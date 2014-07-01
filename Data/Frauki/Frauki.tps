@@ -6,7 +6,7 @@
         <key>texturePackerVersion</key>
         <string>3.3.4</string>
         <key>fileName</key>
-        <string>C:/Users/KC/Desktop/Frauki's Adventure/Data/Frauki/Frauki.tps</string>
+        <string>C:/Users/KC/Desktop/Frauki/Data/Frauki/Frauki.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -88,7 +88,7 @@
         <key>algorithmSettings</key>
         <struct type="AlgorithmSettings">
             <key>algorithm</key>
-            <enum type="AlgorithmSettings::AlgorithmId">Basic</enum>
+            <enum type="AlgorithmSettings::AlgorithmId">MaxRects</enum>
             <key>freeSizeMode</key>
             <enum type="AlgorithmSettings::AlgorithmFreeSizeMode">Good</enum>
             <key>sizeConstraints</key>
@@ -148,7 +148,7 @@
         <key>autoAliasEnabled</key>
         <true/>
         <key>trimSpriteNames</key>
-        <false/>
+        <true/>
         <key>cleanTransparentPixels</key>
         <true/>
         <key>globalSpriteSettings</key>
@@ -164,7 +164,7 @@
             <key>trimThreshold</key>
             <uint>1</uint>
             <key>trimMode</key>
-            <enum type="SpriteSettings::TrimMode">None</enum>
+            <enum type="SpriteSettings::TrimMode">Crop</enum>
             <key>heuristicMask</key>
             <false/>
             <key>pivotPoint</key>

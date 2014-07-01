@@ -37,7 +37,7 @@ Frogland.create = function() {
 
     map.addTilesetImage('Frogland');
 
-    map.setCollisionByExclusion([82, 83, 84, 87, 88, 89, 149, 127, 129, 108, 147, 109, 103, 104, 183, 184, 128, 107]);
+    map.setCollision([82, 83, 84, 87, 88, 89, 149, 127, 129, 108, 147, 109, 103, 104, 183, 184, 128, 107]);
 
     layer = map.createLayer('Tile Layer 1');
 
@@ -46,7 +46,7 @@ Frogland.create = function() {
 
     layer.resizeWorld();
 
-    game.physics.arcade.gravity.y = 500;
+    game.physics.arcade.gravity.y = 1000;
 
     frauki = new Player(game, 0, 0, 'Frauki');
     game.add.existing(frauki);
@@ -89,4 +89,6 @@ Frogland.render = function() {
     })(frauki.state);
 
     game.debug.text(stateName, 0, 30);*/
+
+    //game.debug.body(frauki);
 }
