@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Frauki's Adventure!</title>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/phaser/2.0.4/phaser.min.js"></script>
+
+        <script src="Src/Frogland.js"></script>
+       
+
+        <script src="Src/Frauki.js"></script>
+
+        <script>
+        	var game = new Phaser.Game(320, 240, Phaser.AUTO, "Frauki's Adventure", Frogland, false, false);
+
+        	game.state.add('Frogland', Frogland, true);
+        </script>
+    </head>
+    <body>
+
+   
+
+    </body>
+</html>
