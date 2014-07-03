@@ -16,7 +16,7 @@ Player = function (game, x, y, name) {
     this.animations.add('fall', ['Standing Jump0005'], 10, true, false);
     this.animations.add('land', ['Standing Jump0006', 'Standing Jump0007', 'Standing Jump0008'], 10, false, false);
 
-    game.camera.follow(this);
+    //game.camera.follow(this);
 
     this.state = this.Standing;
     this.direction = 'right';
@@ -31,9 +31,7 @@ Player.prototype.create = function() {
 
 Player.prototype.update = function() {
 
-    //Phaser.Utils.Debug.text("test", 0, 0);
     this.state();
-
 };
 
 Player.prototype.SetDirection = function(dir) {
@@ -51,6 +49,8 @@ Player.prototype.PlayAnim = function(name) {
     if(this.animations.currentAnim.name !== name)
         this.animations.play(name);
 };
+
+
 
 Player.prototype.Standing = function() {
     this.PlayAnim('stand');

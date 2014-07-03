@@ -18,6 +18,7 @@ var cursors;
 var jumpButton;
 var bg;
 var parallax1, parallax2;
+var cameraController;
 
 Frogland.create = function() {
 	game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -40,9 +41,7 @@ Frogland.create = function() {
     map.setCollision([82, 83, 84, 87, 88, 89, 149, 127, 129, 108, 147, 109, 103, 104, 183, 184, 128, 107]);
 
     layer = map.createLayer('Tile Layer 1');
-
-    //  Un-comment this on to see the collision tiles
-    // layer.debug = true;
+    //layer.debug = true;
 
     layer.resizeWorld();
 
@@ -53,6 +52,8 @@ Frogland.create = function() {
 
     cursors = game.input.keyboard.createCursorKeys();
     jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+
+    cameraController = new CameraController(frauki);
 }
 
 Frogland.update = function() {
@@ -78,6 +79,8 @@ Frogland.update = function() {
         frauki.body.velocity.y = -500;
         jumpTimer = game.time.now + 750;
     }
+
+    cameraController.UpdateCamera();
 }
 
 Frogland.render = function() {
