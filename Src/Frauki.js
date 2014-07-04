@@ -16,8 +16,6 @@ Player = function (game, x, y, name) {
     this.animations.add('fall', ['Standing Jump0005'], 10, true, false);
     this.animations.add('land', ['Standing Jump0006', 'Standing Jump0007', 'Standing Jump0008'], 10, false, false);
 
-    //game.camera.follow(this);
-
     this.state = this.Standing;
     this.direction = 'right';
 };
