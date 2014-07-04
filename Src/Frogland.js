@@ -53,7 +53,8 @@ Frogland.create = function() {
     cursors = game.input.keyboard.createCursorKeys();
     jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
-    cameraController = new CameraController(frauki);
+    cameraController = new CameraController(frauki, map);
+    cameraController.SetRepulsiveTiles([82, 83, 84, 87, 88, 89, 149, 127, 129, 108, 147, 109, 103, 104, 183, 184, 128, 107]);
 }
 
 Frogland.update = function() {
