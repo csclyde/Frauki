@@ -15,9 +15,11 @@ Player = function (game, x, y, name) {
     this.animations.add('peak', ['Standing Jump0002', 'Standing Jump0003', 'Standing Jump0004'], 10, false, false);
     this.animations.add('fall', ['Standing Jump0005'], 10, true, false);
     this.animations.add('land', ['Standing Jump0006', 'Standing Jump0007', 'Standing Jump0008'], 10, false, false);
+    this.animations.add('crouch', ['Crouch0001'], 10, true, false);
 
     this.state = this.Standing;
     this.direction = 'right';
+    this.isCrouching = false;
 };
 
 Player.prototype = Object.create(Phaser.Sprite.prototype);
@@ -59,6 +61,8 @@ Player.prototype.Standing = function() {
         this.state = this.Falling;
     } else if(this.body.velocity.x !== 0) {
         this.state = this.Running;
+    } else if(this.isCrouching) {
+        this.state = this.Crouching;
     }
 };
 
@@ -114,3 +118,12 @@ Player.prototype.Landing = function() {
         }
     }
 };
+
+Player.prototype.Crouching = function() {
+    this.PlayAnim('crouch');
+
+    if(!this.isCrouching || this.body.velocity.x !== 0 || this.body.velocity.y !== 0) {
+        this.state = this.Standing;
+    }
+
+}

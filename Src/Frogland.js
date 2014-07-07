@@ -74,6 +74,12 @@ Frogland.update = function() {
 
         frauki.SetDirection('right');
     }
+
+    if(cursors.down.isDown) {
+        frauki.isCrouching = true;
+    } else {
+        frauki.isCrouching = false;
+    }
     
     if (jumpButton.isDown && frauki.body.onFloor() && game.time.now > jumpTimer)
     {
