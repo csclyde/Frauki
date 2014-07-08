@@ -10,6 +10,9 @@ CameraController = function(player, map) {
 	this.camY = player.body.y;
 
 	this.repulsiveTiles = [];
+
+	this.prevXVel = 0;
+	this.prevYVel = 0;
 }
 
 //camera is controlled in player centric space
@@ -47,11 +50,16 @@ CameraController.prototype.UpdateCamera = function() {
 	Math.floor(game.camera.width / map.tileWidth),
 	Math.floor(game.camera.height / map.tileHeight));
 
-	game.add.tween(this).to({camX:Math.floor((this.player.body.velocity.x / X_VEL_DIV) + xOffset)}, 200, Phaser.Easing.Linear.None, true);
-	game.add.tween(this).to({camY:Math.floor((this.player.body.velocity.y / Y_VEL_DIV) + yOffset)}, 100, Phaser.Easing.Exponential.None, true);
+	if(this.prevXVel !== this.player.body.velocity.x)
+		game.add.tween(this).to({camX:Math.floor((this.player.body.velocity.x / X_VEL_DIV) + xOffset)}, 500, Phaser.Easing.Cubic.Out, true);
+
+	if(this.prevYVel !== this.player.body.velocity.y)
+		game.add.tween(this).to({camY:Math.floor((this.player.body.velocity.y / Y_VEL_DIV) + yOffset)}, 400, Phaser.Easing.Cubic.Out, true);
 
 	game.camera.focusOnXY(this.camX + this.player.body.x, this.camY + this.player.body.y);
 
+	this.prevXVel = this.player.body.velocity.x;
+	this.prevYVel = this.player.body.velocity.y;
 }
 
 CameraController.prototype.SetRepulsiveTiles = function(tileArray) {
