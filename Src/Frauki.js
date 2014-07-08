@@ -19,9 +19,11 @@ Player = function (game, x, y, name) {
     this.state = this.Standing;
     this.direction = 'right';
     this.isCrouching = false;
+    this.isSprinting = false;
 
     events.subscribe('player_jump', this.Jump);
     events.subscribe('player_crouch', this.Crouch);
+    events.subscribe('player_sprint', this.Sprint);
 
 };
 
@@ -54,14 +56,22 @@ Player.prototype.PlayAnim = function(name) {
 };
 
 ////////////////CALLBACKS//////////////////
-Player.prototype.Jump = function() {
-    if(this.body.onFloor()) {
-        this.body.velocity.y = -500;
+Player.prototype.Jump = function(params) {
+    if(params.jump) {
+        if(this.body.onFloor()) {
+            this.body.velocity.y = -500;
+        }
+    } else if(this.body.velocity.y < 0) {
+        game.add.tween(this.body.velocity).to({y:0}, 150, Phaser.Easing.Quadratic.InOut, true);
     }
 }
 
 Player.prototype.Crouch = function(params) {
     this.isCrouching = params.crouch;
+}
+
+Player.prototype.Sprint = function(params) {
+    this.isSprinting = params.sprint;
 }
 
 //////////////////STATES/////////////////
@@ -73,7 +83,7 @@ Player.prototype.Standing = function() {
         this.state = this.Jumping;
     } else if(this.body.velocity.y > 10) {
         this.state = this.Falling;
-    } else if(this.body.velocity.x !== 0) {
+    } else if(Math.abs(this.body.velocity.x) >= 250) {
         this.state = this.Running;
     } else if(this.isCrouching) {
         this.state = this.Crouching;
@@ -83,7 +93,7 @@ Player.prototype.Standing = function() {
 Player.prototype.Running = function() {
     this.PlayAnim('run');
 
-    if(this.body.velocity.x === 0 && this.body.onFloor()) {
+    if(Math.abs(this.body.velocity.x) < 250 && this.body.onFloor()) {
         this.state = this.Standing;
     } else if(this.body.velocity.y < 0) {
         this.state = this.Jumping;

@@ -6,13 +6,14 @@ InputController = function(player) {
 	this.crouch 	= game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
 	this.runLeft 	= game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
 	this.runRight 	= game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+	this.sprint		= game.input.keyboard.addKey(Phaser.Keyboard.Z);
 
 	this.jump.onDown.add(function() {
-		events.publish('player_jump', null, this.player);
+		events.publish('player_jump', {jump: true}, this.player);
 	}, this);
 
 	this.jump.onUp.add(function() {
-
+		events.publish('player_jump', {jump: false}, this.player);
 	}, this);
 
 	this.crouch.onDown.add(function() {
@@ -23,6 +24,14 @@ InputController = function(player) {
 		events.publish('player_crouch', {crouch: false}, this.player);
 	}, this);
 
+	this.sprint.onDown.add(function() {
+		events.publish('player_sprint', {sprint: true}, this.player);
+	}, this);
+
+	this.sprint.onUp.add(function() {
+		events.publish('player_sprint', {sprint: false}, this.player);
+	}, this);
+
 	this.up.onDown.add(function() {
 	}, this);
 
@@ -31,16 +40,19 @@ InputController = function(player) {
 };
 
 InputController.prototype.UpdateInput = function() {
-	this.player.body.velocity.x = 0;
 
-    if (this.runLeft.isDown)
-    {
-        this.player.body.velocity.x = -250;
+    if (this.runLeft.isDown) {
+        this.player.body.velocity.x = this.player.isSprinting ? -300 : -250;
         this.player.SetDirection('left');
     }
-    else if (this.runRight.isDown)
-    {
-        this.player.body.velocity.x = 250;
+    else if (this.runRight.isDown) {
+        this.player.body.velocity.x = this.player.isSprinting ? 300 : 250;
         this.player.SetDirection('right');
+    }
+    else {
+    	if(Math.abs(this.player.body.velocity.x) > 250)
+    		game.add.tween(this.player.body.velocity).to({x:0}, 200, null, true);
+    	else
+    		this.player.body.velocity.x = 0;
     }
 }

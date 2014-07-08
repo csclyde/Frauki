@@ -13,8 +13,6 @@ Frogland.preload = function() {
 var map;
 var tileset;
 var layer;
-var cursors;
-var jumpButton;
 var bg;
 var parallax1, parallax2;
 var cameraController;
@@ -60,21 +58,6 @@ Frogland.create = function() {
 
 Frogland.update = function() {
 	game.physics.arcade.collide(frauki, layer);
-
-    //frauki.body.velocity.x = 0;
-
-    if (cursors.left.isDown)
-    {
-        //frauki.body.velocity.x = -250;
-
-        //frauki.SetDirection('left');
-    }
-    else if (cursors.right.isDown)
-    {
-        //frauki.body.velocity.x = 250;
-
-       // frauki.SetDirection('right');
-    }
 
     cameraController.UpdateCamera();
     inputController.UpdateInput();
