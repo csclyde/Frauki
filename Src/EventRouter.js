@@ -10,13 +10,15 @@ EventRouter.prototype.subscribe = function(eventName, callback) {
 	this.events[eventName].push(callback);
 };
 
-EventRouter.prototype.publish = function(eventName, parameters) {
+EventRouter.prototype.publish = function(eventName, parameters, context) {
 	if(!this.events[eventName]) {
 		return;
 	}
 
+	console.log(eventName + ' - ', parameters);
+
 	this.events[eventName].forEach(function(el) {
-		el(parameters);
+		el.apply(context, [parameters]);
 	});
 };
 

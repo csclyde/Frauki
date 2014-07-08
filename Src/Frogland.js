@@ -13,12 +13,12 @@ Frogland.preload = function() {
 var map;
 var tileset;
 var layer;
-var jumpTimer = 0;
 var cursors;
 var jumpButton;
 var bg;
 var parallax1, parallax2;
 var cameraController;
+var inputController;
 
 Frogland.create = function() {
 	game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -51,54 +51,35 @@ Frogland.create = function() {
     game.add.existing(frauki);
 
     cursors = game.input.keyboard.createCursorKeys();
-    jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
     cameraController = new CameraController(frauki, map);
     cameraController.SetRepulsiveTiles([82, 83, 84, 87, 88, 89, 149, 127, 129, 108, 147, 109, 103, 104, 183, 184, 128, 107]);
+
+    inputController = new InputController(frauki);
 }
 
 Frogland.update = function() {
 	game.physics.arcade.collide(frauki, layer);
 
-    frauki.body.velocity.x = 0;
+    //frauki.body.velocity.x = 0;
 
     if (cursors.left.isDown)
     {
-        frauki.body.velocity.x = -250;
+        //frauki.body.velocity.x = -250;
 
-        frauki.SetDirection('left');
+        //frauki.SetDirection('left');
     }
     else if (cursors.right.isDown)
     {
-        frauki.body.velocity.x = 250;
+        //frauki.body.velocity.x = 250;
 
-        frauki.SetDirection('right');
-    }
-
-    if(cursors.down.isDown) {
-        frauki.isCrouching = true;
-    } else {
-        frauki.isCrouching = false;
-    }
-    
-    if (jumpButton.isDown && frauki.body.onFloor() && game.time.now > jumpTimer)
-    {
-        frauki.body.velocity.y = -500;
-        jumpTimer = game.time.now + 750;
+       // frauki.SetDirection('right');
     }
 
     cameraController.UpdateCamera();
+    inputController.UpdateInput();
 }
 
 Frogland.render = function() {
-    /*var stateName = (function functionName(fun) {
-        var ret = fun.toString();
-        ret = ret.substr('function '.length);
-        ret = ret.substr(0, ret.indexOf('('));
-        return ret;
-    })(frauki.state);
-
-    game.debug.text(stateName, 0, 30);*/
-
     //game.debug.body(frauki);
 }

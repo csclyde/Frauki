@@ -19,6 +19,10 @@ Player = function (game, x, y, name) {
     this.state = this.Standing;
     this.direction = 'right';
     this.isCrouching = false;
+
+    events.subscribe('player_jump', this.Jump);
+    events.subscribe('player_crouch', this.Crouch);
+
 };
 
 Player.prototype = Object.create(Phaser.Sprite.prototype);
@@ -49,6 +53,16 @@ Player.prototype.PlayAnim = function(name) {
         this.animations.play(name);
 };
 
+////////////////CALLBACKS//////////////////
+Player.prototype.Jump = function() {
+    if(this.body.onFloor()) {
+        this.body.velocity.y = -500;
+    }
+}
+
+Player.prototype.Crouch = function(params) {
+    this.isCrouching = params.crouch;
+}
 
 //////////////////STATES/////////////////
 
