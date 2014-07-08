@@ -48,7 +48,7 @@ CameraController.prototype.UpdateCamera = function() {
 	Math.floor(game.camera.height / map.tileHeight));
 
 	game.add.tween(this).to({camX:Math.floor((this.player.body.velocity.x / X_VEL_DIV) + xOffset)}, 200, Phaser.Easing.Linear.None, true);
-	game.add.tween(this).to({camY:Math.floor((this.player.body.velocity.y / Y_VEL_DIV) + yOffset)}, 40, Phaser.Easing.Exponential.None, true);
+	game.add.tween(this).to({camY:Math.floor((this.player.body.velocity.y / Y_VEL_DIV) + yOffset)}, 100, Phaser.Easing.Exponential.None, true);
 
 	game.camera.focusOnXY(this.camX + this.player.body.x, this.camY + this.player.body.y);
 

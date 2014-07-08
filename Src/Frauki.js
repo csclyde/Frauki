@@ -1,4 +1,3 @@
-//  Here is a custom game object
 Player = function (game, x, y, name) {
 
     Phaser.Sprite.call(this, game, x, y, name);
@@ -51,6 +50,7 @@ Player.prototype.PlayAnim = function(name) {
 };
 
 
+//////////////////STATES/////////////////
 
 Player.prototype.Standing = function() {
     this.PlayAnim('stand');
@@ -99,10 +99,15 @@ Player.prototype.Falling = function() {
     this.PlayAnim('fall');
     
     if(this.body.onFloor()) {
-        if(this.body.velocity.x === 0)
-            this.state = this.Landing;
-        else
+        if(this.body.velocity.x === 0) {
+            if(this.isCrouching)
+                this.state = this.Crouching;
+            else
+                this.state = this.Landing;
+        }
+        else {
             this.state = this.Running;
+        }
     }
 
 };
