@@ -1,5 +1,5 @@
 CAM_DRAG_RATE = 5;
-X_VEL_DIV = 10;
+X_VEL_DIV = 15;
 Y_VEL_DIV = 30;
 
 CameraController = function(player, map) {
@@ -13,13 +13,17 @@ CameraController = function(player, map) {
 
 	this.prevXVel = 0;
 	this.prevYVel = 0;
+
+	this.retweenY = false;
+
+	events.subscribe('player_crouch', this.CrouchCamera);
 }
 
 //camera is controlled in player centric space
 CameraController.prototype.UpdateCamera = function() {
 	
 
-	var xOffset = this.player.direction === 'left' ? -20 : 20;
+	var xOffset = this.player.direction === 'left' ? -15 : 15;
 	var yOffset = this.player.body.velocity.y > 0 ? 20 : 0;
 
 	yOffset += (this.player.isCrouching ? 50 : 0);
@@ -50,11 +54,18 @@ CameraController.prototype.UpdateCamera = function() {
 	Math.floor(game.camera.width / map.tileWidth),
 	Math.floor(game.camera.height / map.tileHeight));
 
-	if(this.prevXVel !== this.player.body.velocity.x)
-		game.add.tween(this).to({camX:Math.floor((this.player.body.velocity.x / X_VEL_DIV) + xOffset)}, 500, Phaser.Easing.Cubic.Out, true);
+	tileXOffset /= 2;
+	tileYOffset /= 2;
 
-	if(this.prevYVel !== this.player.body.velocity.y)
-		game.add.tween(this).to({camY:Math.floor((this.player.body.velocity.y / Y_VEL_DIV) + yOffset)}, 400, Phaser.Easing.Cubic.Out, true);
+	if(this.prevXVel !== this.player.body.velocity.x)
+		game.add.tween(this).to({camX:Math.floor((this.player.body.velocity.x / X_VEL_DIV) + xOffset + tileXOffset)}, 700, Phaser.Easing.Sinusoidal.Out, true);
+
+	if(this.prevYVel !== this.player.body.velocity.y || this.retweenY) {
+		game.add.tween(this).to({camY:Math.floor((this.player.body.velocity.y / Y_VEL_DIV) + yOffset + tileYOffset)}, 400, Phaser.Easing.Sinusoidal.Out, true);
+		this.retweenY = false;
+
+		console.log(tileYOffset);
+	}
 
 	game.camera.focusOnXY(this.camX + this.player.body.x, this.camY + this.player.body.y);
 
@@ -64,4 +75,8 @@ CameraController.prototype.UpdateCamera = function() {
 
 CameraController.prototype.SetRepulsiveTiles = function(tileArray) {
 	this.repulsiveTiles = tileArray;
+}
+
+CameraController.prototype.CrouchCamera = function(params) {
+	this.retweenY = true;
 }

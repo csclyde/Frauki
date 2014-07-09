@@ -1,3 +1,5 @@
+PLAYER_SPEED = 225;
+
 Player = function (game, x, y, name) {
 
     Phaser.Sprite.call(this, game, x, y, name);
@@ -83,7 +85,7 @@ Player.prototype.Standing = function() {
         this.state = this.Jumping;
     } else if(this.body.velocity.y > 10) {
         this.state = this.Falling;
-    } else if(Math.abs(this.body.velocity.x) >= 250) {
+    } else if(Math.abs(this.body.velocity.x) >= PLAYER_SPEED) {
         this.state = this.Running;
     } else if(this.isCrouching) {
         this.state = this.Crouching;
@@ -93,7 +95,7 @@ Player.prototype.Standing = function() {
 Player.prototype.Running = function() {
     this.PlayAnim('run');
 
-    if(Math.abs(this.body.velocity.x) < 250 && this.body.onFloor()) {
+    if(Math.abs(this.body.velocity.x) < PLAYER_SPEED && this.body.onFloor()) {
         this.state = this.Standing;
     } else if(this.body.velocity.y < 0) {
         this.state = this.Jumping;

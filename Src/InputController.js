@@ -42,15 +42,15 @@ InputController = function(player) {
 InputController.prototype.UpdateInput = function() {
 
     if (this.runLeft.isDown) {
-        this.player.body.velocity.x = this.player.isSprinting ? -300 : -250;
+        this.player.body.velocity.x = this.player.isSprinting ? -300 : -PLAYER_SPEED;
         this.player.SetDirection('left');
     }
     else if (this.runRight.isDown) {
-        this.player.body.velocity.x = this.player.isSprinting ? 300 : 250;
+        this.player.body.velocity.x = this.player.isSprinting ? 300 : PLAYER_SPEED;
         this.player.SetDirection('right');
     }
     else {
-    	if(Math.abs(this.player.body.velocity.x) > 250)
+    	if(Math.abs(this.player.body.velocity.x) > PLAYER_SPEED)
     		game.add.tween(this.player.body.velocity).to({x:0}, 200, null, true);
     	else
     		this.player.body.velocity.x = 0;
