@@ -16,7 +16,7 @@ CameraController = function(player, map) {
 
 	this.retweenY = false;
 
-	events.subscribe('player_crouch', this.CrouchCamera);
+	events.subscribe('player_crouch', this.CrouchCamera, this);
 }
 
 //camera is controlled in player centric space
@@ -63,8 +63,6 @@ CameraController.prototype.UpdateCamera = function() {
 	if(this.prevYVel !== this.player.body.velocity.y || this.retweenY) {
 		game.add.tween(this).to({camY:Math.floor((this.player.body.velocity.y / Y_VEL_DIV) + yOffset + tileYOffset)}, 400, Phaser.Easing.Sinusoidal.Out, true);
 		this.retweenY = false;
-
-		console.log(tileYOffset);
 	}
 
 	game.camera.focusOnXY(this.camX + this.player.body.x, this.camY + this.player.body.y);

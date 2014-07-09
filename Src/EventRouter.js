@@ -2,15 +2,15 @@ EventRouter = function() {
 	this.events = {};
 }
 
-EventRouter.prototype.subscribe = function(eventName, callback) {
+EventRouter.prototype.subscribe = function(eventName, callback, context) {
 	if(!this.events[eventName]) {
 		this.events[eventName] = [];
 	}
 
-	this.events[eventName].push(callback);
+	this.events[eventName].push({func: callback, ctx: context});
 };
 
-EventRouter.prototype.publish = function(eventName, parameters, context) {
+EventRouter.prototype.publish = function(eventName, parameters) {
 	if(!this.events[eventName]) {
 		return;
 	}
@@ -18,7 +18,7 @@ EventRouter.prototype.publish = function(eventName, parameters, context) {
 	console.log(eventName + ' - ', parameters);
 
 	this.events[eventName].forEach(function(el) {
-		el.apply(context, [parameters]);
+		el.func.apply(el.ctx, [parameters]);
 	});
 };
 

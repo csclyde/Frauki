@@ -20,8 +20,7 @@ var inputController;
 
 Frogland.create = function() {
 	game.physics.startSystem(Phaser.Physics.ARCADE);
-
-    game.stage.backgroundColor = '#000000';
+    game.physics.arcade.gravity.y = 1000;
 
     bg = game.add.tileSprite(0, 0, 320, 240, 'Background');
     bg.fixedToCamera = true;
@@ -33,22 +32,14 @@ Frogland.create = function() {
     parallaxLayer2.fixedToCamera = true;
 
     map = game.add.tilemap('Frogland');
-
     map.addTilesetImage('Frogland');
-
     map.setCollision([82, 83, 84, 87, 88, 89, 149, 127, 129, 108, 147, 109, 103, 104, 183, 184, 128, 107]);
 
     layer = map.createLayer('Tile Layer 1');
-    //layer.debug = true;
-
     layer.resizeWorld();
-
-    game.physics.arcade.gravity.y = 1000;
 
     frauki = new Player(game, 0, 0, 'Frauki');
     game.add.existing(frauki);
-
-    cursors = game.input.keyboard.createCursorKeys();
 
     cameraController = new CameraController(frauki, map);
     cameraController.SetRepulsiveTiles([82, 83, 84, 87, 88, 89, 149, 127, 129, 108, 147, 109, 103, 104, 183, 184, 128, 107]);

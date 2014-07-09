@@ -17,15 +17,17 @@ Player = function (game, x, y, name) {
     this.animations.add('fall', ['Standing Jump0005'], 10, true, false);
     this.animations.add('land', ['Standing Jump0006', 'Standing Jump0007', 'Standing Jump0008'], 10, false, false);
     this.animations.add('crouch', ['Crouch0001'], 10, true, false);
+    this.animations.add('flip', ['Flip0000', 'Flip0001', 'Flip0002', 'Flip0003', 'Flip0004'], 18, false, false);
 
     this.state = this.Standing;
     this.direction = 'right';
     this.isCrouching = false;
     this.isSprinting = false;
+    this.hasFlipped = false;
 
-    events.subscribe('player_jump', this.Jump);
-    events.subscribe('player_crouch', this.Crouch);
-    events.subscribe('player_sprint', this.Sprint);
+    events.subscribe('player_jump', this.Jump, this);
+    events.subscribe('player_crouch', this.Crouch, this);
+    events.subscribe('player_sprint', this.Sprint, this);
 
 };
 
@@ -39,6 +41,10 @@ Player.prototype.create = function() {
 Player.prototype.update = function() {
 
     this.state();
+
+    if(this.body.onFloor()) {
+        this.hasFlipped = false;
+    }
 };
 
 Player.prototype.SetDirection = function(dir) {
@@ -63,7 +69,12 @@ Player.prototype.Jump = function(params) {
         if(this.body.onFloor()) {
             this.body.velocity.y = -500;
         }
-    } else if(this.body.velocity.y < 0) {
+        else if(this.hasFlipped === false) {
+            this.body.velocity.y -= 500;
+            this.state = this.Flipping;
+            this.hasFlipped = true;
+        }
+    } else if(this.body.velocity.y < 0 && this.state !== this.Flipping) {
         game.add.tween(this.body.velocity).to({y:0}, 150, Phaser.Easing.Quadratic.InOut, true);
     }
 }
@@ -157,4 +168,20 @@ Player.prototype.Crouching = function() {
         this.state = this.Standing;
     }
 
+}
+
+Player.prototype.Flipping = function() {
+    this.PlayAnim('flip');
+
+    if(this.animations.currentAnim.isFinished) {
+        if(this.body.velocity.y > 0) {
+            this.state = this.Falling;
+        } else if(this.body.velocity.y < 0) {
+            this.state = this.Jumping;
+        } else if(this.body.velocity.x !== 0 && this.body.onFloor()) {
+            this.state = this.Running;
+        } else if(this.body.velocity.x === 0 && this.body.onFloor()) {
+            this.state = this.Landing;
+        }
+    }
 }

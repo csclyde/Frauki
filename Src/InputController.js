@@ -8,35 +8,14 @@ InputController = function(player) {
 	this.runRight 	= game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
 	this.sprint		= game.input.keyboard.addKey(Phaser.Keyboard.Z);
 
-	this.jump.onDown.add(function() {
-		events.publish('player_jump', {jump: true}, this.player);
-	}, this);
-
-	this.jump.onUp.add(function() {
-		events.publish('player_jump', {jump: false}, this.player);
-	}, this);
-
-	this.crouch.onDown.add(function() {
-		events.publish('player_crouch', {crouch: true}, this.player);
-	}, this);
-
-	this.crouch.onUp.add(function() {
-		events.publish('player_crouch', {crouch: false}, this.player);
-	}, this);
-
-	this.sprint.onDown.add(function() {
-		events.publish('player_sprint', {sprint: true}, this.player);
-	}, this);
-
-	this.sprint.onUp.add(function() {
-		events.publish('player_sprint', {sprint: false}, this.player);
-	}, this);
-
-	this.up.onDown.add(function() {
-	}, this);
-
-	this.up.onUp.add(function() {
-	}, this);
+	this.jump.onDown.add(function() { 	events.publish('player_jump', {jump: true}); }, this);
+	this.jump.onUp.add(function() { 	events.publish('player_jump', {jump: false}); }, this);
+	this.crouch.onDown.add(function() { events.publish('player_crouch', {crouch: true}); }, this);
+	this.crouch.onUp.add(function() { 	events.publish('player_crouch', {crouch: false}); }, this);
+	this.sprint.onDown.add(function() { events.publish('player_sprint', {sprint: true}); }, this);
+	this.sprint.onUp.add(function() { 	events.publish('player_sprint', {sprint: false}); }, this);
+	this.up.onDown.add(function() { }, this);
+	this.up.onUp.add(function() { }, this);
 };
 
 InputController.prototype.UpdateInput = function() {
