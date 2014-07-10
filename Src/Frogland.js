@@ -9,6 +9,12 @@ Frogland.preload = function() {
     game.load.image('parallax1', '../Data/Locations/Frogland/Parallax1.png');
     game.load.image('parallax2', '../Data/Locations/Frogland/Parallax2.png');
     game.load.image('fluff', '../Data/Fluff.png');
+
+    game.scale.minWidth = 640;
+    game.scale.minHeight = 480;
+    game.scale.pageAlignHorizontally = true;
+    game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+    game.scale.setSize();
 }
 
 var map;
@@ -19,9 +25,14 @@ var parallax1, parallax2;
 var cameraController;
 var inputController;
 
+var previousCamX;
+
 Frogland.create = function() {
 	game.physics.startSystem(Phaser.Physics.ARCADE);
     game.physics.arcade.gravity.y = 1000;
+
+    game.stage.smoothed = false;
+    //game.scale.setSize();
 
     bg = game.add.tileSprite(0, 0, 320, 240, 'Background');
     bg.fixedToCamera = true;
@@ -47,9 +58,14 @@ Frogland.create = function() {
 
     inputController = new InputController(frauki);
     effectsController = new EffectsController();
+
+    previousCamX = game.camera.x;
 }
 
 Frogland.update = function() {
+    parallaxLayer1.autoScroll(-(frauki.body.velocity.x / 15), 0);
+    parallaxLayer2.autoScroll(-(frauki.body.velocity.x / 10), 0);
+
 	game.physics.arcade.collide(frauki, layer);
 
     cameraController.UpdateCamera();

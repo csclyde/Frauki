@@ -17,7 +17,7 @@ Player = function (game, x, y, name) {
     this.animations.add('fall', ['Standing Jump0005'], 10, true, false);
     this.animations.add('land', ['Standing Jump0006', 'Standing Jump0007', 'Standing Jump0008'], 10, false, false);
     this.animations.add('crouch', ['Crouch0001'], 10, true, false);
-    this.animations.add('flip', ['Flip0000', 'Flip0001', 'Flip0002', 'Flip0003', 'Flip0004'], 12, false, false);
+    this.animations.add('flip', ['Flip0000', 'Flip0001', 'Flip0002', 'Flip0003', 'Flip0004'], 14, false, false);
 
     this.state = this.Standing;
     this.direction = 'right';
