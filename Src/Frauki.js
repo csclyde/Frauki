@@ -17,7 +17,7 @@ Player = function (game, x, y, name) {
     this.animations.add('fall', ['Standing Jump0005'], 10, true, false);
     this.animations.add('land', ['Standing Jump0006', 'Standing Jump0007', 'Standing Jump0008'], 10, false, false);
     this.animations.add('crouch', ['Crouch0001'], 10, true, false);
-    this.animations.add('flip', ['Flip0000', 'Flip0001', 'Flip0002', 'Flip0003', 'Flip0004'], 18, false, false);
+    this.animations.add('flip', ['Flip0000', 'Flip0001', 'Flip0002', 'Flip0003', 'Flip0004'], 12, false, false);
 
     this.state = this.Standing;
     this.direction = 'right';
@@ -40,6 +40,7 @@ Player.prototype.create = function() {
 
 Player.prototype.update = function() {
 
+    this.body.acceleration.y = 0;
     this.state();
 
     if(this.body.onFloor()) {
@@ -64,18 +65,19 @@ Player.prototype.PlayAnim = function(name) {
 };
 
 ////////////////CALLBACKS//////////////////
+
 Player.prototype.Jump = function(params) {
     if(params.jump) {
-        if(this.body.onFloor()) {
+        if(this.body.onFloor() || this.state === this.Standing || this.state === this.Running) {
             this.body.velocity.y = -500;
         }
-        else if(this.hasFlipped === false) {
-            this.body.velocity.y -= 500;
+        else if(this.hasFlipped === false && this.state !== this.Falling) {
+            this.body.velocity.y = -350;
             this.state = this.Flipping;
             this.hasFlipped = true;
         }
     } else if(this.body.velocity.y < 0 && this.state !== this.Flipping) {
-        game.add.tween(this.body.velocity).to({y:0}, 150, Phaser.Easing.Quadratic.InOut, true);
+        //this.player.body.y = 0;
     }
 }
 

@@ -8,6 +8,7 @@ Frogland.preload = function() {
     game.load.image('Background', '../Data/Locations/Frogland/Sky.png');
     game.load.image('parallax1', '../Data/Locations/Frogland/Parallax1.png');
     game.load.image('parallax2', '../Data/Locations/Frogland/Parallax2.png');
+    game.load.image('fluff', '../Data/Fluff.png');
 }
 
 var map;
@@ -45,6 +46,7 @@ Frogland.create = function() {
     cameraController.SetRepulsiveTiles([82, 83, 84, 87, 88, 89, 149, 127, 129, 108, 147, 109, 103, 104, 183, 184, 128, 107]);
 
     inputController = new InputController(frauki);
+    effectsController = new EffectsController();
 }
 
 Frogland.update = function() {
@@ -52,6 +54,7 @@ Frogland.update = function() {
 
     cameraController.UpdateCamera();
     inputController.UpdateInput();
+    effectsController.UpdateEffects();
 }
 
 Frogland.render = function() {

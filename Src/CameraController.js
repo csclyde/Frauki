@@ -1,4 +1,3 @@
-CAM_DRAG_RATE = 5;
 X_VEL_DIV = 15;
 Y_VEL_DIV = 30;
 
@@ -26,7 +25,7 @@ CameraController.prototype.UpdateCamera = function() {
 	var xOffset = this.player.direction === 'left' ? -15 : 15;
 	var yOffset = this.player.body.velocity.y > 0 ? 20 : 0;
 
-	yOffset += (this.player.isCrouching ? 50 : 0);
+	yOffset += (this.player.isCrouching ? 30 : 0);
 
 	var tileXOffset = 0;
 	var tileYOffset = 0;
