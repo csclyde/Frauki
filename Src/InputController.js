@@ -7,6 +7,7 @@ InputController = function(player) {
 	this.runLeft 	= game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
 	this.runRight 	= game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
 	this.sprint		= game.input.keyboard.addKey(Phaser.Keyboard.Z);
+	this.roll		= game.input.keyboard.addKey(Phaser.Keyboard.X);
 
 	this.jump.onDown.add(function() { 	events.publish('player_jump', {jump: true}); }, this);
 	this.jump.onUp.add(function() { 	events.publish('player_jump', {jump: false}); }, this);
@@ -14,6 +15,7 @@ InputController = function(player) {
 	this.crouch.onUp.add(function() { 	events.publish('player_crouch', {crouch: false}); }, this);
 	this.sprint.onDown.add(function() { events.publish('player_sprint', {sprint: true}); }, this);
 	this.sprint.onUp.add(function() { 	events.publish('player_sprint', {sprint: false}); }, this);
+	this.roll.onDown.add(function() {	events.publish('player_roll', null, this)});
 	this.up.onDown.add(function() { }, this);
 	this.up.onUp.add(function() { }, this);
 };

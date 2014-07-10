@@ -63,14 +63,16 @@ Frogland.create = function() {
 }
 
 Frogland.update = function() {
-    parallaxLayer1.autoScroll(-(frauki.body.velocity.x / 15), 0);
-    parallaxLayer2.autoScroll(-(frauki.body.velocity.x / 10), 0);
+    parallaxLayer1.autoScroll(-(game.camera.x - previousCamX) * 100, 0);
+    parallaxLayer2.autoScroll(-(game.camera.x - previousCamX) * 150, 0);
 
 	game.physics.arcade.collide(frauki, layer);
 
     cameraController.UpdateCamera();
     inputController.UpdateInput();
     effectsController.UpdateEffects();
+
+    previousCamX = game.camera.x;
 }
 
 Frogland.render = function() {
