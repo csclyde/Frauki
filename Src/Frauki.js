@@ -27,11 +27,14 @@ Player = function (game, x, y, name) {
     this.hasFlipped = false;
     this.canWallJump = false;
     this.wallJumpTimer = new Phaser.Timer(game, false);
+    this.rollVelMod = 0;
+    this.jumpTimer = 0;
 
     events.subscribe('player_jump', this.Jump, this);
     events.subscribe('player_crouch', this.Crouch, this);
     events.subscribe('player_sprint', this.Sprint, this);
     events.subscribe('player_roll', this.Roll, this);
+
 };
 
 Player.prototype = Object.create(Phaser.Sprite.prototype);
@@ -60,6 +63,7 @@ Player.prototype.update = function() {
         this.wallJumpTimer.start();
     }
 
+    this.body.velocity.x += this.rollVelMod;
 };
 
 Player.prototype.SetDirection = function(dir) {
@@ -108,13 +112,23 @@ Player.prototype.Sprint = function(params) {
 }
 
 Player.prototype.Roll = function(params) {
+    if(!this.body.onFloor() || this.game.time.now < this.rollTimer || this.body.velocity.x === 0)
+        return;
+
     this.state = this.Rolling;
 
-    if(this.direction === 'left')
-        this.body.velocity.x -= 500;
-    if(this.direction === 'right')
-        this.body.velocity.x += 500;
+    if(this.direction === 'left') {
+        this.rollVelMod = -300;
+        game.add.tween(this).to({rollVelMod: 80}, 300, Phaser.Easing.Quartic.In, true).to({rollVelMod:0}, 500, Phaser.Easing.Quartic.In, true);
+    }
+    else {
+        this.rollVelMod = 300;
+        game.add.tween(this).to({rollVelMod: -80}, 300, Phaser.Easing.Quartic.In, true).to({rollVelMod:0}, 500, Phaser.Easing.Quartic.In, true);
+    }
+
+    this.rollTimer = game.time.now + 650;
 }
+
 //////////////////STATES/////////////////
 
 Player.prototype.Standing = function() {
@@ -124,7 +138,7 @@ Player.prototype.Standing = function() {
         this.state = this.Jumping;
     } else if(this.body.velocity.y > 10) {
         this.state = this.Falling;
-    } else if(Math.abs(this.body.velocity.x) >= PLAYER_SPEED) {
+    } else if(this.body.velocity.x !== 0) {
         this.state = this.Running;
     } else if(this.isCrouching) {
         this.state = this.Crouching;
@@ -134,7 +148,7 @@ Player.prototype.Standing = function() {
 Player.prototype.Running = function() {
     this.PlayAnim('run');
 
-    if(Math.abs(this.body.velocity.x) < PLAYER_SPEED && this.body.onFloor()) {
+    if(this.body.velocity.x === 0 && this.body.onFloor()) {
         this.state = this.Standing;
     } else if(this.body.velocity.y < 0) {
         this.state = this.Jumping;
