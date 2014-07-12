@@ -2,7 +2,7 @@ var Frogland = new Phaser.State();
 
 Frogland.preload = function() {
 	
-    game.load.atlasJSONHash('Frauki', '../Data/Frauki/Frauki.png', '../Data/Frauki/Frauki.json');
+    game.load.atlasJSONHash('Frauki', 'Data/Frauki/Frauki.png', '../Data/Frauki/Frauki.json');
     game.load.tilemap('Frogland', '../Data/Locations/Frogland/Frogland.json', null, Phaser.Tilemap.TILED_JSON);
     game.load.image('Frogland', '../Data/Locations/Frogland/Frogland.png');
     game.load.image('Background', '../Data/Locations/Frogland/Sky.png');
