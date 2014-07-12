@@ -28,6 +28,7 @@ Player = function (game, x, y, name) {
     this.canWallJump = false;
     this.wallJumpTimer = new Phaser.Timer(game, false);
     this.rollVelMod = 0;
+    this.rollTween = null;
     this.jumpTimer = 0;
 
     events.subscribe('player_jump', this.Jump, this);
@@ -63,10 +64,19 @@ Player.prototype.update = function() {
         this.wallJumpTimer.start();
     }
 
-    this.body.velocity.x += this.rollVelMod;
+    if(this.direction === 'left') {
+        if(this.rollVelMod + this.body.velocity.x < 0)
+            this.body.velocity.x += this.rollVelMod;
+    } else {
+        if(this.rollVelMod + this.body.velocity.x > 0)
+            this.body.velocity.x += this.rollVelMod;
+    }
 };
 
 Player.prototype.SetDirection = function(dir) {
+    if(this.state === this.Rolling)
+        return;
+    
     if(dir === 'left' && this.direction !== 'left') {
         this.direction = 'left';
         this.scale.x = -1;
@@ -112,22 +122,22 @@ Player.prototype.Sprint = function(params) {
 }
 
 Player.prototype.Roll = function(params) {
-    if(!this.body.onFloor() || this.game.time.now < this.rollTimer || this.body.velocity.x === 0)
+    if(!this.body.onFloor() || this.game.time.now < this.rollTimer)
         return;
 
     this.state = this.Rolling;
 
     if(this.direction === 'left') {
         this.rollVelMod = -300;
-        game.add.tween(this).to({rollVelMod: -300}, 100, Phaser.Easing.Quartic.In, true).
-                             to({rollVelMod:  80},  300, Phaser.Easing.Quartic.In, true).
-                             to({rollVelMod:  0},   500, Phaser.Easing.Quartic.In, true);
+        this.rollTween = game.add.tween(this).to({rollVelMod: -300}, 100, Phaser.Easing.Quartic.In, true).
+                                              to({rollVelMod:  80},  300, Phaser.Easing.Quartic.In, true).
+                                              to({rollVelMod:  0},   500, Phaser.Easing.Quartic.In, true);
     }
     else {
         this.rollVelMod = 300;
-        game.add.tween(this).to({rollVelMod:  300}, 100, Phaser.Easing.Quartic.In, true).
-                             to({rollVelMod: -80},  300, Phaser.Easing.Quartic.In, true).
-                             to({rollVelMod:  0},   500, Phaser.Easing.Quartic.In, true);
+        this.rollTween = game.add.tween(this).to({rollVelMod:  300}, 100, Phaser.Easing.Quartic.In, true).
+                                              to({rollVelMod: -80},  300, Phaser.Easing.Quartic.In, true).
+                                              to({rollVelMod:  0},   500, Phaser.Easing.Quartic.In, true);
     }
 
     this.rollTimer = game.time.now + 650;
