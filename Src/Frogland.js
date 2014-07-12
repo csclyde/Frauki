@@ -2,13 +2,13 @@ var Frogland = new Phaser.State();
 
 Frogland.preload = function() {
 	
-    game.load.atlasJSONHash('Frauki', 'Data/Frauki/Frauki.png', '../Data/Frauki/Frauki.json');
-    game.load.tilemap('Frogland', '../Data/Locations/Frogland/Frogland.json', null, Phaser.Tilemap.TILED_JSON);
-    game.load.image('Frogland', '../Data/Locations/Frogland/Frogland.png');
-    game.load.image('Background', '../Data/Locations/Frogland/Sky.png');
-    game.load.image('parallax1', '../Data/Locations/Frogland/Parallax1.png');
-    game.load.image('parallax2', '../Data/Locations/Frogland/Parallax2.png');
-    game.load.image('fluff', '../Data/Fluff.png');
+    game.load.atlasJSONHash('Frauki', 'Data/Frauki/Frauki.png', 'Data/Frauki/Frauki.json');
+    game.load.tilemap('Frogland', 'Data/Locations/Frogland/Frogland.json', null, Phaser.Tilemap.TILED_JSON);
+    game.load.image('Frogland', 'Data/Locations/Frogland/Frogland.png');
+    game.load.image('Background', 'Data/Locations/Frogland/Sky.png');
+    game.load.image('parallax1', 'Data/Locations/Frogland/Parallax1.png');
+    game.load.image('parallax2', 'Data/Locations/Frogland/Parallax2.png');
+    game.load.image('fluff', 'Data/Fluff.png');
 
     game.scale.minWidth = 640;
     game.scale.minHeight = 480;
