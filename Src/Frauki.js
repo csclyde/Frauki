@@ -119,11 +119,15 @@ Player.prototype.Roll = function(params) {
 
     if(this.direction === 'left') {
         this.rollVelMod = -300;
-        game.add.tween(this).to({rollVelMod: 80}, 300, Phaser.Easing.Quartic.In, true).to({rollVelMod:0}, 500, Phaser.Easing.Quartic.In, true);
+        game.add.tween(this).to({rollVelMod: -300}, 100, Phaser.Easing.Quartic.In, true).
+                             to({rollVelMod:  80},  300, Phaser.Easing.Quartic.In, true).
+                             to({rollVelMod:  0},   500, Phaser.Easing.Quartic.In, true);
     }
     else {
         this.rollVelMod = 300;
-        game.add.tween(this).to({rollVelMod: -80}, 300, Phaser.Easing.Quartic.In, true).to({rollVelMod:0}, 500, Phaser.Easing.Quartic.In, true);
+        game.add.tween(this).to({rollVelMod:  300}, 100, Phaser.Easing.Quartic.In, true).
+                             to({rollVelMod: -80},  300, Phaser.Easing.Quartic.In, true).
+                             to({rollVelMod:  0},   500, Phaser.Easing.Quartic.In, true);
     }
 
     this.rollTimer = game.time.now + 650;
@@ -231,10 +235,14 @@ Player.prototype.Flipping = function() {
 Player.prototype.Rolling = function() {
     this.PlayAnim('roll');
 
+    if(this.body.velocity.y > 150) {
+        this.state = this.Falling;
+    } else if(this.body.velocity.y < 0) {
+        this.state = this.Jumping;
+    }
+
     if(this.animations.currentAnim.isFinished) {
-        if(this.body.velocity.y > 0) {
-            this.state = this.Falling;
-        } else if(this.body.velocity.x !== 0 && this.body.onFloor()) {
+        if(this.body.velocity.x !== 0 && this.body.onFloor()) {
             this.state = this.Running;
         } else if(this.body.velocity.x === 0 && this.body.onFloor()) {
             this.state = this.Standing;
