@@ -22,15 +22,13 @@ InputController = function(player) {
 
 InputController.prototype.UpdateInput = function() {
 
-    if (this.runLeft.isDown) {
-        this.player.body.velocity.x = -PLAYER_SPEED;
-        this.player.SetDirection('left');
+	if (this.runLeft.isDown) {
+        this.player.Run({dir:'left'});
     }
     else if (this.runRight.isDown) {
-        this.player.body.velocity.x = PLAYER_SPEED;
-        this.player.SetDirection('right');
+        this.player.Run({dir:'right'});
     }
     else {
-    	this.player.body.velocity.x = 0;
+    	this.player.Run({dir:'still'});
     }
 }

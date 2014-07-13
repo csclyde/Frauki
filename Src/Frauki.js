@@ -22,11 +22,11 @@ Player = function (game, x, y, name) {
 
     this.state = this.Standing;
     this.direction = 'right';
+
     this.isCrouching = false;
     this.isSprinting = false;
     this.hasFlipped = false;
-    this.canWallJump = false;
-    this.wallJumpTimer = new Phaser.Timer(game, false);
+
     this.rollVelMod = 0;
     this.rollTween = null;
     this.jumpTimer = 0;
@@ -53,17 +53,6 @@ Player.prototype.update = function() {
         this.hasFlipped = false;
     }
 
-    if(this.body.onWall() && !this.body.onFloor() && this.state === this.Jumping) {
-        this.canWallJump = true;
-        this.wallJumpTimer.stop(true);
-
-        this.wallJumpTimer.add(500, function() {
-            this.canWallJump = false;
-        }, this);
-
-        this.wallJumpTimer.start();
-    }
-
     if(this.direction === 'left') {
         if(this.rollVelMod + this.body.velocity.x < 0)
             this.body.velocity.x += this.rollVelMod;
@@ -71,12 +60,18 @@ Player.prototype.update = function() {
         if(this.rollVelMod + this.body.velocity.x > 0)
             this.body.velocity.x += this.rollVelMod;
     }
+
+    if(this.state === this.Crouching || this.state === this.Rolling) {
+        this.body.setSize(11, 30, 0, 0);
+    } else {
+        this.body.setSize(11, 50, 0, 0);
+    }
 };
 
 Player.prototype.SetDirection = function(dir) {
     if(this.state === this.Rolling)
         return;
-    
+
     if(dir === 'left' && this.direction !== 'left') {
         this.direction = 'left';
         this.scale.x = -1;
@@ -93,17 +88,24 @@ Player.prototype.PlayAnim = function(name) {
 };
 
 ////////////////CALLBACKS//////////////////
+Player.prototype.Run = function(params) {
+    if(params.dir === 'left') {
+        this.body.velocity.x = -PLAYER_SPEED;
+        this.SetDirection('left');
+    } else if(params.dir === 'right') {
+        this.body.velocity.x = PLAYER_SPEED;
+        this.SetDirection('right');
+    } else {
+        this.body.velocity.x = 0;
+    }
+}
 
 Player.prototype.Jump = function(params) {
     if(params.jump) {
         if(this.body.onFloor() || this.state === this.Standing || this.state === this.Running) {
             this.body.velocity.y = -500;
         }
-        else if(this.canWallJump && false) {
-            this.body.velocity.y = -400;
-            this.body.velocity.x = -this.body.velocity.x;
-        }
-        else if(this.hasFlipped === false && this.state !== this.Falling) {
+        else if(this.hasFlipped === false && this.state !== this.Falling && this.state !== this.Rolling) {
             this.body.velocity.y = -350;
             this.state = this.Flipping;
             this.hasFlipped = true;

@@ -76,5 +76,5 @@ Frogland.update = function() {
 }
 
 Frogland.render = function() {
-    //game.debug.body(frauki);
+    game.debug.body(frauki);
 }
