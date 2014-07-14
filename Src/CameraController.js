@@ -65,7 +65,7 @@ CameraController.prototype.UpdateCamera = function() {
 	}
 
 	//conditional is to compensate for change is body size
-	if(this.player.state === this.player.Crouching || this.player.state === this.player.Rolling)
+	if(this.player.state === this.player.Crouching)
 		game.camera.focusOnXY(this.camX + this.player.body.x, this.camY + this.player.body.y - 20);
 	else
 		game.camera.focusOnXY(this.camX + this.player.body.x, this.camY + this.player.body.y);

@@ -49,6 +49,7 @@ Player.prototype.update = function() {
 
     this.state();
 
+    //reset the double jump flag
     if(this.body.onFloor()) {
         this.hasFlipped = false;
     }
@@ -61,10 +62,31 @@ Player.prototype.update = function() {
             this.body.velocity.x += this.rollVelMod;
     }
 
-    if(this.state === this.Crouching || this.state === this.Rolling) {
+    if(this.state === this.Crouching) {
         this.body.setSize(11, 30, 0, 0);
     } else {
         this.body.setSize(11, 50, 0, 0);
+    }
+
+    //constrain the players speed. it can be faster during jumps because of rolling into a jump
+    if(this.state === this.Rolling) {
+
+    } else if(this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling) {
+        if(this.body.velocity.x > PLAYER_SPEED + 100) {
+            this.body.velocity.x = PLAYER_SPEED + 100;
+        }
+
+        if(this.body.velocity.x < -PLAYER_SPEED - 100) {
+            this.body.velocity.x = -PLAYER_SPEED - 100;
+        }
+    } else {
+        if(this.body.velocity.x > PLAYER_SPEED) {
+            this.body.velocity.x = PLAYER_SPEED;
+        }
+
+        if(this.body.velocity.x < -PLAYER_SPEED) {
+            this.body.velocity.x = -PLAYER_SPEED;
+        }
     }
 };
 
@@ -251,6 +273,8 @@ Player.prototype.Rolling = function() {
         this.state = this.Falling;
     } else if(this.body.velocity.y < 0) {
         this.state = this.Jumping;
+        this.rollTween.stop();
+        this.rollVelMod = 0;
     }
 
     if(this.animations.currentAnim.isFinished) {
