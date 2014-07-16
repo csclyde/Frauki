@@ -53,7 +53,7 @@ Frogland.create = function() {
     
     midgroundLayer.resizeWorld();
 
-    map.setCollision([82, 83, 84, 87, 88, 89, 149, 127, 129, 108, 147, 109, 103, 104, 183, 184, 128, 107], true, 'Midground');
+    map.setCollision([2, 82, 83, 84, 87, 88, 89, 102, 103, 104, 107, 108, 109, 127, 128, 129, 147, 148, 149, 181, 182, 183, 184, 185], true, 'Midground');
 
 
     frauki = new Player(game, 0, 0, 'Frauki');
@@ -68,6 +68,17 @@ Frogland.create = function() {
     effectsController = new EffectsController();
 
     previousCamX = game.camera.x;
+
+    //set up tiles with one way collision
+    map.forEach(function (tile) {
+        if(!!tile.properties.cloud) {
+            tile.collideUp = true;
+            tile.collideDown = false;
+            tile.collideLeft = true;
+            tile.collideRight = true;
+        }
+
+    }, this, 0, 0, map.width, map.height, 'Midground');
 }
 
 Frogland.update = function() {
