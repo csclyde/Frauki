@@ -53,7 +53,7 @@ Frogland.create = function() {
     
     midgroundLayer.resizeWorld();
 
-    map.setCollision([2, 82, 83, 84, 87, 88, 89, 102, 103, 104, 107, 108, 109, 127, 128, 129, 147, 148, 149, 181, 182, 183, 184, 185], true, 'Midground');
+    map.setCollision([2, 71, 72, 73, 74, 75, 76, 82, 83, 84, 87, 88, 89, 91, 92, 93, 94, 95, 95, 102, 103, 104, 107, 108, 109, 127, 128, 129, 147, 148, 149, 181, 182, 183, 184, 185], true, 'Midground');
 
 
     frauki = new Player(game, 0, 0, 'Frauki');
