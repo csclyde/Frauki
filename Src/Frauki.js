@@ -9,6 +9,7 @@ Player = function (game, x, y, name) {
     //this.body.bounce.y = 0.2;
     this.body.collideWorldBounds = true;
     this.body.setSize(11, 50, 0, 0);
+    this.body.maxVelocity.y = 500;
 
     this.animations.add('stand', ['Stand0000'], 10, true, false);
     this.animations.add('run', ['Run0000', 'Run0001', 'Run0002', 'Run0003', 'Run0004', 'Run0005', 'Run0006', 'Run0007'], 10, true, false);
@@ -29,6 +30,7 @@ Player = function (game, x, y, name) {
 
     this.rollVelMod = 0;
     this.rollTween = null;
+    this.stopJumpTween = null;
     this.jumpTimer = 0;
 
     events.subscribe('player_jump', this.Jump, this);
@@ -124,16 +126,23 @@ Player.prototype.Run = function(params) {
 
 Player.prototype.Jump = function(params) {
     if(params.jump) {
+        //normal jump
         if(this.body.onFloor() || this.state === this.Standing || this.state === this.Running) {
             this.body.velocity.y = -500;
         }
+        //double jump
         else if(this.hasFlipped === false && this.state !== this.Falling && this.state !== this.Rolling) {
+            if(this.stopJumpTween) {
+                this.stopJumpTween.stop();
+            }
+
             this.body.velocity.y = -350;
             this.state = this.Flipping;
             this.hasFlipped = true;
         }
     } else if(this.body.velocity.y < 0 && this.state !== this.Flipping) {
-        //this.player.body.y = 0;
+        if(this.body.velocity.y < 0)
+            this.stopJumpTween = game.add.tween(this.body.velocity).to({y: 0}, 100, Phaser.Easing.Exponential.In, true);
     }
 }
 
