@@ -18,6 +18,13 @@ InputController = function(player) {
 	this.roll.onDown.add(function() {	events.publish('player_roll', null, this)});
 	this.up.onDown.add(function() { }, this);
 	this.up.onUp.add(function() { }, this);
+
+	game.input.gamepad.start();
+    this.pad = game.input.gamepad.pad1;
+
+    this.pad.onDownCallback = function() {
+    	events.publish('player_jump', {jump: true});
+    };
 };
 
 InputController.prototype.UpdateInput = function() {
