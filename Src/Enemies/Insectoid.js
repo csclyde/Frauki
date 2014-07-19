@@ -1,22 +1,23 @@
 var Insectoid  = (function() {
 	var e = {};
 
-	e.Create = function() {
-		this.UpdateFunction = Update;
+	e.Create = function(sprite) {
 
-		//this.body.setSize(11, 50, 0, 0);
+		sprite.body.setSize(11, 50, 0, 0);
 
-	    //this.animations.add('stand', ['Stand0000'], 10, true, false);
+	    sprite.animations.add('stand', ['Hop0000'], 10, true, false);
+	    sprite.animations.play('stand');
 
-	    //this.state = this.Standing;
+	    sprite.state = Standing;
 
 	    //events.subscribe('player_jump', this.Jump, this);
+	};
 
-	}
+	e.Update = function() {
+	};
 
-	function Update() {
+	function Standing() {
 
-	}
-
+	};
 
 return e; })();

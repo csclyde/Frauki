@@ -11,6 +11,9 @@
  <tileset firstgid="241" name="DoodadTiles" tilewidth="16" tileheight="16">
   <image source="Frogland Doodads.png" width="640" height="320"/>
  </tileset>
+ <tileset firstgid="1041" name="SpawnKey" tilewidth="16" tileheight="16">
+  <image source="../SpawnKey.png" width="320" height="192"/>
+ </tileset>
  <layer name="Background" width="150" height="100">
   <data encoding="base64" compression="zlib">
    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
@@ -27,39 +30,26 @@
   </data>
  </layer>
  <objectgroup name="Items" width="150" height="100">
-  <object name="Apple" type="Item" x="1183" y="1016" width="9" height="9"/>
-  <object name="Cool Item" type="Item" x="800" y="1256" width="21" height="20"/>
+  <object gid="1041" x="1178" y="1014"/>
+  <object gid="1041" x="794" y="1268"/>
+  <object gid="1041" x="300" y="1048"/>
+  <object gid="1041" x="1622" y="1514"/>
  </objectgroup>
  <objectgroup name="Enemies" width="150" height="100">
-  <object name="Dork" type="Enemy" x="1103" y="1284" width="21" height="25">
-   <ellipse/>
-  </object>
-  <object name="Dork" type="Enemy" x="956" y="1272" width="20" height="22">
-   <ellipse/>
-  </object>
-  <object name="Spore Blaster" type="Enemy" x="946" y="819" width="18" height="18">
-   <ellipse/>
-  </object>
-  <object name="Dork" type="Enemy" x="408" y="1064" width="33" height="31">
-   <ellipse/>
-  </object>
-  <object name="Dork" type="Enemy" x="344" y="1407" width="31" height="29">
-   <ellipse/>
-  </object>
-  <object name="Spore Blaster" type="Enemy" x="394" y="1172" width="21" height="24">
-   <ellipse/>
-  </object>
-  <object name="Buzzar" type="Enemy" x="668" y="1281" width="31" height="31">
-   <ellipse/>
-  </object>
-  <object name="Spore Blaster" type="Enemy" x="95" y="1133" width="29" height="33">
-   <ellipse/>
-  </object>
-  <object name="Buzzar" type="Enemy" x="203" y="1283" width="29" height="35">
-   <ellipse/>
-  </object>
-  <object name="Buzar" type="Enemy" x="105" y="1289" width="37" height="36">
-   <ellipse/>
+  <object gid="1061" x="1110" y="1298"/>
+  <object gid="1061" x="340" y="1430"/>
+  <object gid="1061" x="440" y="1108"/>
+  <object gid="1062" x="668" y="1302"/>
+  <object gid="1062" x="188" y="1312"/>
+  <object gid="1062" x="108" y="1312"/>
+  <object gid="1063" x="804" y="1362"/>
+  <object gid="1063" x="90" y="1156"/>
+  <object gid="1063" x="948" y="830"/>
+  <object gid="1063" x="400" y="1182"/>
+  <object type="Enemy" gid="1061" x="208" y="570">
+   <properties>
+    <property name="test" value="tets"/>
+   </properties>
   </object>
  </objectgroup>
 </map>

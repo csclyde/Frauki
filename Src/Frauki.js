@@ -44,7 +44,7 @@ Player.prototype = Object.create(Phaser.Sprite.prototype);
 Player.prototype.constructor = Player;
 
 Player.prototype.create = function() {
-
+    console.log('test');
 }
 
 Player.prototype.update = function() {

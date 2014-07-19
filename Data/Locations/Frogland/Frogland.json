@@ -38,30 +38,60 @@
          "name":"Items",
          "objects":[
                 {
-                 "height":9,
-                 "name":"Apple",
+                 "gid":1041,
+                 "height":0,
+                 "name":"",
                  "properties":
                     {
 
                     },
-                 "type":"Item",
+                 "type":"",
                  "visible":true,
-                 "width":9,
-                 "x":1183,
-                 "y":1016
+                 "width":0,
+                 "x":1178,
+                 "y":1014
                 }, 
                 {
-                 "height":20,
-                 "name":"Cool Item",
+                 "gid":1041,
+                 "height":0,
+                 "name":"",
                  "properties":
                     {
 
                     },
-                 "type":"Item",
+                 "type":"",
                  "visible":true,
-                 "width":21,
-                 "x":800,
-                 "y":1256
+                 "width":0,
+                 "x":794,
+                 "y":1268
+                }, 
+                {
+                 "gid":1041,
+                 "height":0,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":300,
+                 "y":1048
+                }, 
+                {
+                 "gid":1041,
+                 "height":0,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1622,
+                 "y":1514
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -75,144 +105,158 @@
          "name":"Enemies",
          "objects":[
                 {
-                 "ellipse":true,
-                 "height":25,
-                 "name":"Dork",
+                 "gid":1061,
+                 "height":0,
+                 "name":"",
                  "properties":
                     {
 
                     },
-                 "type":"Enemy",
+                 "type":"",
                  "visible":true,
-                 "width":21,
-                 "x":1103,
-                 "y":1284
+                 "width":0,
+                 "x":1110,
+                 "y":1298
                 }, 
                 {
-                 "ellipse":true,
-                 "height":22,
-                 "name":"Dork",
+                 "gid":1061,
+                 "height":0,
+                 "name":"",
                  "properties":
                     {
 
                     },
-                 "type":"Enemy",
+                 "type":"",
                  "visible":true,
-                 "width":20,
-                 "x":956,
-                 "y":1272
+                 "width":0,
+                 "x":340,
+                 "y":1430
                 }, 
                 {
-                 "ellipse":true,
-                 "height":18,
-                 "name":"Spore Blaster",
+                 "gid":1061,
+                 "height":0,
+                 "name":"",
                  "properties":
                     {
 
                     },
-                 "type":"Enemy",
+                 "type":"",
                  "visible":true,
-                 "width":18,
-                 "x":946,
-                 "y":819
+                 "width":0,
+                 "x":440,
+                 "y":1108
                 }, 
                 {
-                 "ellipse":true,
-                 "height":31,
-                 "name":"Dork",
+                 "gid":1062,
+                 "height":0,
+                 "name":"",
                  "properties":
                     {
 
                     },
-                 "type":"Enemy",
+                 "type":"",
                  "visible":true,
-                 "width":33,
-                 "x":408,
-                 "y":1064
-                }, 
-                {
-                 "ellipse":true,
-                 "height":29,
-                 "name":"Dork",
-                 "properties":
-                    {
-
-                    },
-                 "type":"Enemy",
-                 "visible":true,
-                 "width":31,
-                 "x":344,
-                 "y":1407
-                }, 
-                {
-                 "ellipse":true,
-                 "height":24,
-                 "name":"Spore Blaster",
-                 "properties":
-                    {
-
-                    },
-                 "type":"Enemy",
-                 "visible":true,
-                 "width":21,
-                 "x":394,
-                 "y":1172
-                }, 
-                {
-                 "ellipse":true,
-                 "height":31,
-                 "name":"Buzzar",
-                 "properties":
-                    {
-
-                    },
-                 "type":"Enemy",
-                 "visible":true,
-                 "width":31,
+                 "width":0,
                  "x":668,
-                 "y":1281
+                 "y":1302
                 }, 
                 {
-                 "ellipse":true,
-                 "height":33,
-                 "name":"Spore Blaster",
+                 "gid":1062,
+                 "height":0,
+                 "name":"",
                  "properties":
                     {
 
                     },
-                 "type":"Enemy",
+                 "type":"",
                  "visible":true,
-                 "width":29,
-                 "x":95,
-                 "y":1133
+                 "width":0,
+                 "x":188,
+                 "y":1312
                 }, 
                 {
-                 "ellipse":true,
-                 "height":35,
-                 "name":"Buzzar",
+                 "gid":1062,
+                 "height":0,
+                 "name":"",
                  "properties":
                     {
 
                     },
-                 "type":"Enemy",
+                 "type":"",
                  "visible":true,
-                 "width":29,
-                 "x":203,
-                 "y":1283
+                 "width":0,
+                 "x":108,
+                 "y":1312
                 }, 
                 {
-                 "ellipse":true,
-                 "height":36,
-                 "name":"Buzar",
+                 "gid":1063,
+                 "height":0,
+                 "name":"",
                  "properties":
                     {
 
                     },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":804,
+                 "y":1362
+                }, 
+                {
+                 "gid":1063,
+                 "height":0,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":90,
+                 "y":1156
+                }, 
+                {
+                 "gid":1063,
+                 "height":0,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":948,
+                 "y":830
+                }, 
+                {
+                 "gid":1063,
+                 "height":0,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":400,
+                 "y":1182
+                }, 
+                {
+                 "gid":1061,
+                 "height":0,
+                 "name":"",
+                 "properties":
+                    {
+                     "test":"tets"
+                    },
                  "type":"Enemy",
                  "visible":true,
-                 "width":37,
-                 "x":105,
-                 "y":1289
+                 "width":0,
+                 "x":208,
+                 "y":570
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -257,6 +301,21 @@
          "imagewidth":640,
          "margin":0,
          "name":"DoodadTiles",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tileheight":16,
+         "tilewidth":16
+        }, 
+        {
+         "firstgid":1041,
+         "image":"..\/SpawnKey.png",
+         "imageheight":192,
+         "imagewidth":320,
+         "margin":0,
+         "name":"SpawnKey",
          "properties":
             {
 
