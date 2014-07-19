@@ -53,11 +53,13 @@ Frogland.create = function() {
     
     midgroundLayer.resizeWorld();
 
-    map.setCollision([2, 71, 72, 73, 74, 75, 76, 82, 83, 84, 87, 88, 89, 91, 92, 93, 94, 95, 95, 102, 103, 104, 107, 108, 109, 127, 128, 129, 147, 148, 149, 181, 182, 183, 184, 185], true, 'Midground');
+    map.setCollision([ 71, 72, 73, 74, 75, 76, 82, 83, 84, 87, 88, 89, 91, 92, 93, 94, 95, 95, 102, 103, 104, 107, 108, 109, 127, 128, 129, 147, 148, 149, 181, 182, 183, 184, 185], true, 'Midground');
 
 
     frauki = new Player(game, 0, 0, 'Frauki');
     game.add.existing(frauki);
+
+    //loop through the objects and create the enemies
 
     foregroundLayer = map.createLayer('Foreground');
 
@@ -71,7 +73,7 @@ Frogland.create = function() {
 
     //set up tiles with one way collision
     map.forEach(function (tile) {
-        if(!!tile.properties.cloud) {
+        if(!!tile.cloud) {
             tile.collideUp = true;
             tile.collideDown = false;
             tile.collideLeft = true;
