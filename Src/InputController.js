@@ -19,12 +19,31 @@ InputController = function(player) {
 	this.up.onDown.add(function() { }, this);
 	this.up.onUp.add(function() { }, this);
 
+	game.input.gamepad.addCallbacks(this, {
+            onConnect: function(){
+                console.log('gamepad connected');
+            },
+            onDisconnect: function(){
+                
+            },
+            onDown: function(buttonCode, value){
+                events.publish('player_jump', {jump: true});
+            },
+            onUp: function(buttonCode, value){
+                events.publish('player_jump', {jump: true});
+                console.log('Gamepad button pushed');
+            },
+            onAxis: function(axisState) {
+                
+            },
+            onFloat: function(buttonCode, value) {
+                
+            }
+        });
+	
 	game.input.gamepad.start();
-    this.pad = game.input.gamepad.pad1;
 
-    this.pad.onDownCallback = function() {
-    	events.publish('player_jump', {jump: true});
-    };
+    
 };
 
 InputController.prototype.UpdateInput = function() {

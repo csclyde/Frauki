@@ -78,6 +78,7 @@ Frogland.create = function() {
     cameraController.SetRepulsiveTiles([82, 83, 84, 87, 88, 89, 149, 127, 129, 108, 147, 109, 103, 104, 183, 184, 128, 107]);
 
     inputController = new InputController(frauki);
+
     effectsController = new EffectsController();
 
     previousCamX = game.camera.x;
@@ -92,7 +93,7 @@ Frogland.create = function() {
         }
 
     }, this, 0, 0, map.width, map.height, 'Midground');
-}
+};
 
 Frogland.update = function() {
     parallaxLayer1.autoScroll(-(game.camera.x - previousCamX) * 100, 0);
