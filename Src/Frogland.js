@@ -33,6 +33,8 @@ var cameraController;
 var inputController;
 var effectsController;
 
+var playerX, playerY;
+
 var enemyLayer;
 
 var previousCamX;
@@ -109,6 +111,9 @@ Frogland.update = function() {
     effectsController.UpdateEffects();
 
     previousCamX = game.camera.x;
+
+    playerX = frauki.body.x;
+    playerY = frauki.body.y;
 }
 
 Frogland.render = function() {

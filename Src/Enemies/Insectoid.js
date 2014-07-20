@@ -16,6 +16,18 @@ Enemy.prototype.types['Insectoid'] =  function(sprite) {
 
 	function Idling() {
 		sprite.PlayAnim('idle');
+
+		if(this.PlayerIsVisible() || this.PlayerIsNear(100)) {
+			if(playerX < this.body.x) {
+				this.body.velocity.x = -100;
+				this.SetDirection('left');
+			} else {
+				this.body.velocity.x = 100;
+				this.SetDirection('right');
+			}
+		} else {
+			this.body.velocity.x = 0;
+		}
 	};
 
 	function Hopping() {
