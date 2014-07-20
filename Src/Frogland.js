@@ -40,6 +40,7 @@ var previousCamX;
 Frogland.create = function() {
 	game.physics.startSystem(Phaser.Physics.ARCADE);
     game.physics.arcade.gravity.y = 1000;
+    game.time.deltaCap = 0.016;
 
     bg = game.add.tileSprite(0, 0, 320, 240, 'Background');
     bg.fixedToCamera = true;
@@ -63,7 +64,7 @@ Frogland.create = function() {
     map.setCollision([71, 72, 73, 74, 75, 76, 82, 83, 84, 87, 88, 89, 91, 92, 93, 94, 95, 95, 102, 103, 104, 107, 108, 109, 127, 128, 129, 147, 148, 149, 181, 182, 183, 184, 185], true, 'Midground');
 
 
-    frauki = new Player(game, 10, 300, 'Frauki');
+    frauki = new Player(game, 0, 0, 'Frauki');
     game.add.existing(frauki);
 
     //create the enemies

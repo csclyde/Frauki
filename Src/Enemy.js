@@ -5,16 +5,18 @@ Enemy = function(game, x, y, name) {
     this.anchor.setTo(.5, 1);
     this.body.collideWorldBounds = true;
     this.body.maxVelocity.y = 500;
-    this.direction = 'right';
+    this.SetDirection('left');
+    this.state = null;
 
-    this.updateFunction = Insectoid.Update;
-
-    Insectoid.Create(this);
+    if(!!this.types['Insectoid']) {
+        this.types['Insectoid'](this);
+    }
 
 };
 
 Enemy.prototype = Object.create(Phaser.Sprite.prototype);
 Enemy.prototype.constructor = Enemy;
+Enemy.prototype.types = {};
 
 Enemy.prototype.create = function() {
 	//use the type property to call the correct create function. that function will assign the update function
@@ -23,15 +25,30 @@ Enemy.prototype.create = function() {
 };
 
 Enemy.prototype.update = function() {
-	//if(!!this.updateFunction) {
+	if(typeof this.updateFunction === 'function') {
 		this.updateFunction.apply(this);
-	//} else {
-		//console.log('what haps');
-	//}
+	} else {
+		console.log('Enemy update function not found');
+	}
+
+    this.state();
 };
 
-//provide utility functions here that the specific enemies can all use
+Enemy.prototype.SetDirection = function(dir) {
+    if(dir === 'left' && this.direction !== 'left') {
+        this.direction = 'left';
+        this.scale.x = -1;
+    }
+    else if(dir === 'right' && this.direction !== 'right') {
+        this.direction = 'right';
+        this.scale.x = 1;
+    }
+};
+
 Enemy.prototype.PlayAnim = function(name) {
     if(this.animations.currentAnim.name !== name)
         this.animations.play(name);
 };
+
+
+//provide utility functions here that the specific enemies can all use

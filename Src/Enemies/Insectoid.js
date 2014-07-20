@@ -1,23 +1,40 @@
-var Insectoid  = (function() {
-	var e = {};
+Enemy.prototype.types['Insectoid'] =  function(sprite) {
 
-	e.Create = function(sprite) {
+	sprite.body.setSize(11, 50, 0, 0);
 
-		sprite.body.setSize(11, 50, 0, 0);
+    sprite.animations.add('idle', ['Hop0000'], 10, true, false);
+    sprite.animations.add('hop', ['Hop0001', 'Hop0002'], 10, true, false);
+    sprite.animations.add('land', ['Hop0003', 'Hop0004'], 10, true, false);
 
-	    sprite.animations.add('stand', ['Hop0000'], 10, true, false);
-	    sprite.animations.play('stand');
+    sprite.state = Idling;
 
-	    sprite.state = Standing;
+    //events.subscribe('player_jump', this.Jump, this);
 
-	    //events.subscribe('player_jump', this.Jump, this);
+	sprite.updateFunction = function() {
+		
 	};
 
-	e.Update = function() {
+	function Idling() {
+		sprite.PlayAnim('idle');
 	};
 
-	function Standing() {
+	function Hopping() {
 
 	};
 
-return e; })();
+	function Landing() {
+
+	};
+
+	function Scuttling() {
+
+	};
+
+	function Dodging() {
+
+	};
+
+	function Shooting() {
+
+	};
+};

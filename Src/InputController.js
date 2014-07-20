@@ -8,6 +8,7 @@ InputController = function(player) {
 	this.runRight 	= game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
 	this.sprint		= game.input.keyboard.addKey(Phaser.Keyboard.Z);
 	this.roll		= game.input.keyboard.addKey(Phaser.Keyboard.X);
+	this.testButton = game.input.keyboard.addKey(Phaser.Keyboard.P);
 
 	this.jump.onDown.add(function() { 	events.publish('player_jump', {jump: true}); }, this);
 	this.jump.onUp.add(function() { 	events.publish('player_jump', {jump: false}); }, this);
@@ -19,31 +20,32 @@ InputController = function(player) {
 	this.up.onDown.add(function() { }, this);
 	this.up.onUp.add(function() { }, this);
 
-	game.input.gamepad.addCallbacks(this, {
-            onConnect: function(){
-                console.log('gamepad connected');
-            },
-            onDisconnect: function(){
-                
-            },
-            onDown: function(buttonCode, value){
-                events.publish('player_jump', {jump: true});
-            },
-            onUp: function(buttonCode, value){
-                events.publish('player_jump', {jump: true});
-                console.log('Gamepad button pushed');
-            },
-            onAxis: function(axisState) {
-                
-            },
-            onFloat: function(buttonCode, value) {
-                
-            }
-        });
-	
-	game.input.gamepad.start();
+	this.testButton.onDown.add(function() {
+		game.input.gamepad.start();
+		console.log(game.input.gamepad.padsConnected);
+	}, this);
 
-    
+	game.input.gamepad.addCallbacks(this, {
+        onConnect: function(){
+            console.log('gamepad connected');
+        },
+        onDisconnect: function(){
+            
+        },
+        onDown: function(buttonCode, value){
+            events.publish('player_jump', {jump: true});
+        },
+        onUp: function(buttonCode, value){
+            events.publish('player_jump', {jump: true});
+            console.log('Gamepad button pushed');
+        },
+        onAxis: function(axisState) {
+            
+        },
+        onFloat: function(buttonCode, value) {
+            
+        }
+    });
 };
 
 InputController.prototype.UpdateInput = function() {
@@ -57,4 +59,4 @@ InputController.prototype.UpdateInput = function() {
     else {
     	this.player.Run({dir:'still'});
     }
-}
+};
