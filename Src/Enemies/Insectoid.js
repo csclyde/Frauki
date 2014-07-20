@@ -1,6 +1,6 @@
 Enemy.prototype.types['Insectoid'] =  function(sprite) {
 
-	sprite.body.setSize(11, 50, 0, 0);
+	sprite.body.setSize(67, 25, 0, 0);
 
     sprite.animations.add('idle', ['Hop0000'], 10, true, false);
     sprite.animations.add('hop', ['Hop0001', 'Hop0002'], 10, true, false);
@@ -14,6 +14,7 @@ Enemy.prototype.types['Insectoid'] =  function(sprite) {
 		
 	};
 
+	////////////////////////////////STATES////////////////////////////////////
 	function Idling() {
 		sprite.PlayAnim('idle');
 
@@ -31,7 +32,7 @@ Enemy.prototype.types['Insectoid'] =  function(sprite) {
 	};
 
 	function Hopping() {
-
+		
 	};
 
 	function Landing() {
@@ -48,5 +49,10 @@ Enemy.prototype.types['Insectoid'] =  function(sprite) {
 
 	function Shooting() {
 
+	};
+
+	///////////////////////////////ACTIONS////////////////////////////////////
+	function Hop() {
+		this.state = Hopping;
 	};
 };

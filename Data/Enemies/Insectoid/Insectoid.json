@@ -2,47 +2,47 @@
 
 "Die0000":
 {
-	"frame": {"x":519,"y":1,"w":74,"h":36},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":74,"h":36},
-	"sourceSize": {"w":74,"h":36}
-},
-"Die0001":
-{
-	"frame": {"x":338,"y":1,"w":56,"h":40},
+	"frame": {"x":86,"y":87,"w":56,"h":40},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":56,"h":40},
 	"sourceSize": {"w":56,"h":40}
 },
-"Die0002":
+"Die0001":
 {
-	"frame": {"x":1,"y":1,"w":50,"h":52},
+	"frame": {"x":161,"y":1,"w":50,"h":52},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":52},
 	"sourceSize": {"w":50,"h":52}
 },
-"Die0003":
+"Die0002":
 {
-	"frame": {"x":395,"y":1,"w":48,"h":38},
+	"frame": {"x":161,"y":54,"w":48,"h":38},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":38},
 	"sourceSize": {"w":48,"h":38}
 },
-"Die0004":
+"Die0003":
 {
-	"frame": {"x":212,"y":1,"w":40,"h":46},
+	"frame": {"x":210,"y":54,"w":40,"h":46},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":46},
 	"sourceSize": {"w":40,"h":46}
 },
+"Die0004":
+{
+	"frame": {"x":76,"y":95,"w":1,"h":1},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1,"h":1},
+	"sourceSize": {"w":1,"h":1}
+},
 "Hop0000":
 {
-	"frame": {"x":444,"y":1,"w":74,"h":36},
+	"frame": {"x":86,"y":50,"w":74,"h":36},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":74,"h":36},
@@ -50,7 +50,7 @@
 },
 "Hop0001":
 {
-	"frame": {"x":52,"y":1,"w":84,"h":48},
+	"frame": {"x":1,"y":1,"w":84,"h":48},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":84,"h":48},
@@ -58,7 +58,7 @@
 },
 "Hop0002":
 {
-	"frame": {"x":253,"y":1,"w":84,"h":44},
+	"frame": {"x":1,"y":50,"w":84,"h":44},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":84,"h":44},
@@ -66,7 +66,7 @@
 },
 "Hop0003":
 {
-	"frame": {"x":137,"y":1,"w":74,"h":48},
+	"frame": {"x":86,"y":1,"w":74,"h":48},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":74,"h":48},
@@ -74,7 +74,7 @@
 },
 "Hop0004":
 {
-	"frame": {"x":594,"y":1,"w":74,"h":32},
+	"frame": {"x":1,"y":95,"w":74,"h":32},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":74,"h":32},
@@ -82,7 +82,7 @@
 },
 "Hop0005":
 {
-	"frame": {"x":444,"y":1,"w":74,"h":36},
+	"frame": {"x":86,"y":50,"w":74,"h":36},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":74,"h":36},
@@ -93,8 +93,8 @@
 	"version": "1.0",
 	"image": "Insectoid.png",
 	"format": "RGBA8888",
-	"size": {"w":669,"h":54},
+	"size": {"w":251,"h":128},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:615221d1a0c84bc66013f3d705444f44:e720afc761b890e9d76c63a45fae341f:e9d0e1bedafcc228ff87822386a884de$"
+	"smartupdate": "$TexturePacker:SmartUpdate:f1d5cb89cefcc72f768e398458ca1fe6:b3f7a7441bfefeb736dc24388625f600:e9d0e1bedafcc228ff87822386a884de$"
 }
 }
