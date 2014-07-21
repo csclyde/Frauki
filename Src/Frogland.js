@@ -32,6 +32,7 @@ var parallax1, parallax2;
 var cameraController;
 var inputController;
 var effectsController;
+var frauki;
 
 var playerX, playerY;
 
@@ -74,43 +75,28 @@ Frogland.create = function() {
     this.enemyGroup.enableBody = true;
 
     enemyLayer = map.createFromObjects('Enemies', 1061, 'Insectoid', 'Hop0000', true, false, this.enemyGroup, Enemy);
-
     foregroundLayer = map.createLayer('Foreground');
 
     cameraController = new CameraController(frauki, map);
-    cameraController.SetRepulsiveTiles([82, 83, 84, 87, 88, 89, 149, 127, 129, 108, 147, 109, 103, 104, 183, 184, 128, 107]);
-
     inputController = new InputController(frauki);
-
     effectsController = new EffectsController();
 
-    previousCamX = game.camera.x;
-
-    //set up tiles with one way collision
-    map.forEach(function (tile) {
-        if(!!tile.cloud) {
-            tile.collideUp = true;
-            tile.collideDown = false;
-            tile.collideLeft = true;
-            tile.collideRight = true;
-        }
-
-    }, this, 0, 0, map.width, map.height, 'Midground');
+    //the player gets hurt if they collide with an enemy
+    game.physics.arcade.overlap(frauki, this.enemyGroup, function(frauki, enemy) {
+        //frauki.Hit();
+        //console.log('Player hit');
+    });
 };
 
 Frogland.update = function() {
-    parallaxLayer1.autoScroll(-(game.camera.x - previousCamX) * 100, 0);
-    parallaxLayer2.autoScroll(-(game.camera.x - previousCamX) * 150, 0);
 
 	game.physics.arcade.collide(frauki, midgroundLayer);
-
+    game.physics.arcade.collide(frauki, this.enemyGroup, frauki.Hit, null, frauki);
     game.physics.arcade.collide(this.enemyGroup, midgroundLayer);
 
     cameraController.UpdateCamera();
     inputController.UpdateInput();
     effectsController.UpdateEffects();
-
-    previousCamX = game.camera.x;
 
     playerX = frauki.body.x;
     playerY = frauki.body.y;

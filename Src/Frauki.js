@@ -20,6 +20,7 @@ Player = function (game, x, y, name) {
     this.animations.add('crouch', ['Crouch0001'], 10, true, false);
     this.animations.add('flip', ['Flip0000', 'Flip0001', 'Flip0002', 'Flip0003', 'Flip0004'], 14, false, false);
     this.animations.add('roll', ['Flip0000', 'Flip0001', 'Flip0002', 'Flip0003', 'Flip0004'], 14, false, false);
+    this.animations.add('hit', ['Hit0001', 'Hit0002'], 10, true, false);
 
     this.state = this.Standing;
     this.direction = 'right';
@@ -32,6 +33,7 @@ Player = function (game, x, y, name) {
     this.rollTween = null;
     this.stopJumpTween = null;
     this.jumpTimer = 0;
+    this.hitTimer = 0;
 
     events.subscribe('player_jump', this.Jump, this);
     events.subscribe('player_crouch', this.Crouch, this);
@@ -113,6 +115,10 @@ Player.prototype.PlayAnim = function(name) {
 
 ////////////////CALLBACKS//////////////////
 Player.prototype.Run = function(params) {
+    if(this.state === this.Hurting) {
+        return;
+    }
+
     if(params.dir === 'left') {
         this.body.velocity.x = -PLAYER_SPEED;
         this.SetDirection('left');
@@ -122,9 +128,13 @@ Player.prototype.Run = function(params) {
     } else {
         this.body.velocity.x = 0;
     }
-}
+};
 
 Player.prototype.Jump = function(params) {
+    if(this.state === this.Hurting) {
+        return;
+    }
+    
     if(params.jump) {
         //normal jump
         if(this.body.onFloor() || this.state === this.Standing || this.state === this.Running) {
@@ -144,15 +154,15 @@ Player.prototype.Jump = function(params) {
         if(this.body.velocity.y < 0)
             this.stopJumpTween = game.add.tween(this.body.velocity).to({y: 0}, 100, Phaser.Easing.Exponential.In, true);
     }
-}
+};
 
 Player.prototype.Crouch = function(params) {
     this.isCrouching = params.crouch;
-}
+};
 
 Player.prototype.Sprint = function(params) {
     this.isSprinting = params.sprint;
-}
+};
 
 Player.prototype.Roll = function(params) {
     if(!this.body.onFloor() || this.game.time.now < this.rollTimer)
@@ -174,7 +184,20 @@ Player.prototype.Roll = function(params) {
     }
 
     this.rollTimer = game.time.now + 650;
-}
+};
+
+Player.prototype.Hit = function(f, e) {
+    if(this.state !== this.Hurting) {
+        this.body.velocity.y = -300;
+
+        if(f.body.x < e.body.x)
+            this.body.velocity.x = -200;
+        else
+            this.body.velocity.x = 200;
+
+        this.state = this.Hurting;
+    }
+};
 
 //////////////////STATES/////////////////
 
@@ -219,7 +242,7 @@ Player.prototype.Peaking = function() {
     if(this.animations.currentAnim.isFinished) {
         this.state = this.Falling;
     }
-}
+};
 
 Player.prototype.Falling = function() {
     this.PlayAnim('fall');
@@ -257,7 +280,7 @@ Player.prototype.Crouching = function() {
         this.state = this.Standing;
     }
 
-}
+};
 
 Player.prototype.Flipping = function() {
     this.PlayAnim('flip');
@@ -273,7 +296,7 @@ Player.prototype.Flipping = function() {
             this.state = this.Landing;
         }
     }
-}
+};
 
 Player.prototype.Rolling = function() {
     this.PlayAnim('roll');
@@ -293,4 +316,18 @@ Player.prototype.Rolling = function() {
             this.state = this.Standing;
         }
     }
-}
+};
+
+Player.prototype.Hurting = function() {
+    this.PlayAnim('hit');
+
+    if(this.body.onFloor() || game.time.now - this.hitTimer > 500) {
+        if(this.body.velocity.x === 0) {
+            this.state = this.Standing;
+        } else {
+            this.state = this.Running;
+        }
+
+        this.hitTimer = game.time.now;
+    }
+};

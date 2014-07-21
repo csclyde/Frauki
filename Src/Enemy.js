@@ -10,7 +10,7 @@ Enemy = function(game, x, y, name) {
     this.state = null;
 
     if(!!this.types['Insectoid']) {
-        this.types['Insectoid'](this);
+        this.types['Insectoid'].apply(this);
     }
 
 };

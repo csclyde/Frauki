@@ -52,10 +52,10 @@ InputController.prototype.UpdateInput = function() {
 
 	var gamepads = navigator.getGamepads ? navigator.getGamepads() : (navigator.webkitGetGamepads ? navigator.webkitGetGamepads() : []);
 
-	if (this.runLeft.isDown || (gamepads[1] && gamepads[1].buttons[0].pressed)) {
+	if (this.runLeft.isDown) {
         this.player.Run({dir:'left'});
     }
-    else if (this.runRight.isDown || (gamepads[1] && gamepads[1].buttons[1].pressed)) {
+    else if (this.runRight.isDown) {
         this.player.Run({dir:'right'});
     }
     else {
