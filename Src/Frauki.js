@@ -34,6 +34,7 @@ Player = function (game, x, y, name) {
     this.stopJumpTween = null;
     this.jumpTimer = 0;
     this.hitTimer = 0;
+    this.gracePeriod = 0;
 
     events.subscribe('player_jump', this.Jump, this);
     events.subscribe('player_crouch', this.Crouch, this);
@@ -113,6 +114,10 @@ Player.prototype.PlayAnim = function(name) {
         this.animations.play(name);
 };
 
+Player.prototype.Grace = function() {
+    return (this.game.time.now < this.gracePeriod);
+}
+
 ////////////////CALLBACKS//////////////////
 Player.prototype.Run = function(params) {
     if(this.state === this.Hurting) {
@@ -134,7 +139,7 @@ Player.prototype.Jump = function(params) {
     if(this.state === this.Hurting) {
         return;
     }
-    
+
     if(params.jump) {
         //normal jump
         if(this.body.onFloor() || this.state === this.Standing || this.state === this.Running) {
@@ -184,6 +189,7 @@ Player.prototype.Roll = function(params) {
     }
 
     this.rollTimer = game.time.now + 650;
+    this.gracePeriod = game.time.now + 200;
 };
 
 Player.prototype.Hit = function(f, e) {
@@ -196,6 +202,8 @@ Player.prototype.Hit = function(f, e) {
             this.body.velocity.x = 200;
 
         this.state = this.Hurting;
+        this.gracePeriod = game.time.now + 1000;
+        this.hitTimer = game.time.now + 500;
     }
 };
 
@@ -321,13 +329,11 @@ Player.prototype.Rolling = function() {
 Player.prototype.Hurting = function() {
     this.PlayAnim('hit');
 
-    if(this.body.onFloor() || game.time.now - this.hitTimer > 500) {
+    if(game.time.now > this.hitTimer) {
         if(this.body.velocity.x === 0) {
             this.state = this.Standing;
         } else {
             this.state = this.Running;
-        }
-
-        this.hitTimer = game.time.now;
+        }  
     }
 };

@@ -80,19 +80,17 @@ Frogland.create = function() {
     cameraController = new CameraController(frauki, map);
     inputController = new InputController(frauki);
     effectsController = new EffectsController();
-
-    //the player gets hurt if they collide with an enemy
-    game.physics.arcade.overlap(frauki, this.enemyGroup, function(frauki, enemy) {
-        //frauki.Hit();
-        //console.log('Player hit');
-    });
 };
 
 Frogland.update = function() {
 
 	game.physics.arcade.collide(frauki, midgroundLayer);
-    game.physics.arcade.collide(frauki, this.enemyGroup, frauki.Hit, null, frauki);
     game.physics.arcade.collide(this.enemyGroup, midgroundLayer);
+
+    if(!frauki.Grace()) {
+        game.physics.arcade.overlap(frauki, this.enemyGroup, frauki.Hit, null, frauki);
+    }
+
 
     cameraController.UpdateCamera();
     inputController.UpdateInput();
