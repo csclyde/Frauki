@@ -9,8 +9,11 @@ Enemy = function(game, x, y, name) {
     this.SetDirection('left');
     this.state = null;
 
+    console.log(this.enemy);
+
     if(!!this.types['Insectoid']) {
         this.types['Insectoid'].apply(this);
+        console.log('applying the indextoid');
     }
 
 };
@@ -28,11 +31,10 @@ Enemy.prototype.create = function() {
 Enemy.prototype.update = function() {
 	if(typeof this.updateFunction === 'function') {
 		this.updateFunction.apply(this);
-	} else {
-		console.log('Enemy update function not found');
-	}
+	} 
 
-    this.state();
+    if(!!this.state)
+        this.state();
 };
 
 Enemy.prototype.SetDirection = function(dir) {

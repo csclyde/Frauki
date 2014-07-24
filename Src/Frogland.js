@@ -13,6 +13,7 @@ Frogland.preload = function() {
     game.load.image('fluff', 'Data/Fluff.png');
 
     game.load.atlasJSONHash('Insectoid', 'Data/Enemies/Insectoid/Insectoid.png', 'Data/Enemies/Insectoid/Insectoid.json');
+    game.load.atlasJSONHash('Buzzar', 'Data/Enemies/Buzzar/Buzzar.png', 'Data/Enemies/Buzzar/Buzzar.json');
 
     game.scale.minWidth = 640;
     game.scale.minHeight = 480;
@@ -35,8 +36,6 @@ var effectsController;
 var frauki;
 
 var playerX, playerY;
-
-var enemyLayer;
 
 var previousCamX;
 
@@ -74,7 +73,9 @@ Frogland.create = function() {
     this.enemyGroup = game.add.group();
     this.enemyGroup.enableBody = true;
 
-    enemyLayer = map.createFromObjects('Enemies', 1061, 'Insectoid', 'Hop0000', true, false, this.enemyGroup, Enemy);
+    map.createFromObjects('Enemies', 1061, 'Insectoid', 'Hop0000', true, false, this.enemyGroup, Enemy);
+    //map.createFromObjects('Enemies', 1062, 'Buzzar', 'Sting0000', true, false, this.enemyGroup, Enemy);
+    
     foregroundLayer = map.createLayer('Foreground');
 
     cameraController = new CameraController(frauki, map);

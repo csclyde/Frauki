@@ -1,0 +1,52 @@
+{"frames": {
+
+"Sting0000.png":
+{
+	"frame": {"x":33,"y":2,"w":19,"h":41},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":32,"y":16,"w":19,"h":41},
+	"sourceSize": {"w":69,"h":87}
+},
+"Sting0001.png":
+{
+	"frame": {"x":2,"y":45,"w":23,"h":41},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":32,"y":11,"w":23,"h":41},
+	"sourceSize": {"w":69,"h":87}
+},
+"Sting0002.png":
+{
+	"frame": {"x":2,"y":88,"w":29,"h":31},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":32,"y":8,"w":29,"h":31},
+	"sourceSize": {"w":69,"h":87}
+},
+"Sting0003.png":
+{
+	"frame": {"x":2,"y":2,"w":29,"h":41},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":22,"y":23,"w":29,"h":41},
+	"sourceSize": {"w":69,"h":87}
+},
+"Sting0004.png":
+{
+	"frame": {"x":27,"y":45,"w":25,"h":35},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":27,"y":21,"w":25,"h":35},
+	"sourceSize": {"w":69,"h":87}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker ",
+	"version": "1.0",
+	"image": "Buzzar.png",
+	"format": "RGBA8888",
+	"size": {"w":54,"h":119},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:f16f000e1261f366a022f68b63bfd677:c801d12109d1b082288f6ca85faa016d:33ba44c50159a8887b77ce94e5173ace$"
+}
+}

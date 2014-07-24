@@ -1,4 +1,5 @@
 PLAYER_SPEED = 225;
+PLAYER_ROLL_SPEED = 500;
 
 Player = function (game, x, y, name) {
 
@@ -30,6 +31,7 @@ Player = function (game, x, y, name) {
     this.hasFlipped = false;
 
     this.rollVelMod = 0;
+    this.rollBoost = 0;
     this.rollTween = null;
     this.stopJumpTween = null;
     this.jumpTimer = 0;
@@ -59,39 +61,14 @@ Player.prototype.update = function() {
         this.hasFlipped = false;
     }
 
-    if(this.direction === 'left') {
-        if(this.rollVelMod + this.body.velocity.x < 0)
-            this.body.velocity.x += this.rollVelMod;
-    } else {
-        if(this.rollVelMod + this.body.velocity.x > 0)
-            this.body.velocity.x += this.rollVelMod;
+    if(this.state === this.Rolling) {
+        this.body.velocity.x = this.rollVelMod;
     }
 
     if(this.state === this.Crouching) {
         this.body.setSize(11, 30, 0, 0);
     } else {
         this.body.setSize(11, 50, 0, 0);
-    }
-
-    //constrain the players speed. it can be faster during jumps because of rolling into a jump
-    if(this.state === this.Rolling) {
-
-    } else if(this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling) {
-        if(this.body.velocity.x > PLAYER_SPEED + 100) {
-            this.body.velocity.x = PLAYER_SPEED + 100;
-        }
-
-        if(this.body.velocity.x < -PLAYER_SPEED - 100) {
-            this.body.velocity.x = -PLAYER_SPEED - 100;
-        }
-    } else {
-        if(this.body.velocity.x > PLAYER_SPEED) {
-            this.body.velocity.x = PLAYER_SPEED;
-        }
-
-        if(this.body.velocity.x < -PLAYER_SPEED) {
-            this.body.velocity.x = -PLAYER_SPEED;
-        }
     }
 };
 
@@ -120,18 +97,19 @@ Player.prototype.Grace = function() {
 
 ////////////////CALLBACKS//////////////////
 Player.prototype.Run = function(params) {
-    if(this.state === this.Hurting) {
+    if(this.state === this.Hurting || this.state === this.Rolling) {
         return;
     }
 
     if(params.dir === 'left') {
-        this.body.velocity.x = -PLAYER_SPEED;
+        this.body.velocity.x = -PLAYER_SPEED - this.rollBoost;
         this.SetDirection('left');
     } else if(params.dir === 'right') {
-        this.body.velocity.x = PLAYER_SPEED;
+        this.body.velocity.x = PLAYER_SPEED + this.rollBoost;
         this.SetDirection('right');
     } else {
         this.body.velocity.x = 0;
+        this.rollBoost = 0;
     }
 };
 
@@ -176,20 +154,18 @@ Player.prototype.Roll = function(params) {
     this.state = this.Rolling;
 
     if(this.direction === 'left') {
-        this.rollVelMod = -300;
-        this.rollTween = game.add.tween(this).to({rollVelMod: -300}, 100, Phaser.Easing.Quartic.In, true).
-                                              to({rollVelMod:  80},  300, Phaser.Easing.Quartic.In, true).
-                                              to({rollVelMod:  0},   500, Phaser.Easing.Quartic.In, true);
+        this.rollVelMod = -PLAYER_ROLL_SPEED;
+        // this.rollTween = game.add.tween(this).to({rollVelMod:  80},  300, Phaser.Easing.Quartic.In, true).
+        //                                       to({rollVelMod:  0},   500, Phaser.Easing.Quartic.In, true);
     }
     else {
-        this.rollVelMod = 300;
-        this.rollTween = game.add.tween(this).to({rollVelMod:  300}, 100, Phaser.Easing.Quartic.In, true).
-                                              to({rollVelMod: -80},  300, Phaser.Easing.Quartic.In, true).
-                                              to({rollVelMod:  0},   500, Phaser.Easing.Quartic.In, true);
+        this.rollVelMod = PLAYER_ROLL_SPEED;
+        // this.rollTween = game.add.tween(this).to({rollVelMod: -80},  300, Phaser.Easing.Quartic.In, true).
+        //                                       to({rollVelMod:  0},   500, Phaser.Easing.Quartic.In, true);
     }
 
     this.rollTimer = game.time.now + 650;
-    this.gracePeriod = game.time.now + 200;
+    this.gracePeriod = game.time.now + 300;
 };
 
 Player.prototype.Hit = function(f, e) {
@@ -256,6 +232,8 @@ Player.prototype.Falling = function() {
     this.PlayAnim('fall');
     
     if(this.body.onFloor()) {
+        this.rollBoost = 0;
+
         if(this.body.velocity.x === 0) {
             if(this.isCrouching)
                 this.state = this.Crouching;
@@ -313,8 +291,14 @@ Player.prototype.Rolling = function() {
         this.state = this.Falling;
     } else if(this.body.velocity.y < 0) {
         this.state = this.Jumping;
-        this.rollTween.stop();
+        this.rollBoost = Math.abs(this.rollVelMod) - PLAYER_SPEED; 
         this.rollVelMod = 0;
+
+        if(this.rollBoost < 0)
+            this.rollBoost = 0;
+
+        if(this.rollBoost > 75)
+            this.rollBoost = 75;
     }
 
     if(this.animations.currentAnim.isFinished) {
