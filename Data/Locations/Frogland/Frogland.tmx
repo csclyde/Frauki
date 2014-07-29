@@ -86,11 +86,6 @@
     <property name="enemy" value="Spore"/>
    </properties>
   </object>
-  <object name="Enemy" type="Enemy" gid="1061" x="208" y="570">
-   <properties>
-    <property name="enemy" value="Insectoid"/>
-   </properties>
-  </object>
   <object name="Enemy" gid="1063" x="13" y="1516">
    <properties>
     <property name="enemy" value="Spore"/>

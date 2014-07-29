@@ -13,7 +13,6 @@ Enemy = function(game, x, y, name) {
 
     if(!!this.types['Insectoid']) {
         this.types['Insectoid'].apply(this);
-        console.log('applying the indextoid');
     }
 
 };

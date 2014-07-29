@@ -68,7 +68,7 @@
                 {
                  "gid":1041,
                  "height":0,
-                 "name":"Enemy",
+                 "name":"",
                  "properties":
                     {
 
@@ -107,7 +107,7 @@
                 {
                  "gid":1061,
                  "height":0,
-                 "name":"",
+                 "name":"Enemy",
                  "properties":
                     {
                      "enemy":"Insectoid"
@@ -243,20 +243,6 @@
                  "width":0,
                  "x":400,
                  "y":1182
-                }, 
-                {
-                 "gid":1061,
-                 "height":0,
-                 "name":"Enemy",
-                 "properties":
-                    {
-                     "enemy":"Insectoid"
-                    },
-                 "type":"Enemy",
-                 "visible":true,
-                 "width":0,
-                 "x":208,
-                 "y":570
                 }, 
                 {
                  "gid":1063,
