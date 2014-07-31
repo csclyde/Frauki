@@ -76,13 +76,6 @@ Player.prototype.update = function() {
         this.body.setSize(11, 50, 0, 0);
     }
 
-    if(this.state === this.Rolling) {
-        console.log(this.body.velocity.x);
-    }
-
-    if(this.movement.inertia !== 0)
-        console.log(this.movement.inertia);
-
     if(this.body.onFloor()) {
         this.movement.rollBoost = 0;
     }
@@ -156,7 +149,7 @@ Player.prototype.Jump = function(params) {
 
     if(params.jump) {
         //normal jump
-        if(this.body.onFloor() || this.state === this.Standing || this.state === this.Running) {
+        if(this.body.onFloor() || this.state === this.Standing || this.state === this.Running || this.state === this.Landing) {
             this.body.velocity.y = -500;
         }
         //double jump
@@ -168,6 +161,7 @@ Player.prototype.Jump = function(params) {
             this.body.velocity.y = -350;
             this.state = this.Flipping;
             this.hasFlipped = true;
+            this.gracePeriod = game.time.now + 300;
         }
     } else if(this.body.velocity.y < 0 && this.state !== this.Flipping) {
         if(this.body.velocity.y < 0)

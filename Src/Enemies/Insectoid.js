@@ -88,7 +88,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	function Idling() {
 		this.PlayAnim('idle');
 
-		if(this.PlayerIsVisible() || this.PlayerIsNear(100)) {
+		if(this.PlayerIsVisible() || this.PlayerIsNear(75)) {
 			if(playerX < this.body.x) {
 				this.SetDirection('left');
 			} else {
@@ -103,10 +103,13 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		}
 
 		//in the future, test for the players bullets being near
-		if(this.PlayerIsNear(200) && (Math.random() * 2 <= 1)) {
+		if(this.PlayerIsNear(200)) {
 			if(this.game.time.now > this.hopTimer) {
 				this.Dodge();
 				this.hopTimer = game.time.now + 4000;
+			}
+			else {
+				this.Scuttle();
 			}
 		}
 		else if(Math.abs(this.body.y - playerY) < 40 && Math.abs(this.body.x - playerX) < 300) {
