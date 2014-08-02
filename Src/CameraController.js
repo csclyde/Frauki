@@ -22,10 +22,10 @@ CameraController = function(player, map) {
 CameraController.prototype.UpdateCamera = function() {
 	
 
-	var xOffset = this.player.direction === 'left' ? -15 : 15;
+	var xOffset = this.player.states.direction === 'left' ? -15 : 15;
 	var yOffset = this.player.body.velocity.y > 0 ? 20 : 0;
 
-	yOffset += (this.player.isCrouching ? 30 : 0);
+	yOffset += (this.player.states.crouching ? 30 : 0);
 
 	var tileXOffset = 0;
 	var tileYOffset = 0;

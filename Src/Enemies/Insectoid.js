@@ -19,6 +19,10 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
 	///////////////////////////////ACTIONS////////////////////////////////////
 	this.Hop = function() {
+		if(game.time.now < this.hopTimer)
+			return;
+
+		this.hopTimer = game.time.now + 2000;
 		this.state = Hopping;
 
 		this.body.velocity.y = -1 * ((Math.random() * 300) + 300);
@@ -33,6 +37,10 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	};
 
 	this.Scuttle = function() {
+		if(game.time.now < this.scuttleTimer)
+			return;
+
+		this.scuttleTimer = game.time.now + 2000;
 		this.state = Scuttling;
 
 		if(playerX < this.body.x) {
@@ -45,6 +53,10 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	};
 
 	this.Dodge = function() {
+		if(game.time.now < game.hopTimer)
+			return;
+
+		this.hopTimer = game.time.now + 4000;
 		this.state = Hopping;
 
 		this.body.velocity.y = -500;
@@ -65,7 +77,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 			if(Math.abs(this.body.velocity.x) === 100)
 				return;
 
-			if(Math.random() * 2 < 1) {
+			if(c) {
 				this.body.velocity.x = -100;
 				this.SetDirection('left');
 			} else {
@@ -103,26 +115,15 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		}
 
 		//in the future, test for the players bullets being near
-		if(this.PlayerIsNear(200)) {
-			if(this.game.time.now > this.hopTimer) {
+		if(this.PlayerIsNear(100)) {
+			if(Math.random() * 2 < 1) 
 				this.Dodge();
-				this.hopTimer = game.time.now + 4000;
-			}
-			else {
+			else
 				this.Scuttle();
-			}
-		}
-		else if(Math.abs(this.body.y - playerY) < 40 && Math.abs(this.body.x - playerX) < 300) {
-			if(this.game.time.now > this.scuttleTimer) {
-				this.Scuttle();
-				this.scuttleTimer = game.time.now + 5000;
-			}
-		}
-		else if(Math.abs(this.body.x - playerX) > 100 && Math.abs(this.body.x - playerX) < 450) {
-			if(this.game.time.now > this.hopTimer) {
-				this.Hop();
-				this.hopTimer = game.time.now + 4000;
-			}
+		} else if(Math.abs(this.body.y - playerY) < 40 && Math.abs(this.body.x - playerX) < 300) {
+			this.Scuttle();
+		} else if(Math.abs(this.body.x - playerX) > 100 && Math.abs(this.body.x - playerX) < 450) {
+			this.Hop();
 		} else {
 			this.Creep();
 		}

@@ -41,7 +41,7 @@ var previousCamX;
 
 Frogland.create = function() {
 	game.physics.startSystem(Phaser.Physics.ARCADE);
-    game.physics.arcade.gravity.y = 1000;
+    game.physics.arcade.gravity.y = 680;
     game.time.deltaCap = 0.016;
 
     bg = game.add.tileSprite(0, 0, 320, 240, 'Background');

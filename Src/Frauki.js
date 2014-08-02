@@ -1,6 +1,6 @@
 PLAYER_SPEED = 225;
 PLAYER_ROLL_SPEED = 500;
-PLAYER_INERTIA = 50;
+PLAYER_INERTIA = 100;
 
 Player = function (game, x, y, name) {
 
@@ -13,6 +13,7 @@ Player = function (game, x, y, name) {
     this.body.setSize(11, 50, 0, 0);
     this.body.maxVelocity.y = 500;
 
+    //movements
     this.animations.add('stand', ['Stand0000'], 10, true, false);
     this.animations.add('run', ['Run0000', 'Run0001', 'Run0002', 'Run0003', 'Run0004', 'Run0005', 'Run0006', 'Run0007'], 10, true, false);
     this.animations.add('jump', ['Standing Jump0001'], 10, true, false);
@@ -24,18 +25,27 @@ Player = function (game, x, y, name) {
     this.animations.add('roll', ['Flip0000', 'Flip0001', 'Flip0002', 'Flip0003', 'Flip0004'], 14, false, false);
     this.animations.add('hit', ['Hit0001', 'Hit0002'], 10, true, false);
 
+    //attacks
+    this.animations.add('slash_stand1', ['Slash Standing0001', 'Slash Standing0002', 'Slash Standing0003', 'Slash Standing0004', 'Slash Standing0005'], 12, false, false);
+    this.animations.add('slash_stand2', ['Slash Standing0006', 'Slash Standing0007', 'Slash Standing0008', 'Slash Standing0009', 'Slash Standing0010'], 12, false, false);
+    this.animations.add('slash_stand3', ['Slash Standing0011', 'Slash Standing0012', 'Slash Standing0013', 'Slash Standing0014', 'Slash Standing0015', 'Slash Standing0016', 'Slash Standing0017'], 12, false, false);
+
     this.state = this.Standing;
-    this.direction = 'right';
+    
+    this.tweens = {};
+    this.tweens.roll = null;
+    this.tweens.stopJump = null;
 
-    this.isCrouching = false;
-    this.isSprinting = false;
-    this.hasFlipped = false;
+    this.states = {};
+    this.states.direction = 'right';
+    this.states.crouching = false;
+    this.states.hasFlipped = false;
+    this.states.gracePeriod = 0;
+    this.states.slashAgain = false;
+    this.states.nextSlash = 'slash_stand1';
 
-    this.rollTween = null;
-    this.stopJumpTween = null;
-    this.jumpTimer = 0;
-    this.hitTimer = 0;
-    this.gracePeriod = 0;
+    this.timers = {};
+    this.timers.hitTimer = 0;
 
     this.movement = {};
     this.movement.rollVelocity = 0;
@@ -54,7 +64,6 @@ Player.prototype = Object.create(Phaser.Sprite.prototype);
 Player.prototype.constructor = Player;
 
 Player.prototype.create = function() {
-    console.log('test');
 }
 
 Player.prototype.update = function() {
@@ -63,11 +72,8 @@ Player.prototype.update = function() {
 
     //reset the double jump flag
     if(this.body.onFloor()) {
-        this.hasFlipped = false;
-    }
-
-    if(this.state === this.Rolling) {
-        this.body.velocity.x = this.movement.rollVelocity;
+        this.states.hasFlipped = false;
+        this.movement.rollBoost = 0;
     }
 
     if(this.state === this.Crouching) {
@@ -76,22 +82,14 @@ Player.prototype.update = function() {
         this.body.setSize(11, 50, 0, 0);
     }
 
-    if(this.body.onFloor()) {
-        this.movement.rollBoost = 0;
-    }
+    this.AdjustFrame(this.animations.currentFrame.name);
 };
 
 Player.prototype.SetDirection = function(dir) {
-    if(this.state === this.Rolling)
-        return;
+    if(this.states.direction !== dir) {
+        this.states.direction = dir;
 
-    if(dir === 'left' && this.direction !== 'left') {
-        this.direction = 'left';
-        this.scale.x = -1;
-    }
-    else if(dir === 'right' && this.direction !== 'right') {
-        this.direction = 'right';
-        this.scale.x = 1;
+        dir === 'left' ? this.scale.x = -1 : this.scale.x = 1;
     }
 };
 
@@ -101,14 +99,23 @@ Player.prototype.PlayAnim = function(name) {
 };
 
 Player.prototype.Grace = function() {
-    return (this.game.time.now < this.gracePeriod);
-}
+    return (this.game.time.now < this.states.gracePeriod);
+};
+
+Player.prototype.AdjustFrame = function(frameName) {
+    //check for a frame mod and apply its mods
+    var frameMod = fraukiDamageFrames[frameName];
+    if(!!frameMod) {
+        if(!!frameMod.xOffset) {
+            this.states.direction === 'left' ? this.x -= frameMod.xOffset : this.x += frameMod.xOffset;;
+        }
+    }
+};
 
 ////////////////CALLBACKS//////////////////
 Player.prototype.Run = function(params) {
-    if(this.state === this.Hurting || this.state === this.Rolling) {
+    if(this.state === this.Hurting || this.state === this.Rolling) 
         return;
-    }
 
     if(params.dir === 'left') {
         this.body.velocity.x = -PLAYER_SPEED - this.movement.rollBoost + this.movement.inertia;
@@ -124,56 +131,50 @@ Player.prototype.Run = function(params) {
 
 Player.prototype.StartStopRun = function(params) {
     if(params.run) {
-        if(params.dir === 'left') {
-            this.movement.inertia = 100;//PLAYER_INERTIA;
-            game.add.tween(this.movement).to({inertia: 0}, 120, Phaser.Easing.Linear.None, true);
-        } else {
-            this.movement.inertia = 100;//PLAYER_INERTIA;
-            game.add.tween(this.movement).to({inertia: 0}, 120, Phaser.Easing.Linear.None, true);
-        }
+        params.dir === 'left' ? this.movement.inertia = PLAYER_INERTIA : this.movement.inertia = -PLAYER_INERTIA;
+        game.add.tween(this.movement).to({inertia: 0}, 120, Phaser.Easing.Linear.None, true);
     } else {
-        if(params.dir === 'left') {
-            this.movement.inertia = this.body.velocity.x;
-            game.add.tween(this.movement).to({inertia: 0}, 120, Phaser.Easing.Linear.None, true);
-        } else {
-            this.movement.inertia = this.body.velocity.x;
-            game.add.tween(this.movement).to({inertia: 0}, 120, Phaser.Easing.Linear.None, true);
-        }
+        this.movement.inertia = this.body.velocity.x;
+        game.add.tween(this.movement).to({inertia: 0}, 120, Phaser.Easing.Linear.None, true);
     }
 };
 
 Player.prototype.Jump = function(params) {
-    if(this.state === this.Hurting) {
+    if(this.state === this.Hurting) 
         return;
-    }
 
     if(params.jump) {
         //normal jump
         if(this.body.onFloor() || this.state === this.Standing || this.state === this.Running || this.state === this.Landing) {
-            this.body.velocity.y = -500;
+            this.body.velocity.y = -400;
         }
         //double jump
-        else if(this.hasFlipped === false && this.state !== this.Falling && this.state !== this.Rolling) {
-            if(this.stopJumpTween) {
-                this.stopJumpTween.stop();
-            }
+        else if(this.states.hasFlipped === false && this.state !== this.Falling && this.state !== this.Rolling) {
+            if(this.tweens.stopJump) { this.tweens.stopJump.stop(); }
 
             this.body.velocity.y = -350;
             this.state = this.Flipping;
-            this.hasFlipped = true;
-            this.gracePeriod = game.time.now + 300;
+            this.states.hasFlipped = true;
+            this.states.gracePeriod = game.time.now + 300;
         }
     } else if(this.body.velocity.y < 0 && this.state !== this.Flipping) {
         if(this.body.velocity.y < 0)
-            this.stopJumpTween = game.add.tween(this.body.velocity).to({y: 0}, 100, Phaser.Easing.Exponential.In, true);
+            this.tweens.stopJump = game.add.tween(this.body.velocity).to({y: 0}, 100, Phaser.Easing.Exponential.In, true);
     }
 };
 
 Player.prototype.Crouch = function(params) {
-    this.isCrouching = params.crouch;
+    this.states.crouching = params.crouch;
 };
 
 Player.prototype.Slash = function(params) {
+    if(this.state === this.SlashStanding) {
+        this.states.slashAgain = true;
+    }
+
+    if(this.state === this.Standing || this.state === this.Landing) {
+        this.state = this.SlashStanding;
+    }
 };
 
 Player.prototype.Roll = function(params) {
@@ -182,32 +183,30 @@ Player.prototype.Roll = function(params) {
 
     this.state = this.Rolling;
 
-    if(this.direction === 'left') {
+    if(this.states.direction === 'left') {
         this.movement.rollVelocity = -PLAYER_ROLL_SPEED;
-        this.rollTween = game.add.tween(this.movement).to({rollVelocity: -PLAYER_SPEED}, 300, Phaser.Easing.Quartic.In, true);
+        this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: -PLAYER_SPEED}, 300, Phaser.Easing.Quartic.In, true);
     }
     else {
         this.movement.rollVelocity = PLAYER_ROLL_SPEED;
-        this.rollTween = game.add.tween(this.movement).to({rollVelocity: PLAYER_SPEED}, 300, Phaser.Easing.Quartic.In, true);
+        this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: PLAYER_SPEED}, 300, Phaser.Easing.Quartic.In, true);
     }
 
     this.rollTimer = game.time.now + 650;
-    this.gracePeriod = game.time.now + 300;
+    this.states.gracePeriod = game.time.now + 300;
 };
 
 Player.prototype.Hit = function(f, e) {
-    if(this.state !== this.Hurting) {
-        this.body.velocity.y = -300;
+    if(this.state === this.Hurting)
+        return;
 
-        if(f.body.x < e.body.x)
-            this.body.velocity.x = -200;
-        else
-            this.body.velocity.x = 200;
+    this.body.velocity.y = -300;
 
-        this.state = this.Hurting;
-        this.gracePeriod = game.time.now + 1000;
-        this.hitTimer = game.time.now + 500;
-    }
+    f.body.x < e.body.x ? this.body.velocity.x = -200 : this.body.velocity.x = 200;
+
+    this.state = this.Hurting;
+    this.states.gracePeriod = game.time.now + 1000;
+    this.timers.hitTimer = game.time.now + 500;
 };
 
 //////////////////STATES/////////////////
@@ -221,7 +220,7 @@ Player.prototype.Standing = function() {
         this.state = this.Falling;
     } else if(this.body.velocity.x !== 0) {
         this.state = this.Running;
-    } else if(this.isCrouching) {
+    } else if(this.states.crouching) {
         this.state = this.Crouching;
     }
 };
@@ -259,10 +258,8 @@ Player.prototype.Falling = function() {
     this.PlayAnim('fall');
     
     if(this.body.onFloor()) {
-        this.movement.rollBoost = 0;
-
         if(this.body.velocity.x === 0) {
-            if(this.isCrouching)
+            if(this.states.crouching)
                 this.state = this.Crouching;
             else
                 this.state = this.Landing;
@@ -289,7 +286,7 @@ Player.prototype.Landing = function() {
 Player.prototype.Crouching = function() {
     this.PlayAnim('crouch');
 
-    if(!this.isCrouching || this.body.velocity.x !== 0 || this.body.velocity.y !== 0) {
+    if(!this.states.crouching || this.body.velocity.x !== 0 || this.body.velocity.y !== 0) {
         this.state = this.Standing;
     }
 
@@ -313,10 +310,9 @@ Player.prototype.Flipping = function() {
 
 Player.prototype.Rolling = function() {
     this.PlayAnim('roll');
-
-    if(this.body.velocity.y > 150) {
-        this.state = this.Falling;
-    } else if(this.body.velocity.y < 0) {
+    this.body.velocity.x = this.movement.rollVelocity;
+    
+    if(this.body.velocity.y < 0) {
         this.state = this.Jumping;
 
         //roll boost is caluclated based on how close they were to the max roll speed
@@ -328,7 +324,9 @@ Player.prototype.Rolling = function() {
     }
 
     if(this.animations.currentAnim.isFinished) {
-        if(this.body.velocity.x !== 0 && this.body.onFloor()) {
+        if(this.body.velocity.y > 150) {
+            this.state = this.Falling;
+        } else if(this.body.velocity.x !== 0 && this.body.onFloor()) {
             this.state = this.Running;
         } else if(this.body.velocity.x === 0 && this.body.onFloor()) {
             this.state = this.Standing;
@@ -339,7 +337,7 @@ Player.prototype.Rolling = function() {
 Player.prototype.Hurting = function() {
     this.PlayAnim('hit');
 
-    if(game.time.now > this.hitTimer) {
+    if(game.time.now > this.timers.hitTimer) {
         if(this.body.velocity.x === 0) {
             this.state = this.Standing;
         } else {
@@ -347,3 +345,24 @@ Player.prototype.Hurting = function() {
         }  
     }
 };
+
+Player.prototype.SlashStanding = function() {
+    this.PlayAnim(this.states.nextSlash);
+
+    if(this.animations.currentAnim.isFinished) {
+        if(this.states.slashAgain === true) {
+            if(this.animations.currentAnim.name === 'slash_stand1') {
+                this.states.nextSlash = 'slash_stand2';
+            }
+            else if(this.animations.currentAnim.name === 'slash_stand2') {
+                this.states.nextSlash = 'slash_stand3';
+            }
+
+            this.states.slashAgain = false;
+        }
+        else {
+            this.state = this.Standing;
+            this.states.nextSlash = 'slash_stand1';
+        }
+    }
+}
