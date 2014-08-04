@@ -1,5 +1,6 @@
 PLAYER_SPEED = 225;
 PLAYER_ROLL_SPEED = 500;
+PLAYER_RUN_SLASH_SPEED = 300;
 PLAYER_INERTIA = 100;
 
 Player = function (game, x, y, name) {
@@ -29,6 +30,7 @@ Player = function (game, x, y, name) {
     this.animations.add('slash_stand1', ['Slash Standing0001', 'Slash Standing0002', 'Slash Standing0003', 'Slash Standing0004', 'Slash Standing0005'], 12, false, false);
     this.animations.add('slash_stand2', ['Slash Standing0006', 'Slash Standing0007', 'Slash Standing0008', 'Slash Standing0009', 'Slash Standing0010'], 12, false, false);
     this.animations.add('slash_stand3', ['Slash Standing0011', 'Slash Standing0012', 'Slash Standing0013', 'Slash Standing0014', 'Slash Standing0015', 'Slash Standing0016', 'Slash Standing0017'], 12, false, false);
+    this.animations.add('slash_run', ['Slash Standing0013', 'Slash Standing0014', 'Slash Standing0015', 'Slash Standing0016'], 12, false, false);
 
     this.state = this.Standing;
     
@@ -46,6 +48,7 @@ Player = function (game, x, y, name) {
 
     this.timers = {};
     this.timers.hitTimer = 0;
+    this.timers.runSlashTimer = 0;
 
     this.movement = {};
     this.movement.rollVelocity = 0;
@@ -114,7 +117,7 @@ Player.prototype.AdjustFrame = function(frameName) {
 
 ////////////////CALLBACKS//////////////////
 Player.prototype.Run = function(params) {
-    if(this.state === this.Hurting || this.state === this.Rolling) 
+    if(this.state === this.Hurting || this.state === this.Rolling || this.state === this.SlashStanding || this.state === this.SlashRunning) 
         return;
 
     if(params.dir === 'left') {
@@ -149,7 +152,7 @@ Player.prototype.Jump = function(params) {
             this.body.velocity.y = -400;
         }
         //double jump
-        else if(this.states.hasFlipped === false && this.state !== this.Falling && this.state !== this.Rolling) {
+        else if(this.states.hasFlipped === false && this.state !== this.Falling && this.state !== this.Rolling && this.state !== this.SlashRunning) {
             if(this.tweens.stopJump) { this.tweens.stopJump.stop(); }
 
             this.body.velocity.y = -350;
@@ -174,6 +177,19 @@ Player.prototype.Slash = function(params) {
 
     if(this.state === this.Standing || this.state === this.Landing) {
         this.state = this.SlashStanding;
+    }
+    else if(this.state === this.Running) {
+        this.state = this.SlashRunning;
+        this.timers.runSlashTimer = game.time.now + 200;
+
+        if(this.states.direction === 'left') {
+            this.movement.rollVelocity = -PLAYER_RUN_SLASH_SPEED;
+            this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: -PLAYER_SPEED}, 300, Phaser.Easing.Quartic.In, true);
+        }
+        else {
+            this.movement.rollVelocity = PLAYER_RUN_SLASH_SPEED;
+            this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: PLAYER_SPEED}, 300, Phaser.Easing.Quartic.In, true);
+        }
     }
 };
 
@@ -249,6 +265,12 @@ Player.prototype.Jumping = function() {
 Player.prototype.Peaking = function() {
     this.PlayAnim('peak');
 
+    if(this.body.velocity.y < -100) {
+        this.state = this.Jumping;
+    } else if(this.body.onFloor()) {
+        this.state === this.Landing;
+    }
+
     if(this.animations.currentAnim.isFinished) {
         this.state = this.Falling;
     }
@@ -273,6 +295,10 @@ Player.prototype.Falling = function() {
 
 Player.prototype.Landing = function() {
     this.PlayAnim('land');
+
+    if(this.body.velocity.y < 0) {
+        this.state = this.Jumping;
+    }
 
     if(this.animations.currentAnim.isFinished) {
         if(this.body.velocity.x === 0) {
@@ -348,6 +374,7 @@ Player.prototype.Hurting = function() {
 
 Player.prototype.SlashStanding = function() {
     this.PlayAnim(this.states.nextSlash);
+    this.body.velocity.x = 0;
 
     if(this.animations.currentAnim.isFinished) {
         if(this.states.slashAgain === true) {
@@ -366,3 +393,18 @@ Player.prototype.SlashStanding = function() {
         }
     }
 }
+
+Player.prototype.SlashRunning = function() {
+    this.PlayAnim('slash_run');
+    this.body.velocity.x = this.movement.rollVelocity;
+
+    if(this.animations.currentAnim.isFinished) {
+        if(this.body.velocity.y > 150) {
+            this.state = this.Falling;
+        } else if(this.body.velocity.x !== 0 && this.body.onFloor()) {
+            this.state = this.Running;
+        } else if(this.body.velocity.x === 0 && this.body.onFloor()) {
+            this.state = this.Standing;
+        }
+    }
+};
