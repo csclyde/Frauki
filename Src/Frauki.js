@@ -31,6 +31,7 @@ Player = function (game, x, y, name) {
     this.animations.add('slash_stand2', ['Slash Standing0006', 'Slash Standing0007', 'Slash Standing0008', 'Slash Standing0009', 'Slash Standing0010'], 12, false, false);
     this.animations.add('slash_stand3', ['Slash Standing0011', 'Slash Standing0012', 'Slash Standing0013', 'Slash Standing0014', 'Slash Standing0015', 'Slash Standing0016', 'Slash Standing0017'], 12, false, false);
     this.animations.add('slash_run', ['Slash Standing0013', 'Slash Standing0014', 'Slash Standing0015', 'Slash Standing0016'], 12, false, false);
+    this.animations.add('slash_aerial', ['Slash Standing0001', 'Slash Standing0002', 'Slash Standing0003', 'Slash Standing0004', 'Slash Standing0005'], 12, false, false);
 
     this.state = this.Standing;
     
@@ -45,6 +46,7 @@ Player = function (game, x, y, name) {
     this.states.gracePeriod = 0;
     this.states.slashAgain = false;
     this.states.nextSlash = 'slash_stand1';
+    this.states.slashing = false;
 
     this.timers = {};
     this.timers.hitTimer = 0;
@@ -86,6 +88,12 @@ Player.prototype.update = function() {
     }
 
     this.AdjustFrame(this.animations.currentFrame.name);
+
+    if(this.state === this.SlashStanding || this.state === this.SlashRunning || this.state === this.SlashAerial) {
+        this.states.slashing = true;
+    } else {
+        this.states.slashing = false;
+    }
 };
 
 Player.prototype.SetDirection = function(dir) {
@@ -190,6 +198,9 @@ Player.prototype.Slash = function(params) {
             this.movement.rollVelocity = PLAYER_RUN_SLASH_SPEED;
             this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: PLAYER_SPEED}, 300, Phaser.Easing.Quartic.In, true);
         }
+    }
+    else if(this.body.velocity.x !== 0 && (this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling)) {
+        this.state = this.SlashAerial;
     }
 };
 
@@ -405,6 +416,22 @@ Player.prototype.SlashRunning = function() {
             this.state = this.Running;
         } else if(this.body.velocity.x === 0 && this.body.onFloor()) {
             this.state = this.Standing;
+        }
+    }
+};
+
+Player.prototype.SlashAerial = function() {
+    this.PlayAnim('slash_aerial');
+
+    if(this.animations.currentAnim.isFinished) {
+        if(this.body.velocity.y >= 0) {
+            this.state = this.Falling;
+        } else if(this.body.velocity.y < 0) {
+            this.state = this.Jumping;
+        } else if(this.body.velocity.x !== 0 && this.body.onFloor()) {
+            this.state = this.Running;
+        } else if(this.body.velocity.x === 0 && this.body.onFloor()) {
+            this.state = this.Landing;
         }
     }
 };
