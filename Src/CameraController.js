@@ -27,40 +27,11 @@ CameraController.prototype.UpdateCamera = function() {
 
 	yOffset += (this.player.states.crouching ? 30 : 0);
 
-	var tileXOffset = 0;
-	var tileYOffset = 0;
-
-	this.map.forEach(function(tile) {
-		if(tile && this.repulsiveTiles.indexOf(tile.index) > -1) {
-			//tile is on the right
-			if(tile.x > (game.camera.x + (game.camera.width / 2)) / map.tileWidth) {
-				tileXOffset -= 1;
-			} else {
-				tileXOffset += 1;
-			}
-
-			//tile is on the bottom
-			if(tile.y > (game.camera.y + (game.camera.height / 2)) / map.tileHeight) {
-				tileYOffset -= 1;
-			} else {
-				tileYOffset += 1;
-			}
-		}
-
-	}, this,
-	Math.floor(game.camera.x / map.tileWidth),
-	Math.floor(game.camera.y / map.tileHeight),
-	Math.floor(game.camera.width / map.tileWidth),
-	Math.floor(game.camera.height / map.tileHeight));
-
-	tileXOffset /= 2;
-	tileYOffset /= 2;
-
 	if(this.prevXVel !== this.player.body.velocity.x)
-		game.add.tween(this).to({camX:Math.floor((this.player.body.velocity.x / X_VEL_DIV) + xOffset + tileXOffset)}, 700, Phaser.Easing.Sinusoidal.Out, true);
+		game.add.tween(this).to({camX:Math.floor((this.player.body.velocity.x / X_VEL_DIV) + xOffset)}, 700, Phaser.Easing.Sinusoidal.Out, true);
 
 	if(this.prevYVel !== this.player.body.velocity.y || this.retweenY) {
-		game.add.tween(this).to({camY:Math.floor((this.player.body.velocity.y / Y_VEL_DIV) + yOffset + tileYOffset)}, 400, Phaser.Easing.Sinusoidal.Out, true);
+		game.add.tween(this).to({camY:Math.floor((this.player.body.velocity.y / Y_VEL_DIV) + yOffset)}, 400, Phaser.Easing.Sinusoidal.Out, true);
 		this.retweenY = false;
 	}
 
