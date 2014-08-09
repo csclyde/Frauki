@@ -9,8 +9,6 @@ Enemy = function(game, x, y, name) {
     this.SetDirection('left');
     this.state = null;
 
-    console.log(this.enemy);
-
     if(!!this.types['Insectoid']) {
         this.types['Insectoid'].apply(this);
     }
@@ -23,7 +21,6 @@ Enemy.prototype.types = {};
 
 Enemy.prototype.create = function() {
 	//use the type property to call the correct create function. that function will assign the update function
-
 
 };
 

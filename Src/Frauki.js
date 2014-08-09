@@ -47,6 +47,7 @@ Player = function (game, x, y, name) {
     this.states.slashAgain = false;
     this.states.nextSlash = 'slash_stand1';
     this.states.slashing = false;
+    this.states.attacking = false;
 
     this.timers = {};
     this.timers.hitTimer = 0;
@@ -120,10 +121,16 @@ Player.prototype.AdjustFrame = function(frameName) {
         if(!!frameMod.xOffset) {
             this.states.direction === 'left' ? this.x -= frameMod.xOffset : this.x += frameMod.xOffset;;
         }
+
+        if(!!frameMod.damageFrame) {
+            this.states.attacking = true;
+        } else {
+            this.states.attacking = false;
+        }
     }
 };
 
-////////////////CALLBACKS//////////////////
+////////////////ACTIONS//////////////////
 Player.prototype.Run = function(params) {
     if(this.state === this.Hurting || this.state === this.Rolling || this.state === this.SlashStanding || this.state === this.SlashRunning) 
         return;
@@ -143,10 +150,10 @@ Player.prototype.Run = function(params) {
 Player.prototype.StartStopRun = function(params) {
     if(params.run) {
         params.dir === 'left' ? this.movement.inertia = PLAYER_INERTIA : this.movement.inertia = -PLAYER_INERTIA;
-        game.add.tween(this.movement).to({inertia: 0}, 120, Phaser.Easing.Linear.None, true);
+        game.add.tween(this.movement).to({inertia: 0}, 200, Phaser.Easing.Linear.None, true);
     } else {
         this.movement.inertia = this.body.velocity.x;
-        game.add.tween(this.movement).to({inertia: 0}, 120, Phaser.Easing.Linear.None, true);
+        game.add.tween(this.movement).to({inertia: 0}, 80, Phaser.Easing.Linear.None, true);
     }
 };
 

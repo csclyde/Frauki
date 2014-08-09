@@ -11,10 +11,12 @@ Enemy.prototype.types['Insectoid'] =  function() {
     this.hopTimer = 0;
     this.scuttleTimer = 0;
 
-    //events.subscribe('player_jump', this.Jump, this);
-
 	this.updateFunction = function() {
-		
+		if(game.physics.arcade.distanceBetween(this, frauki) < 100 && this.state !== this.Hopping) {
+			game.physics.arcade.overlap(this, frauki, function() {
+				this.Dodge();
+			}, null, this);
+		}
 	};
 
 	///////////////////////////////ACTIONS////////////////////////////////////
