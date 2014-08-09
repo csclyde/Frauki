@@ -10,26 +10,26 @@ InputController = function(player) {
 	this.roll		= game.input.keyboard.addKey(Phaser.Keyboard.X);
 	this.testButton = game.input.keyboard.addKey(Phaser.Keyboard.P);
 
-  this.runLeft.onDown.add(function() { events.publish('player_run', {run:true, dir:'left'}); }, this);
-  this.runLeft.onUp.add(function() { events.publish('player_run', {run:false, dir: 'left'}); }, this);
-  this.runRight.onDown.add(function() { events.publish('player_run', {run:true, dir:'right'}); }, this);
-  this.runRight.onUp.add(function() { events.publish('player_run', {run:false, dir: 'right'}); }, this);
+    this.runLeft.onDown.add(function() { events.publish('player_run', {run:true, dir:'left'}); }, this);
+    this.runLeft.onUp.add(function() { events.publish('player_run', {run:false, dir: 'left'}); }, this);
+    this.runRight.onDown.add(function() { events.publish('player_run', {run:true, dir:'right'}); }, this);
+    this.runRight.onUp.add(function() { events.publish('player_run', {run:false, dir: 'right'}); }, this);
 
-	this.jump.onDown.add(function() { 	events.publish('player_jump', {jump: true}); }, this);
-	this.jump.onUp.add(function() { 	events.publish('player_jump', {jump: false}); }, this);
+    this.up.onDown.add(function() { events.publish('control_up', {pressed: true}); }, this);
+    this.up.onUp.add(function() { events.publish('control_up', {pressed: false}); }, this);
 
-	this.crouch.onDown.add(function() { events.publish('player_crouch', {crouch: true}); }, this);
-	this.crouch.onUp.add(function() { 	events.publish('player_crouch', {crouch: false}); }, this);
+    this.jump.onDown.add(function() {   events.publish('player_jump', {jump: true}); }, this);
+    this.jump.onUp.add(function() {     events.publish('player_jump', {jump: false}); }, this);
 
-	this.slash.onDown.add(function() { events.publish('player_slash', {}); }, this);
+    this.crouch.onDown.add(function() { events.publish('player_crouch', {crouch: true}); }, this);
+    this.crouch.onUp.add(function() {   events.publish('player_crouch', {crouch: false}); }, this);
 
-	this.roll.onDown.add(function() {	events.publish('player_roll', null, this)});
-	this.up.onDown.add(function() { }, this);
-	this.up.onUp.add(function() { }, this);
+    this.slash.onDown.add(function() { events.publish('player_slash', {}); }, this);
+    this.roll.onDown.add(function() {   events.publish('player_roll', null, this)});
 
-	game.input.gamepad.start();
+    game.input.gamepad.start();
 
-	game.input.gamepad.addCallbacks(this, {
+    game.input.gamepad.addCallbacks(this, {
         onConnect: function(){
             console.log('gamepad connected');
             console.log(game.input.gamepad.pad2)
