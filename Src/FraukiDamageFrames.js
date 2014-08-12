@@ -1,5 +1,5 @@
 var fraukiDamageFrames = {
-	'Slash0003': {
+	'Slash Standing0003': {
 		damageFrame: true,
 		damageX: 0,
 		damageY: 0,
@@ -11,19 +11,19 @@ var fraukiDamageFrames = {
 		penetrationAmount: 0
 	},
 
-	'Slash0007': {
+	'Slash Standing0007': {
 		damageFrame: true
 	},
 
-	'Slash0013': {
+	'Slash Standing0013': {
 		damageFrame: true
 	},
 
-	'Slash0014': {
+	'Slash Standing0014': {
 		damageFrame: true
 	},
 
-	'Slash0015': {
+	'Slash Standing0015': {
 		damageFrame: true
 	}
 };

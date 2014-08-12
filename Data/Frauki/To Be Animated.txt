@@ -3,9 +3,3 @@ Flip Kick
 Hold onto wall (underwater)
 Spiral push off of wall (into swim)
 Slide to a stop from sprint
-
--Possible-
-
-Hold ledge, climb up
-Falling down
-Getting up

@@ -89,7 +89,8 @@ Frogland.update = function() {
     game.physics.arcade.collide(this.enemyGroup, midgroundLayer);
 
     if(!frauki.Grace()) {
-        game.physics.arcade.overlap(frauki, this.enemyGroup, frauki.Hit, null, frauki);
+        if(frauki.states.attacking === false)
+            game.physics.arcade.overlap(frauki, this.enemyGroup, frauki.Hit, null, frauki);
     }
 
 

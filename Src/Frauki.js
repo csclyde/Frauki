@@ -122,7 +122,9 @@ Player.prototype.Grace = function() {
 Player.prototype.AdjustFrame = function(frameName) {
     //check for a frame mod and apply its mods
     var frameMod = fraukiDamageFrames[frameName];
+
     if(!!frameMod) {
+
         if(!!frameMod.xOffset) {
             this.states.direction === 'left' ? this.x -= frameMod.xOffset : this.x += frameMod.xOffset;;
         }
