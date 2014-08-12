@@ -8,6 +8,8 @@ Enemy = function(game, x, y, name) {
     this.direction = 'right';
     this.SetDirection('left');
     this.state = null;
+    this.weight = 0;
+    this.hitTimer = 0;
 
     if(!!this.types['Insectoid']) {
         this.types['Insectoid'].apply(this);
@@ -49,6 +51,16 @@ Enemy.prototype.PlayAnim = function(name) {
         this.animations.play(name);
 };
 
+Enemy.prototype.TakeHit = function(f, e, kb) {
+
+    //compute the velocity based on weight and attack knockback
+    this.body.velocity.y = -300 + this.weight - kb;
+
+    this.body.velocity.x = f.body.x < e.body.x ? -200 - (kb / 2) + (this.weight / 2) : 200 + (kb / 2) - (this.weight / 2);
+
+    //a durability stat should modify how long they are stunned for. also, the amount of dmg
+    this.hitTimer = this.game.time.now + 500;
+};
 
 //provide utility functions here that the specific enemies can all use
 Enemy.prototype.PlayerIsNear = function(radius) {
