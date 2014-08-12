@@ -80,7 +80,7 @@ Frogland.create = function() {
 
     cameraController = new CameraController(frauki, map);
     inputController = new InputController(frauki);
-    effectsController = new EffectsController();
+    //effectsController = new EffectsController();
 };
 
 Frogland.update = function() {
@@ -95,7 +95,7 @@ Frogland.update = function() {
 
     cameraController.UpdateCamera();
     inputController.UpdateInput();
-    effectsController.UpdateEffects();
+    //effectsController.UpdateEffects();
 
     playerX = frauki.body.x;
     playerY = frauki.body.y;
