@@ -88,11 +88,13 @@ Frogland.update = function() {
 	game.physics.arcade.collide(frauki, midgroundLayer);
     game.physics.arcade.collide(this.enemyGroup, midgroundLayer);
 
-    if(!frauki.Grace()) {
-        if(frauki.states.attacking === false)
-            game.physics.arcade.overlap(frauki, this.enemyGroup, frauki.Hit, null, frauki);
+    if(frauki.states.attacking === false && !frauki.Grace()) {
+        game.physics.arcade.overlap(frauki, this.enemyGroup, frauki.Hit, null, frauki);
     }
-
+    else if(frauki.states.attacking === true) {
+        game.physics.arcade.overlap(frauki, this.enemyGroup, EnemyHit);
+        frauki.timers.gracePeriod = game.time.now + 200;
+    }
 
     cameraController.UpdateCamera();
     inputController.UpdateInput();
@@ -100,8 +102,8 @@ Frogland.update = function() {
 
     playerX = frauki.body.x;
     playerY = frauki.body.y;
-}
+};
 
 Frogland.render = function() {
     //game.debug.body(frauki);
-}
+};

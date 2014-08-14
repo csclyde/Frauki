@@ -45,7 +45,6 @@ Player = function (game, x, y, name) {
     this.states.direction = 'right';
     this.states.crouching = false;
     this.states.hasFlipped = false;
-    this.states.gracePeriod = 0;
     this.states.slashAgain = false;
     this.states.nextSlash = 'slash_stand1';
     this.states.slashing = false;
@@ -53,6 +52,7 @@ Player = function (game, x, y, name) {
     this.states.upPresseed = false;
 
     this.timers = {};
+    this.timers.gracePeriod = 0;
     this.timers.hitTimer = 0;
     this.timers.runSlashTimer = 0;
 
@@ -61,6 +61,9 @@ Player = function (game, x, y, name) {
     this.movement.diveVelocity = 0;
     this.movement.rollBoost = 0;
     this.movement.inertia = 0;
+
+    this.currentAttack = {};
+    this.currentAttack.knockback = 0;
 
     events.subscribe('player_jump', this.Jump, this);
     events.subscribe('player_crouch', this.Crouch, this);
@@ -116,12 +119,13 @@ Player.prototype.PlayAnim = function(name) {
 };
 
 Player.prototype.Grace = function() {
-    return (this.game.time.now < this.states.gracePeriod);
+    return (this.game.time.now < this.timers.gracePeriod);
 };
 
 Player.prototype.AdjustFrame = function(frameName) {
     //check for a frame mod and apply its mods
     var frameMod = fraukiDamageFrames[frameName];
+    this.states.attacking = false;
 
     if(!!frameMod) {
 
@@ -131,8 +135,10 @@ Player.prototype.AdjustFrame = function(frameName) {
 
         if(!!frameMod.damageFrame) {
             this.states.attacking = true;
-        } else {
-            this.states.attacking = false;
+        }
+
+        if(!!frameMod.knockback) {
+            this.currentAttack.knockback = frameMod.knockback;
         }
     }
 };
@@ -180,7 +186,7 @@ Player.prototype.Jump = function(params) {
             this.body.velocity.y = -350;
             this.state = this.Flipping;
             this.states.hasFlipped = true;
-            this.states.gracePeriod = game.time.now + 300;
+            this.timers.gracePeriod = game.time.now + 300;
         }
     } else if(this.body.velocity.y < 0 && this.state !== this.Flipping) {
         if(this.body.velocity.y < 0)
@@ -241,7 +247,7 @@ Player.prototype.Roll = function(params) {
     }
 
     this.rollTimer = game.time.now + 650;
-    this.states.gracePeriod = game.time.now + 300;
+    this.timers.gracePeriod = game.time.now + 300;
 };
 
 Player.prototype.Hit = function(f, e) {
@@ -250,10 +256,10 @@ Player.prototype.Hit = function(f, e) {
 
     this.body.velocity.y = -300;
 
-    f.body.x < e.body.x ? this.body.velocity.x = -200 : this.body.velocity.x = 200;
+    this.body.x < e.body.x ? this.body.velocity.x = -200 : this.body.velocity.x = 200;
 
     this.state = this.Hurting;
-    this.states.gracePeriod = game.time.now + 1000;
+    this.timers.gracePeriod = game.time.now + 1000;
     this.timers.hitTimer = game.time.now + 500;
 };
 

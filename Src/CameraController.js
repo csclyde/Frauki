@@ -26,7 +26,7 @@ CameraController.prototype.UpdateCamera = function() {
 	var yOffset = this.player.body.velocity.y > 0 ? 20 : 0;
 
 	yOffset += (this.player.states.crouching ? 30 : 0);
-	yOffset -= (this.player.states.upPressed ? 70 : 0);
+	//yOffset -= (this.player.states.upPressed ? 70 : 0);
 
 	if(this.prevXVel !== this.player.body.velocity.x)
 		game.add.tween(this).to({camX:Math.floor((this.player.body.velocity.x / X_VEL_DIV) + xOffset)}, 700, Phaser.Easing.Sinusoidal.Out, true);

@@ -100,6 +100,11 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
 	////////////////////////////////STATES////////////////////////////////////
 	function Idling() {
+		if(game.time.now < this.hitTimer)
+			return;
+		else
+			this.alpha = 1.0;
+		
 		this.PlayAnim('idle');
 
 		if(this.PlayerIsVisible() || this.PlayerIsNear(75)) {
@@ -164,4 +169,5 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	function Shooting() {
 
 	};
+
 };

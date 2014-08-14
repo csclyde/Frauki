@@ -22,7 +22,6 @@ Enemy.prototype.constructor = Enemy;
 Enemy.prototype.types = {};
 
 Enemy.prototype.create = function() {
-	//use the type property to call the correct create function. that function will assign the update function
 
 };
 
@@ -49,17 +48,6 @@ Enemy.prototype.SetDirection = function(dir) {
 Enemy.prototype.PlayAnim = function(name) {
     if(this.animations.currentAnim.name !== name)
         this.animations.play(name);
-};
-
-Enemy.prototype.TakeHit = function(f, e, kb) {
-
-    //compute the velocity based on weight and attack knockback
-    this.body.velocity.y = -300 + this.weight - kb;
-
-    this.body.velocity.x = f.body.x < e.body.x ? -200 - (kb / 2) + (this.weight / 2) : 200 + (kb / 2) - (this.weight / 2);
-
-    //a durability stat should modify how long they are stunned for. also, the amount of dmg
-    this.hitTimer = this.game.time.now + 500;
 };
 
 //provide utility functions here that the specific enemies can all use
@@ -92,3 +80,16 @@ Enemy.prototype.PlayerIsVisible = function() {
         return false;
     }
 };
+
+function EnemyHit(f, e) {
+    console.log('Enemy is taking hit');
+    
+    //compute the velocity based on weight and attack knockback
+    e.body.velocity.y = -300 + e.weight - f.currentAttack.knockback;
+
+    e.body.velocity.x = f.body.x < e.body.x ? -200 - (f.currentAttack.knockback / 2) + (e.weight / 2) : 200 + (f.currentAttack.knockback / 2) - (e.weight / 2);
+
+    //a durability stat should modify how long they are stunned for. also, the amount of dmg
+    e.hitTimer = game.time.now + 500;
+    e.alpha = 0.2;
+}
