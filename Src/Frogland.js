@@ -43,6 +43,7 @@ Frogland.create = function() {
 	game.physics.startSystem(Phaser.Physics.ARCADE);
     game.physics.arcade.gravity.y = 680;
     game.time.deltaCap = 0.016;
+    game.stage.smoothed = false;
 
     bg = game.add.tileSprite(0, 0, 320, 240, 'Background');
     bg.fixedToCamera = true;
@@ -92,7 +93,7 @@ Frogland.update = function() {
         game.physics.arcade.overlap(frauki, this.enemyGroup, frauki.Hit, null, frauki);
     }
     else if(frauki.states.attacking === true) {
-        game.physics.arcade.overlap(frauki, this.enemyGroup, EnemyHit);
+        game.physics.arcade.overlap(frauki.currentAttack.attackRect, this.enemyGroup, EnemyHit);
         frauki.timers.gracePeriod = game.time.now + 200;
     }
 
@@ -105,5 +106,9 @@ Frogland.update = function() {
 };
 
 Frogland.render = function() {
-    //game.debug.body(frauki);
+    game.debug.body(frauki);
+
+    if(!!frauki.states.attacking) {
+        game.debug.geom(frauki.currentAttack.attackRect, '#ff0000');
+    }
 };

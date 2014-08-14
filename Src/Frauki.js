@@ -40,6 +40,7 @@ Player = function (game, x, y, name) {
     this.tweens = {};
     this.tweens.roll = null;
     this.tweens.stopJump = null;
+    this.tweens.startRun = null;
 
     this.states = {};
     this.states.direction = 'right';
@@ -63,7 +64,6 @@ Player = function (game, x, y, name) {
     this.movement.inertia = 0;
 
     this.currentAttack = {};
-    this.currentAttack.knockback = 0;
 
     events.subscribe('player_jump', this.Jump, this);
     events.subscribe('player_crouch', this.Crouch, this);
@@ -124,22 +124,26 @@ Player.prototype.Grace = function() {
 
 Player.prototype.AdjustFrame = function(frameName) {
     //check for a frame mod and apply its mods
-    var frameMod = fraukiDamageFrames[frameName];
+    this.currentAttack = fraukiDamageFrames[frameName];
     this.states.attacking = false;
 
-    if(!!frameMod) {
+    if(!!this.currentAttack) {
+        if(this.states.direction === 'right')
+            this.currentAttack.attackRect = new Phaser.Rectangle(this.currentAttack.x + this.body.x, this.currentAttack.y + this.body.y, this.currentAttack.w, this.currentAttack.h);
+        else
+            this.currentAttack.attackRect = new Phaser.Rectangle((this.currentAttack.x * -1) + this.body.x - this.currentAttack.w + 6, this.currentAttack.y + this.body.y, this.currentAttack.w, this.currentAttack.h);
+    }
 
-        if(!!frameMod.xOffset) {
-            this.states.direction === 'left' ? this.x -= frameMod.xOffset : this.x += frameMod.xOffset;;
+    if(!!this.currentAttack) {
+
+        if(!!this.currentAttack.xOffset) {
+            this.states.direction === 'left' ? this.x -= this.currentAttack.xOffset : this.x += this.currentAttack.xOffset;;
         }
 
-        if(!!frameMod.damageFrame) {
+        if(!!this.currentAttack.damageFrame) {
             this.states.attacking = true;
         }
 
-        if(!!frameMod.knockback) {
-            this.currentAttack.knockback = frameMod.knockback;
-        }
     }
 };
 
@@ -163,9 +167,10 @@ Player.prototype.Run = function(params) {
 Player.prototype.StartStopRun = function(params) {
     if(params.run) {
         params.dir === 'left' ? this.movement.inertia = PLAYER_INERTIA : this.movement.inertia = -PLAYER_INERTIA;
-        game.add.tween(this.movement).to({inertia: 0}, 200, Phaser.Easing.Linear.None, true);
+        this.tweens.startRun = game.add.tween(this.movement).to({inertia: 0}, 300, Phaser.Easing.Linear.None, true);
     } else {
         this.movement.inertia = this.body.velocity.x;
+        this.tweens.startRun.stop();
         game.add.tween(this.movement).to({inertia: 0}, 80, Phaser.Easing.Linear.None, true);
     }
 };

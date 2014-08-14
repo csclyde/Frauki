@@ -85,9 +85,9 @@ function EnemyHit(f, e) {
     console.log('Enemy is taking hit');
     
     //compute the velocity based on weight and attack knockback
-    e.body.velocity.y = -300 + e.weight - f.currentAttack.knockback;
+    e.body.velocity.y = -300 + e.weight;
 
-    e.body.velocity.x = f.body.x < e.body.x ? -200 - (f.currentAttack.knockback / 2) + (e.weight / 2) : 200 + (f.currentAttack.knockback / 2) - (e.weight / 2);
+    e.body.velocity.x = frauki.body.x < e.body.x ? -200 - (frauki.currentAttack.knockback / 2) + (e.weight / 2) : 200 + (frauki.currentAttack.knockback / 2) - (e.weight / 2);
 
     //a durability stat should modify how long they are stunned for. also, the amount of dmg
     e.hitTimer = game.time.now + 500;
