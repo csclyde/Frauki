@@ -64,6 +64,9 @@ Player = function (game, x, y, name) {
     this.movement.inertia = 0;
 
     this.currentAttack = {};
+    this.attackRect = game.add.sprite(0, 0, null);
+    game.physics.enable(this.attackRect, Phaser.Physics.ARCADE);
+    this.attackRect.body.setSize(0, 0, 0, 0);
 
     events.subscribe('player_jump', this.Jump, this);
     events.subscribe('player_crouch', this.Crouch, this);
@@ -128,10 +131,23 @@ Player.prototype.AdjustFrame = function(frameName) {
     this.states.attacking = false;
 
     if(!!this.currentAttack) {
-        if(this.states.direction === 'right')
-            this.currentAttack.attackRect = new Phaser.Rectangle(this.currentAttack.x + this.body.x, this.currentAttack.y + this.body.y, this.currentAttack.w, this.currentAttack.h);
-        else
-            this.currentAttack.attackRect = new Phaser.Rectangle((this.currentAttack.x * -1) + this.body.x - this.currentAttack.w + 6, this.currentAttack.y + this.body.y, this.currentAttack.w, this.currentAttack.h);
+        if(this.states.direction === 'right') {
+            this.attackRect.body.x = this.currentAttack.x + this.body.x; 
+            this.attackRect.body.y = this.currentAttack.y + this.body.y; 
+            this.attackRect.body.width = this.currentAttack.w; 
+            this.attackRect.body.height = this.currentAttack.h;
+        } else {
+            this.attackRect.body.x = (this.currentAttack.x * -1) + this.body.x - this.currentAttack.w + this.body.width;
+            this.attackRect.body.y = this.currentAttack.y + this.body.y;
+            this.attackRect.body.width = this.currentAttack.w;
+            this.attackRect.body.height = this.currentAttack.h;
+        }
+    }
+    else {
+        this.attackRect.body.x = 0;
+        this.attackRect.body.y = 0;
+        this.attackRect.body.width = 0;
+        this.attackRect.body.height = 0;
     }
 
     if(!!this.currentAttack) {

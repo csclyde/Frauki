@@ -12,22 +12,62 @@ var fraukiDamageFrames = {
 	},
 
 	'Slash Standing0007': {
-		damageFrame: true
+		damageFrame: true,
+		x: 10, 
+		y: 10,
+		w: 25,
+		h: 25,
+
+		damage: 0,
+		knockback: 0,
+		penetration: 0
 	},
 
 	'Slash Standing0008': {
-		damageFrame: true
+		damageFrame: true,
+		x: 10, 
+		y: 10,
+		w: 25,
+		h: 25,
+
+		damage: 0,
+		knockback: 0,
+		penetration: 0
 	},
 
 	'Slash Standing0013': {
-		damageFrame: true
+		damageFrame: true,
+		x: 10, 
+		y: 10,
+		w: 25,
+		h: 25,
+
+		damage: 0,
+		knockback: 0,
+		penetration: 0
 	},
 
 	'Slash Standing0014': {
-		damageFrame: true
+		damageFrame: true,
+		x: 10, 
+		y: 10,
+		w: 25,
+		h: 25,
+
+		damage: 0,
+		knockback: 0,
+		penetration: 0
 	},
 
 	'Slash Standing0015': {
-		damageFrame: true
+		damageFrame: true,
+		x: 10, 
+		y: 10,
+		w: 25,
+		h: 25,
+
+		damage: 0,
+		knockback: 0,
+		penetration: 0
 	}
 };

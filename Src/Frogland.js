@@ -93,7 +93,7 @@ Frogland.update = function() {
         game.physics.arcade.overlap(frauki, this.enemyGroup, frauki.Hit, null, frauki);
     }
     else if(frauki.states.attacking === true) {
-        game.physics.arcade.overlap(frauki.currentAttack.attackRect, this.enemyGroup, EnemyHit);
+        game.physics.arcade.overlap(frauki.attackRect, this.enemyGroup, EnemyHit);
         frauki.timers.gracePeriod = game.time.now + 200;
     }
 
@@ -108,7 +108,5 @@ Frogland.update = function() {
 Frogland.render = function() {
     game.debug.body(frauki);
 
-    if(!!frauki.states.attacking) {
-        game.debug.geom(frauki.currentAttack.attackRect, '#ff0000');
-    }
+    game.debug.body(frauki.attackRect);
 };
