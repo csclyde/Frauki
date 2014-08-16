@@ -99,7 +99,6 @@ Player.prototype.update = function() {
         this.body.setSize(11, 50, 0, 0);
     }
 
-    this.AdjustFrame(this.animations.currentFrame.name);
 
     if(this.state === this.SlashStanding || this.state === this.SlashRunning || this.state === this.SlashAerial || this.state === this.OverheadSlashAerial || this.state === this.DiveSlashAerial) {
         this.states.slashing = true;
@@ -125,12 +124,14 @@ Player.prototype.Grace = function() {
     return (this.game.time.now < this.timers.gracePeriod);
 };
 
-Player.prototype.AdjustFrame = function(frameName) {
+Player.prototype.AdjustFrame = function() {
     //check for a frame mod and apply its mods
-    this.currentAttack = fraukiDamageFrames[frameName];
+    this.currentAttack = fraukiDamageFrames[this.animations.currentFrame.name];
     this.states.attacking = false;
 
     if(!!this.currentAttack) {
+        this.states.attacking = true;
+
         if(this.states.direction === 'right') {
             this.attackRect.body.x = this.currentAttack.x + this.body.x; 
             this.attackRect.body.y = this.currentAttack.y + this.body.y; 
@@ -148,18 +149,6 @@ Player.prototype.AdjustFrame = function(frameName) {
         this.attackRect.body.y = 0;
         this.attackRect.body.width = 0;
         this.attackRect.body.height = 0;
-    }
-
-    if(!!this.currentAttack) {
-
-        if(!!this.currentAttack.xOffset) {
-            this.states.direction === 'left' ? this.x -= this.currentAttack.xOffset : this.x += this.currentAttack.xOffset;;
-        }
-
-        if(!!this.currentAttack.damageFrame) {
-            this.states.attacking = true;
-        }
-
     }
 };
 

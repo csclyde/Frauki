@@ -82,14 +82,14 @@ Enemy.prototype.PlayerIsVisible = function() {
 };
 
 function EnemyHit(f, e) {
-    console.log('Enemy is taking hit');
     
     //compute the velocity based on weight and attack knockback
     e.body.velocity.y = -300 + e.weight;
 
-    e.body.velocity.x = frauki.body.x < e.body.x ? -200 - (frauki.currentAttack.knockback / 2) + (e.weight / 2) : 200 + (frauki.currentAttack.knockback / 2) - (e.weight / 2);
+    var c = frauki.body.x < e.body.x ? 1 : -1;
+    e.body.velocity.x =  c * ((200 + (e.weight / 2)) * (frauki.currentAttack.knockback));
 
     //a durability stat should modify how long they are stunned for. also, the amount of dmg
-    e.hitTimer = game.time.now + 500;
+    e.hitTimer = game.time.now + 200;
     e.alpha = 0.2;
 }

@@ -104,7 +104,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 			return;
 		else
 			this.alpha = 1.0;
-		
+
 		this.PlayAnim('idle');
 
 		if(this.PlayerIsVisible() || this.PlayerIsNear(75)) {
@@ -123,7 +123,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
 		//in the future, test for the players bullets being near
 		if(this.PlayerIsNear(100)) {
-			if(Math.random() * 2 < 1) 
+			if(Math.random() * 5 < 1) 
 				this.Dodge();
 			else
 				this.Scuttle();
