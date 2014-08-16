@@ -7,8 +7,6 @@ Enemy.prototype.types['Buzzar'] =  function() {
 
     this.state = Idling;
 
-    //events.subscribe('player_jump', this.Jump, this);
-
 	this.updateFunction = function() {
 		
 	};
@@ -19,7 +17,6 @@ Enemy.prototype.types['Buzzar'] =  function() {
 	////////////////////////////////STATES////////////////////////////////////
 	function Idling() {
 		this.PlayAnim('idle');
-
 		
 	};
 

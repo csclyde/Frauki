@@ -4,9 +4,9 @@
         <key>fileFormatVersion</key>
         <int>3</int>
         <key>texturePackerVersion</key>
-        <string>3.3.4</string>
+        <string>3.4.0</string>
         <key>fileName</key>
-        <string>C:/Users/KC/Desktop/Frauki/Data/Enemies/Buzzar/Buzzar.tps</string>
+        <string>D:/gamedev/Frauki/Data/Enemies/Buzzar/Buzzar.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -28,7 +28,7 @@
             </struct>
         </array>
         <key>allowRotation</key>
-        <true/>
+        <false/>
         <key>premultiplyAlpha</key>
         <false/>
         <key>shapeDebug</key>
@@ -148,6 +148,8 @@
         <key>autoAliasEnabled</key>
         <true/>
         <key>trimSpriteNames</key>
+        <true/>
+        <key>prependSmartFolderName</key>
         <false/>
         <key>cleanTransparentPixels</key>
         <true/>
@@ -164,7 +166,7 @@
             <key>trimThreshold</key>
             <uint>1</uint>
             <key>trimMode</key>
-            <enum type="SpriteSettings::TrimMode">Trim</enum>
+            <enum type="SpriteSettings::TrimMode">Crop</enum>
             <key>heuristicMask</key>
             <false/>
             <key>pivotPoint</key>

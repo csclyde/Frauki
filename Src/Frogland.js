@@ -75,7 +75,7 @@ Frogland.create = function() {
     this.enemyGroup.enableBody = true;
 
     map.createFromObjects('Enemies', 1061, 'Insectoid', 'Hop0000', true, false, this.enemyGroup, Enemy);
-    //map.createFromObjects('Enemies', 1062, 'Buzzar', 'Sting0000', true, false, this.enemyGroup, Enemy);
+    map.createFromObjects('Enemies', 1062, 'Buzzar', 'Sting0000', true, false, this.enemyGroup, Enemy);
     
     foregroundLayer = map.createLayer('Foreground');
 
@@ -109,6 +109,5 @@ Frogland.update = function() {
 
 Frogland.render = function() {
     //game.debug.body(frauki);
-
-    game.debug.body(frauki.attackRect);
+    //game.debug.body(frauki.attackRect);
 };

@@ -10,9 +10,12 @@ Enemy = function(game, x, y, name) {
     this.state = null;
     this.weight = 0;
     this.hitTimer = 0;
+    this.flashing = false;
 
-    if(!!this.types['Insectoid']) {
-        this.types['Insectoid'].apply(this);
+    if(!!this.types[name]) {
+        this.types[name].apply(this);
+    } else {
+        console.log('Enemy of type ' + name + ' was not found');
     }
 
 };
@@ -32,6 +35,12 @@ Enemy.prototype.update = function() {
 
     if(!!this.state)
         this.state();
+
+    if(this.flashing) {
+        this.tint = 0xFEFEFE;
+    } else {
+        this.tint = 0xFFFFFF;
+    }
 };
 
 Enemy.prototype.SetDirection = function(dir) {
@@ -82,6 +91,8 @@ Enemy.prototype.PlayerIsVisible = function() {
 };
 
 function EnemyHit(f, e) {
+    if(game.time.now < e.hitTimer)
+        return;
     
     //compute the velocity based on weight and attack knockback
     e.body.velocity.y = -300 + e.weight;
@@ -90,6 +101,5 @@ function EnemyHit(f, e) {
     e.body.velocity.x =  c * ((200 + (e.weight / 2)) * (frauki.currentAttack.knockback));
 
     //a durability stat should modify how long they are stunned for. also, the amount of dmg
-    e.hitTimer = game.time.now + 200;
-    e.alpha = 0.2;
+    e.hitTimer = game.time.now + 1000;
 }
