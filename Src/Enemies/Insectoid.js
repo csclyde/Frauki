@@ -5,13 +5,15 @@ Enemy.prototype.types['Insectoid'] =  function() {
     this.animations.add('idle', ['Hop0000'], 10, true, false);
     this.animations.add('hop', ['Hop0001', 'Hop0002'], 10, false, false);
     this.animations.add('land', ['Hop0003', 'Hop0004'], 10, false, false);
-
-    this.state = this.Idling;
+    this.animations.add('die', ['Die0000', 'Die0001', 'Die0002', 'Die0003'], 10, false, false);
 
     this.hopTimer = 0;
     this.scuttleTimer = 0;
 
 	this.updateFunction = function() {
+		if(game.time.now < this.hitTimer)
+			return;
+		
 		if(game.physics.arcade.distanceBetween(this, frauki) < 100 && this.state !== this.Hopping) {
 			game.physics.arcade.overlap(this, frauki, function() {
 				this.Dodge();
@@ -98,6 +100,22 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		}	
 	};
 
+	this.TakeHit = function(power) {
+		if(game.time.now < this.hitTimer)
+        	return;
+    
+	    //compute the velocity based on weight and attack knockback
+	    this.body.velocity.y = -300 + this.weight;
+
+	    var c = frauki.body.x < this.body.x ? 1 : -1;
+	    this.body.velocity.x =  c * ((200 + (this.weight / 2)) * (frauki.currentAttack.knockback));
+
+	    //a durability stat should modify how long they are stunned for. also, the amount of dmg
+	    this.hitTimer = game.time.now + 500;
+
+	    this.state = this.Hurting;
+	};
+
 	////////////////////////////////STATES////////////////////////////////////
 	this.Idling = function() {
 		this.PlayAnim('idle');
@@ -166,7 +184,10 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	};
 
 	this.Hurting = function() {
+		this.PlayAnim('die');
 
+		if(game.time.now > this.hitTimer)
+			this.state = this.Idling;
 	};
 
 };

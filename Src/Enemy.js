@@ -18,6 +18,8 @@ Enemy = function(game, x, y, name) {
         console.log('Enemy of type ' + name + ' was not found');
     }
 
+    this.state = this.Idling;
+
 };
 
 Enemy.prototype = Object.create(Phaser.Sprite.prototype);
@@ -35,12 +37,6 @@ Enemy.prototype.update = function() {
 
     if(!!this.state)
         this.state();
-
-    if(this.flashing) {
-        this.tint = 0xFEFEFE;
-    } else {
-        this.tint = 0xFFFFFF;
-    }
 };
 
 Enemy.prototype.SetDirection = function(dir) {
@@ -60,21 +56,8 @@ Enemy.prototype.PlayAnim = function(name) {
 };
 
 function EnemyHit(f, e) {
-    if(game.time.now < e.hitTimer)
-        return;
-    
-    //compute the velocity based on weight and attack knockback
-    e.body.velocity.y = -300 + e.weight;
-
-    var c = frauki.body.x < e.body.x ? 1 : -1;
-    e.body.velocity.x =  c * ((200 + (e.weight / 2)) * (frauki.currentAttack.knockback));
-
-    //a durability stat should modify how long they are stunned for. also, the amount of dmg
-    e.hitTimer = game.time.now + 1000;
-    e.alpha = 0.2;
-
-    e.state = e.Hurting;
-}
+    e.TakeHit();
+};
 
 //provide utility functions here that the specific enemies can all use
 Enemy.prototype.PlayerIsNear = function(radius) {

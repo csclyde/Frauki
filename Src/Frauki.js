@@ -209,12 +209,12 @@ Player.prototype.Crouch = function(params) {
 };
 
 Player.prototype.Slash = function(params) {
-    if(this.state === this.SlashStanding) {
-        this.states.slashAgain = true;
-    }
 
     if(this.state === this.Standing || this.state === this.Landing) {
-        this.state = this.SlashStanding;
+        if(this.states.upPressed)
+            this.state = this.SlashOverheadStanding;
+        else
+            this.state = this.SlashStanding;
     }
     else if(this.state === this.Running) {
         this.state = this.SlashRunning;
@@ -326,10 +326,7 @@ Player.prototype.Peaking = function() {
 
 Player.prototype.Falling = function() {
     this.PlayAnim('fall');
-    
-    if(this.body.velocity.x < 0)
-        this.state = this.Jumping;
-    
+
     if(this.body.onFloor()) {
         if(this.body.velocity.x === 0) {
             if(this.states.crouching)
@@ -424,26 +421,22 @@ Player.prototype.Hurting = function() {
 };
 
 Player.prototype.SlashStanding = function() {
-    this.PlayAnim(this.states.nextSlash);
+    this.PlayAnim('slash_stand1');
     this.body.velocity.x = 0;
 
     if(this.animations.currentAnim.isFinished) {
-        if(this.states.slashAgain === true) {
-            if(this.animations.currentAnim.name === 'slash_stand1') {
-                this.states.nextSlash = 'slash_stand2';
-            }
-            else if(this.animations.currentAnim.name === 'slash_stand2') {
-                this.states.nextSlash = 'slash_stand3';
-            }
-
-            this.states.slashAgain = false;
-        }
-        else {
-            this.state = this.Standing;
-            this.states.nextSlash = 'slash_stand1';
-        }
+        this.state = this.Standing;
     }
-}
+};
+
+Player.prototype.SlashOverheadStanding = function() {
+    this.PlayAnim('slash_stand2');
+    this.body.velocity.x = 0;
+
+    if(this.animations.currentAnim.isFinished) {
+        this.state = this.Standing;
+    }
+};
 
 Player.prototype.SlashRunning = function() {
     this.PlayAnim('slash_run');
