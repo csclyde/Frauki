@@ -327,6 +327,9 @@ Player.prototype.Peaking = function() {
 Player.prototype.Falling = function() {
     this.PlayAnim('fall');
     
+    if(this.body.velocity.x < 0)
+        this.state = this.Jumping;
+    
     if(this.body.onFloor()) {
         if(this.body.velocity.x === 0) {
             if(this.states.crouching)

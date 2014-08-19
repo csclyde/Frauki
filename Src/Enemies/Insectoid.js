@@ -6,7 +6,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
     this.animations.add('hop', ['Hop0001', 'Hop0002'], 10, false, false);
     this.animations.add('land', ['Hop0003', 'Hop0004'], 10, false, false);
 
-    this.state = Idling;
+    this.state = this.Idling;
 
     this.hopTimer = 0;
     this.scuttleTimer = 0;
@@ -17,13 +17,6 @@ Enemy.prototype.types['Insectoid'] =  function() {
 				this.Dodge();
 			}, null, this);
 		}
-
-		if(game.time.now < this.hitTimer) {
-			this.flashing = true;
-		}
-		else {
-			this.flashing = false;
-		}
 	};
 
 	///////////////////////////////ACTIONS////////////////////////////////////
@@ -32,7 +25,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 			return;
 
 		this.hopTimer = game.time.now + 2000;
-		this.state = Hopping;
+		this.state = this.Hopping;
 
 		this.body.velocity.y = -1 * ((Math.random() * 250));
 
@@ -50,7 +43,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 			return;
 
 		this.scuttleTimer = game.time.now + 2000;
-		this.state = Scuttling;
+		this.state = this.Scuttling;
 
 		if(playerX < this.body.x) {
 			this.body.velocity.x = -500;
@@ -66,7 +59,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 			return;
 
 		this.hopTimer = game.time.now + 4000;
-		this.state = Hopping;
+		this.state = this.Hopping;
 
 		this.body.velocity.y = -300;
 
@@ -80,7 +73,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	};
 
 	this.Creep = function(random) {
-		this.state = Idling;
+		this.state = this.Idling;
 
 		if(random) {
 			if(Math.abs(this.body.velocity.x) === 100)
@@ -106,7 +99,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	};
 
 	////////////////////////////////STATES////////////////////////////////////
-	function Idling() {
+	this.Idling = function() {
 		this.PlayAnim('idle');
 
 		if(this.PlayerIsVisible() || this.PlayerIsNear(75)) {
@@ -138,37 +131,41 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		}
 	};
 
-	function Hopping() {
+	this.Hopping = function() {
 		this.PlayAnim('hop');
 
 		if(this.body.velocity.y >= 0) {
-			this.state = Landing;
+			this.state = this.Landing;
 		}
 	};
 
-	function Landing() {
+	this.Landing = function() {
 		this.PlayAnim('land');
 
 		if(this.body.onFloor()) {
-			this.state = Idling;
+			this.state = this.Idling;
 			this.body.velocity.x = 0;
 		}
 	};
 
-	function Scuttling() {
+	this.Scuttling = function() {
 		this.PlayAnim('idle');
 
 		if(game.physics.arcade.intersects(this.body, frauki.body)) {
-			this.state = Idling;
+			this.state = this.Idling;
 			game.add.tween(this.body.velocity).to({x: 0}, 100, Phaser.Easing.Sinusoidal.Out, true);
 		}
 		if(game.time.now - this.scuttleTimer > 50) {
-			this.state = Idling;
+			this.state = this.Idling;
 			this.body.velocity.x = 0;
 		}
 	};
 
-	function Shooting() {
+	this.Shooting = function() {
+
+	};
+
+	this.Hurting = function() {
 
 	};
 

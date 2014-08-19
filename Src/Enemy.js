@@ -59,6 +59,23 @@ Enemy.prototype.PlayAnim = function(name) {
         this.animations.play(name);
 };
 
+function EnemyHit(f, e) {
+    if(game.time.now < e.hitTimer)
+        return;
+    
+    //compute the velocity based on weight and attack knockback
+    e.body.velocity.y = -300 + e.weight;
+
+    var c = frauki.body.x < e.body.x ? 1 : -1;
+    e.body.velocity.x =  c * ((200 + (e.weight / 2)) * (frauki.currentAttack.knockback));
+
+    //a durability stat should modify how long they are stunned for. also, the amount of dmg
+    e.hitTimer = game.time.now + 1000;
+    e.alpha = 0.2;
+
+    e.state = e.Hurting;
+}
+
 //provide utility functions here that the specific enemies can all use
 Enemy.prototype.PlayerIsNear = function(radius) {
     var ray = new Phaser.Line(playerX, playerY, this.body.x, this.body.y);
@@ -89,17 +106,3 @@ Enemy.prototype.PlayerIsVisible = function() {
         return false;
     }
 };
-
-function EnemyHit(f, e) {
-    if(game.time.now < e.hitTimer)
-        return;
-    
-    //compute the velocity based on weight and attack knockback
-    e.body.velocity.y = -300 + e.weight;
-
-    var c = frauki.body.x < e.body.x ? 1 : -1;
-    e.body.velocity.x =  c * ((200 + (e.weight / 2)) * (frauki.currentAttack.knockback));
-
-    //a durability stat should modify how long they are stunned for. also, the amount of dmg
-    e.hitTimer = game.time.now + 1000;
-}
