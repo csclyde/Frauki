@@ -181,7 +181,7 @@ Player.prototype.StartStopRun = function(params) {
 };
 
 Player.prototype.Jump = function(params) {
-    if(this.state === this.Hurting) 
+    if(this.state === this.Hurting || this.states.slashing) 
         return;
 
     if(params.jump) {
@@ -239,6 +239,9 @@ Player.prototype.Slash = function(params) {
     else if(this.body.velocity.x !== 0 && (this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling)) {
         this.state = this.SlashAerial;
     }
+
+    if(this.state === this.SlashOverheadStanding || this.state === this.SlashStanding || this.state === this.SlashRunning || this.state === this.DiveSlashAerial || this.state === this.OverheadSlashAerial || this.state === this.SlashAerial)
+        this.timers.gracePeriod = game.time.now + 200;
 };
 
 Player.prototype.Roll = function(params) {

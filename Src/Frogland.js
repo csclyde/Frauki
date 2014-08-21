@@ -97,7 +97,6 @@ Frogland.update = function() {
     }
     else if(frauki.states.attacking === true) {
         game.physics.arcade.overlap(frauki.attackRect, this.enemyGroup, EnemyHit);
-        frauki.timers.gracePeriod = game.time.now + 200;
     }
 
     cameraController.UpdateCamera();

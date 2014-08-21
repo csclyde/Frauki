@@ -13,17 +13,17 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	this.updateFunction = function() {
 		if(game.time.now < this.hitTimer)
 			return;
-		
-		if(game.physics.arcade.distanceBetween(this, frauki) < 100 && this.state !== this.Hopping) {
+
+		if(game.physics.arcade.distanceBetween(this, frauki) < 100 && this.state !== this.Hopping && frauki.state === frauki.Hurting) {
 			game.physics.arcade.overlap(this, frauki, function() {
-				this.Dodge();
+				this.Dodge(true);
 			}, null, this);
 		}
 	};
 
 	///////////////////////////////ACTIONS////////////////////////////////////
 	this.Hop = function() {
-		if(game.time.now < this.hopTimer)
+		if(game.time.now < this.hopTimer || !this.body.onFloor())
 			return;
 
 		this.hopTimer = game.time.now + 2000;
@@ -56,8 +56,8 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		}		
 	};
 
-	this.Dodge = function() {
-		if(game.time.now < game.hopTimer)
+	this.Dodge = function(overrideFloorCondition) {
+		if(game.time.now < game.hopTimer && (!this.body.onFloor() || !!overrideFloorCondition))
 			return;
 
 		this.hopTimer = game.time.now + 4000;
@@ -134,7 +134,6 @@ Enemy.prototype.types['Insectoid'] =  function() {
 			return;
 		}
 
-		//in the future, test for the players bullets being near
 		if(this.PlayerIsNear(100)) {
 			if(Math.random() * 5 < 1) 
 				this.Dodge();

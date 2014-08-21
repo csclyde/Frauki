@@ -11,13 +11,21 @@ Enemy.prototype.types['Buzzar'] =  function() {
 
     this.hitVel = 0;
 
+    this.targetX = null;
+    this.targetY = null;
+
 	this.updateFunction = function() {
 		
 	};
 
 	///////////////////////////////ACTIONS////////////////////////////////////
 	this.Sting = function() {
+		game.physics.arcade.moveToXY(this, frauki.body.x, frauki.body.y, 400);
 
+		this.targetX = frauki.body.x;
+		this.targetY = frauki.body.y;
+
+		this.state = this.Stinging;
 	};
 
 	this.ChangeDirection = function() {
@@ -39,13 +47,13 @@ Enemy.prototype.types['Buzzar'] =  function() {
 		}
     
 	    //compute the velocity based on weight and attack knockback
-	    this.body.velocity.y = -50 + this.weight;
+	    this.body.velocity.y = -150 + this.weight;
 
 	    var c = frauki.body.x < this.body.x ? 1 : -1;
-	    this.body.velocity.x =  c * ((20 + (this.weight / 2)) * (frauki.currentAttack.knockback));
+	    this.body.velocity.x =  c * ((80 + (this.weight / 2)) * (frauki.currentAttack.knockback));
 
 	    //a durability stat should modify how long they are stunned for. also, the amount of dmg
-	    this.hitTimer = game.time.now + 1000;
+	    this.hitTimer = game.time.now + 300;
 	    this.alpha = 0.2;
 
 	    this.state = this.Hurting;
@@ -66,6 +74,9 @@ Enemy.prototype.types['Buzzar'] =  function() {
 			case 'down': this.body.velocity.y += 30; break;
 		}
 
+		if(Math.floor(Math.random() * 100) == 1 && this.PlayerIsVisible()) 
+			this.Sting();
+
 		if(this.body.onFloor() || this.body.onWall())
 			this.ChangeDirection();
 
@@ -78,6 +89,15 @@ Enemy.prototype.types['Buzzar'] =  function() {
 	this.Stinging = function() {
 		this.PlayAnim('sting');
 
+		if(this.body.onFloor() || this.body.onWall())
+			this.state = this.Idling;
+
+		if(game.physics.arcade.distanceToXY(this.targetX, this.targetY) < 5)
+			this.state = this.Idling;
+
+		game.physics.arcade.overlap(this, frauki, function() {
+			this.state = this.Idling;
+		}, null, this);
 	};
 
 	this.Hurting = function() {
