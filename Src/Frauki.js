@@ -1,6 +1,6 @@
 PLAYER_SPEED = 225;
 PLAYER_ROLL_SPEED = 500;
-PLAYER_RUN_SLASH_SPEED = 300;
+PLAYER_RUN_SLASH_SPEED = 600;
 PLAYER_INERTIA = 100;
 
 Player = function (game, x, y, name) {
@@ -46,11 +46,10 @@ Player = function (game, x, y, name) {
     this.states.direction = 'right';
     this.states.crouching = false;
     this.states.hasFlipped = false;
-    this.states.slashAgain = false;
-    this.states.nextSlash = 'slash_stand1';
     this.states.slashing = false;
     this.states.attacking = false;
     this.states.upPresseed = false;
+    this.states.attackOutOfRoll = false;
 
     this.timers = {};
     this.timers.gracePeriod = 0;
@@ -222,11 +221,11 @@ Player.prototype.Slash = function(params) {
 
         if(this.states.direction === 'left') {
             this.movement.rollVelocity = -PLAYER_RUN_SLASH_SPEED;
-            this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: -PLAYER_SPEED}, 300, Phaser.Easing.Quartic.In, true);
+            this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: -PLAYER_SPEED}, 200, Phaser.Easing.Quartic.In, true);
         }
         else {
             this.movement.rollVelocity = PLAYER_RUN_SLASH_SPEED;
-            this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: PLAYER_SPEED}, 300, Phaser.Easing.Quartic.In, true);
+            this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: PLAYER_SPEED}, 200, Phaser.Easing.Quartic.In, true);
         }
     }
     else if(this.states.crouching && (this.state === this.Peaking || this.state === this.Falling)) {
@@ -238,6 +237,9 @@ Player.prototype.Slash = function(params) {
     }
     else if(this.body.velocity.x !== 0 && (this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling)) {
         this.state = this.SlashAerial;
+    }
+    else if(this.state === this.Rolling) {
+        this.states.attackOutOfRoll = true;
     }
 
     if(this.state === this.SlashOverheadStanding || this.state === this.SlashStanding || this.state === this.SlashRunning || this.state === this.DiveSlashAerial || this.state === this.OverheadSlashAerial || this.state === this.SlashAerial)
@@ -401,7 +403,10 @@ Player.prototype.Rolling = function() {
     }
 
     if(this.animations.currentAnim.isFinished) {
-        if(this.body.velocity.y > 150) {
+        if(this.states.attackOutOfRoll === true) {
+            this.state = this.SlashRunning;
+            this.states.attackOutOfRoll = false;
+        } else if(this.body.velocity.y > 150) {
             this.state = this.Falling;
         } else if(this.body.velocity.x !== 0 && this.body.onFloor()) {
             this.state = this.Running;
@@ -415,7 +420,9 @@ Player.prototype.Hurting = function() {
     this.PlayAnim('hit');
 
     if(game.time.now > this.timers.hitTimer) {
-        if(this.body.velocity.x === 0) {
+        if(this.body.velocity.y > 0) {
+            this.state = this.Falling;
+        } else if(this.body.velocity.x === 0) {
             this.state = this.Standing;
         } else {
             this.state = this.Running;

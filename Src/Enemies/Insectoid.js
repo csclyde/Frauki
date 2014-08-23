@@ -128,7 +128,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 			}
 		} 
 		else {
-			if(Math.random() * 1000 < 10)
+			if(Math.random() * 100 <= 5)
 				this.Creep();
 
 			return;

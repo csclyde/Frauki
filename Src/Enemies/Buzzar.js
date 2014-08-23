@@ -11,8 +11,10 @@ Enemy.prototype.types['Buzzar'] =  function() {
 
     this.hitVel = 0;
 
-    this.targetX = null;
-    this.targetY = null;
+    this.stingTimer = 0;
+    this.stingRestTimer = 0;
+
+    this.anger = 1;
 
 	this.updateFunction = function() {
 		
@@ -20,10 +22,13 @@ Enemy.prototype.types['Buzzar'] =  function() {
 
 	///////////////////////////////ACTIONS////////////////////////////////////
 	this.Sting = function() {
+		if(frauki.body.y <= this.body.y)
+			return;
+
 		game.physics.arcade.moveToXY(this, frauki.body.x, frauki.body.y, 400);
 
-		this.targetX = frauki.body.x;
-		this.targetY = frauki.body.y;
+		this.stingTimer = game.time.now + 400;
+		this.stingRestTimer = game.time.now + 1500;
 
 		this.state = this.Stinging;
 	};
@@ -32,7 +37,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
 		var dir = Math.random() * 4;
 
 	    if(dir <= 1)
-	    	this.wanderDirection = 'left';
+	    	this.wanderDirection = 'left'
 	    else if(dir <= 2)
 	    	this.wanderDirection = 'up';
 	    else if(dir <= 3)
@@ -57,6 +62,8 @@ Enemy.prototype.types['Buzzar'] =  function() {
 	    this.alpha = 0.2;
 
 	    this.state = this.Hurting;
+
+	    if(this.anger < 4) this.anger++;
 	};
 
 	////////////////////////////////STATES////////////////////////////////////
@@ -74,8 +81,8 @@ Enemy.prototype.types['Buzzar'] =  function() {
 			case 'down': this.body.velocity.y += 30; break;
 		}
 
-		if(Math.floor(Math.random() * 100) == 1 && this.PlayerIsVisible()) 
-			this.Sting();
+		if(this.PlayerIsVisible())
+			this.state = this.Creepin;
 
 		if(this.body.onFloor() || this.body.onWall())
 			this.ChangeDirection();
@@ -89,10 +96,10 @@ Enemy.prototype.types['Buzzar'] =  function() {
 	this.Stinging = function() {
 		this.PlayAnim('sting');
 
-		if(this.body.onFloor() || this.body.onWall())
+		if(this.game.time.now > this.stingTimer)
 			this.state = this.Idling;
 
-		if(game.physics.arcade.distanceToXY(this.targetX, this.targetY) < 5)
+		if(this.body.onFloor() || this.body.onWall())
 			this.state = this.Idling;
 
 		game.physics.arcade.overlap(this, frauki, function() {
@@ -107,6 +114,23 @@ Enemy.prototype.types['Buzzar'] =  function() {
 			this.alpha = 1.0;
 		}
         	
+	};
+
+	this.Creepin = function() {
+		if(!this.PlayerIsVisible()) {
+			this.state = this.Idling;
+			this.anger = 1;
+		}
+
+		//move to a point somewhere above fraukis head
+		var locus = {};
+		locus.x = frauki.body.x + (Math.sin(game.time.now / 150) * 50);
+		locus.y = frauki.body.y - 100 + (Math.sin(game.time.now / 150) * 100);
+
+		game.physics.arcade.moveToXY(this, locus.x, locus.y, 100 * this.anger);
+
+		if(Math.floor(Math.random() * 100) == 1 && game.time.now > this.stingRestTimer && this.PlayerIsVisible()) 
+			this.Sting();
 	};
 
 };

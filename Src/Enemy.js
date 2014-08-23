@@ -61,30 +61,22 @@ function EnemyHit(f, e) {
 
 //provide utility functions here that the specific enemies can all use
 Enemy.prototype.PlayerIsNear = function(radius) {
-    var ray = new Phaser.Line(playerX, playerY, this.body.x, this.body.y);
-
-    if(ray.length > radius)
-        return false;
-    else
+    if(game.physics.arcade.distanceBetween(frauki, this) <= radius)
         return true;
+    else
+        return false;
 };
 
 Enemy.prototype.PlayerIsVisible = function() {
-    if(playerX < this.body.x && this.direction === 'right')
-        return false;
 
-    if(playerX > this.body.x && this.direction === 'left')
-        return false;
+    if(!this.PlayerIsNear(600))
+        return;
 
-    if(this.PlayerIsNear(500)) {
-        var ray = new Phaser.Line(playerX, playerY, this.body.x, this.body.y);
-        var collideTiles = midgroundLayer.getRayCastTiles(ray, 1, true);
+    var ray = new Phaser.Line(playerX, playerY, this.body.x, this.body.y);
+    var collideTiles = midgroundLayer.getRayCastTiles(ray, 1, true);
 
-        if(collideTiles.length === 0) {
-            return true;
-        } else {
-            return false;
-        }
+    if(collideTiles.length === 0) {
+        return true;
     } else {
         return false;
     }
