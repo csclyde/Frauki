@@ -5,10 +5,10 @@ var fraukiDamageFrames = {
 		damageFrame: true,
 		x: 10, 
 		y: 10,
-		w: 25,
+		w: 35,
 		h: 25,
 
-		damage: 0,
+		damage: 10,
 		knockback: 0.5,
 		penetration: 0
 	},
@@ -21,7 +21,7 @@ var fraukiDamageFrames = {
 		w: 25,
 		h: 15,
 
-		damage: 0,
+		damage: 10,
 		knockback: 0,
 		penetration: 0
 	},
@@ -34,7 +34,7 @@ var fraukiDamageFrames = {
 		w: 30,
 		h: 50,
 
-		damage: 0,
+		damage: 10,
 		knockback: 0,
 		penetration: 0
 	},
@@ -47,7 +47,7 @@ var fraukiDamageFrames = {
 		w: 18,
 		h: 15,
 
-		damage: 0,
+		damage: 10,
 		knockback: 0,
 		penetration: 0
 	},
@@ -60,7 +60,7 @@ var fraukiDamageFrames = {
 		w: 45,
 		h: 6,
 
-		damage: 0,
+		damage: 10,
 		knockback: 0.8,
 		penetration: 0
 	},
@@ -73,7 +73,7 @@ var fraukiDamageFrames = {
 		w: 45,
 		h: 6,
 
-		damage: 0,
+		damage: 10,
 		knockback: 0.8,
 		penetration: 0
 	},
@@ -86,7 +86,7 @@ var fraukiDamageFrames = {
 		w: 45,
 		h: 6,
 
-		damage: 0,
+		damage: 10,
 		knockback: 0.8,
 		penetration: 0
 	}

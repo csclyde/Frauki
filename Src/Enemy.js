@@ -56,6 +56,9 @@ Enemy.prototype.PlayAnim = function(name) {
 };
 
 function EnemyHit(f, e) {
+    if(frauki.states.energy < 16 && e.state !== e.Hurting)
+        frauki.states.energy++;
+
     e.TakeHit();
 };
 
