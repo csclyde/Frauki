@@ -33,7 +33,7 @@ Player = function (game, x, y, name) {
     this.animations.add('slash_stand3', ['Slash Standing0011', 'Slash Standing0012', 'Slash Standing0013', 'Slash Standing0014', 'Slash Standing0015', 'Slash Standing0016', 'Slash Standing0017'], 12, false, false);
     this.animations.add('slash_run', ['Slash Standing0013', 'Slash Standing0014', 'Slash Standing0015', 'Slash Standing0016'], 12, false, false);
     this.animations.add('slash_aerial', ['Slash Standing0001', 'Slash Standing0002', 'Slash Standing0003', 'Slash Standing0004', 'Slash Standing0005'], 12, false, false);
-    this.animations.add('dive_slash_aerial', ['Slash Standing0008'], 12, false, false);
+    this.animations.add('dive_slash_aerial', ['Slash Standing0006', 'Slash Standing0007', 'Slash Standing0008'], 12, false, false);
     this.animations.add('overhead_slash_aerial', ['Slash Standing0006', 'Slash Standing0007', 'Slash Standing0008', 'Slash Standing0009', 'Slash Standing0010'], 12, false, false);
 
     this.state = this.Standing;
@@ -57,6 +57,7 @@ Player = function (game, x, y, name) {
     this.timers.gracePeriod = 0;
     this.timers.hitTimer = 0;
     this.timers.runSlashTimer = 0;
+    this.timers.runSlashWindow = 0;
     this.timers.kickTimer = 0;
 
     this.movement = {};
@@ -175,6 +176,8 @@ Player.prototype.StartStopRun = function(params) {
     if(params.run) {
         params.dir === 'left' ? this.movement.inertia = PLAYER_INERTIA : this.movement.inertia = -PLAYER_INERTIA;
         this.tweens.startRun = game.add.tween(this.movement).to({inertia: 0}, 300, Phaser.Easing.Linear.None, true);
+
+        this.timers.runSlashWindow = game.time.now + 150;
     } else {
         this.movement.inertia = this.body.velocity.x;
         this.tweens.startRun.stop();
@@ -218,7 +221,7 @@ Player.prototype.Slash = function(params) {
         else
             this.state = this.SlashStanding;
     }
-    else if(this.state === this.Running) {
+    else if(this.state === this.Running && game.time.now < this.timers.runSlashWindow) {
         this.state = this.SlashRunning;
         this.timers.runSlashTimer = game.time.now + 200;
 
@@ -537,7 +540,7 @@ Player.prototype.Kicking = function() {
     } else if(this.body.velocity.x === 0 && this.body.onFloor()) {
         this.state = this.Landing;
     }
-    
+
     if(game.time.now > this.timers.kickTimer) {
         if(this.body.velocity.y >= 0) {
             this.state = this.Falling;
