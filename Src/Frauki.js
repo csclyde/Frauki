@@ -25,6 +25,7 @@ Player = function (game, x, y, name) {
     this.animations.add('flip', ['Flip0000', 'Flip0001', 'Flip0002', 'Flip0003', 'Flip0004'], 14, false, false);
     this.animations.add('roll', ['Flip0000', 'Flip0001', 'Flip0002', 'Flip0003', 'Flip0004'], 14, false, false);
     this.animations.add('hit', ['Hit0001', 'Hit0002'], 10, true, false);
+    this.animations.add('kick', ['Kick0000'], 12, false, false);
 
     //attacks
     this.animations.add('slash_stand1', ['Slash Standing0001', 'Slash Standing0002', 'Slash Standing0003', 'Slash Standing0004', 'Slash Standing0005'], 12, false, false);
@@ -56,6 +57,7 @@ Player = function (game, x, y, name) {
     this.timers.gracePeriod = 0;
     this.timers.hitTimer = 0;
     this.timers.runSlashTimer = 0;
+    this.timers.kickTimer = 0;
 
     this.movement = {};
     this.movement.rollVelocity = 0;
@@ -248,6 +250,12 @@ Player.prototype.Slash = function(params) {
 };
 
 Player.prototype.Roll = function(params) {
+    if(this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling || this.state === this.Flipping) {
+        this.state = this.Kicking;
+        this.timers.kickTimer = game.time.now + 200;
+        return;
+    }
+
     if(!this.body.onFloor() || this.game.time.now < this.rollTimer)
         return;
 
@@ -520,3 +528,21 @@ Player.prototype.OverheadSlashAerial = function() {
         }
     }
 };
+
+Player.prototype.Kicking = function() {
+    this.PlayAnim('kick');
+
+    if(this.body.velocity.x !== 0 && this.body.onFloor()) {
+            this.state = this.Running;
+    } else if(this.body.velocity.x === 0 && this.body.onFloor()) {
+        this.state = this.Landing;
+    }
+    
+    if(game.time.now > this.timers.kickTimer) {
+        if(this.body.velocity.y >= 0) {
+            this.state = this.Falling;
+        } else if(this.body.velocity.y < 0) {
+            this.state = this.Jumping;
+        }
+    }
+}

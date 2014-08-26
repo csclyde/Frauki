@@ -89,5 +89,17 @@ var fraukiDamageFrames = {
 		damage: 10,
 		knockback: 0.8,
 		penetration: 0
+	},
+
+	'Kick0000': {
+		damageFrame: true,
+		x: 0, 
+		y: 25,
+		w: 25,
+		h: 20,
+
+		damage: 10,
+		knockback: 0.8,
+		penetration: 0
 	}
 };
