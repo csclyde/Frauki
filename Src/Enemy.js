@@ -12,6 +12,11 @@ Enemy = function(game, x, y, name) {
     this.hitTimer = 0;
     this.flashing = false;
 
+    this.initialX = this.body.x;
+    this.initialY = this.body.y;
+
+    this.energy = 1;
+
     if(!!this.types[name]) {
         this.types[name].apply(this);
     } else {
@@ -59,7 +64,13 @@ function EnemyHit(f, e) {
     if(frauki.states.energy < 16 && e.state !== e.Hurting)
         frauki.states.energy++;
 
+    if(e.state !== e.Hurting)
+        e.energy--;
+
     e.TakeHit();
+
+    if(e.energy <= 0)
+        e.kill();
 };
 
 //provide utility functions here that the specific enemies can all use

@@ -51,7 +51,7 @@ Player = function (game, x, y, name) {
     this.states.attacking = false;
     this.states.upPresseed = false;
     this.states.attackOutOfRoll = false;
-    this.states.energy = 8;
+    this.states.energy = 1;
 
     this.timers = {};
     this.timers.gracePeriod = 0;
@@ -283,10 +283,11 @@ Player.prototype.Hit = function(f, e) {
 
     this.body.velocity.y = -300;
 
-    if(this.states.energy > 1) {
+    if(this.states.energy > 0)
         this.states.energy--;
-    } else {
-        //you die
+
+    if(this.states.energy <= 0) {
+        Utilities.RestartGame();
     }
 
     this.body.x < e.body.x ? this.body.velocity.x = -200 : this.body.velocity.x = 200;
