@@ -51,7 +51,7 @@ Player = function (game, x, y, name) {
     this.states.attacking = false;
     this.states.upPresseed = false;
     this.states.attackOutOfRoll = false;
-    this.states.energy = 1;
+    this.states.energy = 8;
 
     this.timers = {};
     this.timers.gracePeriod = 0;
@@ -103,7 +103,7 @@ Player.prototype.update = function() {
     }
 
 
-    if(this.state === this.SlashStanding || this.state === this.SlashRunning || this.state === this.SlashAerial || this.state === this.OverheadSlashAerial || this.state === this.DiveSlashAerial) {
+    if(this.state === this.SlashStanding || this.state === this.StabRunning || this.state === this.SlashAerial || this.state === this.OverheadSlashAerial || this.state === this.DiveSlashAerial) {
         this.states.slashing = true;
     } else {
         this.states.slashing = false;
@@ -157,7 +157,7 @@ Player.prototype.AdjustFrame = function() {
 
 ////////////////ACTIONS//////////////////
 Player.prototype.Run = function(params) {
-    if(this.state === this.Hurting || this.state === this.Rolling || this.state === this.SlashStanding || this.state === this.SlashRunning) 
+    if(this.state === this.Hurting || this.state === this.Rolling || this.state === this.StabRunning) 
         return;
 
     if(params.dir === 'left') {
@@ -195,7 +195,7 @@ Player.prototype.Jump = function(params) {
             this.body.velocity.y = -400;
         }
         //double jump
-        else if(this.states.hasFlipped === false && this.state !== this.Falling && this.state !== this.Rolling && this.state !== this.SlashRunning) {
+        else if(this.states.hasFlipped === false && this.state !== this.Falling && this.state !== this.Rolling && this.state !== this.StabRunning) {
             if(this.tweens.stopJump) { this.tweens.stopJump.stop(); }
 
             this.body.velocity.y = -350;
@@ -215,14 +215,14 @@ Player.prototype.Crouch = function(params) {
 
 Player.prototype.Slash = function(params) {
 
-    if(this.state === this.Standing || this.state === this.Landing) {
+    if(this.state === this.Standing || this.state === this.Landing || (this.state === this.Running && game.time.now > this.timers.runSlashWindow)) {
         if(this.states.upPressed)
             this.state = this.SlashOverheadStanding;
         else
             this.state = this.SlashStanding;
     }
     else if(this.state === this.Running && game.time.now < this.timers.runSlashWindow) {
-        this.state = this.SlashRunning;
+        this.state = this.StabRunning;
         this.timers.runSlashTimer = game.time.now + 200;
 
         if(this.states.direction === 'left') {
@@ -248,7 +248,7 @@ Player.prototype.Slash = function(params) {
         this.states.attackOutOfRoll = true;
     }
 
-    if(this.state === this.SlashOverheadStanding || this.state === this.SlashStanding || this.state === this.SlashRunning || this.state === this.DiveSlashAerial || this.state === this.OverheadSlashAerial || this.state === this.SlashAerial)
+    if(this.state === this.SlashOverheadStanding || this.state === this.SlashStanding || this.state === this.StabRunning || this.state === this.DiveSlashAerial || this.state === this.OverheadSlashAerial || this.state === this.SlashAerial)
         this.timers.gracePeriod = game.time.now + 200;
 };
 
@@ -423,7 +423,7 @@ Player.prototype.Rolling = function() {
 
     if(this.animations.currentAnim.isFinished) {
         if(this.states.attackOutOfRoll === true) {
-            this.state = this.SlashRunning;
+            this.state = this.StabRunning;
             this.states.attackOutOfRoll = false;
         } else if(this.body.velocity.y > 150) {
             this.state = this.Falling;
@@ -451,7 +451,7 @@ Player.prototype.Hurting = function() {
 
 Player.prototype.SlashStanding = function() {
     this.PlayAnim('slash_stand1');
-    this.body.velocity.x = 0;
+    //this.body.velocity.x = 0;
 
     if(this.animations.currentAnim.isFinished) {
         this.state = this.Standing;
@@ -460,14 +460,14 @@ Player.prototype.SlashStanding = function() {
 
 Player.prototype.SlashOverheadStanding = function() {
     this.PlayAnim('slash_stand2');
-    this.body.velocity.x = 0;
+    //this.body.velocity.x = 0;
 
     if(this.animations.currentAnim.isFinished) {
         this.state = this.Standing;
     }
 };
 
-Player.prototype.SlashRunning = function() {
+Player.prototype.StabRunning = function() {
     this.PlayAnim('slash_run');
     this.body.velocity.x = this.movement.rollVelocity;
 

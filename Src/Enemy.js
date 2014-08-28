@@ -15,7 +15,7 @@ Enemy = function(game, x, y, name) {
     this.initialX = this.body.x;
     this.initialY = this.body.y;
 
-    this.energy = 1;
+    this.energy = 7;
 
     if(!!this.types[name]) {
         this.types[name].apply(this);

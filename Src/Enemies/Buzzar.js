@@ -17,7 +17,10 @@ Enemy.prototype.types['Buzzar'] =  function() {
     this.anger = 1;
 
 	this.updateFunction = function() {
-		
+		if(this.body.velocity.x <= 0)
+			this.SetDirection('right');
+		else
+			this.SetDirection('left');
 	};
 
 	///////////////////////////////ACTIONS////////////////////////////////////
@@ -25,7 +28,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
 		if(frauki.body.y <= this.body.y)
 			return;
 
-		game.physics.arcade.moveToXY(this, frauki.body.x, frauki.body.y, 400);
+		game.physics.arcade.moveToXY(this, frauki.body.x, frauki.body.y, 450);
 
 		this.stingTimer = game.time.now + 400;
 		this.stingRestTimer = game.time.now + 1500;
@@ -66,6 +69,10 @@ Enemy.prototype.types['Buzzar'] =  function() {
 	    if(this.anger < 4) this.anger++;
 	};
 
+	this.Reset = function() {
+		this.anger = 1;
+	}
+
 	////////////////////////////////STATES////////////////////////////////////
 	this.Idling = function() {
 		this.PlayAnim('idle');
@@ -86,11 +93,6 @@ Enemy.prototype.types['Buzzar'] =  function() {
 
 		if(this.body.onFloor() || this.body.onWall())
 			this.ChangeDirection();
-
-		if(this.body.velocity.x <= 0)
-			this.SetDirection('right');
-		else
-			this.SetDirection('left');
 	};
 
 	this.Stinging = function() {
@@ -110,7 +112,12 @@ Enemy.prototype.types['Buzzar'] =  function() {
 	this.Hurting = function() {
 
 		if(game.time.now > this.hitTimer) {
-			this.state = this.Idling;
+
+			if(this.anger >= 4)
+	    		this.state = this.Enraged;
+	    	else
+				this.state = this.Idling;
+
 			this.alpha = 1.0;
 		}
         	
@@ -119,7 +126,6 @@ Enemy.prototype.types['Buzzar'] =  function() {
 	this.Creepin = function() {
 		if(!this.PlayerIsVisible()) {
 			this.state = this.Idling;
-			this.anger = 1;
 		}
 
 		//move to a point somewhere above fraukis head
@@ -129,8 +135,34 @@ Enemy.prototype.types['Buzzar'] =  function() {
 
 		game.physics.arcade.moveToXY(this, locus.x, locus.y, 100 * this.anger);
 
-		if(Math.floor(Math.random() * 100) == 1 && game.time.now > this.stingRestTimer && this.PlayerIsVisible()) 
+		if(Math.floor(Math.random() * 100) <= this.anger && game.time.now > this.stingRestTimer && this.PlayerIsVisible()) 
 			this.Sting();
 	};
+
+	this.Enraged = function() {
+		this.PlayAnim('idle');
+
+		if(this.body.x < frauki.body.x)
+			this.body.velocity.x += 10;
+		else
+			this.body.velocity.x -= 10;
+
+		if(this.body.y < frauki.body.y)
+			this.body.velocity.y += 10;
+		else
+			this.body.velocity.y -= 10;
+
+		if(this.body.velocity.x > 600)
+			this.body.velocity.x = 600;
+
+		if(this.body.velocity.x < -600)
+			this.body.velocity.x = -600;
+
+		if(this.body.velocity.y > 600)
+			this.body.velocity.y = 600;
+
+		if(this.body.velocity.y < -600)
+			this.body.velocity.y = -600;
+	}
 
 };
