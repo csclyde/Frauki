@@ -247,9 +247,6 @@ Player.prototype.Slash = function(params) {
     else if(this.state === this.Rolling) {
         this.states.attackOutOfRoll = true;
     }
-
-    //if(this.state === this.SlashOverheadStanding || this.state === this.SlashStanding || this.state === this.StabRunning || this.state === this.DiveSlashAerial || this.state === this.OverheadSlashAerial || this.state === this.SlashAerial)
-        //this.timers.gracePeriod = game.time.now + 200;
 };
 
 Player.prototype.Roll = function(params) {
@@ -337,13 +334,11 @@ Player.prototype.Jumping = function() {
 Player.prototype.Peaking = function() {
     this.PlayAnim('peak');
 
-    if(this.body.velocity.y < -100) {
+    if(this.body.velocity.y < 0) {
         this.state = this.Jumping;
     } else if(this.body.onFloor()) {
         this.state === this.Landing;
-    }
-
-    if(this.animations.currentAnim.isFinished) {
+    } else if(this.animations.currentAnim.isFinished) {
         this.state = this.Falling;
     }
 };
