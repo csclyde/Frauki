@@ -25,7 +25,7 @@ Player = function (game, x, y, name) {
     this.animations.add('flip', ['Flip0000', 'Flip0001', 'Flip0002', 'Flip0003', 'Flip0004'], 14, false, false);
     this.animations.add('roll', ['Flip0000', 'Flip0001', 'Flip0002', 'Flip0003', 'Flip0004'], 14, false, false);
     this.animations.add('hit', ['Hit0001', 'Hit0002'], 10, true, false);
-    this.animations.add('kick', ['Kick0000'], 12, false, false);
+    this.animations.add('kick', ['Kick0000', 'Kick0001'], 18, false, false);
 
     //attacks
     this.animations.add('slash_stand1', ['Slash Standing0001', 'Slash Standing0002', 'Slash Standing0003', 'Slash Standing0004', 'Slash Standing0005'], 12, false, false);
@@ -278,7 +278,7 @@ Player.prototype.Roll = function(params) {
 };
 
 Player.prototype.Hit = function(f, e) {
-    if(this.state === this.Hurting || e.state === e.Hurti)
+    if(this.state === this.Hurting || e.state === e.Hurting)
         return;
 
     this.body.velocity.y = -300;

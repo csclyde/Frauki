@@ -99,7 +99,7 @@ var fraukiDamageFrames = {
 		h: 20,
 
 		damage: 10,
-		knockback: 0.8,
+		knockback: 3.0,
 		penetration: 0
 	}
 };

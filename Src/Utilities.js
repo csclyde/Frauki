@@ -13,6 +13,7 @@ var Utilities = {
 				e.visible = true;
 				e.body.x = e.initialX;
 				e.body.y = e.initialY;
+				e.energy = 7;
 
 				if(!!e.Reset)
 					e.Reset.apply(e);
