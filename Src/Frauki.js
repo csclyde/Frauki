@@ -248,8 +248,8 @@ Player.prototype.Slash = function(params) {
         this.states.attackOutOfRoll = true;
     }
 
-    if(this.state === this.SlashOverheadStanding || this.state === this.SlashStanding || this.state === this.StabRunning || this.state === this.DiveSlashAerial || this.state === this.OverheadSlashAerial || this.state === this.SlashAerial)
-        this.timers.gracePeriod = game.time.now + 200;
+    //if(this.state === this.SlashOverheadStanding || this.state === this.SlashStanding || this.state === this.StabRunning || this.state === this.DiveSlashAerial || this.state === this.OverheadSlashAerial || this.state === this.SlashAerial)
+        //this.timers.gracePeriod = game.time.now + 200;
 };
 
 Player.prototype.Roll = function(params) {
@@ -278,7 +278,7 @@ Player.prototype.Roll = function(params) {
 };
 
 Player.prototype.Hit = function(f, e) {
-    if(this.state === this.Hurting)
+    if(this.state === this.Hurting || e.state === e.Hurti)
         return;
 
     this.body.velocity.y = -300;
