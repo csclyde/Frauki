@@ -51,13 +51,14 @@ Player = function (game, x, y, name) {
     this.states.attacking = false;
     this.states.upPresseed = false;
     this.states.attackOutOfRoll = false;
-    this.states.energy = 8;
+    this.states.energy = 15;
 
     this.timers = {};
     this.timers.gracePeriod = 0;
     this.timers.hitTimer = 0;
     this.timers.runSlashTimer = 0;
     this.timers.runSlashWindow = 0;
+    this.timers.diveSlashWindow = 0;
     this.timers.kickTimer = 0;
 
     this.movement = {};
@@ -155,6 +156,11 @@ Player.prototype.AdjustFrame = function() {
     }
 };
 
+Player.prototype.GainEnergy = function() {
+    if(frauki.states.energy < 30)
+        frauki.states.energy++;
+};
+
 ////////////////ACTIONS//////////////////
 Player.prototype.Run = function(params) {
     if(this.state === this.Hurting || this.state === this.Rolling || this.state === this.StabRunning) 
@@ -211,6 +217,8 @@ Player.prototype.Jump = function(params) {
 
 Player.prototype.Crouch = function(params) {
     this.states.crouching = params.crouch;
+
+    this.timers.diveSlashWindow = game.time.now + 150;
 };
 
 Player.prototype.Slash = function(params) {
@@ -234,7 +242,7 @@ Player.prototype.Slash = function(params) {
             this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: PLAYER_SPEED}, 200, Phaser.Easing.Quartic.In, true);
         }
     }
-    else if(this.states.crouching && (this.state === this.Peaking || this.state === this.Falling)) {
+    else if(this.states.crouching && (this.state === this.Peaking || this.state === this.Falling) && game.time.now < this.timers.diveSlashWindow) {
         this.state = this.DiveSlashAerial;
         this.movement.diveVelocity = 400;
     }
@@ -337,7 +345,7 @@ Player.prototype.Peaking = function() {
     if(this.body.velocity.y < 0) {
         this.state = this.Jumping;
     } else if(this.body.onFloor()) {
-        this.state === this.Landing;
+        this.state = this.Landing;
     } else if(this.animations.currentAnim.isFinished) {
         this.state = this.Falling;
     }
@@ -497,7 +505,7 @@ Player.prototype.DiveSlashAerial = function() {
     this.PlayAnim('dive_slash_aerial');
     this.body.velocity.y = this.movement.diveVelocity;
 
-    if(this.body.onFloor()) {
+    if(this.body.onFloor() && this.animations.currentAnim.isFinished) {
         this.movement.diveVelocity = 0;
 
         if(this.body.velocity.x === 0) {

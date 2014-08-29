@@ -64,8 +64,7 @@ function EnemyHit(f, e) {
     if(e.state === e.Hurting)
         return;
 
-    if(frauki.states.energy < 16)
-        frauki.states.energy++;
+    frauki.GainEnergy();
 
     if(e.state !== e.Hurting)
         e.energy--;
