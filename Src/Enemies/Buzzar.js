@@ -28,19 +28,17 @@ Enemy.prototype.types['Buzzar'] =  function() {
 		if(frauki.body.y <= this.body.y)
 			return;
 
-		game.physics.arcade.moveToXY(this, frauki.body.x, frauki.body.y, 450);
-
 		this.stingTimer = game.time.now + 400;
 		this.stingRestTimer = game.time.now + 1500;
 
-		this.state = this.Stinging;
+		this.state = this.PreStinging;
 	};
 
 	this.ChangeDirection = function() {
 		var dir = Math.random() * 4;
 
 	    if(dir <= 1)
-	    	this.wanderDirection = 'left'
+	    	this.wanderDirection = 'left';
 	    else if(dir <= 2)
 	    	this.wanderDirection = 'up';
 	    else if(dir <= 3)
@@ -94,6 +92,18 @@ Enemy.prototype.types['Buzzar'] =  function() {
 
 		if(this.body.onFloor() || this.body.onWall())
 			this.ChangeDirection();
+	};
+
+	this.PreStinging = function() {
+		this.PlayAnim('sting');
+		this.scale.y = -1;
+
+		if(game.time.now > this.stingTimer) {
+			this.stingTimer = game.time.now + 400;
+			this.state = this.Stinging;
+			this.scale.y = 1;
+			game.physics.arcade.moveToXY(this, frauki.body.x, frauki.body.y, 450);
+		}
 	};
 
 	this.Stinging = function() {

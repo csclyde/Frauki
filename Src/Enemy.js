@@ -85,7 +85,7 @@ Enemy.prototype.PlayerIsNear = function(radius) {
 
 Enemy.prototype.PlayerIsVisible = function() {
 
-    if(!this.PlayerIsNear(600))
+    if(!Phaser.Rectangle.intersects(game.camera.view, this.body))
         return;
 
     var ray = new Phaser.Line(playerX, playerY, this.body.x, this.body.y);
