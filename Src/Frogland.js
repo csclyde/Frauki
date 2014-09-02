@@ -68,8 +68,9 @@ Frogland.create = function() {
 
     map.setCollision([71, 72, 73, 74, 75, 76, 82, 83, 84, 87, 88, 89, 91, 92, 93, 94, 95, 95, 102, 103, 104, 107, 108, 109, 127, 128, 129, 147, 148, 149, 181, 182, 183, 184, 185], true, 'Midground');
 
+    var fraukiTile = map.searchTileIndex(1041, 0, false, 'Midground');
 
-    frauki = new Player(game, 0, 2000, 'Frauki');
+    frauki = new Player(game, fraukiTile.worldX, fraukiTile.worldY, 'Frauki');
     game.add.existing(frauki);
 
     //create the enemies

@@ -37,6 +37,7 @@ Player = function (game, x, y, name) {
     this.animations.add('overhead_slash_aerial', ['Slash Standing0006', 'Slash Standing0007', 'Slash Standing0008', 'Slash Standing0009', 'Slash Standing0010'], 12, false, false);
 
     this.state = this.Standing;
+    this.PlayAnim('stand');
     
     this.tweens = {};
     this.tweens.roll = null;
@@ -130,7 +131,11 @@ Player.prototype.Grace = function() {
 
 Player.prototype.AdjustFrame = function() {
     //check for a frame mod and apply its mods
-    this.currentAttack = fraukiDamageFrames[this.animations.currentFrame.name];
+    if(this.animations.currentFrame) {
+        this.currentAttack = fraukiDamageFrames[this.animations.currentFrame.name];
+    } else {
+        this.currentAttack = null;
+    }
     this.states.attacking = false;
 
     if(!!this.currentAttack) {
@@ -249,7 +254,7 @@ Player.prototype.Slash = function(params) {
     else if(this.states.upPressed && (this.state === this.Peaking || this.state === this.Jumping)) {
         this.state = this.OverheadSlashAerial;
     }
-    else if(this.body.velocity.x !== 0 && (this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling)) {
+    else if(this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling) {
         this.state = this.SlashAerial;
     }
     else if(this.state === this.Rolling) {

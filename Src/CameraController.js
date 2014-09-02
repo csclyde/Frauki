@@ -5,8 +5,8 @@ CameraController = function(player, map) {
 	this.player = player;
 	this.map = map;
 
-	this.camX = player.body.x;
-	this.camY = player.body.y;
+	this.camX = 0;
+	this.camY = 0;
 
 	this.repulsiveTiles = [];
 
