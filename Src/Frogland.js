@@ -15,8 +15,8 @@ Frogland.preload = function() {
     game.load.atlasJSONHash('Insectoid', 'Data/Enemies/Insectoid/Insectoid.png', 'Data/Enemies/Insectoid/Insectoid.json');
     game.load.atlasJSONHash('Buzzar', 'Data/Enemies/Buzzar/Buzzar.png', 'Data/Enemies/Buzzar/Buzzar.json');
 
-    game.scale.minWidth = 640;
-    game.scale.minHeight = 480;
+    game.scale.minWidth = 1024;
+    game.scale.minHeight = 576;
     game.scale.pageAlignHorizontally = true;
     game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     game.scale.setSize();
@@ -48,13 +48,13 @@ Frogland.create = function() {
     game.time.deltaCap = 0.016;
     game.stage.smoothed = false;
 
-    bg = game.add.tileSprite(0, 0, 320, 240, 'Background');
+    bg = game.add.tileSprite(0, 0, 512, 288, 'Background');
     bg.fixedToCamera = true;
 
-    parallaxLayer1 = game.add.tileSprite(0, 0, 320, 240, "parallax1");
+    parallaxLayer1 = game.add.tileSprite(0, 0, 512, 288, "parallax1");
     parallaxLayer1.fixedToCamera = true;
 
-    parallaxLayer2 = game.add.tileSprite(0, 0, 320, 240, "parallax2");
+    parallaxLayer2 = game.add.tileSprite(0, 0, 512, 288, "parallax2");
     parallaxLayer2.fixedToCamera = true;
 
     map = game.add.tilemap('Frogland');
