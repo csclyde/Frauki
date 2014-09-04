@@ -188,7 +188,13 @@ Player.prototype.StartStopRun = function(params) {
         params.dir === 'left' ? this.movement.inertia = PLAYER_INERTIA : this.movement.inertia = -PLAYER_INERTIA;
         this.tweens.startRun = game.add.tween(this.movement).to({inertia: 0}, 300, Phaser.Easing.Linear.None, true);
 
-        this.timers.runSlashWindow = game.time.now + 150;
+        if(game.time.now > this.timers.runSlashWindow) {
+            this.timers.runSlashWindow = game.time.now + 200;
+        } else if(params.dir === this.states.direction) {
+            this.Roll();
+            this.timers.runSlashWindow = game.time.now + 200;
+        }
+
     } else {
         this.movement.inertia = this.body.velocity.x;
         this.tweens.startRun.stop();

@@ -21,6 +21,11 @@ Enemy.prototype.types['Buzzar'] =  function() {
 			this.SetDirection('right');
 		else
 			this.SetDirection('left');
+
+		if(this.scale.y > 1 && this.state !== this.Stinging) {
+			this.scale.y = 1;
+			this.scale.x /= 0.7;
+		}
 	};
 
 	///////////////////////////////ACTIONS////////////////////////////////////
@@ -28,7 +33,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
 		if(frauki.body.y <= this.body.y)
 			return;
 
-		this.stingTimer = game.time.now + 400;
+		this.stingTimer = game.time.now + 300;
 		this.stingRestTimer = game.time.now + 1500;
 
 		this.state = this.PreStinging;
@@ -87,7 +92,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
 			case 'down': this.body.velocity.y += 30; break;
 		}
 
-		if(this.PlayerIsVisible())
+		if(this.PlayerIsNear(640))
 			this.state = this.Creepin;
 
 		if(this.body.onFloor() || this.body.onWall())
@@ -95,19 +100,22 @@ Enemy.prototype.types['Buzzar'] =  function() {
 	};
 
 	this.PreStinging = function() {
-		this.PlayAnim('sting');
-		this.scale.y = -1;
+		this.PlayAnim('idle');
+		this.scale.y = 0.7;
+		this.body.velocity.x = 0;
+		this.body.velocity.y = 0;
 
 		if(game.time.now > this.stingTimer) {
 			this.stingTimer = game.time.now + 400;
 			this.state = this.Stinging;
-			this.scale.y = 1;
+			this.scale.y = 1.3;
+			this.scale.x *= 0.8;
 			game.physics.arcade.moveToXY(this, frauki.body.x, frauki.body.y, 450);
 		}
 	};
 
 	this.Stinging = function() {
-		this.PlayAnim('sting');
+		this.PlayAnim('idle');
 
 		if(this.game.time.now > this.stingTimer)
 			this.state = this.Idling;
