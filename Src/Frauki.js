@@ -1,6 +1,7 @@
 PLAYER_SPEED = 225;
 PLAYER_ROLL_SPEED = 500;
 PLAYER_RUN_SLASH_SPEED = 600;
+PLAYER_KICK_SPEED = 800;
 PLAYER_INERTIA = 100;
 
 Player = function (game, x, y, name) {
@@ -28,13 +29,13 @@ Player = function (game, x, y, name) {
     this.animations.add('kick', ['Kick0000', 'Kick0001'], 18, false, false);
 
     //attacks
-    this.animations.add('slash_stand1', ['Slash Standing0001', 'Slash Standing0002', 'Slash Standing0003', 'Slash Standing0004', 'Slash Standing0005'], 12, false, false);
-    this.animations.add('slash_stand2', ['Slash Standing0006', 'Slash Standing0007', 'Slash Standing0008', 'Slash Standing0009', 'Slash Standing0010'], 12, false, false);
-    this.animations.add('slash_stand3', ['Slash Standing0011', 'Slash Standing0012', 'Slash Standing0013', 'Slash Standing0014', 'Slash Standing0015', 'Slash Standing0016', 'Slash Standing0017'], 12, false, false);
-    this.animations.add('slash_run', ['Slash Standing0013', 'Slash Standing0014', 'Slash Standing0015', 'Slash Standing0016'], 12, false, false);
-    this.animations.add('slash_aerial', ['Slash Standing0001', 'Slash Standing0002', 'Slash Standing0003', 'Slash Standing0004', 'Slash Standing0005'], 12, false, false);
-    this.animations.add('dive_slash_aerial', ['Slash Standing0006', 'Slash Standing0007', 'Slash Standing0008'], 12, false, false);
-    this.animations.add('overhead_slash_aerial', ['Slash Standing0006', 'Slash Standing0007', 'Slash Standing0008', 'Slash Standing0009', 'Slash Standing0010'], 12, false, false);
+    this.animations.add('slash_stand1', ['Slash Standing0001', 'Slash Standing0002', 'Slash Standing0003', 'Slash Standing0004', 'Slash Standing0005'], 18, false, false);
+    this.animations.add('slash_stand2', ['Slash Standing0006', 'Slash Standing0007', 'Slash Standing0008', 'Slash Standing0009', 'Slash Standing0010'], 18, false, false);
+    this.animations.add('slash_stand3', ['Slash Standing0011', 'Slash Standing0012', 'Slash Standing0013', 'Slash Standing0014', 'Slash Standing0015', 'Slash Standing0016', 'Slash Standing0017'], 18, false, false);
+    this.animations.add('slash_run', ['Slash Standing0013', 'Slash Standing0014', 'Slash Standing0015', 'Slash Standing0016'], 18, false, false);
+    this.animations.add('slash_aerial', ['Slash Standing0001', 'Slash Standing0002', 'Slash Standing0003', 'Slash Standing0004', 'Slash Standing0005'], 18, false, false);
+    this.animations.add('dive_slash_aerial', ['Slash Standing0006', 'Slash Standing0007', 'Slash Standing0008'], 18, false, false);
+    this.animations.add('overhead_slash_aerial', ['Slash Standing0006', 'Slash Standing0007', 'Slash Standing0008', 'Slash Standing0009', 'Slash Standing0010'], 18, false, false);
 
     this.state = this.Standing;
     this.PlayAnim('stand');
@@ -272,6 +273,16 @@ Player.prototype.Roll = function(params) {
     if(this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling || this.state === this.Flipping) {
         this.state = this.Kicking;
         this.timers.kickTimer = game.time.now + 200;
+
+        if(this.states.direction === 'left') {
+            this.movement.rollVelocity = -PLAYER_RUN_SLASH_SPEED;
+            this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: -PLAYER_SPEED}, 100, Phaser.Easing.Quartic.In, true);
+        }
+        else {
+            this.movement.rollVelocity = PLAYER_RUN_SLASH_SPEED;
+            this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: PLAYER_SPEED}, 100, Phaser.Easing.Quartic.In, true);
+        }
+
         return;
     }
 
@@ -549,6 +560,7 @@ Player.prototype.OverheadSlashAerial = function() {
 
 Player.prototype.Kicking = function() {
     this.PlayAnim('kick');
+    this.body.velocity.x = this.movement.rollVelocity;
 
     if(this.body.velocity.x !== 0 && this.body.onFloor()) {
             this.state = this.Running;
