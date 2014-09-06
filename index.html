@@ -22,8 +22,12 @@
             <script type="text/javascript" src="Src/Enemies/Buzzar.js"></script>
 
         <script>
-        	var game = new Phaser.Game(512, 288, Phaser.CANVAS, "Frauki's Adventure", Frogland, false, false);
+        	var game = new Phaser.Game(512, 288, Phaser.CANVAS, "", Frogland, false, false);
             var events = new EventRouter();
+
+            var pixel = { scale: 2, canvas: null, context: null, width: 512, height: 288 }
+
+
 
         	game.state.add('Frogland', Frogland, true);
         </script>

@@ -9,6 +9,8 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
     this.attackTimer = 0;
 
+    this.body.bounce.set(0.5);
+
 	this.updateFunction = function() {
 		if(game.time.now < this.hitTimer)
 			return;

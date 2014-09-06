@@ -44,10 +44,18 @@ var playerX, playerY;
 var previousCamX;
 
 Frogland.create = function() {
+
+    game.canvas.style['display'] = 'none';
+    pixel.canvas = Phaser.Canvas.create(game.width * pixel.scale, game.height * pixel.scale);
+    pixel.context = pixel.canvas.getContext('2d');
+    Phaser.Canvas.addToDOM(pixel.canvas);
+    Phaser.Canvas.setSmoothingEnabled(pixel.context, false);
+    pixel.width = pixel.canvas.width;
+    pixel.height = pixel.canvas.height;
+
 	game.physics.startSystem(Phaser.Physics.ARCADE);
     game.physics.arcade.gravity.y = 680;
     game.time.deltaCap = 0.016;
-    game.stage.smoothed = false;
 
     bg = game.add.tileSprite(0, 0, 512, 288, 'Background');
     bg.fixedToCamera = true;
@@ -122,4 +130,6 @@ Frogland.update = function() {
 Frogland.render = function() {
     //game.debug.body(frauki);
     //game.debug.body(frauki.attackRect);
+
+    pixel.context.drawImage(game.canvas, 0, 0, game.width, game.height, 0, 0, pixel.width, pixel.height);
 };

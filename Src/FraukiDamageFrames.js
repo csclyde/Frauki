@@ -29,9 +29,9 @@ var fraukiDamageFrames = {
 	//overhead swing
 	'Slash Standing0007': {
 		damageFrame: true,
-		x: 5, 
+		x: -5, 
 		y: -22,
-		w: 30,
+		w: 40,
 		h: 50,
 
 		damage: 10,
@@ -58,7 +58,7 @@ var fraukiDamageFrames = {
 		x: 7, 
 		y: 15,
 		w: 45,
-		h: 6,
+		h: 12,
 
 		damage: 10,
 		knockback: 0.8,
@@ -71,7 +71,7 @@ var fraukiDamageFrames = {
 		x: 7, 
 		y: 15,
 		w: 45,
-		h: 6,
+		h: 12,
 
 		damage: 10,
 		knockback: 0.8,
@@ -84,7 +84,7 @@ var fraukiDamageFrames = {
 		x: 7, 
 		y: 15,
 		w: 45,
-		h: 6,
+		h: 12,
 
 		damage: 10,
 		knockback: 0.8,
