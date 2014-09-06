@@ -95,8 +95,8 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	    //compute the velocity based on weight and attack knockback
 	    this.body.velocity.y = -300 + this.weight;
 
-	    var c = frauki.body.x < this.body.x ? 1 : -1;
-	    this.body.velocity.x =  c * ((200 + (this.weight / 2)) * (frauki.currentAttack.knockback));
+	    var c = frauki.body.center.x < this.body.center.x ? 1 : -1;
+	    this.body.velocity.x =  c * ((400 + (this.weight / 2)) * (frauki.currentAttack.knockback));
 
 	    //a durability stat should modify how long they are stunned for. also, the amount of dmg
 	    this.hitTimer = game.time.now + 500;

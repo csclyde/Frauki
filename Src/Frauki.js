@@ -256,7 +256,7 @@ Player.prototype.Slash = function(params) {
     }
     else if(this.states.crouching && (this.state === this.Peaking || this.state === this.Falling) && game.time.now < this.timers.diveSlashWindow) {
         this.state = this.DiveSlashAerial;
-        this.movement.diveVelocity = 400;
+        this.movement.diveVelocity = 600;
     }
     else if(this.states.upPressed && (this.state === this.Peaking || this.state === this.Jumping)) {
         this.state = this.OverheadSlashAerial;
@@ -529,6 +529,8 @@ Player.prototype.DiveSlashAerial = function() {
 
     if(this.body.onFloor() && this.animations.currentAnim.isFinished) {
         this.movement.diveVelocity = 0;
+
+        cameraController.ScreenShake(10, 5, 200);
 
         if(this.body.velocity.x === 0) {
             if(this.states.crouching)

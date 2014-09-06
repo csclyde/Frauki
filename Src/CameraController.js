@@ -8,6 +8,11 @@ CameraController = function(player, map) {
 	this.camX = 0;
 	this.camY = 0;
 
+	this.shakeX = 0;
+	this.shakeY = 0;
+	this.shakeMagnitudeX = 0;
+	this.shakeMagnitudeY = 0;
+
 	this.repulsiveTiles = [];
 
 	this.prevXVel = 0;
@@ -36,11 +41,18 @@ CameraController.prototype.UpdateCamera = function() {
 		this.retweenY = false;
 	}
 
+	//do the screen shake
+	if(this.shakeMagnitudeX > 0) {
+		this.shakeX = Math.sin(game.time.now) * this.shakeMagnitudeX;
+	} else {
+		this.shakeX = 0;
+	}
+
 	//conditional is to compensate for change is body size
 	if(this.player.state === this.player.Crouching)
-		game.camera.focusOnXY(this.camX + this.player.body.x, this.camY + this.player.body.y - 20);
+		game.camera.focusOnXY(this.camX + this.player.body.x + this.shakeX, this.camY + this.player.body.y - 20 + this.shakeY);
 	else
-		game.camera.focusOnXY(this.camX + this.player.body.x, this.camY + this.player.body.y);
+		game.camera.focusOnXY(this.camX + this.player.body.x + this.shakeX, this.camY + this.player.body.y + this.shakeY);
 
 	this.prevXVel = this.player.body.velocity.x;
 	this.prevYVel = this.player.body.velocity.y;
@@ -52,4 +64,14 @@ CameraController.prototype.SetRepulsiveTiles = function(tileArray) {
 
 CameraController.prototype.CrouchCamera = function(params) {
 	this.retweenY = true;
+}
+
+CameraController.prototype.ScreenShake = function(magnitudeX, magnitudeY, duration) {
+	this.shakeMagnitudeX = magnitudeX;
+	this.shakeMagnitudeY = magnitudeY;
+	
+	game.add.tween(this).to({shakeMagnitudeX: 0}, duration, Phaser.Easing.Linear.None, true);
+	game.add.tween(this).to({shakeMagnitudeY: 0}, duration, Phaser.Easing.Linear.None, true);
+
+	//a sine function that is multiplied by the magnitude. The magnitude has a tween set to 0 based on the duration
 }
