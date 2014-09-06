@@ -69,6 +69,14 @@ Player = function (game, x, y, name) {
     this.movement.rollBoost = 0;
     this.movement.inertia = 0;
 
+    this.hitParticles = game.add.emitter(0, 0, 100);
+    this.hitParticles.makeParticles('YellowParticles');
+    this.hitParticles.gravity = -200;
+    this.hitParticles.width = this.body.width;
+    this.hitParticles.height = this.body.height;
+    this.hitParticles.maxParticleScale = 1.0;
+    this.hitParticles.minParticleScale = 0.7;
+
     this.currentAttack = {};
     this.attackRect = game.add.sprite(0, 0, null);
     game.physics.enable(this.attackRect, Phaser.Physics.ARCADE);
@@ -111,6 +119,9 @@ Player.prototype.update = function() {
     } else {
         this.states.slashing = false;
     }
+
+    this.hitParticles.x = this.body.x;
+    this.hitParticles.y = this.body.y;
 };
 
 Player.prototype.SetDirection = function(dir) {
@@ -309,6 +320,11 @@ Player.prototype.Hit = function(f, e) {
         return;
 
     this.body.velocity.y = -300;
+
+    this.hitParticles.start(false, 2000, 5, 5, 5);
+
+    this.hitParticles.minParticleSpeed.y = -200;
+    this.hitParticles.maxParticleSpeed.y = -100;
 
     if(this.states.energy > 0)
         this.states.energy--;

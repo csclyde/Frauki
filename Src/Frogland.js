@@ -12,6 +12,7 @@ Frogland.preload = function() {
     game.load.image('parallax2', 'Data/Locations/Frogland/Parallax2.png');
     game.load.image('fluff', 'Data/Fluff.png');
     game.load.image('HitParticles', 'Data/Hit Particles.png');
+    game.load.image('YellowParticles', 'Data/Yellow Particles.png');
 
     game.load.atlasJSONHash('Insectoid', 'Data/Enemies/Insectoid/Insectoid.png', 'Data/Enemies/Insectoid/Insectoid.json');
     game.load.atlasJSONHash('Buzzar', 'Data/Enemies/Buzzar/Buzzar.png', 'Data/Enemies/Buzzar/Buzzar.json');

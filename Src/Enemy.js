@@ -28,6 +28,8 @@ Enemy = function(game, x, y, name) {
     this.hitParticles.gravity = -200;
     this.hitParticles.width = this.body.width;
     this.hitParticles.height = this.body.height;
+    this.hitParticles.maxParticleScale = 1.0;
+    this.hitParticles.minParticleScale = 0.7;
 
     this.state = this.Idling;
 
@@ -48,6 +50,7 @@ Enemy.prototype.update = function() {
 
     this.hitParticles.x = this.body.x;
     this.hitParticles.y = this.body.y;
+    
     if(!!this.state)
         this.state();
 };
