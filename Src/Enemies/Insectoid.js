@@ -90,6 +90,10 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		}	
 	};
 
+	this.Dive = function() {
+
+	};
+
 	this.TakeHit = function(power) {
 		if(game.time.now < this.hitTimer)
         	return;
@@ -202,6 +206,14 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	};
 
 	this.Shooting = function() {
+
+	};
+
+	this.PreDiving = function() {
+
+	};
+
+	this.Diving = function() {
 
 	};
 
