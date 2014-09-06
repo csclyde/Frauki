@@ -36,6 +36,7 @@ Player = function (game, x, y, name) {
     this.animations.add('slash_aerial', ['Slash Standing0001', 'Slash Standing0002', 'Slash Standing0003', 'Slash Standing0004', 'Slash Standing0005'], 18, false, false);
     this.animations.add('dive_slash_aerial', ['Slash Standing0006', 'Slash Standing0007', 'Slash Standing0008'], 18, false, false);
     this.animations.add('overhead_slash_aerial', ['Slash Standing0006', 'Slash Standing0007', 'Slash Standing0008', 'Slash Standing0009', 'Slash Standing0010'], 18, false, false);
+    this.animations.add('jump_slash_aerial', ['Slash Standing0006', 'Slash Standing0007', 'Slash Standing0008'], 12, false, false);
 
     this.state = this.Standing;
     this.PlayAnim('stand');
@@ -61,11 +62,13 @@ Player = function (game, x, y, name) {
     this.timers.runSlashTimer = 0;
     this.timers.runSlashWindow = 0;
     this.timers.diveSlashWindow = 0;
+    this.timers.jumpSlashWindow = 0;
     this.timers.kickTimer = 0;
 
     this.movement = {};
     this.movement.rollVelocity = 0;
     this.movement.diveVelocity = 0;
+    this.movement.jumpSlashVelocity = 0;
     this.movement.rollBoost = 0;
     this.movement.inertia = 0;
 
@@ -87,7 +90,10 @@ Player = function (game, x, y, name) {
     events.subscribe('player_slash', this.Slash, this);
     events.subscribe('player_roll', this.Roll, this);
     events.subscribe('player_run', this.StartStopRun, this);
-    events.subscribe('control_up', function(params) { this.states.upPressed = params.pressed; }, this);
+    events.subscribe('control_up', function(params) { 
+        this.states.upPressed = params.pressed; 
+        this.timers.jumpSlashWindow = game.time.now + 200;
+    }, this);
 
 };
 
@@ -246,12 +252,14 @@ Player.prototype.Crouch = function(params) {
 
 Player.prototype.Slash = function(params) {
 
+    //normal slashes while standing or running
     if(this.state === this.Standing || this.state === this.Landing || (this.state === this.Running && game.time.now > this.timers.runSlashWindow)) {
         if(this.states.upPressed)
             this.state = this.SlashOverheadStanding;
         else
             this.state = this.SlashStanding;
     }
+    //forward dash attack
     else if(this.state === this.Running && game.time.now < this.timers.runSlashWindow) {
         this.state = this.StabRunning;
         this.timers.runSlashTimer = game.time.now + 200;
@@ -265,16 +273,27 @@ Player.prototype.Slash = function(params) {
             this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: PLAYER_SPEED}, 200, Phaser.Easing.Quartic.In, true);
         }
     }
+    //downward dash attack
     else if(this.states.crouching && (this.state === this.Peaking || this.state === this.Falling) && game.time.now < this.timers.diveSlashWindow) {
         this.state = this.DiveSlashAerial;
-        this.movement.diveVelocity = 600;
+        this.movement.diveVelocity = 800;
     }
+    //upwards dash attack
+    else if(this.states.upPressed && game.time.now < this.timers.jumpSlashWindow && (this.state === this.Peaking || this.state === this.Jumping) && this.states.hasFlipped === false) {
+        this.state = this.JumpSlashAerial;
+        this.movement.jumpSlashVelocity = -800;
+        game.add.tween(this.movement).to({jumpSlashVelocity:0}, 200, Phaser.Easing.Linear.None, true);
+        this.states.hasFlipped = true;
+    }
+    //rising overhead slash
     else if(this.states.upPressed && (this.state === this.Peaking || this.state === this.Jumping)) {
         this.state = this.OverheadSlashAerial;
     }
+    //normal aerial slash
     else if(this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling) {
         this.state = this.SlashAerial;
     }
+    //attack out of roll
     else if(this.state === this.Rolling) {
         this.states.attackOutOfRoll = true;
     }
@@ -557,6 +576,15 @@ Player.prototype.DiveSlashAerial = function() {
         else {
             this.state = this.Running;
         }
+    }
+};
+
+Player.prototype.JumpSlashAerial = function() {
+    this.PlayAnim('jump_slash_aerial');
+    this.body.velocity.y = this.movement.jumpSlashVelocity;
+
+    if(this.animations.currentAnim.isFinished) {
+        this.state = this.Jumping;
     }
 };
 
