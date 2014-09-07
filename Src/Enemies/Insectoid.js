@@ -30,6 +30,9 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		if(this.state !== this.PreScuttling && Math.abs(this.scale.x) !== 1) {
 			this.scale.x /= 0.7;
 		}
+
+		if(this.state !== this.PreDiving && this.state !== this.Diving && this.angle !== 0)
+			this.angle = 0;
 	};
 
 	///////////////////////////////ACTIONS////////////////////////////////////
@@ -91,7 +94,12 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	};
 
 	this.Dive = function() {
-
+		this.state = this.PreDiving;
+		this.body.velocity.y = 300;
+		this.body.velocity.x = 0;
+		this.body.setSize(25, 67, 0, 0);
+		this.scale.x = 1;
+		this.angle = 90;
 	};
 
 	this.TakeHit = function(power) {
@@ -99,7 +107,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
         	return;
     
 	    //compute the velocity based on weight and attack knockback
-	    this.body.velocity.y = -300 + this.weight;
+	    this.body.velocity.y = -400 + this.weight;
 
 	    var c = frauki.body.center.x < this.body.center.x ? 1 : -1;
 	    this.body.velocity.x =  c * ((400 + (this.weight / 2)) * (frauki.currentAttack.knockback));
@@ -115,9 +123,9 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		this.PlayAnim('idle');
 
 		if(this.PlayerIsVisible()) {
-			if(playerX < this.body.x) {
+			if(frauki.body.center.x - 10 < this.body.center.x) {
 				this.SetDirection('left');
-			} else {
+			} else if(frauki.body.center.x + 10 > this.body.center.x) {
 				this.SetDirection('right');
 			}
 		} 
@@ -133,6 +141,8 @@ Enemy.prototype.types['Insectoid'] =  function() {
 				this.Dodge();
 			else
 				this.Scuttle();
+		} else if(this.body.center.y < frauki.body.y && this.body.center.x > frauki.body.center.x - 10 && this.body.center.x < frauki.body.center.x + 10) {
+			this.Dive();
 		} else if(Math.abs(this.body.y - playerY) < 40 && Math.abs(this.body.x - playerX) < 300 && this.body.onFloor()) {
 			this.Scuttle();
 		} else if(Math.abs(this.body.x - playerX) > 100 && Math.abs(this.body.x - playerX) < 450 && this.body.onFloor()) {
@@ -210,11 +220,14 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	};
 
 	this.PreDiving = function() {
-
+		this.state = this.Diving;
 	};
 
 	this.Diving = function() {
-
+		if(this.body.onFloor()) {
+			this.state = this.Idling;
+			this.body.setSize(67, 25, 0, 0);
+		}
 	};
 
 	this.Hurting = function() {
