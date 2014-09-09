@@ -5,7 +5,7 @@ var Utilities = {
 			frauki.body.x = fraukiSpawnX;
 			frauki.body.y = fraukiSpawnY;
 			game.world.alpha = 1;
-			frauki.states.energy = 8;
+			frauki.states.energy = 15;
 
 			Frogland.enemyGroup.forEach(function(e) {
 				e.alive = true;
