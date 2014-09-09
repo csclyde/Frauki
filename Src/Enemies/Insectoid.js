@@ -1,6 +1,7 @@
 Enemy.prototype.types['Insectoid'] =  function() {
 
 	this.body.setSize(67, 25, 0, 0);
+	this.anchor.setTo(.5, 1);
 
     this.animations.add('idle', ['Hop0000'], 10, true, false);
     this.animations.add('hop', ['Hop0001', 'Hop0002'], 10, false, false);

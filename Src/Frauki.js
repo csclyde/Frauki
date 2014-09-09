@@ -8,7 +8,7 @@ Player = function (game, x, y, name) {
 
     Phaser.Sprite.call(this, game, x, y, name);
     game.physics.enable(this, Phaser.Physics.ARCADE);
-    this.anchor.setTo(.5, 1);
+    this.anchor.setTo(0.5, 1);
 
     //this.body.bounce.y = 0.2;
     this.body.collideWorldBounds = true;
@@ -91,8 +91,7 @@ Player = function (game, x, y, name) {
     events.subscribe('player_roll', this.Roll, this);
     events.subscribe('player_run', this.StartStopRun, this);
     events.subscribe('control_up', function(params) { 
-        this.states.upPressed = params.pressed; 
-        this.timers.jumpSlashWindow = game.time.now + 200;
+        this.states.upPressed = params.pressed;
     }, this);
 
 };
@@ -276,17 +275,17 @@ Player.prototype.Slash = function(params) {
     //downward dash attack
     else if(this.states.crouching && (this.state === this.Peaking || this.state === this.Falling) && game.time.now < this.timers.diveSlashWindow) {
         this.state = this.DiveSlashAerial;
-        this.movement.diveVelocity = 800;
+        this.movement.diveVelocity = 1400;
     }
     //upwards dash attack
-    else if(this.states.upPressed && game.time.now < this.timers.jumpSlashWindow && (this.state === this.Peaking || this.state === this.Jumping) && this.states.hasFlipped === false) {
+    else if(this.states.upPressed && (this.state === this.Peaking || this.state === this.Jumping) && this.states.hasFlipped === false) {
         this.state = this.JumpSlashAerial;
-        this.movement.jumpSlashVelocity = -800;
-        game.add.tween(this.movement).to({jumpSlashVelocity:0}, 200, Phaser.Easing.Linear.None, true);
+        this.movement.jumpSlashVelocity = -1000;
+        game.add.tween(this.movement).to({jumpSlashVelocity:0}, 400, Phaser.Easing.Quartic.Out, true);
         this.states.hasFlipped = true;
     }
-    //rising overhead slash
-    else if(this.states.upPressed && (this.state === this.Peaking || this.state === this.Jumping)) {
+    //faling overhead slash. should eventually be some sort of spinning attack that is useful while falling
+    else if(this.states.upPressed && this.state === this.Falling) {
         this.state = this.OverheadSlashAerial;
     }
     //normal aerial slash

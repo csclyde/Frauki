@@ -38,10 +38,10 @@ InputController = function(player) {
             
         },
         onDown: function(buttonCode, value){
-            events.publish('player_jump', {jump: true});
+            //events.publish('player_jump', {jump: true});
         },
         onUp: function(buttonCode, value){
-            events.publish('player_jump', {jump: true});
+            //events.publish('player_jump', {jump: true});
         },
         onAxis: function(axisState) {
             
