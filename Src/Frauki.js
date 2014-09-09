@@ -345,7 +345,7 @@ Player.prototype.Hit = function(f, e) {
     this.hitParticles.maxParticleSpeed.y = -100;
 
     if(this.states.energy > 0)
-        this.states.energy--;
+        this.states.energy -= 2;
 
     if(this.states.energy <= 0) {
         Utilities.RestartGame();

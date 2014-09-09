@@ -112,7 +112,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
 		this.body.velocity.y = 0;
 
 		if(game.time.now > this.stingTimer) {
-			this.stingTimer = game.time.now + 400;
+			this.stingTimer = game.time.now + 600;
 			this.state = this.Stinging;
 			this.scale.y = 1.3;
 			this.scale.x *= 0.8;
@@ -156,7 +156,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
 		//move to a point somewhere above fraukis head
 		var locus = {};
 		locus.x = frauki.body.x + (Math.sin(game.time.now / 150) * 50);
-		locus.y = frauki.body.y - 100 + (Math.sin(game.time.now / 150) * 100);
+		locus.y = frauki.body.y - 500 + (Math.sin(game.time.now / 150) * 100);
 
 		game.physics.arcade.moveToXY(this, locus.x, locus.y, 100 * this.anger);
 

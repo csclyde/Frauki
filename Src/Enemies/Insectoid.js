@@ -114,7 +114,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	    this.body.velocity.x =  c * ((400 + (this.weight / 2)) * (frauki.currentAttack.knockback));
 
 	    //a durability stat should modify how long they are stunned for. also, the amount of dmg
-	    this.hitTimer = game.time.now + 500;
+	    this.hitTimer = game.time.now + 400;
 
 	    this.state = this.Hurting;
 	};
@@ -144,7 +144,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 				this.Scuttle();
 		} else if(this.body.center.y < frauki.body.y && this.body.center.x > frauki.body.center.x - 10 && this.body.center.x < frauki.body.center.x + 10) {
 			this.Dive();
-		} else if(Math.abs(this.body.y - playerY) < 40 && Math.abs(this.body.x - playerX) < 300 && this.body.onFloor()) {
+		} else if(Math.abs(this.body.y - playerY) < 40 && Math.abs(this.body.x - playerX) < 400 && this.body.onFloor()) {
 			this.Scuttle();
 		} else if(Math.abs(this.body.x - playerX) > 100 && Math.abs(this.body.x - playerX) < 450 && this.body.onFloor()) {
 			this.Hop();
@@ -234,8 +234,14 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	this.Hurting = function() {
 		this.PlayAnim('die');
 
-		if(game.time.now > this.hitTimer)
-			this.state = this.Idling;
+		if(game.time.now > this.hitTimer) {
+			if(Math.abs(this.body.y - playerY) < 40 && Math.abs(this.body.x - playerX) < 300 && this.body.onFloor())
+				this.Scuttle();
+			else if(Math.abs(this.body.x - playerX) > 100 && Math.abs(this.body.x - playerX) < 450 && this.body.onFloor())
+				this.Hop();
+			else
+				this.state = this.Idling;
+		}
 	};
 
 };
