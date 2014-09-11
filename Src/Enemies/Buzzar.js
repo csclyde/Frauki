@@ -158,7 +158,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
 		locus.x = frauki.body.x + (Math.sin(game.time.now / 150) * 50);
 		locus.y = frauki.body.y - 500 + (Math.sin(game.time.now / 150) * 100);
 
-		game.physics.arcade.moveToXY(this, locus.x, locus.y, 100 * this.anger);
+		game.physics.arcade.moveToXY(this, locus.x, locus.y, 40 * this.anger);
 
 		if(Math.floor(Math.random() * 100) <= this.anger && game.time.now > this.stingRestTimer && this.PlayerIsVisible()) 
 			this.Sting();

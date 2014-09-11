@@ -1,5 +1,5 @@
-PLAYER_SPEED = 225;
-PLAYER_ROLL_SPEED = 500;
+PLAYER_SPEED = function() { return 180 + (frauki.states.energy * 3) };
+PLAYER_ROLL_SPEED = function() { return 455 + (frauki.states.energy * 5) };
 PLAYER_RUN_SLASH_SPEED = 600;
 PLAYER_KICK_SPEED = 800;
 PLAYER_INERTIA = 100;
@@ -179,8 +179,10 @@ Player.prototype.AdjustFrame = function() {
 };
 
 Player.prototype.GainEnergy = function() {
-    if(frauki.states.energy < 30)
-        frauki.states.energy++;
+    frauki.states.energy += 2;
+
+    if(frauki.states.energy > 30)
+        frauki.states.energy = 30;
 };
 
 ////////////////ACTIONS//////////////////
@@ -189,10 +191,10 @@ Player.prototype.Run = function(params) {
         return;
 
     if(params.dir === 'left') {
-        this.body.velocity.x = -PLAYER_SPEED - this.movement.rollBoost + this.movement.inertia;
+        this.body.velocity.x = -(PLAYER_SPEED()) - this.movement.rollBoost + this.movement.inertia;
         this.SetDirection('left');
     } else if(params.dir === 'right') {
-        this.body.velocity.x = PLAYER_SPEED + this.movement.rollBoost + this.movement.inertia;
+        this.body.velocity.x = PLAYER_SPEED() + this.movement.rollBoost + this.movement.inertia;
         this.SetDirection('right');
     } else {
         this.body.velocity.x = 0 + this.movement.inertia;
@@ -226,13 +228,13 @@ Player.prototype.Jump = function(params) {
     if(params.jump) {
         //normal jump
         if(this.body.onFloor() || this.state === this.Standing || this.state === this.Running || this.state === this.Landing) {
-            this.body.velocity.y = -400;
+            this.body.velocity.y = -370 - (this.states.energy * 3);
         }
         //double jump
         else if(this.states.hasFlipped === false && this.state !== this.Falling && this.state !== this.Rolling && this.state !== this.StabRunning) {
             if(this.tweens.stopJump) { this.tweens.stopJump.stop(); }
 
-            this.body.velocity.y = -350;
+            this.body.velocity.y = -350 - (this.states.energy * 2);
             this.state = this.Flipping;
             this.states.hasFlipped = true;
             this.timers.gracePeriod = game.time.now + 300;
@@ -265,11 +267,11 @@ Player.prototype.Slash = function(params) {
 
         if(this.states.direction === 'left') {
             this.movement.rollVelocity = -PLAYER_RUN_SLASH_SPEED;
-            this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: -PLAYER_SPEED}, 200, Phaser.Easing.Quartic.In, true);
+            this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: -PLAYER_SPEED()}, 200, Phaser.Easing.Quartic.In, true);
         }
         else {
             this.movement.rollVelocity = PLAYER_RUN_SLASH_SPEED;
-            this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: PLAYER_SPEED}, 200, Phaser.Easing.Quartic.In, true);
+            this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: PLAYER_SPEED()}, 200, Phaser.Easing.Quartic.In, true);
         }
     }
     //downward dash attack
@@ -299,34 +301,39 @@ Player.prototype.Slash = function(params) {
 };
 
 Player.prototype.Roll = function(params) {
+
+    if(this.game.time.now < this.rollTimer)
+        return;
+
+    //kick
     if(this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling || this.state === this.Flipping) {
         this.state = this.Kicking;
         this.timers.kickTimer = game.time.now + 200;
 
         if(this.states.direction === 'left') {
             this.movement.rollVelocity = -PLAYER_RUN_SLASH_SPEED;
-            this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: -PLAYER_SPEED}, 100, Phaser.Easing.Quartic.In, true);
+            this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: -PLAYER_SPEED()}, 100, Phaser.Easing.Quartic.In, true);
         }
         else {
             this.movement.rollVelocity = PLAYER_RUN_SLASH_SPEED;
-            this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: PLAYER_SPEED}, 100, Phaser.Easing.Quartic.In, true);
+            this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: PLAYER_SPEED()}, 100, Phaser.Easing.Quartic.In, true);
         }
 
         return;
     }
 
-    if(!this.body.onFloor() || this.game.time.now < this.rollTimer)
+    if(!this.body.onFloor())
         return;
 
     this.state = this.Rolling;
 
     if(this.states.direction === 'left') {
-        this.movement.rollVelocity = -PLAYER_ROLL_SPEED;
-        this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: -PLAYER_SPEED}, 300, Phaser.Easing.Quartic.In, true);
+        this.movement.rollVelocity = -(PLAYER_ROLL_SPEED());
+        this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: -(PLAYER_SPEED())}, 300, Phaser.Easing.Quartic.In, true);
     }
     else {
-        this.movement.rollVelocity = PLAYER_ROLL_SPEED;
-        this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: PLAYER_SPEED}, 300, Phaser.Easing.Quartic.In, true);
+        this.movement.rollVelocity = PLAYER_ROLL_SPEED();
+        this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: PLAYER_SPEED()}, 300, Phaser.Easing.Quartic.In, true);
     }
 
     this.rollTimer = game.time.now + 650;
@@ -345,7 +352,7 @@ Player.prototype.Hit = function(f, e) {
     this.hitParticles.maxParticleSpeed.y = -100;
 
     if(this.states.energy > 0)
-        this.states.energy -= 2;
+        this.states.energy -= 3;
 
     if(this.states.energy <= 0) {
         Utilities.RestartGame();
@@ -473,8 +480,8 @@ Player.prototype.Rolling = function() {
         this.state = this.Jumping;
 
         //roll boost is caluclated based on how close they were to the max roll speed
-        this.movement.rollBoost = Math.abs(this.movement.rollVelocity) - PLAYER_SPEED; 
-        this.movement.rollBoost /= (PLAYER_ROLL_SPEED - PLAYER_SPEED);
+        this.movement.rollBoost = Math.abs(this.movement.rollVelocity) - PLAYER_SPEED(); 
+        this.movement.rollBoost /= (PLAYER_ROLL_SPEED() - PLAYER_SPEED());
         this.movement.rollBoost *= 75;
 
         this.movement.rollVelocity = 0;

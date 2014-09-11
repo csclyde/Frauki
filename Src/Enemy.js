@@ -80,7 +80,7 @@ function EnemyHit(f, e) {
     frauki.GainEnergy();
     e.energy--;
 
-    e.hitParticles.start(false, 2000, 5, 10, 10);
+    e.hitParticles.start(false, 2000, 10, 10, 10);
 
     if(e.PlayerDirection() === 'above') {
         e.hitParticles.minParticleSpeed.y = -200;

@@ -27,6 +27,8 @@ InputController = function(player) {
     this.slash.onDown.add(function() { events.publish('player_slash', {}); }, this);
     this.roll.onDown.add(function() {   events.publish('player_roll', null, this)});
 
+    this.testButton.onDown.add(function() { frauki.states.energy++; });
+
     game.input.gamepad.start();
 
     game.input.gamepad.addCallbacks(this, {
