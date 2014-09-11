@@ -1,4 +1,4 @@
-PLAYER_SPEED = function() { return 180 + (frauki.states.energy * 3) };
+PLAYER_SPEED = function() { return 200 + (frauki.states.energy * 3) };
 PLAYER_ROLL_SPEED = function() { return 455 + (frauki.states.energy * 5) };
 PLAYER_RUN_SLASH_SPEED = 600;
 PLAYER_KICK_SPEED = 800;
