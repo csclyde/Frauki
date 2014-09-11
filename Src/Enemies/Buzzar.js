@@ -112,7 +112,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
 		this.body.velocity.y = 0;
 
 		if(game.time.now > this.stingTimer) {
-			this.stingTimer = game.time.now + 600;
+			this.stingTimer = game.time.now + 2000;
 			this.state = this.Stinging;
 			this.scale.y = 1.3;
 			this.scale.x *= 0.8;

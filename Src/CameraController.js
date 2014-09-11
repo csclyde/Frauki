@@ -1,4 +1,4 @@
-X_VEL_DIV = 15;
+X_VEL_DIV = 12;
 Y_VEL_DIV = 30;
 
 CameraController = function(player, map) {
@@ -27,14 +27,14 @@ CameraController = function(player, map) {
 CameraController.prototype.UpdateCamera = function() {
 	
 
-	var xOffset = this.player.states.direction === 'left' ? -15 : 15;
+	var xOffset = this.player.states.direction === 'left' ? -30 : 30;
 	var yOffset = this.player.body.velocity.y > 0 ? 20 : 0;
 
-	yOffset += (this.player.states.crouching ? 30 : 0);
+	yOffset += (this.player.states.crouching ? 50 : 0);
 	//yOffset -= (this.player.states.upPressed ? 70 : 0);
 
 	if(this.prevXVel !== this.player.body.velocity.x)
-		game.add.tween(this).to({camX:Math.floor((this.player.body.velocity.x / X_VEL_DIV) + xOffset)}, 700, Phaser.Easing.Sinusoidal.Out, true);
+		game.add.tween(this).to({camX:Math.floor((this.player.body.velocity.x / X_VEL_DIV) + xOffset)}, 500, Phaser.Easing.Sinusoidal.Out, true);
 
 	if(this.prevYVel !== this.player.body.velocity.y || this.retweenY) {
 		game.add.tween(this).to({camY:Math.floor((this.player.body.velocity.y / Y_VEL_DIV) + yOffset)}, 400, Phaser.Easing.Sinusoidal.Out, true);
