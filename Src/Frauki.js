@@ -1,6 +1,6 @@
-PLAYER_SPEED = function() { return 180 + (frauki.states.energy * 3) };
-PLAYER_ROLL_SPEED = function() { return 455 + (frauki.states.energy * 5) };
-PLAYER_RUN_SLASH_SPEED = 600;
+PLAYER_SPEED = function() { return 150 + (frauki.states.energy * 7); }
+PLAYER_ROLL_SPEED = function() { return 455 + (frauki.states.energy * 5); }
+PLAYER_RUN_SLASH_SPEED = function() { return  500 + (frauki.states.energy * 10); }
 PLAYER_KICK_SPEED = 800;
 PLAYER_INERTIA = 100;
 
@@ -266,11 +266,11 @@ Player.prototype.Slash = function(params) {
         this.timers.runSlashTimer = game.time.now + 200;
 
         if(this.states.direction === 'left') {
-            this.movement.rollVelocity = -PLAYER_RUN_SLASH_SPEED;
+            this.movement.rollVelocity = -PLAYER_RUN_SLASH_SPEED();
             this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: -PLAYER_SPEED()}, 200, Phaser.Easing.Quartic.In, true);
         }
         else {
-            this.movement.rollVelocity = PLAYER_RUN_SLASH_SPEED;
+            this.movement.rollVelocity = PLAYER_RUN_SLASH_SPEED();
             this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: PLAYER_SPEED()}, 200, Phaser.Easing.Quartic.In, true);
         }
     }
@@ -311,11 +311,11 @@ Player.prototype.Roll = function(params) {
         this.timers.kickTimer = game.time.now + 200;
 
         if(this.states.direction === 'left') {
-            this.movement.rollVelocity = -PLAYER_RUN_SLASH_SPEED;
+            this.movement.rollVelocity = -PLAYER_RUN_SLASH_SPEED();
             this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: -PLAYER_SPEED()}, 100, Phaser.Easing.Quartic.In, true);
         }
         else {
-            this.movement.rollVelocity = PLAYER_RUN_SLASH_SPEED;
+            this.movement.rollVelocity = PLAYER_RUN_SLASH_SPEED();
             this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: PLAYER_SPEED()}, 100, Phaser.Easing.Quartic.In, true);
         }
 

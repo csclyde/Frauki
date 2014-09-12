@@ -37,8 +37,8 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	};
 
 	///////////////////////////////ACTIONS////////////////////////////////////
-	this.Hop = function(overrideFloorCondition) {
-		if(game.time.now < this.attackTimer || (!this.body.onFloor() || !!overrideFloorCondition))
+	this.Hop = function() {
+		if(game.time.now < this.attackTimer || !this.body.onFloor())
 			return;
 
 		this.attackTimer = game.time.now + 300;
@@ -47,7 +47,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
 	};
 
-	this.Scuttle = function(overrideFloorCondition) {
+	this.Scuttle = function() {
 		if(game.time.now < this.attackTimer)
 			return;
 
@@ -235,15 +235,12 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		this.PlayAnim('die');
 
 		if(game.time.now > this.hitTimer) {
-			if(Math.abs(this.body.y - playerY) < 40 && Math.abs(this.body.x - playerX) < 300) {
-				this.Scuttle(true);
-			}
-			else if(Math.abs(this.body.x - playerX) > 100 && Math.abs(this.body.x - playerX) < 450) {
-				this.Hop(true);
-			}
-			else {
+			if(Math.abs(this.body.y - playerY) < 40 && Math.abs(this.body.x - playerX) < 300 && this.body.onFloor())
+				this.Scuttle();
+			else if(Math.abs(this.body.x - playerX) > 100 && Math.abs(this.body.x - playerX) < 450 && this.body.onFloor())
+				this.Hop();
+			else
 				this.state = this.Idling;
-			}
 		}
 	};
 
