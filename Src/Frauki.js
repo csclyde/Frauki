@@ -61,9 +61,7 @@ Player = function (game, x, y, name) {
     this.timers.gracePeriod = 0;
     this.timers.hitTimer = 0;
     this.timers.runSlashTimer = 0;
-    this.timers.runSlashWindow = 0;
-    this.timers.diveSlashWindow = 0;
-    this.timers.jumpSlashWindow = 0;
+    this.timers.dashWindow = 0;
     this.timers.kickTimer = 0;
 
     this.movement = {};
@@ -158,6 +156,7 @@ Player.prototype.AdjustFrame = function() {
 
     if(!!this.currentAttack) {
         this.states.attacking = true;
+        console.log('Current attack frame: ' + this.animations.currentFrame.name);
 
         if(this.states.direction === 'right') {
             this.attackRect.body.x = this.currentAttack.x + this.body.x; 
@@ -208,11 +207,11 @@ Player.prototype.StartStopRun = function(params) {
         params.dir === 'left' ? this.movement.inertia = PLAYER_INERTIA : this.movement.inertia = -PLAYER_INERTIA;
         this.tweens.startRun = game.add.tween(this.movement).to({inertia: 0}, 300, Phaser.Easing.Linear.None, true);
 
-        if(game.time.now > this.timers.runSlashWindow) {
-            this.timers.runSlashWindow = game.time.now + 200;
+        if(game.time.now > this.timers.dashWindow) {
+            this.timers.dashWindow = game.time.now + 200;
         } else if(params.dir === this.states.direction) {
             this.Roll();
-            this.timers.runSlashWindow = game.time.now + 200;
+            this.timers.dashWindow = game.time.now + 200;
         }
 
     } else {
@@ -249,36 +248,37 @@ Player.prototype.Jump = function(params) {
 Player.prototype.Crouch = function(params) {
     this.states.crouching = params.crouch;
 
-    this.timers.diveSlashWindow = game.time.now + 150;
+    this.timers.dashWindow = game.time.now + 200;
 };
 
 Player.prototype.Slash = function(params) {
 
     //normal slashes while standing or running
-    if(this.state === this.Standing || this.state === this.Landing || (this.state === this.Running && game.time.now > this.timers.runSlashWindow)) {
+    if(this.state === this.Standing || this.state === this.Landing || (this.state === this.Running && game.time.now > this.timers.dashWindow)) {
         if(this.states.upPressed)
             this.state = this.SlashOverheadStanding;
         else
             this.state = this.SlashStanding;
     }
     //forward dash attack
-    else if(this.state === this.Running && game.time.now < this.timers.runSlashWindow) {
-        this.state = this.StabRunning;
-        this.timers.runSlashTimer = game.time.now + 200;
-
-        if(this.states.direction === 'left') {
-            this.movement.rollVelocity = -PLAYER_RUN_SLASH_SPEED();
-            this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: -PLAYER_SPEED()}, 200, Phaser.Easing.Quartic.In, true);
+    else if(game.time.now < this.timers.dashWindow) {
+        if(this.states.crouching) {
+            this.state = this.DiveSlashAerial;
+            this.movement.diveVelocity = 1400;
         }
         else {
-            this.movement.rollVelocity = PLAYER_RUN_SLASH_SPEED();
-            this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: PLAYER_SPEED()}, 200, Phaser.Easing.Quartic.In, true);
+            this.state = this.StabRunning;
+            this.timers.runSlashTimer = game.time.now + 200;
+
+            if(this.states.direction === 'left') {
+                this.movement.rollVelocity = -PLAYER_RUN_SLASH_SPEED();
+                this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: -PLAYER_SPEED()}, 200, Phaser.Easing.Quartic.In, true);
+            }
+            else {
+                this.movement.rollVelocity = PLAYER_RUN_SLASH_SPEED();
+                this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: PLAYER_SPEED()}, 200, Phaser.Easing.Quartic.In, true);
+            }
         }
-    }
-    //downward dash attack
-    else if(this.states.crouching && (this.state === this.Peaking || this.state === this.Falling) && game.time.now < this.timers.diveSlashWindow) {
-        this.state = this.DiveSlashAerial;
-        this.movement.diveVelocity = 1400;
     }
     //upwards dash attack
     else if(this.states.upPressed && (this.state === this.Peaking || this.state === this.Jumping) && this.states.hasFlipped === false) {
@@ -539,6 +539,8 @@ Player.prototype.StabRunning = function() {
     this.body.velocity.x = this.movement.rollVelocity;
 
     if(this.animations.currentAnim.isFinished) {
+        this.timers.dashWindow = game.time.now + 200;
+
         if(this.body.velocity.y > 150) {
             this.state = this.Falling;
         } else if(this.body.velocity.x !== 0 && this.body.onFloor()) {
@@ -571,6 +573,7 @@ Player.prototype.DiveSlashAerial = function() {
 
     if(this.body.onFloor() && this.animations.currentAnim.isFinished) {
         this.movement.diveVelocity = 0;
+        this.timers.dashWindow = game.time.now + 200;
 
         cameraController.ScreenShake(10, 5, 200);
 

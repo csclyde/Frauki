@@ -3,9 +3,9 @@ var fraukiDamageFrames = {
 	//slash across in front of yourself
 	'Slash Standing0003': {
 		damageFrame: true,
-		x: 10, 
+		x: 0, 
 		y: 10,
-		w: 35,
+		w: 50,
 		h: 25,
 
 		damage: 10,
@@ -16,9 +16,9 @@ var fraukiDamageFrames = {
 	//followthrough of the front slash, is behind you
 	'Slash Standing0004': {
 		damageFrame: true,
-		x: -32, 
+		x: -35, 
 		y: 10,
-		w: 25,
+		w: 35,
 		h: 15,
 
 		damage: 10,
@@ -29,9 +29,9 @@ var fraukiDamageFrames = {
 	//overhead swing
 	'Slash Standing0007': {
 		damageFrame: true,
-		x: -5, 
-		y: -22,
-		w: 40,
+		x: -10, 
+		y: -25,
+		w: 45,
 		h: 50,
 
 		damage: 10,
@@ -42,10 +42,10 @@ var fraukiDamageFrames = {
 	//follow through on the overhead swing, in front of you and low
 	'Slash Standing0008': {
 		damageFrame: true,
-		x: 20, 
+		x: 10, 
 		y: 25,
-		w: 18,
-		h: 15,
+		w: 28,
+		h: 20,
 
 		damage: 10,
 		knockback: 0,
@@ -57,7 +57,7 @@ var fraukiDamageFrames = {
 		damageFrame: true,
 		x: 7, 
 		y: 15,
-		w: 45,
+		w: 50,
 		h: 12,
 
 		damage: 10,
@@ -70,7 +70,7 @@ var fraukiDamageFrames = {
 		damageFrame: true,
 		x: 7, 
 		y: 15,
-		w: 45,
+		w: 50,
 		h: 12,
 
 		damage: 10,
@@ -83,7 +83,7 @@ var fraukiDamageFrames = {
 		damageFrame: true,
 		x: 7, 
 		y: 15,
-		w: 45,
+		w: 50,
 		h: 12,
 
 		damage: 10,
