@@ -2,6 +2,7 @@ X_VEL_DIV = 15;
 Y_VEL_DIV = 30;
 
 CameraController = function(player, map) {
+	frauki = player;
 	this.map = map;
 
 	this.camX = 0;
@@ -19,12 +20,8 @@ CameraController = function(player, map) {
 
 	this.retweenY = false;
 
-	this.upPressed = false;
-	events.subscribe('control_up', function(params) { 
-        this.upPressed = params.pressed;
-    }, this);
-
 	events.subscribe('player_crouch', this.CrouchCamera, this);
+	events.subscribe('control_up', this.RaiseCamera, this);
 }
 
 //camera is controlled in player centric space
@@ -35,7 +32,7 @@ CameraController.prototype.UpdateCamera = function() {
 	var yOffset = frauki.body.velocity.y > 0 ? 20 : 0;
 
 	yOffset += (frauki.states.crouching ? 50 : 0);
-	yOffset += (this.upPressed ? -50 : 0);
+	yOffset -= (frauki.states.upPressed ? 50 : 0);
 
 	if(this.prevXVel !== frauki.body.velocity.x)
 		game.add.tween(this).to({camX:Math.floor((frauki.body.velocity.x / X_VEL_DIV) + xOffset)}, 500, Phaser.Easing.Sinusoidal.Out, true);
@@ -67,6 +64,10 @@ CameraController.prototype.SetRepulsiveTiles = function(tileArray) {
 }
 
 CameraController.prototype.CrouchCamera = function(params) {
+	this.retweenY = true;
+}
+
+CameraController.prototype.RaiseCamera = function(params) {
 	this.retweenY = true;
 }
 

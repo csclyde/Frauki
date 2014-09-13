@@ -1,6 +1,7 @@
 PLAYER_SPEED = function() { return 150 + (frauki.states.energy * 7); }
 PLAYER_ROLL_SPEED = function() { return 455 + (frauki.states.energy * 5); }
 PLAYER_RUN_SLASH_SPEED = function() { return  500 + (frauki.states.energy * 10); }
+PLAYER_JUMP_SLASH_SPEED = function() { return 1000 + frauki.states.energy * 5; }
 PLAYER_KICK_SPEED = 800;
 PLAYER_INERTIA = 100;
 
@@ -179,7 +180,7 @@ Player.prototype.AdjustFrame = function() {
 };
 
 Player.prototype.GainEnergy = function() {
-    frauki.states.energy += 2;
+    frauki.states.energy += 1;
 
     if(frauki.states.energy > 30)
         frauki.states.energy = 30;
@@ -282,7 +283,7 @@ Player.prototype.Slash = function(params) {
     //upwards dash attack
     else if(this.states.upPressed && (this.state === this.Peaking || this.state === this.Jumping) && this.states.hasFlipped === false) {
         this.state = this.JumpSlashAerial;
-        this.movement.jumpSlashVelocity = -1000;
+        this.movement.jumpSlashVelocity = -(PLAYER_JUMP_SLASH_SPEED());
         game.add.tween(this.movement).to({jumpSlashVelocity:0}, 400, Phaser.Easing.Quartic.Out, true);
         this.states.hasFlipped = true;
     }
@@ -352,7 +353,7 @@ Player.prototype.Hit = function(f, e) {
     this.hitParticles.maxParticleSpeed.y = -100;
 
     if(this.states.energy > 0)
-        this.states.energy -= 3;
+        this.states.energy -= 1;
 
     if(this.states.energy <= 0) {
         Utilities.RestartGame();

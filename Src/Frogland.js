@@ -5,6 +5,7 @@ Frogland.preload = function() {
     game.load.atlasJSONHash('Frauki', 'Data/Frauki/Frauki.png', 'Data/Frauki/Frauki.json');
     game.load.tilemap('Frogland', 'Data/Locations/Frogland/Frogland.json', null, Phaser.Tilemap.TILED_JSON);
     game.load.image('FroglandTiles', 'Data/Locations/Frogland/Frogland.png');
+    game.load.image('TerraceTiles', 'Data/Locations/Frogland/Infinite Terrace.png');
     game.load.image('DoodadTiles', 'Data/Locations/Frogland/Frogland Doodads.png');
     game.load.image('SpawnKey', 'Data/Locations/SpawnKey.png');
     game.load.image('Background', 'Data/Locations/Frogland/Sky.png');
@@ -69,6 +70,7 @@ Frogland.create = function() {
 
     map = game.add.tilemap('Frogland');
     map.addTilesetImage('FroglandTiles');
+    map.addTilesetImage('TerraceTiles');
     map.addTilesetImage('DoodadTiles');
     map.addTilesetImage('SpawnKey');
    
