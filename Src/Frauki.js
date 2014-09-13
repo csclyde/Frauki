@@ -1,6 +1,6 @@
 PLAYER_SPEED = function() { return 150 + (frauki.states.energy * 7); }
 PLAYER_ROLL_SPEED = function() { return 455 + (frauki.states.energy * 5); }
-PLAYER_RUN_SLASH_SPEED = function() { return  500 + (frauki.states.energy * 10); }
+PLAYER_RUN_SLASH_SPEED = function() { return  100 + (frauki.states.energy * 10); }
 PLAYER_JUMP_SLASH_SPEED = function() { return 1000 + frauki.states.energy * 5; }
 PLAYER_KICK_SPEED = 800;
 PLAYER_INERTIA = 100;
@@ -149,14 +149,12 @@ Player.prototype.AdjustFrame = function() {
     //check for a frame mod and apply its mods
     if(this.animations.currentFrame) {
         this.currentAttack = fraukiDamageFrames[this.animations.currentFrame.name];
-    } else {
-        this.currentAttack = null;
-    }
+    } 
+    
     this.states.attacking = false;
 
     if(!!this.currentAttack) {
         this.states.attacking = true;
-        console.log('Current attack frame: ' + this.animations.currentFrame.name);
 
         if(this.states.direction === 'right') {
             this.attackRect.body.x = this.currentAttack.x + this.body.x; 
@@ -262,11 +260,11 @@ Player.prototype.Slash = function(params) {
     }
     //forward dash attack
     else if(game.time.now < this.timers.dashWindow) {
-        if(this.states.crouching) {
+        if(this.states.crouching && (this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling)) {
             this.state = this.DiveSlashAerial;
             this.movement.diveVelocity = 1400;
         }
-        else {
+        else if(this.state === this.Running || this.state === this.Standing || this.state === this.Landing) {
             this.state = this.StabRunning;
             this.timers.runSlashTimer = game.time.now + 200;
 

@@ -134,7 +134,11 @@ Frogland.update = function() {
 
 Frogland.render = function() {
     //game.debug.body(frauki);
-    game.debug.body(frauki.attackRect);
+    //game.debug.body(frauki.attackRect);
+
+    /*this.enemyGroup.forEach(function(e) {
+        game.debug.body(e);
+    });*/
 
     pixel.context.drawImage(game.canvas, 0, 0, game.width, game.height, 0, 0, pixel.width, pixel.height);
 };

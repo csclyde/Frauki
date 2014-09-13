@@ -34,6 +34,9 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
 		if(this.state !== this.PreDiving && this.state !== this.Diving && this.angle !== 0)
 			this.angle = 0;
+
+		if(this.state !== this.PreDiving && this.state !== this.Diving && this.body.width !== 67)
+			this.body.setSize(67, 25, 0, 0);
 	};
 
 	///////////////////////////////ACTIONS////////////////////////////////////
@@ -142,7 +145,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 				this.Dodge();
 			else
 				this.Scuttle();
-		} else if(this.body.center.y < frauki.body.y && this.body.center.x > frauki.body.center.x - 10 && this.body.center.x < frauki.body.center.x + 10) {
+		} else if(this.body.center.y < frauki.body.y && this.body.center.x > frauki.body.center.x - 20 && this.body.center.x < frauki.body.center.x + 20) {
 			this.Dive();
 		} else if(Math.abs(this.body.y - playerY) < 40 && Math.abs(this.body.x - playerX) < 400 && this.body.onFloor()) {
 			this.Scuttle();
@@ -227,7 +230,6 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	this.Diving = function() {
 		if(this.body.onFloor()) {
 			this.state = this.Idling;
-			this.body.setSize(67, 25, 0, 0);
 		}
 	};
 
