@@ -12,7 +12,8 @@ Frogland.preload = function() {
     game.load.image('parallax1', 'Data/Locations/Frogland/Parallax1.png');
     game.load.image('parallax2', 'Data/Locations/Frogland/Parallax2.png');
     game.load.image('fluff', 'Data/Fluff.png');
-    game.load.image('HitParticles', 'Data/Hit Particles.png');
+    
+    game.load.image('RedParticles', 'Data/Hit Particles.png');
     game.load.image('YellowParticles', 'Data/Yellow Particles.png');
 
     game.load.atlasJSONHash('Insectoid', 'Data/Enemies/Insectoid/Insectoid.png', 'Data/Enemies/Insectoid/Insectoid.json');
@@ -99,7 +100,7 @@ Frogland.create = function() {
 
     cameraController = new CameraController(frauki, map);
     inputController = new InputController(frauki);
-    //effectsController = new EffectsController();
+    effectsController = new EffectsController();
 
     game.camera.focusOnXY(frauki.body.x, frauki.body.y);
 

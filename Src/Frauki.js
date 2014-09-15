@@ -1,6 +1,6 @@
 PLAYER_SPEED = function() { return 150 + (frauki.states.energy * 7); }
 PLAYER_ROLL_SPEED = function() { return 455 + (frauki.states.energy * 5); }
-PLAYER_RUN_SLASH_SPEED = function() { return  100 + (frauki.states.energy * 10); }
+PLAYER_RUN_SLASH_SPEED = function() { return  300 + (frauki.states.energy * 10); }
 PLAYER_JUMP_SLASH_SPEED = function() { return 1000 + frauki.states.energy * 5; }
 PLAYER_KICK_SPEED = 800;
 PLAYER_INERTIA = 100;
@@ -11,7 +11,6 @@ Player = function (game, x, y, name) {
     game.physics.enable(this, Phaser.Physics.ARCADE);
     this.anchor.setTo(0.5, 1);
 
-    //this.body.bounce.y = 0.2;
     this.body.collideWorldBounds = true;
     this.body.setSize(11, 50, 0, 0);
     this.body.maxVelocity.y = 500;
@@ -30,14 +29,11 @@ Player = function (game, x, y, name) {
     this.animations.add('kick', ['Kick0000', 'Kick0001'], 18, false, false);
 
     //attacks
-    this.animations.add('slash_stand1', ['Slash Standing0001', 'Slash Standing0002', 'Slash Standing0003', 'Slash Standing0004', 'Slash Standing0005'], 18, false, false);
-    this.animations.add('slash_stand2', ['Slash Standing0006', 'Slash Standing0007', 'Slash Standing0008', 'Slash Standing0009', 'Slash Standing0010'], 18, false, false);
-    this.animations.add('slash_stand3', ['Slash Standing0011', 'Slash Standing0012', 'Slash Standing0013', 'Slash Standing0014', 'Slash Standing0015', 'Slash Standing0016', 'Slash Standing0017'], 18, false, false);
-    this.animations.add('slash_run', ['Slash Standing0013', 'Slash Standing0014', 'Slash Standing0015', 'Slash Standing0016'], 18, false, false);
-    this.animations.add('slash_aerial', ['Slash Standing0001', 'Slash Standing0002', 'Slash Standing0003', 'Slash Standing0004', 'Slash Standing0005'], 18, false, false);
-    this.animations.add('dive_slash_aerial', ['Slash Standing0006', 'Slash Standing0007', 'Slash Standing0008'], 18, false, false);
-    this.animations.add('overhead_slash_aerial', ['Slash Standing0006', 'Slash Standing0007', 'Slash Standing0008', 'Slash Standing0009', 'Slash Standing0010'], 18, false, false);
-    this.animations.add('jump_slash_aerial', ['Slash Standing0006', 'Slash Standing0007', 'Slash Standing0008'], 12, false, false);
+    this.animations.add('attack_front', ['Slash Standing0001', 'Slash Standing0002', 'Slash Standing0003', 'Slash Standing0004', 'Slash Standing0005'], 18, false, false);
+    this.animations.add('attack_overhead', ['Slash Standing0006', 'Slash Standing0007', 'Slash Standing0008', 'Slash Standing0009', 'Slash Standing0010'], 18, false, false);
+    this.animations.add('attack_stab', ['Slash Standing0013', 'Slash Standing0014', 'Slash Standing0015', 'Slash Standing0016'], 18, false, false);
+    this.animations.add('attack_dive', ['Slash Standing0006', 'Slash Standing0007', 'Slash Standing0008'], 18, false, false);
+    this.animations.add('attack_jump', ['Slash Standing0006', 'Slash Standing0007', 'Slash Standing0008'], 12, false, false);
 
     this.state = this.Standing;
     this.PlayAnim('stand');
@@ -51,7 +47,6 @@ Player = function (game, x, y, name) {
     this.states.direction = 'right';
     this.states.crouching = false;
     this.states.hasFlipped = false;
-    this.states.slashing = false;
     this.states.attacking = false;
     this.states.upPresseed = false;
     this.states.attackOutOfRoll = false;
@@ -60,7 +55,6 @@ Player = function (game, x, y, name) {
     this.timers = {};
     this.timers.gracePeriod = 0;
     this.timers.hitTimer = 0;
-    this.timers.runSlashTimer = 0;
     this.timers.dashWindow = 0;
     this.timers.kickTimer = 0;
 
@@ -70,14 +64,6 @@ Player = function (game, x, y, name) {
     this.movement.jumpSlashVelocity = 0;
     this.movement.rollBoost = 0;
     this.movement.inertia = 0;
-
-    this.hitParticles = game.add.emitter(0, 0, 100);
-    this.hitParticles.makeParticles('YellowParticles');
-    this.hitParticles.gravity = -200;
-    this.hitParticles.width = this.body.width;
-    this.hitParticles.height = this.body.height;
-    this.hitParticles.maxParticleScale = 1.0;
-    this.hitParticles.minParticleScale = 0.7;
 
     this.currentAttack = {};
     this.attackRect = game.add.sprite(0, 0, null);
@@ -116,16 +102,6 @@ Player.prototype.update = function() {
     } else {
         this.body.setSize(11, 50, 0, 0);
     }
-
-
-    if(this.state === this.SlashStanding || this.state === this.StabRunning || this.state === this.SlashAerial || this.state === this.OverheadSlashAerial || this.state === this.DiveSlashAerial) {
-        this.states.slashing = true;
-    } else {
-        this.states.slashing = false;
-    }
-
-    this.hitParticles.x = this.body.x;
-    this.hitParticles.y = this.body.y;
 };
 
 Player.prototype.SetDirection = function(dir) {
@@ -185,7 +161,7 @@ Player.prototype.GainEnergy = function() {
 
 ////////////////ACTIONS//////////////////
 Player.prototype.Run = function(params) {
-    if(this.state === this.Hurting || this.state === this.Rolling || this.state === this.StabRunning) 
+    if(this.state === this.Hurting || this.state === this.Rolling || this.state === this.AttackStab) 
         return;
 
     if(params.dir === 'left') {
@@ -220,7 +196,7 @@ Player.prototype.StartStopRun = function(params) {
 };
 
 Player.prototype.Jump = function(params) {
-    if(this.state === this.Hurting || this.states.slashing) 
+    if(this.state === this.Hurting) 
         return;
 
     if(params.jump) {
@@ -229,7 +205,7 @@ Player.prototype.Jump = function(params) {
             this.body.velocity.y = -370 - (this.states.energy * 3);
         }
         //double jump
-        else if(this.states.hasFlipped === false && this.state !== this.Falling && this.state !== this.Rolling && this.state !== this.StabRunning) {
+        else if(this.states.hasFlipped === false && this.state !== this.Falling && this.state !== this.Rolling && this.state !== this.AttackStab) {
             if(this.tweens.stopJump) { this.tweens.stopJump.stop(); }
 
             this.body.velocity.y = -350 - (this.states.energy * 2);
@@ -251,51 +227,44 @@ Player.prototype.Crouch = function(params) {
 
 Player.prototype.Slash = function(params) {
 
-    //normal slashes while standing or running
-    if(this.state === this.Standing || this.state === this.Landing || (this.state === this.Running && game.time.now > this.timers.dashWindow)) {
-        if(this.states.upPressed)
-            this.state = this.SlashOverheadStanding;
-        else
-            this.state = this.SlashStanding;
+    //diving dash
+    if(game.time.now < this.timers.dashWindow && this.states.crouching && (this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling)) {
+        this.state = this.AttackDive;
+        this.movement.diveVelocity = 1400;
     }
-    //forward dash attack
-    else if(game.time.now < this.timers.dashWindow) {
-        if(this.states.crouching && (this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling)) {
-            this.state = this.DiveSlashAerial;
-            this.movement.diveVelocity = 1400;
-        }
-        else if(this.state === this.Running || this.state === this.Standing || this.state === this.Landing) {
-            this.state = this.StabRunning;
-            this.timers.runSlashTimer = game.time.now + 200;
+    //running dash
+    else if(game.time.now < this.timers.dashWindow && (this.state === this.Running || this.state === this.Standing || this.state === this.Landing)) {
+        this.state = this.AttackStab;
 
-            if(this.states.direction === 'left') {
-                this.movement.rollVelocity = -PLAYER_RUN_SLASH_SPEED();
-                this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: -PLAYER_SPEED()}, 200, Phaser.Easing.Quartic.In, true);
-            }
-            else {
-                this.movement.rollVelocity = PLAYER_RUN_SLASH_SPEED();
-                this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: PLAYER_SPEED()}, 200, Phaser.Easing.Quartic.In, true);
-            }
+        if(this.states.direction === 'left') {
+            this.movement.rollVelocity = -PLAYER_RUN_SLASH_SPEED();
+            this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: -PLAYER_SPEED()}, 200, Phaser.Easing.Quartic.In, true);
+        }
+        else {
+            this.movement.rollVelocity = PLAYER_RUN_SLASH_SPEED();
+            this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: PLAYER_SPEED()}, 200, Phaser.Easing.Quartic.In, true);
         }
     }
     //upwards dash attack
     else if(this.states.upPressed && (this.state === this.Peaking || this.state === this.Jumping) && this.states.hasFlipped === false) {
-        this.state = this.JumpSlashAerial;
+        this.state = this.AttackJump;
         this.movement.jumpSlashVelocity = -(PLAYER_JUMP_SLASH_SPEED());
         game.add.tween(this.movement).to({jumpSlashVelocity:0}, 400, Phaser.Easing.Quartic.Out, true);
         this.states.hasFlipped = true;
     }
-    //faling overhead slash. should eventually be some sort of spinning attack that is useful while falling
-    else if(this.states.upPressed && this.state === this.Falling) {
-        this.state = this.OverheadSlashAerial;
-    }
-    //normal aerial slash
-    else if(this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling) {
-        this.state = this.SlashAerial;
+    //normal slashes while standing or running
+    else if(this.state === this.Standing || this.state === this.Landing || this.state === this.AttackStab || this.state === this.Running || this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling) {
+        if(this.states.upPressed)
+            this.state = this.AttackOverhead;
+        else
+            this.state = this.AttackFront;
     }
     //attack out of roll
     else if(this.state === this.Rolling) {
         this.states.attackOutOfRoll = true;
+    }
+    else {
+        console.log('An attack was attempted in an unresolved state');
     }
 };
 
@@ -345,10 +314,7 @@ Player.prototype.Hit = function(f, e) {
 
     this.body.velocity.y = -300;
 
-    this.hitParticles.start(false, 2000, 5, 5, 5);
-
-    this.hitParticles.minParticleSpeed.y = -200;
-    this.hitParticles.maxParticleSpeed.y = -100;
+    effectsController.ParticleSpray(this.body.x, this.body.y, this.body.width, this.body.height, 'yellow');
 
     if(this.states.energy > 0)
         this.states.energy -= 1;
@@ -488,7 +454,7 @@ Player.prototype.Rolling = function() {
 
     if(this.animations.currentAnim.isFinished) {
         if(this.states.attackOutOfRoll === true) {
-            this.state = this.StabRunning;
+            this.state = this.AttackStab;
             this.states.attackOutOfRoll = false;
         } else if(this.body.velocity.y > 150) {
             this.state = this.Falling;
@@ -514,8 +480,8 @@ Player.prototype.Hurting = function() {
     }
 };
 
-Player.prototype.SlashStanding = function() {
-    this.PlayAnim('slash_stand1');
+Player.prototype.AttackFront = function() {
+    this.PlayAnim('attack_front');
     //this.body.velocity.x = 0;
 
     if(this.animations.currentAnim.isFinished) {
@@ -523,8 +489,8 @@ Player.prototype.SlashStanding = function() {
     }
 };
 
-Player.prototype.SlashOverheadStanding = function() {
-    this.PlayAnim('slash_stand2');
+Player.prototype.AttackOverhead = function() {
+    this.PlayAnim('attack_overhead');
     //this.body.velocity.x = 0;
 
     if(this.animations.currentAnim.isFinished) {
@@ -532,8 +498,8 @@ Player.prototype.SlashOverheadStanding = function() {
     }
 };
 
-Player.prototype.StabRunning = function() {
-    this.PlayAnim('slash_run');
+Player.prototype.AttackStab = function() {
+    this.PlayAnim('attack_stab');
     this.body.velocity.x = this.movement.rollVelocity;
 
     if(this.animations.currentAnim.isFinished) {
@@ -549,24 +515,8 @@ Player.prototype.StabRunning = function() {
     }
 };
 
-Player.prototype.SlashAerial = function() {
-    this.PlayAnim('slash_aerial');
-
-    if(this.animations.currentAnim.isFinished) {
-        if(this.body.velocity.y >= 0) {
-            this.state = this.Falling;
-        } else if(this.body.velocity.y < 0) {
-            this.state = this.Jumping;
-        } else if(this.body.velocity.x !== 0 && this.body.onFloor()) {
-            this.state = this.Running;
-        } else if(this.body.velocity.x === 0 && this.body.onFloor()) {
-            this.state = this.Landing;
-        }
-    }
-};
-
-Player.prototype.DiveSlashAerial = function() {
-    this.PlayAnim('dive_slash_aerial');
+Player.prototype.AttackDive = function() {
+    this.PlayAnim('attack_dive');
     this.body.velocity.y = this.movement.diveVelocity;
 
     if(this.body.onFloor() && this.animations.currentAnim.isFinished) {
@@ -587,28 +537,12 @@ Player.prototype.DiveSlashAerial = function() {
     }
 };
 
-Player.prototype.JumpSlashAerial = function() {
-    this.PlayAnim('jump_slash_aerial');
+Player.prototype.AttackJump = function() {
+    this.PlayAnim('attack_jump');
     this.body.velocity.y = this.movement.jumpSlashVelocity;
 
     if(this.animations.currentAnim.isFinished) {
         this.state = this.Jumping;
-    }
-};
-
-Player.prototype.OverheadSlashAerial = function() {
-    this.PlayAnim('overhead_slash_aerial');
-
-    if(this.animations.currentAnim.isFinished) {
-        if(this.body.velocity.y > 0) {
-            this.state = this.Falling;
-        } else if(this.body.velocity.y < 0) {
-            this.state = this.Jumping;
-        } else if(this.body.velocity.x !== 0 && this.body.onFloor()) {
-            this.state = this.Running;
-        } else if(this.body.velocity.x === 0 && this.body.onFloor()) {
-            this.state = this.Landing;
-        }
     }
 };
 

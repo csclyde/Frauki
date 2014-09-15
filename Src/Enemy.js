@@ -23,14 +23,6 @@ Enemy = function(game, x, y, name) {
         console.log('Enemy of type ' + name + ' was not found');
     }
 
-    this.hitParticles = game.add.emitter(0, 0, 100);
-    this.hitParticles.makeParticles('HitParticles');
-    this.hitParticles.gravity = -200;
-    this.hitParticles.width = this.body.width;
-    this.hitParticles.height = this.body.height;
-    this.hitParticles.maxParticleScale = 1.0;
-    this.hitParticles.minParticleScale = 0.7;
-
     this.state = this.Idling;
 
 };
@@ -47,9 +39,6 @@ Enemy.prototype.update = function() {
 	if(typeof this.updateFunction === 'function') {
 		this.updateFunction.apply(this);
 	} 
-
-    this.hitParticles.x = this.body.x;
-    this.hitParticles.y = this.body.y;
     
     if(!!this.state)
         this.state();
@@ -80,21 +69,7 @@ function EnemyHit(f, e) {
     frauki.GainEnergy();
     e.energy--;
 
-    e.hitParticles.start(false, 2000, 10, 10, 10);
-
-    if(e.PlayerDirection() === 'above') {
-        e.hitParticles.minParticleSpeed.y = -200;
-        e.hitParticles.maxParticleSpeed.y = -100;
-    } else if(e.PlayerDirection() === 'below') {
-        e.hitParticles.minParticleSpeed.y = 100;
-        e.hitParticles.maxParticleSpeed.y = 200;
-    } else if (e.PlayerDirection() === 'left') {
-        e.hitParticles.minParticleSpeed.x = 100;
-        e.hitParticles.maxParticleSpeed.x = 200;
-    } else if (e.PlayerDirection() === 'right') {
-        e.hitParticles.minParticleSpeed.x = -200;
-        e.hitParticles.maxParticleSpeed.x = -100;
-    }
+    effectsController.ParticleSpray(e.body.x, e.body.y, e.body.width, e.body.height, 'red', e.PlayerDirection());
 
     e.TakeHit();
 

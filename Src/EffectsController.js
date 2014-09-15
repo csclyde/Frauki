@@ -13,9 +13,24 @@ EffectsController = function() {
 	this.fluff.setRotation(0, 20);
 
 	this.fluff.start(false, 8000, 200);
+
+
+    this.yellowParticles = game.add.emitter(0, 0, 100);
+    this.yellowParticles.makeParticles('YellowParticles');
+    this.yellowParticles.gravity = -200;
+    this.yellowParticles.maxParticleScale = 1.0;
+    this.yellowParticles.minParticleScale = 0.7;
+
+    this.redParticles = game.add.emitter(0, 0, 100);
+    this.redParticles.makeParticles('RedParticles');
+    this.redParticles.gravity = -200;
+    this.redParticles.maxParticleScale = 1.0;
+    this.redParticles.minParticleScale = 0.7;
 }
 
 EffectsController.prototype.UpdateEffects = function() {
+	return;
+
 	this.fluff.x = game.camera.x + (game.camera.width / 2);
 	this.fluff.y = game.camera.y - 20;
 
@@ -33,4 +48,45 @@ EffectsController.prototype.UpdateEffects = function() {
 		if(particle.body.velocity.y < -MAX_FLUFF_SPEED)
 			particle.body.velocity.y = -MAX_FLUFF_SPEED;
 	}, this);
+}
+
+EffectsController.prototype.ParticleSpray = function(x, y, w, h, color, dir) {
+
+	var effect = null;
+
+	if(color === 'red') {
+		effect = this.redParticles;
+	}
+	else if(color === 'yellow') {
+		effect = this.yellowParticles;
+	}
+
+    if(dir === 'below') {
+    	effect.minParticleSpeed.x = 0;
+        effect.maxParticleSpeed.x = 0;
+        effect.minParticleSpeed.y = 100;
+        effect.maxParticleSpeed.y = 200;
+    } else if (dir === 'left') {
+        effect.minParticleSpeed.x = 100;
+        effect.maxParticleSpeed.x = 200;
+        effect.minParticleSpeed.y = 0;
+        effect.maxParticleSpeed.y = 0;
+    } else if (dir === 'right') {
+        effect.minParticleSpeed.x = -200;
+        effect.maxParticleSpeed.x = -100;
+        effect.minParticleSpeed.y = 0;
+        effect.maxParticleSpeed.y = 0;
+    } else {
+    	effect.minParticleSpeed.x = 0;
+        effect.maxParticleSpeed.x = 0;
+        effect.minParticleSpeed.y = -200;
+        effect.maxParticleSpeed.y = -100;
+    }
+
+    effect.x = x || 0;
+    effect.y = y || 0;
+    effect.width = w || 0;
+    effect.height = h || 0;
+
+	effect.start(false, 2000, 5, 5, 5);
 }
