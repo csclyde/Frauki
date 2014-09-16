@@ -177,8 +177,8 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	this.Hopping = function() {
 		this.PlayAnim('hop');
 
-		if(this.body.velocity.y >= 0) {
-			this.state = this.Landing;
+		if(this.body.onFloor()) {
+			this.state = this.Idle;
 		}
 	};
 

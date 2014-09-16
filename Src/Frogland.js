@@ -12,12 +12,13 @@ Frogland.preload = function() {
     game.load.image('parallax1', 'Data/Locations/Frogland/Parallax1.png');
     game.load.image('parallax2', 'Data/Locations/Frogland/Parallax2.png');
     game.load.image('fluff', 'Data/Fluff.png');
-    
+
     game.load.image('RedParticles', 'Data/Hit Particles.png');
     game.load.image('YellowParticles', 'Data/Yellow Particles.png');
 
     game.load.atlasJSONHash('Insectoid', 'Data/Enemies/Insectoid/Insectoid.png', 'Data/Enemies/Insectoid/Insectoid.json');
     game.load.atlasJSONHash('Buzzar', 'Data/Enemies/Buzzar/Buzzar.png', 'Data/Enemies/Buzzar/Buzzar.json');
+    game.load.atlasJSONHash('Sporoid', 'Data/Enemies/Sporoid/Sporoid.png', 'Data/Enemies/Sporoid/Sporoid.json');
 
     game.scale.minWidth = 1024;
     game.scale.minHeight = 576;
@@ -95,6 +96,7 @@ Frogland.create = function() {
 
     map.createFromObjects('Enemies', 1061, 'Insectoid', 'Hop0000', true, false, this.enemyGroup, Enemy);
     map.createFromObjects('Enemies', 1062, 'Buzzar', 'Sting0000', true, false, this.enemyGroup, Enemy);
+    map.createFromObjects('Enemies', 1063, 'Sporoid', 'Sporoid0000', true, false, this.enemyGroup, Enemy);
     
     foregroundLayer = map.createLayer('Foreground');
 
