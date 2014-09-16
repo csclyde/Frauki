@@ -317,11 +317,13 @@ Player.prototype.Hit = function(f, e) {
     effectsController.ParticleSpray(this.body.x, this.body.y, this.body.width, this.body.height, 'yellow');
 
     if(this.states.energy > 0)
-        this.states.energy -= 1;
+        this.states.energy -= 2;
 
     if(this.states.energy <= 0) {
         Utilities.RestartGame();
     }
+
+    e.energy++;
 
     this.body.x < e.body.x ? this.body.velocity.x = -200 : this.body.velocity.x = 200;
 

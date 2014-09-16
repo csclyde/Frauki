@@ -42,6 +42,15 @@ Enemy.prototype.update = function() {
     
     if(!!this.state)
         this.state();
+
+    if(this.alpha > 7)
+        this.alpha = 7;
+
+    this.alpha = this.GetEnergyPercentage();
+};
+
+Enemy.prototype.GetEnergyPercentage = function() {
+    return this.energy / 7;
 };
 
 Enemy.prototype.SetDirection = function(dir) {
