@@ -64,6 +64,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 			return;
 
 		this.attackTimer = game.time.now + 4000;
+
 		this.state = this.Hopping;
 
 		this.body.velocity.y = -300;
@@ -164,7 +165,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 			this.state = this.Hopping;
 			this.scale.y = 1;
 
-			this.body.velocity.y = -1 * ((Math.random() * 250));
+			this.body.velocity.y = (-1 * (Math.random() * 200)) - 100;
 
 			if(playerX < this.body.x) {
 				this.body.velocity.x = -400;
@@ -177,8 +178,8 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	this.Hopping = function() {
 		this.PlayAnim('hop');
 
-		if(this.body.onFloor()) {
-			this.state = this.Idle;
+		if(this.body.velocity.y >= 0 || this.body.onFloor()) {
+			this.state = this.Landing;
 		}
 	};
 
