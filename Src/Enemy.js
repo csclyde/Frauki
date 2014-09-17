@@ -46,6 +46,12 @@ Enemy.prototype.update = function() {
     if(this.alpha > 7)
         this.alpha = 7;
 
+    if(this.body.velocity.x > 0) {
+        this.SetDirection('right');
+    } else if(this.body.velocity.x < 0) {
+        this.SetDirection('left');
+    }
+
     this.alpha = this.GetEnergyPercentage();
 };
 

@@ -18,10 +18,6 @@ Enemy.prototype.types['Buzzar'] =  function() {
     this.anger = 1;
 
 	this.updateFunction = function() {
-		if(this.body.velocity.x <= 0)
-			this.SetDirection('right');
-		else
-			this.SetDirection('left');
 
 		if(this.scale.y > 1 && this.state !== this.Stinging) {
 			this.scale.y = 1;
@@ -49,7 +45,15 @@ Enemy.prototype.types['Buzzar'] =  function() {
 	this.ChangeDirection = function() {
 		var dir = Math.random() * 4;
 
-	    if(dir <= 1)
+		if(this.body.touching.up)
+			this.wanderDirection = 'down';
+		else if(this.body.touching.down)
+			this.wanderDirection = 'up';
+		else if(this.body.touching.left)
+			this.wanderDirection = 'right';
+		else if(this.body.touching.right)
+			this.wanderDirection = 'left';
+	    else if(dir <= 1)
 	    	this.wanderDirection = 'left';
 	    else if(dir <= 2)
 	    	this.wanderDirection = 'up';
@@ -116,7 +120,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
 			this.state = this.Stinging;
 			this.scale.y = 1.3;
 			this.scale.x *= 0.8;
-			game.physics.arcade.moveToXY(this, frauki.body.x, frauki.body.y, 450);
+			game.physics.arcade.moveToXY(this, frauki.body.center.x, frauki.body.center.y, 450);
 		}
 	};
 

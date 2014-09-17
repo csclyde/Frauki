@@ -1,18 +1,15 @@
 Enemy.prototype.types['Sporoid'] =  function() {
 
-	this.body.setSize(11, 27, 0, 0);
+	this.body.setSize(22, 17, 0, 0);
 
     this.animations.add('idle', ['Sporoid0000'], 10, true, false);
 
     this.body.allowGravity = false;
     this.body.bounce.set(0.3);
 
-	this.updateFunction = function() {
-		if(this.body.velocity.x <= 0)
-			this.SetDirection('right');
-		else
-			this.SetDirection('left');
+    this.dashTimer = 0;
 
+	this.updateFunction = function() {
 		
 	};
 
@@ -34,6 +31,12 @@ Enemy.prototype.types['Sporoid'] =  function() {
 	    this.state = this.Hurting;
 	};
 
+	this.Dash = function() {
+		game.physics.arcade.moveToXY(this, frauki.body.center.x, frauki.body.center.y, 450);
+		this.state = this.Dashing;
+		this.dashTimer = game.time.now + 1000;
+	};
+
 	this.Reset = function() {
 		this.state = this.Idling;
 	};
@@ -53,7 +56,36 @@ Enemy.prototype.types['Sporoid'] =  function() {
 			case 'down': this.body.velocity.y += 30; break;
 		}
 
+		if(this.PlayerIsNear(80)) {
+			this.Dash();
+			return;
+		}
 
+		if(this.PlayerIsNear(300)) {
+			if(frauki.body.center.x < this.body.center.x)
+				this.body.velocity.x += 30;
+			else
+				this.body.velocity.x += -30;
+
+			if(frauki.body.center.y < this.body.center.y)
+				this.body.velocity.y += 30;
+			else
+				this.body.velocity.y += -30;
+		}
+	};
+
+	this.Dashing = function() {
+		this.PlayAnim('idle');
+
+		this.body.velocity.x = this.body.velocity.x;
+		this.body.velocity.y = this.body.velocity.y;
+
+		if(game.time.now > this.dashTimer){
+			this.body.velocity.x = 0;
+			this.body.velocity.y = 0;
+
+			this.state = this.Idling;
+		}
 	};
 
 	this.Hurting = function() {

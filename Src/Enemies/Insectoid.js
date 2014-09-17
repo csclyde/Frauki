@@ -22,12 +22,6 @@ Enemy.prototype.types['Insectoid'] =  function() {
 			}, null, this);
 		}
 
-		if(this.body.velocity.x > 0) {
-			this.SetDirection('right');
-		} else if(this.body.velocity.x < 0) {
-			this.SetDirection('left');
-		}
-
 		if(this.state !== this.PreScuttling && Math.abs(this.scale.x) !== 1) {
 			this.scale.x /= 0.7;
 		}
