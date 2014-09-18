@@ -8,6 +8,11 @@ Enemy.prototype.types['Sporoid'] =  function() {
     this.body.bounce.set(0.3);
 
     this.dashTimer = 0;
+    this.shootTimer = 0;
+
+    this.Spore = game.add.emitter(0, 0, 100);
+	this.Spore.makeParticles('Spore');
+    this.Spore.gravity = -680;
 
 	this.updateFunction = function() {
 		
@@ -37,6 +42,14 @@ Enemy.prototype.types['Sporoid'] =  function() {
 		this.dashTimer = game.time.now + 1000;
 	};
 
+	this.Shoot = function() {
+		var spore = game.add.sprite(this.body.center.x, this.body.center.y, 'Spore');
+		game.physics.arcade.moveToXY(this, frauki.body.center.x, frauki.body.center.y, 500);
+		game.add.tween(spore.body).to({x: 0, y: 0}, 1000, Phaser.Easing.Exponential.Out, true);
+
+	    this.shootTimer = game.time.now + 1000;
+	};
+
 	this.Reset = function() {
 		this.state = this.Idling;
 	};
@@ -47,6 +60,10 @@ Enemy.prototype.types['Sporoid'] =  function() {
 		
 		this.body.velocity.y = Math.sin(game.time.now / 300) * 50 + (Math.random() * 40 - 20);
 		this.body.velocity.x = Math.sin(game.time.now / 1000) * 20;
+
+		if(this.PlayerIsVisible() && game.time.now > this.shootTimer) {
+			this.Shoot();
+		}
 
 
 		switch(this.wanderDirection) {
