@@ -323,7 +323,7 @@ Player.prototype.Hit = function(f, e) {
         Utilities.RestartGame();
     }
 
-    e.energy++;
+    e.energy += 0.5;
 
     this.body.x < e.body.x ? this.body.velocity.x = -200 : this.body.velocity.x = 200;
 
