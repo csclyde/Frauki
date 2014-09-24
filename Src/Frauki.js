@@ -29,7 +29,7 @@ Player = function (game, x, y, name) {
     this.animations.add('kick', ['Kick0000', 'Kick0001'], 18, false, false);
 
     //attacks
-    this.animations.add('attack_front', ['Slash Standing0001', 'Slash Standing0002', 'Slash Standing0003', 'Slash Standing0004', 'Slash Standing0005'], 18, false, false);
+    this.animations.add('attack_front', ['Attack Front0001', 'Attack Front0002', 'Attack Front0003', 'Attack Front0004', 'Attack Front0005', 'Attack Front0006', 'Attack Front0007', 'Attack Front0008',], 18, false, false);
     this.animations.add('attack_overhead', ['Slash Standing0006', 'Slash Standing0007', 'Slash Standing0008', 'Slash Standing0009', 'Slash Standing0010'], 18, false, false);
     this.animations.add('attack_stab', ['Slash Standing0013', 'Slash Standing0014', 'Slash Standing0015', 'Slash Standing0016'], 18, false, false);
     this.animations.add('attack_dive', ['Slash Standing0006', 'Slash Standing0007', 'Slash Standing0008'], 18, false, false);
