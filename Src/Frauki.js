@@ -17,7 +17,7 @@ Player = function (game, x, y, name) {
 
     //movements
     this.animations.add('stand', ['Stand0000'], 10, true, false);
-    this.animations.add('run', ['Run0000', 'Run0001', 'Run0002', 'Run0003', 'Run0004', 'Run0005', 'Run0006', 'Run0007'], 10, true, false);
+    this.animations.add('run', ['Run0000', 'Run0001', 'Run0002', 'Run0003', 'Run0004', 'Run0005', 'Run0006', 'Run0007'], 15, true, false);
     this.animations.add('jump', ['Standing Jump0001'], 10, true, false);
     this.animations.add('peak', ['Standing Jump0002', 'Standing Jump0003', 'Standing Jump0004'], 10, false, false);
     this.animations.add('fall', ['Standing Jump0005'], 10, true, false);
