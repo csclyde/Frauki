@@ -1,6 +1,32 @@
 var fraukiDamageFrames = {
 	
 	//slash across in front of yourself
+	'Attack Front0002': {
+		damageFrame: true,
+		x: 0, 
+		y: 10,
+		w: 65,
+		h: 34,
+
+		damage: 10,
+		knockback: 0.5,
+		penetration: 0
+	},
+	
+	//followthrough of the front slash, is behind you
+	'Attack Front0003': {
+		damageFrame: true,
+		x: -35, 
+		y: 0,
+		w: 35,
+		h: 15,
+
+		damage: 10,
+		knockback: 0,
+		penetration: 0
+	},
+
+	//slash across in front of yourself
 	'Slash Standing0003': {
 		damageFrame: true,
 		x: 0, 

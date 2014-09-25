@@ -12,7 +12,7 @@ Enemy.prototype.types['Sporoid'] =  function() {
 
     this.Spore = game.add.emitter(0, 0, 100);
 	this.Spore.makeParticles('Spore');
-    this.Spore.gravity = -680;
+    this.Spore.gravity = -660;
 
 	this.updateFunction = function() {
 		
@@ -28,7 +28,7 @@ Enemy.prototype.types['Sporoid'] =  function() {
 	    this.body.velocity.y = -150 + this.weight;
 
 	    var c = frauki.body.x < this.body.x ? 1 : -1;
-	    this.body.velocity.x =  c * ((80 + (this.weight / 2)) * (frauki.currentAttack.knockback));
+	    this.body.velocity.x = c * ((80 + (this.weight / 2)) * (frauki.currentAttack.knockback));
 
 	    //a durability stat should modify how long they are stunned for. also, the amount of dmg
 	    this.hitTimer = game.time.now + 300;
@@ -43,9 +43,9 @@ Enemy.prototype.types['Sporoid'] =  function() {
 	};
 
 	this.Shoot = function() {
-		var spore = game.add.sprite(this.body.center.x, this.body.center.y, 'Spore');
-		game.physics.arcade.moveToXY(this, frauki.body.center.x, frauki.body.center.y, 500);
-		game.add.tween(spore.body).to({x: 0, y: 0}, 1000, Phaser.Easing.Exponential.Out, true);
+		//var spore = game.add.sprite(this.body.center.x, this.body.center.y, 'Spore');
+		//game.physics.arcade.moveToXY(this, frauki.body.center.x, frauki.body.center.y, 500);
+		//game.add.tween(spore.body).to({x: 0, y: 0}, 1000, Phaser.Easing.Exponential.Out, true);
 
 	    this.shootTimer = game.time.now + 1000;
 	};
