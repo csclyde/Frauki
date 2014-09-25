@@ -12,20 +12,20 @@ Player = function (game, x, y, name) {
     this.anchor.setTo(0.5, 1);
 
     this.body.collideWorldBounds = true;
-    this.body.setSize(11, 50, 0, 0);
+    this.body.setSize(11, 50, 0, -75);
     this.body.maxVelocity.y = 500;
 
     //movements
     this.animations.add('stand', ['Stand0000'], 10, true, false);
     this.animations.add('run', ['Run0000', 'Run0001', 'Run0002', 'Run0003', 'Run0004', 'Run0005', 'Run0006', 'Run0007'], 15, true, false);
-    this.animations.add('jump', ['Standing Jump0001'], 10, true, false);
+    this.animations.add('jump', ['Jump0001', 'Jump0000', 'Jump0001', 'Jump0002', 'Jump0003', 'Jump0004'], 10, true, false);
     this.animations.add('peak', ['Standing Jump0002', 'Standing Jump0003', 'Standing Jump0004'], 10, false, false);
     this.animations.add('fall', ['Standing Jump0005'], 10, true, false);
     this.animations.add('land', ['Standing Jump0006', 'Standing Jump0007', 'Standing Jump0008'], 10, false, false);
-    this.animations.add('crouch', ['Crouch0001'], 10, true, false);
+    this.animations.add('crouch', ['Crouch0000'], 10, true, false);
     this.animations.add('flip', ['Flip0000', 'Flip0001', 'Flip0002', 'Flip0003', 'Flip0004'], 14, false, false);
     this.animations.add('roll', ['Flip0000', 'Flip0001', 'Flip0002', 'Flip0003', 'Flip0004'], 14, false, false);
-    this.animations.add('hit', ['Hit0001', 'Hit0002'], 10, true, false);
+    this.animations.add('hit', ['Hit0000', 'Hit0001'], 10, true, false);
     this.animations.add('kick', ['Kick0000', 'Kick0001'], 18, false, false);
 
     //attacks
@@ -97,11 +97,11 @@ Player.prototype.update = function() {
         this.movement.rollBoost = 0;
     }
 
-    if(this.state === this.Crouching) {
+    /*if(this.state === this.Crouching) {
         this.body.setSize(11, 30, 0, 0);
     } else {
         this.body.setSize(11, 50, 0, 0);
-    }
+    }*/
 };
 
 Player.prototype.SetDirection = function(dir) {
