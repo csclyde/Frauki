@@ -25,6 +25,8 @@ Enemy = function(game, x, y, name) {
 
     this.state = this.Idling;
 
+    this.maxEnergy = this.energy;
+
 };
 
 Enemy.prototype = Object.create(Phaser.Sprite.prototype);
@@ -43,9 +45,6 @@ Enemy.prototype.update = function() {
     if(!!this.state)
         this.state();
 
-    if(this.alpha > 7)
-        this.alpha = 7;
-
     if(this.body.velocity.x > 0) {
         this.SetDirection('right');
     } else if(this.body.velocity.x < 0) {
@@ -56,7 +55,7 @@ Enemy.prototype.update = function() {
 };
 
 Enemy.prototype.GetEnergyPercentage = function() {
-    return this.energy / 7;
+    return this.energy / this.maxEnergy;
 };
 
 Enemy.prototype.SetDirection = function(dir) {
@@ -79,7 +78,7 @@ function EnemyHit(f, e) {
     if(e.state === e.Hurting)
         return;
 
-    cameraController.ScreenShake(15, 5, 100);
+    events.publish('camera_shake', {magnitudeX: 15, magnitudeY: 5, duration: 100});
 
     frauki.GainEnergy();
     e.energy--;

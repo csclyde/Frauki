@@ -22,6 +22,7 @@ CameraController = function(player, map) {
 
 	events.subscribe('player_crouch', this.CrouchCamera, this);
 	events.subscribe('control_up', this.RaiseCamera, this);
+	events.subscribe('camera_shake', this.ScreenShake, this);
 }
 
 //camera is controlled in player centric space
@@ -71,12 +72,12 @@ CameraController.prototype.RaiseCamera = function(params) {
 	this.retweenY = true;
 }
 
-CameraController.prototype.ScreenShake = function(magnitudeX, magnitudeY, duration) {
-	this.shakeMagnitudeX = magnitudeX;
-	this.shakeMagnitudeY = magnitudeY;
+CameraController.prototype.ScreenShake = function(params) {
+	this.shakeMagnitudeX = params.magnitudeX;
+	this.shakeMagnitudeY = params.magnitudeY;
 	
-	game.add.tween(this).to({shakeMagnitudeX: 0}, duration, Phaser.Easing.Linear.None, true);
-	game.add.tween(this).to({shakeMagnitudeY: 0}, duration, Phaser.Easing.Linear.None, true);
+	game.add.tween(this).to({shakeMagnitudeX: 0}, params.duration, Phaser.Easing.Linear.None, true);
+	game.add.tween(this).to({shakeMagnitudeY: 0}, params.duration, Phaser.Easing.Linear.None, true);
 
 	//a sine function that is multiplied by the magnitude. The magnitude has a tween set to 0 based on the duration
 }

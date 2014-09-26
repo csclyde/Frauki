@@ -121,7 +121,7 @@ Player.prototype.Grace = function() {
     return (this.game.time.now < this.timers.gracePeriod);
 };
 
-Player.prototype.AdjustFrame = function() {
+Player.prototype.UpdateAttackGeometry = function() {
     //check for a frame mod and apply its mods
     if(this.animations.currentFrame) {
         this.currentAttack = fraukiDamageFrames[this.animations.currentFrame.name];
@@ -157,6 +157,15 @@ Player.prototype.GainEnergy = function() {
 
     if(frauki.states.energy > 30)
         frauki.states.energy = 30;
+};
+
+Player.prototype.LoseEnergy = function() {
+    if(this.states.energy > 0)
+        this.states.energy -= 2;
+
+    if(this.states.energy <= 0) {
+        Frogland.Restart();
+    }
 };
 
 ////////////////ACTIONS//////////////////
@@ -316,12 +325,7 @@ Player.prototype.Hit = function(f, e) {
 
     effectsController.ParticleSpray(this.body.x, this.body.y, this.body.width, this.body.height, 'yellow');
 
-    if(this.states.energy > 0)
-        this.states.energy -= 2;
-
-    if(this.states.energy <= 0) {
-        Utilities.RestartGame();
-    }
+    this.LoseEnergy();
 
     e.energy += 0.5;
 
@@ -525,7 +529,7 @@ Player.prototype.AttackDive = function() {
         this.movement.diveVelocity = 0;
         this.timers.dashWindow = game.time.now + 200;
 
-        cameraController.ScreenShake(10, 5, 200);
+        events.publish('camera_shake', {magnitudeX: 10, magnitudeY: 5, duration: 200});
 
         if(this.body.velocity.x === 0) {
             if(this.states.crouching)

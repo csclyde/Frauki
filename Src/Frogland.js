@@ -112,7 +112,7 @@ Frogland.create = function() {
 };
 
 Frogland.update = function() {
-    frauki.AdjustFrame();
+    frauki.UpdateAttackGeometry();
 
 	game.physics.arcade.collide(frauki, midgroundLayer);
     game.physics.arcade.collide(this.enemyGroup, midgroundLayer);
@@ -146,3 +146,27 @@ Frogland.render = function() {
 
     pixel.context.drawImage(game.canvas, 0, 0, game.width, game.height, 0, 0, pixel.width, pixel.height);
 };
+
+Frogland.Restart = function() {
+    var fadeOutTween = game.add.tween(game.world).to({alpha:0}, 1500, Phaser.Easing.Linear.None, true);
+        fadeOutTween.onComplete.add(function() {
+            frauki.body.x = fraukiSpawnX;
+            frauki.body.y = fraukiSpawnY;
+            game.world.alpha = 1;
+            frauki.states.energy = 15;
+
+            Frogland.enemyGroup.forEach(function(e) {
+                e.alive = true;
+                e.exists = true;
+                e.visible = true;
+                e.body.center.x = e.initialX;
+                e.body.center.y = e.initialY;
+                e.body.velocity.x = 0;
+                e.body.velocity.y = 0;
+                e.energy = e.maxEnergy;
+
+                if(!!e.Reset)
+                    e.Reset.apply(e);
+            });
+        });
+}
