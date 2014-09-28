@@ -97,6 +97,12 @@ Player.prototype.update = function() {
         this.movement.rollBoost = 0;
     }
 
+    if(this.state === this.Falling) {
+        this.body.gravity.y = game.physics.arcade.gravity.y * 3;
+    } else {
+        this.body.gravity.y = 0;
+    }
+
     /*if(this.state === this.Crouching) {
         this.body.setSize(11, 30, 0, 0);
     } else {
