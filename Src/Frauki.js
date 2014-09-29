@@ -182,13 +182,13 @@ Player.prototype.Run = function(params) {
         return;
 
     if(params.dir === 'left') {
-        this.body.acceleration.x = -300;
+        this.body.acceleration.x = -600;
         this.SetDirection('left');
     } else if(params.dir === 'right') {
-        this.body.acceleration.x = 300;
+        this.body.acceleration.x = 600;
         this.SetDirection('right');
     } else {
-        this.body.velocity.x = 0 + this.movement.inertia;
+        //this.body.velocity.x = 0 + this.movement.inertia;
         this.body.acceleration.x = 0;
         this.movement.rollBoost = 0;
     }
@@ -196,20 +196,17 @@ Player.prototype.Run = function(params) {
 
 Player.prototype.StartStopRun = function(params) {
     if(params.run) {
-        params.dir === 'left' ? this.movement.inertia = PLAYER_INERTIA : this.movement.inertia = -PLAYER_INERTIA;
-        this.tweens.startRun = game.add.tween(this.movement).to({inertia: 0}, 300, Phaser.Easing.Linear.None, true);
-
+        //open the window for dash attcks
         if(game.time.now > this.timers.dashWindow) {
             this.timers.dashWindow = game.time.now + 200;
+        //double tap to roll
         } else if(params.dir === this.states.direction) {
             this.Roll();
             this.timers.dashWindow = game.time.now + 200;
         }
 
     } else {
-        this.movement.inertia = this.body.velocity.x;
-        this.tweens.startRun.stop();
-        game.add.tween(this.movement).to({inertia: 0}, 80, Phaser.Easing.Linear.None, true);
+        game.add.tween(this.body.velocity).to({x: 0}, 80, Phaser.Easing.Exponential.Out, true);
     }
 };
 
