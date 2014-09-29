@@ -90,6 +90,8 @@ Player.prototype.create = function() {
 Player.prototype.update = function() {
 
     this.state();
+    
+    this.body.maxVelocity.x = PLAYER_SPEED();
 
     //reset the double jump flag
     if(this.body.onFloor()) {
@@ -98,7 +100,7 @@ Player.prototype.update = function() {
     }
 
     if(this.state === this.Falling) {
-        this.body.gravity.y = game.physics.arcade.gravity.y * 3;
+        this.body.gravity.y = game.physics.arcade.gravity.y * 1.2;
     } else {
         this.body.gravity.y = 0;
     }
@@ -180,13 +182,14 @@ Player.prototype.Run = function(params) {
         return;
 
     if(params.dir === 'left') {
-        this.body.velocity.x = -(PLAYER_SPEED()) - this.movement.rollBoost + this.movement.inertia;
+        this.body.acceleration.x = -300;
         this.SetDirection('left');
     } else if(params.dir === 'right') {
-        this.body.velocity.x = PLAYER_SPEED() + this.movement.rollBoost + this.movement.inertia;
+        this.body.acceleration.x = 300;
         this.SetDirection('right');
     } else {
         this.body.velocity.x = 0 + this.movement.inertia;
+        this.body.acceleration.x = 0;
         this.movement.rollBoost = 0;
     }
 };
