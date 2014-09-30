@@ -194,7 +194,7 @@ Player.prototype.Run = function(params) {
 
         //if no direction is being pushed, and the player is not in an override state
         //lock down their x velocity
-        this.body.velocity.x = 0;
+        //this.body.velocity.x = 0;
     }
 };
 
@@ -210,7 +210,7 @@ Player.prototype.StartStopRun = function(params) {
         }
 
     } else {
-        game.add.tween(this.body.velocity).to({x: 0}, 80, Phaser.Easing.Exponential.Out, true);
+        game.add.tween(this.body.velocity).to({x: 0}, 120, Phaser.Easing.Linear.None, true);
     }
 };
 
