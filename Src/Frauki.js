@@ -89,9 +89,9 @@ Player.prototype.create = function() {
 
 Player.prototype.update = function() {
 
-    this.state();
-    
     this.body.maxVelocity.x = PLAYER_SPEED();
+
+    this.state();
 
     //reset the double jump flag
     if(this.body.onFloor()) {
@@ -100,7 +100,7 @@ Player.prototype.update = function() {
     }
 
     if(this.state === this.Falling) {
-        this.body.gravity.y = game.physics.arcade.gravity.y * 1.2;
+        
     } else {
         this.body.gravity.y = 0;
     }
@@ -182,15 +182,19 @@ Player.prototype.Run = function(params) {
         return;
 
     if(params.dir === 'left') {
-        this.body.acceleration.x = -600;
+        this.body.acceleration.x = -700;
         this.SetDirection('left');
     } else if(params.dir === 'right') {
-        this.body.acceleration.x = 600;
+        this.body.acceleration.x = 700;
         this.SetDirection('right');
     } else {
         //this.body.velocity.x = 0 + this.movement.inertia;
         this.body.acceleration.x = 0;
         this.movement.rollBoost = 0;
+
+        //if no direction is being pushed, and the player is not in an override state
+        //lock down their x velocity
+        this.body.velocity.x = 0;
     }
 };
 
@@ -277,8 +281,7 @@ Player.prototype.Slash = function(params) {
     //attack out of roll
     else if(this.state === this.Rolling) {
         this.states.attackOutOfRoll = true;
-    }
-    else {
+    } else {
         console.log('An attack was attempted in an unresolved state');
     }
 };
@@ -451,7 +454,11 @@ Player.prototype.Flipping = function() {
 
 Player.prototype.Rolling = function() {
     this.PlayAnim('roll');
+
+    this.body.maxVelocity.x = PLAYER_ROLL_SPEED();
     this.body.velocity.x = this.movement.rollVelocity;
+
+    console.log(this.body.velocity.x);
     
     if(this.body.velocity.y < 0) {
         this.state = this.Jumping;
@@ -494,7 +501,6 @@ Player.prototype.Hurting = function() {
 
 Player.prototype.AttackFront = function() {
     this.PlayAnim('attack_front');
-    //this.body.velocity.x = 0;
 
     if(this.animations.currentAnim.isFinished) {
         this.state = this.Standing;
@@ -503,7 +509,6 @@ Player.prototype.AttackFront = function() {
 
 Player.prototype.AttackOverhead = function() {
     this.PlayAnim('attack_overhead');
-    //this.body.velocity.x = 0;
 
     if(this.animations.currentAnim.isFinished) {
         this.state = this.Standing;
@@ -512,6 +517,9 @@ Player.prototype.AttackOverhead = function() {
 
 Player.prototype.AttackStab = function() {
     this.PlayAnim('attack_stab');
+
+    //override the max velocity
+    this.body.maxVelocity.x = PLAYER_ROLL_SPEED();
     this.body.velocity.x = this.movement.rollVelocity;
 
     if(this.animations.currentAnim.isFinished) {
