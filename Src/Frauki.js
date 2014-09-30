@@ -182,10 +182,10 @@ Player.prototype.Run = function(params) {
         return;
 
     if(params.dir === 'left') {
-        this.body.acceleration.x = -700;
+        this.body.acceleration.x = -900;
         this.SetDirection('left');
     } else if(params.dir === 'right') {
-        this.body.acceleration.x = 700;
+        this.body.acceleration.x = 900;
         this.SetDirection('right');
     } else {
         //this.body.velocity.x = 0 + this.movement.inertia;
