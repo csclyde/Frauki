@@ -41,7 +41,7 @@ Enemy.prototype.types['Sporoid'] =  function() {
 	this.Dash = function() {
 		if(game.time.now < this.dashWaitTimer)
 			return;
-		
+
 		game.physics.arcade.moveToXY(this, frauki.body.center.x, frauki.body.center.y, 450);
 		this.state = this.Dashing;
 		this.dashTimer = game.time.now + 1000;
@@ -79,7 +79,7 @@ Enemy.prototype.types['Sporoid'] =  function() {
 			case 'down': this.body.velocity.y += 30; break;
 		}
 
-		if(this.PlayerIsNear(160)) {
+		if(this.PlayerIsNear(120)) {
 			this.Dash();
 			return;
 		}

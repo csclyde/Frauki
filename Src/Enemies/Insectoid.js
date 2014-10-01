@@ -26,10 +26,10 @@ Enemy.prototype.types['Insectoid'] =  function() {
 			this.scale.x /= 0.7;
 		}
 
-		if(this.state !== this.PreDiving && this.state !== this.Diving && this.angle !== 0)
+		if(this.state !== this.Diving && this.angle !== 0)
 			this.angle = 0;
 
-		if(this.state !== this.PreDiving && this.state !== this.Diving && this.body.width !== 67)
+		if(this.state !== this.Diving && this.body.width !== 67)
 			this.body.setSize(67, 25, 0, 0);
 	};
 
@@ -70,30 +70,8 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		}
 	};
 
-	this.Creep = function(random) {
-		this.state = this.Idling;
-
-		if(random) {
-			if(Math.abs(this.body.velocity.x) === 100)
-				return;
-
-			if(c) {
-				this.body.velocity.x = -100;
-			} else {
-				this.body.velocity.x = 100;
-			}
-		}
-		else {
-			if(playerX < this.body.x) {
-				this.body.velocity.x = -100;
-			} else {
-				this.body.velocity.x = 100;
-			}
-		}	
-	};
-
 	this.Dive = function() {
-		this.state = this.PreDiving;
+		this.state = this.Diving;
 		this.body.velocity.y = 300;
 		this.body.velocity.x = 0;
 		this.body.setSize(25, 67, 0, 0);
@@ -121,20 +99,6 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	this.Idling = function() {
 		this.PlayAnim('idle');
 
-		if(this.PlayerIsVisible()) {
-			if(frauki.body.center.x - 10 < this.body.center.x) {
-				this.SetDirection('left');
-			} else if(frauki.body.center.x + 10 > this.body.center.x) {
-				this.SetDirection('right');
-			}
-		} 
-		else {
-			if(Math.random() * 100 <= 5)
-				this.Creep();
-
-			return;
-		}
-
 		if(this.PlayerIsNear(50)) {
 			if(Math.random() * 5 < 1) 
 				this.Dodge();
@@ -147,7 +111,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		} else if(Math.abs(this.body.x - playerX) > 100 && Math.abs(this.body.x - playerX) < 450 && this.body.onFloor()) {
 			this.Hop();
 		} else {
-			this.Creep();
+			
 		}
 	};
 
@@ -216,10 +180,6 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
 	this.Shooting = function() {
 
-	};
-
-	this.PreDiving = function() {
-		this.state = this.Diving;
 	};
 
 	this.Diving = function() {

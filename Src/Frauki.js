@@ -191,10 +191,6 @@ Player.prototype.Run = function(params) {
         //this.body.velocity.x = 0 + this.movement.inertia;
         this.body.acceleration.x = 0;
         this.movement.rollBoost = 0;
-
-        //if no direction is being pushed, and the player is not in an override state
-        //lock down their x velocity
-        //this.body.velocity.x = 0;
     }
 };
 
@@ -457,8 +453,6 @@ Player.prototype.Rolling = function() {
 
     this.body.maxVelocity.x = PLAYER_ROLL_SPEED();
     this.body.velocity.x = this.movement.rollVelocity;
-
-    console.log(this.body.velocity.x);
     
     if(this.body.velocity.y < 0) {
         this.state = this.Jumping;
