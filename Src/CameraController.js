@@ -45,7 +45,7 @@ CameraController.prototype.UpdateCamera = function() {
 
 	//do the screen shake
 	if(this.shakeMagnitudeX > 0) {
-		this.shakeX = Math.sin(game.time.now) * this.shakeMagnitudeX;
+		this.shakeX = Math.sin(game.time.now * 3) * this.shakeMagnitudeX;
 	} else {
 		this.shakeX = 0;
 	}
