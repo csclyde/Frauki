@@ -89,7 +89,7 @@ Player.prototype.create = function() {
 
 Player.prototype.update = function() {
 
-    this.body.maxVelocity.x = PLAYER_SPEED();
+    this.body.maxVelocity.x = PLAYER_SPEED() + this.movement.rollBoost;
 
     this.state();
 
@@ -182,10 +182,10 @@ Player.prototype.Run = function(params) {
         return;
 
     if(params.dir === 'left') {
-        this.body.acceleration.x = -900;
+        this.body.acceleration.x = -1100;
         this.SetDirection('left');
     } else if(params.dir === 'right') {
-        this.body.acceleration.x = 900;
+        this.body.acceleration.x = 1100;
         this.SetDirection('right');
     } else {
         //this.body.velocity.x = 0 + this.movement.inertia;

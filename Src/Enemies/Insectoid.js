@@ -40,7 +40,8 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
 		this.attackTimer = game.time.now + 300;
 		this.state = this.PreHopping;
-		this.scale.y = 0.7;
+		game.add.tween(this.scale).to({y: 0.7}, 200, Phaser.Easing.Exponential.Out, true);
+		//this.scale.y = 0.7;
 
 	};
 
@@ -76,7 +77,8 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		this.body.velocity.x = 0;
 		this.body.setSize(25, 67, 0, 0);
 		this.scale.x = 1;
-		this.angle = 90;
+		game.add.tween(this).to({angle: 90}, 100, Phaser.Easing.Exponential.Out, true);
+		//this.angle = 90;
 	};
 
 	this.TakeHit = function(power) {
@@ -118,10 +120,17 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	this.PreHopping = function() {
 		this.PlayAnim('idle');
 
+		if(playerX < this.body.x) {
+			this.SetDirection('left');
+		} else {
+			this.SetDirection('right');
+		}
+
 		if(game.time.now > this.attackTimer) {
 			this.attackTimer = game.time.now + 2000;
 			this.state = this.Hopping;
-			this.scale.y = 1;
+			game.add.tween(this.scale).to({y: 1}, 100, Phaser.Easing.Bounce.Out, true);
+			//this.scale.y = 1;
 
 			this.body.velocity.y = (-1 * (Math.random() * 200)) - 100;
 

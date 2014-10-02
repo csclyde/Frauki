@@ -2,11 +2,11 @@
 
 "Sporoid0000.png":
 {
-	"frame": {"x":2,"y":2,"w":40,"h":23},
+	"frame": {"x":2,"y":2,"w":39,"h":23},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":23},
-	"sourceSize": {"w":40,"h":23},
+	"spriteSourceSize": {"x":0,"y":0,"w":39,"h":23},
+	"sourceSize": {"w":39,"h":23},
 	"pivot": {"x":0.5,"y":0.5}
 }},
 "meta": {
@@ -14,8 +14,8 @@
 	"version": "1.0",
 	"image": "Sporoid.png",
 	"format": "RGBA8888",
-	"size": {"w":44,"h":27},
+	"size": {"w":43,"h":27},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:60edf8ca4788d29ac07f2206da40e379:4f965f09c3a7b9faa46cc343b2602317:d991ed0c931604f4cc4c42f39b0a7965$"
+	"smartupdate": "$TexturePacker:SmartUpdate:06a303c4f0b1db1a0396af998d28abe8:fa16d46ff8dd9bb9d720e5a75499af6f:d991ed0c931604f4cc4c42f39b0a7965$"
 }
 }
