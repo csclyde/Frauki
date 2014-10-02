@@ -100,7 +100,7 @@ Player.prototype.update = function() {
     }
 
     if(this.state === this.Falling) {
-        
+        this.body.gravity.y = game.physics.arcade.gravity.y * 2;
     } else {
         this.body.gravity.y = 0;
     }
@@ -182,10 +182,10 @@ Player.prototype.Run = function(params) {
         return;
 
     if(params.dir === 'left') {
-        this.body.acceleration.x = -1100;
+        this.body.acceleration.x = -1500;
         this.SetDirection('left');
     } else if(params.dir === 'right') {
-        this.body.acceleration.x = 1100;
+        this.body.acceleration.x = 1500;
         this.SetDirection('right');
     } else {
         //this.body.velocity.x = 0 + this.movement.inertia;
@@ -248,7 +248,7 @@ Player.prototype.Slash = function(params) {
         this.movement.diveVelocity = 1400;
     }
     //running dash
-    else if(game.time.now < this.timers.dashWindow && (this.state === this.Running || this.state === this.Standing || this.state === this.Landing)) {
+    else if(this.state === this.Rolling || this.state === this.Kicking) {//(game.time.now < this.timers.dashWindow && (this.state === this.Running || this.state === this.Standing || this.state === this.Landing)) {
         this.state = this.AttackStab;
 
         if(this.states.direction === 'left') {
