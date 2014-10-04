@@ -50,11 +50,7 @@ CameraController.prototype.UpdateCamera = function() {
 		this.shakeX = 0;
 	}
 
-	//conditional is to compensate for change is body size
-	if(frauki.state === frauki.Crouching)
-		game.camera.focusOnXY(this.camX + frauki.body.x + this.shakeX, this.camY + frauki.body.y - 20 + this.shakeY);
-	else
-		game.camera.focusOnXY(this.camX + frauki.body.x + this.shakeX, this.camY + frauki.body.y + this.shakeY);
+	game.camera.focusOnXY(this.camX + frauki.body.x + this.shakeX, this.camY + frauki.body.y + this.shakeY);
 
 	this.prevXVel = frauki.body.velocity.x;
 	this.prevYVel = frauki.body.velocity.y;

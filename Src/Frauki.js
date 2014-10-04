@@ -19,21 +19,20 @@ Player = function (game, x, y, name) {
     this.animations.add('stand', ['Stand0000'], 10, true, false);
     this.animations.add('run', ['Run0000', 'Run0001', 'Run0002', 'Run0003', 'Run0004', 'Run0005', 'Run0006', 'Run0007'], 15, true, false);
     this.animations.add('jump', ['Jump0000', 'Jump0001', 'Jump0002', 'Jump0003', 'Jump0004'], 10, true, false);
-    this.animations.add('peak', ['Standing Jump0002', 'Standing Jump0003', 'Standing Jump0004'], 10, false, false);
+    this.animations.add('peak', ['Peak0000', 'Peak0001'], 14, false, false);
     this.animations.add('fall', ['Fall0000', 'Fall0001', 'Fall0002', 'Fall0003'], 10, true, false);
     this.animations.add('land', ['Standing Jump0006', 'Standing Jump0007', 'Standing Jump0008'], 10, false, false);
-    this.animations.add('crouch', ['Crouch0000'], 10, true, false);
+    this.animations.add('crouch', ['Crouch0000', 'Crouch0001', 'Crouch0002', 'Crouch0003', 'Crouch0004', 'Crouch0005', 'Crouch0006', 'Crouch0007', 'Crouch0008'], 20, true, false);
     this.animations.add('flip', ['Flip0000', 'Flip0001', 'Flip0002', 'Flip0003', 'Flip0004'], 14, false, false);
     this.animations.add('roll', ['Flip0000', 'Flip0001', 'Flip0002', 'Flip0003', 'Flip0004'], 14, false, false);
     this.animations.add('hit', ['Hit0000', 'Hit0001'], 10, true, false);
     this.animations.add('kick', ['Kick0000', 'Kick0001'], 18, false, false);
 
     //attacks
-    this.animations.add('attack_front', ['Attack Front0001', 'Attack Front0002', 'Attack Front0003', 'Attack Front0004', 'Attack Front0005', 'Attack Front0006', 'Attack Front0007', 'Attack Front0008',], 18, false, false);
-    this.animations.add('attack_overhead', ['Slash Standing0006', 'Slash Standing0007', 'Slash Standing0008', 'Slash Standing0009', 'Slash Standing0010'], 18, false, false);
+    this.animations.add('attack_front', ['Attack Front0001', 'Attack Front0002', 'Attack Front0003', 'Attack Front0004', 'Attack Front0005', 'Attack Front0006', 'Attack Front0007', 'Attack Front0008',], 20, false, false);
+    this.animations.add('attack_overhead', ['Attack Overhead0002', 'Attack Overhead0003', 'Attack Overhead0004', 'Attack Overhead0005', 'Attack Overhead0006', 'Attack Overhead0007', 'Attack Overhead0008', 'Attack Overhead0009', 'Attack Overhead0010'], 20, false, false);
     this.animations.add('attack_stab', ['Slash Standing0013', 'Slash Standing0014', 'Slash Standing0015', 'Slash Standing0016'], 18, false, false);
     this.animations.add('attack_dive', ['Slash Standing0006', 'Slash Standing0007', 'Slash Standing0008'], 18, false, false);
-    this.animations.add('attack_jump', ['Slash Standing0006', 'Slash Standing0007', 'Slash Standing0008'], 12, false, false);
 
     this.state = this.Standing;
     this.PlayAnim('stand');
@@ -552,7 +551,7 @@ Player.prototype.AttackDive = function() {
 };
 
 Player.prototype.AttackJump = function() {
-    this.PlayAnim('attack_jump');
+    this.PlayAnim('attack_overhead');
     this.body.velocity.y = this.movement.jumpSlashVelocity;
 
     if(this.animations.currentAnim.isFinished) {
