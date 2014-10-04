@@ -26,6 +26,19 @@ var fraukiDamageFrames = {
 		penetration: 0
 	},
 
+	//slash across in front of yourself return
+	'Attack Front0004': {
+		damageFrame: true,
+		x: 40, 
+		y: 10,
+		w: 35,
+		h: 35,
+
+		damage: 10,
+		knockback: 0.5,
+		penetration: 0
+	},
+
 	//slash across in front of yourself
 	'Slash Standing0003': {
 		damageFrame: true,
@@ -52,6 +65,45 @@ var fraukiDamageFrames = {
 		penetration: 0
 	},
 	
+	//overhead swing
+	'Attack Overhead0004': {
+		damageFrame: true,
+		x: -15, 
+		y: 15,
+		w: 25,
+		h: 30,
+
+		damage: 10,
+		knockback: 0,
+		penetration: 0
+	},
+
+	//overhead swing
+	'Attack Overhead0006': {
+		damageFrame: true,
+		x: -30, 
+		y: -15,
+		w: 45,
+		h: 30,
+
+		damage: 10,
+		knockback: 0,
+		penetration: 0
+	},
+
+	//overhead swing
+	'Attack Overhead0007': {
+		damageFrame: true,
+		x: -30, 
+		y: -32,
+		w: 75,
+		h: 60,
+
+		damage: 10,
+		knockback: 0,
+		penetration: 0
+	},
+
 	//overhead swing
 	'Slash Standing0007': {
 		damageFrame: true,

@@ -3,7 +3,6 @@ PLAYER_ROLL_SPEED = function() { return 455 + (frauki.states.energy * 5); }
 PLAYER_RUN_SLASH_SPEED = function() { return  300 + (frauki.states.energy * 10); }
 PLAYER_JUMP_SLASH_SPEED = function() { return 1000 + frauki.states.energy * 5; }
 PLAYER_KICK_SPEED = 800;
-PLAYER_INERTIA = 100;
 
 Player = function (game, x, y, name) {
 
@@ -30,7 +29,7 @@ Player = function (game, x, y, name) {
 
     //attacks
     this.animations.add('attack_front', ['Attack Front0001', 'Attack Front0002', 'Attack Front0003', 'Attack Front0004', 'Attack Front0005', 'Attack Front0006', 'Attack Front0007', 'Attack Front0008',], 20, false, false);
-    this.animations.add('attack_overhead', ['Attack Overhead0002', 'Attack Overhead0003', 'Attack Overhead0004', 'Attack Overhead0005', 'Attack Overhead0006', 'Attack Overhead0007', 'Attack Overhead0008', 'Attack Overhead0009', 'Attack Overhead0010'], 20, false, false);
+    this.animations.add('attack_overhead', ['Attack Overhead0003', 'Attack Overhead0004', 'Attack Overhead0005', 'Attack Overhead0006', 'Attack Overhead0007', 'Attack Overhead0008', 'Attack Overhead0009', 'Attack Overhead0010'], 20, false, false);
     this.animations.add('attack_stab', ['Slash Standing0013', 'Slash Standing0014', 'Slash Standing0015', 'Slash Standing0016'], 18, false, false);
     this.animations.add('attack_dive', ['Slash Standing0006', 'Slash Standing0007', 'Slash Standing0008'], 18, false, false);
 
@@ -46,7 +45,6 @@ Player = function (game, x, y, name) {
     this.states.direction = 'right';
     this.states.crouching = false;
     this.states.hasFlipped = false;
-    this.states.attacking = false;
     this.states.upPresseed = false;
     this.states.attackOutOfRoll = false;
     this.states.energy = 15;
@@ -62,7 +60,6 @@ Player = function (game, x, y, name) {
     this.movement.diveVelocity = 0;
     this.movement.jumpSlashVelocity = 0;
     this.movement.rollBoost = 0;
-    this.movement.inertia = 0;
 
     this.currentAttack = {};
     this.attackRect = game.add.sprite(0, 0, null);
@@ -133,11 +130,8 @@ Player.prototype.UpdateAttackGeometry = function() {
     if(this.animations.currentFrame) {
         this.currentAttack = fraukiDamageFrames[this.animations.currentFrame.name];
     } 
-    
-    this.states.attacking = false;
 
     if(!!this.currentAttack) {
-        this.states.attacking = true;
 
         if(this.states.direction === 'right') {
             this.attackRect.body.x = this.currentAttack.x + this.body.x; 
@@ -175,6 +169,13 @@ Player.prototype.LoseEnergy = function() {
     }
 };
 
+Player.prototype.Attacking = function() {
+    if(this.state === this.AttackFront || this.state === this.AttackOverhead || this.state === this.AttackStab || this.state === this.AttackDive || this.state === this.AttackJump)
+        return true;
+    else
+        return false;
+}
+
 ////////////////ACTIONS//////////////////
 Player.prototype.Run = function(params) {
     if(this.state === this.Hurting || this.state === this.Rolling || this.state === this.AttackStab) 
@@ -187,7 +188,6 @@ Player.prototype.Run = function(params) {
         this.body.acceleration.x = 1500;
         this.SetDirection('right');
     } else {
-        //this.body.velocity.x = 0 + this.movement.inertia;
         this.body.acceleration.x = 0;
         this.movement.rollBoost = 0;
     }
