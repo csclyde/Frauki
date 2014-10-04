@@ -1,7 +1,9 @@
-PLAYER_SPEED = function() { return 150 + (frauki.states.energy * 7); }
-PLAYER_ROLL_SPEED = function() { return 455 + (frauki.states.energy * 5); }
-PLAYER_RUN_SLASH_SPEED = function() { return  300 + (frauki.states.energy * 10); }
-PLAYER_JUMP_SLASH_SPEED = function() { return 1000 + frauki.states.energy * 5; }
+PLAYER_SPEED = function() { return 150 + (energyController.GetEnergy() * 7); }
+PLAYER_ROLL_SPEED = function() { return 455 + (energyController.GetEnergy() * 5); }
+PLAYER_RUN_SLASH_SPEED = function() { return  300 + (energyController.GetEnergy() * 10); }
+PLAYER_JUMP_VEL = function() { return -370 - (energyController.GetEnergy() * 3); }
+PLAYER_DOUBLE_JUMP_VEL = function() { return -350 - (energyController.GetEnergy() * 2); }
+PLAYER_JUMP_SLASH_SPEED = function() { return 1000 + (energyController.GetEnergy() * 5); }
 PLAYER_KICK_SPEED = 800;
 
 Player = function (game, x, y, name) {
@@ -47,7 +49,7 @@ Player = function (game, x, y, name) {
     this.states.hasFlipped = false;
     this.states.upPresseed = false;
     this.states.attackOutOfRoll = false;
-    this.states.energy = 15;
+    this.states.wasAttacking = false;
 
     this.timers = {};
     this.timers.gracePeriod = 0;
@@ -99,6 +101,16 @@ Player.prototype.update = function() {
         this.body.gravity.y = game.physics.arcade.gravity.y * 2;
     } else {
         this.body.gravity.y = 0;
+    }
+
+    if(this.states.wasAttacking && !this.Attacking()) {
+        this.timers.gracePeriod = game.time.now + 100;
+    }
+
+    if(this.Attacking()) {
+        this.states.wasAttacking = true;
+    } else {
+        this.states.wasAttacking = false;
     }
 
     /*if(this.state === this.Crouching) {
@@ -153,22 +165,6 @@ Player.prototype.UpdateAttackGeometry = function() {
     }
 };
 
-Player.prototype.GainEnergy = function() {
-    frauki.states.energy += 1;
-
-    if(frauki.states.energy > 30)
-        frauki.states.energy = 30;
-};
-
-Player.prototype.LoseEnergy = function() {
-    if(this.states.energy > 0)
-        this.states.energy -= 2;
-
-    if(this.states.energy <= 0) {
-        Frogland.Restart();
-    }
-};
-
 Player.prototype.Attacking = function() {
     if(this.state === this.AttackFront || this.state === this.AttackOverhead || this.state === this.AttackStab || this.state === this.AttackDive || this.state === this.AttackJump)
         return true;
@@ -216,13 +212,13 @@ Player.prototype.Jump = function(params) {
     if(params.jump) {
         //normal jump
         if(this.body.onFloor() || this.state === this.Standing || this.state === this.Running || this.state === this.Landing) {
-            this.body.velocity.y = -370 - (this.states.energy * 3);
+            this.body.velocity.y = PLAYER_JUMP_VEL();
         }
         //double jump
         else if(this.states.hasFlipped === false && this.state !== this.Falling && this.state !== this.Rolling && this.state !== this.AttackStab) {
             if(this.tweens.stopJump) { this.tweens.stopJump.stop(); }
 
-            this.body.velocity.y = -350 - (this.states.energy * 2);
+            this.body.velocity.y = PLAYER_DOUBLE_JUMP_VEL();
             this.state = this.Flipping;
             this.states.hasFlipped = true;
             this.timers.gracePeriod = game.time.now + 300;
@@ -329,7 +325,7 @@ Player.prototype.Hit = function(f, e) {
 
     effectsController.ParticleSpray(this.body.x, this.body.y, this.body.width, this.body.height, 'yellow');
 
-    this.LoseEnergy();
+    energyController.RemoveEnergy();
 
     e.energy += 0.5;
 

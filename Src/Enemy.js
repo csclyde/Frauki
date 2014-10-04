@@ -80,7 +80,7 @@ function EnemyHit(f, e) {
 
     events.publish('camera_shake', {magnitudeX: 15, magnitudeY: 5, duration: 100});
 
-    frauki.GainEnergy();
+    energyController.AddEnergy();
     e.energy--;
 
     effectsController.ParticleSpray(e.body.x, e.body.y, e.body.width, e.body.height, 'red', e.PlayerDirection());

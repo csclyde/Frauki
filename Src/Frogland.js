@@ -39,6 +39,7 @@ var parallax1, parallax2;
 var cameraController;
 var inputController;
 var effectsController;
+var energyController;
 var frauki;
 var fraukiSpawnX, fraukiSpawnY;
 
@@ -104,10 +105,11 @@ Frogland.create = function() {
     cameraController = new CameraController(frauki, map);
     inputController = new InputController(frauki);
     effectsController = new EffectsController();
+    energyController = new EnergyController();
 
     game.camera.focusOnXY(frauki.body.x, frauki.body.y);
 
-    energyText = game.add.text(0, 0, '', {font: "14px Arial", fill: "#ff0044"});
+    energyText = game.add.text(0, 0, '', {font: "10px Arial", fill: "#ff0044"});
     energyText.fixedToCamera = true;
 };
 
@@ -129,11 +131,12 @@ Frogland.update = function() {
     cameraController.UpdateCamera();
     inputController.UpdateInput();
     //effectsController.UpdateEffects();
+    energyController.UpdateEnergy();
 
     playerX = frauki.body.x;
     playerY = frauki.body.y;
 
-    energyText.setText('Fraukis Energy: ' + frauki.states.energy);
+    energyText.setText('Energy: ' + energyController.GetEnergy() + ' Neutral: ' + energyController.neutralPoint);
 };
 
 Frogland.render = function() {
