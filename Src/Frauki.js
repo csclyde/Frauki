@@ -48,7 +48,6 @@ Player = function (game, x, y, name) {
     this.states.crouching = false;
     this.states.hasFlipped = false;
     this.states.upPresseed = false;
-    this.states.attackOutOfRoll = false;
     this.states.wasAttacking = false;
 
     this.timers = {};
@@ -243,7 +242,7 @@ Player.prototype.Slash = function(params) {
         this.movement.diveVelocity = 1400;
     }
     //running dash
-    else if(this.state === this.Rolling || this.state === this.Kicking) {//(game.time.now < this.timers.dashWindow && (this.state === this.Running || this.state === this.Standing || this.state === this.Landing)) {
+    else if(this.state === this.Rolling || this.state === this.Kicking) {
         this.state = this.AttackStab;
 
         if(this.states.direction === 'left') {
@@ -268,10 +267,6 @@ Player.prototype.Slash = function(params) {
             this.state = this.AttackOverhead;
         else
             this.state = this.AttackFront;
-    }
-    //attack out of roll
-    else if(this.state === this.Rolling) {
-        this.states.attackOutOfRoll = true;
     } else {
         console.log('An attack was attempted in an unresolved state');
     }
@@ -461,15 +456,13 @@ Player.prototype.Rolling = function() {
     }
 
     if(this.animations.currentAnim.isFinished) {
-        if(this.states.attackOutOfRoll === true) {
-            this.state = this.AttackStab;
-            this.states.attackOutOfRoll = false;
-        } else if(this.body.velocity.y > 150) {
+        if(this.body.velocity.y > 150) {
             this.state = this.Falling;
+        } else if(!inputController.runLeft.isDown && !inputController.runRight.isDown && this.body.onFloor()) {
+            this.state = this.Standing;
+            this.body.velocity.x = 0;
         } else if(this.body.velocity.x !== 0 && this.body.onFloor()) {
             this.state = this.Running;
-        } else if(this.body.velocity.x === 0 && this.body.onFloor()) {
-            this.state = this.Standing;
         }
     }
 };
@@ -512,14 +505,15 @@ Player.prototype.AttackStab = function() {
     this.body.velocity.x = this.movement.rollVelocity;
 
     if(this.animations.currentAnim.isFinished) {
-        this.timers.dashWindow = game.time.now + 200;
+        //this.timers.dashWindow = game.time.now + 200;
 
         if(this.body.velocity.y > 150) {
             this.state = this.Falling;
+        } else if(!inputController.runLeft.isDown && !inputController.runRight.isDown && this.body.onFloor()) {
+            this.state = this.Standing;
+            this.body.velocity.x = 0;
         } else if(this.body.velocity.x !== 0 && this.body.onFloor()) {
             this.state = this.Running;
-        } else if(this.body.velocity.x === 0 && this.body.onFloor()) {
-            this.state = this.Standing;
         }
     }
 };
