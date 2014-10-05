@@ -13,7 +13,7 @@ EnergyController.prototype.UpdateEnergy = function() {
 	var energyDiff = this.energy - this.neutralPoint;
 	var step = -1 * energyDiff / 25;
 
-	if(step < 0.05 && step > -0.05) this.energy = this.neutralPoint;
+	if(step < 0.005 && step > -0.005) this.energy = this.neutralPoint;
 	else if(step < 0.2 && step > 0) step = 0.2;
 	else if(step > -0.2 && step < 0) step = -0.2;
 
@@ -33,6 +33,9 @@ EnergyController.prototype.UpdateEnergy = function() {
 		this.neutralPoint = 30;
 	if(this.neutralPoint < 0)
 		this.neutralPoint = 0;
+
+	if(this.neutralPoint <= 0)
+		Frogland.Restart();
 };
 
 EnergyController.prototype.AddEnergy = function() {
