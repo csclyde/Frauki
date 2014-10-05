@@ -40,13 +40,13 @@ EnergyController.prototype.UpdateEnergy = function() {
 
 EnergyController.prototype.AddEnergy = function() {
 	this.energy += 2;
-	this.neutralPoint += 0.1;
+	this.neutralPoint += 0.2;
 	//add energy and modify the neutral point
 };
 
 EnergyController.prototype.RemoveEnergy = function() {
 	this.energy -= 7;
-	this.neutralPoint -= 0.6;
+	this.neutralPoint -= 0.5;
 
 };
 
