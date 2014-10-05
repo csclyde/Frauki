@@ -104,7 +104,7 @@ Player.prototype.update = function() {
     }
 
     if(this.states.wasAttacking && !this.Attacking()) {
-        this.timers.gracePeriod = game.time.now + 100;
+        //this.timers.gracePeriod = game.time.now + 100;
     }
 
     if(this.Attacking()) {
@@ -327,7 +327,7 @@ Player.prototype.Hit = function(f, e) {
 
     energyController.RemoveEnergy();
 
-    e.energy += 0.5;
+    e.energy += 1;
 
     this.body.x < e.body.x ? this.body.velocity.x = -200 : this.body.velocity.x = 200;
 

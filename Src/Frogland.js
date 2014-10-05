@@ -27,6 +27,8 @@ Frogland.preload = function() {
     game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     game.scale.setSize();
 
+    game.time.advancedTiming = true;
+
 }
 
 var map;
@@ -136,7 +138,7 @@ Frogland.update = function() {
     playerX = frauki.body.x;
     playerY = frauki.body.y;
 
-    energyText.setText('Energy: ' + energyController.GetEnergy() + ' Neutral: ' + energyController.neutralPoint);
+    energyText.setText('Energy: ' + energyController.GetEnergy() + ' Neutral: ' + energyController.GetNeutral() + ' FPS: ' + game.time.fps);
 };
 
 Frogland.render = function() {

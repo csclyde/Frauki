@@ -2,10 +2,26 @@ EnergyController = function() {
 
 	this.energy = 15;
 	this.neutralPoint = 15;
+	this.tickTimer = 0;
 };
 
 EnergyController.prototype.UpdateEnergy = function() {
-	//move energy towards the neutral point
+	//move energy towards the neutral point. the step should increase in magnitude with distance from
+	//the neutral point. The energy wants to rest at the neutral point. the farther it is from there, the
+	//more perturbed it is. 
+
+	var energyDiff = this.energy - this.neutralPoint;
+	var step = -1 * energyDiff / 25;
+
+	if(step < 0.05 && step > -0.05) this.energy = this.neutralPoint;
+	else if(step < 0.2 && step > 0) step = 0.2;
+	else if(step > -0.2 && step < 0) step = -0.2;
+
+	//if the timer is up, tick the energy and reset the timer
+	if(game.time.now > this.tickTimer) {
+		this.energy += step;
+		this.tickTimer = game.time.now + 500;
+	}
 
 	//clamp the enrgy and neutral point;
 	if(this.energy > 30)
@@ -20,15 +36,25 @@ EnergyController.prototype.UpdateEnergy = function() {
 };
 
 EnergyController.prototype.AddEnergy = function() {
-	this.energy += 1;
+	this.energy += 2;
+	this.neutralPoint += 0.1;
 	//add energy and modify the neutral point
 };
 
 EnergyController.prototype.RemoveEnergy = function() {
-	this.energy -= 2;
+	this.energy -= 7;
+	this.neutralPoint -= 0.6;
 
 };
 
 EnergyController.prototype.GetEnergy = function() {
-	return this.energy;
+	return Math.round(this.energy * 10) / 10;
+};
+
+EnergyController.prototype.GetNeutral = function() {
+	return Math.round(this.neutralPoint * 10) / 10;
+}
+
+EnergyController.prototype.DelayEntropy = function() {
+	this.tickTimer = game.time.now + 1500;
 };
