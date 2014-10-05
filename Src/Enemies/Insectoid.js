@@ -95,6 +95,8 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	    this.hitTimer = game.time.now + 400;
 
 	    this.state = this.Hurting;
+
+	    this.scale.y = 1;
 	};
 
 	////////////////////////////////STATES////////////////////////////////////
@@ -129,8 +131,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		if(game.time.now > this.attackTimer) {
 			this.attackTimer = game.time.now + 2000;
 			this.state = this.Hopping;
-			game.add.tween(this.scale).to({y: 1}, 100, Phaser.Easing.Bounce.Out, true);
-			//this.scale.y = 1;
+			this.scale.y = 1;
 
 			this.body.velocity.y = (-1 * (Math.random() * 200)) - 100;
 
@@ -160,7 +161,13 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	};
 
 	this.PreScuttling = function() {
-		this.PlayAnim('idle');			
+		this.PlayAnim('idle');
+
+		if(playerX < this.body.x) {
+			this.SetDirection('left');
+		} else {
+			this.SetDirection('right');
+		}			
 
 		if(game.time.now > this.attackTimer) {
 			this.attackTimer = game.time.now + 2000;
