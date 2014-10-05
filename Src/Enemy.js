@@ -87,8 +87,12 @@ function EnemyHit(f, e) {
 
     e.TakeHit();
 
-    if(e.energy <= 0)
+    if(e.energy <= 0) {
+        if(!!e.Die)
+            e.Die();
+
         e.kill();
+    }
 };
 
 //provide utility functions here that the specific enemies can all use
