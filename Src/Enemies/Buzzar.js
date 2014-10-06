@@ -16,6 +16,8 @@ Enemy.prototype.types['Buzzar'] =  function() {
     this.stingRestTimer = 0;
 
     this.anger = 1;
+    
+    this.weight = 80;
 
 	this.updateFunction = function() {
 
@@ -70,9 +72,6 @@ Enemy.prototype.types['Buzzar'] =  function() {
     
 	    //compute the velocity based on weight and attack knockback
 	    this.body.velocity.y = -350 + this.weight;
-
-	    var c = frauki.body.x < this.body.x ? 1 : -1;
-	    this.body.velocity.x =  c * ((80 + (this.weight / 2)) * (frauki.currentAttack.knockback));
 
 	    //a durability stat should modify how long they are stunned for. also, the amount of dmg
 	    this.hitTimer = game.time.now + 300;
