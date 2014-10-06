@@ -26,9 +26,6 @@ Frogland.preload = function() {
     game.scale.pageAlignHorizontally = true;
     game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     game.scale.setSize();
-
-    game.time.advancedTiming = true;
-
 }
 
 var map;
@@ -52,6 +49,8 @@ var playerX, playerY;
 var previousCamX;
 
 Frogland.create = function() {
+
+    //game.add.plugin(Phaser.Plugin.Debug);
 
     game.canvas.style['display'] = 'none';
     pixel.canvas = Phaser.Canvas.create(game.width * pixel.scale, game.height * pixel.scale);
@@ -113,6 +112,8 @@ Frogland.create = function() {
 
     energyText = game.add.text(0, 0, '', {font: "10px Arial", fill: "#ff0044"});
     energyText.fixedToCamera = true;
+
+    this.enemySelfCollisionTimer = 0;
 };
 
 Frogland.update = function() {
@@ -121,7 +122,10 @@ Frogland.update = function() {
 	game.physics.arcade.collide(frauki, midgroundLayer);
     game.physics.arcade.collide(this.enemyGroup, midgroundLayer);
 
-    game.physics.arcade.collide(this.enemyGroup, this.enemyGroup);
+    if(game.time.now > this.enemySelfCollisionTimer) {
+        game.physics.arcade.collide(this.enemyGroup, this.enemyGroup);
+        this.enemySelfCollisionTImer = game.time.now + 250;
+    }
 
     if(!frauki.Attacking() && !frauki.Grace()) {
         game.physics.arcade.overlap(frauki, this.enemyGroup, frauki.Hit, null, frauki);
@@ -145,9 +149,9 @@ Frogland.render = function() {
     //game.debug.body(frauki);
     //game.debug.body(frauki.attackRect);
 
-    this.enemyGroup.forEach(function(e) {
+    /*this.enemyGroup.forEach(function(e) {
         game.debug.body(e);
-    });
+    });*/
 
     pixel.context.drawImage(game.canvas, 0, 0, game.width, game.height, 0, 0, pixel.width, pixel.height);
 };
@@ -158,7 +162,8 @@ Frogland.Restart = function() {
             frauki.body.x = fraukiSpawnX;
             frauki.body.y = fraukiSpawnY;
             game.world.alpha = 1;
-            frauki.states.energy = 15;
+            energyController.energy = 15;
+            energyController.neutralPoint = 15;
 
             Frogland.enemyGroup.forEach(function(e) {
                 e.alive = true;

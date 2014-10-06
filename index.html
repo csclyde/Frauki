@@ -4,6 +4,8 @@
         <meta charset="UTF-8" />
         <title>Frauki's Adventure!</title>
         <script type="text/javascript" src="https://rawgit.com/photonstorm/phaser/master/build/phaser.min.js"></script>
+        <script src="Src/phaser-debug.js"></script>
+
         <script type="text/javascript" src="Src/EventRouter.js"></script>
         <script type="text/javascript" src="Src/CameraController.js"></script>
         <script type="text/javascript" src="Src/InputController.js"></script>
@@ -22,6 +24,7 @@
 
         <script>
         	var game = new Phaser.Game(512, 288, Phaser.CANVAS, "", Frogland, false, false);
+
             var events = new EventRouter();
 
             var pixel = { scale: 2, canvas: null, context: null, width: 512, height: 288 }
