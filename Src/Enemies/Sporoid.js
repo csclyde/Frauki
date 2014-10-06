@@ -11,6 +11,8 @@ Enemy.prototype.types['Sporoid'] =  function() {
     this.dashWaitTimer = 0;
     this.shootTimer = 0;
     this.energy = 3;
+    
+    this.weight = 80;
 
     this.Spore = game.add.emitter(0, 0, 100);
 	this.Spore.makeParticles('Spore');
