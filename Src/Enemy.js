@@ -18,7 +18,7 @@ Enemy = function(game, x, y, name) {
     this.energy = 7;
     this.weight = 400;
     
-    this.body.setBounce(0.2);
+    this.body.bounce.set(0.2);
 
     if(!!this.types[name]) {
         this.types[name].apply(this);
