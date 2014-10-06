@@ -22,7 +22,7 @@ Player = function (game, x, y, name) {
     this.animations.add('run', ['Run0000', 'Run0001', 'Run0002', 'Run0003', 'Run0004', 'Run0005', 'Run0006', 'Run0007'], 15, true, false);
     this.animations.add('jump', ['Jump0000', 'Jump0001', 'Jump0002', 'Jump0003', 'Jump0004'], 10, true, false);
     this.animations.add('peak', ['Peak0000', 'Peak0001'], 14, false, false);
-    this.animations.add('fall', ['Fall0000', 'Fall0001', 'Fall0002', 'Fall0003'], 10, false, false);
+    this.animations.add('fall', ['Fall0000', 'Fall0001', 'Fall0002', 'Fall0003'], 18, true, false);
     this.animations.add('land', ['Standing Jump0006', 'Standing Jump0007', 'Standing Jump0008'], 10, false, false);
     this.animations.add('crouch', ['Crouch0000', 'Crouch0001', 'Crouch0002', 'Crouch0003', 'Crouch0004', 'Crouch0005', 'Crouch0006', 'Crouch0007', 'Crouch0008'], 20, false, false);
     this.animations.add('flip', ['Flip0000', 'Flip0001', 'Flip0002', 'Flip0003', 'Flip0004'], 14, false, false);
