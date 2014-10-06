@@ -82,7 +82,9 @@ function EnemyHit(f, e) {
 
     energyController.AddEnergy();
     frauki.LandHit();
-    e.energy--;
+    
+    //e.energy--;
+    e.energy -= frauki.currentAttack.damage;
 
     effectsController.ParticleSpray(e.body.x, e.body.y, e.body.width, e.body.height, 'red', e.PlayerDirection());
 
