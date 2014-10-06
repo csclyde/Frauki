@@ -91,7 +91,7 @@ function EnemyHit(f, e) {
 
     effectsController.ParticleSpray(e.body.x, e.body.y, e.body.width, e.body.height, 'red', e.PlayerDirection());
 
-    this.body.velocity.x =  c * this.weight * frauki.currentAttack.knockback;
+    e.body.velocity.x =  c * e.weight * frauki.currentAttack.knockback;
     
     e.TakeHit();
 
