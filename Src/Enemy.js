@@ -16,6 +16,9 @@ Enemy = function(game, x, y, name) {
     this.initialY = this.body.y;
 
     this.energy = 7;
+    this.weight = 400;
+    
+    this.body.setBounce(0.2);
 
     if(!!this.types[name]) {
         this.types[name].apply(this);
@@ -88,6 +91,8 @@ function EnemyHit(f, e) {
 
     effectsController.ParticleSpray(e.body.x, e.body.y, e.body.width, e.body.height, 'red', e.PlayerDirection());
 
+    this.body.velocity.x =  c * this.weight * frauki.currentAttack.knockback;
+    
     e.TakeHit();
 
     if(e.energy <= 0) {
