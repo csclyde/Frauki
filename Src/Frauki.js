@@ -113,6 +113,10 @@ Player.prototype.update = function() {
         this.states.wasAttacking = false;
     }
 
+    if(this.body.acceleration.x === 0 && this.movement.rollVelocity === 0 && this.state !== this.Hurting)
+        this.body.velocity.x = 0;
+
+
     /*if(this.state === this.Crouching) {
         this.body.setSize(11, 30, 0, 0);
     } else {
@@ -464,11 +468,13 @@ Player.prototype.Rolling = function() {
     if(this.animations.currentAnim.isFinished) {
         if(this.body.velocity.y > 150) {
             this.state = this.Falling;
+            this.movement.rollVelocity = 0;
         } else if(!inputController.runLeft.isDown && !inputController.runRight.isDown && this.body.onFloor()) {
             this.state = this.Standing;
-            this.body.velocity.x = 0;
+            this.movement.rollVelocity = 0;
         } else if(this.body.velocity.x !== 0 && this.body.onFloor()) {
             this.state = this.Running;
+            this.movement.rollVelocity = 0;
         }
     }
 };
@@ -515,11 +521,13 @@ Player.prototype.AttackStab = function() {
 
         if(this.body.velocity.y > 150) {
             this.state = this.Falling;
+            this.movement.rollVelocity = 0;
         } else if(!inputController.runLeft.isDown && !inputController.runRight.isDown && this.body.onFloor()) {
             this.state = this.Standing;
-            this.body.velocity.x = 0;
+            this.movement.rollVelocity = 0;
         } else if(this.body.velocity.x !== 0 && this.body.onFloor()) {
             this.state = this.Running;
+            this.movement.rollVelocity = 0;
         }
     }
 };
