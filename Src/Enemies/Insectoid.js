@@ -9,6 +9,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
     this.animations.add('die', ['Die0000', 'Die0001', 'Die0002', 'Die0003'], 10, false, false);
 
     this.attackTimer = 0;
+    this.weight = 800;
 
     this.body.bounce.set(0.5);
 
@@ -86,7 +87,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
         	return;
     
 	    //compute the velocity based on weight and attack knockback
-	    this.body.velocity.y = -400 + this.weight;
+	    this.body.velocity.y = -400 - this.weight;
 
 	    //a durability stat should modify how long they are stunned for. also, the amount of dmg
 	    this.hitTimer = game.time.now + 400;

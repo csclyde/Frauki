@@ -17,7 +17,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
 
     this.anger = 1;
     
-    this.weight = 80;
+    this.weight = 400;
 
 	this.updateFunction = function() {
 
@@ -71,7 +71,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
 		}
     
 	    //compute the velocity based on weight and attack knockback
-	    this.body.velocity.y = -350 + this.weight;
+	    this.body.velocity.y = -350 - this.weight;
 
 	    //a durability stat should modify how long they are stunned for. also, the amount of dmg
 	    this.hitTimer = game.time.now + 300;

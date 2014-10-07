@@ -8,7 +8,7 @@ Enemy = function(game, x, y, name) {
     this.direction = 'right';
     this.SetDirection('left');
     this.state = null;
-    this.weight = 0;
+    this.weight = 400;
     this.hitTimer = 0;
     this.flashing = false;
 
@@ -16,7 +16,6 @@ Enemy = function(game, x, y, name) {
     this.initialY = this.body.y;
 
     this.energy = 7;
-    this.weight = 400;
     
     this.body.bounce.set(0.2);
 
@@ -91,6 +90,7 @@ function EnemyHit(f, e) {
 
     effectsController.ParticleSpray(e.body.x, e.body.y, e.body.width, e.body.height, 'red', e.PlayerDirection());
 
+    var c = frauki.body.center.x < e.body.center.x ? 1 : -1;
     e.body.velocity.x =  c * e.weight * frauki.currentAttack.knockback;
     
     e.TakeHit();
