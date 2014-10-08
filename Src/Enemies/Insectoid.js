@@ -11,6 +11,8 @@ Enemy.prototype.types['Insectoid'] =  function() {
     this.attackTimer = 0;
     this.weight = 800;
 
+    this.squashTween = null;
+
     this.body.bounce.set(0.5);
 
 	this.updateFunction = function() {
@@ -23,8 +25,9 @@ Enemy.prototype.types['Insectoid'] =  function() {
 			}, null, this);
 		}
 
-		if(this.state !== this.PreScuttling && Math.abs(this.scale.x) !== 1) {
-			this.scale.x /= 0.7;
+		if(!!this.squashTween && !this.squashTween.isRunning) {
+			this.scale.x = 1;
+			this.scale.y = 1;
 		}
 
 		if(this.state !== this.Diving && this.angle !== 0)
@@ -41,7 +44,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
 		this.attackTimer = game.time.now + 300;
 		this.state = this.PreHopping;
-		game.add.tween(this.scale).to({y: 0.7}, 200, Phaser.Easing.Exponential.Out, true);
+		this.squashTween = game.add.tween(this.scale).to({y: 0.7}, 200, Phaser.Easing.Exponential.Out, true);
 		//this.scale.y = 0.7;
 
 	};
@@ -52,7 +55,6 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
 		this.attackTimer = game.time.now + 300;
 		this.state = this.PreScuttling;
-		this.scale.x =  this.scale.x * 0.7;
 	};
 
 	this.Dodge = function(overrideFloorCondition) {
@@ -106,7 +108,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 				this.Dodge();
 			else
 				this.Scuttle();
-		} else if(this.body.center.y < frauki.body.y && this.body.center.x > frauki.body.center.x - 20 && this.body.center.x < frauki.body.center.x + 20) {
+		} else if(this.body.center.y < frauki.body.y && this.body.center.x > frauki.body.center.x - 20 && this.body.center.x < frauki.body.center.x + 20 && !this.body.onFloor()) {
 			this.Dive();
 		} else if(Math.abs(this.body.y - playerY) < 40 && Math.abs(this.body.x - playerX) < 400 && this.body.onFloor()) {
 			this.Scuttle();

@@ -39,29 +39,16 @@ var fraukiDamageFrames = {
 		penetration: 0
 	},
 
-	//slash across in front of yourself
-	'Slash Standing0003': {
+	//return to the followthrough, smaller and weaker
+	'Attack Front0005': {
 		damageFrame: true,
-		x: 0, 
-		y: 10,
-		w: 50,
-		h: 25,
-
-		damage: 1,
-		knockback: 0.5,
-		penetration: 0
-	},
-	
-	//followthrough of the front slash, is behind you
-	'Slash Standing0004': {
-		damageFrame: true,
-		x: -35, 
-		y: 10,
-		w: 35,
+		x: -30, 
+		y: 0,
+		w: 25,
 		h: 15,
 
-		damage: 1,
-		knockback: 0,
+		damage: 0.5,
+		knockback: 0.1,
 		penetration: 0
 	},
 	
@@ -72,6 +59,19 @@ var fraukiDamageFrames = {
 		y: 15,
 		w: 25,
 		h: 30,
+
+		damage: 0.5,
+		knockback: 0,
+		penetration: 0
+	},
+
+	//overhead swing
+	'Attack Overhead0005': {
+		damageFrame: true,
+		x: 15, 
+		y: 10,
+		w: 15,
+		h: 15,
 
 		damage: 0.5,
 		knockback: 0,
@@ -130,25 +130,38 @@ var fraukiDamageFrames = {
 		penetration: 0
 	},
 	
-	//stab
-	'Slash Standing0013': {
+	//stab, big short initial shape
+	'Attack Stab0006': {
 		damageFrame: true,
-		x: 7, 
-		y: 15,
+		x: -25, 
+		y: 0,
 		w: 50,
-		h: 12,
+		h: 40,
+
+		damage: 2,
+		knockback: 1.4,
+		penetration: 0
+	},
+
+	//stab, long followthrough
+	'Attack Stab0007': {
+		damageFrame: true,
+		x: 0, 
+		y: 15,
+		w: 83,
+		h: 10,
 
 		damage: 1,
 		knockback: 0.8,
 		penetration: 0
 	},
 	
-	//stab
-	'Slash Standing0014': {
+	//stab, long followthrough
+	'Attack Stab0008': {
 		damageFrame: true,
-		x: 7, 
+		x: 0, 
 		y: 15,
-		w: 50,
+		w: 83,
 		h: 12,
 
 		damage: 1,
@@ -156,12 +169,12 @@ var fraukiDamageFrames = {
 		penetration: 0
 	},
 
-	//stab
-	'Slash Standing0015': {
+	//stab, long followthrough
+	'Attack Stab0009': {
 		damageFrame: true,
-		x: 7, 
+		x: 0, 
 		y: 15,
-		w: 50,
+		w: 83,
 		h: 12,
 
 		damage: 1,

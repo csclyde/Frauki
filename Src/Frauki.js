@@ -1,6 +1,6 @@
 PLAYER_SPEED = function() { return 150 + (energyController.GetEnergy() * 7); }
 PLAYER_ROLL_SPEED = function() { return 455 + (energyController.GetEnergy() * 5); }
-PLAYER_RUN_SLASH_SPEED = function() { return  300 + (energyController.GetEnergy() * 10); }
+PLAYER_RUN_SLASH_SPEED = function() { return  900 + (energyController.GetEnergy() * 10); }
 PLAYER_JUMP_VEL = function() { return -370 - (energyController.GetEnergy() * 3); }
 PLAYER_DOUBLE_JUMP_VEL = function() { return -350 - (energyController.GetEnergy() * 2); }
 PLAYER_HIT_JUMP_VEL = function() { return -250 - (energyController.GetEnergy() * 2); }
@@ -32,9 +32,9 @@ Player = function (game, x, y, name) {
 
     //attacks
     this.animations.add('attack_front', ['Attack Front0001', 'Attack Front0002', 'Attack Front0003', 'Attack Front0004', 'Attack Front0005', 'Attack Front0006', 'Attack Front0007', 'Attack Front0008',], 20, false, false);
-    this.animations.add('attack_overhead', ['Attack Overhead0003', 'Attack Overhead0004', 'Attack Overhead0005', 'Attack Overhead0006', 'Attack Overhead0007', 'Attack Overhead0008', 'Attack Overhead0009', 'Attack Overhead0010'], 20, false, false);
-    this.animations.add('attack_stab', ['Slash Standing0013', 'Slash Standing0014', 'Slash Standing0015', 'Slash Standing0016'], 18, false, false);
-    this.animations.add('attack_dive', ['Slash Standing0006', 'Slash Standing0007', 'Slash Standing0008'], 18, false, false);
+    this.animations.add('attack_overhead', ['Attack Overhead0003', 'Attack Overhead0004', 'Attack Overhead0005', 'Attack Overhead0006', 'Attack Overhead0007', 'Attack Overhead0008', 'Attack Overhead0009', 'Attack Overhead0010', 'Attack Overhead0011', 'Attack Overhead0012', 'Attack Overhead0013'], 20, false, false);
+    this.animations.add('attack_stab', ['Attack Stab0002', 'Attack Stab0003', 'Attack Stab0004', 'Attack Stab0005', 'Attack Stab0006', 'Attack Stab0007', 'Attack Stab0008', 'Attack Stab0009', 'Attack Stab0010', 'Attack Stab0011', 'Attack Stab0012', 'Attack Stab0013', 'Attack Stab0014', 'Attack Stab0015', 'Attack Stab0016', 'Attack Stab0017', 'Attack Stab0018', 'Attack Stab0019'], 20, false, false);
+    this.animations.add('attack_dive', ['Slash Standing0006', 'Slash Standing0007', 'Slash Standing0008'], 20, false, false);
 
     this.state = this.Standing;
     this.PlayAnim('stand');
@@ -170,7 +170,8 @@ Player.prototype.UpdateAttackGeometry = function() {
 };
 
 Player.prototype.Attacking = function() {
-    if(this.state === this.AttackFront || this.state === this.AttackOverhead || this.state === this.AttackStab || this.state === this.AttackDive || this.state === this.AttackJump)
+    //if(this.state === this.AttackFront || this.state === this.AttackOverhead || this.state === this.AttackStab || this.state === this.AttackDive || this.state === this.AttackJump)
+    if(!!this.attackRect && this.attackRect.body.width !== 0)
         return true;
     else
         return false;
@@ -183,7 +184,7 @@ Player.prototype.LandHit = function() {
 
 ////////////////ACTIONS//////////////////
 Player.prototype.Run = function(params) {
-    if(this.state === this.Hurting || this.state === this.Rolling || this.state === this.AttackStab) 
+    if(this.state === this.Hurting || this.state === this.Rolling) 
         return;
 
     if(params.dir === 'left') {
@@ -215,7 +216,7 @@ Player.prototype.StartStopRun = function(params) {
 };
 
 Player.prototype.Jump = function(params) {
-    if(this.state === this.Hurting) 
+    if(this.state === this.Hurting || this.state === this.AttackStab) 
         return;
 
     if(params.jump) {
@@ -256,12 +257,14 @@ Player.prototype.Slash = function(params) {
         this.state = this.AttackStab;
 
         if(this.states.direction === 'left') {
-            this.movement.rollVelocity = -PLAYER_RUN_SLASH_SPEED();
-            this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: -PLAYER_SPEED()}, 200, Phaser.Easing.Quartic.In, true);
+            //this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: -PLAYER_SPEED()}, 200, Phaser.Easing.Quartic.In, true);
+            this.movement.rollVelocity = 0;
+            this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: -PLAYER_RUN_SLASH_SPEED()}, 200, Phaser.Easing.Exponential.InOut, true).to({rollVelocity: 0}, 500, Phaser.Easing.Exponential.InOut, true);
         }
         else {
-            this.movement.rollVelocity = PLAYER_RUN_SLASH_SPEED();
-            this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: PLAYER_SPEED()}, 200, Phaser.Easing.Quartic.In, true);
+            //this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: PLAYER_SPEED()}, 200, Phaser.Easing.Quartic.In, true);
+            this.movement.rollVelocity = 0;
+            this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: PLAYER_RUN_SLASH_SPEED()}, 200, Phaser.Easing.Exponential.InOut, true).to({rollVelocity: 0}, 500, Phaser.Easing.Exponential.InOut, true);
         }
     }
     //upwards dash attack

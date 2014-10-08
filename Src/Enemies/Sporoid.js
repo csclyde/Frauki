@@ -121,6 +121,8 @@ Enemy.prototype.types['Sporoid'] =  function() {
 	this.Dashing = function() {
 		this.PlayAnim('idle');
 
+		//this.Spore.explode(3000, 20);
+
 		this.body.velocity.x = this.body.velocity.x;
 		this.body.velocity.y = this.body.velocity.y;
 

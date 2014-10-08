@@ -25,6 +25,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
 			this.scale.y = 1;
 			this.scale.x /= 0.7;
 		}
+		
 		if(this.state == this.Hurting) {
 			this.angle += 30;
 		}
