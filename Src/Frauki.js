@@ -43,6 +43,7 @@ Player = function (game, x, y, name) {
     this.tweens.roll = null;
     this.tweens.stopJump = null;
     this.tweens.startRun = null;
+    this.tweens.stopRun = null;
 
     this.states = {};
     this.states.direction = 'right';
@@ -211,12 +212,13 @@ Player.prototype.StartStopRun = function(params) {
         }
 
     } else {
-        game.add.tween(this.body.velocity).to({x: 0}, 120, Phaser.Easing.Linear.None, true);
+        if(this.state !== this.Rolling)
+            this.tweens.stopRun = game.add.tween(this.body.velocity).to({x: 0}, 120, Phaser.Easing.Linear.None, true);
     }
 };
 
 Player.prototype.Jump = function(params) {
-    if(this.state === this.Hurting || this.state === this.AttackStab) 
+    if(this.state === this.Hurting || this.Attacking()) 
         return;
 
     if(params.jump) {
@@ -519,6 +521,15 @@ Player.prototype.AttackStab = function() {
     this.body.maxVelocity.x = PLAYER_ROLL_SPEED();
     this.body.velocity.x = this.movement.rollVelocity;
 
+    if(this.body.velocity.y < 0) {
+        this.state = this.Jumping;
+        this.movement.rollVelocity = 0;
+    } else if(this.body.velocity.y > 150 && !this.Attacking()) {
+        this.state = this.Peaking;
+        this.movement.rollVelocity = 0;
+    }
+
+
     if(this.animations.currentAnim.isFinished) {
         //this.timers.dashWindow = game.time.now + 200;
 
@@ -528,7 +539,7 @@ Player.prototype.AttackStab = function() {
         } else if(!inputController.runLeft.isDown && !inputController.runRight.isDown && this.body.onFloor()) {
             this.state = this.Standing;
             this.movement.rollVelocity = 0;
-        } else if(this.body.velocity.x !== 0 && this.body.onFloor()) {
+        } else if(this.body.acceleration.x !== 0 && this.body.onFloor()) {
             this.state = this.Running;
             this.movement.rollVelocity = 0;
         }
@@ -559,7 +570,9 @@ Player.prototype.AttackDive = function() {
 
 Player.prototype.AttackJump = function() {
     this.PlayAnim('attack_overhead');
-    this.body.velocity.y = this.movement.jumpSlashVelocity;
+
+    if(this.movement.jumpSlashVelocity !== 0)
+        this.body.velocity.y = this.movement.jumpSlashVelocity;
 
     if(this.animations.currentAnim.isFinished) {
         this.state = this.Jumping;
