@@ -199,6 +199,11 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	};
 
 	this.Diving = function() {
+		if(frauki.body.center.x < this.body.center.x)
+			this.body.x--;
+		else if(frauki.body.center.x > this.body.center.x)
+			this.body.x++;
+		
 		if(this.body.onFloor()) {
 			this.state = this.Idling;
 		}

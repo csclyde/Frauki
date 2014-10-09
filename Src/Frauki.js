@@ -34,7 +34,9 @@ Player = function (game, x, y, name) {
     this.animations.add('attack_front', ['Attack Front0001', 'Attack Front0002', 'Attack Front0003', 'Attack Front0004', 'Attack Front0005', 'Attack Front0006', 'Attack Front0007', 'Attack Front0008',], 20, false, false);
     this.animations.add('attack_overhead', ['Attack Overhead0003', 'Attack Overhead0004', 'Attack Overhead0005', 'Attack Overhead0006', 'Attack Overhead0007', 'Attack Overhead0008', 'Attack Overhead0009', 'Attack Overhead0010', 'Attack Overhead0011', 'Attack Overhead0012', 'Attack Overhead0013'], 20, false, false);
     this.animations.add('attack_stab', ['Attack Stab0002', 'Attack Stab0003', 'Attack Stab0004', 'Attack Stab0005', 'Attack Stab0006', 'Attack Stab0007', 'Attack Stab0008', 'Attack Stab0009', 'Attack Stab0010', 'Attack Stab0011', 'Attack Stab0012', 'Attack Stab0013', 'Attack Stab0014', 'Attack Stab0015', 'Attack Stab0016', 'Attack Stab0017', 'Attack Stab0018', 'Attack Stab0019'], 20, false, false);
-    this.animations.add('attack_dive', ['Slash Standing0006', 'Slash Standing0007', 'Slash Standing0008'], 20, false, false);
+    this.animations.add('attack_dive_charge', ['Attack Dive0000', 'Attack Dive0001', 'Attack Dive0002', 'Attack Dive0003', 'Attack Dive0004', 'Attack Dive0005', 'Attack Dive0006', 'Attack Dive0007', 'Attack Dive0008', 'Attack Dive0009', 'Attack Dive0010', 'Attack Dive0011'], 2, false, false);
+    this.animations.add('attack_dive_fall', ['Attack Dive0012', 'Attack Dive0013', 'Attack Dive0014'], 2, true, false);
+    this.animations.add('attack_dive_land', ['Attack Dive0021', 'Attack Dive0022', 'Attack Dive0023', 'Attack Dive0024', 'Attack Dive0025', 'Attack Dive0026', 'Attack Dive0027', 'Attack Dive0028', 'Attack Dive0029'], 2, false, false);
 
     this.state = this.Standing;
     this.PlayAnim('stand');
@@ -89,6 +91,7 @@ Player.prototype.create = function() {
 Player.prototype.update = function() {
 
     this.body.maxVelocity.x = PLAYER_SPEED() + this.movement.rollBoost;
+    this.body.maxVelocity.y = 500;
 
     this.state();
 
@@ -213,7 +216,8 @@ Player.prototype.StartStopRun = function(params) {
 
     } else {
         if(this.state !== this.Rolling)
-            this.tweens.stopRun = game.add.tween(this.body.velocity).to({x: 0}, 120, Phaser.Easing.Linear.None, true);
+            this.body.velocity.x = 0;
+            //this.tweens.stopRun = game.add.tween(this.body.velocity).to({x: 0}, 120, Phaser.Easing.Linear.None, true);
     }
 };
 
@@ -251,8 +255,8 @@ Player.prototype.Slash = function(params) {
 
     //diving dash
     if(game.time.now < this.timers.dashWindow && this.states.crouching && (this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling)) {
-        this.state = this.AttackDive;
-        this.movement.diveVelocity = 1400;
+        this.state = this.AttackDiveCharge;
+        this.movement.diveVelocity = 1000;
     }
     //running dash
     else if(this.state === this.Rolling || this.state === this.Kicking) {
@@ -546,16 +550,34 @@ Player.prototype.AttackStab = function() {
     }
 };
 
-Player.prototype.AttackDive = function() {
-    this.PlayAnim('attack_dive');
+Player.prototype.AttackDiveCharge = function() {
+    this.PlayAnim('attack_dive_charge');
+    this.body.velocity.y = 0;
+
+    if(this.animations.currentAnim.isFinished) {
+        this.state = this.AttackDiveFall;
+    }
+};
+
+Player.prototype.AttackDiveFall = function() {
+    this.PlayAnim('attack_dive_fall');
+    this.body.maxVelocity.y = this.movement.diveVelocity;
     this.body.velocity.y = this.movement.diveVelocity;
 
-    if(this.body.onFloor() && this.animations.currentAnim.isFinished) {
+    if(this.body.onFloor()) {
         this.movement.diveVelocity = 0;
-        this.timers.dashWindow = game.time.now + 200;
+        //this.timers.dashWindow = game.time.now + 200;
 
         events.publish('camera_shake', {magnitudeX: 10, magnitudeY: 5, duration: 200});
+        this.state = this.AttackDiveLand;
+    }
+};
 
+Player.prototype.AttackDiveLand = function() {
+    this.PlayAnim('attack_dive_land');
+    this.body.velocity.y = 0;
+
+    if(this.animations.currentAnim.isFinished) {
         if(this.body.velocity.x === 0) {
             if(this.states.crouching)
                 this.state = this.Crouching;
@@ -566,6 +588,7 @@ Player.prototype.AttackDive = function() {
             this.state = this.Running;
         }
     }
+
 };
 
 Player.prototype.AttackJump = function() {
