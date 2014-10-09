@@ -13,7 +13,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
     this.squashTween = null;
 
-    this.body.bounce.set(0.5);
+    //this.body.bounce.set(0.5);
 
 	this.updateFunction = function() {
 		if(game.time.now < this.hitTimer)
@@ -26,7 +26,6 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		}
 
 		if(!!this.squashTween && !this.squashTween.isRunning) {
-			this.scale.x = 1;
 			this.scale.y = 1;
 		}
 
@@ -213,7 +212,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		this.PlayAnim('die');
 
 		if(game.time.now > this.hitTimer) {
-			if(Math.abs(this.body.y - playerY) < 40 && Math.abs(this.body.x - playerX) < 300) {
+			if(Math.abs(this.body.y - playerY) < 40 && Math.abs(this.body.x - playerX) < 300 && this.RollDice(20, 12)) {
 				this.Scuttle();
 				this.attackTimer = game.time.now;
 			}

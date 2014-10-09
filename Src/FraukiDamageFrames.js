@@ -175,8 +175,8 @@ var fraukiDamageFrames = {
 		w: 28,
 		h: 45,
 
-		damage: 1,
-		knockback: 0.8,
+		damage: 3,
+		knockback: 1.5,
 		penetration: 0
 	},
 
@@ -187,44 +187,56 @@ var fraukiDamageFrames = {
 		w: 28,
 		h: 50,
 
-		damage: 1,
-		knockback: 0.8,
+		damage: 3,
+		knockback: 1.5,
 		penetration: 0
 	},
 
 	'Attack Dive0012': {
 		damageFrame: true,
-		x: -10, 
-		y: -5,
-		w: 28,
-		h: 45,
+		x: -2, 
+		y: 40,
+		w: 13,
+		h: 33,
 
-		damage: 1,
-		knockback: 0.8,
+		damage: 3,
+		knockback: 1.5,
 		penetration: 0
 	},
 
 	'Attack Dive0013': {
 		damageFrame: true,
-		x: -10, 
-		y: -5,
-		w: 28,
-		h: 45,
+		x: -2, 
+		y: 40,
+		w: 13,
+		h: 33,
 
-		damage: 1,
-		knockback: 0.8,
+		damage: 3,
+		knockback: 1.5,
 		penetration: 0
 	},
 
 	'Attack Dive0014': {
 		damageFrame: true,
-		x: -10, 
-		y: -5,
-		w: 28,
-		h: 45,
+		x: -2, 
+		y: 40,
+		w: 13,
+		h: 33,
 
-		damage: 1,
-		knockback: 0.8,
+		damage: 3,
+		knockback: 1.5,
+		penetration: 0
+	},
+
+	'Attack Dive0021': {
+		damageFrame: true,
+		x: -20, 
+		y: -8,
+		w: 50,
+		h: 55,
+
+		damage: 2,
+		knockback: 3,
 		penetration: 0
 	}
 };

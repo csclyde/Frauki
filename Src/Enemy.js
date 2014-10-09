@@ -135,4 +135,13 @@ Enemy.prototype.PlayerDirection = function() {
         return 'right';
     if(frauki.body.center.y > this.body.center.y)
         return 'below';
-}
+};
+
+Enemy.prototype.RollDice = function(sides, thresh) {
+    var roll = Math.ceil(Math.random() * sides);
+
+    if(roll >= thresh)
+        return true;
+    else
+        return false;
+};

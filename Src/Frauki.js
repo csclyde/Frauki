@@ -1,5 +1,5 @@
 PLAYER_SPEED = function() { return 150 + (energyController.GetEnergy() * 7); }
-PLAYER_ROLL_SPEED = function() { return 455 + (energyController.GetEnergy() * 5); }
+PLAYER_ROLL_SPEED = function() { return 600 + (energyController.GetEnergy() * 5); }
 PLAYER_RUN_SLASH_SPEED = function() { return  900 + (energyController.GetEnergy() * 10); }
 PLAYER_JUMP_VEL = function() { return -370 - (energyController.GetEnergy() * 3); }
 PLAYER_DOUBLE_JUMP_VEL = function() { return -350 - (energyController.GetEnergy() * 2); }
@@ -120,6 +120,9 @@ Player.prototype.update = function() {
     if(this.body.acceleration.x === 0 && this.movement.rollVelocity === 0 && this.state !== this.Hurting)
         this.body.velocity.x = 0;
 
+    if(!inputController.runLeft.isDown && !inputController.runRight.isDown) {
+        this.body.acceleration.x = 0;
+    }
 
     /*if(this.state === this.Crouching) {
         this.body.setSize(11, 30, 0, 0);
