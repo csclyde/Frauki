@@ -557,7 +557,7 @@ Player.prototype.AttackDiveCharge = function() {
     this.PlayAnim('attack_dive_charge');
     this.body.velocity.y = 0;
     
-    this.body.maxVelocity.x = 0;
+    this.body.maxVelocity.x = 1;
 
     if(this.animations.currentAnim.isFinished) {
         this.state = this.AttackDiveFall;
@@ -584,7 +584,7 @@ Player.prototype.AttackDiveLand = function() {
     this.PlayAnim('attack_dive_land');
     this.body.velocity.y = 0;
     
-    this.body.maxVelocity.x = 0;
+    this.body.maxVelocity.x = 1;
 
     if(this.animations.currentAnim.isFinished) {
         if(this.body.velocity.x === 0) {
