@@ -38,15 +38,16 @@ EnergyController.prototype.UpdateEnergy = function() {
 		Frogland.Restart();
 };
 
-EnergyController.prototype.AddEnergy = function() {
-	this.energy += 2;
-	this.neutralPoint += 0.2;
+EnergyController.prototype.AddEnergy = function(amt) {
+	amt = amt || 2;
+	this.energy += amt;
+	this.neutralPoint += (amt / 10);
 	//add energy and modify the neutral point
 };
 
 EnergyController.prototype.RemoveEnergy = function() {
 	this.energy -= 7;
-	this.neutralPoint -= 0.5;
+	this.neutralPoint -= 0.4;
 
 };
 
