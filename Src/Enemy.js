@@ -28,6 +28,9 @@ Enemy = function(game, x, y, name) {
     this.state = this.Idling;
 
     this.maxEnergy = this.energy;
+    
+    this.body.maxVelocity.y = 600;
+    this.body.maxVelocity.x = 600;
 
 };
 
@@ -54,6 +57,9 @@ Enemy.prototype.update = function() {
     }
 
     this.alpha = this.GetEnergyPercentage();
+    
+    if(this.energy > this.maxEnergy)
+        this.energy = this.maxEnergy;
 };
 
 Enemy.prototype.GetEnergyPercentage = function() {
