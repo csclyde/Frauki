@@ -1,24 +1,24 @@
 Enemy = function(game, x, y, name) {
-	Phaser.Sprite.call(this, game, x, y, name);
+    //instantiate the sprite
+    Phaser.Sprite.call(this, game, x, y, name);
+    
+    //enable its physics body
     game.physics.enable(this, Phaser.Physics.ARCADE);
-
-    this.anchor.setTo(.5, 1);
     this.body.collideWorldBounds = true;
-    this.body.maxVelocity.y = 500;
-    this.direction = 'right';
+    this.body.maxVelocity.y = 600;
+    this.body.maxVelocity.x = 600;
+    this.body.bounce.set(0.2);
+    
+    this.anchor.setTo(.5, 1);
+    
     this.SetDirection('left');
-    this.state = null;
+    
     this.weight = 400;
     this.hitTimer = 0;
     this.flashing = false;
 
-    this.initialX = this.body.x;
-    this.initialY = this.body.y;
-
     this.energy = 7;
     
-    this.body.bounce.set(0.2);
-
     if(!!this.types[name]) {
         this.types[name].apply(this);
     } else {
@@ -28,10 +28,8 @@ Enemy = function(game, x, y, name) {
     this.state = this.Idling;
 
     this.maxEnergy = this.energy;
-    
-    this.body.maxVelocity.y = 600;
-    this.body.maxVelocity.x = 600;
-
+    this.initialX = this.body.x;
+    this.initialY = this.body.y;
 };
 
 Enemy.prototype = Object.create(Phaser.Sprite.prototype);
@@ -43,9 +41,9 @@ Enemy.prototype.create = function() {
 };
 
 Enemy.prototype.update = function() {
-	if(typeof this.updateFunction === 'function') {
-		this.updateFunction.apply(this);
-	} 
+    if(!!this.updateFunction) {
+        this.updateFunction.apply(this);
+    } 
     
     if(!!this.state)
         this.state();
@@ -89,6 +87,7 @@ function EnemyHit(f, e) {
     events.publish('camera_shake', {magnitudeX: 15, magnitudeY: 5, duration: 100});
 
     frauki.LandHit();
+    e.TakeHit();
     
     //e.energy--;
     e.energy -= frauki.currentAttack.damage;
@@ -98,8 +97,6 @@ function EnemyHit(f, e) {
     var c = frauki.body.center.x < e.body.center.x ? 1 : -1;
     e.body.velocity.x =  c * e.weight * frauki.currentAttack.knockback;
     
-    e.TakeHit();
-
     if(e.energy <= 0) {
         if(!!e.Die)
             e.Die();
