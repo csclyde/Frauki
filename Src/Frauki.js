@@ -187,6 +187,8 @@ Player.prototype.Attacking = function() {
 Player.prototype.LandHit = function() { 
     if(!this.body.onFloor())
         this.body.velocity.y += PLAYER_HIT_JUMP_VEL();
+        
+    energyController.AddEnergy(this.currentAttack.damage);
 };
 
 ////////////////ACTIONS//////////////////
