@@ -82,7 +82,6 @@ function EnemyHit(f, e) {
 
     events.publish('camera_shake', {magnitudeX: 15, magnitudeY: 5, duration: 100});
 
-    energyController.AddEnergy();
     frauki.LandHit();
     
     //e.energy--;
