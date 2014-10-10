@@ -3,7 +3,6 @@ PLAYER_ROLL_SPEED = function() { return 600 + (energyController.GetEnergy() * 5)
 PLAYER_RUN_SLASH_SPEED = function() { return  900 + (energyController.GetEnergy() * 10); }
 PLAYER_JUMP_VEL = function() { return -370 - (energyController.GetEnergy() * 3); }
 PLAYER_DOUBLE_JUMP_VEL = function() { return -350 - (energyController.GetEnergy() * 2); }
-PLAYER_HIT_JUMP_VEL = function() { return -250 - (energyController.GetEnergy() * 2); }
 PLAYER_JUMP_SLASH_SPEED = function() { return 1000 + (energyController.GetEnergy() * 5); }
 PLAYER_KICK_SPEED = 800;
 
@@ -185,9 +184,6 @@ Player.prototype.Attacking = function() {
 };
 
 Player.prototype.LandHit = function() { 
-    if(!this.body.onFloor())
-        this.body.velocity.y += PLAYER_HIT_JUMP_VEL();
-        
     energyController.AddEnergy(this.currentAttack.damage);
 };
 
