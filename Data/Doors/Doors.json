@@ -1,0 +1,21 @@
+{"frames": {
+
+"Door0000.png":
+{
+	"frame": {"x":2,"y":2,"w":32,"h":68},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":80,"y":62,"w":32,"h":68},
+	"sourceSize": {"w":200,"h":200},
+	"pivot": {"x":0.5,"y":0.5}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "Doors.png",
+	"format": "RGBA8888",
+	"size": {"w":36,"h":72},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:a4eb2387950e6a058a46d2f0915addb1:958e6134a1fadc06f9078933369f4d15:2965e999a4aa640f4aa51af6ba94b2fe$"
+}
+}

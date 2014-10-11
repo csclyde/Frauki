@@ -298,7 +298,7 @@ Player.prototype.Roll = function(params) {
         return;
 
     //kick
-    if(this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling || this.state === this.Flipping) {
+    /*if(this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling || this.state === this.Flipping) {
         this.state = this.Kicking;
         this.timers.kickTimer = game.time.now + 200;
 
@@ -312,7 +312,7 @@ Player.prototype.Roll = function(params) {
         }
 
         return;
-    }
+    }*/
 
     if(!this.body.onFloor())
         return;

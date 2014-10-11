@@ -21,11 +21,7 @@ Frogland.preload = function() {
     game.load.atlasJSONHash('Buzzar', 'Data/Enemies/Buzzar/Buzzar.png', 'Data/Enemies/Buzzar/Buzzar.json');
     game.load.atlasJSONHash('Sporoid', 'Data/Enemies/Sporoid/Sporoid.png', 'Data/Enemies/Sporoid/Sporoid.json');
 
-    game.scale.minWidth = 1024;
-    game.scale.minHeight = 576;
-    game.scale.pageAlignHorizontally = true;
-    game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-    game.scale.setSize();
+    game.load.atlasJSONHash('Door', 'Data/Doors/Doors.png', 'Data/Doors/Doors.json');
 }
 
 var map;
@@ -100,6 +96,12 @@ Frogland.create = function() {
     map.createFromObjects('Enemies', 1061, 'Insectoid', 'Hop0000', true, false, this.enemyGroup, Enemy);
     map.createFromObjects('Enemies', 1062, 'Buzzar', 'Sting0000', true, false, this.enemyGroup, Enemy);
     map.createFromObjects('Enemies', 1063, 'Sporoid', 'Sporoid0000', true, false, this.enemyGroup, Enemy);
+
+    //create the enemies
+    this.doorGroup = game.add.group();
+    this.doorGroup.enableBody = true;
+
+    map.createFromObjects('Items', 1043, 'Door', 'Door0000', true, false, this.doorGroup, Door, false);
     
     foregroundLayer = map.createLayer('Foreground');
 
@@ -120,6 +122,7 @@ Frogland.update = function() {
     frauki.UpdateAttackGeometry();
 
 	game.physics.arcade.collide(frauki, midgroundLayer);
+    game.physics.arcade.collide(frauki, this.doorGroup);
     game.physics.arcade.collide(this.enemyGroup, midgroundLayer);
 
     if(game.time.now > this.enemySelfCollisionTimer) {
@@ -148,6 +151,10 @@ Frogland.update = function() {
 Frogland.render = function() {
     //game.debug.body(frauki);
     //game.debug.body(frauki.attackRect);
+
+    /*this.doorGroup.forEach(function(o) {
+        game.debug.body(o);
+    });*/
 
     /*this.enemyGroup.forEach(function(e) {
         game.debug.body(e);
