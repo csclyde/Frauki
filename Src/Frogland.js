@@ -149,7 +149,7 @@ Frogland.update = function() {
 };
 
 Frogland.render = function() {
-    game.debug.body(frauki);
+    //game.debug.body(frauki);
     //game.debug.body(frauki.attackRect);
 
     /*this.doorGroup.forEach(function(o) {

@@ -41,6 +41,9 @@ Enemy.prototype.create = function() {
 };
 
 Enemy.prototype.update = function() {
+    if(!this.WithinCameraRange())
+        return;
+    
     if(!!this.updateFunction) {
         this.updateFunction.apply(this);
     } 
@@ -62,6 +65,18 @@ Enemy.prototype.update = function() {
 
 Enemy.prototype.GetEnergyPercentage = function() {
     return this.energy / this.maxEnergy;
+};
+
+Enemy.prototype.WithinCameraRange = function() {
+    var padding = 100;
+
+    if(this.body.x > game.camera.x - padding &&
+       this.body.y > game.camera.y - padding &&
+       this.body.x < game.camera.x + game.camera.width + padding &&
+       this.body.y < game.camera.y + game.camera.height + padding)
+        return true;
+
+    return false;
 };
 
 Enemy.prototype.SetDirection = function(dir) {
