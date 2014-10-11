@@ -289,7 +289,7 @@ Player.prototype.Slash = function(params) {
         else
             this.state = this.AttackFront;
     } else {
-        console.log('An attack was attempted in an unresolved state');
+        console.log('An attack was attempted in an unresolved state ' + this.state);
     }
 };
 
@@ -475,6 +475,7 @@ Player.prototype.Rolling = function() {
         this.movement.rollBoost /= (PLAYER_ROLL_SPEED() - PLAYER_SPEED());
         this.movement.rollBoost *= 75;
 
+        this.tweens.roll.stop();
         this.movement.rollVelocity = 0;
     }
 

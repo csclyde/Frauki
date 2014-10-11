@@ -46,7 +46,7 @@ Enemy.prototype.types['Sporoid'] =  function() {
 	    this.body.velocity.x = c * ((80 + (this.weight / 2)) * (frauki.currentAttack.knockback));
 
 	    //a durability stat should modify how long they are stunned for. also, the amount of dmg
-	    this.hitTimer = game.time.now + 300;
+	    this.hitTimer = game.time.now + 800;
 
 	    this.state = this.Hurting;
 	};
