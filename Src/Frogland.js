@@ -122,7 +122,7 @@ Frogland.update = function() {
     frauki.UpdateAttackGeometry();
 
 	game.physics.arcade.collide(frauki, midgroundLayer);
-    game.physics.arcade.collide(frauki, this.doorGroup);
+    game.physics.arcade.collide(frauki, this.doorGroup, OpenDoor);
     game.physics.arcade.collide(this.enemyGroup, midgroundLayer);
 
     if(game.time.now > this.enemySelfCollisionTimer) {

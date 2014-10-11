@@ -42,6 +42,19 @@ Door.prototype.SetDirection = function(dir) {
     }
 };
 
+function OpenDoor(f, d) {
+    if(d.state === d.Closed) {
+        var openTween = game.add.tween(d.body).to({y: d.body.y + 70}, 2000, Phaser.Easing.Quartic.InOut, true);
+
+        //disable the body after its opened
+        openTween.onComplete.add(function() {
+            this.body.enable = false;
+        }, d);
+
+        d.state = d.Opening;
+    }
+};
+
 Door.prototype.PlayAnim = function(name) {
     if(this.animations.currentAnim.name !== name)
         this.animations.play(name);
@@ -52,9 +65,12 @@ Door.prototype.Closed = function() {
 };
 
 Door.prototype.Opening = function() {
+    this.PlayAnim('closed');
 
+    this.state = this.Open;
 };
 
 Door.prototype.Open = function() {
+    this.PlayAnim('closed');
 
 };

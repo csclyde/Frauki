@@ -417,7 +417,6 @@ Player.prototype.Falling = function() {
             this.state = this.Running;
         }
     }
-
 };
 
 Player.prototype.Landing = function() {
