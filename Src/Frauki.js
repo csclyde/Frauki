@@ -92,6 +92,8 @@ Player.prototype.update = function() {
     this.body.maxVelocity.x = PLAYER_SPEED() + this.movement.rollBoost;
     this.body.maxVelocity.y = 500;
 
+    this.body.gravity.y = 0;
+    
     this.state();
 
     //reset the double jump flag
@@ -100,11 +102,6 @@ Player.prototype.update = function() {
         this.movement.rollBoost = 0;
     }
 
-    if(this.state === this.Falling) {
-        this.body.gravity.y = game.physics.arcade.gravity.y * 2;
-    } else {
-        this.body.gravity.y = 0;
-    }
 
     if(this.states.wasAttacking && !this.Attacking()) {
         //this.timers.gracePeriod = game.time.now + 100;
@@ -185,6 +182,10 @@ Player.prototype.Attacking = function() {
 
 Player.prototype.LandHit = function() { 
     energyController.AddEnergy(this.currentAttack.damage);
+};
+
+Player.prototype.LandKill = function() { 
+    energyController.AddEnergy(7);
 };
 
 ////////////////ACTIONS//////////////////
@@ -402,6 +403,8 @@ Player.prototype.Peaking = function() {
 
 Player.prototype.Falling = function() {
     this.PlayAnim('fall');
+
+    this.body.gravity.y = game.physics.arcade.gravity.y * 2;
 
     if(this.body.onFloor()) {
         if(this.body.velocity.x === 0) {

@@ -6,7 +6,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
     this.animations.add('idle', ['Sting0000'], 10, true, false);
     this.animations.add('sting', ['Sting0001', 'Sting0002'], 10, false, false);
 
-    this.body.allowGravity = false;
+    
 
     this.wanderDirection = 'left';
 
@@ -27,12 +27,8 @@ Enemy.prototype.types['Buzzar'] =  function() {
 			this.scale.x /= 0.7;
 		}
 
-		if(this.state == this.Hurting) {
-			this.angle += 30;
-		}
-		else {
-			this.angle = 0;
-		}
+		this.body.allowGravity = false;
+        this.body.gravity.y = 0;
 	};
 
 	///////////////////////////////ACTIONS////////////////////////////////////
@@ -76,7 +72,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
 	    this.body.velocity.y = -350 - this.weight;
 
 	    //a durability stat should modify how long they are stunned for. also, the amount of dmg
-	    this.hitTimer = game.time.now + 300;
+	    this.hitTimer = game.time.now + 1000;
 
 	    this.state = this.Hurting;
 
@@ -140,6 +136,9 @@ Enemy.prototype.types['Buzzar'] =  function() {
 	};
 
 	this.Hurting = function() {
+
+		this.body.allowGravity = true;
+        this.body.gravity.y = game.physics.arcade.gravity.y * 2;
 
 		if(game.time.now > this.hitTimer) {
 

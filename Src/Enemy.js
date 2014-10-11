@@ -86,23 +86,24 @@ function EnemyHit(f, e) {
 
     events.publish('camera_shake', {magnitudeX: 15, magnitudeY: 5, duration: 100});
 
-    frauki.LandHit();
-    e.TakeHit();
-    
-    //e.energy--;
     e.energy -= frauki.currentAttack.damage;
+    if(e.energy <= 0) {
+        if(!!e.Die)
+            e.Die();
+
+        frauki.LandKill();
+        e.kill();
+    } else {
+        frauki.LandHit();
+        e.TakeHit();
+    }
+    
 
     effectsController.ParticleSpray(e.body.x, e.body.y, e.body.width, e.body.height, 'red', e.PlayerDirection());
 
     var c = frauki.body.center.x < e.body.center.x ? 1 : -1;
     e.body.velocity.x =  c * e.weight * frauki.currentAttack.knockback;
     
-    if(e.energy <= 0) {
-        if(!!e.Die)
-            e.Die();
-
-        e.kill();
-    }
 };
 
 //provide utility functions here that the specific enemies can all use
