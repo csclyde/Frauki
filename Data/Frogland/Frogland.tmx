@@ -33,7 +33,11 @@
   </data>
  </layer>
  <objectgroup name="Items" width="500" height="500">
-  <object gid="1043" x="3824" y="2280"/>
+  <object gid="1043" x="3824" y="2280">
+   <properties>
+    <property name="facing" value="left"/>
+   </properties>
+  </object>
   <object gid="1043" x="988" y="4423"/>
  </objectgroup>
  <objectgroup name="Enemies" width="500" height="500">

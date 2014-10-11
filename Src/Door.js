@@ -16,6 +16,7 @@ Door = function(game, x, y, name) {
     this.body.immovable = true;
 
     this.animations.add('closed', ['Door0000'], 10, true, false);
+
 };
 
 Door.prototype = Object.create(Phaser.Sprite.prototype);
@@ -23,6 +24,7 @@ Door.prototype.constructor = Door;
 
 Door.prototype.create = function() {
 
+    console.log(this.facing);
 };
 
 Door.prototype.update = function() {
@@ -44,14 +46,16 @@ Door.prototype.SetDirection = function(dir) {
 
 function OpenDoor(f, d) {
     if(d.state === d.Closed) {
-        var openTween = game.add.tween(d.body).to({y: d.body.y + 70}, 2000, Phaser.Easing.Quartic.InOut, true);
+        if((d.facing === 'left' && f.body.center.x > d.body.center.x) || (d.facing === 'right' && f.body.center.x < d.body.center.x)) {
+            var openTween = game.add.tween(d.body).to({y: d.body.y + 70}, 2000, Phaser.Easing.Quintic.InOut, true);
 
-        //disable the body after its opened
-        openTween.onComplete.add(function() {
-            this.body.enable = false;
-        }, d);
+            //disable the body after its opened
+            openTween.onComplete.add(function() {
+                this.body.enable = false;
+            }, d);
 
-        d.state = d.Opening;
+            d.state = d.Opening;
+        }
     }
 };
 
