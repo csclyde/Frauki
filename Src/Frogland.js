@@ -46,7 +46,7 @@ var previousCamX;
 
 Frogland.create = function() {
 
-    //game.add.plugin(Phaser.Plugin.Debug);
+    game.add.plugin(Phaser.Plugin.Debug);
 
     game.canvas.style['display'] = 'none';
     pixel.canvas = Phaser.Canvas.create(game.width * pixel.scale, game.height * pixel.scale);
@@ -112,8 +112,8 @@ Frogland.create = function() {
 
     game.camera.focusOnXY(frauki.body.x, frauki.body.y);
 
-    energyText = game.add.text(0, 0, '', {font: "10px Arial", fill: "#ff0044"});
-    energyText.fixedToCamera = true;
+    //energyText = game.add.text(0, 0, '', {font: "10px Arial", fill: "#ff0044"});
+    //energyText.fixedToCamera = true;
 
     this.enemySelfCollisionTimer = 0;
 };
@@ -126,8 +126,8 @@ Frogland.update = function() {
     game.physics.arcade.collide(this.enemyGroup, midgroundLayer);
 
     if(game.time.now > this.enemySelfCollisionTimer) {
-        game.physics.arcade.collide(this.enemyGroup, this.enemyGroup);
-        this.enemySelfCollisionTImer = game.time.now + 250;
+        //game.physics.arcade.collide(this.enemyGroup, this.enemyGroup);
+        this.enemySelfCollisionTImer = game.time.now + 1000;
     }
 
     if(!frauki.Attacking() && !frauki.Grace()) {
@@ -145,7 +145,7 @@ Frogland.update = function() {
     playerX = frauki.body.x;
     playerY = frauki.body.y;
 
-    energyText.setText('Energy: ' + energyController.GetEnergy() + ' Neutral: ' + energyController.GetNeutral() + ' FPS: ' + game.time.fps);
+    //energyText.setText('Energy: ' + energyController.GetEnergy() + ' Neutral: ' + energyController.GetNeutral() + ' FPS: ' + game.time.fps);
 };
 
 Frogland.render = function() {

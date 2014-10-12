@@ -26,7 +26,7 @@ Enemy.prototype.types['Sporoid'] =  function() {
 
     this.Spore.maxParticleSpeed.x = 20;
     this.Spore.minParticleSpeed.x = -20;
-    this.Spore.start(false, 5000, 400);
+    //this.Spore.start(false, 5000, 400);
 
 	this.updateFunction = function() {
 
@@ -71,7 +71,7 @@ Enemy.prototype.types['Sporoid'] =  function() {
 
 	this.Reset = function() {
 		this.state = this.Idling;
-		this.Spore.start(false, 5000, 400);
+		//this.Spore.start(false, 5000, 400);
 	};
 
 	this.Die = function() {
