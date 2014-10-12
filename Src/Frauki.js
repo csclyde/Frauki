@@ -190,7 +190,7 @@ Player.prototype.LandKill = function() {
 
 ////////////////ACTIONS//////////////////
 Player.prototype.Run = function(params) {
-    if(this.state === this.Hurting || this.state === this.Rolling) 
+    if(this.state === this.Hurting || this.state === this.Rolling || this.state === this.AttackStab) 
         return;
 
     if(params.dir === 'left') {
@@ -334,7 +334,8 @@ Player.prototype.Roll = function(params) {
 };
 
 Player.prototype.Hit = function(f, e) {
-    if(this.state === this.Hurting || e.state === e.Hurting)
+
+    if(this.state === this.Hurting || e.state === e.Hurting || frauki.Attacking() || frauki.Grace())
         return;
 
     this.body.velocity.y = -300;
@@ -547,10 +548,10 @@ Player.prototype.AttackStab = function() {
         } else if(!inputController.runLeft.isDown && !inputController.runRight.isDown && this.body.onFloor()) {
             this.state = this.Standing;
             this.movement.rollVelocity = 0;
-        } else if(this.body.acceleration.x !== 0 && this.body.onFloor()) {
+        } else if((inputController.runLeft.isDown || inputController.runRight.isDown) && this.body.onFloor()) {
             this.state = this.Running;
             this.movement.rollVelocity = 0;
-        }
+        } 
     }
 };
 

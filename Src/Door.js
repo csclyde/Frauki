@@ -1,6 +1,7 @@
 Door = function(game, x, y, name) {
     //instantiate the sprite
     Phaser.Sprite.call(this, game, x, y, name);
+    this.spriteType = 'door';
     
     //enable its physics body
     game.physics.enable(this, Phaser.Physics.ARCADE);

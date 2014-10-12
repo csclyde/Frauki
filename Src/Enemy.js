@@ -1,6 +1,7 @@
 Enemy = function(game, x, y, name) {
     //instantiate the sprite
     Phaser.Sprite.call(this, game, x, y, name);
+    this.spriteType = 'enemy';
     
     //enable its physics body
     game.physics.enable(this, Phaser.Physics.ARCADE);
@@ -43,7 +44,7 @@ Enemy.prototype.create = function() {
 Enemy.prototype.update = function() {
     if(!this.WithinCameraRange())
         return;
-    
+
     if(!!this.updateFunction) {
         this.updateFunction.apply(this);
     } 
@@ -96,7 +97,7 @@ Enemy.prototype.PlayAnim = function(name) {
 };
 
 function EnemyHit(f, e) {
-    if(e.state === e.Hurting)
+    if(e.state === e.Hurting || e.spriteType !== 'enemy')
         return;
 
     events.publish('camera_shake', {magnitudeX: 15, magnitudeY: 5, duration: 100});

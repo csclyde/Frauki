@@ -90,18 +90,14 @@ Frogland.create = function() {
     game.add.existing(frauki);
 
     //create the enemies
-    this.enemyGroup = game.add.group();
-    this.enemyGroup.enableBody = true;
+    this.objectGroup = game.add.group();
+    this.objectGroup.enableBody = true;
 
-    map.createFromObjects('Enemies', 1061, 'Insectoid', 'Hop0000', true, false, this.enemyGroup, Enemy);
-    map.createFromObjects('Enemies', 1062, 'Buzzar', 'Sting0000', true, false, this.enemyGroup, Enemy);
-    map.createFromObjects('Enemies', 1063, 'Sporoid', 'Sporoid0000', true, false, this.enemyGroup, Enemy);
+    map.createFromObjects('Enemies', 1061, 'Insectoid', 'Hop0000', true, false, this.objectGroup, Enemy);
+    map.createFromObjects('Enemies', 1062, 'Buzzar', 'Sting0000', true, false, this.objectGroup, Enemy);
+    map.createFromObjects('Enemies', 1063, 'Sporoid', 'Sporoid0000', true, false, this.objectGroup, Enemy);
 
-    //create the enemies
-    this.doorGroup = game.add.group();
-    this.doorGroup.enableBody = true;
-
-    map.createFromObjects('Items', 1043, 'Door', 'Door0000', true, false, this.doorGroup, Door, false);
+    map.createFromObjects('Items', 1043, 'Door', 'Door0000', true, false, this.objectGroup, Door, false);
     
     foregroundLayer = map.createLayer('Foreground');
 
@@ -114,27 +110,17 @@ Frogland.create = function() {
 
     //energyText = game.add.text(0, 0, '', {font: "10px Arial", fill: "#ff0044"});
     //energyText.fixedToCamera = true;
-
-    this.enemySelfCollisionTimer = 0;
 };
 
 Frogland.update = function() {
     frauki.UpdateAttackGeometry();
 
 	game.physics.arcade.collide(frauki, midgroundLayer);
-    game.physics.arcade.collide(frauki, this.doorGroup, OpenDoor);
-    game.physics.arcade.collide(this.enemyGroup, midgroundLayer);
+    game.physics.arcade.collide(frauki, this.objectGroup, this.CollideFraukiWithObject);
+    game.physics.arcade.collide(this.objectGroup, midgroundLayer);
 
-    if(game.time.now > this.enemySelfCollisionTimer) {
-        //game.physics.arcade.collide(this.enemyGroup, this.enemyGroup);
-        this.enemySelfCollisionTImer = game.time.now + 1000;
-    }
-
-    if(!frauki.Attacking() && !frauki.Grace()) {
-        game.physics.arcade.overlap(frauki, this.enemyGroup, frauki.Hit, null, frauki);
-    }
-    else if(!!frauki.attackRect && frauki.attackRect.width !== 0) {
-        game.physics.arcade.overlap(frauki.attackRect, this.enemyGroup, EnemyHit);
+    if(!!frauki.attackRect && frauki.attackRect.width !== 0) {
+        game.physics.arcade.overlap(frauki.attackRect, this.objectGroup, EnemyHit);
     }
 
     cameraController.UpdateCamera();
@@ -152,11 +138,11 @@ Frogland.render = function() {
     //game.debug.body(frauki);
     //game.debug.body(frauki.attackRect);
 
-    /*this.doorGroup.forEach(function(o) {
+    /*this.objectGroup.forEach(function(o) {
         game.debug.body(o);
     });*/
 
-    /*this.enemyGroup.forEach(function(e) {
+    /*this.objectGroup.forEach(function(e) {
         game.debug.body(e);
     });*/
 
@@ -172,7 +158,7 @@ Frogland.Restart = function() {
             energyController.energy = 15;
             energyController.neutralPoint = 15;
 
-            Frogland.enemyGroup.forEach(function(e) {
+            Frogland.objectGroup.forEach(function(e) {
                 e.alive = true;
                 e.exists = true;
                 e.visible = true;
@@ -187,3 +173,13 @@ Frogland.Restart = function() {
             });
         });
 }
+
+Frogland.CollideFraukiWithObject = function(f, o) {
+
+    if(!!o && typeof o === 'object') {
+        if(o.spriteType === 'enemy')
+            frauki.Hit(f, o);
+        else if(o.spriteType === 'door')
+            OpenDoor(f, o);
+    }
+};
