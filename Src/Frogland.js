@@ -22,6 +22,7 @@ Frogland.preload = function() {
     game.load.atlasJSONHash('Sporoid', 'Data/Enemies/Sporoid/Sporoid.png', 'Data/Enemies/Sporoid/Sporoid.json');
 
     game.load.atlasJSONHash('Door', 'Data/Doors/Doors.png', 'Data/Doors/Doors.json');
+    game.load.atlasJSONHash('Item', 'Data/Items/Items.png', 'Data/Items/Items.json');
 }
 
 var map;
@@ -98,6 +99,7 @@ Frogland.create = function() {
     map.createFromObjects('Enemies', 1063, 'Sporoid', 'Sporoid0000', true, false, this.objectGroup, Enemy);
 
     map.createFromObjects('Items', 1043, 'Door', 'Door0000', true, false, this.objectGroup, Door, false);
+    map.createFromObjects('Items', 1042, 'Item', 'Apple0000', true, false, this.objectGroup, Apple, false);
     
     foregroundLayer = map.createLayer('Foreground');
 
@@ -108,15 +110,22 @@ Frogland.create = function() {
 
     game.camera.focusOnXY(frauki.body.x, frauki.body.y);
 
-    //energyText = game.add.text(0, 0, '', {font: "10px Arial", fill: "#ff0044"});
-    //energyText.fixedToCamera = true;
+    energyText = game.add.text(0, 0, '', {font: "10px Arial", fill: "#ff0044"});
+    energyText.fixedToCamera = true;
 };
 
 Frogland.update = function() {
     frauki.UpdateAttackGeometry();
 
 	game.physics.arcade.collide(frauki, midgroundLayer);
-    game.physics.arcade.collide(frauki, this.objectGroup, this.CollideFraukiWithObject);
+
+    game.physics.arcade.collide(frauki, this.objectGroup, this.CollideFraukiWithObject, function(f, o) {
+        if(o.spriteType == 'apple' && o.state === o.Eaten)
+            return false;
+
+        return true;
+    });
+    
     game.physics.arcade.collide(this.objectGroup, midgroundLayer);
 
     if(!!frauki.attackRect && frauki.attackRect.width !== 0) {
@@ -131,7 +140,7 @@ Frogland.update = function() {
     playerX = frauki.body.x;
     playerY = frauki.body.y;
 
-    //energyText.setText('Energy: ' + energyController.GetEnergy() + ' Neutral: ' + energyController.GetNeutral() + ' FPS: ' + game.time.fps);
+    energyText.setText('Energy: ' + energyController.GetEnergy() + ' Neutral: ' + energyController.GetNeutral() + ' FPS: ' + game.time.fps);
 };
 
 Frogland.render = function() {
@@ -181,5 +190,7 @@ Frogland.CollideFraukiWithObject = function(f, o) {
             frauki.Hit(f, o);
         else if(o.spriteType === 'door')
             OpenDoor(f, o);
+        else if(o.spriteType === 'apple')
+            EatApple(f, o);
     }
 };
