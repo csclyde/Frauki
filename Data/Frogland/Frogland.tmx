@@ -48,7 +48,7 @@
     <property name="facing" value="right"/>
    </properties>
   </object>
-  <object gid="1042" x="3557" y="2301"/>
+  <object gid="1042" x="3582" y="2132"/>
  </objectgroup>
  <objectgroup name="Enemies" width="500" height="500">
   <object name="Enemy" gid="1061" x="3510" y="2418">

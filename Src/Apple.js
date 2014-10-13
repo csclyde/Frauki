@@ -13,6 +13,8 @@ Apple = function(game, x, y, name) {
 
     this.state = this.Fresh;
 
+    this.body.allowGravity = false;
+
     this.animations.add('fresh', ['Apple0000'], 10, false, false);
     this.animations.add('eaten', ['Apple0001'], 10, false, false);
 
@@ -35,7 +37,9 @@ function EatApple(f, a) {
     a.state = a.Eaten;
     energyController.AddEnergy(10);
 
-    a.body.velocity.y = -1500;
+    a.body.allowGravity = true;
+
+    a.body.velocity.y = -250;
 
     if(frauki.body.center.x < a.body.center.x)
         a.body.velocity.x = 75;
@@ -58,6 +62,8 @@ Apple.prototype.PlayAnim = function(name) {
 
 Apple.prototype.Fresh = function() {
     this.PlayAnim('fresh');
+
+    this.body.velocity.y = Math.sin(game.time.now / 150) * 30;
 };
 
 Apple.prototype.Eaten = function() {
