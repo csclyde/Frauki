@@ -230,9 +230,9 @@ var fraukiDamageFrames = {
 
 	'Attack Dive0021': {
 		damageFrame: true,
-		x: -20, 
+		x: -30, 
 		y: -8,
-		w: 50,
+		w: 70,
 		h: 55,
 
 		damage: 3,

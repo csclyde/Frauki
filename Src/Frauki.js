@@ -136,8 +136,9 @@ Player.prototype.SetDirection = function(dir) {
 };
 
 Player.prototype.PlayAnim = function(name) {
-    if(this.animations.currentAnim.name !== name)
+    if(this.animations.currentAnim.name !== name) {
         this.animations.play(name);
+    }
 };
 
 Player.prototype.Grace = function() {
@@ -599,7 +600,6 @@ Player.prototype.AttackDiveLand = function() {
             this.state = this.Running;
         }
     }
-
 };
 
 Player.prototype.AttackJump = function() {
