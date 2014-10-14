@@ -58,7 +58,7 @@ Frogland.create = function() {
     pixel.height = pixel.canvas.height;
 
 	game.physics.startSystem(Phaser.Physics.ARCADE);
-    game.physics.arcade.gravity.y = 680;
+    game.physics.arcade.gravity.y = 800;
     game.time.deltaCap = 0.016;
 
     bg = game.add.tileSprite(0, 0, 512, 288, 'Background');
@@ -119,12 +119,7 @@ Frogland.update = function() {
 
 	game.physics.arcade.collide(frauki, midgroundLayer);
 
-    game.physics.arcade.collide(frauki, this.objectGroup, this.CollideFraukiWithObject, function(f, o) {
-        if(o.spriteType == 'apple' && o.state === o.Eaten)
-            return false;
-
-        return true;
-    });
+    game.physics.arcade.collide(frauki, this.objectGroup, this.CollideFraukiWithObject, this.OverlapFraukiWithObject);
 
     game.physics.arcade.collide(this.objectGroup, midgroundLayer);
 
@@ -145,7 +140,7 @@ Frogland.update = function() {
 
 Frogland.render = function() {
     //game.debug.body(frauki);
-    game.debug.body(frauki.attackRect);
+    //game.debug.body(frauki.attackRect);
 
 /*    this.objectGroup.forEach(function(o) {
         game.debug.body(o);
@@ -179,14 +174,23 @@ Frogland.Restart = function() {
         });
 }
 
+//this is called when a collision happens. if it returns false the two will not be seperated
+Frogland.OverlapFraukiWithObject = function(f, o) {
+    if(o.spriteType == 'apple') {
+        EatApple(f, o);
+        return false;
+    } else if(o.spriteType === 'enemy') {
+        frauki.Hit(f, o);
+        return false;
+    }
+
+    return true;
+};
+
 Frogland.CollideFraukiWithObject = function(f, o) {
 
     if(!!o && typeof o === 'object') {
-        if(o.spriteType === 'enemy')
-            frauki.Hit(f, o);
-        else if(o.spriteType === 'door')
+        if(o.spriteType === 'door')
             OpenDoor(f, o);
-        else if(o.spriteType === 'apple')
-            EatApple(f, o);
     }
 };

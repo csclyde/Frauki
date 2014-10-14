@@ -1,8 +1,8 @@
 PLAYER_SPEED = function() { return 150 + (energyController.GetEnergy() * 7); }
 PLAYER_ROLL_SPEED = function() { return 600 + (energyController.GetEnergy() * 5); }
 PLAYER_RUN_SLASH_SPEED = function() { return  900 + (energyController.GetEnergy() * 10); }
-PLAYER_JUMP_VEL = function() { return -370 - (energyController.GetEnergy() * 3); }
-PLAYER_DOUBLE_JUMP_VEL = function() { return -350 - (energyController.GetEnergy() * 2); }
+PLAYER_JUMP_VEL = function() { return -470 - (energyController.GetEnergy() * 3); }
+PLAYER_DOUBLE_JUMP_VEL = function() { return -400 - (energyController.GetEnergy() * 2); }
 PLAYER_JUMP_SLASH_SPEED = function() { return 1000 + (energyController.GetEnergy() * 5); }
 PLAYER_KICK_SPEED = 800;
 
@@ -208,8 +208,10 @@ Player.prototype.Run = function(params) {
 
 Player.prototype.StartStopRun = function(params) {
     if(params.run) {
-        //open the window for dash attcks
-        if(game.time.now > this.timers.dashWindow) {
+        if(this.state === this.Crouching) {
+            this.Roll();
+            this.timers.dashWindow = game.time.now + 200;
+        } else if(game.time.now > this.timers.dashWindow) {
             this.timers.dashWindow = game.time.now + 200;
         //double tap to roll
         } else if(params.dir === this.states.direction) {
@@ -394,7 +396,7 @@ Player.prototype.Running = function() {
 Player.prototype.Jumping = function() {
     this.PlayAnim('jump');
 
-    if(this.body.velocity.y > 0) {
+    if(this.body.velocity.y >= 0) {
         this.state = this.Peaking;
     }
 

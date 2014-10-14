@@ -34,6 +34,9 @@ Apple.prototype.update = function() {
 };
 
 function EatApple(f, a) {
+    if(a.state === a.Eaten)
+        return;
+    
     a.state = a.Eaten;
     energyController.AddEnergy(10);
 
