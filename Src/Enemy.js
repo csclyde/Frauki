@@ -124,7 +124,12 @@ function EnemyHit(f, e) {
 
 //provide utility functions here that the specific enemies can all use
 Enemy.prototype.PlayerIsNear = function(radius) {
-    if(game.physics.arcade.distanceBetween(frauki, this) <= radius)
+    var distX = frauki.body.center.x - this.body.center.x;
+    var distY = frauki.body.center.y - this.body.center.y;
+
+    var dist = Math.sqrt(distX * distX + distY * distY);
+
+    if(dist <= radius)
         return true;
     else
         return false;

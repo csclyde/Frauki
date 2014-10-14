@@ -1,6 +1,6 @@
 Enemy.prototype.types['Sporoid'] =  function() {
 
-	this.body.setSize(22, 17, 0, 0);
+	this.body.setSize(22, 17, 0, -7);
 
     this.animations.add('idle', ['Sporoid0000'], 10, true, false);
 
@@ -100,7 +100,7 @@ Enemy.prototype.types['Sporoid'] =  function() {
 			case 'down': this.body.velocity.y += 30; break;
 		}
 
-		if(this.PlayerIsNear(120)) {
+		if(this.PlayerIsNear(100)) {
 			this.Dash();
 			return;
 		}
@@ -115,6 +115,15 @@ Enemy.prototype.types['Sporoid'] =  function() {
 				this.body.velocity.y += 30;
 			else
 				this.body.velocity.y += -30;
+		}
+	};
+
+	this.PreDashing = function() {
+		this.PlayAnim('idle');
+
+		if(game.time.now > this.dashTimer) {
+			this.state = this.Dashing;
+			this.dashTimer = game.time.now + 1000;
 		}
 	};
 

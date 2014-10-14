@@ -321,14 +321,23 @@ Player.prototype.Roll = function(params) {
 
     this.state = this.Rolling;
 
-    if(this.states.direction === 'left') {
-        this.movement.rollVelocity = -(PLAYER_ROLL_SPEED());
-        this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: -(PLAYER_SPEED())}, 300, Phaser.Easing.Quartic.In, true);
+    var dir = 1;
+    if(inputController.runLeft.isDown) {
+        this.SetDirection('left');
+        dir = -1;
+    } else if (inputController.runRight.isDown) {
+        this.SetDirection('right');
+        dir = 1;
+    } else if(this.states.direction === 'left') {
+        this.SetDirection('left');
+        dir = -1;
+    } else {
+        this.SetDirection('right');
+        dir = 1;
     }
-    else {
-        this.movement.rollVelocity = PLAYER_ROLL_SPEED();
-        this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: PLAYER_SPEED()}, 300, Phaser.Easing.Quartic.In, true);
-    }
+
+    this.movement.rollVelocity = dir * PLAYER_ROLL_SPEED();
+    this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: dir * PLAYER_SPEED()}, 300, Phaser.Easing.Quartic.In, true);
 
     this.rollTimer = game.time.now + 650;
     this.timers.gracePeriod = game.time.now + 300;
