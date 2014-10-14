@@ -405,6 +405,8 @@ Player.prototype.Jumping = function() {
 Player.prototype.Peaking = function() {
     this.PlayAnim('peak');
 
+    this.body.gravity.y = game.physics.arcade.gravity.y * 2;
+
     if(this.body.velocity.y < 0) {
         this.state = this.Jumping;
     } else if(this.body.onFloor()) {

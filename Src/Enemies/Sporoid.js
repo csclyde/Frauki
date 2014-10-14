@@ -40,10 +40,7 @@ Enemy.prototype.types['Sporoid'] =  function() {
 		}
     
 	    //compute the velocity based on weight and attack knockback
-	    this.body.velocity.y = -150 + this.weight;
-
-	    var c = frauki.body.x < this.body.x ? 1 : -1;
-	    this.body.velocity.x = c * ((80 + (this.weight / 2)) * (frauki.currentAttack.knockback));
+	    this.body.velocity.y = -200 + this.weight;
 
 	    //a durability stat should modify how long they are stunned for. also, the amount of dmg
 	    this.hitTimer = game.time.now + 800;
