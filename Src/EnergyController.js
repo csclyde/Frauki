@@ -48,7 +48,7 @@ EnergyController.prototype.AddEnergy = function(amt) {
 };
 
 EnergyController.prototype.RemoveEnergy = function(amt) {
-	amt = amt || 10;
+	amt = amt || 7;
 
 	this.energy -= amt;
 	this.neutralPoint -= (amt / 10);
