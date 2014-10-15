@@ -174,7 +174,7 @@ Frogland.Restart = function() {
         });
 }
 
-//this is called when a collision happens. if it returns false the two will not be seperated
+//this is called when a collision happens. if it returns false the two will not be separated
 Frogland.OverlapFraukiWithObject = function(f, o) {
     if(o.spriteType == 'apple') {
         EatApple(f, o);

@@ -186,7 +186,7 @@ Player.prototype.LandHit = function() {
 };
 
 Player.prototype.LandKill = function() { 
-    energyController.AddEnergy(7);
+    energyController.AddEnergy(5);
 };
 
 ////////////////ACTIONS//////////////////
@@ -356,7 +356,7 @@ Player.prototype.Hit = function(f, e) {
 
     energyController.RemoveEnergy();
 
-    e.energy += 1;
+    e.energy += 2;
 
     this.body.x < e.body.x ? this.body.velocity.x = -200 : this.body.velocity.x = 200;
 

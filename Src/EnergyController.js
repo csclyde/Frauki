@@ -3,6 +3,7 @@ EnergyController = function() {
 	this.energy = 15;
 	this.neutralPoint = 15;
 	this.tickTimer = 0;
+	this.gracePeriod = 0;
 };
 
 EnergyController.prototype.UpdateEnergy = function() {
@@ -18,7 +19,7 @@ EnergyController.prototype.UpdateEnergy = function() {
 	else if(step > -0.2 && step < 0) step = -0.2;
 
 	//if the timer is up, tick the energy and reset the timer
-	if(game.time.now > this.tickTimer) {
+	if(game.time.now > this.tickTimer && game.time.now > this.gracePeriod) {
 		this.energy += step;
 		this.tickTimer = game.time.now + 500;
 	}
@@ -43,15 +44,15 @@ EnergyController.prototype.AddEnergy = function(amt) {
 
 	this.energy += amt;
 	this.neutralPoint += (amt / 10);
-	//add energy and modify the neutral point
+	this.gracePeriod = game.time.now + 2000;
 };
 
 EnergyController.prototype.RemoveEnergy = function(amt) {
-	amt = amt || 7;
+	amt = amt || 10;
 
 	this.energy -= amt;
 	this.neutralPoint -= (amt / 10);
-
+	this.gracePeriod = game.time.now + 2000;
 };
 
 EnergyController.prototype.GetEnergy = function() {

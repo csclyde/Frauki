@@ -91,7 +91,6 @@ Enemy.prototype.types['Buzzar'] =  function() {
 		this.body.velocity.y = Math.sin(game.time.now / 150) * 100 + (Math.random() * 40 - 20);
 		this.body.velocity.x = Math.sin(game.time.now / 1000) * 20;
 
-
 		switch(this.wanderDirection) {
 			case 'left': this.body.velocity.x -= 30; break;
 			case 'up':   this.body.velocity.y -= 30; break;
