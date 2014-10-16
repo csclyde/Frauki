@@ -2,47 +2,11 @@
 
 "Sting0000":
 {
-	"frame": {"x":33,"y":2,"w":19,"h":41},
+	"frame": {"x":2,"y":2,"w":30,"h":41},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":19,"h":41},
-	"sourceSize": {"w":19,"h":41},
-	"pivot": {"x":0.5,"y":0.5}
-},
-"Sting0001":
-{
-	"frame": {"x":2,"y":78,"w":23,"h":41},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":23,"h":41},
-	"sourceSize": {"w":23,"h":41},
-	"pivot": {"x":0.5,"y":0.5}
-},
-"Sting0002":
-{
-	"frame": {"x":2,"y":45,"w":29,"h":31},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":29,"h":31},
-	"sourceSize": {"w":29,"h":31},
-	"pivot": {"x":0.5,"y":0.5}
-},
-"Sting0003":
-{
-	"frame": {"x":2,"y":2,"w":29,"h":41},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":29,"h":41},
-	"sourceSize": {"w":29,"h":41},
-	"pivot": {"x":0.5,"y":0.5}
-},
-"Sting0004":
-{
-	"frame": {"x":27,"y":78,"w":25,"h":35},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":25,"h":35},
-	"sourceSize": {"w":25,"h":35},
+	"spriteSourceSize": {"x":0,"y":0,"w":30,"h":41},
+	"sourceSize": {"w":30,"h":41},
 	"pivot": {"x":0.5,"y":0.5}
 }},
 "meta": {
@@ -50,8 +14,8 @@
 	"version": "1.0",
 	"image": "Buzzar.png",
 	"format": "RGBA8888",
-	"size": {"w":54,"h":121},
+	"size": {"w":34,"h":45},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:068dc484abb3b368fad9b52eaf3b8382:c801d12109d1b082288f6ca85faa016d:33ba44c50159a8887b77ce94e5173ace$"
+	"smartupdate": "$TexturePacker:SmartUpdate:d889951f8b80294ea35f3ebd38017b5d:fd64fdb4c5504fee9f19d0eaa9f4ce1d:33ba44c50159a8887b77ce94e5173ace$"
 }
 }

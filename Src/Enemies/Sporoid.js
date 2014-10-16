@@ -146,4 +146,8 @@ Enemy.prototype.types['Sporoid'] =  function() {
 		}
 	};
 
+	this.vulnerableFrames = {
+
+	};
+
 };

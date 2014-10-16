@@ -19,6 +19,8 @@ Enemy = function(game, x, y, name) {
     this.flashing = false;
 
     this.energy = 7;
+
+    this.vulnerableFrames = {};
     
     if(!!this.types[name]) {
         this.types[name].apply(this);
@@ -27,6 +29,8 @@ Enemy = function(game, x, y, name) {
     }
 
     this.state = this.Idling;
+
+    this.inScope = false;
 
     this.maxEnergy = this.energy;
     this.initialX = this.body.x;
@@ -42,8 +46,22 @@ Enemy.prototype.create = function() {
 };
 
 Enemy.prototype.update = function() {
-    if(!this.WithinCameraRange())
+    if(this.WithinCameraRange()) {
+        //if they are in the camera range and not yet in the objectGroup, 
+        //load them into the objectGroup, from the enemy pool
+        if(this.parent === Frogland.enemyPool) {
+            Frogland.objectGroup.addChild(this);
+            this.body.enable = true;
+        }
+    } else {
+        //if they are not in the camera range, and registered as within the
+        //object group, take them out of the group
+        if(this.parent === Frogland.objectGroup) {
+            Frogland.enemyPool.addChild(this);
+            this.body.enable = false;
+        }
         return;
+    }
 
     if(!!this.updateFunction) {
         this.updateFunction.apply(this);
@@ -89,6 +107,10 @@ Enemy.prototype.SetDirection = function(dir) {
         this.direction = 'right';
         this.scale.x = 1;
     }
+};
+
+Enemy.prototype.UpdateVulnerableFrame = function() {
+
 };
 
 Enemy.prototype.PlayAnim = function(name) {

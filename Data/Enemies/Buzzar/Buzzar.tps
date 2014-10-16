@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>3</int>
         <key>texturePackerVersion</key>
-        <string>3.4.0</string>
+        <string>3.5.2</string>
         <key>fileName</key>
         <string>D:/gamedev/Frauki/Data/Enemies/Buzzar/Buzzar.tps</string>
         <key>autoSDSettings</key>
@@ -41,6 +41,20 @@
         <filename>Buzzar.png</filename>
         <key>flipPVR</key>
         <false/>
+        <key>pvrCompressionQuality</key>
+        <enum type="SettingsBase::PvrCompressionQuality">PVR_QUALITY_NORMAL</enum>
+        <key>mipMapMinSize</key>
+        <uint>32768</uint>
+        <key>etc1CompressionQuality</key>
+        <enum type="SettingsBase::Etc1CompressionQuality">ETC1_QUALITY_LOW_PERCEPTUAL</enum>
+        <key>dxtCompressionMode</key>
+        <enum type="SettingsBase::DxtCompressionMode">DXT_PERCEPTUAL</enum>
+        <key>jxrColorFormat</key>
+        <enum type="SettingsBase::JpegXrColorMode">JXR_YUV444</enum>
+        <key>jxrTrimFlexBits</key>
+        <uint>0</uint>
+        <key>jxrCompressionLevel</key>
+        <uint>0</uint>
         <key>ditherType</key>
         <enum type="SettingsBase::DitherType">NearestNeighbour</enum>
         <key>backgroundColor</key>
@@ -175,10 +189,6 @@
         <key>fileList</key>
         <array>
             <filename>Frames/Sting0000.png</filename>
-            <filename>Frames/Sting0001.png</filename>
-            <filename>Frames/Sting0002.png</filename>
-            <filename>Frames/Sting0003.png</filename>
-            <filename>Frames/Sting0004.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

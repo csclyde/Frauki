@@ -94,6 +94,9 @@ Frogland.create = function() {
     this.objectGroup = game.add.group();
     this.objectGroup.enableBody = true;
 
+    this.enemyPool = game.add.group();
+    
+
     map.createFromObjects('Enemies', 1061, 'Insectoid', 'Hop0000', true, false, this.objectGroup, Enemy);
     map.createFromObjects('Enemies', 1062, 'Buzzar', 'Sting0000', true, false, this.objectGroup, Enemy);
     map.createFromObjects('Enemies', 1063, 'Sporoid', 'Sporoid0000', true, false, this.objectGroup, Enemy);
