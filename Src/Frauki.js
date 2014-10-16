@@ -195,10 +195,10 @@ Player.prototype.Run = function(params) {
         return;
 
     if(params.dir === 'left') {
-        this.body.acceleration.x = -1500;
+        this.body.acceleration.x = -1000;
         this.SetDirection('left');
     } else if(params.dir === 'right') {
-        this.body.acceleration.x = 1500;
+        this.body.acceleration.x = 1000;
         this.SetDirection('right');
     } else {
         this.body.acceleration.x = 0;
