@@ -113,9 +113,11 @@ Player.prototype.update = function() {
         this.states.wasAttacking = false;
     }
 
-    if(!inputController.runLeft.isDown && !inputController.runRight.isDown && this.movement.rollVelocity === 0 && this.state !== this.Hurting) {
+    if(!inputController.runLeft.isDown && !inputController.runRight.isDown && this.state !== this.Jumping && this.state !== this.Rolling && this.state !== this.AttackStab && this.state !== this.Hurting) {
         this.body.velocity.x = 0;
         this.body.acceleration.x = 0;
+        this.movement.rollVelocity = 0;
+        this.movement.rollBoost = 0;
     }
 
     /*if(this.state === this.Crouching) {
