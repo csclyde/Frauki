@@ -23,6 +23,12 @@ CameraController = function(player, map) {
 	events.subscribe('player_crouch', this.CrouchCamera, this);
 	events.subscribe('control_up', this.RaiseCamera, this);
 	events.subscribe('camera_shake', this.ScreenShake, this);
+
+	this.daemon = game.add.sprite(0, 0, null);
+
+	this.moveTimer = 0;
+
+	//game.camera.follow(this.daemon);
 }
 
 //camera is controlled in player centric space
@@ -50,7 +56,12 @@ CameraController.prototype.UpdateCamera = function() {
 		this.shakeX = 0;
 	}
 
-	game.camera.focusOnXY(this.camX + frauki.body.x + this.shakeX, this.camY + frauki.body.y + this.shakeY);
+	//this.daemon.x = this.camX + frauki.body.x + this.shakeX;
+	//this.daemon.y = this.camY + frauki.body.y + this.shakeY;
+	if(game.time.now > this.moveTimer) {
+		game.camera.focusOnXY(this.camX + frauki.body.x + this.shakeX, this.camY + frauki.body.y + this.shakeY);
+		this.moveTimer = game.time.now + 12;
+	}
 
 	this.prevXVel = frauki.body.velocity.x;
 	this.prevYVel = frauki.body.velocity.y;
