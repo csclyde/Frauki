@@ -113,10 +113,8 @@ Player.prototype.update = function() {
         this.states.wasAttacking = false;
     }
 
-    if(this.body.acceleration.x === 0 && this.movement.rollVelocity === 0 && this.state !== this.Hurting)
+    if(!inputController.runLeft.isDown && !inputController.runRight.isDown && this.movement.rollVelocity === 0 && this.state !== this.Hurting) {
         this.body.velocity.x = 0;
-
-    if(!inputController.runLeft.isDown && !inputController.runRight.isDown) {
         this.body.acceleration.x = 0;
     }
 
