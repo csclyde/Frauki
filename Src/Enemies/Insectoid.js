@@ -87,9 +87,6 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	this.TakeHit = function(power) {
 		if(game.time.now < this.hitTimer)
         	return;
-    
-	    //compute the velocity based on weight and attack knockback
-	    this.body.velocity.y = -400 - this.weight;
 
 	    //a durability stat should modify how long they are stunned for. also, the amount of dmg
 	    this.hitTimer = game.time.now + 400;
