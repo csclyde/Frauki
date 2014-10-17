@@ -19,6 +19,7 @@ Enemy = function(game, x, y, name) {
     this.flashing = false;
 
     this.energy = 7;
+    this.damage = 5;
 
     this.vulnerableFrames = {};
     
