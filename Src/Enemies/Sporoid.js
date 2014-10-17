@@ -13,6 +13,7 @@ Enemy.prototype.types['Sporoid'] =  function() {
     this.energy = 3;
     
     this.weight = 80;
+    this.damage = 3;
 
     this.Spore = game.add.emitter(0, 0, 100);
 	this.Spore.makeParticles('Spore');
