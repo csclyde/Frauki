@@ -17,7 +17,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
     //this.body.bounce.set(0.5);
 
 	this.updateFunction = function() {
-		if(game.time.now < this.hitTimer)
+		if(this.state === this.Hurting)
 			return;
 
 		if(game.physics.arcade.distanceBetween(this, frauki) < 100 && this.state !== this.Hopping && frauki.state === frauki.Hurting) {
