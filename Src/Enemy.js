@@ -142,6 +142,8 @@ function EnemyHit(f, e) {
 
     var c = frauki.body.center.x < e.body.center.x ? 1 : -1;
     e.body.velocity.x =  c * e.weight * frauki.currentAttack.knockback * (frauki.currentAttack.damage / 2);
+    //compute the velocity based on weight and attack knockback
+	e.body.velocity.y = -200 - this.weight - (100 * frauki.currentAttack.knockback * (frauki.currentAttack.damage / 2));
     
 };
 
