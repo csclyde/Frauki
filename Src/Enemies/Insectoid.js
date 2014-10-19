@@ -66,7 +66,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
 		this.body.velocity.y = -300;
 
-		if(playerX < this.body.x) {
+		if(frauki.body.center.x < this.body.center.x) {
 			this.body.velocity.x = 100;
 		} else {
 			this.body.velocity.x = -100;
@@ -109,9 +109,9 @@ Enemy.prototype.types['Insectoid'] =  function() {
 				this.Scuttle();
 		} else if(this.body.center.y < frauki.body.y && this.body.center.x > frauki.body.center.x - 20 && this.body.center.x < frauki.body.center.x + 20 && !this.body.onFloor()) {
 			this.Dive();
-		} else if(Math.abs(this.body.y - playerY) < 40 && Math.abs(this.body.x - playerX) < 400 && this.body.onFloor()) {
+		} else if(Math.abs(this.body.center.y - frauki.body.center.y) < 40 && Math.abs(this.body.center.x - frauki.body.center.y) < 400 && this.body.onFloor()) {
 			this.Scuttle();
-		} else if(Math.abs(this.body.x - playerX) > 100 && Math.abs(this.body.x - playerX) < 450 && this.body.onFloor()) {
+		} else if(Math.abs(this.body.center.x - frauki.body.center.x) > 100 && Math.abs(this.body.center.x - frauki.body.center.x) < 450 && this.body.onFloor()) {
 			this.Hop();
 		} else {
 			
@@ -121,7 +121,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	this.PreHopping = function() {
 		this.PlayAnim('idle');
 
-		if(playerX < this.body.x) {
+		if(frauki.body.center.x < this.body.center.x) {
 			this.SetDirection('left');
 		} else {
 			this.SetDirection('right');
@@ -134,7 +134,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
 			this.body.velocity.y = (-1 * (Math.random() * 200)) - 100;
 
-			if(playerX < this.body.x) {
+			if(frauki.body.center.x < this.body.center.x) {
 				this.body.velocity.x = -400;
 			} else {
 				this.body.velocity.x = 400;
@@ -162,7 +162,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	this.PreScuttling = function() {
 		this.PlayAnim('idle');
 
-		if(playerX < this.body.x) {
+		if(frauki.body.center.x < this.body.center.x) {
 			this.SetDirection('left');
 		} else {
 			this.SetDirection('right');
@@ -172,7 +172,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 			this.attackTimer = game.time.now + 2000;
 			this.state = this.Scuttling;
 
-			if(frauki.body.x < this.body.x) {
+			if(frauki.body.x < this.body.center.x) {
 				this.body.velocity.x = -500;
 			} else {
 				this.body.velocity.x = 500;
@@ -199,9 +199,9 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
 	this.Diving = function() {
 		if(frauki.body.center.x < this.body.center.x)
-			this.body.x--;
+			this.body.center.x--;
 		else if(frauki.body.center.x > this.body.center.x)
-			this.body.x++;
+			this.body.center.x++;
 		
 		if(this.body.onFloor()) {
 			this.state = this.Idling;
@@ -212,11 +212,11 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		this.PlayAnim('die');
 
 		if(game.time.now > this.hitTimer) {
-			if(Math.abs(this.body.y - playerY) < 40 && Math.abs(this.body.x - playerX) < 300 && this.RollDice(20, 12)) {
+			if(Math.abs(this.body.center.y - frauki.body.center.y) < 40 && Math.abs(this.body.center.x - frauki.body.center.x) < 300 && this.RollDice(20, 12)) {
 				this.Scuttle();
 				this.attackTimer = game.time.now;
 			}
-			else if(Math.abs(this.body.x - playerX) > 100 && Math.abs(this.body.x - playerX) < 450) {
+			else if(Math.abs(this.body.center.x - frauki.body.center.x) > 100 && Math.abs(this.body.center.x - frauki.body.center.x) < 450) {
 				this.Hop();
 				this.attackTimer = game.time.now;
 			}

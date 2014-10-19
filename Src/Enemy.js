@@ -118,8 +118,10 @@ Enemy.prototype.PlayAnim = function(name) {
         this.animations.play(name);
 };
 
+Enemy.prototype.Vulnerable = function() { return true; }
+
 function EnemyHit(f, e) {
-    if(e.state === e.Hurting || e.spriteType !== 'enemy')
+    if(e.state === e.Hurting || e.spriteType !== 'enemy' || !e.Vulnerable())
         return;
 
     events.publish('camera_shake', {magnitudeX: 15, magnitudeY: 5, duration: 100});
@@ -143,6 +145,7 @@ function EnemyHit(f, e) {
     e.body.velocity.x =  c * e.weight * frauki.currentAttack.knockback;
     
 };
+
 
 //provide utility functions here that the specific enemies can all use
 Enemy.prototype.PlayerIsNear = function(radius) {

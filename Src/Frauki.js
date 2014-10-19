@@ -54,8 +54,6 @@ Player = function (game, x, y, name) {
     this.states.wasAttacking = false;
 
     this.timers = {};
-    this.timers.gracePeriod = 0;
-    this.timers.hitTimer = 0;
     this.timers.dashWindow = 0;
     this.timers.kickTimer = 0;
 
@@ -140,7 +138,7 @@ Player.prototype.PlayAnim = function(name) {
 };
 
 Player.prototype.Grace = function() {
-    return (this.game.time.now < this.timers.gracePeriod);
+    return !timerUtil.TimerUp('frauki_grace');
 };
 
 Player.prototype.UpdateAttackGeometry = function() {
@@ -240,7 +238,7 @@ Player.prototype.Jump = function(params) {
             this.body.velocity.y = PLAYER_DOUBLE_JUMP_VEL();
             this.state = this.Flipping;
             this.states.hasFlipped = true;
-            this.timers.gracePeriod = game.time.now + 300;
+            timerUtil.SetTimer('frauki_grace', 300);
         }
     } else if(this.body.velocity.y < 0 && this.state !== this.Flipping) {
         if(this.body.velocity.y < 0)
@@ -340,7 +338,7 @@ Player.prototype.Roll = function(params) {
     this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: dir * PLAYER_SPEED()}, 300, Phaser.Easing.Quartic.In, true);
 
     this.rollTimer = game.time.now + 650;
-    this.timers.gracePeriod = game.time.now + 300;
+    timerUtil.SetTimer('frauki_grace', 300);
 };
 
 Player.prototype.Hit = function(f, e) {
@@ -359,8 +357,8 @@ Player.prototype.Hit = function(f, e) {
     this.body.x < e.body.x ? this.body.velocity.x = -200 : this.body.velocity.x = 200;
 
     this.state = this.Hurting;
-    this.timers.gracePeriod = game.time.now + 1000;
-    this.timers.hitTimer = game.time.now + 500;
+    timerUtil.SetTimer('frauki_grace', 1000);
+    timerUtil.SetTimer('frauki_hit', 500);
 };
 
 //////////////////STATES/////////////////
@@ -508,7 +506,7 @@ Player.prototype.Rolling = function() {
 Player.prototype.Hurting = function() {
     this.PlayAnim('hit');
 
-    if(game.time.now > this.timers.hitTimer) {
+    if(timerUtil.TimerUp('frauki_hit')) {
         if(this.body.velocity.y > 0) {
             this.state = this.Falling;
         } else if(this.body.velocity.x === 0) {

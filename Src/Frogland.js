@@ -20,6 +20,7 @@ Frogland.preload = function() {
     game.load.atlasJSONHash('Insectoid', 'Data/Enemies/Insectoid/Insectoid.png', 'Data/Enemies/Insectoid/Insectoid.json');
     game.load.atlasJSONHash('Buzzar', 'Data/Enemies/Buzzar/Buzzar.png', 'Data/Enemies/Buzzar/Buzzar.json');
     game.load.atlasJSONHash('Sporoid', 'Data/Enemies/Sporoid/Sporoid.png', 'Data/Enemies/Sporoid/Sporoid.json');
+    game.load.atlasJSONHash('Madman', 'Data/Enemies/TerraceMadman/Madman.png', 'Data/Enemies/TerraceMadman/Madman.json');
 
     game.load.atlasJSONHash('Door', 'Data/Doors/Doors.png', 'Data/Doors/Doors.json');
     game.load.atlasJSONHash('Item', 'Data/Items/Items.png', 'Data/Items/Items.json');
@@ -36,6 +37,7 @@ var cameraController;
 var inputController;
 var effectsController;
 var energyController;
+var timerUtil;
 var frauki;
 var fraukiSpawnX, fraukiSpawnY;
 
@@ -100,6 +102,7 @@ Frogland.create = function() {
     map.createFromObjects('Enemies', 1061, 'Insectoid', 'Hop0000', true, false, this.objectGroup, Enemy);
     map.createFromObjects('Enemies', 1062, 'Buzzar', 'Sting0000', true, false, this.objectGroup, Enemy);
     map.createFromObjects('Enemies', 1063, 'Sporoid', 'Sporoid0000', true, false, this.objectGroup, Enemy);
+    map.createFromObjects('Enemies', 1064, 'Madman', 'Madman0000', true, false, this.objectGroup, Enemy);
 
     map.createFromObjects('Items', 1043, 'Door', 'Door0000', true, false, this.objectGroup, Door, false);
     map.createFromObjects('Items', 1042, 'Item', 'Apple0000', true, false, this.objectGroup, Apple, false);
@@ -110,6 +113,7 @@ Frogland.create = function() {
     inputController = new InputController(frauki);
     effectsController = new EffectsController();
     energyController = new EnergyController();
+    timerUtil = new TimerUtil();
 
     game.camera.focusOnXY(frauki.body.x, frauki.body.y);
 
