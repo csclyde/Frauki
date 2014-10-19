@@ -2,7 +2,8 @@ Enemy.prototype.types['Madman'] =  function() {
 
 	this.body.setSize(67, 25, 0, 0);
 	this.anchor.setTo(.5, 1);
-	this.body.bounce.set(0.2);
+	this.body.bounce.x = 0.2;
+	this.body.bounce.y = 0;
 
     this.animations.add('idle', ['Madman0000'], 10, true, false);
 
@@ -52,18 +53,22 @@ Enemy.prototype.types['Madman'] =  function() {
 	};
 
 	this.Dodge = function() {
+		if(game.time.now < this.attackTimer)
+			return;
+
 		if(this.state === this.Dodging || this.state === this.Smashing)
 			return;
 
-		this.body.velocity.y = -400;
+		this.body.velocity.y = -500;
 		this.state = this.Dodging;
+		this.attackTimer = game.time.now + 2000;
 	};
 
 	////////////////////////////////STATES////////////////////////////////////
 	this.Idling = function() {
 		this.PlayAnim('idle');
 
-		if(this.PlayerIsNear(150)) {
+		if(this.PlayerIsNear(150) && this.body.onFloor()) {
 			this.state = this.Dodge;
 		}
 		else if(Math.abs(this.body.center.y - frauki.body.center.y) < 40 && Math.abs(this.body.center.x - frauki.body.center.x) < 300 && this.body.onFloor()) {
@@ -94,18 +99,20 @@ Enemy.prototype.types['Madman'] =  function() {
 		this.PlayAnim('idle');
 
 		if(frauki.body.center.x < this.body.center.x)
-			this.body.velocity.x = -70;
+			this.body.velocity.x = -200;
 		else if(frauki.body.center.x > this.body.center.x)
-			this.body.velocity.x = 70;
+			this.body.velocity.x = 200;
 
-		if(frauki.body.center.x < this.body.center.x + 50 && frauki.body.center.x > this.body.center.x - 100) {
+		if(frauki.body.center.x < this.body.center.x + 30 && frauki.body.center.x > this.body.center.x - 30 && this.body.center.y < frauki.body.center.y - 100) {
 			this.state = this.Smashing;
-			this.body.velocity.y = 500;
+			this.body.velocity.y = 1000;
+		} else if(this.body.onFloor()) {
+			this.state = this.Idling;
 		}
 	};
 
 	this.Smashing = function() {
-		this.body.bounce.y = 0;
+		this.body.velocity.x = 0;
 
 		if(this.body.onFloor())
 			this.state = this.Idling;
