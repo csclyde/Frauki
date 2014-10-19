@@ -227,7 +227,7 @@ Player.prototype.Jump = function(params) {
             this.body.velocity.y = PLAYER_JUMP_VEL();
         }
         //double jump
-        else if(this.states.hasFlipped === false && this.state !== this.Falling && this.state !== this.Rolling && this.state !== this.AttackStab) {
+        else if(this.states.hasFlipped === false && this.state !== this.Rolling && this.state !== this.AttackStab) {
             if(this.tweens.stopJump) { this.tweens.stopJump.stop(); }
 
             this.body.velocity.y = PLAYER_DOUBLE_JUMP_VEL();
