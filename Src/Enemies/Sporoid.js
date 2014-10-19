@@ -53,7 +53,7 @@ Enemy.prototype.types['Sporoid'] =  function() {
 		if(game.time.now < this.dashWaitTimer)
 			return;
 
-		game.physics.arcade.moveToXY(this, frauki.body.center.x, frauki.body.center.y, 450);
+		game.physics.arcade.moveToXY(this, frauki.body.center.x, frauki.body.center.y, 400);
 		this.state = this.Dashing;
 		this.dashTimer = game.time.now + 1000;
 		this.dashWaitTimer = game.time.now + 3000;
@@ -145,10 +145,6 @@ Enemy.prototype.types['Sporoid'] =  function() {
 		if(game.time.now > this.hitTimer) {
 			this.state = this.Idling;
 		}
-	};
-
-	this.vulnerableFrames = {
-
 	};
 
 };

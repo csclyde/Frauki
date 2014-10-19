@@ -99,10 +99,10 @@ Frogland.create = function() {
     this.enemyPool = game.add.group();
     
 
-    map.createFromObjects('Enemies', 1061, 'Insectoid', 'Hop0000', true, false, this.objectGroup, Enemy);
-    map.createFromObjects('Enemies', 1062, 'Buzzar', 'Sting0000', true, false, this.objectGroup, Enemy);
-    map.createFromObjects('Enemies', 1063, 'Sporoid', 'Sporoid0000', true, false, this.objectGroup, Enemy);
-    map.createFromObjects('Enemies', 1064, 'Madman', 'Madman0000', true, false, this.objectGroup, Enemy);
+    map.createFromObjects('Enemies', 1061, 'Insectoid', 'Hop0000', true, false, this.objectGroup, Enemy, false);
+    map.createFromObjects('Enemies', 1062, 'Buzzar', 'Sting0000', true, false, this.objectGroup, Enemy, false);
+    map.createFromObjects('Enemies', 1063, 'Sporoid', 'Sporoid0000', true, false, this.objectGroup, Enemy, false);
+    map.createFromObjects('Enemies', 1064, 'Madman', 'Madman0000', true, false, this.objectGroup, Enemy, false);
 
     map.createFromObjects('Items', 1043, 'Door', 'Door0000', true, false, this.objectGroup, Door, false);
     map.createFromObjects('Items', 1042, 'Item', 'Apple0000', true, false, this.objectGroup, Apple, false);

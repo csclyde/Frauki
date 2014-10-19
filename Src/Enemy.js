@@ -10,18 +10,7 @@ Enemy = function(game, x, y, name) {
     this.body.maxVelocity.x = 600;
     this.body.bounce.set(0.2);
     
-    this.anchor.setTo(.5, 1);
-    
-    this.SetDirection('left');
-    
-    this.weight = 0.5;
-    this.hitTimer = 0;
-    this.flashing = false;
-
-    this.energy = 7;
-    this.damage = 5;
-
-    this.vulnerableFrames = {};
+    this.SetDefaultValues();
     
     if(!!this.types[name]) {
         this.types[name].apply(this);
@@ -31,11 +20,10 @@ Enemy = function(game, x, y, name) {
 
     this.state = this.Idling;
 
-    this.inScope = false;
-
+    //capture any initial values that were set in the specific enemy set up
     this.maxEnergy = this.energy;
-    this.initialX = this.body.x;
-    this.initialY = this.body.y;
+    this.initialX = this.body.center.x;
+    this.initialY = this.body.center.y;
 };
 
 Enemy.prototype = Object.create(Phaser.Sprite.prototype);
@@ -45,6 +33,22 @@ Enemy.prototype.types = {};
 Enemy.prototype.create = function() {
 
 };
+
+Enemy.prototype.SetDefaultValues = function() {
+    this.anchor.setTo(.5, 1);
+    this.SetDirection('left');
+    this.weight = 0.5;
+    this.hitTimer = 0;
+    this.energy = 7;
+    this.damage = 5;
+    this.inScope = false;
+};
+
+Enemy.prototype.UpdateFunction = function() {};
+Enemy.prototype.Idling = function() {};
+Enemy.prototype.Hurting = function() {};
+Enemy.prototype.Die = function() {};
+Enemy.prototype.Vulnerable = function() { return true; }
 
 Enemy.prototype.update = function() {
     if(this.WithinCameraRange()) {
@@ -64,12 +68,8 @@ Enemy.prototype.update = function() {
         return;
     }
 
-    if(!!this.updateFunction) {
-        this.updateFunction.apply(this);
-    } 
-    
-    if(!!this.state)
-        this.state();
+    this.updateFunction();
+    this.state();
 
     if(this.body.velocity.x > 0) {
         this.SetDirection('right');
@@ -110,16 +110,11 @@ Enemy.prototype.SetDirection = function(dir) {
     }
 };
 
-Enemy.prototype.UpdateVulnerableFrame = function() {
-
-};
-
 Enemy.prototype.PlayAnim = function(name) {
     if(this.animations.currentAnim.name !== name)
         this.animations.play(name);
 };
 
-Enemy.prototype.Vulnerable = function() { return true; }
 
 function EnemyHit(f, e) {
     if(e.state === e.Hurting || e.spriteType !== 'enemy' || !e.Vulnerable())
@@ -128,9 +123,9 @@ function EnemyHit(f, e) {
     events.publish('camera_shake', {magnitudeX: 15, magnitudeY: 5, duration: 100});
 
     e.energy -= frauki.currentAttack.damage;
+
     if(e.energy <= 0) {
-        if(!!e.Die)
-            e.Die();
+        e.Die();
 
         frauki.LandKill();
         e.kill();
@@ -139,13 +134,10 @@ function EnemyHit(f, e) {
         e.TakeHit();
     }
     
-
     effectsController.ParticleSpray(e.body.x, e.body.y, e.body.width, e.body.height, 'red', e.PlayerDirection());
 
     var c = frauki.body.center.x < e.body.center.x ? 1 : -1;
     e.body.velocity.x = c * (50 - (e.weight * 300) + (200 * frauki.currentAttack.knockback));
-
-    console.log(e.body.velocity.x);
 
     if(c < 0 && e.body.velocity.x > 0) e.body.velocity.x = 0;
     if(c > 0 && e.body.velocity.x < 0) e.body.velocity.x = 0;
