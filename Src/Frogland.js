@@ -37,7 +37,6 @@ var cameraController;
 var inputController;
 var effectsController;
 var energyController;
-var timerUtil;
 var frauki;
 var fraukiSpawnX, fraukiSpawnY;
 

@@ -36,7 +36,7 @@ Enemy.prototype.types['Sporoid'] =  function() {
 
 	///////////////////////////////ACTIONS////////////////////////////////////
 	this.TakeHit = function(power) {
-		if(game.time.now < this.hitTimer) {
+		if(!this.timers.TimerUp('hit')) {
 			return;
 		}
     
@@ -44,19 +44,20 @@ Enemy.prototype.types['Sporoid'] =  function() {
 	    this.body.velocity.y = -200 + this.weight;
 
 	    //a durability stat should modify how long they are stunned for. also, the amount of dmg
-	    this.hitTimer = game.time.now + 800;
+	    this.timers.SetTimer('hit', 800);
 
 	    this.state = this.Hurting;
 	};
 
 	this.Dash = function() {
-		if(game.time.now < this.dashWaitTimer)
+		if(!this.timers.TimerUp('dash_wait'))
 			return;
 
 		game.physics.arcade.moveToXY(this, frauki.body.center.x, frauki.body.center.y, 400);
 		this.state = this.Dashing;
-		this.dashTimer = game.time.now + 1000;
-		this.dashWaitTimer = game.time.now + 3000;
+
+		this.timers.SetTimer('dash', 1000);
+		this.timers.SetTimer('dash_wait', 3000);
 	};
 
 	this.Shoot = function() {
@@ -64,7 +65,7 @@ Enemy.prototype.types['Sporoid'] =  function() {
 		//game.physics.arcade.moveToXY(this, frauki.body.center.x, frauki.body.center.y, 500);
 		//game.add.tween(spore.body).to({x: 0, y: 0}, 1000, Phaser.Easing.Exponential.Out, true);
 
-	    this.shootTimer = game.time.now + 1000;
+	    this.timers.SetTimer('shoot', 1000);
 	};
 
 	this.Reset = function() {
@@ -86,7 +87,7 @@ Enemy.prototype.types['Sporoid'] =  function() {
 		this.Spore.x = this.body.center.x;
 		this.Spore.y = this.body.center.y;
 
-		if(this.PlayerIsVisible() && game.time.now > this.shootTimer) {
+		if(this.PlayerIsVisible() && this.timers.TimerUp('shoot')) {
 			this.Shoot();
 		}
 
@@ -119,9 +120,9 @@ Enemy.prototype.types['Sporoid'] =  function() {
 	this.PreDashing = function() {
 		this.PlayAnim('idle');
 
-		if(game.time.now > this.dashTimer) {
+		if(this.timers.TimerUp('dash')) {
 			this.state = this.Dashing;
-			this.dashTimer = game.time.now + 1000;
+			this.timers.SetTimer('dash', 1000);
 		}
 	};
 
@@ -133,7 +134,7 @@ Enemy.prototype.types['Sporoid'] =  function() {
 		this.body.velocity.x = this.body.velocity.x;
 		this.body.velocity.y = this.body.velocity.y;
 
-		if(game.time.now > this.dashTimer){
+		if(this.timers.TimerUp('dash')) {
 			this.body.velocity.x = 0;
 			this.body.velocity.y = 0;
 
@@ -142,7 +143,7 @@ Enemy.prototype.types['Sporoid'] =  function() {
 	};
 
 	this.Hurting = function() {
-		if(game.time.now > this.hitTimer) {
+		if(this.timers.TimerUp('hit')) {
 			this.state = this.Idling;
 		}
 	};

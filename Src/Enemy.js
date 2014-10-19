@@ -24,6 +24,8 @@ Enemy = function(game, x, y, name) {
     this.maxEnergy = this.energy;
     this.initialX = this.body.center.x;
     this.initialY = this.body.center.y;
+
+    this.timers = new TimerUtil();
 };
 
 Enemy.prototype = Object.create(Phaser.Sprite.prototype);
@@ -88,7 +90,7 @@ Enemy.prototype.GetEnergyPercentage = function() {
 };
 
 Enemy.prototype.WithinCameraRange = function() {
-    var padding = 100;
+    var padding = 200;
 
     if(this.body.x > game.camera.x - padding &&
        this.body.y > game.camera.y - padding &&
@@ -120,7 +122,7 @@ function EnemyHit(f, e) {
     if(e.state === e.Hurting || e.spriteType !== 'enemy' || !e.Vulnerable())
         return;
 
-    events.publish('camera_shake', {magnitudeX: 15, magnitudeY: 5, duration: 100});
+    events.publish('camera_shake', {magnitudeX: 15 * frauki.currentAttack.damage, magnitudeY: 5, duration: 100});
 
     e.energy -= frauki.currentAttack.damage;
 
