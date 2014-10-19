@@ -111,9 +111,11 @@ Player.prototype.update = function() {
         this.states.wasAttacking = false;
     }
 
-    if(!inputController.runLeft.isDown && !inputController.runRight.isDown && this.movement.rollVelocity === 0 && this.state !== this.Hurting) {
+    if(!inputController.runLeft.isDown && !inputController.runRight.isDown && this.state !== this.Jumping && this.state !== this.Rolling && this.state !== this.AttackStab && this.state !== this.Hurting) {
         this.body.velocity.x = 0;
         this.body.acceleration.x = 0;
+        this.movement.rollVelocity = 0;
+        this.movement.rollBoost = 0;
     }
 
     /*if(this.state === this.Crouching) {
@@ -191,10 +193,10 @@ Player.prototype.Run = function(params) {
         return;
 
     if(params.dir === 'left') {
-        this.body.acceleration.x = -1500;
+        this.body.acceleration.x = -1000;
         this.SetDirection('left');
     } else if(params.dir === 'right') {
-        this.body.acceleration.x = 1500;
+        this.body.acceleration.x = 1000;
         this.SetDirection('right');
     } else {
         this.body.acceleration.x = 0;
@@ -350,9 +352,9 @@ Player.prototype.Hit = function(f, e) {
 
     effectsController.ParticleSpray(this.body.x, this.body.y, this.body.width, this.body.height, 'yellow');
 
-    energyController.RemoveEnergy();
+    energyController.RemoveEnergy(e.damage);
 
-    e.energy += 2;
+    e.energy += e.damage / 2;
 
     this.body.x < e.body.x ? this.body.velocity.x = -200 : this.body.velocity.x = 200;
 

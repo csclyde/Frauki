@@ -19,6 +19,7 @@ Enemy = function(game, x, y, name) {
     this.flashing = false;
 
     this.energy = 7;
+    this.damage = 5;
 
     this.vulnerableFrames = {};
     
@@ -142,7 +143,9 @@ function EnemyHit(f, e) {
     effectsController.ParticleSpray(e.body.x, e.body.y, e.body.width, e.body.height, 'red', e.PlayerDirection());
 
     var c = frauki.body.center.x < e.body.center.x ? 1 : -1;
-    e.body.velocity.x =  c * e.weight * frauki.currentAttack.knockback;
+    e.body.velocity.x =  c * e.weight * frauki.currentAttack.knockback * (frauki.currentAttack.damage / 2);
+    //compute the velocity based on weight and attack knockback
+	e.body.velocity.y = -300 - this.weight ;//- (100 * frauki.currentAttack.knockback * (frauki.currentAttack.damage / 2));
     
 };
 

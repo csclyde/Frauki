@@ -10,13 +10,14 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
     this.attackTimer = 0;
     this.weight = 800;
+    this.damage = 7;
 
     this.squashTween = null;
 
     //this.body.bounce.set(0.5);
 
 	this.updateFunction = function() {
-		if(game.time.now < this.hitTimer)
+		if(this.state === this.Hurting)
 			return;
 
 		if(game.physics.arcade.distanceBetween(this, frauki) < 100 && this.state !== this.Hopping && frauki.state === frauki.Hurting) {
@@ -86,9 +87,6 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	this.TakeHit = function(power) {
 		if(game.time.now < this.hitTimer)
         	return;
-    
-	    //compute the velocity based on weight and attack knockback
-	    this.body.velocity.y = -400 - this.weight;
 
 	    //a durability stat should modify how long they are stunned for. also, the amount of dmg
 	    this.hitTimer = game.time.now + 400;
