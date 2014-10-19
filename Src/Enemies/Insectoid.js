@@ -9,7 +9,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
     this.animations.add('die', ['Die0000', 'Die0001', 'Die0002', 'Die0003'], 10, false, false);
 
     this.attackTimer = 0;
-    this.weight = 800;
+    this.weight = 0.6;
     this.damage = 7;
 
     this.squashTween = null;
@@ -208,6 +208,8 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
 	this.Hurting = function() {
 		this.PlayAnim('die');
+
+		console.log(this.body.velocity.y);
 
 		if(game.time.now > this.hitTimer) {
 			if(Math.abs(this.body.center.y - frauki.body.center.y) < 40 && Math.abs(this.body.center.x - frauki.body.center.x) < 300 && this.RollDice(20, 12)) {

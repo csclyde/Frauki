@@ -43,8 +43,6 @@ Player = function (game, x, y, name) {
     this.tweens = {};
     this.tweens.roll = null;
     this.tweens.stopJump = null;
-    this.tweens.startRun = null;
-    this.tweens.stopRun = null;
 
     this.states = {};
     this.states.direction = 'right';
@@ -52,10 +50,6 @@ Player = function (game, x, y, name) {
     this.states.hasFlipped = false;
     this.states.upPresseed = false;
     this.states.wasAttacking = false;
-
-    this.timers = {};
-    this.timers.dashWindow = 0;
-    this.timers.kickTimer = 0;
 
     this.movement = {};
     this.movement.rollVelocity = 0;
@@ -208,19 +202,18 @@ Player.prototype.StartStopRun = function(params) {
     if(params.run) {
         if(this.state === this.Crouching) {
             this.Roll();
-            this.timers.dashWindow = game.time.now + 200;
-        } else if(game.time.now > this.timers.dashWindow) {
-            this.timers.dashWindow = game.time.now + 200;
+            timerUtil.SetTimer('frauki_dash', 200);
+        } else if(timerUtil.TimerUp('frauki_dash')) {
+            timerUtil.SetTimer('frauki_dash', 200);
         //double tap to roll
         } else if(params.dir === this.states.direction) {
             this.Roll();
-            this.timers.dashWindow = game.time.now + 200;
+            timerUtil.SetTimer('frauki_dash', 200);
         }
 
     } else {
         if(this.state !== this.Rolling)
             this.body.velocity.x = 0;
-            //this.tweens.stopRun = game.add.tween(this.body.velocity).to({x: 0}, 120, Phaser.Easing.Linear.None, true);
     }
 };
 
@@ -251,13 +244,13 @@ Player.prototype.Jump = function(params) {
 Player.prototype.Crouch = function(params) {
     this.states.crouching = params.crouch;
 
-    this.timers.dashWindow = game.time.now + 200;
+    timerUtil.SetTimer('frauki_dash', 200);
 };
 
 Player.prototype.Slash = function(params) {
 
     //diving dash
-    if(game.time.now < this.timers.dashWindow && this.states.crouching && (this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling)) {
+    if(!timerUtil.TimerUp('frauki_dash') && this.states.crouching && (this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling)) {
         this.state = this.AttackDiveCharge;
         this.movement.diveVelocity = 1000;
     }
@@ -296,13 +289,13 @@ Player.prototype.Slash = function(params) {
 
 Player.prototype.Roll = function(params) {
 
-    if(this.game.time.now < this.rollTimer)
+    if(!timerUtil.TimerUp('frauki_roll'))
         return;
 
     //kick
     /*if(this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling || this.state === this.Flipping) {
         this.state = this.Kicking;
-        this.timers.kickTimer = game.time.now + 200;
+        timerUtil.SetTimer('frauki_kick', 200);
 
         if(this.states.direction === 'left') {
             this.movement.rollVelocity = -PLAYER_RUN_SLASH_SPEED();
@@ -339,7 +332,7 @@ Player.prototype.Roll = function(params) {
     this.movement.rollVelocity = dir * PLAYER_ROLL_SPEED();
     this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: dir * PLAYER_SPEED()}, 300, Phaser.Easing.Quartic.In, true);
 
-    this.rollTimer = game.time.now + 650;
+    timerUtil.SetTimer('frauki_roll', 650);
     timerUtil.SetTimer('frauki_grace', 300);
 };
 
@@ -552,7 +545,6 @@ Player.prototype.AttackStab = function() {
 
 
     if(this.animations.currentAnim.isFinished) {
-        //this.timers.dashWindow = game.time.now + 200;
 
         if(this.body.velocity.y > 150) {
             this.state = this.Falling;
@@ -587,7 +579,6 @@ Player.prototype.AttackDiveFall = function() {
 
     if(this.body.onFloor()) {
         this.movement.diveVelocity = 0;
-        //this.timers.dashWindow = game.time.now + 200;
 
         events.publish('camera_shake', {magnitudeX: 10, magnitudeY: 5, duration: 200});
         this.state = this.AttackDiveLand;
@@ -634,7 +625,7 @@ Player.prototype.Kicking = function() {
         this.state = this.Landing;
     }
 
-    if(game.time.now > this.timers.kickTimer) {
+    if(timerUtil.TimerUp('frauki_kick')) {
         if(this.body.velocity.y >= 0) {
             this.state = this.Falling;
         } else if(this.body.velocity.y < 0) {

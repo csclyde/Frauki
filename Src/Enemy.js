@@ -14,7 +14,7 @@ Enemy = function(game, x, y, name) {
     
     this.SetDirection('left');
     
-    this.weight = 400;
+    this.weight = 0.5;
     this.hitTimer = 0;
     this.flashing = false;
 
@@ -143,9 +143,15 @@ function EnemyHit(f, e) {
     effectsController.ParticleSpray(e.body.x, e.body.y, e.body.width, e.body.height, 'red', e.PlayerDirection());
 
     var c = frauki.body.center.x < e.body.center.x ? 1 : -1;
-    e.body.velocity.x =  c * e.weight * frauki.currentAttack.knockback * (frauki.currentAttack.damage / 2);
+    e.body.velocity.x = c * (50 - (e.weight * 300) + (200 * frauki.currentAttack.knockback));
+
+    console.log(e.body.velocity.x);
+
+    if(c < 0 && e.body.velocity.x > 0) e.body.velocity.x = 0;
+    if(c > 0 && e.body.velocity.x < 0) e.body.velocity.x = 0;
     //compute the velocity based on weight and attack knockback
-	e.body.velocity.y = -300 - this.weight ;//- (100 * frauki.currentAttack.knockback * (frauki.currentAttack.damage / 2));
+
+	e.body.velocity.y = -500 + (e.weight * 1000) - (500 * frauki.currentAttack.damage);
     
 };
 
