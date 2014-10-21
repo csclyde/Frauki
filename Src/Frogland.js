@@ -137,6 +137,7 @@ Frogland.update = function() {
     inputController.UpdateInput();
     //effectsController.UpdateEffects();
     energyController.UpdateEnergy();
+    triggers.Update();
 
     playerX = frauki.body.x;
     playerY = frauki.body.y;

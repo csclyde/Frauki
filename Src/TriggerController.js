@@ -7,7 +7,7 @@ TriggerController.prototype.Update = function() {
 	for(var key in this.triggers) {
 		var trig = this.triggers[key];
 
-		if(trig.condition.apply(trig.context) === true) {
+		if(trig.active && trig.condition.apply(trig.context) === true) {
 			trig.subs.forEach(function(el) {
 				el.call.apply(el.ctx);
 			});
@@ -15,7 +15,7 @@ TriggerController.prototype.Update = function() {
 	}
 };
 
-TriggerController.prototype.AddTrigger = function(name, conditon, context) {
+TriggerController.prototype.AddTrigger = function(name, condition, context) {
 	if(!this.triggers[name]) {
 		this.triggers[name] = {};
 		this.triggers[name].subs = [];
@@ -23,6 +23,7 @@ TriggerController.prototype.AddTrigger = function(name, conditon, context) {
 
 	this.triggers[name].condition = condition;
 	this.triggers[name].context = context || condition;
+	this.triggers[name].active = true;
 };
 
 TriggerController.prototype.Subscribe = function(name, callback, context) {
@@ -33,6 +34,15 @@ TriggerController.prototype.Subscribe = function(name, callback, context) {
 
 	this.triggers[name].subs.push({call: callback, ctx: context});
 };
+
+TriggerController.prototype.ActivateTrigger = function(name) {
+	this.triggers[name].active = true;
+};
+
+TriggerController.prototype.DeactivateTrigger = function(name) {
+	this.triggers[name].active = false;
+};
+
 
 /*
 {
