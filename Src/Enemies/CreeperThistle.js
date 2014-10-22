@@ -3,7 +3,7 @@ Enemy.prototype.types['CreeperThistle'] =  function() {
 	this.body.setSize(67, 25, 0, 0);
 	this.anchor.setTo(.5, 1);
 
-    this.animations.add('idle', ['CreeperThistle0000'], 10, true, false);
+    this.animations.add('idle', ['Insectoid/Hop0000'], 10, true, false);
 
     this.energy = 1;
     this.body.immovable = true;

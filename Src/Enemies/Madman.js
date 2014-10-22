@@ -5,7 +5,7 @@ Enemy.prototype.types['Madman'] =  function() {
 	this.body.bounce.x = 0.2;
 	this.body.bounce.y = 0;
 
-    this.animations.add('idle', ['Madman0000'], 10, true, false);
+    this.animations.add('idle', ['TerraceMadman/Standing0000'], 10, true, false);
 
     this.attackTimer = 0;
 
@@ -114,8 +114,10 @@ Enemy.prototype.types['Madman'] =  function() {
 	this.Smashing = function() {
 		this.body.velocity.x = 0;
 
-		if(this.body.onFloor())
+		if(this.body.onFloor()) {
 			this.state = this.Idling;
+			events.publish('camera_shake', {magnitudeX: 20, magnitudeY: 5, duration: 200});
+		}
 	};
 
 };

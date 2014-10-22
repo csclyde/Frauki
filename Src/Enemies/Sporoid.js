@@ -2,7 +2,7 @@ Enemy.prototype.types['Sporoid'] =  function() {
 
 	this.body.setSize(22, 17, 0, -7);
 
-    this.animations.add('idle', ['Sporoid0000'], 10, true, false);
+    this.animations.add('idle', ['Sporoid/Sporoid0000'], 10, true, false);
 
     this.body.allowGravity = false;
     this.body.bounce.set(0.3);

@@ -1,6 +1,6 @@
 Enemy = function(game, x, y, name) {
     //instantiate the sprite
-    Phaser.Sprite.call(this, game, x, y, name);
+    Phaser.Sprite.call(this, game, x, y, 'Enemies');
     this.spriteType = 'enemy';
     
     //enable its physics body

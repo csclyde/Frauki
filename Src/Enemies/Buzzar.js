@@ -3,8 +3,8 @@ Enemy.prototype.types['Buzzar'] =  function() {
 	this.body.setSize(11, 27, 0, 0);
 	this.anchor.setTo(0.5, 0.5);
 
-    this.animations.add('idle', ['Sting0000'], 10, true, false);
-    this.animations.add('sting', ['Sting0000'], 10, false, false);
+    this.animations.add('idle', ['Buzzar/Sting0000'], 10, true, false);
+    this.animations.add('sting', ['Buzzar/Sting0000'], 10, false, false);
 
     
 

@@ -6,7 +6,7 @@
         <key>texturePackerVersion</key>
         <string>3.5.2</string>
         <key>fileName</key>
-        <string>D:/gamedev/Frauki/Data/Enemies/TerraceMadman/Madman.tps</string>
+        <string>D:/gamedev/Frauki/Data/Enemies/Enemies.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -38,7 +38,7 @@
         <key>dataFormat</key>
         <string>json</string>
         <key>textureFileName</key>
-        <filename>Madman.png</filename>
+        <filename>Enemies.png</filename>
         <key>flipPVR</key>
         <false/>
         <key>pvrCompressionQuality</key>
@@ -70,11 +70,11 @@
             </struct>
         </struct>
         <key>shapePadding</key>
-        <uint>2</uint>
+        <uint>1</uint>
         <key>jpgQuality</key>
         <uint>80</uint>
         <key>pngOptimizationLevel</key>
-        <uint>0</uint>
+        <uint>1</uint>
         <key>webpQualityLevel</key>
         <uint>101</uint>
         <key>textureSubPath</key>
@@ -82,7 +82,7 @@
         <key>textureFormat</key>
         <enum type="SettingsBase::TextureFormat">png</enum>
         <key>borderPadding</key>
-        <uint>2</uint>
+        <uint>1</uint>
         <key>maxTextureSize</key>
         <QSize>
             <key>width</key>
@@ -145,7 +145,7 @@
             <key>data</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>Madman.json</filename>
+                <filename>Enemies.json</filename>
             </struct>
         </map>
         <key>multiPack</key>
@@ -162,9 +162,9 @@
         <key>autoAliasEnabled</key>
         <true/>
         <key>trimSpriteNames</key>
-        <false/>
+        <true/>
         <key>prependSmartFolderName</key>
-        <false/>
+        <true/>
         <key>cleanTransparentPixels</key>
         <true/>
         <key>globalSpriteSettings</key>
@@ -188,7 +188,14 @@
         </struct>
         <key>fileList</key>
         <array>
-            <filename>Frames/Standing0000.png</filename>
+            <filename>Buzzar</filename>
+            <filename>CreeperThistle</filename>
+            <filename>Insectoid</filename>
+            <filename>Skelegon</filename>
+            <filename>Sporoid</filename>
+            <filename>TerraceMadman</filename>
+            <filename>Yeti</filename>
+            <filename>Incarnate</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

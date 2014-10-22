@@ -17,11 +17,7 @@ Frogland.preload = function() {
     game.load.image('YellowParticles', 'Data/Yellow Particles.png');
     game.load.image('Spore', 'Data/Enemies/Sporoid/spore.png');
 
-    game.load.atlasJSONHash('Insectoid', 'Data/Enemies/Insectoid/Insectoid.png', 'Data/Enemies/Insectoid/Insectoid.json');
-    game.load.atlasJSONHash('Buzzar', 'Data/Enemies/Buzzar/Buzzar.png', 'Data/Enemies/Buzzar/Buzzar.json');
-    game.load.atlasJSONHash('Sporoid', 'Data/Enemies/Sporoid/Sporoid.png', 'Data/Enemies/Sporoid/Sporoid.json');
-    game.load.atlasJSONHash('Madman', 'Data/Enemies/TerraceMadman/Madman.png', 'Data/Enemies/TerraceMadman/Madman.json');
-    game.load.atlasJSONHash('CreeperThistle', 'Data/Enemies/CreeperThistle/CreeperThistle.png', 'Data/Enemies/CreeperThistle/CreeperThistle.json');
+    game.load.atlasJSONHash('Enemies', 'Data/Enemies/Enemies.png', 'Data/Enemies/Enemies.json');
 
     game.load.atlasJSONHash('Door', 'Data/Doors/Doors.png', 'Data/Doors/Doors.json');
     game.load.atlasJSONHash('Item', 'Data/Items/Items.png', 'Data/Items/Items.json');
@@ -99,11 +95,11 @@ Frogland.create = function() {
     this.enemyPool = game.add.group();
     
 
-    map.createFromObjects('Enemies', 1061, 'Insectoid', 'Hop0000', true, false, this.objectGroup, Enemy, false);
-    map.createFromObjects('Enemies', 1062, 'Buzzar', 'Sting0000', true, false, this.objectGroup, Enemy, false);
-    map.createFromObjects('Enemies', 1063, 'Sporoid', 'Sporoid0000', true, false, this.objectGroup, Enemy, false);
-    map.createFromObjects('Enemies', 1064, 'Madman', 'Madman0000', true, false, this.objectGroup, Enemy, false);
-    map.createFromObjects('Enemies', 1065, 'CreeperThistle', 'CreeperThistle0000', true, false, this.objectGroup, Enemy, false);
+    map.createFromObjects('Enemies', 1061, 'Insectoid', 'Insectoid/Hop0000', true, false, this.objectGroup, Enemy, false);
+    map.createFromObjects('Enemies', 1062, 'Buzzar', 'Buzzar/Sting0000', true, false, this.objectGroup, Enemy, false);
+    map.createFromObjects('Enemies', 1063, 'Sporoid', 'Sporoid/Sporoid0000', true, false, this.objectGroup, Enemy, false);
+    map.createFromObjects('Enemies', 1064, 'Madman', 'TerraceMadman/Standing0000', true, false, this.objectGroup, Enemy, false);
+    map.createFromObjects('Enemies', 1065, 'CreeperThistle', 'Insectoid/Hop0000', true, false, this.objectGroup, Enemy, false);
 
     map.createFromObjects('Items', 1043, 'Door', 'Door0000', true, false, this.objectGroup, Door, false);
     map.createFromObjects('Items', 1042, 'Item', 'Apple0000', true, false, this.objectGroup, Apple, false);
