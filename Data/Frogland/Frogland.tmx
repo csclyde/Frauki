@@ -91,7 +91,6 @@
   <object gid="1063" x="4410" y="2636"/>
   <object gid="1061" x="4595" y="2691"/>
   <object gid="1063" x="3409" y="2223"/>
-  <object gid="1061" x="2526" y="2889"/>
   <object gid="1063" x="2827" y="3034"/>
   <object gid="1063" x="2088" y="3229"/>
   <object gid="1061" x="1831" y="3568"/>
@@ -101,11 +100,13 @@
   <object gid="1063" x="3553" y="3392"/>
   <object gid="1063" x="600" y="3967"/>
   <object gid="1063" x="600" y="4073"/>
-  <object gid="1061" x="514" y="4429"/>
   <object gid="1063" x="867" y="4692"/>
   <object gid="1063" x="649" y="4717"/>
   <object gid="1063" x="758" y="4785"/>
   <object gid="1063" x="601" y="4017"/>
-  <object gid="1064" x="3648" y="1906"/>
+  <object gid="1064" x="2558" y="2889"/>
+  <object gid="1064" x="603" y="4403"/>
+  <object gid="1065" x="3817" y="1936"/>
+  <object gid="1065" x="3662" y="1936"/>
  </objectgroup>
 </map>

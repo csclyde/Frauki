@@ -39,9 +39,6 @@ Enemy.prototype.types['Sporoid'] =  function() {
 		if(!this.timers.TimerUp('hit')) {
 			return;
 		}
-    
-	    //compute the velocity based on weight and attack knockback
-	    this.body.velocity.y = -200 + this.weight;
 
 	    //a durability stat should modify how long they are stunned for. also, the amount of dmg
 	    this.timers.SetTimer('hit', 800);
