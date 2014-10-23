@@ -6,6 +6,7 @@ Enemy.prototype.types['Madman'] =  function() {
 	this.body.bounce.y = 0;
 
     this.animations.add('idle', ['TerraceMadman/Standing0000'], 10, true, false);
+    this.animations.add('shit', ['TerraceMadman/Standing0000'], 10, true, false);
 
     this.attackTimer = 0;
 
