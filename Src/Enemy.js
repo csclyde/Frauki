@@ -1,6 +1,6 @@
 Enemy = function(game, x, y, name) {
     //instantiate the sprite
-    Phaser.Sprite.call(this, game, x, y, 'Enemies');
+    Phaser.Sprite.call(this, game, x, y, 'EnemySprites');
     this.spriteType = 'enemy';
     
     //enable its physics body
@@ -14,6 +14,7 @@ Enemy = function(game, x, y, name) {
     
     if(!!this.types[name]) {
         this.types[name].apply(this);
+        console.log('Enemy of type ' + name + ' was created');
     } else {
         console.log('Enemy of type ' + name + ' was not found');
     }

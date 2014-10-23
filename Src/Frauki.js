@@ -351,7 +351,7 @@ Player.prototype.Hit = function(f, e) {
 
     e.energy += e.damage / 2;
 
-    this.body.x < e.body.x ? this.body.velocity.x = -200 : this.body.velocity.x = 200;
+    this.body.center.x < e.body.center.x ? this.body.velocity.x = -200 : this.body.velocity.x = 200;
 
     this.state = this.Hurting;
     this.timers.SetTimer('frauki_grace', 1000);
