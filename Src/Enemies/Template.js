@@ -4,6 +4,7 @@ Enemy.prototype.types[''] =  function() {
 	this.anchor.setTo(.5, 1);
 
     this.animations.add('idle', ['Hop0000'], 10, true, false);
+    this.animations.add('shit', ['Hop0000'], 10, true, false);
 
 	this.updateFunction = function() {
 
