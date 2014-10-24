@@ -87,7 +87,7 @@ Enemy.prototype.update = function() {
 };
 
 Enemy.prototype.GetEnergyPercentage = function() {
-    return 0.5 + ((this.energy / this.maxEnergy) / 2);
+    return 0.25 + ((this.energy / this.maxEnergy) * 0.75);
 };
 
 Enemy.prototype.WithinCameraRange = function() {
