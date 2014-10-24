@@ -9,12 +9,13 @@ Enemy = function(game, x, y, name) {
     this.body.maxVelocity.y = 600;
     this.body.maxVelocity.x = 600;
     this.body.bounce.set(0.2);
+
+    this.timers = new TimerUtil();
     
     this.SetDefaultValues();
     
     if(!!this.types[name]) {
         this.types[name].apply(this);
-        console.log('Enemy of type ' + name + ' was created');
     } else {
         console.log('Enemy of type ' + name + ' was not found');
     }
@@ -25,8 +26,6 @@ Enemy = function(game, x, y, name) {
     this.maxEnergy = this.energy;
     this.initialX = this.body.center.x;
     this.initialY = this.body.center.y;
-
-    this.timers = new TimerUtil();
 };
 
 Enemy.prototype = Object.create(Phaser.Sprite.prototype);
@@ -45,6 +44,8 @@ Enemy.prototype.SetDefaultValues = function() {
     this.energy = 7;
     this.damage = 5;
     this.inScope = false;
+    this.baseStunDuration = 400;
+    this.stunModifier = 1.0;
 };
 
 Enemy.prototype.UpdateFunction = function() {};
@@ -84,6 +85,11 @@ Enemy.prototype.update = function() {
     
     if(this.energy > this.maxEnergy)
         this.energy = this.maxEnergy;
+
+    this.stunModifier += 0.01;
+
+    if(this.stunModifier > 1.0)
+        this.stunModifier = 1.0;
 };
 
 Enemy.prototype.GetEnergyPercentage = function() {
@@ -120,12 +126,19 @@ Enemy.prototype.PlayAnim = function(name) {
 
 
 function EnemyHit(f, e) {
-    if(e.state === e.Hurting || e.spriteType !== 'enemy' || !e.Vulnerable())
+    if(!e.timers.TimerUp('hit') || e.spriteType !== 'enemy' || !e.Vulnerable())
         return;
 
     events.publish('camera_shake', {magnitudeX: 15 * frauki.currentAttack.damage, magnitudeY: 5, duration: 100});
 
+    e.timers.SetTimer('hit', e.baseStunDuration * e.stunModifier);
+    console.log('Enemy was hit and is being stunned for ' + e.stunModifier + ' seconds');
+
     e.energy -= frauki.currentAttack.damage;
+    console.log('Enemy was hit and is taking ' + frauki.currentAttack.damage + ' damage');
+
+    e.stunModifier /= 2;
+
 
     if(e.energy <= 0) {
         e.Die();
@@ -135,8 +148,11 @@ function EnemyHit(f, e) {
     } else {
         frauki.LandHit();
         e.TakeHit();
+        e.state = e.Hurting;
     }
-    
+
+   
+
     effectsController.ParticleSpray(e.body.x, e.body.y, e.body.width, e.body.height, 'red', e.PlayerDirection());
 
     var c = frauki.body.center.x < e.body.center.x ? 1 : -1;

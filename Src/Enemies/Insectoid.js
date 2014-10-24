@@ -85,13 +85,6 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	};
 
 	this.TakeHit = function(power) {
-		if(game.time.now < this.hitTimer)
-        	return;
-
-	    //a durability stat should modify how long they are stunned for. also, the amount of dmg
-	    this.hitTimer = game.time.now + 400;
-
-	    this.state = this.Hurting;
 
 	    this.scale.y = 1;
 	};
@@ -209,7 +202,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	this.Hurting = function() {
 		this.PlayAnim('die');
 
-		if(game.time.now > this.hitTimer) {
+		if(this.timers.TimerUp('hit')) {
 			if(Math.abs(this.body.center.y - frauki.body.center.y) < 40 && Math.abs(this.body.center.x - frauki.body.center.x) < 300 && this.RollDice(20, 12)) {
 				this.Scuttle();
 				this.attackTimer = game.time.now;

@@ -8,6 +8,7 @@ Enemy.prototype.types['Sporoid'] =  function() {
 
     this.body.allowGravity = false;
     this.body.bounce.set(0.3);
+    this.baseStunDuration = 800;
 
     this.dashTimer = 0;
     this.dashWaitTimer = 0;

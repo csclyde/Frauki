@@ -23,6 +23,8 @@ Enemy.prototype.types['Buzzar'] =  function() {
 
     this.wanderTimer = 0;
 
+    this.baseStunDuration = 800;
+
 	this.updateFunction = function() {
 
 		if(this.scale.y > 1 && this.state !== this.Stinging) {
@@ -56,7 +58,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
 	};
 
 	this.TakeHit = function(power) {
-		if(game.time.now < this.hitTimer) {
+		if(!this.timers.TimerUp('hit')) {
 			return;
 		}
 
@@ -130,8 +132,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
 		this.body.allowGravity = true;
         this.body.gravity.y = game.physics.arcade.gravity.y * 2;
 
-		if(game.time.now > this.hitTimer) {
-
+		if(this.timers.TimerUp('hit')) {
 			if(this.anger >= 4)
 	    		this.state = this.Enraged;
 	    	else

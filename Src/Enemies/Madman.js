@@ -26,8 +26,9 @@ Enemy.prototype.types['Madman'] =  function() {
 	///////////////////////////////ACTIONS////////////////////////////////////
 
 	this.TakeHit = function(power) {
-		if(game.time.now < this.hitTimer)
-        	return;
+		if(!this.timers.TimerUp('hit')) {
+			return;
+		}
     
 	    //compute the velocity based on weight and attack knockback
 	    //this.body.velocity.y = -400 - this.weight;
@@ -79,7 +80,7 @@ Enemy.prototype.types['Madman'] =  function() {
 	this.Hurting = function() {
 		this.PlayAnim('idle');
 
-		if(game.time.now > this.hitTimer) {
+		if(this.timers.TimerUp('hit')) {
 			this.state = this.Idling;
 		}
 	};
