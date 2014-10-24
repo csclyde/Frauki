@@ -141,7 +141,7 @@ function EnemyHit(f, e) {
     	e.state = e.Hurting;
     }
     
-    e.stunModifier /= 3;
+    e.stunModifier /= 4;
 
 
     if(e.energy <= 0) {
