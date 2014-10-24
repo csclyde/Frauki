@@ -137,6 +137,10 @@ function EnemyHit(f, e) {
     e.energy -= frauki.currentAttack.damage;
     console.log('Enemy was hit and is taking ' + frauki.currentAttack.damage + ' damage');
 
+    if(e.stunModifier > 0.4) {
+    	e.state = e.Hurting;
+    }
+    
     e.stunModifier /= 2;
 
 
@@ -148,7 +152,6 @@ function EnemyHit(f, e) {
     } else {
         frauki.LandHit();
         e.TakeHit();
-        e.state = e.Hurting;
     }
 
    
