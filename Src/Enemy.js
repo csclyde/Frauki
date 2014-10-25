@@ -149,7 +149,6 @@ function EnemyHit(f, e) {
     e.poise -= frauki.currentAttack.damage;
     if(e.point < 0) e.poise = 0;
 
-
     if(e.energy <= 0) {
         e.Die();
 
