@@ -26,6 +26,7 @@ Enemy = function(game, x, y, name) {
     this.maxEnergy = this.energy;
     this.initialX = this.body.center.x;
     this.initialY = this.body.center.y;
+    this.initialPoise = this.poise;
 };
 
 Enemy.prototype = Object.create(Phaser.Sprite.prototype);
@@ -46,6 +47,7 @@ Enemy.prototype.SetDefaultValues = function() {
     this.inScope = false;
     this.baseStunDuration = 400;
     this.stunModifier = 1.0;
+    this.poise = 10;
 };
 
 Enemy.prototype.UpdateFunction = function() {};
@@ -86,15 +88,21 @@ Enemy.prototype.update = function() {
     if(this.energy > this.maxEnergy)
         this.energy = this.maxEnergy;
 
-    this.stunModifier += 0.01;
+    this.stunModifier += 0.005;
+    this.poise += 0.01;
 
-    if(this.stunModifier > 1.0)
-        this.stunModifier = 1.0;
+    if(this.stunModifier > 1.0) this.stunModifier = 1.0;
+
+    if(this.poise > this.initialPoise) this.poise = this.initialPoise;
 };
 
 Enemy.prototype.GetEnergyPercentage = function() {
     return 0.25 + ((this.energy / this.maxEnergy) * 0.75);
 };
+
+Enemy.prototype.GetPoisePercentage = function() {
+    return this.poise / this.initialPoise;
+}
 
 Enemy.prototype.WithinCameraRange = function() {
     var padding = 200;
@@ -131,13 +139,15 @@ function EnemyHit(f, e) {
 
     events.publish('camera_shake', {magnitudeX: 15 * frauki.currentAttack.damage, magnitudeY: 5, duration: 100});
 
-    e.timers.SetTimer('hit', e.baseStunDuration * e.stunModifier);
+    e.timers.SetTimer('hit', e.baseStunDuration);
     console.log('Enemy was hit and is being stunned for ' + e.stunModifier + ' seconds');
 
     e.energy -= frauki.currentAttack.damage;
     console.log('Enemy was hit and is taking ' + frauki.currentAttack.damage + ' damage');
 
-    e.stunModifier /= 2;
+    e.stunModifier /= 3;
+    e.poise -= frauki.currentAttack.damage;
+    if(e.point < 0) e.poise = 0;
 
 
     if(e.energy <= 0) {
@@ -148,7 +158,8 @@ function EnemyHit(f, e) {
     } else {
         frauki.LandHit();
         e.TakeHit();
-        e.state = e.Hurting;
+
+        if(e.GetPoisePercentage() < 0.3) e.state = e.Hurting;
     }
 
    
