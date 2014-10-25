@@ -61,7 +61,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		if(game.time.now < game.attackTimer && (!this.body.onFloor() || !!overrideFloorCondition))
 			return;
 
-		this.attackTimer = game.time.now + 4000;
+		this.attackTimer = game.time.now + 800;
 
 		this.state = this.Hopping;
 
@@ -87,6 +87,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	this.TakeHit = function(power) {
 
 	    this.scale.y = 1;
+	    this.Hop();
 	};
 
 	////////////////////////////////STATES////////////////////////////////////
@@ -94,18 +95,15 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		this.PlayAnim('idle');
 
 		if(this.PlayerIsNear(50)) {
-			if(Math.random() * 5 < 1) 
-				this.Dodge();
-			else
 				this.Scuttle();
 		} else if(this.body.center.y < frauki.body.y && this.body.center.x > frauki.body.center.x - 20 && this.body.center.x < frauki.body.center.x + 20 && !this.body.onFloor()) {
 			this.Dive();
 		} else if(Math.abs(this.body.center.y - frauki.body.center.y) < 40 && Math.abs(this.body.center.x - frauki.body.center.y) < 400 && this.body.onFloor()) {
 			this.Scuttle();
-		} else if(Math.abs(this.body.center.x - frauki.body.center.x) > 100 && Math.abs(this.body.center.x - frauki.body.center.x) < 450 && this.body.onFloor()) {
+		} else if(Math.abs(this.body.center.x - frauki.body.center.x) > 50 && Math.abs(this.body.center.x - frauki.body.center.x) < 450) {
 			this.Hop();
 		} else {
-			
+
 		}
 	};
 

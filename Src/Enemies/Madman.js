@@ -100,9 +100,9 @@ Enemy.prototype.types['Madman'] =  function() {
 	this.Dodging = function() {
 		this.PlayAnim('idle');
 
-		if(frauki.body.center.x < this.body.center.x)
+		if(frauki.body.center.x - 100 < this.body.center.x)
 			this.body.velocity.x = -200;
-		else if(frauki.body.center.x > this.body.center.x)
+		else if(frauki.body.center.x + 100 > this.body.center.x)
 			this.body.velocity.x = 200;
 
 		if(frauki.body.center.x < this.body.center.x + 30 && frauki.body.center.x > this.body.center.x - 30 && this.body.center.y < frauki.body.center.y - 100) {
@@ -118,7 +118,7 @@ Enemy.prototype.types['Madman'] =  function() {
 
 		if(this.body.onFloor()) {
 			this.state = this.Idling;
-			events.publish('camera_shake', {magnitudeX: 20, magnitudeY: 5, duration: 200});
+			events.publish('camera_shake', { magnitudeX: 20, magnitudeY: 5, duration: 200});
 		}
 	};
 

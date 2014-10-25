@@ -45,7 +45,7 @@ Enemy.prototype.SetDefaultValues = function() {
     this.energy = 7;
     this.damage = 5;
     this.inScope = false;
-    this.baseStunDuration = 400;
+    this.baseStunDuration = 500;
     this.stunModifier = 1.0;
     this.poise = 10;
 };
@@ -55,6 +55,7 @@ Enemy.prototype.Idling = function() {};
 Enemy.prototype.Hurting = function() {};
 Enemy.prototype.Die = function() {};
 Enemy.prototype.Vulnerable = function() { return true; }
+Enemy.prototype.Act = function() {};
 
 Enemy.prototype.update = function() {
     if(this.WithinCameraRange()) {
@@ -89,11 +90,16 @@ Enemy.prototype.update = function() {
         this.energy = this.maxEnergy;
 
     this.stunModifier += 0.005;
-    this.poise += 0.01;
+
+    if(this.timers.TimerUp('poise_ticker')) {
+        this.poise += 1.25;
+        this.timers.SetTimer('poise_ticker', 250);
+    }
 
     if(this.stunModifier > 1.0) this.stunModifier = 1.0;
 
     if(this.poise > this.initialPoise) this.poise = this.initialPoise;
+    if(this.poise < 0) this.poise = 0;
 };
 
 Enemy.prototype.GetEnergyPercentage = function() {
@@ -101,6 +107,7 @@ Enemy.prototype.GetEnergyPercentage = function() {
 };
 
 Enemy.prototype.GetPoisePercentage = function() {
+    console.log(this.poise + '/' + this.initialPoise);
     return this.poise / this.initialPoise;
 }
 
@@ -134,20 +141,26 @@ Enemy.prototype.PlayAnim = function(name) {
 
 
 function EnemyHit(f, e) {
-    if(!e.timers.TimerUp('hit') || e.spriteType !== 'enemy' || !e.Vulnerable())
+    if(!e.timers.TimerUp('hit') || e.state === e.Hurting || e.spriteType !== 'enemy' || !e.Vulnerable())
         return;
+
+    var c = frauki.body.center.x < e.body.center.x ? 1 : -1;
+    e.body.velocity.x = c * (50 - (e.weight * 300) + (200 * frauki.currentAttack.knockback));
+
+    if(c < 0 && e.body.velocity.x > 0) e.body.velocity.x = 0;
+    if(c > 0 && e.body.velocity.x < 0) e.body.velocity.x = 0;
+    //compute the velocity based on weight and attack knockback
+
+	e.body.velocity.y = -300 + (e.weight * 200) - (100 * frauki.currentAttack.damage);
 
     events.publish('camera_shake', {magnitudeX: 15 * frauki.currentAttack.damage, magnitudeY: 5, duration: 100});
 
     e.timers.SetTimer('hit', e.baseStunDuration);
-    console.log('Enemy was hit and is being stunned for ' + e.stunModifier + ' seconds');
-
     e.energy -= frauki.currentAttack.damage;
-    console.log('Enemy was hit and is taking ' + frauki.currentAttack.damage + ' damage');
 
-    e.stunModifier /= 3;
-    e.poise -= frauki.currentAttack.damage;
-    if(e.point < 0) e.poise = 0;
+    e.poise -= frauki.currentAttack.damage * 4;
+
+    if(e.poise < 0) e.poise = 0;
 
     if(e.energy <= 0) {
         e.Die();
@@ -158,21 +171,16 @@ function EnemyHit(f, e) {
         frauki.LandHit();
         e.TakeHit();
 
-        if(e.GetPoisePercentage() < 0.3) e.state = e.Hurting;
-    }
+        if(e.GetPoisePercentage() < 0.3) {
+            e.state = e.Hurting;
+            console.log('Enemy is being stunned at ' + e.GetPoisePercentage() + ' poise and Frauki did ' + frauki.currentAttack.damage + ' damage');
+        }
+    }   
 
    
 
     effectsController.ParticleSpray(e.body.x, e.body.y, e.body.width, e.body.height, 'red', e.PlayerDirection());
 
-    var c = frauki.body.center.x < e.body.center.x ? 1 : -1;
-    e.body.velocity.x = c * (50 - (e.weight * 300) + (200 * frauki.currentAttack.knockback));
-
-    if(c < 0 && e.body.velocity.x > 0) e.body.velocity.x = 0;
-    if(c > 0 && e.body.velocity.x < 0) e.body.velocity.x = 0;
-    //compute the velocity based on weight and attack knockback
-
-	e.body.velocity.y = -300 + (e.weight * 200) - (100 * frauki.currentAttack.damage);
     
 };
 
@@ -223,4 +231,8 @@ Enemy.prototype.RollDice = function(sides, thresh) {
         return true;
     else
         return false;
+};
+
+Enemy.prototype.ChargeAtPlayer = function(speed) {
+    game.physics.arcade.moveToXY(this, frauki.body.center.x, frauki.body.center.y, speed);
 };
