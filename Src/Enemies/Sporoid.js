@@ -13,7 +13,7 @@ Enemy.prototype.types['Sporoid'] =  function() {
     this.dashTimer = 0;
     this.dashWaitTimer = 0;
     this.shootTimer = 0;
-    this.energy = 3;
+    this.energy = 1;
     
     this.weight = 0.3;
     this.damage = 3;
@@ -30,7 +30,7 @@ Enemy.prototype.types['Sporoid'] =  function() {
 
     this.Spore.maxParticleSpeed.x = 20;
     this.Spore.minParticleSpeed.x = -20;
-    //this.Spore.start(false, 5000, 400);
+    this.Spore.start(false, 5000, 400);
 
 	this.updateFunction = function() {
 
@@ -70,7 +70,7 @@ Enemy.prototype.types['Sporoid'] =  function() {
 
 	this.Reset = function() {
 		this.state = this.Idling;
-		//this.Spore.start(false, 5000, 400);
+		this.Spore.start(false, 5000, 400);
 	};
 
 	this.Die = function() {
@@ -129,7 +129,7 @@ Enemy.prototype.types['Sporoid'] =  function() {
 	this.Dashing = function() {
 		this.PlayAnim('idle');
 
-		//this.Spore.explode(3000, 20);
+		this.Spore.explode(3000, 20);
 
 		this.body.velocity.x = this.body.velocity.x;
 		this.body.velocity.y = this.body.velocity.y;
