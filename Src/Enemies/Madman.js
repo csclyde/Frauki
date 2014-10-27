@@ -46,10 +46,11 @@ Enemy.prototype.types['Madman'] =  function() {
 
 		this.state = this.Rolling;
 
-		if(frauki.body.center.x < this.body.center.x)
-			this.body.velocity.x = -500;
-		else
-			this.body.velocity.x = 500;
+		if(frauki.body.center.x < this.body.center.x) {
+			game.add.tween(this.body.velocity).to({x: -500}, 500, Phaser.Easing.Exponential.In, true);
+		} else {
+			game.add.tween(this.body.velocity).to({x: 500}, 500, Phaser.Easing.Exponential.In, true);
+		}
 
 		this.rollTimer = game.time.now + 1500;
 	};
@@ -64,6 +65,11 @@ Enemy.prototype.types['Madman'] =  function() {
 		this.body.velocity.y = -500;
 		this.state = this.Dodging;
 		this.attackTimer = game.time.now + 2000;
+
+		if(this.body.center.x < frauki.body.center.x)
+			this.body.velocity.x = -200;
+		else if(this.body.center.x > frauki.body.center.x)
+			this.body.velocity.x = 200;
 	};
 
 	////////////////////////////////STATES////////////////////////////////////
@@ -89,7 +95,7 @@ Enemy.prototype.types['Madman'] =  function() {
 	this.Rolling = function() {
 		this.PlayAnim('idle');
 
-		this.body.velocity.x = this.body.velocity.x;
+		//this.body.velocity.x = this.body.velocity.x;
 
 		if(game.time.now > this.rollTimer || this.body.onWall()) {
 			this.state = this.Idling;
@@ -99,11 +105,6 @@ Enemy.prototype.types['Madman'] =  function() {
 
 	this.Dodging = function() {
 		this.PlayAnim('idle');
-
-		if(frauki.body.center.x - 100 < this.body.center.x)
-			this.body.velocity.x = -200;
-		else if(frauki.body.center.x + 100 > this.body.center.x)
-			this.body.velocity.x = 200;
 
 		if(frauki.body.center.x < this.body.center.x + 30 && frauki.body.center.x > this.body.center.x - 30 && this.body.center.y < frauki.body.center.y - 100) {
 			this.state = this.Smashing;
