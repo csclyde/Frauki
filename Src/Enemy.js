@@ -173,6 +173,8 @@ function EnemyHit(f, e) {
 
         if(e.GetPoisePercentage() < 0.3) {
             e.state = e.Hurting;
+            e.body.velocity.x = e.body.velocity.x * e.body.velocity.x;
+            e.body.velocity.y = e.body.velocity.y * e.body.velocity.y;
             console.log('Enemy is being stunned at ' + e.GetPoisePercentage() + ' poise and Frauki did ' + frauki.currentAttack.damage + ' damage');
         }
     }   
