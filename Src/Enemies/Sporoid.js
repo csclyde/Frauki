@@ -55,6 +55,8 @@ Enemy.prototype.types['Sporoid'] =  function() {
 
 		game.physics.arcade.moveToXY(this, frauki.body.center.x, frauki.body.center.y, 400);
 		this.state = this.Dashing;
+		
+		this.Spore.explode(3000, 20);
 
 		this.timers.SetTimer('dash', 1000);
 		this.timers.SetTimer('dash_wait', 3000);
@@ -129,7 +131,7 @@ Enemy.prototype.types['Sporoid'] =  function() {
 	this.Dashing = function() {
 		this.PlayAnim('idle');
 
-		this.Spore.explode(3000, 20);
+		//
 
 		this.body.velocity.x = this.body.velocity.x;
 		this.body.velocity.y = this.body.velocity.y;
