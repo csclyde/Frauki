@@ -251,7 +251,6 @@ Player.prototype.Crouch = function(params) {
 
 Player.prototype.Slash = function(params) {
 
-    events.publish('play_sound', {name: 'attack1'});
 
     //diving dash
     if(!this.timers.TimerUp('frauki_dash') && this.states.crouching && (this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling)) {
@@ -279,13 +278,17 @@ Player.prototype.Slash = function(params) {
         this.movement.jumpSlashVelocity = -(PLAYER_JUMP_SLASH_SPEED());
         game.add.tween(this.movement).to({jumpSlashVelocity:0}, 400, Phaser.Easing.Quartic.Out, true);
         this.states.hasFlipped = true;
+
+        events.publish('play_sound', {name: 'attack1'});
     }
     //normal slashes while standing or running
     else if(this.state === this.Standing || this.state === this.Landing || this.state === this.AttackStab || this.state === this.Running || this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling) {
-        if(this.states.upPressed)
+        if(this.states.upPressed) {
             this.state = this.AttackOverhead;
-        else
+            events.publish('play_sound', {name: 'attack1'});
+        } else {
             this.state = this.AttackFront;
+        }
     } else {
         console.log('An attack was attempted in an unresolved state ' + this.state);
     }

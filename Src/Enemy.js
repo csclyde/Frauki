@@ -141,7 +141,11 @@ Enemy.prototype.PlayAnim = function(name) {
 
 
 function EnemyHit(f, e) {
-    if(!e.timers.TimerUp('hit') || e.state === e.Hurting || e.spriteType !== 'enemy' || !e.Vulnerable())
+    if(e.spriteType !== 'enemy' || e.state === e.Hurting || !e.Vulnerable())
+        return;
+
+    //seperate conditional to prevetn crash!
+    if(!e.timers.TimerUp('hit'))
         return;
 
     var c = frauki.body.center.x < e.body.center.x ? 1 : -1;
