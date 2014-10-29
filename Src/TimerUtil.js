@@ -13,7 +13,6 @@ TimerUtil.prototype.TimerUp = function(name) {
 		else
 			return false;
 	} else {
-		console.log('A timer was checked without being set: ' + name);
 		return true;
 	}
 

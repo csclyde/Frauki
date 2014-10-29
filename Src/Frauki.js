@@ -1,5 +1,5 @@
 PLAYER_SPEED = function() { return 150 + (energyController.GetEnergy() * 7); }
-PLAYER_ROLL_SPEED = function() { return 600 + (energyController.GetEnergy() * 5); }
+PLAYER_ROLL_SPEED = function() { return 550 + (energyController.GetEnergy() * 10); }
 PLAYER_RUN_SLASH_SPEED = function() { return  900 + (energyController.GetEnergy() * 10); }
 PLAYER_JUMP_VEL = function() { return -470 - (energyController.GetEnergy() * 3); }
 PLAYER_DOUBLE_JUMP_VEL = function() { return -400 - (energyController.GetEnergy() * 2); }
@@ -251,6 +251,8 @@ Player.prototype.Crouch = function(params) {
 
 Player.prototype.Slash = function(params) {
 
+    events.publish('play_sound', {name: 'attack1'});
+
     //diving dash
     if(!this.timers.TimerUp('frauki_dash') && this.states.crouching && (this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling)) {
         this.state = this.AttackDiveCharge;
@@ -287,6 +289,7 @@ Player.prototype.Slash = function(params) {
     } else {
         console.log('An attack was attempted in an unresolved state ' + this.state);
     }
+
 };
 
 Player.prototype.Roll = function(params) {

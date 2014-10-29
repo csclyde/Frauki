@@ -21,6 +21,8 @@ Frogland.preload = function() {
 
     game.load.atlasJSONHash('Door', 'Data/Doors/Doors.png', 'Data/Doors/Doors.json');
     game.load.atlasJSONHash('Item', 'Data/Items/Items.png', 'Data/Items/Items.json');
+
+    game.load.audio('attack_1', 'Data/Sfx/attack1.wav');
 }
 
 var map;
@@ -34,6 +36,7 @@ var cameraController;
 var inputController;
 var effectsController;
 var energyController;
+var audioController;
 var frauki;
 var fraukiSpawnX, fraukiSpawnY;
 
@@ -110,6 +113,7 @@ Frogland.create = function() {
     inputController = new InputController(frauki);
     effectsController = new EffectsController();
     energyController = new EnergyController();
+    audioController = new AudioController();
     timerUtil = new TimerUtil();
 
     game.camera.focusOnXY(frauki.body.x, frauki.body.y);

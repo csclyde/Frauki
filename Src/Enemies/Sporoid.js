@@ -20,7 +20,7 @@ Enemy.prototype.types['Sporoid'] =  function() {
 
     this.Spore = game.add.emitter(0, 0, 100);
 	this.Spore.makeParticles('Spore');
-    this.Spore.gravity = -675;
+    this.Spore.gravity = -775;
 
     this.Spore.maxParticleScale = 0.4;
     this.Spore.minParticleScale = 0.1;
@@ -56,7 +56,7 @@ Enemy.prototype.types['Sporoid'] =  function() {
 		game.physics.arcade.moveToXY(this, frauki.body.center.x, frauki.body.center.y, 400);
 		this.state = this.Dashing;
 		
-		this.Spore.explode(3000, 20);
+		//this.Spore.explode(3000, 20);
 
 		this.timers.SetTimer('dash', 1000);
 		this.timers.SetTimer('dash_wait', 3000);
