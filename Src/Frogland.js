@@ -30,6 +30,7 @@ var tileset;
 var backgroundLayer;
 var midgroundLayer;
 var foregroundLayer;
+var collisionLayer;
 var bg;
 var parallax1, parallax2;
 var cameraController;
@@ -79,12 +80,13 @@ Frogland.create = function() {
    
     backgroundLayer = map.createLayer('Background');
     midgroundLayer = map.createLayer('Midground');
+    collisionLayer = map.createLayer('Collision');
     
     midgroundLayer.resizeWorld();
 
-    map.setCollision([71, 72, 73, 74, 75, 76, 82, 83, 84, 87, 88, 89, 91, 92, 93, 94, 95, 96, 102, 103, 104, 107, 108, 109, 112, 113, 114, 127, 128, 129, 131, 132, 133, 134, 147, 148, 149, 152, 153, 154, 181, 182, 183, 184, 185], true, 'Midground');
+    map.setCollision(1, true, 'Collision');
 
-    var fraukiTile = map.searchTileIndex(1041, 0, false, 'Midground');
+    var fraukiTile = map.searchTileIndex(1045, 0, false, 'Midground');
     fraukiSpawnX = fraukiTile.worldX || 0;
     fraukiSpawnY = fraukiTile.worldY || 0;
 
@@ -126,7 +128,7 @@ Frogland.create = function() {
 Frogland.update = function() {
     frauki.UpdateAttackGeometry();
 
-	game.physics.arcade.collide(frauki, midgroundLayer);
+	game.physics.arcade.collide(frauki, collisionLayer);
     game.physics.arcade.collide(frauki, this.objectGroup, this.CollideFraukiWithObject, this.OverlapFraukiWithObject);
     game.physics.arcade.collide(this.objectGroup, midgroundLayer);
 

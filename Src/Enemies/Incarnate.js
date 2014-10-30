@@ -6,12 +6,12 @@ Enemy.prototype.types['Incarnate'] =  function() {
     this.animations.add('idle', ['Incarnate/Incarnate0000'], 10, true, false);
     this.animations.add('shit', ['Incarnate/Incarnate0000'], 10, true, false);
 
-    this.weight = 2;
+    this.weight = 10;
     this.poise = 20;
     this.baseStunDuration = 1000;
     this.damage = 15;
+    this.energy = 20;
     /*
-    this.energy = 5;
     */
 
 	this.updateFunction = function() {
