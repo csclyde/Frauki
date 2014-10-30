@@ -1,19 +1,19 @@
-Enemy.prototype.types[''] =  function() {
+Enemy.prototype.types['Incarnate'] =  function() {
 
 	this.body.setSize(67, 25, 0, 0);
 	this.anchor.setTo(.5, 1);
 
-    this.animations.add('idle', ['Hop0000'], 10, true, false);
-    this.animations.add('shit', ['Hop0000'], 10, true, false);
+    this.animations.add('idle', ['Incarnate/Incarnate0000'], 10, true, false);
+    this.animations.add('shit', ['Incarnate/Incarnate0000'], 10, true, false);
 
+    this.weight = 2;
+    this.poise = 20;
+    this.baseStunDuration = 1000;
+    this.damage = 15;
     /*
-    this.weight = 0.5;
     this.energy = 5;
-    this.damage = 5;
-    this.baseStunDuration = 500;
-    this.poise = 10;
     */
-    
+
 	this.updateFunction = function() {
 
 	};
