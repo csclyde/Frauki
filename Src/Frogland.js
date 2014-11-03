@@ -100,12 +100,12 @@ Frogland.create = function() {
     this.enemyPool = game.add.group();
     
 
-    map.createFromObjects('Enemies', 1061, 'Insectoid', null, true, false, this.objectGroup, Enemy, false);
-    map.createFromObjects('Enemies', 1062, 'Buzzar', null, true, false, this.objectGroup, Enemy, false);
-    map.createFromObjects('Enemies', 1063, 'Sporoid', null, true, false, this.objectGroup, Enemy, false);
-    map.createFromObjects('Enemies', 1064, 'Madman', null, true, false, this.objectGroup, Enemy, false);
-    map.createFromObjects('Enemies', 1065, 'CreeperThistle', null, true, false, this.objectGroup, Enemy, false);
-    map.createFromObjects('Enemies', 1066, 'Incarnate', null, true, false, this.objectGroup, Enemy, false);
+    map.createFromObjects('Enemies', 1065, 'Insectoid', null, true, false, this.objectGroup, Enemy, false);
+    map.createFromObjects('Enemies', 1066, 'Buzzar', null, true, false, this.objectGroup, Enemy, false);
+    map.createFromObjects('Enemies', 1067, 'Sporoid', null, true, false, this.objectGroup, Enemy, false);
+    map.createFromObjects('Enemies', 1068, 'Madman', null, true, false, this.objectGroup, Enemy, false);
+    map.createFromObjects('Enemies', 1069, 'CreeperThistle', null, true, false, this.objectGroup, Enemy, false);
+    map.createFromObjects('Enemies', 1070, 'Incarnate', null, true, false, this.objectGroup, Enemy, false);
 
     map.createFromObjects('Items', 1043, 'Door', 'Door0000', true, false, this.objectGroup, Door, false);
     map.createFromObjects('Items', 1042, 'Item', 'Apple0000', true, false, this.objectGroup, Apple, false);
@@ -130,7 +130,7 @@ Frogland.update = function() {
 
 	game.physics.arcade.collide(frauki, collisionLayer);
     game.physics.arcade.collide(frauki, this.objectGroup, this.CollideFraukiWithObject, this.OverlapFraukiWithObject);
-    game.physics.arcade.collide(this.objectGroup, midgroundLayer);
+    game.physics.arcade.collide(this.objectGroup, collisionLayer);
 
     if(!!frauki.attackRect && frauki.attackRect.width !== 0) {
         game.physics.arcade.overlap(frauki.attackRect, this.objectGroup, EnemyHit);

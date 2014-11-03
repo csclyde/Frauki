@@ -575,6 +575,7 @@ Player.prototype.AttackDiveCharge = function() {
 
     if(this.animations.currentAnim.isFinished) {
         this.state = this.AttackDiveFall;
+        this.timers.SetTimer('frauki_dive', 800);
     }
 };
 
@@ -590,6 +591,9 @@ Player.prototype.AttackDiveFall = function() {
 
         events.publish('camera_shake', {magnitudeX: 10, magnitudeY: 5, duration: 200});
         this.state = this.AttackDiveLand;
+    } else if(this.timers.TimerUp('frauki_dive')) {
+        this.movement.diveVelocity = 0;
+        this.state = this.Falling;
     }
 };
 
