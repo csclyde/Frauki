@@ -38,6 +38,7 @@ var inputController;
 var effectsController;
 var energyController;
 var audioController;
+var weaponController;
 var frauki;
 var fraukiSpawnX, fraukiSpawnY;
 
@@ -117,6 +118,7 @@ Frogland.create = function() {
     effectsController = new EffectsController();
     energyController = new EnergyController();
     audioController = new AudioController();
+    weaponController = new WeaponController();
     timerUtil = new TimerUtil();
 
     game.camera.focusOnXY(frauki.body.x, frauki.body.y);
@@ -140,6 +142,7 @@ Frogland.update = function() {
     inputController.UpdateInput();
     effectsController.UpdateEffects();
     energyController.UpdateEnergy();
+    weaponController.Update();
     triggers.Update();
 
     playerX = frauki.body.x;
