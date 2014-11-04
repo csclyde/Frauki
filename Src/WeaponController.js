@@ -1,5 +1,5 @@
 WeaponController = function() {
-  this.currentWeapon = null;
+  this.currentWeapon = this.Bomb;
   this.weaponActive = false;
   
   events.subscribe('activate_weapon', this.ToggleWeapon, this);
@@ -36,6 +36,7 @@ WeaponController.prototype.Bomb = {
     
     Update: function() {
         //what to do while updating (only called while active)
+        energyController.RemoveEnergy(0.1);
     },
     
     Stop: function() {
