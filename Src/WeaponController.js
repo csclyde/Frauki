@@ -18,7 +18,7 @@ WeaponController.prototype.Update = function() {
 };
 
 WeaponController.prototype.ToggleWeapon = function(params) {
-    this.weaponActive = params.actiavte;
+    this.weaponActive = params.activate;
     
     if(this.currentWeapon != null) {
         if(this.weaponActive) {
