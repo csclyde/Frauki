@@ -51,7 +51,7 @@ EffectsController.prototype.UpdateEffects = function() {
     var particlesToRemove = [];
 
     this.redParticles.forEachAlive(function(p) {
-        var vel = 500;
+        var vel = 1000;
 
         if(p.body.x > frauki.body.x && p.body.x < frauki.body.x + frauki.body.width && p.body.y > frauki.body.y && p.body.y < frauki.body.y + frauki.body.height) {
             //this.redParticles.remove(p);
