@@ -65,12 +65,12 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
 		this.state = this.Hopping;
 
-		this.body.velocity.y = -300;
+		this.body.velocity.y = -450;
 
 		if(frauki.body.center.x < this.body.center.x) {
-			this.body.velocity.x = 100;
+			this.body.velocity.x = 150;
 		} else {
-			this.body.velocity.x = -100;
+			this.body.velocity.x = -150;
 		}
 	};
 
@@ -87,7 +87,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	this.TakeHit = function(power) {
 
 	    this.scale.y = 1;
-	    this.Hop();
+	    this.Dodge();
 	};
 
 	////////////////////////////////STATES////////////////////////////////////
@@ -135,7 +135,10 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		this.PlayAnim('hop');
 
 		if(this.body.velocity.y >= 0 || this.body.onFloor()) {
-			this.state = this.Landing;
+			if(Math.abs(this.body.center.y - frauki.body.center.y) < 40 && Math.abs(this.body.center.x - frauki.body.center.y) < 400)
+				this.Scuttle();
+			else
+				this.state = this.Landing;
 		}
 	};
 

@@ -72,6 +72,17 @@ Enemy.prototype.types['Madman'] =  function() {
 			this.body.velocity.x = 200;
 	};
 
+	this.Roflstomp = function() {
+		this.body.velocity.y = -300;
+
+		if(frauki.body.center.x > this.body.center.x)
+			this.body.velocity.x = -100;
+		else
+			this.body.velocity.x = 100;
+
+		this.state = this.Roflstomping;
+	};
+
 	////////////////////////////////STATES////////////////////////////////////
 	this.Idling = function() {
 		this.PlayAnim('idle');
@@ -120,6 +131,16 @@ Enemy.prototype.types['Madman'] =  function() {
 		if(this.body.onFloor()) {
 			this.state = this.Idling;
 			events.publish('camera_shake', { magnitudeX: 20, magnitudeY: 5, duration: 200});
+		}
+	};
+
+	this.Roflstomping = function() {
+		if(frauki.body.center.x < this.body.center.x + 30 && frauki.body.center.x > this.body.center.x - 30 && this.body.center.y < frauki.body.center.y - 100) {
+			this.body.velocity.y = 1000;
+		}
+
+		if(this.body.onFloor()) {
+			this.state = this.Idling;
 		}
 	};
 

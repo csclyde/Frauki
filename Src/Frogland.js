@@ -132,7 +132,7 @@ Frogland.update = function() {
     game.physics.arcade.collide(frauki, this.objectGroup, this.CollideFraukiWithObject, this.OverlapFraukiWithObject);
     game.physics.arcade.collide(this.objectGroup, collisionLayer);
 
-    if(!!frauki.attackRect && frauki.attackRect.width !== 0) {
+    if(!!frauki.attackRect && frauki.attackRect.body.width != 0) {
         game.physics.arcade.overlap(frauki.attackRect, this.objectGroup, EnemyHit);
     }
 
@@ -203,4 +203,17 @@ Frogland.CollideFraukiWithObject = function(f, o) {
         if(o.spriteType === 'door')
             OpenDoor(f, o);
     }
+};
+
+Frogland.EstablishDisappearingWalls = function() {
+    map.forEach(function(tile) {
+        //if the tile is marked as disappearing
+        if(tile.disappearing) {
+            game.add.tween(tile).to({alpha: 0}, 4000, Phaser.Easing.Linear.None, true);
+        }
+            //give it a callback that makes it disappear when it is touched
+        //if this tile is not already grouped
+            //create a new group and add every connected tile
+
+    }, this, 0, 0, map.width, map.height, 'Foreground');
 };
