@@ -10,7 +10,6 @@ WeaponController.prototype.create = function() {
 };
 
 WeaponController.prototype.Update = function() {
-  console.log('Is the weapon active? ' + this.weaponActive);
     if(this.currentWeapon != null) {
         if(this.weaponActive === true) {
             this.currentWeapon.Update();
@@ -20,8 +19,6 @@ WeaponController.prototype.Update = function() {
 
 WeaponController.prototype.ToggleWeapon = function(params) {
     this.weaponActive = params.activate;
-    
-    console.log('Toggling Weapon');
     
     if(this.currentWeapon != null) {
         if(this.weaponActive) {
@@ -35,7 +32,6 @@ WeaponController.prototype.ToggleWeapon = function(params) {
 WeaponController.prototype.Bomb = {
     Start: function() {
         //the initial activity when you press the button
-        console.log('Dis da bomb');
     },
     
     Update: function() {
