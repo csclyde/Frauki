@@ -87,7 +87,9 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	this.TakeHit = function(power) {
 
 	    this.scale.y = 1;
-	    this.Dodge();
+	    
+	    if(this.RollDice(10, 3))
+	        this.Dodge();
 	};
 
 	////////////////////////////////STATES////////////////////////////////////
