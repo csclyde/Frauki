@@ -23,7 +23,7 @@ EffectsController = function() {
 
     this.redParticles = game.add.emitter(0, 0, 100);
     this.redParticles.makeParticles('RedParticles');
-    this.redParticles.gravity = -200;
+    this.redParticles.gravity = -800;
     this.redParticles.maxParticleScale = 1.0;
     this.redParticles.minParticleScale = 0.7;
 }
@@ -48,12 +48,14 @@ EffectsController.prototype.UpdateEffects = function() {
 			particle.body.velocity.y = -MAX_FLUFF_SPEED;
 	}, this);*/
 
+    var particlesToRemove = [];
+
     this.redParticles.forEachAlive(function(p) {
-        var vel = 1000;
+        var vel = 500;
 
         if(p.body.x > frauki.body.x && p.body.x < frauki.body.x + frauki.body.width && p.body.y > frauki.body.y && p.body.y < frauki.body.y + frauki.body.height) {
             //this.redParticles.remove(p);
-            p.visible = false;
+            particlesToRemove.push(p);
             return;
         }
 
@@ -68,6 +70,12 @@ EffectsController.prototype.UpdateEffects = function() {
             p.body.acceleration.y = -vel;
 
     }, this);
+
+    particlesToRemove.forEach(function(p) {
+        this.redParticles.remove(p);
+    }, this);
+
+    particleToRemove = [];
 }
 
 EffectsController.prototype.ParticleSpray = function(x, y, w, h, color, dir, amt) {
