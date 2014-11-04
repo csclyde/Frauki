@@ -8,7 +8,7 @@ InputController = function(player) {
 	this.runRight 	= game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
 	this.slash		= game.input.keyboard.addKey(Phaser.Keyboard.Z);
 	this.roll		= game.input.keyboard.addKey(Phaser.Keyboard.X);
-	this.wep	= game.input.keyboard.addkey(Phaser.Keyboard.C);
+	this.wep	= game.input.keyboard.addKey(Phaser.Keyboard.C);
 	this.testButton = game.input.keyboard.addKey(Phaser.Keyboard.P);
 
     this.runLeft.onDown.add(function() { events.publish('player_run', {run:true, dir:'left'}); }, this);
