@@ -10,6 +10,7 @@ WeaponController.prototype.create = function() {
 };
 
 WeaponController.prototype.Update = function() {
+  console.log('Is the weapon active? ' + this.weaponActive);
     if(this.currentWeapon != null) {
         if(this.weaponActive === true) {
             this.currentWeapon.Update();
@@ -32,11 +33,12 @@ WeaponController.prototype.ToggleWeapon = function(params) {
 WeaponController.prototype.Bomb = {
     Start: function() {
         //the initial activity when you press the button
+        console.log('Dis da bomb');
     },
     
     Update: function() {
         //what to do while updating (only called while active)
-        energyController.RemoveEnergy(0.1);
+        energyController.RemoveEnergy(1);
     },
     
     Stop: function() {
