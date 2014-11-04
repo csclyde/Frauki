@@ -29,9 +29,8 @@ EffectsController = function() {
 }
 
 EffectsController.prototype.UpdateEffects = function() {
-	return;
 
-	this.fluff.x = game.camera.x + (game.camera.width / 2);
+	/*this.fluff.x = game.camera.x + (game.camera.width / 2);
 	this.fluff.y = game.camera.y - 20;
 
 	this.fluff.forEachAlive(function(particle) {
@@ -47,10 +46,33 @@ EffectsController.prototype.UpdateEffects = function() {
 			particle.body.velocity.y = MAX_FLUFF_SPEED;
 		if(particle.body.velocity.y < -MAX_FLUFF_SPEED)
 			particle.body.velocity.y = -MAX_FLUFF_SPEED;
-	}, this);
+	}, this);*/
+
+    this.redParticles.forEachAlive(function(p) {
+        var vel = 1000;
+
+        if(p.body.x > frauki.body.x && p.body.x < frauki.body.x + frauki.body.width && p.body.y > frauki.body.y && p.body.y < frauki.body.y + frauki.body.height) {
+            //this.redParticles.remove(p);
+            p.visible = false;
+            return;
+        }
+
+        if(p.body.x < frauki.body.x)
+            p.body.acceleration.x = vel;
+        else
+            p.body.acceleration.x = -vel;
+
+        if(p.body.y < frauki.body.y)
+            p.body.acceleration.y = vel;
+        else
+            p.body.acceleration.y = -vel;
+
+    }, this);
 }
 
-EffectsController.prototype.ParticleSpray = function(x, y, w, h, color, dir) {
+EffectsController.prototype.ParticleSpray = function(x, y, w, h, color, dir, amt) {
+
+    amt = amt || 5;
 
 	var effect = null;
 
@@ -88,5 +110,5 @@ EffectsController.prototype.ParticleSpray = function(x, y, w, h, color, dir) {
     effect.width = w || 0;
     effect.height = h || 0;
 
-	effect.start(false, 2000, 5, 5, 5);
+	effect.start(false, 2000, 5, amt, amt);
 }

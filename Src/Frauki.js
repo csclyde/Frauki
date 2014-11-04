@@ -179,8 +179,8 @@ Player.prototype.LandHit = function() {
     energyController.AddEnergy(this.currentAttack.damage);
 };
 
-Player.prototype.LandKill = function() { 
-    energyController.AddEnergy(5);
+Player.prototype.LandKill = function(bonus) { 
+    energyController.AddEnergy(bonus);
 };
 
 ////////////////ACTIONS//////////////////

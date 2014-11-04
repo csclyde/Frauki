@@ -138,7 +138,7 @@ Frogland.update = function() {
 
     cameraController.UpdateCamera();
     inputController.UpdateInput();
-    //effectsController.UpdateEffects();
+    effectsController.UpdateEffects();
     energyController.UpdateEnergy();
     triggers.Update();
 

@@ -148,6 +148,8 @@ function EnemyHit(f, e) {
     if(!e.timers.TimerUp('hit'))
         return;
 
+    var numParticles = frauki.currentAttack.damage * 4;
+
     var c = frauki.body.center.x < e.body.center.x ? 1 : -1;
     e.body.velocity.x = c * (50 - (e.weight * 300) + (200 * frauki.currentAttack.knockback));
 
@@ -169,8 +171,10 @@ function EnemyHit(f, e) {
     if(e.energy <= 0) {
         e.Die();
 
-        frauki.LandKill();
+        frauki.LandKill(e.maxEnergy / 2);
         e.kill();
+
+        numParticles += e.maxEnergy * 2;
     } else {
         frauki.LandHit();
         e.TakeHit();
@@ -185,7 +189,7 @@ function EnemyHit(f, e) {
 
    
 
-    effectsController.ParticleSpray(e.body.x, e.body.y, e.body.width, e.body.height, 'red', e.PlayerDirection());
+    effectsController.ParticleSpray(e.body.x, e.body.y, e.body.width, e.body.height, 'red', e.PlayerDirection(), numParticles);
 
     
 };
