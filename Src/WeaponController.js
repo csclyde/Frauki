@@ -1,5 +1,8 @@
 WeaponController = function() {
   this.currentWeapon = null;
+  this.weaponActive = false;
+  
+  events.subscribe('activate_weapon', this.ToggleWeapon, this);
 };
 
 WeaponController.prototype.create = function() {
@@ -7,8 +10,24 @@ WeaponController.prototype.create = function() {
 };
 
 WeaponController.prototype.Update = function() {
-  
+    if(this.currentWeapon != null) {
+        if(this.weaponActive === true) {
+            this.currentWeapon.Update();
+        }
+    }
 };
+
+WeaponController.prototype.ToggleWeapon = function(params) {
+    this.weaponActive = params.actiavte;
+    
+    if(this.currentWeapon != null) {
+        if(this.weaponActive) {
+            this.currentWeapon.Start();
+        } else {
+            this.currentWeapon.Stop();
+        }
+    }
+}
 
 WeaponController.prototype.Bomb = {
     Start: function() {
