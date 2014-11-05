@@ -22,7 +22,7 @@ EffectsController = function() {
     this.yellowParticles.minParticleScale = 0.7;
 
     this.redParticles = game.add.emitter(0, 0, 100);
-    this.redParticles.makeParticles('RedParticles');
+    this.redParticles.makeParticles('Item', ['EnergyBit0000', 'EnergyBit0001', 'EnergyBit0002', 'EnergyBit0003', 'EnergyBit0004', 'EnergyBit0005']); //array of strings here for multiple sprites
     this.redParticles.gravity = -800;
     this.redParticles.maxParticleScale = 1.0;
     this.redParticles.minParticleScale = 0.7;
@@ -52,23 +52,13 @@ EffectsController.prototype.UpdateEffects = function() {
 
     this.redParticles.forEachAlive(function(p) {
         var vel = 3000;
-        var maxVelocity = 350;
+        var maxVelocity = 250;
 
         if(p.body.x > frauki.body.x && p.body.x < frauki.body.x + frauki.body.width && p.body.y > frauki.body.y && p.body.y < frauki.body.y + frauki.body.height) {
             //this.redParticles.remove(p);
             particlesToRemove.push(p);
             return;
         }
-
-        /*if(p.body.x < frauki.body.x)
-            p.body.acceleration.x = vel;
-        else
-            p.body.acceleration.x = -vel;
-
-        if(p.body.y < frauki.body.y)
-            p.body.acceleration.y = vel;
-        else
-            p.body.acceleration.y = -vel;*/
 
         var xDist = p.body.center.x - frauki.body.center.x;
         var yDist = p.body.center.y - frauki.body.center.y;
@@ -135,6 +125,8 @@ EffectsController.prototype.ParticleSpray = function(x, y, w, h, color, dir, amt
     effect.y = y || 0;
     effect.width = w || 0;
     effect.height = h || 0;
+
+    console.log('Position: ' + effect.x + ' ' + effect.y);
 
 	effect.start(false, 2000, 5, amt, amt);
 }

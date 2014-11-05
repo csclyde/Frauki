@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>3</int>
         <key>texturePackerVersion</key>
-        <string>3.5.2</string>
+        <string>3.5.3</string>
         <key>fileName</key>
         <string>D:/gamedev/Frauki/Data/Items/Items.tps</string>
         <key>autoSDSettings</key>
@@ -199,6 +199,12 @@
             <filename>Frames/Apple0001.png</filename>
             <filename>Frames/Heart0000.png</filename>
             <filename>Frames/Heart0001.png</filename>
+            <filename>Frames/EnergyBit0005.png</filename>
+            <filename>Frames/EnergyBit0000.png</filename>
+            <filename>Frames/EnergyBit0001.png</filename>
+            <filename>Frames/EnergyBit0002.png</filename>
+            <filename>Frames/EnergyBit0003.png</filename>
+            <filename>Frames/EnergyBit0004.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

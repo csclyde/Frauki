@@ -187,11 +187,7 @@ function EnemyHit(f, e) {
         }
     }   
 
-   
-
-    effectsController.ParticleSpray(e.body.x, e.body.y, e.body.width, e.body.height, 'red', e.PlayerDirection(), numParticles);
-
-    
+    effectsController.ParticleSpray(e.body.x, e.body.y, e.body.width, e.body.height, 'red', e.PlayerDirection(), numParticles);    
 };
 
 

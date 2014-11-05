@@ -100,7 +100,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 				this.Scuttle();
 		} else if(this.body.center.y < frauki.body.y && this.body.center.x > frauki.body.center.x - 20 && this.body.center.x < frauki.body.center.x + 20 && !this.body.onFloor()) {
 			this.Dive();
-		} else if(Math.abs(this.body.center.y - frauki.body.center.y) < 40 && Math.abs(this.body.center.x - frauki.body.center.y) < 400 && this.body.onFloor()) {
+		} else if(Math.abs(this.body.center.y - frauki.body.center.y) < 40 && Math.abs(this.body.center.x - frauki.body.center.y) < 400 && (this.body.onFloor() || this.body.velocity.y <= 0)) {
 			this.Scuttle();
 		} else if(Math.abs(this.body.center.x - frauki.body.center.x) > 50 && Math.abs(this.body.center.x - frauki.body.center.x) < 450) {
 			this.Hop();
@@ -147,7 +147,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	this.Landing = function() {
 		this.PlayAnim('land');
 
-		if(this.body.onFloor()) {
+		if(this.body.onFloor() || this.body.velocity.y <= 0) {
 			this.state = this.Idling;
 			this.body.velocity.x = 0;
 		}
@@ -197,7 +197,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		else if(frauki.body.center.x > this.body.center.x)
 			this.body.center.x++;
 		
-		if(this.body.onFloor()) {
+		if(this.body.onFloor() || this.body.velocity.y <= 0) {
 			this.state = this.Idling;
 		}
 	};
