@@ -140,6 +140,10 @@ Player.prototype.Grace = function() {
 };
 
 Player.prototype.UpdateAttackGeometry = function() {
+
+    //first, check the weapon controller for an attack geometry override
+    //barring that, find the normal attack geometry
+    
     //check for a frame mod and apply its mods
     if(this.animations.currentFrame) {
         this.currentAttack = fraukiDamageFrames[this.animations.currentFrame.name];

@@ -12,6 +12,7 @@ Frogland.preload = function() {
     game.load.image('parallax1', 'Data/Frogland/Parallax1.png');
     game.load.image('parallax2', 'Data/Frogland/Parallax2.png');
     game.load.image('fluff', 'Data/Fluff.png');
+    game.load.image('mace', 'Data/Weapons/Mace.png');
 
     game.load.image('RedParticles', 'Data/Hit Particles.png');
     game.load.image('YellowParticles', 'Data/Yellow Particles.png');

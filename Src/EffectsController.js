@@ -51,7 +51,8 @@ EffectsController.prototype.UpdateEffects = function() {
     var particlesToRemove = [];
 
     this.redParticles.forEachAlive(function(p) {
-        var vel = 1000;
+        var vel = 3000;
+        var maxVelocity = 350;
 
         if(p.body.x > frauki.body.x && p.body.x < frauki.body.x + frauki.body.width && p.body.y > frauki.body.y && p.body.y < frauki.body.y + frauki.body.height) {
             //this.redParticles.remove(p);
@@ -59,7 +60,7 @@ EffectsController.prototype.UpdateEffects = function() {
             return;
         }
 
-        if(p.body.x < frauki.body.x)
+        /*if(p.body.x < frauki.body.x)
             p.body.acceleration.x = vel;
         else
             p.body.acceleration.x = -vel;
@@ -67,7 +68,24 @@ EffectsController.prototype.UpdateEffects = function() {
         if(p.body.y < frauki.body.y)
             p.body.acceleration.y = vel;
         else
-            p.body.acceleration.y = -vel;
+            p.body.acceleration.y = -vel;*/
+
+        var xDist = p.body.center.x - frauki.body.center.x;
+        var yDist = p.body.center.y - frauki.body.center.y;
+
+        var angle = Math.atan2(yDist, xDist); 
+        p.body.acceleration.x = Math.cos(angle) * -vel - (xDist * 5);    
+        p.body.acceleration.y = Math.sin(angle) * -vel - (yDist * 5);
+
+        var currVelocitySqr = p.body.velocity.x * p.body.velocity.x + p.body.velocity.y * p.body.velocity.y;
+
+        if (currVelocitySqr > maxVelocity * maxVelocity) {
+            angle = Math.atan2(p.body.velocity.y, p.body.velocity.x);
+
+            p.body.velocity.x = Math.cos(angle) * maxVelocity;
+            p.body.velocity.y = Math.sin(angle) * maxVelocity;
+
+        }
 
     }, this);
 
@@ -95,21 +113,21 @@ EffectsController.prototype.ParticleSpray = function(x, y, w, h, color, dir, amt
     	effect.minParticleSpeed.x = 0;
         effect.maxParticleSpeed.x = 0;
         effect.minParticleSpeed.y = 100;
-        effect.maxParticleSpeed.y = 200;
+        effect.maxParticleSpeed.y = 300;
     } else if (dir === 'left') {
         effect.minParticleSpeed.x = 100;
-        effect.maxParticleSpeed.x = 200;
+        effect.maxParticleSpeed.x = 300;
         effect.minParticleSpeed.y = 0;
         effect.maxParticleSpeed.y = 0;
     } else if (dir === 'right') {
-        effect.minParticleSpeed.x = -200;
+        effect.minParticleSpeed.x = -300;
         effect.maxParticleSpeed.x = -100;
         effect.minParticleSpeed.y = 0;
         effect.maxParticleSpeed.y = 0;
     } else {
     	effect.minParticleSpeed.x = 0;
         effect.maxParticleSpeed.x = 0;
-        effect.minParticleSpeed.y = -200;
+        effect.minParticleSpeed.y = -300;
         effect.maxParticleSpeed.y = -100;
     }
 

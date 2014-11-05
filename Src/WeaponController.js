@@ -1,6 +1,8 @@
 WeaponController = function() {
   this.currentWeapon = this.Bomb;
   this.weaponActive = false;
+
+  this.timers = new TimerUtil();
   
   events.subscribe('activate_weapon', this.ToggleWeapon, this);
 };
@@ -36,12 +38,19 @@ WeaponController.prototype.Bomb = {
     
     Update: function() {
         //what to do while updating (only called while active)
-        energyController.RemoveEnergy(1);
+        if(weaponController.timers.TimerUp('bomb')) {
+            energyController.RemoveEnergy(0.2);
+            weaponController.timers.SetTimer('bomb', 200);
+            this.power += 0.1;
+        }
     },
     
     Stop: function() {
         //the final activity when they release the button
-    }
+        this.power = 0;
+    },
+
+    power: 0
 };
 
 WeaponController.prototype.Mace = {
