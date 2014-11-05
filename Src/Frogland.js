@@ -212,7 +212,7 @@ Frogland.CollideFraukiWithObject = function(f, o) {
     }
 };
 
-Frogland.CheckEnvironmentalCollisions = function(f, t) {
+Frogland.CheckEnvironmentalCollisions = function(f, tile) {
     if(tile.index != 1) {
         //water
         if(tile.index === 2) {
