@@ -131,7 +131,10 @@ Frogland.create = function() {
 Frogland.update = function() {
     frauki.UpdateAttackGeometry();
 
-	game.physics.arcade.collide(frauki, collisionLayer);
+    //reset environmental effect flags
+    frauki.inWater = false;
+    
+    game.physics.arcade.collide(frauki, collisionLayer, null, this.CheckEnvironmentalCollisions);
     game.physics.arcade.collide(frauki, this.objectGroup, this.CollideFraukiWithObject, this.OverlapFraukiWithObject);
     game.physics.arcade.collide(this.objectGroup, collisionLayer);
 
@@ -208,6 +211,19 @@ Frogland.CollideFraukiWithObject = function(f, o) {
             OpenDoor(f, o);
     }
 };
+
+Frogland.CheckEnvironmentalCollisions = function(f, t) {
+    if(tile.index != 1) {
+        //water
+        if(tile.index === 2) {
+            Frauki.inWater = true;
+        }
+        
+        return false;
+    }
+	    
+    return true;
+}
 
 Frogland.EstablishDisappearingWalls = function() {
     map.forEach(function(tile) {
