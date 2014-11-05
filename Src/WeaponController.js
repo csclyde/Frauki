@@ -1,5 +1,5 @@
 WeaponController = function() {
-  this.currentWeapon = this.Bomb;
+  this.currentWeapon = this.Mace;
   this.weaponActive = false;
 
   this.timers = new TimerUtil();
@@ -56,15 +56,45 @@ WeaponController.prototype.Bomb = {
 WeaponController.prototype.Mace = {
     Start: function() {
         //the initial activity when you press the button
+        if(this.mace === null) {
+            this.mace = game.add.sprite(frauki.body.center.x, frauki.body.center.y, 'mace');
+            game.physics.enable(this.mace, Phaser.Physics.ARCADE);
+            this.mace.gravity = -800;
+        }
+
+        this.mace.body.x = frauki.body.center.x;
+        this.mace.body.y = frauki.body.center.y;
     },
     
     Update: function() {
         //what to do while updating (only called while active)
+        var vel = 2000;
+        var maxVelocity = 800;
+
+        var xDist = this.mace.body.center.x - frauki.body.center.x;
+        var yDist = this.mace.body.center.y - frauki.body.center.y;
+
+        var angle = Math.atan2(yDist, xDist); 
+        this.mace.body.acceleration.x = Math.cos(angle) * -vel - (xDist * 5);    
+        this.mace.body.acceleration.y = Math.sin(angle) * -vel - (yDist * 5);
+
+        var currVelocitySqr = this.mace.body.velocity.x * this.mace.body.velocity.x + this.mace.body.velocity.y * this.mace.body.velocity.y;
+
+        if (currVelocitySqr > maxVelocity * maxVelocity) {
+            angle = Math.atan2(this.mace.body.velocity.y, this.mace.body.velocity.x);
+
+            this.mace.body.velocity.x = Math.cos(angle) * maxVelocity;
+            this.mace.body.velocity.y = Math.sin(angle) * maxVelocity;
+
+        }
     },
     
     Stop: function() {
         //the final activity when they release the button
-    }
+        this.mace.visible = false;
+    },
+
+    mace: null
 };
 
 WeaponController.prototype.Bubble = {
