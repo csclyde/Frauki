@@ -88,8 +88,8 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
 	    this.scale.y = 1;
 	    
-	    if(this.RollDice(10, 3))
-	        this.Dodge();
+	    //if(this.RollDice(10, 3))
+	        //this.Dodge();
 	};
 
 	////////////////////////////////STATES////////////////////////////////////
