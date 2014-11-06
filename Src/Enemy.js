@@ -157,8 +157,6 @@ function EnemyHit(f, e) {
     if(c > 0 && e.body.velocity.x < 0) e.body.velocity.x = 0;
     //compute the velocity based on weight and attack knockback
 
-	e.body.velocity.y = -300 + (e.weight * 200) - (100 * frauki.currentAttack.damage);
-
     events.publish('camera_shake', {magnitudeX: 15 * frauki.currentAttack.damage, magnitudeY: 5, duration: 100});
 
     e.timers.SetTimer('hit', e.baseStunDuration);
@@ -180,6 +178,7 @@ function EnemyHit(f, e) {
         e.TakeHit();
 
         if(e.GetPoisePercentage() < 0.3) {
+            e.body.velocity.y = -300 + (e.weight * 200) - (100 * frauki.currentAttack.damage);
             e.state = e.Hurting;
             e.body.velocity.x = c * e.body.velocity.x * e.body.velocity.x;
             e.body.velocity.y = -1 * e.body.velocity.y * e.body.velocity.y;
