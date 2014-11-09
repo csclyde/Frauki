@@ -15,23 +15,24 @@ EffectsController = function() {
 	this.fluff.start(false, 8000, 200);*/
 
 
-    this.yellowParticles = game.add.emitter(0, 0, 100);
-    this.yellowParticles.makeParticles('YellowParticles');
-    this.yellowParticles.gravity = -200;
-    this.yellowParticles.maxParticleScale = 1.0;
-    this.yellowParticles.minParticleScale = 0.7;
+    this.negativeBits = game.add.emitter(0, 0, 100);
+    this.negativeBits.makeParticles('Item', ['EnergyBitNeg0000', 'EnergyBitNeg0001', 'EnergyBitNeg0002', 'EnergyBitNeg0003', 'EnergyBitNeg0004', 'EnergyBitNeg0005']);
+    this.negativeBits.gravity = -200;
+    this.negativeBits.maxParticleScale = 1.0;
+    this.negativeBits.minParticleScale = 0.7;
 
-    this.redParticles = game.add.emitter(0, 0, 100);
-    this.redParticles.makeParticles('Item', ['EnergyBit0000', 'EnergyBit0001', 'EnergyBit0002', 'EnergyBit0003', 'EnergyBit0004', 'EnergyBit0005']); //array of strings here for multiple sprites
-    this.redParticles.gravity = -800;
-    this.redParticles.maxParticleScale = 1.0;
-    this.redParticles.minParticleScale = 0.7;
+    this.positiveBits = game.add.emitter(0, 0, 100);
+    this.positiveBits.makeParticles('Item', ['EnergyBitPos0000', 'EnergyBitPos0001', 'EnergyBitPos0002', 'EnergyBitPos0003', 'EnergyBitPos0004', 'EnergyBitPos0005']); //array of strings here for multiple sprites
+    this.positiveBits.gravity = -800;
+    this.positiveBits.maxParticleScale = 1.0;
+    this.positiveBits.minParticleScale = 0.7;
 
     //unassigned particles will be set to move towards this destination
     this.activeDest = null;
-    this.activeSource = null;
-
     this.enemySource = null;
+    this.enemyDest = null;
+
+    this.particleType = 'pos';
 }
 
 EffectsController.prototype.UpdateEffects = function() {
@@ -54,29 +55,28 @@ EffectsController.prototype.UpdateEffects = function() {
 			particle.body.velocity.y = -MAX_FLUFF_SPEED;
 	}, this);*/
 
-    this.redParticles.forEachAlive(UpdateParticle, this);
-    this.yellowParticles.forEachAlive(UpdateParticle, this);
+    this.activeDest = frauki.body;
+    this.positiveBits.forEachAlive(UpdateParticle, this);
 
-    this.yellowParticles.x = frauki.body.x;
-    this.yellowParticles.y = frauki.body.y;
-    this.yellowParticles.width = frauki.body.width;
-    this.yellowParticles.height = frauki.body.height;
+    this.activeDest = this.enemyDest;
+    this.negativeBits.forEachAlive(UpdateParticle, this);
+
+    this.negativeBits.x = frauki.body.x;
+    this.negativeBits.y = frauki.body.y;
+    this.negativeBits.width = frauki.body.width;
+    this.negativeBits.height = frauki.body.height;
 
     if(!!this.enemySource) {
-        this.redParticles.x = this.enemySource.x;
-        this.redParticles.y = this.enemySource.y;
-        this.redParticles.width = this.enemySource.width;
-        this.redParticles.height = this.enemySource.height;
+        this.positiveBits.x = this.enemySource.x;
+        this.positiveBits.y = this.enemySource.y;
+        this.positiveBits.width = this.enemySource.width;
+        this.positiveBits.height = this.enemySource.height;
     }
 }
 
 function UpdateParticle(p) {
     var vel = 1500;
-    var maxVelocity = 250;
-
-    if(!p.sourceBody) {
-        p.sourceBody = this.activeSource;
-    }
+    var maxVelocity = 800;
 
     if(!p.destBody) {
         p.destBody = this.activeDest;
@@ -97,8 +97,8 @@ function UpdateParticle(p) {
     var yDist = p.body.center.y - p.destBody.center.y;
 
     var angle = Math.atan2(yDist, xDist); 
-    p.body.acceleration.x = Math.cos(angle) * -vel - (xDist * 5);    
-    p.body.acceleration.y = Math.sin(angle) * -vel - (yDist * 5);
+    p.body.acceleration.x = Math.cos(angle) * -vel;// - (xDist * 5);    
+    p.body.acceleration.y = Math.sin(angle) * -vel;// - (yDist * 5);
 
     var currVelocitySqr = p.body.velocity.x * p.body.velocity.x + p.body.velocity.y * p.body.velocity.y;
 
@@ -118,33 +118,34 @@ EffectsController.prototype.ParticleSpray = function(source, dest, color, dir, a
 	var effect = null;
 
 	if(color === 'red') {
-		effect = this.redParticles;
+		effect = this.positiveBits;
         this.enemySource = source;
     }
     else if(color === 'yellow') {
-        effect = this.yellowParticles;
+        effect = this.negativeBits;
+        this.enemyDest = dest;
 	}
 
     if(dir === 'above') {
-    	effect.minParticleSpeed.x = -800;
-        effect.maxParticleSpeed.x = 800;
-        effect.minParticleSpeed.y = -2000;
-        effect.maxParticleSpeed.y = -4000;
+    	effect.minParticleSpeed.x = -80;
+        effect.maxParticleSpeed.x = 80;
+        effect.minParticleSpeed.y = -200;
+        effect.maxParticleSpeed.y = -400;
     } else if (dir === 'right') {
-        effect.minParticleSpeed.x = 2000;
-        effect.maxParticleSpeed.x = 4000;
-        effect.minParticleSpeed.y = -800;
-        effect.maxParticleSpeed.y = 800;
+        effect.minParticleSpeed.x = 200;
+        effect.maxParticleSpeed.x = 400;
+        effect.minParticleSpeed.y = -80;
+        effect.maxParticleSpeed.y = 80;
     } else if (dir === 'left') {
-        effect.minParticleSpeed.x = -4000;
-        effect.maxParticleSpeed.x = -2000;
-        effect.minParticleSpeed.y = -800;
-        effect.maxParticleSpeed.y = 800;
+        effect.minParticleSpeed.x = -400;
+        effect.maxParticleSpeed.x = -200;
+        effect.minParticleSpeed.y = -80;
+        effect.maxParticleSpeed.y = 80;
     } else {
-    	effect.minParticleSpeed.x = -800;
-        effect.maxParticleSpeed.x = 800;
-        effect.minParticleSpeed.y = 4000;
-        effect.maxParticleSpeed.y = 2000;
+    	effect.minParticleSpeed.x = -80;
+        effect.maxParticleSpeed.x = 80;
+        effect.minParticleSpeed.y = 400;
+        effect.maxParticleSpeed.y = 200;
     }
 
     effect.x = source.x || 0;
@@ -152,7 +153,6 @@ EffectsController.prototype.ParticleSpray = function(source, dest, color, dir, a
     effect.width = source.width || 0;
     effect.height = source.height || 0;
 
-    this.activeSource = source;
     this.activeDest = dest;
 
 	effect.start(false, 2000, 5, amt, amt);

@@ -354,7 +354,7 @@ Player.prototype.Hit = function(f, e) {
 
     this.body.velocity.y = -300;
 
-    effectsController.ParticleSpray(this.body, e.body, 'yellow');
+    effectsController.ParticleSpray(this.body, e.body, 'yellow', e.PlayerDirection(), e.damage);
 
     energyController.RemoveEnergy(e.damage);
 

@@ -6,7 +6,7 @@
         <key>texturePackerVersion</key>
         <string>3.5.3</string>
         <key>fileName</key>
-        <string>D:/gamedev/Frauki/Data/Items/Items.tps</string>
+        <string>C:/Users/user/Documents/gamedev/Frauki/Data/Items/Items.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -199,12 +199,18 @@
             <filename>Frames/Apple0001.png</filename>
             <filename>Frames/Heart0000.png</filename>
             <filename>Frames/Heart0001.png</filename>
-            <filename>Frames/EnergyBit0005.png</filename>
-            <filename>Frames/EnergyBit0000.png</filename>
-            <filename>Frames/EnergyBit0001.png</filename>
-            <filename>Frames/EnergyBit0002.png</filename>
-            <filename>Frames/EnergyBit0003.png</filename>
-            <filename>Frames/EnergyBit0004.png</filename>
+            <filename>Frames/EnergyBitNeg0002.png</filename>
+            <filename>Frames/EnergyBitNeg0003.png</filename>
+            <filename>Frames/EnergyBitNeg0004.png</filename>
+            <filename>Frames/EnergyBitNeg0005.png</filename>
+            <filename>Frames/EnergyBitNeg0000.png</filename>
+            <filename>Frames/EnergyBitNeg0001.png</filename>
+            <filename>Frames/EnergyBitPos0001.png</filename>
+            <filename>Frames/EnergyBitPos0002.png</filename>
+            <filename>Frames/EnergyBitPos0003.png</filename>
+            <filename>Frames/EnergyBitPos0004.png</filename>
+            <filename>Frames/EnergyBitPos0005.png</filename>
+            <filename>Frames/EnergyBitPos0000.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

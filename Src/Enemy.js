@@ -148,7 +148,7 @@ function EnemyHit(f, e) {
     if(!e.timers.TimerUp('hit'))
         return;
 
-    var numParticles = frauki.currentAttack.damage * 4;
+    var numParticles = frauki.currentAttack.damage * 2;
 
     var c = frauki.body.center.x < e.body.center.x ? 1 : -1;
     e.body.velocity.x = c * (50 - (e.weight * 300) + (200 * frauki.currentAttack.knockback));
@@ -172,7 +172,7 @@ function EnemyHit(f, e) {
         frauki.LandKill(e.maxEnergy / 2);
         e.kill();
 
-        numParticles += e.maxEnergy * 2;
+        numParticles += e.maxEnergy;
     } else {
         frauki.LandHit();
         e.TakeHit();
