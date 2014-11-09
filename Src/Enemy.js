@@ -186,7 +186,7 @@ function EnemyHit(f, e) {
         }
     }   
 
-    effectsController.ParticleSpray(e.body.x, e.body.y, e.body.width, e.body.height, 'red', e.PlayerDirection(), numParticles);    
+    effectsController.ParticleSpray(e.body, frauki.body, 'red', e.EnemyDirection(), numParticles);    
 };
 
 
@@ -219,14 +219,25 @@ Enemy.prototype.PlayerIsVisible = function() {
 };
 
 Enemy.prototype.PlayerDirection = function() {
-    if(frauki.body.center.y < this.body.center.y)
+    if(frauki.body.center.y < this.body.center.y - (this.body.height / 2))
         return 'above';
+    if(frauki.body.center.y > this.body.center.y + (this.body.height / 2))
+        return 'below';
     if(frauki.body.center.x < this.body.center.x)
         return 'left';
     if(frauki.body.center.x > this.body.center.x)
         return 'right';
-    if(frauki.body.center.y > this.body.center.y)
+};
+
+Enemy.prototype.EnemyDirection = function() {
+     if(frauki.body.center.y < this.body.center.y - (this.body.height / 2))
         return 'below';
+    if(frauki.body.center.y > this.body.center.y + (this.body.height / 2))
+        return 'above';
+    if(frauki.body.center.x < this.body.center.x)
+        return 'right';
+    if(frauki.body.center.x > this.body.center.x)
+        return 'left';
 };
 
 Enemy.prototype.RollDice = function(sides, thresh) {
