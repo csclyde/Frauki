@@ -75,7 +75,7 @@ Player = function (game, x, y, name) {
     }, this);
 
     //set up the run dust
-    this.runDust = game.add.sprite(0, 0, 'Item');
+    this.runDust = game.add.sprite(0, 0, 'Misc');
     this.runDust.animations.add('dust', ['RunDust0000', 'RunDust0001', 'RunDust0002', 'RunDust0003'], 15, true, false);
     this.runDust.play('dust');
 };

@@ -16,13 +16,13 @@ EffectsController = function() {
 
 
     this.negativeBits = game.add.emitter(0, 0, 100);
-    this.negativeBits.makeParticles('Item', ['EnergyBitNeg0000', 'EnergyBitNeg0001', 'EnergyBitNeg0002', 'EnergyBitNeg0003', 'EnergyBitNeg0004', 'EnergyBitNeg0005']);
+    this.negativeBits.makeParticles('Misc', ['EnergyBitNeg0000', 'EnergyBitNeg0001', 'EnergyBitNeg0002', 'EnergyBitNeg0003', 'EnergyBitNeg0004', 'EnergyBitNeg0005']);
     this.negativeBits.gravity = -200;
     this.negativeBits.maxParticleScale = 1.0;
     this.negativeBits.minParticleScale = 0.7;
 
     this.positiveBits = game.add.emitter(0, 0, 100);
-    this.positiveBits.makeParticles('Item', ['EnergyBitPos0000', 'EnergyBitPos0001', 'EnergyBitPos0002', 'EnergyBitPos0003', 'EnergyBitPos0004', 'EnergyBitPos0005']); //array of strings here for multiple sprites
+    this.positiveBits.makeParticles('Misc', ['EnergyBitPos0000', 'EnergyBitPos0001', 'EnergyBitPos0002', 'EnergyBitPos0003', 'EnergyBitPos0004', 'EnergyBitPos0005']); //array of strings here for multiple sprites
     this.positiveBits.gravity = -800;
     this.positiveBits.maxParticleScale = 1.0;
     this.positiveBits.minParticleScale = 0.7;

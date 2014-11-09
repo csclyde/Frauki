@@ -21,7 +21,7 @@ Frogland.preload = function() {
     game.load.atlasJSONHash('EnemySprites', 'Data/Enemies/Enemies.png', 'Data/Enemies/Enemies.json');
 
     game.load.atlasJSONHash('Door', 'Data/Doors/Doors.png', 'Data/Doors/Doors.json');
-    game.load.atlasJSONHash('Item', 'Data/Items/Items.png', 'Data/Items/Items.json');
+    game.load.atlasJSONHash('Misc', 'Data/Misc/Misc.png', 'Data/Misc/Misc.json');
 
     game.load.audio('attack_1', 'Data/Sfx/attack1.wav');
 }
@@ -110,7 +110,7 @@ Frogland.create = function() {
     map.createFromObjects('Enemies', 1070, 'Incarnate', null, true, false, this.objectGroup, Enemy, false);
 
     map.createFromObjects('Items', 1043, 'Door', 'Door0000', true, false, this.objectGroup, Door, false);
-    map.createFromObjects('Items', 1042, 'Item', 'Apple0000', true, false, this.objectGroup, Apple, false);
+    map.createFromObjects('Items', 1042, 'Misc', 'Apple0000', true, false, this.objectGroup, Apple, false);
     
     foregroundLayer = map.createLayer('Foreground');
 

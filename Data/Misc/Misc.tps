@@ -6,7 +6,7 @@
         <key>texturePackerVersion</key>
         <string>3.5.3</string>
         <key>fileName</key>
-        <string>C:/Users/user/Documents/gamedev/Frauki/Data/Items/Items.tps</string>
+        <string>D:/gamedev/Frauki/Data/Misc/Misc.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -38,7 +38,7 @@
         <key>dataFormat</key>
         <string>json</string>
         <key>textureFileName</key>
-        <filename>Items.png</filename>
+        <filename>Misc.png</filename>
         <key>flipPVR</key>
         <false/>
         <key>pvrCompressionQuality</key>
@@ -145,7 +145,7 @@
             <key>data</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>Items.json</filename>
+                <filename>Misc.json</filename>
             </struct>
         </map>
         <key>multiPack</key>
