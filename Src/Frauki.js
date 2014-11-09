@@ -255,7 +255,6 @@ Player.prototype.Crouch = function(params) {
 
 Player.prototype.Slash = function(params) {
 
-
     //diving dash
     if(!this.timers.TimerUp('frauki_dash') && this.states.crouching && (this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling)) {
         this.state = this.AttackDiveCharge;
@@ -501,7 +500,14 @@ Player.prototype.Rolling = function() {
             this.state = this.Falling;
             this.movement.rollVelocity = 0;
         } else if(!inputController.runLeft.isDown && !inputController.runRight.isDown && this.body.onFloor()) {
-            this.state = this.Standing;
+            if(this.states.crouching) {
+                this.state = this.Crouching;
+                this.PlayAnim('crouch');
+                this.animations.currentAnim.setFrame('Crouch0005');
+            } else {
+                this.state = this.Standing;
+            }
+
             this.movement.rollVelocity = 0;
         } else if(this.body.velocity.x !== 0 && this.body.onFloor()) {
             this.state = this.Running;

@@ -52,11 +52,12 @@ EffectsController.prototype.UpdateEffects = function() {
 
     this.redParticles.forEachAlive(function(p) {
         var vel = 2000;
-        var maxVelocity = 200;
+        var maxVelocity = 250;
 
         if(p.body.x > frauki.body.x && p.body.x < frauki.body.x + frauki.body.width && p.body.y > frauki.body.y && p.body.y < frauki.body.y + frauki.body.height) {
             //this.redParticles.remove(p);
-            particlesToRemove.push(p);
+            //particlesToRemove.push(p);
+            p.kill();
             return;
         }
 
@@ -102,23 +103,23 @@ EffectsController.prototype.ParticleSpray = function(x, y, w, h, color, dir, amt
     if(dir === 'below') {
     	effect.minParticleSpeed.x = 0;
         effect.maxParticleSpeed.x = 0;
-        effect.minParticleSpeed.y = 100;
-        effect.maxParticleSpeed.y = 300;
+        effect.minParticleSpeed.y = 200;
+        effect.maxParticleSpeed.y = 800;
     } else if (dir === 'left') {
-        effect.minParticleSpeed.x = 100;
-        effect.maxParticleSpeed.x = 300;
+        effect.minParticleSpeed.x = 200;
+        effect.maxParticleSpeed.x = 800;
         effect.minParticleSpeed.y = 0;
         effect.maxParticleSpeed.y = 0;
     } else if (dir === 'right') {
-        effect.minParticleSpeed.x = -300;
-        effect.maxParticleSpeed.x = -100;
+        effect.minParticleSpeed.x = -800;
+        effect.maxParticleSpeed.x = -200;
         effect.minParticleSpeed.y = 0;
         effect.maxParticleSpeed.y = 0;
     } else {
     	effect.minParticleSpeed.x = 0;
         effect.maxParticleSpeed.x = 0;
-        effect.minParticleSpeed.y = -300;
-        effect.maxParticleSpeed.y = -100;
+        effect.minParticleSpeed.y = -800;
+        effect.maxParticleSpeed.y = -200;
     }
 
     effect.x = x || 0;
