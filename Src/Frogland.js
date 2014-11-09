@@ -86,7 +86,7 @@ Frogland.create = function() {
     
     midgroundLayer.resizeWorld();
 
-    map.setCollision(1, true, 'Collision');
+    map.setCollision([1, 3], true, 'Collision');
 
     var fraukiTile = map.searchTileIndex(1045, 0, false, 'Midground');
     fraukiSpawnX = fraukiTile.worldX || 0;
@@ -223,16 +223,19 @@ Frogland.CollideFraukiWithObject = function(f, o) {
 };
 
 Frogland.CheckEnvironmentalCollisions = function(f, tile) {
-    if(tile.index != 1) {
-        //water
-        if(tile.index === 2) {
-            frauki.states.inWater = true;
-        }
-        
+
+    if(tile.index === 1) { //solid tile
+        return true;
+    } else if(tile.index === 2) { //water
+        frauki.states.inWater = true;
         return false;
+    } else if(tile.index === 3) { //trick wall
+        if(frauki.state === frauki.Rolling) {
+            return false;
+        } else {
+            return true;
+        }
     }
-	    
-    return true;
 }
 
 Frogland.EstablishDisappearingWalls = function() {
