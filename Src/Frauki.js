@@ -50,6 +50,7 @@ Player = function (game, x, y, name) {
     this.states.hasFlipped = false;
     this.states.upPresseed = false;
     this.states.wasAttacking = false;
+    this.states.inWater = false;
 
     this.movement = {};
     this.movement.rollVelocity = 0;
@@ -73,6 +74,10 @@ Player = function (game, x, y, name) {
         this.states.upPressed = params.pressed;
     }, this);
 
+    //set up the run dust
+    this.runDust = game.add.sprite(0, 0, 'Item');
+    this.runDust.animations.add('dust', ['RunDust0000', 'RunDust0001', 'RunDust0002', 'RunDust0003'], 15, true, false);
+    this.runDust.play('dust');
 };
 
 Player.prototype = Object.create(Phaser.Sprite.prototype);
@@ -86,7 +91,17 @@ Player.prototype.update = function() {
     this.body.maxVelocity.x = PLAYER_SPEED() + this.movement.rollBoost;
     this.body.maxVelocity.y = 500;
 
+    if(this.states.inWater) {
+        this.body.maxVelocity.x *= 0.7;
+    }
+
     this.body.gravity.y = 0;
+
+    if(this.state === this.Running && Math.abs(this.body.velocity.x) > 300) {
+        this.runDust.visible = true;
+    } else {
+        this.runDust.visible = false;
+    }
 
     this.state();
 
@@ -385,6 +400,18 @@ Player.prototype.Standing = function() {
 
 Player.prototype.Running = function() {
     this.PlayAnim('run');
+
+
+    this.runDust.y = this.body.y + this.body.height - this.runDust.height;
+
+    //position the dust
+    if(this.states.direction === 'right') {
+        this.runDust.x = this.body.x - 20;
+        this.runDust.scale.x = 1;
+    } else {
+        this.runDust.x = this.body.x + 30;
+        this.runDust.scale.x = -1;
+    }
 
     if(this.body.velocity.x === 0 && this.body.onFloor()) {
         this.state = this.Standing;

@@ -211,6 +211,10 @@
             <filename>Frames/EnergyBitPos0004.png</filename>
             <filename>Frames/EnergyBitPos0005.png</filename>
             <filename>Frames/EnergyBitPos0000.png</filename>
+            <filename>Frames/RunDust0001.png</filename>
+            <filename>Frames/RunDust0002.png</filename>
+            <filename>Frames/RunDust0003.png</filename>
+            <filename>Frames/RunDust0000.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

@@ -126,13 +126,23 @@ Frogland.create = function() {
 
     energyText = game.add.text(0, 0, '', {font: "10px Arial", fill: "#ff0044"});
     energyText.fixedToCamera = true;
+
+    //make the water tiles transparent
+    map.forEach(function(tile) {
+        //if the tile is marked as disappearing
+        if(tile.index === 2) {
+            var water = map.getTileWorldXY(tile.worldX, tile.worldY, 16, 16, 'Foreground');
+            water.alpha = 0.4;
+        }
+           
+    }, this, 0, 0, map.width, map.height, 'Collision');
 };
 
 Frogland.update = function() {
     frauki.UpdateAttackGeometry();
 
     //reset environmental effect flags
-    frauki.inWater = false;
+    frauki.states.inWater = false;
     
     game.physics.arcade.collide(frauki, collisionLayer, null, this.CheckEnvironmentalCollisions);
     game.physics.arcade.collide(frauki, this.objectGroup, this.CollideFraukiWithObject, this.OverlapFraukiWithObject);
@@ -216,7 +226,7 @@ Frogland.CheckEnvironmentalCollisions = function(f, tile) {
     if(tile.index != 1) {
         //water
         if(tile.index === 2) {
-            Frauki.inWater = true;
+            frauki.states.inWater = true;
         }
         
         return false;
