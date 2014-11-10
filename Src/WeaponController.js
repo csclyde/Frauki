@@ -1,5 +1,5 @@
 WeaponController = function() {
-  this.currentWeapon = this.Jumper;
+  this.currentWeapon = this.Mace;
   this.weaponActive = false;
 
   this.timers = new TimerUtil();
@@ -59,24 +59,30 @@ WeaponController.prototype.Mace = {
         if(this.mace === null) {
             this.mace = game.add.sprite(frauki.body.center.x, frauki.body.center.y, 'mace');
             game.physics.enable(this.mace, Phaser.Physics.ARCADE);
-            this.mace.gravity = -800;
+            this.mace.body.allowGravity = false;
         }
 
         this.mace.body.x = frauki.body.center.x;
         this.mace.body.y = frauki.body.center.y;
+        this.mace.visible = true;
+        this.mace.body.enabled = true;
     },
     
     Update: function() {
-        //what to do while updating (only called while active)
-        var vel = 2000;
-        var maxVelocity = 800;
-
+        //the distance multiplied by the stiffness is the force acting on the body
         var xDist = this.mace.body.center.x - frauki.body.center.x;
         var yDist = this.mace.body.center.y - frauki.body.center.y;
+        var stiffness = 20;
+        var maxVelocity = 1000;
 
-        var angle = Math.atan2(yDist, xDist); 
-        this.mace.body.acceleration.x = Math.cos(angle) * -vel - (xDist * 5);    
-        this.mace.body.acceleration.y = Math.sin(angle) * -vel - (yDist * 5);
+        this.mace.body.acceleration.x = xDist * stiffness * -1;
+        this.mace.body.acceleration.y = yDist * stiffness * -1;
+
+        if((frauki.body.center.x < this.mace.body.center.x && this.mace.body.velocity.x > 0) || (frauki.body.center.x > this.mace.body.center.x && this.mace.body.velocity.x < 0))
+            this.mace.body.acceleration.x *= 2;
+
+        if((frauki.body.center.y < this.mace.body.center.y && this.mace.body.velocity.y > 0) || (frauki.body.center.y > this.mace.body.center.y && this.mace.body.velocity.y < 0))
+            this.mace.body.acceleration.y *= 2;
 
         var currVelocitySqr = this.mace.body.velocity.x * this.mace.body.velocity.x + this.mace.body.velocity.y * this.mace.body.velocity.y;
 
@@ -92,6 +98,11 @@ WeaponController.prototype.Mace = {
     Stop: function() {
         //the final activity when they release the button
         this.mace.visible = false;
+        this.mace.body.acceleration.x = 0;
+        this.mace.body.acceleration.y = 0;
+        this.mace.body.velocity.x = 0;
+        this.mace.body.velocity.y = 0;
+        this.mace.body.enabled = false;
     },
 
     mace: null
@@ -116,11 +127,22 @@ WeaponController.prototype.Jumper = {
         //the initial activity when you press the button
         if(energyController.GetEnergy() >= 0) {
             frauki.states.dashing = true;
-            frauki.body.velocity.x *= 100;
-            frauki.body.velocity.y *= 100;
+            
+            //set direction based on which way youre holding the buttons
+            if(inputController.up.isDown) {
+                frauki.body.velocity.y = -500;
+            } else if(inputController.crouch.isDown) {
+                frauki.body.velocity.y = 500;
+            }
+
+            if(inputController.runLeft.isDown) {
+                frauki.body.velocity.x = -500;
+            } else if(inputController.runRight.isDown) {
+                frauki.body.velocity.x = 500;
+            }
             //energyController.RemoveEnergy(15);
 
-            game.time.events.add(300, function() { frauki.states.dashing = false} );
+            game.time.events.add(300, function() { frauki.states.dashing = false; } );
         }
     },
     

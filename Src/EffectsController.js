@@ -85,8 +85,8 @@ EffectsController.prototype.UpdateEffects = function() {
 }
 
 function UpdateParticle(p) {
-    var vel = 2000;
-    var maxVelocity = 250;
+    var vel = 800;
+    var maxVelocity = 800;
 
     if(!p.destBody) {
         p.destBody = this.activeDest;
@@ -109,6 +109,12 @@ function UpdateParticle(p) {
     var angle = Math.atan2(yDist, xDist); 
     p.body.acceleration.x = Math.cos(angle) * -vel;// - (xDist * 5);    
     p.body.acceleration.y = Math.sin(angle) * -vel;// - (yDist * 5);
+
+    if((p.destBody.center.x < p.body.center.x && p.body.velocity.x > 0) || (p.destBody.center.x > p.body.center.x && p.body.velocity.x < 0))
+        p.body.acceleration.x *= 10;
+
+    if((p.destBody.center.y < p.body.center.y && p.body.velocity.y > 0) || (p.destBody.center.y > p.body.center.y && p.body.velocity.y < 0))
+        p.body.acceleration.y *= 10;
 
     var currVelocitySqr = p.body.velocity.x * p.body.velocity.x + p.body.velocity.y * p.body.velocity.y;
 
@@ -139,23 +145,23 @@ EffectsController.prototype.ParticleSpray = function(source, dest, color, dir, a
     if(dir === 'above') {
     	effect.minParticleSpeed.x = -80;
         effect.maxParticleSpeed.x = 80;
-        effect.minParticleSpeed.y = -200;
-        effect.maxParticleSpeed.y = -400;
+        effect.minParticleSpeed.y = -1500;
+        effect.maxParticleSpeed.y = -2000;
     } else if (dir === 'right') {
-        effect.minParticleSpeed.x = 200;
-        effect.maxParticleSpeed.x = 400;
+        effect.minParticleSpeed.x = 1500;
+        effect.maxParticleSpeed.x = 2000;
         effect.minParticleSpeed.y = -80;
         effect.maxParticleSpeed.y = 80;
     } else if (dir === 'left') {
-        effect.minParticleSpeed.x = -400;
-        effect.maxParticleSpeed.x = -200;
+        effect.minParticleSpeed.x = -2000;
+        effect.maxParticleSpeed.x = -1500;
         effect.minParticleSpeed.y = -80;
         effect.maxParticleSpeed.y = 80;
     } else {
     	effect.minParticleSpeed.x = -80;
         effect.maxParticleSpeed.x = 80;
-        effect.minParticleSpeed.y = 400;
-        effect.maxParticleSpeed.y = 200;
+        effect.minParticleSpeed.y = 2000;
+        effect.maxParticleSpeed.y = 1500;
     }
 
     effect.x = source.x || 0;
@@ -171,7 +177,7 @@ EffectsController.prototype.ParticleSpray = function(source, dest, color, dir, a
 EffectsController.prototype.Splash = function() {
 
     return;
-    
+
     if(this.timers.TimerUp('splash_timer')) {
         //the y should be based on the water tiles at the bottom of frauki.
         this.splash.x = frauki.body.x;
