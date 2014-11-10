@@ -215,6 +215,8 @@
             <filename>Frames/RunDust0002.png</filename>
             <filename>Frames/RunDust0003.png</filename>
             <filename>Frames/RunDust0000.png</filename>
+            <filename>Frames/Splash0001.png</filename>
+            <filename>Frames/Splash0000.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

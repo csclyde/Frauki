@@ -27,6 +27,8 @@ Enemy = function(game, x, y, name) {
     this.initialX = this.body.center.x;
     this.initialY = this.body.center.y;
     this.initialPoise = this.poise;
+
+    this.xHitVel = 0;
 };
 
 Enemy.prototype = Object.create(Phaser.Sprite.prototype);
@@ -78,10 +80,12 @@ Enemy.prototype.update = function() {
     this.updateFunction();
     this.state();
 
-    if(this.body.velocity.x > 0) {
-        this.SetDirection('right');
-    } else if(this.body.velocity.x < 0) {
-        this.SetDirection('left');
+    if(this.xHitVel === 0) {
+        if(this.body.velocity.x > 0) {
+            this.SetDirection('right');
+        } else if(this.body.velocity.x < 0) {
+            this.SetDirection('left');
+        }
     }
 
     this.alpha = this.GetEnergyPercentage();
@@ -100,6 +104,11 @@ Enemy.prototype.update = function() {
 
     if(this.poise > this.initialPoise) this.poise = this.initialPoise;
     if(this.poise < 0) this.poise = 0;
+
+    if(this.xHitVel !== 0) {
+        this.body.velocity.x = this.xHitVel;
+    }
+
 };
 
 Enemy.prototype.GetEnergyPercentage = function() {
@@ -151,10 +160,12 @@ function EnemyHit(f, e) {
     var numParticles = frauki.currentAttack.damage * 2;
 
     var c = frauki.body.center.x < e.body.center.x ? 1 : -1;
-    e.body.velocity.x = c * (50 - (e.weight * 300) + (200 * frauki.currentAttack.knockback));
+    e.xHitVel = c * (50 - (e.weight * 300) + (1000 * frauki.currentAttack.knockback));
 
-    if(c < 0 && e.body.velocity.x > 0) e.body.velocity.x = 0;
-    if(c > 0 && e.body.velocity.x < 0) e.body.velocity.x = 0;
+    game.add.tween(e).to({xHitVel: 0}, 800, Phaser.Easing.Exponential.Out, true);
+
+    //if(c < 0 && e.body.velocity.x > 0) e.body.velocity.x = 0;
+    //if(c > 0 && e.body.velocity.x < 0) e.body.velocity.x = 0;
     //compute the velocity based on weight and attack knockback
 
     events.publish('camera_shake', {magnitudeX: 15 * frauki.currentAttack.damage, magnitudeY: 5, duration: 100});

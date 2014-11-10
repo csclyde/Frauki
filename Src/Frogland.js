@@ -7,7 +7,6 @@ Frogland.preload = function() {
     game.load.image('FroglandTiles', 'Data/Frogland/Frogland.png');
     game.load.image('TerraceTiles', 'Data/Frogland/Infinite Terrace.png');
     game.load.image('DoodadTiles', 'Data/Frogland/Frogland Doodads.png');
-    game.load.image('SpawnKey', 'Data/SpawnKey.png');
     game.load.image('Background', 'Data/Frogland/Sky.png');
     game.load.image('parallax1', 'Data/Frogland/Parallax1.png');
     game.load.image('parallax2', 'Data/Frogland/Parallax2.png');
@@ -86,7 +85,7 @@ Frogland.create = function() {
     
     midgroundLayer.resizeWorld();
 
-    map.setCollision([1, 3], true, 'Collision');
+    map.setCollision([1, 3, 4], true, 'Collision');
 
     var fraukiTile = map.searchTileIndex(1045, 0, false, 'Midground');
     fraukiSpawnX = fraukiTile.worldX || 0;
@@ -127,12 +126,21 @@ Frogland.create = function() {
     energyText = game.add.text(0, 0, '', {font: "10px Arial", fill: "#ff0044"});
     energyText.fixedToCamera = true;
 
-    //make the water tiles transparent
+    //special procesing for collision tiles
     map.forEach(function(tile) {
         //if the tile is marked as disappearing
         if(tile.index === 2) {
             var water = map.getTileWorldXY(tile.worldX, tile.worldY, 16, 16, 'Foreground');
             water.alpha = 0.4;
+        } else if(tile.index === 4) {
+            tile.collideLeft = false;
+            tile.collideRight = false;
+            tile.collideUp = true;
+            tile.collideDown = false;
+            tile.faceUp = true;
+            tile.faceDown = false;
+            tile.faceLeft = false;
+            tile.faceRight = false; 
         }
            
     }, this, 0, 0, map.width, map.height, 'Collision');
@@ -235,6 +243,8 @@ Frogland.CheckEnvironmentalCollisions = function(f, tile) {
         } else {
             return true;
         }
+    } else if(tile.index === 4) { //cloud tile
+        return true;
     }
 }
 
