@@ -1,5 +1,5 @@
 WeaponController = function() {
-  this.currentWeapon = this.Mace;
+  this.currentWeapon = this.Jumper;
   this.weaponActive = false;
 
   this.timers = new TimerUtil();
@@ -114,6 +114,14 @@ WeaponController.prototype.Bubble = {
 WeaponController.prototype.Jumper = {
     Start: function() {
         //the initial activity when you press the button
+        if(energyController.GetEnergy() >= 0) {
+            frauki.states.dashing = true;
+            frauki.body.velocity.x *= 100;
+            frauki.body.velocity.y *= 100;
+            //energyController.RemoveEnergy(15);
+
+            game.time.events.add(300, function() { frauki.states.dashing = false} );
+        }
     },
     
     Update: function() {
