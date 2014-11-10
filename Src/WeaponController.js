@@ -1,6 +1,7 @@
 WeaponController = function() {
   this.currentWeapon = this.Mace;
   this.weaponActive = false;
+  this.attackGeometry = null;
 
   this.timers = new TimerUtil();
   
@@ -23,13 +24,26 @@ WeaponController.prototype.ToggleWeapon = function(params) {
     this.weaponActive = params.activate;
     
     if(this.currentWeapon != null) {
-        if(this.weaponActive) {
+        if(params.activate) {
             this.currentWeapon.Start();
         } else {
             this.currentWeapon.Stop();
         }
     }
-}
+};
+
+//returns null of there is no current attck geometry
+WeaponController.prototype.GetAttackGeometry = function() {
+    if(this.currentWeapon === this.Mace && this.weaponActive) {
+        return {x: this.Mace.mace.x,  y: this.Mace.mace.y, w: this.Mace.mace.width, h: this.Mace.mace.height,
+            damage: 1,
+            knockback: 1,
+            penetration: 0
+        }
+    }
+
+    return null;
+};
 
 WeaponController.prototype.Bomb = {
     Start: function() {
@@ -62,10 +76,16 @@ WeaponController.prototype.Mace = {
             this.mace.body.allowGravity = false;
         }
 
-        this.mace.body.x = frauki.body.center.x;
-        this.mace.body.y = frauki.body.center.y;
         this.mace.visible = true;
-        this.mace.body.enabled = true;
+        this.mace.body.enable = true;
+        this.mace.x = frauki.body.center.x;
+        this.mace.y = frauki.body.center.y;
+        this.mace.body.acceleration.x = 0;
+        this.mace.body.acceleration.y = 0;
+        this.mace.body.velocity.x = 0;
+        this.mace.body.velocity.y = 0;
+
+        energyController.RemoveEnergy(2);
     },
     
     Update: function() {
@@ -93,16 +113,21 @@ WeaponController.prototype.Mace = {
             this.mace.body.velocity.y = Math.sin(angle) * maxVelocity;
 
         }
+
+        weaponController.attackGeometry = this.mace.body;
+
+        if(weaponController.timers.TimerUp('mace_depletion')) {
+            energyController.RemoveEnergy(0.1);
+            weaponController.timers.SetTimer('mace_depletion', 200);
+        }
     },
     
     Stop: function() {
         //the final activity when they release the button
         this.mace.visible = false;
-        this.mace.body.acceleration.x = 0;
-        this.mace.body.acceleration.y = 0;
-        this.mace.body.velocity.x = 0;
-        this.mace.body.velocity.y = 0;
-        this.mace.body.enabled = false;
+        
+        this.mace.body.enable = false;
+        energyController.RemoveEnergy(2);
     },
 
     mace: null

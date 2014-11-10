@@ -170,7 +170,17 @@ Player.prototype.UpdateAttackGeometry = function() {
 
     //first, check the weapon controller for an attack geometry override
     //barring that, find the normal attack geometry
-    
+    if(weaponController.GetAttackGeometry()) {
+        this.currentAttack = weaponController.GetAttackGeometry();
+
+        this.attackRect.body.x = this.currentAttack.x; 
+        this.attackRect.body.y = this.currentAttack.y; 
+        this.attackRect.body.width = this.currentAttack.w; 
+        this.attackRect.body.height = this.currentAttack.h;
+
+        return;
+    }
+
     //check for a frame mod and apply its mods
     if(this.animations.currentFrame) {
         this.currentAttack = fraukiDamageFrames[this.animations.currentFrame.name];
@@ -251,7 +261,7 @@ Player.prototype.StartStopRun = function(params) {
 };
 
 Player.prototype.Jump = function(params) {
-    if(this.state === this.Hurting || this.Attacking()) 
+    if(this.state === this.Hurting) 
         return;
 
     if(params.jump) {

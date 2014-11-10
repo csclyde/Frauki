@@ -77,7 +77,6 @@ Frogland.create = function() {
     map.addTilesetImage('FroglandTiles');
     map.addTilesetImage('TerraceTiles');
     map.addTilesetImage('DoodadTiles');
-    map.addTilesetImage('SpawnKey');
    
     backgroundLayer = map.createLayer('Background');
     midgroundLayer = map.createLayer('Midground');
