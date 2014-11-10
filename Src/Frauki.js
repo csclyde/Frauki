@@ -1,4 +1,11 @@
-PLAYER_SPEED = function() { return 150 + (energyController.GetEnergy() * 7); }
+PLAYER_SPEED = function() { 
+    if(!frauki.states.dashing) {
+        return 150 + (energyController.GetEnergy() * 7); 
+    } else {
+        return 2000;
+    }
+}
+
 PLAYER_ROLL_SPEED = function() { return 550 + (energyController.GetEnergy() * 10); }
 PLAYER_RUN_SLASH_SPEED = function() { return  900 + (energyController.GetEnergy() * 10); }
 PLAYER_JUMP_VEL = function() { return -470 - (energyController.GetEnergy() * 3); }
@@ -51,6 +58,7 @@ Player = function (game, x, y, name) {
     this.states.upPresseed = false;
     this.states.wasAttacking = false;
     this.states.inWater = false;
+    this.states.dashing = false;
 
     this.movement = {};
     this.movement.rollVelocity = 0;
@@ -134,6 +142,10 @@ Player.prototype.update = function() {
     } else {
         this.body.setSize(11, 50, 0, 0);
     }*/
+
+    if(this.states.dashing) {
+        this.body.gravity.y = -800;
+    }
 };
 
 Player.prototype.SetDirection = function(dir) {
