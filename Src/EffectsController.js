@@ -137,6 +137,8 @@ function UpdateParticle(p) {
 	    if(p.frameName === 'EnergyBitPos0004') p.frameName = 'EnergyBitPos0005';
 	    if(p.frameName === 'EnergyBitPos0005') p.frameName = 'EnergyBitPos0000';
 	    
+	    console.log(p.frameName);
+	    
 	    p.frameUpdateTimer = game.time.now + 80;
     }
 };
