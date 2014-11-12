@@ -125,6 +125,20 @@ function UpdateParticle(p) {
         p.body.velocity.y = Math.sin(angle) * maxVelocity;
 
     }
+    
+    //update frames to animate the energy
+    if(!p.frameUpdateTimer) p.frameUpdateTimer = 0;
+    
+    if(game.time.now > p.frameUpdateTimer) {
+	    if(p.frameName === 'EnergyBitPos0000') p.frameName = 'EnergyBitPos0001';
+	    if(p.frameName === 'EnergyBitPos0001') p.frameName = 'EnergyBitPos0002';
+	    if(p.frameName === 'EnergyBitPos0002') p.frameName = 'EnergyBitPos0003';
+	    if(p.frameName === 'EnergyBitPos0003') p.frameName = 'EnergyBitPos0004';
+	    if(p.frameName === 'EnergyBitPos0004') p.frameName = 'EnergyBitPos0005';
+	    if(p.frameName === 'EnergyBitPos0005') p.frameName = 'EnergyBitPos0000';
+	    
+	    p.frameUpdateTimer = game.time.now + 80;
+    }
 };
 
 EffectsController.prototype.ParticleSpray = function(source, dest, color, dir, amt) {
