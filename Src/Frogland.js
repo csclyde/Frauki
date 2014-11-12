@@ -111,6 +111,7 @@ Frogland.create = function() {
     map.createFromObjects('Items', 1042, 'Misc', 'Apple0000', true, false, this.objectGroup, Apple, false);
     
     foregroundLayer = map.createLayer('Foreground');
+    map.setCollisionByExclusion([], true, 'Foreground');
 
     cameraController = new CameraController(frauki, map);
     inputController = new InputController(frauki);
@@ -143,6 +144,9 @@ Frogland.create = function() {
         }
            
     }, this, 0, 0, map.width, map.height, 'Collision');
+
+    this.fadedTiles = [];
+    //this.EstablishDisappearingWalls();
 };
 
 Frogland.update = function() {
@@ -154,6 +158,7 @@ Frogland.update = function() {
     game.physics.arcade.collide(frauki, collisionLayer, null, this.CheckEnvironmentalCollisions);
     game.physics.arcade.collide(frauki, this.objectGroup, this.CollideFraukiWithObject, this.OverlapFraukiWithObject);
     game.physics.arcade.collide(this.objectGroup, collisionLayer);
+    game.physics.arcade.collide(frauki, foregroundLayer, null, this.HideForeground);
 
     if(!!frauki.attackRect && frauki.attackRect.body.width != 0) {
         game.physics.arcade.overlap(frauki.attackRect, this.objectGroup, EnemyHit);
@@ -251,11 +256,89 @@ Frogland.EstablishDisappearingWalls = function() {
     map.forEach(function(tile) {
         //if the tile is marked as disappearing
         if(tile.disappearing) {
-            game.add.tween(tile).to({alpha: 0}, 4000, Phaser.Easing.Linear.None, true);
+            if(!tile.tileGroup) {
+
+                //check the adjacent tiles for a group to glom onto (uo down left right)
+                var adjTile = map.getTileWorldXY(tile.worldX, tile.worldY - 1, 'Foreground');
+
+                if(!!adjTile && adjTile.disappearing && !!adjTile.tileGroup) {
+                    tile.tileGroup = adjTile.tileGroup;
+                    tile.tileGroup.tiles.push(tile);
+                    return;
+                }
+
+                adjTile = map.getTileWorldXY(tile.worldX, tile.worldY + 1, 'Foreground');
+
+                if(!!adjTile && adjTile.disappearing && !!adjTile.tileGroup) {
+                    tile.tileGroup = adjTile.tileGroup;
+                    tile.tileGroup.tiles.push(tile);
+                    return;
+                }
+
+                adjTile = map.getTileWorldXY(tile.worldX - 1, tile.worldY, 'Foreground');
+
+                if(!!adjTile && adjTile.disappearing && !!adjTile.tileGroup) {
+                    tile.tileGroup = adjTile.tileGroup;
+                    tile.tileGroup.tiles.push(tile);
+                    return;
+                }
+
+                adjTile = map.getTileWorldXY(tile.worldX + 1, tile.worldY, 'Foreground');
+
+                if(!!adjTile && adjTile.disappearing && !!adjTile.tileGroup) {
+                    tile.tileGroup = adjTile.tileGroup;
+                    tile.tileGroup.tiles.push(tile);
+                    return;
+                }
+
+                //none of the adjacent tiles have a group. so create a new one
+                tile.tileGroup = {tiles: [tile], visible: true};
+                this.fadedTiles.push(tile.tileGroup);
+
+            }
         }
             //give it a callback that makes it disappear when it is touched
         //if this tile is not already grouped
             //create a new group and add every connected tile
 
     }, this, 0, 0, map.width, map.height, 'Foreground');
+};
+
+Frogland.HideForeground = function(f, t) {
+
+    if(t.disappearing && !!t.tileGroup && t.tileGroup.visible === true) {
+        console.log('stuff');
+        t.tileGroup.visible = false;
+
+        t.tileGroup.tiles.forEach(function(tile) {
+            tile.alpha = 0;
+        }. this);
+    }
+    
+    return false;
+};
+
+Frogland.CheckForegroundGroup = function() {
+    this.fadedTiles.forEach(function(grp) {
+        //if the group is invisible, loop through each child tile and check if they are still being collided with
+        if(grp.visible === false) {
+            var stillColliding = false;
+
+            grp.tiles.forEach(function(tile) {
+                if(tile.intersects(frauki.body.x, frauki.body.y, frauki.body.x + frauki.body.width, frauki.body.y + frauki.body.height)) {
+                    stillColliding = true;
+                    return;
+                }
+            }, this);
+
+            if(stillColliding === false) {
+                grp.visible = true;
+                //tween each of the tiles back to being visible
+
+                grp.tiles.forEach(function(tile) {
+                    tile.alpha = 1;
+                }, this);
+            }
+        }
+    }, this);
 };

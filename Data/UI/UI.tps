@@ -187,7 +187,13 @@
             <enum type="SpriteSettings::PivotPoint">Center</enum>
         </struct>
         <key>fileList</key>
-        <array/>
+        <array>
+            <filename>Frames/Upgrades0000.png</filename>
+            <filename>Frames/Upgrades0001.png</filename>
+            <filename>Frames/Upgrades0002.png</filename>
+            <filename>Frames/Upgrades0003.png</filename>
+            <filename>Frames/Upgrades0004.png</filename>
+        </array>
         <key>ignoreFileList</key>
         <array/>
         <key>replaceList</key>
