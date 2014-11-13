@@ -268,7 +268,6 @@ Player.prototype.Jump = function(params) {
         //normal jump
         if(this.body.onFloor() || this.state === this.Standing || this.state === this.Running || this.state === this.Landing) {
             this.body.velocity.y = PLAYER_JUMP_VEL();
-            energyController.UseEnergy(3);
         }
         //double jump
         else if(this.states.hasFlipped === false && this.state !== this.Rolling && this.state !== this.AttackStab) {
@@ -278,7 +277,7 @@ Player.prototype.Jump = function(params) {
             this.state = this.Flipping;
             this.states.hasFlipped = true;
             this.timers.SetTimer('frauki_grace', 300);
-            energyController.UseEnergy(3);
+            energyController.UseEnergy(2);
         }
     } else if(this.body.velocity.y < 0 && this.state !== this.Flipping) {
         if(this.body.velocity.y < 0)
