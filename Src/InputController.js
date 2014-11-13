@@ -29,7 +29,7 @@ InputController = function(player) {
     this.slash.onDown.add(function() { 
         if(this.timers.TimerUp('slash_timer')) {
             events.publish('player_slash', {}); 
-            this.timers.SetTimer('slash_timer', 600);
+            this.timers.SetTimer('slash_timer', 300);
         }
     }, this);
 
