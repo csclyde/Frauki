@@ -271,13 +271,14 @@ Player.prototype.Jump = function(params) {
         }
         //double jump
         else if(this.states.hasFlipped === false && this.state !== this.Rolling && this.state !== this.AttackStab) {
-            if(this.tweens.stopJump) { this.tweens.stopJump.stop(); }
-
-            this.body.velocity.y = PLAYER_DOUBLE_JUMP_VEL();
-            this.state = this.Flipping;
-            this.states.hasFlipped = true;
-            this.timers.SetTimer('frauki_grace', 300);
-            energyController.UseEnergy(2);
+            if(!energyController.UseEnergy(2)) {
+                if(this.tweens.stopJump) { this.tweens.stopJump.stop(); }
+    
+                this.body.velocity.y = PLAYER_DOUBLE_JUMP_VEL();
+                this.state = this.Flipping;
+                this.states.hasFlipped = true;
+                this.timers.SetTimer('frauki_grace', 300);
+            }
         }
     } else if(this.body.velocity.y < 0 && this.state !== this.Flipping) {
         if(this.body.velocity.y < 0)
@@ -295,49 +296,49 @@ Player.prototype.Slash = function(params) {
 
     //diving dash
     if(!this.timers.TimerUp('frauki_dash') && this.states.crouching && (this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling)) {
-        this.state = this.AttackDiveCharge;
-        this.movement.diveVelocity = 1000;
-        
-        energyController.UseEnergy(10);
+        if(energyController.UseEnergy(10)) {
+            this.state = this.AttackDiveCharge;
+            this.movement.diveVelocity = 1000;
+        }
     }
     //running dash
     else if(this.state === this.Rolling || this.state === this.Kicking) {
-        this.state = this.AttackStab;
-
-        if(this.states.direction === 'left') {
-            //this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: -PLAYER_SPEED()}, 200, Phaser.Easing.Quartic.In, true);
-            this.movement.rollVelocity = 0;
-            this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: -PLAYER_RUN_SLASH_SPEED()}, 200, Phaser.Easing.Exponential.InOut, true).to({rollVelocity: 0}, 500, Phaser.Easing.Exponential.InOut, true);
+        if(energyController.UseEnergy(8)) {
+            this.state = this.AttackStab;
+    
+            if(this.states.direction === 'left') {
+                //this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: -PLAYER_SPEED()}, 200, Phaser.Easing.Quartic.In, true);
+                this.movement.rollVelocity = 0;
+                this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: -PLAYER_RUN_SLASH_SPEED()}, 200, Phaser.Easing.Exponential.InOut, true).to({rollVelocity: 0}, 500, Phaser.Easing.Exponential.InOut, true);
+            }
+            else {
+                //this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: PLAYER_SPEED()}, 200, Phaser.Easing.Quartic.In, true);
+                this.movement.rollVelocity = 0;
+                this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: PLAYER_RUN_SLASH_SPEED()}, 200, Phaser.Easing.Exponential.InOut, true).to({rollVelocity: 0}, 500, Phaser.Easing.Exponential.InOut, true);
+            }
         }
-        else {
-            //this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: PLAYER_SPEED()}, 200, Phaser.Easing.Quartic.In, true);
-            this.movement.rollVelocity = 0;
-            this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: PLAYER_RUN_SLASH_SPEED()}, 200, Phaser.Easing.Exponential.InOut, true).to({rollVelocity: 0}, 500, Phaser.Easing.Exponential.InOut, true);
-        }
-        
-        energyController.UseEnergy(8);
     }
     //upwards dash attack
     else if(this.states.upPressed && (this.state === this.Peaking || this.state === this.Jumping) && this.states.hasFlipped === false) {
-        this.state = this.AttackJump;
-        this.movement.jumpSlashVelocity = -(PLAYER_JUMP_SLASH_SPEED());
-        game.add.tween(this.movement).to({jumpSlashVelocity:0}, 400, Phaser.Easing.Quartic.Out, true);
-        this.states.hasFlipped = true;
-
-        events.publish('play_sound', {name: 'attack1'});
-        
-        energyController.UseEnergy(5);
+        if(energyController.UseEnergy(5)) {
+            this.state = this.AttackJump;
+            this.movement.jumpSlashVelocity = -(PLAYER_JUMP_SLASH_SPEED());
+            game.add.tween(this.movement).to({jumpSlashVelocity:0}, 400, Phaser.Easing.Quartic.Out, true);
+            this.states.hasFlipped = true;
+    
+            events.publish('play_sound', {name: 'attack1'});
+        }
     }
     //normal slashes while standing or running
     else if(this.state === this.Standing || this.state === this.Landing || this.state === this.AttackStab || this.state === this.Running || this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling) {
-        if(this.states.upPressed) {
-            this.state = this.AttackOverhead;
-            events.publish('play_sound', {name: 'attack1'});
-        } else {
-            this.state = this.AttackFront;
+        if(energyController.UseEnergy(4)) {
+            if(this.states.upPressed) {
+                this.state = this.AttackOverhead;
+                events.publish('play_sound', {name: 'attack1'});
+            } else {
+                this.state = this.AttackFront;
+            }
         }
-        
-        energyController.UseEnergy(4);
     } else {
         console.log('An attack was attempted in an unresolved state ' + this.state);
     }
@@ -368,6 +369,9 @@ Player.prototype.Roll = function(params) {
 
     if(!this.body.onFloor())
         return;
+        
+    if(!energyController.UseEnergy(5))
+        return;
 
     this.state = this.Rolling;
 
@@ -391,8 +395,6 @@ Player.prototype.Roll = function(params) {
 
     this.timers.SetTimer('frauki_roll', 650);
     this.timers.SetTimer('frauki_grace', 300);
-    
-    energyController.UseEnergy(5);
 };
 
 Player.prototype.Hit = function(f, e) {
