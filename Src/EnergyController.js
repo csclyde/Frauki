@@ -12,16 +12,25 @@ EnergyController.prototype.UpdateEnergy = function() {
 	//more perturbed it is. 
 
 	var energyDiff = this.energy - this.neutralPoint;
-	var step = -1 * energyDiff / 10;
+	var step = 0.6;//-1 * energyDiff / 10;
 
-	if(step < 0.005 && step > -0.005) this.energy = this.neutralPoint;
+	/*if(step < 0.005 && step > -0.005) this.energy = this.neutralPoint;
 	else if(step < 0.2 && step > 0) step = 0.2;
-	else if(step > -0.2 && step < 0) step = -0.2;
+	else if(step > -0.2 && step < 0) step = -0.2;*/
 
 	//if the timer is up, tick the energy and reset the timer
 	if(game.time.now > this.tickTimer && game.time.now > this.gracePeriod) {
-		this.energy += step;
-		this.tickTimer = game.time.now + 500;
+		if(Math.abs(energyDiff) < step) {
+			this.energy = this.neutralPoint;
+		} else {
+			if(this.energy > this.neutralPoint) {
+				this.energy -= step;
+			} else {
+				this.energy += step;
+			}
+		}
+		
+		this.tickTimer = game.time.now + 200;
 	}
 
 	//clamp the enrgy and neutral point;
