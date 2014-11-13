@@ -370,7 +370,7 @@ Player.prototype.Roll = function(params) {
     if(!this.body.onFloor())
         return;
         
-    if(!energyController.UseEnergy(5))
+    if(!energyController.UseEnergy(2))
         return;
 
     this.state = this.Rolling;
