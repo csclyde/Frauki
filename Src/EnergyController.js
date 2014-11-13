@@ -27,8 +27,6 @@ EnergyController.prototype.UpdateEnergy = function() {
 	//clamp the enrgy and neutral point;
 	if(this.energy > 30)
 		this.energy = 30;
-	if(this.energy < 0)
-		this.energy = 0;
 
 	if(this.neutralPoint > 30)
 		this.neutralPoint = 30;
@@ -53,6 +51,12 @@ EnergyController.prototype.RemoveEnergy = function(amt) {
 	this.energy -= amt;
 	this.neutralPoint -= (amt / 5);
 	this.gracePeriod = game.time.now + 2000;
+};
+
+EnergyController.prototype.UseEnergy = function(amt) {
+	if(this.energy > 0) {
+		this.energy -= amt;
+	}
 };
 
 EnergyController.prototype.GetEnergy = function() {
