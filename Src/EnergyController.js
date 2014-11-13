@@ -12,7 +12,7 @@ EnergyController.prototype.UpdateEnergy = function() {
 	//more perturbed it is. 
 
 	var energyDiff = this.energy - this.neutralPoint;
-	var step = -1 * energyDiff / 20;
+	var step = -1 * energyDiff / 10;
 
 	if(step < 0.005 && step > -0.005) this.energy = this.neutralPoint;
 	else if(step < 0.2 && step > 0) step = 0.2;
