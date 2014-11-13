@@ -56,9 +56,12 @@ EnergyController.prototype.RemoveEnergy = function(amt) {
 };
 
 EnergyController.prototype.UseEnergy = function(amt) {
-	if(this.energy > 0) {
+	if(this.energy >= amt) {
 		this.energy -= amt;
+		return true;
 	}
+	
+	return false;
 };
 
 EnergyController.prototype.GetEnergy = function() {
