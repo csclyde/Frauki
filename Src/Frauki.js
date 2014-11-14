@@ -6,11 +6,11 @@ PLAYER_SPEED = function() {
     }
 }
 
-PLAYER_ROLL_SPEED = function() { return 550 + (energyController.GetEnergy() * 10); }
-PLAYER_RUN_SLASH_SPEED = function() { return  900 + (energyController.GetEnergy() * 10); }
-PLAYER_JUMP_VEL = function() { return -470 - (energyController.GetEnergy() * 3); }
-PLAYER_DOUBLE_JUMP_VEL = function() { return -400 - (energyController.GetEnergy() * 2); }
-PLAYER_JUMP_SLASH_SPEED = function() { return 1000 + (energyController.GetEnergy() * 5); }
+PLAYER_ROLL_SPEED = function() { return 550 + (energyController.GetNeutral() * 10); }
+PLAYER_RUN_SLASH_SPEED = function() { return  900 + (energyController.GetNeutral() * 10); }
+PLAYER_JUMP_VEL = function() { return -470 - (energyController.GetNeutral() * 3); }
+PLAYER_DOUBLE_JUMP_VEL = function() { return -400 - (energyController.GetNeutral() * 2); }
+PLAYER_JUMP_SLASH_SPEED = function() { return 1000 + (energyController.GetNeutral() * 5); }
 PLAYER_KICK_SPEED = 800;
 
 Player = function (game, x, y, name) {
