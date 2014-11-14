@@ -53,7 +53,6 @@ EnergyController.prototype.AddEnergy = function(amt) {
 
 	this.energy += amt;
 	this.neutralPoint += (amt / 5);
-	this.gracePeriod = game.time.now + 2000;
 };
 
 EnergyController.prototype.RemoveEnergy = function(amt) {
@@ -61,7 +60,6 @@ EnergyController.prototype.RemoveEnergy = function(amt) {
 
 	this.energy -= amt;
 	this.neutralPoint -= (amt / 5);
-	this.gracePeriod = game.time.now + 2000;
 };
 
 EnergyController.prototype.UseEnergy = function(amt) {
@@ -82,5 +80,5 @@ EnergyController.prototype.GetNeutral = function() {
 }
 
 EnergyController.prototype.DelayEntropy = function() {
-	this.tickTimer = game.time.now + 1500;
+	this.tickTimer = game.time.now + 500;
 };
