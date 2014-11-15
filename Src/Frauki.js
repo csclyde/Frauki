@@ -119,17 +119,6 @@ Player.prototype.update = function() {
         this.movement.rollBoost = 0;
     }
 
-
-    if(this.states.wasAttacking && !this.Attacking()) {
-        //this.timers.gracePeriod = game.time.now + 100;
-    }
-
-    if(this.Attacking()) {
-        this.states.wasAttacking = true;
-    } else {
-        this.states.wasAttacking = false;
-    }
-
     if(!inputController.runLeft.isDown && !inputController.runRight.isDown && this.state !== this.Jumping && this.state !== this.Rolling && this.state !== this.AttackStab && this.state !== this.Hurting) {
         this.body.velocity.x = 0;
         this.body.acceleration.x = 0;
@@ -618,11 +607,7 @@ Player.prototype.AttackStab = function() {
     if(this.body.velocity.y < 0) {
         this.state = this.Jumping;
         this.movement.rollVelocity = 0;
-    } else if(this.body.velocity.y > 150 && !this.Attacking()) {
-        this.state = this.Peaking;
-        this.movement.rollVelocity = 0;
-    }
-
+    } 
 
     if(this.animations.currentAnim.isFinished) {
 

@@ -44,7 +44,7 @@ Enemy.prototype.SetDefaultValues = function() {
     this.SetDirection('left');
     this.weight = 0.5;
     this.hitTimer = 0;
-    this.energy = 5;
+    this.energy = 6;
     this.damage = 4;
     this.inScope = false;
     this.baseStunDuration = 500;

@@ -12,7 +12,7 @@ EnergyController.prototype.UpdateEnergy = function() {
 	//more perturbed it is. 
 
 	var energyDiff = this.energy - this.neutralPoint;
-	var step = 0.35;//-1 * energyDiff / 10;
+	var step = 0.4;//-1 * energyDiff / 10;
 
 	/*if(step < 0.005 && step > -0.005) this.energy = this.neutralPoint;
 	else if(step < 0.2 && step > 0) step = 0.2;
@@ -36,8 +36,8 @@ EnergyController.prototype.UpdateEnergy = function() {
 	//clamp the enrgy and neutral point;
 	if(this.energy > 30)
 		this.energy = 30;
-	if(this.energy < 0)
-		this.energy = 0;
+/*	if(this.energy < 0)
+		this.energy = 0;*/
 
 	if(this.neutralPoint > 30)
 		this.neutralPoint = 30;
@@ -53,7 +53,7 @@ EnergyController.prototype.AddEnergy = function(amt) {
 
 	this.energy += amt;
 	this.neutralPoint += (amt / 5);
-	this.gracePeriod = game.time.now + 1000;
+	this.gracePeriod = game.time.now + 500;
 };
 
 EnergyController.prototype.RemoveEnergy = function(amt) {
@@ -61,13 +61,13 @@ EnergyController.prototype.RemoveEnergy = function(amt) {
 
 	//this.energy -= (amt / 5);
 	this.neutralPoint -= (amt / 5);
-	this.gracePeriod = game.time.now + 1000;
+	this.gracePeriod = game.time.now + 500;
 };
 
 EnergyController.prototype.UseEnergy = function(amt) {
-	if(this.energy >= amt) {
+	if(this.energy > 0) {
 		this.energy -= amt;
-		this.gracePeriod = game.time.now + 1000;
+		this.gracePeriod = game.time.now + 500;
 		return true;
 	}
 	
@@ -75,7 +75,7 @@ EnergyController.prototype.UseEnergy = function(amt) {
 };
 
 EnergyController.prototype.GetEnergy = function() {
-	return Math.round(this.energy * 10) / 10;
+	return this.energy > 0 ? (Math.round(this.energy * 10) / 10) : 0;
 };
 
 EnergyController.prototype.GetNeutral = function() {

@@ -146,7 +146,7 @@ Frogland.create = function() {
     }, this, 0, 0, map.width, map.height, 'Collision');
 
     this.fadedTiles = [];
-    //this.EstablishDisappearingWalls();
+    this.EstablishDisappearingWalls();
 };
 
 Frogland.update = function() {
@@ -255,6 +255,7 @@ Frogland.CheckEnvironmentalCollisions = function(f, tile) {
 Frogland.EstablishDisappearingWalls = function() {
     map.forEach(function(tile) {
         //if the tile is marked as disappearing
+
         if(tile.disappearing) {
             if(!tile.tileGroup) {
 
@@ -342,3 +343,18 @@ Frogland.CheckForegroundGroup = function() {
         }
     }, this);
 };
+
+Frogland.SpawnEnemies = function() {
+    //this function will randomly spawn enemies on the map. The farther down you get in the map,
+    //the more difficult it should become. There should be a "density" function that considers the
+    //max energy of enemies when deciding how to spawn them. For instance, in one area it might 
+    //either spawn 5 or 6 sporoids, or one incarnate. Or, two or three insectoids. The difficulty
+    //of an enemy is considered parallell to their max energy.
+
+    //the spatial positioning will be the difficult part. there can be no guarntee of the size or
+    //type of rooms created. so the spawning should consider the size of the space in which the thing
+    //is going to be spawned.
+
+    //perhaps their could be a sort of spawn daemon that traverses through the map and checks if
+    //a certain type of enemy could potentially fit where it is by modifying its size, or something
+}
