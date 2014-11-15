@@ -53,21 +53,21 @@ EnergyController.prototype.AddEnergy = function(amt) {
 
 	this.energy += amt;
 	this.neutralPoint += (amt / 5);
-	this.gracePeriod = game.time.now + 1500;
+	this.gracePeriod = game.time.now + 1000;
 };
 
 EnergyController.prototype.RemoveEnergy = function(amt) {
 	amt = amt || 7;
 
-	this.energy -= amt;
+	this.energy -= (amt / 5);
 	this.neutralPoint -= (amt / 5);
-	this.gracePeriod = game.time.now + 1500;
+	this.gracePeriod = game.time.now + 1000;
 };
 
 EnergyController.prototype.UseEnergy = function(amt) {
 	if(this.energy >= amt) {
 		this.energy -= amt;
-		this.gracePeriod = game.time.now + 1500;
+		this.gracePeriod = game.time.now + 1000;
 		return true;
 	}
 	
