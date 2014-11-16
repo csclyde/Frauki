@@ -48,7 +48,6 @@
  <objectgroup name="Items" width="0" height="0"/>
  <objectgroup name="Enemies" width="0" height="0">
   <object gid="1065" x="3896" y="2655"/>
-  <object gid="1065" x="3436" y="2410"/>
   <object gid="1067" x="2856" y="2202"/>
   <object gid="1066" x="2554" y="2470"/>
   <object gid="1066" x="4048" y="2526"/>

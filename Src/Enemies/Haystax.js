@@ -6,13 +6,11 @@ Enemy.prototype.types['Haystax'] =  function() {
     this.animations.add('idle', ['Haystax/Idle0000'], 10, true, false);
     this.animations.add('up', ['Haystax/Idle0001'], 10, true, false);
 
-    /*
-    this.weight = 0.5;
-    this.energy = 5;
-    this.damage = 5;
+    this.weight = 1;
+    this.energy = 4;
+    this.damage = 3;
     this.baseStunDuration = 500;
-    this.poise = 10;
-    */
+    this.poise = 20;
     
 	this.updateFunction = function() {
 
@@ -38,15 +36,17 @@ Enemy.prototype.types['Haystax'] =  function() {
 	};
 
 	this.Spit = function() {
-		this.timers.SetTimer('spit', 1000 + (Math.random() * 500));
+		this.timers.SetTimer('spit', 1000 + (Math.random() * 1000));
 		this.state = this.PoppedUp;
+
+		projectileController.Tarball(this);
 	};
 
 	////////////////////////////////STATES////////////////////////////////////
 	this.Idling = function() {
 		this.PlayAnim('idle');
 
-		if(!this.PlayerIsNear(200) && this.PlayerIsNear(1000) && this.timers.TimerUp('spit_wait')) {
+		if(!this.PlayerIsNear(150) && this.PlayerIsNear(1000) && this.timers.TimerUp('spit_wait')) {
 			this.Spit();
 		}
 		

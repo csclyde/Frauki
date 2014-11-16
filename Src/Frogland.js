@@ -40,6 +40,7 @@ var effectsController;
 var energyController;
 var audioController;
 var weaponController;
+var projectileController;
 var frauki;
 var fraukiSpawnX, fraukiSpawnY;
 
@@ -48,6 +49,7 @@ var energyText;
 var playerX, playerY;
 
 var previousCamX;
+
 
 Frogland.create = function() {
 
@@ -121,6 +123,7 @@ Frogland.create = function() {
     energyController = new EnergyController();
     audioController = new AudioController();
     weaponController = new WeaponController();
+    projectileController = new ProjectileController();
     timerUtil = new TimerUtil();
 
     game.camera.focusOnXY(frauki.body.x, frauki.body.y);
@@ -161,6 +164,7 @@ Frogland.update = function() {
     game.physics.arcade.collide(frauki, this.objectGroup, this.CollideFraukiWithObject, this.OverlapFraukiWithObject);
     game.physics.arcade.collide(this.objectGroup, collisionLayer);
     game.physics.arcade.collide(frauki, foregroundLayer, null, this.HideForeground);
+    game.physics.arcade.overlap(frauki, projectileController.projectiles, this.CollideFraukiWithProjectile);
 
     if(!!frauki.attackRect && frauki.attackRect.body.width != 0) {
         game.physics.arcade.overlap(frauki.attackRect, this.objectGroup, EnemyHit);
@@ -226,6 +230,17 @@ Frogland.OverlapFraukiWithObject = function(f, o) {
     }
 
     return true;
+};
+
+Frogland.CollideFraukiWithProjectile = function(f, p) {
+
+    console.log('tarred');
+
+    if(p.projType === 'tar') {
+        frauki.Hit(f, p.owningEnemy);
+    }
+
+    p.destroy();
 };
 
 Frogland.CollideFraukiWithObject = function(f, o) {

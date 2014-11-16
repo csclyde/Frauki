@@ -36,6 +36,24 @@
 	"sourceSize": {"w":62,"h":78},
 	"pivot": {"x":0.5,"y":0.5}
 },
+"Haystax/Tarball0000":
+{
+	"frame": {"x":150,"y":85,"w":18,"h":21},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":21},
+	"sourceSize": {"w":18,"h":21},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"Haystax/Tarball0001":
+{
+	"frame": {"x":169,"y":84,"w":19,"h":18},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":19,"h":18},
+	"sourceSize": {"w":19,"h":18},
+	"pivot": {"x":0.5,"y":0.5}
+},
 "Incarnate/Incarnate0000":
 {
 	"frame": {"x":1,"y":1,"w":108,"h":111},
@@ -65,7 +83,7 @@
 },
 "Sporoid/spore":
 {
-	"frame": {"x":150,"y":85,"w":12,"h":12},
+	"frame": {"x":189,"y":84,"w":12,"h":12},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":12,"h":12},
@@ -97,6 +115,6 @@
 	"format": "RGBA8888",
 	"size": {"w":363,"h":113},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:9fe7b699f8054fdfa912f614c9e61567:d41f9b0c6b6962444b7ba2fcf781c263:b1585ba32d60cf5440f3fdffe8c37c76$"
+	"smartupdate": "$TexturePacker:SmartUpdate:33571c1a18e3a20ece2072d85f4eff7f:aeaa10f100dedf3f18eea612982180ad:b1585ba32d60cf5440f3fdffe8c37c76$"
 }
 }
