@@ -99,7 +99,46 @@ var fraukiDamageFrames = {
 		w: 75,
 		h: 60,
 
+		damage: 2.5,
+		knockback: 0.1,
+		penetration: 0
+	},
+
+	//overhead swing
+	'Attack Overhead0008': {
+		damageFrame: true,
+		x: -30, 
+		y: -32,
+		w: 75,
+		h: 60,
+
 		damage: 2,
+		knockback: 0.1,
+		penetration: 0
+	},
+
+	//overhead swing
+	'Attack Overhead0009': {
+		damageFrame: true,
+		x: -30, 
+		y: -32,
+		w: 75,
+		h: 60,
+
+		damage: 1,
+		knockback: 0.1,
+		penetration: 0
+	},
+
+	//overhead swing
+	'Attack Overhead0010': {
+		damageFrame: true,
+		x: -30, 
+		y: -32,
+		w: 75,
+		h: 60,
+
+		damage: 0.5,
 		knockback: 0.1,
 		penetration: 0
 	},
