@@ -24,13 +24,14 @@ Enemy.prototype.types['Buzzar'] =  function() {
 
     this.wanderTimer = 0;
 
+    this.squashTween = null;
+
     this.baseStunDuration = 800;
 
 	this.updateFunction = function() {
 
-		if(this.scale.y > 1 && this.state !== this.Stinging) {
+		if(!!this.squashTween && !this.squashTween.isRunning) {
 			this.scale.y = 1;
-			this.scale.x /= 0.7;
 		}
 
 		this.body.allowGravity = false;
@@ -43,10 +44,11 @@ Enemy.prototype.types['Buzzar'] =  function() {
 		if(frauki.body.y <= this.body.y)
 			return;
 
-		this.stingTimer = game.time.now + 300;
+		this.stingTimer = game.time.now + 400;
 		this.stingRestTimer = game.time.now + 1500;
 
 		this.state = this.PreStinging;
+		this.squashTween = game.add.tween(this.scale).to({y: 0.7}, 300, Phaser.Easing.Exponential.Out, true);
 	};
 
 	this.ChangeDirection = function() {
@@ -101,15 +103,13 @@ Enemy.prototype.types['Buzzar'] =  function() {
 
 	this.PreStinging = function() {
 		this.PlayAnim('idle');
-		this.scale.y = 0.7;
 		this.body.velocity.x = 0;
 		this.body.velocity.y = 0;
 
 		if(game.time.now > this.stingTimer) {
 			this.stingTimer = game.time.now + 2000;
 			this.state = this.Stinging;
-			this.scale.y = 1.3;
-			this.scale.x *= 0.8;
+			this.squashTween = game.add.tween(this.scale).to({y: 1.5}, 200, Phaser.Easing.Exponential.In, true);
 			game.physics.arcade.moveToXY(this, frauki.body.center.x, frauki.body.center.y, 450);
 		}
 	};

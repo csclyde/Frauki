@@ -156,6 +156,45 @@ var fraukiDamageFrames = {
 		penetration: 0
 	},
 
+	//stab, long followthrough
+	'Attack Stab0010': {
+		damageFrame: true,
+		x: 0, 
+		y: 15,
+		w: 83,
+		h: 12,
+
+		damage: 0.5,
+		knockback: 0.4,
+		penetration: 0
+	},
+
+	//stab taper off
+	'Attack Stab0011': {
+		damageFrame: true,
+		x: 0, 
+		y: 15,
+		w: 83,
+		h: 12,
+
+		damage: 0.1,
+		knockback: 0,
+		penetration: 0
+	},
+
+	//stab, taper off
+	'Attack Stab0012': {
+		damageFrame: true,
+		x: 0, 
+		y: 15,
+		w: 83,
+		h: 12,
+
+		damage: 0,
+		knockback: 0,
+		penetration: 0
+	},
+
 	'Kick0000': {
 		damageFrame: true,
 		x: 0, 
