@@ -193,6 +193,16 @@
             <filename>Frames/Upgrades0002.png</filename>
             <filename>Frames/Upgrades0003.png</filename>
             <filename>Frames/Upgrades0004.png</filename>
+            <filename>Frames/Speech0004.png</filename>
+            <filename>Frames/Speech0005.png</filename>
+            <filename>Frames/Speech0006.png</filename>
+            <filename>Frames/Speech0007.png</filename>
+            <filename>Frames/Speech0008.png</filename>
+            <filename>Frames/Speech0009.png</filename>
+            <filename>Frames/Speech0000.png</filename>
+            <filename>Frames/Speech0001.png</filename>
+            <filename>Frames/Speech0002.png</filename>
+            <filename>Frames/Speech0003.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

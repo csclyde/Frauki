@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>3</int>
         <key>texturePackerVersion</key>
-        <string>3.5.2</string>
+        <string>3.5.3</string>
         <key>fileName</key>
         <string>D:/gamedev/Frauki/Data/Enemies/Enemies.tps</string>
         <key>autoSDSettings</key>
@@ -196,6 +196,7 @@
             <filename>TerraceMadman</filename>
             <filename>Yeti</filename>
             <filename>Incarnate</filename>
+            <filename>Haystax</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

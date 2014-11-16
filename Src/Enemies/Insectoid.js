@@ -3,10 +3,10 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	this.body.setSize(67, 25, 0, 0);
 	this.anchor.setTo(.5, 1);
 
-    this.animations.add('idle', ['Insectoid/Hop0000'], 10, true, false);
-    this.animations.add('hop', ['Insectoid/Hop0001', 'Insectoid/Hop0002'], 10, false, false);
-    this.animations.add('land', ['Insectoid/Hop0003', 'Insectoid/Hop0004'], 10, false, false);
-    this.animations.add('die', ['Insectoid/Die0000', 'Insectoid/Die0001', 'Insectoid/Die0002', 'Insectoid/Die0003'], 10, false, false);
+    this.animations.add('idle', ['Insectoid/Idle0000'], 10, true, false);
+    this.animations.add('hop', ['Insectoid/Idle0000', 'Insectoid/Idle0000'], 10, false, false);
+    this.animations.add('land', ['Insectoid/Idle0000', 'Insectoid/Idle0000'], 10, false, false);
+    this.animations.add('die', ['Insectoid/Idle0000', 'Insectoid/Idle0000', 'Insectoid/Idle0000', 'Insectoid/Idle0000'], 10, false, false);
 
     this.attackTimer = 0;
     this.weight = 0.6;

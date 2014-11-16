@@ -21,6 +21,7 @@ Frogland.preload = function() {
 
     game.load.atlasJSONHash('Door', 'Data/Doors/Doors.png', 'Data/Doors/Doors.json');
     game.load.atlasJSONHash('Misc', 'Data/Misc/Misc.png', 'Data/Misc/Misc.json');
+    game.load.atlasJSONHash('UI', 'Data/UI/UI.png', 'Data/UI/UI.json');
 
     game.load.audio('attack_1', 'Data/Sfx/attack1.wav');
 }
@@ -106,6 +107,7 @@ Frogland.create = function() {
     map.createFromObjects('Enemies', 1068, 'Madman', null, true, false, this.objectGroup, Enemy, false);
     map.createFromObjects('Enemies', 1069, 'CreeperThistle', null, true, false, this.objectGroup, Enemy, false);
     map.createFromObjects('Enemies', 1070, 'Incarnate', null, true, false, this.objectGroup, Enemy, false);
+    map.createFromObjects('Enemies', 1071, 'Haystax', null, true, false, this.objectGroup, Enemy, false);
 
     map.createFromObjects('Items', 1043, 'Door', 'Door0000', true, false, this.objectGroup, Door, false);
     map.createFromObjects('Items', 1042, 'Misc', 'Apple0000', true, false, this.objectGroup, Apple, false);

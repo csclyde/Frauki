@@ -282,6 +282,20 @@
                  "width":0,
                  "x":4192,
                  "y":2156
+                }, 
+                {
+                 "gid":1071,
+                 "height":0,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":3255,
+                 "y":2289
                 }],
          "opacity":1,
          "type":"objectgroup",
