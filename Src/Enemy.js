@@ -171,7 +171,7 @@ function EnemyHit(f, e) {
     events.publish('camera_shake', {magnitudeX: 15 * frauki.currentAttack.damage, magnitudeY: 5, duration: 100});
 
     e.timers.SetTimer('hit', e.baseStunDuration);
-    //e.energy -= frauki.currentAttack.damage;
+    e.energy -= frauki.currentAttack.damage;
 
     e.poise -= frauki.currentAttack.damage * 4;
 
