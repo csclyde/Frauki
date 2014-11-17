@@ -4,6 +4,20 @@ EnergyController = function() {
 	this.neutralPoint = 15;
 	this.tickTimer = 0;
 	this.gracePeriod = 0;
+	
+};
+
+EnergyController.prototype.Create = function() {
+	this.barContainer = game.add.image(7, 7, 'UI', 'EnergyBar0000');
+	this.barContainer.fixedToCamera = true;
+
+	this.energyBar = game.add.image(9, 9, 'UI', 'EnergyBar0001');
+	this.energyBar.fixedToCamera = true;
+	this.energyBar.anchor.x = 0;
+
+	this.restingPointMarker = game.add.image(this.energyBar.x + (this.energyBar.width / 2) - 2, 5, 'UI', 'EnergyBar0002');
+	console.log(this.restingPointMarker.x);
+	this.restingPointMarker.fixedToCamera = true;
 };
 
 EnergyController.prototype.UpdateEnergy = function() {
@@ -24,7 +38,7 @@ EnergyController.prototype.UpdateEnergy = function() {
 			this.energy = this.neutralPoint;
 		} else {
 			if(this.energy > this.neutralPoint) {
-				this.energy -= step;
+				this.energy -= step / 10;
 			} else {
 				this.energy += step;
 			}
@@ -46,6 +60,9 @@ EnergyController.prototype.UpdateEnergy = function() {
 
 	if(this.neutralPoint <= 0)
 		Frogland.Restart();
+
+	this.energyBar.scale.x = this.energy / 30;
+	this.restingPointMarker.cameraOffset.x = 10 + (90 * (this.neutralPoint / 30));
 };
 
 EnergyController.prototype.AddEnergy = function(amt) {
@@ -67,7 +84,7 @@ EnergyController.prototype.RemoveEnergy = function(amt) {
 EnergyController.prototype.UseEnergy = function(amt) {
 	if(this.energy > 0) {
 		this.energy -= amt;
-		this.gracePeriod = game.time.now + 1000;
+		this.gracePeriod = game.time.now + 300;
 		return true;
 	}
 	

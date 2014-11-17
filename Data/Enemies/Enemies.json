@@ -1,8 +1,143 @@
 {"frames": {
 
+"Bizarro/Attack0000":
+{
+	"frame": {"x":381,"y":61,"w":16,"h":50},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":50},
+	"sourceSize": {"w":16,"h":50},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"Bizarro/Attack0001":
+{
+	"frame": {"x":600,"y":54,"w":34,"h":52},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":34,"h":52},
+	"sourceSize": {"w":34,"h":52},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"Bizarro/Attack0002":
+{
+	"frame": {"x":617,"y":1,"w":85,"h":47},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":47},
+	"sourceSize": {"w":85,"h":47},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"Bizarro/Attack0003":
+{
+	"frame": {"x":291,"y":1,"w":107,"h":59},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":107,"h":59},
+	"sourceSize": {"w":107,"h":59},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"Bizarro/Attack0004":
+{
+	"frame": {"x":399,"y":1,"w":109,"h":55},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":109,"h":55},
+	"sourceSize": {"w":109,"h":55},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"Bizarro/Attack0005":
+{
+	"frame": {"x":489,"y":57,"w":110,"h":53},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":110,"h":53},
+	"sourceSize": {"w":110,"h":53},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"Bizarro/Attack0006":
+{
+	"frame": {"x":509,"y":1,"w":107,"h":52},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":107,"h":52},
+	"sourceSize": {"w":107,"h":52},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"Bizarro/Attack0007":
+{
+	"frame": {"x":398,"y":61,"w":90,"h":47},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":90,"h":47},
+	"sourceSize": {"w":90,"h":47},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"Bizarro/Attack0008":
+{
+	"frame": {"x":352,"y":61,"w":28,"h":50},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":28,"h":50},
+	"sourceSize": {"w":28,"h":50},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"Bizarro/Flip0000":
+{
+	"frame": {"x":240,"y":80,"w":34,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":34,"h":32},
+	"sourceSize": {"w":34,"h":32},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"Bizarro/Flip0001":
+{
+	"frame": {"x":110,"y":85,"w":31,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":31,"h":24},
+	"sourceSize": {"w":31,"h":24},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"Bizarro/Flip0002":
+{
+	"frame": {"x":275,"y":80,"w":23,"h":31},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":23,"h":31},
+	"sourceSize": {"w":23,"h":31},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"Bizarro/Flip0003":
+{
+	"frame": {"x":206,"y":84,"w":33,"h":21},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":33,"h":21},
+	"sourceSize": {"w":33,"h":21},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"Bizarro/Flip0004":
+{
+	"frame": {"x":182,"y":84,"w":23,"h":28},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":23,"h":28},
+	"sourceSize": {"w":23,"h":28},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"Bizarro/Stand0000":
+{
+	"frame": {"x":381,"y":61,"w":16,"h":50},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":50},
+	"sourceSize": {"w":16,"h":50},
+	"pivot": {"x":0.5,"y":0.5}
+},
 "Buzzar/Sting0000":
 {
-	"frame": {"x":332,"y":48,"w":30,"h":41},
+	"frame": {"x":703,"y":1,"w":30,"h":41},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":30,"h":41},
@@ -11,7 +146,7 @@
 },
 "CreeperThistle/CreeperThistle0000":
 {
-	"frame": {"x":228,"y":80,"w":37,"h":29},
+	"frame": {"x":699,"y":65,"w":37,"h":29},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":37,"h":29},
@@ -38,7 +173,7 @@
 },
 "Haystax/Tarball0000":
 {
-	"frame": {"x":150,"y":85,"w":18,"h":21},
+	"frame": {"x":703,"y":43,"w":18,"h":21},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":21},
@@ -47,7 +182,7 @@
 },
 "Haystax/Tarball0001":
 {
-	"frame": {"x":169,"y":84,"w":19,"h":18},
+	"frame": {"x":291,"y":61,"w":19,"h":18},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":19,"h":18},
@@ -65,7 +200,7 @@
 },
 "Insectoid/Idle0000":
 {
-	"frame": {"x":291,"y":1,"w":63,"h":46},
+	"frame": {"x":635,"y":65,"w":63,"h":46},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":63,"h":46},
@@ -74,7 +209,7 @@
 },
 "Sporoid/Sporoid0000":
 {
-	"frame": {"x":110,"y":85,"w":39,"h":23},
+	"frame": {"x":142,"y":85,"w":39,"h":23},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":39,"h":23},
@@ -83,7 +218,7 @@
 },
 "Sporoid/spore":
 {
-	"frame": {"x":189,"y":84,"w":12,"h":12},
+	"frame": {"x":722,"y":43,"w":12,"h":12},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":12,"h":12},
@@ -92,7 +227,7 @@
 },
 "TerraceMadman/Standing0000":
 {
-	"frame": {"x":291,"y":48,"w":40,"h":50},
+	"frame": {"x":311,"y":61,"w":40,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":50},
@@ -113,8 +248,8 @@
 	"version": "1.0",
 	"image": "Enemies.png",
 	"format": "RGBA8888",
-	"size": {"w":363,"h":113},
+	"size": {"w":737,"h":113},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:33571c1a18e3a20ece2072d85f4eff7f:aeaa10f100dedf3f18eea612982180ad:b1585ba32d60cf5440f3fdffe8c37c76$"
+	"smartupdate": "$TexturePacker:SmartUpdate:bf37096860c3357c5ee0c471cb71cb9f:667fca34d00b08d32666fb542bd7a85f:b1585ba32d60cf5440f3fdffe8c37c76$"
 }
 }

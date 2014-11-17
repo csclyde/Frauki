@@ -44,7 +44,7 @@ Enemy.prototype.SetDefaultValues = function() {
     this.SetDirection('left');
     this.weight = 0.5;
     this.hitTimer = 0;
-    this.energy = 6;
+    this.energy = 5;
     this.damage = 4;
     this.inScope = false;
     this.baseStunDuration = 500;
@@ -57,6 +57,7 @@ Enemy.prototype.Idling = function() {};
 Enemy.prototype.Hurting = function() {};
 Enemy.prototype.Die = function() {};
 Enemy.prototype.Vulnerable = function() { return true; }
+Enemy.prototype.CanCauseDamage = function() { return true; }
 Enemy.prototype.Act = function() {};
 
 Enemy.prototype.update = function() {
@@ -256,7 +257,7 @@ Enemy.prototype.EnemyDirection = function() {
 };
 
 Enemy.prototype.RollDice = function(sides, thresh) {
-    var roll = Math.ceil(Math.random() * sides);
+    var roll = Math.random() * sides;
 
     if(roll >= thresh)
         return true;

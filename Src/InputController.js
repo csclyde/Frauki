@@ -27,10 +27,7 @@ InputController = function(player) {
     this.crouch.onUp.add(function() {   events.publish('player_crouch', {crouch: false}); }, this);
 
     this.slash.onDown.add(function() { 
-        if(this.timers.TimerUp('slash_timer')) {
-            events.publish('player_slash', {}); 
-            this.timers.SetTimer('slash_timer', 300);
-        }
+        events.publish('player_slash', {});
     }, this);
 
     this.roll.onDown.add(function() {   events.publish('player_roll', null, this)});

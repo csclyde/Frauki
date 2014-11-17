@@ -110,6 +110,7 @@ Frogland.create = function() {
     map.createFromObjects('Enemies', 1069, 'CreeperThistle', null, true, false, this.objectGroup, Enemy, false);
     map.createFromObjects('Enemies', 1070, 'Incarnate', null, true, false, this.objectGroup, Enemy, false);
     map.createFromObjects('Enemies', 1071, 'Haystax', null, true, false, this.objectGroup, Enemy, false);
+    map.createFromObjects('Enemies', 1072, 'Bizarro', null, true, false, this.objectGroup, Enemy, false);
 
     map.createFromObjects('Items', 1043, 'Door', 'Door0000', true, false, this.objectGroup, Door, false);
     map.createFromObjects('Items', 1042, 'Misc', 'Apple0000', true, false, this.objectGroup, Apple, false);
@@ -126,10 +127,9 @@ Frogland.create = function() {
     projectileController = new ProjectileController();
     timerUtil = new TimerUtil();
 
-    game.camera.focusOnXY(frauki.body.x, frauki.body.y);
+    energyController.Create();
 
-    energyText = game.add.text(0, 0, '', {font: "10px Arial", fill: "#ff0044"});
-    energyText.fixedToCamera = true;
+    game.camera.focusOnXY(frauki.body.x, frauki.body.y);
 
     //special procesing for collision tiles
     map.forEach(function(tile) {
@@ -181,8 +181,6 @@ Frogland.update = function() {
 
     playerX = frauki.body.x;
     playerY = frauki.body.y;
-
-    energyText.setText('Energy: ' + energyController.GetEnergy() + ' Neutral: ' + energyController.GetNeutral());
 };
 
 Frogland.render = function() {
@@ -227,7 +225,11 @@ Frogland.OverlapFraukiWithObject = function(f, o) {
         EatApple(f, o);
         return false;
     } else if(o.spriteType === 'enemy') {
-        frauki.Hit(f, o);
+
+        if(o.CanCauseDamage()) {
+            frauki.Hit(f, o);
+        }
+
         return false;
     }
 

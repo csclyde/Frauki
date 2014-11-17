@@ -203,6 +203,9 @@
             <filename>Frames/Speech0001.png</filename>
             <filename>Frames/Speech0002.png</filename>
             <filename>Frames/Speech0003.png</filename>
+            <filename>Frames/EnergyBar0002.png</filename>
+            <filename>Frames/EnergyBar0000.png</filename>
+            <filename>Frames/EnergyBar0001.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

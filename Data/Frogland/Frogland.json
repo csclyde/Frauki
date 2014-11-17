@@ -270,7 +270,7 @@
                  "y":2156
                 }, 
                 {
-                 "gid":1071,
+                 "gid":1072,
                  "height":0,
                  "name":"",
                  "properties":
@@ -280,8 +280,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":3255,
-                 "y":2289
+                 "x":3259,
+                 "y":2281
                 }],
          "opacity":1,
          "type":"objectgroup",
