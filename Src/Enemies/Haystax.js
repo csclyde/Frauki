@@ -16,7 +16,7 @@ Enemy.prototype.types['Haystax'] =  function() {
 
 	};
 
-	Enemy.prototype.Vulnerable = function() { 
+	this.Vulnerable = function() { 
 		if(this.state === this.Idling)
 			return false;
 		else
@@ -36,7 +36,7 @@ Enemy.prototype.types['Haystax'] =  function() {
 	};
 
 	this.Spit = function() {
-		this.timers.SetTimer('spit', 1000 + (Math.random() * 1000));
+		this.timers.SetTimer('spit', 1000 + (Math.random() * 3000));
 		this.state = this.PoppedUp;
 
 		projectileController.Tarball(this);
@@ -46,7 +46,7 @@ Enemy.prototype.types['Haystax'] =  function() {
 	this.Idling = function() {
 		this.PlayAnim('idle');
 
-		if(!this.PlayerIsNear(150) && this.PlayerIsNear(1000) && this.timers.TimerUp('spit_wait')) {
+		if(!this.PlayerIsNear(50) && this.PlayerIsNear(1000) && this.timers.TimerUp('spit_wait')) {
 			this.Spit();
 		}
 		

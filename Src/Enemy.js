@@ -77,6 +77,9 @@ Enemy.prototype.update = function() {
         return;
     }
 
+    if(this.alive === false)
+        return;
+
     this.updateFunction();
     this.state();
 
@@ -150,6 +153,7 @@ Enemy.prototype.PlayAnim = function(name) {
 
 
 function EnemyHit(f, e) {
+    
     if(e.spriteType !== 'enemy' || e.state === e.Hurting || !e.Vulnerable())
         return;
 

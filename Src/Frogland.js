@@ -164,11 +164,13 @@ Frogland.update = function() {
     game.physics.arcade.collide(frauki, this.objectGroup, this.CollideFraukiWithObject, this.OverlapFraukiWithObject);
     game.physics.arcade.collide(this.objectGroup, collisionLayer);
     game.physics.arcade.collide(frauki, foregroundLayer, null, this.HideForeground);
-    game.physics.arcade.overlap(frauki, projectileController.projectiles, this.CollideFraukiWithProjectile);
+
 
     if(!!frauki.attackRect && frauki.attackRect.body.width != 0) {
         game.physics.arcade.overlap(frauki.attackRect, this.objectGroup, EnemyHit);
     }
+
+    game.physics.arcade.overlap(frauki, projectileController.projectiles, this.CollideFraukiWithProjectile);
 
     cameraController.UpdateCamera();
     inputController.UpdateInput();
@@ -180,7 +182,7 @@ Frogland.update = function() {
     playerX = frauki.body.x;
     playerY = frauki.body.y;
 
-    energyText.setText('Energy: ' + energyController.GetEnergy() + ' Neutral: ' + energyController.GetNeutral() + ' FPS: ' + game.time.fps);
+    energyText.setText('Energy: ' + energyController.GetEnergy() + ' Neutral: ' + energyController.GetNeutral());
 };
 
 Frogland.render = function() {
@@ -233,8 +235,6 @@ Frogland.OverlapFraukiWithObject = function(f, o) {
 };
 
 Frogland.CollideFraukiWithProjectile = function(f, p) {
-
-    console.log('tarred');
 
     if(p.projType === 'tar') {
         frauki.Hit(f, p.owningEnemy);
