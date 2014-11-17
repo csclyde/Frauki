@@ -62,6 +62,10 @@ EnergyController.prototype.UpdateEnergy = function() {
 		Frogland.Restart();
 
 	this.energyBar.scale.x = this.energy / 30;
+
+	if(this.energyBar.scale.x < 0)
+		this.energyBar.scale.x = 0;
+
 	this.restingPointMarker.cameraOffset.x = 10 + (90 * (this.neutralPoint / 30));
 };
 
@@ -84,7 +88,7 @@ EnergyController.prototype.RemoveEnergy = function(amt) {
 EnergyController.prototype.UseEnergy = function(amt) {
 	if(this.energy > 0) {
 		this.energy -= amt;
-		this.gracePeriod = game.time.now + 300;
+		this.gracePeriod = game.time.now + 500;
 		return true;
 	}
 	
