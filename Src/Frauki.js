@@ -285,14 +285,14 @@ Player.prototype.Slash = function(params) {
 
     //diving dash
     if(!this.timers.TimerUp('frauki_dash') && this.states.crouching && (this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling)) {
-        if(energyController.UseEnergy(7)) {
+        if(energyController.UseEnergy(8)) {
             this.state = this.AttackDiveCharge;
             this.movement.diveVelocity = 1000;
         }
     }
     //running dash
     else if(this.state === this.Rolling || this.state === this.Kicking) {
-        if(energyController.UseEnergy(5)) {
+        if(energyController.UseEnergy(6)) {
             this.state = this.AttackStab;
     
             if(this.states.direction === 'left') {
@@ -309,7 +309,7 @@ Player.prototype.Slash = function(params) {
     }
     //upwards dash attack
     else if(this.states.upPressed && (this.state === this.Peaking || this.state === this.Jumping) && this.states.hasFlipped === false) {
-        if(energyController.UseEnergy(4)) {
+        if(energyController.UseEnergy(7)) {
             this.state = this.AttackJump;
             this.movement.jumpSlashVelocity = -(PLAYER_JUMP_SLASH_SPEED());
             game.add.tween(this.movement).to({jumpSlashVelocity:0}, 400, Phaser.Easing.Quartic.Out, true);
@@ -320,7 +320,7 @@ Player.prototype.Slash = function(params) {
     }
     //normal slashes while standing or running
     else if(this.state === this.Standing || this.state === this.Landing || this.state === this.AttackStab || this.state === this.Running || this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling) {
-        if(energyController.UseEnergy(3)) {
+        if(energyController.UseEnergy(6)) {
             if(this.states.upPressed) {
                 this.state = this.AttackOverhead;
                 events.publish('play_sound', {name: 'attack1'});

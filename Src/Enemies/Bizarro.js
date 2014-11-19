@@ -108,9 +108,9 @@ Enemy.prototype.types['Bizarro'] =  function() {
 	this.Idling = function() {
 		//this.PlayAnim('stand');
 
-		if(this.PlayerIsNear(70)) {
+		if(this.PlayerIsNear(70) && this.timers.TimerUp('roll_wait')) {
 			this.Roll();
-		} else if(frauki.Attacking() && this.PlayerIsNear(150)) {
+		} else if(frauki.Attacking() && this.PlayerIsNear(150) && this.timers.TimerUp('bail_wait')) {
 			this.Bail();
 		} else if(this.PlayerIsNear(150)) {
 			this.Attack();
