@@ -285,7 +285,7 @@ Player.prototype.Slash = function(params) {
 
     //diving dash
     if(!this.timers.TimerUp('frauki_dash') && this.states.crouching && (this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling)) {
-        if(energyController.UseEnergy(7.5)) {
+        if(energyController.UseEnergy(7)) {
             this.state = this.AttackDiveCharge;
             this.movement.diveVelocity = 1000;
         }
@@ -309,7 +309,7 @@ Player.prototype.Slash = function(params) {
     }
     //upwards dash attack
     else if(this.states.upPressed && (this.state === this.Peaking || this.state === this.Jumping) && this.states.hasFlipped === false) {
-        if(energyController.UseEnergy(3.5)) {
+        if(energyController.UseEnergy(4)) {
             this.state = this.AttackJump;
             this.movement.jumpSlashVelocity = -(PLAYER_JUMP_SLASH_SPEED());
             game.add.tween(this.movement).to({jumpSlashVelocity:0}, 400, Phaser.Easing.Quartic.Out, true);

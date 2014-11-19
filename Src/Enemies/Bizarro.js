@@ -82,7 +82,7 @@ Enemy.prototype.types['Bizarro'] =  function() {
 		if(!this.timers.TimerUp('bail_wait'))
 			return;
 
-		this.timers.SetTimer('bail_wait', 2000);
+		this.timers.SetTimer('bail_wait', 2000 + (Math.random() * 1500));
 
 		this.body.velocity.y = -500;
 
@@ -114,7 +114,7 @@ Enemy.prototype.types['Bizarro'] =  function() {
 			this.Bail();
 		} else if(this.PlayerIsNear(150)) {
 			this.Attack();
-		} else if(!this.PlayerIsNear(200) && this.PlayerIsNear(600)) {
+		} else if(!this.PlayerIsNear(200) && this.PlayerIsNear(400)) {
 			this.SlashAttack();
 		}
 
