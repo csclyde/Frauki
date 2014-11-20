@@ -5,7 +5,7 @@ Enemy.prototype.types['Lancer'] =  function() {
 
     this.animations.add('stand', ['Lancer/Stand0000'], 10, true, false);
 	this.animations.add('run', ['Lancer/Run0000', 'Lancer/Run0001', 'Lancer/Run0002', 'Lancer/Run0003', 'Lancer/Run0004', 'Lancer/Run0005', 'Lancer/Run0006', 'Lancer/Run0007'], 14, true, false);
-    this.animations.add('attack', ['Lancer/Attack0001', 'Lancer/Attack0002', 'Lancer/Attack0003', 'Lancer/Attack0004', 'Lancer/Attack0005', 'Lancer/Attack0006', 'Lancer/Attack0007', 'Lancer/Attack0008', 'Lancer/Attack0009', 'Lancer/Attack0010'], 10, false, false);
+    this.animations.add('attack', ['Lancer/Attack0000', 'Lancer/Attack0001', 'Lancer/Attack0002', 'Lancer/Attack0003', 'Lancer/Attack0004', 'Lancer/Attack0005', 'Lancer/Attack0006', 'Lancer/Attack0007', 'Lancer/Attack0008', 'Lancer/Attack0009', 'Lancer/Attack0010', 'Lancer/Attack0011', 'Lancer/Attack0012', 'Lancer/Attack0013', 'Lancer/Attack0014', 'Lancer/Attack0015', 'Lancer/Attack0016', 'Lancer/Attack0017', 'Lancer/Attack0018', 'Lancer/Attack0019'], 20, false, false);
 
     this.weight = 0.5;
     this.energy = 8;
@@ -23,7 +23,7 @@ Enemy.prototype.types['Lancer'] =  function() {
 	};
 
 	this.Vulnerable = function() {
-		if(this.state === this.Attacking) {
+		if(this.animations.frameName === 'Lancer/Attack0006' || this.animations.frameName === 'Lancer/Attack0007' || this.animations.frameName === 'Lancer/Attack0008' || this.animations.frameName === 'Lancer/Attack0009' || this.animations.frameName === 'Lancer/Attack0010' || this.animations.frameName === 'Lancer/Attack0011') {
 			return false;
 		}
 
@@ -31,7 +31,7 @@ Enemy.prototype.types['Lancer'] =  function() {
 	};
 
 	this.CanCauseDamage = function() {
-		if(this.state === this.Attacking) {
+		if(this.animations.frameName === 'Lancer/Attack0006' || this.animations.frameName === 'Lancer/Attack0007' || this.animations.frameName === 'Lancer/Attack0008' || this.animations.frameName === 'Lancer/Attack0009' || this.animations.frameName === 'Lancer/Attack0010' || this.animations.frameName === 'Lancer/Attack0011') {
 			return true;
 		}
 		
@@ -64,10 +64,10 @@ Enemy.prototype.types['Lancer'] =  function() {
 			return;
 
 		if(frauki.body.center.x < this.body.center.x) {
-			game.add.tween(this.body.velocity).to({x: -500}, 300, Phaser.Easing.Exponential.InOut, true).to({x: 0}, 500, Phaser.Easing.Exponential.InOut, true);
+			game.add.tween(this.body.velocity).to({x: -500}, 500, Phaser.Easing.Quartic.InOut, true).to({x: 0}, 600, Phaser.Easing.Quartic.InOut, true);
 			this.SetDirection('left');
 		} else {
-			game.add.tween(this.body.velocity).to({x: 500}, 300, Phaser.Easing.Exponential.InOut, true).to({x: 0}, 500, Phaser.Easing.Exponential.InOut, true);
+			game.add.tween(this.body.velocity).to({x: 500}, 500, Phaser.Easing.Quartic.InOut, true).to({x: 0}, 600, Phaser.Easing.Quartic.InOut, true);
 			this.SetDirection('right');
 		}
 
@@ -86,7 +86,7 @@ Enemy.prototype.types['Lancer'] =  function() {
 
 		if(this.PlayerIsNear(75)) {
 			this.Run();
-		} else if(this.PlayerIsNear(150) && this.timers.TimerUp('attack_wait')) {
+		} else if(this.PlayerIsNear(175) && this.timers.TimerUp('attack_wait')) {
 			this.Attack();
 		}
 
@@ -114,7 +114,7 @@ Enemy.prototype.types['Lancer'] =  function() {
 		if(this.PlayerIsNear(100)) {
 			this.Attack();
 		}
-		if(!this.PlayerIsNear(250)) {
+		if(!this.PlayerIsNear(300)) {
 			this.state = this.Idling;
 			this.body.velocity.x = 0;
 			this.body.acceleration.x = 0;
@@ -124,7 +124,10 @@ Enemy.prototype.types['Lancer'] =  function() {
 	this.Attacking = function() {
 		this.PlayAnim('attack');
 
-		this.body.width = 100;
+		if(this.animations.frameName === 'Lancer/Attack0006' || this.animations.frameName === 'Lancer/Attack0007' || this.animations.frameName === 'Lancer/Attack0008' || this.animations.frameName === 'Lancer/Attack0009' || this.animations.frameName === 'Lancer/Attack0010' || this.animations.frameName === 'Lancer/Attack0011') {
+			this.body.width = 75;
+		}
+
 		this.body.maxVelocity.x = 500;
 
 		if(this.animations.currentAnim.isFinished) {
