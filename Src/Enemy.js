@@ -58,6 +58,7 @@ Enemy.prototype.Hurting = function() {};
 Enemy.prototype.Die = function() {};
 Enemy.prototype.Vulnerable = function() { return true; }
 Enemy.prototype.CanCauseDamage = function() { return true; }
+Enemy.prototype.CanChangeDirection = function() { return true; }
 Enemy.prototype.Act = function() {};
 
 Enemy.prototype.update = function() {
@@ -84,7 +85,7 @@ Enemy.prototype.update = function() {
     this.updateFunction();
     this.state();
 
-    if(this.xHitVel === 0) {
+    if(this.xHitVel === 0 && this.CanChangeDirection()) {
         if(this.body.velocity.x > 0) {
             this.SetDirection('right');
         } else if(this.body.velocity.x < 0) {

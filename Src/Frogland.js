@@ -111,6 +111,7 @@ Frogland.create = function() {
     map.createFromObjects('Enemies', 1070, 'Incarnate', null, true, false, this.objectGroup, Enemy, false);
     map.createFromObjects('Enemies', 1071, 'Haystax', null, true, false, this.objectGroup, Enemy, false);
     map.createFromObjects('Enemies', 1072, 'Bizarro', null, true, false, this.objectGroup, Enemy, false);
+    map.createFromObjects('Enemies', 1073, 'Lancer', null, true, false, this.objectGroup, Enemy, false);
 
     map.createFromObjects('Items', 1043, 'Door', 'Door0000', true, false, this.objectGroup, Door, false);
     map.createFromObjects('Items', 1042, 'Misc', 'Apple0000', true, false, this.objectGroup, Apple, false);

@@ -180,7 +180,7 @@
             <key>trimThreshold</key>
             <uint>1</uint>
             <key>trimMode</key>
-            <enum type="SpriteSettings::TrimMode">Crop</enum>
+            <enum type="SpriteSettings::TrimMode">CropKeepPos</enum>
             <key>heuristicMask</key>
             <false/>
             <key>pivotPoint</key>
@@ -198,6 +198,7 @@
             <filename>Incarnate</filename>
             <filename>Haystax</filename>
             <filename>Bizarro</filename>
+            <filename>Lancer</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

@@ -47,21 +47,6 @@
  </layer>
  <objectgroup name="Items" width="0" height="0"/>
  <objectgroup name="Enemies" width="0" height="0">
-  <object gid="1065" x="3896" y="2655"/>
-  <object gid="1067" x="2856" y="2202"/>
-  <object gid="1066" x="2554" y="2470"/>
-  <object gid="1066" x="4048" y="2526"/>
-  <object gid="1066" x="1912" y="2118"/>
-  <object gid="1067" x="2684" y="2144"/>
-  <object gid="1065" x="2862" y="2650"/>
-  <object gid="1069" x="4024" y="2374"/>
-  <object gid="1069" x="3936" y="2540"/>
-  <object gid="1069" x="4000" y="2540"/>
-  <object gid="1069" x="3968" y="2538"/>
-  <object gid="1069" x="3954" y="2536"/>
-  <object gid="1069" x="3982" y="2538"/>
-  <object gid="1069" x="2888" y="2320"/>
-  <object gid="1067" x="4192" y="2156"/>
-  <object gid="1072" x="3259" y="2281"/>
+  <object gid="1073" x="3606" y="2594"/>
  </objectgroup>
 </map>

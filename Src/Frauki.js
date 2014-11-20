@@ -219,10 +219,10 @@ Player.prototype.Run = function(params) {
         return;
 
     if(params.dir === 'left') {
-        this.body.acceleration.x = -1000;
+        this.body.acceleration.x = -2000;
         this.SetDirection('left');
     } else if(params.dir === 'right') {
-        this.body.acceleration.x = 1000;
+        this.body.acceleration.x = 2000;
         this.SetDirection('right');
     } else {
         this.body.acceleration.x = 0;
@@ -603,6 +603,11 @@ Player.prototype.AttackStab = function() {
     //override the max velocity
     this.body.maxVelocity.x = PLAYER_ROLL_SPEED();
     this.body.velocity.x = this.movement.rollVelocity;
+
+    var frameName = this.animations.currentFrame;
+    if(frameName === 'Attack Stab0006' || frameName === 'Attack Stab0007' || frameName === 'Attack Stab0008' || frameName === 'Attack Stab0009' || frameName === 'Attack Stab0010' || frameName === 'Attack Stab0011') {
+        this.body.velocity.y = 0;
+    }
 
     if(this.body.velocity.y < 0) {
         this.state = this.Jumping;
