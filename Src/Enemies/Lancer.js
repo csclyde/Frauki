@@ -64,10 +64,10 @@ Enemy.prototype.types['Lancer'] =  function() {
 			return;
 
 		if(frauki.body.center.x < this.body.center.x) {
-			game.add.tween(this.body.velocity).to({x: -500}, 500, Phaser.Easing.Quartic.InOut, true).to({x: 0}, 600, Phaser.Easing.Quartic.InOut, true);
+			game.add.tween(this.body.velocity).to({x: -500}, 600, Phaser.Easing.Exponential.InOut, true).to({x: 0}, 600, Phaser.Easing.Exponential.InOut, true);
 			this.SetDirection('left');
 		} else {
-			game.add.tween(this.body.velocity).to({x: 500}, 500, Phaser.Easing.Quartic.InOut, true).to({x: 0}, 600, Phaser.Easing.Quartic.InOut, true);
+			game.add.tween(this.body.velocity).to({x: 500}, 600, Phaser.Easing.Exponential.InOut, true).to({x: 0}, 600, Phaser.Easing.Exponential.InOut, true);
 			this.SetDirection('right');
 		}
 
