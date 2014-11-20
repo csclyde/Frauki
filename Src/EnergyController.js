@@ -33,7 +33,7 @@ EnergyController.prototype.UpdateEnergy = function() {
 	else if(step > -0.2 && step < 0) step = -0.2;*/
 
 	//if the timer is up, tick the energy and reset the timer
-	if(game.time.now > this.tickTimer && game.time.now > this.gracePeriod) {
+	if(game.time.now > this.tickTimer && game.time.now > this.gracePeriod && !frauki.Attacking()) {
 		if(Math.abs(energyDiff) < step) {
 			this.energy = this.neutralPoint;
 		} else {
