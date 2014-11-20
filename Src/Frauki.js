@@ -320,7 +320,7 @@ Player.prototype.Slash = function(params) {
     }
     //normal slashes while standing or running
     else if(this.state === this.Standing || this.state === this.Landing || this.state === this.AttackStab || this.state === this.Running || this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling) {
-        if(energyController.UseEnergy(5)) {
+        if(energyController.UseEnergy(5.5)) {
             if(this.states.upPressed) {
                 this.state = this.AttackOverhead;
                 events.publish('play_sound', {name: 'attack1'});
