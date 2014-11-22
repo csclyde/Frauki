@@ -135,6 +135,12 @@ Player.prototype.update = function() {
     if(this.states.dashing) {
         this.body.gravity.y = -800;
     }
+
+    if(this.state === this.Crouching || this.state === this.Rolling || this.state === this.Flipping) {
+        this.body.height = 30;
+    } else {
+        this.body.height = 50;
+    }
 };
 
 Player.prototype.SetDirection = function(dir) {
@@ -506,7 +512,7 @@ Player.prototype.Landing = function() {
 Player.prototype.Crouching = function() {
     this.PlayAnim('crouch');
 
-    if(!this.states.crouching || this.body.velocity.x !== 0 || this.body.velocity.y !== 0) {
+    if((!this.states.crouching || this.body.velocity.x !== 0 || this.body.velocity.y !== 0) && !this.body.touching.up) {
         this.state = this.Standing;
     }
 
