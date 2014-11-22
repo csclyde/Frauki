@@ -3,20 +3,22 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	this.body.setSize(67, 25, 0, 0);
 	this.anchor.setTo(.5, 1);
 
-    this.animations.add('idle', ['Hop0000'], 10, true, false);
-    this.animations.add('hop', ['Hop0001', 'Hop0002'], 10, false, false);
-    this.animations.add('land', ['Hop0003', 'Hop0004'], 10, false, false);
-    this.animations.add('die', ['Die0000', 'Die0001', 'Die0002', 'Die0003'], 10, false, false);
+    this.animations.add('idle', ['Insectoid/Idle0000'], 10, true, false);
+    this.animations.add('hop', ['Insectoid/Idle0000', 'Insectoid/Idle0000'], 10, false, false);
+    this.animations.add('land', ['Insectoid/Idle0000', 'Insectoid/Idle0000'], 10, false, false);
+    this.animations.add('die', ['Insectoid/Idle0000', 'Insectoid/Idle0000', 'Insectoid/Idle0000', 'Insectoid/Idle0000'], 10, false, false);
 
     this.attackTimer = 0;
-    this.weight = 800;
+    this.weight = 0.6;
+    this.damage = 5;
+    this.energy = 6;
 
     this.squashTween = null;
 
-    this.body.bounce.set(0.5);
+    //this.body.bounce.set(0.5);
 
 	this.updateFunction = function() {
-		if(game.time.now < this.hitTimer)
+		if(this.state === this.Hurting)
 			return;
 
 		if(game.physics.arcade.distanceBetween(this, frauki) < 100 && this.state !== this.Hopping && frauki.state === frauki.Hurting) {
@@ -26,7 +28,6 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		}
 
 		if(!!this.squashTween && !this.squashTween.isRunning) {
-			this.scale.x = 1;
 			this.scale.y = 1;
 		}
 
@@ -61,16 +62,16 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		if(game.time.now < game.attackTimer && (!this.body.onFloor() || !!overrideFloorCondition))
 			return;
 
-		this.attackTimer = game.time.now + 4000;
+		this.attackTimer = game.time.now + 800;
 
 		this.state = this.Hopping;
 
-		this.body.velocity.y = -300;
+		this.body.velocity.y = -450;
 
-		if(playerX < this.body.x) {
-			this.body.velocity.x = 100;
+		if(frauki.body.center.x < this.body.center.x) {
+			this.body.velocity.x = 150;
 		} else {
-			this.body.velocity.x = -100;
+			this.body.velocity.x = -150;
 		}
 	};
 
@@ -85,18 +86,11 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	};
 
 	this.TakeHit = function(power) {
-		if(game.time.now < this.hitTimer)
-        	return;
-    
-	    //compute the velocity based on weight and attack knockback
-	    this.body.velocity.y = -400 - this.weight;
-
-	    //a durability stat should modify how long they are stunned for. also, the amount of dmg
-	    this.hitTimer = game.time.now + 400;
-
-	    this.state = this.Hurting;
 
 	    this.scale.y = 1;
+	    
+	    //if(this.RollDice(10, 3))
+	        //this.Dodge();
 	};
 
 	////////////////////////////////STATES////////////////////////////////////
@@ -104,25 +98,22 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		this.PlayAnim('idle');
 
 		if(this.PlayerIsNear(50)) {
-			if(Math.random() * 5 < 1) 
-				this.Dodge();
-			else
 				this.Scuttle();
 		} else if(this.body.center.y < frauki.body.y && this.body.center.x > frauki.body.center.x - 20 && this.body.center.x < frauki.body.center.x + 20 && !this.body.onFloor()) {
 			this.Dive();
-		} else if(Math.abs(this.body.y - playerY) < 40 && Math.abs(this.body.x - playerX) < 400 && this.body.onFloor()) {
+		} else if(Math.abs(this.body.center.y - frauki.body.center.y) < 40 && Math.abs(this.body.center.x - frauki.body.center.y) < 400 && (this.body.onFloor() || this.body.velocity.y <= 0)) {
 			this.Scuttle();
-		} else if(Math.abs(this.body.x - playerX) > 100 && Math.abs(this.body.x - playerX) < 450 && this.body.onFloor()) {
+		} else if(Math.abs(this.body.center.x - frauki.body.center.x) > 50 && Math.abs(this.body.center.x - frauki.body.center.x) < 450) {
 			this.Hop();
 		} else {
-			
+
 		}
 	};
 
 	this.PreHopping = function() {
 		this.PlayAnim('idle');
 
-		if(playerX < this.body.x) {
+		if(frauki.body.center.x < this.body.center.x) {
 			this.SetDirection('left');
 		} else {
 			this.SetDirection('right');
@@ -135,7 +126,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
 			this.body.velocity.y = (-1 * (Math.random() * 200)) - 100;
 
-			if(playerX < this.body.x) {
+			if(frauki.body.center.x < this.body.center.x) {
 				this.body.velocity.x = -400;
 			} else {
 				this.body.velocity.x = 400;
@@ -147,14 +138,17 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		this.PlayAnim('hop');
 
 		if(this.body.velocity.y >= 0 || this.body.onFloor()) {
-			this.state = this.Landing;
+			if(Math.abs(this.body.center.y - frauki.body.center.y) < 40 && Math.abs(this.body.center.x - frauki.body.center.y) < 400)
+				this.Scuttle();
+			else
+				this.state = this.Landing;
 		}
 	};
 
 	this.Landing = function() {
 		this.PlayAnim('land');
 
-		if(this.body.onFloor()) {
+		if(this.body.onFloor() || this.body.velocity.y <= 0) {
 			this.state = this.Idling;
 			this.body.velocity.x = 0;
 		}
@@ -163,7 +157,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	this.PreScuttling = function() {
 		this.PlayAnim('idle');
 
-		if(playerX < this.body.x) {
+		if(frauki.body.center.x < this.body.center.x) {
 			this.SetDirection('left');
 		} else {
 			this.SetDirection('right');
@@ -173,7 +167,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 			this.attackTimer = game.time.now + 2000;
 			this.state = this.Scuttling;
 
-			if(frauki.body.x < this.body.x) {
+			if(frauki.body.x < this.body.center.x) {
 				this.body.velocity.x = -500;
 			} else {
 				this.body.velocity.x = 500;
@@ -199,7 +193,12 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	};
 
 	this.Diving = function() {
-		if(this.body.onFloor()) {
+		if(frauki.body.center.x < this.body.center.x)
+			this.body.center.x--;
+		else if(frauki.body.center.x > this.body.center.x)
+			this.body.center.x++;
+		
+		if(this.body.onFloor() || this.body.velocity.y <= 0) {
 			this.state = this.Idling;
 		}
 	};
@@ -207,12 +206,12 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	this.Hurting = function() {
 		this.PlayAnim('die');
 
-		if(game.time.now > this.hitTimer) {
-			if(Math.abs(this.body.y - playerY) < 40 && Math.abs(this.body.x - playerX) < 300) {
+		if(this.timers.TimerUp('hit')) {
+			if(Math.abs(this.body.center.y - frauki.body.center.y) < 40 && Math.abs(this.body.center.x - frauki.body.center.x) < 300 && this.RollDice(20, 12)) {
 				this.Scuttle();
 				this.attackTimer = game.time.now;
 			}
-			else if(Math.abs(this.body.x - playerX) > 100 && Math.abs(this.body.x - playerX) < 450) {
+			else if(Math.abs(this.body.center.x - frauki.body.center.x) > 100 && Math.abs(this.body.center.x - frauki.body.center.x) < 450) {
 				this.Hop();
 				this.attackTimer = game.time.now;
 			}

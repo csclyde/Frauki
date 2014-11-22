@@ -1,22 +1,26 @@
 Enemy.prototype.types['Sporoid'] =  function() {
 
-	this.body.setSize(22, 17, 0, 0);
+	this.body.setSize(22, 17, 0, -7);
+	this.anchor.setTo(0.5, 0.5);
 
-    this.animations.add('idle', ['Sporoid0000'], 10, true, false);
+    this.animations.add('idle', ['Sporoid/Sporoid0000'], 10, true, false);
+    this.animations.add('shit', ['Sporoid/Sporoid0000'], 10, true, false);
 
     this.body.allowGravity = false;
     this.body.bounce.set(0.3);
+    this.baseStunDuration = 800;
 
     this.dashTimer = 0;
     this.dashWaitTimer = 0;
     this.shootTimer = 0;
-    this.energy = 3;
+    this.energy = 1;
     
-    this.weight = 80;
+    this.weight = 0.3;
+    this.damage = 3;
 
     this.Spore = game.add.emitter(0, 0, 100);
 	this.Spore.makeParticles('Spore');
-    this.Spore.gravity = -675;
+    this.Spore.gravity = -775;
 
     this.Spore.maxParticleScale = 0.4;
     this.Spore.minParticleScale = 0.1;
@@ -35,30 +39,27 @@ Enemy.prototype.types['Sporoid'] =  function() {
 
 	///////////////////////////////ACTIONS////////////////////////////////////
 	this.TakeHit = function(power) {
-		if(game.time.now < this.hitTimer) {
+		if(!this.timers.TimerUp('hit')) {
 			return;
 		}
-    
-	    //compute the velocity based on weight and attack knockback
-	    this.body.velocity.y = -150 + this.weight;
-
-	    var c = frauki.body.x < this.body.x ? 1 : -1;
-	    this.body.velocity.x = c * ((80 + (this.weight / 2)) * (frauki.currentAttack.knockback));
 
 	    //a durability stat should modify how long they are stunned for. also, the amount of dmg
-	    this.hitTimer = game.time.now + 300;
+	    this.timers.SetTimer('hit', 800);
 
 	    this.state = this.Hurting;
 	};
 
 	this.Dash = function() {
-		if(game.time.now < this.dashWaitTimer)
+		if(!this.timers.TimerUp('dash_wait'))
 			return;
 
-		game.physics.arcade.moveToXY(this, frauki.body.center.x, frauki.body.center.y, 450);
+		game.physics.arcade.moveToXY(this, frauki.body.center.x, frauki.body.center.y, 400);
 		this.state = this.Dashing;
-		this.dashTimer = game.time.now + 1000;
-		this.dashWaitTimer = game.time.now + 3000;
+		
+		//this.Spore.explode(3000, 20);
+
+		this.timers.SetTimer('dash', 1000);
+		this.timers.SetTimer('dash_wait', 3000);
 	};
 
 	this.Shoot = function() {
@@ -66,7 +67,7 @@ Enemy.prototype.types['Sporoid'] =  function() {
 		//game.physics.arcade.moveToXY(this, frauki.body.center.x, frauki.body.center.y, 500);
 		//game.add.tween(spore.body).to({x: 0, y: 0}, 1000, Phaser.Easing.Exponential.Out, true);
 
-	    this.shootTimer = game.time.now + 1000;
+	    this.timers.SetTimer('shoot', 1000);
 	};
 
 	this.Reset = function() {
@@ -88,7 +89,7 @@ Enemy.prototype.types['Sporoid'] =  function() {
 		this.Spore.x = this.body.center.x;
 		this.Spore.y = this.body.center.y;
 
-		if(this.PlayerIsVisible() && game.time.now > this.shootTimer) {
+		if(this.PlayerIsVisible() && this.timers.TimerUp('shoot')) {
 			this.Shoot();
 		}
 
@@ -100,7 +101,7 @@ Enemy.prototype.types['Sporoid'] =  function() {
 			case 'down': this.body.velocity.y += 30; break;
 		}
 
-		if(this.PlayerIsNear(120)) {
+		if(this.PlayerIsNear(100)) {
 			this.Dash();
 			return;
 		}
@@ -118,15 +119,24 @@ Enemy.prototype.types['Sporoid'] =  function() {
 		}
 	};
 
+	this.PreDashing = function() {
+		this.PlayAnim('idle');
+
+		if(this.timers.TimerUp('dash')) {
+			this.state = this.Dashing;
+			this.timers.SetTimer('dash', 1000);
+		}
+	};
+
 	this.Dashing = function() {
 		this.PlayAnim('idle');
 
-		//this.Spore.explode(3000, 20);
+		//
 
 		this.body.velocity.x = this.body.velocity.x;
 		this.body.velocity.y = this.body.velocity.y;
 
-		if(game.time.now > this.dashTimer){
+		if(this.timers.TimerUp('dash')) {
 			this.body.velocity.x = 0;
 			this.body.velocity.y = 0;
 
@@ -135,7 +145,7 @@ Enemy.prototype.types['Sporoid'] =  function() {
 	};
 
 	this.Hurting = function() {
-		if(game.time.now > this.hitTimer) {
+		if(this.timers.TimerUp('hit')) {
 			this.state = this.Idling;
 		}
 	};

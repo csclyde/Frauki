@@ -4,14 +4,19 @@
         <meta charset="UTF-8" />
         <title>Frauki's Adventure!</title>
         <script type="text/javascript" src="https://rawgit.com/photonstorm/phaser/master/build/phaser.min.js"></script>
-        <script src="Src/phaser-debug.js"></script>
+        <script src="Src/Plugins/phaser-debug.js"></script>
 
         <script type="text/javascript" src="Src/EventRouter.js"></script>
+        <script type="text/javascript" src="Src/TriggerController.js"></script>
+        <script type="text/javascript" src="Src/TimerUtil.js"></script>
         <script type="text/javascript" src="Src/CameraController.js"></script>
+        <script type="text/javascript" src="Src/AudioController.js"></script>
         <script type="text/javascript" src="Src/InputController.js"></script>
         <script type="text/javascript" src="Src/EffectsController.js"></script>
         <script type="text/javascript" src="Src/WeaponController.js"></script>
         <script type="text/javascript" src="Src/EnergyController.js"></script>
+        <script type="text/javascript" src="Src/ProjectileController.js"></script>
+        <script type="text/javascript" src="Src/SpeechBubble.js"></script>
 
         <script type="text/javascript" src="Src/Frogland.js"></script>
         <script type="text/javascript" src="Src/Frauki.js"></script>
@@ -21,15 +26,23 @@
             <script type="text/javascript" src="Src/Enemies/Insectoid.js"></script>
             <script type="text/javascript" src="Src/Enemies/Buzzar.js"></script>
             <script type="text/javascript" src="Src/Enemies/Sporoid.js"></script>
+            <script type="text/javascript" src="Src/Enemies/Madman.js"></script>
+            <script type="text/javascript" src="Src/Enemies/CreeperThistle.js"></script>
+            <script type="text/javascript" src="Src/Enemies/Incarnate.js"></script>
+            <script type="text/javascript" src="Src/Enemies/Haystax.js"></script>
+            <script type="text/javascript" src="Src/Enemies/Bizarro.js"></script>
+            <script type="text/javascript" src="Src/Enemies/Lancer.js"></script>
+
+        <script type="text/javascript" src="Src/Door.js"></script>
+        <script type="text/javascript" src="Src/Apple.js"></script>
 
         <script>
         	var game = new Phaser.Game(512, 288, Phaser.CANVAS, "", Frogland, false, false);
 
             var events = new EventRouter();
+            var triggers = new TriggerController();
 
-            var pixel = { scale: 2, canvas: null, context: null, width: 512, height: 288 }
-
-
+            var pixel = { scale: 3, canvas: null, context: null, width: 512, height: 288 }
 
         	game.state.add('Frogland', Frogland, true);
         </script>

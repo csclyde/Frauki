@@ -23,6 +23,12 @@ CameraController = function(player, map) {
 	events.subscribe('player_crouch', this.CrouchCamera, this);
 	events.subscribe('control_up', this.RaiseCamera, this);
 	events.subscribe('camera_shake', this.ScreenShake, this);
+
+	this.daemon = game.add.sprite(0, 0, null);
+
+	this.moveTimer = 0;
+
+	//game.camera.follow(this.daemon);
 }
 
 //camera is controlled in player centric space
@@ -32,14 +38,14 @@ CameraController.prototype.UpdateCamera = function() {
 	var xOffset = frauki.states.direction === 'left' ? -15 : 15;
 	var yOffset = frauki.body.velocity.y > 0 ? 20 : 0;
 
-	yOffset += (frauki.states.crouching ? 50 : 0);
-	yOffset -= (frauki.states.upPressed ? 50 : 0);
+	yOffset += (frauki.states.crouching ? 35 : 0);
+	yOffset -= (frauki.states.upPressed ? 35 : 0);
 
 	if(this.prevXVel !== frauki.body.velocity.x)
 		game.add.tween(this).to({camX:Math.floor((frauki.body.velocity.x / X_VEL_DIV) + xOffset)}, 500, Phaser.Easing.Sinusoidal.Out, true);
 
 	if(this.prevYVel !== frauki.body.velocity.y || this.retweenY) {
-		game.add.tween(this).to({camY:Math.floor((frauki.body.velocity.y / Y_VEL_DIV) + yOffset)}, 400, Phaser.Easing.Sinusoidal.Out, true);
+		game.add.tween(this).to({camY:Math.floor((frauki.body.velocity.y / Y_VEL_DIV) + yOffset)}, 1000, Phaser.Easing.Quintic.Out, true);
 		this.retweenY = false;
 	}
 
@@ -50,7 +56,12 @@ CameraController.prototype.UpdateCamera = function() {
 		this.shakeX = 0;
 	}
 
-	game.camera.focusOnXY(this.camX + frauki.body.x + this.shakeX, this.camY + frauki.body.y + this.shakeY);
+	//this.daemon.x = this.camX + frauki.body.x + this.shakeX;
+	//this.daemon.y = this.camY + frauki.body.y + this.shakeY;
+	if(game.time.now > this.moveTimer) {
+		game.camera.focusOnXY(this.camX + frauki.body.x + this.shakeX, this.camY + frauki.body.y + this.shakeY + (frauki.body.height - 50));
+		this.moveTimer = game.time.now + 12;
+	}
 
 	this.prevXVel = frauki.body.velocity.x;
 	this.prevYVel = frauki.body.velocity.y;

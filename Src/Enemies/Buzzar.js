@@ -3,10 +3,10 @@ Enemy.prototype.types['Buzzar'] =  function() {
 	this.body.setSize(11, 27, 0, 0);
 	this.anchor.setTo(0.5, 0.5);
 
-    this.animations.add('idle', ['Sting0000'], 10, true, false);
-    this.animations.add('sting', ['Sting0001', 'Sting0002'], 10, false, false);
+    this.animations.add('idle', ['Buzzar/Sting0000'], 10, true, false);
+    this.animations.add('sting', ['Buzzar/Sting0000'], 10, false, false);
 
-    this.body.allowGravity = false;
+    
 
     this.wanderDirection = 'left';
 
@@ -17,21 +17,26 @@ Enemy.prototype.types['Buzzar'] =  function() {
 
     this.anger = 1;
     
-    this.weight = 400;
+    this.weight = 0.5;
+    this.energy = 3;
+    this.damage = 5;
+    this.poise = 5;
+
+    this.wanderTimer = 0;
+
+    this.squashTween = null;
+
+    this.baseStunDuration = 800;
 
 	this.updateFunction = function() {
 
-		if(this.scale.y > 1 && this.state !== this.Stinging) {
+		if(!!this.squashTween && !this.squashTween.isRunning) {
 			this.scale.y = 1;
-			this.scale.x /= 0.7;
 		}
-		
-		if(this.state == this.Hurting) {
-			this.angle += 30;
-		}
-		else {
-			this.angle = 0;
-		}
+
+		this.body.allowGravity = false;
+        this.body.gravity.y = 0;
+
 	};
 
 	///////////////////////////////ACTIONS////////////////////////////////////
@@ -39,43 +44,29 @@ Enemy.prototype.types['Buzzar'] =  function() {
 		if(frauki.body.y <= this.body.y)
 			return;
 
-		this.stingTimer = game.time.now + 300;
+		this.stingTimer = game.time.now + 400;
 		this.stingRestTimer = game.time.now + 1500;
 
 		this.state = this.PreStinging;
+		this.squashTween = game.add.tween(this.scale).to({y: 0.7}, 300, Phaser.Easing.Exponential.Out, true);
 	};
 
 	this.ChangeDirection = function() {
 		var dir = Math.random() * 4;
 
-		if(this.body.touching.up)
-			this.wanderDirection = 'down';
-		else if(this.body.touching.down)
-			this.wanderDirection = 'up';
-		else if(this.body.touching.left)
+		if(this.body.touching.left)
 			this.wanderDirection = 'right';
 		else if(this.body.touching.right)
 			this.wanderDirection = 'left';
-	    else if(dir <= 1)
-	    	this.wanderDirection = 'left';
-	    else if(dir <= 2)
-	    	this.wanderDirection = 'up';
-	    else if(dir <= 3)
-	    	this.wanderDirection = 'right';
-	    else if(dir <= 4)
-	    	this.wanderDirection = 'down';
 	};
 
 	this.TakeHit = function(power) {
-		if(game.time.now < this.hitTimer) {
+		if(!this.timers.TimerUp('hit')) {
 			return;
 		}
-    
-	    //compute the velocity based on weight and attack knockback
-	    this.body.velocity.y = -350 - this.weight;
 
 	    //a durability stat should modify how long they are stunned for. also, the amount of dmg
-	    this.hitTimer = game.time.now + 300;
+	    this.hitTimer = game.time.now + 800;
 
 	    this.state = this.Hurting;
 
@@ -92,14 +83,15 @@ Enemy.prototype.types['Buzzar'] =  function() {
 		this.PlayAnim('idle');
 		
 		this.body.velocity.y = Math.sin(game.time.now / 150) * 100 + (Math.random() * 40 - 20);
-		this.body.velocity.x = Math.sin(game.time.now / 1000) * 20;
+		//this.body.velocity.x = Math.sin(game.time.now / 1000) * 20;
 
+		if(this.wanderTimer > game.time.now) {
+			switch(this.wanderDirection) {
+				case 'left': this.body.velocity.x -= 30; break;
+				case 'right': this.body.velocity.x += 30; break;
+			}
 
-		switch(this.wanderDirection) {
-			case 'left': this.body.velocity.x -= 30; break;
-			case 'up':   this.body.velocity.y -= 30; break;
-			case 'right': this.body.velocity.x += 30; break;
-			case 'down': this.body.velocity.y += 30; break;
+			this.wanderTimer = game.time.now + 1000 + (Math.random() * 200);
 		}
 
 		if(this.PlayerIsNear(640))
@@ -111,15 +103,13 @@ Enemy.prototype.types['Buzzar'] =  function() {
 
 	this.PreStinging = function() {
 		this.PlayAnim('idle');
-		this.scale.y = 0.7;
 		this.body.velocity.x = 0;
 		this.body.velocity.y = 0;
 
 		if(game.time.now > this.stingTimer) {
 			this.stingTimer = game.time.now + 2000;
 			this.state = this.Stinging;
-			this.scale.y = 1.3;
-			this.scale.x *= 0.8;
+			this.squashTween = game.add.tween(this.scale).to({y: 1.5}, 200, Phaser.Easing.Exponential.In, true);
 			game.physics.arcade.moveToXY(this, frauki.body.center.x, frauki.body.center.y, 450);
 		}
 	};
@@ -140,8 +130,10 @@ Enemy.prototype.types['Buzzar'] =  function() {
 
 	this.Hurting = function() {
 
-		if(game.time.now > this.hitTimer) {
+		this.body.allowGravity = true;
+        this.body.gravity.y = game.physics.arcade.gravity.y * 2;
 
+		if(this.timers.TimerUp('hit')) {
 			if(this.anger >= 4)
 	    		this.state = this.Enraged;
 	    	else

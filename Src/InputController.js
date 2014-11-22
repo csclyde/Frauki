@@ -1,5 +1,6 @@
 InputController = function(player) {
 	this.player = player;
+    this.timers = new TimerUtil();
 
 	this.jump 		= game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 	this.up 		= game.input.keyboard.addKey(Phaser.Keyboard.UP);
@@ -8,6 +9,7 @@ InputController = function(player) {
 	this.runRight 	= game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
 	this.slash		= game.input.keyboard.addKey(Phaser.Keyboard.Z);
 	this.roll		= game.input.keyboard.addKey(Phaser.Keyboard.X);
+	this.wep	    = game.input.keyboard.addKey(Phaser.Keyboard.C);
 	this.testButton = game.input.keyboard.addKey(Phaser.Keyboard.P);
 
     this.runLeft.onDown.add(function() { events.publish('player_run', {run:true, dir:'left'}); }, this);
@@ -24,8 +26,14 @@ InputController = function(player) {
     this.crouch.onDown.add(function() { events.publish('player_crouch', {crouch: true}); }, this);
     this.crouch.onUp.add(function() {   events.publish('player_crouch', {crouch: false}); }, this);
 
-    this.slash.onDown.add(function() { events.publish('player_slash', {}); }, this);
+    this.slash.onDown.add(function() { 
+        events.publish('player_slash', {});
+    }, this);
+
     this.roll.onDown.add(function() {   events.publish('player_roll', null, this)});
+    
+    this.wep.onDown.add(function() { events.publish('activate_weapon', {activate: true}); }, this);
+    this.wep.onUp.add(function() {   events.publish('activate_weapon', {activate: false}); }, this);
 
     this.testButton.onDown.add(function() { energyController.AddEnergy(); });
 

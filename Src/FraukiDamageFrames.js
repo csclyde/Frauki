@@ -8,8 +8,8 @@ var fraukiDamageFrames = {
 		w: 65,
 		h: 34,
 
-		damage: 1.5,
-		knockback: 0.5,
+		damage: 1,
+		knockback: 1,
 		penetration: 0
 	},
 	
@@ -34,8 +34,8 @@ var fraukiDamageFrames = {
 		w: 35,
 		h: 35,
 
-		damage: 0.5,
-		knockback: 0.5,
+		damage: 0.75,
+		knockback: 0.3,
 		penetration: 0
 	},
 
@@ -47,7 +47,7 @@ var fraukiDamageFrames = {
 		w: 25,
 		h: 15,
 
-		damage: 0.5,
+		damage: 0.25,
 		knockback: 0.1,
 		penetration: 0
 	},
@@ -61,7 +61,7 @@ var fraukiDamageFrames = {
 		h: 30,
 
 		damage: 0.5,
-		knockback: 0,
+		knockback: 0.1,
 		penetration: 0
 	},
 
@@ -74,7 +74,7 @@ var fraukiDamageFrames = {
 		h: 15,
 
 		damage: 0.5,
-		knockback: 0,
+		knockback: 0.1,
 		penetration: 0
 	},
 
@@ -86,8 +86,8 @@ var fraukiDamageFrames = {
 		w: 45,
 		h: 30,
 
-		damage: 1.5,
-		knockback: 0,
+		damage: 1,
+		knockback: 0.1,
 		penetration: 0
 	},
 
@@ -99,34 +99,47 @@ var fraukiDamageFrames = {
 		w: 75,
 		h: 60,
 
-		damage: 1.5,
-		knockback: 0,
+		damage: 2.5,
+		knockback: 0.1,
 		penetration: 0
 	},
 
 	//overhead swing
-	'Slash Standing0007': {
+	'Attack Overhead0008': {
 		damageFrame: true,
-		x: -10, 
-		y: -25,
-		w: 45,
-		h: 50,
+		x: -30, 
+		y: -32,
+		w: 75,
+		h: 60,
 
-		damage: 1,
-		knockback: 0,
+		damage: 2,
+		knockback: 0.1,
 		penetration: 0
 	},
-	
-	//follow through on the overhead swing, in front of you and low
-	'Slash Standing0008': {
+
+	//overhead swing
+	'Attack Overhead0009': {
 		damageFrame: true,
-		x: 10, 
-		y: 25,
-		w: 28,
-		h: 20,
+		x: -30, 
+		y: -32,
+		w: 75,
+		h: 60,
 
 		damage: 1,
-		knockback: 0,
+		knockback: 0.1,
+		penetration: 0
+	},
+
+	//overhead swing
+	'Attack Overhead0010': {
+		damageFrame: true,
+		x: -30, 
+		y: -32,
+		w: 75,
+		h: 60,
+
+		damage: 0.5,
+		knockback: 0.1,
 		penetration: 0
 	},
 	
@@ -138,7 +151,7 @@ var fraukiDamageFrames = {
 		w: 50,
 		h: 40,
 
-		damage: 2,
+		damage: 3,
 		knockback: 1.4,
 		penetration: 0
 	},
@@ -152,7 +165,7 @@ var fraukiDamageFrames = {
 		h: 10,
 
 		damage: 1,
-		knockback: 0.8,
+		knockback: 1,
 		penetration: 0
 	},
 	
@@ -182,6 +195,45 @@ var fraukiDamageFrames = {
 		penetration: 0
 	},
 
+	//stab, long followthrough
+	'Attack Stab0010': {
+		damageFrame: true,
+		x: 0, 
+		y: 15,
+		w: 83,
+		h: 12,
+
+		damage: 0.5,
+		knockback: 0.4,
+		penetration: 0
+	},
+
+	//stab taper off
+	'Attack Stab0011': {
+		damageFrame: true,
+		x: 0, 
+		y: 15,
+		w: 83,
+		h: 12,
+
+		damage: 0.1,
+		knockback: 0,
+		penetration: 0
+	},
+
+	//stab, taper off
+	'Attack Stab0012': {
+		damageFrame: true,
+		x: 0, 
+		y: 15,
+		w: 83,
+		h: 12,
+
+		damage: 0,
+		knockback: 0,
+		penetration: 0
+	},
+
 	'Kick0000': {
 		damageFrame: true,
 		x: 0, 
@@ -191,6 +243,78 @@ var fraukiDamageFrames = {
 
 		damage: 0,
 		knockback: 3.0,
+		penetration: 0
+	},
+
+	'Attack Dive0010': {
+		damageFrame: true,
+		x: -10, 
+		y: -5,
+		w: 28,
+		h: 45,
+
+		damage: 3,
+		knockback: 1.5,
+		penetration: 0
+	},
+
+	'Attack Dive0011': {
+		damageFrame: true,
+		x: -10, 
+		y: 15,
+		w: 28,
+		h: 50,
+
+		damage: 3,
+		knockback: 1.5,
+		penetration: 0
+	},
+
+	'Attack Dive0012': {
+		damageFrame: true,
+		x: -2, 
+		y: 40,
+		w: 13,
+		h: 33,
+
+		damage: 4,
+		knockback: 1.5,
+		penetration: 0
+	},
+
+	'Attack Dive0013': {
+		damageFrame: true,
+		x: -2, 
+		y: 40,
+		w: 13,
+		h: 33,
+
+		damage: 4,
+		knockback: 1.5,
+		penetration: 0
+	},
+
+	'Attack Dive0014': {
+		damageFrame: true,
+		x: -2, 
+		y: 40,
+		w: 13,
+		h: 33,
+
+		damage: 4,
+		knockback: 1.5,
+		penetration: 0
+	},
+
+	'Attack Dive0021': {
+		damageFrame: true,
+		x: -30, 
+		y: -8,
+		w: 70,
+		h: 55,
+
+		damage: 3,
+		knockback: 1,
 		penetration: 0
 	}
 };
