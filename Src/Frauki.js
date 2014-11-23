@@ -41,8 +41,8 @@ Player = function (game, x, y, name) {
     this.animations.add('attack_overhead', ['Attack Overhead0003', 'Attack Overhead0004', 'Attack Overhead0005', 'Attack Overhead0006', 'Attack Overhead0007', 'Attack Overhead0008', 'Attack Overhead0009', 'Attack Overhead0010', 'Attack Overhead0011', 'Attack Overhead0012', 'Attack Overhead0013'], 20, false, false);
     this.animations.add('attack_stab', ['Attack Stab0002', 'Attack Stab0003', 'Attack Stab0004', 'Attack Stab0005', 'Attack Stab0006', 'Attack Stab0007', 'Attack Stab0008', 'Attack Stab0009', 'Attack Stab0010', 'Attack Stab0011', 'Attack Stab0012', 'Attack Stab0013', 'Attack Stab0014', 'Attack Stab0015', 'Attack Stab0016', 'Attack Stab0017', 'Attack Stab0018', 'Attack Stab0019'], 20, false, false);
     this.animations.add('attack_dive_charge', ['Attack Dive0000', 'Attack Dive0001', 'Attack Dive0002', 'Attack Dive0003', 'Attack Dive0004', 'Attack Dive0005', 'Attack Dive0009', 'Attack Dive0010', 'Attack Dive0011'], 20, false, false);
-    this.animations.add('attack_dive_fall', ['Attack Dive0012', 'Attack Dive0013', 'Attack Dive0014'], 20, true, false);
-    this.animations.add('attack_dive_land', ['Attack Dive0021', 'Attack Dive0022', 'Attack Dive0023', 'Attack Dive0024', 'Attack Dive0025', 'Attack Dive0026', 'Attack Dive0027', 'Attack Dive0028', 'Attack Dive0029'], 20, false, false);
+    this.animations.add('attack_dive_fall', ['Attack Dive0012', 'Attack Dive0013', 'Attack Dive0014', 'Attack Dive0015', 'Attack Dive0016', 'Attack Dive0017'], 20, true, false);
+    this.animations.add('attack_dive_land', ['Attack Dive0018', 'Attack Dive0019', 'Attack Dive0020', 'Attack Dive0021', 'Attack Dive0022', 'Attack Dive0023', 'Attack Dive0024', 'Attack Dive0025', 'Attack Dive0026', 'Attack Dive0027', 'Attack Dive0028'], 20, false, false);
 
     this.state = this.Standing;
     this.PlayAnim('stand');
@@ -657,7 +657,7 @@ Player.prototype.AttackDiveFall = function() {
     if(this.body.onFloor()) {
         this.movement.diveVelocity = 0;
 
-        events.publish('camera_shake', {magnitudeX: 10, magnitudeY: 5, duration: 200});
+        events.publish('camera_shake', {magnitudeX: 15, magnitudeY: 5, duration: 250});
         this.state = this.AttackDiveLand;
     } else if(this.timers.TimerUp('frauki_dive')) {
         this.movement.diveVelocity = 0;
@@ -676,7 +676,7 @@ Player.prototype.AttackDiveLand = function() {
             if(this.states.crouching)
                 this.state = this.Crouching;
             else
-                this.state = this.Landing;
+                this.state = this.Standing;
         }
         else {
             this.state = this.Running;

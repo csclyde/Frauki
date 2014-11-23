@@ -4,9 +4,9 @@
         <key>fileFormatVersion</key>
         <int>3</int>
         <key>texturePackerVersion</key>
-        <string>3.5.2</string>
+        <string>3.5.3</string>
         <key>fileName</key>
-        <string>D:/gamedev/Frauki/Data/Frauki/Frauki.tps</string>
+        <string>C:/Users/user/Documents/gamedev/Frauki/Data/Frauki/Frauki.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
