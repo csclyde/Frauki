@@ -101,19 +101,20 @@ Enemy.prototype.update = function() {
     this.stunModifier += 0.005;
 
     if(this.timers.TimerUp('poise_ticker')) {
-        this.poise += 1.25;
-        this.timers.SetTimer('poise_ticker', 250);
+        this.poise += 0.25;
+        this.timers.SetTimer('poise_ticker', 200);
     }
 
     if(this.stunModifier > 1.0) this.stunModifier = 1.0;
 
     if(this.poise > this.initialPoise) this.poise = this.initialPoise;
-    if(this.poise < 0) this.poise = 0;
+    if(this.poise < -this.initialPoise) this.poise = -this.initialPoise;
 
     if(this.xHitVel !== 0) {
         this.body.velocity.x = this.xHitVel;
     }
 
+    console.log(this.poise);
 };
 
 Enemy.prototype.GetEnergyPercentage = function() {
@@ -153,6 +154,15 @@ Enemy.prototype.PlayAnim = function(name) {
         this.animations.play(name);
 };
 
+Enemy.prototype.UsePoise = function(amt) {
+    if(this.poise > 0) {
+        this.poise -= amt;
+        return true;
+    } else {
+        return false;
+    }
+};
+
 
 function EnemyHit(f, e) {
     
@@ -179,9 +189,7 @@ function EnemyHit(f, e) {
     e.timers.SetTimer('hit', e.baseStunDuration);
     e.energy -= frauki.currentAttack.damage;
 
-    e.poise -= frauki.currentAttack.damage * 4;
-
-    if(e.poise < 0) e.poise = 0;
+    e.poise -= frauki.currentAttack.damage;
 
     if(e.energy <= 0) {
         e.Die();
@@ -194,7 +202,7 @@ function EnemyHit(f, e) {
         frauki.LandHit();
         e.TakeHit();
 
-        if(e.GetPoisePercentage() < 0.3) {
+        if(e.GetPoisePercentage() < 0) {
             e.body.velocity.y = -300 + (e.weight * 200) - (100 * frauki.currentAttack.damage);
             e.state = e.Hurting;
             e.body.velocity.x = c * e.body.velocity.x * e.body.velocity.x;
