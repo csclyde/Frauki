@@ -219,7 +219,7 @@ EffectsController.prototype.Splash = function(tile) {
         this.splash.minParticleSpeed.y = -200;
         this.splash.maxParticleSpeed.y = -100;
 
-        if(speed !== 0)
+        if(speed > 50)
             this.splash.explode(100, 1);
 
         this.timers.SetTimer('splash_timer', 50);
