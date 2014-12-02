@@ -186,7 +186,9 @@ EffectsController.prototype.ParticleSpray = function(source, dest, color, dir, a
 
 EffectsController.prototype.Splash = function(tile) {
 
-	//if this is not a surface water tile
+    return;
+    
+    //if this is not a surface water tile
     if(map.getTile(tile.x, tile.y - 1, 'Foreground') != null) {
     	return;
     }
@@ -215,6 +217,6 @@ EffectsController.prototype.Splash = function(tile) {
         if(speed > 50)
             this.splash.explode(100, Math.ceil((Math.abs(frauki.body.velocity.y) / 10) + 1));
 
-        this.timers.SetTimer('splash_timer', 50);
+        this.timers.SetTimer('splash_timer', 100);
     }
 };
