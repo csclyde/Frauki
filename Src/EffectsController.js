@@ -201,8 +201,8 @@ EffectsController.prototype.Splash = function(tile) {
         var speed = frauki.body.velocity.x * frauki.body.velocity.x + frauki.body.velocity.y * frauki.body.velocity.y;
         speed = Math.sqrt(speed);
 
-        this.splash.minParticleSpeed.x = frauki.body.velocity.x * 2 + 100;
-        this.splash.maxParticleSpeed.x = frauki.body.velocity.x * 3 + 150;
+        this.splash.minParticleSpeed.x = Math.abs(frauki.body.velocity.x) + 100;
+        this.splash.maxParticleSpeed.x = Math.abs(frauki.body.velocity.x) * 2 + 150;
 
         if(frauki.body.velocity.x < 0) {
             this.splash.minParticleSpeed.x *= -1;
@@ -213,7 +213,7 @@ EffectsController.prototype.Splash = function(tile) {
         this.splash.maxParticleSpeed.y = -1 * frauki.body.velocity.y - 200;
 
         if(speed > 50)
-            this.splash.explode(100, 1 * (speed / 100));
+            this.splash.explode(100, Math.ceil((Math.abs(frauki.body.velocity.y) / 50) + 1));
 
         this.timers.SetTimer('splash_timer', 50);
     }
