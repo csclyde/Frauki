@@ -204,7 +204,7 @@ EffectsController.prototype.Splash = function(tile) {
         this.splash.minParticleSpeed.x = 150;
         this.splash.maxParticleSpeed.x = 250;
 
-        if(frauki.body.velocity.x < 0) {
+        if(frauki.body.velocity.x > 0) {
             this.splash.minParticleSpeed.x *= -1;
             this.splash.maxParticleSpeed.x *= -1;
         }
