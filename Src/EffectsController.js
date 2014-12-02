@@ -213,7 +213,7 @@ EffectsController.prototype.Splash = function(tile) {
         this.splash.maxParticleSpeed.y = -1 * frauki.body.velocity.y - 200;
 
         if(speed > 50)
-            this.splash.explode(100, 1);
+            this.splash.explode(100, 1 * (speed / 100));
 
         this.timers.SetTimer('splash_timer', 50);
     }
