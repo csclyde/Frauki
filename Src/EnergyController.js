@@ -83,7 +83,7 @@ EnergyController.prototype.RemoveEnergy = function(amt) {
 EnergyController.prototype.UseEnergy = function(amt) {
 	if(this.energy > 0) {
 		this.energy -= amt;
-		this.gracePeriod = game.time.now + 500;
+		this.gracePeriod = game.time.now + 600;
 		return true;
 	}
 	
