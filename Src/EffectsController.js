@@ -78,10 +78,6 @@ EffectsController.prototype.UpdateEffects = function() {
         this.positiveBits.width = this.enemySource.width;
         this.positiveBits.height = this.enemySource.height;
     }
-
-    if(frauki.states.inWater) {
-        this.Splash();
-    }
 }
 
 function UpdateParticle(p) {
@@ -188,14 +184,17 @@ EffectsController.prototype.ParticleSpray = function(source, dest, color, dir, a
 	effect.start(false, 2000, 5, amt, amt);
 };
 
-EffectsController.prototype.Splash = function() {
+EffectsController.prototype.Splash = function(tile) {
 
-    return;
-
+	//if this is not a surface water tile
+    if(map.getTile(tile.x, tile.y - 1, 'Foreground') != null) {
+    	return;
+    }
+    
     if(this.timers.TimerUp('splash_timer')) {
         //the y should be based on the water tiles at the bottom of frauki.
         this.splash.x = frauki.body.x;
-        this.splash.y = frauki.body.y + frauki.body.height - ((frauki.body.y + frauki.body.height) % 16);
+        this.splash.y = tile.y * 16;
         this.splash.width = frauki.body.width;
         this.splash.height = 0;
 
@@ -220,7 +219,7 @@ EffectsController.prototype.Splash = function() {
         this.splash.minParticleSpeed.y = -200;
         this.splash.maxParticleSpeed.y = -100;
 
-        if(frauki.body.velocity.x !== 0)
+        if(speed !== 0)
             this.splash.explode(100, 1);
 
         this.timers.SetTimer('splash_timer', 50);
