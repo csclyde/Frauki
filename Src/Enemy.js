@@ -120,8 +120,6 @@ Enemy.prototype.update = function() {
     if(this.xHitVel !== 0) {
         this.body.velocity.x = this.xHitVel;
     }
-
-    console.log(this.poise);
 };
 
 Enemy.prototype.GetEnergyPercentage = function() {
