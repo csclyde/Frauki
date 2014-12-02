@@ -262,6 +262,7 @@ Frogland.CheckEnvironmentalCollisions = function(f, tile) {
         return true;
     } else if(tile.index === 2) { //water
         frauki.states.inWater = true;
+        effectsController.Splash(tile);
         return false;
     } else if(tile.index === 3) { //trick wall
         if(frauki.state === frauki.Rolling) {
