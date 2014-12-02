@@ -6,9 +6,6 @@ Enemy = function(game, x, y, name) {
     //enable its physics body
     game.physics.enable(this, Phaser.Physics.ARCADE);
     this.body.collideWorldBounds = true;
-    this.body.maxVelocity.y = 600;
-    this.body.maxVelocity.x = 600;
-    this.body.bounce.set(0.2);
 
     this.timers = new TimerUtil();
     
@@ -35,11 +32,10 @@ Enemy.prototype = Object.create(Phaser.Sprite.prototype);
 Enemy.prototype.constructor = Enemy;
 Enemy.prototype.types = {};
 
-Enemy.prototype.create = function() {
-
-};
-
 Enemy.prototype.SetDefaultValues = function() {
+    this.body.maxVelocity.y = 1000;
+    this.body.maxVelocity.x = 1000;
+    this.body.bounce.set(0.2);
     this.anchor.setTo(.5, 1);
     this.SetDirection('left');
     this.weight = 0.5;
@@ -59,16 +55,17 @@ Enemy.prototype.Die = function() {};
 Enemy.prototype.Vulnerable = function() { return true; }
 Enemy.prototype.CanCauseDamage = function() { return true; }
 Enemy.prototype.CanChangeDirection = function() { return true; }
-Enemy.prototype.Act = function() {};
 
-Enemy.prototype.update = function() {
-    if(this.WithinCameraRange()) {
+Enemy.prototype.UpdateParentage = function() {
+    if(this.WithinCameraRange() && this.alive) {
         //if they are in the camera range and not yet in the objectGroup, 
         //load them into the objectGroup, from the enemy pool
         if(this.parent === Frogland.enemyPool) {
             Frogland.objectGroup.addChild(this);
             this.body.enable = true;
         }
+
+        return true;
     } else {
         //if they are not in the camera range, and registered as within the
         //object group, take them out of the group
@@ -76,15 +73,24 @@ Enemy.prototype.update = function() {
             Frogland.enemyPool.addChild(this);
             this.body.enable = false;
         }
+
+        return false;
+    }
+}
+
+Enemy.prototype.update = function() {
+
+    if(!this.UpdateParentage()) {
         return;
     }
 
-    if(this.alive === false)
-        return;
-
+    //update function is the generic update function for the specific enemy,
+    //executed regardless of state. State is the actual state function
     this.updateFunction();
     this.state();
 
+    //update the facing of the enemy, assuming they are not being hit and
+    //there is no other precondition overriding their ability to turn
     if(this.xHitVel === 0 && this.CanChangeDirection()) {
         if(this.body.velocity.x > 0) {
             this.SetDirection('right');
@@ -93,6 +99,7 @@ Enemy.prototype.update = function() {
         }
     }
 
+    //temporary means of communicating their energy levels
     this.alpha = this.GetEnergyPercentage();
     
     if(this.energy > this.maxEnergy)
@@ -177,10 +184,6 @@ function EnemyHit(f, e) {
     e.xHitVel = c * (50 - (e.weight * 300) + (1000 * frauki.currentAttack.knockback));
 
     game.add.tween(e).to({xHitVel: 0}, 800, Phaser.Easing.Exponential.Out, true);
-
-    //if(c < 0 && e.body.velocity.x > 0) e.body.velocity.x = 0;
-    //if(c > 0 && e.body.velocity.x < 0) e.body.velocity.x = 0;
-    //compute the velocity based on weight and attack knockback
 
     events.publish('camera_shake', {magnitudeX: 15 * frauki.currentAttack.damage, magnitudeY: 5, duration: 100});
 

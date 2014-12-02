@@ -16,7 +16,6 @@ EnergyController.prototype.Create = function() {
 	this.energyBar.anchor.x = 0;
 
 	this.restingPointMarker = game.add.image(this.energyBar.x + (this.energyBar.width / 2) - 2, 5, 'UI', 'EnergyBar0002');
-	console.log(this.restingPointMarker.x);
 	this.restingPointMarker.fixedToCamera = true;
 };
 
@@ -26,11 +25,7 @@ EnergyController.prototype.UpdateEnergy = function() {
 	//more perturbed it is. 
 
 	var energyDiff = this.energy - this.neutralPoint;
-	var step = 0.15;//-1 * energyDiff / 10;
-
-	/*if(step < 0.005 && step > -0.005) this.energy = this.neutralPoint;
-	else if(step < 0.2 && step > 0) step = 0.2;
-	else if(step > -0.2 && step < 0) step = -0.2;*/
+	var step = 0.25;
 
 	//if the timer is up, tick the energy and reset the timer
 	if(game.time.now > this.tickTimer && game.time.now > this.gracePeriod && !frauki.Attacking()) {
@@ -88,7 +83,7 @@ EnergyController.prototype.RemoveEnergy = function(amt) {
 EnergyController.prototype.UseEnergy = function(amt) {
 	if(this.energy > 0) {
 		this.energy -= amt;
-		this.gracePeriod = game.time.now + 500;
+		this.gracePeriod = game.time.now + 600;
 		return true;
 	}
 	
