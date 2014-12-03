@@ -53,7 +53,7 @@ var previousCamX;
 
 Frogland.create = function() {
 
-    game.add.plugin(Phaser.Plugin.Debug);
+    //game.add.plugin(Phaser.Plugin.Debug);
 
     /*game.canvas.style['display'] = 'none';
     pixel.canvas = Phaser.Canvas.create(game.width * pixel.scale, game.height * pixel.scale);
