@@ -67,14 +67,14 @@ Frogland.create = function() {
     game.time.deltaCap = 0.016;
     game.physics.arcade.TILE_BIAS = 32;
 
-    /*bg = game.add.tileSprite(0, 0, 512, 288, 'Background');
+    bg = game.add.tileSprite(0, 0, 512, 288, 'Background');
     bg.fixedToCamera = true;
 
     parallaxLayer1 = game.add.tileSprite(0, 0, 512, 288, "parallax1");
     parallaxLayer1.fixedToCamera = true;
 
     parallaxLayer2 = game.add.tileSprite(0, 0, 512, 288, "parallax2");
-    parallaxLayer2.fixedToCamera = true;*/
+    parallaxLayer2.fixedToCamera = true;
 
     map = game.add.tilemap('Frogland');
     map.addTilesetImage('FroglandTiles');
