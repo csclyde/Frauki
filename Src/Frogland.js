@@ -54,13 +54,13 @@ Frogland.create = function() {
 
     //game.add.plugin(Phaser.Plugin.Debug);
 
-    game.canvas.style['display'] = 'none';
+    /*game.canvas.style['display'] = 'none';
     pixel.canvas = Phaser.Canvas.create(game.width * pixel.scale, game.height * pixel.scale);
     pixel.context = pixel.canvas.getContext('2d');
     Phaser.Canvas.addToDOM(pixel.canvas);
     Phaser.Canvas.setSmoothingEnabled(pixel.context, false);
     pixel.width = pixel.canvas.width;
-    pixel.height = pixel.canvas.height;
+    pixel.height = pixel.canvas.height;*/
 
 	game.physics.startSystem(Phaser.Physics.ARCADE);
     game.physics.arcade.gravity.y = 800;
@@ -78,7 +78,6 @@ Frogland.create = function() {
 
     map = game.add.tilemap('Frogland');
     map.addTilesetImage('FroglandTiles');
-    map.addTilesetImage('TerraceTiles');
     map.addTilesetImage('DoodadTiles');
    
     backgroundLayer = map.createLayer('Background');
