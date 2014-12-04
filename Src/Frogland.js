@@ -136,7 +136,7 @@ Frogland.create = function() {
         //if the tile is marked as disappearing
         if(tile.index === 2) {
             var water = map.getTileWorldXY(tile.worldX, tile.worldY, 16, 16, 'Foreground');
-            water.alpha = 0.4;
+            //water.alpha = 0.4;
         } else if(tile.index === 4) {
             tile.collideLeft = false;
             tile.collideRight = false;
