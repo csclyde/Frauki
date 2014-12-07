@@ -5,7 +5,6 @@ Frogland.preload = function() {
     game.load.atlasJSONHash('Frauki', 'Data/Frauki/Frauki.png', 'Data/Frauki/Frauki.json');
     game.load.tilemap('Frogland', 'Data/Frogland/Frogland.json', null, Phaser.Tilemap.TILED_JSON);
     game.load.image('FroglandTiles', 'Data/Frogland/Frogland.png');
-    game.load.image('TerraceTiles', 'Data/Frogland/Infinite Terrace.png');
     game.load.image('DoodadTiles', 'Data/Frogland/Frogland Doodads.png');
     game.load.image('Background', 'Data/Frogland/Sky.png');
     game.load.image('parallax1', 'Data/Frogland/Parallax1.png');
@@ -53,15 +52,15 @@ var previousCamX;
 
 Frogland.create = function() {
 
-    game.add.plugin(Phaser.Plugin.Debug);
+    //game.add.plugin(Phaser.Plugin.Debug);
 
-    game.canvas.style['display'] = 'none';
+    /*game.canvas.style['display'] = 'none';
     pixel.canvas = Phaser.Canvas.create(game.width * pixel.scale, game.height * pixel.scale);
     pixel.context = pixel.canvas.getContext('2d');
     Phaser.Canvas.addToDOM(pixel.canvas);
     Phaser.Canvas.setSmoothingEnabled(pixel.context, false);
     pixel.width = pixel.canvas.width;
-    pixel.height = pixel.canvas.height;
+    pixel.height = pixel.canvas.height;*/
 
 	game.physics.startSystem(Phaser.Physics.ARCADE);
     game.physics.arcade.gravity.y = 800;
@@ -185,14 +184,15 @@ Frogland.update = function() {
 };
 
 Frogland.render = function() {
-    game.debug.body(frauki);
+    //game.debug.body(frauki);
+    //game.debug.body(frauki.bodyDouble);
     //game.debug.body(frauki.attackRect);
 
 /*    this.objectGroup.forEach(function(o) {
         game.debug.body(o);
     });*/
 
-    pixel.context.drawImage(game.canvas, 0, 0, game.width, game.height, 0, 0, pixel.width, pixel.height);
+    //pixel.context.drawImage(game.canvas, 0, 0, game.width, game.height, 0, 0, pixel.width, pixel.height);
 };
 
 Frogland.Restart = function() {
@@ -260,6 +260,7 @@ Frogland.CheckEnvironmentalCollisions = function(f, tile) {
         return true;
     } else if(tile.index === 2) { //water
         frauki.states.inWater = true;
+        effectsController.Splash(tile);
         return false;
     } else if(tile.index === 3) { //trick wall
         if(frauki.state === frauki.Rolling) {

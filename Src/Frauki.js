@@ -73,6 +73,14 @@ Player = function (game, x, y, name) {
     game.physics.enable(this.attackRect, Phaser.Physics.ARCADE);
     this.attackRect.body.setSize(0, 0, 0, 0);
 
+    this.bodyDouble = game.add.sprite(0, 0, null);
+    game.physics.enable(this.bodyDouble, Phaser.Physics.ARCADE);
+    this.bodyDouble.anchor.setTo(0.5, 1);
+
+    this.bodyDouble.body.collideWorldBounds = true;
+    this.bodyDouble.body.setSize(11, 50, 0, -75);
+    this.bodyDouble.body.allowGravity = false;
+
     events.subscribe('player_jump', this.Jump, this);
     events.subscribe('player_crouch', this.Crouch, this);
     events.subscribe('player_slash', this.Slash, this);
@@ -126,12 +134,6 @@ Player.prototype.update = function() {
         this.movement.rollBoost = 0;
     }
 
-    /*if(this.state === this.Crouching) {
-        this.body.setSize(11, 30, 0, 0);
-    } else {
-        this.body.setSize(11, 50, 0, 0);
-    }*/
-
     if(this.states.dashing) {
         this.body.gravity.y = -800;
     }
@@ -141,6 +143,9 @@ Player.prototype.update = function() {
     } else {
         this.body.height = 50;
     }
+
+    this.bodyDouble.x = this.x;
+    this.bodyDouble.y = this.y;
 };
 
 Player.prototype.SetDirection = function(dir) {
@@ -204,7 +209,6 @@ Player.prototype.UpdateAttackGeometry = function() {
 };
 
 Player.prototype.Attacking = function() {
-    //if(this.state === this.AttackFront || this.state === this.AttackOverhead || this.state === this.AttackStab || this.state === this.AttackDive || this.state === this.AttackJump)
     if(!!this.attackRect && this.attackRect.body.width !== 0)
         return true;
     else
@@ -512,7 +516,7 @@ Player.prototype.Landing = function() {
 Player.prototype.Crouching = function() {
     this.PlayAnim('crouch');
 
-    if((!this.states.crouching || this.body.velocity.x !== 0 || this.body.velocity.y !== 0) && !this.body.touching.up) {
+    if((!this.states.crouching || this.body.velocity.x !== 0 || this.body.velocity.y !== 0) && !game.physics.arcade.overlap(this.bodyDouble, collisionLayer)) {
         this.state = this.Standing;
     }
 
@@ -553,7 +557,14 @@ Player.prototype.Rolling = function() {
     }
 
     if(this.animations.currentAnim.isFinished) {
-        if(this.body.velocity.y > 150) {
+        this.bodyDouble.body.x = this.body.x;
+        console.log(game.physics.arcade.overlap(this.bodyDouble, collisionLayer));
+        if(game.physics.arcade.overlap(this.bodyDouble, collisionLayer)) {
+            this.state = this.Crouching;
+            this.PlayAnim('crouch');
+            this.animations.currentAnim.setFrame('Crouch0005');
+            console.log('into crouch');
+        } else if(this.body.velocity.y > 150) {
             this.state = this.Falling;
             this.movement.rollVelocity = 0;
         } else if(!inputController.runLeft.isDown && !inputController.runRight.isDown && this.body.onFloor()) {
