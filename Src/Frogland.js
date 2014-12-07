@@ -192,7 +192,7 @@ Frogland.render = function() {
         game.debug.body(o);
     });*/
 
-    pixel.context.drawImage(game.canvas, 0, 0, game.width, game.height, 0, 0, pixel.width, pixel.height);
+    //pixel.context.drawImage(game.canvas, 0, 0, game.width, game.height, 0, 0, pixel.width, pixel.height);
 };
 
 Frogland.Restart = function() {
