@@ -56,12 +56,7 @@ CameraController.prototype.UpdateCamera = function() {
 		this.shakeX = 0;
 	}
 
-	//this.daemon.x = this.camX + frauki.body.x + this.shakeX;
-	//this.daemon.y = this.camY + frauki.body.y + this.shakeY;
-	if(game.time.now > this.moveTimer) {
-		game.camera.focusOnXY(this.camX + frauki.body.x + this.shakeX, this.camY + frauki.body.y + this.shakeY + (frauki.body.height - 50));
-		this.moveTimer = game.time.now + 12;
-	}
+	game.camera.focusOnXY(this.camX + frauki.body.x + this.shakeX, this.camY + frauki.body.y + this.shakeY + (frauki.body.height - 50));
 
 	this.prevXVel = frauki.body.velocity.x;
 	this.prevYVel = frauki.body.velocity.y;
