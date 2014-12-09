@@ -4,8 +4,8 @@ Frogland.preload = function() {
 	
     game.load.atlasJSONHash('Frauki', 'Data/Frauki/Frauki.png', 'Data/Frauki/Frauki.json');
     game.load.tilemap('Frogland', 'Data/Frogland/Frogland.json', null, Phaser.Tilemap.TILED_JSON);
-    game.load.image('FroglandTiles', 'Data/Frogland/Frogland.png');
-    game.load.image('DoodadTiles', 'Data/Frogland/Frogland Doodads.png');
+    game.load.image('FrogtownTiles', 'Data/Frogland/FrogtownTiles.png');
+    game.load.image('DepthsTiles', 'Data/Frogland/DepthsTiles.png');
     game.load.image('Background', 'Data/Frogland/Sky.png');
     game.load.image('parallax1', 'Data/Frogland/Parallax1.png');
     game.load.image('parallax2', 'Data/Frogland/Parallax2.png');
@@ -77,9 +77,8 @@ Frogland.create = function() {
     parallaxLayer2.fixedToCamera = true;
 
     map = game.add.tilemap('Frogland');
-    map.addTilesetImage('FroglandTiles');
-    map.addTilesetImage('TerraceTiles');
-    map.addTilesetImage('DoodadTiles');
+    map.addTilesetImage('FrogtownTiles');
+    map.addTilesetImage('DepthsTiles');
    
     backgroundLayer = map.createLayer('Background');
     midgroundLayer = map.createLayer('Midground');
@@ -89,11 +88,11 @@ Frogland.create = function() {
 
     map.setCollision([1, 3, 4], true, 'Collision');
 
-    var fraukiTile = map.searchTileIndex(1045, 0, false, 'Midground');
+    /*var fraukiTile = map.searchTileIndex(1045, 0, false, 'Midground');
     fraukiSpawnX = fraukiTile.worldX || 0;
-    fraukiSpawnY = fraukiTile.worldY || 0;
+    fraukiSpawnY = fraukiTile.worldY || 0;*/
 
-    frauki = new Player(game, fraukiSpawnX, fraukiSpawnY, 'Frauki');
+    frauki = new Player(game, 100, 100, 'Frauki');
     game.add.existing(frauki);
 
     //create the enemies
