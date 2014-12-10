@@ -7,7 +7,7 @@ PLAYER_SPEED = function() {
 }
 
 PLAYER_ROLL_SPEED = function() { return 550 + (energyController.GetNeutral() * 10); }
-PLAYER_RUN_SLASH_SPEED = function() { return  900 + (energyController.GetNeutral() * 10); }
+PLAYER_RUN_SLASH_SPEED = function() { return  650 + (energyController.GetNeutral() * 10); }
 PLAYER_JUMP_VEL = function() { return -470 - (energyController.GetNeutral() * 3); }
 PLAYER_DOUBLE_JUMP_VEL = function() { return -400 - (energyController.GetNeutral() * 2); }
 PLAYER_JUMP_SLASH_SPEED = function() { return 1000 + (energyController.GetNeutral() * 5); }
