@@ -305,16 +305,10 @@ Player.prototype.Slash = function(params) {
         if(energyController.UseEnergy(6)) {
             this.state = this.AttackStab;
     
-            if(this.states.direction === 'left') {
-                //this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: -PLAYER_SPEED()}, 200, Phaser.Easing.Quartic.In, true);
-                this.movement.rollVelocity = 0;
-                this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: -PLAYER_RUN_SLASH_SPEED()}, 200, Phaser.Easing.Exponential.InOut, true).to({rollVelocity: 0}, 500, Phaser.Easing.Exponential.InOut, true);
-            }
-            else {
-                //this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: PLAYER_SPEED()}, 200, Phaser.Easing.Quartic.In, true);
-                this.movement.rollVelocity = 0;
-                this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: PLAYER_RUN_SLASH_SPEED()}, 200, Phaser.Easing.Exponential.InOut, true).to({rollVelocity: 0}, 500, Phaser.Easing.Exponential.InOut, true);
-            }
+            var dir = this.GetDirectionMultiplier();
+            
+            this.movement.rollVelocity = 0;
+            this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: dir * PLAYER_RUN_SLASH_SPEED()}, 200, Phaser.Easing.Exponential.InOut, true).to({rollVelocity: 0}, 500, Phaser.Easing.Exponential.InOut, true);
         }
     }
     //upwards dash attack
@@ -374,6 +368,16 @@ Player.prototype.Roll = function(params) {
 
     this.state = this.Rolling;
 
+    var dir = this.GetDirectionMultiplier();
+
+    this.movement.rollVelocity = dir * PLAYER_ROLL_SPEED();
+    this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: dir * PLAYER_SPEED()}, 300, Phaser.Easing.Quartic.In, true);
+
+    this.timers.SetTimer('frauki_roll', 650);
+    this.timers.SetTimer('frauki_grace', 300);
+};
+
+Player.prototype.GetDirectionMultiplier() {
     var dir = 1;
     if(inputController.runLeft.isDown) {
         this.SetDirection('left');
@@ -388,13 +392,9 @@ Player.prototype.Roll = function(params) {
         this.SetDirection('right');
         dir = 1;
     }
-
-    this.movement.rollVelocity = dir * PLAYER_ROLL_SPEED();
-    this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: dir * PLAYER_SPEED()}, 300, Phaser.Easing.Quartic.In, true);
-
-    this.timers.SetTimer('frauki_roll', 650);
-    this.timers.SetTimer('frauki_grace', 300);
-};
+    
+    return dir;
+}
 
 Player.prototype.Hit = function(f, e) {
 
@@ -618,7 +618,7 @@ Player.prototype.AttackStab = function() {
     this.PlayAnim('attack_stab');
 
     //override the max velocity
-    this.body.maxVelocity.x = PLAYER_ROLL_SPEED();
+    this.body.maxVelocity.x = PLAYER_RUN_SLASH_SPEED();
     this.body.velocity.x = this.movement.rollVelocity;
 
     var frameName = this.animations.currentFrame;
@@ -633,16 +633,16 @@ Player.prototype.AttackStab = function() {
 
     if(this.animations.currentAnim.isFinished) {
 
+        this.tweens.roll.stop();
+        this.movement.rollVelocity = 0;
+        
         if(this.body.velocity.y > 150) {
             this.state = this.Falling;
-            this.movement.rollVelocity = 0;
-        } else if(!inputController.runLeft.isDown && !inputController.runRight.isDown && this.body.onFloor()) {
-            this.state = this.Standing;
-            this.movement.rollVelocity = 0;
         } else if((inputController.runLeft.isDown || inputController.runRight.isDown) && this.body.onFloor()) {
             this.state = this.Running;
-            this.movement.rollVelocity = 0;
-        } 
+        } else {
+            this.state = this.Standing;
+        }
     }
 };
 
