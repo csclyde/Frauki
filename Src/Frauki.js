@@ -377,7 +377,7 @@ Player.prototype.Roll = function(params) {
     this.timers.SetTimer('frauki_grace', 300);
 };
 
-Player.prototype.GetDirectionMultiplier() {
+Player.prototype.GetDirectionMultiplier = function() {
     var dir = 1;
     if(inputController.runLeft.isDown) {
         this.SetDirection('left');
