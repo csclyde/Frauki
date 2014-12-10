@@ -6,6 +6,7 @@ Frogland.preload = function() {
     game.load.tilemap('Frogland', 'Data/Frogland/Frogland.json', null, Phaser.Tilemap.TILED_JSON);
     game.load.image('FrogtownTiles', 'Data/Frogland/FrogtownTiles.png');
     game.load.image('DepthsTiles', 'Data/Frogland/DepthsTiles.png');
+    game.load.image('Collision', 'Data/CollisionKey.png');
     game.load.image('Background', 'Data/Frogland/Sky.png');
     game.load.image('parallax1', 'Data/Frogland/Parallax1.png');
     game.load.image('parallax2', 'Data/Frogland/Parallax2.png');
@@ -79,10 +80,12 @@ Frogland.create = function() {
     map = game.add.tilemap('Frogland');
     map.addTilesetImage('FrogtownTiles');
     map.addTilesetImage('DepthsTiles');
+    map.addTilesetImage('Collision');
    
     backgroundLayer = map.createLayer('Background');
     midgroundLayer = map.createLayer('Midground');
     collisionLayer = map.createLayer('Collision');
+    collisionLayer.visible = false;
     
     midgroundLayer.resizeWorld();
 
