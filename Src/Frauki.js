@@ -372,8 +372,9 @@ Player.prototype.Roll = function(params) {
 
     var dir = this.GetDirectionMultiplier();
 
-    this.movement.rollVelocity = dir * PLAYER_ROLL_SPEED();
-    this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: dir * PLAYER_SPEED()}, 300, Phaser.Easing.Quartic.In, true);
+    this.movement.rollVelocity = dir * PLAYER_SPEED();
+    this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: dir * PLAYER_ROLL_SPEED()}, 50, Phaser.Easing.Exponential.In, false).to({rollVelocity: dir * PLAYER_SPEED()}, 300, Phaser.Easing.Quartic.In, false);
+    this.tweens.roll.start();
 
     this.timers.SetTimer('frauki_roll', 650);
     this.timers.SetTimer('frauki_grace', 300);
