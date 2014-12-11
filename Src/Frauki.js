@@ -32,7 +32,7 @@ Player = function (game, x, y, name) {
     this.animations.add('land', ['Standing Jump0006', 'Standing Jump0007', 'Standing Jump0008'], 10, false, false);
     this.animations.add('crouch', ['Crouch0000', 'Crouch0001', 'Crouch0002', 'Crouch0003', 'Crouch0004', 'Crouch0005', 'Crouch0006', 'Crouch0007', 'Crouch0008'], 20, false, false);
     this.animations.add('flip', ['Flip0000', 'Flip0001', 'Flip0002', 'Flip0003', 'Flip0004'], 14, false, false);
-    this.animations.add('roll', ['Flip0000', 'Flip0001', 'Flip0002', 'Flip0003', 'Flip0004'], 14, false, false);
+    this.animations.add('roll', ['Roll0000', 'Roll0001', 'Roll0002', 'Roll0003', 'Roll0004', 'Roll0005', 'Roll0013', 'Roll0014'], 18, false, false);
     this.animations.add('hit', ['Hit0000', 'Hit0001'], 10, true, false);
     this.animations.add('kick', ['Kick0000', 'Kick0001'], 18, false, false);
 
