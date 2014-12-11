@@ -63,8 +63,10 @@ Frogland.create = function() {
     pixel.width = pixel.canvas.width;
     pixel.height = pixel.canvas.height;
 
-	game.physics.startSystem(Phaser.Physics.ARCADE);
+    game.physics.startSystem(Phaser.Physics.ARCADE);
     game.physics.arcade.gravity.y = 800;
+    
+    game.physics.arcade.TILE_BIAS = 40;
 
     bg = game.add.tileSprite(0, 0, 512, 288, 'Background');
     bg.fixedToCamera = true;
