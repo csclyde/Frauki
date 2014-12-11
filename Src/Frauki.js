@@ -104,6 +104,8 @@ Player.prototype.create = function() {
 
 Player.prototype.update = function() {
 
+    console.log(this.body.velocity.y);
+    
     this.body.maxVelocity.x = PLAYER_SPEED() + this.movement.rollBoost;
     this.body.maxVelocity.y = 500;
 
