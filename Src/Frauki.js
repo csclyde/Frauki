@@ -35,6 +35,7 @@ Player = function (game, x, y, name) {
     this.animations.add('roll', ['Roll0000', 'Roll0001', 'Roll0002', 'Roll0003', 'Roll0004', 'Roll0005', 'Roll0013', 'Roll0014'], 18, false, false);
     this.animations.add('hit', ['Hit0000', 'Hit0001'], 10, true, false);
     this.animations.add('kick', ['Kick0000', 'Kick0001'], 18, false, false);
+    this.animations.add('roll_jump', ['Roll0009', 'Roll0010', 'Roll0011', 'Roll0012'], 14, false, false);
 
     //attacks
     this.animations.add('attack_front', ['Attack Front0001', 'Attack Front0002', 'Attack Front0003', 'Attack Front0004', 'Attack Front0005', 'Attack Front0006', 'Attack Front0007', 'Attack Front0008',], 20, false, false);
@@ -462,7 +463,9 @@ Player.prototype.Running = function() {
 };
 
 Player.prototype.Jumping = function() {
-    this.PlayAnim('jump');
+    if(this.animations.name !== 'roll_jump' || (this.animations.name === 'roll_jump' && this.animations.currentAnim.isFinished)) {
+        this.PlayAnim('jump');
+    }
 
     if(this.body.velocity.y >= 0) {
         this.state = this.Peaking;
@@ -551,6 +554,7 @@ Player.prototype.Rolling = function() {
     
     if(this.body.velocity.y < 0) {
         this.state = this.Jumping;
+        this.PlayAnim('roll_jump');
 
         //roll boost is caluclated based on how close they were to the max roll speed
         this.movement.rollBoost = Math.abs(this.movement.rollVelocity) - PLAYER_SPEED(); 
@@ -562,8 +566,9 @@ Player.prototype.Rolling = function() {
     }
 
     if(this.animations.currentAnim.isFinished) {
+
         this.bodyDouble.body.x = this.body.x;
-        console.log(game.physics.arcade.overlap(this.bodyDouble, collisionLayer));
+
         if(game.physics.arcade.overlap(this.bodyDouble, collisionLayer)) {
             this.state = this.Crouching;
             this.PlayAnim('crouch');
