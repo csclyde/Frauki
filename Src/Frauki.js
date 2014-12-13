@@ -35,7 +35,7 @@ Player = function (game, x, y, name) {
     this.animations.add('roll', ['Roll0000', 'Roll0001', 'Roll0002', 'Roll0003', 'Roll0004', 'Roll0005', 'Roll0013', 'Roll0014'], 18, false, false);
     this.animations.add('hit', ['Hit0000', 'Hit0001'], 10, true, false);
     this.animations.add('kick', ['Kick0000', 'Kick0001'], 18, false, false);
-    this.animations.add('roll_jump', ['Roll0009', 'Roll0010', 'Roll0011', 'Roll0012'], 14, false, false);
+    this.animations.add('roll_jump', ['Roll0009', 'Roll0010', 'Roll0011', 'Roll0012'], 18, false, false);
 
     //attacks
     this.animations.add('attack_front', ['Attack Front0001', 'Attack Front0002', 'Attack Front0003', 'Attack Front0004', 'Attack Front0005', 'Attack Front0006', 'Attack Front0007', 'Attack Front0008',], 20, false, false);
