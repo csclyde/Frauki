@@ -8,8 +8,8 @@ PLAYER_SPEED = function() {
 
 PLAYER_ROLL_SPEED = function() { return 550 + (energyController.GetNeutral() * 10); }
 PLAYER_RUN_SLASH_SPEED = function() { return  650 + (energyController.GetNeutral() * 10); }
-PLAYER_JUMP_VEL = function() { return -470 - (energyController.GetNeutral() * 3); }
-PLAYER_DOUBLE_JUMP_VEL = function() { return -400 - (energyController.GetNeutral() * 2); }
+PLAYER_JUMP_VEL = function() { return -250 - (energyController.GetNeutral() * 10); }
+PLAYER_DOUBLE_JUMP_VEL = function() { return -200 - (energyController.GetNeutral() * 10); }
 PLAYER_JUMP_SLASH_SPEED = function() { return 1000 + (energyController.GetNeutral() * 5); }
 PLAYER_KICK_SPEED = 800;
 
@@ -559,7 +559,7 @@ Player.prototype.Rolling = function() {
         //roll boost is caluclated based on how close they were to the max roll speed
         this.movement.rollBoost = Math.abs(this.movement.rollVelocity) - PLAYER_SPEED(); 
         this.movement.rollBoost /= (PLAYER_ROLL_SPEED() - PLAYER_SPEED());
-        this.movement.rollBoost *= 75;
+        this.movement.rollBoost *= 150;
 
         this.tweens.roll.stop();
         this.movement.rollVelocity = 0;
