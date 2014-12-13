@@ -87,7 +87,7 @@ Frogland.create = function() {
     
     midgroundLayer.resizeWorld();
 
-    map.setCollision([1, 3, 4], true, 'Collision');
+    map.setCollision([1, 3, 4, 9, 10], true, 'Collision');
 
     /*var fraukiTile = map.searchTileIndex(1045, 0, false, 'Midground');
     fraukiSpawnX = fraukiTile.worldX || 0;
@@ -153,6 +153,10 @@ Frogland.create = function() {
 
     this.fadedTiles = [];
     this.EstablishDisappearingWalls();
+
+    map.setTileIndexCallback(9, function() {
+        console.log('test');
+    }, this, 'Collision');
 };
 
 Frogland.update = function() {
