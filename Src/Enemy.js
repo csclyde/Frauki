@@ -120,6 +120,8 @@ Enemy.prototype.update = function() {
     if(this.xHitVel !== 0) {
         this.body.velocity.x = this.xHitVel;
     }
+
+    game.physics.arcade.collide(this, collisionLayer);
 };
 
 Enemy.prototype.GetEnergyPercentage = function() {

@@ -167,7 +167,7 @@ Frogland.update = function() {
     //reset environmental effect flags
     frauki.states.inWater = false;
     
-    //game.physics.arcade.collide(frauki, collisionLayer, null, this.CheckEnvironmentalCollisions);
+    game.physics.arcade.collide(frauki, collisionLayer, null, this.CheckEnvironmentalCollisions);
     game.physics.arcade.collide(frauki, this.objectGroup, this.CollideFraukiWithObject, this.OverlapFraukiWithObject);
     game.physics.arcade.collide(this.objectGroup, collisionLayer);
     game.physics.arcade.collide(frauki, foregroundLayer, null, this.HideForeground);
