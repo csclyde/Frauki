@@ -66,6 +66,8 @@ Frogland.create = function() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
     game.physics.arcade.gravity.y = 800;
 
+    game.time.desiredFps = 60;
+
     bg = game.add.tileSprite(0, 0, 512, 288, 'Background');
     bg.fixedToCamera = true;
 
@@ -103,17 +105,17 @@ Frogland.create = function() {
     this.enemyPool = game.add.group();
     
 
-    map.createFromObjects('Enemies', 1065, 'Insectoid', null, true, false, this.objectGroup, Enemy, false);
-    map.createFromObjects('Enemies', 1066, 'Buzzar', null, true, false, this.objectGroup, Enemy, false);
-    map.createFromObjects('Enemies', 1067, 'Sporoid', null, true, false, this.objectGroup, Enemy, false);
-    map.createFromObjects('Enemies', 1068, 'Madman', null, true, false, this.objectGroup, Enemy, false);
+    map.createFromObjects('Enemies', 85, 'Insectoid', null, true, false, this.objectGroup, Enemy, false);
+    map.createFromObjects('Enemies', 86, 'Buzzar', null, true, false, this.objectGroup, Enemy, false);
+    map.createFromObjects('Enemies', 87, 'Sporoid', null, true, false, this.objectGroup, Enemy, false);
+    map.createFromObjects('Enemies', 88, 'Madman', null, true, false, this.objectGroup, Enemy, false);
     map.createFromObjects('Enemies', 89, 'CreeperThistle', null, true, false, this.objectGroup, Enemy, false);
-    map.createFromObjects('Enemies', 1070, 'Incarnate', null, true, false, this.objectGroup, Enemy, false);
-    map.createFromObjects('Enemies', 1071, 'Haystax', null, true, false, this.objectGroup, Enemy, false);
-    map.createFromObjects('Enemies', 1072, 'Bizarro', null, true, false, this.objectGroup, Enemy, false);
-    map.createFromObjects('Enemies', 1073, 'Lancer', null, true, false, this.objectGroup, Enemy, false);
+    map.createFromObjects('Enemies', 90, 'Incarnate', null, true, false, this.objectGroup, Enemy, false);
+    map.createFromObjects('Enemies', 91, 'Haystax', null, true, false, this.objectGroup, Enemy, false);
+    map.createFromObjects('Enemies', 92, 'Bizarro', null, true, false, this.objectGroup, Enemy, false);
+    map.createFromObjects('Enemies', 93, 'Lancer', null, true, false, this.objectGroup, Enemy, false);
 
-    map.createFromObjects('Items', 1043, 'Door', 'Door0000', true, false, this.objectGroup, Door, false);
+    map.createFromObjects('Items', 65, 'Door', 'Door0000', true, false, this.objectGroup, Door, false);
     map.createFromObjects('Items', 66, 'Misc', 'Apple0000', true, false, this.objectGroup, Apple, false);
     
     foregroundLayer = map.createLayer('Foreground');
@@ -165,15 +167,10 @@ Frogland.update = function() {
     //reset environmental effect flags
     frauki.states.inWater = false;
     
-    game.physics.arcade.collide(frauki, collisionLayer, null, this.CheckEnvironmentalCollisions);
+    //game.physics.arcade.collide(frauki, collisionLayer, null, this.CheckEnvironmentalCollisions);
     game.physics.arcade.collide(frauki, this.objectGroup, this.CollideFraukiWithObject, this.OverlapFraukiWithObject);
     game.physics.arcade.collide(this.objectGroup, collisionLayer);
     game.physics.arcade.collide(frauki, foregroundLayer, null, this.HideForeground);
-
-
-    if(!!frauki.attackRect && frauki.attackRect.body.width != 0) {
-        game.physics.arcade.overlap(frauki.attackRect, this.objectGroup, EnemyHit);
-    }
 
     game.physics.arcade.overlap(frauki, projectileController.projectiles, this.CollideFraukiWithProjectile);
 
@@ -189,7 +186,7 @@ Frogland.update = function() {
 };
 
 Frogland.render = function() {
-    //game.debug.body(frauki);
+    game.debug.body(frauki);
     //game.debug.body(frauki.bodyDouble);
     //game.debug.body(frauki.attackRect);
 

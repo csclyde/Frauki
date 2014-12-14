@@ -13,15 +13,7 @@ Enemy.prototype.types['CreeperThistle'] =  function() {
     this.state = this.Idling;
 
 	this.updateFunction = function() {
-		if(this.clingWall == 'above') {
-			this.scale.y = -1;
-		} else if(this.clingWall == 'left') {
-			this.rotation = 90;
-			this.body.setSize(25, 30);
-		} else if(this.clingWall == 'right') {
-			this.rotation = 270;
-			this.body.setSize(25, 30);
-		}
+		this.rotation = this.Rotation;
 	};
 
 	///////////////////////////////ACTIONS////////////////////////////////////

@@ -127,7 +127,6 @@ Enemy.prototype.GetEnergyPercentage = function() {
 };
 
 Enemy.prototype.GetPoisePercentage = function() {
-    console.log(this.poise + '/' + this.initialPoise);
     return this.poise / this.initialPoise;
 }
 

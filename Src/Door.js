@@ -25,7 +25,6 @@ Door.prototype.constructor = Door;
 
 Door.prototype.create = function() {
 
-    console.log(this.facing);
 };
 
 Door.prototype.update = function() {

@@ -104,8 +104,6 @@ Player.prototype.create = function() {
 }
 
 Player.prototype.update = function() {
-
-    console.log(this.body.velocity.y);
     
     this.body.maxVelocity.x = PLAYER_SPEED() + this.movement.rollBoost;
     this.body.maxVelocity.y = 500;
@@ -149,6 +147,12 @@ Player.prototype.update = function() {
 
     this.bodyDouble.x = this.x;
     this.bodyDouble.y = this.y;
+
+    if(!!frauki.attackRect && frauki.attackRect.body.width != 0) {
+        game.physics.arcade.overlap(frauki.attackRect, Frogland.objectGroup, EnemyHit);
+    }
+    
+    game.physics.arcade.collide(frauki, collisionLayer, null, Frogland.CheckEnvironmentalCollisions);
 };
 
 Player.prototype.SetDirection = function(dir) {
