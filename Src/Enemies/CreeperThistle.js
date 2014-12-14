@@ -1,6 +1,6 @@
 Enemy.prototype.types['CreeperThistle'] =  function() {
 
-	this.body.setSize(67, 25, 0, 0);
+	this.body.setSize(30, 25, 0, 0);
 	this.anchor.setTo(.5, 1);
 
     this.animations.add('idle', ["CreeperThistle/CreeperThistle0000"], 10, true, false);
@@ -8,11 +8,20 @@ Enemy.prototype.types['CreeperThistle'] =  function() {
 
     this.energy = 1;
     this.body.immovable = true;
+    this.body.allowGravity = false;
 
     this.state = this.Idling;
 
 	this.updateFunction = function() {
-		
+		if(this.clingWall == 'above') {
+			this.scale.y = -1;
+		} else if(this.clingWall == 'left') {
+			this.rotation = 90;
+			this.body.setSize(25, 30);
+		} else if(this.clingWall == 'right') {
+			this.rotation = 270;
+			this.body.setSize(25, 30);
+		}
 	};
 
 	///////////////////////////////ACTIONS////////////////////////////////////
