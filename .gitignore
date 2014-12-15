@@ -2,4 +2,6 @@
 *.sublime-project
 *.sublime-workspace
 *.ini
+*.log
+Thumbs.db
 frauki.cfg
