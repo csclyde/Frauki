@@ -65,6 +65,7 @@ Frogland.create = function() {
 
     game.physics.startSystem(Phaser.Physics.ARCADE);
     game.physics.arcade.gravity.y = 800;
+    game.physics.arcade.OVERLAP_BIAS = 10;
 
     game.time.desiredFps = 60;
 
