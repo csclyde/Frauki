@@ -1,0 +1,3 @@
+function CustomCollider(sprite, collisionLayer) {
+
+}
