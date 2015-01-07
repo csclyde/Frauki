@@ -138,6 +138,8 @@ Player.prototype.update = function() {
     if(this.states.dashing) {
         this.body.gravity.y = -800;
     }
+    
+    console.log(this.deltaX());
 
     if(this.state === this.Crouching || this.state === this.Rolling || this.state === this.Flipping) {
         this.body.height = 30;
