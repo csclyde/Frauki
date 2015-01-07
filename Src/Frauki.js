@@ -2,7 +2,7 @@ PLAYER_SPEED = function() {
     if(!frauki.states.dashing) {
         return 150 + (energyController.GetEnergy() * 7); 
     } else {
-        return 2000;
+        return 360;
     }
 }
 
