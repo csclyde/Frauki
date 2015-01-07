@@ -515,6 +515,10 @@ Player.prototype.Landing = function() {
     if(this.body.velocity.y < 0) {
         this.state = this.Jumping;
     }
+    
+    if(this.body.velocity.x !== 0) {
+        this.state = this.Running;
+    }
 
     if(this.animations.currentAnim.isFinished) {
         if(this.body.velocity.x === 0) {
