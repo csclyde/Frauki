@@ -139,7 +139,7 @@ Player.prototype.update = function() {
         this.body.gravity.y = -800;
     }
     
-    console.log(this.deltaX());
+    console.log(this.body.deltaX());
 
     if(this.state === this.Crouching || this.state === this.Rolling || this.state === this.Flipping) {
         this.body.height = 30;
