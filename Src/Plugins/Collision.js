@@ -1,7 +1,7 @@
 function CustomCollider(spriteBody, collisionLayer) {
     //add a collision layer property to the sprite
+    spriteBody.collisionLayer = collisionLayer;
     
-    //update the bodies 
     spriteBody.preUpdate = function () {
 
         if (!this.enable)
@@ -53,8 +53,51 @@ function CustomCollider(spriteBody, collisionLayer) {
 
             //increment the position by the width, and test for collision. if a collision happens, then move it
             //back to the old position and increment pixel by pixel
-            this.position.x += this.newVelocity.x;
-            this.position.y += this.newVelocity.y;
+            //this.position.x += this.newVelocity.x;
+            
+            //for every pixel that will be moved
+            for(var i = 0; i < Math.abs(this.newVelocity.x); i++) {
+                //check the direction of the velocity
+                if(this.newVelocity.x > 0) {
+                    //move ourselves to the right by a pixel, then check for overlap.
+                    //if its no good move back and prevent more movement
+                    this.position.x += 1;
+                    
+                    if(game.arcade.overlap(this, this.collisionLayer)) {
+                        this.position.x -= 1;
+                        break;
+                    }
+                } else {
+                    this.position.x -= 1;
+                    
+                    if(game.arcade.overlap(this, this.collisionLayer)) {
+                        this.position.x += 1;
+                        break;
+                    }
+                }
+            }
+            
+            //this.position.y += this.newVelocity.y;
+            for(var i = 0; i < Math.abs(this.newVelocity.y); i++) {
+                //check the direction of the velocity
+                if(this.newVelocity.y > 0) {
+                    //move ourselves to the right by a pixel, then check for overlap.
+                    //if its no good move back and prevent more movement
+                    this.position.y += 1;
+                    
+                    if(game.arcade.overlap(this, this.collisionLayer)) {
+                        this.position.y -= 1;
+                        break;
+                    }
+                } else {
+                    this.position.y -= 1;
+                    
+                    if(game.arcade.overlap(this, this.collisionLayer)) {
+                        this.position.y += 1;
+                        break;
+                    }
+                }
+            }
 
             if (this.position.x !== this.prev.x || this.position.y !== this.prev.y)
             {
