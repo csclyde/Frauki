@@ -2,6 +2,8 @@ function CustomCollider(spriteBody, collisionLayer) {
     //add a collision layer property to the sprite
     spriteBody.collisionLayer = collisionLayer;
     
+    console.log('this is happening');
+    
     spriteBody.preUpdate = function () {
 
         if (!this.enable)
