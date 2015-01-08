@@ -63,14 +63,14 @@ function CustomCollider(spriteBody, collisionLayer) {
                     //if its no good move back and prevent more movement
                     this.position.x += 1;
                     
-                    if(game.arcade.overlap(this, this.collisionLayer)) {
+                    if(game.physics.arcade.overlap(this, this.collisionLayer)) {
                         this.position.x -= 1;
                         break;
                     }
                 } else {
                     this.position.x -= 1;
                     
-                    if(game.arcade.overlap(this, this.collisionLayer)) {
+                    if(game.physics.arcade.overlap(this, this.collisionLayer)) {
                         this.position.x += 1;
                         break;
                     }
@@ -85,14 +85,14 @@ function CustomCollider(spriteBody, collisionLayer) {
                     //if its no good move back and prevent more movement
                     this.position.y += 1;
                     
-                    if(game.arcade.overlap(this, this.collisionLayer)) {
+                    if(game.physics.arcade.overlap(this, this.collisionLayer)) {
                         this.position.y -= 1;
                         break;
                     }
                 } else {
                     this.position.y -= 1;
                     
-                    if(game.arcade.overlap(this, this.collisionLayer)) {
+                    if(game.physics.arcade.overlap(this, this.collisionLayer)) {
                         this.position.y += 1;
                         break;
                     }
