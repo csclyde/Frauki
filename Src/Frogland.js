@@ -96,6 +96,7 @@ Frogland.create = function() {
     this.midgroundLayer_2.resizeWorld();
 
     map.setCollision([1, 3, 4, 9, 10], true, 'Collision_3');
+    map.setCollision([1, 3, 4, 9, 10], true, 'Collision_2');
 
     frauki = new Player(game, 100, 100, 'Frauki');
     game.add.existing(frauki);
@@ -107,19 +108,20 @@ Frogland.create = function() {
 
     this.enemyPool = game.add.group();
     
+    for(var i = 2; i <= 3; i++) {
+        map.createFromObjects('Objects_' + i, 85, 'Insectoid', null, true, false, this.objectGroup, Enemy, false);
+        map.createFromObjects('Objects_' + i, 86, 'Buzzar', null, true, false, this.objectGroup, Enemy, false);
+        map.createFromObjects('Objects_' + i, 87, 'Sporoid', null, true, false, this.objectGroup, Enemy, false);
+        map.createFromObjects('Objects_' + i, 88, 'Madman', null, true, false, this.objectGroup, Enemy, false);
+        map.createFromObjects('Objects_' + i, 89, 'CreeperThistle', null, true, false, this.objectGroup, Enemy, false);
+        map.createFromObjects('Objects_' + i, 90, 'Incarnate', null, true, false, this.objectGroup, Enemy, false);
+        map.createFromObjects('Objects_' + i, 91, 'Haystax', null, true, false, this.objectGroup, Enemy, false);
+        map.createFromObjects('Objects_' + i, 92, 'Bizarro', null, true, false, this.objectGroup, Enemy, false);
+        map.createFromObjects('Objects_' + i, 93, 'Lancer', null, true, false, this.objectGroup, Enemy, false);
 
-    map.createFromObjects('Objects_3', 85, 'Insectoid', null, true, false, this.objectGroup, Enemy, false);
-    map.createFromObjects('Objects_3', 86, 'Buzzar', null, true, false, this.objectGroup, Enemy, false);
-    map.createFromObjects('Objects_3', 87, 'Sporoid', null, true, false, this.objectGroup, Enemy, false);
-    map.createFromObjects('Objects_3', 88, 'Madman', null, true, false, this.objectGroup, Enemy, false);
-    map.createFromObjects('Objects_3', 89, 'CreeperThistle', null, true, false, this.objectGroup, Enemy, false);
-    map.createFromObjects('Objects_3', 90, 'Incarnate', null, true, false, this.objectGroup, Enemy, false);
-    map.createFromObjects('Objects_3', 91, 'Haystax', null, true, false, this.objectGroup, Enemy, false);
-    map.createFromObjects('Objects_3', 92, 'Bizarro', null, true, false, this.objectGroup, Enemy, false);
-    map.createFromObjects('Objects_3', 93, 'Lancer', null, true, false, this.objectGroup, Enemy, false);
-
-    map.createFromObjects('Objects_3', 65, 'Door', 'Door0000', true, false, this.objectGroup, Door, false);
-    map.createFromObjects('Objects_3', 66, 'Misc', 'Apple0000', true, false, this.objectGroup, Apple, false);
+        map.createFromObjects('Objects_' + i, 65, 'Door', 'Door0000', true, false, this.objectGroup, Door, false);
+        map.createFromObjects('Objects_' + i, 66, 'Misc', 'Apple0000', true, false, this.objectGroup, Apple, false);
+    }
     
     this.foregroundLayer_3 = map.createLayer('Foreground_3');
     this.foregroundLayer_2 = map.createLayer('Foreground_2');
@@ -220,15 +222,21 @@ Frogland.Restart = function() {
 };
 
 Frogland.ChangeLayer = function(newLayer) {
+
+    if(this.currentLayer == newLayer) return;
+
     //get the current layer
     var currentForgroundLayer = this['foregroundLayer_' + this.currentLayer];
     var currentMidgroundLayer = this['midgroundLayer_' + this.currentLayer];
     var currentBackgroundLayer = this['backgroundLayer_' + this.currentLayer];
     var currentCollisionLayer = this['collisionLayer_' + this.currentLayer];
 
-    currentForgroundLayer.visible = false;
-    currentMidgroundLayer.visible = false;
-    currentBackgroundLayer.visible = false;
+    //currentForgroundLayer.visible = false;
+    //currentMidgroundLayer.visible = false;
+    //currentBackgroundLayer.visible = false;
+    game.add.tween(currentForgroundLayer).to({alpha: 0}, 200, Phaser.Easing.Linear.None, true);
+    game.add.tween(currentMidgroundLayer).to({alpha: 0}, 200, Phaser.Easing.Linear.None, true);
+    game.add.tween(currentBackgroundLayer).to({alpha: 0}, 200, Phaser.Easing.Linear.None, true);
 
     this.currentLayer = newLayer;
 
@@ -238,8 +246,15 @@ Frogland.ChangeLayer = function(newLayer) {
     currentCollisionLayer = this['collisionLayer_' + this.currentLayer];
 
     currentForgroundLayer.visible = true;
+    currentForgroundLayer.alpha = 0;
     currentMidgroundLayer.visible = true;
+    currentMidgroundLayer.alpha = 0;
     currentBackgroundLayer.visible = true;
+    currentBackgroundLayer.alpha = 0;
+
+    game.add.tween(currentForgroundLayer).to({alpha: 1}, 200, Phaser.Easing.Linear.None, true);
+    game.add.tween(currentMidgroundLayer).to({alpha: 1}, 200, Phaser.Easing.Linear.None, true);
+    game.add.tween(currentBackgroundLayer).to({alpha: 1}, 200, Phaser.Easing.Linear.None, true);
 
 };
 

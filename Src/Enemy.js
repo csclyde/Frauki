@@ -236,7 +236,7 @@ Enemy.prototype.PlayerIsVisible = function() {
         return;
 
     var ray = new Phaser.Line(playerX, playerY, this.body.x, this.body.y);
-    var collideTiles = midgroundLayer.getRayCastTiles(ray, 1, true);
+    var collideTiles = Frogland['midgroundLayer_' + Frogland.currentLayer].getRayCastTiles(ray, 1, true);
 
     if(collideTiles.length === 0) {
         return true;

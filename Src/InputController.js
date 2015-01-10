@@ -37,7 +37,8 @@ InputController = function(player) {
 
     this.testButton.onDown.add(function() { 
         //energyController.AddEnergy(); 
-        Frogland.ChangeLayer(2);
+        if(Frogland.currentLayer == 3) Frogland.ChangeLayer(2);
+        else Frogland.ChangeLayer(3);
     });
 
     game.input.gamepad.start();
