@@ -35,7 +35,10 @@ InputController = function(player) {
     this.wep.onDown.add(function() { events.publish('activate_weapon', {activate: true}); }, this);
     this.wep.onUp.add(function() {   events.publish('activate_weapon', {activate: false}); }, this);
 
-    this.testButton.onDown.add(function() { energyController.AddEnergy(); });
+    this.testButton.onDown.add(function() { 
+        //energyController.AddEnergy(); 
+        Frogland.ChangeLayer(2);
+    });
 
     game.input.gamepad.start();
 

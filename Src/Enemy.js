@@ -121,7 +121,7 @@ Enemy.prototype.update = function() {
         this.body.velocity.x = this.xHitVel;
     }
 
-    game.physics.arcade.collide(this, collisionLayer);
+    game.physics.arcade.collide(this, Frogland['collisionLayer_' + Frogland.currentLayer]);
 };
 
 Enemy.prototype.GetEnergyPercentage = function() {

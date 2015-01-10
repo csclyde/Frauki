@@ -152,7 +152,7 @@ Player.prototype.update = function() {
         game.physics.arcade.overlap(frauki.attackRect, Frogland.objectGroup, EnemyHit);
     }
     
-    game.physics.arcade.collide(frauki, collisionLayer, null, Frogland.CheckEnvironmentalCollisions);
+    game.physics.arcade.collide(frauki, Frogland['collisionLayer_' + Frogland.currentLayer], null, Frogland.CheckEnvironmentalCollisions);
 };
 
 Player.prototype.SetDirection = function(dir) {
@@ -577,7 +577,7 @@ Player.prototype.Rolling = function() {
 
         this.bodyDouble.body.x = this.body.x;
 
-        if(game.physics.arcade.overlap(this.bodyDouble, collisionLayer)) {
+        if(game.physics.arcade.overlap(this.bodyDouble, Frogland['collisionLayer_' + Frogland.currentLayer])) {
             this.state = this.Crouching;
             this.PlayAnim('crouch');
             this.animations.currentAnim.setFrame('Crouch0005');

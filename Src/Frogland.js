@@ -28,10 +28,6 @@ Frogland.preload = function() {
 
 var map;
 var tileset;
-var backgroundLayer;
-var midgroundLayer;
-var foregroundLayer;
-var collisionLayer;
 var bg;
 var parallax1, parallax2;
 var cameraController;
@@ -82,22 +78,28 @@ Frogland.create = function() {
     map.addTilesetImage('DepthsTiles');
     map.addTilesetImage('Collision');
    
-    backgroundLayer = map.createLayer('Background');
-    midgroundLayer = map.createLayer('Midground');
-    collisionLayer = map.createLayer('Collision');
-    collisionLayer.visible = false;
+    this.backgroundLayer_3 = map.createLayer('Background_3');
+    this.midgroundLayer_3 = map.createLayer('Midground_3');
+    this.collisionLayer_3 = map.createLayer('Collision_3');
+    this.collisionLayer_3.visible = false;
+
+    this.backgroundLayer_2 = map.createLayer('Background_2');
+    this.midgroundLayer_2 = map.createLayer('Midground_2');
+    this.collisionLayer_2 = map.createLayer('Collision_2');
+    this.collisionLayer_2.visible = false;
+    this.backgroundLayer_2.visible = false;
+    this.midgroundLayer_2.visible = false;
+
+    this.currentLayer = 3;
     
-    midgroundLayer.resizeWorld();
+    this.midgroundLayer_3.resizeWorld();
+    this.midgroundLayer_2.resizeWorld();
 
-    map.setCollision([1, 3, 4, 9, 10], true, 'Collision');
-
-    /*var fraukiTile = map.searchTileIndex(1045, 0, false, 'Midground');
-    fraukiSpawnX = fraukiTile.worldX || 0;
-    fraukiSpawnY = fraukiTile.worldY || 0;*/
+    map.setCollision([1, 3, 4, 9, 10], true, 'Collision_3');
 
     frauki = new Player(game, 100, 100, 'Frauki');
     game.add.existing(frauki);
-    CustomCollider(frauki.body, collisionLayer);
+    CustomCollider(frauki.body, this.collisionLayer_3);
 
     //create the enemies
     this.objectGroup = game.add.group();
@@ -106,21 +108,21 @@ Frogland.create = function() {
     this.enemyPool = game.add.group();
     
 
-    map.createFromObjects('Enemies', 85, 'Insectoid', null, true, false, this.objectGroup, Enemy, false);
-    map.createFromObjects('Enemies', 86, 'Buzzar', null, true, false, this.objectGroup, Enemy, false);
-    map.createFromObjects('Enemies', 87, 'Sporoid', null, true, false, this.objectGroup, Enemy, false);
-    map.createFromObjects('Enemies', 88, 'Madman', null, true, false, this.objectGroup, Enemy, false);
-    map.createFromObjects('Enemies', 89, 'CreeperThistle', null, true, false, this.objectGroup, Enemy, false);
-    map.createFromObjects('Enemies', 90, 'Incarnate', null, true, false, this.objectGroup, Enemy, false);
-    map.createFromObjects('Enemies', 91, 'Haystax', null, true, false, this.objectGroup, Enemy, false);
-    map.createFromObjects('Enemies', 92, 'Bizarro', null, true, false, this.objectGroup, Enemy, false);
-    map.createFromObjects('Enemies', 93, 'Lancer', null, true, false, this.objectGroup, Enemy, false);
+    map.createFromObjects('Objects_3', 85, 'Insectoid', null, true, false, this.objectGroup, Enemy, false);
+    map.createFromObjects('Objects_3', 86, 'Buzzar', null, true, false, this.objectGroup, Enemy, false);
+    map.createFromObjects('Objects_3', 87, 'Sporoid', null, true, false, this.objectGroup, Enemy, false);
+    map.createFromObjects('Objects_3', 88, 'Madman', null, true, false, this.objectGroup, Enemy, false);
+    map.createFromObjects('Objects_3', 89, 'CreeperThistle', null, true, false, this.objectGroup, Enemy, false);
+    map.createFromObjects('Objects_3', 90, 'Incarnate', null, true, false, this.objectGroup, Enemy, false);
+    map.createFromObjects('Objects_3', 91, 'Haystax', null, true, false, this.objectGroup, Enemy, false);
+    map.createFromObjects('Objects_3', 92, 'Bizarro', null, true, false, this.objectGroup, Enemy, false);
+    map.createFromObjects('Objects_3', 93, 'Lancer', null, true, false, this.objectGroup, Enemy, false);
 
-    map.createFromObjects('Items', 65, 'Door', 'Door0000', true, false, this.objectGroup, Door, false);
-    map.createFromObjects('Items', 66, 'Misc', 'Apple0000', true, false, this.objectGroup, Apple, false);
+    map.createFromObjects('Objects_3', 65, 'Door', 'Door0000', true, false, this.objectGroup, Door, false);
+    map.createFromObjects('Objects_3', 66, 'Misc', 'Apple0000', true, false, this.objectGroup, Apple, false);
     
-    foregroundLayer = map.createLayer('Foreground');
-    map.setCollisionByExclusion([], true, 'Foreground');
+    this.foregroundLayer_3 = map.createLayer('Foreground_3');
+    this.foregroundLayer_2 = map.createLayer('Foreground_2');
 
     cameraController = new CameraController(frauki, map);
     inputController = new InputController(frauki);
@@ -139,7 +141,7 @@ Frogland.create = function() {
     map.forEach(function(tile) {
         //if the tile is marked as disappearing
         if(tile.index === 2) {
-            var water = map.getTileWorldXY(tile.worldX, tile.worldY, 16, 16, 'Foreground');
+            var water = map.getTileWorldXY(tile.worldX, tile.worldY, 16, 16, 'Foreground_3');
             water.alpha = 0.4;
         } else if(tile.index === 4) {
             tile.collideLeft = false;
@@ -152,14 +154,8 @@ Frogland.create = function() {
             tile.faceRight = false; 
         }
            
-    }, this, 0, 0, map.width, map.height, 'Collision');
+    }, this, 0, 0, map.width, map.height, 'Collision_3');
 
-    this.fadedTiles = [];
-    this.EstablishDisappearingWalls();
-
-    map.setTileIndexCallback(9, function() {
-        console.log('test');
-    }, this, 'Collision');
 };
 
 Frogland.update = function() {
@@ -168,10 +164,10 @@ Frogland.update = function() {
     //reset environmental effect flags
     frauki.states.inWater = false;
     
-    game.physics.arcade.collide(frauki, collisionLayer, null, this.CheckEnvironmentalCollisions);
+    game.physics.arcade.collide(frauki, this['collisionLayer_' + this.currentLayer], null, this.CheckEnvironmentalCollisions);
     game.physics.arcade.collide(frauki, this.objectGroup, this.CollideFraukiWithObject, this.OverlapFraukiWithObject);
-    game.physics.arcade.collide(this.objectGroup, collisionLayer);
-    game.physics.arcade.collide(frauki, foregroundLayer, null, this.HideForeground);
+    game.physics.arcade.collide(this.objectGroup, this['collisionLayer_' + this.currentLayer]);
+    game.physics.arcade.collide(frauki, this['foregroundLayer_' + this.currentLayer], null, this.HideForeground);
 
     game.physics.arcade.overlap(frauki, projectileController.projectiles, this.CollideFraukiWithProjectile);
 
@@ -221,7 +217,31 @@ Frogland.Restart = function() {
                     e.Reset.apply(e);
             });
         });
-}
+};
+
+Frogland.ChangeLayer = function(newLayer) {
+    //get the current layer
+    var currentForgroundLayer = this['foregroundLayer_' + this.currentLayer];
+    var currentMidgroundLayer = this['midgroundLayer_' + this.currentLayer];
+    var currentBackgroundLayer = this['backgroundLayer_' + this.currentLayer];
+    var currentCollisionLayer = this['collisionLayer_' + this.currentLayer];
+
+    currentForgroundLayer.visible = false;
+    currentMidgroundLayer.visible = false;
+    currentBackgroundLayer.visible = false;
+
+    this.currentLayer = newLayer;
+
+    currentForgroundLayer = this['foregroundLayer_' + this.currentLayer];
+    currentMidgroundLayer = this['midgroundLayer_' + this.currentLayer];
+    currentBackgroundLayer = this['backgroundLayer_' + this.currentLayer];
+    currentCollisionLayer = this['collisionLayer_' + this.currentLayer];
+
+    currentForgroundLayer.visible = true;
+    currentMidgroundLayer.visible = true;
+    currentBackgroundLayer.visible = true;
+
+};
 
 //this is called when a collision happens. if it returns false the two will not be separated
 Frogland.OverlapFraukiWithObject = function(f, o) {
@@ -275,98 +295,6 @@ Frogland.CheckEnvironmentalCollisions = function(f, tile) {
         return true;
     }
 }
-
-Frogland.EstablishDisappearingWalls = function() {
-    map.forEach(function(tile) {
-        //if the tile is marked as disappearing
-
-        if(tile.disappearing) {
-            if(!tile.tileGroup) {
-
-                //check the adjacent tiles for a group to glom onto (uo down left right)
-                var adjTile = map.getTileWorldXY(tile.worldX, tile.worldY - 1, 'Foreground');
-
-                if(!!adjTile && adjTile.disappearing && !!adjTile.tileGroup) {
-                    tile.tileGroup = adjTile.tileGroup;
-                    tile.tileGroup.tiles.push(tile);
-                    return;
-                }
-
-                adjTile = map.getTileWorldXY(tile.worldX, tile.worldY + 1, 'Foreground');
-
-                if(!!adjTile && adjTile.disappearing && !!adjTile.tileGroup) {
-                    tile.tileGroup = adjTile.tileGroup;
-                    tile.tileGroup.tiles.push(tile);
-                    return;
-                }
-
-                adjTile = map.getTileWorldXY(tile.worldX - 1, tile.worldY, 'Foreground');
-
-                if(!!adjTile && adjTile.disappearing && !!adjTile.tileGroup) {
-                    tile.tileGroup = adjTile.tileGroup;
-                    tile.tileGroup.tiles.push(tile);
-                    return;
-                }
-
-                adjTile = map.getTileWorldXY(tile.worldX + 1, tile.worldY, 'Foreground');
-
-                if(!!adjTile && adjTile.disappearing && !!adjTile.tileGroup) {
-                    tile.tileGroup = adjTile.tileGroup;
-                    tile.tileGroup.tiles.push(tile);
-                    return;
-                }
-
-                //none of the adjacent tiles have a group. so create a new one
-                tile.tileGroup = {tiles: [tile], visible: true};
-                this.fadedTiles.push(tile.tileGroup);
-
-            }
-        }
-            //give it a callback that makes it disappear when it is touched
-        //if this tile is not already grouped
-            //create a new group and add every connected tile
-
-    }, this, 0, 0, map.width, map.height, 'Foreground');
-};
-
-Frogland.HideForeground = function(f, t) {
-
-    if(t.disappearing && !!t.tileGroup && t.tileGroup.visible === true) {
-        console.log('stuff');
-        t.tileGroup.visible = false;
-
-        t.tileGroup.tiles.forEach(function(tile) {
-            tile.alpha = 0;
-        }. this);
-    }
-    
-    return false;
-};
-
-Frogland.CheckForegroundGroup = function() {
-    this.fadedTiles.forEach(function(grp) {
-        //if the group is invisible, loop through each child tile and check if they are still being collided with
-        if(grp.visible === false) {
-            var stillColliding = false;
-
-            grp.tiles.forEach(function(tile) {
-                if(tile.intersects(frauki.body.x, frauki.body.y, frauki.body.x + frauki.body.width, frauki.body.y + frauki.body.height)) {
-                    stillColliding = true;
-                    return;
-                }
-            }, this);
-
-            if(stillColliding === false) {
-                grp.visible = true;
-                //tween each of the tiles back to being visible
-
-                grp.tiles.forEach(function(tile) {
-                    tile.alpha = 1;
-                }, this);
-            }
-        }
-    }, this);
-};
 
 Frogland.SpawnEnemies = function() {
     //this function will randomly spawn enemies on the map. The farther down you get in the map,
