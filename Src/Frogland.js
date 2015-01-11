@@ -103,24 +103,27 @@ Frogland.create = function() {
     CustomCollider(frauki.body, this.collisionLayer_3);
 
     //create the enemies
-    this.objectGroup = game.add.group();
-    this.objectGroup.enableBody = true;
+    this.objectGroup_3 = game.add.group();
+    this.objectGroup_3.enableBody = true;
+
+    this.objectGroup_2 = game.add.group();
+    this.objectGroup_2.enableBody = true;
 
     this.enemyPool = game.add.group();
     
     for(var i = 2; i <= 3; i++) {
-        map.createFromObjects('Objects_' + i, 85, 'Insectoid', null, true, false, this.objectGroup, Enemy, false);
-        map.createFromObjects('Objects_' + i, 86, 'Buzzar', null, true, false, this.objectGroup, Enemy, false);
-        map.createFromObjects('Objects_' + i, 87, 'Sporoid', null, true, false, this.objectGroup, Enemy, false);
-        map.createFromObjects('Objects_' + i, 88, 'Madman', null, true, false, this.objectGroup, Enemy, false);
-        map.createFromObjects('Objects_' + i, 89, 'CreeperThistle', null, true, false, this.objectGroup, Enemy, false);
-        map.createFromObjects('Objects_' + i, 90, 'Incarnate', null, true, false, this.objectGroup, Enemy, false);
-        map.createFromObjects('Objects_' + i, 91, 'Haystax', null, true, false, this.objectGroup, Enemy, false);
-        map.createFromObjects('Objects_' + i, 92, 'Bizarro', null, true, false, this.objectGroup, Enemy, false);
-        map.createFromObjects('Objects_' + i, 93, 'Lancer', null, true, false, this.objectGroup, Enemy, false);
+        map.createFromObjects('Objects_' + i, 85, 'Insectoid', null, true, false, this['objectGroup_' + i], Enemy, false);
+        map.createFromObjects('Objects_' + i, 86, 'Buzzar', null, true, false, this['objectGroup_' + i], Enemy, false);
+        map.createFromObjects('Objects_' + i, 87, 'Sporoid', null, true, false, this['objectGroup_' + i], Enemy, false);
+        map.createFromObjects('Objects_' + i, 88, 'Madman', null, true, false, this['objectGroup_' + i], Enemy, false);
+        map.createFromObjects('Objects_' + i, 89, 'CreeperThistle', null, true, false, this['objectGroup_' + i], Enemy, false);
+        map.createFromObjects('Objects_' + i, 90, 'Incarnate', null, true, false, this['objectGroup_' + i], Enemy, false);
+        map.createFromObjects('Objects_' + i, 91, 'Haystax', null, true, false, this['objectGroup_' + i], Enemy, false);
+        map.createFromObjects('Objects_' + i, 92, 'Bizarro', null, true, false, this['objectGroup_' + i], Enemy, false);
+        map.createFromObjects('Objects_' + i, 93, 'Lancer', null, true, false, this['objectGroup_' + i], Enemy, false);
 
-        map.createFromObjects('Objects_' + i, 65, 'Door', 'Door0000', true, false, this.objectGroup, Door, false);
-        map.createFromObjects('Objects_' + i, 66, 'Misc', 'Apple0000', true, false, this.objectGroup, Apple, false);
+        map.createFromObjects('Objects_' + i, 65, 'Door', 'Door0000', true, false, this['objectGroup_' + i], Door, false);
+        map.createFromObjects('Objects_' + i, 66, 'Misc', 'Apple0000', true, false, this['objectGroup_' + i], Apple, false);
     }
     
     this.foregroundLayer_3 = map.createLayer('Foreground_3');
@@ -167,8 +170,8 @@ Frogland.update = function() {
     frauki.states.inWater = false;
     
     game.physics.arcade.collide(frauki, this['collisionLayer_' + this.currentLayer], null, this.CheckEnvironmentalCollisions);
-    game.physics.arcade.collide(frauki, this.objectGroup, this.CollideFraukiWithObject, this.OverlapFraukiWithObject);
-    game.physics.arcade.collide(this.objectGroup, this['collisionLayer_' + this.currentLayer]);
+    game.physics.arcade.collide(frauki, this['objectGroup_' + this.currentLayer], this.CollideFraukiWithObject, this.OverlapFraukiWithObject);
+    game.physics.arcade.collide(this['objectGroup_' + this.currentLayer], this['collisionLayer_' + this.currentLayer]);
     game.physics.arcade.collide(frauki, this['foregroundLayer_' + this.currentLayer], null, this.HideForeground);
 
     game.physics.arcade.overlap(frauki, projectileController.projectiles, this.CollideFraukiWithProjectile);

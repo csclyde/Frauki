@@ -532,7 +532,7 @@ Player.prototype.Landing = function() {
 Player.prototype.Crouching = function() {
     this.PlayAnim('crouch');
 
-    if((!this.states.crouching || this.body.velocity.x !== 0 || this.body.velocity.y !== 0) && !game.physics.arcade.overlap(this.bodyDouble, collisionLayer)) {
+    if(!this.states.crouching || this.body.velocity.x !== 0 || this.body.velocity.y !== 0) {
         this.state = this.Standing;
     }
 
@@ -561,16 +561,20 @@ Player.prototype.Rolling = function() {
     this.body.velocity.x = this.movement.rollVelocity;
     
     if(this.body.velocity.y < 0) {
-        this.state = this.Jumping;
-        this.PlayAnim('roll_jump');
+        if(energyController.UseEnergy(3)) { 
+            this.state = this.Jumping;
+            this.PlayAnim('roll_jump');
 
-        //roll boost is caluclated based on how close they were to the max roll speed
-        this.movement.rollBoost = Math.abs(this.movement.rollVelocity) - PLAYER_SPEED(); 
-        this.movement.rollBoost /= (PLAYER_ROLL_SPEED() - PLAYER_SPEED());
-        this.movement.rollBoost *= 150;
+            //roll boost is caluclated based on how close they were to the max roll speed
+            this.movement.rollBoost = Math.abs(this.movement.rollVelocity) - PLAYER_SPEED(); 
+            this.movement.rollBoost /= (PLAYER_ROLL_SPEED() - PLAYER_SPEED());
+            this.movement.rollBoost *= 150;
 
-        this.tweens.roll.stop();
-        this.movement.rollVelocity = 0;
+            this.tweens.roll.stop();
+            this.movement.rollVelocity = 0;
+        } else {
+            this.state = this.Jumping;
+        }
     }
 
     if(this.animations.currentAnim.isFinished) {
