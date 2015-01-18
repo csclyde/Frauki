@@ -37,8 +37,10 @@ InputController = function(player) {
 
     this.testButton.onDown.add(function() { 
         //energyController.AddEnergy(); 
-        if(Frogland.currentLayer == 3) Frogland.ChangeLayer(2);
-        else Frogland.ChangeLayer(3);
+        if(game.physics.arcade.overlap(frauki, Frogland.doorGroup)) {
+            if(Frogland.currentLayer == 3) Frogland.ChangeLayer(2);
+            else Frogland.ChangeLayer(3);
+        }
     });
 
     game.input.gamepad.start();

@@ -86,4 +86,12 @@
   <object gid="66" x="1716" y="1285"/>
   <object gid="66" x="463" y="1033"/>
  </objectgroup>
+ <objectgroup name="Doors" width="307" height="265">
+  <object gid="67" x="644" y="389">
+   <properties>
+    <property name="firstLayer" value="2"/>
+    <property name="secondLayer" value="3"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

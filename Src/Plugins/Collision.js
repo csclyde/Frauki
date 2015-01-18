@@ -2,8 +2,6 @@ function CustomCollider(spriteBody, collisionLayer) {
     //add a collision layer property to the sprite
     spriteBody.collisionLayer = collisionLayer;
     
-    console.log('this is happening');
-    
     spriteBody.preUpdate = function () {
 
         if (!this.enable)
@@ -59,7 +57,6 @@ function CustomCollider(spriteBody, collisionLayer) {
             
             //for every pixel that will be moved
             for(var i = 0; i < Math.abs(this.newVelocity.x); i++) {
-                console.log('Moving ' + this.newVelocity.x + ' pixels');
                 //check the direction of the velocity
                 if(this.newVelocity.x > 0) {
                     //move ourselves to the right by a pixel, then check for overlap.

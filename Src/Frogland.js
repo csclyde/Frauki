@@ -110,6 +110,8 @@ Frogland.create = function() {
     this.objectGroup_2.enableBody = true;
 
     this.enemyPool = game.add.group();
+
+    this.doorGroup = game.add.group();
     
     for(var i = 2; i <= 3; i++) {
         map.createFromObjects('Objects_' + i, 85, 'Insectoid', null, true, false, this['objectGroup_' + i], Enemy, false);
@@ -122,9 +124,10 @@ Frogland.create = function() {
         map.createFromObjects('Objects_' + i, 92, 'Bizarro', null, true, false, this['objectGroup_' + i], Enemy, false);
         map.createFromObjects('Objects_' + i, 93, 'Lancer', null, true, false, this['objectGroup_' + i], Enemy, false);
 
-        map.createFromObjects('Objects_' + i, 65, 'Door', 'Door0000', true, false, this['objectGroup_' + i], Door, false);
         map.createFromObjects('Objects_' + i, 66, 'Misc', 'Apple0000', true, false, this['objectGroup_' + i], Apple, false);
     }
+
+    map.createFromObjects('Doors', 67, 'Door', 'Door0000', true, false, this.doorGroup, Door, false);
     
     this.foregroundLayer_3 = map.createLayer('Foreground_3');
     this.foregroundLayer_2 = map.createLayer('Foreground_2');
@@ -171,6 +174,7 @@ Frogland.update = function() {
     
     game.physics.arcade.collide(frauki, this['collisionLayer_' + this.currentLayer], null, this.CheckEnvironmentalCollisions);
     game.physics.arcade.collide(frauki, this['objectGroup_' + this.currentLayer], this.CollideFraukiWithObject, this.OverlapFraukiWithObject);
+    //game.physics.arcade.overlap(frauki, this.doorGroup, this.OverlapFraukiWithDoor);
     game.physics.arcade.collide(this['objectGroup_' + this.currentLayer], this['collisionLayer_' + this.currentLayer]);
     game.physics.arcade.collide(frauki, this['foregroundLayer_' + this.currentLayer], null, this.HideForeground);
 
@@ -276,6 +280,14 @@ Frogland.OverlapFraukiWithObject = function(f, o) {
     }
 
     return true;
+};
+
+Frogland.OverlapFraukiWithDoor = function(f, d) {
+    if(d.spriteType === 'door') {
+        if(frauki.currentLayer === d.firstLayer || frauki.currentLayer === d.secondLayer) {
+            this.standingInDoorway = true;
+        }
+    }
 };
 
 Frogland.CollideFraukiWithProjectile = function(f, p) {
