@@ -164,6 +164,25 @@ Frogland.create = function() {
            
     }, this, 0, 0, map.width, map.height, 'Collision_3');
 
+    //special procesing for collision tiles
+    map.forEach(function(tile) {
+        //if the tile is marked as disappearing
+        if(tile.index === 2) {
+            var water = map.getTileWorldXY(tile.worldX, tile.worldY, 16, 16, 'Foreground_2');
+            water.alpha = 0.4;
+        } else if(tile.index === 4) {
+            tile.collideLeft = false;
+            tile.collideRight = false;
+            tile.collideUp = true;
+            tile.collideDown = false;
+            tile.faceUp = true;
+            tile.faceDown = false;
+            tile.faceLeft = false;
+            tile.faceRight = false; 
+        }
+           
+    }, this, 0, 0, map.width, map.height, 'Collision_2');
+
 };
 
 Frogland.update = function() {
@@ -237,6 +256,7 @@ Frogland.ChangeLayer = function(newLayer) {
     var currentMidgroundLayer = this['midgroundLayer_' + this.currentLayer];
     var currentBackgroundLayer = this['backgroundLayer_' + this.currentLayer];
     var currentCollisionLayer = this['collisionLayer_' + this.currentLayer];
+    var currentObjectLayer = this['objectGroup_' + this.currentLayer];
 
     //currentForgroundLayer.visible = false;
     //currentMidgroundLayer.visible = false;
@@ -244,6 +264,7 @@ Frogland.ChangeLayer = function(newLayer) {
     game.add.tween(currentForgroundLayer).to({alpha: 0}, 200, Phaser.Easing.Linear.None, true);
     game.add.tween(currentMidgroundLayer).to({alpha: 0}, 200, Phaser.Easing.Linear.None, true);
     game.add.tween(currentBackgroundLayer).to({alpha: 0}, 200, Phaser.Easing.Linear.None, true);
+    game.add.tween(currentObjectLayer).to({alpha: 0}, 200, Phaser.Easing.Linear.None, true);
 
     this.currentLayer = newLayer;
 
@@ -251,6 +272,7 @@ Frogland.ChangeLayer = function(newLayer) {
     currentMidgroundLayer = this['midgroundLayer_' + this.currentLayer];
     currentBackgroundLayer = this['backgroundLayer_' + this.currentLayer];
     currentCollisionLayer = this['collisionLayer_' + this.currentLayer];
+    currentCollisionLayer = this['objectGroup_' + this.currentLayer];
 
     currentForgroundLayer.visible = true;
     currentForgroundLayer.alpha = 0;
@@ -262,6 +284,7 @@ Frogland.ChangeLayer = function(newLayer) {
     game.add.tween(currentForgroundLayer).to({alpha: 1}, 200, Phaser.Easing.Linear.None, true);
     game.add.tween(currentMidgroundLayer).to({alpha: 1}, 200, Phaser.Easing.Linear.None, true);
     game.add.tween(currentBackgroundLayer).to({alpha: 1}, 200, Phaser.Easing.Linear.None, true);
+    game.add.tween(currentObjectLayer).to({alpha: 1}, 200, Phaser.Easing.Linear.None, true);
 
 };
 

@@ -35,7 +35,7 @@ InputController = function(player) {
     this.wep.onDown.add(function() { events.publish('activate_weapon', {activate: true}); }, this);
     this.wep.onUp.add(function() {   events.publish('activate_weapon', {activate: false}); }, this);
 
-    this.testButton.onDown.add(function() { 
+    this.up.onDown.add(function() { 
         //energyController.AddEnergy(); 
         if(game.physics.arcade.overlap(frauki, Frogland.doorGroup)) {
             if(Frogland.currentLayer == 3) Frogland.ChangeLayer(2);
