@@ -202,10 +202,10 @@ Frogland.update = function() {
     //reset environmental effect flags
     frauki.states.inWater = false;
     
-    game.physics.arcade.collide(frauki, this['collisionLayer_' + this.currentLayer], null, this.CheckEnvironmentalCollisions);
+    game.physics.arcade.collide(frauki, this.GetCurrentCollisionLayer(), null, this.CheckEnvironmentalCollisions);
     game.physics.arcade.collide(frauki, this.GetCurrentObjectGroup(), this.CollideFraukiWithObject, this.OverlapFraukiWithObject);
     //game.physics.arcade.overlap(frauki, this.doorGroup, this.OverlapFraukiWithDoor);
-    game.physics.arcade.collide(this.GetCurrentObjectGroup(), this['collisionLayer_' + this.currentLayer]);
+    game.physics.arcade.collide(this.GetCurrentObjectGroup(), this.GetCurrentCollisionLayer());
     game.physics.arcade.collide(frauki, this['foregroundLayer_' + this.currentLayer], null, this.HideForeground);
 
     game.physics.arcade.overlap(frauki, projectileController.projectiles, this.CollideFraukiWithProjectile);
@@ -223,7 +223,11 @@ Frogland.update = function() {
 
 Frogland.GetCurrentObjectGroup = function() {
     return this['objectGroup_' + this.currentLayer];
-}
+};
+
+Frogland.GetCurrentCollisionLayer = function() {
+    return this['collisionLayer_' + this.currentLayer];
+};
 
 Frogland.render = function() {
     //game.debug.body(frauki);
@@ -246,7 +250,7 @@ Frogland.Restart = function() {
             energyController.energy = 15;
             energyController.neutralPoint = 15;
 
-            Frogland.objectGroup.forEach(function(e) {
+            Frogland.GetCurrentObjectGroup().forEach(function(e) {
                 e.alive = true;
                 e.exists = true;
                 e.visible = true;

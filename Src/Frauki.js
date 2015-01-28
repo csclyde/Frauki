@@ -149,10 +149,10 @@ Player.prototype.update = function() {
     this.bodyDouble.y = this.y;
 
     if(!!frauki.attackRect && frauki.attackRect.body.width != 0) {
-        game.physics.arcade.overlap(frauki.attackRect, Frogland.objectGroup, EnemyHit);
+        game.physics.arcade.overlap(frauki.attackRect, Frogland.GetCurrentObjectGroup(), EnemyHit);
     }
     
-    game.physics.arcade.collide(frauki, Frogland['collisionLayer_' + Frogland.currentLayer], null, Frogland.CheckEnvironmentalCollisions);
+    game.physics.arcade.collide(frauki, Frogland.GetCurrentCollisionLayer(), null, Frogland.CheckEnvironmentalCollisions);
 };
 
 Player.prototype.SetDirection = function(dir) {
