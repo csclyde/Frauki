@@ -127,11 +127,12 @@ Frogland.create = function() {
         map.createFromObjects('Objects_' + i, 66, 'Misc', 'Apple0000', true, false, this['objectGroup_' + i], Apple, false);
 
         //inform each enemy of its own layer
-        this['objectGroup_' + i].forEach(function(enem) {
-            enem.owningLayer = i;
+        this['objectGroup_' + i].forEach(function(obj) {
+            obj.owningLayer = i;
 
             if(Frogland.currentLayer !== i) {
-                enem.alpha = 0;
+                obj.alpha = 0;
+                obj.body.enable = false;
             }
         });
     }
@@ -140,6 +141,7 @@ Frogland.create = function() {
     
     this.foregroundLayer_3 = map.createLayer('Foreground_3');
     this.foregroundLayer_2 = map.createLayer('Foreground_2');
+    this.foregroundLayer_2.visible = false;
 
     cameraController = new CameraController(frauki, map);
     inputController = new InputController(frauki);
@@ -201,9 +203,9 @@ Frogland.update = function() {
     frauki.states.inWater = false;
     
     game.physics.arcade.collide(frauki, this['collisionLayer_' + this.currentLayer], null, this.CheckEnvironmentalCollisions);
-    game.physics.arcade.collide(frauki, this['objectGroup_' + this.currentLayer], this.CollideFraukiWithObject, this.OverlapFraukiWithObject);
+    game.physics.arcade.collide(frauki, this.GetCurrentObjectGroup(), this.CollideFraukiWithObject, this.OverlapFraukiWithObject);
     //game.physics.arcade.overlap(frauki, this.doorGroup, this.OverlapFraukiWithDoor);
-    game.physics.arcade.collide(this['objectGroup_' + this.currentLayer], this['collisionLayer_' + this.currentLayer]);
+    game.physics.arcade.collide(this.GetCurrentObjectGroup(), this['collisionLayer_' + this.currentLayer]);
     game.physics.arcade.collide(frauki, this['foregroundLayer_' + this.currentLayer], null, this.HideForeground);
 
     game.physics.arcade.overlap(frauki, projectileController.projectiles, this.CollideFraukiWithProjectile);
@@ -219,8 +221,12 @@ Frogland.update = function() {
     playerY = frauki.body.y;
 };
 
+Frogland.GetCurrentObjectGroup = function() {
+    return this['objectGroup_' + this.currentLayer];
+}
+
 Frogland.render = function() {
-    game.debug.body(frauki);
+    //game.debug.body(frauki);
     //game.debug.body(frauki.bodyDouble);
     //game.debug.body(frauki.attackRect);
 
@@ -265,7 +271,7 @@ Frogland.ChangeLayer = function(newLayer) {
     var currentMidgroundLayer = this['midgroundLayer_' + this.currentLayer];
     var currentBackgroundLayer = this['backgroundLayer_' + this.currentLayer];
     var currentCollisionLayer = this['collisionLayer_' + this.currentLayer];
-    var currentObjectLayer = this['objectGroup_' + this.currentLayer];
+    var currentObjectLayer = this.GetCurrentObjectGroup();
 
     game.add.tween(currentForgroundLayer).to({alpha: 0}, 200, Phaser.Easing.Linear.None, true);
     game.add.tween(currentMidgroundLayer).to({alpha: 0}, 200, Phaser.Easing.Linear.None, true);
@@ -273,6 +279,7 @@ Frogland.ChangeLayer = function(newLayer) {
 
     currentObjectLayer.forEach(function(obj) {
         game.add.tween(obj).to({alpha: 0}, 200, Phaser.Easing.Linear.None, true);
+        obj.body.enable = false;
     });
 
     this.currentLayer = newLayer;
@@ -281,7 +288,7 @@ Frogland.ChangeLayer = function(newLayer) {
     currentMidgroundLayer = this['midgroundLayer_' + this.currentLayer];
     currentBackgroundLayer = this['backgroundLayer_' + this.currentLayer];
     currentCollisionLayer = this['collisionLayer_' + this.currentLayer];
-    currentObjectLayer = this['objectGroup_' + this.currentLayer];
+    currentObjectLayer = this.GetCurrentObjectGroup();
 
     currentForgroundLayer.visible = true;
     currentForgroundLayer.alpha = 0;
@@ -297,6 +304,7 @@ Frogland.ChangeLayer = function(newLayer) {
     currentObjectLayer.forEach(function(obj) {
         obj.alpha = 0;
         game.add.tween(obj).to({alpha: 1}, 200, Phaser.Easing.Linear.None, true);
+        obj.body.enable = true;
     });
 
 

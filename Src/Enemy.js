@@ -57,9 +57,10 @@ Enemy.prototype.CanCauseDamage = function() { return true; }
 Enemy.prototype.CanChangeDirection = function() { return true; }
 
 Enemy.prototype.UpdateParentage = function() {
-    if(this.WithinCameraRange() && this.alive && Frogland.curentLayer == this.owningLayer) {
+    if(this.WithinCameraRange() && this.alive && this.owningLayer === Frogland.currentLayer) {
         //if they are in the camera range and not yet in the objectGroup, 
         //load them into the objectGroup, from the enemy pool
+
         if(this.parent === Frogland.enemyPool) {
             Frogland.objectGroup.addChild(this);
             this.body.enable = true;
@@ -101,7 +102,7 @@ Enemy.prototype.update = function() {
     }
 
     //temporary means of communicating their energy levels
-    this.alpha = this.GetEnergyPercentage();
+    //this.alpha = this.GetEnergyPercentage();
     
     if(this.energy > this.maxEnergy)
         this.energy = this.maxEnergy;
