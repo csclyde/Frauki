@@ -68,7 +68,7 @@ EnergyController.prototype.AddEnergy = function(amt) {
 	amt = amt || 2;
 
 	this.energy += amt;
-	this.neutralPoint += (amt / 5);
+	this.neutralPoint += (amt / 2);
 	//this.gracePeriod = game.time.now + 500;
 };
 
@@ -76,7 +76,7 @@ EnergyController.prototype.RemoveEnergy = function(amt) {
 	amt = amt || 7;
 
 	//this.energy -= (amt / 5);
-	this.neutralPoint -= (amt / 5);
+	this.neutralPoint -= (amt / 3);
 	//this.gracePeriod = game.time.now + 500;
 };
 
