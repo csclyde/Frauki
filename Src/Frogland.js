@@ -176,44 +176,6 @@ Frogland.create = function() {
     this.ProcessCollisionTiles(3);
     this.ProcessCollisionTiles(2);
 
-    // //special procesing for collision tiles
-    // map.forEach(function(tile) {
-    //     //if the tile is marked as disappearing
-    //     if(tile.index === 2) {
-    //         var water = map.getTileWorldXY(tile.worldX, tile.worldY, 16, 16, 'Foreground_3');
-    //         water.alpha = 0.4;
-    //     } else if(tile.index === 4) {
-    //         tile.collideLeft = false;
-    //         tile.collideRight = false;
-    //         tile.collideUp = true;
-    //         tile.collideDown = false;
-    //         tile.faceUp = true;
-    //         tile.faceDown = false;
-    //         tile.faceLeft = false;
-    //         tile.faceRight = false; 
-    //     }
-           
-    // }, this, 0, 0, map.width, map.height, 'Collision_3');
-
-    // //special procesing for collision tiles
-    // map.forEach(function(tile) {
-    //     //if the tile is marked as disappearing
-    //     if(tile.index === 2) {
-    //         var water = map.getTileWorldXY(tile.worldX, tile.worldY, 16, 16, 'Foreground_2');
-    //         water.alpha = 0.4;
-    //     } else if(tile.index === 4) {
-    //         tile.collideLeft = false;
-    //         tile.collideRight = false;
-    //         tile.collideUp = true;
-    //         tile.collideDown = false;
-    //         tile.faceUp = true;
-    //         tile.faceDown = false;
-    //         tile.faceLeft = false;
-    //         tile.faceRight = false; 
-    //     }
-           
-    // }, this, 0, 0, map.width, map.height, 'Collision_2');
-
 };
 
 Frogland.ProcessCollisionTiles = function(layer) {
@@ -256,6 +218,7 @@ Frogland.update = function() {
     effectsController.UpdateEffects();
     energyController.UpdateEnergy();
     weaponController.Update();
+    projectileController.Update();
     triggers.Update();
 
     playerX = frauki.body.x;
@@ -276,6 +239,10 @@ Frogland.render = function() {
     //game.debug.body(frauki.attackRect);
 
 /*    this.objectGroup.forEach(function(o) {
+        game.debug.body(o);
+    });*/
+
+    /*projectileController.projectiles.forEach(function(o) {
         game.debug.body(o);
     });*/
 
