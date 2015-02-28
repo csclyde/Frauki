@@ -78,6 +78,13 @@ Frogland.create = function() {
     map.addTilesetImage('DepthsTiles');
     map.addTilesetImage('Collision');
    
+    this.backgroundLayer_4 = map.createLayer('Background_4');
+    this.midgroundLayer_4 = map.createLayer('Midground_4');
+    this.collisionLayer_4 = map.createLayer('Collision_4');
+    this.collisionLayer_4.visible = false;
+    this.backgroundLayer_4.visible = false;
+    this.midgroundLayer_4.visible = false;
+
     this.backgroundLayer_3 = map.createLayer('Background_3');
     this.midgroundLayer_3 = map.createLayer('Midground_3');
     this.collisionLayer_3 = map.createLayer('Collision_3');
@@ -92,9 +99,11 @@ Frogland.create = function() {
 
     this.currentLayer = 3;
     
+    this.midgroundLayer_4.resizeWorld();
     this.midgroundLayer_3.resizeWorld();
     this.midgroundLayer_2.resizeWorld();
 
+    map.setCollision([1, 3, 4, 9, 10], true, 'Collision_4');
     map.setCollision([1, 3, 4, 9, 10], true, 'Collision_3');
     map.setCollision([1, 3, 4, 9, 10], true, 'Collision_2');
 
@@ -103,6 +112,9 @@ Frogland.create = function() {
     CustomCollider(frauki.body, this.collisionLayer_3);
 
     //create the enemies
+    this.objectGroup_4 = game.add.group();
+    this.objectGroup_4.enableBody = true;
+
     this.objectGroup_3 = game.add.group();
     this.objectGroup_3.enableBody = true;
 
@@ -113,7 +125,7 @@ Frogland.create = function() {
 
     this.doorGroup = game.add.group();
     
-    for(var i = 2; i <= 3; i++) {
+    for(var i = 2; i <= 4; i++) {
         map.createFromObjects('Objects_' + i, 85, 'Insectoid', null, true, false, this['objectGroup_' + i], Enemy, false);
         map.createFromObjects('Objects_' + i, 86, 'Buzzar', null, true, false, this['objectGroup_' + i], Enemy, false);
         map.createFromObjects('Objects_' + i, 87, 'Sporoid', null, true, false, this['objectGroup_' + i], Enemy, false);
@@ -139,7 +151,11 @@ Frogland.create = function() {
 
     map.createFromObjects('Doors', 67, 'Door', 'Door0000', true, false, this.doorGroup, Door, false);
     
+    this.foregroundLayer_4 = map.createLayer('Foreground_4');
+    this.foregroundLayer_4.visible = false;
+
     this.foregroundLayer_3 = map.createLayer('Foreground_3');
+
     this.foregroundLayer_2 = map.createLayer('Foreground_2');
     this.foregroundLayer_2.visible = false;
 
@@ -156,11 +172,56 @@ Frogland.create = function() {
 
     game.camera.focusOnXY(frauki.body.x, frauki.body.y);
 
+    this.ProcessCollisionTiles(4);
+    this.ProcessCollisionTiles(3);
+    this.ProcessCollisionTiles(2);
+
+    // //special procesing for collision tiles
+    // map.forEach(function(tile) {
+    //     //if the tile is marked as disappearing
+    //     if(tile.index === 2) {
+    //         var water = map.getTileWorldXY(tile.worldX, tile.worldY, 16, 16, 'Foreground_3');
+    //         water.alpha = 0.4;
+    //     } else if(tile.index === 4) {
+    //         tile.collideLeft = false;
+    //         tile.collideRight = false;
+    //         tile.collideUp = true;
+    //         tile.collideDown = false;
+    //         tile.faceUp = true;
+    //         tile.faceDown = false;
+    //         tile.faceLeft = false;
+    //         tile.faceRight = false; 
+    //     }
+           
+    // }, this, 0, 0, map.width, map.height, 'Collision_3');
+
+    // //special procesing for collision tiles
+    // map.forEach(function(tile) {
+    //     //if the tile is marked as disappearing
+    //     if(tile.index === 2) {
+    //         var water = map.getTileWorldXY(tile.worldX, tile.worldY, 16, 16, 'Foreground_2');
+    //         water.alpha = 0.4;
+    //     } else if(tile.index === 4) {
+    //         tile.collideLeft = false;
+    //         tile.collideRight = false;
+    //         tile.collideUp = true;
+    //         tile.collideDown = false;
+    //         tile.faceUp = true;
+    //         tile.faceDown = false;
+    //         tile.faceLeft = false;
+    //         tile.faceRight = false; 
+    //     }
+           
+    // }, this, 0, 0, map.width, map.height, 'Collision_2');
+
+};
+
+Frogland.ProcessCollisionTiles = function(layer) {
     //special procesing for collision tiles
     map.forEach(function(tile) {
         //if the tile is marked as disappearing
         if(tile.index === 2) {
-            var water = map.getTileWorldXY(tile.worldX, tile.worldY, 16, 16, 'Foreground_3');
+            var water = map.getTileWorldXY(tile.worldX, tile.worldY, 16, 16, 'Foreground_' + layer);
             water.alpha = 0.4;
         } else if(tile.index === 4) {
             tile.collideLeft = false;
@@ -173,27 +234,7 @@ Frogland.create = function() {
             tile.faceRight = false; 
         }
            
-    }, this, 0, 0, map.width, map.height, 'Collision_3');
-
-    //special procesing for collision tiles
-    map.forEach(function(tile) {
-        //if the tile is marked as disappearing
-        if(tile.index === 2) {
-            var water = map.getTileWorldXY(tile.worldX, tile.worldY, 16, 16, 'Foreground_2');
-            water.alpha = 0.4;
-        } else if(tile.index === 4) {
-            tile.collideLeft = false;
-            tile.collideRight = false;
-            tile.collideUp = true;
-            tile.collideDown = false;
-            tile.faceUp = true;
-            tile.faceDown = false;
-            tile.faceLeft = false;
-            tile.faceRight = false; 
-        }
-           
-    }, this, 0, 0, map.width, map.height, 'Collision_2');
-
+    }, this, 0, 0, map.width, map.height, 'Collision_' + layer);
 };
 
 Frogland.update = function() {
@@ -274,7 +315,7 @@ Frogland.ChangeLayer = function(newLayer) {
     var currentForgroundLayer = this['foregroundLayer_' + this.currentLayer];
     var currentMidgroundLayer = this['midgroundLayer_' + this.currentLayer];
     var currentBackgroundLayer = this['backgroundLayer_' + this.currentLayer];
-    var currentCollisionLayer = this['collisionLayer_' + this.currentLayer];
+    var currentCollisionLayer = this.GetCurrentCollisionLayer();
     var currentObjectLayer = this.GetCurrentObjectGroup();
 
     game.add.tween(currentForgroundLayer).to({alpha: 0}, 200, Phaser.Easing.Linear.None, true);
@@ -291,7 +332,7 @@ Frogland.ChangeLayer = function(newLayer) {
     currentForgroundLayer = this['foregroundLayer_' + this.currentLayer];
     currentMidgroundLayer = this['midgroundLayer_' + this.currentLayer];
     currentBackgroundLayer = this['backgroundLayer_' + this.currentLayer];
-    currentCollisionLayer = this['collisionLayer_' + this.currentLayer];
+    currentCollisionLayer = this.GetCurrentCollisionLayer();
     currentObjectLayer = this.GetCurrentObjectGroup();
 
     currentForgroundLayer.visible = true;
@@ -374,19 +415,4 @@ Frogland.CheckEnvironmentalCollisions = function(f, tile) {
     } else if(tile.index === 4) { //cloud tile
         return true;
     }
-}
-
-Frogland.SpawnEnemies = function() {
-    //this function will randomly spawn enemies on the map. The farther down you get in the map,
-    //the more difficult it should become. There should be a "density" function that considers the
-    //max energy of enemies when deciding how to spawn them. For instance, in one area it might 
-    //either spawn 5 or 6 sporoids, or one incarnate. Or, two or three insectoids. The difficulty
-    //of an enemy is considered parallell to their max energy.
-
-    //the spatial positioning will be the difficult part. there can be no guarntee of the size or
-    //type of rooms created. so the spawning should consider the size of the space in which the thing
-    //is going to be spawned.
-
-    //perhaps their could be a sort of spawn daemon that traverses through the map and checks if
-    //a certain type of enemy could potentially fit where it is by modifying its size, or something
 }
