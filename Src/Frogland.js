@@ -109,7 +109,6 @@ Frogland.create = function() {
 
     frauki = new Player(game, 100, 100, 'Frauki');
     game.add.existing(frauki);
-    CustomCollider(frauki.body, this.collisionLayer_3);
 
     //create the enemies
     this.objectGroup_4 = game.add.group();
