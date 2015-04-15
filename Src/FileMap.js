@@ -26,3 +26,14 @@ FileMap.Audio = [
 	{ Name: 'attack_1', File: 'Data/Sfx/attack1.wav'}
 ];
 
+FileMap.Enemies = [
+	{ Name: 'Insectoid', Tile: 85 },
+	{ Name: 'Buzzar', Tile: 86 },
+	{ Name: 'Sporoid', Tile: 87 },
+	{ Name: 'Madman', Tile: 88 },
+	{ Name: 'CreeperThistle', Tile: 89 },
+	{ Name: 'Incarnate', Tile: 90 },
+	{ Name: 'Haystax', Tile: 91 },
+	{ Name: 'Bizarro', Tile: 92 },
+	{ Name: 'Lancer', Tile: 93 }
+];

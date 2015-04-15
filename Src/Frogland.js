@@ -46,76 +46,22 @@ Frogland.create = function() {
     map.addTilesetImage('FrogtownTiles');
     map.addTilesetImage('DepthsTiles');
     map.addTilesetImage('Collision');
-   
-    this.backgroundLayer_4 = map.createLayer('Background_4');
-    this.midgroundLayer_4 = map.createLayer('Midground_4');
-    this.collisionLayer_4 = map.createLayer('Collision_4');
-    this.collisionLayer_4.visible = false;
-    this.backgroundLayer_4.visible = false;
-    this.midgroundLayer_4.visible = false;
 
-    this.backgroundLayer_3 = map.createLayer('Background_3');
-    this.midgroundLayer_3 = map.createLayer('Midground_3');
-    this.collisionLayer_3 = map.createLayer('Collision_3');
-    this.collisionLayer_3.visible = false;
-
-    this.backgroundLayer_2 = map.createLayer('Background_2');
-    this.midgroundLayer_2 = map.createLayer('Midground_2');
-    this.collisionLayer_2 = map.createLayer('Collision_2');
-    this.collisionLayer_2.visible = false;
-    this.backgroundLayer_2.visible = false;
-    this.midgroundLayer_2.visible = false;
-
-    this.currentLayer = 3;
+    this.CreateMapLayer(4, false);
+    this.CreateMapLayer(3, true);
+    this.CreateMapLayer(2, false);
     
-    this.midgroundLayer_4.resizeWorld();
-    this.midgroundLayer_3.resizeWorld();
-    this.midgroundLayer_2.resizeWorld();
-
-    map.setCollision([1, 3, 4, 9, 10], true, 'Collision_4');
-    map.setCollision([1, 3, 4, 9, 10], true, 'Collision_3');
-    map.setCollision([1, 3, 4, 9, 10], true, 'Collision_2');
+    this.currentLayer = 3;
 
     frauki = new Player(game, 100, 100, 'Frauki');
     game.add.existing(frauki);
 
-    //create the enemies
-    this.objectGroup_4 = game.add.group();
-    this.objectGroup_4.enableBody = true;
-
-    this.objectGroup_3 = game.add.group();
-    this.objectGroup_3.enableBody = true;
-
-    this.objectGroup_2 = game.add.group();
-    this.objectGroup_2.enableBody = true;
-
     this.enemyPool = game.add.group();
-
     this.doorGroup = game.add.group();
-    
-    for(var i = 2; i <= 4; i++) {
-        map.createFromObjects('Objects_' + i, 85, 'Insectoid', null, true, false, this['objectGroup_' + i], Enemy, false);
-        map.createFromObjects('Objects_' + i, 86, 'Buzzar', null, true, false, this['objectGroup_' + i], Enemy, false);
-        map.createFromObjects('Objects_' + i, 87, 'Sporoid', null, true, false, this['objectGroup_' + i], Enemy, false);
-        map.createFromObjects('Objects_' + i, 88, 'Madman', null, true, false, this['objectGroup_' + i], Enemy, false);
-        map.createFromObjects('Objects_' + i, 89, 'CreeperThistle', null, true, false, this['objectGroup_' + i], Enemy, false);
-        map.createFromObjects('Objects_' + i, 90, 'Incarnate', null, true, false, this['objectGroup_' + i], Enemy, false);
-        map.createFromObjects('Objects_' + i, 91, 'Haystax', null, true, false, this['objectGroup_' + i], Enemy, false);
-        map.createFromObjects('Objects_' + i, 92, 'Bizarro', null, true, false, this['objectGroup_' + i], Enemy, false);
-        map.createFromObjects('Objects_' + i, 93, 'Lancer', null, true, false, this['objectGroup_' + i], Enemy, false);
 
-        map.createFromObjects('Objects_' + i, 66, 'Misc', 'Apple0000', true, false, this['objectGroup_' + i], Apple, false);
-
-        //inform each enemy of its own layer
-        this['objectGroup_' + i].forEach(function(obj) {
-            obj.owningLayer = i;
-
-            if(Frogland.currentLayer !== i) {
-                obj.alpha = 0;
-                obj.body.enable = false;
-            }
-        });
-    }
+    this.CreateObjectsLayer(4);
+    this.CreateObjectsLayer(3);
+    this.CreateObjectsLayer(2);
 
     map.createFromObjects('Doors', 67, 'Door', 'Door0000', true, false, this.doorGroup, Door, false);
     
@@ -144,6 +90,46 @@ Frogland.create = function() {
     this.ProcessCollisionTiles(3);
     this.ProcessCollisionTiles(2);
 
+};
+
+Frogland.CreateMapLayer = function(layer, visible) {
+    this['backgroundLayer_' + layer] = map.createLayer('Background_' + layer);
+    this['backgroundLayer_' + layer].visible = visible;
+
+    this['midgroundLayer_' + layer] = map.createLayer('Midground_' + layer);
+    this['midgroundLayer_' + layer].resizeWorld();
+    this['midgroundLayer_' + layer].visible = visible;
+    
+    this['collisionLayer_' + layer] = map.createLayer('Collision_' + layer);
+    map.setCollision([1, 3, 4, 9, 10], true, 'Collision_' + layer);
+    this['collisionLayer_' + layer].visible = false;
+};
+
+Frogland.CreateObjectsLayer = function(layer) {
+    var that = this;
+    var currLayer = 'objectGroup_' + layer;
+
+    this[currLayer] = game.add.group();
+    this[currLayer].enableBody = true;
+
+    //create each enemy for this layer
+    FileMap.Enemies.forEach(function(enemy) {
+        map.createFromObjects('Objects_' + layer, enemy.Tile, enemy.Name, null, true, false, that[currLayer], Enemy, false);
+    });
+
+    //create all the apples
+    map.createFromObjects('Objects_' + layer, 66, 'Misc', 'Apple0000', true, false, this[currLayer], Apple, false);
+
+    //inform each enemy of its own layer
+    this[currLayer].forEach(function(obj) {
+        obj.owningLayer = layer;
+
+        if(Frogland.currentLayer !== layer) {
+            obj.alpha = 0;
+            obj.body.enable = false;
+        }
+    });
+    
 };
 
 Frogland.ProcessCollisionTiles = function(layer) {
@@ -215,7 +201,7 @@ Frogland.render = function() {
 
 Frogland.Restart = function() {
     var fadeOutTween = game.add.tween(game.world).to({alpha:0}, 1500, Phaser.Easing.Linear.None, true);
-    
+
     fadeOutTween.onComplete.add(function() {
         frauki.body.x = fraukiSpawnX;
         frauki.body.y = fraukiSpawnY;
