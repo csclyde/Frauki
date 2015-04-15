@@ -41,11 +41,20 @@ CameraController.prototype.UpdateCamera = function() {
 	yOffset += (frauki.states.crouching ? 35 : 0);
 	yOffset -= (frauki.states.upPressed ? 35 : 0);
 
-	if(this.prevXVel !== frauki.body.velocity.x)
-		game.add.tween(this).to({camX:Math.floor((frauki.body.velocity.x / X_VEL_DIV) + xOffset)}, 500, Phaser.Easing.Sinusoidal.Out, true);
+	if(this.prevXVel !== frauki.body.velocity.x) {
+		if(this.camXTween != null) {
+			this.camXTween.stop();
+		}
+
+		this.camXTween = game.add.tween(this).to({camX:Math.floor((frauki.body.velocity.x / X_VEL_DIV) + xOffset)}, 500, Phaser.Easing.Sinusoidal.Out, true);
+	}
 
 	if(this.prevYVel !== frauki.body.velocity.y || this.retweenY) {
-		game.add.tween(this).to({camY:Math.floor((frauki.body.velocity.y / Y_VEL_DIV) + yOffset)}, 1000, Phaser.Easing.Quintic.Out, true);
+		if(this.camyTween != null) {
+			this.camyTween.stop();
+		}
+
+		this.camYTween = game.add.tween(this).to({camY:Math.floor((frauki.body.velocity.y / Y_VEL_DIV) + yOffset)}, 1000, Phaser.Easing.Quintic.Out, true);
 		this.retweenY = false;
 	}
 
@@ -56,7 +65,10 @@ CameraController.prototype.UpdateCamera = function() {
 		this.shakeX = 0;
 	}
 
-	game.camera.focusOnXY(this.camX + frauki.body.x + this.shakeX, this.camY + frauki.body.y + this.shakeY + (frauki.body.height - 50));
+	var newCamX = (this.camX + frauki.body.x + this.shakeX);
+	var newCamY = (this.camY + frauki.body.y + this.shakeY + (frauki.body.height - 50));
+
+	game.camera.focusOnXY(newCamX, newCamY);
 
 	this.prevXVel = frauki.body.velocity.x;
 	this.prevYVel = frauki.body.velocity.y;

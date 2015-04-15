@@ -2,54 +2,29 @@ var Frogland = new Phaser.State();
 
 Frogland.preload = function() {
 	
-    game.load.atlasJSONHash('Frauki', 'Data/Frauki/Frauki.png', 'Data/Frauki/Frauki.json');
     game.load.tilemap('Frogland', 'Data/Frogland/Frogland.json', null, Phaser.Tilemap.TILED_JSON);
-    game.load.image('FrogtownTiles', 'Data/Frogland/FrogtownTiles.png');
-    game.load.image('DepthsTiles', 'Data/Frogland/DepthsTiles.png');
-    game.load.image('Collision', 'Data/CollisionKey.png');
-    game.load.image('Background', 'Data/Frogland/Sky.png');
-    game.load.image('parallax1', 'Data/Frogland/Parallax1.png');
-    game.load.image('parallax2', 'Data/Frogland/Parallax2.png');
-    game.load.image('fluff', 'Data/Fluff.png');
-    game.load.image('mace', 'Data/Weapons/Mace.png');
 
-    game.load.image('RedParticles', 'Data/Hit Particles.png');
-    game.load.image('YellowParticles', 'Data/Yellow Particles.png');
-    game.load.image('Spore', 'Data/Enemies/Sporoid/spore.png');
+    //load images
+    FileMap.Images.forEach(function(img) {
+        game.load.image(img.Name, img.File);
+    });
 
-    game.load.atlasJSONHash('EnemySprites', 'Data/Enemies/Enemies.png', 'Data/Enemies/Enemies.json');
+    //load atlases
+    FileMap.Atlas.forEach(function(atlas) {
+        game.load.atlasJSONHash(atlas.Name, atlas.Img, atlas.File);
+    });
 
-    game.load.atlasJSONHash('Door', 'Data/Doors/Doors.png', 'Data/Doors/Doors.json');
-    game.load.atlasJSONHash('Misc', 'Data/Misc/Misc.png', 'Data/Misc/Misc.json');
-    game.load.atlasJSONHash('UI', 'Data/UI/UI.png', 'Data/UI/UI.json');
-
-    game.load.audio('attack_1', 'Data/Sfx/attack1.wav');
-}
-
-var map;
-var tileset;
-var bg;
-var parallax1, parallax2;
-var cameraController;
-var inputController;
-var effectsController;
-var energyController;
-var audioController;
-var weaponController;
-var projectileController;
-var frauki;
-var fraukiSpawnX, fraukiSpawnY;
-
-var energyText;
-
-var playerX, playerY;
-
-var previousCamX;
-
+    //load audio
+    FileMap.Audio.forEach(function(audio) {
+        game.load.audio(audio.Name, audio.File);
+    });
+};
 
 Frogland.create = function() {
 
     game.add.plugin(Phaser.Plugin.Debug);
+
+    game.renderer.renderSession.roundPixels = true;
 
     game.canvas.style['display'] = 'none';
     pixel.canvas = Phaser.Canvas.create(game.width * pixel.scale, game.height * pixel.scale);
@@ -64,14 +39,8 @@ Frogland.create = function() {
 
     game.time.desiredFps = 60;
 
-    bg = game.add.tileSprite(0, 0, 512, 288, 'Background');
-    bg.fixedToCamera = true;
-
-    parallaxLayer1 = game.add.tileSprite(0, 0, 512, 288, "parallax1");
-    parallaxLayer1.fixedToCamera = true;
-
-    parallaxLayer2 = game.add.tileSprite(0, 0, 512, 288, "parallax2");
-    parallaxLayer2.fixedToCamera = true;
+    this.bg = game.add.tileSprite(0, 0, pixel.width, pixel.height, 'Background');
+    this.bg.fixedToCamera = true;
 
     map = game.add.tilemap('Frogland');
     map.addTilesetImage('FrogtownTiles');
@@ -214,14 +183,10 @@ Frogland.update = function() {
 
     cameraController.UpdateCamera();
     inputController.UpdateInput();
-    effectsController.UpdateEffects();
+    //effectsController.UpdateEffects();
     energyController.UpdateEnergy();
     weaponController.Update();
-    projectileController.Update();
-    triggers.Update();
-
-    playerX = frauki.body.x;
-    playerY = frauki.body.y;
+    //projectileController.Update();
 };
 
 Frogland.GetCurrentObjectGroup = function() {
@@ -250,27 +215,28 @@ Frogland.render = function() {
 
 Frogland.Restart = function() {
     var fadeOutTween = game.add.tween(game.world).to({alpha:0}, 1500, Phaser.Easing.Linear.None, true);
-        fadeOutTween.onComplete.add(function() {
-            frauki.body.x = fraukiSpawnX;
-            frauki.body.y = fraukiSpawnY;
-            game.world.alpha = 1;
-            energyController.energy = 15;
-            energyController.neutralPoint = 15;
+    
+    fadeOutTween.onComplete.add(function() {
+        frauki.body.x = fraukiSpawnX;
+        frauki.body.y = fraukiSpawnY;
+        game.world.alpha = 1;
+        energyController.energy = 15;
+        energyController.neutralPoint = 15;
 
-            Frogland.GetCurrentObjectGroup().forEach(function(e) {
-                e.alive = true;
-                e.exists = true;
-                e.visible = true;
-                e.body.center.x = e.initialX;
-                e.body.center.y = e.initialY;
-                e.body.velocity.x = 0;
-                e.body.velocity.y = 0;
-                e.energy = e.maxEnergy;
+        Frogland.GetCurrentObjectGroup().forEach(function(e) {
+            e.alive = true;
+            e.exists = true;
+            e.visible = true;
+            e.body.center.x = e.initialX;
+            e.body.center.y = e.initialY;
+            e.body.velocity.x = 0;
+            e.body.velocity.y = 0;
+            e.energy = e.maxEnergy;
 
-                if(!!e.Reset)
-                    e.Reset.apply(e);
-            });
+            if(!!e.Reset)
+                e.Reset.apply(e);
         });
+    });
 };
 
 Frogland.ChangeLayer = function(newLayer) {

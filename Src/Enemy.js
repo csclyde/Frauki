@@ -237,7 +237,7 @@ Enemy.prototype.PlayerIsVisible = function() {
     if(!Phaser.Rectangle.intersects(game.camera.view, this.body))
         return;
 
-    var ray = new Phaser.Line(playerX, playerY, this.body.x, this.body.y);
+    var ray = new Phaser.Line(frauki.body.x, frauki.body.y, this.body.x, this.body.y);
     var collideTiles = Frogland['midgroundLayer_' + Frogland.currentLayer].getRayCastTiles(ray, 1, true);
 
     if(collideTiles.length === 0) {
