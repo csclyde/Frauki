@@ -38,6 +38,7 @@ Frogland.create = function() {
     game.physics.arcade.gravity.y = 800;
 
     game.time.desiredFps = 60;
+    //game.time.slowMotion = 5.0;
 
     this.bg = game.add.tileSprite(0, 0, pixel.width, pixel.height, 'Background');
     this.bg.fixedToCamera = true;
@@ -163,7 +164,6 @@ Frogland.update = function() {
     game.physics.arcade.collide(frauki, this.GetCurrentObjectGroup(), this.CollideFraukiWithObject, this.OverlapFraukiWithObject);
     //game.physics.arcade.overlap(frauki, this.doorGroup, this.OverlapFraukiWithDoor);
     game.physics.arcade.collide(this.GetCurrentObjectGroup(), this.GetCurrentCollisionLayer());
-    game.physics.arcade.collide(frauki, this['foregroundLayer_' + this.currentLayer], null, this.HideForeground);
 
     game.physics.arcade.overlap(frauki, projectileController.projectiles, this.CollideFraukiWithProjectile);
 

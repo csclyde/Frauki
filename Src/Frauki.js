@@ -6,7 +6,7 @@ PLAYER_SPEED = function() {
     }
 }
 
-PLAYER_ROLL_SPEED = function() { return 550 + (energyController.GetNeutral() * 10); }
+PLAYER_ROLL_SPEED = function() { return 500 + (energyController.GetNeutral() * 10); }
 PLAYER_RUN_SLASH_SPEED = function() { return  650 + (energyController.GetNeutral() * 10); }
 PLAYER_JUMP_VEL = function() { return -250 - (energyController.GetNeutral() * 10); }
 PLAYER_DOUBLE_JUMP_VEL = function() { return -200 - (energyController.GetNeutral() * 10); }
@@ -74,14 +74,6 @@ Player = function (game, x, y, name) {
     game.physics.enable(this.attackRect, Phaser.Physics.ARCADE);
     this.attackRect.body.setSize(0, 0, 0, 0);
 
-    this.bodyDouble = game.add.sprite(0, 0, null);
-    game.physics.enable(this.bodyDouble, Phaser.Physics.ARCADE);
-    this.bodyDouble.anchor.setTo(0.5, 1);
-
-    this.bodyDouble.body.collideWorldBounds = true;
-    this.bodyDouble.body.setSize(11, 50, 0, -75);
-    this.bodyDouble.body.allowGravity = false;
-
     events.subscribe('player_jump', this.Jump, this);
     events.subscribe('player_crouch', this.Crouch, this);
     events.subscribe('player_slash', this.Slash, this);
@@ -105,6 +97,10 @@ Player.prototype.create = function() {
 
 Player.prototype.update = function() {
     
+    if(this.state === this.AttackDiveFall) {
+        console.log('Y vel: ' + this.body.velocity.y);
+    }
+
     this.body.maxVelocity.x = PLAYER_SPEED() + this.movement.rollBoost;
     this.body.maxVelocity.y = 500;
 
@@ -144,9 +140,6 @@ Player.prototype.update = function() {
     } else {
         this.body.height = 50;
     }
-
-    this.bodyDouble.x = this.x;
-    this.bodyDouble.y = this.y;
 
     if(!!frauki.attackRect && frauki.attackRect.body.width != 0) {
         game.physics.arcade.overlap(frauki.attackRect, Frogland.GetCurrentObjectGroup(), EnemyHit);
@@ -304,7 +297,7 @@ Player.prototype.Slash = function(params) {
     if(!this.timers.TimerUp('frauki_dash') && this.states.crouching && (this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling)) {
         if(energyController.UseEnergy(8)) {
             this.state = this.AttackDiveCharge;
-            this.movement.diveVelocity = 1000;
+            this.movement.diveVelocity = 950;
         }
     }
     //running dash
@@ -351,23 +344,6 @@ Player.prototype.Roll = function(params) {
 
     if(!this.timers.TimerUp('frauki_roll'))
         return;
-
-    //kick
-    /*if(this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling || this.state === this.Flipping) {
-        this.state = this.Kicking;
-        this.timers.SetTimer('frauki_kick', 200);
-
-        if(this.states.direction === 'left') {
-            this.movement.rollVelocity = -PLAYER_RUN_SLASH_SPEED();
-            this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: -PLAYER_SPEED()}, 100, Phaser.Easing.Quartic.In, true);
-        }
-        else {
-            this.movement.rollVelocity = PLAYER_RUN_SLASH_SPEED();
-            this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: PLAYER_SPEED()}, 100, Phaser.Easing.Quartic.In, true);
-        }
-
-        return;
-    }*/
 
     if(!this.body.onFloor())
         return;
@@ -557,8 +533,8 @@ Player.prototype.Flipping = function() {
 Player.prototype.Rolling = function() {
     this.PlayAnim('roll');
 
-    this.body.maxVelocity.x = PLAYER_ROLL_SPEED();
     this.body.velocity.x = this.movement.rollVelocity;
+    this.body.maxVelocity.x = PLAYER_ROLL_SPEED();
     
     if(this.body.velocity.y < 0) {
         if(energyController.UseEnergy(3)) { 
@@ -579,14 +555,7 @@ Player.prototype.Rolling = function() {
 
     if(this.animations.currentAnim.isFinished) {
 
-        this.bodyDouble.body.x = this.body.x;
-
-        if(game.physics.arcade.overlap(this.bodyDouble, Frogland['collisionLayer_' + Frogland.currentLayer])) {
-            this.state = this.Crouching;
-            this.PlayAnim('crouch');
-            this.animations.currentAnim.setFrame('Crouch0005');
-            console.log('into crouch');
-        } else if(this.body.velocity.y > 150) {
+        if(this.body.velocity.y > 150) {
             this.state = this.Falling;
             this.movement.rollVelocity = 0;
         } else if(!inputController.runLeft.isDown && !inputController.runRight.isDown && this.body.onFloor()) {
@@ -602,6 +571,8 @@ Player.prototype.Rolling = function() {
         } else if(this.body.velocity.x !== 0 && this.body.onFloor()) {
             this.state = this.Running;
             this.movement.rollVelocity = 0;
+        } else {
+            this.state = this.Running;
         }
     }
 };
