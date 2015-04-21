@@ -66,6 +66,7 @@ Player = function (game, x, y, name) {
     this.movement.diveVelocity = 0;
     this.movement.jumpSlashVelocity = 0;
     this.movement.rollBoost = 0;
+    this.movement.startRollTime = game.time.now;
 
     this.timers = new TimerUtil();
 
@@ -223,6 +224,36 @@ Player.prototype.LandKill = function(bonus) {
     energyController.AddEnergy(bonus);
 };
 
+Player.prototype.GetRollVel = function(elap) {
+    //x^3 - 3x^2 -2x^2 + 6x
+    //x: 0-3
+    //y: 2.1 to -.6
+    //if elap is above 3, return player speed
+
+    //2.112 ~= max y
+    //-0.631 ~= min y
+
+    //normalize the elapsed time to be 3 seconds, for a 270 ms duration
+    elap = 3 * (elap / 270);
+
+    if(elap > 3) {
+        return PLAYER_SPEED();
+    }
+
+    var velModifier = Math.pow(elap, 3) - (3 * Math.pow(elap, 2)) - (2 * Math.pow(elap, 2)) + (6 * elap);
+
+    //normalize the output based on the maximum, then factor in the max speed
+    velModifier /= 2.112;
+    velModifier *= 200;
+
+    if(velModifier > 0) velModifier *= 2;
+    if(velModifier < 0) velModifier /= 3;
+
+    console.log(velModifier + PLAYER_SPEED());
+
+    return velModifier + PLAYER_SPEED();
+};
+
 ////////////////ACTIONS//////////////////
 Player.prototype.Run = function(params) {
     if(this.state === this.Hurting || this.state === this.Rolling || this.state === this.AttackStab) 
@@ -351,6 +382,8 @@ Player.prototype.Roll = function(params) {
     if(!energyController.UseEnergy(2))
         return;
 
+    this.movement.startRollTime = game.time.now;
+
     this.state = this.Rolling;
 
     var dir = this.GetDirectionMultiplier();
@@ -358,6 +391,8 @@ Player.prototype.Roll = function(params) {
     this.movement.rollVelocity = dir * PLAYER_SPEED();
     this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: dir * PLAYER_ROLL_SPEED()}, 50, Phaser.Easing.Exponential.In, false).to({rollVelocity: dir * PLAYER_SPEED()}, 300, Phaser.Easing.Quartic.In, false);
     this.tweens.roll.start();
+
+    //this.movement.rollVelocity = dir * PLAYER_ROLL_SPEED();
 
     this.timers.SetTimer('frauki_roll', 650);
     this.timers.SetTimer('frauki_grace', 300);
@@ -533,8 +568,12 @@ Player.prototype.Flipping = function() {
 Player.prototype.Rolling = function() {
     this.PlayAnim('roll');
 
-    this.body.velocity.x = this.movement.rollVelocity;
-    this.body.maxVelocity.x = PLAYER_ROLL_SPEED();
+    //var rollVel = this.GetRollVel(game.time.now - this.movement.startRollTime);
+    //this.body.maxVelocity.x = rollVel;
+    //this.body.velocity.x = rollVel;
+
+    this.body.maxVelocity.x = this.movement.rollVelocity;
+    this.body.velocity.x = this.GetDirectionMultiplier() * this.movement.rollVelocity;
     
     if(this.body.velocity.y < 0) {
         if(energyController.UseEnergy(3)) { 
