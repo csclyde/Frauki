@@ -11,7 +11,6 @@ PLAYER_RUN_SLASH_SPEED = function() { return  650 + (energyController.GetNeutral
 PLAYER_JUMP_VEL = function() { return -250 - (energyController.GetNeutral() * 10); }
 PLAYER_DOUBLE_JUMP_VEL = function() { return -200 - (energyController.GetNeutral() * 10); }
 PLAYER_JUMP_SLASH_SPEED = function() { return 1000 + (energyController.GetNeutral() * 5); }
-PLAYER_KICK_SPEED = 800;
 
 Player = function (game, x, y, name) {
 
@@ -23,27 +22,10 @@ Player = function (game, x, y, name) {
     this.body.setSize(11, 50, 0, -75);
     this.body.maxVelocity.y = 500;
 
-    //movements
-    this.animations.add('stand', ['Stand0000'], 10, true, false);
-    this.animations.add('run', ['Run0000', 'Run0001', 'Run0002', 'Run0003', 'Run0004', 'Run0005', 'Run0006', 'Run0007'], 15, true, false);
-    this.animations.add('jump', ['Jump0000', 'Jump0001', 'Jump0002', 'Jump0003', 'Jump0004'], 10, true, false);
-    this.animations.add('peak', ['Peak0000', 'Peak0001'], 14, false, false);
-    this.animations.add('fall', ['Fall0000', 'Fall0001', 'Fall0002', 'Fall0003'], 18, true, false);
-    this.animations.add('land', ['Standing Jump0006', 'Standing Jump0007', 'Standing Jump0008'], 10, false, false);
-    this.animations.add('crouch', ['Crouch0000', 'Crouch0001', 'Crouch0002', 'Crouch0003', 'Crouch0004', 'Crouch0005', 'Crouch0006', 'Crouch0007', 'Crouch0008'], 20, false, false);
-    this.animations.add('flip', ['Flip0000', 'Flip0001', 'Flip0002', 'Flip0003', 'Flip0004'], 14, false, false);
-    this.animations.add('roll', ['Roll0000', 'Roll0001', 'Roll0002', 'Roll0003', 'Roll0004', 'Roll0005', 'Roll0013', 'Roll0014'], 18, false, false);
-    this.animations.add('hit', ['Hit0000', 'Hit0001'], 10, true, false);
-    this.animations.add('kick', ['Kick0000', 'Kick0001'], 18, false, false);
-    this.animations.add('roll_jump', ['Roll0009', 'Roll0010', 'Roll0011', 'Roll0012'], 18, false, false);
-
-    //attacks
-    this.animations.add('attack_front', ['Attack Front0001', 'Attack Front0002', 'Attack Front0003', 'Attack Front0004', 'Attack Front0005', 'Attack Front0006', 'Attack Front0007', 'Attack Front0008',], 20, false, false);
-    this.animations.add('attack_overhead', ['Attack Overhead0003', 'Attack Overhead0004', 'Attack Overhead0005', 'Attack Overhead0006', 'Attack Overhead0007', 'Attack Overhead0008', 'Attack Overhead0009', 'Attack Overhead0010', 'Attack Overhead0011', 'Attack Overhead0012', 'Attack Overhead0013'], 20, false, false);
-    this.animations.add('attack_stab', ['Attack Stab0002', 'Attack Stab0003', 'Attack Stab0004', 'Attack Stab0005', 'Attack Stab0006', 'Attack Stab0007', 'Attack Stab0008', 'Attack Stab0009', 'Attack Stab0010', 'Attack Stab0011', 'Attack Stab0012', 'Attack Stab0013', 'Attack Stab0014', 'Attack Stab0015', 'Attack Stab0016', 'Attack Stab0017', 'Attack Stab0018', 'Attack Stab0019'], 20, false, false);
-    this.animations.add('attack_dive_charge', ['Attack Dive0000', 'Attack Dive0001', 'Attack Dive0002', 'Attack Dive0003', 'Attack Dive0004', 'Attack Dive0005', 'Attack Dive0009', 'Attack Dive0010', 'Attack Dive0011'], 20, false, false);
-    this.animations.add('attack_dive_fall', ['Attack Dive0012', 'Attack Dive0013', 'Attack Dive0014', 'Attack Dive0015', 'Attack Dive0016', 'Attack Dive0017'], 20, true, false);
-    this.animations.add('attack_dive_land', ['Attack Dive0018', 'Attack Dive0019', 'Attack Dive0020', 'Attack Dive0021', 'Attack Dive0022', 'Attack Dive0023', 'Attack Dive0024', 'Attack Dive0025', 'Attack Dive0026', 'Attack Dive0027', 'Attack Dive0028'], 20, false, false);
+    //load up the animations
+    fraukiAnimations.forEach(function(anim) {
+        this.animations.add(anim.Name, anim.Frames, anim.Fps, anim.Loop, false);
+    }, this);
 
     this.state = this.Standing;
     this.PlayAnim('stand');
@@ -97,10 +79,6 @@ Player.prototype.create = function() {
 }
 
 Player.prototype.update = function() {
-    
-    if(this.state === this.AttackDiveFall) {
-        console.log('Y vel: ' + this.body.velocity.y);
-    }
 
     this.body.maxVelocity.x = PLAYER_SPEED() + this.movement.rollBoost;
     this.body.maxVelocity.y = 500;
@@ -129,7 +107,7 @@ Player.prototype.update = function() {
         this.body.velocity.x = 0;
         this.body.acceleration.x = 0;
         this.movement.rollVelocity = 0;
-        this.movement.rollBoost = 0;
+        //this.movement.rollBoost = 0;
     }
 
     if(this.states.dashing) {
@@ -260,10 +238,10 @@ Player.prototype.Run = function(params) {
         return;
 
     if(params.dir === 'left') {
-        this.body.acceleration.x = -2000;
+        this.body.acceleration.x = -1500;
         this.SetDirection('left');
     } else if(params.dir === 'right') {
-        this.body.acceleration.x = 2000;
+        this.body.acceleration.x = 1500;
         this.SetDirection('right');
     } else {
         this.body.acceleration.x = 0;
@@ -381,8 +359,6 @@ Player.prototype.Roll = function(params) {
         
     if(!energyController.UseEnergy(2))
         return;
-
-    this.movement.startRollTime = game.time.now;
 
     this.state = this.Rolling;
 
@@ -567,10 +543,6 @@ Player.prototype.Flipping = function() {
 
 Player.prototype.Rolling = function() {
     this.PlayAnim('roll');
-
-    //var rollVel = this.GetRollVel(game.time.now - this.movement.startRollTime);
-    //this.body.maxVelocity.x = rollVel;
-    //this.body.velocity.x = rollVel;
 
     this.body.maxVelocity.x = this.movement.rollVelocity;
     this.body.velocity.x = this.GetDirectionMultiplier() * this.movement.rollVelocity;

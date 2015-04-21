@@ -38,7 +38,6 @@ Frogland.create = function() {
     game.physics.arcade.gravity.y = 800;
 
     game.time.desiredFps = 60;
-    //game.time.slowMotion = 5.0;
 
     this.bg = game.add.tileSprite(0, 0, pixel.width, pixel.height, 'Background');
     this.bg.fixedToCamera = true;
