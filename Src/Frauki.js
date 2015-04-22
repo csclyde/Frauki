@@ -75,11 +75,7 @@ Player = function (game, x, y, name) {
 Player.prototype = Object.create(Phaser.Sprite.prototype);
 Player.prototype.constructor = Player;
 
-Player.prototype.create = function() {
-}
-
-Player.prototype.update = function() {
-
+Player.prototype.preStateUpdate = function() {
     this.body.maxVelocity.x = PLAYER_SPEED() + this.movement.rollBoost;
     this.body.maxVelocity.y = 500;
 
@@ -94,20 +90,20 @@ Player.prototype.update = function() {
     } else {
         this.runDust.visible = false;
     }
-
-    this.state();
-
-    //reset the double jump flag
-    if(this.body.onFloor()) {
-        this.states.hasFlipped = false;
-        this.movement.rollBoost = 0;
-    }
-
+    
     if(!inputController.runLeft.isDown && !inputController.runRight.isDown && this.state !== this.Jumping && this.state !== this.Rolling && this.state !== this.AttackStab && this.state !== this.Hurting) {
         this.body.velocity.x = 0;
         this.body.acceleration.x = 0;
         this.movement.rollVelocity = 0;
         //this.movement.rollBoost = 0;
+    }
+};
+
+Player.prototype.postStateUpdate = function() {
+    //reset the double jump flag
+    if(this.body.onFloor()) {
+        this.states.hasFlipped = false;
+        this.movement.rollBoost = 0;
     }
 
     if(this.states.dashing) {
@@ -123,6 +119,12 @@ Player.prototype.update = function() {
     if(!!frauki.attackRect && frauki.attackRect.body.width != 0) {
         game.physics.arcade.overlap(frauki.attackRect, Frogland.GetCurrentObjectGroup(), EnemyHit);
     }
+};
+
+Player.prototype.update = function() {
+    this.preStateUpdate();
+    this.state();
+    this.postStateUpdate();
 };
 
 Player.prototype.SetDirection = function(dir) {
@@ -200,34 +202,23 @@ Player.prototype.LandKill = function(bonus) {
     energyController.AddEnergy(bonus);
 };
 
-Player.prototype.GetRollVel = function(elap) {
-    //x^3 - 3x^2 -2x^2 + 6x
-    //x: 0-3
-    //y: 2.1 to -.6
-    //if elap is above 3, return player speed
-
-    //2.112 ~= max y
-    //-0.631 ~= min y
-
-    //normalize the elapsed time to be 3 seconds, for a 270 ms duration
-    elap = 3 * (elap / 270);
-
-    if(elap > 3) {
-        return PLAYER_SPEED();
+Player.prototype.GetDirectionMultiplier = function() {
+    var dir = 1;
+    if(inputController.runLeft.isDown) {
+        this.SetDirection('left');
+        dir = -1;
+    } else if (inputController.runRight.isDown) {
+        this.SetDirection('right');
+        dir = 1;
+    } else if(this.states.direction === 'left') {
+        this.SetDirection('left');
+        dir = -1;
+    } else {
+        this.SetDirection('right');
+        dir = 1;
     }
-
-    var velModifier = Math.pow(elap, 3) - (3 * Math.pow(elap, 2)) - (2 * Math.pow(elap, 2)) + (6 * elap);
-
-    //normalize the output based on the maximum, then factor in the max speed
-    velModifier /= 2.112;
-    velModifier *= 200;
-
-    if(velModifier > 0) velModifier *= 2;
-    if(velModifier < 0) velModifier /= 3;
-
-    console.log(velModifier + PLAYER_SPEED());
-
-    return velModifier + PLAYER_SPEED();
+    
+    return dir;
 };
 
 ////////////////ACTIONS//////////////////
@@ -371,25 +362,6 @@ Player.prototype.Roll = function(params) {
     this.timers.SetTimer('frauki_roll', 650);
     this.timers.SetTimer('frauki_grace', 300);
 };
-
-Player.prototype.GetDirectionMultiplier = function() {
-    var dir = 1;
-    if(inputController.runLeft.isDown) {
-        this.SetDirection('left');
-        dir = -1;
-    } else if (inputController.runRight.isDown) {
-        this.SetDirection('right');
-        dir = 1;
-    } else if(this.states.direction === 'left') {
-        this.SetDirection('left');
-        dir = -1;
-    } else {
-        this.SetDirection('right');
-        dir = 1;
-    }
-    
-    return dir;
-}
 
 Player.prototype.Hit = function(f, e) {
 
