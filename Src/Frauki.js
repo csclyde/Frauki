@@ -1,16 +1,16 @@
 PLAYER_SPEED = function() { 
     if(!frauki.states.dashing) {
-        return 150 + (energyController.GetEnergy() * 7); 
+        return 255;
     } else {
         return 360;
     }
 }
 
-PLAYER_ROLL_SPEED = function() { return 500 + (energyController.GetNeutral() * 10); }
-PLAYER_RUN_SLASH_SPEED = function() { return  500 + (energyController.GetNeutral() * 10); }
-PLAYER_JUMP_VEL = function() { return -250 - (energyController.GetNeutral() * 10); }
-PLAYER_DOUBLE_JUMP_VEL = function() { return -200 - (energyController.GetNeutral() * 10); }
-PLAYER_JUMP_SLASH_SPEED = function() { return 1000 + (energyController.GetNeutral() * 5); }
+PLAYER_ROLL_SPEED = function() { return 650; }
+PLAYER_RUN_SLASH_SPEED = function() { return  650; }
+PLAYER_JUMP_VEL = function() { return -400; }
+PLAYER_DOUBLE_JUMP_VEL = function() { return -350; }
+PLAYER_JUMP_SLASH_SPEED = function() { return 1075; }
 
 Player = function (game, x, y, name) {
 
