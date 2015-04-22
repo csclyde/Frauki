@@ -91,7 +91,7 @@ Player.prototype.preStateUpdate = function() {
         this.runDust.visible = false;
     }
     
-    if(!inputController.runLeft.isDown && !inputController.runRight.isDown && this.state !== this.Jumping && this.state !== this.Rolling && this.state !== this.AttackStab && this.state !== this.Hurting) {
+    if(!inputController.runLeft.isDown && !inputController.runRight.isDown && this.state !== this.Jumping && this.state !== this.Peaking && this.state !== this.Falling && this.state !== this.Rolling && this.state !== this.AttackStab && this.state !== this.Hurting) {
         this.body.velocity.x = 0;
         this.body.acceleration.x = 0;
         this.movement.rollVelocity = 0;
