@@ -123,8 +123,6 @@ Player.prototype.update = function() {
     if(!!frauki.attackRect && frauki.attackRect.body.width != 0) {
         game.physics.arcade.overlap(frauki.attackRect, Frogland.GetCurrentObjectGroup(), EnemyHit);
     }
-    
-    game.physics.arcade.collide(frauki, Frogland.GetCurrentCollisionLayer(), null, Frogland.CheckEnvironmentalCollisions);
 };
 
 Player.prototype.SetDirection = function(dir) {
@@ -604,6 +602,8 @@ Player.prototype.Hurting = function() {
 
 Player.prototype.AttackFront = function() {
     this.PlayAnim('attack_front');
+
+    this.body.velocity.x /= 2;
 
     if(this.animations.currentAnim.isFinished) {
         this.state = this.Standing;

@@ -290,6 +290,14 @@ Frogland.OverlapFraukiWithObject = function(f, o) {
     return true;
 };
 
+Frogland.CollideFraukiWithObject = function(f, o) {
+
+    if(!!o && typeof o === 'object') {
+        if(o.spriteType === 'door')
+            OpenDoor(f, o);
+    }
+};
+
 Frogland.OverlapFraukiWithDoor = function(f, d) {
     if(d.spriteType === 'door') {
         if(frauki.currentLayer === d.firstLayer || frauki.currentLayer === d.secondLayer) {
@@ -305,14 +313,6 @@ Frogland.CollideFraukiWithProjectile = function(f, p) {
     }
 
     p.destroy();
-};
-
-Frogland.CollideFraukiWithObject = function(f, o) {
-
-    if(!!o && typeof o === 'object') {
-        if(o.spriteType === 'door')
-            OpenDoor(f, o);
-    }
 };
 
 Frogland.CheckEnvironmentalCollisions = function(f, tile) {
