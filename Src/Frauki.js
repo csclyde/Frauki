@@ -454,6 +454,9 @@ Player.prototype.Falling = function() {
     this.body.gravity.y = game.physics.arcade.gravity.y * 2;
 
     if(this.body.onFloor()) {
+        
+        console.log(this.body.velocity.x);
+        
         if(this.body.velocity.x === 0) {
             if(this.states.crouching)
                 this.state = this.Crouching;
