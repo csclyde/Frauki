@@ -91,7 +91,7 @@ Player.prototype.preStateUpdate = function() {
         this.runDust.visible = false;
     }
     
-    if(!inputController.runLeft.isDown && !inputController.runRight.isDown && this.state !== this.Jumping && this.state !== this.Peaking && this.state !== this.Falling && this.state !== this.Rolling && this.state !== this.AttackStab && this.state !== this.Hurting) {
+    if(!inputController.runLeft.isDown && !inputController.runRight.isDown && this.state !== this.Jumping && this.state !== this.Rolling && this.state !== this.AttackStab && this.state !== this.Hurting) {
         this.body.velocity.x = 0;
         this.body.acceleration.x = 0;
         this.movement.rollVelocity = 0;
@@ -454,10 +454,6 @@ Player.prototype.Falling = function() {
     this.body.gravity.y = game.physics.arcade.gravity.y * 2;
 
     if(this.body.onFloor()) {
-        
-        console.log(this.body.velocity.x);
-        console.log(this.movement.rollBoost);
-        console.log(this.movement.rollVelocity);
         
         if(this.body.velocity.x === 0) {
             if(this.states.crouching)
