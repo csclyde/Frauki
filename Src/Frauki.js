@@ -456,6 +456,8 @@ Player.prototype.Falling = function() {
     if(this.body.onFloor()) {
         
         console.log(this.body.velocity.x);
+        console.log(this.movement.rollBoost);
+        console.log(this.movement.rollVelocity);
         
         if(this.body.velocity.x === 0) {
             if(this.states.crouching)
