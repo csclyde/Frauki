@@ -35,7 +35,11 @@ EnergyController.prototype.UpdateEnergy = function() {
 			if(this.energy > this.neutralPoint) {
 				this.energy -= step / 10;
 			} else {
-				this.energy += step;
+				if(this.energy < 0) {
+					this.energy += step * 0.8;
+				} else {
+					this.energy += step;
+				}
 			}
 		}
 		

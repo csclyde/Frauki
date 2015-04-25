@@ -114,8 +114,6 @@ Player.prototype.update = function() {
     this.preStateUpdate();
     this.state();
     this.postStateUpdate();
-
-    if(this.body.velocity.x !== 0) console.log(this.body.velocity.x);
 };
 
 Player.prototype.SetDirection = function(dir) {

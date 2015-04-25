@@ -44,7 +44,7 @@ Enemy.prototype.SetDefaultValues = function() {
     this.energy = 5;
     this.damage = 4;
     this.inScope = false;
-    this.baseStunDuration = 500;
+    this.baseStunDuration = 300;
     this.poise = 10;
 };
 
@@ -171,11 +171,11 @@ function EnemyHit(f, e) {
     if(e.xHitVel < 100) e.xHitVel = 100;
     e.xHitVel *= c;
 
-    game.add.tween(e).to({xHitVel: 0}, 800, Phaser.Easing.Exponential.Out, true);
+    game.add.tween(e).to({xHitVel: 0}, 400, Phaser.Easing.Exponential.Out, true);
 
-    e.body.velocity.y = frauki.currentAttack.juggle * -300;
+    e.body.velocity.y = -100 + (frauki.currentAttack.juggle * -400);
 
-    console.log(e.xHitVel + ':' + e.body.velocity.y);
+    console.log(e.xHitVel + ' : ' + e.body.velocity.y);
 
     events.publish('camera_shake', {magnitudeX: 15 * frauki.currentAttack.damage, magnitudeY: 5, duration: 100});
 
