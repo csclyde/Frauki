@@ -363,7 +363,7 @@ Player.prototype.Hit = function(f, e) {
 
     energyController.RemoveEnergy(e.damage);
 
-    e.energy += e.damage / 2;
+    //e.energy += e.damage / 2;
 
     this.body.center.x < e.body.center.x ? this.body.velocity.x = -200 : this.body.velocity.x = 200;
 

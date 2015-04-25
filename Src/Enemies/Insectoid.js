@@ -11,7 +11,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
     this.attackTimer = 0;
     this.weight = 0.6;
     this.damage = 5;
-    this.energy = 6;
+    this.energy = 10;
 
     this.squashTween = null;
 
@@ -40,6 +40,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
 	///////////////////////////////ACTIONS////////////////////////////////////
 	this.Hop = function() {
+
 		if(game.time.now < this.attackTimer)
 			return;
 
@@ -48,7 +49,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		this.squashTween = game.add.tween(this.scale).to({y: 0.7}, 200, Phaser.Easing.Exponential.Out, true);
 		//this.scale.y = 0.7;
 
-		console.log('Hopping');
+		
 
 	};
 
@@ -56,10 +57,11 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		if(game.time.now < this.attackTimer)
 			return;
 
-		this.attackTimer = game.time.now + 300;
+		this.attackTimer = game.time.now + 400;
+		this.squashTween = game.add.tween(this.scale).to({x: this.GetDirMod() * 0.7}, 300, Phaser.Easing.Exponential.Out, true);
 		this.state = this.PreScuttling;
 
-		console.log('Scuttling');
+		
 	};
 
 	this.Dodge = function(overrideFloorCondition) {
@@ -78,7 +80,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 			this.body.velocity.x = -150;
 		}
 
-		console.log('Dodging');
+		
 	};
 
 	this.Dive = function() {
@@ -90,7 +92,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		game.add.tween(this).to({angle: 90}, 100, Phaser.Easing.Exponential.Out, true);
 		//this.angle = 90;
 
-		console.log('Diving');
+		
 	};
 
 	this.Flee = function() {
@@ -104,12 +106,13 @@ Enemy.prototype.types['Insectoid'] =  function() {
 			this.Dodge();
 		}
 
-		console.log('Fleeing');
+		
 	}
 
 	this.TakeHit = function(power) {
 
 	    this.scale.y = 1;
+	    this.attackTimer = 0;
 	    
 	    //if(this.RollDice(10, 3))
 	        //this.Dodge();
@@ -120,19 +123,23 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		this.PlayAnim('idle');
 
 		if(this.PlayerIsNear(50)) {
-				this.Scuttle();
+
+			this.Scuttle();
 		} else if(this.body.center.y < frauki.body.y && this.body.center.x > frauki.body.center.x - 20 && 
 				  this.body.center.x < frauki.body.center.x + 20 && 
 				  !this.body.onFloor()) {
+
 			this.Dive();
 
 		} else if(Math.abs(this.body.center.y - frauki.body.center.y) < 40 && 
 				  Math.abs(this.body.center.x - frauki.body.center.y) < 400 && 
 				  (this.body.onFloor() || this.body.velocity.y <= 0)) {
+
 			this.Scuttle();
 
 		} else if(Math.abs(this.body.center.x - frauki.body.center.x) > 50 && 
 				  Math.abs(this.body.center.x - frauki.body.center.x) < 450) {
+
 			this.Hop();
 
 		} else {
@@ -153,6 +160,8 @@ Enemy.prototype.types['Insectoid'] =  function() {
 			this.attackTimer = game.time.now + 2000;
 			this.state = this.Hopping;
 			this.scale.y = 1;
+
+			this.xHitVel = 0;
 
 			//parabolic arc
 			//the duration of the hop is a function of how far apart the bug and
@@ -196,11 +205,12 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		if(game.time.now > this.attackTimer) {
 			this.attackTimer = game.time.now + 2000;
 			this.state = this.Scuttling;
+			this.scale.x = this.GetDirMod();
 
 			if(frauki.body.x < this.body.center.x) {
-				this.body.velocity.x = -500;
+				this.body.velocity.x = -450;
 			} else {
-				this.body.velocity.x = 500;
+				this.body.velocity.x = 450;
 			}	
 		}
 	};

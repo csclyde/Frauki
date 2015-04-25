@@ -135,6 +135,14 @@ Enemy.prototype.WithinCameraRange = function() {
     return false;
 };
 
+Enemy.prototype.GetDirMod = function() {
+    if(this.direction === 'left') {
+        return -1;
+    } else {
+        return 1;
+    }
+};
+
 Enemy.prototype.SetDirection = function(dir) {
     if(dir === 'left' && this.direction !== 'left') {
         this.direction = 'left';
@@ -171,7 +179,7 @@ function EnemyHit(f, e) {
     if(e.xHitVel < 100) e.xHitVel = 100;
     e.xHitVel *= c;
 
-    game.add.tween(e).to({xHitVel: 0}, 400, Phaser.Easing.Exponential.Out, true);
+    game.add.tween(e).to({xHitVel: 0}, 300, Phaser.Easing.Exponential.Out, true);
 
     e.body.velocity.y = -100 + (frauki.currentAttack.juggle * -400);
 
