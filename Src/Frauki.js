@@ -1,11 +1,4 @@
-PLAYER_SPEED = function() { 
-    if(!frauki.states.dashing) {
-        return 255;
-    } else {
-        return 360;
-    }
-}
-
+PLAYER_SPEED = function() { return 255; }
 PLAYER_ROLL_SPEED = function() { return 650; }
 PLAYER_RUN_SLASH_SPEED = function() { return  650; }
 PLAYER_JUMP_VEL = function() { return -400; }
@@ -21,6 +14,7 @@ Player = function (game, x, y, name) {
     this.body.collideWorldBounds = true;
     this.body.setSize(11, 50, 0, -75);
     this.body.maxVelocity.y = 500;
+    this.body.drag.x = 2000;
 
     //load up the animations
     fraukiAnimations.forEach(function(anim) {
@@ -41,7 +35,6 @@ Player = function (game, x, y, name) {
     this.states.upPresseed = false;
     this.states.wasAttacking = false;
     this.states.inWater = false;
-    this.states.dashing = false;
 
     this.movement = {};
     this.movement.rollVelocity = 0;
@@ -92,9 +85,9 @@ Player.prototype.preStateUpdate = function() {
     }
     
     if(!inputController.runLeft.isDown && !inputController.runRight.isDown && this.state !== this.Jumping && this.state !== this.Rolling && this.state !== this.AttackStab && this.state !== this.Hurting) {
-        this.body.velocity.x = 0;
-        this.body.acceleration.x = 0;
-        this.movement.rollVelocity = 0;
+        //this.body.velocity.x = 0;
+        //this.body.acceleration.x = 0;
+        //this.movement.rollVelocity = 0;
         //this.movement.rollBoost = 0;
     }
 };
@@ -104,10 +97,6 @@ Player.prototype.postStateUpdate = function() {
     if(this.body.onFloor()) {
         this.states.hasFlipped = false;
         this.movement.rollBoost = 0;
-    }
-
-    if(this.states.dashing) {
-        this.body.gravity.y = -800;
     }
 
     if(this.state === this.Crouching || this.state === this.Rolling || this.state === this.Flipping) {
@@ -125,6 +114,8 @@ Player.prototype.update = function() {
     this.preStateUpdate();
     this.state();
     this.postStateUpdate();
+
+    if(this.body.velocity.x !== 0) console.log(this.body.velocity.x);
 };
 
 Player.prototype.SetDirection = function(dir) {
@@ -252,8 +243,8 @@ Player.prototype.StartStopRun = function(params) {
         }
 
     } else {
-        if(this.state !== this.Rolling)
-            this.body.velocity.x = 0;
+        //if(this.state !== this.Rolling)
+            //this.body.velocity.x = 0;
     }
 };
 
@@ -539,7 +530,6 @@ Player.prototype.Rolling = function() {
 
         if(this.body.velocity.y > 150) {
             this.state = this.Falling;
-            this.movement.rollVelocity = 0;
         } else if(!inputController.runLeft.isDown && !inputController.runRight.isDown && this.body.onFloor()) {
             if(this.states.crouching) {
                 this.state = this.Crouching;
@@ -549,13 +539,14 @@ Player.prototype.Rolling = function() {
                 this.state = this.Standing;
             }
 
-            this.movement.rollVelocity = 0;
+            this.body.velocity.x = 0;
         } else if(this.body.velocity.x !== 0 && this.body.onFloor()) {
             this.state = this.Running;
-            this.movement.rollVelocity = 0;
         } else {
-            this.state = this.Running;
+            this.state = this.Standing;
         }
+
+        this.movement.rollVelocity = 0;
     }
 };
 
@@ -674,6 +665,8 @@ Player.prototype.AttackDiveLand = function() {
 
 Player.prototype.AttackJump = function() {
     this.PlayAnim('attack_overhead');
+
+    this.body.velocity.x /= 2;
 
     if(this.movement.jumpSlashVelocity !== 0)
         this.body.velocity.y = this.movement.jumpSlashVelocity;
