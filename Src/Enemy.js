@@ -26,6 +26,7 @@ Enemy = function(game, x, y, name) {
     this.initialPoise = this.poise;
 
     this.xHitVel = 0;
+    this.yHitVel = 0;
 };
 
 Enemy.prototype = Object.create(Phaser.Sprite.prototype);
@@ -44,7 +45,6 @@ Enemy.prototype.SetDefaultValues = function() {
     this.damage = 4;
     this.inScope = false;
     this.baseStunDuration = 500;
-    this.stunModifier = 1.0;
     this.poise = 10;
 };
 
@@ -78,7 +78,7 @@ Enemy.prototype.UpdateParentage = function() {
 
         return false;
     }
-}
+};
 
 Enemy.prototype.update = function() {
 
@@ -100,21 +100,14 @@ Enemy.prototype.update = function() {
             this.SetDirection('left');
         }
     }
-
-    //temporary means of communicating their energy levels
-    //this.alpha = this.GetEnergyPercentage();
     
     if(this.energy > this.maxEnergy)
         this.energy = this.maxEnergy;
-
-    this.stunModifier += 0.005;
 
     if(this.timers.TimerUp('poise_ticker')) {
         this.poise += 0.25;
         this.timers.SetTimer('poise_ticker', 200);
     }
-
-    if(this.stunModifier > 1.0) this.stunModifier = 1.0;
 
     if(this.poise > this.initialPoise) this.poise = this.initialPoise;
     if(this.poise < -this.initialPoise) this.poise = -this.initialPoise;
@@ -123,11 +116,7 @@ Enemy.prototype.update = function() {
         this.body.velocity.x = this.xHitVel;
     }
 
-    game.physics.arcade.collide(this, Frogland['collisionLayer_' + Frogland.currentLayer]);
-};
-
-Enemy.prototype.GetEnergyPercentage = function() {
-    return 0.25 + ((this.energy / this.maxEnergy) * 0.75);
+    game.physics.arcade.collide(this, Frogland.GetCurrentCollisionLayer());
 };
 
 Enemy.prototype.GetPoisePercentage = function() {
@@ -162,16 +151,6 @@ Enemy.prototype.PlayAnim = function(name) {
         this.animations.play(name);
 };
 
-Enemy.prototype.UsePoise = function(amt) {
-    if(this.poise > 0) {
-        this.poise -= amt;
-        return true;
-    } else {
-        return false;
-    }
-};
-
-
 function EnemyHit(f, e) {
     
     if(e.spriteType !== 'enemy' || e.state === e.Hurting || !e.Vulnerable())
@@ -184,9 +163,19 @@ function EnemyHit(f, e) {
     var numParticles = frauki.currentAttack.damage * 2;
 
     var c = frauki.body.center.x < e.body.center.x ? 1 : -1;
-    e.xHitVel = c * (50 - (e.weight * 300) + (1000 * frauki.currentAttack.knockback));
+    //e.xHitVel = c * (50 - (e.weight * 400) + (1000 * frauki.currentAttack.knockback));
+
+    //fraukis knockback will increase the amount that the enemy is moved. The weight
+    //of the enemy will work against that. 
+    e.xHitVel = (1000 * frauki.currentAttack.knockback) - (1000 * e.weight);
+    if(e.xHitVel < 100) e.xHitVel = 100;
+    e.xHitVel *= c;
 
     game.add.tween(e).to({xHitVel: 0}, 800, Phaser.Easing.Exponential.Out, true);
+
+    e.body.velocity.y = frauki.currentAttack.juggle * -300;
+
+    console.log(e.xHitVel + ':' + e.body.velocity.y);
 
     events.publish('camera_shake', {magnitudeX: 15 * frauki.currentAttack.damage, magnitudeY: 5, duration: 100});
 
@@ -221,15 +210,20 @@ function EnemyHit(f, e) {
 
 //provide utility functions here that the specific enemies can all use
 Enemy.prototype.PlayerIsNear = function(radius) {
+
+    if(this.PlayerDistance() <= radius)
+        return true;
+    else
+        return false;
+};
+
+Enemy.prototype.PlayerDistance = function() {
     var distX = frauki.body.center.x - this.body.center.x;
     var distY = frauki.body.center.y - this.body.center.y;
 
     var dist = Math.sqrt(distX * distX + distY * distY);
 
-    if(dist <= radius)
-        return true;
-    else
-        return false;
+    return dist;
 };
 
 Enemy.prototype.PlayerIsVisible = function() {
@@ -259,7 +253,7 @@ Enemy.prototype.PlayerDirection = function() {
 };
 
 Enemy.prototype.EnemyDirection = function() {
-     if(frauki.body.center.y < this.body.center.y - (this.body.height / 2))
+    if(frauki.body.center.y < this.body.center.y - (this.body.height / 2))
         return 'below';
     if(frauki.body.center.y > this.body.center.y + (this.body.height / 2))
         return 'above';

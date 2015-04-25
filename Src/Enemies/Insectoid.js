@@ -124,13 +124,13 @@ Enemy.prototype.types['Insectoid'] =  function() {
 			this.state = this.Hopping;
 			this.scale.y = 1;
 
-			this.body.velocity.y = (-1 * (Math.random() * 200)) - 100;
+			//parabolic arc
+			//the duration of the hop is a function of how far apart the bug and
+			//frauki are. The max time should be approx 1 second.
+			var duration = this.PlayerDistance() / 500;
+			this.body.velocity.x = (frauki.body.center.x - this.body.center.x) / duration;
+			this.body.velocity.y = (frauki.body.center.y + -0.5 * game.physics.arcade.gravity.y * duration * duration - this.body.center.y) / duration;
 
-			if(frauki.body.center.x < this.body.center.x) {
-				this.body.velocity.x = -400;
-			} else {
-				this.body.velocity.x = 400;
-			}
 		}
 	};
 

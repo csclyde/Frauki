@@ -10,6 +10,7 @@ var fraukiDamageFrames = {
 
 		damage: 1,
 		knockback: 1,
+		juggle: 0,
 		penetration: 0
 	},
 	
@@ -23,6 +24,7 @@ var fraukiDamageFrames = {
 
 		damage: 0.5,
 		knockback: 0.1,
+		juggle: 0,
 		penetration: 0
 	},
 
@@ -36,6 +38,7 @@ var fraukiDamageFrames = {
 
 		damage: 0.75,
 		knockback: 0.3,
+		juggle: 0,
 		penetration: 0
 	},
 
@@ -49,6 +52,7 @@ var fraukiDamageFrames = {
 
 		damage: 0.25,
 		knockback: 0.1,
+		juggle: 0,
 		penetration: 0
 	},
 	
@@ -62,6 +66,7 @@ var fraukiDamageFrames = {
 
 		damage: 0.5,
 		knockback: 0.1,
+		juggle: 0.1,
 		penetration: 0
 	},
 
@@ -75,6 +80,7 @@ var fraukiDamageFrames = {
 
 		damage: 0.5,
 		knockback: 0.1,
+		juggle: 0.2,
 		penetration: 0
 	},
 
@@ -88,6 +94,7 @@ var fraukiDamageFrames = {
 
 		damage: 1,
 		knockback: 0.1,
+		juggle: 0.5,
 		penetration: 0
 	},
 
@@ -99,8 +106,9 @@ var fraukiDamageFrames = {
 		w: 75,
 		h: 60,
 
-		damage: 2.5,
-		knockback: 0.1,
+		damage: 3,
+		knockback: 0,
+		juggle: 1,
 		penetration: 0
 	},
 
@@ -113,7 +121,8 @@ var fraukiDamageFrames = {
 		h: 60,
 
 		damage: 2,
-		knockback: 0.1,
+		knockback: 0,
+		juggle: 1,
 		penetration: 0
 	},
 
@@ -127,6 +136,7 @@ var fraukiDamageFrames = {
 
 		damage: 1,
 		knockback: 0.1,
+		juggle: 0.4,
 		penetration: 0
 	},
 
@@ -140,6 +150,7 @@ var fraukiDamageFrames = {
 
 		damage: 0.5,
 		knockback: 0.1,
+		juggle: 0.2,
 		penetration: 0
 	},
 	
@@ -153,6 +164,7 @@ var fraukiDamageFrames = {
 
 		damage: 3,
 		knockback: 1.4,
+		juggle: 0,
 		penetration: 0
 	},
 
@@ -166,6 +178,7 @@ var fraukiDamageFrames = {
 
 		damage: 1,
 		knockback: 1,
+		juggle: 0,
 		penetration: 0
 	},
 	
@@ -179,6 +192,7 @@ var fraukiDamageFrames = {
 
 		damage: 1,
 		knockback: 0.8,
+		juggle: 0,
 		penetration: 0
 	},
 
@@ -192,6 +206,7 @@ var fraukiDamageFrames = {
 
 		damage: 1,
 		knockback: 0.8,
+		juggle: 0,
 		penetration: 0
 	},
 
@@ -205,6 +220,7 @@ var fraukiDamageFrames = {
 
 		damage: 0.5,
 		knockback: 0.4,
+		juggle: 0,
 		penetration: 0
 	},
 
@@ -218,6 +234,7 @@ var fraukiDamageFrames = {
 
 		damage: 0.1,
 		knockback: 0,
+		juggle: 0,
 		penetration: 0
 	},
 
@@ -231,6 +248,7 @@ var fraukiDamageFrames = {
 
 		damage: 0,
 		knockback: 0,
+		juggle: 0,
 		penetration: 0
 	},
 
@@ -243,6 +261,7 @@ var fraukiDamageFrames = {
 
 		damage: 0,
 		knockback: 3.0,
+		juggle: 0,
 		penetration: 0
 	},
 
@@ -255,6 +274,7 @@ var fraukiDamageFrames = {
 
 		damage: 3,
 		knockback: 1.5,
+		juggle: 0,
 		penetration: 0
 	},
 
@@ -267,6 +287,7 @@ var fraukiDamageFrames = {
 
 		damage: 3,
 		knockback: 1.5,
+		juggle: 0,
 		penetration: 0
 	},
 
@@ -279,6 +300,7 @@ var fraukiDamageFrames = {
 
 		damage: 4,
 		knockback: 1.5,
+		juggle: 0,
 		penetration: 0
 	},
 
@@ -291,6 +313,7 @@ var fraukiDamageFrames = {
 
 		damage: 4,
 		knockback: 1.5,
+		juggle: 0,
 		penetration: 0
 	},
 
@@ -303,6 +326,7 @@ var fraukiDamageFrames = {
 
 		damage: 4,
 		knockback: 1.5,
+		juggle: 0,
 		penetration: 0
 	},
 
@@ -315,6 +339,7 @@ var fraukiDamageFrames = {
 
 		damage: 3,
 		knockback: 1,
+		juggle: 0,
 		penetration: 0
 	}
 };

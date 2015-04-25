@@ -89,7 +89,6 @@ Frogland.create = function() {
     this.ProcessCollisionTiles(4);
     this.ProcessCollisionTiles(3);
     this.ProcessCollisionTiles(2);
-
 };
 
 Frogland.CreateMapLayer = function(layer, visible) {
@@ -128,8 +127,7 @@ Frogland.CreateObjectsLayer = function(layer) {
             obj.alpha = 0;
             obj.body.enable = false;
         }
-    });
-    
+    });    
 };
 
 Frogland.ProcessCollisionTiles = function(layer) {
@@ -268,9 +266,6 @@ Frogland.ChangeLayer = function(newLayer) {
         game.add.tween(obj).to({alpha: 1}, 200, Phaser.Easing.Linear.None, true);
         obj.body.enable = true;
     });
-
-
-
 };
 
 //this is called when a collision happens. if it returns false the two will not be separated
@@ -332,4 +327,4 @@ Frogland.CheckEnvironmentalCollisions = function(f, tile) {
     } else if(tile.index === 4) { //cloud tile
         return true;
     }
-}
+};
