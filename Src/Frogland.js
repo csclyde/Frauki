@@ -166,10 +166,10 @@ Frogland.update = function() {
 
     cameraController.UpdateCamera();
     inputController.UpdateInput();
-    //effectsController.UpdateEffects();
+    effectsController.UpdateEffects();
     energyController.UpdateEnergy();
     weaponController.Update();
-    //projectileController.Update();
+    projectileController.Update();
 };
 
 Frogland.GetCurrentObjectGroup = function() {

@@ -40,6 +40,7 @@ ProjectileController.prototype.Update = function() {
 	});
 
 	childrenToRemove.forEach(function(e) {
+		e.destroy();
 		that.projectiles.remove(e, true);
 	});
 };

@@ -308,7 +308,7 @@ Player.prototype.Slash = function(params) {
             game.add.tween(this.movement).to({jumpSlashVelocity:0}, 400, Phaser.Easing.Quartic.Out, true);
             this.states.hasFlipped = true;
     
-            events.publish('play_sound', {name: 'attack1'});
+            //events.publish('play_sound', {name: 'attack1'});
         }
     }
     //normal slashes while standing or running
@@ -316,7 +316,7 @@ Player.prototype.Slash = function(params) {
         if(energyController.UseEnergy(5)) {
             if(this.states.upPressed) {
                 this.state = this.AttackOverhead;
-                events.publish('play_sound', {name: 'attack1'});
+                //events.publish('play_sound', {name: 'attack1'});
             } else {
                 this.state = this.AttackFront;
             }
