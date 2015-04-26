@@ -45,7 +45,7 @@ Enemy.prototype.SetDefaultValues = function() {
     this.damage = 4;
     this.inScope = false;
     this.baseStunDuration = 300;
-    this.poise = 10;
+    this.poise = 5;
 };
 
 Enemy.prototype.UpdateFunction = function() {};
@@ -55,6 +55,7 @@ Enemy.prototype.Die = function() {};
 Enemy.prototype.Vulnerable = function() { return true; }
 Enemy.prototype.CanCauseDamage = function() { return true; }
 Enemy.prototype.CanChangeDirection = function() { return true; }
+Enemy.prototype.TakeHit = function() {};
 
 Enemy.prototype.UpdateParentage = function() {
     if(this.WithinCameraRange() && this.alive && this.owningLayer === Frogland.currentLayer) {
@@ -105,7 +106,7 @@ Enemy.prototype.update = function() {
         this.energy = this.maxEnergy;
 
     if(this.timers.TimerUp('poise_ticker')) {
-        this.poise += 0.25;
+        this.poise += 0.1;
         this.timers.SetTimer('poise_ticker', 200);
     }
 
@@ -171,7 +172,6 @@ function EnemyHit(f, e) {
     var numParticles = frauki.currentAttack.damage * 2;
 
     var c = frauki.body.center.x < e.body.center.x ? 1 : -1;
-    //e.xHitVel = c * (50 - (e.weight * 400) + (1000 * frauki.currentAttack.knockback));
 
     //fraukis knockback will increase the amount that the enemy is moved. The weight
     //of the enemy will work against that. 
@@ -203,11 +203,16 @@ function EnemyHit(f, e) {
         frauki.LandHit();
         e.TakeHit();
 
-        if(e.GetPoisePercentage() < 0) {
-            e.body.velocity.y = -300 + (e.weight * 200) - (100 * frauki.currentAttack.damage);
+        if(e.GetPoisePercentage() < 0.1) {
+            //send it flying
+            e.body.velocity.y = -700;
+            e.body.velocity.x = c * 700;
+            
             e.state = e.Hurting;
-            e.body.velocity.x = c * e.body.velocity.x * e.body.velocity.x;
-            e.body.velocity.y = -1 * e.body.velocity.y * e.body.velocity.y;
+            e.poise = e.initialPoise;
+
+            //attack ultimately does 3x damage
+            e.energy -= frauki.currentAttack.damage * 2;
             console.log('Enemy is being stunned at ' + e.GetPoisePercentage() + ' poise and Frauki did ' + frauki.currentAttack.damage + ' damage');
         }
     }   

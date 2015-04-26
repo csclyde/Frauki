@@ -257,7 +257,7 @@ Player.prototype.Jump = function(params) {
         }
         //double jump
         else if(this.states.hasFlipped === false && this.state !== this.Rolling && this.state !== this.AttackStab) {
-            if(energyController.UseEnergy(2)) {
+            if(energyController.UseEnergy(1)) {
                 if(this.tweens.stopJump) { this.tweens.stopJump.stop(); }
     
                 this.body.velocity.y = PLAYER_DOUBLE_JUMP_VEL();
@@ -313,7 +313,7 @@ Player.prototype.Slash = function(params) {
     }
     //normal slashes while standing or running
     else if(this.state === this.Standing || this.state === this.Landing || this.state === this.AttackStab || this.state === this.Running || this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling) {
-        if(energyController.UseEnergy(5.5)) {
+        if(energyController.UseEnergy(5)) {
             if(this.states.upPressed) {
                 this.state = this.AttackOverhead;
                 events.publish('play_sound', {name: 'attack1'});
@@ -324,7 +324,6 @@ Player.prototype.Slash = function(params) {
     } else {
         console.log('An attack was attempted in an unresolved state ' + this.state);
     }
-
 };
 
 Player.prototype.Roll = function(params) {
@@ -335,7 +334,7 @@ Player.prototype.Roll = function(params) {
     if(!this.body.onFloor())
         return;
         
-    if(!energyController.UseEnergy(2))
+    if(!energyController.UseEnergy(1))
         return;
 
     this.state = this.Rolling;
@@ -363,7 +362,7 @@ Player.prototype.Hit = function(f, e) {
 
     energyController.RemoveEnergy(e.damage);
 
-    //e.energy += e.damage / 2;
+    e.poise += e.initialPoise;
 
     this.body.center.x < e.body.center.x ? this.body.velocity.x = -200 : this.body.velocity.x = 200;
 
