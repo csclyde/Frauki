@@ -48,9 +48,6 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		this.state = this.PreHopping;
 		this.squashTween = game.add.tween(this.scale).to({y: 0.7}, 200, Phaser.Easing.Exponential.Out, true);
 		//this.scale.y = 0.7;
-
-		
-
 	};
 
 	this.Scuttle = function() {
@@ -65,8 +62,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 			this.SetDirection('left');
 		} else {
 			this.SetDirection('right');
-		}	
-		
+		}		
 	};
 
 	this.Dodge = function(overrideFloorCondition) {
@@ -83,9 +79,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 			this.body.velocity.x = 150;
 		} else {
 			this.body.velocity.x = -150;
-		}
-
-		
+		}	
 	};
 
 	this.Dive = function() {
@@ -95,9 +89,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		this.body.setSize(25, 67, 0, 0);
 		this.scale.x = 1;
 		game.add.tween(this).to({angle: 90}, 100, Phaser.Easing.Exponential.Out, true);
-		//this.angle = 90;
-
-		
+		//this.angle = 90;	
 	};
 
 	this.Flee = function() {
@@ -110,8 +102,6 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		} else {
 			this.Dodge();
 		}
-
-		
 	}
 
 	this.TakeHit = function(power) {
@@ -229,7 +219,6 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	};
 
 	this.Shooting = function() {
-
 	};
 
 	this.Diving = function() {

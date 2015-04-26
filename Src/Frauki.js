@@ -345,6 +345,7 @@ Player.prototype.Roll = function(params) {
     this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: dir * PLAYER_ROLL_SPEED()}, 50, Phaser.Easing.Exponential.In, false).to({rollVelocity: dir * PLAYER_SPEED()}, 300, Phaser.Easing.Quartic.In, false);
     this.tweens.roll.start();
 
+    this.body.acceleration.x = 0;
     //this.movement.rollVelocity = dir * PLAYER_ROLL_SPEED();
 
     this.timers.SetTimer('frauki_roll', 650);
@@ -504,7 +505,7 @@ Player.prototype.Rolling = function() {
     this.PlayAnim('roll');
 
     this.body.maxVelocity.x = this.movement.rollVelocity;
-    this.body.velocity.x = this.GetDirectionMultiplier() * this.movement.rollVelocity;
+    this.body.velocity.x = this.movement.rollVelocity;
     
     if(this.body.velocity.y < 0) {
         if(energyController.UseEnergy(3)) { 
