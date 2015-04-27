@@ -21,8 +21,8 @@ Enemy = function(game, x, y, name) {
 
     //capture any initial values that were set in the specific enemy set up
     this.maxEnergy = this.energy;
-    this.initialX = this.body.center.x;
-    this.initialY = this.body.center.y;
+    this.initialX = this.body.x;
+    this.initialY = this.body.y;
     this.initialPoise = this.poise;
 
     this.xHitVel = 0;
@@ -57,25 +57,31 @@ Enemy.prototype.CanCauseDamage = function() { return true; }
 Enemy.prototype.CanChangeDirection = function() { return true; }
 Enemy.prototype.TakeHit = function() {};
 
+Enemy.prototype.Reset = function() {
+    console.log('Resetting enemy');
+
+    this.alive = true;
+    this.exists = true;
+    this.visible = true;
+    this.body.x = this.initialX;
+    this.body.y = this.initialY;
+    this.body.velocity.x = 0;
+    this.body.velocity.y = 0;
+    this.energy = this.maxEnergy;
+    this.poise = this.initialPoise;
+};
+
 Enemy.prototype.UpdateParentage = function() {
     if(this.WithinCameraRange() && this.alive && this.owningLayer === Frogland.currentLayer) {
-        //if they are in the camera range and not yet in the objectGroup, 
-        //load them into the objectGroup, from the enemy pool
 
-        if(this.parent === Frogland.enemyPool) {
-            Frogland.objectGroup.addChild(this);
-            this.body.enable = true;
-        }
-
+        this.body.enable = true;
+        //this.alpha = 1;
+        
         return true;
     } else {
-        //if they are not in the camera range, and registered as within the
-        //object group, take them out of the group
-        if(this.parent === Frogland.objectGroup) {
-            Frogland.enemyPool.addChild(this);
-            this.body.enable = false;
-            this.alpha = 0;
-        }
+
+        this.body.enable = false;
+        //this.alpha = 0;
 
         return false;
     }
@@ -207,7 +213,7 @@ function EnemyHit(f, e) {
             //send it flying
             e.body.velocity.y = -700;
             e.body.velocity.x = c * 700;
-            
+
             e.state = e.Hurting;
             e.poise = e.initialPoise;
 
@@ -241,11 +247,8 @@ Enemy.prototype.PlayerDistance = function() {
 
 Enemy.prototype.PlayerIsVisible = function() {
 
-    if(!Phaser.Rectangle.intersects(game.camera.view, this.body))
-        return;
-
-    var ray = new Phaser.Line(frauki.body.x, frauki.body.y, this.body.x, this.body.y);
-    var collideTiles = Frogland['midgroundLayer_' + Frogland.currentLayer].getRayCastTiles(ray, 1, true);
+    var ray = new Phaser.Line(frauki.body.center.x, frauki.body.center.y, this.body.center.x, this.body.center.y);
+    var collideTiles = Frogland.GetCurrentCollisionLayer().getRayCastTiles(ray, 1, true);
 
     if(collideTiles.length === 0) {
         return true;

@@ -3,10 +3,8 @@ Enemy.prototype.types['Buzzar'] =  function() {
 	this.body.setSize(11, 27, 0, 0);
 	this.anchor.setTo(0.5, 0.5);
 
-    this.animations.add('idle', ['Buzzar/Sting0000'], 10, true, false);
-    this.animations.add('sting', ['Buzzar/Sting0000'], 10, false, false);
-
-    
+    this.animations.add('idle', ['Buzzar/Idle0000', 'Buzzar/Idle0001'], 20, true, false);
+    this.animations.add('sting', ['Buzzar/Attack0000', 'Buzzar/Attack0001'], 20, false, false);
 
     this.wanderDirection = 'left';
 
@@ -18,7 +16,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
     this.anger = 1;
     
     this.weight = 0.5;
-    this.energy = 3;
+    this.energy = 5;
     this.damage = 5;
     this.poise = 5;
 
@@ -82,7 +80,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
 	this.Idling = function() {
 		this.PlayAnim('idle');
 		
-		this.body.velocity.y = Math.sin(game.time.now / 150) * 100 + (Math.random() * 40 - 20);
+		this.body.velocity.y = Math.sin(game.time.now / 250) * 100 + (Math.random() * 40 - 20);
 		//this.body.velocity.x = Math.sin(game.time.now / 1000) * 20;
 
 		if(this.wanderTimer > game.time.now) {
@@ -94,7 +92,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
 			this.wanderTimer = game.time.now + 1000 + (Math.random() * 200);
 		}
 
-		if(this.PlayerIsNear(640))
+		if(this.PlayerIsVisible())
 			this.state = this.Creepin;
 
 		if(this.body.onFloor() || this.body.onWall())
@@ -115,7 +113,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
 	};
 
 	this.Stinging = function() {
-		this.PlayAnim('idle');
+		this.PlayAnim('sting');
 
 		if(this.game.time.now > this.stingTimer)
 			this.state = this.Idling;
@@ -152,9 +150,9 @@ Enemy.prototype.types['Buzzar'] =  function() {
 		//move to a point somewhere above fraukis head
 		var locus = {};
 		locus.x = frauki.body.x + (Math.sin(game.time.now / 150) * 50);
-		locus.y = frauki.body.y - 500 + (Math.sin(game.time.now / 150) * 100);
+		locus.y = frauki.body.y - 500 + (Math.sin(game.time.now / 50) * 100 + (Math.random() * 40 - 20));
 
-		game.physics.arcade.moveToXY(this, locus.x, locus.y, 40 * this.anger);
+		game.physics.arcade.moveToXY(this, locus.x, locus.y, 40);
 
 		if(Math.floor(Math.random() * 100) <= this.anger && game.time.now > this.stingRestTimer && this.PlayerIsVisible()) 
 			this.Sting();
@@ -162,6 +160,8 @@ Enemy.prototype.types['Buzzar'] =  function() {
 
 	this.Enraged = function() {
 		this.PlayAnim('idle');
+
+		console.log('enraged');
 
 		if(this.body.x < frauki.body.x)
 			this.body.velocity.x += 10;

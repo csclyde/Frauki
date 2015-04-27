@@ -52,6 +52,7 @@ Frogland.create = function() {
     this.CreateMapLayer(2, false);
     
     this.currentLayer = 3;
+    this.restarting = false;
 
     frauki = new Player(game, 100, 100, 'Frauki');
     game.add.existing(frauki);
@@ -197,28 +198,39 @@ Frogland.render = function() {
 };
 
 Frogland.Restart = function() {
-    var fadeOutTween = game.add.tween(game.world).to({alpha:0}, 1500, Phaser.Easing.Linear.None, true);
+    if(this.restarting === true) {
+        return;
+    }
+
+    this.restarting = true;
+    game.time.slowMotion = 5;
+    var fadeOutTween = game.add.tween(game.world).to({alpha:0}, 500, Phaser.Easing.Linear.None, true);
 
     fadeOutTween.onComplete.add(function() {
-        frauki.body.x = fraukiSpawnX;
-        frauki.body.y = fraukiSpawnY;
-        game.world.alpha = 1;
+        Frogland.ChangeLayer(3);
+        frauki.body.x = 100; //fraukiSpawnX;
+        frauki.body.y = 100; //fraukiSpawnY;
         energyController.energy = 15;
         energyController.neutralPoint = 15;
+        game.time.slowMotion = 1;
+        game.world.alpha = 1;
 
-        Frogland.GetCurrentObjectGroup().forEach(function(e) {
-            e.alive = true;
-            e.exists = true;
-            e.visible = true;
-            e.body.center.x = e.initialX;
-            e.body.center.y = e.initialY;
-            e.body.velocity.x = 0;
-            e.body.velocity.y = 0;
-            e.energy = e.maxEnergy;
+        Frogland.restarting = false;
 
-            if(!!e.Reset)
-                e.Reset.apply(e);
-        });
+        // Frogland['objectGroup_4'].forEach(function(e) {
+        //     if(!!e.Reset)
+        //         e.Reset.apply(e);
+        // });
+
+        // Frogland['objectGroup_3'].forEach(function(e) {
+        //     if(!!e.Reset)
+        //         e.Reset.apply(e);
+        // });
+
+        // Frogland['objectGroup_2'].forEach(function(e) {
+        //     if(!!e.Reset)
+        //         e.Reset.apply(e);
+        // });
     });
 };
 

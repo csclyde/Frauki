@@ -6,7 +6,7 @@
          "name":"Background_2",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":307,
          "x":0,
          "y":0
@@ -17,7 +17,7 @@
          "name":"Midground_2",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":307,
          "x":0,
          "y":0
@@ -28,7 +28,7 @@
          "name":"Foreground_2",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":307,
          "x":0,
          "y":0
@@ -39,7 +39,7 @@
          "name":"Collision_2",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":307,
          "x":0,
          "y":0
@@ -200,7 +200,7 @@
                  "y":728
                 }, 
                 {
-                 "gid":85,
+                 "gid":86,
                  "height":0,
                  "name":"",
                  "properties":
@@ -211,12 +211,12 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":770,
-                 "y":1134
+                 "x":757,
+                 "y":1034
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "width":307,
          "x":0,
          "y":0
@@ -227,7 +227,7 @@
          "name":"Background_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":307,
          "x":0,
          "y":0
@@ -238,7 +238,7 @@
          "name":"Midground_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":307,
          "x":0,
          "y":0
@@ -249,7 +249,7 @@
          "name":"Foreground_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":307,
          "x":0,
          "y":0
@@ -260,7 +260,7 @@
          "name":"Collision_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":307,
          "x":0,
          "y":0
@@ -1097,7 +1097,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "width":0,
          "x":0,
          "y":0

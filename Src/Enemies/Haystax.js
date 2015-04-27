@@ -46,7 +46,7 @@ Enemy.prototype.types['Haystax'] =  function() {
 	this.Idling = function() {
 		this.PlayAnim('idle');
 
-		if(!this.PlayerIsNear(50) && this.PlayerIsNear(1000) && this.timers.TimerUp('spit_wait')) {
+		if(!this.PlayerIsNear(50) && this.PlayerIsVisible() && this.timers.TimerUp('spit_wait')) {
 			this.Spit();
 		}
 		
