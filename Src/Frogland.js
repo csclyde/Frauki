@@ -54,8 +54,6 @@ Frogland.create = function() {
     this.currentLayer = 3;
     this.restarting = false;
 
-    frauki = new Player(game, 100, 100, 'Frauki');
-    game.add.existing(frauki);
 
     this.enemyPool = game.add.group();
     this.doorGroup = game.add.group();
@@ -65,6 +63,9 @@ Frogland.create = function() {
     this.CreateObjectsLayer(2);
 
     map.createFromObjects('Doors', 67, 'Door', 'Door0000', true, false, this.doorGroup, Door, false);
+
+    frauki = new Player(game, 100, 100, 'Frauki');
+    game.add.existing(frauki);
     
     this.foregroundLayer_4 = map.createLayer('Foreground_4');
     this.foregroundLayer_4.visible = false;
@@ -217,20 +218,26 @@ Frogland.Restart = function() {
 
         Frogland.restarting = false;
 
-        // Frogland['objectGroup_4'].forEach(function(e) {
-        //     if(!!e.Reset)
-        //         e.Reset.apply(e);
-        // });
+        Frogland['objectGroup_4'].forEach(function(e) {
+            if(!!e.Reset) {
+                console.log('Resetting l4')
+                e.Reset.apply(e);
+            }
+        });
 
-        // Frogland['objectGroup_3'].forEach(function(e) {
-        //     if(!!e.Reset)
-        //         e.Reset.apply(e);
-        // });
+        Frogland['objectGroup_3'].forEach(function(e) {
+            if(!!e.Reset) {
+                console.log('Resetting l3')
+                e.Reset.apply(e);
+            }
+        });
 
-        // Frogland['objectGroup_2'].forEach(function(e) {
-        //     if(!!e.Reset)
-        //         e.Reset.apply(e);
-        // });
+        Frogland['objectGroup_2'].forEach(function(e) {
+            if(!!e.Reset) {
+                console.log('Resetting l2')
+                e.Reset.apply(e);
+            }
+        });
     });
 };
 

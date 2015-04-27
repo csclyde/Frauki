@@ -58,15 +58,14 @@ Enemy.prototype.CanChangeDirection = function() { return true; }
 Enemy.prototype.TakeHit = function() {};
 
 Enemy.prototype.Reset = function() {
-    console.log('Resetting enemy');
 
     this.alive = true;
     this.exists = true;
     this.visible = true;
-    this.body.x = this.initialX;
-    this.body.y = this.initialY;
     this.body.velocity.x = 0;
     this.body.velocity.y = 0;
+    this.x = this.initialX;
+    this.y = this.initialY;
     this.energy = this.maxEnergy;
     this.poise = this.initialPoise;
 };

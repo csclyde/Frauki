@@ -23,6 +23,8 @@ Enemy.prototype.types['Haystax'] =  function() {
 			return true; 
 	};
 
+	this.CanCauseDamage = function() { return false; }
+
 	///////////////////////////////ACTIONS////////////////////////////////////
 
 	this.TakeHit = function(power) {
