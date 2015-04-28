@@ -41,6 +41,11 @@ ProjectileController.prototype.Update = function() {
 
 	childrenToRemove.forEach(function(e) {
 		e.destroy();
-		that.projectiles.remove(e, true);
 	});
+};
+
+function ProjectileHit(f, p) {
+	if(p.projType === 'tar') {
+		p.destroy();
+	}
 };

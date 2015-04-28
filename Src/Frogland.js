@@ -31,6 +31,7 @@ Frogland.create = function() {
     pixel.context = pixel.canvas.getContext('2d');
     Phaser.Canvas.addToDOM(pixel.canvas);
     Phaser.Canvas.setSmoothingEnabled(pixel.context, false);
+    Phaser.Canvas.setImageRenderingCrisp(pixel.canvas);
     pixel.width = pixel.canvas.width;
     pixel.height = pixel.canvas.height;
 
