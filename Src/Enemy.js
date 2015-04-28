@@ -51,13 +51,15 @@ Enemy.prototype.SetDefaultValues = function() {
 Enemy.prototype.UpdateFunction = function() {};
 Enemy.prototype.Idling = function() {};
 Enemy.prototype.Hurting = function() {};
-Enemy.prototype.Die = function() {};
+Enemy.prototype.Die = function() { };
 Enemy.prototype.Vulnerable = function() { return true; }
 Enemy.prototype.CanCauseDamage = function() { return true; }
 Enemy.prototype.CanChangeDirection = function() { return true; }
 Enemy.prototype.TakeHit = function() {};
 
-Enemy.prototype.Reset = function() {
+Enemy.prototype.Respawn = function() {
+
+    console.log('What: ' + this.alive)
 
     this.alive = true;
     this.exists = true;
@@ -72,15 +74,12 @@ Enemy.prototype.Reset = function() {
 
 Enemy.prototype.UpdateParentage = function() {
     if(this.WithinCameraRange() && this.alive && this.owningLayer === Frogland.currentLayer) {
-
         this.body.enable = true;
-        //this.alpha = 1;
         
         return true;
     } else {
 
         this.body.enable = false;
-        //this.alpha = 0;
 
         return false;
     }
@@ -111,7 +110,7 @@ Enemy.prototype.update = function() {
         this.energy = this.maxEnergy;
 
     if(this.timers.TimerUp('poise_ticker')) {
-        this.poise += 0.1;
+        this.poise += 0.05;
         this.timers.SetTimer('poise_ticker', 200);
     }
 

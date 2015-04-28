@@ -38,6 +38,14 @@ Enemy.prototype.types['Insectoid'] =  function() {
 			this.body.setSize(67, 25, 0, 0);
 	};
 
+	this.CanChangeDirection = function() {
+		if(this.state === this.PreScuttling || this.state === this.Scuttling) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
 	///////////////////////////////ACTIONS////////////////////////////////////
 	this.Hop = function() {
 
@@ -54,15 +62,16 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		if(game.time.now < this.attackTimer)
 			return;
 
-		this.attackTimer = game.time.now + 400;
-		this.squashTween = game.add.tween(this.scale).to({x: this.GetDirMod() * 0.7}, 300, Phaser.Easing.Exponential.Out, true);
-		this.state = this.PreScuttling;
-		
 		if(frauki.body.center.x < this.body.center.x) {
 			this.SetDirection('left');
 		} else {
 			this.SetDirection('right');
 		}		
+
+		this.attackTimer = game.time.now + 400;
+		this.squashTween = game.add.tween(this.scale).to({x: this.GetDirMod() * 0.7}, 300, Phaser.Easing.Exponential.Out, true);
+		this.state = this.PreScuttling;
+		
 	};
 
 	this.Dodge = function(overrideFloorCondition) {
@@ -193,7 +202,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		this.PlayAnim('idle');		
 
 		if(game.time.now > this.attackTimer) {
-			this.attackTimer = game.time.now + 2000;
+			this.attackTimer = game.time.now + 1000;
 			this.state = this.Scuttling;
 			this.scale.x = this.GetDirMod();
 
@@ -208,17 +217,10 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	this.Scuttling = function() {
 		this.PlayAnim('idle');
 
-		if(game.physics.arcade.intersects(this.body, frauki.body)) {
+		if(game.physics.arcade.intersects(this.body, frauki.body) || game.time.now > this.attackTimer) {
 			this.state = this.Idling;
 			game.add.tween(this.body.velocity).to({x: 0}, 100, Phaser.Easing.Sinusoidal.Out, true);
 		}
-		if(game.time.now - this.attackTimer > 50) {
-			this.state = this.Idling;
-			this.body.velocity.x = 0;
-		}
-	};
-
-	this.Shooting = function() {
 	};
 
 	this.Diving = function() {

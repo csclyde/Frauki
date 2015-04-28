@@ -551,7 +551,7 @@ Player.prototype.Rolling = function() {
 Player.prototype.Hurting = function() {
     this.PlayAnim('hit');
 
-    if(this.timers.TimerUp('frauki_hit')) {
+    if(this.timers.TimerUp('frauki_hit') && !Frogland.restarting) {
         if(this.body.velocity.y > 0) {
             this.state = this.Falling;
         } else if(this.body.velocity.x === 0) {

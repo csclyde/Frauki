@@ -172,6 +172,15 @@ Frogland.update = function() {
     energyController.UpdateEnergy();
     weaponController.Update();
     projectileController.Update();
+
+    var deadd = 0;
+    Frogland['objectGroup_2'].forEach(function(e) {
+        if(!e.alive) {
+            deadd += 1;
+        }
+    });
+
+    if(deadd > 0) console.log('Dead as shit:' + deadd);
 };
 
 Frogland.GetCurrentObjectGroup = function() {
@@ -219,23 +228,21 @@ Frogland.Restart = function() {
         Frogland.restarting = false;
 
         Frogland['objectGroup_4'].forEach(function(e) {
-            if(!!e.Reset) {
-                console.log('Resetting l4')
-                e.Reset.apply(e);
+            if(!!e.Respawn) {
+                e.Respawn();
             }
         });
 
         Frogland['objectGroup_3'].forEach(function(e) {
-            if(!!e.Reset) {
-                console.log('Resetting l3')
-                e.Reset.apply(e);
+            if(!!e.Respawn) {
+                e.Respawn();
             }
         });
 
         Frogland['objectGroup_2'].forEach(function(e) {
-            if(!!e.Reset) {
-                console.log('Resetting l2')
-                e.Reset.apply(e);
+            if(!!e.Respawn) {
+                console.log('Bitch:' + e.alive);
+                e.Respawn();
             }
         });
     });
