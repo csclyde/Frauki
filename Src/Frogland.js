@@ -303,7 +303,7 @@ Frogland.OverlapFraukiWithObject = function(f, o) {
         return false;
     } else if(o.spriteType === 'enemy') {
 
-        if(o.CanCauseDamage()) {
+        if(o.CanCauseDamage() && o.state !== o.Dying) {
             frauki.Hit(f, o);
         }
 

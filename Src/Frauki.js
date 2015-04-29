@@ -253,14 +253,14 @@ Player.prototype.Jump = function(params) {
     if(this.state === this.Hurting) 
         return;
 
-    //drop through cloud tiles
-    if(this.state === this.Crouching && this.states.onCloud) {
-        this.states.droppingThroughCloud = true;
-        game.time.events.add(200, function() { frauki.states.droppingThroughCloud = false; } );
-        return;
-    }
-
     if(params.jump) {
+        //drop through cloud tiles
+        if(this.state === this.Crouching && this.states.onCloud) {
+            this.states.droppingThroughCloud = true;
+            game.time.events.add(200, function() { frauki.states.droppingThroughCloud = false; } );
+            return;
+        }
+        
         //normal jump
         if(this.body.onFloor() || this.state === this.Standing || this.state === this.Running || this.state === this.Landing) {
             this.body.velocity.y = PLAYER_JUMP_VEL();

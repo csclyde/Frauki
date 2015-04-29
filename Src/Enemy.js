@@ -51,6 +51,7 @@ Enemy.prototype.SetDefaultValues = function() {
 Enemy.prototype.UpdateFunction = function() {};
 Enemy.prototype.Idling = function() {};
 Enemy.prototype.Hurting = function() {};
+Enemy.prototype.Dying = function() {};
 Enemy.prototype.Die = function() { };
 Enemy.prototype.Vulnerable = function() { return true; }
 Enemy.prototype.CanCauseDamage = function() { return true; }
@@ -164,7 +165,7 @@ Enemy.prototype.PlayAnim = function(name) {
 
 function EnemyHit(f, e) {
     
-    if(e.spriteType !== 'enemy' || e.state === e.Hurting || !e.Vulnerable())
+    if(e.spriteType !== 'enemy' || e.state === e.Hurting || !e.Vulnerable() || e.state === e.Dying)
         return;
 
     //seperate conditional to prevetn crash!
@@ -196,9 +197,12 @@ function EnemyHit(f, e) {
 
     if(e.energy <= 0) {
         e.Die();
+        e.state = e.Dying;
 
         frauki.LandKill(e.maxEnergy / 2);
+
         e.kill();
+
 
         numParticles += e.maxEnergy;
     } else {
