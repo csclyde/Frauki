@@ -174,14 +174,6 @@ Frogland.update = function() {
     weaponController.Update();
     projectileController.Update();
 
-    var deadd = 0;
-    Frogland['objectGroup_2'].forEach(function(e) {
-        if(!e.alive) {
-            deadd += 1;
-        }
-    });
-
-    if(deadd > 0) console.log('Dead as shit:' + deadd);
 };
 
 Frogland.GetCurrentObjectGroup = function() {
@@ -242,7 +234,6 @@ Frogland.Restart = function() {
 
         Frogland['objectGroup_2'].forEach(function(e) {
             if(!!e.Respawn) {
-                console.log('Bitch:' + e.alive);
                 e.Respawn();
             }
         });

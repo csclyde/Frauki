@@ -59,8 +59,6 @@ Enemy.prototype.TakeHit = function() {};
 
 Enemy.prototype.Respawn = function() {
 
-    console.log('What: ' + this.alive)
-
     this.alive = true;
     this.exists = true;
     this.visible = true;

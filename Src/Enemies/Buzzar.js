@@ -71,7 +71,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
 	    if(this.anger < 4) this.anger++;
 	};
 
-	this.Reset = function() {
+	this.Die = function() {
 		this.anger = 1;
 		this.state = this.Idling;
 	};
