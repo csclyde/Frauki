@@ -2,6 +2,7 @@ Enemy = function(game, x, y, name) {
     //instantiate the sprite
     Phaser.Sprite.call(this, game, x, y, 'EnemySprites');
     this.spriteType = 'enemy';
+    this.name = name;
     
     //enable its physics body
     game.physics.enable(this, Phaser.Physics.ARCADE);
@@ -201,8 +202,9 @@ function EnemyHit(f, e) {
 
         frauki.LandKill(e.maxEnergy / 2);
 
+        effectsController.DiceEnemy('Insectoid', e.body.center.x, e.body.center.y);
+        
         e.kill();
-
 
         numParticles += e.maxEnergy;
     } else {
