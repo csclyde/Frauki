@@ -2,7 +2,6 @@ Enemy = function(game, x, y, name) {
     //instantiate the sprite
     Phaser.Sprite.call(this, game, x, y, 'EnemySprites');
     this.spriteType = 'enemy';
-    this.name = name;
     
     //enable its physics body
     game.physics.enable(this, Phaser.Physics.ARCADE);
@@ -18,6 +17,7 @@ Enemy = function(game, x, y, name) {
         console.log('Enemy of type ' + name + ' was not found');
     }
 
+    this.enemyName = name;
     this.state = this.Idling;
 
     //capture any initial values that were set in the specific enemy set up
@@ -202,8 +202,8 @@ function EnemyHit(f, e) {
 
         frauki.LandKill(e.maxEnergy / 2);
 
-        effectsController.DiceEnemy('Insectoid', e.body.center.x, e.body.center.y);
-        
+        effectsController.DiceEnemy(e.enemyName, e.body.center.x, e.body.center.y);
+
         e.kill();
 
         numParticles += e.maxEnergy;

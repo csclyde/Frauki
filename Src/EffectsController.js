@@ -225,11 +225,13 @@ EffectsController.prototype.DiceEnemy = function(enemyName, x, y) {
 
     var pieces = [];
 
-    pieces.push(game.add.sprite(x, y, 'EnemySprites', enemyName + '/Dead0000'));
-    pieces.push(game.add.sprite(x, y, 'EnemySprites', enemyName + '/Dead0001'));
-    pieces.push(game.add.sprite(x, y, 'EnemySprites', enemyName + '/Dead0002'));
-    pieces.push(game.add.sprite(x, y, 'EnemySprites', enemyName + '/Dead0003'));
-    pieces.push(game.add.sprite(x, y, 'EnemySprites', enemyName + '/Dead0004'));
+    var i = 0;
+    while(game.cache.getFrameData('EnemySprites').getFrameByName(enemyName + '/Dead000' + i)) {
+        pieces.push(game.add.sprite(x, y, 'EnemySprites', enemyName + '/Dead000' + i));
+        i++;
+
+        console.log('killa');
+    }
 
     pieces.forEach(function(p) {
         game.physics.enable(p, Phaser.Physics.ARCADE);
@@ -237,7 +239,7 @@ EffectsController.prototype.DiceEnemy = function(enemyName, x, y) {
         p.anchor.setTo(0.5, 0.5);
 
         //randomly set the velocity, rotation, and lifespan
-        p.body.velocity.x = game.rnd.between(-200, 200);
+        p.body.velocity.x = game.rnd.between(-150, 150);
         p.body.velocity.y = game.rnd.between(-100, -700);
         p.body.angularVelocity = game.rnd.between(500, 1500);
 
