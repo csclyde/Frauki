@@ -35,6 +35,8 @@ Player = function (game, x, y, name) {
     this.states.upPresseed = false;
     this.states.wasAttacking = false;
     this.states.inWater = false;
+    this.states.onCloud = false;
+    this.states.droppingThroughCloud = false;
 
     this.movement = {};
     this.movement.rollVelocity = 0;
@@ -251,6 +253,13 @@ Player.prototype.Jump = function(params) {
     if(this.state === this.Hurting) 
         return;
 
+    //drop through cloud tiles
+    if(this.state === this.Crouching && this.states.onCloud) {
+        this.states.droppingThroughCloud = true;
+        game.time.events.add(200, function() { frauki.states.droppingThroughCloud = false; } );
+        return;
+    }
+
     if(params.jump) {
         //normal jump
         if(this.body.onFloor() || this.state === this.Standing || this.state === this.Running || this.state === this.Landing) {
@@ -302,7 +311,7 @@ Player.prototype.Slash = function(params) {
         }
     }
     //upwards dash attack
-    else if(this.states.upPressed && (this.state === this.Peaking || this.state === this.Jumping) && this.states.hasFlipped === false) {
+    else if(this.states.upPressed && !inputController.runLeft.isDown && !inputController.runRight.isDown && (this.state === this.Peaking || this.state === this.Jumping) && this.states.hasFlipped === false) {
         if(energyController.UseEnergy(6)) {
             this.state = this.AttackJump;
             this.movement.jumpSlashVelocity = -(PLAYER_JUMP_SLASH_SPEED());

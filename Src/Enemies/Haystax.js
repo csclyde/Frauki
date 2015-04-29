@@ -1,6 +1,6 @@
 Enemy.prototype.types['Haystax'] =  function() {
 
-	this.body.setSize(67, 25, 0, 0);
+	this.body.setSize(35, 70, 0, 0);
 	this.anchor.setTo(.5, 1);
 
     this.animations.add('idle', ['Haystax/Idle0000'], 10, true, false);

@@ -43,6 +43,12 @@ Frogland.create = function() {
     this.bg = game.add.tileSprite(0, 0, pixel.width, pixel.height, 'Background');
     this.bg.fixedToCamera = true;
 
+    this.plx1 = game.add.tileSprite(0, 0, pixel.width, pixel.height, 'parallax1');
+    this.plx1.fixedToCamera = true;
+
+    this.plx2 = game.add.tileSprite(0, 0, pixel.width, pixel.height, 'parallax2');
+    this.plx2.fixedToCamera = true;
+
     map = game.add.tilemap('Frogland');
     map.addTilesetImage('FrogtownTiles');
     map.addTilesetImage('DepthsTiles');
@@ -159,6 +165,7 @@ Frogland.update = function() {
 
     //reset environmental effect flags
     frauki.states.inWater = false;
+    frauki.states.onCloud = false;
     
     game.physics.arcade.collide(frauki, this.GetCurrentCollisionLayer(), null, this.CheckEnvironmentalCollisions);
     game.physics.arcade.collide(frauki, this.GetCurrentObjectGroup(), this.CollideFraukiWithObject, this.OverlapFraukiWithObject);
@@ -173,6 +180,9 @@ Frogland.update = function() {
     energyController.UpdateEnergy();
     weaponController.Update();
     projectileController.Update();
+
+    this.plx1.tilePosition.x = -(game.camera.x * 0.8);
+    this.plx2.tilePosition.x = -(game.camera.x * 0.9);
 
 };
 
@@ -189,9 +199,9 @@ Frogland.render = function() {
     //game.debug.body(frauki.bodyDouble);
     //game.debug.body(frauki.attackRect);
 
-/*    this.objectGroup.forEach(function(o) {
-        game.debug.body(o);
-    });*/
+    // this.objectGroup_3.forEach(function(o) {
+    //     game.debug.body(o);
+    // });
 
     /*projectileController.projectiles.forEach(function(o) {
         game.debug.body(o);
@@ -343,6 +353,12 @@ Frogland.CheckEnvironmentalCollisions = function(f, tile) {
             return true;
         }
     } else if(tile.index === 4) { //cloud tile
-        return true;
+        frauki.states.onCloud = true;
+
+        if(frauki.states.droppingThroughCloud) {
+            return false;
+        } else {
+            return true;
+        }
     }
 };

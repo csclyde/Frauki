@@ -1,6 +1,6 @@
 Enemy.prototype.types['Buzzar'] =  function() {
 
-	this.body.setSize(11, 27, 0, 0);
+	this.body.setSize(16, 30, 0, 5);
 	this.anchor.setTo(0.5, 0.5);
 
     this.animations.add('idle', ['Buzzar/Idle0000', 'Buzzar/Idle0001'], 20, true, false);

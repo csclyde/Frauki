@@ -37,11 +37,19 @@
         <script type="text/javascript" src="Src/Apple.js"></script>
 
         <script>
+
+            var pixel = { scale: 3, canvas: null, context: null, width: 512, height: 288 };
+
+            if(window.innerWidth < pixel.width * 2) {
+                pixel.scale = 1;
+            } else if(window.innerWidth < pixel.width * 3) {
+                pixel.scale = 2;
+            } else {
+                pixel.scale = 3;
+            }
+            
         	var game = new Phaser.Game(512, 288, Phaser.CANVAS, "game", Frogland, false, false);
-
             var events = new EventRouter();
-
-            var pixel = { scale: 3, canvas: null, context: null, width: 512, height: 288 }
 
             var cameraController;
             var inputController;

@@ -1,6 +1,6 @@
 Enemy.prototype.types['Insectoid'] =  function() {
 
-	this.body.setSize(67, 25, 0, 0);
+	this.body.setSize(55, 35, 0, 0);
 	this.anchor.setTo(.5, 1);
 
     this.animations.add('idle', ['Insectoid/Idle0000'], 10, true, false);
@@ -34,8 +34,8 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		if(this.state !== this.Diving && this.angle !== 0)
 			this.angle = 0;
 
-		if(this.state !== this.Diving && this.body.width !== 67)
-			this.body.setSize(67, 25, 0, 0);
+		if(this.state !== this.Diving && this.body.width !== 55)
+			this.body.setSize(55, 35, 0, 0);
 	};
 
 	this.CanChangeDirection = function() {
@@ -95,7 +95,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		this.state = this.Diving;
 		this.body.velocity.y = 300;
 		this.body.velocity.x = 0;
-		this.body.setSize(25, 67, 0, 0);
+		this.body.setSize(35, 55, 0, 0);
 		this.scale.x = 1;
 		game.add.tween(this).to({angle: 90}, 100, Phaser.Easing.Exponential.Out, true);
 		//this.angle = 90;	
