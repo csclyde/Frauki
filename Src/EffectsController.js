@@ -229,8 +229,6 @@ EffectsController.prototype.DiceEnemy = function(enemyName, x, y) {
     while(game.cache.getFrameData('EnemySprites').getFrameByName(enemyName + '/Dead000' + i)) {
         pieces.push(game.add.sprite(x, y, 'EnemySprites', enemyName + '/Dead000' + i));
         i++;
-
-        console.log('killa');
     }
 
     pieces.forEach(function(p) {
