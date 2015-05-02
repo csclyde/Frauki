@@ -261,9 +261,9 @@ Frogland.ChangeLayer = function(newLayer) {
     var currentCollisionLayer = this.GetCurrentCollisionLayer();
     var currentObjectLayer = this.GetCurrentObjectGroup();
 
-    game.add.tween(currentForgroundLayer).to({alpha: 0}, 200, Phaser.Easing.Linear.None, true);
-    game.add.tween(currentMidgroundLayer).to({alpha: 0}, 200, Phaser.Easing.Linear.None, true);
-    game.add.tween(currentBackgroundLayer).to({alpha: 0}, 200, Phaser.Easing.Linear.None, true);
+    game.add.tween(currentForgroundLayer).to({alpha: 0}, 300, Phaser.Easing.Linear.None, true);
+    game.add.tween(currentMidgroundLayer).to({alpha: 0}, 300, Phaser.Easing.Linear.None, true);
+    game.add.tween(currentBackgroundLayer).to({alpha: 0}, 300, Phaser.Easing.Linear.None, true);
 
     currentObjectLayer.forEach(function(obj) {
         game.add.tween(obj).to({alpha: 0}, 200, Phaser.Easing.Linear.None, true);
