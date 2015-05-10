@@ -575,7 +575,9 @@ Player.prototype.Hurting = function() {
 Player.prototype.AttackFront = function() {
     this.PlayAnim('attack_front');
 
-    this.body.velocity.x /= 2;
+    if(this.body.onFloor()) {
+        this.body.velocity.x /= 2;
+    }
 
     if(this.animations.currentAnim.isFinished) {
         this.state = this.Standing;
@@ -585,6 +587,10 @@ Player.prototype.AttackFront = function() {
 Player.prototype.AttackOverhead = function() {
     this.PlayAnim('attack_overhead');
 
+    if(this.body.onFloor()) {
+        this.body.velocity.x /= 2;
+    }
+    
     if(this.animations.currentAnim.isFinished) {
         this.state = this.Standing;
     }
