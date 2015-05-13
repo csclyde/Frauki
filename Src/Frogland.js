@@ -43,7 +43,7 @@ Frogland.create = function() {
     this.bg = game.add.tileSprite(0, 0, pixel.width, pixel.height, 'Background');
     this.bg.fixedToCamera = true;
 
-    this.plx1 = game.add.tileSprite(0, 0, pixel.width, pixel.height, 'parallax1');
+    this.plx1 = game.add.tileSprite(0, 0, 2048, 576, 'parallax1');
     this.plx1.fixedToCamera = true;
 
     this.plx2 = game.add.tileSprite(0, 0, pixel.width, pixel.height, 'parallax2');
@@ -181,7 +181,8 @@ Frogland.update = function() {
     weaponController.Update();
     projectileController.Update();
 
-    this.plx1.tilePosition.x = -(game.camera.x * 0.8);
+    this.plx1.tilePosition.x = -(game.camera.x * 0.5);
+    this.plx1.tilePosition.y = -(game.camera.y * 0.55);
     this.plx2.tilePosition.x = -(game.camera.x * 0.9);
 
 };

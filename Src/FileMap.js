@@ -7,10 +7,7 @@ FileMap.Images = [
 	{ Name: 'Background', File: 'Data/Frogland/Sky.png' },
 	{ Name: 'parallax1', File: 'Data/Frogland/Parallax1.png' },
 	{ Name: 'parallax2', File: 'Data/Frogland/Parallax2.png' },
-	{ Name: 'fluff', File: 'Data/Fluff.png' },
 	{ Name: 'mace', File: 'Data/Weapons/Mace.png' },
-	{ Name: 'RedParticles', File: 'Data/Hit Particles.png' },
-	{ Name: 'YellowParticles', File: 'Data/Yellow Particles.png' },
 	{ Name: 'Spore', File: 'Data/Enemies/Sporoid/spore.png' }
 ];
 
