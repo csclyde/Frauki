@@ -43,7 +43,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
 			return;
 
 		this.stingTimer = game.time.now + 400;
-		this.stingRestTimer = game.time.now + 1500;
+		this.stingRestTimer = game.time.now + 300 + (Math.random() * 1500);
 
 		this.state = this.PreStinging;
 		this.squashTween = game.add.tween(this.scale).to({y: 0.7}, 300, Phaser.Easing.Exponential.Out, true);
