@@ -1,12 +1,12 @@
 var FileMap = {};
 
 FileMap.Images = [
-	{ Name: 'FrogtownTiles', File: 'Data/Frogland/FrogtownTiles.png' },
-	{ Name: 'DepthsTiles', File: 'Data/Frogland/DepthsTiles.png' },
+	{ Name: 'FrogtownTiles', File: 'Data/World/FrogtownTiles.png' },
+	{ Name: 'DepthsTiles', File: 'Data/World/DepthsTiles.png' },
 	{ Name: 'Collision', File: 'Data/CollisionKey.png' },
-	{ Name: 'Background', File: 'Data/Frogland/Sky.png' },
-	{ Name: 'parallax1', File: 'Data/Frogland/Parallax1.png' },
-	{ Name: 'parallax2', File: 'Data/Frogland/Parallax2.png' },
+	{ Name: 'Background', File: 'Data/World/Sky.png' },
+	{ Name: 'parallax1', File: 'Data/World/Parallax1.png' },
+	{ Name: 'parallax2', File: 'Data/World/Parallax2.png' },
 	{ Name: 'mace', File: 'Data/Weapons/Mace.png' },
 	{ Name: 'Spore', File: 'Data/Enemies/Sporoid/spore.png' }
 ];

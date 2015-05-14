@@ -186,14 +186,6 @@ Player.prototype.Attacking = function() {
         return false;
 };
 
-Player.prototype.LandHit = function() { 
-    energyController.AddEnergy(this.currentAttack.damage);
-};
-
-Player.prototype.LandKill = function(bonus) { 
-    energyController.AddEnergy(bonus);
-};
-
 Player.prototype.GetDirectionMultiplier = function() {
     var dir = 1;
     if(inputController.runLeft.isDown) {

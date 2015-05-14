@@ -200,7 +200,7 @@ function EnemyHit(f, e) {
         e.Die();
         e.state = e.Dying;
 
-        frauki.LandKill(e.maxEnergy / 2);
+        energyController.AddEnergy(e.maxEnergy / 2);
 
         effectsController.DiceEnemy(e.enemyName, e.body.center.x, e.body.center.y);
 
@@ -208,7 +208,7 @@ function EnemyHit(f, e) {
 
         numParticles += e.maxEnergy;
     } else {
-        frauki.LandHit();
+        energyController.AddEnergy(frauki.currentAttack.damage);
         e.TakeHit();
 
         if(e.GetPoisePercentage() < 0.1) {

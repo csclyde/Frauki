@@ -2,7 +2,7 @@ var Frogland = new Phaser.State();
 
 Frogland.preload = function() {
 	
-    game.load.tilemap('Frogland', 'Data/Frogland/Frogland.json', null, Phaser.Tilemap.TILED_JSON);
+    game.load.tilemap('Frogland', 'Data/World/Frogland.json', null, Phaser.Tilemap.TILED_JSON);
 
     //load images
     FileMap.Images.forEach(function(img) {

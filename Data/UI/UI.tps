@@ -4,9 +4,9 @@
         <key>fileFormatVersion</key>
         <int>3</int>
         <key>texturePackerVersion</key>
-        <string>3.5.3</string>
+        <string>3.7.1</string>
         <key>fileName</key>
-        <string>D:/gamedev/Frauki/Data/UI/UI.tps</string>
+        <string>C:/Users/user/Documents/gamedev/Frauki/Data/UI/UI.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -193,16 +193,6 @@
             <filename>Frames/Upgrades0002.png</filename>
             <filename>Frames/Upgrades0003.png</filename>
             <filename>Frames/Upgrades0004.png</filename>
-            <filename>Frames/Speech0004.png</filename>
-            <filename>Frames/Speech0005.png</filename>
-            <filename>Frames/Speech0006.png</filename>
-            <filename>Frames/Speech0007.png</filename>
-            <filename>Frames/Speech0008.png</filename>
-            <filename>Frames/Speech0009.png</filename>
-            <filename>Frames/Speech0000.png</filename>
-            <filename>Frames/Speech0001.png</filename>
-            <filename>Frames/Speech0002.png</filename>
-            <filename>Frames/Speech0003.png</filename>
             <filename>Frames/EnergyBar0002.png</filename>
             <filename>Frames/EnergyBar0000.png</filename>
             <filename>Frames/EnergyBar0001.png</filename>
@@ -217,5 +207,15 @@
         <uint>1</uint>
         <key>commonDivisorY</key>
         <uint>1</uint>
+        <key>packNormalMaps</key>
+        <false/>
+        <key>autodetectNormalMaps</key>
+        <true/>
+        <key>normalMapFilter</key>
+        <string></string>
+        <key>normalMapSuffix</key>
+        <string></string>
+        <key>normalMapSheetFileName</key>
+        <filename></filename>
     </struct>
 </data>
