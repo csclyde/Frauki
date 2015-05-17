@@ -52,6 +52,8 @@ Frogland.create = function() {
     map = game.add.tilemap('Frogland');
     map.addTilesetImage('FrogtownTiles');
     map.addTilesetImage('DepthsTiles');
+    map.addTilesetImage('TerraceTiles');
+    map.addTilesetImage('Doodads');
     map.addTilesetImage('Collision');
 
     this.CreateMapLayer(4, false);

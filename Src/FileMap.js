@@ -3,6 +3,8 @@ var FileMap = {};
 FileMap.Images = [
 	{ Name: 'FrogtownTiles', File: 'Data/World/FrogtownTiles.png' },
 	{ Name: 'DepthsTiles', File: 'Data/World/DepthsTiles.png' },
+	{ Name: 'TerraceTiles', File: 'Data/World/TerraceTiles.png' },
+	{ Name: 'Doodads', File: 'Data/World/Doodads.png' },
 	{ Name: 'Collision', File: 'Data/CollisionKey.png' },
 	{ Name: 'Background', File: 'Data/World/Sky.png' },
 	{ Name: 'parallax1', File: 'Data/World/Parallax1.png' },
