@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>3</int>
         <key>texturePackerVersion</key>
-        <string>3.6.0</string>
+        <string>3.7.1</string>
         <key>fileName</key>
         <string>C:/Users/user/Documents/gamedev/Frauki/Data/Enemies/Enemies.tps</string>
         <key>autoSDSettings</key>
@@ -210,5 +210,15 @@
         <uint>1</uint>
         <key>commonDivisorY</key>
         <uint>1</uint>
+        <key>packNormalMaps</key>
+        <false/>
+        <key>autodetectNormalMaps</key>
+        <true/>
+        <key>normalMapFilter</key>
+        <string></string>
+        <key>normalMapSuffix</key>
+        <string></string>
+        <key>normalMapSheetFileName</key>
+        <filename></filename>
     </struct>
 </data>

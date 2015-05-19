@@ -1,9 +1,15 @@
 Enemy.prototype.types['CreeperThistle'] =  function() {
 
-	this.body.setSize(30, 25, 0, 0);
-	this.anchor.setTo(.5, 1);
+    this.body.setSize(30, 25, 0, 0);
+    this.anchor.setTo(.5, 1);
 
-    this.animations.add('idle', ["CreeperThistle/CreeperThistle0000"], 10, true, false);
+    var frames = ["CreeperThistle/CreeperThistle0000", "CreeperThistle/CreeperThistle0001", "CreeperThistle/CreeperThistle0002", "CreeperThistle/CreeperThistle0003"];
+    var i = Math.floor(Math.random() * 4);
+    while(i--) {
+        frames.push(frames.shift());
+    }
+
+    this.animations.add('idle', frames, 10, true, false);
     this.animations.add('shit', ["CreeperThistle/CreeperThistle0000"], 10, true, false);
 
     this.energy = 1;
@@ -12,33 +18,35 @@ Enemy.prototype.types['CreeperThistle'] =  function() {
 
     this.state = this.Idling;
 
-	this.updateFunction = function() {
-		this.rotation = this.Rotation;
-	};
+    //this.frameName = "CreeperThistle/CreeperThistle000" + 
 
-	///////////////////////////////ACTIONS////////////////////////////////////
+    this.updateFunction = function() {
+        this.rotation = this.Rotation;
+    };
 
-	this.TakeHit = function(power) {
-		if(!this.timers.TimerUp('hit')) {
-			return;
-		}
+    ///////////////////////////////ACTIONS////////////////////////////////////
 
-	    this.timers.SetTimer('hit', 800);
+    this.TakeHit = function(power) {
+        if(!this.timers.TimerUp('hit')) {
+            return;
+        }
 
-	    this.state = this.Hurting;
-	};
+        this.timers.SetTimer('hit', 800);
 
-	////////////////////////////////STATES////////////////////////////////////
-	this.Idling = function() {
-		this.PlayAnim('idle');
-	};
+        this.state = this.Hurting;
+    };
 
-	this.Hurting = function() {
-		this.PlayAnim('idle');
+    ////////////////////////////////STATES////////////////////////////////////
+    this.Idling = function() {
+        this.PlayAnim('idle');
+    };
 
-		if(this.timers.TimerUp('hit')) {
-			this.state = this.Idling;
-		}
-	};
+    this.Hurting = function() {
+        this.PlayAnim('idle');
+
+        if(this.timers.TimerUp('hit')) {
+            this.state = this.Idling;
+        }
+    };
 
 };

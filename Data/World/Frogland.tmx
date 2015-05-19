@@ -23,10 +23,10 @@
   <image source="DepthsTiles.png" width="512" height="512"/>
  </tileset>
  <tileset firstgid="2353" name="TerraceTiles" tilewidth="16" tileheight="16">
-  <image source="Infinite Terrace.png" width="320" height="240"/>
+  <image source="TerraceTiles.png" width="320" height="240"/>
  </tileset>
  <tileset firstgid="2653" name="Doodads" tilewidth="16" tileheight="16">
-  <image source="Frogland Doodads.png" width="640" height="320"/>
+  <image source="Doodads.png" width="640" height="320"/>
  </tileset>
  <layer name="Background_2" width="260" height="800" visible="0">
   <data encoding="base64" compression="zlib">
@@ -124,6 +124,8 @@
   <object gid="88" x="377" y="4370"/>
   <object gid="87" x="558" y="4078"/>
   <object gid="85" x="1578" y="3438"/>
+  <object gid="89" x="1328" y="752"/>
+  <object gid="89" x="1440" y="752"/>
  </objectgroup>
  <layer name="Background_4" width="260" height="800" visible="0">
   <data encoding="base64" compression="zlib">
