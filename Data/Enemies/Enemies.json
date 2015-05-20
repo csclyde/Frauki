@@ -290,11 +290,11 @@
 },
 "CreeperThistle/CreeperThistle0000":
 {
-	"frame": {"x":1226,"y":97,"w":41,"h":30},
+	"frame": {"x":1226,"y":97,"w":37,"h":30},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":41,"h":30},
-	"sourceSize": {"w":41,"h":30},
+	"spriteSourceSize": {"x":0,"y":0,"w":37,"h":30},
+	"sourceSize": {"w":37,"h":30},
 	"pivot": {"x":0.5,"y":0.5}
 },
 "CreeperThistle/CreeperThistle0001":
@@ -308,7 +308,7 @@
 },
 "CreeperThistle/CreeperThistle0002":
 {
-	"frame": {"x":1268,"y":97,"w":37,"h":30},
+	"frame": {"x":1264,"y":97,"w":37,"h":30},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":37,"h":30},
@@ -344,7 +344,7 @@
 },
 "Haystax/Tarball0000":
 {
-	"frame": {"x":1306,"y":97,"w":18,"h":21},
+	"frame": {"x":1302,"y":97,"w":18,"h":21},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":21},
@@ -407,7 +407,7 @@
 },
 "Insectoid/Dead0004":
 {
-	"frame": {"x":1325,"y":97,"w":40,"h":20},
+	"frame": {"x":1321,"y":97,"w":40,"h":20},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":20},
@@ -727,6 +727,6 @@
 	"format": "RGBA8888",
 	"size": {"w":1549,"h":128},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:17b0a9c21247c30dbb0caf65738277c3:1515af82b08612181e43cf5bf98cb8a1:b1585ba32d60cf5440f3fdffe8c37c76$"
+	"smartupdate": "$TexturePacker:SmartUpdate:18da5bfef196f626735eafa2a6819cb1:77cf707601417c7cddb383704fcdd513:b1585ba32d60cf5440f3fdffe8c37c76$"
 }
 }

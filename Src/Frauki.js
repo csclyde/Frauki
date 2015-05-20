@@ -85,13 +85,6 @@ Player.prototype.preStateUpdate = function() {
     } else {
         this.runDust.visible = false;
     }
-    
-    if(!inputController.runLeft.isDown && !inputController.runRight.isDown && this.state !== this.Jumping && this.state !== this.Rolling && this.state !== this.AttackStab && this.state !== this.Hurting) {
-        //this.body.velocity.x = 0;
-        //this.body.acceleration.x = 0;
-        //this.movement.rollVelocity = 0;
-        //this.movement.rollBoost = 0;
-    }
 };
 
 Player.prototype.postStateUpdate = function() {
@@ -348,7 +341,6 @@ Player.prototype.Roll = function(params) {
     this.tweens.roll.start();
 
     this.body.acceleration.x = 0;
-    //this.movement.rollVelocity = dir * PLAYER_ROLL_SPEED();
 
     this.timers.SetTimer('frauki_roll', 650);
     this.timers.SetTimer('frauki_grace', 300);
@@ -393,7 +385,6 @@ Player.prototype.Standing = function() {
 Player.prototype.Running = function() {
     this.PlayAnim('run');
 
-
     this.runDust.y = this.body.y + this.body.height - this.runDust.height;
 
     //position the dust
@@ -422,7 +413,6 @@ Player.prototype.Jumping = function() {
     if(this.body.velocity.y >= 0) {
         this.state = this.Peaking;
     }
-
 };
 
 Player.prototype.Peaking = function() {
@@ -484,7 +474,6 @@ Player.prototype.Crouching = function() {
     if(!this.states.crouching || this.body.velocity.x !== 0 || this.body.velocity.y !== 0) {
         this.state = this.Standing;
     }
-
 };
 
 Player.prototype.Flipping = function() {
@@ -540,6 +529,7 @@ Player.prototype.Rolling = function() {
             }
 
             this.body.velocity.x = 0;
+
         } else if(this.body.velocity.x !== 0 && this.body.onFloor()) {
             this.state = this.Running;
         } else {

@@ -6,7 +6,7 @@
         <key>texturePackerVersion</key>
         <string>3.7.1</string>
         <key>fileName</key>
-        <string>C:/Users/user/Documents/gamedev/Frauki/Data/Frauki/Frauki.tps</string>
+        <string>D:/gamedev/Frauki/Data/Frauki/Frauki.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">

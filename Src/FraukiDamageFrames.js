@@ -200,7 +200,7 @@ var fraukiAnimations = [
 	{ Name: 'jump', Frames:  ['Jump0000', 'Jump0001', 'Jump0002', 'Jump0003', 'Jump0004'],  Fps: 10 , Loop: true },
 	{ Name: 'peak', Frames:  ['Peak0000', 'Peak0001'],  Fps: 14 , Loop: false },
 	{ Name: 'fall', Frames:  ['Fall0000', 'Fall0001', 'Fall0002', 'Fall0003'],  Fps: 18 , Loop: true },
-	{ Name: 'land', Frames:  ['Standing Jump0006', 'Standing Jump0007', 'Standing Jump0008'],  Fps: 10 , Loop: false },
+	{ Name: 'land', Frames:  ['Land0000', 'Land0001', 'Land0002'],  Fps: 10 , Loop: false },
 	{ Name: 'crouch', Frames:  ['Crouch0000', 'Crouch0001', 'Crouch0002', 'Crouch0003', 'Crouch0004', 'Crouch0005', 'Crouch0006', 'Crouch0007', 'Crouch0008'],  Fps: 20 , Loop: false },
 	{ Name: 'flip', Frames:  ['Flip0000', 'Flip0001', 'Flip0002', 'Flip0003', 'Flip0004'],  Fps: 14 , Loop: false },
 	{ Name: 'roll', Frames:  ['Roll0000', 'Roll0001', 'Roll0002', 'Roll0003', 'Roll0004', 'Roll0005', 'Roll0013', 'Roll0014'],  Fps: 18 , Loop: false },
