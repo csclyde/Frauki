@@ -200,7 +200,7 @@
 },
 "Attack Dive0022":
 {
-	"frame": {"x":1901,"y":140,"w":27,"h":43},
+	"frame": {"x":1956,"y":92,"w":27,"h":43},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":86,"y":85,"w":27,"h":43},
@@ -209,7 +209,7 @@
 },
 "Attack Dive0023":
 {
-	"frame": {"x":1928,"y":140,"w":27,"h":43},
+	"frame": {"x":1971,"y":135,"w":27,"h":43},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":86,"y":85,"w":27,"h":43},
@@ -218,7 +218,7 @@
 },
 "Attack Dive0024":
 {
-	"frame": {"x":1928,"y":140,"w":27,"h":43},
+	"frame": {"x":1971,"y":135,"w":27,"h":43},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":86,"y":85,"w":27,"h":43},
@@ -227,7 +227,7 @@
 },
 "Attack Dive0025":
 {
-	"frame": {"x":1928,"y":140,"w":27,"h":43},
+	"frame": {"x":1971,"y":135,"w":27,"h":43},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":86,"y":85,"w":27,"h":43},
@@ -236,7 +236,7 @@
 },
 "Attack Dive0026":
 {
-	"frame": {"x":1928,"y":140,"w":27,"h":43},
+	"frame": {"x":1971,"y":135,"w":27,"h":43},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":86,"y":85,"w":27,"h":43},
@@ -281,10 +281,10 @@
 },
 "Attack Front0002":
 {
-	"frame": {"x":1862,"y":0,"w":87,"h":49},
+	"frame": {"x":1615,"y":0,"w":87,"h":50},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":75,"y":78,"w":87,"h":49},
+	"spriteSourceSize": {"x":75,"y":78,"w":87,"h":50},
 	"sourceSize": {"w":202,"h":202},
 	"pivot": {"x":0,"y":0}
 },
@@ -326,7 +326,7 @@
 },
 "Attack Front0007":
 {
-	"frame": {"x":1770,"y":0,"w":92,"h":49},
+	"frame": {"x":1802,"y":0,"w":92,"h":49},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":71,"y":79,"w":92,"h":49},
@@ -488,7 +488,7 @@
 },
 "Attack Stab0002":
 {
-	"frame": {"x":1615,"y":50,"w":27,"h":50},
+	"frame": {"x":1627,"y":100,"w":27,"h":50},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":79,"y":77,"w":27,"h":50},
@@ -497,7 +497,7 @@
 },
 "Attack Stab0003":
 {
-	"frame": {"x":1949,"y":45,"w":40,"h":47},
+	"frame": {"x":1877,"y":98,"w":40,"h":47},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":68,"y":81,"w":40,"h":47},
@@ -506,7 +506,7 @@
 },
 "Attack Stab0004":
 {
-	"frame": {"x":1864,"y":49,"w":39,"h":47},
+	"frame": {"x":1917,"y":96,"w":39,"h":47},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":66,"y":81,"w":39,"h":47},
@@ -515,7 +515,7 @@
 },
 "Attack Stab0005":
 {
-	"frame": {"x":1851,"y":98,"w":40,"h":47},
+	"frame": {"x":1893,"y":49,"w":40,"h":47},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":66,"y":81,"w":40,"h":47},
@@ -578,7 +578,7 @@
 },
 "Attack Stab0012":
 {
-	"frame": {"x":1642,"y":50,"w":124,"h":49},
+	"frame": {"x":1654,"y":100,"w":124,"h":49},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":69,"y":79,"w":124,"h":49},
@@ -587,7 +587,7 @@
 },
 "Attack Stab0013":
 {
-	"frame": {"x":1652,"y":0,"w":118,"h":49},
+	"frame": {"x":1677,"y":50,"w":118,"h":49},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":68,"y":79,"w":118,"h":49},
@@ -596,7 +596,7 @@
 },
 "Attack Stab0014":
 {
-	"frame": {"x":1766,"y":49,"w":98,"h":49},
+	"frame": {"x":1795,"y":49,"w":98,"h":49},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":87,"y":79,"w":98,"h":49},
@@ -605,7 +605,7 @@
 },
 "Attack Stab0015":
 {
-	"frame": {"x":1652,"y":99,"w":100,"h":49},
+	"frame": {"x":1702,"y":0,"w":100,"h":49},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":87,"y":79,"w":100,"h":49},
@@ -614,7 +614,7 @@
 },
 "Attack Stab0016":
 {
-	"frame": {"x":1752,"y":99,"w":99,"h":49},
+	"frame": {"x":1778,"y":99,"w":99,"h":49},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":87,"y":79,"w":99,"h":49},
@@ -659,7 +659,7 @@
 },
 "Crouch0001":
 {
-	"frame": {"x":1627,"y":100,"w":25,"h":50},
+	"frame": {"x":1652,"y":50,"w":25,"h":50},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":88,"y":78,"w":25,"h":50},
@@ -668,7 +668,7 @@
 },
 "Crouch0002":
 {
-	"frame": {"x":1744,"y":148,"w":26,"h":39},
+	"frame": {"x":1744,"y":149,"w":26,"h":39},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":85,"y":89,"w":26,"h":39},
@@ -767,7 +767,7 @@
 },
 "Flip0000":
 {
-	"frame": {"x":1770,"y":148,"w":36,"h":34},
+	"frame": {"x":1770,"y":149,"w":36,"h":34},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":82,"y":93,"w":36,"h":34},
@@ -776,7 +776,7 @@
 },
 "Flip0001":
 {
-	"frame": {"x":1914,"y":72,"w":33,"h":26},
+	"frame": {"x":1894,"y":23,"w":33,"h":26},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":84,"y":105,"w":33,"h":26},
@@ -794,7 +794,7 @@
 },
 "Flip0003":
 {
-	"frame": {"x":1914,"y":49,"w":35,"h":23},
+	"frame": {"x":1971,"y":0,"w":35,"h":23},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":83,"y":109,"w":35,"h":23},
@@ -875,7 +875,7 @@
 },
 "Kick0000":
 {
-	"frame": {"x":1949,"y":0,"w":41,"h":45},
+	"frame": {"x":1930,"y":143,"w":41,"h":45},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":83,"y":77,"w":41,"h":45},
@@ -884,7 +884,7 @@
 },
 "Kick0001":
 {
-	"frame": {"x":1862,"y":145,"w":39,"h":43},
+	"frame": {"x":1891,"y":145,"w":39,"h":43},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":84,"y":77,"w":39,"h":43},
@@ -893,7 +893,7 @@
 },
 "Land0000":
 {
-	"frame": {"x":1943,"y":98,"w":24,"h":41},
+	"frame": {"x":1983,"y":92,"w":24,"h":41},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":86,"y":87,"w":24,"h":41},
@@ -902,7 +902,7 @@
 },
 "Land0001":
 {
-	"frame": {"x":1891,"y":96,"w":23,"h":44},
+	"frame": {"x":1927,"y":0,"w":23,"h":44},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":88,"y":84,"w":23,"h":44},
@@ -947,7 +947,7 @@
 },
 "Roll0001":
 {
-	"frame": {"x":1670,"y":148,"w":45,"h":39},
+	"frame": {"x":1670,"y":149,"w":45,"h":39},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":79,"y":89,"w":45,"h":39},
@@ -974,7 +974,7 @@
 },
 "Roll0004":
 {
-	"frame": {"x":1967,"y":92,"w":28,"h":27},
+	"frame": {"x":1933,"y":65,"w":28,"h":27},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":89,"y":101,"w":28,"h":27},
@@ -992,7 +992,7 @@
 },
 "Roll0006":
 {
-	"frame": {"x":1955,"y":146,"w":29,"h":27},
+	"frame": {"x":1862,"y":148,"w":29,"h":27},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":89,"y":101,"w":29,"h":27},
@@ -1001,7 +1001,7 @@
 },
 "Roll0007":
 {
-	"frame": {"x":1967,"y":119,"w":28,"h":27},
+	"frame": {"x":1961,"y":65,"w":28,"h":27},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":90,"y":101,"w":28,"h":27},
@@ -1055,7 +1055,7 @@
 },
 "Roll0013":
 {
-	"frame": {"x":1715,"y":148,"w":29,"h":39},
+	"frame": {"x":1715,"y":149,"w":29,"h":39},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":88,"y":87,"w":29,"h":39},
@@ -1064,7 +1064,7 @@
 },
 "Roll0014":
 {
-	"frame": {"x":1914,"y":98,"w":29,"h":42},
+	"frame": {"x":1971,"y":23,"w":29,"h":42},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":92,"y":80,"w":29,"h":42},
@@ -1136,7 +1136,7 @@
 },
 "Run0007":
 {
-	"frame": {"x":1615,"y":0,"w":37,"h":50},
+	"frame": {"x":1615,"y":50,"w":37,"h":50},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":84,"y":71,"w":37,"h":50},
@@ -1157,8 +1157,8 @@
 	"version": "1.0",
 	"image": "Frauki.png",
 	"format": "RGBA8888",
-	"size": {"w":1995,"h":188},
+	"size": {"w":2007,"h":188},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:50dd54f3598f974274bb2310f584f62b:6077e1e51c324b7823fa93e37ff12bb6:952b4494219d24729a00770fbb75db3d$"
+	"smartupdate": "$TexturePacker:SmartUpdate:3f74c5dc6f7e3d19f852ffee50d952b3:395b54eaceaa03d2b5a4e3d364ff46e9:952b4494219d24729a00770fbb75db3d$"
 }
 }
