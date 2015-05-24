@@ -36,9 +36,12 @@ InputController = function(player) {
     this.wep.onUp.add(function() {   events.publish('activate_weapon', {activate: false}); }, this);
 
     this.up.onDown.add(function() { 
-        //energyController.AddEnergy(); 
-        if(game.physics.arcade.overlap(frauki, Frogland.doorGroup)) {
-            if(Frogland.currentLayer == 3) Frogland.ChangeLayer(2);
+        //switch between layers if they are in a doorway
+        if(game.physics.arcade.overlap(frauki, Frogland.door1Group)) {
+            if(Frogland.currentLayer === 3) Frogland.ChangeLayer(2);
+            else Frogland.ChangeLayer(3);
+        } else if(game.physics.arcade.overlap(frauki, Frogland.door2Group)) {
+            if(Frogland.currentLayer === 3) Frogland.ChangeLayer(4);
             else Frogland.ChangeLayer(3);
         }
     });
