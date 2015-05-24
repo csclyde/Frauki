@@ -75,7 +75,7 @@ Frogland.create = function() {
     map.createFromObjects('Doors_1', 67, 'Door', 'Door0000', true, false, this.door1Group, Door, false);
     map.createFromObjects('Doors_2', 67, 'Door', 'Door0000', true, false, this.door2Group, Door, false);
 
-    frauki = new Player(game, 100, 100, 'Frauki');
+    frauki = new Player(game, 184 * 16, 62 * 16, 'Frauki');
     game.add.existing(frauki);
     
     this.foregroundLayer_4 = map.createLayer('Foreground_4');
@@ -141,6 +141,71 @@ Frogland.CreateObjectsLayer = function(layer) {
             obj.body.enable = false;
         }
     });    
+};
+
+//spawns some random enemies
+Frogland.ThunderDome = function(x, y) {
+
+    // console.log('spawning shit');
+
+    // var enemType = Math.random() * 6;
+    // var enemName = '';
+
+    // if(enemType < 1) {
+    //     enemName = 'Buzzar';
+    // } else if(enemType < 2) {
+    //     enemName = 'Sporoid';
+    // } else if(enemType < 3) {
+    //     enemName = 'Insectoid';
+    // } else if(enemType < 4) {
+    //     enemName = 'CreeperThistle';
+    // } else if(enemType < 5) {
+    //     enemName = 'Haystax';
+    // } else if(enemType < 6) {
+    //     enemName = 'Madman';
+    // }
+
+    // if(Math.random() > 0.85) {
+    //     enem = new Enemy(game, 151 * 16, 81 * 16, enemName);
+    //     game.add.existing(enem);
+    //     enem.owningLayer = 3;
+    //     Frogland['objectGroup_3'].add(enem);
+    // }
+
+    // if(Math.random() > 0.85) {
+    //     enem = new Enemy(game, 156 * 16, 71 * 16, enemName);
+    //     game.add.existing(enem);
+    //     enem.owningLayer = 3;
+    //     Frogland['objectGroup_3'].add(enem);
+    // }
+
+    // if(Math.random() > 0.85) {
+    //     enem = new Enemy(game, 163 * 16, 72 * 16, enemName);
+    //     game.add.existing(enem);
+    //     enem.owningLayer = 3;
+    //     Frogland['objectGroup_3'].add(enem);
+    // }
+
+    // if(Math.random() > 0.85) {
+    //     enem = new Enemy(game, 174 * 16, 72 * 16, enemName);
+    //     game.add.existing(enem);
+    //     enem.owningLayer = 3;
+    //     Frogland['objectGroup_3'].add(enem);
+    // }
+
+    // if(Math.random() > 0.85) {
+    //     enem = new Enemy(game, 175 * 16, 83 * 16, enemName);
+    //     game.add.existing(enem);
+    //     enem.owningLayer = 3;
+    //     Frogland['objectGroup_3'].add(enem);
+    // }
+
+    // if(Math.random() > 0.85) {
+        enem = new Enemy(game, 166 * 16, 89 * 16, 'Insectoid');
+        game.add.existing(enem);
+        enem.owningLayer = 3;
+        Frogland['objectGroup_3'].add(enem);
+    // }
 };
 
 Frogland.ProcessCollisionTiles = function(layer) {

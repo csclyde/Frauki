@@ -197,8 +197,6 @@
             <filename>Yeti</filename>
             <filename>Incarnate</filename>
             <filename>Haystax</filename>
-            <filename>Bizarro</filename>
-            <filename>Lancer</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

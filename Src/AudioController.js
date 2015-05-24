@@ -1,8 +1,18 @@
 AudioController = function() {
+	var that = this;
+
 	events.subscribe('play_sound', this.PlaySound, this);
+	events.subscribe('stop_sound', this.StopSound, this);
 
     this.sounds = {};
-    this.sounds['attack1'] = game.add.audio('attack_1', 0.5);
+
+    //load audio
+    FileMap.Audio.forEach(function(audio) {
+        //game.load.audio(audio.Name, audio.File);
+        that.sounds[audio.Name] = game.add.audio(audio.Name, audio.Volume, audio.Loop);
+    });
+
+    //this.sounds['attack1'] = game.add.audio('attack_1', 0.5);
 };
 
 AudioController.prototype.Update = function() {
@@ -14,6 +24,12 @@ AudioController.prototype.PlaySound = function(params) {
         this.sounds[params.name].play();
     }
 };
+
+AudioController.prototype.StopSound = function(params) {
+	if(!!params.name && !!this.sounds[params.name]) {
+        this.sounds[params.name].stop();
+    }
+}
 
 AudioController.prototype.PlayMusic = function(params) {
 
