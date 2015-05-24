@@ -65,13 +65,15 @@ Frogland.create = function() {
 
 
     this.enemyPool = game.add.group();
-    this.doorGroup = game.add.group();
+    this.door1Group = game.add.group();
+    this.door2Group = game.add.group();
 
     this.CreateObjectsLayer(4);
     this.CreateObjectsLayer(3);
     this.CreateObjectsLayer(2);
 
-    map.createFromObjects('Doors', 67, 'Door', 'Door0000', true, false, this.doorGroup, Door, false);
+    map.createFromObjects('Doors_1', 67, 'Door', 'Door0000', true, false, this.door1Group, Door, false);
+    map.createFromObjects('Doors_2', 67, 'Door', 'Door0000', true, false, this.door2Group, Door, false);
 
     frauki = new Player(game, 100, 100, 'Frauki');
     game.add.existing(frauki);
@@ -168,13 +170,14 @@ Frogland.update = function() {
     //reset environmental effect flags
     frauki.states.inWater = false;
     frauki.states.onCloud = false;
-    
+
     game.physics.arcade.collide(frauki, this.GetCurrentCollisionLayer(), null, this.CheckEnvironmentalCollisions);
     game.physics.arcade.collide(frauki, this.GetCurrentObjectGroup(), this.CollideFraukiWithObject, this.OverlapFraukiWithObject);
-    //game.physics.arcade.overlap(frauki, this.doorGroup, this.OverlapFraukiWithDoor);
+    //game.physics.arcade.overlap(frauki, this.door1Group, this.OverlapFraukiWithDoor);
     game.physics.arcade.collide(this.GetCurrentObjectGroup(), this.GetCurrentCollisionLayer());
 
     game.physics.arcade.overlap(frauki, projectileController.projectiles, this.CollideFraukiWithProjectile);
+
 
     cameraController.UpdateCamera();
     inputController.UpdateInput();
@@ -199,7 +202,6 @@ Frogland.GetCurrentCollisionLayer = function() {
 
 Frogland.render = function() {
     //game.debug.body(frauki);
-    //game.debug.body(frauki.bodyDouble);
     //game.debug.body(frauki.attackRect);
 
     // this.objectGroup_3.forEach(function(o) {
