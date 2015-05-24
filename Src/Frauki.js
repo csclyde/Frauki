@@ -318,10 +318,11 @@ Player.prototype.Slash = function(params) {
         if(energyController.UseEnergy(5)) {
             if(this.states.upPressed) {
                 this.state = this.AttackOverhead;
-                events.publish('play_sound', {name: 'attack1'});
             } else {
                 this.state = this.AttackFront;
             }
+            
+            events.publish('play_sound', {name: 'attack1'});
         }
     } else {
         console.log('An attack was attempted in an unresolved state ' + this.state);
