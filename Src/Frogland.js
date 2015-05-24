@@ -170,13 +170,14 @@ Frogland.update = function() {
     //reset environmental effect flags
     frauki.states.inWater = false;
     frauki.states.onCloud = false;
-    
+
     game.physics.arcade.collide(frauki, this.GetCurrentCollisionLayer(), null, this.CheckEnvironmentalCollisions);
     game.physics.arcade.collide(frauki, this.GetCurrentObjectGroup(), this.CollideFraukiWithObject, this.OverlapFraukiWithObject);
     //game.physics.arcade.overlap(frauki, this.door1Group, this.OverlapFraukiWithDoor);
     game.physics.arcade.collide(this.GetCurrentObjectGroup(), this.GetCurrentCollisionLayer());
 
     game.physics.arcade.overlap(frauki, projectileController.projectiles, this.CollideFraukiWithProjectile);
+
 
     cameraController.UpdateCamera();
     inputController.UpdateInput();
@@ -201,6 +202,7 @@ Frogland.GetCurrentCollisionLayer = function() {
 
 Frogland.render = function() {
     //game.debug.body(frauki);
+
     //game.debug.body(frauki.bodyDouble);
     //game.debug.body(frauki.attackRect);
 
