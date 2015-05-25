@@ -287,6 +287,7 @@ Player.prototype.Slash = function(params) {
         if(energyController.UseEnergy(8)) {
             this.state = this.AttackDiveCharge;
             this.movement.diveVelocity = 950;
+            events.publish('play_sound', {name: 'attack_dive_charge'});
         }
     }
     //running dash
@@ -310,7 +311,7 @@ Player.prototype.Slash = function(params) {
             game.add.tween(this.movement).to({jumpSlashVelocity:0}, 400, Phaser.Easing.Quartic.Out, true);
             this.states.hasFlipped = true;
     
-            events.publish('play_sound', {name: 'attack1'});
+            events.publish('play_sound', {name: 'attack_slash'});
         }
     }
     //normal slashes while standing or running
@@ -321,8 +322,8 @@ Player.prototype.Slash = function(params) {
             } else {
                 this.state = this.AttackFront;
             }
-            
-            events.publish('play_sound', {name: 'attack1'});
+
+            events.publish('play_sound', {name: 'attack_slash'});
         }
     } else {
         console.log('An attack was attempted in an unresolved state ' + this.state);
@@ -629,6 +630,8 @@ Player.prototype.AttackDiveCharge = function() {
     if(this.animations.currentAnim.isFinished) {
         this.state = this.AttackDiveFall;
         this.timers.SetTimer('frauki_dive', 800);
+
+        events.publish('play_sound', {name: 'attack_dive_fall'});
     }
 };
 
@@ -643,6 +646,9 @@ Player.prototype.AttackDiveFall = function() {
         this.movement.diveVelocity = 0;
 
         events.publish('camera_shake', {magnitudeX: 15, magnitudeY: 5, duration: 250});
+        events.publish('stop_sound', {name: 'attack_dive_fall'});
+        events.publish('play_sound', {name: 'attack_dive_land'});
+
         this.state = this.AttackDiveLand;
     } else if(this.timers.TimerUp('frauki_dive')) {
         this.movement.diveVelocity = 0;
