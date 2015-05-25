@@ -11,8 +11,6 @@ AudioController = function() {
         //game.load.audio(audio.Name, audio.File);
         that.sounds[audio.Name] = game.add.audio(audio.Name, audio.Volume, audio.Loop);
     });
-
-    //this.sounds['attack1'] = game.add.audio('attack_1', 0.5);
 };
 
 AudioController.prototype.Update = function() {
@@ -21,7 +19,7 @@ AudioController.prototype.Update = function() {
 
 AudioController.prototype.PlaySound = function(params) {
 	var that = this;
-	
+
     if(!!params.name && !!this.sounds[params.name]) {
 
     	//if this is the damage sound, or an attack sound, stop all attack sounds
