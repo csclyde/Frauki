@@ -148,22 +148,22 @@ Frogland.ThunderDome = function(x, y) {
 
     // console.log('spawning shit');
 
-    // var enemType = Math.random() * 6;
-    // var enemName = '';
+    var enemType = Math.random() * 6;
+    var enemName = '';
 
-    // if(enemType < 1) {
-    //     enemName = 'Buzzar';
-    // } else if(enemType < 2) {
-    //     enemName = 'Sporoid';
-    // } else if(enemType < 3) {
-    //     enemName = 'Insectoid';
-    // } else if(enemType < 4) {
-    //     enemName = 'CreeperThistle';
-    // } else if(enemType < 5) {
-    //     enemName = 'Haystax';
-    // } else if(enemType < 6) {
-    //     enemName = 'Madman';
-    // }
+    if(enemType < 1) {
+        enemName = 'Buzzar';
+    } else if(enemType < 2) {
+        enemName = 'Sporoid';
+    } else if(enemType < 3) {
+        enemName = 'Insectoid';
+    } else if(enemType < 4) {
+        enemName = 'CreeperThistle';
+    } else if(enemType < 5) {
+        enemName = 'Haystax';
+    } else if(enemType < 6) {
+        enemName = 'Madman';
+    }
 
     // if(Math.random() > 0.85) {
     //     enem = new Enemy(game, 151 * 16, 81 * 16, enemName);
@@ -201,7 +201,7 @@ Frogland.ThunderDome = function(x, y) {
     // }
 
     // if(Math.random() > 0.85) {
-        enem = new Enemy(game, 166 * 16, 89 * 16, 'Insectoid');
+        enem = new Enemy(game, 166 * 16, 89 * 16, enemName);
         game.add.existing(enem);
         enem.owningLayer = 3;
         Frogland['objectGroup_3'].add(enem);
