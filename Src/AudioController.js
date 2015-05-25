@@ -20,7 +20,18 @@ AudioController.prototype.Update = function() {
 };
 
 AudioController.prototype.PlaySound = function(params) {
+	var that = this;
+	
     if(!!params.name && !!this.sounds[params.name]) {
+
+    	//if this is the damage sound, or an attack sound, stop all attack sounds
+    	if(params.name.indexOf('ouch') > -1 || params.name.indexOf('attack') > -1) {
+			that.sounds['attack_slash'].stop();
+			that.sounds['attack_stab'].stop();
+			that.sounds['attack_dive_charge'].stop();
+			that.sounds['attack_dive_fall'].stop();
+			that.sounds['attack_dive_land'].stop();
+    	}
         this.sounds[params.name].play();
     }
 };
