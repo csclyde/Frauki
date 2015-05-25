@@ -300,6 +300,8 @@ Player.prototype.Slash = function(params) {
             this.movement.rollVelocity = 0;
             this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: dir * PLAYER_RUN_SLASH_SPEED()}, 300, Phaser.Easing.Exponential.InOut, false).to({rollVelocity: 0}, 500, Phaser.Easing.Exponential.InOut, false);
             this.tweens.roll.start();
+
+            events.publish('play_sound', {name: 'attack_stab'});
             
         }
     }
@@ -646,10 +648,12 @@ Player.prototype.AttackDiveFall = function() {
         this.movement.diveVelocity = 0;
 
         events.publish('camera_shake', {magnitudeX: 15, magnitudeY: 5, duration: 250});
+
         events.publish('stop_sound', {name: 'attack_dive_fall'});
         events.publish('play_sound', {name: 'attack_dive_land'});
 
         this.state = this.AttackDiveLand;
+
     } else if(this.timers.TimerUp('frauki_dive')) {
         this.movement.diveVelocity = 0;
         this.state = this.Falling;
