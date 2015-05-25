@@ -180,7 +180,7 @@ function EnemyHit(f, e) {
     //fraukis knockback will increase the amount that the enemy is moved. The weight
     //of the enemy will work against that. 
     e.xHitVel = (1000 * frauki.currentAttack.knockback) - (1000 * e.weight);
-    if(e.xHitVel < 100) e.xHitVel = 100;
+    if(e.xHitVel < 200) e.xHitVel = 200;
     e.xHitVel *= c;
 
     game.add.tween(e).to({xHitVel: 0}, 300, Phaser.Easing.Exponential.Out, true);
@@ -197,6 +197,9 @@ function EnemyHit(f, e) {
     e.poise -= frauki.currentAttack.damage;
 
     if(e.energy <= 0) {
+
+        Frogland.ThunderDome(e.x, e.y);
+
         e.Die();
         e.state = e.Dying;
 
@@ -213,7 +216,7 @@ function EnemyHit(f, e) {
 
         if(e.GetPoisePercentage() < 0.1) {
             //send it flying
-            e.body.velocity.y = -700;
+            e.body.velocity.y = -600;
             e.body.velocity.x = c * 700;
 
             e.state = e.Hurting;

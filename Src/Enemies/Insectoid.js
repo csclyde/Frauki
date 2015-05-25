@@ -3,17 +3,19 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	this.body.setSize(55, 35, 0, 0);
 	this.anchor.setTo(.5, 1);
 
-    this.animations.add('idle', ['Insectoid/Idle0000'], 10, true, false);
-    this.animations.add('hop', ['Insectoid/Idle0000', 'Insectoid/Idle0000'], 10, false, false);
-    this.animations.add('land', ['Insectoid/Idle0000', 'Insectoid/Idle0000'], 10, false, false);
-    this.animations.add('die', ['Insectoid/Idle0000', 'Insectoid/Idle0000', 'Insectoid/Idle0000', 'Insectoid/Idle0000'], 10, false, false);
+    this.animations.add('idle', ['Insectoid/Hop0000'], 10, true, false);
+    this.animations.add('hop', ['Insectoid/Hop0001', 'Insectoid/Hop0002'], 10, false, false);
+    this.animations.add('land', ['Insectoid/Hop0003', 'Insectoid/Hop0004'], 10, false, false);
+    this.animations.add('die', ['Insectoid/Hop0000', 'Insectoid/Idle0000', 'Insectoid/Idle0000', 'Insectoid/Idle0000'], 10, false, false);
 
     this.attackTimer = 0;
     this.weight = 0.6;
     this.damage = 5;
-    this.energy = 10;
+    this.energy = 6;
 
     this.squashTween = null;
+
+    this.preHopPos = {};
 
     //this.body.bounce.set(0.5);
 
@@ -56,6 +58,9 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		this.state = this.PreHopping;
 		this.squashTween = game.add.tween(this.scale).to({y: 0.7}, 200, Phaser.Easing.Exponential.Out, true);
 		//this.scale.y = 0.7;
+
+		this.preHopPos.x = this.body.center.x;
+		this.preHopPos.y = this.body.center.y;
 	};
 
 	this.Scuttle = function() {
@@ -182,10 +187,14 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		this.PlayAnim('hop');
 
 		if(this.body.velocity.y >= 0 || this.body.onFloor()) {
-			if(Math.abs(this.body.center.y - frauki.body.center.y) < 40 && Math.abs(this.body.center.x - frauki.body.center.y) < 400)
+			//if the hop didnt move us, just scuttle
+			if(this.preHopPos.x > this.body.center.x - 40 && this.preHopPos.x < this.body.center.x + 40 && this.preHopPos.y > this.body.center.y - 40 && this.preHopPos.y < this.body.center.y + 40) {
 				this.Scuttle();
-			else
+			} else if(Math.abs(this.body.center.y - frauki.body.center.y) < 40 && Math.abs(this.body.center.x - frauki.body.center.y) < 400) {
+				this.Scuttle();
+			} else {
 				this.state = this.Landing;
+			}
 		}
 	};
 

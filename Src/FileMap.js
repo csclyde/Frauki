@@ -22,7 +22,15 @@ FileMap.Atlas = [
 ];
 
 FileMap.Audio = [
-	{ Name: 'attack_1', File: 'Data/Sfx/attack1.wav'}
+	{ Name: 'attack_slash', File: 'Data/Sfx/attack_slash.wav', Volume: 0.5, Loop: false },
+	{ Name: 'attack_stab', File: 'Data/Sfx/attack_stab.wav', Volume: 0.5, Loop: false },
+	{ Name: 'attack_dive_charge', File: 'Data/Sfx/attack_dive_charge.wav', Volume: 0.3, Loop: false },
+	{ Name: 'attack_dive_fall', File: 'Data/Sfx/attack_dive_fall.wav', Volume: 0.3, Loop: true },
+	{ Name: 'attack_dive_land', File: 'Data/Sfx/attack_dive_land.wav', Volume: 0.5, Loop: false },
+	{ Name: 'jump', File: 'Data/Sfx/jump.wav', Volume: 0.5, Loop: false },
+	{ Name: 'ouch', File: 'Data/Sfx/ouch.wav', Volume: 0.5, Loop: false },
+	{ Name: 'running', File: 'Data/Sfx/runningloop1.wav', Volume: 0.5, Loop: true },
+	{ Name: 'slide', File: 'Data/Sfx/slide.wav', Volume: 0.5, Loop: false }
 ];
 
 FileMap.Enemies = [
