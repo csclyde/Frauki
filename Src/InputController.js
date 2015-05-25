@@ -46,6 +46,8 @@ InputController = function(player) {
         }
     });
 
+    this.testButton.onDown.add(function() { music.stop(); } );
+
     game.input.gamepad.start();
 
     game.input.gamepad.addCallbacks(this, {

@@ -5,7 +5,9 @@
         <title>Frauki's Adventure!</title>
         <script type="text/javascript" src="https://rawgit.com/Preece/phaser/master/build/phaser.min.js"></script>
         <script src="Src/Plugins/phaser-debug.js"></script>
-        <script src="Src/Plugins/modplayer.min.js"></script>
+        <script src="Src/Plugins/Core.js"></script>
+        <script src="Src/Plugins/Soundblaster.js"></script>
+        <script src="Src/Plugins/F2Player.js"></script>
 
         <script type="text/javascript" src="Src/EventRouter.js"></script>
         <script type="text/javascript" src="Src/TimerUtil.js"></script>
@@ -64,6 +66,22 @@
             var frauki;
 
         	game.state.add('Frogland', Frogland, true);
+
+            var music = {};
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'Data/Music/[WIP]Frauki\'s Adventure.xm', true);
+            xhr.responseType = 'arraybuffer';
+            xhr.onload = function(e) {
+              if(this.status == 200){
+                var uInt8Array = new Uint8Array(this.response);
+                music = window.neoart.F2Player(null);
+                music.load(this.response);
+                music.loopSong = 1;
+                music.play();
+              } 
+            };
+            xhr.send();
         </script>
     </head>
     <body>
