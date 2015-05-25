@@ -46,7 +46,7 @@ InputController = function(player) {
         }
     });
 
-    this.testButton.onDown.add(function() { music.stop(); } );
+    this.testButton.onDown.add(function() { events.publish('stop_music', { name: 'Surface' } );  } );
 
     game.input.gamepad.start();
 

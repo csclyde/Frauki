@@ -67,21 +67,6 @@
 
         	game.state.add('Frogland', Frogland, true);
 
-            var music = {};
-
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'Data/Music/[WIP]Frauki\'s Adventure.xm', true);
-            xhr.responseType = 'arraybuffer';
-            xhr.onload = function(e) {
-              if(this.status == 200){
-                var uInt8Array = new Uint8Array(this.response);
-                music = window.neoart.F2Player(null);
-                music.load(this.response);
-                music.loopSong = 1;
-                music.play();
-              } 
-            };
-            xhr.send();
         </script>
     </head>
     <body>

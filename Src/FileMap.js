@@ -33,6 +33,12 @@ FileMap.Audio = [
 	{ Name: 'slide', File: 'Data/Sfx/slide.wav', Volume: 0.5, Loop: false }
 ];
 
+FileMap.Music = [
+	{ Name: 'Surface', File: 'Data/Music/Surface.xm', Volume: 0.5 },
+	{ Name: 'Ruins', File: 'Data/Music/Ruins.xm', Volume: 0.5 },
+	{ Name: 'Landfill', File: 'Data/Music/Landfill.xm', Volume: 0.5 }
+];
+
 FileMap.Enemies = [
 	{ Name: 'Insectoid', Tile: 85 },
 	{ Name: 'Buzzar', Tile: 86 },
