@@ -27,10 +27,10 @@ FileMap.Audio = [
 	{ Name: 'attack_dive_charge', File: 'Data/Sfx/attack_dive_charge.wav', Volume: 0.3, Loop: false },
 	{ Name: 'attack_dive_fall', File: 'Data/Sfx/attack_dive_fall.wav', Volume: 0.3, Loop: true },
 	{ Name: 'attack_dive_land', File: 'Data/Sfx/attack_dive_land.wav', Volume: 0.5, Loop: false },
-	{ Name: 'jump', File: 'Data/Sfx/jump.wav', Volume: 0.5, Loop: false },
+	{ Name: 'jump', File: 'Data/Sfx/jump.wav', Volume: 0.3, Loop: false },
 	{ Name: 'ouch', File: 'Data/Sfx/ouch.wav', Volume: 0.5, Loop: false },
-	{ Name: 'running', File: 'Data/Sfx/runningloop1.wav', Volume: 0.5, Loop: true },
-	{ Name: 'slide', File: 'Data/Sfx/slide.wav', Volume: 0.5, Loop: false }
+	{ Name: 'running', File: 'Data/Sfx/runningloop1.wav', Volume: 0.3, Loop: true },
+	{ Name: 'slide', File: 'Data/Sfx/slide.wav', Volume: 0.3, Loop: false }
 ];
 
 FileMap.Music = [
