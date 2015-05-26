@@ -5,6 +5,7 @@ AudioController = function() {
     events.subscribe('stop_sound', this.StopSound, this);
     events.subscribe('play_music', this.PlayMusic, this);
     events.subscribe('stop_music', this.StopMusic, this);
+    events.subscribe('stop_all_music', this.StopAllMusic, this);
 
     this.sounds = {};
     this.music = {};
@@ -19,14 +20,14 @@ AudioController = function() {
         that.music[music.Name] = {};
 
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'Data/Music/' + music.Name + '.xm', true);
+        xhr.open('GET', music.File, true);
         xhr.responseType = 'arraybuffer';
         xhr.onload = function(e) {
             if(this.status == 200){
                 var uInt8Array = new Uint8Array(this.response);
                 that.music[music.Name] = window.neoart.F2Player(null);
                 that.music[music.Name].load(this.response);
-                that.music[music.Name].loopSong = 1;
+                that.music[music.Name].loopSong = music.Loop ? 1 : 0;
                 that.music[music.Name].volume = music.Volume;
 
                 if(music.Name === 'Surface') {
@@ -78,6 +79,14 @@ AudioController.prototype.StopMusic = function(params) {
 
     }
 };
+
+AudioController.prototype.StopAllMusic = function(params) {
+    for(var key in this.music) {
+        if(!this.music.hasOwnProperty(key)) continue;
+
+        this.music[key].stop();
+    }
+}
 
 //NOTES
 //Each element of the sounds object could be either a clip or an array. If

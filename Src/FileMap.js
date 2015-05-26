@@ -34,9 +34,10 @@ FileMap.Audio = [
 ];
 
 FileMap.Music = [
-	{ Name: 'Surface', File: 'Data/Music/Surface.xm', Volume: 0.5 },
-	{ Name: 'Ruins', File: 'Data/Music/Ruins.xm', Volume: 0.5 },
-	{ Name: 'Landfill', File: 'Data/Music/Landfill.xm', Volume: 0.5 }
+	{ Name: 'Surface', File: 'Data/Music/Surface.xm', Volume: 0.5, Loop: true },
+	{ Name: 'Ruins', File: 'Data/Music/Ruins.xm', Volume: 0.5, Loop: true },
+	{ Name: 'Landfill', File: 'Data/Music/Landfill.xm', Volume: 0.5, Loop: true },
+	{ Name: 'Gameover', File: 'Data/Music/Game Over (Dead Frauki).xm', Volume: 0.5, Loop: false },
 ];
 
 FileMap.Enemies = [

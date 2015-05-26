@@ -293,6 +293,9 @@ Frogland.Restart = function() {
         return;
     }
 
+    events.publish('stop_all_music'); 
+    events.publish('play_music', { name: 'Gameover' } ); 
+
     this.restarting = true;
     game.time.slowMotion = 5;
     var fadeOutTween = game.add.tween(game.world).to({alpha:0}, 500, Phaser.Easing.Linear.None, true);

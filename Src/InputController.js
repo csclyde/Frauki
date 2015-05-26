@@ -47,8 +47,7 @@ InputController = function(player) {
     });
 
     this.testButton.onDown.add(function() { 
-        events.publish('stop_music', { name: 'Surface' } ); 
-        events.publish('stop_music', { name: 'Ruins' } ); 
+        events.publish('stop_all_music');
     });
 
     game.input.gamepad.start();
