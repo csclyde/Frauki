@@ -104,6 +104,12 @@ Player.prototype.postStateUpdate = function() {
         game.physics.arcade.overlap(frauki.attackRect, Frogland.GetCurrentObjectGroup(), EnemyHit);
         game.physics.arcade.overlap(frauki.attackRect, projectileController.projectiles, ProjectileHit);
     }
+    
+    if(this.state === this.Running) {
+        events.publish('play_sound', {name: 'running'});
+    } else {
+        events.publish('stop_sound', {name: 'running'});
+    }
 };
 
 Player.prototype.update = function() {
@@ -217,9 +223,6 @@ Player.prototype.Run = function(params) {
 
 Player.prototype.StartStopRun = function(params) {
     if(params.run) {
-
-        events.publish('play_sound', {name: 'running'});
-
         if(this.state === this.Crouching) {
             this.Roll();
             this.timers.SetTimer('frauki_dash', 200);
@@ -232,8 +235,6 @@ Player.prototype.StartStopRun = function(params) {
         }
 
     } else {
-
-        events.publish('stop_sound', {name: 'running'});
 
         //if(this.state !== this.Rolling)
             //this.body.velocity.x = 0;
