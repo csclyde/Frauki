@@ -48,6 +48,8 @@ AudioController.prototype.PlaySound = function(params) {
 
     if(!!params.name && !!this.sounds[params.name]) {
 
+        if(this.sounds[params.name].isPlaying) return;
+        
         //if this is the damage sound, or an attack sound, stop all attack sounds
         if(params.name.indexOf('ouch') > -1 || params.name.indexOf('attack') > -1) {
             that.sounds['attack_slash'].stop();
