@@ -51,7 +51,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	///////////////////////////////ACTIONS////////////////////////////////////
 	this.Hop = function() {
 
-		if(game.time.now < this.attackTimer)
+		if(game.time.now < this.attackTimer || this.state === this.PreHopping || this.state === this.Hopping || this.state === this.Landing)
 			return;
 
 		this.attackTimer = game.time.now + 300;
@@ -187,11 +187,11 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		this.PlayAnim('hop');
 
 		if(this.body.velocity.y >= 0 || this.body.onFloor()) {
-			//if the hop didnt move us, just scuttle
-			if(this.preHopPos.x > this.body.center.x - 40 && this.preHopPos.x < this.body.center.x + 40 && this.preHopPos.y > this.body.center.y - 40 && this.preHopPos.y < this.body.center.y + 40) {
+
+			if(Math.abs(this.body.center.y - frauki.body.center.y) < 40 && Math.abs(this.body.center.x - frauki.body.center.y) < 400) {
 				this.Scuttle();
-			} else if(Math.abs(this.body.center.y - frauki.body.center.y) < 40 && Math.abs(this.body.center.x - frauki.body.center.y) < 400) {
-				this.Scuttle();
+			} else if(this.body.onFloor()) {
+				this.state = this.Idling;
 			} else {
 				this.state = this.Landing;
 			}
