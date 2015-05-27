@@ -275,7 +275,7 @@ Frogland.GetCurrentCollisionLayer = function() {
 
 Frogland.render = function() {
     //game.debug.body(frauki);
-    //game.debug.body(frauki.attackRect);
+    game.debug.body(frauki.attackRect);
 
     // this.objectGroup_3.forEach(function(o) {
     //     game.debug.body(o);
