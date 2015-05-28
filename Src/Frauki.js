@@ -267,6 +267,8 @@ Player.prototype.Jump = function(params) {
                 this.state = this.Flipping;
                 this.states.hasFlipped = true;
                 this.timers.SetTimer('frauki_grace', 300);
+
+                events.publish('play_sound', {name: 'airhike'});
             }
         }
     } else if(this.body.velocity.y < 0 && this.state !== this.Flipping) {
