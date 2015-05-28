@@ -9,7 +9,7 @@ InputController = function(player) {
 	this.runRight 	= game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
 	this.slash		= game.input.keyboard.addKey(Phaser.Keyboard.Z);
 	this.roll		= game.input.keyboard.addKey(Phaser.Keyboard.X);
-	this.wep	    = game.input.keyboard.addKey(Phaser.Keyboard.C);
+    this.pause      = game.input.keyboard.addKey(Phaser.Keyboard.Q);
 	this.testButton = game.input.keyboard.addKey(Phaser.Keyboard.P);
 
     this.runLeft.onDown.add(function() { events.publish('player_run', {run:true, dir:'left'}); }, this);
@@ -31,22 +31,25 @@ InputController = function(player) {
     }, this);
 
     this.roll.onDown.add(function() {   events.publish('player_roll', null, this)});
-    
-    this.wep.onDown.add(function() { events.publish('activate_weapon', {activate: true}); }, this);
-    this.wep.onUp.add(function() {   events.publish('activate_weapon', {activate: false}); }, this);
 
     this.up.onDown.add(function() { 
         //switch between layers if they are in a doorway
         if(game.physics.arcade.overlap(frauki, Frogland.door1Group)) {
             if(Frogland.currentLayer === 3) Frogland.ChangeLayer(2);
-            else Frogland.ChangeLayer(3);
+            else if(Frogland.currentLayer === 2) Frogland.ChangeLayer(3);
         } else if(game.physics.arcade.overlap(frauki, Frogland.door2Group)) {
             if(Frogland.currentLayer === 3) Frogland.ChangeLayer(4);
-            else Frogland.ChangeLayer(3);
+            else if(Frogland.currentLayer === 4) Frogland.ChangeLayer(3);
         }
     });
 
-    this.testButton.onDown.add(function() { music.stop(); } );
+    this.pause.onDown.add(function() {
+        game.paused = !game.paused;
+    });
+
+    this.testButton.onDown.add(function() { 
+        events.publish('stop_all_music');
+    });
 
     game.input.gamepad.start();
 

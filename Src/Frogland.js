@@ -75,7 +75,7 @@ Frogland.create = function() {
     map.createFromObjects('Doors_1', 67, 'Door', 'Door0000', true, false, this.door1Group, Door, false);
     map.createFromObjects('Doors_2', 67, 'Door', 'Door0000', true, false, this.door2Group, Door, false);
 
-    frauki = new Player(game, 184 * 16, 62 * 16, 'Frauki');
+    frauki = new Player(game, 156 * 16, 54 * 16, 'Frauki');
     game.add.existing(frauki);
     
     this.foregroundLayer_4 = map.createLayer('Foreground_4');
@@ -201,10 +201,10 @@ Frogland.ThunderDome = function(x, y) {
     // }
 
     // if(Math.random() > 0.85) {
-        enem = new Enemy(game, 166 * 16, 89 * 16, enemName);
-        game.add.existing(enem);
-        enem.owningLayer = 3;
-        Frogland['objectGroup_3'].add(enem);
+        // enem = new Enemy(game, 166 * 16, 89 * 16, 'Insectoid');
+        // game.add.existing(enem);
+        // enem.owningLayer = 3;
+        // Frogland['objectGroup_3'].add(enem);
     // }
 };
 
@@ -238,7 +238,6 @@ Frogland.update = function() {
 
     game.physics.arcade.collide(frauki, this.GetCurrentCollisionLayer(), null, this.CheckEnvironmentalCollisions);
     game.physics.arcade.collide(frauki, this.GetCurrentObjectGroup(), this.CollideFraukiWithObject, this.OverlapFraukiWithObject);
-    //game.physics.arcade.overlap(frauki, this.door1Group, this.OverlapFraukiWithDoor);
     game.physics.arcade.collide(this.GetCurrentObjectGroup(), this.GetCurrentCollisionLayer());
 
     game.physics.arcade.overlap(frauki, projectileController.projectiles, this.CollideFraukiWithProjectile);
@@ -255,6 +254,15 @@ Frogland.update = function() {
     this.plx1.tilePosition.y = -(game.camera.y * 0.35);
     this.plx2.tilePosition.x = -(game.camera.x * 0.9);
 
+    if(this.switch1 !== true && frauki.body.center.y > 62 * 16) {
+        events.publish('stop_music', { name: 'Surface' } );
+        this.switch1 = true;
+    }
+
+    if(this.switch2 !== true && frauki.body.center.y > 80 * 16) {
+        events.publish('play_music', { name: 'Ruins' } );
+        this.switch2 = true;
+    }
 };
 
 Frogland.GetCurrentObjectGroup = function() {
@@ -284,6 +292,9 @@ Frogland.Restart = function() {
     if(this.restarting === true) {
         return;
     }
+
+    events.publish('stop_all_music'); 
+    events.publish('play_music', { name: 'Gameover' } ); 
 
     this.restarting = true;
     game.time.slowMotion = 5;
@@ -375,6 +386,7 @@ Frogland.OverlapFraukiWithObject = function(f, o) {
 
         if(o.CanCauseDamage() && o.state !== o.Dying) {
             frauki.Hit(f, o);
+            o.poise = o.initialPoise;
         }
 
         return false;

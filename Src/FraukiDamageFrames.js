@@ -186,7 +186,28 @@ var fraukiDamageFrames = {
 		juggle: 1.5
 	},
 
-	'Attack Dive0021': {
+	'Attack Dive0015': {
+		x: -2, y: 40, w: 13, h: 33,
+		damage: 4,
+		knockback: 1.5,
+		juggle: 1.5
+	},
+
+	'Attack Dive0016': {
+		x: -2, y: 40, w: 13, h: 33,
+		damage: 4,
+		knockback: 1.5,
+		juggle: 1.5
+	},
+
+	'Attack Dive0017': {
+		x: -2, y: 40, w: 13, h: 33,
+		damage: 4,
+		knockback: 1.5,
+		juggle: 1.5
+	},
+
+	'Attack Dive0018': {
 		x: -30, y: -8, w: 70, h: 55,
 		damage: 3,
 		knockback: 1,

@@ -6,7 +6,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
     this.animations.add('idle', ['Insectoid/Hop0000'], 10, true, false);
     this.animations.add('hop', ['Insectoid/Hop0001', 'Insectoid/Hop0002'], 10, false, false);
     this.animations.add('land', ['Insectoid/Hop0003', 'Insectoid/Hop0004'], 10, false, false);
-    this.animations.add('die', ['Insectoid/Hop0000', 'Insectoid/Idle0000', 'Insectoid/Idle0000', 'Insectoid/Idle0000'], 10, false, false);
+    this.animations.add('die', ['Insectoid/Die0000', 'Insectoid/Die0001', 'Insectoid/Die0002', 'Insectoid/Die0003'], 10, false, false);
 
     this.attackTimer = 0;
     this.weight = 0.6;
@@ -51,7 +51,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 	///////////////////////////////ACTIONS////////////////////////////////////
 	this.Hop = function() {
 
-		if(game.time.now < this.attackTimer)
+		if(game.time.now < this.attackTimer || this.state === this.PreHopping || this.state === this.Hopping || this.state === this.Landing)
 			return;
 
 		this.attackTimer = game.time.now + 300;
@@ -132,7 +132,6 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		this.PlayAnim('idle');
 
 		if(this.PlayerIsNear(50)) {
-
 			this.Scuttle();
 		} else if(this.body.center.y < frauki.body.y && this.body.center.x > frauki.body.center.x - 20 && 
 				  this.body.center.x < frauki.body.center.x + 20 && 
@@ -187,11 +186,11 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		this.PlayAnim('hop');
 
 		if(this.body.velocity.y >= 0 || this.body.onFloor()) {
-			//if the hop didnt move us, just scuttle
-			if(this.preHopPos.x > this.body.center.x - 40 && this.preHopPos.x < this.body.center.x + 40 && this.preHopPos.y > this.body.center.y - 40 && this.preHopPos.y < this.body.center.y + 40) {
+
+			if(Math.abs(this.body.center.y - frauki.body.center.y) < 40 && Math.abs(this.body.center.x - frauki.body.center.y) < 400) {
 				this.Scuttle();
-			} else if(Math.abs(this.body.center.y - frauki.body.center.y) < 40 && Math.abs(this.body.center.x - frauki.body.center.y) < 400) {
-				this.Scuttle();
+			} else if(this.body.onFloor()) {
+				this.state = this.Idling;
 			} else {
 				this.state = this.Landing;
 			}

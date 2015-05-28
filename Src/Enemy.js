@@ -110,7 +110,7 @@ Enemy.prototype.update = function() {
         this.energy = this.maxEnergy;
 
     if(this.timers.TimerUp('poise_ticker')) {
-        this.poise += 0.05;
+        //this.poise += 0.05;
         this.timers.SetTimer('poise_ticker', 200);
     }
 
@@ -187,14 +187,12 @@ function EnemyHit(f, e) {
 
     e.body.velocity.y = -100 + (frauki.currentAttack.juggle * -400);
 
-    console.log(e.xHitVel + ' : ' + e.body.velocity.y);
-
     events.publish('camera_shake', {magnitudeX: 15 * frauki.currentAttack.damage, magnitudeY: 5, duration: 100});
 
     e.timers.SetTimer('hit', e.baseStunDuration);
     e.energy -= frauki.currentAttack.damage;
 
-    e.poise -= frauki.currentAttack.damage;
+    e.poise -= frauki.currentAttack.damage * 2;
 
     if(e.energy <= 0) {
 
@@ -214,7 +212,7 @@ function EnemyHit(f, e) {
         energyController.AddEnergy(frauki.currentAttack.damage);
         e.TakeHit();
 
-        if(e.GetPoisePercentage() < 0.1) {
+        if(e.GetPoisePercentage() < 0.2) {
             //send it flying
             e.body.velocity.y = -600;
             e.body.velocity.x = c * 700;
@@ -255,11 +253,12 @@ Enemy.prototype.PlayerIsVisible = function() {
     var ray = new Phaser.Line(frauki.body.center.x, frauki.body.center.y, this.body.center.x, this.body.center.y);
     var collideTiles = Frogland.GetCurrentCollisionLayer().getRayCastTiles(ray, 1, true);
 
-    if(collideTiles.length === 0) {
-        return true;
-    } else {
-        return false;
+    var i = collideTiles.length;
+    while(i--) {
+        if(collideTiles[i].index === 1) return true;
     }
+
+    return false;
 };
 
 Enemy.prototype.PlayerDirection = function() {
