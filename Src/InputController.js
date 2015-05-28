@@ -36,10 +36,10 @@ InputController = function(player) {
         //switch between layers if they are in a doorway
         if(game.physics.arcade.overlap(frauki, Frogland.door1Group)) {
             if(Frogland.currentLayer === 3) Frogland.ChangeLayer(2);
-            else Frogland.ChangeLayer(3);
+            else if(Frogland.currentLayer === 2) Frogland.ChangeLayer(3);
         } else if(game.physics.arcade.overlap(frauki, Frogland.door2Group)) {
             if(Frogland.currentLayer === 3) Frogland.ChangeLayer(4);
-            else Frogland.ChangeLayer(3);
+            else if(Frogland.currentLayer === 4) Frogland.ChangeLayer(3);
         }
     });
 
