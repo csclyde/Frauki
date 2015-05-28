@@ -132,7 +132,6 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		this.PlayAnim('idle');
 
 		if(this.PlayerIsNear(50)) {
-
 			this.Scuttle();
 		} else if(this.body.center.y < frauki.body.y && this.body.center.x > frauki.body.center.x - 20 && 
 				  this.body.center.x < frauki.body.center.x + 20 && 

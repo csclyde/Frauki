@@ -187,8 +187,6 @@ function EnemyHit(f, e) {
 
     e.body.velocity.y = -100 + (frauki.currentAttack.juggle * -400);
 
-    console.log(e.xHitVel + ' : ' + e.body.velocity.y);
-
     events.publish('camera_shake', {magnitudeX: 15 * frauki.currentAttack.damage, magnitudeY: 5, duration: 100});
 
     e.timers.SetTimer('hit', e.baseStunDuration);
