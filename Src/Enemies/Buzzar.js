@@ -5,6 +5,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
 
     this.animations.add('idle', ['Buzzar/Idle0000', 'Buzzar/Idle0001'], 20, true, false);
     this.animations.add('sting', ['Buzzar/Attack0000', 'Buzzar/Attack0001'], 20, false, false);
+    this.animations.add('hurt', ['Buzzar/Hurt0000'], 20, true, false);
 
     this.wanderDirection = 'left';
 
@@ -66,9 +67,11 @@ Enemy.prototype.types['Buzzar'] =  function() {
         //a durability stat should modify how long they are stunned for. also, the amount of dmg
         this.hitTimer = game.time.now + 800;
 
-        this.state = this.Hurting;
-
         if(this.anger < 4) this.anger++;
+
+        if(this.state === this.Stinging || this.state === this.PreStinging) {
+        	this.state = this.Idling;
+        }
     };
 
     this.Die = function() {
@@ -127,8 +130,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
     };
 
     this.Hurting = function() {
-
-        console.log('we hurtin');
+    	this.PlayAnim('hurt');
 
         this.body.allowGravity = true;
         this.body.gravity.y = game.physics.arcade.gravity.y * 2;
@@ -145,6 +147,8 @@ Enemy.prototype.types['Buzzar'] =  function() {
     };
 
     this.Creepin = function() {
+    	this.PlayAnim('idle');
+
         if(!this.PlayerIsVisible()) {
             this.state = this.Idling;
         }

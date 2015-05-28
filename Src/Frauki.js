@@ -331,7 +331,7 @@ Player.prototype.Slash = function(params) {
             events.publish('play_sound', {name: 'attack_slash'});
         }
     } else {
-        console.log('An attack was attempted in an unresolved state ' + this.state);
+        console.log('An attack was attempted in an unresolved state ', this.state);
     }
 };
 
