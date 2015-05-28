@@ -253,11 +253,12 @@ Enemy.prototype.PlayerIsVisible = function() {
     var ray = new Phaser.Line(frauki.body.center.x, frauki.body.center.y, this.body.center.x, this.body.center.y);
     var collideTiles = Frogland.GetCurrentCollisionLayer().getRayCastTiles(ray, 1, true);
 
-    if(collideTiles.length === 0) {
-        return true;
-    } else {
-        return false;
+    var i = collideTiles.length;
+    while(i--) {
+        if(collideTiles[i].index === 1) return true;
     }
+
+    return false;
 };
 
 Enemy.prototype.PlayerDirection = function() {

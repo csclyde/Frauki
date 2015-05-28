@@ -201,10 +201,10 @@ Frogland.ThunderDome = function(x, y) {
     // }
 
     // if(Math.random() > 0.85) {
-        enem = new Enemy(game, 166 * 16, 89 * 16, 'Insectoid');
-        game.add.existing(enem);
-        enem.owningLayer = 3;
-        Frogland['objectGroup_3'].add(enem);
+        // enem = new Enemy(game, 166 * 16, 89 * 16, 'Insectoid');
+        // game.add.existing(enem);
+        // enem.owningLayer = 3;
+        // Frogland['objectGroup_3'].add(enem);
     // }
 };
 
