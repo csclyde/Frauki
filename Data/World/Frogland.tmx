@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="500" tilewidth="16" tileheight="16" nextobjectid="90">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="500" tilewidth="16" tileheight="16">
  <tileset firstgid="1" name="Collision" tilewidth="16" tileheight="16">
   <image source="../CollisionKey.png" width="128" height="128"/>
  </tileset>
@@ -49,36 +49,36 @@
   </data>
  </layer>
  <objectgroup name="Objects_2" visible="0">
-  <object id="1" gid="89" x="2353" y="2720" width="16" height="16"/>
-  <object id="2" gid="89" x="2563" y="2720" width="16" height="16">
+  <object gid="89" x="2353" y="2720" width="16" height="16"/>
+  <object gid="89" x="2563" y="2720" width="16" height="16">
    <properties>
     <property name="clingWall" value="right"/>
    </properties>
   </object>
-  <object id="3" gid="89" x="2531" y="4028" width="16" height="16"/>
-  <object id="4" gid="89" x="2260" y="3665" width="16" height="16"/>
-  <object id="5" gid="89" x="2275" y="3754" width="16" height="16"/>
-  <object id="6" gid="89" x="2053" y="3927" width="16" height="16"/>
-  <object id="7" gid="85" x="899" y="3929" width="16" height="16"/>
-  <object id="8" gid="66" x="689" y="3766" width="16" height="16"/>
-  <object id="9" gid="85" x="2028" y="4635" width="16" height="16"/>
-  <object id="10" gid="85" x="1808" y="4637" width="16" height="16"/>
-  <object id="11" gid="66" x="1799" y="3602" width="16" height="16"/>
-  <object id="12" gid="87" x="1365" y="4253" width="16" height="16"/>
-  <object id="13" gid="89" x="1278" y="4270" width="16" height="16"/>
-  <object id="14" gid="89" x="1274" y="4227" width="16" height="16"/>
-  <object id="15" gid="89" x="1241" y="4227" width="16" height="16"/>
-  <object id="16" gid="89" x="1244" y="4270" width="16" height="16"/>
-  <object id="17" gid="89" x="1209" y="4272" width="16" height="16"/>
-  <object id="18" gid="89" x="1208" y="4228" width="16" height="16"/>
-  <object id="19" gid="89" x="1323" y="4268" width="16" height="16"/>
-  <object id="20" gid="89" x="1316" y="4229" width="16" height="16"/>
-  <object id="21" gid="86" x="788" y="4322" width="16" height="16"/>
-  <object id="22" gid="86" x="921" y="4283" width="16" height="16"/>
-  <object id="23" gid="88" x="217" y="4370" width="16" height="16"/>
-  <object id="24" gid="87" x="398" y="4078" width="16" height="16"/>
-  <object id="25" gid="85" x="1418" y="3438" width="16" height="16"/>
-  <object id="60" type="Trigger" x="-3.0303" y="75.7576" width="242.424" height="254.545">
+  <object gid="89" x="2531" y="4028" width="16" height="16"/>
+  <object gid="89" x="2260" y="3665" width="16" height="16"/>
+  <object gid="89" x="2275" y="3754" width="16" height="16"/>
+  <object gid="89" x="2053" y="3927" width="16" height="16"/>
+  <object gid="85" x="899" y="3929" width="16" height="16"/>
+  <object gid="66" x="689" y="3766" width="16" height="16"/>
+  <object gid="85" x="2028" y="4635" width="16" height="16"/>
+  <object gid="85" x="1808" y="4637" width="16" height="16"/>
+  <object gid="66" x="1799" y="3602" width="16" height="16"/>
+  <object gid="87" x="1365" y="4253" width="16" height="16"/>
+  <object gid="89" x="1278" y="4270" width="16" height="16"/>
+  <object gid="89" x="1274" y="4227" width="16" height="16"/>
+  <object gid="89" x="1241" y="4227" width="16" height="16"/>
+  <object gid="89" x="1244" y="4270" width="16" height="16"/>
+  <object gid="89" x="1209" y="4272" width="16" height="16"/>
+  <object gid="89" x="1208" y="4228" width="16" height="16"/>
+  <object gid="89" x="1323" y="4268" width="16" height="16"/>
+  <object gid="89" x="1316" y="4229" width="16" height="16"/>
+  <object gid="86" x="788" y="4322" width="16" height="16"/>
+  <object gid="86" x="921" y="4283" width="16" height="16"/>
+  <object gid="88" x="217" y="4370" width="16" height="16"/>
+  <object gid="87" x="398" y="4078" width="16" height="16"/>
+  <object gid="85" x="1418" y="3438" width="16" height="16"/>
+  <object type="Trigger" x="-3.0303" y="75.7576" width="242.424" height="254.545">
    <properties>
     <property name="Condition" value=""/>
     <property name="Effect" value=""/>
@@ -106,56 +106,30 @@
   </data>
  </layer>
  <objectgroup name="Objects_3">
-  <object id="53" gid="85" x="2635" y="1435" width="16" height="16"/>
-  <object id="63" gid="87" x="2025" y="1110" width="16" height="16"/>
-  <object id="64" gid="89" x="1983" y="1581" width="16" height="16"/>
-  <object id="65" gid="89" x="1967" y="1544" width="16" height="16"/>
-  <object id="66" gid="89" x="2078" y="1572" width="16" height="16"/>
-  <object id="67" gid="85" x="2192" y="1683" width="16" height="16"/>
-  <object id="69" gid="86" x="2262" y="1460" width="16" height="16"/>
-  <object id="70" gid="86" x="1684" y="1475" width="16" height="16"/>
-  <object id="71" gid="86" x="1770" y="1485" width="16" height="16"/>
-  <object id="72" gid="89" x="1706" y="1227" width="16" height="16"/>
-  <object id="73" gid="89" x="1733" y="1227" width="16" height="16"/>
-  <object id="74" gid="89" x="1763" y="1228" width="16" height="16"/>
-  <object id="75" gid="89" x="1758" y="1168" width="16" height="16"/>
-  <object id="76" gid="89" x="1736" y="1170" width="16" height="16"/>
-  <object id="77" gid="89" x="1709" y="1168" width="16" height="16"/>
-  <object id="78" gid="91" x="1474" y="883" width="16" height="16"/>
-  <object id="79" gid="85" x="1391" y="1037" width="16" height="16"/>
-  <object id="80" gid="86" x="1085" y="1117" width="16" height="16"/>
-  <object id="81" gid="89" x="1302" y="1287" width="16" height="16"/>
-  <object id="82" gid="89" x="1300" y="1259" width="16" height="16"/>
-  <object id="83" gid="86" x="1493" y="1591" width="16" height="16"/>
-  <object id="84" gid="85" x="1679" y="1705" width="16" height="16"/>
-  <object id="85" gid="86" x="2718" y="1643" width="16" height="16"/>
-  <object id="86" gid="86" x="2954" y="1640" width="16" height="16"/>
-  <object id="87" gid="86" x="2868" y="1641" width="16" height="16"/>
-  <object id="88" gid="85" x="1783" y="2430" width="16" height="16"/>
-  <object id="89" gid="85" x="1676" y="2422" width="16" height="16"/>
+  <object gid="86" x="2624" y="1280"/>
  </objectgroup>
  <objectgroup name="Doors_1" visible="0">
-  <object id="26" gid="67" x="470" y="3088" width="16" height="16">
+  <object gid="67" x="470" y="3088" width="16" height="16">
    <properties>
     <property name="firstLayer" value="2"/>
     <property name="secondLayer" value="3"/>
    </properties>
   </object>
-  <object id="27" gid="67" x="790" y="3538" width="16" height="16"/>
-  <object id="28" gid="67" x="1549" y="3980" width="16" height="16"/>
-  <object id="29" gid="67" x="2573" y="3981" width="16" height="16"/>
-  <object id="30" gid="67" x="2171" y="4208" width="16" height="16"/>
-  <object id="31" gid="67" x="2071" y="3215" width="16" height="16"/>
-  <object id="32" gid="67" x="678" y="4179" width="16" height="16"/>
-  <object id="33" gid="67" x="384" y="4510" width="16" height="16"/>
-  <object id="34" gid="67" x="2840" y="3211" width="16" height="16"/>
-  <object id="35" gid="67" x="1544" y="4036" width="16" height="16"/>
-  <object id="38" gid="67" x="2384" y="1424" width="16" height="16"/>
-  <object id="40" gid="67" x="1652" y="1571" width="16" height="16"/>
-  <object id="41" gid="67" x="528" y="934" width="16" height="16"/>
-  <object id="42" gid="67" x="342.667" y="2584" width="16" height="16"/>
-  <object id="43" gid="67" x="2823" y="1478.67" width="16" height="16"/>
-  <object id="62" gid="67" x="1582" y="2197" width="16" height="16"/>
+  <object gid="67" x="790" y="3538" width="16" height="16"/>
+  <object gid="67" x="1549" y="3980" width="16" height="16"/>
+  <object gid="67" x="2573" y="3981" width="16" height="16"/>
+  <object gid="67" x="2171" y="4208" width="16" height="16"/>
+  <object gid="67" x="2071" y="3215" width="16" height="16"/>
+  <object gid="67" x="678" y="4179" width="16" height="16"/>
+  <object gid="67" x="384" y="4510" width="16" height="16"/>
+  <object gid="67" x="2840" y="3211" width="16" height="16"/>
+  <object gid="67" x="1544" y="4036" width="16" height="16"/>
+  <object gid="67" x="2384" y="1424" width="16" height="16"/>
+  <object gid="67" x="1652" y="1571" width="16" height="16"/>
+  <object gid="67" x="528" y="934" width="16" height="16"/>
+  <object gid="67" x="342.667" y="2584" width="16" height="16"/>
+  <object gid="67" x="2823" y="1478.67" width="16" height="16"/>
+  <object gid="67" x="1582" y="2197" width="16" height="16"/>
  </objectgroup>
  <layer name="Background_4" width="200" height="500" visible="0">
   <data encoding="base64" compression="zlib">
@@ -179,8 +153,8 @@
  </layer>
  <objectgroup name="Objects_4" visible="0"/>
  <objectgroup name="Doors_2" visible="0">
-  <object id="49" gid="67" x="730.636" y="2388.56" width="16" height="16"/>
-  <object id="50" gid="67" x="780.636" y="1607.56" width="16" height="16"/>
-  <object id="61" gid="67" x="3081" y="2111.5" width="16" height="16"/>
+  <object gid="67" x="730.636" y="2388.56" width="16" height="16"/>
+  <object gid="67" x="780.636" y="1607.56" width="16" height="16"/>
+  <object gid="67" x="3081" y="2111.5" width="16" height="16"/>
  </objectgroup>
 </map>

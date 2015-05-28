@@ -77,6 +77,8 @@ EnergyController.prototype.AddEnergy = function(amt) {
 };
 
 EnergyController.prototype.RemoveEnergy = function(amt) {
+	return;
+	
 	amt = amt || 7;
 
 	//this.energy -= (amt / 5);

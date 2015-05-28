@@ -255,10 +255,10 @@ Enemy.prototype.PlayerIsVisible = function() {
 
     var i = collideTiles.length;
     while(i--) {
-        if(collideTiles[i].index === 1) return true;
+        if(collideTiles[i].index === 1) return false;
     }
 
-    return false;
+    return true;
 };
 
 Enemy.prototype.PlayerDirection = function() {

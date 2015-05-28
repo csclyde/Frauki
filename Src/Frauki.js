@@ -524,6 +524,9 @@ Player.prototype.Rolling = function() {
 
             this.tweens.roll.stop();
             this.movement.rollVelocity = 0;
+
+            //add a little boost to their jump
+            this.body.velocity.y -= 50;
         } else {
             this.state = this.Jumping;
         }
