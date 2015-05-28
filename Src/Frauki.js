@@ -290,7 +290,7 @@ Player.prototype.Slash = function(params) {
         if(energyController.UseEnergy(8)) {
             this.state = this.AttackDiveCharge;
             this.movement.diveVelocity = 950;
-            events.publish('play_sound', {name: 'attack_dive_charge'});
+            events.publish('play_sound', {name: 'attack_dive_charge', restart: true });
         }
     }
     //running dash
@@ -304,7 +304,7 @@ Player.prototype.Slash = function(params) {
             this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: dir * PLAYER_RUN_SLASH_SPEED()}, 300, Phaser.Easing.Exponential.InOut, false).to({rollVelocity: 0}, 500, Phaser.Easing.Exponential.InOut, false);
             this.tweens.roll.start();
 
-            events.publish('play_sound', {name: 'attack_stab'});
+            events.publish('play_sound', {name: 'attack_stab', restart: true });
             
         }
     }
@@ -316,7 +316,7 @@ Player.prototype.Slash = function(params) {
             game.add.tween(this.movement).to({jumpSlashVelocity:0}, 400, Phaser.Easing.Quartic.Out, true);
             this.states.hasFlipped = true;
     
-            events.publish('play_sound', {name: 'attack_slash'});
+            events.publish('play_sound', {name: 'attack_slash', restart: true });
         }
     }
     //normal slashes while standing or running
@@ -328,7 +328,7 @@ Player.prototype.Slash = function(params) {
                 this.state = this.AttackFront;
             }
 
-            events.publish('play_sound', {name: 'attack_slash'});
+            events.publish('play_sound', {name: 'attack_slash', restart: true });
         }
     } else {
         console.log('An attack was attempted in an unresolved state ', this.state);
