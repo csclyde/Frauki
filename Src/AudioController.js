@@ -48,7 +48,8 @@ AudioController.prototype.PlaySound = function(params) {
 
     if(!!params.name && !!this.sounds[params.name]) {
 
-        if(this.sounds[params.name].isPlaying) return;
+        //if the sound is already playing and they dont want to start it over
+        if(this.sounds[params.name].isPlaying && params.restart !== true) return;
         
         //if this is the damage sound, or an attack sound, stop all attack sounds
         if(params.name.indexOf('ouch') > -1 || params.name.indexOf('attack') > -1) {
