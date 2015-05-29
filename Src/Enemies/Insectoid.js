@@ -48,6 +48,10 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		}
 	}
 
+	this.TakeHit = function() {
+		events.publish('play_sound', { name: 'insectoid_hurt' });
+	}
+
 	///////////////////////////////ACTIONS////////////////////////////////////
 	this.Hop = function() {
 
@@ -61,6 +65,8 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
 		this.preHopPos.x = this.body.center.x;
 		this.preHopPos.y = this.body.center.y;
+
+		events.publish('play_sound', { name: 'insectoid_jump' });
 	};
 
 	this.Scuttle = function() {
@@ -76,6 +82,8 @@ Enemy.prototype.types['Insectoid'] =  function() {
 		this.attackTimer = game.time.now + 400;
 		this.squashTween = game.add.tween(this.scale).to({x: this.GetDirMod() * 0.7}, 300, Phaser.Easing.Exponential.Out, true);
 		this.state = this.PreScuttling;
+
+		events.publish('play_sound', { name: 'insectoid_slide' });
 		
 	};
 
@@ -194,6 +202,8 @@ Enemy.prototype.types['Insectoid'] =  function() {
 			} else {
 				this.state = this.Landing;
 			}
+
+			events.publish('play_sound', { name: 'insectoid_land' });
 		}
 	};
 

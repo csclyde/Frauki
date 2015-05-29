@@ -194,6 +194,8 @@ function EnemyHit(f, e) {
 
     e.poise -= frauki.currentAttack.damage * 2;
 
+    events.publish('play_sound', { name: 'attack_connect' });
+
     if(e.energy <= 0) {
 
         Frogland.ThunderDome(e.x, e.y);

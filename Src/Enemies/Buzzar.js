@@ -48,6 +48,8 @@ Enemy.prototype.types['Buzzar'] =  function() {
 
         this.state = this.PreStinging;
         this.squashTween = game.add.tween(this.scale).to({y: 0.7}, 300, Phaser.Easing.Exponential.Out, true);
+
+        events.publish('play_sound', { name: 'buzzar_sting' });
     };
 
     this.ChangeDirection = function() {
@@ -72,6 +74,8 @@ Enemy.prototype.types['Buzzar'] =  function() {
         if(this.state === this.Stinging || this.state === this.PreStinging) {
         	this.state = this.Idling;
         }
+
+        events.publish('play_sound', { name: 'buzzar_hurt' });
     };
 
     this.Die = function() {
@@ -82,6 +86,8 @@ Enemy.prototype.types['Buzzar'] =  function() {
     ////////////////////////////////STATES////////////////////////////////////
     this.Idling = function() {
         this.PlayAnim('idle');
+
+        events.publish('play_sound', { name: 'buzzar_idle' });
         
         this.body.velocity.y = Math.sin(game.time.now / 250) * 100 + (Math.random() * 40 - 20);
         //this.body.velocity.x = Math.sin(game.time.now / 1000) * 20;

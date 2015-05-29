@@ -27,11 +27,21 @@ FileMap.Audio = [
 	{ Name: 'attack_dive_charge', File: 'Data/Sfx/attack_dive_charge.wav', Volume: 0.3, Loop: false },
 	{ Name: 'attack_dive_fall', File: 'Data/Sfx/attack_dive_fall.wav', Volume: 0.3, Loop: true },
 	{ Name: 'attack_dive_land', File: 'Data/Sfx/attack_dive_land.wav', Volume: 0.5, Loop: false },
+	{ Name: 'attack_connect', File: 'Data/Sfx/attack_connect.wav', Volume: 0.3, Loop: false },
+
 	{ Name: 'jump', File: 'Data/Sfx/jump.wav', Volume: 0.3, Loop: false },
 	{ Name: 'ouch', File: 'Data/Sfx/ouch.wav', Volume: 0.5, Loop: false },
-	{ Name: 'running', File: 'Data/Sfx/runningloop1.wav', Volume: 0.3, Loop: true },
+	{ Name: 'running', File: 'Data/Sfx/run.wav', Volume: 0.3, Loop: true },
 	{ Name: 'slide', File: 'Data/Sfx/slide.wav', Volume: 0.3, Loop: false },
-	{ Name: 'airhike', File: 'Data/Sfx/airhike.wav', Volume: 0.3, Loop: false }
+	{ Name: 'airhike', File: 'Data/Sfx/airhike.wav', Volume: 0.3, Loop: false },
+
+	{ Name: 'buzzar_hurt', File: 'Data/Sfx/buzzar_hurt.wav', Volume: 0.3, Loop: false },
+	{ Name: 'buzzar_idle', File: 'Data/Sfx/buzzar_idle.wav', Volume: 0.3, Loop: false },
+	{ Name: 'buzzar_sting', File: 'Data/Sfx/buzzar_sting.wav', Volume: 0.3, Loop: false },
+	{ Name: 'insectoid_hurt', File: 'Data/Sfx/insectoid_hurt.wav', Volume: 0.3, Loop: false },
+	{ Name: 'insectoid_jump', File: 'Data/Sfx/insectoid_jump.wav', Volume: 0.3, Loop: false },
+	{ Name: 'insectoid_land', File: 'Data/Sfx/insectoid_land.wav', Volume: 0.3, Loop: false },
+	{ Name: 'insectoid_slide', File: 'Data/Sfx/insectoid_slide.wav', Volume: 0.3, Loop: false }
 ];
 
 FileMap.Music = [
