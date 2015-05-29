@@ -52,7 +52,7 @@ AudioController.prototype.PlaySound = function(params) {
         if(this.sounds[params.name].isPlaying && params.restart !== true) return;
         
         //if this is the damage sound, or an attack sound, stop all attack sounds
-        if(params.name.indexOf('ouch') > -1 || params.name.indexOf('attack') > -1) {
+        if((params.name.indexOf('ouch') > -1 || params.name.indexOf('attack') > -1) && params.name !== 'attack_connect') {
             that.sounds['attack_slash'].stop();
             that.sounds['attack_stab'].stop();
             that.sounds['attack_dive_charge'].stop();
