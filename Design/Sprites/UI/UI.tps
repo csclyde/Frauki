@@ -4,9 +4,9 @@
         <key>fileFormatVersion</key>
         <int>3</int>
         <key>texturePackerVersion</key>
-        <string>3.7.1</string>
+        <string>3.8.0</string>
         <key>fileName</key>
-        <string>C:/Users/user/Documents/gamedev/Frauki/Data/UI/UI.tps</string>
+        <string>D:/gamedev/Frauki/Design/Sprites/UI/UI.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -38,7 +38,7 @@
         <key>dataFormat</key>
         <string>json</string>
         <key>textureFileName</key>
-        <filename>UI.png</filename>
+        <filename>../../../Data/Sprites/UI.png</filename>
         <key>flipPVR</key>
         <false/>
         <key>pvrCompressionQuality</key>
@@ -145,7 +145,7 @@
             <key>data</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>UI.json</filename>
+                <filename>../../../Data/Sprites/UI.json</filename>
             </struct>
         </map>
         <key>multiPack</key>

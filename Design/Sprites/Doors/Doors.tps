@@ -4,9 +4,9 @@
         <key>fileFormatVersion</key>
         <int>3</int>
         <key>texturePackerVersion</key>
-        <string>3.7.1</string>
+        <string>3.8.0</string>
         <key>fileName</key>
-        <string>C:/Users/user/Documents/gamedev/Frauki/Data/Misc/Misc.tps</string>
+        <string>D:/gamedev/Frauki/Design/Sprites/Doors/Doors.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -28,7 +28,7 @@
             </struct>
         </array>
         <key>allowRotation</key>
-        <false/>
+        <true/>
         <key>premultiplyAlpha</key>
         <false/>
         <key>shapeDebug</key>
@@ -38,7 +38,7 @@
         <key>dataFormat</key>
         <string>json</string>
         <key>textureFileName</key>
-        <filename>Misc.png</filename>
+        <filename>../../../Data/Sprites/Doors.png</filename>
         <key>flipPVR</key>
         <false/>
         <key>pvrCompressionQuality</key>
@@ -74,7 +74,7 @@
         <key>jpgQuality</key>
         <uint>80</uint>
         <key>pngOptimizationLevel</key>
-        <uint>0</uint>
+        <uint>1</uint>
         <key>webpQualityLevel</key>
         <uint>101</uint>
         <key>textureSubPath</key>
@@ -145,7 +145,7 @@
             <key>data</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>Misc.json</filename>
+                <filename>../../../Data/Sprites/Doors.json</filename>
             </struct>
         </map>
         <key>multiPack</key>
@@ -162,7 +162,7 @@
         <key>autoAliasEnabled</key>
         <true/>
         <key>trimSpriteNames</key>
-        <true/>
+        <false/>
         <key>prependSmartFolderName</key>
         <false/>
         <key>cleanTransparentPixels</key>
@@ -180,7 +180,7 @@
             <key>trimThreshold</key>
             <uint>1</uint>
             <key>trimMode</key>
-            <enum type="SpriteSettings::TrimMode">CropKeepPos</enum>
+            <enum type="SpriteSettings::TrimMode">Trim</enum>
             <key>heuristicMask</key>
             <false/>
             <key>pivotPoint</key>
@@ -188,43 +188,7 @@
         </struct>
         <key>fileList</key>
         <array>
-            <filename>Frames/AngelKiss0002.png</filename>
-            <filename>Frames/AngelKiss0003.png</filename>
-            <filename>Frames/AngelKiss0004.png</filename>
-            <filename>Frames/AngelKiss0005.png</filename>
-            <filename>Frames/AngelKiss0006.png</filename>
-            <filename>Frames/Apple0000.png</filename>
-            <filename>Frames/Apple0001.png</filename>
-            <filename>Frames/EnergyBitNeg0000.png</filename>
-            <filename>Frames/EnergyBitNeg0001.png</filename>
-            <filename>Frames/EnergyBitNeg0002.png</filename>
-            <filename>Frames/EnergyBitNeg0003.png</filename>
-            <filename>Frames/EnergyBitNeg0004.png</filename>
-            <filename>Frames/EnergyBitNeg0005.png</filename>
-            <filename>Frames/EnergyBitPos0000.png</filename>
-            <filename>Frames/EnergyBitPos0001.png</filename>
-            <filename>Frames/EnergyBitPos0002.png</filename>
-            <filename>Frames/EnergyBitPos0003.png</filename>
-            <filename>Frames/EnergyBitPos0004.png</filename>
-            <filename>Frames/EnergyBitPos0005.png</filename>
-            <filename>Frames/Fluff0000.png</filename>
-            <filename>Frames/Heart0000.png</filename>
-            <filename>Frames/Heart0001.png</filename>
-            <filename>Frames/JumpDust0000.png</filename>
-            <filename>Frames/JumpDust0001.png</filename>
-            <filename>Frames/JumpDust0002.png</filename>
-            <filename>Frames/JumpDust0003.png</filename>
-            <filename>Frames/JumpDust0004.png</filename>
-            <filename>Frames/JumpDust0005.png</filename>
-            <filename>Frames/JumpDust0006.png</filename>
-            <filename>Frames/RunDust0000.png</filename>
-            <filename>Frames/RunDust0001.png</filename>
-            <filename>Frames/RunDust0002.png</filename>
-            <filename>Frames/RunDust0003.png</filename>
-            <filename>Frames/Splash0000.png</filename>
-            <filename>Frames/Splash0001.png</filename>
-            <filename>Frames/AngelKiss0000.png</filename>
-            <filename>Frames/AngelKiss0001.png</filename>
+            <filename>Frames/Door0000.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

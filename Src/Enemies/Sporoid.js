@@ -19,7 +19,7 @@ Enemy.prototype.types['Sporoid'] =  function() {
     this.damage = 3;
 
     this.Spore = game.add.emitter(0, 0, 100);
-	this.Spore.makeParticles('Spore');
+	this.Spore.makeParticles('Misc', 'spore0000');
     this.Spore.gravity = -775;
 
     this.Spore.maxParticleScale = 0.4;
