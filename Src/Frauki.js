@@ -510,6 +510,8 @@ Player.prototype.Flipping = function() {
 
 Player.prototype.Rolling = function() {
     this.PlayAnim('roll');
+    
+    console.log(frauki.body.velocity.x);
 
     this.body.maxVelocity.x = this.movement.rollVelocity;
     this.body.velocity.x = this.movement.rollVelocity;
