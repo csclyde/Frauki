@@ -75,7 +75,7 @@ Frogland.create = function() {
     map.createFromObjects('Doors_1', 67, 'Door', 'Door0000', true, false, this.door1Group, Door, false);
     map.createFromObjects('Doors_2', 67, 'Door', 'Door0000', true, false, this.door2Group, Door, false);
 
-    frauki = new Player(game, 156 * 16, 54 * 16, 'Frauki');
+    frauki = new Player(game, 50 * 16, 45 * 16, 'Frauki');
     game.add.existing(frauki);
     
     this.foregroundLayer_4 = map.createLayer('Foreground_4');

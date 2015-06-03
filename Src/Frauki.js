@@ -351,10 +351,13 @@ Player.prototype.Roll = function(params) {
     var dir = this.GetDirectionMultiplier();
 
     this.movement.rollVelocity = dir * PLAYER_SPEED();
-    this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: dir * PLAYER_ROLL_SPEED()}, 50, Phaser.Easing.Exponential.In, false).to({rollVelocity: dir * PLAYER_SPEED()}, 300, Phaser.Easing.Quartic.In, false);
-    this.tweens.roll.start();
+    //this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: dir * PLAYER_ROLL_SPEED()}, 50, Phaser.Easing.Exponential.In, false).to({rollVelocity: dir * PLAYER_SPEED()}, 300, Phaser.Easing.Quartic.In, false);
+    //this.tweens.roll.start();
+    this.body.velocity.x = PLAYER_SPEED() * this.GetDirectionMultiplier();
 
-    this.body.acceleration.x = 0;
+    this.movement.rollStage = 0;
+    this.movement.rollDirection = this.GetDirectionMultiplier();
+    this.movement.rollStart = game.time.now;
 
     this.timers.SetTimer('frauki_roll', 650);
     this.timers.SetTimer('frauki_grace', 300);
@@ -383,7 +386,6 @@ Player.prototype.Hit = function(f, e) {
 };
 
 //////////////////STATES/////////////////
-
 Player.prototype.Standing = function() {
     this.PlayAnim('stand');
 
@@ -511,10 +513,36 @@ Player.prototype.Flipping = function() {
 Player.prototype.Rolling = function() {
     this.PlayAnim('roll');
     
-    console.log(frauki.body.velocity.x);
+    console.log(this.body.velocity.x);
 
-    this.body.maxVelocity.x = this.movement.rollVelocity;
-    this.body.velocity.x = this.movement.rollVelocity;
+    this.body.maxVelocity.x = PLAYER_ROLL_SPEED();
+
+    var dur = game.time.now - this.movement.rollStart;
+    var accelMod = 0;
+
+    if(inputController.runLeft.isDown && !inputController.runRight.isDown) {
+        accelMod = -500;
+    } else if(!inputController.runLeft.isDown && inputController.runRight.isDown) {
+        accelMod = 500;
+    }
+
+    //pickup stage
+    if(Math.abs(this.body.velocity.x) < PLAYER_ROLL_SPEED() && this.movement.rollStage === 0) {
+        dur /= 130;
+        this.body.acceleration.x = this.movement.rollDirection * 5000 * game.math.catmullRomInterpolation([0, 0.7, 1, 1, 0.7, 0], dur);
+        this.body.acceleration.x += accelMod;
+
+    //ready to switch to release
+    } else if(Math.abs(this.body.velocity.x) == PLAYER_ROLL_SPEED() && this.movement.rollStage === 0) {
+        this.movement.rollStage = 1;
+        this.movement.rollStart = game.time.now;
+
+    //release stage
+    } else if(this.movement.rollStage === 1) {
+        dur /= 300;
+        this.body.acceleration.x = this.movement.rollDirection * 1800 * -1 * game.math.catmullRomInterpolation([0, 0.7, 1, 1, 0.7, 0], dur);
+        this.body.acceleration.x += accelMod;
+    }
     
     if(this.body.velocity.y < 0) {
         if(energyController.UseEnergy(3)) { 
@@ -522,11 +550,11 @@ Player.prototype.Rolling = function() {
             this.PlayAnim('roll_jump');
 
             //roll boost is caluclated based on how close they were to the max roll speed
-            this.movement.rollBoost = Math.abs(this.movement.rollVelocity) - PLAYER_SPEED(); 
+            this.movement.rollBoost = Math.abs(this.body.velocity.x) - PLAYER_SPEED(); 
             this.movement.rollBoost /= (PLAYER_ROLL_SPEED() - PLAYER_SPEED());
             this.movement.rollBoost *= 150;
 
-            this.tweens.roll.stop();
+            //this.tweens.roll.stop();
             this.movement.rollVelocity = 0;
 
             //add a little boost to their jump
