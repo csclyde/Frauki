@@ -689,6 +689,7 @@ Player.prototype.AttackDiveFall = function() {
         if(!energyController.UseEnergy(1)) {
             this.movement.diveVelocity = 0;
             this.state = this.Falling;
+            events.publish('stop_sound', {name: 'attack_dive_fall'});
         }
         
         this.timers.SetTimer('frauki_dive', 50);
