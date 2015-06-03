@@ -288,7 +288,7 @@ Player.prototype.Slash = function(params) {
 
     //diving dash
     if(!this.timers.TimerUp('frauki_dash') && this.states.crouching && (this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling)) {
-        if(energyController.UseEnergy(8)) {
+        if(energyController.UseEnergy(6)) {
             this.state = this.AttackDiveCharge;
             this.movement.diveVelocity = 950;
             events.publish('play_sound', {name: 'attack_dive_charge', restart: true });
@@ -670,7 +670,7 @@ Player.prototype.AttackDiveCharge = function() {
 
     if(this.animations.currentAnim.isFinished) {
         this.state = this.AttackDiveFall;
-        this.timers.SetTimer('frauki_dive', 800);
+        this.timers.SetTimer('frauki_dive', 100);
 
         events.publish('play_sound', {name: 'attack_dive_fall'});
     }
@@ -682,6 +682,17 @@ Player.prototype.AttackDiveFall = function() {
     this.body.velocity.y = this.movement.diveVelocity;
     
     this.body.maxVelocity.x = 100;
+    
+    //use some energy every tenth of a second
+    if(this.timers.TimerUp('frauki_dive')) {
+        //if they run out of energy, the attack fizzles into a fall
+        if(!energyController.UseEnergy(1)) {
+            this.movement.diveVelocity = 0;
+            this.state = this.Falling;
+        }
+        
+        this.timers.SetTimer('frauki_dive', 100);
+    }
 
     if(this.body.onFloor()) {
         this.movement.diveVelocity = 0;
@@ -693,10 +704,7 @@ Player.prototype.AttackDiveFall = function() {
 
         this.state = this.AttackDiveLand;
 
-    } else if(this.timers.TimerUp('frauki_dive')) {
-        this.movement.diveVelocity = 0;
-        this.state = this.Falling;
-    }
+    } 
 };
 
 Player.prototype.AttackDiveLand = function() {
