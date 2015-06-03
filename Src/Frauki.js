@@ -670,7 +670,7 @@ Player.prototype.AttackDiveCharge = function() {
 
     if(this.animations.currentAnim.isFinished) {
         this.state = this.AttackDiveFall;
-        this.timers.SetTimer('frauki_dive', 100);
+        this.timers.SetTimer('frauki_dive', 0);
 
         events.publish('play_sound', {name: 'attack_dive_fall'});
     }
@@ -691,7 +691,7 @@ Player.prototype.AttackDiveFall = function() {
             this.state = this.Falling;
         }
         
-        this.timers.SetTimer('frauki_dive', 100);
+        this.timers.SetTimer('frauki_dive', 50);
     }
 
     if(this.body.onFloor()) {
