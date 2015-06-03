@@ -530,7 +530,7 @@ Player.prototype.Rolling = function() {
     //pickup stage
     if(Math.abs(this.body.velocity.x) < PLAYER_ROLL_SPEED() && this.movement.rollStage === 0) {
         dur /= 130;
-        this.body.acceleration.x = this.movement.rollDirection * 5000 * game.math.catmullRomInterpolation([0, 0.7, 1, 1, 0.7, 0], dur);
+        this.body.acceleration.x = this.movement.rollDirection * 5500 * game.math.catmullRomInterpolation([0, 0.7, 1, 1, 0.7, 0], dur);
         this.body.acceleration.x += accelMod;
 
     //ready to switch to release
@@ -544,7 +544,7 @@ Player.prototype.Rolling = function() {
         //this.body.acceleration.x = this.movement.rollDirection * 1800 * -1 * game.math.catmullRomInterpolation([0, 0.7, 1, 1, 0.7, 0], dur);
         //this.body.acceleration.x += accelMod;
         this.body.acceleration.x = 0;
-        this.body.drag.x = 1500 * game.math.catmullRomInterpolation([0.1, 0.7, 1, 1, 0.7, 0.1], dur);
+        this.body.drag.x = 1600 * game.math.catmullRomInterpolation([0.1, 0.7, 1, 1, 0.7, 0.1], dur);
     }
     
     if(this.body.velocity.y < 0) {
