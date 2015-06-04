@@ -251,7 +251,7 @@ Player.prototype.Jump = function(params) {
         }
         
         //normal jump
-        if(this.body.onFloor() || this.state === this.Standing || this.state === this.Running || this.state === this.Landing) {
+        if(this.state === this.Standing || this.state === this.Running || this.state === this.Landing) {
             this.body.velocity.y = PLAYER_JUMP_VEL();
             events.publish('play_sound', {name: 'jump'});
         }
