@@ -564,8 +564,8 @@ Player.prototype.Rolling = function() {
     }
     
     //if they are against a wall, transfer their horizontal acceleration into vertical acceleration
-    if(this.body.velocity.x === 0) {
-        this.body.acceleration.y = (-1 * Math.abs(this.body.acceleration.x)) / 10;
+    if((this.body.touching.left || this.body.touching.right) && this.body.velocity >= 0) {
+        this.body.velocity.y = -200;//(-1 * Math.abs(this.body.acceleration.x)) / 10;
     }
 
     if(this.animations.currentAnim.isFinished) {
