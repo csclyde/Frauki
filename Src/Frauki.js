@@ -564,6 +564,8 @@ Player.prototype.Rolling = function() {
         this.body.drag.x = 1600 * game.math.catmullRomInterpolation([0.1, 0.7, 1, 1, 0.7, 0.1], dur);
     }
     
+    console.log(this.body.touching.left, this.body.touching.right, this.body.velocity.y);
+    
     //if they are against a wall, transfer their horizontal acceleration into vertical acceleration
     if((this.body.touching.left || this.body.touching.right) && this.body.velocity.y >= 0) {
         this.body.velocity.y = -200;//(-1 * Math.abs(this.body.acceleration.x)) / 10;
