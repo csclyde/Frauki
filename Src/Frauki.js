@@ -514,7 +514,7 @@ Player.prototype.Flipping = function() {
 Player.prototype.Rolling = function() {
     this.PlayAnim('roll');
     
-    console.log(this.body.velocity.x);
+    console.log(this.body.acceleration.y);
 
     this.body.maxVelocity.x = PLAYER_ROLL_SPEED();
 
@@ -545,6 +545,11 @@ Player.prototype.Rolling = function() {
         //this.body.acceleration.x += accelMod;
         this.body.acceleration.x = 0;
         this.body.drag.x = 1600 * game.math.catmullRomInterpolation([0.1, 0.7, 1, 1, 0.7, 0.1], dur);
+    }
+    
+    //if they are against a wall, transfer their horizontal acceleration into vertical acceleration
+    if(this.body.velocity.x === 0) {
+        this.body.acceleration.y = -1 * Math.abs(this.body.acceleration.x);
     }
     
     if(this.body.velocity.y < 0) {
