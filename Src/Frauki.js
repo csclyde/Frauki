@@ -235,11 +235,7 @@ Player.prototype.StartStopRun = function(params) {
             this.timers.SetTimer('frauki_dash', 200);
         }
 
-    } else {
-
-        //if(this.state !== this.Rolling)
-            //this.body.velocity.x = 0;
-    }
+    } 
 };
 
 Player.prototype.Jump = function(params) {
@@ -270,6 +266,26 @@ Player.prototype.Jump = function(params) {
                 this.timers.SetTimer('frauki_grace', 300);
 
                 events.publish('play_sound', {name: 'airhike'});
+            }
+        }
+        //roll jump
+        else if(this.state === this.Rolling) {
+            if(energyController.UseEnergy(3)) { 
+                this.state = this.Jumping;
+                this.PlayAnim('roll_jump');
+    
+                //roll boost is caluclated based on how close they were to the max roll speed
+                this.movement.rollBoost = Math.abs(this.body.velocity.x) - PLAYER_SPEED(); 
+                this.movement.rollBoost /= (PLAYER_ROLL_SPEED() - PLAYER_SPEED());
+                this.movement.rollBoost *= 150;
+    
+                //this.tweens.roll.stop();
+                this.movement.rollVelocity = 0;
+    
+                //add a little boost to their jump
+                this.body.velocity.y -= 50;
+            } else {
+                this.state = this.Jumping;
             }
         }
     } else if(this.body.velocity.y < 0 && this.state !== this.Flipping) {
@@ -549,27 +565,7 @@ Player.prototype.Rolling = function() {
     
     //if they are against a wall, transfer their horizontal acceleration into vertical acceleration
     if(this.body.velocity.x === 0) {
-        this.body.acceleration.y = -1 * Math.abs(this.body.acceleration.x);
-    }
-    
-    if(this.body.velocity.y < 0) {
-        if(energyController.UseEnergy(3)) { 
-            this.state = this.Jumping;
-            this.PlayAnim('roll_jump');
-
-            //roll boost is caluclated based on how close they were to the max roll speed
-            this.movement.rollBoost = Math.abs(this.body.velocity.x) - PLAYER_SPEED(); 
-            this.movement.rollBoost /= (PLAYER_ROLL_SPEED() - PLAYER_SPEED());
-            this.movement.rollBoost *= 150;
-
-            //this.tweens.roll.stop();
-            this.movement.rollVelocity = 0;
-
-            //add a little boost to their jump
-            this.body.velocity.y -= 50;
-        } else {
-            this.state = this.Jumping;
-        }
+        this.body.acceleration.y = (-1 * Math.abs(this.body.acceleration.x)) / 10;
     }
 
     if(this.animations.currentAnim.isFinished) {
