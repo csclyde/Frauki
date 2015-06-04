@@ -531,7 +531,7 @@ Player.prototype.Flipping = function() {
 Player.prototype.Rolling = function() {
     this.PlayAnim('roll');
     
-    console.log(this.body.acceleration.y);
+    console.log(this.body.velocity.y);
 
     this.body.maxVelocity.x = PLAYER_ROLL_SPEED();
 
@@ -565,7 +565,7 @@ Player.prototype.Rolling = function() {
     }
     
     //if they are against a wall, transfer their horizontal acceleration into vertical acceleration
-    if((this.body.touching.left || this.body.touching.right) && this.body.velocity >= 0) {
+    if((this.body.touching.left || this.body.touching.right) && this.body.velocity.y >= 0) {
         this.body.velocity.y = -200;//(-1 * Math.abs(this.body.acceleration.x)) / 10;
     }
 
