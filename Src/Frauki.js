@@ -1,5 +1,5 @@
 PLAYER_SPEED = function() { return 255; }
-PLAYER_ROLL_SPEED = function() { return 800; }
+PLAYER_ROLL_SPEED = function() { return 650; }
 PLAYER_RUN_SLASH_SPEED = function() { return  650; }
 PLAYER_JUMP_VEL = function() { return -400; }
 PLAYER_DOUBLE_JUMP_VEL = function() { return -350; }
@@ -571,7 +571,7 @@ Player.prototype.Rolling = function() {
     if(Math.abs(this.body.velocity.x) < PLAYER_ROLL_SPEED() && this.movement.rollStage === 0 && dur <= 130) {
         dur /= 130;
         this.body.acceleration.x = this.movement.rollDirection * 5000 * game.math.catmullRomInterpolation([0, 0.7, 1, 1, 0.7, 0], dur);
-        this.body.acceleration.x += accelMod;
+        //this.body.acceleration.x += accelMod;
 
     //ready to switch to release
     } else if(Math.abs(this.body.velocity.x) == PLAYER_ROLL_SPEED() && this.movement.rollStage === 0) {
@@ -584,8 +584,6 @@ Player.prototype.Rolling = function() {
         this.body.acceleration.x = 0;
         this.body.drag.x = 1500 * game.math.catmullRomInterpolation([0.1, 0.7, 1, 1, 0.7, 0.1], dur);
     }
-    
-    console.log(this.movement.rollStage, this.body.acceleration.x, this.body.velocity.x);
 
     //if they are against a wall, transfer their horizontal acceleration into vertical acceleration
     if(this.body.velocity.x === 0 && this.movement.rollPop === false) {
@@ -593,6 +591,7 @@ Player.prototype.Rolling = function() {
         //roll boost is caluclated based on how close they were to the max roll speed
         var popBoost = Math.abs(this.movement.rollPrevVel) - PLAYER_SPEED(); 
         popBoost /= (PLAYER_ROLL_SPEED() - PLAYER_SPEED());
+
         popBoost *= -300;
         this.body.velocity.y = popBoost;
         this.movement.rollPop = true;
