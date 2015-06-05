@@ -567,7 +567,7 @@ Player.prototype.Rolling = function() {
     //if they are against a wall, transfer their horizontal acceleration into vertical acceleration
     if(this.body.velocity.x === 0 && this.body.velocity.y >= 0) {
         console.log('we jumping');
-        this.body.velocity.y = -200;//(-1 * Math.abs(this.body.acceleration.x)) / 10;
+        this.body.velocity.y = -300;//(-1 * Math.abs(this.body.acceleration.x)) / 10;
     }
 
     if(this.animations.currentAnim.isFinished) {
