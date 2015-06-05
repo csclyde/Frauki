@@ -1,5 +1,5 @@
 PLAYER_SPEED = function() { return 255; }
-PLAYER_ROLL_SPEED = function() { return 650; }
+PLAYER_ROLL_SPEED = function() { return 800; }
 PLAYER_RUN_SLASH_SPEED = function() { return  650; }
 PLAYER_JUMP_VEL = function() { return -400; }
 PLAYER_DOUBLE_JUMP_VEL = function() { return -350; }
@@ -46,6 +46,7 @@ Player = function (game, x, y, name) {
     this.movement.startRollTime = game.time.now;
     this.movement.rollPop = false;
     this.movement.rollPrevVel = 0;
+    this.movement.rollDirection = 1;
 
     this.timers = new TimerUtil();
 
@@ -75,6 +76,11 @@ Player.prototype.constructor = Player;
 Player.prototype.preStateUpdate = function() {
     this.body.maxVelocity.x = PLAYER_SPEED() + this.movement.rollBoost;
     this.body.maxVelocity.y = 500;
+
+    if(this.movement.rollBoost > 0) {
+        console.log(this.body.velocity.x, this.body.acceleration.x, this.movement.rollDirection);
+        this.body.velocity.x = (PLAYER_SPEED() + this.movement.rollBoost) * this.movement.rollDirection;
+    }
 
     if(this.states.inWater) {
         this.body.maxVelocity.x *= 0.7;
@@ -220,7 +226,10 @@ Player.prototype.Run = function(params) {
         this.SetDirection('right');
     } else {
         this.body.acceleration.x = 0;
-        this.movement.rollBoost = 0;
+
+        if(this.body.onFloor()) {
+            this.movement.rollBoost = 0;
+        }
     }
 };
 
@@ -237,7 +246,9 @@ Player.prototype.StartStopRun = function(params) {
             this.timers.SetTimer('frauki_dash', 200);
         }
 
-    } 
+    } else {
+        this.movement.rollBoost = 0;
+    }
 };
 
 Player.prototype.Jump = function(params) {
