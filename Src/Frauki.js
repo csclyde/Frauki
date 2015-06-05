@@ -45,6 +45,7 @@ Player = function (game, x, y, name) {
     this.movement.rollBoost = 0;
     this.movement.startRollTime = game.time.now;
     this.movement.rollPop = false;
+    this.movement.rollPrevVel = 0;
 
     this.timers = new TimerUtil();
 
@@ -208,7 +209,7 @@ Player.prototype.GetDirectionMultiplier = function() {
 
 ////////////////ACTIONS//////////////////
 Player.prototype.Run = function(params) {
-    if(this.state === this.Hurting || this.state === this.Rolling || this.state === this.AttackStab) 
+    if(this.state === this.Hurting || (this.state === this.Rolling && this.movement.rollPop === false) || this.state === this.AttackStab) 
         return;
 
     if(params.dir === 'left') {
@@ -245,7 +246,7 @@ Player.prototype.Jump = function(params) {
 
     if(params.jump) {
         //drop through cloud tiles
-        if(this.state === this.Crouching && this.states.onCloud) {
+        if(inputController.crouch.isDown && this.states.onCloud) {
             this.states.droppingThroughCloud = true;
             game.time.events.add(200, function() { frauki.states.droppingThroughCloud = false; } );
             return;
@@ -378,6 +379,7 @@ Player.prototype.Roll = function(params) {
     this.movement.rollDirection = this.GetDirectionMultiplier();
     this.movement.rollStart = game.time.now;
     this.movement.rollPop = false;
+    this.movement.rollPrevVel = 0;
 
     this.timers.SetTimer('frauki_roll', 650);
     this.timers.SetTimer('frauki_grace', 300);
@@ -533,7 +535,7 @@ Player.prototype.Flipping = function() {
 Player.prototype.Rolling = function() {
     this.PlayAnim('roll');
     
-    console.log(this.body.velocity.y);
+    console.log(this.body.acceleration.x, this.body.velocity.x);
 
     this.body.maxVelocity.x = PLAYER_ROLL_SPEED();
 
@@ -549,7 +551,7 @@ Player.prototype.Rolling = function() {
     //pickup stage
     if(Math.abs(this.body.velocity.x) < PLAYER_ROLL_SPEED() && this.movement.rollStage === 0) {
         dur /= 130;
-        this.body.acceleration.x = this.movement.rollDirection * 5500 * game.math.catmullRomInterpolation([0, 0.7, 1, 1, 0.7, 0], dur);
+        this.body.acceleration.x = this.movement.rollDirection * 5000 * game.math.catmullRomInterpolation([0, 0.7, 1, 1, 0.7, 0], dur);
         this.body.acceleration.x += accelMod;
 
     //ready to switch to release
@@ -558,19 +560,24 @@ Player.prototype.Rolling = function() {
         this.movement.rollStart = game.time.now;
 
     //release stage
-    } else if(this.movement.rollStage === 1) {
+    } else if(this.movement.rollStage === 1 && this.movement.rollPop === false) {
         dur /= 300;
-        //this.body.acceleration.x = this.movement.rollDirection * 1800 * -1 * game.math.catmullRomInterpolation([0, 0.7, 1, 1, 0.7, 0], dur);
-        //this.body.acceleration.x += accelMod;
         this.body.acceleration.x = 0;
-        this.body.drag.x = 1600 * game.math.catmullRomInterpolation([0.1, 0.7, 1, 1, 0.7, 0.1], dur);
+        this.body.drag.x = 1500 * game.math.catmullRomInterpolation([0.1, 0.7, 1, 1, 0.7, 0.1], dur);
     }
     
     //if they are against a wall, transfer their horizontal acceleration into vertical acceleration
     if(this.body.velocity.x === 0 && this.movement.rollPop === false) {
-        this.body.velocity.y = -300;
+
+        //roll boost is caluclated based on how close they were to the max roll speed
+        var popBoost = Math.abs(this.movement.rollPrevVel) - PLAYER_SPEED(); 
+        popBoost /= (PLAYER_ROLL_SPEED() - PLAYER_SPEED());
+        popBoost *= -300;
+        this.body.velocity.y = popBoost;
         this.movement.rollPop = true;
     }
+
+    this.movement.rollPrevVel = this.body.velocity.x;
 
     if(this.animations.currentAnim.isFinished) {
 

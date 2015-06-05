@@ -56,13 +56,23 @@ Frogland.create = function() {
     map.addTilesetImage('Doodads');
     map.addTilesetImage('Collision');
 
+    this.backgroundLayer_4 = map.createLayer('Background_4');
+    this.backgroundLayer_4.visible = false;
+
+    this.backgroundLayer_3 = map.createLayer('Background_3');
+
+    this.backgroundLayer_2 = map.createLayer('Background_2');
+    this.backgroundLayer_2.visible = false;
+
+    frauki = new Player(game, 50 * 16, 45 * 16, 'Frauki');
+    game.add.existing(frauki);
+
     this.CreateMapLayer(4, false);
     this.CreateMapLayer(3, true);
     this.CreateMapLayer(2, false);
     
     this.currentLayer = 3;
     this.restarting = false;
-
 
     this.enemyPool = game.add.group();
     this.door1Group = game.add.group();
@@ -74,17 +84,6 @@ Frogland.create = function() {
 
     map.createFromObjects('Doors_1', 67, 'Door', 'Door0000', true, false, this.door1Group, Door, false);
     map.createFromObjects('Doors_2', 67, 'Door', 'Door0000', true, false, this.door2Group, Door, false);
-
-    frauki = new Player(game, 50 * 16, 45 * 16, 'Frauki');
-    game.add.existing(frauki);
-    
-    this.foregroundLayer_4 = map.createLayer('Foreground_4');
-    this.foregroundLayer_4.visible = false;
-
-    this.foregroundLayer_3 = map.createLayer('Foreground_3');
-
-    this.foregroundLayer_2 = map.createLayer('Foreground_2');
-    this.foregroundLayer_2.visible = false;
 
     cameraController = new CameraController(frauki, map);
     inputController = new InputController(frauki);
@@ -105,13 +104,14 @@ Frogland.create = function() {
 };
 
 Frogland.CreateMapLayer = function(layer, visible) {
-    this['backgroundLayer_' + layer] = map.createLayer('Background_' + layer);
-    this['backgroundLayer_' + layer].visible = visible;
 
     this['midgroundLayer_' + layer] = map.createLayer('Midground_' + layer);
     this['midgroundLayer_' + layer].resizeWorld();
     this['midgroundLayer_' + layer].visible = visible;
     
+    this['foregroundLayer_' + layer] = map.createLayer('Foreground_' + layer);
+    this['foregroundLayer_' + layer].visible = visible;
+
     this['collisionLayer_' + layer] = map.createLayer('Collision_' + layer);
     map.setCollision([1, 3, 4, 9, 10], true, 'Collision_' + layer);
     this['collisionLayer_' + layer].visible = false;
