@@ -77,8 +77,8 @@ Player.prototype.preStateUpdate = function() {
     this.body.maxVelocity.x = PLAYER_SPEED() + this.movement.rollBoost;
     this.body.maxVelocity.y = 500;
 
+    //maintain the roll boost when they jump without a key down
     if(this.movement.rollBoost > 0) {
-        console.log(this.body.velocity.x, this.body.acceleration.x, this.movement.rollDirection);
         this.body.velocity.x = (PLAYER_SPEED() + this.movement.rollBoost) * this.movement.rollDirection;
     }
 
@@ -246,6 +246,14 @@ Player.prototype.StartStopRun = function(params) {
             this.timers.SetTimer('frauki_dash', 200);
         }
 
+        if(this.movement.rollBoost > 0) {
+            if(this.movement.rollDirection === -1 && params.dir === 'right') {
+                this.movement.rollBoost = 0;
+            } else if(this.movement.rollDirection === 1 && params.dir === 'left') {
+                this.movement.rollBoost = 0;
+            }
+        }
+
     } else {
         this.movement.rollBoost = 0;
     }
@@ -381,9 +389,9 @@ Player.prototype.Roll = function(params) {
 
     var dir = this.GetDirectionMultiplier();
 
+    this.body.maxVelocity.x = PLAYER_ROLL_SPEED();
+
     this.movement.rollVelocity = dir * PLAYER_SPEED();
-    //this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: dir * PLAYER_ROLL_SPEED()}, 50, Phaser.Easing.Exponential.In, false).to({rollVelocity: dir * PLAYER_SPEED()}, 300, Phaser.Easing.Quartic.In, false);
-    //this.tweens.roll.start();
     this.body.velocity.x = PLAYER_SPEED() * this.GetDirectionMultiplier();
 
     this.movement.rollStage = 0;
@@ -546,7 +554,7 @@ Player.prototype.Flipping = function() {
 Player.prototype.Rolling = function() {
     this.PlayAnim('roll');
     
-    console.log(this.body.acceleration.x, this.body.velocity.x);
+    console.log(this.movement.rollStage, this.body.acceleration.x, this.body.velocity.x);
 
     this.body.maxVelocity.x = PLAYER_ROLL_SPEED();
 
