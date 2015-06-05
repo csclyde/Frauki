@@ -44,6 +44,7 @@ Player = function (game, x, y, name) {
     this.movement.jumpSlashVelocity = 0;
     this.movement.rollBoost = 0;
     this.movement.startRollTime = game.time.now;
+    this.movement.rollPop = false;
 
     this.timers = new TimerUtil();
 
@@ -235,11 +236,7 @@ Player.prototype.StartStopRun = function(params) {
             this.timers.SetTimer('frauki_dash', 200);
         }
 
-    } else {
-
-        //if(this.state !== this.Rolling)
-            //this.body.velocity.x = 0;
-    }
+    } 
 };
 
 Player.prototype.Jump = function(params) {
@@ -255,7 +252,7 @@ Player.prototype.Jump = function(params) {
         }
         
         //normal jump
-        if(this.body.onFloor() || this.state === this.Standing || this.state === this.Running || this.state === this.Landing) {
+        if(this.state === this.Standing || this.state === this.Running || this.state === this.Landing) {
             this.body.velocity.y = PLAYER_JUMP_VEL();
             events.publish('play_sound', {name: 'jump'});
         }
@@ -270,6 +267,27 @@ Player.prototype.Jump = function(params) {
                 this.timers.SetTimer('frauki_grace', 300);
 
                 events.publish('play_sound', {name: 'airhike'});
+            }
+        }
+        //roll jump
+        else if(this.state === this.Rolling) {
+            if(energyController.UseEnergy(3)) { 
+                this.state = this.Jumping;
+                this.PlayAnim('roll_jump');
+    
+                //roll boost is caluclated based on how close they were to the max roll speed
+                this.movement.rollBoost = Math.abs(this.body.velocity.x) - PLAYER_SPEED(); 
+                this.movement.rollBoost /= (PLAYER_ROLL_SPEED() - PLAYER_SPEED());
+                this.movement.rollBoost *= 150;
+    
+                //this.tweens.roll.stop();
+                this.movement.rollVelocity = 0;
+    
+                //add a little boost to their jump
+                this.body.velocity.y = PLAYER_JUMP_VEL() - 50;
+                events.publish('play_sound', {name: 'jump'});
+            } else {
+                this.state = this.Jumping;
             }
         }
     } else if(this.body.velocity.y < 0 && this.state !== this.Flipping) {
@@ -359,6 +377,7 @@ Player.prototype.Roll = function(params) {
     this.movement.rollStage = 0;
     this.movement.rollDirection = this.GetDirectionMultiplier();
     this.movement.rollStart = game.time.now;
+    this.movement.rollPop = false;
 
     this.timers.SetTimer('frauki_roll', 650);
     this.timers.SetTimer('frauki_grace', 300);
@@ -514,7 +533,7 @@ Player.prototype.Flipping = function() {
 Player.prototype.Rolling = function() {
     this.PlayAnim('roll');
     
-    console.log(this.body.velocity.x);
+    console.log(this.body.velocity.y);
 
     this.body.maxVelocity.x = PLAYER_ROLL_SPEED();
 
@@ -547,24 +566,10 @@ Player.prototype.Rolling = function() {
         this.body.drag.x = 1600 * game.math.catmullRomInterpolation([0.1, 0.7, 1, 1, 0.7, 0.1], dur);
     }
     
-    if(this.body.velocity.y < 0) {
-        if(energyController.UseEnergy(3)) { 
-            this.state = this.Jumping;
-            this.PlayAnim('roll_jump');
-
-            //roll boost is caluclated based on how close they were to the max roll speed
-            this.movement.rollBoost = Math.abs(this.body.velocity.x) - PLAYER_SPEED(); 
-            this.movement.rollBoost /= (PLAYER_ROLL_SPEED() - PLAYER_SPEED());
-            this.movement.rollBoost *= 150;
-
-            //this.tweens.roll.stop();
-            this.movement.rollVelocity = 0;
-
-            //add a little boost to their jump
-            this.body.velocity.y -= 50;
-        } else {
-            this.state = this.Jumping;
-        }
+    //if they are against a wall, transfer their horizontal acceleration into vertical acceleration
+    if(this.body.velocity.x === 0 && this.movement.rollPop === false) {
+        this.body.velocity.y = -300;
+        this.movement.rollPop = true;
     }
 
     if(this.animations.currentAnim.isFinished) {
