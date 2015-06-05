@@ -44,6 +44,7 @@ Player = function (game, x, y, name) {
     this.movement.jumpSlashVelocity = 0;
     this.movement.rollBoost = 0;
     this.movement.startRollTime = game.time.now;
+    this.movement.rollPop = false;
 
     this.timers = new TimerUtil();
 
@@ -376,6 +377,7 @@ Player.prototype.Roll = function(params) {
     this.movement.rollStage = 0;
     this.movement.rollDirection = this.GetDirectionMultiplier();
     this.movement.rollStart = game.time.now;
+    this.movement.rollPop = false;
 
     this.timers.SetTimer('frauki_roll', 650);
     this.timers.SetTimer('frauki_grace', 300);
@@ -565,9 +567,9 @@ Player.prototype.Rolling = function() {
     }
     
     //if they are against a wall, transfer their horizontal acceleration into vertical acceleration
-    if(this.body.velocity.x === 0 && this.body.velocity.y >= 0) {
-        console.log('we jumping');
-        this.body.velocity.y = -300;//(-1 * Math.abs(this.body.acceleration.x)) / 10;
+    if(this.body.velocity.x === 0 && this.movement.rollPop === false) {
+        this.body.velocity.y = -300;
+        this.movement.rollPop = true;
     }
 
     if(this.animations.currentAnim.isFinished) {
