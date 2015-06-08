@@ -46,6 +46,7 @@ Player = function (game, x, y, name) {
     this.movement.startRollTime = game.time.now;
     this.movement.rollPop = false;
     this.movement.rollPrevVel = 0;
+    this.movement.rollDirection = 1;
 
     this.timers = new TimerUtil();
 
@@ -75,6 +76,11 @@ Player.prototype.constructor = Player;
 Player.prototype.preStateUpdate = function() {
     this.body.maxVelocity.x = PLAYER_SPEED() + this.movement.rollBoost;
     this.body.maxVelocity.y = 500;
+
+    //maintain the roll boost when they jump without a key down
+    if(this.movement.rollBoost > 0) {
+        this.body.velocity.x = (PLAYER_SPEED() + this.movement.rollBoost) * this.movement.rollDirection;
+    }
 
     if(this.states.inWater) {
         this.body.maxVelocity.x *= 0.7;
@@ -220,7 +226,10 @@ Player.prototype.Run = function(params) {
         this.SetDirection('right');
     } else {
         this.body.acceleration.x = 0;
-        this.movement.rollBoost = 0;
+
+        if(this.body.onFloor()) {
+            this.movement.rollBoost = 0;
+        }
     }
 };
 
@@ -237,7 +246,17 @@ Player.prototype.StartStopRun = function(params) {
             this.timers.SetTimer('frauki_dash', 200);
         }
 
-    } 
+        if(this.movement.rollBoost > 0) {
+            if(this.movement.rollDirection === -1 && params.dir === 'right') {
+                this.movement.rollBoost = 0;
+            } else if(this.movement.rollDirection === 1 && params.dir === 'left') {
+                this.movement.rollBoost = 0;
+            }
+        }
+
+    } else {
+        this.movement.rollBoost = 0;
+    }
 };
 
 Player.prototype.Jump = function(params) {
@@ -370,9 +389,9 @@ Player.prototype.Roll = function(params) {
 
     var dir = this.GetDirectionMultiplier();
 
+    this.body.maxVelocity.x = PLAYER_ROLL_SPEED();
+
     this.movement.rollVelocity = dir * PLAYER_SPEED();
-    //this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: dir * PLAYER_ROLL_SPEED()}, 50, Phaser.Easing.Exponential.In, false).to({rollVelocity: dir * PLAYER_SPEED()}, 300, Phaser.Easing.Quartic.In, false);
-    //this.tweens.roll.start();
     this.body.velocity.x = PLAYER_SPEED() * this.GetDirectionMultiplier();
 
     this.movement.rollStage = 0;
@@ -535,7 +554,7 @@ Player.prototype.Flipping = function() {
 Player.prototype.Rolling = function() {
     this.PlayAnim('roll');
     
-    console.log(this.body.acceleration.x, this.body.velocity.x);
+    
 
     this.body.maxVelocity.x = PLAYER_ROLL_SPEED();
 
@@ -549,10 +568,10 @@ Player.prototype.Rolling = function() {
     }
 
     //pickup stage
-    if(Math.abs(this.body.velocity.x) < PLAYER_ROLL_SPEED() && this.movement.rollStage === 0) {
+    if(Math.abs(this.body.velocity.x) < PLAYER_ROLL_SPEED() && this.movement.rollStage === 0 && dur <= 130) {
         dur /= 130;
         this.body.acceleration.x = this.movement.rollDirection * 5000 * game.math.catmullRomInterpolation([0, 0.7, 1, 1, 0.7, 0], dur);
-        this.body.acceleration.x += accelMod;
+        //this.body.acceleration.x += accelMod;
 
     //ready to switch to release
     } else if(Math.abs(this.body.velocity.x) == PLAYER_ROLL_SPEED() && this.movement.rollStage === 0) {
@@ -565,13 +584,14 @@ Player.prototype.Rolling = function() {
         this.body.acceleration.x = 0;
         this.body.drag.x = 1500 * game.math.catmullRomInterpolation([0.1, 0.7, 1, 1, 0.7, 0.1], dur);
     }
-    
+
     //if they are against a wall, transfer their horizontal acceleration into vertical acceleration
     if(this.body.velocity.x === 0 && this.movement.rollPop === false) {
 
         //roll boost is caluclated based on how close they were to the max roll speed
         var popBoost = Math.abs(this.movement.rollPrevVel) - PLAYER_SPEED(); 
         popBoost /= (PLAYER_ROLL_SPEED() - PLAYER_SPEED());
+
         popBoost *= -300;
         this.body.velocity.y = popBoost;
         this.movement.rollPop = true;
