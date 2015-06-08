@@ -103,6 +103,10 @@ Frogland.create = function() {
     this.ProcessCollisionTiles(4);
     this.ProcessCollisionTiles(3);
     this.ProcessCollisionTiles(2);
+
+    triggerController.CreateTriggers(4);
+    triggerController.CreateTriggers(3);
+    triggerController.CreateTriggers(2);
 };
 
 Frogland.CreateMapLayer = function(layer, visible) {
@@ -258,12 +262,12 @@ Frogland.update = function() {
     this.plx2.tilePosition.x = -(game.camera.x * 0.9);
 
     if(this.switch1 !== true && frauki.body.center.y > 62 * 16) {
-        events.publish('stop_music', { name: 'Surface' } );
+        //events.publish('stop_music', { name: 'Surface' } );
         this.switch1 = true;
     }
 
     if(this.switch2 !== true && frauki.body.center.y > 80 * 16) {
-        events.publish('play_music', { name: 'Ruins' } );
+        //events.publish('play_music', { name: 'Ruins' } );
         this.switch2 = true;
     }
 };

@@ -2,59 +2,50 @@ TriggerController = function() {
 
     this.timers = new TimerUtil();
 
-    this.triggerLayers = {
-        'Triggers_4': [],
-        'Triggers_3': [],
-        'Triggers_2': []
-    };
+    this.triggerLayers = {};
   
 };
 
-TriggerController.prototype.create = function(map) {
+TriggerController.prototype.triggers = {};
 
-    //extract the triggers from the map
-    this.triggerLayers['Triggers_4'] = map.objects['Triggers_4'];
-    this.triggerLayers['Triggers_3'] = map.objects['Triggers_3'];
-    this.triggerLayers['Triggers_2'] = map.objects['Triggers_2'];
+TriggerController.prototype.Create = function(map) {
+};
 
-    //move the "once" property from the properties object onto the top.
-    //clamp the positions at whole numbers
-    for(var i = 0; i < this.triggerLayers['Triggers_4'].length; i++) {
-        this.triggerLayers.Triggers_4[i].once =  this.triggerLayers.Triggers_4[i].properties.once;
-        delete this.triggerLayers.Triggers_4[i].properties.once;
+TriggerController.prototype.CreateTriggers = function(layer) {
 
-        this.triggerLayers.Triggers_4[i].x = Math.floor(this.triggerLayers.Triggers_4[i].x);
-        this.triggerLayers.Triggers_4[i].y = Math.floor(this.triggerLayers.Triggers_4[i].y);
-        this.triggerLayers.Triggers_4[i].width = Math.floor(this.triggerLayers.Triggers_4[i].width);
-        this.triggerLayers.Triggers_4[i].height = Math.floor(this.triggerLayers.Triggers_4[i].height);
+    this.triggerLayers['Triggers_' + layer] = map.objects['Triggers_' + layer];
+
+    for(var i = 0; i < this.triggerLayers['Triggers_' + layer].length; i++) {
+
+        var trigger = this.triggerLayers['Triggers_' + layer][i];
+
+        trigger.once =  trigger.properties.once === 'true' ? true : false;
+        delete trigger.properties.once;
+
+        trigger.x = Math.floor(trigger.x);
+        trigger.y = Math.floor(trigger.y);
+        trigger.width = Math.floor(trigger.width);
+        trigger.height = Math.floor(trigger.height);
+
+        trigger.enterFired = false;
+        trigger.stayFired = false;
+        trigger.exitFired = false;
+
+        trigger.playerInside = false;
+
+        if(!!this.triggers[trigger.name]) {
+            trigger.enter = this.triggers[trigger.name].enter;
+            trigger.stay = this.triggers[trigger.name].stay;
+            trigger.exit = this.triggers[trigger.name].exit;
+        } else {
+            console.log('Trigger with name ' + trigger.name + ' was not found');
+        }
     }
-
-    for(var i = 0; i < this.triggerLayers['Triggers_3'].length; i++) {
-        this.triggerLayers.Triggers_3[i].once =  this.triggerLayers.Triggers_3[i].properties.once;
-        delete this.triggerLayers.Triggers_3[i].properties.once;
-
-        this.triggerLayers.Triggers_3[i].x = Math.floor(this.triggerLayers.Triggers_3[i].x);
-        this.triggerLayers.Triggers_3[i].y = Math.floor(this.triggerLayers.Triggers_3[i].y);
-        this.triggerLayers.Triggers_3[i].width = Math.floor(this.triggerLayers.Triggers_3[i].width);
-        this.triggerLayers.Triggers_3[i].height = Math.floor(this.triggerLayers.Triggers_3[i].height);
-    }
-
-    for(var i = 0; i < this.triggerLayers['Triggers_2'].length; i++) {
-        this.triggerLayers.Triggers_2[i].once =  this.triggerLayers.Triggers_2[i].properties.once;
-        delete this.triggerLayers.Triggers_2[i].properties.once;
-
-        this.triggerLayers.Triggers_2[i].x = Math.floor(this.triggerLayers.Triggers_2[i].x);
-        this.triggerLayers.Triggers_2[i].y = Math.floor(this.triggerLayers.Triggers_2[i].y);
-        this.triggerLayers.Triggers_2[i].width = Math.floor(this.triggerLayers.Triggers_2[i].width);
-        this.triggerLayers.Triggers_2[i].height = Math.floor(this.triggerLayers.Triggers_2[i].height);
-    }
-
-    //the properties object will then be passed in to the triggers as a param
 };
 
 TriggerController.prototype.Update = function(currentLayer) {
 
-    currentLayer = triggerLayers['Triggers_' + currentLayer];
+    currentLayer = this.triggerLayers['Triggers_' + currentLayer];
 
     //loop through all triggers on the current layer and see if any in
     //the active zone around or within the camera
@@ -63,9 +54,61 @@ TriggerController.prototype.Update = function(currentLayer) {
 
     var i = currentLayer.length;
     while(i--) {
+        var trigger = currentLayer[i];
 
+        //if the player intersects with this trigger
+        if(this.Intersects(frauki, trigger)) {
+
+            //if the flag is unset, they just entered the trigger
+            if(trigger.playerInside === false) {
+
+                if(!trigger.enterFired || !trigger.once) {
+                    //so call the enter function
+                    trigger.enter(trigger.properties);
+
+                    trigger.enterFired = true;
+                }
+
+                //and set the flag
+                trigger.playerInside = true;
+
+            //if the flag is already set, they are still in the trigger
+            } else {
+                if(!trigger.stayFired || !trigger.once) {
+                    //call the stay function
+                    trigger.stay(trigger.properties);
+
+                    trigger.stayFired = true;
+                }
+            }
+
+        //if the player does not intersect with the trigger
+        } else {
+
+            //if the flag is set, they just exited the trigger
+            if(trigger.playerInside === true) {
+
+                if(!trigger.exitFired || !trigger.once) {
+                    //so call the exit function of the trigger
+                    trigger.exit(trigger.properties);
+
+                    trigger.exitFired = true;
+                }
+
+                //and unset the flag
+                trigger.playerInside = false;
+            }
+        }
     }
 };
+
+TriggerController.prototype.Intersects = function(body, trigger) {
+    if (body.right <= trigger.x) { return false; }
+    if (body.bottom <= trigger.y) { return false; }
+    if (body.position.x >= trigger.width + trigger.x) { return false; }
+    if (body.position.y >= trigger.height + trigger.y) { return false; }
+    return true;
+}
 
 /* TRIGGER TEMPLATE
 
