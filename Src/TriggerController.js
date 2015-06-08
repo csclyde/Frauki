@@ -64,7 +64,7 @@ TriggerController.prototype.Update = function(currentLayer) {
 
                 if(!trigger.enterFired || !trigger.once) {
                     //so call the enter function
-                    trigger.enter(trigger.properties);
+                    if(!!trigger.enter) trigger.enter(trigger.properties);
 
                     trigger.enterFired = true;
                 }
@@ -76,7 +76,7 @@ TriggerController.prototype.Update = function(currentLayer) {
             } else {
                 if(!trigger.stayFired || !trigger.once) {
                     //call the stay function
-                    trigger.stay(trigger.properties);
+                    if(!!trigger.stay) trigger.stay(trigger.properties);
 
                     trigger.stayFired = true;
                 }
@@ -90,7 +90,7 @@ TriggerController.prototype.Update = function(currentLayer) {
 
                 if(!trigger.exitFired || !trigger.once) {
                     //so call the exit function of the trigger
-                    trigger.exit(trigger.properties);
+                    if(!!trigger.exit) trigger.exit(trigger.properties);
 
                     trigger.exitFired = true;
                 }
