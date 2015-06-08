@@ -92,9 +92,11 @@ Frogland.create = function() {
     audioController = new AudioController();
     weaponController = new WeaponController();
     projectileController = new ProjectileController();
+    triggerController = new TriggerController();
     timerUtil = new TimerUtil();
 
     energyController.Create();
+    triggerController.Create(map);
 
     game.camera.focusOnXY(frauki.body.x, frauki.body.y);
 
@@ -249,6 +251,7 @@ Frogland.update = function() {
     energyController.UpdateEnergy();
     weaponController.Update();
     projectileController.Update();
+    triggerController.Update(this.currentLayer);
 
     this.plx1.tilePosition.x = -(game.camera.x * 0.5);
     this.plx1.tilePosition.y = -(game.camera.y * 0.35);
