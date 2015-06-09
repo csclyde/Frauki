@@ -64,7 +64,7 @@ Frogland.create = function() {
     this.backgroundLayer_2 = map.createLayer('Background_2');
     this.backgroundLayer_2.visible = false;
 
-    frauki = new Player(game, 171 * 16, 56 * 16, 'Frauki');
+    frauki = new Player(game, 64 * 16, 146 * 16, 'Frauki');
     game.add.existing(frauki);
 
     this.CreateMapLayer(4, false);
