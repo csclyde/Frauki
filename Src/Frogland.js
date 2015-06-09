@@ -64,7 +64,7 @@ Frogland.create = function() {
     this.backgroundLayer_2 = map.createLayer('Background_2');
     this.backgroundLayer_2.visible = false;
 
-    frauki = new Player(game, 50 * 16, 45 * 16, 'Frauki');
+    frauki = new Player(game, 171 * 16, 56 * 16, 'Frauki');
     game.add.existing(frauki);
 
     this.CreateMapLayer(4, false);
@@ -93,6 +93,7 @@ Frogland.create = function() {
     weaponController = new WeaponController();
     projectileController = new ProjectileController();
     triggerController = new TriggerController();
+    scriptRunner = new ScriptRunner();
     timerUtil = new TimerUtil();
 
     energyController.Create();
@@ -261,15 +262,6 @@ Frogland.update = function() {
     this.plx1.tilePosition.y = -(game.camera.y * 0.35);
     this.plx2.tilePosition.x = -(game.camera.x * 0.9);
 
-    if(this.switch1 !== true && frauki.body.center.y > 62 * 16) {
-        //events.publish('stop_music', { name: 'Surface' } );
-        this.switch1 = true;
-    }
-
-    if(this.switch2 !== true && frauki.body.center.y > 80 * 16) {
-        //events.publish('play_music', { name: 'Ruins' } );
-        this.switch2 = true;
-    }
 };
 
 Frogland.GetCurrentObjectGroup = function() {
