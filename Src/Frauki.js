@@ -302,6 +302,11 @@ Player.prototype.Jump = function(params) {
     
                 //this.tweens.roll.stop();
                 this.movement.rollVelocity = 0;
+
+                //if they are holding away from the roll, dont go crazy
+                if(this.movement.rollDirection !== this.GetDirectionMultiplier()) {
+                    this.movement.rollBoost = 0;
+                }
     
                 //add a little boost to their jump
                 this.body.velocity.y = PLAYER_JUMP_VEL() - 50;
