@@ -1,5 +1,4 @@
-InputController = function(player) {
-	this.player = player;
+InputController = function() {
     this.timers = new TimerUtil();
 
 	this.jump 		= game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
@@ -79,12 +78,12 @@ InputController = function(player) {
 InputController.prototype.UpdateInput = function() {
 
 	if (this.runLeft.isDown) {
-        this.player.Run({dir:'left'});
+        frauki.Run({dir:'left'});
     }
     else if (this.runRight.isDown) {
-        this.player.Run({dir:'right'});
+        frauki.Run({dir:'right'});
     }
     else {
-    	this.player.Run({dir:'still'});
+    	frauki.Run({dir:'still'});
     }
 };

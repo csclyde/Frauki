@@ -109,7 +109,7 @@
  <objectgroup name="Objects_3" visible="0">
   <object id="27" gid="86" x="2624" y="1280" width="16" height="16"/>
  </objectgroup>
- <objectgroup name="Triggers_3" visible="0">
+ <objectgroup name="Triggers_3">
   <object id="47" name="music_surface_ruins" x="2921.33" y="979.333" width="85.3333" height="293.333">
    <properties>
     <property name="once" value="true"/>

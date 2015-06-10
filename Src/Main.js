@@ -2,7 +2,7 @@ var Main = new Phaser.State();
 
 Main.preload = function() {
     
-    game.load.tilemap('Main', 'Data/World/Main.json', null, Phaser.Tilemap.TILED_JSON);
+    game.load.tilemap('Frogland', 'Data/World/Frogland.json', null, Phaser.Tilemap.TILED_JSON);
 
     //load images
     FileMap.Images.forEach(function(img) {
@@ -40,11 +40,8 @@ Main.create = function() {
 
     game.time.desiredFps = 60;
 
-    frauki = new Player(game, 64 * 16, 146 * 16, 'Frauki');
-    game.add.existing(frauki);
-
-    cameraController = new CameraController(frauki, map);
-    inputController = new InputController(frauki);
+    cameraController = new CameraController();
+    inputController = new InputController();
     effectsController = new EffectsController();
     energyController = new EnergyController();
     audioController = new AudioController();
@@ -57,11 +54,16 @@ Main.create = function() {
     energyController.Create();
     triggerController.Create(map);
 
-    game.camera.focusOnXY(frauki.body.x, frauki.body.y);
+    this.restarting = false;
+
+    Frogland.Create();
 };
 
 Main.update = function() {
+
     frauki.UpdateAttackGeometry();
+    
+    Frogland.Update();
 
     cameraController.UpdateCamera();
     inputController.UpdateInput();
@@ -69,7 +71,7 @@ Main.update = function() {
     energyController.UpdateEnergy();
     weaponController.Update();
     projectileController.Update();
-    triggerController.Update(this.currentLayer);
+    triggerController.Update(Frogland.currentLayer);
 
 };
 

@@ -58,7 +58,7 @@ EnergyController.prototype.UpdateEnergy = function() {
 		this.neutralPoint = 0;
 
 	if(this.neutralPoint <= 0)
-		Frogland.Restart();
+		Main.Restart();
 
 	this.energyBar.scale.x = this.energy / 30;
 

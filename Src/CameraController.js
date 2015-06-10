@@ -1,9 +1,7 @@
 X_VEL_DIV = 15;
 Y_VEL_DIV = 30;
 
-CameraController = function(player, map) {
-	frauki = player;
-	this.map = map;
+CameraController = function() {
 
 	this.camX = 0;
 	this.camY = 0;
@@ -12,8 +10,6 @@ CameraController = function(player, map) {
 	this.shakeY = 0;
 	this.shakeMagnitudeX = 0;
 	this.shakeMagnitudeY = 0;
-
-	this.repulsiveTiles = [];
 
 	this.prevXVel = 0;
 	this.prevYVel = 0;
@@ -24,17 +20,11 @@ CameraController = function(player, map) {
 	events.subscribe('control_up', this.RaiseCamera, this);
 	events.subscribe('camera_shake', this.ScreenShake, this);
 
-	this.daemon = game.add.sprite(0, 0, null);
-
-	this.moveTimer = 0;
-
-	//game.camera.follow(this.daemon);
 }
 
 //camera is controlled in player centric space
 CameraController.prototype.UpdateCamera = function() {
 	
-
 	var xOffset = frauki.states.direction === 'left' ? -15 : 15;
 	var yOffset = frauki.body.velocity.y > 0 ? 20 : 0;
 
@@ -50,8 +40,8 @@ CameraController.prototype.UpdateCamera = function() {
 	}
 
 	if(this.prevYVel !== frauki.body.velocity.y || this.retweenY) {
-		if(this.camyTween != null) {
-			this.camyTween.stop();
+		if(this.camYTween != null) {
+			//this.camYTween.stop();
 		}
 
 		this.camYTween = game.add.tween(this).to({camY:Math.floor((frauki.body.velocity.y / Y_VEL_DIV) + yOffset)}, 1000, Phaser.Easing.Quintic.Out, true);
