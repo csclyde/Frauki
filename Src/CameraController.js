@@ -33,10 +33,12 @@ CameraController.prototype.UpdateCamera = function() {
 
 	if(this.prevXVel !== frauki.body.velocity.x) {
 		if(this.camXTween != null) {
-			this.camXTween.stop();
+			//this.camXTween.stop();
 		}
 
-		this.camXTween = game.add.tween(this).to({camX:Math.floor((frauki.body.velocity.x / X_VEL_DIV) + xOffset)}, 500, Phaser.Easing.Sinusoidal.Out, true);
+		this.camXTween = game.add.tween(this).to( { camX: Math.floor((frauki.body.velocity.x / X_VEL_DIV) + xOffset) }, 500, Phaser.Easing.Sinusoidal.Out, true);
+
+		console.log(frauki.body.velocity.x);
 	}
 
 	if(this.prevYVel !== frauki.body.velocity.y || this.retweenY) {
@@ -44,7 +46,7 @@ CameraController.prototype.UpdateCamera = function() {
 			//this.camYTween.stop();
 		}
 
-		this.camYTween = game.add.tween(this).to({camY:Math.floor((frauki.body.velocity.y / Y_VEL_DIV) + yOffset)}, 1000, Phaser.Easing.Quintic.Out, true);
+		this.camYTween = game.add.tween(this).to( { camY: Math.floor((frauki.body.velocity.y / Y_VEL_DIV) + yOffset) }, 1000, Phaser.Easing.Quintic.Out, true);
 		this.retweenY = false;
 	}
 

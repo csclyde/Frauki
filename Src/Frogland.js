@@ -308,7 +308,14 @@ Frogland.CheckEnvironmentalCollisions = function(f, tile) {
             return true;
         }
     } else if(tile.index === 5) { //falling tile
-        Frogland.DislodgeTile(tile)
+
+        if(tile.waitingToFall !== true) {
+
+            setTimeout(function() { Frogland.DislodgeTile(tile); }, 10);
+
+            tile.waitingToFall = true;
+        }
+
         return true;
     }
 };
