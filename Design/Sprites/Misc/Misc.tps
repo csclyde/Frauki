@@ -226,6 +226,9 @@
             <filename>Frames/AngelKiss0000.png</filename>
             <filename>Frames/AngelKiss0001.png</filename>
             <filename>Frames/spore0000.png</filename>
+            <filename>Frames/Tiles0000.png</filename>
+            <filename>Frames/Tiles0001.png</filename>
+            <filename>Frames/Tiles0002.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

@@ -46,7 +46,6 @@ Main.create = function() {
     energyController = new EnergyController();
     audioController = new AudioController();
     weaponController = new WeaponController();
-    projectileController = new ProjectileController();
     triggerController = new TriggerController();
     scriptRunner = new ScriptRunner();
     timerUtil = new TimerUtil();
@@ -57,6 +56,8 @@ Main.create = function() {
     this.restarting = false;
 
     Frogland.Create();
+    
+    projectileController = new ProjectileController();
 };
 
 Main.update = function() {

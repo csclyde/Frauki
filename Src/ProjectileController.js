@@ -20,8 +20,31 @@ ProjectileController.prototype.Tarball = function(e) {
 	tar.projType = 'tar';
 	tar.owningEnemy = e;
 	tar.spawnTime = game.time.now;
+	tar.lifeTime = 5000;
+	tar.solid = true;
 
 	this.projectiles.add(tar);
+};
+
+ProjectileController.prototype.FallingTile = function(sourceTile) {
+
+	console.log('tile spawn', sourceTile);
+
+	var tile = game.add.sprite(sourceTile.worldX, sourceTile.worldY, 'Misc', 'Tiles0000');
+	game.physics.enable(tile, Phaser.Physics.ARCADE);
+
+	tile.body.setSize(16, 16);
+
+	tile.body.bounce.set(0.2);
+	tile.rotation = (Math.random() * 0.2) - 0.1;
+	tile.body.velocity.x = Math.random() * 50;
+	tile.body.drag.x = 200;
+
+	tile.projType = 'tile';
+	tile.spawnTime = game.time.now;
+	tile.lifeTime = 3000;
+
+	this.projectiles.add(tile);
 };
 
 ProjectileController.prototype.Update = function() {
@@ -31,12 +54,13 @@ ProjectileController.prototype.Update = function() {
 
 	this.projectiles.forEach(function(p) {
 
-		if(game.time.now - p.spawnTime > 5000) {
+		if(game.time.now - p.spawnTime > p.lifeTime && p.lifeTime !== 0) {
 			p.kill();
 			childrenToRemove.push(p);
-		} else {
+		} else if(p.solid) {
 			game.physics.arcade.collide(p, Frogland.GetCurrentCollisionLayer());
 		}
+
 	});
 
 	childrenToRemove.forEach(function(e) {
