@@ -72,7 +72,6 @@ Frogland.Update = function() {
     this.plx1.tilePosition.x = -(game.camera.x * 0.5);
     this.plx1.tilePosition.y = -(game.camera.y * 0.35);
     this.plx2.tilePosition.x = -(game.camera.x * 0.9);
-
 };
 
 Frogland.CreateMapLayer = function(layer, visible) {
