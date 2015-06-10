@@ -58,6 +58,8 @@ CameraController.prototype.UpdateCamera = function() {
 	var newCamX = (this.camX + frauki.body.x + this.shakeX);
 	var newCamY = (this.camY + frauki.body.y + this.shakeY + (frauki.body.height - 50));
 
+	console.log(this.camY);
+	
 	game.camera.focusOnXY(newCamX, newCamY);
 
 	this.prevXVel = frauki.body.velocity.x;
