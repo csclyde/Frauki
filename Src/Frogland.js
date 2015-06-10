@@ -203,12 +203,10 @@ Frogland.ProcessCollisionTiles = function(layer) {
 
 Frogland.GetCurrentObjectGroup = function() {
     return this['objectGroup_' + this.currentLayer];
-
 };
 
 Frogland.GetCurrentCollisionLayer = function() {
     return this['collisionLayer_' + this.currentLayer];
-
 };
 
 Frogland.ChangeLayer = function(newLayer) {
@@ -276,19 +274,7 @@ Frogland.OverlapFraukiWithObject = function(f, o) {
 };
 
 Frogland.CollideFraukiWithObject = function(f, o) {
-
-    if(!!o && typeof o === 'object') {
-        if(o.spriteType === 'door')
-            OpenDoor(f, o);
-    }
-};
-
-Frogland.OverlapFraukiWithDoor = function(f, d) {
-    if(d.spriteType === 'door') {
-        if(frauki.currentLayer === d.firstLayer || frauki.currentLayer === d.secondLayer) {
-            this.standingInDoorway = true;
-        }
-    }
+    
 };
 
 Frogland.CollideFraukiWithProjectile = function(f, p) {
