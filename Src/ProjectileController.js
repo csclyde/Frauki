@@ -36,7 +36,7 @@ ProjectileController.prototype.FallingTile = function(sourceTile) {
 	tile.body.setSize(16, 16);
 
 	tile.body.bounce.set(0.2);
-	tile.rotation = (Math.random() * 0.2) - 0.1;
+	tile.rotation = (Math.random() * 0.5) - 0.25;
 	tile.body.velocity.x = Math.random() * 50;
 	tile.body.drag.x = 200;
 

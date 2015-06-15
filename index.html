@@ -27,6 +27,8 @@
 
         <script type="text/javascript" src="Src/FileMap.js"></script>
 
+        
+        <script type="text/javascript" src="Src/Loading.js"></script>        
         <script type="text/javascript" src="Src/Main.js"></script>
         <script type="text/javascript" src="Src/Frogland.js"></script>
         <script type="text/javascript" src="Src/Frauki.js"></script>
@@ -58,7 +60,7 @@
                 pixel.scale = 3;
             }
             
-        	var game = new Phaser.Game(512, 288, Phaser.CANVAS, "game", Main, false, false);
+        	var game = new Phaser.Game(512, 288, Phaser.CANVAS, "game", Loading, false, false);
             var events = new EventRouter();
 
             var cameraController;
@@ -73,7 +75,8 @@
             var map;
             var frauki;
 
-        	game.state.add('Main', Main, true);
+        	game.state.add('Loading', Loading, true);
+            game.state.add('Main', Main, false);
 
         </script>
     </head>
