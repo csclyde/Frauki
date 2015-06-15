@@ -45,9 +45,3 @@ Loading.create = function() {
 
     game.state.start('Main');
 };
-
-Loading.update = function() {
-};
-
-Loading.render = function() {
-};

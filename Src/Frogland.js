@@ -11,22 +11,24 @@ Frogland.Create = function() {
     this.plx2 = game.add.tileSprite(0, 0, pixel.width, pixel.height, 'parallax2');
     this.plx2.fixedToCamera = true;
 
-    map = game.add.tilemap('Frogland');
-    map.addTilesetImage('FrogtownTiles');
-    map.addTilesetImage('DepthsTiles');
-    map.addTilesetImage('TerraceTiles');
-    map.addTilesetImage('Doodads');
-    map.addTilesetImage('Collision');
+    this.map = game.add.tilemap('Frogland');
+    this.map.addTilesetImage('FrogtownTiles');
+    this.map.addTilesetImage('DepthsTiles');
+    this.map.addTilesetImage('TerraceTiles');
+    this.map.addTilesetImage('Doodads');
+    this.map.addTilesetImage('Collision');
 
-    this.backgroundLayer_4 = map.createLayer('Background_4');
+    this.map.removeTile(0, 0, 'Midground_3');
+
+    this.backgroundLayer_4 = this.map.createLayer('Background_4');
     this.backgroundLayer_4.visible = false;
 
-    this.backgroundLayer_3 = map.createLayer('Background_3');
+    this.backgroundLayer_3 = this.map.createLayer('Background_3');
 
-    this.backgroundLayer_2 = map.createLayer('Background_2');
+    this.backgroundLayer_2 = this.map.createLayer('Background_2');
     this.backgroundLayer_2.visible = false;
 
-    frauki = new Player(game, 32 * 16, 44 * 16, 'Frauki');
+    frauki = new Player(game, 120 * 16, 135 * 16, 'Frauki');
     game.add.existing(frauki);
 
     game.camera.focusOnXY(frauki.body.x, frauki.body.y);
@@ -45,8 +47,8 @@ Frogland.Create = function() {
     this.CreateObjectsLayer(3);
     this.CreateObjectsLayer(2);
 
-    map.createFromObjects('Doors_1', 67, 'Door', 'Door0000', true, false, this.door1Group, Door, false);
-    map.createFromObjects('Doors_2', 67, 'Door', 'Door0000', true, false, this.door2Group, Door, false);
+    this.map.createFromObjects('Doors_1', 67, 'Door', 'Door0000', true, false, this.door1Group, Door, false);
+    this.map.createFromObjects('Doors_2', 67, 'Door', 'Door0000', true, false, this.door2Group, Door, false);
 
     this.ProcessCollisionTiles(4);
     this.ProcessCollisionTiles(3);
@@ -76,15 +78,15 @@ Frogland.Update = function() {
 
 Frogland.CreateMapLayer = function(layer, visible) {
 
-    this['midgroundLayer_' + layer] = map.createLayer('Midground_' + layer);
+    this['midgroundLayer_' + layer] = this.map.createLayer('Midground_' + layer);
     this['midgroundLayer_' + layer].resizeWorld();
     this['midgroundLayer_' + layer].visible = visible;
     
-    this['foregroundLayer_' + layer] = map.createLayer('Foreground_' + layer);
+    this['foregroundLayer_' + layer] = this.map.createLayer('Foreground_' + layer);
     this['foregroundLayer_' + layer].visible = visible;
 
-    this['collisionLayer_' + layer] = map.createLayer('Collision_' + layer);
-    map.setCollision([1, 3, 4, 5, 9, 10], true, 'Collision_' + layer);
+    this['collisionLayer_' + layer] = this.map.createLayer('Collision_' + layer);
+    this.map.setCollision([1, 3, 4, 5, 9, 10], true, 'Collision_' + layer);
     this['collisionLayer_' + layer].visible = false;
 };
 
@@ -97,11 +99,11 @@ Frogland.CreateObjectsLayer = function(layer) {
 
     //create each enemy for this layer
     FileMap.Enemies.forEach(function(enemy) {
-        map.createFromObjects('Objects_' + layer, enemy.Tile, enemy.Name, null, true, false, that[currLayer], Enemy, false);
+        Frogland.map.createFromObjects('Objects_' + layer, enemy.Tile, enemy.Name, null, true, false, that[currLayer], Enemy, false);
     });
 
     //create all the apples
-    map.createFromObjects('Objects_' + layer, 66, 'Misc', 'Apple0000', true, false, this[currLayer], Apple, false);
+    this.map.createFromObjects('Objects_' + layer, 66, 'Misc', 'Apple0000', true, false, this[currLayer], Apple, false);
 
     //inform each enemy of its own layer
     this[currLayer].forEach(function(obj) {
@@ -181,10 +183,10 @@ Frogland.ThunderDome = function(x, y) {
 
 Frogland.ProcessCollisionTiles = function(layer) {
     //special procesing for collision tiles
-    map.forEach(function(tile) {
+    this.map.forEach(function(tile) {
         //if the tile is marked as disappearing
         if(tile.index === 2) {
-            var water = map.getTileWorldXY(tile.worldX, tile.worldY, 16, 16, 'Foreground_' + layer);
+            var water = this.map.getTileWorldXY(tile.worldX, tile.worldY, 16, 16, 'Foreground_' + layer);
             water.alpha = 0.4;
         } else if(tile.index === 4) {
             tile.collideLeft = false;
@@ -197,7 +199,7 @@ Frogland.ProcessCollisionTiles = function(layer) {
             tile.faceRight = false; 
         }
            
-    }, this, 0, 0, map.width, map.height, 'Collision_' + layer);
+    }, this, 0, 0, this.map.width, this.map.height, 'Collision_' + layer);
 };
 
 Frogland.GetCurrentObjectGroup = function() {
@@ -321,8 +323,8 @@ Frogland.CheckEnvironmentalCollisions = function(f, tile) {
 };
 
 Frogland.DislodgeTile = function(tile) {
-    map.removeTile(tile.x, tile.y, 'Midground_3');
-    map.removeTile(tile.x, tile.y, 'Collision_3');
+    this.map.removeTile(tile.x, tile.y, 'Midground_3');
+    this.map.removeTile(tile.x, tile.y, 'Collision_3');
 
     projectileController.FallingTile(tile);
 };

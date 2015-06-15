@@ -82,10 +82,6 @@ Player.prototype.preStateUpdate = function() {
         this.body.velocity.x = (PLAYER_SPEED() + this.movement.rollBoost) * this.movement.rollDirection;
     }
 
-    if(this.states.inWater) {
-        this.body.maxVelocity.x *= 0.7;
-    }
-
     this.body.gravity.y = 0;
     this.body.drag.x = 2000;
 
@@ -97,6 +93,19 @@ Player.prototype.preStateUpdate = function() {
 };
 
 Player.prototype.postStateUpdate = function() {
+
+    if(this.states.inWater) {
+        this.body.maxVelocity.x *= 0.7;
+
+        if(this.body.gravity.y !== 0) {
+            this.body.gravity.y /= 100;
+        } else {
+            this.body.gravity.y = game.physics.arcade.gravity.y / 100;
+        }
+
+        console.log(this.body.gravity.y);
+    }
+
     //reset the double jump flag
     if(this.body.onFloor()) {
         this.states.hasFlipped = false;

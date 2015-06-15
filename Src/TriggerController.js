@@ -13,7 +13,7 @@ TriggerController.prototype.Create = function(map) {
 
 TriggerController.prototype.CreateTriggers = function(layer) {
 
-    this.triggerLayers['Triggers_' + layer] = map.objects['Triggers_' + layer];
+    this.triggerLayers['Triggers_' + layer] = Frogland.map.objects['Triggers_' + layer];
 
     for(var i = 0; i < this.triggerLayers['Triggers_' + layer].length; i++) {
 

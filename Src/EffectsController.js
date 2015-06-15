@@ -189,7 +189,7 @@ EffectsController.prototype.Splash = function(tile) {
     return;
     
     //if this is not a surface water tile
-    if(map.getTile(tile.x, tile.y - 1, 'Foreground') != null) {
+    if(Frogland.map.getTile(tile.x, tile.y - 1, 'Foreground') != null) {
     	return;
     }
     

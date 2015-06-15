@@ -38,7 +38,6 @@ CameraController.prototype.UpdateCamera = function() {
 
 		this.camXTween = game.add.tween(this).to( { camX: Math.floor((frauki.body.velocity.x / X_VEL_DIV) + xOffset) }, 500, Phaser.Easing.Sinusoidal.Out, true);
 
-		console.log(frauki.body.velocity.x);
 	}
 
 	if(this.prevYVel !== frauki.body.velocity.y || this.retweenY) {

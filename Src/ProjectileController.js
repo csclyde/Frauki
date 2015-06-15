@@ -28,8 +28,6 @@ ProjectileController.prototype.Tarball = function(e) {
 
 ProjectileController.prototype.FallingTile = function(sourceTile) {
 
-	console.log('tile spawn', sourceTile);
-
 	var tile = game.add.sprite(sourceTile.worldX, sourceTile.worldY, 'Misc', 'Tiles0000');
 	game.physics.enable(tile, Phaser.Physics.ARCADE);
 
