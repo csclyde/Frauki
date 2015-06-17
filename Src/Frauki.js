@@ -97,13 +97,9 @@ Player.prototype.postStateUpdate = function() {
     if(this.states.inWater) {
         this.body.maxVelocity.x *= 0.7;
 
-        if(this.body.gravity.y !== 0) {
-            this.body.gravity.y /= 100;
-        } else {
-            this.body.gravity.y = game.physics.arcade.gravity.y / 100;
-        }
+        this.body.gravity.y = -300;
 
-        console.log(this.body.gravity.y);
+        console.log(this.body.velocity.y);
     }
 
     //reset the double jump flag
@@ -506,6 +502,10 @@ Player.prototype.Falling = function() {
     this.PlayAnim('fall');
 
     this.body.gravity.y = game.physics.arcade.gravity.y * 2;
+
+    if(this.states.inWater && this.body.velocity.y > 300) {
+        this.body.velocity.y = 300;
+    }
 
     if(this.body.onFloor()) {
         
