@@ -28,7 +28,7 @@ Frogland.Create = function() {
     this.backgroundLayer_2 = this.map.createLayer('Background_2');
     this.backgroundLayer_2.visible = false;
 
-    frauki = new Player(game, 120 * 16, 135 * 16, 'Frauki');
+    frauki = new Player(game, 174 * 16, 81 * 16, 'Frauki');
     game.add.existing(frauki);
 
     game.camera.focusOnXY(frauki.body.x, frauki.body.y);
@@ -259,8 +259,10 @@ Frogland.ChangeLayer = function(newLayer) {
 //this is called when a collision happens. if it returns false the two will not be separated
 Frogland.OverlapFraukiWithObject = function(f, o) {
     if(o.spriteType == 'apple') {
+
         EatApple(f, o);
         return false;
+
     } else if(o.spriteType === 'enemy') {
 
         if(o.CanCauseDamage() && o.state !== o.Dying) {

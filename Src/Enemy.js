@@ -2,6 +2,7 @@ Enemy = function(game, x, y, name) {
     //instantiate the sprite
     Phaser.Sprite.call(this, game, x, y, 'EnemySprites');
     this.spriteType = 'enemy';
+
     
     //enable its physics body
     game.physics.enable(this, Phaser.Physics.ARCADE);
@@ -17,6 +18,7 @@ Enemy = function(game, x, y, name) {
         console.log('Enemy of type ' + name + ' was not found');
     }
 
+    this.power = new PowerMeter(this.energy);
     this.enemyName = name;
     this.state = this.Idling;
 
@@ -190,13 +192,14 @@ function EnemyHit(f, e) {
     events.publish('camera_shake', {magnitudeX: 15 * frauki.currentAttack.damage, magnitudeY: 5, duration: 100});
 
     e.timers.SetTimer('hit', e.baseStunDuration);
-    e.energy -= frauki.currentAttack.damage;
+    //e.energy -= frauki.currentAttack.damage;
+    frauki.power.attack(e, frauki.currentAttack.damage);
 
     e.poise -= frauki.currentAttack.damage * 2;
 
     events.publish('play_sound', { name: 'attack_connect' });
 
-    if(e.energy <= 0) {
+    if(e.power.level <= 0) {
 
         Frogland.ThunderDome(e.x, e.y);
 
@@ -223,7 +226,8 @@ function EnemyHit(f, e) {
             e.poise = e.initialPoise;
 
             //attack ultimately does 3x damage
-            e.energy -= frauki.currentAttack.damage * 2;
+            //e.energy -= frauki.currentAttack.damage * 2;
+            frauki.power.attack(e, frauki.currentAttack.damage * 2);
             console.log('Enemy is being stunned at ' + e.GetPoisePercentage() + ' poise and Frauki did ' + frauki.currentAttack.damage + ' damage');
         }
     }   

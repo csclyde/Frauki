@@ -21,6 +21,8 @@ Player = function (game, x, y, name) {
         this.animations.add(anim.Name, anim.Frames, anim.Fps, anim.Loop, false);
     }, this);
 
+    this.power = new PowerMeter();
+
     this.state = this.Standing;
     this.PlayAnim('stand');
     
@@ -425,7 +427,9 @@ Player.prototype.Hit = function(f, e) {
 
     effectsController.ParticleSpray(this.body, e.body, 'yellow', e.PlayerDirection(), e.damage);
 
-    energyController.RemoveEnergy(e.damage);
+    //energyController.RemoveEnergy(e.damage);
+
+    e.power.attack(this, e.damage);
 
     e.poise += e.initialPoise;
 
@@ -503,6 +507,7 @@ Player.prototype.Falling = function() {
 
     this.body.gravity.y = game.physics.arcade.gravity.y * 2;
 
+    //if they jump into water, make sure they slow the hell down
     if(this.states.inWater && this.body.velocity.y > 300) {
         this.body.velocity.y = 300;
     }
