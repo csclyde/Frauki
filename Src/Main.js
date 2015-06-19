@@ -4,7 +4,6 @@ Main.create = function() {
 
     cameraController = new CameraController();
     inputController = new InputController();
-    effectsController = new EffectsController();
     energyController = new EnergyController();
     audioController = new AudioController();
     weaponController = new WeaponController();
@@ -19,6 +18,7 @@ Main.create = function() {
 
     Frogland.Create();
     
+    effectsController = new EffectsController();
     projectileController = new ProjectileController();
 };
 
