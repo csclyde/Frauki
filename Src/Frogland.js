@@ -28,7 +28,7 @@ Frogland.Create = function() {
     this.backgroundLayer_2 = this.map.createLayer('Background_2');
     this.backgroundLayer_2.visible = false;
 
-    frauki = new Player(game, 174 * 16, 81 * 16, 'Frauki');
+    frauki = new Player(game, 30 * 16, 44 * 16, 'Frauki');
     game.add.existing(frauki);
 
     game.camera.focusOnXY(frauki.body.x, frauki.body.y);
@@ -325,8 +325,17 @@ Frogland.CheckEnvironmentalCollisions = function(f, tile) {
 };
 
 Frogland.DislodgeTile = function(tile) {
-    this.map.removeTile(tile.x, tile.y, 'Midground_3');
-    this.map.removeTile(tile.x, tile.y, 'Collision_3');
+    if(tile && tile.index === 5) {
+        this.map.removeTile(tile.x, tile.y, 'Midground_3');
+        this.map.removeTile(tile.x, tile.y, 'Collision_3');
 
-    projectileController.FallingTile(tile);
+        projectileController.FallingTile(tile);
+
+        setTimeout(function() { 
+            Frogland.DislodgeTile(Frogland.map.getTile(tile.x - 1, tile.y, 'Collision_3'));
+            Frogland.DislodgeTile(Frogland.map.getTile(tile.x + 1, tile.y, 'Collision_3'));
+            Frogland.DislodgeTile(Frogland.map.getTile(tile.x, tile.y - 1, 'Collision_3'));
+            Frogland.DislodgeTile(Frogland.map.getTile(tile.x, tile.y + 1, 'Collision_3'));
+        }, 40);
+    }
 };

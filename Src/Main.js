@@ -11,13 +11,13 @@ Main.create = function() {
     scriptRunner = new ScriptRunner();
     timerUtil = new TimerUtil();
 
-    energyController.Create();
     triggerController.Create(map);
 
     this.restarting = false;
 
     Frogland.Create();
     
+    energyController.Create();
     effectsController = new EffectsController();
     projectileController = new ProjectileController();
 };
