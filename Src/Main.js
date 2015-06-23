@@ -66,29 +66,30 @@ Main.Restart = function() {
     var fadeOutTween = game.add.tween(game.world).to({alpha:0}, 500, Phaser.Easing.Linear.None, true);
 
     fadeOutTween.onComplete.add(function() {
-        Main.ChangeLayer(3);
+        Frogland.ChangeLayer(3);
         frauki.body.x = 100; //fraukiSpawnX;
         frauki.body.y = 100; //fraukiSpawnY;
         energyController.energy = 15;
+        energyController.health = 30;
         energyController.neutralPoint = 15;
         game.time.slowMotion = 1;
         game.world.alpha = 1;
 
         Main.restarting = false;
 
-        Main['objectGroup_4'].forEach(function(e) {
+        Frogland['objectGroup_4'].forEach(function(e) {
             if(!!e.Respawn) {
                 e.Respawn();
             }
         });
 
-        Main['objectGroup_3'].forEach(function(e) {
+        Frogland['objectGroup_3'].forEach(function(e) {
             if(!!e.Respawn) {
                 e.Respawn();
             }
         });
 
-        Main['objectGroup_2'].forEach(function(e) {
+        Frogland['objectGroup_2'].forEach(function(e) {
             if(!!e.Respawn) {
                 e.Respawn();
             }

@@ -2,7 +2,7 @@
 
 "EnergyBar0000":
 {
-	"frame": {"x":142,"y":2,"w":98,"h":13},
+	"frame": {"x":149,"y":2,"w":98,"h":13},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":1,"y":1,"w":98,"h":13},
@@ -11,7 +11,7 @@
 },
 "EnergyBar0001":
 {
-	"frame": {"x":142,"y":17,"w":94,"h":9},
+	"frame": {"x":149,"y":17,"w":94,"h":9},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":3,"y":15,"w":94,"h":9},
@@ -20,12 +20,21 @@
 },
 "EnergyBar0002":
 {
-	"frame": {"x":242,"y":2,"w":5,"h":17},
+	"frame": {"x":142,"y":2,"w":5,"h":17},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":43,"y":9,"w":5,"h":17},
 	"sourceSize": {"w":5,"h":17},
 	"pivot": {"x":1.4,"y":0.647059}
+},
+"EnergyBar0003":
+{
+	"frame": {"x":245,"y":17,"w":94,"h":9},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":3,"y":15,"w":94,"h":9},
+	"sourceSize": {"w":94,"h":9},
+	"pivot": {"x":0.5,"y":0.555556}
 },
 "Upgrades0000":
 {
@@ -77,8 +86,8 @@
 	"version": "1.0",
 	"image": "UI.png",
 	"format": "RGBA8888",
-	"size": {"w":249,"h":30},
+	"size": {"w":341,"h":30},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:25008c9c78bcec01635a0e10dc0524b7:28d3b2411dc875c6b416101dc5661295:4b774b923918ecd961888279dba3ffad$"
+	"smartupdate": "$TexturePacker:SmartUpdate:911bcb3086819c385f4c1cfbdd6f5c48:322dd7a1839d3635479a10101792ad93:4b774b923918ecd961888279dba3ffad$"
 }
 }

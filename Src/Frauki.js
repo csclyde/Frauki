@@ -428,6 +428,7 @@ Player.prototype.Hit = function(f, e) {
     effectsController.ParticleSpray(this.body, e.body, 'yellow', e.PlayerDirection(), e.damage);
 
     //energyController.RemoveEnergy(e.damage);
+    energyController.RemoveHealth(e.damage);
 
     e.power.attack(this, e.damage);
 
