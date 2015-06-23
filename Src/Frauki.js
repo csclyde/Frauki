@@ -16,6 +16,9 @@ Player = function (game, x, y, name) {
     this.body.maxVelocity.y = 500;
     this.body.drag.x = 2000;
 
+    this.initialX = x;
+    this.initialY = y;
+
     //load up the animations
     fraukiAnimations.forEach(function(anim) {
         this.animations.add(anim.Name, anim.Frames, anim.Fps, anim.Loop, false);
@@ -429,6 +432,8 @@ Player.prototype.Hit = function(f, e) {
 
     //energyController.RemoveEnergy(e.damage);
     energyController.RemoveHealth(e.damage);
+
+    console.log('Frauki is taking ' + e.damage + ' damage');
 
     e.power.attack(this, e.damage);
 

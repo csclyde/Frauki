@@ -45,7 +45,7 @@ Enemy.prototype.SetDefaultValues = function() {
     this.weight = 0.5;
     this.hitTimer = 0;
     this.energy = 5;
-    this.damage = 4;
+    this.damage = 3;
     this.inScope = false;
     this.baseStunDuration = 300;
     this.poise = 5;
@@ -72,6 +72,7 @@ Enemy.prototype.Respawn = function() {
     this.y = this.initialY;
     this.energy = this.maxEnergy;
     this.poise = this.initialPoise;
+    this.state = this.Idling;
 };
 
 Enemy.prototype.UpdateParentage = function() {
@@ -192,21 +193,23 @@ function EnemyHit(f, e) {
     events.publish('camera_shake', {magnitudeX: 15 * frauki.currentAttack.damage, magnitudeY: 5, duration: 100});
 
     e.timers.SetTimer('hit', e.baseStunDuration);
-    //e.energy -= frauki.currentAttack.damage;
-    frauki.power.attack(e, frauki.currentAttack.damage);
+    e.energy -= frauki.currentAttack.damage;
+
+    console.log('Enemy is taking ' + frauki.currentAttack.damage + ' out of ' + e.maxEnergy + ' (' + e.energy + ')');
+    //frauki.power.attack(e, frauki.currentAttack.damage);
 
     e.poise -= frauki.currentAttack.damage * 2;
 
     events.publish('play_sound', { name: 'attack_connect' });
 
-    if(e.power.level <= 0) {
+    if(e.energy <= 0) {
 
         Frogland.ThunderDome(e.x, e.y);
 
         e.Die();
         e.state = e.Dying;
 
-        energyController.AddEnergy(e.maxEnergy / 2);
+        energyController.AddHealth(1);
 
         effectsController.DiceEnemy(e.enemyName, e.body.center.x, e.body.center.y);
 
@@ -226,8 +229,8 @@ function EnemyHit(f, e) {
             e.poise = e.initialPoise;
 
             //attack ultimately does 3x damage
-            //e.energy -= frauki.currentAttack.damage * 2;
-            frauki.power.attack(e, frauki.currentAttack.damage * 2);
+            e.energy -= frauki.currentAttack.damage * 2;
+            //frauki.power.attack(e, frauki.currentAttack.damage * 2);
             console.log('Enemy is being stunned at ' + e.GetPoisePercentage() + ' poise and Frauki did ' + frauki.currentAttack.damage + ' damage');
         }
     }   

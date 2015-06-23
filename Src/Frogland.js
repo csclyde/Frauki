@@ -28,7 +28,7 @@ Frogland.Create = function() {
     this.backgroundLayer_2 = this.map.createLayer('Background_2');
     this.backgroundLayer_2.visible = false;
 
-    frauki = new Player(game, 30 * 16, 44 * 16, 'Frauki');
+    frauki = new Player(game, 140 * 16, 40 * 16, 'Frauki');
     game.add.existing(frauki);
 
     game.camera.focusOnXY(frauki.body.x, frauki.body.y);
@@ -174,10 +174,10 @@ Frogland.ThunderDome = function(x, y) {
     // }
 
     // if(Math.random() > 0.85) {
-        enem = new Enemy(game, 166 * 16, 89 * 16, 'Buzzar');
-        game.add.existing(enem);
-        enem.owningLayer = 3;
-        Frogland['objectGroup_3'].add(enem);
+        // enem = new Enemy(game, 166 * 16, 89 * 16, 'Buzzar');
+        // game.add.existing(enem);
+        // enem.owningLayer = 3;
+        // Frogland['objectGroup_3'].add(enem);
     // }
 };
 
@@ -336,6 +336,6 @@ Frogland.DislodgeTile = function(tile) {
             Frogland.DislodgeTile(Frogland.map.getTile(tile.x + 1, tile.y, 'Collision_3'));
             Frogland.DislodgeTile(Frogland.map.getTile(tile.x, tile.y - 1, 'Collision_3'));
             Frogland.DislodgeTile(Frogland.map.getTile(tile.x, tile.y + 1, 'Collision_3'));
-        }, 40);
+        }, 20 + (Math.random() * 80));
     }
 };

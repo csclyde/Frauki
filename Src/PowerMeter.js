@@ -18,9 +18,9 @@ PowerMeter.prototype.attack = function(target, damage) {
 		this.level = this.maxLevel;
 	}
 
-	if(target === frauki) {
-		console.log('Frauki was attacked. Ratio: ' + ratio + ' Damage: ' + damage + ' Total Damage: ' + ratio * damage);
-	} else {
-		console.log('Enemy was attacked. Ratio: ' + ratio + ' Damage: ' + damage + ' Total Damage: ' + ratio * damage);
-	}
+	// if(target === frauki) {
+	// 	console.log('Frauki was attacked. Ratio: ' + ratio + ' Damage: ' + damage + ' Total Damage: ' + ratio * damage);
+	// } else {
+	// 	console.log('Enemy was attacked. Ratio: ' + ratio + ' Damage: ' + damage + ' Total Damage: ' + ratio * damage);
+	// }
 };

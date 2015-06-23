@@ -18,7 +18,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
     
     this.weight = 0.5;
     this.energy = 4;
-    this.damage = 5;
+    this.damage = 3;
     this.poise = 5;
 
     this.wanderTimer = 0;

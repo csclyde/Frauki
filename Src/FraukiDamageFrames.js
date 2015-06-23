@@ -59,7 +59,7 @@ var fraukiDamageFrames = {
 	//overhead swing
 	'Attack Overhead0007': {
 		x: -30, y: -32, w: 75, h: 60,
-		damage: 3,
+		damage: 2.5,
 		knockback: 0,
 		juggle: 1
 	},
@@ -153,7 +153,7 @@ var fraukiDamageFrames = {
 
 	'Attack Dive0010': {
 		x: -10, y: -5, w: 28, h: 45,
-		damage: 3,
+		damage: 4,
 		knockback: 1.5,
 		juggle: 0
 	},
@@ -167,42 +167,42 @@ var fraukiDamageFrames = {
 
 	'Attack Dive0012': {
 		x: -2, y: 40, w: 13, h: 33,
-		damage: 4,
+		damage: 2,
 		knockback: 1.5,
 		juggle: 1.5
 	},
 
 	'Attack Dive0013': {
 		x: -2, y: 40, w: 13, h: 33,
-		damage: 4,
+		damage: 2,
 		knockback: 1.5,
 		juggle: 1.5
 	},
 
 	'Attack Dive0014': {
 		x: -2, y: 40, w: 13, h: 33,
-		damage: 4,
+		damage: 2,
 		knockback: 1.5,
 		juggle: 1.5
 	},
 
 	'Attack Dive0015': {
 		x: -2, y: 40, w: 13, h: 33,
-		damage: 4,
+		damage: 2,
 		knockback: 1.5,
 		juggle: 1.5
 	},
 
 	'Attack Dive0016': {
 		x: -2, y: 40, w: 13, h: 33,
-		damage: 4,
+		damage: 2,
 		knockback: 1.5,
 		juggle: 1.5
 	},
 
 	'Attack Dive0017': {
 		x: -2, y: 40, w: 13, h: 33,
-		damage: 4,
+		damage: 2,
 		knockback: 1.5,
 		juggle: 1.5
 	},

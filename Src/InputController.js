@@ -10,6 +10,7 @@ InputController = function() {
 	this.roll		= game.input.keyboard.addKey(Phaser.Keyboard.X);
     this.pause      = game.input.keyboard.addKey(Phaser.Keyboard.Q);
 	this.testButton = game.input.keyboard.addKey(Phaser.Keyboard.P);
+    this.testButton2 = game.input.keyboard.addKey(Phaser.Keyboard.O);
 
     this.runLeft.onDown.add(function() { events.publish('player_run', {run:true, dir:'left'}); }, this);
     this.runLeft.onUp.add(function() { events.publish('player_run', {run:false, dir: 'left'}); }, this);
@@ -48,6 +49,10 @@ InputController = function() {
 
     this.testButton.onDown.add(function() { 
         events.publish('stop_all_music');
+    });
+
+    this.testButton2.onDown.add(function() { 
+        Main.Restart();
     });
 
     game.input.gamepad.start();

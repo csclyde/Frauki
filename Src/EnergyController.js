@@ -106,6 +106,10 @@ EnergyController.prototype.RemoveEnergy = function(amt) {
 	//this.gracePeriod = game.time.now + 500;
 };
 
+EnergyController.prototype.AddHealth = function(amt) {
+	this.health += amt;
+}
+
 EnergyController.prototype.RemoveHealth = function(amt) {
 	this.health -= amt;
 }
