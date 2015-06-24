@@ -313,6 +313,10 @@ Frogland.CheckEnvironmentalCollisions = function(f, tile) {
         }
     } else if(tile.index === 5) { //falling tile
 
+        if(tile.dislodged === true) {
+            return false;
+        }
+        
         if(tile.waitingToFall !== true) {
 
             setTimeout(function() { Frogland.DislodgeTile(tile); }, 10);
@@ -320,11 +324,7 @@ Frogland.CheckEnvironmentalCollisions = function(f, tile) {
             tile.waitingToFall = true;
         }
 
-        if(tile.dislodged === true) {
-            return false;
-        } else {
-            return true;
-        }
+        return true;
     }
 };
 
@@ -337,10 +337,10 @@ Frogland.DislodgeTile = function(tile) {
         projectileController.FallingTile(tile);
 
         setTimeout(function() { 
-            Frogland.DislodgeTile(Frogland.map.getTile(tile.x - 1, tile.y, 'Collision_3'));
-            Frogland.DislodgeTile(Frogland.map.getTile(tile.x + 1, tile.y, 'Collision_3'));
-            Frogland.DislodgeTile(Frogland.map.getTile(tile.x, tile.y - 1, 'Collision_3'));
-            Frogland.DislodgeTile(Frogland.map.getTile(tile.x, tile.y + 1, 'Collision_3'));
+            Frogland.DislodgeTile(Frogland.map.getTile(tile.x - 1, tile.y, 'Midground_3'));
+            Frogland.DislodgeTile(Frogland.map.getTile(tile.x + 1, tile.y, 'Midground_3'));
+            Frogland.DislodgeTile(Frogland.map.getTile(tile.x, tile.y - 1, 'Midground_3'));
+            Frogland.DislodgeTile(Frogland.map.getTile(tile.x, tile.y + 1, 'Midground_3'));
         }, 20 + (Math.random() * 80));
     }
 };
