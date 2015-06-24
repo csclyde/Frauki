@@ -320,14 +320,19 @@ Frogland.CheckEnvironmentalCollisions = function(f, tile) {
             tile.waitingToFall = true;
         }
 
-        return true;
+        if(tile.dislodged === true) {
+            return false;
+        } else {
+            return true;
+        }
     }
 };
 
 Frogland.DislodgeTile = function(tile) {
     if(tile && tile.index === 5) {
         this.map.removeTile(tile.x, tile.y, 'Midground_3');
-        this.map.removeTile(tile.x, tile.y, 'Collision_3');
+        //this.map.removeTile(tile.x, tile.y, 'Collision_3');
+        tile.dislodged = true;
 
         projectileController.FallingTile(tile);
 
