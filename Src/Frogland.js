@@ -330,7 +330,10 @@ Frogland.CheckEnvironmentalCollisions = function(f, tile) {
 
 Frogland.DislodgeTile = function(tile) {
     if(tile && tile.index === 5 && tile.dislodged !== true) {
-        this.map.removeTile(tile.x, tile.y, 'Midground_3');
+        //this.map.removeTile(tile.x, tile.y, 'Midground_3');
+        
+        mgTile = Frogland.map.getTile(tile.x, tile.y, 'Midground_3');
+        mgTile.alpha = 0;
         //this.map.removeTile(tile.x, tile.y, 'Collision_3');
         tile.dislodged = true;
 
