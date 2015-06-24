@@ -334,6 +334,7 @@ Frogland.DislodgeTile = function(tile) {
         
         mgTile = Frogland.map.getTile(tile.x, tile.y, 'Midground_3');
         mgTile.alpha = 0;
+        Frogland.midgroundLayer_3.dirty = true;
         //this.map.removeTile(tile.x, tile.y, 'Collision_3');
         tile.dislodged = true;
 
