@@ -14,7 +14,7 @@ Enemy.prototype.types['CreeperThistle'] =  function() {
 
     this.energy = 1;
     this.body.immovable = true;
-    this.body.allowGravity = false;
+    //this.body.allowGravity = false;
 
     this.state = this.Idling;
 

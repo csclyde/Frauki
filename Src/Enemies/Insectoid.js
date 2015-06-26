@@ -17,6 +17,8 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
     this.preHopPos = {};
 
+    this.body.maxVelocity.y = 500;
+
     //this.body.bounce.set(0.5);
 
 	this.updateFunction = function() {
