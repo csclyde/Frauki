@@ -6,6 +6,7 @@ EnergyController = function() {
 	this.gracePeriod = 0;
 
 	this.health = 30;
+	this.power = 0;
 	
 };
 
@@ -13,7 +14,7 @@ EnergyController.prototype.Create = function() {
 	this.barContainer = game.add.image(7, 27, 'UI', 'EnergyBar0000');
 	this.barContainer.fixedToCamera = true;
 
-	this.energyBar = game.add.image(9, 29, 'UI', 'EnergyBar0001');
+	this.energyBar = game.add.image(9, 29, 'UI', 'EnergyBar0004');
 	this.energyBar.fixedToCamera = true;
 	this.energyBar.anchor.x = 0;
 
@@ -23,6 +24,13 @@ EnergyController.prototype.Create = function() {
 	this.healthBar = game.add.image(9, 9, 'UI', 'EnergyBar0003');
 	this.healthBar.fixedToCamera = true;
 	this.healthBar.anchor.x = 0;
+
+	this.powerContainer = game.add.image(7, 47, 'UI', 'EnergyBar0000');
+	this.powerContainer.fixedToCamera = true;
+
+	this.powerBar = game.add.image(9, 49, 'UI', 'EnergyBar0001');
+	this.powerBar.fixedToCamera = true;
+	this.powerBar.anchor.x = 0;
 
 	this.restingPointMarker = game.add.image(this.energyBar.x + (this.energyBar.width / 2) - 2, 25, 'UI', 'EnergyBar0002');
 	this.restingPointMarker.fixedToCamera = true;
@@ -77,12 +85,16 @@ EnergyController.prototype.UpdateEnergy = function() {
 
 	this.energyBar.scale.x = this.energy / 30;
 	this.healthBar.scale.x = this.health / 30;
+	this.powerBar.scale.x = this.power / 30;
 
 	if(this.energyBar.scale.x < 0)
 		this.energyBar.scale.x = 0;
 
 	if(this.healthBar.scale.x < 0)
 		this.healthBar.scale.x = 0;
+
+	if(this.powerBar.scale.x < 0)
+		this.powerBar.scale.x = 0;
 
 
 	this.restingPointMarker.cameraOffset.x = 10 + (90 * (this.neutralPoint / 30));
@@ -108,11 +120,19 @@ EnergyController.prototype.RemoveEnergy = function(amt) {
 
 EnergyController.prototype.AddHealth = function(amt) {
 	this.health += amt;
-}
+};
 
 EnergyController.prototype.RemoveHealth = function(amt) {
 	this.health -= amt;
-}
+};
+
+EnergyController.prototype.AddPower = function(amt) {
+	this.power += amt;
+};
+
+EnergyController.prototype.RemovePower = function(amt) {
+	this.power -= amt;
+};
 
 EnergyController.prototype.UseEnergy = function(amt) {
 	if(this.energy > 0) {

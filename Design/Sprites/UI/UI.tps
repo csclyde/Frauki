@@ -4,9 +4,9 @@
         <key>fileFormatVersion</key>
         <int>3</int>
         <key>texturePackerVersion</key>
-        <string>3.8.0</string>
+        <string>3.7.1</string>
         <key>fileName</key>
-        <string>D:/gamedev/Frauki/Design/Sprites/UI/UI.tps</string>
+        <string>C:/Users/user/Documents/gamedev/Frauki/Design/Sprites/UI/UI.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -197,6 +197,7 @@
             <filename>Frames/EnergyBar0000.png</filename>
             <filename>Frames/EnergyBar0001.png</filename>
             <filename>Frames/EnergyBar0003.png</filename>
+            <filename>Frames/EnergyBar0004.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

@@ -18,7 +18,6 @@ Enemy = function(game, x, y, name) {
         console.log('Enemy of type ' + name + ' was not found');
     }
 
-    this.power = new PowerMeter(this.energy);
     this.enemyName = name;
     this.state = this.Idling;
 
@@ -193,10 +192,11 @@ function EnemyHit(f, e) {
     events.publish('camera_shake', {magnitudeX: 15 * frauki.currentAttack.damage, magnitudeY: 5, duration: 100});
 
     e.timers.SetTimer('hit', e.baseStunDuration);
-    e.energy -= frauki.currentAttack.damage;
+    e.energy -= frauki.currentAttack.damage + (frauki.currentAttack.damage * (energyController.power / 10));
+
+    energyController.AddPower(frauki.currentAttack.damage);
 
     console.log('Enemy is taking ' + frauki.currentAttack.damage + ' out of ' + e.maxEnergy + ' (' + e.energy + ')');
-    //frauki.power.attack(e, frauki.currentAttack.damage);
 
     e.poise -= frauki.currentAttack.damage * 2;
 
@@ -230,7 +230,6 @@ function EnemyHit(f, e) {
 
             //attack ultimately does 3x damage
             e.energy -= frauki.currentAttack.damage * 2;
-            //frauki.power.attack(e, frauki.currentAttack.damage * 2);
             console.log('Enemy is being stunned at ' + e.GetPoisePercentage() + ' poise and Frauki did ' + frauki.currentAttack.damage + ' damage');
         }
     }   

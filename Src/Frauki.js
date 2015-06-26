@@ -24,8 +24,6 @@ Player = function (game, x, y, name) {
         this.animations.add(anim.Name, anim.Frames, anim.Fps, anim.Loop, false);
     }, this);
 
-    this.power = new PowerMeter();
-
     this.state = this.Standing;
     this.PlayAnim('stand');
     
@@ -432,10 +430,9 @@ Player.prototype.Hit = function(f, e) {
 
     //energyController.RemoveEnergy(e.damage);
     energyController.RemoveHealth(e.damage);
+    energyController.RemovePower(e.damage / 3);
 
     console.log('Frauki is taking ' + e.damage + ' damage');
-
-    e.power.attack(this, e.damage);
 
     e.poise += e.initialPoise;
 

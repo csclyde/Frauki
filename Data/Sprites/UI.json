@@ -11,7 +11,7 @@
 },
 "EnergyBar0001":
 {
-	"frame": {"x":149,"y":17,"w":94,"h":9},
+	"frame": {"x":249,"y":2,"w":94,"h":9},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":3,"y":15,"w":94,"h":9},
@@ -29,7 +29,16 @@
 },
 "EnergyBar0003":
 {
-	"frame": {"x":245,"y":17,"w":94,"h":9},
+	"frame": {"x":249,"y":13,"w":94,"h":9},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":3,"y":15,"w":94,"h":9},
+	"sourceSize": {"w":94,"h":9},
+	"pivot": {"x":0.5,"y":0.555556}
+},
+"EnergyBar0004":
+{
+	"frame": {"x":149,"y":17,"w":94,"h":9},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":3,"y":15,"w":94,"h":9},
@@ -86,8 +95,8 @@
 	"version": "1.0",
 	"image": "UI.png",
 	"format": "RGBA8888",
-	"size": {"w":341,"h":30},
+	"size": {"w":345,"h":30},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:911bcb3086819c385f4c1cfbdd6f5c48:322dd7a1839d3635479a10101792ad93:4b774b923918ecd961888279dba3ffad$"
+	"smartupdate": "$TexturePacker:SmartUpdate:26373107e28ed3444bd92c8e65e9165d:e0f3d0b7057d1a140b74ace1ba7b0768:4b774b923918ecd961888279dba3ffad$"
 }
 }

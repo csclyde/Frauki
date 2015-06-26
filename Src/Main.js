@@ -71,6 +71,7 @@ Main.Restart = function() {
         frauki.body.y = frauki.initialY; //fraukiSpawnY;
         energyController.energy = 15;
         energyController.health = 30;
+        energyController.power = 0;
         energyController.neutralPoint = 15;
         game.time.slowMotion = 1;
         game.world.alpha = 1;
