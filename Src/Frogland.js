@@ -319,7 +319,9 @@ Frogland.CheckEnvironmentalCollisions = function(f, tile) {
         
         if(tile.waitingToFall !== true) {
 
-            setTimeout(function() { Frogland.DislodgeTile(tile); }, 5);
+            //setTimeout(function() { 
+                Frogland.DislodgeTile(tile); 
+                //}, 5);
 
             tile.waitingToFall = true;
         }

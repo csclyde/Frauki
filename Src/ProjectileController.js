@@ -28,7 +28,17 @@ ProjectileController.prototype.Tarball = function(e) {
 
 ProjectileController.prototype.FallingTile = function(sourceTile) {
 
-	var tile = game.add.sprite(sourceTile.worldX, sourceTile.worldY, 'Misc', 'Tiles0000');
+	var tileName = Math.random() * 3;
+
+	if(tileName < 1) {
+		tileName = 'Tiles0000';
+	} else if(tileName < 2) {
+		tileName = 'Tiles0001';
+	} else {
+		tileName = 'Tiles0002';
+	}
+
+	var tile = game.add.sprite(sourceTile.worldX, sourceTile.worldY, 'Misc', tileName);
 	game.physics.enable(tile, Phaser.Physics.ARCADE);
 
 	tile.body.setSize(16, 16);
