@@ -387,15 +387,6 @@
 	"sourceSize": {"w":39,"h":23},
 	"pivot": {"x":0.5,"y":0.5}
 },
-"Sporoid/spore":
-{
-	"frame": {"x":659,"y":114,"w":12,"h":12},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":12,"h":12},
-	"sourceSize": {"w":12,"h":12},
-	"pivot": {"x":0.5,"y":0.5}
-},
 "TerraceMadman/Standing0000":
 {
 	"frame": {"x":635,"y":1,"w":40,"h":50},
@@ -421,6 +412,6 @@
 	"format": "RGBA8888",
 	"size": {"w":682,"h":127},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:e9e425d698a5357ac2db2b352e20954e:f725429dc2cb00f879408cd32bdf08be:b1585ba32d60cf5440f3fdffe8c37c76$"
+	"smartupdate": "$TexturePacker:SmartUpdate:67e2762bc5d6e71d743fbf93f167229b:9ed37614e668699b85c7cb87e0fdde2f:b1585ba32d60cf5440f3fdffe8c37c76$"
 }
 }
