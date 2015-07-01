@@ -5,7 +5,7 @@ EnergyController = function() {
 	this.tickTimer = 0;
 	this.gracePeriod = 0;
 
-	this.health = 30;
+	this.health = 100;
 	this.power = 0;
 	
 };
@@ -75,17 +75,20 @@ EnergyController.prototype.UpdateEnergy = function() {
 	if(this.neutralPoint < 0)
 		this.neutralPoint = 0;
 
-	if(this.health > 30)
-		this.health = 30;
+	if(this.health > 100)
+		this.health = 100;
 	if(this.health < 0)
 		this.health = 0;
+
+	if(this.power < 0)
+		this.power = 0;
 
 	if(this.health <= 0)
 		Main.Restart();
 
 	this.energyBar.scale.x = this.energy / 30;
-	this.healthBar.scale.x = this.health / 30;
-	this.powerBar.scale.x = this.power / 30;
+	this.healthBar.scale.x = this.health / 100;
+	this.powerBar.scale.x = this.power / 100;
 
 	if(this.energyBar.scale.x < 0)
 		this.energyBar.scale.x = 0;
@@ -132,6 +135,10 @@ EnergyController.prototype.AddPower = function(amt) {
 
 EnergyController.prototype.RemovePower = function(amt) {
 	this.power -= amt;
+};
+
+EnergyController.prototype.GetPowerPercentage = function() {
+	return this.power / 100;
 };
 
 EnergyController.prototype.UseEnergy = function(amt) {

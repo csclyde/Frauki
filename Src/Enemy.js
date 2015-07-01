@@ -174,8 +174,7 @@ function EnemyHit(f, e) {
     if(!e.timers.TimerUp('hit'))
         return;
 
-    var numParticles = frauki.currentAttack.damage * 2;
-    var damage = frauki.currentAttack.damage + (frauki.currentAttack.damage * (energyController.power / 10));
+    var damage = frauki.currentAttack.damage + (frauki.currentAttack.damage * (energyController.GetPowerPercentage() * 3));
 
     //fraukis knockback will increase the amount that the enemy is moved. The weight
     //of the enemy will work against that. 
@@ -184,7 +183,9 @@ function EnemyHit(f, e) {
     e.xHitVel *= e.PlayerDirMod();
     game.add.tween(e).to({xHitVel: 0}, 300, Phaser.Easing.Exponential.Out, true);
 
-    e.body.velocity.y = -100 + (frauki.currentAttack.juggle * -400);
+    e.body.velocity.y = -200 + (frauki.currentAttack.juggle * -600);
+
+    console.log(frauki.currentAttack);
 
     e.timers.SetTimer('hit', e.baseStunDuration);
 
@@ -204,7 +205,7 @@ function EnemyHit(f, e) {
 
     e.energy -= damage;
 
-    energyController.AddPower(damage / 3);
+    energyController.AddPower(damage);
 
     console.log('Enemy is taking ' + damage + ', now at ' + e.energy + '/' + e.maxEnergy);
 
@@ -213,7 +214,7 @@ function EnemyHit(f, e) {
         e.Die();
         e.state = e.Dying;
 
-        energyController.AddHealth(1);
+        energyController.AddHealth(3);
 
         effectsController.DiceEnemy(e.enemyName, e.body.center.x, e.body.center.y);
 

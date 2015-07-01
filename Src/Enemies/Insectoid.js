@@ -107,6 +107,11 @@ Enemy.prototype.types['Insectoid'] =  function() {
     };
 
     this.Dive = function() {
+
+        if(!this.timers.TimerUp('dive')) {
+            return;
+        }
+
         this.state = this.Diving;
         this.body.velocity.y = 300;
         this.body.velocity.x = 0;
@@ -114,6 +119,8 @@ Enemy.prototype.types['Insectoid'] =  function() {
         this.scale.x = 1;
         game.add.tween(this).to({angle: 90}, 100, Phaser.Easing.Exponential.Out, true);
         //this.angle = 90;  
+
+        this.timers.SetTimer('dive', 2000);
     };
 
     this.Flee = function() {
