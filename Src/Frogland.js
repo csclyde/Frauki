@@ -28,7 +28,7 @@ Frogland.Create = function() {
     this.backgroundLayer_2 = this.map.createLayer('Background_2');
     this.backgroundLayer_2.visible = false;
 
-    frauki = new Player(game, 174 * 16, 82 * 16, 'Frauki');
+    frauki = new Player(game, 148 * 16, 87 * 16, 'Frauki');
     game.add.existing(frauki);
 
     game.camera.focusOnXY(frauki.body.x, frauki.body.y);

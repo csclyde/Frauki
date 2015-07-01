@@ -15,6 +15,8 @@ Enemy.prototype.types['Buzzar'] =  function() {
     this.stingRestTimer = 0;
 
     this.anger = 1;
+
+    this.hoverOffset = Math.random() * 300;
     
     this.weight = 0.5;
     this.energy = 4;
@@ -86,7 +88,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
 
         events.publish('play_sound', { name: 'buzzar_idle' });
         
-        this.body.velocity.y = Math.sin(game.time.now / 250) * 100 + (Math.random() * 40 - 20);
+        this.body.acceleration.y = Math.sin((this.hoverOffset + game.time.now) / 250) * 300;
         //this.body.velocity.x = Math.sin(game.time.now / 1000) * 20;
 
         if(this.wanderTimer > game.time.now) {
