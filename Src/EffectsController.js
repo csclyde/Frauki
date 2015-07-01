@@ -18,14 +18,14 @@ EffectsController = function() {
     this.negativeBits = game.add.emitter(0, 0, 100);
     this.negativeBits.makeParticles('Misc', ['EnergyBitNeg0000', 'EnergyBitNeg0001', 'EnergyBitNeg0002', 'EnergyBitNeg0003', 'EnergyBitNeg0004', 'EnergyBitNeg0005']);
     this.negativeBits.gravity = -200;
-    this.negativeBits.maxParticleScale = 1.0;
-    this.negativeBits.minParticleScale = 0.7;
+    this.negativeBits.maxParticleScale = 1.5;
+    this.negativeBits.minParticleScale = 0.5;
 
     this.positiveBits = game.add.emitter(0, 0, 100);
     this.positiveBits.makeParticles('Misc', ['EnergyBitPos0000', 'EnergyBitPos0001', 'EnergyBitPos0002', 'EnergyBitPos0003', 'EnergyBitPos0004', 'EnergyBitPos0005']); //array of strings here for multiple sprites
     this.positiveBits.gravity = -800;
-    this.positiveBits.maxParticleScale = 1.0;
-    this.positiveBits.minParticleScale = 0.7;
+    this.positiveBits.maxParticleScale = 1.5;
+    this.positiveBits.minParticleScale = 0.5;
 
     this.splash = game.add.emitter(0, 0, 100);
     this.splash.makeParticles('Misc', ['Splash0000', 'Splash0001']); 
@@ -81,8 +81,8 @@ EffectsController.prototype.UpdateEffects = function() {
 }
 
 function UpdateParticle(p) {
-    var vel = 800;
-    var maxVelocity = 800;
+    var vel = 900;
+    var maxVelocity = 750;
 
     if(!p.destBody) {
         p.destBody = this.activeDest;
@@ -143,11 +143,11 @@ EffectsController.prototype.ParticleSpray = function(source, dest, color, dir, a
 
 	var effect = null;
 
-	if(color === 'red') {
+	if(color === 'positive') {
 		effect = this.positiveBits;
         this.enemySource = source;
     }
-    else if(color === 'yellow') {
+    else if(color === 'negative') {
         effect = this.negativeBits;
         this.enemyDest = dest;
 	}

@@ -28,7 +28,6 @@ Enemy = function(game, x, y, name) {
     this.initialPoise = this.poise;
 
     this.xHitVel = 0;
-    this.yHitVel = 0;
 };
 
 Enemy.prototype = Object.create(Phaser.Sprite.prototype);
@@ -176,35 +175,40 @@ function EnemyHit(f, e) {
         return;
 
     var numParticles = frauki.currentAttack.damage * 2;
-
-    var c = frauki.body.center.x < e.body.center.x ? 1 : -1;
+    var damage = frauki.currentAttack.damage + (frauki.currentAttack.damage * (energyController.power / 10));
 
     //fraukis knockback will increase the amount that the enemy is moved. The weight
     //of the enemy will work against that. 
     e.xHitVel = (1000 * frauki.currentAttack.knockback) - (1000 * e.weight);
     if(e.xHitVel < 200) e.xHitVel = 200;
-    e.xHitVel *= c;
-
+    e.xHitVel *= e.PlayerDirMod();
     game.add.tween(e).to({xHitVel: 0}, 300, Phaser.Easing.Exponential.Out, true);
 
     e.body.velocity.y = -100 + (frauki.currentAttack.juggle * -400);
 
-    events.publish('camera_shake', {magnitudeX: 15 * frauki.currentAttack.damage, magnitudeY: 5, duration: 100});
-
     e.timers.SetTimer('hit', e.baseStunDuration);
-    e.energy -= frauki.currentAttack.damage + (frauki.currentAttack.damage * (energyController.power / 10));
 
-    energyController.AddPower(frauki.currentAttack.damage);
+    e.poise -= damage;
 
-    console.log('Enemy is taking ' + frauki.currentAttack.damage + ' out of ' + e.maxEnergy + ' (' + e.energy + ')');
+    if(e.GetPoisePercentage() < 0.2) {
+        //send it flying
+        e.body.velocity.y = -600;
+        e.body.velocity.x = e.PlayerDirMod() * 700;
 
-    e.poise -= frauki.currentAttack.damage * 2;
+        e.state = e.Hurting;
+        e.poise = e.initialPoise;
 
-    events.publish('play_sound', { name: 'attack_connect' });
+        damage *= 2;
+        console.log('Enemy is being stunned!');
+    }
+
+    e.energy -= damage;
+
+    energyController.AddPower(damage / 3);
+
+    console.log('Enemy is taking ' + damage + ', now at ' + e.energy + '/' + e.maxEnergy);
 
     if(e.energy <= 0) {
-
-        Frogland.ThunderDome(e.x, e.y);
 
         e.Die();
         e.state = e.Dying;
@@ -215,26 +219,14 @@ function EnemyHit(f, e) {
 
         e.kill();
 
-        numParticles += e.maxEnergy;
+        damage = e.maxEnergy;
     } else {
-        energyController.AddEnergy(frauki.currentAttack.damage);
         e.TakeHit();
-
-        if(e.GetPoisePercentage() < 0.2) {
-            //send it flying
-            e.body.velocity.y = -600;
-            e.body.velocity.x = c * 700;
-
-            e.state = e.Hurting;
-            e.poise = e.initialPoise;
-
-            //attack ultimately does 3x damage
-            e.energy -= frauki.currentAttack.damage * 2;
-            console.log('Enemy is being stunned at ' + e.GetPoisePercentage() + ' poise and Frauki did ' + frauki.currentAttack.damage + ' damage');
-        }
     }   
-
-    effectsController.ParticleSpray(e.body, frauki.body, 'red', e.EnemyDirection(), numParticles);    
+        
+    events.publish('camera_shake', {magnitudeX: 15 * frauki.currentAttack.damage, magnitudeY: 5, duration: 100});
+    events.publish('play_sound', { name: 'attack_connect' });
+    effectsController.ParticleSpray(e.body, frauki.body, 'positive', e.EnemyDirection(), damage);    
 };
 
 
@@ -280,6 +272,11 @@ Enemy.prototype.PlayerDirection = function() {
         return 'right';
 };
 
+Enemy.prototype.PlayerDirMod = function() {
+
+    return frauki.body.center.x < this.body.center.x ? 1 : -1;
+};
+
 Enemy.prototype.EnemyDirection = function() {
     if(frauki.body.center.y < this.body.center.y - (this.body.height / 2))
         return 'below';
@@ -301,5 +298,6 @@ Enemy.prototype.RollDice = function(sides, thresh) {
 };
 
 Enemy.prototype.ChargeAtPlayer = function(speed) {
+
     game.physics.arcade.moveToXY(this, frauki.body.center.x, frauki.body.center.y, speed);
 };

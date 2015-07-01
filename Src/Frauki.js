@@ -425,16 +425,33 @@ Player.prototype.Hit = function(f, e) {
     events.publish('play_sound', {name: 'ouch'});
 
     this.body.velocity.y = -300;
+    this.body.velocity.x *= 0.1;
 
-    effectsController.ParticleSpray(this.body, e.body, 'yellow', e.PlayerDirection(), e.damage);
+    var damage = e.damage;
 
-    //energyController.RemoveEnergy(e.damage);
-    energyController.RemoveHealth(e.damage);
-    energyController.RemovePower(e.damage / 3);
+    //if they are crouching, half damage
+    if(frauki.state === this.Crouching) {
+        damage /= 2;
+    }
 
-    console.log('Frauki is taking ' + e.damage + ' damage');
+    //if they are attacking (but outside a damage frame), double damage
+    if(frauki.state === this.AttackStab || 
+       frauki.state === this.AttackFront || 
+       frauki.state === this.AttackOverhead ||
+       frauki.state === this.AttackJump ||
+       frauki.state === this.AttackDiveCharge ||
+       frauki.state === this.AttackDiveLand) {
+        damage *= 2;
+    }
 
-    e.poise += e.initialPoise;
+    effectsController.ParticleSpray(this.body, e.body, 'negative', e.PlayerDirection(), damage);
+
+    energyController.RemoveHealth(damage);
+    energyController.RemovePower(damage / 3);
+
+    console.log('Frauki is taking ' + damage + ' damage');
+
+    e.poise = e.initialPoise;
 
     this.body.center.x < e.body.center.x ? this.body.velocity.x = -200 : this.body.velocity.x = 200;
 
@@ -576,24 +593,14 @@ Player.prototype.Flipping = function() {
 Player.prototype.Rolling = function() {
     this.PlayAnim('roll');
     
-    
-
     this.body.maxVelocity.x = PLAYER_ROLL_SPEED();
 
     var dur = game.time.now - this.movement.rollStart;
-    var accelMod = 0;
-
-    if(inputController.runLeft.isDown && !inputController.runRight.isDown) {
-        accelMod = -500;
-    } else if(!inputController.runLeft.isDown && inputController.runRight.isDown) {
-        accelMod = 500;
-    }
 
     //pickup stage
     if(Math.abs(this.body.velocity.x) < PLAYER_ROLL_SPEED() && this.movement.rollStage === 0 && dur <= 130) {
         dur /= 130;
         this.body.acceleration.x = this.movement.rollDirection * 5000 * game.math.catmullRomInterpolation([0, 0.7, 1, 1, 0.7, 0], dur);
-        //this.body.acceleration.x += accelMod;
 
     //ready to switch to release
     } else if(Math.abs(this.body.velocity.x) == PLAYER_ROLL_SPEED() && this.movement.rollStage === 0) {
