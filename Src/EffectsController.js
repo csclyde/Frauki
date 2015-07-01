@@ -81,7 +81,7 @@ EffectsController.prototype.UpdateEffects = function() {
 }
 
 function UpdateParticle(p) {
-    var vel = 900;
+    var vel = 1000;
     var maxVelocity = 750;
 
     if(!p.destBody) {

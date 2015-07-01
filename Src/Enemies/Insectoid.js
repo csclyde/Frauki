@@ -120,7 +120,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
         game.add.tween(this).to({angle: 90}, 100, Phaser.Easing.Exponential.Out, true);
         //this.angle = 90;  
 
-        this.timers.SetTimer('dive', 2000);
+        this.timers.SetTimer('dive', 3000);
     };
 
     this.Flee = function() {
