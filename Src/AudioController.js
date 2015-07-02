@@ -31,7 +31,7 @@ AudioController = function() {
                 that.music[music.Name].volume = music.Volume;
 
                 if(music.Name === 'Surface') {
-                    that.music[music.Name].play();
+                    //that.music[music.Name].play();
                 }
             } 
         };

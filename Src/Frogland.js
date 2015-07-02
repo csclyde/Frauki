@@ -18,8 +18,6 @@ Frogland.Create = function() {
     this.map.addTilesetImage('Doodads');
     this.map.addTilesetImage('Collision');
 
-    this.map.removeTile(0, 0, 'Midground_3');
-
     this.backgroundLayer_4 = this.map.createLayer('Background_4');
     this.backgroundLayer_4.visible = false;
 
@@ -28,7 +26,7 @@ Frogland.Create = function() {
     this.backgroundLayer_2 = this.map.createLayer('Background_2');
     this.backgroundLayer_2.visible = false;
 
-    frauki = new Player(game, 148 * 16, 87 * 16, 'Frauki');
+    frauki = new Player(game, 96 * 16, 138 * 16, 'Frauki');
     game.add.existing(frauki);
 
     game.camera.focusOnXY(frauki.body.x, frauki.body.y);
@@ -57,6 +55,10 @@ Frogland.Create = function() {
     triggerController.CreateTriggers(4);
     triggerController.CreateTriggers(3);
     triggerController.CreateTriggers(2);
+
+    setInterval(function() {
+        Frogland.AnimateWater();
+    }, 200);
 };
 
 Frogland.Update = function() {
@@ -74,6 +76,7 @@ Frogland.Update = function() {
     this.plx1.tilePosition.x = -(game.camera.x * 0.5);
     this.plx1.tilePosition.y = -(game.camera.y * 0.35);
     this.plx2.tilePosition.x = -(game.camera.x * 0.9);
+
 };
 
 Frogland.CreateMapLayer = function(layer, visible) {
@@ -184,10 +187,13 @@ Frogland.ThunderDome = function(x, y) {
 Frogland.ProcessCollisionTiles = function(layer) {
     //special procesing for collision tiles
     this.map.forEach(function(tile) {
-        //if the tile is marked as disappearing
+
+        //water tiles
         if(tile.index === 2) {
             var water = this.map.getTileWorldXY(tile.worldX, tile.worldY, 16, 16, 'Foreground_' + layer);
             water.alpha = 0.4;
+
+        //cloud tiles
         } else if(tile.index === 4) {
             tile.collideLeft = false;
             tile.collideRight = false;
@@ -332,12 +338,11 @@ Frogland.CheckEnvironmentalCollisions = function(f, tile) {
 
 Frogland.DislodgeTile = function(tile) {
     if(tile && tile.index === 5 && tile.dislodged !== true) {
-        //this.map.removeTile(tile.x, tile.y, 'Midground_3');
         
         mgTile = Frogland.map.getTile(tile.x, tile.y, 'Midground_3');
         mgTile.alpha = 0;
         Frogland.midgroundLayer_3.dirty = true;
-        //this.map.removeTile(tile.x, tile.y, 'Collision_3');
+
         tile.dislodged = true;
 
         projectileController.FallingTile(tile);
@@ -349,4 +354,30 @@ Frogland.DislodgeTile = function(tile) {
             Frogland.DislodgeTile(Frogland.map.getTile(tile.x, tile.y + 1, 'Collision_3'));
         }, (Math.random() * 80));
     }
+};
+
+//383
+
+Frogland.AnimateWater = function() {
+    var viewLeft, viewRight, viewTop, viewBottom;
+
+    viewLeft = Math.ceil((game.camera.x / 16) - 5);
+    viewTop = Math.ceil((game.camera.y / 16) - 5);
+    viewRight = Math.ceil((game.camera.width / 16) + 5);
+    viewBottom = Math.ceil((game.camera.height / 16) + 5);
+
+    var update = Math.random() * 3;
+
+
+    Frogland.map.replace(383, 382, viewLeft, viewTop, viewRight, viewBottom, 'Foreground_' + Frogland.currentLayer);
+    Frogland.map.replace(385, 383, viewLeft, viewTop, viewRight, viewBottom, 'Foreground_' + Frogland.currentLayer);
+    Frogland.map.replace(384, 385, viewLeft, viewTop, viewRight, viewBottom, 'Foreground_' + Frogland.currentLayer);
+    Frogland.map.replace(382, 384, viewLeft, viewTop, viewRight, viewBottom, 'Foreground_' + Frogland.currentLayer);
+
+
+    Frogland.map.replace(386, 382, viewLeft, viewTop, viewRight, viewBottom, 'Foreground_' + Frogland.currentLayer);
+    Frogland.map.replace(387, 386, viewLeft, viewTop, viewRight, viewBottom, 'Foreground_' + Frogland.currentLayer);
+    Frogland.map.replace(382, 387, viewLeft, viewTop, viewRight, viewBottom, 'Foreground_' + Frogland.currentLayer);
+
+    
 };

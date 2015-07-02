@@ -101,8 +101,6 @@ Player.prototype.postStateUpdate = function() {
         this.body.maxVelocity.x *= 0.7;
 
         this.body.gravity.y = -300;
-
-        console.log(this.body.velocity.y);
     }
 
     //reset the double jump flag
