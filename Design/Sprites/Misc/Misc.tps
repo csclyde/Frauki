@@ -4,9 +4,9 @@
         <key>fileFormatVersion</key>
         <int>3</int>
         <key>texturePackerVersion</key>
-        <string>3.7.1</string>
+        <string>3.8.0</string>
         <key>fileName</key>
-        <string>C:/Users/user/Documents/gamedev/Frauki/Design/Sprites/Misc/Misc.tps</string>
+        <string>D:/gamedev/Frauki/Design/Sprites/Misc/Misc.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -229,6 +229,8 @@
             <filename>Frames/Tiles0000.png</filename>
             <filename>Frames/Tiles0001.png</filename>
             <filename>Frames/Tiles0002.png</filename>
+            <filename>Frames/Splash0002.png</filename>
+            <filename>Frames/Splash0003.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

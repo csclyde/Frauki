@@ -27,11 +27,17 @@ EffectsController = function() {
     this.positiveBits.maxParticleScale = 1.5;
     this.positiveBits.minParticleScale = 0.5;
 
-    this.splash = game.add.emitter(0, 0, 100);
-    this.splash.makeParticles('Misc', ['Splash0000', 'Splash0001']); 
-    this.splash.gravity = -600;
-    this.splash.maxParticleScale = 1.1;
-    this.splash.minParticleScale = 0.8;
+    this.splashRight = game.add.emitter(0, 0, 100);
+    this.splashRight.makeParticles('Misc', ['Splash0000', 'Splash0001']); 
+    this.splashRight.gravity = 400;
+    this.splashRight.maxParticleScale = 1.1;
+    this.splashRight.minParticleScale = 0.8;
+
+    this.splashLeft = game.add.emitter(0, 0, 100);
+    this.splashLeft.makeParticles('Misc', ['Splash0002', 'Splash0003']); 
+    this.splashLeft.gravity = 400;
+    this.splashLeft.maxParticleScale = 1.1;
+    this.splashLeft.minParticleScale = 0.8;
 
     //unassigned particles will be set to move towards this destination
     this.activeDest = null;
@@ -185,37 +191,43 @@ EffectsController.prototype.ParticleSpray = function(source, dest, color, dir, a
 };
 
 EffectsController.prototype.Splash = function(tile) {
-
-    return;
-    
-    //if this is not a surface water tile
-    if(Frogland.map.getTile(tile.x, tile.y - 1, 'Foreground') != null) {
-    	return;
-    }
     
     if(this.timers.TimerUp('splash_timer')) {
+
+        if(frauki.states.direction === 'left') {
+            this.splash = this.splashRight;
+        } else if(frauki.states.direction === 'right') {
+            this.splash = this.splashLeft;
+        }
+
         //the y should be based on the water tiles at the bottom of frauki.
         this.splash.x = frauki.body.x;
         this.splash.y = tile.y * 16;
         this.splash.width = frauki.body.width;
         this.splash.height = 0;
+        this.splash.minParticleSpeed.x = 25;
+        this.splash.maxParticleSpeed.x = 50;
+        this.splash.minParticleSpeed.y = -100;
+        this.splash.maxParticleSpeed.y = -200;
 
         var speed = frauki.body.velocity.x * frauki.body.velocity.x + frauki.body.velocity.y * frauki.body.velocity.y;
         speed = Math.sqrt(speed);
-
-        this.splash.minParticleSpeed.x = 150;
-        this.splash.maxParticleSpeed.x = 250;
 
         if(frauki.body.velocity.x > 0) {
             this.splash.minParticleSpeed.x *= -1;
             this.splash.maxParticleSpeed.x *= -1;
         }
 
-        this.splash.minParticleSpeed.y = -1 * frauki.body.velocity.y - 100;
-        this.splash.maxParticleSpeed.y = -1 * frauki.body.velocity.y - 200;
+        if(speed > 50) {
+            this.splash.explode(200, Math.ceil((Math.abs(frauki.body.velocity.y) / 50) + 1));
+        }
 
-        if(speed > 50)
-            this.splash.explode(100, Math.ceil((Math.abs(frauki.body.velocity.y) / 10) + 1));
+        if(Math.abs(frauki.body.velocity.y) > 100) {
+            this.splash.minParticleSpeed.x *= -1;
+            this.splash.maxParticleSpeed.x *= -1;
+
+            this.splash.explode(200, Math.ceil((Math.abs(frauki.body.velocity.y) / 50) + 1));
+        }
 
         this.timers.SetTimer('splash_timer', 100);
     }

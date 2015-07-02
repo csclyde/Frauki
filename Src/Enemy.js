@@ -193,7 +193,7 @@ function EnemyHit(f, e) {
 
     if(e.GetPoisePercentage() < 0.2) {
         //send it flying
-        e.body.velocity.y = -600;
+        e.body.velocity.y = -800;
         e.body.velocity.x = e.PlayerDirMod() * 700;
 
         e.state = e.Hurting;
