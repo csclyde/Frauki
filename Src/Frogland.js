@@ -191,7 +191,7 @@ Frogland.ProcessCollisionTiles = function(layer) {
         //water tiles
         if(tile.index === 2) {
             var water = this.map.getTileWorldXY(tile.worldX, tile.worldY, 16, 16, 'Foreground_' + layer);
-            water.alpha = 0.4;
+            water.alpha = 0.3;
 
         //cloud tiles
         } else if(tile.index === 4) {
