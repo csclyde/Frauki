@@ -89,7 +89,7 @@ Frogland.CreateMapLayer = function(layer, visible) {
     this['foregroundLayer_' + layer].visible = visible;
 
     this['collisionLayer_' + layer] = this.map.createLayer('Collision_' + layer);
-    this.map.setCollision([1, 3, 4, 5], true, 'Collision_' + layer);
+    this.map.setCollision([1, 3, 4, 5, 9], true, 'Collision_' + layer);
     this['collisionLayer_' + layer].visible = false;
 };
 
@@ -189,7 +189,7 @@ Frogland.ProcessCollisionTiles = function(layer) {
     this.map.forEach(function(tile) {
 
         //water tiles
-        if(tile.index === 2 || tile.index === 10) {
+        if(tile.index === 2 || tile.index === 9 || tile.index === 10) {
             var water = this.map.getTileWorldXY(tile.worldX, tile.worldY, 16, 16, 'Foreground_' + layer);
             water.alpha = 0.3;
 
@@ -298,7 +298,7 @@ Frogland.CollideFraukiWithProjectile = function(f, p) {
 Frogland.CheckEnvironmentalCollisions = function(f, tile) {
 
     //solid tile
-    if(tile.index === 1) { 
+    if(tile.index === 1 || tile.index === 9) { 
         return true;
 
     //water
