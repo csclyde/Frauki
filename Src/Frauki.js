@@ -39,6 +39,7 @@ Player = function (game, x, y, name) {
     this.states.wasAttacking = false;
     this.states.inWater = false;
     this.states.onCloud = false;
+    this.states.inUpdraft = false;
     this.states.droppingThroughCloud = false;
 
     this.movement = {};
@@ -101,6 +102,12 @@ Player.prototype.postStateUpdate = function() {
         this.body.maxVelocity.x *= 0.7;
 
         this.body.gravity.y = -300;
+    }
+
+    if(this.states.inUpdraft) {
+        this.body.acceleration.y = -500;
+    } else {
+        this.body.acceleration.y = 0;
     }
 
     //reset the double jump flag

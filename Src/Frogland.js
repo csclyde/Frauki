@@ -26,7 +26,7 @@ Frogland.Create = function() {
     this.backgroundLayer_2 = this.map.createLayer('Background_2');
     this.backgroundLayer_2.visible = false;
 
-    frauki = new Player(game, 96 * 16, 138 * 16, 'Frauki');
+    frauki = new Player(game, 106 * 16, 149 * 16, 'Frauki');
     game.add.existing(frauki);
 
     game.camera.focusOnXY(frauki.body.x, frauki.body.y);
@@ -66,6 +66,7 @@ Frogland.Update = function() {
     //reset environmental effect flags
     frauki.states.inWater = false;
     frauki.states.onCloud = false;
+    frauki.states.inUpdraft = false;
 
     game.physics.arcade.collide(frauki, this.GetCurrentCollisionLayer(), null, this.CheckEnvironmentalCollisions);
     game.physics.arcade.collide(frauki, this.GetCurrentObjectGroup(), this.CollideFraukiWithObject, this.OverlapFraukiWithObject);
@@ -191,7 +192,18 @@ Frogland.ProcessCollisionTiles = function(layer) {
         //water tiles
         if(tile.index === 2 || tile.index === 9 || tile.index === 10) {
             var water = this.map.getTileWorldXY(tile.worldX, tile.worldY, 16, 16, 'Foreground_' + layer);
-            water.alpha = 0.3;
+
+            if(water) {
+                water.alpha = 0.3;
+            }
+
+        } else if(tile.index === 11) {
+
+            var draft = this.map.getTileWorldXY(tile.worldX, tile.worldY, 16, 16, 'Foreground_' + layer);
+
+            if(draft) {
+                draft.alpha = 0.2;
+            }
 
         //cloud tiles
         } else if(tile.index === 4) {
@@ -340,6 +352,10 @@ Frogland.CheckEnvironmentalCollisions = function(f, tile) {
         }
 
         return true;
+
+    //updraft
+    } else if(tile.index === 11) {
+        frauki.states.inUpdraft = true;
     }
 };
 
@@ -363,7 +379,7 @@ Frogland.DislodgeTile = function(tile) {
     }
 };
 
-//383
+//383, 545
 
 Frogland.AnimateWater = function() {
     var viewLeft, viewRight, viewTop, viewBottom;
@@ -382,6 +398,11 @@ Frogland.AnimateWater = function() {
     Frogland.map.replace(388, 386, viewLeft, viewTop, viewRight, viewBottom, 'Foreground_' + Frogland.currentLayer); //C -> A
     Frogland.map.replace(387, 388, viewLeft, viewTop, viewRight, viewBottom, 'Foreground_' + Frogland.currentLayer); //B -> C 
     Frogland.map.replace(382, 387, viewLeft, viewTop, viewRight, viewBottom, 'Foreground_' + Frogland.currentLayer); //D -> B
+
+    Frogland.map.replace(545, 544, viewLeft, viewTop, viewRight, viewBottom, 'Foreground_' + Frogland.currentLayer);
+    Frogland.map.replace(547, 545, viewLeft, viewTop, viewRight, viewBottom, 'Foreground_' + Frogland.currentLayer);
+    Frogland.map.replace(546, 547, viewLeft, viewTop, viewRight, viewBottom, 'Foreground_' + Frogland.currentLayer);
+    Frogland.map.replace(544, 546, viewLeft, viewTop, viewRight, viewBottom, 'Foreground_' + Frogland.currentLayer);
 
     
 };
