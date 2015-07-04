@@ -26,7 +26,7 @@ Frogland.Create = function() {
     this.backgroundLayer_2 = this.map.createLayer('Background_2');
     this.backgroundLayer_2.visible = false;
 
-    frauki = new Player(game, 106 * 16, 149 * 16, 'Frauki');
+    frauki = new Player(game, 96 * 16, 138 * 16, 'Frauki');
     game.add.existing(frauki);
 
     game.camera.focusOnXY(frauki.body.x, frauki.body.y);
@@ -206,7 +206,7 @@ Frogland.ProcessCollisionTiles = function(layer) {
             }
 
         //cloud tiles
-        } else if(tile.index === 4) {
+        } else if(tile.index === 4 || tile.index === 12) {
             tile.collideLeft = false;
             tile.collideRight = false;
             tile.collideUp = true;
@@ -356,6 +356,10 @@ Frogland.CheckEnvironmentalCollisions = function(f, tile) {
     //updraft
     } else if(tile.index === 11) {
         frauki.states.inUpdraft = true;
+
+    //spikes
+    } else if(tile.index === 12) {
+
     }
 };
 
@@ -384,25 +388,29 @@ Frogland.DislodgeTile = function(tile) {
 Frogland.AnimateWater = function() {
     var viewLeft, viewRight, viewTop, viewBottom;
 
-    viewLeft = Math.ceil((game.camera.x / 16) - 5);
-    viewTop = Math.ceil((game.camera.y / 16) - 5);
-    viewRight = Math.ceil((game.camera.width / 16) + 5);
-    viewBottom = Math.ceil((game.camera.height / 16) + 5);
+    viewLeft = Math.ceil((game.camera.x / 16) - 2);
+    viewTop = Math.ceil((game.camera.y / 16) - 2);
+    viewRight = Math.ceil((game.camera.width / 16) + 2);
+    viewBottom = Math.ceil((game.camera.height / 16) + 2);
 
-    Frogland.map.replace(383, 382, viewLeft, viewTop, viewRight, viewBottom, 'Foreground_' + Frogland.currentLayer);
-    Frogland.map.replace(385, 383, viewLeft, viewTop, viewRight, viewBottom, 'Foreground_' + Frogland.currentLayer);
-    Frogland.map.replace(384, 385, viewLeft, viewTop, viewRight, viewBottom, 'Foreground_' + Frogland.currentLayer);
-    Frogland.map.replace(382, 384, viewLeft, viewTop, viewRight, viewBottom, 'Foreground_' + Frogland.currentLayer);
+    this.map.forEach(function(tile) {
 
-    Frogland.map.replace(386, 382, viewLeft, viewTop, viewRight, viewBottom, 'Foreground_' + Frogland.currentLayer); //A -> D
-    Frogland.map.replace(388, 386, viewLeft, viewTop, viewRight, viewBottom, 'Foreground_' + Frogland.currentLayer); //C -> A
-    Frogland.map.replace(387, 388, viewLeft, viewTop, viewRight, viewBottom, 'Foreground_' + Frogland.currentLayer); //B -> C 
-    Frogland.map.replace(382, 387, viewLeft, viewTop, viewRight, viewBottom, 'Foreground_' + Frogland.currentLayer); //D -> B
+        //water tiles
+        if(tile.index === 383) tile.index = 382;
+        if(tile.index === 385) tile.index = 383;
+        if(tile.index === 384) tile.index = 385;
+        if(tile.index === 382) tile.index = 384;
 
-    Frogland.map.replace(545, 544, viewLeft, viewTop, viewRight, viewBottom, 'Foreground_' + Frogland.currentLayer);
-    Frogland.map.replace(547, 545, viewLeft, viewTop, viewRight, viewBottom, 'Foreground_' + Frogland.currentLayer);
-    Frogland.map.replace(546, 547, viewLeft, viewTop, viewRight, viewBottom, 'Foreground_' + Frogland.currentLayer);
-    Frogland.map.replace(544, 546, viewLeft, viewTop, viewRight, viewBottom, 'Foreground_' + Frogland.currentLayer);
+        if(tile.index === 386) tile.index = 382;
+        if(tile.index === 388) tile.index = 386;
+        if(tile.index === 387) tile.index = 388;
+        if(tile.index === 382) tile.index = 387;
 
-    
+        if(tile.index === 545) tile.index = 544;
+        if(tile.index === 547) tile.index = 545;
+        if(tile.index === 546) tile.index = 547;
+        if(tile.index === 544) tile.index = 546;
+           
+    }, this, viewLeft, viewTop, viewRight, viewBottom, 'Foreground_' + Frogland.currentLayer);
+  
 };
