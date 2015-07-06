@@ -280,12 +280,16 @@ Player.prototype.Jump = function(params) {
         //drop through cloud tiles
         if(inputController.crouch.isDown && this.states.onCloud) {
             this.states.droppingThroughCloud = true;
-            game.time.events.add(200, function() { frauki.states.droppingThroughCloud = false; } );
+
+            var dropTime = 200;
+            if(frauki.states.inWater) dropTime *= 2;
+
+            game.time.events.add(dropTime, function() { frauki.states.droppingThroughCloud = false; } );
             return;
         }
         
         //normal jump
-        if(this.state === this.Standing || this.state === this.Running || this.state === this.Landing) {
+        if(this.state === this.Standing || this.state === this.Running || this.state === this.Landing || this.state === this.Crouching) {
             this.body.velocity.y = PLAYER_JUMP_VEL();
             events.publish('play_sound', {name: 'jump'});
         }
