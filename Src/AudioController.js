@@ -71,13 +71,13 @@ AudioController.prototype.StopSound = function(params) {
 
 AudioController.prototype.PlayMusic = function(params) {
     if(!!params.name && !!this.music[params.name]) {
-            this.music[params.name].play();
+            //this.music[params.name].play();
     }
 };
 
 AudioController.prototype.StopMusic = function(params) {
     if(!!params.name && !!this.music[params.name]) {
-        this.music[params.name].stop();
+        //this.music[params.name].stop();
         this.music[params.name].isPlaying = false;
 
     }

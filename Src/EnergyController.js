@@ -123,6 +123,8 @@ EnergyController.prototype.RemoveEnergy = function(amt) {
 
 EnergyController.prototype.AddHealth = function(amt) {
 	this.health += amt;
+
+	effectsController.MakeHearts(amt);
 };
 
 EnergyController.prototype.RemoveHealth = function(amt) {

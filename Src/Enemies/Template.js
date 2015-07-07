@@ -30,6 +30,11 @@ Enemy.prototype.types[''] =  function() {
 	    this.state = this.Hurting;
 	};
 
+	this.Die = function() {
+        this.anger = 1;
+        this.state = this.Idling;
+    };
+
 	////////////////////////////////STATES////////////////////////////////////
 	this.Idling = function() {
 		this.PlayAnim('idle');

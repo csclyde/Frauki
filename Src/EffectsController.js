@@ -256,3 +256,33 @@ EffectsController.prototype.DiceEnemy = function(enemyName, x, y) {
         game.time.events.add(2000, function() { p.destroy(); } );
     });
 };
+
+EffectsController.prototype.MakeHearts = function(amt) {
+
+    var hearts = [];
+    for(var i = 0; i < amt; i++) {
+
+        var heart = game.add.sprite(frauki.body.center.x, frauki.body.center.y - 15, 'Misc');
+        game.physics.enable(heart, Phaser.Physics.ARCADE);
+
+        heart.animations.add('idle', ['Heart0000', 'Heart0001'], 4, true, false);
+        heart.play('idle');
+
+        heart.body.gravity.y = - 800;
+
+        heart.body.drag.x = 300;
+        heart.body.drag.y = 100;
+
+        heart.body.velocity.x = Math.random() * 500 - 250;
+        heart.body.velocity.y = -100 + (Math.random() * -100);
+
+        hearts.push(heart);
+    }
+
+    hearts.forEach(function(h) {
+        setTimeout(function() {
+            h.destroy();
+        }, 700 + Math.random() * 300);
+    })
+
+};

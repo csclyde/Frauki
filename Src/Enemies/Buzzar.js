@@ -28,6 +28,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
     this.squashTween = null;
 
     this.baseStunDuration = 800;
+    this.playerSeen = false;
 
     this.updateFunction = function() {
 
@@ -84,6 +85,11 @@ Enemy.prototype.types['Buzzar'] =  function() {
 
     ////////////////////////////////STATES////////////////////////////////////
     this.Idling = function() {
+
+        if(this.playerSeen === true) {
+            this.state = this.Creepin;
+        }
+        
         this.PlayAnim('idle');
 
         events.publish('play_sound', { name: 'buzzar_idle' });
@@ -150,7 +156,8 @@ Enemy.prototype.types['Buzzar'] =  function() {
     	this.PlayAnim('idle');
 
         if(!this.PlayerIsVisible()) {
-            this.state = this.Idling;
+            //this.state = this.Idling;
+            this.playerSeen = true;
         }
 
         //move to a point somewhere above fraukis head
