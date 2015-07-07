@@ -31,6 +31,7 @@ Frogland.Create = function() {
 
     game.camera.focusOnXY(frauki.body.x, frauki.body.y);
 
+
     this.CreateMapLayer(4, false);
     this.CreateMapLayer(3, true);
     this.CreateMapLayer(2, false);
@@ -51,6 +52,18 @@ Frogland.Create = function() {
     this.ProcessCollisionTiles(4);
     this.ProcessCollisionTiles(3);
     this.ProcessCollisionTiles(2);
+
+    this.easyStar_4 = new EasyStar.js();
+    this.easyStar_4.setGrid(this.collisionLayer_4.layer.data);
+    this.easyStar_4.setAcceptableTiles([-1]);
+    
+    this.easyStar_3 = new EasyStar.js();
+    this.easyStar_3.setGrid(this.collisionLayer_3.layer.data);
+    this.easyStar_3.setAcceptableTiles([-1]);
+
+    this.easyStar_2 = new EasyStar.js();
+    this.easyStar_2.setGrid(this.collisionLayer_2.layer.data);
+    this.easyStar_2.setAcceptableTiles([-1]);
 
     triggerController.CreateTriggers(4);
     triggerController.CreateTriggers(3);
