@@ -26,7 +26,7 @@ Frogland.Create = function() {
     this.backgroundLayer_2 = this.map.createLayer('Background_2');
     this.backgroundLayer_2.visible = false;
 
-    frauki = new Player(game, 184 * 16, 72 * 16, 'Frauki');
+    frauki = new Player(game, this.map.properties.startX * 16, this.map.properties.startY * 16, 'Frauki');
     game.add.existing(frauki);
 
     game.camera.focusOnXY(frauki.body.x, frauki.body.y);
@@ -56,7 +56,7 @@ Frogland.Create = function() {
     this.easyStar_4 = new EasyStar.js();
     this.easyStar_4.setGrid(this.collisionLayer_4.layer.data);
     this.easyStar_4.setAcceptableTiles([-1]);
-    
+
     this.easyStar_3 = new EasyStar.js();
     this.easyStar_3.setGrid(this.collisionLayer_3.layer.data);
     this.easyStar_3.setAcceptableTiles([-1]);
