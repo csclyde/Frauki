@@ -381,7 +381,7 @@ Player.prototype.Slash = function(params) {
         }
     }
     //normal slashes while standing or running
-    else if(this.state === this.Standing || this.state === this.Landing || this.state === this.AttackStab || this.state === this.Running || this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling || this.state === this.Flipping) {
+    else if(this.state === this.Standing || this.state === this.Landing || this.state === this.AttackStab || this.state === this.Running || this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling || this.state === this.Flipping || this.state === this.Crouching) {
         if(energyController.UseEnergy(5)) {
             if(this.states.upPressed) {
                 this.state = this.AttackOverhead;
@@ -684,7 +684,13 @@ Player.prototype.AttackFront = function() {
     }
 
     if(this.animations.currentAnim.isFinished) {
-        this.state = this.Standing;
+        if(inputController.crouch.isDown && !inputController.runLeft.isDown && !inputController.runRight.isDown && this.body.onFloor()) {
+            this.state = this.Crouching;
+            this.PlayAnim('crouch');
+            this.animations.currentAnim.setFrame('Crouch0008');
+        } else { 
+            this.state = this.Standing;
+        }
     }
 };
 
