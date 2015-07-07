@@ -14,7 +14,7 @@ EnergyController.prototype.Create = function() {
 	this.barContainer = game.add.image(7, 27, 'UI', 'EnergyBar0000');
 	this.barContainer.fixedToCamera = true;
 
-	this.energyBar = game.add.image(9, 29, 'UI', 'EnergyBar0004');
+	this.energyBar = game.add.image(9, 29, 'UI', 'EnergyBar0001');
 	this.energyBar.fixedToCamera = true;
 	this.energyBar.anchor.x = 0;
 
@@ -25,12 +25,12 @@ EnergyController.prototype.Create = function() {
 	this.healthBar.fixedToCamera = true;
 	this.healthBar.anchor.x = 0;
 
-	this.powerContainer = game.add.image(7, 47, 'UI', 'EnergyBar0000');
+	/*this.powerContainer = game.add.image(7, 47, 'UI', 'EnergyBar0000');
 	this.powerContainer.fixedToCamera = true;
 
 	this.powerBar = game.add.image(9, 49, 'UI', 'EnergyBar0001');
 	this.powerBar.fixedToCamera = true;
-	this.powerBar.anchor.x = 0;
+	this.powerBar.anchor.x = 0;*/
 
 	this.restingPointMarker = game.add.image(this.energyBar.x + (this.energyBar.width / 2) - 2, 25, 'UI', 'EnergyBar0002');
 	this.restingPointMarker.fixedToCamera = true;
@@ -88,7 +88,7 @@ EnergyController.prototype.UpdateEnergy = function() {
 
 	this.energyBar.scale.x = this.energy / 30;
 	this.healthBar.scale.x = this.health / 100;
-	this.powerBar.scale.x = this.power / 100;
+	//this.powerBar.scale.x = this.power / 100;
 
 	if(this.energyBar.scale.x < 0)
 		this.energyBar.scale.x = 0;
@@ -96,8 +96,8 @@ EnergyController.prototype.UpdateEnergy = function() {
 	if(this.healthBar.scale.x < 0)
 		this.healthBar.scale.x = 0;
 
-	if(this.powerBar.scale.x < 0)
-		this.powerBar.scale.x = 0;
+	// if(this.powerBar.scale.x < 0)
+	// 	this.powerBar.scale.x = 0;
 
 
 	this.restingPointMarker.cameraOffset.x = 10 + (90 * (this.neutralPoint / 30));

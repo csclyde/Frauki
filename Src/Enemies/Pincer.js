@@ -14,7 +14,7 @@ Enemy.prototype.types['Pincer'] =  function() {
     //create the body sections
     this.bodies = [];
     this.bodies.push(game.add.sprite(this.body.center.x, this.body.center.y, 'EnemySprites', 'Pincer/Idle0003'));
-    game.physics.enable(this.bodies[0], Phaser.Physics.ARCADE);
+    //game.physics.enable(this.bodies[0], Phaser.Physics.ARCADE);
 
     /*
     this.weight = 0.5;
