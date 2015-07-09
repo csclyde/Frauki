@@ -1,6 +1,6 @@
 Enemy.prototype.types['Pincer'] =  function() {
 
-	this.body.setSize(67, 25, 0, 0);
+	this.body.setSize(25, 20, -10, 0);
 	this.anchor.setTo(.5, 1);
 
     this.animations.add('idle', ['Pincer/Idle0001'], 10, true, false);
@@ -74,7 +74,7 @@ Enemy.prototype.types['Pincer'] =  function() {
 		this.body.acceleration.x *= -1;
 		this.body.acceleration.y *= -1;
 
-		this.body.velocity.setMagnitude(150);
+		this.body.velocity.setMagnitude(200);
 
 		if(!this.PlayerIsVisible()) {
 			this.state = this.Idling;

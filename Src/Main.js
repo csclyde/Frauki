@@ -42,9 +42,9 @@ Main.render = function() {
     //game.debug.body(frauki);
     //game.debug.body(frauki.attackRect);
 
-    // this.objectGroup_3.forEach(function(o) {
-    //     game.debug.body(o);
-    // });
+    Frogland.objectGroup_3.forEach(function(o) {
+        game.debug.body(o);
+    });
 
     /*projectileController.projectiles.forEach(function(o) {
         game.debug.body(o);
