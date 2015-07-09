@@ -50,17 +50,9 @@ Enemy.prototype.types['Pincer'] =  function() {
 	this.Idling = function() {
 		this.PlayAnim('idle');
 
-		if(this.body.x < frauki.body.x)
-            this.body.acceleration.x = 200;
-        else
-            this.body.acceleration.x = -200;
+		var angle = Math.atan2(this.body.velocity.y, this.body.velocity.x);
 
-        if(this.body.y < frauki.body.y)
-            this.body.acceleration.y = 200;
-        else
-            this.body.acceleration.y = -200;
-
-		
+		console.log(angle);
 	};
 
 	this.Hurting = function() {

@@ -29,7 +29,12 @@ CameraController.prototype.UpdateCamera = function() {
 	var yOffset = frauki.body.velocity.y > 0 ? 20 : 0;
 
 	yOffset += (frauki.states.crouching ? 35 : 0);
-	yOffset -= (frauki.states.upPressed ? 35 : 0);
+
+	if(frauki.states.upPressed) {
+		if(!game.physics.arcade.overlap(frauki, Frogland.door1Group) && !game.physics.arcade.overlap(frauki, Frogland.door2Group)) {
+			yOffset -= 35;
+		}
+	}
 
 	if(this.prevXVel !== frauki.body.velocity.x) {
 		if(this.camXTween != null) {

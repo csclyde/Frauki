@@ -32,14 +32,6 @@ FileMap.Audio = [
 	{ Name: 'running', File: 'Data/Sfx/run.wav', Volume: 0.3, Loop: true },
 	{ Name: 'slide', File: 'Data/Sfx/slide.wav', Volume: 0.3, Loop: false },
 	{ Name: 'airhike', File: 'Data/Sfx/airhike.wav', Volume: 0.3, Loop: false },
-
-	{ Name: 'buzzar_hurt', File: 'Data/Sfx/Enemies/buzzar_hurt.wav', Volume: 0.3, Loop: false },
-	{ Name: 'buzzar_idle', File: 'Data/Sfx/Enemies/buzzar_idle.wav', Volume: 0.3, Loop: false },
-	{ Name: 'buzzar_sting', File: 'Data/Sfx/Enemies/buzzar_sting.wav', Volume: 0.3, Loop: false },
-	{ Name: 'insectoid_hurt', File: 'Data/Sfx/Enemies/insectoid_hurt.wav', Volume: 0.3, Loop: false },
-	{ Name: 'insectoid_jump', File: 'Data/Sfx/Enemies/insectoid_jump.wav', Volume: 0.3, Loop: false },
-	{ Name: 'insectoid_land', File: 'Data/Sfx/Enemies/insectoid_land.wav', Volume: 0.3, Loop: false },
-	{ Name: 'insectoid_slide', File: 'Data/Sfx/Enemies/insectoid_slide.wav', Volume: 0.3, Loop: false }
 ];
 
 FileMap.Music = [

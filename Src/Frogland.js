@@ -84,7 +84,7 @@ Frogland.Update = function() {
     game.physics.arcade.collide(frauki, this.GetCurrentCollisionLayer(), null, this.CheckEnvironmentalCollisions);
     game.physics.arcade.collide(frauki, this.GetCurrentObjectGroup(), this.CollideFraukiWithObject, this.OverlapFraukiWithObject);
     game.physics.arcade.collide(this.GetCurrentObjectGroup(), this.GetCurrentCollisionLayer());
-    game.physics.arcade.collide(this.GetCurrentObjectGroup(), this.GetCurrentObjectGroup());
+    game.physics.arcade.collide(this.GetCurrentObjectGroup(), this.GetCurrentObjectGroup(), null, this.OverlapEnemiesWithSelf);
 
     game.physics.arcade.overlap(frauki, projectileController.projectiles, this.CollideFraukiWithProjectile);
 
@@ -232,6 +232,24 @@ Frogland.ProcessCollisionTiles = function(layer) {
         }
            
     }, this, 0, 0, this.map.width, this.map.height, 'Collision_' + layer);
+
+    this.map.forEach(function(tile) {
+        if(tile.index === 790 || tile.index === 791 || tile.index === 822 || tile.index === 823) {
+            tile.alpha = 0.95;
+        }
+    }, this, 0, 0, this.map.width, this.map.height, 'Foreground_4');
+
+    this.map.forEach(function(tile) {
+        if(tile.index === 790 || tile.index === 791 || tile.index === 822 || tile.index === 823) {
+            tile.alpha = 0.95;
+        }
+    }, this, 0, 0, this.map.width, this.map.height, 'Foreground_3');
+
+    this.map.forEach(function(tile) {
+        if(tile.index === 790 || tile.index === 791 || tile.index === 822 || tile.index === 823) {
+            tile.alpha = 0.95;
+        }
+    }, this, 0, 0, this.map.width, this.map.height, 'Foreground_2');
 };
 
 Frogland.GetCurrentObjectGroup = function() {
@@ -374,6 +392,14 @@ Frogland.CheckEnvironmentalCollisions = function(f, tile) {
     //spikes
     } else if(tile.index === 12) {
 
+    }
+};
+
+Frogland.OverlapEnemiesWithSelf = function(o1, o2) {
+    if(o1.enemyName && o2.enemyName && o1.enemyName === o2.enemyName) {
+        return true;
+    } else {
+        return false;
     }
 };
 
