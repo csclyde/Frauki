@@ -228,7 +228,7 @@ Frogland.ProcessCollisionTiles = function(layer) {
             tile.faceUp = true;
             tile.faceDown = false;
             tile.faceLeft = false;
-            tile.faceRight = false; 
+            tile.faceRight = false;
         }
            
     }, this, 0, 0, this.map.width, this.map.height, 'Collision_' + layer);

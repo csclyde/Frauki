@@ -11,6 +11,8 @@ Enemy.prototype.types['Pincer'] =  function() {
     this.body.maxVelocity.y = 300;
     this.body.maxVelocity.x = 300;
 
+    //this.body.bounce.set(0);
+
     //create the body sections
     this.bodies = [];
     this.bodies.push(game.add.sprite(this.body.center.x, this.body.center.y, 'EnemySprites', 'Pincer/Idle0003'));
@@ -50,9 +52,33 @@ Enemy.prototype.types['Pincer'] =  function() {
 	this.Idling = function() {
 		this.PlayAnim('idle');
 
-		var angle = Math.atan2(this.body.velocity.y, this.body.velocity.x);
+		if(this.PlayerIsVisible()) {
+			this.state = this.Chasing;
+		}
 
-		console.log(angle);
+	};
+
+	this.Chasing = function() {
+		this.PlayAnim('idle');
+
+		var normVel = this.body.velocity.normalize();
+
+		var dist = new Phaser.Point(this.body.center.x - frauki.body.center.x, this.body.center.y - frauki.body.center.y);
+
+		dist = dist.normalize();
+
+		normVel = Phaser.Point.interpolate(normVel, dist, 0.9);
+
+		this.body.acceleration = normVel.setMagnitude(400);
+
+		this.body.acceleration.x *= -1;
+		this.body.acceleration.y *= -1;
+
+		this.body.velocity.setMagnitude(150);
+
+		if(!this.PlayerIsVisible()) {
+			this.state = this.Idling;
+		}
 	};
 
 	this.Hurting = function() {
