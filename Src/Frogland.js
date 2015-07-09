@@ -19,12 +19,13 @@ Frogland.Create = function() {
     this.map.addTilesetImage('Collision');
 
     this.backgroundLayer_4 = this.map.createLayer('Background_4');
-    this.backgroundLayer_4.visible = false;
+    this.backgroundLayer_4.visible = +this.map.properties.startLayer === 4;
 
     this.backgroundLayer_3 = this.map.createLayer('Background_3');
+    this.backgroundLayer_3.visible = +this.map.properties.startLayer === 3;
 
     this.backgroundLayer_2 = this.map.createLayer('Background_2');
-    this.backgroundLayer_2.visible = false;
+    this.backgroundLayer_2.visible = +this.map.properties.startLayer === 2;
 
     frauki = new Player(game, this.map.properties.startX * 16, this.map.properties.startY * 16, 'Frauki');
     game.add.existing(frauki);
@@ -32,11 +33,11 @@ Frogland.Create = function() {
     game.camera.focusOnXY(frauki.body.x, frauki.body.y);
 
 
-    this.CreateMapLayer(4, false);
-    this.CreateMapLayer(3, true);
-    this.CreateMapLayer(2, false);
+    this.CreateMapLayer(4, +this.map.properties.startLayer === 4);
+    this.CreateMapLayer(3, +this.map.properties.startLayer === 3);
+    this.CreateMapLayer(2, +this.map.properties.startLayer === 2);
     
-    this.currentLayer = 3;
+    this.currentLayer = +this.map.properties.startLayer;
 
     this.enemyPool = game.add.group();
     this.door1Group = game.add.group();
