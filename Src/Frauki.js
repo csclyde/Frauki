@@ -41,6 +41,8 @@ Player = function (game, x, y, name) {
     this.states.onCloud = false;
     this.states.inUpdraft = false;
     this.states.droppingThroughCloud = false;
+    this.states.onLeftSlope = false;
+    this.states.onRightSlope = false;
 
     this.movement = {};
     this.movement.rollVelocity = 0;
@@ -109,6 +111,14 @@ Player.prototype.postStateUpdate = function() {
     } else {
         this.body.acceleration.y = 0;
     }
+
+    // if(this.states.onLeftSlope) {
+    //     this.body.gravity.x = -300;
+    // } else if(this.states.onRightSlope) {
+    //     this.body.gravity.x = 300;
+    // } else {
+    //     this.body.gravity.x = 0;
+    // }
 
     //reset the double jump flag
     if(this.body.onFloor()) {

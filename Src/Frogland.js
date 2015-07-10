@@ -81,6 +81,8 @@ Frogland.Update = function() {
     frauki.states.inWater = false;
     frauki.states.onCloud = false;
     frauki.states.inUpdraft = false;
+    frauki.states.onLeftSlope = false;
+    frauki.states.onRightSlope = false;
 
     game.physics.arcade.collide(frauki, this.GetCurrentCollisionLayer(), null, this.CheckEnvironmentalCollisions);
     game.physics.arcade.collide(frauki, this.GetCurrentObjectGroup(), this.CollideFraukiWithObject, this.OverlapFraukiWithObject);
@@ -228,6 +230,17 @@ Frogland.ProcessCollisionTiles = function(layer) {
             tile.collideDown = false;
             tile.faceUp = true;
             tile.faceDown = false;
+            tile.faceLeft = false;
+            tile.faceRight = false;
+
+        //drop tiles
+        } else if(tile.index === 6) {
+            tile.collideLeft = false;
+            tile.collideRight = false;
+            tile.collideUp = false;
+            tile.collideDown = true;
+            tile.faceUp = false;
+            tile.faceDown = true;
             tile.faceLeft = false;
             tile.faceRight = false;
         }
@@ -393,6 +406,13 @@ Frogland.CheckEnvironmentalCollisions = function(f, tile) {
     //spikes
     } else if(tile.index === 12) {
 
+    //left slope
+    } else if(tile.index === 17) {
+        frauki.states.onLeftSlope = true;
+
+    //right slope
+    } else if(tile.index === 18) {
+        frauki.states.onRightSlope = true;
     }
 };
 

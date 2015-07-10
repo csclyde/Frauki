@@ -214,7 +214,9 @@ function EnemyHit(f, e) {
         e.Die();
         e.state = e.Dying;
 
-        energyController.AddHealth(1);
+        if(e.maxEnergy > 1) {
+            energyController.AddHealth(1);
+        }
 
         effectsController.DiceEnemy(e.enemyName, e.body.center.x, e.body.center.y);
 
