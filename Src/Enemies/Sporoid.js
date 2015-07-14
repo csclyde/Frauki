@@ -37,6 +37,14 @@ Enemy.prototype.types['Sporoid'] =  function() {
 		
 	};
 
+	this.CanCauseDamage = function() {
+		if(this.state === this.Dashing) {
+			return true;
+		} else {
+			return false;
+		}
+	};
+
 	///////////////////////////////ACTIONS////////////////////////////////////
 	this.TakeHit = function(power) {
 		if(!this.timers.TimerUp('hit')) {

@@ -41,6 +41,14 @@ Enemy.prototype.types['Buzzar'] =  function() {
 
     };
 
+    this.CanCauseDamage = function() {
+        if(this.state === this.Stinging || this.state === this.Enraged) {
+            return true;
+        } else {
+            return false;
+        }
+    };
+
     ///////////////////////////////ACTIONS////////////////////////////////////
     this.Sting = function() {
         if(frauki.body.y <= this.body.y)
