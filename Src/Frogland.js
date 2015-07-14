@@ -32,7 +32,6 @@ Frogland.Create = function() {
 
     game.camera.focusOnXY(frauki.body.x, frauki.body.y);
 
-
     this.CreateMapLayer(4, +this.map.properties.startLayer === 4);
     this.CreateMapLayer(3, +this.map.properties.startLayer === 3);
     this.CreateMapLayer(2, +this.map.properties.startLayer === 2);
