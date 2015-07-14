@@ -53,6 +53,14 @@ Enemy.prototype.types['Insectoid'] =  function() {
     this.TakeHit = function() {
     }
 
+    this.CanCauseDamage = function() {
+        if(this.state === this.Hopping || this.state === this.Scuttling || this.state === this.Diving || this.state === this.Landing) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     ///////////////////////////////ACTIONS////////////////////////////////////
     this.Hop = function() {
 
@@ -117,7 +125,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
         game.add.tween(this).to({angle: 90}, 100, Phaser.Easing.Exponential.Out, true);
         //this.angle = 90;  
 
-        this.timers.SetTimer('dive', 3000);
+        this.timers.SetTimer('dive', 1000);
     };
 
     this.Flee = function() {
@@ -180,7 +188,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
         }
 
         if(game.time.now > this.attackTimer) {
-            this.attackTimer = game.time.now + 2000;
+            this.attackTimer = game.time.now + 1000;
             this.state = this.Hopping;
             this.scale.y = 1;
 
@@ -225,7 +233,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
         this.PlayAnim('idle');      
 
         if(game.time.now > this.attackTimer) {
-            this.attackTimer = game.time.now + 1000;
+            this.attackTimer = game.time.now + 800;
             this.state = this.Scuttling;
             this.scale.x = this.GetDirMod();
 

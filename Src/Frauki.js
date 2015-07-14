@@ -689,8 +689,9 @@ Player.prototype.Hurting = function() {
 Player.prototype.AttackFront = function() {
     this.PlayAnim('attack_front');
 
-    if(this.body.onFloor()) {
-        this.body.velocity.x /= 2;
+    if(this.Attacking()) {
+        this.body.maxVelocity.x = PLAYER_ROLL_SPEED();
+        this.body.acceleration.x *= 3;
     }
 
     if(this.animations.currentAnim.isFinished) {

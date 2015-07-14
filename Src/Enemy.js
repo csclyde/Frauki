@@ -191,10 +191,10 @@ function EnemyHit(f, e) {
 
     e.poise -= damage;
 
-    if(e.GetPoisePercentage() < 0.2) {
+    if(e.GetPoisePercentage() < 1) {
         //send it flying
-        e.body.velocity.y = -800;
-        e.body.velocity.x = e.PlayerDirMod() * 700;
+        e.body.velocity.y = -400;
+        e.body.velocity.x = e.PlayerDirMod() * 500;
 
         e.state = e.Hurting;
         e.poise = e.initialPoise;
@@ -227,10 +227,10 @@ function EnemyHit(f, e) {
         e.TakeHit();
     }   
 
-    effectsController.SlowHit(function() {
+    // effectsController.SlowHit(function() {
 
-        events.publish('camera_shake', {magnitudeX: 15 * damage, magnitudeY: 5, duration: 100});
-    });
+    //     //events.publish('camera_shake', {magnitudeX: 15 * damage, magnitudeY: 5, duration: 100});
+    // });
         
     events.publish('play_sound', { name: 'attack_connect' });
     effectsController.ParticleSpray(e.body, frauki.body, 'positive', e.EnemyDirection(), damage);    
