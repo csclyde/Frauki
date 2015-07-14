@@ -148,9 +148,11 @@ EnergyController.prototype.UseEnergy = function(amt) {
 		this.energy -= amt;
 		this.gracePeriod = game.time.now + 600;
 		return true;
+	} else {
+		events.publish('play_sound', {name: 'no_energy'});
+		return false;
 	}
 	
-	return false;
 };
 
 EnergyController.prototype.GetEnergy = function() {
