@@ -106,7 +106,7 @@ Frogland.CreateMapLayer = function(layer, visible) {
     this['foregroundLayer_' + layer].visible = visible;
 
     this['collisionLayer_' + layer] = this.map.createLayer('Collision_' + layer);
-    this.map.setCollision([1, 3, 4, 5, 9], true, 'Collision_' + layer);
+    this.map.setCollision([1, 3, 4, 5, 7, 9], true, 'Collision_' + layer);
     this['collisionLayer_' + layer].visible = false;
 };
 
@@ -384,7 +384,7 @@ Frogland.CheckEnvironmentalCollisions = function(f, tile) {
             return true;
         }
 
-    //falling tile
+    //falling tiles and attackable tiles
     } else if(tile.index === 5) { 
 
         if(tile.dislodged === true) {
@@ -394,6 +394,14 @@ Frogland.CheckEnvironmentalCollisions = function(f, tile) {
         if(tile.waitingToFall !== true) {
             Frogland.DislodgeTile(tile); 
             tile.waitingToFall = true;
+        }
+
+        return true;
+
+    } else if(tile.index === 7) {
+
+        if(tile.dislodged === true) {
+            return false;
         }
 
         return true;
@@ -424,7 +432,7 @@ Frogland.OverlapEnemiesWithSelf = function(o1, o2) {
 };
 
 Frogland.DislodgeTile = function(tile) {
-    if(tile && tile.index === 5 && tile.dislodged !== true) {
+    if(tile && (tile.index === 5 || tile.index === 7) && tile.dislodged !== true) {
         
         mgTile = Frogland.map.getTile(tile.x, tile.y, 'Midground_3');
         mgTile.alpha = 0;
@@ -473,4 +481,10 @@ Frogland.AnimateWater = function() {
            
     }, this, viewLeft, viewTop, viewRight, viewBottom, 'Foreground_' + Frogland.currentLayer);
   
+};
+
+function TilesHit(f, t) {
+    if(t.index === 7) {
+        Frogland.DislodgeTile(t);
+    }
 };
