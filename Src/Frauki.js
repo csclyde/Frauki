@@ -166,6 +166,7 @@ Player.prototype.PlayAnim = function(name) {
 };
 
 Player.prototype.Grace = function() {
+
     return !this.timers.TimerUp('frauki_grace');
 };
 

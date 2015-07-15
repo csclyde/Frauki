@@ -26,11 +26,8 @@ InputController = function() {
     this.crouch.onDown.add(function() { events.publish('player_crouch', {crouch: true}); }, this);
     this.crouch.onUp.add(function() {   events.publish('player_crouch', {crouch: false}); }, this);
 
-    this.slash.onDown.add(function() { 
-        events.publish('player_slash', {});
-    }, this);
-
-    this.roll.onDown.add(function() {   events.publish('player_roll', null, this)});
+    this.slash.onDown.add(function() { events.publish('player_slash', {}); }, this);
+    this.roll.onDown.add(function() { events.publish('player_roll', {}); }, this);
 
     this.up.onDown.add(function() { 
         //switch between layers if they are in a doorway
