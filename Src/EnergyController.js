@@ -128,11 +128,11 @@ EnergyController.prototype.AddHealth = function(amt) {
 };
 
 EnergyController.prototype.RemoveHealth = function(amt) {
-	this.health -= amt;
+	this.health -= amt * 2;
 };
 
 EnergyController.prototype.AddPower = function(amt) {
-	this.power += amt;
+	this.power += 0; //amt;
 };
 
 EnergyController.prototype.RemovePower = function(amt) {
