@@ -6,7 +6,6 @@ Main.create = function() {
     inputController = new InputController();
     energyController = new EnergyController();
     audioController = new AudioController();
-    weaponController = new WeaponController();
     triggerController = new TriggerController();
     scriptRunner = new ScriptRunner();
     timerUtil = new TimerUtil();
@@ -32,7 +31,6 @@ Main.update = function() {
     inputController.UpdateInput();
     effectsController.UpdateEffects();
     energyController.UpdateEnergy();
-    weaponController.Update();
     projectileController.Update();
     triggerController.Update(Frogland.currentLayer);
 
@@ -70,7 +68,7 @@ Main.Restart = function() {
         frauki.body.x = frauki.initialX; //fraukiSpawnX;
         frauki.body.y = frauki.initialY; //fraukiSpawnY;
         energyController.energy = 15;
-        energyController.health = 30;
+        energyController.health = 100;
         energyController.power = 0;
         energyController.neutralPoint = 15;
         game.time.slowMotion = 1;

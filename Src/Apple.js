@@ -38,7 +38,6 @@ function EatApple(f, a) {
         return;
     
     a.state = a.Eaten;
-    energyController.AddHealth(5);
 
     a.body.allowGravity = true;
 

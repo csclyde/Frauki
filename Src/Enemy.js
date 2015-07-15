@@ -174,7 +174,7 @@ function EnemyHit(f, e) {
     if(!e.timers.TimerUp('hit'))
         return;
 
-    var damage = frauki.currentAttack.damage + (frauki.currentAttack.damage * (energyController.GetPowerPercentage() * 3));
+    var damage = frauki.currentAttack.damage * energyController.GetEnergyPercentage();
 
     //fraukis knockback will increase the amount that the enemy is moved. The weight
     //of the enemy will work against that. 
@@ -204,8 +204,7 @@ function EnemyHit(f, e) {
     }
 
     e.energy -= damage;
-
-    energyController.AddPower(damage);
+    energyController.AddPower(damage / 5);
 
     console.log('Enemy is taking ' + damage + ', now at ' + e.energy + '/' + e.maxEnergy);
 
@@ -213,10 +212,6 @@ function EnemyHit(f, e) {
 
         e.Die();
         e.state = e.Dying;
-
-        if(e.maxEnergy > 1) {
-            energyController.AddHealth(1);
-        }
 
         effectsController.DiceEnemy(e.enemyName, e.body.center.x, e.body.center.y);
 
