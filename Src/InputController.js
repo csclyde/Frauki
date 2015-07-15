@@ -49,7 +49,7 @@ InputController = function() {
     });
 
     this.testButton2.onDown.add(function() { 
-        Main.Restart();
+        energyController.neutralPoint += 2;
     });
 
     game.input.gamepad.start();

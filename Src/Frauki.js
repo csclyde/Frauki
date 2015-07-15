@@ -72,7 +72,7 @@ Player = function (game, x, y, name) {
 
     //set up the run dust
     this.runDust = game.add.sprite(0, 0, 'Misc');
-    this.runDust.animations.add('dust', ['RunDust0000', 'RunDust0001', 'RunDust0002', 'RunDust0003'], 15, true, false);
+    this.runDust.animations.add('dust', ['RunDust0000', 'RunDust0001', 'RunDust0002', 'RunDust0003'], 10, true, false);
     this.runDust.play('dust');
 };
 
@@ -91,8 +91,19 @@ Player.prototype.preStateUpdate = function() {
     this.body.gravity.y = 0;
     this.body.drag.x = 2000;
 
-    if(this.state === this.Running && Math.abs(this.body.velocity.x) > 300) {
+    if(!this.states.inWater && (this.state === this.Running || this.state === this.Rolling)) {
         this.runDust.visible = true;
+
+        this.runDust.y = this.body.y + this.body.height - this.runDust.height;
+
+        //position the dust
+        if(this.states.direction === 'right') {
+            this.runDust.x = this.body.x - 15;
+            this.runDust.scale.x = 1;
+        } else {
+            this.runDust.x = this.body.x + 25;
+            this.runDust.scale.x = -1;
+        }
     } else {
         this.runDust.visible = false;
     }
@@ -345,6 +356,9 @@ Player.prototype.Crouch = function(params) {
 
 Player.prototype.Slash = function(params) {
 
+    if(!this.timers.TimerUp('frauki_slash'))
+        return;
+
     //diving dash
     if(!this.timers.TimerUp('frauki_dash') && this.states.crouching && (this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling)) {
         if(energyController.UseEnergy(6)) {
@@ -393,6 +407,8 @@ Player.prototype.Slash = function(params) {
     } else {
         console.log('An attack was attempted in an unresolved state ', this.state);
     }
+
+    this.timers.SetTimer('frauki_slash', 400 * (1 / energyController.GetEnergyPercentage()));
 };
 
 Player.prototype.Roll = function(params) {
@@ -484,17 +500,6 @@ Player.prototype.Standing = function() {
 
 Player.prototype.Running = function() {
     this.PlayAnim('run');
-
-    this.runDust.y = this.body.y + this.body.height - this.runDust.height;
-
-    //position the dust
-    if(this.states.direction === 'right') {
-        this.runDust.x = this.body.x - 20;
-        this.runDust.scale.x = 1;
-    } else {
-        this.runDust.x = this.body.x + 30;
-        this.runDust.scale.x = -1;
-    }
 
     if(this.body.velocity.x === 0 && this.body.onFloor()) {
         this.state = this.Standing;
@@ -676,6 +681,9 @@ Player.prototype.Hurting = function() {
 
 Player.prototype.AttackFront = function() {
     this.PlayAnim('attack_front');
+
+    var anim = this.animations.getAnimation('attack_front');
+    anim.delay = 1000 / (10 + (energyController.GetEnergyPercentage() * 8));
 
     if(this.Attacking()) {
         this.body.maxVelocity.x = PLAYER_ROLL_SPEED();

@@ -4,7 +4,8 @@ EnergyController = function() {
 	this.neutralPoint = 15;
 	this.tickTimer = 0;
 	this.gracePeriod = 0;
-	
+
+	this.energyUsageTimestamp = 0;
 };
 
 EnergyController.prototype.Create = function() {
@@ -20,12 +21,15 @@ EnergyController.prototype.Create = function() {
 };
 
 EnergyController.prototype.UpdateEnergy = function() {
-	//move energy towards the neutral point. the step should increase in magnitude with distance from
-	//the neutral point. The energy wants to rest at the neutral point. the farther it is from there, the
-	//more perturbed it is. 
 
 	var energyDiff = this.energy - this.neutralPoint;
 	var step = 0.1;
+
+	if(game.time.now - this.energyUsageTimestamp > 4000) {
+		step += 0.1;
+	} else {
+		step += ((game.time.now - this.energyUsageTimestamp) / 4000) * 0.1;
+	}
 
 	//if the timer is up, tick the energy and reset the timer
 	if(game.time.now > this.tickTimer && game.time.now > this.gracePeriod && !frauki.Attacking()) {
@@ -67,6 +71,7 @@ EnergyController.prototype.UseEnergy = function(amt) {
 	if(this.energy > 0) {
 		this.energy -= amt / 2;
 		this.gracePeriod = game.time.now + 600;
+		this.energyUsageTimestamp = game.time.now;
 		return true;
 	} else {
 		events.publish('play_sound', {name: 'no_energy'});
@@ -88,7 +93,7 @@ EnergyController.prototype.RemovePower = function(amt) {
 };
 
 EnergyController.prototype.GetEnergyPercentage = function() {
-	var percentageCurve = [0.2, 1, 2];
+	var percentageCurve = [0.5, 1, 2];
 
 	return game.math.catmullRomInterpolation(percentageCurve, this.energy / 30);
 };
