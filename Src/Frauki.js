@@ -517,7 +517,7 @@ Player.prototype.Standing = function() {
 Player.prototype.Running = function() {
 
     if((frauki.states.flowLeft || frauki.states.flowRight) && !inputController.runLeft.isDown && !inputController.runRight.isDown) {
-        this.PlayAnim('stand');
+        this.PlayAnim('fall');
     } else {
         this.PlayAnim('run');
     }
