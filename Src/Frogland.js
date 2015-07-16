@@ -70,7 +70,7 @@ Frogland.Create = function() {
     triggerController.CreateTriggers(2);
 
     setInterval(function() {
-        Frogland.AnimateWater();
+        Frogland.AnimateTiles();
     }, 200);
 };
 
@@ -461,7 +461,7 @@ Frogland.DislodgeTile = function(tile) {
     }
 };
 
-Frogland.AnimateWater = function() {
+Frogland.AnimateTiles = function() {
     var viewLeft, viewRight, viewTop, viewBottom;
 
     viewLeft = Math.ceil((game.camera.x / 16) - 2);
@@ -469,23 +469,23 @@ Frogland.AnimateWater = function() {
     viewRight = Math.ceil((game.camera.width / 16) + 2);
     viewBottom = Math.ceil((game.camera.height / 16) + 2);
 
+    var animatedTiles = [
+        [383, 384, 385],
+        [386, 387, 388],
+        [545, 546, 547],
+        [548, 549, 550],
+        [580, 581, 582],
+        [612, 613, 614]
+    ];
+
     this.map.forEach(function(tile) {
 
-        //water tiles
-        if(tile.index === 383) tile.index = 382;
-        if(tile.index === 385) tile.index = 383;
-        if(tile.index === 384) tile.index = 385;
-        if(tile.index === 382) tile.index = 384;
-
-        if(tile.index === 386) tile.index = 382;
-        if(tile.index === 388) tile.index = 386;
-        if(tile.index === 387) tile.index = 388;
-        if(tile.index === 382) tile.index = 387;
-
-        if(tile.index === 545) tile.index = 544;
-        if(tile.index === 547) tile.index = 545;
-        if(tile.index === 546) tile.index = 547;
-        if(tile.index === 544) tile.index = 546;
+        for(var i = 0; i < animatedTiles.length; i++) {
+            if(tile.index === animatedTiles[i][0]) tile.index = 999;
+            if(tile.index === animatedTiles[i][2]) tile.index = animatedTiles[i][0];
+            if(tile.index === animatedTiles[i][1]) tile.index = animatedTiles[i][2];
+            if(tile.index === 999) tile.index = animatedTiles[i][1];
+        }
            
     }, this, viewLeft, viewTop, viewRight, viewBottom, 'Foreground_' + Frogland.currentLayer); 
 };

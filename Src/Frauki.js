@@ -123,15 +123,17 @@ Player.prototype.postStateUpdate = function() {
         this.body.acceleration.y = 0;
     }
 
-    // if(frauki.states.flowDown) {
-    //     this.body.acceleration.y = 500;
-    // } else if(frauki.states.flowUp) {
-        
-    // } else if(frauki.states.flowLeft) {
-    //     this.body.acceleration.x = -500;
-    // } else if(frauki.states.flowRight) {
-    //     this.body.acceleration.x = 500;
-    // }
+    if(frauki.states.flowDown) {
+        this.body.acceleration.y = 500;
+    } else if(frauki.states.flowUp) {
+        this.body.acceleration.y = -500;
+    }
+
+    if(frauki.states.flowLeft) {
+        this.body.acceleration.x = -300;
+    } else if(frauki.states.flowRight) {
+        this.body.acceleration.x = 300;
+    }
 
     // if(this.states.onLeftSlope) {
     //     this.body.gravity.x = -300;
@@ -159,7 +161,7 @@ Player.prototype.postStateUpdate = function() {
         game.physics.arcade.overlap(frauki.attackRect, Frogland.GetCurrentCollisionLayer(), TilesHit);
     }
     
-    if(this.state === this.Running) {
+    if(this.state === this.Running && this.animations.currentAnim.name === 'run') {
         events.publish('play_sound', {name: 'running'});
     } else {
         events.publish('stop_sound', {name: 'running'});
@@ -509,7 +511,12 @@ Player.prototype.Standing = function() {
 };
 
 Player.prototype.Running = function() {
-    this.PlayAnim('run');
+
+    if((frauki.states.flowLeft || frauki.states.flowRight) && !inputController.runLeft.isDown && !inputController.runRight.isDown) {
+        this.PlayAnim('stand');
+    } else {
+        this.PlayAnim('run');
+    }
 
     if(this.body.velocity.x === 0 && this.body.onFloor()) {
         this.state = this.Standing;
