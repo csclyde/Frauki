@@ -142,6 +142,9 @@ function UpdateParticle(p) {
 EffectsController.prototype.ParticleSpray = function(source, dest, color, dir, amt) {
 
 	var effect = null;
+    amt = amt || 5;
+
+    console.log('Particle amount: ' + amt);
 
 	if(color === 'positive') {
 		effect = this.positiveBits;
