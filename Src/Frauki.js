@@ -112,7 +112,11 @@ Player.prototype.preStateUpdate = function() {
 Player.prototype.postStateUpdate = function() {
 
     if(this.states.inWater) {
-        this.body.maxVelocity.x *= 0.7;
+        if(this.states.flowLeft || this.states.flowRight) {
+            this.body.maxVelocity.x *= 2;
+        } else {
+            this.body.maxVelocity.x *= 0.7;
+        }
 
         this.body.gravity.y = -300;
     }

@@ -41,6 +41,7 @@ Frogland.Create = function() {
     this.enemyPool = game.add.group();
     this.door1Group = game.add.group();
     this.door2Group = game.add.group();
+    this.door3Group = game.add.group();
 
     this.CreateObjectsLayer(4);
     this.CreateObjectsLayer(3);
@@ -48,6 +49,7 @@ Frogland.Create = function() {
 
     this.map.createFromObjects('Doors_1', 67, 'Door', 'Door0000', true, false, this.door1Group, Door, false);
     this.map.createFromObjects('Doors_2', 67, 'Door', 'Door0000', true, false, this.door2Group, Door, false);
+    this.map.createFromObjects('Doors_3', 67, 'Door', 'Door0000', true, false, this.door3Group, Door, false);
 
     this.ProcessCollisionTiles(4);
     this.ProcessCollisionTiles(3);

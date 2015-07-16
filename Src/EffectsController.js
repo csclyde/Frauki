@@ -143,6 +143,8 @@ EffectsController.prototype.ParticleSpray = function(source, dest, color, dir, a
 
 	var effect = null;
     amt = amt || 5;
+    amt = Math.round(amt);
+    if(!amt) { amt = 1; }
 
     console.log('Particle amount: ' + amt);
 
@@ -184,7 +186,7 @@ EffectsController.prototype.ParticleSpray = function(source, dest, color, dir, a
 
     this.activeDest = dest;
 
-	effect.start(false, 2000, 5, Math.round(amt), Math.round(amt));
+	effect.start(false, 2000, 5, amt, amt);
 };
 
 EffectsController.prototype.Splash = function(tile) {
