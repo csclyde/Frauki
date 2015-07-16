@@ -356,8 +356,8 @@ Player.prototype.Crouch = function(params) {
 
 Player.prototype.Slash = function(params) {
 
-    if(!this.timers.TimerUp('frauki_slash'))
-        return;
+    // if(!this.timers.TimerUp('frauki_slash'))
+    //     return;
 
     //diving dash
     if(!this.timers.TimerUp('frauki_dash') && this.states.crouching && (this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling)) {
@@ -704,6 +704,9 @@ Player.prototype.AttackFront = function() {
 Player.prototype.AttackOverhead = function() {
     this.PlayAnim('attack_overhead');
 
+    var anim = this.animations.getAnimation('attack_overhead');
+    anim.delay = 1000 / (10 + (energyController.GetEnergyPercentage() * 8));
+
     if(this.body.onFloor()) {
         this.body.velocity.x /= 2;
     }
@@ -812,6 +815,9 @@ Player.prototype.AttackDiveLand = function() {
 
 Player.prototype.AttackJump = function() {
     this.PlayAnim('attack_overhead');
+
+    var anim = this.animations.getAnimation('attack_overhead');
+    anim.delay = 1000 / (10 + (energyController.GetEnergyPercentage() * 8));
 
     this.body.velocity.x /= 2;
 

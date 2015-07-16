@@ -266,6 +266,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
     };
 
     this.Fleeing = function() {
+
         if(this.PlayerDistance() > 400 || this.body.touching.left || this.body.touching.right) {
             if(Math.abs(this.body.center.y - frauki.body.center.y) < 40) {
                 this.Scuttle();
@@ -288,7 +289,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
                 this.attackTimer = game.time.now;
             }
             else {
-                this.Flee();
+                this.state = this.Idling;
             }
         }
     };
