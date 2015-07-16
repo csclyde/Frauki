@@ -18,14 +18,10 @@ EffectsController = function() {
     this.negativeBits = game.add.emitter(0, 0, 100);
     this.negativeBits.makeParticles('Misc', ['EnergyBitNeg0000', 'EnergyBitNeg0001', 'EnergyBitNeg0002', 'EnergyBitNeg0003', 'EnergyBitNeg0004', 'EnergyBitNeg0005']);
     this.negativeBits.gravity = -200;
-    this.negativeBits.maxParticleScale = 1.5;
-    this.negativeBits.minParticleScale = 0.5;
 
     this.positiveBits = game.add.emitter(0, 0, 100);
     this.positiveBits.makeParticles('Misc', ['EnergyBitPos0000', 'EnergyBitPos0001', 'EnergyBitPos0002', 'EnergyBitPos0003', 'EnergyBitPos0004', 'EnergyBitPos0005']); //array of strings here for multiple sprites
     this.positiveBits.gravity = -800;
-    this.positiveBits.maxParticleScale = 1.5;
-    this.positiveBits.minParticleScale = 0.5;
 
     this.splashRight = game.add.emitter(0, 0, 100);
     this.splashRight.makeParticles('Misc', ['Splash0000', 'Splash0001']); 
@@ -87,8 +83,8 @@ EffectsController.prototype.UpdateEffects = function() {
 }
 
 function UpdateParticle(p) {
-    var vel = 1000;
-    var maxVelocity = 750;
+    var vel = 1200;
+    var maxVelocity = 300;
 
     if(!p.destBody) {
         p.destBody = this.activeDest;
@@ -113,10 +109,10 @@ function UpdateParticle(p) {
     p.body.acceleration.y = Math.sin(angle) * -vel;// - (yDist * 5);
 
     if((p.destBody.center.x < p.body.center.x && p.body.velocity.x > 0) || (p.destBody.center.x > p.body.center.x && p.body.velocity.x < 0))
-        p.body.acceleration.x *= 10;
+        p.body.acceleration.x *= 5;
 
     if((p.destBody.center.y < p.body.center.y && p.body.velocity.y > 0) || (p.destBody.center.y > p.body.center.y && p.body.velocity.y < 0))
-        p.body.acceleration.y *= 10;
+        p.body.acceleration.y *= 5;
 
     var currVelocitySqr = p.body.velocity.x * p.body.velocity.x + p.body.velocity.y * p.body.velocity.y;
 
@@ -144,8 +140,6 @@ function UpdateParticle(p) {
 };
 
 EffectsController.prototype.ParticleSpray = function(source, dest, color, dir, amt) {
-
-    amt = amt || 5;
 
 	var effect = null;
 
@@ -187,7 +181,7 @@ EffectsController.prototype.ParticleSpray = function(source, dest, color, dir, a
 
     this.activeDest = dest;
 
-	effect.start(false, 2000, 5, amt, amt);
+	effect.start(false, 2000, 5, Math.round(amt), Math.round(amt));
 };
 
 EffectsController.prototype.Splash = function(tile) {

@@ -123,6 +123,16 @@ Player.prototype.postStateUpdate = function() {
         this.body.acceleration.y = 0;
     }
 
+    // if(frauki.states.flowDown) {
+    //     this.body.acceleration.y = 500;
+    // } else if(frauki.states.flowUp) {
+        
+    // } else if(frauki.states.flowLeft) {
+    //     this.body.acceleration.x = -500;
+    // } else if(frauki.states.flowRight) {
+    //     this.body.acceleration.x = 500;
+    // }
+
     // if(this.states.onLeftSlope) {
     //     this.body.gravity.x = -300;
     // } else if(this.states.onRightSlope) {
