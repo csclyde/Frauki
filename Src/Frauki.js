@@ -123,6 +123,10 @@ Player.prototype.postStateUpdate = function() {
 
     if(this.states.inUpdraft) {
         this.body.acceleration.y = -500;
+
+        if(this.body.velocity.y > 300) {
+            this.body.velocity.y = 300;
+        }
     } else {
         this.body.acceleration.y = 0;
     }

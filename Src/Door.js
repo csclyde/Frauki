@@ -16,7 +16,6 @@ Door = function(game, x, y, name) {
     this.body.allowGravity = false;
     this.body.immovable = true;
     this.visible = false;
-    this.alpha = 0;
 
     this.animations.add('closed', ['Door0000'], 10, true, false);
 

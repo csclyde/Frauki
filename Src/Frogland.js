@@ -51,6 +51,11 @@ Frogland.Create = function() {
     this.map.createFromObjects('Doors_2', 67, 'Door', 'Door0000', true, false, this.door2Group, Door, false);
     this.map.createFromObjects('Doors_3', 67, 'Door', 'Door0000', true, false, this.door3Group, Door, false);
 
+    //make all the doors invisible
+    this.door1Group.forEach(function(d) { d.alpha = 0; });
+    this.door2Group.forEach(function(d) { d.alpha = 0; });
+    this.door3Group.forEach(function(d) { d.alpha = 0; });
+
     this.ProcessCollisionTiles(4);
     this.ProcessCollisionTiles(3);
     this.ProcessCollisionTiles(2);
@@ -129,6 +134,9 @@ Frogland.CreateObjectsLayer = function(layer) {
 
     //create all the apples
     this.map.createFromObjects('Objects_' + layer, 66, 'Misc', 'Apple0000', true, false, this[currLayer], Apple, false);
+
+    //create the doors
+    this.map.createFromObjects('Objects_' + layer, 67, 'Door', 'Door0000', true, false, this[currLayer], Door, false)
 
     //inform each enemy of its own layer
     this[currLayer].forEach(function(obj) {
@@ -341,6 +349,11 @@ Frogland.OverlapFraukiWithObject = function(f, o) {
         }
 
         return false;
+    } else if(o.spriteType === 'door') {
+
+        OpenDoor(f, o);
+
+        return true;
     }
 
     return true;
