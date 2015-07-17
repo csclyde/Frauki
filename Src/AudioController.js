@@ -87,7 +87,7 @@ AudioController.prototype.StopAllMusic = function(params) {
     for(var key in this.music) {
         if(!this.music.hasOwnProperty(key)) continue;
 
-        this.music[key].stop();
+        //this.music[key].stop();
     }
 }
 

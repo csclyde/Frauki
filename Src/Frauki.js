@@ -134,9 +134,9 @@ Player.prototype.postStateUpdate = function() {
     }
 
     if(frauki.states.flowLeft) {
-        this.body.acceleration.x = -300;
+        this.body.acceleration.x = -600;
     } else if(frauki.states.flowRight) {
-        this.body.acceleration.x = 300;
+        this.body.acceleration.x = 600;
     }
 
     // if(this.states.onLeftSlope) {
