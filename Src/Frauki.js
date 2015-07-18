@@ -372,6 +372,12 @@ Player.prototype.Crouch = function(params) {
     this.states.crouching = params.crouch;
 
     this.timers.SetTimer('frauki_dash', 200);
+
+    if(this.state === this.AttackFront && this.body.onFloor() === false && !this.timers.TimerUp('smash_timer')) {
+        this.state = this.AttackDiveCharge;
+        this.movement.diveVelocity = 950;
+        events.publish('play_sound', {name: 'attack_dive_charge', restart: true });
+    }
 };
 
 Player.prototype.Slash = function(params) {
@@ -429,6 +435,7 @@ Player.prototype.Slash = function(params) {
     }
 
     this.timers.SetTimer('frauki_slash', 400 * (1 / energyController.GetEnergyPercentage()));
+    this.timers.SetTimer('smash_timer', 200);
 };
 
 Player.prototype.Roll = function(params) {
