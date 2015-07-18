@@ -27,6 +27,8 @@ Frogland.Create = function() {
     this.backgroundLayer_2 = this.map.createLayer('Background_2');
     this.backgroundLayer_2.visible = +this.map.properties.startLayer === 2;
 
+    this.CreateNPCs();
+
     frauki = new Player(game, this.map.properties.startX * 16, this.map.properties.startY * 16, 'Frauki');
     game.add.existing(frauki);
 
@@ -95,6 +97,7 @@ Frogland.Update = function() {
     frauki.states.flowLeft = false;
 
     game.physics.arcade.collide(frauki, this.GetCurrentCollisionLayer(), null, this.CheckEnvironmentalCollisions);
+    game.physics.arcade.collide(this.NPCs, this.GetCurrentCollisionLayer());
     game.physics.arcade.collide(frauki, this.GetCurrentObjectGroup(), this.CollideFraukiWithObject, this.OverlapFraukiWithObject);
     game.physics.arcade.collide(this.GetCurrentObjectGroup(), this.GetCurrentCollisionLayer());
     game.physics.arcade.collide(this.GetCurrentObjectGroup(), this.GetCurrentObjectGroup(), null, this.OverlapEnemiesWithSelf);
@@ -510,3 +513,39 @@ function TilesHit(f, t) {
         Frogland.DislodgeTile(t);
     }
 };
+
+Frogland.CreateNPCs = function() {
+    this.NPCs = [];
+
+    irena = game.add.sprite(156 * 16, 53 * 16, 'EnemySprites', 'NPCs/Irena');
+    game.physics.enable(irena, Phaser.Physics.ARCADE);
+
+    irena.body.setSize(11, 50, 0, 5);
+
+    this.NPCs.push(irena);
+
+
+    cool = game.add.sprite(194 * 16, 55 * 16, 'EnemySprites', 'NPCs/Cool Frog');
+    game.physics.enable(cool, Phaser.Physics.ARCADE);
+
+    cool.body.setSize(11, 50, 0, 5);
+
+    this.NPCs.push(cool);
+
+
+    dapper = game.add.sprite(123 * 16, 57 * 16, 'EnemySprites', 'NPCs/Dapper Frog');
+    game.physics.enable(dapper, Phaser.Physics.ARCADE);
+
+    dapper.body.setSize(11, 50, 0, 19);
+    dapper.scale.x = -1;
+
+    this.NPCs.push(dapper);
+
+
+    biggie = game.add.sprite(105 * 16, 41 * 16, 'EnemySprites', 'NPCs/Big Frog');
+    game.physics.enable(biggie, Phaser.Physics.ARCADE);
+
+    biggie.body.setSize(11, 50, 0, 25);
+
+    this.NPCs.push(biggie);
+}

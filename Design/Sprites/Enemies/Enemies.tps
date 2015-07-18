@@ -200,6 +200,8 @@
             <filename>Incarnate</filename>
             <filename>Haystax</filename>
             <filename>Pincer</filename>
+            <filename>Bizarro</filename>
+            <filename>NPCs</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

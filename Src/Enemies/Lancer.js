@@ -63,9 +63,6 @@ Enemy.prototype.types['Lancer'] =  function() {
 		if(!this.timers.TimerUp('attack_wait') || !this.body.onFloor())
 			return;
 
-		if(!this.UsePoise(5))
-			return;
-
 		if(frauki.body.center.x < this.body.center.x) {
 			game.add.tween(this.body.velocity).to({x: -500}, 600, Phaser.Easing.Exponential.InOut, true).to({x: 0}, 600, Phaser.Easing.Exponential.InOut, true);
 			this.SetDirection('left');

@@ -4,9 +4,9 @@
         <key>fileFormatVersion</key>
         <int>3</int>
         <key>texturePackerVersion</key>
-        <string>3.7.1</string>
+        <string>3.9.1</string>
         <key>fileName</key>
-        <string>C:/Users/user/Documents/gamedev/Frauki/Design/Sprites/UI/UI.tps</string>
+        <string>D:/gamedev/Frauki/Design/Sprites/UI/UI.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -43,6 +43,8 @@
         <false/>
         <key>pvrCompressionQuality</key>
         <enum type="SettingsBase::PvrCompressionQuality">PVR_QUALITY_NORMAL</enum>
+        <key>atfCompressData</key>
+        <false/>
         <key>mipMapMinSize</key>
         <uint>32768</uint>
         <key>etc1CompressionQuality</key>
@@ -56,7 +58,7 @@
         <key>jxrCompressionLevel</key>
         <uint>0</uint>
         <key>ditherType</key>
-        <enum type="SettingsBase::DitherType">NearestNeighbour</enum>
+        <enum type="SettingsBase::DitherType">FloydSteinberg</enum>
         <key>backgroundColor</key>
         <uint>0</uint>
         <key>libGdx</key>
@@ -196,8 +198,6 @@
             <filename>Frames/EnergyBar0002.png</filename>
             <filename>Frames/EnergyBar0000.png</filename>
             <filename>Frames/EnergyBar0001.png</filename>
-            <filename>Frames/EnergyBar0003.png</filename>
-            <filename>Frames/EnergyBar0004.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

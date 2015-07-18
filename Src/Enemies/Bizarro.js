@@ -5,7 +5,7 @@ Enemy.prototype.types['Bizarro'] =  function() {
 
     this.animations.add('stand', ['Bizarro/Stand0000'], 10, true, false);
 	this.animations.add('flip', ['Bizarro/Flip0000', 'Bizarro/Flip0001', 'Bizarro/Flip0002', 'Bizarro/Flip0003', 'Bizarro/Flip0004'], 14, true, false);
-    this.animations.add('attack', ['Bizarro/Attack0001', 'Bizarro/Attack0002', 'Bizarro/Attack0003', 'Bizarro/Attack0004', 'Bizarro/Attack0005', 'Bizarro/Attack0006', 'Bizarro/Attack0007', 'Bizarro/Attack0008',], 14, false, false);
+    this.animations.add('attack', ['Bizarro/Attack0003', 'Bizarro/Attack0003', 'Bizarro/Attack0003', 'Bizarro/Attack0003', 'Bizarro/Attack0003', 'Bizarro/Attack0003', 'Bizarro/Attack0003', 'Bizarro/Attack0003',], 14, false, false);
 
     this.weight = 0.5;
     this.energy = 10;
@@ -73,7 +73,7 @@ Enemy.prototype.types['Bizarro'] =  function() {
 		if(!this.timers.TimerUp('attack_wait'))
 			return;
 
-		this.ChargeAtPlayer(400);
+		this.ChargeAtPlayer(350);
 
 		this.state = this.Attacking;
 	};

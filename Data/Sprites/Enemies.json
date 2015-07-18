@@ -1,8 +1,71 @@
 {"frames": {
 
+"Bizarro/Attack0003":
+{
+	"frame": {"x":548,"y":1,"w":107,"h":59},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":107,"h":59},
+	"sourceSize": {"w":107,"h":59},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"Bizarro/Flip0000":
+{
+	"frame": {"x":837,"y":73,"w":34,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":34,"h":32},
+	"sourceSize": {"w":34,"h":32},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"Bizarro/Flip0001":
+{
+	"frame": {"x":989,"y":1,"w":31,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":31,"h":24},
+	"sourceSize": {"w":31,"h":24},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"Bizarro/Flip0002":
+{
+	"frame": {"x":889,"y":1,"w":23,"h":31},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":23,"h":31},
+	"sourceSize": {"w":23,"h":31},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"Bizarro/Flip0003":
+{
+	"frame": {"x":908,"y":99,"w":33,"h":21},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":33,"h":21},
+	"sourceSize": {"w":33,"h":21},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"Bizarro/Flip0004":
+{
+	"frame": {"x":985,"y":65,"w":23,"h":28},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":23,"h":28},
+	"sourceSize": {"w":23,"h":28},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"Bizarro/Stand0000":
+{
+	"frame": {"x":722,"y":1,"w":16,"h":50},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":50},
+	"sourceSize": {"w":16,"h":50},
+	"pivot": {"x":0.5,"y":0.5}
+},
 "Buzzar/Attack0000":
 {
-	"frame": {"x":172,"y":84,"w":30,"h":42},
+	"frame": {"x":739,"y":1,"w":30,"h":42},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":30,"h":42},
@@ -11,7 +74,7 @@
 },
 "Buzzar/Attack0001":
 {
-	"frame": {"x":203,"y":84,"w":30,"h":42},
+	"frame": {"x":770,"y":1,"w":30,"h":42},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":30,"h":42},
@@ -20,7 +83,7 @@
 },
 "Buzzar/Dead0000":
 {
-	"frame": {"x":452,"y":102,"w":22,"h":22},
+	"frame": {"x":1001,"y":26,"w":22,"h":22},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":22,"h":22},
@@ -29,7 +92,7 @@
 },
 "Buzzar/Dead0001":
 {
-	"frame": {"x":58,"y":113,"w":18,"h":12},
+	"frame": {"x":699,"y":108,"w":18,"h":12},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":12},
@@ -38,7 +101,7 @@
 },
 "Buzzar/Dead0002":
 {
-	"frame": {"x":616,"y":73,"w":12,"h":14},
+	"frame": {"x":837,"y":106,"w":12,"h":14},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":12,"h":14},
@@ -47,7 +110,7 @@
 },
 "Buzzar/FlyForward0000":
 {
-	"frame": {"x":572,"y":1,"w":31,"h":35},
+	"frame": {"x":185,"y":84,"w":31,"h":35},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":31,"h":35},
@@ -56,7 +119,7 @@
 },
 "Buzzar/FlyForward0001":
 {
-	"frame": {"x":602,"y":37,"w":31,"h":35},
+	"frame": {"x":217,"y":84,"w":31,"h":35},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":31,"h":35},
@@ -65,7 +128,7 @@
 },
 "Buzzar/FlyForward0002":
 {
-	"frame": {"x":604,"y":1,"w":31,"h":35},
+	"frame": {"x":297,"y":82,"w":31,"h":35},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":31,"h":35},
@@ -74,7 +137,7 @@
 },
 "Buzzar/FlyForward0003":
 {
-	"frame": {"x":634,"y":37,"w":31,"h":35},
+	"frame": {"x":329,"y":82,"w":31,"h":35},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":31,"h":35},
@@ -83,7 +146,7 @@
 },
 "Buzzar/FlyForward0004":
 {
-	"frame": {"x":636,"y":1,"w":31,"h":35},
+	"frame": {"x":832,"y":1,"w":31,"h":35},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":31,"h":35},
@@ -92,7 +155,7 @@
 },
 "Buzzar/FlyForward0005":
 {
-	"frame": {"x":648,"y":73,"w":31,"h":35},
+	"frame": {"x":805,"y":81,"w":31,"h":35},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":31,"h":35},
@@ -101,7 +164,7 @@
 },
 "Buzzar/FlyForward0006":
 {
-	"frame": {"x":666,"y":37,"w":31,"h":35},
+	"frame": {"x":835,"y":37,"w":31,"h":35},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":31,"h":35},
@@ -110,7 +173,7 @@
 },
 "Buzzar/FlyForward0007":
 {
-	"frame": {"x":648,"y":73,"w":31,"h":35},
+	"frame": {"x":805,"y":81,"w":31,"h":35},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":31,"h":35},
@@ -119,7 +182,7 @@
 },
 "Buzzar/FlyForward0008":
 {
-	"frame": {"x":604,"y":1,"w":31,"h":35},
+	"frame": {"x":297,"y":82,"w":31,"h":35},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":31,"h":35},
@@ -128,7 +191,7 @@
 },
 "Buzzar/FlyForward0009":
 {
-	"frame": {"x":634,"y":37,"w":31,"h":35},
+	"frame": {"x":329,"y":82,"w":31,"h":35},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":31,"h":35},
@@ -137,7 +200,7 @@
 },
 "Buzzar/Hurt0000":
 {
-	"frame": {"x":668,"y":1,"w":24,"h":34},
+	"frame": {"x":864,"y":1,"w":24,"h":34},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":24,"h":34},
@@ -146,7 +209,7 @@
 },
 "Buzzar/Idle0000":
 {
-	"frame": {"x":493,"y":1,"w":30,"h":39},
+	"frame": {"x":801,"y":1,"w":30,"h":39},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":30,"h":39},
@@ -155,7 +218,7 @@
 },
 "Buzzar/Idle0001":
 {
-	"frame": {"x":496,"y":51,"w":30,"h":39},
+	"frame": {"x":804,"y":41,"w":30,"h":39},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":30,"h":39},
@@ -164,7 +227,7 @@
 },
 "CreeperThistle/CreeperThistle0000":
 {
-	"frame": {"x":698,"y":1,"w":37,"h":30},
+	"frame": {"x":913,"y":1,"w":37,"h":30},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":37,"h":30},
@@ -173,7 +236,7 @@
 },
 "CreeperThistle/CreeperThistle0001":
 {
-	"frame": {"x":698,"y":63,"w":37,"h":29},
+	"frame": {"x":947,"y":64,"w":37,"h":29},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":37,"h":29},
@@ -182,7 +245,7 @@
 },
 "CreeperThistle/CreeperThistle0002":
 {
-	"frame": {"x":698,"y":32,"w":37,"h":30},
+	"frame": {"x":951,"y":1,"w":37,"h":30},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":37,"h":30},
@@ -191,7 +254,7 @@
 },
 "CreeperThistle/CreeperThistle0003":
 {
-	"frame": {"x":535,"y":95,"w":37,"h":31},
+	"frame": {"x":867,"y":36,"w":37,"h":31},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":37,"h":31},
@@ -209,7 +272,7 @@
 },
 "Haystax/Idle0001":
 {
-	"frame": {"x":228,"y":1,"w":62,"h":78},
+	"frame": {"x":343,"y":1,"w":62,"h":78},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":62,"h":78},
@@ -218,7 +281,7 @@
 },
 "Haystax/Tarball0000":
 {
-	"frame": {"x":475,"y":102,"w":18,"h":21},
+	"frame": {"x":942,"y":99,"w":18,"h":21},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":21},
@@ -227,7 +290,7 @@
 },
 "Haystax/Tarball0001":
 {
-	"frame": {"x":557,"y":76,"w":19,"h":18},
+	"frame": {"x":769,"y":101,"w":19,"h":18},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":19,"h":18},
@@ -245,7 +308,7 @@
 },
 "Insectoid/Dead0000":
 {
-	"frame": {"x":377,"y":52,"w":34,"h":21},
+	"frame": {"x":873,"y":99,"w":34,"h":21},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":34,"h":21},
@@ -254,7 +317,7 @@
 },
 "Insectoid/Dead0001":
 {
-	"frame": {"x":527,"y":76,"w":29,"h":18},
+	"frame": {"x":739,"y":101,"w":29,"h":18},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":29,"h":18},
@@ -263,7 +326,7 @@
 },
 "Insectoid/Dead0002":
 {
-	"frame": {"x":1,"y":113,"w":22,"h":13},
+	"frame": {"x":850,"y":106,"w":22,"h":13},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":22,"h":13},
@@ -272,7 +335,7 @@
 },
 "Insectoid/Dead0003":
 {
-	"frame": {"x":593,"y":76,"w":22,"h":15},
+	"frame": {"x":1001,"y":49,"w":22,"h":15},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":22,"h":15},
@@ -281,7 +344,7 @@
 },
 "Insectoid/Dead0004":
 {
-	"frame": {"x":494,"y":102,"w":40,"h":20},
+	"frame": {"x":956,"y":32,"w":40,"h":20},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":20},
@@ -290,7 +353,7 @@
 },
 "Insectoid/Die0000":
 {
-	"frame": {"x":115,"y":85,"w":56,"h":39},
+	"frame": {"x":361,"y":80,"w":56,"h":39},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":56,"h":39},
@@ -299,7 +362,7 @@
 },
 "Insectoid/Die0001":
 {
-	"frame": {"x":362,"y":74,"w":49,"h":51},
+	"frame": {"x":679,"y":56,"w":49,"h":51},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":49,"h":51},
@@ -308,7 +371,7 @@
 },
 "Insectoid/Die0002":
 {
-	"frame": {"x":524,"y":1,"w":47,"h":38},
+	"frame": {"x":249,"y":82,"w":47,"h":38},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":47,"h":38},
@@ -317,7 +380,7 @@
 },
 "Insectoid/Die0003":
 {
-	"frame": {"x":234,"y":80,"w":40,"h":46},
+	"frame": {"x":418,"y":74,"w":40,"h":46},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":46},
@@ -326,7 +389,7 @@
 },
 "Insectoid/Hop0000":
 {
-	"frame": {"x":527,"y":40,"w":74,"h":35},
+	"frame": {"x":110,"y":85,"w":74,"h":35},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":74,"h":35},
@@ -335,7 +398,7 @@
 },
 "Insectoid/Hop0001":
 {
-	"frame": {"x":412,"y":52,"w":83,"h":49},
+	"frame": {"x":546,"y":71,"w":83,"h":49},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":83,"h":49},
@@ -344,7 +407,7 @@
 },
 "Insectoid/Hop0002":
 {
-	"frame": {"x":275,"y":80,"w":86,"h":43},
+	"frame": {"x":459,"y":74,"w":86,"h":43},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":86,"h":43},
@@ -353,7 +416,7 @@
 },
 "Insectoid/Hop0003":
 {
-	"frame": {"x":418,"y":1,"w":74,"h":48},
+	"frame": {"x":729,"y":52,"w":74,"h":48},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":74,"h":48},
@@ -362,7 +425,7 @@
 },
 "Insectoid/Hop0004":
 {
-	"frame": {"x":573,"y":95,"w":74,"h":30},
+	"frame": {"x":872,"y":68,"w":74,"h":30},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":74,"h":30},
@@ -371,16 +434,52 @@
 },
 "Insectoid/Hop0005":
 {
-	"frame": {"x":527,"y":40,"w":74,"h":35},
+	"frame": {"x":110,"y":85,"w":74,"h":35},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":74,"h":35},
 	"sourceSize": {"w":74,"h":35},
 	"pivot": {"x":0.5,"y":0.5}
 },
+"NPCs/Big Frog":
+{
+	"frame": {"x":228,"y":1,"w":114,"h":80},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":114,"h":80},
+	"sourceSize": {"w":114,"h":80},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"NPCs/Cool Frog":
+{
+	"frame": {"x":630,"y":61,"w":48,"h":54},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":54},
+	"sourceSize": {"w":48,"h":54},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"NPCs/Dapper Frog":
+{
+	"frame": {"x":492,"y":1,"w":55,"h":69},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":55,"h":69},
+	"sourceSize": {"w":55,"h":69},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"NPCs/Irena":
+{
+	"frame": {"x":656,"y":1,"w":24,"h":54},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":24,"h":54},
+	"sourceSize": {"w":24,"h":54},
+	"pivot": {"x":0.5,"y":0.5}
+},
 "Pincer/Idle0000":
 {
-	"frame": {"x":291,"y":1,"w":85,"h":72},
+	"frame": {"x":406,"y":1,"w":85,"h":72},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":85,"h":72},
@@ -389,7 +488,7 @@
 },
 "Pincer/Idle0001":
 {
-	"frame": {"x":680,"y":93,"w":50,"h":30},
+	"frame": {"x":905,"y":33,"w":50,"h":30},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":30},
@@ -398,7 +497,7 @@
 },
 "Pincer/Idle0002":
 {
-	"frame": {"x":577,"y":76,"w":15,"h":18},
+	"frame": {"x":789,"y":101,"w":15,"h":18},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":15,"h":18},
@@ -407,7 +506,7 @@
 },
 "Pincer/Idle0003":
 {
-	"frame": {"x":24,"y":113,"w":13,"h":13},
+	"frame": {"x":1009,"y":65,"w":13,"h":13},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":13,"h":13},
@@ -416,7 +515,7 @@
 },
 "Sporoid/Dead0000":
 {
-	"frame": {"x":493,"y":41,"w":13,"h":9},
+	"frame": {"x":548,"y":61,"w":13,"h":9},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":13,"h":9},
@@ -425,7 +524,7 @@
 },
 "Sporoid/Dead0001":
 {
-	"frame": {"x":98,"y":113,"w":16,"h":11},
+	"frame": {"x":1001,"y":94,"w":16,"h":11},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":11},
@@ -434,7 +533,7 @@
 },
 "Sporoid/Dead0002":
 {
-	"frame": {"x":38,"y":113,"w":19,"h":12},
+	"frame": {"x":679,"y":108,"w":19,"h":12},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":19,"h":12},
@@ -443,7 +542,7 @@
 },
 "Sporoid/Dead0003":
 {
-	"frame": {"x":77,"y":113,"w":20,"h":11},
+	"frame": {"x":718,"y":108,"w":20,"h":11},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":20,"h":11},
@@ -452,7 +551,7 @@
 },
 "Sporoid/Sporoid0000":
 {
-	"frame": {"x":412,"y":102,"w":39,"h":23},
+	"frame": {"x":961,"y":94,"w":39,"h":23},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":39,"h":23},
@@ -461,7 +560,7 @@
 },
 "TerraceMadman/Standing0000":
 {
-	"frame": {"x":377,"y":1,"w":40,"h":50},
+	"frame": {"x":681,"y":1,"w":40,"h":50},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":50},
@@ -482,8 +581,8 @@
 	"version": "1.0",
 	"image": "Enemies.png",
 	"format": "RGBA8888",
-	"size": {"w":739,"h":127},
+	"size": {"w":1024,"h":121},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:0d25e49544b3ffca3ac3124c83682f0e:595baea4d20d276160004e8543122938:b1585ba32d60cf5440f3fdffe8c37c76$"
+	"smartupdate": "$TexturePacker:SmartUpdate:b5f57411d54ac6672791749f63936867:72cfbaebbd99a2ed85ade4af5b39bd10:b1585ba32d60cf5440f3fdffe8c37c76$"
 }
 }
