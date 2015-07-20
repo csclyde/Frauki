@@ -45,6 +45,15 @@ Frogland.Create = function() {
     this.door2Group = game.add.group();
     this.door3Group = game.add.group();
 
+    this.easyStar_4 = game.plugins.add(Phaser.Plugin.PathFinderPlugin);
+    this.easyStar_4.setGrid(this.collisionLayer_4.layer.data, [-1]);
+
+    this.easyStar_3 = game.plugins.add(Phaser.Plugin.PathFinderPlugin);
+    this.easyStar_3.setGrid(this.collisionLayer_3.layer.data, [-1]);
+
+    this.easyStar_2 = game.plugins.add(Phaser.Plugin.PathFinderPlugin);
+    this.easyStar_2.setGrid(this.collisionLayer_2.layer.data, [-1]);
+
     this.CreateObjectsLayer(4);
     this.CreateObjectsLayer(3);
     this.CreateObjectsLayer(2);
@@ -61,18 +70,6 @@ Frogland.Create = function() {
     this.ProcessCollisionTiles(4);
     this.ProcessCollisionTiles(3);
     this.ProcessCollisionTiles(2);
-
-    this.easyStar_4 = new EasyStar.js();
-    this.easyStar_4.setGrid(this.collisionLayer_4.layer.data);
-    this.easyStar_4.setAcceptableTiles([-1]);
-
-    this.easyStar_3 = new EasyStar.js();
-    this.easyStar_3.setGrid(this.collisionLayer_3.layer.data);
-    this.easyStar_3.setAcceptableTiles([-1]);
-
-    this.easyStar_2 = new EasyStar.js();
-    this.easyStar_2.setGrid(this.collisionLayer_2.layer.data);
-    this.easyStar_2.setAcceptableTiles([-1]);
 
     triggerController.CreateTriggers(4);
     triggerController.CreateTriggers(3);

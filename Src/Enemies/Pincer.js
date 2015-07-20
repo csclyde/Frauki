@@ -1,4 +1,5 @@
 Enemy.prototype.types['Pincer'] =  function() {
+	var that = this;
 
 	this.body.setSize(25, 20, -10, 0);
 	this.anchor.setTo(.5, 1);
@@ -15,7 +16,8 @@ Enemy.prototype.types['Pincer'] =  function() {
 
     //create the body sections
     this.bodies = [];
-    this.bodies.push(game.add.sprite(this.body.center.x, this.body.center.y, 'EnemySprites', 'Pincer/Idle0003'));
+    this.startTime = null;
+    //this.bodies.push(game.add.sprite(this.body.center.x, this.body.center.y, 'EnemySprites', 'Pincer/Idle0003'));
     //game.physics.enable(this.bodies[0], Phaser.Physics.ARCADE);
 
     /*
@@ -25,10 +27,36 @@ Enemy.prototype.types['Pincer'] =  function() {
     this.baseStunDuration = 500;
     this.poise = 10;
     */
+
+    Frogland.easyStar_3.setCallbackFunction(function(path) {
+        path = path || [];
+
+        that.pathX = [];
+        that.pathY = [];
+        
+ 		for(var i = 0; i < path.length; i++) {
+
+ 			that.pathX.push(path[i].x * 16);
+ 			that.pathY.push(path[i].y * 16);
+ 		}
+
+ 		that.startTime = game.time.now;
+
+
+    });
+
+    Frogland.easyStar_3.preparePathCalculation([95,90], [95,100]);
+    Frogland.easyStar_3.calculatePath();
     
 	this.updateFunction = function() {
-		this.bodies[0].x = this.body.center.x;
-		this.bodies[0].y = this.body.center.y;
+
+		if(this.startTime !== null) {
+			var pcent = game.time.now - this.startTime;
+			pcent /= 15000;
+
+			this.x = game.math.catmullRomInterpolation(this.pathX, pcent);
+			this.y = game.math.catmullRomInterpolation(this.pathY, pcent);
+		}
 	};
 
 	///////////////////////////////ACTIONS////////////////////////////////////
@@ -44,7 +72,6 @@ Enemy.prototype.types['Pincer'] =  function() {
 	};
 
 	this.Die = function() {
-        this.anger = 1;
         this.state = this.Idling;
     };
 
@@ -53,7 +80,7 @@ Enemy.prototype.types['Pincer'] =  function() {
 		this.PlayAnim('idle');
 
 		if(this.PlayerIsVisible()) {
-			this.state = this.Chasing;
+			//this.state = this.Chasing;
 		}
 
 	};

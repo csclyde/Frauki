@@ -220,12 +220,13 @@ function EnemyHit(f, e) {
     }   
 
     energyController.AddPower(damage / 5);
-    
+
     // effectsController.SlowHit(function() {
 
-    //     //events.publish('camera_shake', {magnitudeX: 15 * damage, magnitudeY: 5, duration: 100});
+    //     //
     // });
-        
+
+    //events.publish('camera_shake', {magnitudeX: 15 * damage, magnitudeY: 5, duration: 100});
     events.publish('play_sound', { name: 'attack_connect' });
     effectsController.ParticleSpray(e.body, frauki.body, 'positive', e.EnemyDirection(), damage);  
 

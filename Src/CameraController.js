@@ -36,11 +36,13 @@ CameraController.prototype.UpdateCamera = function() {
 		}
 	}
 
+	//if the velocity has changed
 	if(this.prevXVel !== frauki.body.velocity.x) {
 		if(this.camXTween != null) {
 			//this.camXTween.stop();
 		}
 
+		//tween the offset to be modified based on the current velocity
 		this.camXTween = game.add.tween(this).to( { camX: Math.floor((frauki.body.velocity.x / X_VEL_DIV) + xOffset) }, 500, Phaser.Easing.Sinusoidal.Out, true);
 
 	}
@@ -61,7 +63,7 @@ CameraController.prototype.UpdateCamera = function() {
 		this.shakeX = 0;
 	}
 
-	var newCamX = (this.camX + frauki.body.x + this.shakeX);
+	var newCamX = (this.camX + frauki.body.center.x + this.shakeX);
 	var newCamY = (this.camY + frauki.body.y + this.shakeY + (frauki.body.height - 50));
 	
 	game.camera.focusOnXY(newCamX, newCamY);
