@@ -76,22 +76,13 @@ Main.Restart = function() {
 
         Main.restarting = false;
 
-        Frogland['objectGroup_4'].forEach(function(e) {
-            if(!!e.Respawn) {
-                e.Respawn();
-            }
-        });
+        Frogland.objectGroup_4.destroy();
+        Frogland.objectGroup_3.destroy();
+        Frogland.objectGroup_2.destroy();
 
-        Frogland['objectGroup_3'].forEach(function(e) {
-            if(!!e.Respawn) {
-                e.Respawn();
-            }
-        });
+        Frogland.CreateObjectsLayer(4);
+        Frogland.CreateObjectsLayer(3);
+        Frogland.CreateObjectsLayer(2);
 
-        Frogland['objectGroup_2'].forEach(function(e) {
-            if(!!e.Respawn) {
-                e.Respawn();
-            }
-        });
     });
 };

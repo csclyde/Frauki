@@ -515,37 +515,37 @@ function TilesHit(f, t) {
 };
 
 Frogland.CreateNPCs = function() {
-    this.NPCs = [];
+    // this.NPCs = [];
 
-    irena = game.add.sprite(156 * 16, 53 * 16, 'EnemySprites', 'NPCs/Irena');
-    game.physics.enable(irena, Phaser.Physics.ARCADE);
+    // irena = game.add.sprite(156 * 16, 53 * 16, 'EnemySprites', 'NPCs/Irena');
+    // game.physics.enable(irena, Phaser.Physics.ARCADE);
 
-    irena.body.setSize(11, 50, 0, 5);
+    // irena.body.setSize(11, 50, 0, 5);
 
-    this.NPCs.push(irena);
-
-
-    cool = game.add.sprite(194 * 16, 55 * 16, 'EnemySprites', 'NPCs/Cool Frog');
-    game.physics.enable(cool, Phaser.Physics.ARCADE);
-
-    cool.body.setSize(11, 50, 0, 5);
-
-    this.NPCs.push(cool);
+    // this.NPCs.push(irena);
 
 
-    dapper = game.add.sprite(123 * 16, 57 * 16, 'EnemySprites', 'NPCs/Dapper Frog');
-    game.physics.enable(dapper, Phaser.Physics.ARCADE);
+    // cool = game.add.sprite(194 * 16, 55 * 16, 'EnemySprites', 'NPCs/Cool Frog');
+    // game.physics.enable(cool, Phaser.Physics.ARCADE);
 
-    dapper.body.setSize(11, 50, 0, 19);
-    dapper.scale.x = -1;
+    // cool.body.setSize(11, 50, 0, 5);
 
-    this.NPCs.push(dapper);
+    // this.NPCs.push(cool);
 
 
-    biggie = game.add.sprite(105 * 16, 41 * 16, 'EnemySprites', 'NPCs/Big Frog');
-    game.physics.enable(biggie, Phaser.Physics.ARCADE);
+    // dapper = game.add.sprite(123 * 16, 57 * 16, 'EnemySprites', 'NPCs/Dapper Frog');
+    // game.physics.enable(dapper, Phaser.Physics.ARCADE);
 
-    biggie.body.setSize(11, 50, 0, 25);
+    // dapper.body.setSize(11, 50, 0, 19);
+    // dapper.scale.x = -1;
 
-    this.NPCs.push(biggie);
+    // this.NPCs.push(dapper);
+
+
+    // biggie = game.add.sprite(105 * 16, 41 * 16, 'EnemySprites', 'NPCs/Big Frog');
+    // game.physics.enable(biggie, Phaser.Physics.ARCADE);
+
+    // biggie.body.setSize(11, 50, 0, 25);
+
+    // this.NPCs.push(biggie);
 }

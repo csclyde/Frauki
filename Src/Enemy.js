@@ -204,7 +204,6 @@ function EnemyHit(f, e) {
     }
 
     e.energy -= damage;
-    energyController.AddPower(damage / 5);
 
     console.log('Enemy is taking ' + damage + ', now at ' + e.energy + '/' + e.maxEnergy);
 
@@ -215,20 +214,22 @@ function EnemyHit(f, e) {
 
         effectsController.DiceEnemy(e.enemyName, e.body.center.x, e.body.center.y);
 
-        e.kill();
-
         damage = e.maxEnergy;
     } else {
         e.TakeHit();
     }   
 
+    energyController.AddPower(damage / 5);
+    
     // effectsController.SlowHit(function() {
 
     //     //events.publish('camera_shake', {magnitudeX: 15 * damage, magnitudeY: 5, duration: 100});
     // });
         
     events.publish('play_sound', { name: 'attack_connect' });
-    effectsController.ParticleSpray(e.body, frauki.body, 'positive', e.EnemyDirection(), damage);    
+    effectsController.ParticleSpray(e.body, frauki.body, 'positive', e.EnemyDirection(), damage);  
+
+    if(e.energy <= 0) { e.destroy(); }
 };
 
 
