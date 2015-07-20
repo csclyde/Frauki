@@ -284,7 +284,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
                 this.Scuttle();
                 this.attackTimer = game.time.now;
             }
-            else if(Math.abs(this.body.center.x - frauki.body.center.x) > 100 && Math.abs(this.body.center.x - frauki.body.center.x) < 450) {
+            else if(Math.abs(this.body.center.x - frauki.body.center.x) > 100 && Math.abs(this.body.center.x - frauki.body.center.x) < 450 && this.RollDice(20, 10)) {
                 this.Hop();
                 this.attackTimer = game.time.now;
             }

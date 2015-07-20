@@ -45,7 +45,7 @@ Enemy.prototype.SetDefaultValues = function() {
     this.energy = 5;
     this.damage = 3;
     this.inScope = false;
-    this.baseStunDuration = 300;
+    this.baseStunDuration = 600;
     this.poise = 5;
 };
 
@@ -181,7 +181,7 @@ function EnemyHit(f, e) {
     e.xHitVel = (1000 * frauki.currentAttack.knockback) - (1000 * e.weight);
     if(e.xHitVel < 200) e.xHitVel = 200;
     e.xHitVel *= e.PlayerDirMod();
-    game.add.tween(e).to({xHitVel: 0}, 300, Phaser.Easing.Exponential.Out, true);
+    game.add.tween(e).to({xHitVel: 0}, e.baseStunDuration, Phaser.Easing.Exponential.Out, true);
 
     e.body.velocity.y = -200 + (frauki.currentAttack.juggle * -600);
 
