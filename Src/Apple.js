@@ -55,6 +55,8 @@ function EatApple(f, a) {
     a.spinTween.onComplete.add(function() { 
         game.time.events.add(1000, function(){ a.kill(); } );
     }, a);
+
+    energyController.AddPower(5);
 };
 
 Apple.prototype.PlayAnim = function(name) {
