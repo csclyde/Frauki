@@ -1,4 +1,4 @@
-X_VEL_DIV = 15;
+X_VEL_DIV = 10;
 Y_VEL_DIV = 30;
 
 CameraController = function() {
@@ -25,7 +25,7 @@ CameraController = function() {
 //camera is controlled in player centric space
 CameraController.prototype.UpdateCamera = function() {
 	
-	var xOffset = frauki.states.direction === 'left' ? -15 : 15;
+	var xOffset = frauki.states.direction === 'left' ? -25 : 25;
 	var yOffset = frauki.body.velocity.y > 0 ? 20 : 0;
 
 	yOffset += (frauki.states.crouching ? 35 : 0);
@@ -42,19 +42,28 @@ CameraController.prototype.UpdateCamera = function() {
 			//this.camXTween.stop();
 		}
 
-		//tween the offset to be modified based on the current velocity
-		this.camXTween = game.add.tween(this).to( { camX: Math.floor((frauki.body.velocity.x / X_VEL_DIV) + xOffset) }, 500, Phaser.Easing.Sinusoidal.Out, true);
+		//this.camXTween = game.add.tween(this).to( { camX: Math.floor((frauki.body.velocity.x / X_VEL_DIV) + xOffset) }, 500, Phaser.Easing.Sinusoidal.Out, true);
 
 	}
+		var idealX = (frauki.body.velocity.x / X_VEL_DIV) + xOffset;
+		var dist = idealX - this.camX;
+
+		this.camX += Math.ceil(dist * 3) * game.time.physicsElapsed;
+
 
 	if(this.prevYVel !== frauki.body.velocity.y || this.retweenY) {
 		if(this.camYTween != null) {
 			//this.camYTween.stop();
 		}
 
-		this.camYTween = game.add.tween(this).to( { camY: Math.floor((frauki.body.velocity.y / Y_VEL_DIV) + yOffset) }, 1000, Phaser.Easing.Quintic.Out, true);
+		//this.camYTween = game.add.tween(this).to( { camY: Math.floor((frauki.body.velocity.y / Y_VEL_DIV) + yOffset) }, 1000, Phaser.Easing.Quintic.Out, true);
 		this.retweenY = false;
 	}
+
+		var idealY = (frauki.body.velocity.y / Y_VEL_DIV) + yOffset;
+		var dist = idealY - this.camY;
+
+		this.camY += Math.ceil(dist * 5) * game.time.physicsElapsed;
 
 	//do the screen shake
 	if(this.shakeMagnitudeX > 0) {

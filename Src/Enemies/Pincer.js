@@ -41,8 +41,6 @@ Enemy.prototype.types['Pincer'] =  function() {
  		}
 
  		that.startTime = game.time.now;
-
-
     });
 
     Frogland.easyStar_3.preparePathCalculation([95,90], [95,100]);
