@@ -52,5 +52,6 @@ FileMap.Enemies = [
 	{ Name: 'Haystax', Tile: 91 },
 	{ Name: 'Bizarro', Tile: 92 },
 	{ Name: 'Lancer', Tile: 93 },
-	{ Name: 'Pincer', Tile: 94 }
+	{ Name: 'Pincer', Tile: 94 },
+	{ Name: 'Mask', Tile: 95 }
 ];

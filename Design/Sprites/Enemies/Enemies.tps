@@ -202,6 +202,7 @@
             <filename>Pincer</filename>
             <filename>Bizarro</filename>
             <filename>NPCs</filename>
+            <filename>Mask</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

@@ -451,7 +451,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "width":0,
          "x":0,
          "y":0
@@ -474,7 +474,7 @@
          "name":"Background_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -485,7 +485,7 @@
          "name":"Midground_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -496,7 +496,7 @@
          "name":"Foreground_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -507,7 +507,7 @@
          "name":"Collision_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -676,22 +676,6 @@
                  "width":16,
                  "x":1702,
                  "y":1218
-                }, 
-                {
-                 "gid":85,
-                 "height":16,
-                 "id":38,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":2622,
-                 "y":1430
                 }, 
                 {
                  "gid":94,
@@ -868,10 +852,26 @@
                  "width":16,
                  "x":2856,
                  "y":2552
+                }, 
+                {
+                 "gid":95,
+                 "height":16,
+                 "id":111,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":2623.5,
+                 "y":1428
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "width":0,
          "x":0,
          "y":0
@@ -1980,7 +1980,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":111,
+ "nextobjectid":112,
  "orientation":"orthogonal",
  "properties":
     {
