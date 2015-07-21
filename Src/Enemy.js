@@ -305,3 +305,8 @@ Enemy.prototype.ChargeAtPlayer = function(speed) {
 
     game.physics.arcade.moveToXY(this, frauki.body.center.x, frauki.body.center.y, speed);
 };
+
+Enemy.prototype.SeekPlayer = function() {
+    
+      
+};
