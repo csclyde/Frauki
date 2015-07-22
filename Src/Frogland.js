@@ -34,29 +34,21 @@ Frogland.Create = function() {
 
     game.camera.focusOnXY(frauki.body.x, frauki.body.y);
 
+    this.currentLayer = +this.map.properties.startLayer;
+    
+    this.CreateObjectsLayer(4);
+    this.CreateObjectsLayer(3);
+    this.CreateObjectsLayer(2);
+
     this.CreateMapLayer(4, +this.map.properties.startLayer === 4);
     this.CreateMapLayer(3, +this.map.properties.startLayer === 3);
     this.CreateMapLayer(2, +this.map.properties.startLayer === 2);
     
-    this.currentLayer = +this.map.properties.startLayer;
 
     this.enemyPool = game.add.group();
     this.door1Group = game.add.group();
     this.door2Group = game.add.group();
     this.door3Group = game.add.group();
-
-    this.easyStar_4 = game.plugins.add(Phaser.Plugin.PathFinderPlugin);
-    this.easyStar_4.setGrid(this.collisionLayer_4.layer.data, [-1]);
-
-    this.easyStar_3 = game.plugins.add(Phaser.Plugin.PathFinderPlugin);
-    this.easyStar_3.setGrid(this.collisionLayer_3.layer.data, [-1]);
-
-    this.easyStar_2 = game.plugins.add(Phaser.Plugin.PathFinderPlugin);
-    this.easyStar_2.setGrid(this.collisionLayer_2.layer.data, [-1]);
-
-    this.CreateObjectsLayer(4);
-    this.CreateObjectsLayer(3);
-    this.CreateObjectsLayer(2);
 
     this.map.createFromObjects('Doors_1', 67, 'Door', 'Door0000', true, false, this.door1Group, Door, false);
     this.map.createFromObjects('Doors_2', 67, 'Door', 'Door0000', true, false, this.door2Group, Door, false);
@@ -74,6 +66,15 @@ Frogland.Create = function() {
     triggerController.CreateTriggers(4);
     triggerController.CreateTriggers(3);
     triggerController.CreateTriggers(2);
+
+    this.easyStar_4 = game.plugins.add(Phaser.Plugin.PathFinderPlugin);
+    this.easyStar_4.setGrid(this.collisionLayer_4.layer.data, [-1]);
+
+    this.easyStar_3 = game.plugins.add(Phaser.Plugin.PathFinderPlugin);
+    this.easyStar_3.setGrid(this.collisionLayer_3.layer.data, [-1]);
+
+    this.easyStar_2 = game.plugins.add(Phaser.Plugin.PathFinderPlugin);
+    this.easyStar_2.setGrid(this.collisionLayer_2.layer.data, [-1]);
 
     setInterval(function() {
         Frogland.AnimateTiles();
