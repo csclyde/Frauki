@@ -174,7 +174,7 @@ function EnemyHit(f, e) {
     if(!e.timers.TimerUp('hit'))
         return;
 
-    var damage = frauki.currentAttack.damage * energyController.GetEnergyPercentage();
+    var damage = frauki.currentAttack.damage * (energyController.GetEnergyPercentage() > 1 ? energyController.GetEnergyPercentage() : 1);
 
     //fraukis knockback will increase the amount that the enemy is moved. The weight
     //of the enemy will work against that. 
@@ -216,7 +216,7 @@ function EnemyHit(f, e) {
         e.TakeHit();
     }   
 
-    energyController.AddPower(damage / 3);
+    energyController.AddPower(damage / 5);
 
     // effectsController.SlowHit(function() {
 
