@@ -1,5 +1,5 @@
-X_VEL_DIV = 10;
-Y_VEL_DIV = 30;
+X_VEL_DIV = 5;
+Y_VEL_DIV = 20;
 
 CameraController = function() {
 
@@ -36,34 +36,16 @@ CameraController.prototype.UpdateCamera = function() {
 		}
 	}
 
-	//if the velocity has changed
-	if(this.prevXVel !== frauki.body.velocity.x) {
-		if(this.camXTween != null) {
-			//this.camXTween.stop();
-		}
 
-		//this.camXTween = game.add.tween(this).to( { camX: Math.floor((frauki.body.velocity.x / X_VEL_DIV) + xOffset) }, 500, Phaser.Easing.Sinusoidal.Out, true);
+	var idealX = (frauki.body.velocity.x / X_VEL_DIV) + xOffset;
+	var dist = idealX - this.camX;
 
-	}
-		var idealX = (frauki.body.velocity.x / X_VEL_DIV) + xOffset;
-		var dist = idealX - this.camX;
+	this.camX += dist * 3 * game.time.physicsElapsed;
 
-		this.camX += Math.ceil(dist * 3) * game.time.physicsElapsed;
+	var idealY = (frauki.body.velocity.y / Y_VEL_DIV) + yOffset;
+	var dist = idealY - this.camY;
 
-
-	if(this.prevYVel !== frauki.body.velocity.y || this.retweenY) {
-		if(this.camYTween != null) {
-			//this.camYTween.stop();
-		}
-
-		//this.camYTween = game.add.tween(this).to( { camY: Math.floor((frauki.body.velocity.y / Y_VEL_DIV) + yOffset) }, 1000, Phaser.Easing.Quintic.Out, true);
-		this.retweenY = false;
-	}
-
-		var idealY = (frauki.body.velocity.y / Y_VEL_DIV) + yOffset;
-		var dist = idealY - this.camY;
-
-		this.camY += Math.ceil(dist * 5) * game.time.physicsElapsed;
+	this.camY += dist * 5 * game.time.physicsElapsed;
 
 	//do the screen shake
 	if(this.shakeMagnitudeX > 0) {
@@ -71,6 +53,9 @@ CameraController.prototype.UpdateCamera = function() {
 	} else {
 		this.shakeX = 0;
 	}
+
+	this.camX = Math.round(this.camX);
+	this.camY = Math.round(this.camY);
 
 	var newCamX = (this.camX + frauki.body.center.x + this.shakeX);
 	var newCamY = (this.camY + frauki.body.y + this.shakeY + (frauki.body.height - 50));

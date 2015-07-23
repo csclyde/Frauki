@@ -146,8 +146,6 @@ EffectsController.prototype.ParticleSpray = function(source, dest, color, dir, a
     amt = Math.round(amt);
     if(!amt) { amt = 1; }
 
-    console.log('Particle amount: ' + amt);
-
 	if(color === 'positive') {
 		effect = this.positiveBits;
         this.enemySource = source;

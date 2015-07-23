@@ -48,8 +48,6 @@ Enemy.prototype.types['Mask'] =  function() {
 		if(this.direction === 'left') {
 			this.body.acceleration.x = -500;
 
-			console.log(this.body.touching);
-
 			if(this.body.touching.left) {
 				this.SetDirection('right');
 			}

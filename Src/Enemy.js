@@ -185,8 +185,6 @@ function EnemyHit(f, e) {
 
     e.body.velocity.y = -200 + (frauki.currentAttack.juggle * -600);
 
-    console.log(frauki.currentAttack);
-
     e.timers.SetTimer('hit', e.baseStunDuration);
 
     e.poise -= damage;
@@ -200,7 +198,6 @@ function EnemyHit(f, e) {
         e.poise = e.initialPoise;
 
         damage *= 2;
-        console.log('Enemy is being stunned!');
     }
 
     e.energy -= damage;

@@ -324,7 +324,7 @@ Player.prototype.Jump = function(params) {
             events.publish('play_sound', {name: 'jump'});
         }
         //double jump
-        else if(this.states.hasFlipped === false && this.state !== this.Rolling && this.state !== this.AttackStab) {
+        else if(this.states.hasFlipped === false && this.state !== this.Rolling && this.state !== this.AttackStab && this.state !== this.AttackOverhead) {
             if(energyController.UseEnergy(1)) {
                 if(this.tweens.stopJump) { this.tweens.stopJump.stop(); }
     
@@ -409,7 +409,7 @@ Player.prototype.Slash = function(params) {
         }
     }
     //upwards dash attack
-    else if(this.states.upPressed && !inputController.runLeft.isDown && !inputController.runRight.isDown && (this.state === this.Peaking || this.state === this.Jumping) && this.states.hasFlipped === false) {
+    else if(this.states.upPressed && (this.state === this.Peaking || this.state === this.Jumping) && this.states.hasFlipped === false) {
         if(energyController.UseEnergy(6)) {
             this.state = this.AttackJump;
             this.movement.jumpSlashVelocity = -(PLAYER_JUMP_SLASH_SPEED());
@@ -851,7 +851,7 @@ Player.prototype.AttackJump = function() {
     var anim = this.animations.getAnimation('attack_overhead');
     anim.delay = 1000 / (10 + (energyController.GetEnergyPercentage() * 8));
 
-    this.body.velocity.x /= 2;
+    this.body.velocity.x /= 1.1;
 
     if(this.movement.jumpSlashVelocity !== 0)
         this.body.velocity.y = this.movement.jumpSlashVelocity;
