@@ -34,6 +34,12 @@ Enemy.prototype.types['Sporoid'] =  function() {
 
 	this.updateFunction = function() {
 
+		//get the alignment right
+		if(this.direction === 'left') {
+			this.body.offset.x = -10;
+		} else if(this.direction === 'right') {
+			this.body.offset.x = 10;
+		}
 		
 	};
 
