@@ -801,7 +801,7 @@ Player.prototype.AttackDiveCharge = function() {
 Player.prototype.AttackDiveFall = function() {
     this.PlayAnim('attack_dive_fall');
     this.body.maxVelocity.y = this.movement.diveVelocity;
-    this.body.velocity.y = this.movement.diveVelocity;
+    this.body.velocity.y = 20000;//this.movement.diveVelocity / (frauki.states.inUpdraft ? 3 : 1);
     
     this.body.maxVelocity.x = 100;
     

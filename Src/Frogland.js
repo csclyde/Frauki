@@ -459,10 +459,13 @@ Frogland.DislodgeTile = function(tile) {
 Frogland.AnimateTiles = function() {
     var viewLeft, viewRight, viewTop, viewBottom;
 
-    viewLeft = Math.ceil((game.camera.x / 16) - 2);
-    viewTop = Math.ceil((game.camera.y / 16) - 2);
-    viewRight = Math.ceil((game.camera.width / 16) + 2);
-    viewBottom = Math.ceil((game.camera.height / 16) + 2);
+    viewLeft = Math.ceil((game.camera.x / 16));
+    viewTop = Math.ceil((game.camera.y / 16));
+    viewRight = Math.ceil((game.camera.width / 16));
+    viewBottom = Math.ceil((game.camera.height / 16));
+
+    // if(viewLeft < 0) viewLeft = 0;
+    // if(viewTop < 0) viewTop = 0;
 
     var animatedTiles = [
         [383, 384, 385],
