@@ -439,19 +439,19 @@ Frogland.OverlapEnemiesWithSelf = function(o1, o2) {
 Frogland.DislodgeTile = function(tile) {
     if(tile && (tile.index === 5 || tile.index === 7) && tile.dislodged !== true) {
         
-        mgTile = Frogland.map.getTile(tile.x, tile.y, 'Midground_3');
+        mgTile = Frogland.map.getTile(tile.x, tile.y, 'Midground_' + this.currentLayer);
         mgTile.alpha = 0;
-        Frogland.midgroundLayer_3.dirty = true;
+        Frogland['midgroundLayer_' + this.currentLayer].dirty = true;
 
         tile.dislodged = true;
 
         projectileController.FallingTile(tile);
 
         setTimeout(function() { 
-            Frogland.DislodgeTile(Frogland.map.getTile(tile.x - 1, tile.y, 'Collision_3'));
-            Frogland.DislodgeTile(Frogland.map.getTile(tile.x + 1, tile.y, 'Collision_3'));
-            Frogland.DislodgeTile(Frogland.map.getTile(tile.x, tile.y - 1, 'Collision_3'));
-            Frogland.DislodgeTile(Frogland.map.getTile(tile.x, tile.y + 1, 'Collision_3'));
+            Frogland.DislodgeTile(Frogland.map.getTile(tile.x - 1, tile.y, 'Collision_' + this.currentLayer));
+            Frogland.DislodgeTile(Frogland.map.getTile(tile.x + 1, tile.y, 'Collision_' + this.currentLayer));
+            Frogland.DislodgeTile(Frogland.map.getTile(tile.x, tile.y - 1, 'Collision_' + this.currentLayer));
+            Frogland.DislodgeTile(Frogland.map.getTile(tile.x, tile.y + 1, 'Collision_' + this.currentLayer));
         }, (Math.random() * 80));
     }
 };
