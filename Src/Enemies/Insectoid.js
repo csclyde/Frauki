@@ -102,12 +102,12 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
         this.state = this.Hopping;
 
-        this.body.velocity.y = -450;
+        this.body.velocity.y = -200;
 
         if(frauki.body.center.x < this.body.center.x) {
-            this.body.velocity.x = 150;
+            this.body.velocity.x = 200;
         } else {
-            this.body.velocity.x = -150;
+            this.body.velocity.x = -200;
         }   
     };
 
@@ -280,17 +280,24 @@ Enemy.prototype.types['Insectoid'] =  function() {
         this.PlayAnim('die');
 
         if(this.timers.TimerUp('hit')) {
-            if(Math.abs(this.body.center.y - frauki.body.center.y) < 40 && Math.abs(this.body.center.x - frauki.body.center.x) < 300 && this.RollDice(20, 12)) {
-                this.Scuttle();
-                this.attackTimer = game.time.now;
-            }
-            else if(Math.abs(this.body.center.x - frauki.body.center.x) > 100 && Math.abs(this.body.center.x - frauki.body.center.x) < 450 && this.RollDice(20, 10)) {
-                this.Hop();
-                this.attackTimer = game.time.now;
-            }
-            else {
+
+            if(this.RollDice(20, 10)) {
+                this.Dodge(true);
+            } else {
                 this.state = this.Idling;
             }
+
+            // if(Math.abs(this.body.center.y - frauki.body.center.y) < 40 && Math.abs(this.body.center.x - frauki.body.center.x) < 300 && this.RollDice(20, 12)) {
+            //     this.Scuttle();
+            //     this.attackTimer = game.time.now;
+            // }
+            // else if(Math.abs(this.body.center.x - frauki.body.center.x) > 100 && Math.abs(this.body.center.x - frauki.body.center.x) < 450 && this.RollDice(20, 10)) {
+            //     this.Hop();
+            //     this.attackTimer = game.time.now;
+            // }
+            // else {
+            //     this.state = this.Idling;
+            // }
         }
     };
 

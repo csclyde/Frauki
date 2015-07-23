@@ -45,8 +45,8 @@ Enemy.prototype.SetDefaultValues = function() {
     this.energy = 5;
     this.damage = 3;
     this.inScope = false;
-    this.baseStunDuration = 600;
-    this.poise = 5;
+    this.baseStunDuration = 500;
+    this.poise = 2;
 };
 
 Enemy.prototype.UpdateFunction = function() {};
@@ -200,7 +200,7 @@ function EnemyHit(f, e) {
         damage *= 2;
     }
 
-    e.energy -= damage;
+    //e.energy -= damage;
 
     console.log('Enemy is taking ' + damage + ', now at ' + e.energy + '/' + e.maxEnergy);
 
@@ -216,7 +216,7 @@ function EnemyHit(f, e) {
         e.TakeHit();
     }   
 
-    energyController.AddPower(damage / 5);
+    energyController.AddPower(damage / 3);
 
     // effectsController.SlowHit(function() {
 
