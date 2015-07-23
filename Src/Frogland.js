@@ -59,9 +59,9 @@ Frogland.Create = function() {
     this.door2Group.forEach(function(d) { d.alpha = 0; });
     this.door3Group.forEach(function(d) { d.alpha = 0; });
 
-    this.ProcessCollisionTiles(4);
-    this.ProcessCollisionTiles(3);
-    this.ProcessCollisionTiles(2);
+    this.PreprocessTiles(4);
+    this.PreprocessTiles(3);
+    this.PreprocessTiles(2);
 
     triggerController.CreateTriggers(4);
     triggerController.CreateTriggers(3);
@@ -215,28 +215,11 @@ Frogland.ThunderDome = function(x, y) {
     // }
 };
 
-Frogland.ProcessCollisionTiles = function(layer) {
+Frogland.PreprocessTiles = function(layer) {
     //special procesing for collision tiles
     this.map.forEach(function(tile) {
 
-        //water tiles
-        if(tile.index === 2 || tile.index === 9 || tile.index === 10 || tile.index === 13 || tile.index === 14 || tile.index === 15 || tile.index === 16) {
-            var water = this.map.getTileWorldXY(tile.worldX, tile.worldY, 16, 16, 'Foreground_' + layer);
-
-            if(water) {
-                water.alpha = 0.3;
-            }
-
-        } else if(tile.index === 11) {
-
-            var draft = this.map.getTileWorldXY(tile.worldX, tile.worldY, 16, 16, 'Foreground_' + layer);
-
-            if(draft) {
-                draft.alpha = 0.2;
-            }
-
-        //cloud tiles
-        } else if(tile.index === 4 || tile.index === 12) {
+        if(tile.index === 4 || tile.index === 12) {
             tile.collideLeft = false;
             tile.collideRight = false;
             tile.collideUp = true;
@@ -260,23 +243,19 @@ Frogland.ProcessCollisionTiles = function(layer) {
            
     }, this, 0, 0, this.map.width, this.map.height, 'Collision_' + layer);
 
-    this.map.forEach(function(tile) {
-        if(tile.index === 790 || tile.index === 791 || tile.index === 822 || tile.index === 823) {
-            tile.alpha = 0.95;
-        }
-    }, this, 0, 0, this.map.width, this.map.height, 'Foreground_4');
+    var waterTiles = [383, 384, 385, 386, 387, 388, 548, 549, 550, 580, 581, 582, 612, 613, 614]; 
+    var draftTiles = [545, 546, 547];
 
     this.map.forEach(function(tile) {
-        if(tile.index === 790 || tile.index === 791 || tile.index === 822 || tile.index === 823) {
-            tile.alpha = 0.95;
+        if(waterTiles.indexOf(tile.index) > -1) {
+            tile.alpha = 0.3;
         }
-    }, this, 0, 0, this.map.width, this.map.height, 'Foreground_3');
 
-    this.map.forEach(function(tile) {
-        if(tile.index === 790 || tile.index === 791 || tile.index === 822 || tile.index === 823) {
-            tile.alpha = 0.95;
+        if(draftTiles.indexOf(tile.index) > -1) {
+            tile.alpha = 0.2;
         }
-    }, this, 0, 0, this.map.width, this.map.height, 'Foreground_2');
+
+    }, this, 0, 0, this.map.width, this.map.height, 'Foreground_' + layer);
 };
 
 Frogland.GetCurrentObjectGroup = function() {

@@ -122,10 +122,10 @@ Player.prototype.postStateUpdate = function() {
     }
 
     if(this.states.inUpdraft) {
-        this.body.acceleration.y = -500;
+        this.body.acceleration.y = -1000;
 
         if(this.body.velocity.y > 300) {
-            this.body.velocity.y = 300;
+            //this.body.velocity.y = 300;
         }
     } else {
         this.body.acceleration.y = 0;
@@ -569,7 +569,9 @@ Player.prototype.Peaking = function() {
 Player.prototype.Falling = function() {
     this.PlayAnim('fall');
 
-    this.body.gravity.y = game.physics.arcade.gravity.y * 2;
+    if(!this.states.inUpdraft) {
+        this.body.gravity.y = game.physics.arcade.gravity.y * 2;
+    }
 
     //if they jump into water, make sure they slow the hell down
     if(this.states.inWater && this.body.velocity.y > 300) {
@@ -587,6 +589,8 @@ Player.prototype.Falling = function() {
         else {
             this.state = this.Running;
         }
+    } else if(this.body.velocity.y < 0) {
+        this.state = this.Jumping;
     }
 };
 
