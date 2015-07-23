@@ -200,7 +200,7 @@ function EnemyHit(f, e) {
         damage *= 2;
     }
 
-    //e.energy -= damage;
+    e.energy -= damage;
 
     console.log('Enemy is taking ' + damage + ', now at ' + e.energy + '/' + e.maxEnergy);
 
