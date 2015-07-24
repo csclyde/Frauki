@@ -331,7 +331,7 @@ Player.prototype.Jump = function(params) {
         }
         
         //normal jump
-        if(this.state === this.Standing || this.state === this.Running || this.state === this.Landing || this.state === this.Crouching) {
+        if(this.state === this.Standing || this.state === this.Running || this.state === this.Landing || this.state === this.Crouching || (this.state === this.AttackFront && this.body.onFloor())) {
             this.body.velocity.y = PLAYER_JUMP_VEL();
             events.publish('play_sound', {name: 'jump'});
         }
@@ -346,6 +346,7 @@ Player.prototype.Jump = function(params) {
                 this.timers.SetTimer('frauki_grace', 300);
 
                 events.publish('play_sound', {name: 'airhike'});
+                events.publish('stop_sound', {name: 'attack_dive_fall'});
             }
         }
         //roll jump
