@@ -135,6 +135,7 @@ Frogland.CreateObjectsLayer = function(layer) {
 
     //create all the apples
     this.map.createFromObjects('Objects_' + layer, 66, 'Misc', 'Apple0000', true, false, this[currLayer], Apple, false);
+    this.map.createFromObjects('Objects_' + layer, 68, 'Misc', 'EnergyBitPos0000', true, false, this[currLayer], EnergyNugg, false);
 
     //create the doors
     this.map.createFromObjects('Objects_' + layer, 67, 'Door', 'Door0000', true, false, this[currLayer], Door, false)
@@ -319,6 +320,11 @@ Frogland.OverlapFraukiWithObject = function(f, o) {
     if(o.spriteType == 'apple') {
 
         EatApple(f, o);
+        return false;
+
+    } else if(o.spriteType === 'energyNugg') {
+
+        EatEnergyNugg(f, o);
         return false;
 
     } else if(o.spriteType === 'enemy') {

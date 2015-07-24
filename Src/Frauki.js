@@ -68,6 +68,18 @@ Player = function (game, x, y, name) {
     events.subscribe('player_run', this.StartStopRun, this);
     events.subscribe('control_up', function(params) { 
         this.states.upPressed = params.pressed;
+
+        if(this.state === this.AttackFront && this.body.onFloor() === false && !this.timers.TimerUp('updash_timer')) {
+            if(energyController.UseEnergy(6)) {
+                this.state = this.AttackJump;
+                this.movement.jumpSlashVelocity = -(PLAYER_JUMP_SLASH_SPEED());
+                game.add.tween(this.movement).to({jumpSlashVelocity:0}, 400, Phaser.Easing.Quartic.Out, true);
+                this.states.hasFlipped = true;
+        
+                events.publish('play_sound', {name: 'attack_slash', restart: true });
+            }
+        }
+
     }, this);
 
     //set up the run dust
@@ -374,9 +386,11 @@ Player.prototype.Crouch = function(params) {
     this.timers.SetTimer('frauki_dash', 200);
 
     if(this.state === this.AttackFront && this.body.onFloor() === false && !this.timers.TimerUp('smash_timer')) {
-        this.state = this.AttackDiveCharge;
-        this.movement.diveVelocity = 950;
-        events.publish('play_sound', {name: 'attack_dive_charge', restart: true });
+        if(energyController.UseEnergy(6)) {
+            this.state = this.AttackDiveCharge;
+            this.movement.diveVelocity = 950;
+            events.publish('play_sound', {name: 'attack_dive_charge', restart: true });
+        }
     }
 };
 
@@ -436,6 +450,7 @@ Player.prototype.Slash = function(params) {
 
     this.timers.SetTimer('frauki_slash', 400 * (1 / energyController.GetEnergyPercentage()));
     this.timers.SetTimer('smash_timer', 200);
+    this.timers.SetTimer('updash_timer', 200);
 };
 
 Player.prototype.Roll = function(params) {

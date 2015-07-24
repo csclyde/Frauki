@@ -31,7 +31,7 @@ AudioController = function() {
                 that.music[music.Name].volume = music.Volume;
 
                 if(music.Name === 'Surface') {
-                    //that.music[music.Name].play();
+                    that.music[music.Name].play();
                 }
             } 
         };
@@ -71,13 +71,13 @@ AudioController.prototype.StopSound = function(params) {
 
 AudioController.prototype.PlayMusic = function(params) {
     if(!!params.name && !!this.music[params.name]) {
-            //this.music[params.name].play();
+            this.music[params.name].play();
     }
 };
 
 AudioController.prototype.StopMusic = function(params) {
     if(!!params.name && !!this.music[params.name]) {
-        //this.music[params.name].stop();
+        this.music[params.name].stop();
         this.music[params.name].isPlaying = false;
 
     }
@@ -87,7 +87,7 @@ AudioController.prototype.StopAllMusic = function(params) {
     for(var key in this.music) {
         if(!this.music.hasOwnProperty(key)) continue;
 
-        //this.music[key].stop();
+        this.music[key].stop();
     }
 }
 

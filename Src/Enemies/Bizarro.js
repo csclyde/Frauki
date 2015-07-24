@@ -73,7 +73,7 @@ Enemy.prototype.types['Bizarro'] =  function() {
 		if(!this.timers.TimerUp('attack_wait'))
 			return;
 
-		this.ChargeAtPlayer(350);
+		this.ChargeAtPlayer(300);
 
 		this.state = this.Attacking;
 	};

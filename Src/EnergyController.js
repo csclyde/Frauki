@@ -23,7 +23,7 @@ EnergyController.prototype.Create = function() {
 EnergyController.prototype.UpdateEnergy = function() {
 
 	var energyDiff = this.energy - this.neutralPoint;
-	var step = 0.2;
+	var step = 0.1;
 
 	if(game.time.now - this.energyUsageTimestamp > 4000) {
 		step += 0.1;
@@ -69,7 +69,7 @@ EnergyController.prototype.UpdateEnergy = function() {
 
 EnergyController.prototype.UseEnergy = function(amt) {
 	if(this.energy > 0) {
-		this.energy -= amt / 1.5;
+		this.energy -= amt / 1.3;
 		this.gracePeriod = game.time.now + 600;
 		this.energyUsageTimestamp = game.time.now;
 		return true;

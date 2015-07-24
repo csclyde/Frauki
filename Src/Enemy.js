@@ -45,7 +45,7 @@ Enemy.prototype.SetDefaultValues = function() {
     this.energy = 5;
     this.damage = 3;
     this.inScope = false;
-    this.baseStunDuration = 500;
+    this.baseStunDuration = 300;
     this.poise = 2;
 };
 
@@ -197,7 +197,7 @@ function EnemyHit(f, e) {
         e.state = e.Hurting;
         e.poise = e.initialPoise;
 
-        damage *= 2;
+        //damage *= 2;
     }
 
     e.energy -= damage;

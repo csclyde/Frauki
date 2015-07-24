@@ -281,8 +281,12 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
         if(this.timers.TimerUp('hit')) {
 
-            if(this.RollDice(20, 10)) {
+            var move = Math.random() * 3;
+
+            if(move < 1) {
                 this.Dodge(true);
+            } else if(move < 2) {
+                this.Hop();
             } else {
                 this.state = this.Idling;
             }
