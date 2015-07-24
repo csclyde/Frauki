@@ -8,7 +8,7 @@ Enemy.prototype.types['Bizarro'] =  function() {
     this.animations.add('attack', ['Bizarro/Attack0003', 'Bizarro/Attack0003', 'Bizarro/Attack0003', 'Bizarro/Attack0003', 'Bizarro/Attack0003', 'Bizarro/Attack0003', 'Bizarro/Attack0003', 'Bizarro/Attack0003',], 14, false, false);
 
     this.weight = 0.5;
-    this.energy = 10;
+    this.energy = 30;
     this.damage = 8;
     this.baseStunDuration = 500;
     this.poise = 10;
@@ -73,7 +73,7 @@ Enemy.prototype.types['Bizarro'] =  function() {
 		if(!this.timers.TimerUp('attack_wait'))
 			return;
 
-		this.ChargeAtPlayer(300);
+		this.ChargeAtPlayer(350);
 
 		this.state = this.Attacking;
 	};

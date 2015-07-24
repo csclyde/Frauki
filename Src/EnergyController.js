@@ -69,8 +69,8 @@ EnergyController.prototype.UpdateEnergy = function() {
 
 EnergyController.prototype.UseEnergy = function(amt) {
 	if(this.energy > 0) {
-		this.energy -= amt / 1.3;
-		this.gracePeriod = game.time.now + 600;
+		this.energy -= amt / 1.5;
+		this.gracePeriod = game.time.now + 500;
 		this.energyUsageTimestamp = game.time.now;
 		return true;
 	} else {
