@@ -1,5 +1,5 @@
-X_VEL_DIV = 10;
-Y_VEL_DIV = 20;
+X_VEL_DIV = 5;
+Y_VEL_DIV = 10;
 
 CameraController = function() {
 
@@ -25,8 +25,8 @@ CameraController = function() {
 //camera is controlled in player centric space
 CameraController.prototype.UpdateCamera = function() {
 	
-	var xOffset = frauki.states.direction === 'left' ? -15 : 15;
-	var yOffset = frauki.body.velocity.y > 0 ? 20 : 0;
+	var xOffset = frauki.states.direction === 'left' ? -5 : 5;
+	var yOffset = frauki.body.velocity.y > 0 ? 0 : 0;
 
 	yOffset += (frauki.states.crouching ? 35 : 0);
 

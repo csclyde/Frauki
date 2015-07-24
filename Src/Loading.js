@@ -17,10 +17,6 @@ Loading.preload = function() {
     pixel.canvas.style['padding-right'] = 0;
     pixel.canvas.style['margin-left'] = 'auto';
     pixel.canvas.style['margin-right'] = 'auto';
-    pixel.canvas.style['padding-top'] = 0;
-    pixel.canvas.style['padding-bottom'] = 0;
-    pixel.canvas.style['margin-top'] = 'auto';
-    pixel.canvas.style['margin-bottom'] = 'auto';
     pixel.canvas.style['display'] = 'block';
     pixel.canvas.style['width'] = pixel.canvas.width;
 
