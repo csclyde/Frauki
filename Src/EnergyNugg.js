@@ -9,6 +9,15 @@ EnergyNugg = function(game, x, y, name) {
     this.body.setSize(16, 16, 0, 2);
     this.anchor.setTo(0.5, 0.5);
     this.body.bounce.y = 0.5;
+    this.rando = Math.floor(Math.random() * 300);
+
+    var frames = ['EnergyBitPos0000', 'EnergyBitPos0001', 'EnergyBitPos0002', 'EnergyBitPos0003', 'EnergyBitPos0004', 'EnergyBitPos0005'];
+    var i = Math.floor(Math.random() * 5);
+    while(i--) {
+        frames.push(frames.shift());
+    }
+
+
     //this.body.gravity.y = game.physics.arcade.gravity.y * 2;
 
     this.state = this.Idle;
@@ -53,5 +62,5 @@ EnergyNugg.prototype.PlayAnim = function(name) {
 EnergyNugg.prototype.Idle = function() {
     this.PlayAnim('idle');
 
-    this.body.velocity.y = Math.sin(game.time.now / 150) * 10;
+    this.body.velocity.y = Math.sin((game.time.now / 150) + this.rando) * 15;
 };
