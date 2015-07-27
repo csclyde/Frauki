@@ -5,7 +5,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
 
     this.animations.add('idle', ['Buzzar/Idle0000', 'Buzzar/Idle0001'], 20, true, false);
     this.animations.add('sting', ['Buzzar/Attack0000', 'Buzzar/Attack0001'], 20, false, false);
-    this.animations.add('hurt', ['Buzzar/Hurt0000'], 20, true, false);
+    this.animations.add('hurt', ['Buzzar/Idle0000'], 20, true, false);
 
     this.wanderDirection = 'left';
 
@@ -54,11 +54,11 @@ Enemy.prototype.types['Buzzar'] =  function() {
         if(frauki.body.y <= this.body.y)
             return;
 
-        this.stingTimer = game.time.now + 400;
+        this.stingTimer = game.time.now + 600;
         this.stingRestTimer = game.time.now + 300 + (Math.random() * 1500);
 
         this.state = this.PreStinging;
-        this.squashTween = game.add.tween(this.scale).to({y: 0.7}, 300, Phaser.Easing.Exponential.Out, true);
+        this.squashTween = game.add.tween(this.scale).to({y: 0.7}, 600, Phaser.Easing.Exponential.Out, true);
     };
 
     this.ChangeDirection = function() {

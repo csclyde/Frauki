@@ -69,6 +69,7 @@ Player = function (game, x, y, name) {
     events.subscribe('control_up', function(params) { 
         this.states.upPressed = params.pressed;
 
+        //this allows an inverted seaquence of inputs for the jump slash
         if(this.state === this.AttackFront && this.body.onFloor() === false && !this.timers.TimerUp('updash_timer')) {
             if(energyController.UseEnergy(6)) {
                 this.state = this.AttackJump;
