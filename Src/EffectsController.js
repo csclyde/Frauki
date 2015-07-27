@@ -83,19 +83,26 @@ EffectsController.prototype.UpdateEffects = function() {
 }
 
 function UpdateParticle(p) {
-    var vel = 1200;
-    var maxVelocity = 300;
+    var vel = 1000;
+    var maxVelocity = 400;
 
     if(!p.destBody) {
         p.destBody = this.activeDest;
+    }
+
+    if(!p.spawnTime) {
+        p.spawnTime = game.time.now;
     }
 
     if(!p.destBody) {
         return;
     }
 
+    if(game.time.now - p.spawnTime < 1000) {
+        return;
+    }
+
     if(p.body.x > p.destBody.x && p.body.x < p.destBody.x + p.destBody.width && p.body.y > p.destBody.y && p.body.y < p.destBody.y + p.destBody.height) {
-        p.destBody = null;
         p.destBody = null;
         p.kill();
         return;
@@ -109,19 +116,14 @@ function UpdateParticle(p) {
     p.body.acceleration.y = Math.sin(angle) * -vel;// - (yDist * 5);
 
     if((p.destBody.center.x < p.body.center.x && p.body.velocity.x > 0) || (p.destBody.center.x > p.body.center.x && p.body.velocity.x < 0))
-        p.body.acceleration.x *= 5;
+        p.body.acceleration.x *= 4;
 
     if((p.destBody.center.y < p.body.center.y && p.body.velocity.y > 0) || (p.destBody.center.y > p.body.center.y && p.body.velocity.y < 0))
-        p.body.acceleration.y *= 5;
+        p.body.acceleration.y *= 4;
 
-    var currVelocitySqr = p.body.velocity.x * p.body.velocity.x + p.body.velocity.y * p.body.velocity.y;
 
-    if (currVelocitySqr > maxVelocity * maxVelocity) {
-        angle = Math.atan2(p.body.velocity.y, p.body.velocity.x);
-
-        p.body.velocity.x = Math.cos(angle) * maxVelocity;
-        p.body.velocity.y = Math.sin(angle) * maxVelocity;
-
+    if (p.body.velocity.getMagnitude() > maxVelocity) {
+        p.body.velocity.setMagnitude(maxVelocity);
     }
     
     //update frames to animate the energy
@@ -129,11 +131,11 @@ function UpdateParticle(p) {
     
     if(game.time.now > p.frameUpdateTimer) {
 	    if(p.frameName === 'EnergyBitPos0000') p.frameName = 'EnergyBitPos0001';
-	    if(p.frameName === 'EnergyBitPos0001') p.frameName = 'EnergyBitPos0002';
-	    if(p.frameName === 'EnergyBitPos0002') p.frameName = 'EnergyBitPos0003';
-	    if(p.frameName === 'EnergyBitPos0003') p.frameName = 'EnergyBitPos0004';
-	    if(p.frameName === 'EnergyBitPos0004') p.frameName = 'EnergyBitPos0005';
-	    if(p.frameName === 'EnergyBitPos0005') p.frameName = 'EnergyBitPos0000';
+	    else if(p.frameName === 'EnergyBitPos0001') p.frameName = 'EnergyBitPos0002';
+	    else if(p.frameName === 'EnergyBitPos0002') p.frameName = 'EnergyBitPos0003';
+	    else if(p.frameName === 'EnergyBitPos0003') p.frameName = 'EnergyBitPos0004';
+	    else if(p.frameName === 'EnergyBitPos0004') p.frameName = 'EnergyBitPos0005';
+	    else if(p.frameName === 'EnergyBitPos0005') p.frameName = 'EnergyBitPos0000';
 	    
 	    p.frameUpdateTimer = game.time.now + 80;
     }
@@ -155,27 +157,17 @@ EffectsController.prototype.ParticleSpray = function(source, dest, color, dir, a
         this.enemyDest = dest;
 	}
 
-    if(dir === 'above') {
-    	effect.minParticleSpeed.x = -80;
-        effect.maxParticleSpeed.x = 80;
-        effect.minParticleSpeed.y = -1500;
-        effect.maxParticleSpeed.y = -2000;
-    } else if (dir === 'right') {
-        effect.minParticleSpeed.x = 1500;
-        effect.maxParticleSpeed.x = 2000;
-        effect.minParticleSpeed.y = -80;
-        effect.maxParticleSpeed.y = 80;
-    } else if (dir === 'left') {
-        effect.minParticleSpeed.x = -2000;
-        effect.maxParticleSpeed.x = -1500;
-        effect.minParticleSpeed.y = -80;
-        effect.maxParticleSpeed.y = 80;
-    } else {
-    	effect.minParticleSpeed.x = -80;
-        effect.maxParticleSpeed.x = 80;
-        effect.minParticleSpeed.y = 2000;
-        effect.maxParticleSpeed.y = 1500;
-    }
+    var vel = new Phaser.Point(source.x - dest.x, source.y - dest.y);
+    vel = vel.normalize();
+
+    vel.x *= 1750;
+    vel.y *= 1750;
+
+    effect.minParticleSpeed.x = vel.x;
+    effect.maxParticleSpeed.x = vel.x;
+    effect.minParticleSpeed.y = vel.y;
+    effect.maxParticleSpeed.y = vel.y;
+
 
     effect.x = source.x || 0;
     effect.y = source.y || 0;

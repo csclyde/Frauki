@@ -154,64 +154,64 @@ var fraukiDamageFrames = {
 	'Attack Dive0010': {
 		x: -10, y: -5, w: 28, h: 45,
 		damage: 4,
-		knockback: 1.5,
-		juggle: 0
+		knockback: 3,
+		juggle: 3
 	},
 
 	'Attack Dive0011': {
 		x: -10, y: 15, w: 28, h: 50,
 		damage: 3,
-		knockback: 1.5,
-		juggle: 1.5
+		knockback: 3,
+		juggle: 3
 	},
 
 	'Attack Dive0012': {
 		x: -2, y: 40, w: 13, h: 33,
 		damage: 2,
 		knockback: 1.5,
-		juggle: 1.5
+		juggle: 2
 	},
 
 	'Attack Dive0013': {
 		x: -2, y: 40, w: 13, h: 33,
 		damage: 2,
 		knockback: 1.5,
-		juggle: 1.5
+		juggle: 2
 	},
 
 	'Attack Dive0014': {
 		x: -2, y: 40, w: 13, h: 33,
 		damage: 2,
 		knockback: 1.5,
-		juggle: 1.5
+		juggle: 2
 	},
 
 	'Attack Dive0015': {
 		x: -2, y: 40, w: 13, h: 33,
 		damage: 2,
 		knockback: 1.5,
-		juggle: 1.5
+		juggle: 2
 	},
 
 	'Attack Dive0016': {
 		x: -2, y: 40, w: 13, h: 33,
 		damage: 2,
 		knockback: 1.5,
-		juggle: 1.5
+		juggle: 2
 	},
 
 	'Attack Dive0017': {
 		x: -2, y: 40, w: 13, h: 33,
 		damage: 2,
 		knockback: 1.5,
-		juggle: 1.5
+		juggle: 2
 	},
 
 	'Attack Dive0018': {
 		x: -30, y: -8, w: 70, h: 55,
 		damage: 3,
-		knockback: 1,
-		juggle: 1
+		knockback: 3,
+		juggle: 5
 	}
 };
 

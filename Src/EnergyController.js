@@ -23,12 +23,12 @@ EnergyController.prototype.Create = function() {
 EnergyController.prototype.UpdateEnergy = function() {
 
 	var energyDiff = this.energy - this.neutralPoint;
-	var step = 0.1;
+	var step = 0.125;
 
-	if(game.time.now - this.energyUsageTimestamp > 4000) {
+	if(game.time.now - this.energyUsageTimestamp > 2000) {
 		step += 0.1;
 	} else {
-		step += ((game.time.now - this.energyUsageTimestamp) / 4000) * 0.1;
+		step += ((game.time.now - this.energyUsageTimestamp) / 2000) * 0.1;
 	}
 
 	//if the timer is up, tick the energy and reset the timer
@@ -69,8 +69,8 @@ EnergyController.prototype.UpdateEnergy = function() {
 
 EnergyController.prototype.UseEnergy = function(amt) {
 	if(this.energy > 0) {
-		this.energy -= amt / 1.5;
-		this.gracePeriod = game.time.now + 500;
+		this.energy -= amt / 1.2;
+		this.gracePeriod = game.time.now + 600;
 		this.energyUsageTimestamp = game.time.now;
 		return true;
 	} else {

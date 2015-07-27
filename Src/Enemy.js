@@ -37,6 +37,7 @@ Enemy.prototype.types = {};
 Enemy.prototype.SetDefaultValues = function() {
     this.body.maxVelocity.y = 1000;
     this.body.maxVelocity.x = 1000;
+    this.body.drag.x = 300;
     this.body.bounce.set(0.2);
     this.anchor.setTo(.5, 1);
     this.SetDirection('left');
@@ -178,27 +179,16 @@ function EnemyHit(f, e) {
 
     //fraukis knockback will increase the amount that the enemy is moved. The weight
     //of the enemy will work against that. 
-    e.xHitVel = (1000 * frauki.currentAttack.knockback) - (1000 * e.weight);
-    if(e.xHitVel < 200) e.xHitVel = 200;
-    e.xHitVel *= e.PlayerDirMod();
-    game.add.tween(e).to({xHitVel: 0}, e.baseStunDuration, Phaser.Easing.Exponential.Out, true);
+    e.body.velocity.x = (800 * frauki.currentAttack.knockback) - (800 * e.weight);
+    if(e.body.velocity.x < 100) e.body.velocity.x = 100;
+    e.body.velocity.x *= e.PlayerDirMod();
+    
+    e.body.velocity.y = -200 + (frauki.currentAttack.juggle * -1000);
 
-    e.body.velocity.y = -200 + (frauki.currentAttack.juggle * -600);
-
-    e.timers.SetTimer('hit', e.baseStunDuration);
+    e.timers.SetTimer('hit', e.baseStunDuration * damage);
 
     e.poise -= damage;
-
-    if(e.GetPoisePercentage() < 1) {
-        //send it flying
-        e.body.velocity.y = -300 - (energyController.GetEnergyPercentage() * 200);
-        e.body.velocity.x = e.PlayerDirMod() * 400 + (energyController.GetEnergyPercentage() * 200);
-
-        e.state = e.Hurting;
-        e.poise = e.initialPoise;
-
-        //damage *= 2;
-    }
+    e.state = e.Hurting;
 
     e.energy -= damage;
 
@@ -225,7 +215,7 @@ function EnemyHit(f, e) {
 
     //events.publish('camera_shake', {magnitudeX: 15 * damage, magnitudeY: 5, duration: 100});
     events.publish('play_sound', { name: 'attack_connect' });
-    effectsController.ParticleSpray(e.body, frauki.body, 'positive', e.EnemyDirection(), damage);  
+    effectsController.ParticleSpray(e.body, frauki.body, 'positive', e.EnemyDirection(), damage * 2);  
 
     if(e.energy <= 0) { e.destroy(); }
 };

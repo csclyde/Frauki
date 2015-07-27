@@ -19,7 +19,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
     this.hoverOffset = Math.random() * 300;
     
     this.weight = 0.5;
-    this.energy = 4;
+    this.energy = 3;
     this.damage = 3;
     this.poise = 5;
 
@@ -71,15 +71,6 @@ Enemy.prototype.types['Buzzar'] =  function() {
     };
 
     this.TakeHit = function(power) {
-
-        //a durability stat should modify how long they are stunned for. also, the amount of dmg
-        if(this.anger < 3) this.anger++;
-        else this.state = this.Enraged;
-
-
-        if(this.state === this.Stinging || this.state === this.PreStinging) {
-        	this.state = this.Idling;
-        }
 
     };
 
@@ -151,7 +142,8 @@ Enemy.prototype.types['Buzzar'] =  function() {
         this.body.gravity.y = game.physics.arcade.gravity.y * 2;
 
         if(this.timers.TimerUp('hit')) {
-            this.state = this.Idling;
+            this.state = this.Enraged;
+            this.timers.SetTimer('enraged', 5000);
         }
             
     };
@@ -199,6 +191,10 @@ Enemy.prototype.types['Buzzar'] =  function() {
 
         if(this.body.velocity.y < -600)
             this.body.velocity.y = -600;
+
+        if(this.timers.TimerUp('enraged')) {
+            this.state = this.Idling;
+        }
     }
 
 };

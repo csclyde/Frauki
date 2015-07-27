@@ -1,5 +1,5 @@
 PLAYER_SPEED = function() { return 255; }
-PLAYER_ROLL_SPEED = function() { return 650; }
+PLAYER_ROLL_SPEED = function() { return 600; }
 PLAYER_RUN_SLASH_SPEED = function() { return  650; }
 PLAYER_JUMP_VEL = function() { return -400; }
 PLAYER_DOUBLE_JUMP_VEL = function() { return -350; }
@@ -154,14 +154,6 @@ Player.prototype.postStateUpdate = function() {
     } else if(frauki.states.flowRight) {
         this.body.acceleration.x = 600;
     }
-
-    // if(this.states.onLeftSlope) {
-    //     this.body.gravity.x = -300;
-    // } else if(this.states.onRightSlope) {
-    //     this.body.gravity.x = 300;
-    // } else {
-    //     this.body.gravity.x = 0;
-    // }
 
     //reset the double jump flag
     if(this.body.onFloor()) {
@@ -459,8 +451,8 @@ Player.prototype.Roll = function(params) {
     if(!this.timers.TimerUp('frauki_roll'))
         return;
 
-    if(!this.body.onFloor())
-        return;
+    // if(!this.body.onFloor())
+    //     return;
         
     if(!energyController.UseEnergy(1))
         return;
