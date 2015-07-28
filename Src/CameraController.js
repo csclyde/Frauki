@@ -54,8 +54,8 @@ CameraController.prototype.UpdateCamera = function() {
 		this.shakeX = 0;
 	}
 
-	this.camX = Math.round(this.camX);
-	this.camY = Math.round(this.camY);
+	this.camX = Math.abs(dist) < 0.2 ? Math.round(this.camX) : this.camX;
+	this.camY = Math.abs(dist) < 0.2 ? Math.round(this.camY) : this.camY;
 
 	var newCamX = (this.camX + frauki.body.center.x + this.shakeX);
 	var newCamY = (this.camY + frauki.body.y + this.shakeY + (frauki.body.height - 50));

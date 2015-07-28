@@ -501,7 +501,7 @@ Player.prototype.Hit = function(f, e) {
        frauki.state === this.AttackJump ||
        frauki.state === this.AttackDiveCharge ||
        frauki.state === this.AttackDiveLand) {
-        damage *= 2;
+        damage *= 1.5;
     }
 
     effectsController.ParticleSpray(this.body, e.body, 'negative', e.PlayerDirection(), damage);
@@ -773,10 +773,10 @@ Player.prototype.AttackStab = function() {
         this.body.velocity.y = 0;
     }
 
-    if(this.body.velocity.y < 0) {
-        this.state = this.Jumping;
-        this.movement.rollVelocity = 0;
-    } 
+    // if(this.body.velocity.y < 0) {
+    //     this.state = this.Jumping;
+    //     this.movement.rollVelocity = 0;
+    // } 
 
     if(this.animations.currentAnim.isFinished) {
 
