@@ -269,7 +269,7 @@ Player.prototype.LandHit = function(e, damage) {
     vel = vel.normalize();
 
     vel.x *= 300;
-    vel.y *= 500;
+    vel.y *= 300;
 
     frauki.body.velocity.x = vel.x;
     frauki.body.velocity.y = vel.y;
