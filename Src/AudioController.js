@@ -31,7 +31,7 @@ AudioController = function() {
                 that.music[music.Name].volume = music.Volume;
 
                 if(music.Name === 'Surface') {
-                    that.music[music.Name].play();
+                    //that.music[music.Name].play();
                 }
             } 
         };
@@ -71,7 +71,7 @@ AudioController.prototype.StopSound = function(params) {
 
 AudioController.prototype.PlayMusic = function(params) {
     if(!!params.name && !!this.music[params.name] && !!this.music[params.name].play) {
-            this.music[params.name].play();
+            //this.music[params.name].play();
     }
 };
 

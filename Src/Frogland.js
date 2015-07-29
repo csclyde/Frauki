@@ -398,11 +398,12 @@ Frogland.CheckEnvironmentalCollisions = function(f, tile) {
     //falling tiles and attackable tiles
     } else if(tile.index === 5) { 
 
+
         if(tile.dislodged === true) {
             return false;
         }
         
-        if(tile.waitingToFall !== true) {
+        if(tile.waitingToFall !== true && frauki.body.center.y < tile.worldY) {
             Frogland.DislodgeTile(tile); 
             tile.waitingToFall = true;
         }

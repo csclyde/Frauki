@@ -49,7 +49,14 @@ Enemy.prototype.types['Pincer'] =  function() {
 
    //  Frogland.easyStar_3.preparePathCalculation([95,90], [95,100]);
    //  Frogland.easyStar_3.calculatePath();
-    
+
+   console.log(Frogland.map.collision['Objects_3']);
+
+   Frogland.map.collision['Objects_3'][0].polyline.forEach(function(e) {
+		that.pathX.push(e[0] + Frogland.map.collision['Objects_3'][0].x);
+		that.pathY.push(e[1] + Frogland.map.collision['Objects_3'][0].y);
+	});
+
 	this.updateFunction = function() {
 
 		// if(this.startTime !== null) {
@@ -82,29 +89,31 @@ Enemy.prototype.types['Pincer'] =  function() {
 			}
 		} else {
 
-			if(this.timers.TimerUp('path_calc') && this.pathX.length === 0) {
-				var that = this;
+			var that = this;
 
-				Frogland.easyStar_3.setCallbackFunction(function(path) {
-			        path = path || [];
+			// if(this.timers.TimerUp('path_calc') && this.pathX.length === 0) {
+			// 	var that = this;
 
-			        that.pathX = [];
-			        that.pathY = [];
+			// 	Frogland.easyStar_3.setCallbackFunction(function(path) {
+			//         path = path || [];
+
+			//         that.pathX = [];
+			//         that.pathY = [];
 			        
-			 		for(var i = 0; i < path.length; i++) {
+			//  		for(var i = 0; i < path.length; i++) {
 
-			 			that.pathX.push(path[i].x * 16);
-			 			that.pathY.push(path[i].y * 16);
-			 		}
+			//  			that.pathX.push(path[i].x * 16);
+			//  			that.pathY.push(path[i].y * 16);
+			//  		}
 
-			 		that.startTime = game.time.now;
-			    });
+			//  		that.startTime = game.time.now;
+			//     });
 
-			    Frogland.easyStar_3.preparePathCalculation([Math.round(this.body.center.x / 16), Math.round(this.body.center.y / 16)], [Math.round(frauki.body.center.x / 16), Math.round(frauki.body.center.y / 16)]);
-			    Frogland.easyStar_3.calculatePath();
+			//     Frogland.easyStar_3.preparePathCalculation([Math.round(this.body.center.x / 16), Math.round(this.body.center.y / 16)], [Math.round(frauki.body.center.x / 16), Math.round(frauki.body.center.y / 16)]);
+			//     Frogland.easyStar_3.calculatePath();
 
-			    this.timers.SetTimer('path_calc', 1000);
-			}
+			//     this.timers.SetTimer('path_calc', 1000);
+			// }	
 
 			if(this.pathX.length !== 0) {
 				var tX = this.pathX[0];
