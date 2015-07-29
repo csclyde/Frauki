@@ -452,8 +452,8 @@ Player.prototype.Roll = function(params) {
     if(!this.timers.TimerUp('frauki_roll'))
         return;
 
-    // if(!this.body.onFloor())
-    //     return;
+    if(!this.body.onFloor())
+        return;
         
     if(!energyController.UseEnergy(1))
         return;
@@ -507,6 +507,7 @@ Player.prototype.Hit = function(f, e) {
     effectsController.ParticleSpray(this.body, e.body, 'negative', e.PlayerDirection(), damage);
 
     energyController.RemovePower(damage / 4);
+    energyController.RemoveEnergy(damage / 1.5);
 
     console.log('Frauki is taking ' + damage + ' damage');
 
@@ -733,6 +734,10 @@ Player.prototype.AttackFront = function() {
     if(this.Attacking()) {
         this.body.maxVelocity.x = PLAYER_ROLL_SPEED();
         this.body.acceleration.x *= 3;
+
+        if(this.body.velocity.y > 0 && (inputController.runLeft.isDown || inputController.runRight.isDown)) {
+            this.body.velocity.y = 0;
+        }
     }
 
     if(this.animations.currentAnim.isFinished) {

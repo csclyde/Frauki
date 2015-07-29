@@ -203,6 +203,7 @@
             <filename>Bizarro</filename>
             <filename>NPCs</filename>
             <filename>Mask</filename>
+            <filename>Fungu</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

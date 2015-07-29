@@ -350,7 +350,7 @@ Frogland.CollideFraukiWithObject = function(f, o) {
 
 Frogland.CollideFraukiWithProjectile = function(f, p) {
 
-    if(p.projType === 'tar') {
+    if(p.projType === 'tar' || p.projType === 'spore') {
         frauki.Hit(f, p.owningEnemy);
         p.destroy();
     }

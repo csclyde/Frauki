@@ -26,6 +26,31 @@ ProjectileController.prototype.Tarball = function(e) {
 	this.projectiles.add(tar);
 };
 
+ProjectileController.prototype.Spore = function(e) {
+	var spore = game.add.sprite(e.body.center.x, e.body.center.y, 'EnemySprites');
+	game.physics.enable(spore, Phaser.Physics.ARCADE);
+
+	spore.body.setSize(18, 20);
+	spore.body.allowGravity = false;
+	spore.animations.add('idle', ['Sporoid/Spore0000'], 14, true, false);
+	spore.play('idle');
+
+	game.physics.arcade.moveToXY(spore, frauki.body.center.x, frauki.body.center.y, 200);
+
+	spore.body.velocity.x += Math.random() * 50 - 25;
+	spore.body.velocity.y += Math.random() * 50 - 25;
+
+	spore.body.bounce.set(0.2);
+
+	spore.projType = 'spore';
+	spore.owningEnemy = e;
+	spore.spawnTime = game.time.now;
+	spore.lifeTime = 5000;
+	spore.solid = true;
+
+	this.projectiles.add(spore);
+};
+
 ProjectileController.prototype.FallingTile = function(sourceTile) {
 
 	var tileName = Math.random() * 3;
@@ -77,7 +102,7 @@ ProjectileController.prototype.Update = function() {
 };
 
 function ProjectileHit(f, p) {
-	if(p.projType === 'tar') {
+	if(p.projType === 'tar' || p.projType === 'spore') {
 		p.destroy();
 	}
 };

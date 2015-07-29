@@ -80,6 +80,15 @@ EnergyController.prototype.UseEnergy = function(amt) {
 	
 };
 
+EnergyController.prototype.RemoveEnergy = function(amt) {
+	if(this.energy > 0) {
+		this.energy -= amt;
+		this.gracePeriod = game.time.now + 400;
+		this.energyUsageTimestamp = game.time.now;
+		return true;
+	}
+};
+
 EnergyController.prototype.GetEnergy = function() {
 	return this.energy > 0 ? (Math.round(this.energy * 10) / 10) : 0;
 };

@@ -207,6 +207,7 @@ function EnemyHit(f, e) {
     }   
 
     energyController.AddPower(damage / 5);
+    energyController.energy += damage;
 
     // effectsController.SlowHit(function() {
 

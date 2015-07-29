@@ -43,15 +43,13 @@ EnergyNugg.prototype.update = function() {
 };
 
 function EatEnergyNugg(f, a) {
-    if(a.state === a.Eaten)
-        return;
     
     effectsController.ParticleSpray({ x: a.body.center.x, y: a.body.center.y }, frauki.body, 'positive', (Math.random() < 0.5 ? 'left' : 'right'), 1);
 
     a.kill();
 
-
-    energyController.AddPower(0.2);
+    energyController.AddPower(0.1);
+    energyController.energy += 1;
 };
 
 EnergyNugg.prototype.PlayAnim = function(name) {

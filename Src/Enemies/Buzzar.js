@@ -19,7 +19,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
     this.hoverOffset = Math.random() * 300;
     
     this.weight = 0.5;
-    this.energy = 3;
+    this.energy = 2.5;
     this.damage = 3;
     this.poise = 5;
 
