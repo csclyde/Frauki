@@ -206,8 +206,7 @@ function EnemyHit(f, e) {
         e.TakeHit();
     }   
 
-    energyController.AddPower(damage / 5);
-    energyController.energy += damage;
+    frauki.LandHit(e, damage);
 
     // effectsController.SlowHit(function() {
 

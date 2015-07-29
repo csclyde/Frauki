@@ -261,6 +261,20 @@ Player.prototype.GetDirectionMultiplier = function() {
     return dir;
 };
 
+Player.prototype.LandHit = function(e, damage) {
+    energyController.AddPower(damage / 5);
+    energyController.energy += damage;
+
+    var vel = new Phaser.Point(frauki.body.center.x - e.body.center.x, frauki.body.center.y - e.body.center.y);
+    vel = vel.normalize();
+
+    vel.x *= 300;
+    vel.y *= 500;
+
+    frauki.body.velocity.x = vel.x;
+    frauki.body.velocity.y = vel.y;
+};
+
 ////////////////ACTIONS//////////////////
 Player.prototype.Run = function(params) {
     if(this.state === this.Hurting || (this.state === this.Rolling && this.movement.rollPop === false) || this.state === this.AttackStab) 
