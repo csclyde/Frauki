@@ -495,6 +495,10 @@ Player.prototype.Roll = function(params) {
         this.movement.rollPop = false;
         this.movement.rollPrevVel = 0;
     } else {
+
+        if(!energyController.UseEnergy(1))
+            return;
+        
         effectsController.ForceField();
     }
 
