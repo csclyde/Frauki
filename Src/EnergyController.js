@@ -69,7 +69,7 @@ EnergyController.prototype.UpdateEnergy = function() {
 
 EnergyController.prototype.UseEnergy = function(amt) {
 	if(this.energy > 0) {
-		this.energy -= amt;
+		this.energy -= amt / 1.2;
 		this.gracePeriod = game.time.now + 600;
 		this.energyUsageTimestamp = game.time.now;
 		return true;
@@ -98,7 +98,7 @@ EnergyController.prototype.AddPower = function(amt) {
 };
 
 EnergyController.prototype.RemovePower = function(amt) {
-	this.neutralPoint -= amt;
+	this.neutralPoint -= amt * 2;
 };
 
 EnergyController.prototype.GetEnergyPercentage = function() {

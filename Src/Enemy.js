@@ -179,8 +179,8 @@ function EnemyHit(f, e) {
 
     //fraukis knockback will increase the amount that the enemy is moved. The weight
     //of the enemy will work against that. 
-    e.body.velocity.x = (800 * frauki.currentAttack.knockback) - (800 * e.weight);
-    if(e.body.velocity.x < 100) e.body.velocity.x = 100;
+    e.body.velocity.x = (600 * frauki.currentAttack.knockback) - (600 * e.weight);
+    if(e.body.velocity.x < 50) e.body.velocity.x = 50;
     e.body.velocity.x *= e.PlayerDirMod();
     
     e.body.velocity.y = -200 + (frauki.currentAttack.juggle * -1000);
