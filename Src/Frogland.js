@@ -439,7 +439,7 @@ Frogland.CheckEnvironmentalCollisions = function(f, tile) {
 };
 
 Frogland.OverlapEnemiesWithSelf = function(o1, o2) {
-    if(o1.enemyName && o2.enemyName && o1.enemyName === o2.enemyName) {
+    if(o1.enemyName && o2.enemyName && o1.enemyName === o2.enemyName && o1.enemyName !== 'Skelegon') {
         return true;
     } else {
         return false;

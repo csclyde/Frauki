@@ -508,16 +508,6 @@ Player.prototype.Hit = function(f, e) {
         damage /= 2;
     }
 
-    //if they are attacking (but outside a damage frame), double damage
-    if(frauki.state === this.AttackStab || 
-       frauki.state === this.AttackFront || 
-       frauki.state === this.AttackOverhead ||
-       frauki.state === this.AttackJump ||
-       frauki.state === this.AttackDiveCharge ||
-       frauki.state === this.AttackDiveLand) {
-        damage *= 1.5;
-    }
-
     effectsController.ParticleSpray(this.body, e.body, 'negative', e.PlayerDirection(), damage);
 
     energyController.RemovePower(damage / 4);

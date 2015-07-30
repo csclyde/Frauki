@@ -91,7 +91,7 @@ ProjectileController.prototype.Update = function() {
 			p.kill();
 			childrenToRemove.push(p);
 		} else if(p.solid) {
-			game.physics.arcade.collide(p, Frogland.GetCurrentCollisionLayer());
+			game.physics.arcade.collide(p, Frogland.GetCurrentCollisionLayer(), this.CollideProjectileWithWorld, this.CollideProjectileWithWorld);
 		}
 
 	});
@@ -99,6 +99,14 @@ ProjectileController.prototype.Update = function() {
 	childrenToRemove.forEach(function(e) {
 		e.destroy();
 	});
+};
+
+ProjectileController.prototype.CollideProjectileWithWorld = function(p, t) {
+	if(t.index === 1) {
+		return false;
+	} else {
+		return false;
+	}
 };
 
 function ProjectileHit(f, p) {

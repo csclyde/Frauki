@@ -1,16 +1,18 @@
-Enemy.prototype.types['Fungu'] =  function() {
+Enemy.prototype.types['Skelegon'] =  function() {
 
-	this.body.setSize(25, 50, 0, 0);
-	this.anchor.setTo(0.5, 1);
+	this.body.setSize(25, 60, 0, 0);
+	this.anchor.setTo(.5, 1);
 
-    this.animations.add('idle', ['Fungu/Fungu0000'], 10, true, false);
+    this.animations.add('idle', ['Skelegon/Shamble0000', 'Skelegon/Shamble0001', 'Skelegon/Shamble0002', 'Skelegon/Shamble0003', 'Skelegon/Shamble0004', 'Skelegon/Shamble0005'], 16, true, false);
     this.animations.add('shit', ['Hop0000'], 10, true, false);
 
-    this.energy = 1.5;
+    this.damage = 3;
+    this.energy = 2;
+
+    Math.random() > 0.5 ? this.SetDirection('left') : this.SetDirection('right');
 
     /*
     this.weight = 0.5;
-    this.damage = 5;
     this.baseStunDuration = 500;
     this.poise = 10;
     */
@@ -18,8 +20,6 @@ Enemy.prototype.types['Fungu'] =  function() {
 	this.updateFunction = function() {
 
 	};
-
-	this.CanCauseDamage = function() { return false; }
 
 	///////////////////////////////ACTIONS////////////////////////////////////
 
@@ -42,19 +42,29 @@ Enemy.prototype.types['Fungu'] =  function() {
 	this.Idling = function() {
 		this.PlayAnim('idle');
 
-		if(this.timers.TimerUp('shoot')) {
-			if(this.PlayerIsVisible()) {
-				projectileController.Spore(this);
-			}
+		this.body.maxVelocity.x = 80;
 
-			this.timers.SetTimer('shoot', 500);
+		if(this.direction === 'left') {
+			this.body.acceleration.x = -300;
+
+			if(this.body.touching.left) {
+				this.SetDirection('right');
+			}
+		} else if(this.direction === 'right') {
+			this.body.acceleration.x = 300;
+
+			if(this.body.touching.right) {
+				this.SetDirection('left');
+			}
 		}
+		
 	};
 
 	this.Hurting = function() {
 		this.PlayAnim('die');
 
 		if(this.timers.TimerUp('hit')) {
+			this.energy = this.maxEnergy;
 			this.state = this.Idling;
 		}
 	};
