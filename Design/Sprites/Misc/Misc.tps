@@ -182,7 +182,7 @@
             <key>trimThreshold</key>
             <uint>1</uint>
             <key>trimMode</key>
-            <enum type="SpriteSettings::TrimMode">CropKeepPos</enum>
+            <enum type="SpriteSettings::TrimMode">Trim</enum>
             <key>heuristicMask</key>
             <false/>
             <key>pivotPoint</key>
@@ -233,6 +233,12 @@
             <filename>Frames/Tiles0002.png</filename>
             <filename>Frames/Splash0002.png</filename>
             <filename>Frames/Splash0003.png</filename>
+            <filename>Frames/ForceField0005.png</filename>
+            <filename>Frames/ForceField0000.png</filename>
+            <filename>Frames/ForceField0001.png</filename>
+            <filename>Frames/ForceField0002.png</filename>
+            <filename>Frames/ForceField0003.png</filename>
+            <filename>Frames/ForceField0004.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

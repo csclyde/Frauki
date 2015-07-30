@@ -41,7 +41,12 @@ EffectsController = function() {
     this.enemyDest = null;
 
     this.particleType = 'pos';
-}
+
+    this.forceField = game.add.sprite(0, 0, 'Misc');
+    this.forceField.animations.add('activate', ['ForceField0000', 'ForceField0001', 'ForceField0002', 'ForceField0003', 'ForceField0004', 'ForceField0005'], 14, false, false);
+    this.forceField.visible = false;
+
+};
 
 EffectsController.prototype.UpdateEffects = function() {
 
@@ -80,7 +85,15 @@ EffectsController.prototype.UpdateEffects = function() {
         this.positiveBits.width = this.enemySource.width;
         this.positiveBits.height = this.enemySource.height;
     }
-}
+
+    this.forceField.x = frauki.body.x - 43;
+    this.forceField.y = frauki.body.y - 30;
+
+    if(this.forceField.animations.currentAnim.isFinished) {
+        this.forceField.visible = false;
+        frauki.states.forceFieldActive = false;
+    }
+};
 
 function UpdateParticle(p) {
     var vel = 1000;
@@ -143,8 +156,9 @@ function UpdateParticle(p) {
 
 EffectsController.prototype.ParticleSpray = function(source, dest, color, dir, amt) {
 
+    if(amt === 0) return;
+    
 	var effect = null;
-    amt = amt || 5;
     amt = Math.round(amt);
     if(!amt) { amt = 1; }
 
@@ -287,4 +301,11 @@ EffectsController.prototype.SlowHit = function(callback) {
     //     game.paused = false;
     //     if(!!callback) callback();
     // }, 50);
+};
+
+EffectsController.prototype.ForceField = function() {
+
+    this.forceField.visible = true;
+    frauki.states.forceFieldActive = true;
+    this.forceField.animations.play('activate');
 };

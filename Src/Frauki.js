@@ -43,6 +43,7 @@ Player = function (game, x, y, name) {
     this.states.droppingThroughCloud = false;
     this.states.onLeftSlope = false;
     this.states.onRightSlope = false;
+    this.states.forceFieldActive = false;
 
     this.movement = {};
     this.movement.rollVelocity = 0;
@@ -208,8 +209,12 @@ Player.prototype.Grace = function() {
 
 Player.prototype.UpdateAttackGeometry = function() {
 
+    //if the force field is active, then use its geometry
+    if(this.states.forceFieldActive) {
+        this.currentAttack = fraukiDamageFrames[effectsController.forceField.animations.currentFrame.name];
+    }
     //check for a frame mod and apply its mods
-    if(this.animations.currentFrame) {
+    else if(this.animations.currentFrame) {
         this.currentAttack = fraukiDamageFrames[this.animations.currentFrame.name];
     } 
 
@@ -470,26 +475,28 @@ Player.prototype.Roll = function(params) {
     if(!this.timers.TimerUp('frauki_roll'))
         return;
 
-    if(!this.body.onFloor())
-        return;
+    if(this.body.onFloor()) {
         
-    if(!energyController.UseEnergy(1))
-        return;
+        if(!energyController.UseEnergy(1))
+            return;
 
-    this.state = this.Rolling;
+        this.state = this.Rolling;
 
-    var dir = this.GetDirectionMultiplier();
+        var dir = this.GetDirectionMultiplier();
 
-    this.body.maxVelocity.x = PLAYER_ROLL_SPEED();
+        this.body.maxVelocity.x = PLAYER_ROLL_SPEED();
 
-    this.movement.rollVelocity = dir * PLAYER_SPEED();
-    this.body.velocity.x = PLAYER_SPEED() * this.GetDirectionMultiplier();
+        this.movement.rollVelocity = dir * PLAYER_SPEED();
+        this.body.velocity.x = PLAYER_SPEED() * this.GetDirectionMultiplier();
 
-    this.movement.rollStage = 0;
-    this.movement.rollDirection = this.GetDirectionMultiplier();
-    this.movement.rollStart = game.time.now;
-    this.movement.rollPop = false;
-    this.movement.rollPrevVel = 0;
+        this.movement.rollStage = 0;
+        this.movement.rollDirection = this.GetDirectionMultiplier();
+        this.movement.rollStart = game.time.now;
+        this.movement.rollPop = false;
+        this.movement.rollPrevVel = 0;
+    } else {
+        effectsController.ForceField();
+    }
 
     this.timers.SetTimer('frauki_roll', 650);
     this.timers.SetTimer('frauki_grace', 300);
