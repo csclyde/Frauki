@@ -2,14 +2,15 @@ var Frogland = {};
 
 Frogland.Create = function() {
 
-    this.bg = game.add.tileSprite(0, 0, pixel.width, pixel.height, 'Background');
+    this.bg = game.add.tileSprite(0, 0, pixel.width / pixel.scale, pixel.height / pixel.scale, 'Background');
     this.bg.fixedToCamera = true;
+    this.bg.autoScroll(-2, 0);
 
-    this.plx1 = game.add.tileSprite(0, 0, 2048, 576, 'parallax1');
+    this.plx1 = game.add.image(0, 0, 'parallax1');
     this.plx1.fixedToCamera = true;
 
-    this.plx2 = game.add.tileSprite(0, 0, pixel.width, pixel.height, 'parallax2');
-    this.plx2.fixedToCamera = true;
+    // this.plx2 = game.add.tileSprite(0, 0, pixel.width / pixel.scale, pixel.height / pixel.scale, 'parallax2');
+    // this.plx2.fixedToCamera = true;
 
     this.map = game.add.tilemap('Frogland');
     this.map.addTilesetImage('FrogtownTiles');
@@ -102,9 +103,9 @@ Frogland.Update = function() {
 
     game.physics.arcade.overlap(frauki, projectileController.projectiles, this.CollideFraukiWithProjectile);
 
-    this.plx1.tilePosition.x = -(game.camera.x * 0.5);
-    this.plx1.tilePosition.y = -(game.camera.y * 0.35);
-    this.plx2.tilePosition.x = -(game.camera.x * 0.9);
+    this.plx1.cameraOffset.x = -(game.camera.x * 0.45) + 280;
+    this.plx1.cameraOffset.y = -(game.camera.y * 0.30) + 220;
+    //this.plx2.tilePosition.x = -(game.camera.x * 0.9);
 };
 
 Frogland.CreateMapLayer = function(layer, visible) {
