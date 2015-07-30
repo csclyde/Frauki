@@ -50,8 +50,6 @@ Enemy.prototype.types['Pincer'] =  function() {
    //  Frogland.easyStar_3.preparePathCalculation([95,90], [95,100]);
    //  Frogland.easyStar_3.calculatePath();
 
-   console.log(Frogland.map.collision['Objects_3']);
-
    Frogland.map.collision['Objects_3'][0].polyline.forEach(function(e) {
 		that.pathX.push(e[0] + Frogland.map.collision['Objects_3'][0].x);
 		that.pathY.push(e[1] + Frogland.map.collision['Objects_3'][0].y);
@@ -122,7 +120,6 @@ Enemy.prototype.types['Pincer'] =  function() {
 				if(this.body.x > tX + 16 || this.body.y > tY + 16 || this.body.x + this.body.width < tX || this.body.y + this.body.height < tY) {
 					game.physics.arcade.moveToXY(this, tX, tY, 300);
 
-					console.log(this.pathX, this.pathY);
 				} else {
 					this.pathX.shift();
 					this.pathY.shift();
