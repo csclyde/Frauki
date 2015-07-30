@@ -277,7 +277,14 @@ EffectsController.prototype.MakeHearts = function(amt) {
 };
 
 EffectsController.prototype.SlowHit = function(callback) {
-    var t = game.add.tween(game.time).to( { slowMotion: 5 }, 40, Phaser.Easing.Quartic.Out, false).to( { slowMotion: 1 }, 15, Phaser.Easing.Exponential.In, false);
+    var t = game.add.tween(game.time).to( { slowMotion: 6 }, 25, Phaser.Easing.Quartic.Out, false).to( { slowMotion: 1 }, 10, Phaser.Easing.Exponential.In, false);
     t.onComplete.add(callback)
     t.start();
+
+    // game.paused = true;
+
+    // setTimeout(function() {
+    //     game.paused = false;
+    //     if(!!callback) callback();
+    // }, 50);
 };

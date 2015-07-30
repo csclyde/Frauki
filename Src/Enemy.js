@@ -208,12 +208,6 @@ function EnemyHit(f, e) {
 
     frauki.LandHit(e, damage);
 
-    // effectsController.SlowHit(function() {
-
-    //     //
-    // });
-
-    //events.publish('camera_shake', {magnitudeX: 15 * damage, magnitudeY: 5, duration: 100});
     events.publish('play_sound', { name: 'attack_connect' });
     effectsController.ParticleSpray(e.body, frauki.body, 'positive', e.EnemyDirection(), damage * 2);  
 
