@@ -59,6 +59,8 @@ Enemy.prototype.Vulnerable = function() { return true; }
 Enemy.prototype.CanCauseDamage = function() { return true; }
 Enemy.prototype.CanChangeDirection = function() { return true; }
 Enemy.prototype.TakeHit = function() {};
+Enemy.prototype.Activate = function() {};
+Enemy.prototype.Deactivate = function() {};
 
 Enemy.prototype.Respawn = function() {
 
@@ -77,12 +79,12 @@ Enemy.prototype.Respawn = function() {
 Enemy.prototype.UpdateParentage = function() {
     if(this.WithinCameraRange() && this.alive && this.owningLayer === Frogland.currentLayer) {
         this.body.enable = true;
-        
+        this.Activate();
         return true;
     } else {
 
         this.body.enable = false;
-
+        this.Deactivate();
         return false;
     }
 };

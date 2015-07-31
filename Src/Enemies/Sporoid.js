@@ -21,6 +21,7 @@ Enemy.prototype.types['Sporoid'] =  function() {
     this.Spore = game.add.emitter(0, 0, 100);
 	this.Spore.makeParticles('Misc', 'spore0000');
     this.Spore.gravity = -775;
+    this.Spore.visible = false;
 
     this.Spore.maxParticleScale = 0.4;
     this.Spore.minParticleScale = 0.1;
@@ -49,6 +50,14 @@ Enemy.prototype.types['Sporoid'] =  function() {
 		} else {
 			return false;
 		}
+	};
+
+	this.Activate = function() {
+		this.Spore.visible = true;
+	};
+
+	this.Deactivate = function() {
+		this.Spore.visible = false;
 	};
 
 	///////////////////////////////ACTIONS////////////////////////////////////
