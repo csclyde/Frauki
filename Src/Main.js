@@ -69,8 +69,8 @@ Main.Restart = function() {
 
     fadeOutTween.onComplete.add(function() {
         Frogland.ChangeLayer(3);
-        frauki.body.x = frauki.initialX; //fraukiSpawnX;
-        frauki.body.y = frauki.initialY; //fraukiSpawnY;
+        frauki.x = frauki.initialX; //fraukiSpawnX;
+        frauki.y = frauki.initialY; //fraukiSpawnY;
         energyController.energy = 15;
         energyController.health = 100;
         energyController.power = 0;
