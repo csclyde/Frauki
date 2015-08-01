@@ -163,11 +163,11 @@ Player.prototype.postStateUpdate = function() {
         this.movement.rollBoost = 0;
     }
 
-    if(this.state === this.Crouching || this.state === this.Rolling || this.state === this.Flipping) {
-        this.body.height = 30;
-    } else {
-        this.body.height = 50;
-    }
+    // if(this.state === this.Crouching || this.state === this.Rolling || this.state === this.Flipping) {
+    //     this.body.height = 30;
+    // } else {
+    //     this.body.height = 50;
+    // }
 
     if(this.Attacking()) {
         game.physics.arcade.overlap(frauki.attackRect, Frogland.GetCurrentObjectGroup(), EnemyHit);

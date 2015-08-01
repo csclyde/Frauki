@@ -3,6 +3,9 @@ Y_VEL_DIV = 10;
 
 CameraController = function() {
 
+	game.camera.bounds = null;//Phaser.Rectangle.inflate(game.camera.bounds, pixel.width * pixel.scale, 0);
+	//game.camera.bounds.inflate()
+
 	this.camX = 0;
 	this.camY = 0;
 
@@ -37,12 +40,12 @@ CameraController.prototype.UpdateCamera = function() {
 	}
 
 
-	var idealX = (frauki.body.velocity.x / X_VEL_DIV) + xOffset;
+	var idealX = (frauki.body.velocity.x / X_VEL_DIV) + xOffset * pixel.scale;
 	var dist = idealX - this.camX;
 
 	this.camX += dist * 3 * game.time.physicsElapsed;
 
-	var idealY = (frauki.body.velocity.y / Y_VEL_DIV) + yOffset;
+	var idealY = (frauki.body.velocity.y / Y_VEL_DIV) + yOffset * pixel.scale;
 	var dist = idealY - this.camY;
 
 	this.camY += dist * 5 * game.time.physicsElapsed;
@@ -60,7 +63,8 @@ CameraController.prototype.UpdateCamera = function() {
 	var newCamX = (this.camX + frauki.body.center.x + this.shakeX);
 	var newCamY = (this.camY + frauki.body.y + this.shakeY + (frauki.body.height - 50));
 	
-	game.camera.focusOnXY(newCamX, newCamY);
+	//game.camera.focusOnXY(newCamX, newCamY);
+	game.camera.focusOnXY(frauki.body.center.x, frauki.body.center.y);
 
 	this.prevXVel = frauki.body.velocity.x;
 	this.prevYVel = frauki.body.velocity.y;

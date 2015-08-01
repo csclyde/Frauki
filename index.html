@@ -70,7 +70,7 @@
                 pixel.scale = 4;
             }
 
-            var game = new Phaser.Game(pixel.width, pixel.height, Phaser.CANVAS, "game", Loading, false, false);
+            var game = new Phaser.Game(pixel.width * pixel.scale, pixel.height * pixel.scale, Phaser.CANVAS, "game", Loading, false, false);
             var events = new EventRouter();
 
             var cameraController;
