@@ -29,7 +29,7 @@ CameraController = function() {
 CameraController.prototype.UpdateCamera = function() {
 	
 	var xOffset = frauki.states.direction === 'left' ? -5 : 5;
-	var yOffset = frauki.body.velocity.y > 0 ? 0 : 0;
+	var yOffset = frauki.body.velocity.y > 0 ? 20 : 0;
 
 	yOffset += (frauki.states.crouching ? 35 : 0);
 
