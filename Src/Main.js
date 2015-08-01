@@ -48,8 +48,6 @@ Main.render = function() {
         game.debug.body(o);
     });*/
 
-console.log(pixel.scale);
-
     pixel.context.drawImage(game.canvas, 0, 0, game.width, game.height, 
         -(game.width * pixel.what) - cameraController.camX, 
         -(game.height * pixel.what) - cameraController.camY, 
