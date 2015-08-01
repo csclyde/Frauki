@@ -62,12 +62,16 @@
 
             if(window.innerWidth < pixel.width * 2) {
                 pixel.scale = 1;
+                pixel.what = 0;
             } else if(window.innerWidth < pixel.width * 3) {
                 pixel.scale = 2;
+                pixel.what = 0.5;
             } else if(window.innerWidth < pixel.width * 4) {
                 pixel.scale = 3;
+                pixel.what = 1;
             } else {
                 pixel.scale = 4;
+                pixel.what = 1.5;
             }
 
             var game = new Phaser.Game(pixel.width * pixel.scale, pixel.height * pixel.scale, Phaser.CANVAS, "game", Loading, false, false);

@@ -48,9 +48,11 @@ Main.render = function() {
         game.debug.body(o);
     });*/
 
+console.log(pixel.scale);
+
     pixel.context.drawImage(game.canvas, 0, 0, game.width, game.height, 
-        -(pixel.width) - cameraController.camX, 
-        -(pixel.height) - cameraController.camY, 
+        -(game.width * pixel.what) - cameraController.camX, 
+        -(game.height * pixel.what) - cameraController.camY, 
         pixel.width * pixel.scale, 
         pixel.height * pixel.scale);
 };
