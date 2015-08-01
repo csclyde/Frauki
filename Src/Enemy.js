@@ -27,7 +27,8 @@ Enemy = function(game, x, y, name) {
     this.initialY = this.body.y;
     this.initialPoise = this.poise;
 
-    this.xHitVel = 0;
+    this.damageFrames = {};
+    this.currentAttack = {};
 };
 
 Enemy.prototype = Object.create(Phaser.Sprite.prototype);
@@ -102,7 +103,7 @@ Enemy.prototype.update = function() {
 
     //update the facing of the enemy, assuming they are not being hit and
     //there is no other precondition overriding their ability to turn
-    if(this.xHitVel === 0 && this.CanChangeDirection()) {
+    if(this.CanChangeDirection()) {
         if(this.body.velocity.x > 0) {
             this.SetDirection('right');
         } else if(this.body.velocity.x < 0) {
@@ -121,11 +122,30 @@ Enemy.prototype.update = function() {
     if(this.poise > this.initialPoise) this.poise = this.initialPoise;
     if(this.poise < -this.initialPoise) this.poise = -this.initialPoise;
 
-    if(this.xHitVel !== 0) {
-        this.body.velocity.x = this.xHitVel;
+    //check for and apply any existing attack frame
+    if(this.animations.currentFrame) {
+        this.currentAttack = this.damageFrames[this.animations.currentFrame.name];
+    } 
+
+    if(!!this.currentAttack) {
+
+        if(this.direction === 'right') {
+            this.currentAttack.x = this.currentAttack.x + this.body.x; 
+            this.currentAttack.y = this.currentAttack.y + this.body.y; 
+        } else {
+            this.currentAttack.x = (this.currentAttack.x * -1) + this.body.x - this.currentAttack.w + this.body.width;
+            this.currentAttack.y = this.currentAttack.y + this.body.y;
+            this.currentAttack.width = this.currentAttack.w;
+            this.currentAttack.height = this.currentAttack.h;
+        }
+    }
+    else {
+        this.currentAttack.x = 0;
+        this.currentAttack.y = 0;
+        this.currentAttack.width = 0;
+        this.currentAttack.height = 0;
     }
 
-    game.physics.arcade.collide(this, Frogland.GetCurrentCollisionLayer());
 };
 
 Enemy.prototype.GetPoisePercentage = function() {
