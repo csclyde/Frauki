@@ -60,21 +60,18 @@
 
             var pixel = { scale: 3, canvas: null, context: null, width: 480, height: 270 };
 
-            if(window.innerWidth < pixel.width * 2) {
-                pixel.scale = 1;
-                pixel.what = 0;
-            } else if(window.innerWidth < pixel.width * 3) {
+            if(window.innerWidth < pixel.width * 3) {
                 pixel.scale = 2;
-                pixel.what = 0.5;
+                pixel.what = 4;
             } else if(window.innerWidth < pixel.width * 4) {
                 pixel.scale = 3;
-                pixel.what = 1;
+                pixel.what = 2;
             } else {
                 pixel.scale = 4;
                 pixel.what = 1.5;
             }
 
-            var game = new Phaser.Game(pixel.width * pixel.scale, pixel.height * pixel.scale, Phaser.CANVAS, "game", Loading, false, false);
+            var game = new Phaser.Game(pixel.width * 1.5, pixel.height * 1.5, Phaser.CANVAS, "game", Loading, false, false);
             var events = new EventRouter();
 
             var cameraController;

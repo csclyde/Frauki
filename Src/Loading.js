@@ -5,13 +5,13 @@ Loading.preload = function() {
     game.renderer.renderSession.roundPixels = true;
 
     game.canvas.style['display'] = 'none';
-    pixel.canvas = Phaser.Canvas.create(game.width, game.height);
+    pixel.canvas = Phaser.Canvas.create(pixel.width * pixel.scale, pixel.height * pixel.scale);
     pixel.context = pixel.canvas.getContext('2d');
     Phaser.Canvas.addToDOM(pixel.canvas);
     Phaser.Canvas.setSmoothingEnabled(pixel.context, false);
     Phaser.Canvas.setImageRenderingCrisp(pixel.canvas);
-    pixel.width = pixel.canvas.width;
-    pixel.height = pixel.canvas.height;
+    // pixel.width = pixel.canvas.width;
+    // pixel.height = pixel.canvas.height;
 
     pixel.canvas.style['padding-left'] = 0;
     pixel.canvas.style['padding-right'] = 0;

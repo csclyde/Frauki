@@ -48,11 +48,13 @@ Main.render = function() {
         game.debug.body(o);
     });*/
 
-    pixel.context.drawImage(game.canvas, 0, 0, game.width, game.height, 
-        -(game.width * pixel.what) - cameraController.camX, 
-        -(game.height * pixel.what) - cameraController.camY, 
-        pixel.width * pixel.scale, 
-        pixel.height * pixel.scale);
+    pixel.context.drawImage(
+        game.canvas, 0, 0, game.width, game.height, 
+        -(pixel.width * (pixel.scale / 4)) - cameraController.camX, 
+        -(pixel.height * (pixel.scale / 4)) - cameraController.camY, 
+        game.width * pixel.scale, 
+        game.height * pixel.scale
+    );
 };
 
 Main.Restart = function() {
