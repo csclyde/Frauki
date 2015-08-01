@@ -140,6 +140,7 @@ Enemy.prototype.update = function() {
         }
     }
     else {
+        this.currentAttack = {};
         this.currentAttack.x = 0;
         this.currentAttack.y = 0;
         this.currentAttack.width = 0;

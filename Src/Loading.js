@@ -2,23 +2,23 @@ var Loading = new Phaser.State();
 
 Loading.preload = function() {
 
-    game.renderer.renderSession.roundPixels = true;
+    //game.renderer.renderSession.roundPixels = true;
 
-    game.canvas.style['display'] = 'none';
-    pixel.canvas = Phaser.Canvas.create(game.width * pixel.scale, game.height * pixel.scale);
-    pixel.context = pixel.canvas.getContext('2d');
-    Phaser.Canvas.addToDOM(pixel.canvas);
-    Phaser.Canvas.setSmoothingEnabled(pixel.context, false);
-    Phaser.Canvas.setImageRenderingCrisp(pixel.canvas);
-    pixel.width = pixel.canvas.width;
-    pixel.height = pixel.canvas.height;
+    // game.canvas.style['display'] = 'none';
+    // pixel.canvas = scaledGame.canvas; //Phaser.Canvas.create(game.width * pixel.scale, game.height * pixel.scale);
+    // pixel.context = pixel.canvas.getContext('2d');
+    // //Phaser.Canvas.addToDOM(pixel.canvas);
+    // //Phaser.Canvas.setSmoothingEnabled(pixel.context, false);
+    // //Phaser.Canvas.setImageRenderingCrisp(pixel.canvas);
+    // pixel.width = pixel.canvas.width;
+    // pixel.height = pixel.canvas.height;
 
-    pixel.canvas.style['padding-left'] = 0;
-    pixel.canvas.style['padding-right'] = 0;
-    pixel.canvas.style['margin-left'] = 'auto';
-    pixel.canvas.style['margin-right'] = 'auto';
-    pixel.canvas.style['display'] = 'block';
-    pixel.canvas.style['width'] = pixel.canvas.width;
+    // pixel.canvas.style['padding-left'] = 0;
+    // pixel.canvas.style['padding-right'] = 0;
+    // pixel.canvas.style['margin-left'] = 'auto';
+    // pixel.canvas.style['margin-right'] = 'auto';
+    // pixel.canvas.style['display'] = 'block';
+    // pixel.canvas.style['width'] = pixel.canvas.width;
 
     /*
     padding-left: 0;
@@ -28,8 +28,10 @@ Loading.preload = function() {
     display: block;
     */
 
-    pixel.context.drawImage(game.canvas, 0, 0, game.width, game.height, 0, 0, pixel.width, pixel.height);
-    
+    //pixel.context.drawImage(game.canvas, 0, 0, game.width, game.height, 0, 0, pixel.width, pixel.height);
+
+    game.scale.scaleMode = Phaser.ScaleManager.USER_SCALE;
+    game.scale.setUserScale(pixel.scale, pixel.scale);
     
     game.load.tilemap('Frogland', 'Data/World/Frogland.json', null, Phaser.Tilemap.TILED_JSON);
 

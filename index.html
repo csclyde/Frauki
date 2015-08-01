@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+    <style>canvas { image-rendering: pixelated; } </style>
     <head>
         <meta charset="UTF-8" />
         <title>Frauki's Adventure!</title>
@@ -68,8 +69,8 @@
             } else {
                 pixel.scale = 4;
             }
-            
-        	var game = new Phaser.Game(pixel.width, pixel.height, Phaser.CANVAS, "game", Loading, false, false);
+
+            var game = new Phaser.Game(pixel.width, pixel.height, Phaser.CANVAS, "game", Loading, false, false);
             var events = new EventRouter();
 
             var cameraController;
@@ -83,8 +84,9 @@
             var map;
             var frauki;
 
-        	game.state.add('Loading', Loading, true);
+            game.state.add('Loading', Loading, true);
             game.state.add('Main', Main, false);
+
 
         </script>
     </head>
