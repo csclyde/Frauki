@@ -200,10 +200,9 @@
             <filename>Incarnate</filename>
             <filename>Haystax</filename>
             <filename>Pincer</filename>
-            <filename>Bizarro</filename>
-            <filename>NPCs</filename>
             <filename>Mask</filename>
             <filename>Fungu</filename>
+            <filename>KR32</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
