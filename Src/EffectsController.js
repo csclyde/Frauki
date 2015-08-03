@@ -116,8 +116,12 @@ function UpdateParticle(p) {
     }
 
     if(p.body.x > p.destBody.x && p.body.x < p.destBody.x + p.destBody.width && p.body.y > p.destBody.y && p.body.y < p.destBody.y + p.destBody.height) {
+        
+        if(p.destBody === frauki.body) events.publish('play_sound', {name: 'energy_bit', restart: true });
+        
         p.destBody = null;
         p.kill();
+
         return;
     }
 
