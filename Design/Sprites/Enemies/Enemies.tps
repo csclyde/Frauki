@@ -193,13 +193,8 @@
             <filename>Buzzar</filename>
             <filename>CreeperThistle</filename>
             <filename>Insectoid</filename>
-            <filename>Skelegon</filename>
             <filename>Sporoid</filename>
-            <filename>TerraceMadman</filename>
-            <filename>Yeti</filename>
-            <filename>Incarnate</filename>
             <filename>Haystax</filename>
-            <filename>Pincer</filename>
             <filename>Mask</filename>
             <filename>Fungu</filename>
             <filename>KR32</filename>

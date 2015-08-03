@@ -5,15 +5,16 @@ Enemy.prototype.types['KR32'] =  function() {
 
     this.animations.add('idle', ['KR32/Stand0000'], 10, true, false);
     this.animations.add('block', ['KR32/Block0000'], 10, true, false);
+    this.animations.add('walk_back', ['KR32/Walk0000', 'KR32/Walk0001', 'KR32/Walk0002', 'KR32/Walk0003', 'KR32/Walk0004', 'KR32/Walk0005'], 10, true, false);
     this.animations.add('windup', ['KR32/Attack0000'], 5,  false, false);
     this.animations.add('attack', ['KR32/Attack0001', 'KR32/Attack0002', 'KR32/Attack0003', 'KR32/Attack0004', 'KR32/Attack0005', 'KR32/Attack0006', 'KR32/Attack0007', 'KR32/Attack0008'], 18, false, false);
 
     this.energy = 50;
     this.weight = 0.8;
+    this.baseStunDuration = 600;
+
     /*
     this.damage = 5;
-    this.baseStunDuration = 500;
-    this.poise = 10;
     */
 
     this.body.drag.x = 800;
@@ -56,7 +57,7 @@ Enemy.prototype.types['KR32'] =  function() {
 
     	this.state = this.Windup;
 
-    	this.timers.SetTimer('attack', 1000);
+    	this.timers.SetTimer('attack', 1000 + Math.random() * 1000);
     };
 
 	////////////////////////////////STATES////////////////////////////////////
@@ -69,7 +70,17 @@ Enemy.prototype.types['KR32'] =  function() {
 	};
 
 	this.Blocking = function() {
-		this.PlayAnim('block');
+		if(this.PlayerDistance() < 200) {
+			this.PlayAnim('walk_back');
+
+			if(this.direction === 'left') {
+				this.body.velocity.x = 25;
+			} else {
+				this.body.velocity.x = -25;
+			}
+		} else {
+			this.PlayAnim('block');
+		}
 
 		if(frauki.body.center.x < this.body.center.x) {
 			this.SetDirection('left');
@@ -81,7 +92,8 @@ Enemy.prototype.types['KR32'] =  function() {
 			this.state = this.Idling;
 		}
 
-		if(this.PlayerDistance() < 120) {
+
+		if(this.PlayerDistance() < 120 && !frauki.Attacking()) {
 			this.Attack();
 		}
 
@@ -110,7 +122,7 @@ Enemy.prototype.types['KR32'] =  function() {
 	}
 
 	this.Hurting = function() {
-		this.PlayAnim('die');
+		this.PlayAnim('idle');
 
 		if(this.timers.TimerUp('hit')) {
 			this.state = this.Idling;
@@ -119,6 +131,54 @@ Enemy.prototype.types['KR32'] =  function() {
 
 	this.attackFrames = {
 		'KR32/Block0000': {
+			x: 18, y: -8, w: 10, h: 40,
+			damage: 0,
+			knockback: 0,
+			priority: 1,
+			juggle: 0
+		},
+
+		'KR32/Walk0000': {
+			x: 18, y: -8, w: 10, h: 40,
+			damage: 0,
+			knockback: 0,
+			priority: 1,
+			juggle: 0
+		},
+
+		'KR32/Walk0001': {
+			x: 18, y: -8, w: 10, h: 40,
+			damage: 0,
+			knockback: 0,
+			priority: 1,
+			juggle: 0
+		},
+
+		'KR32/Walk0002': {
+			x: 18, y: -8, w: 10, h: 40,
+			damage: 0,
+			knockback: 0,
+			priority: 1,
+			juggle: 0
+		},
+
+		'KR32/Walk0003': {
+			x: 18, y: -8, w: 10, h: 40,
+			damage: 0,
+			knockback: 0,
+			priority: 1,
+			juggle: 0
+		},
+
+		'KR32/Walk0004': {
+			x: 18, y: -8, w: 10, h: 40,
+			damage: 0,
+			knockback: 0,
+			priority: 1,
+			juggle: 0
+		},
+
+		'KR32/Walk0005': {
 			x: 18, y: -8, w: 10, h: 40,
 			damage: 0,
 			knockback: 0,

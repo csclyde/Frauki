@@ -198,7 +198,7 @@ Enemy.prototype.PlayAnim = function(name) {
 
 function EnemyHit(f, e) {
     
-    if(e.spriteType !== 'enemy' || e.state === e.Hurting || !e.Vulnerable() || e.state === e.Dying)
+    if(e.spriteType !== 'enemy' || e.state === e.Hurting || !e.Vulnerable() || e.state === e.Dying || e.Attacking())
         return;
 
     //seperate conditional to prevent crash!
@@ -217,6 +217,8 @@ function EnemyHit(f, e) {
 
     e.timers.SetTimer('hit', e.baseStunDuration * damage);
 
+    console.log(e.state);
+    
     e.poise -= damage;
     e.state = e.Hurting;
 
