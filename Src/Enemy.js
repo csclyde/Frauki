@@ -3,7 +3,6 @@ Enemy = function(game, x, y, name) {
     Phaser.Sprite.call(this, game, x, y, 'EnemySprites');
     this.spriteType = 'enemy';
 
-    
     //enable its physics body
     game.physics.enable(this, Phaser.Physics.ARCADE);
     this.body.collideWorldBounds = true;
@@ -11,6 +10,7 @@ Enemy = function(game, x, y, name) {
     this.timers = new TimerUtil();
     
     this.SetDefaultValues();
+    this.attackFrames = {};
     
     if(!!this.types[name]) {
         this.types[name].apply(this);
@@ -25,10 +25,11 @@ Enemy = function(game, x, y, name) {
     this.maxEnergy = this.energy;
     this.initialX = this.body.x;
     this.initialY = this.body.y;
-    this.initialPoise = this.poise;
 
-    this.damageFrames = {};
-    this.currentAttack = {};
+    this.attackRect = game.add.sprite(0, 0, null);
+    game.physics.enable(this.attackRect, Phaser.Physics.ARCADE);
+    this.attackRect.body.setSize(0, 0, 0, 0);
+    this.attackRect.owningEnemy = this;
 };
 
 Enemy.prototype = Object.create(Phaser.Sprite.prototype);
@@ -48,7 +49,6 @@ Enemy.prototype.SetDefaultValues = function() {
     this.damage = 3;
     this.inScope = false;
     this.baseStunDuration = 300;
-    this.poise = 2;
 };
 
 Enemy.prototype.UpdateFunction = function() {};
@@ -73,7 +73,6 @@ Enemy.prototype.Respawn = function() {
     this.x = this.initialX;
     this.y = this.initialY;
     this.energy = this.maxEnergy;
-    this.poise = this.initialPoise;
     this.state = this.Idling;
 };
 
@@ -114,44 +113,52 @@ Enemy.prototype.update = function() {
     if(this.energy > this.maxEnergy)
         this.energy = this.maxEnergy;
 
-    if(this.timers.TimerUp('poise_ticker')) {
-        //this.poise += 0.05;
-        this.timers.SetTimer('poise_ticker', 200);
-    }
-
-    if(this.poise > this.initialPoise) this.poise = this.initialPoise;
-    if(this.poise < -this.initialPoise) this.poise = -this.initialPoise;
-
     //check for and apply any existing attack frame
+    //check for a frame mod and apply its mods
     if(this.animations.currentFrame) {
-        this.currentAttack = this.damageFrames[this.animations.currentFrame.name];
+        this.currentAttack = this.attackFrames[this.animations.currentFrame.name];
     } 
 
     if(!!this.currentAttack) {
 
         if(this.direction === 'right') {
-            this.currentAttack.x = this.currentAttack.x + this.body.x; 
-            this.currentAttack.y = this.currentAttack.y + this.body.y; 
+            this.attackRect.body.x = this.currentAttack.x + this.body.x; 
+            this.attackRect.body.y = this.currentAttack.y + this.body.y; 
+            this.attackRect.body.width = this.currentAttack.w; 
+            this.attackRect.body.height = this.currentAttack.h;
         } else {
-            this.currentAttack.x = (this.currentAttack.x * -1) + this.body.x - this.currentAttack.w + this.body.width;
-            this.currentAttack.y = this.currentAttack.y + this.body.y;
-            this.currentAttack.width = this.currentAttack.w;
-            this.currentAttack.height = this.currentAttack.h;
+            this.attackRect.body.x = (this.currentAttack.x * -1) + this.body.x - this.currentAttack.w + this.body.width;
+            this.attackRect.body.y = this.currentAttack.y + this.body.y;
+            this.attackRect.body.width = this.currentAttack.w;
+            this.attackRect.body.height = this.currentAttack.h;
         }
     }
     else {
-        this.currentAttack = {};
-        this.currentAttack.x = 0;
-        this.currentAttack.y = 0;
-        this.currentAttack.width = 0;
-        this.currentAttack.height = 0;
+        this.attackRect.body.x = 0;
+        this.attackRect.body.y = 0;
+        this.attackRect.body.width = 0;
+        this.attackRect.body.height = 0;
+    }
+
+    //if they are attacking and facing each other
+    if(this.Attacking()) {
+        if((this.direction === 'left' && frauki.states.direction === 'right' && frauki.body.center.x < this.body.center.x) ||
+           (this.direction === 'right' && frauki.states.direction === 'left' && frauki.body.center.x > this.body.center.x) ) 
+        {
+            game.physics.arcade.overlap(this.attackRect, frauki.attackRect, ClashSwords);
+        }
+
+        game.physics.arcade.overlap(this.attackRect, frauki, EnemyAttackConnect);
     }
 
 };
 
-Enemy.prototype.GetPoisePercentage = function() {
-    return this.poise / this.initialPoise;
-}
+Enemy.prototype.Attacking = function() {
+    if(!!this.attackRect && this.attackRect.body.width !== 0)
+        return true;
+    else
+        return false;
+};
 
 Enemy.prototype.WithinCameraRange = function() {
     var padding = 200;
@@ -194,7 +201,7 @@ function EnemyHit(f, e) {
     if(e.spriteType !== 'enemy' || e.state === e.Hurting || !e.Vulnerable() || e.state === e.Dying)
         return;
 
-    //seperate conditional to prevetn crash!
+    //seperate conditional to prevent crash!
     if(!e.timers.TimerUp('hit'))
         return;
 
@@ -236,6 +243,28 @@ function EnemyHit(f, e) {
 
     if(e.energy <= 0) { e.destroy(); }
 };
+
+function ClashSwords(e, f) {
+    e = e.owningEnemy;
+
+    frauki.LandHit(e, 0);
+
+    var vel = new Phaser.Point(e.body.center.x - frauki.body.center.x, e.body.center.y - frauki.body.center.y);
+    vel = vel.normalize();
+
+    vel.x *= 300;
+    vel.y *= 300;
+
+    e.body.velocity.x = vel.x;
+    e.body.velocity.y = vel.y;
+
+    //console.log(e.body.velocity.x, e.body.velocity.y);
+};
+
+function EnemyAttackConnect(e, f) {
+
+    frauki.Hit(e.owningEnemy, e.owningEnemy.currentAttack.damage);
+}
 
 
 //provide utility functions here that the specific enemies can all use

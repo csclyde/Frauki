@@ -172,7 +172,7 @@ Player.prototype.postStateUpdate = function() {
     if(this.Attacking()) {
         game.physics.arcade.overlap(frauki.attackRect, Frogland.GetCurrentObjectGroup(), EnemyHit);
         game.physics.arcade.overlap(frauki.attackRect, projectileController.projectiles, ProjectileHit);
-        game.physics.arcade.overlap(frauki.attackRect, Frogland.GetCurrentCollisionLayer(), TilesHit);
+        //game.physics.arcade.overlap(frauki.attackRect, Frogland.GetCurrentCollisionLayer(), TilesHit);
     }
     
     if(this.state === this.Running && this.animations.currentAnim.name === 'run') {
@@ -506,7 +506,7 @@ Player.prototype.Roll = function(params) {
     this.timers.SetTimer('frauki_grace', 300);
 };
 
-Player.prototype.Hit = function(f, e) {
+Player.prototype.Hit = function(e, damage) {
 
     if(this.state === this.Hurting || e.state === e.Hurting || frauki.Attacking() || frauki.Grace())
         return;
@@ -515,8 +515,6 @@ Player.prototype.Hit = function(f, e) {
 
     this.body.velocity.y = -300;
     this.body.velocity.x *= 0.1;
-
-    var damage = e.damage;
 
     //if they are crouching, half damage
     if(frauki.state === this.Crouching) {

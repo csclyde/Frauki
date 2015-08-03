@@ -96,7 +96,7 @@ Frogland.Update = function() {
     frauki.states.flowLeft = false;
 
     game.physics.arcade.collide(frauki, this.GetCurrentCollisionLayer(), null, this.CheckEnvironmentalCollisions);
-    game.physics.arcade.collide(this.NPCs, this.GetCurrentCollisionLayer());
+    //game.physics.arcade.collide(this.NPCs, this.GetCurrentCollisionLayer());
     game.physics.arcade.collide(frauki, this.GetCurrentObjectGroup(), this.CollideFraukiWithObject, this.OverlapFraukiWithObject);
     game.physics.arcade.collide(this.GetCurrentObjectGroup(), this.GetCurrentCollisionLayer());
     game.physics.arcade.collide(this.GetCurrentObjectGroup(), this.GetCurrentObjectGroup(), null, this.OverlapEnemiesWithSelf);
@@ -331,8 +331,7 @@ Frogland.OverlapFraukiWithObject = function(f, o) {
     } else if(o.spriteType === 'enemy') {
 
         if(o.CanCauseDamage() && o.state !== o.Dying) {
-            frauki.Hit(f, o);
-            o.poise = o.initialPoise;
+            frauki.Hit(o, o.damage);
         }
 
         return false;
