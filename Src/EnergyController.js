@@ -9,10 +9,10 @@ EnergyController = function() {
 };
 
 EnergyController.prototype.Create = function() {
-	this.barContainer = game.add.image(7, 7, 'UI', 'EnergyBar0000');
+	this.barContainer = game.add.image(107, 107, 'UI', 'EnergyBar0000');
 	this.barContainer.fixedToCamera = true;
 
-	this.energyBar = game.add.image(9, 9, 'UI', 'EnergyBar0001');
+	this.energyBar = game.add.image(109, 109, 'UI', 'EnergyBar0001');
 	this.energyBar.fixedToCamera = true;
 	this.energyBar.anchor.x = 0;
 
@@ -65,6 +65,9 @@ EnergyController.prototype.UpdateEnergy = function() {
 		this.energyBar.scale.x = 0;
 
 	this.restingPointMarker.cameraOffset.x = 10 + (90 * (this.neutralPoint / 30));
+
+	this.energyBar.cameraOffset.x = (pixel.width * (pixel.scale / 4));
+	this.energyBar.cameraOffset.y = (pixel.height * (pixel.scale / 4));
 };
 
 EnergyController.prototype.UseEnergy = function(amt) {
