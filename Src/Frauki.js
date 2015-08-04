@@ -279,9 +279,11 @@ Player.prototype.LandHit = function(e, damage) {
     frauki.body.velocity.x = vel.x;
     frauki.body.velocity.y = vel.y;
 
-    effectsController.SlowHit(function() {
-        events.publish('camera_shake', {magnitudeX: 15 * damage, magnitudeY: 5, duration: 100});
-    });
+    if(damage > 0) {
+        effectsController.SlowHit(function() {
+            events.publish('camera_shake', {magnitudeX: 15 * damage, magnitudeY: 5, duration: 100});
+        });
+    }
 };
 
 ////////////////ACTIONS//////////////////

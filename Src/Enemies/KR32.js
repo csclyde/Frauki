@@ -9,10 +9,11 @@ Enemy.prototype.types['KR32'] =  function() {
     this.animations.add('windup', ['KR32/Attack0000'], 5,  false, false);
     this.animations.add('attack', ['KR32/Attack0001', 'KR32/Attack0002', 'KR32/Attack0003', 'KR32/Attack0004', 'KR32/Attack0005', 'KR32/Attack0006', 'KR32/Attack0007', 'KR32/Attack0008'], 18, false, false);
 
-    this.energy = 0.5;
+    this.energy = 5;
     this.weight = 0.8;
     this.baseStunDuration = 600;
-    this.deathFrame = 'KR32/Stand0000';
+
+    this.mode = 'defensive';
 
     /*
     this.damage = 5;
@@ -21,7 +22,16 @@ Enemy.prototype.types['KR32'] =  function() {
     this.body.drag.x = 800;
     
 	this.updateFunction = function() {
+		if(this.timers.TimerUp('mode_change')) {
 
+			if(Math.random() < 0.3 + (0.1 * this.energy)) {
+				this.mode = 'defensive';
+			} else {
+				this.mode = 'aggressive';
+			}
+
+			this.timers.SetTimer('mode_change', game.rnd.between(1000, 2000));
+		}
 	};
 
 	this.CanCauseDamage = function() { return false; }
@@ -75,9 +85,10 @@ Enemy.prototype.types['KR32'] =  function() {
 			this.PlayAnim('walk_back');
 
 			if(this.direction === 'left') {
-				this.body.velocity.x = 25;
+
+				this.body.velocity.x = this.mode === 'defensive' ? 25 : -25;
 			} else {
-				this.body.velocity.x = -25;
+				this.body.velocity.x = this.mode === 'defensive' ? -25 : 25;
 			}
 		} else {
 			this.PlayAnim('block');
@@ -117,10 +128,17 @@ Enemy.prototype.types['KR32'] =  function() {
 	this.Slashing = function() {
 		this.PlayAnim('attack');
 
+		if(this.animations.currentFrame.name === 'KR32/Attack0005') {
+			this.animations.currentAnim.delay = 500;
+		} else {
+			this.animations.currentAnim.delay = 1000 / 18;
+		}
+
 		if(this.animations.currentAnim.isFinished) {
 			this.state = this.Blocking;
+			this.timers.SetTimer('post_attack', 300);
 		}
-	}
+	};
 
 	this.Hurting = function() {
 		this.PlayAnim('idle');
