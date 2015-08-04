@@ -217,8 +217,6 @@ function EnemyHit(f, e) {
 
     e.timers.SetTimer('hit', e.baseStunDuration * damage);
 
-    console.log(e.state);
-    
     e.poise -= damage;
     e.state = e.Hurting;
 
@@ -231,7 +229,9 @@ function EnemyHit(f, e) {
         e.Die();
         e.state = e.Dying;
 
-        effectsController.DiceEnemy(e.enemyName, e.body.center.x, e.body.center.y);
+        console.log(e.animations.currentFrame);
+
+        effectsController.DiceEnemy(e, e.body.center.x, e.body.center.y);
 
         damage = e.maxEnergy;
     } else {
