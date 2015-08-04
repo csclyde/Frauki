@@ -10,7 +10,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
     this.attackTimer = 0;
     this.weight = 0.6;
-    this.damage = 5;
+    this.damage = 2;
     this.energy = 3;
 
     this.squashTween = null;

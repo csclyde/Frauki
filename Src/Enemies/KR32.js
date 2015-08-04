@@ -1,6 +1,6 @@
 Enemy.prototype.types['KR32'] =  function() {
 
-	this.body.setSize(15, 60, 0, -68);
+	this.body.setSize(15, 56, 0, -72);
 	this.anchor.setTo(.5, 1);
 
     this.animations.add('idle', ['KR32/Stand0000'], 10, true, false);
@@ -11,7 +11,7 @@ Enemy.prototype.types['KR32'] =  function() {
     this.animations.add('hurt', ['KR32/Hurt0000', 'KR32/Hurt0001'], 8, true, false);
 
     this.energy = 5;
-    this.baseStunDuration = 600;
+    this.baseStunDuration = 400;
 
     this.mode = 'defensive';
 
@@ -105,7 +105,7 @@ Enemy.prototype.types['KR32'] =  function() {
 		}
 
 
-		if(this.PlayerDistance() < 120 && !frauki.Attacking()) {
+		if(this.PlayerDistance() < 120 && !frauki.Attacking() && this.body.onFloor()) {
 			this.Attack();
 		}
 
@@ -206,7 +206,7 @@ Enemy.prototype.types['KR32'] =  function() {
 		},
 
 		'KR32/Attack0001': {
-			x: 40, y: -8, w: 25, h: 60,
+			x: 35, y: -3, w: 35, h: 50,
 			damage: 3,
 			knockback: 0.5,
 			priority: 1,
@@ -214,7 +214,7 @@ Enemy.prototype.types['KR32'] =  function() {
 		},
 
 		'KR32/Attack0002': {
-			x: 42, y: -8, w: 25, h: 60,
+			x: 35, y: -3, w: 35, h: 50,
 			damage: 2,
 			knockback: 0.3,
 			priority: 1,
@@ -222,7 +222,15 @@ Enemy.prototype.types['KR32'] =  function() {
 		},
 
 		'KR32/Attack0003': {
-			x: 43, y: -8, w: 25, h: 60,
+			x: 35, y: -3, w: 35, h: 50,
+			damage: 2,
+			knockback: 0.3,
+			priority: 1,
+			juggle: 0
+		},
+
+		'KR32/Attack0004': {
+			x: 35, y: -3, w: 35, h: 50,
 			damage: 2,
 			knockback: 0.3,
 			priority: 1,

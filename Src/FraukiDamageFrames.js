@@ -111,7 +111,7 @@ var fraukiDamageFrames = {
 	//stab, long followthrough
 	'Attack Stab0007': {
 		x: 0, y: 15, w: 83, h: 10,
-		damage: 1,
+		damage: 2,
 		knockback: 1,
 		priority: 1,
 		juggle: 0
@@ -120,7 +120,7 @@ var fraukiDamageFrames = {
 	//stab, long followthrough
 	'Attack Stab0008': {
 		x: 0, y: 15, w: 83, h: 12,
-		damage: 1,
+		damage: 2,
 		knockback: 0.8,
 		priority: 1,
 		juggle: 0
@@ -129,7 +129,7 @@ var fraukiDamageFrames = {
 	//stab, long followthrough
 	'Attack Stab0009': {
 		x: 0, y: 15, w: 83, h: 12,
-		damage: 1,
+		damage: 2,
 		knockback: 0.8,
 		priority: 1,
 		juggle: 0
@@ -138,7 +138,7 @@ var fraukiDamageFrames = {
 	//stab, long followthrough
 	'Attack Stab0010': {
 		x: 0, y: 15, w: 83, h: 12,
-		damage: 0.5,
+		damage: 1,
 		knockback: 0.4,
 		priority: 1,
 		juggle: 0

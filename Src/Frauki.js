@@ -533,7 +533,7 @@ Player.prototype.Hit = function(e, damage) {
 
     this.state = this.Hurting;
     this.timers.SetTimer('frauki_grace', 1000);
-    this.timers.SetTimer('frauki_hit', 500 * (damage / 6));
+    this.timers.SetTimer('frauki_hit', 500 * (damage / 4));
 };
 
 //////////////////STATES/////////////////
