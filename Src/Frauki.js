@@ -276,7 +276,7 @@ Player.prototype.LandHit = function(e, damage) {
     //frauki.animations.paused = true;
     //game.time.events.add(200, function() { frauki.animations.paused = false; }, this);
 
-    if(damage > 0) {
+    if(damage > 0 && e.maxEnergy > 1) {
         effectsController.SlowHit(function() {
             events.publish('camera_shake', {magnitudeX: 15 * damage, magnitudeY: 5, duration: 100});
         });

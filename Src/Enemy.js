@@ -229,8 +229,6 @@ function EnemyHit(f, e) {
         e.Die();
         e.state = e.Dying;
 
-        console.log(e.animations.currentFrame);
-
         effectsController.DiceEnemy(e, e.body.center.x, e.body.center.y);
 
         damage = e.maxEnergy;
