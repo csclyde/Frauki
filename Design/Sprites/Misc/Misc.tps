@@ -239,6 +239,8 @@
             <filename>Frames/ForceField0002.png</filename>
             <filename>Frames/ForceField0003.png</filename>
             <filename>Frames/ForceField0004.png</filename>
+            <filename>Frames/Sparks0000.png</filename>
+            <filename>Frames/Sparks0001.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

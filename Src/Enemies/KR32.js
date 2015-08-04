@@ -67,8 +67,6 @@ Enemy.prototype.types['KR32'] =  function() {
     	}
 
     	this.state = this.Windup;
-
-    	this.timers.SetTimer('attack', 1000 + Math.random() * 1000);
     };
 
 	////////////////////////////////STATES////////////////////////////////////
@@ -136,7 +134,7 @@ Enemy.prototype.types['KR32'] =  function() {
 
 		if(this.animations.currentAnim.isFinished) {
 			this.state = this.Blocking;
-			this.timers.SetTimer('post_attack', 300);
+			this.timers.SetTimer('attack', 500 + Math.random() * 1000);
 		}
 	};
 

@@ -247,6 +247,9 @@ function EnemyHit(f, e) {
 };
 
 function ClashSwords(e, f) {
+
+    effectsController.SparkSplash(e, frauki.attackRect);
+
     e = e.owningEnemy;
 
     frauki.LandHit(e, 0);
@@ -265,7 +268,10 @@ function ClashSwords(e, f) {
 
 function EnemyAttackConnect(e, f) {
 
-    frauki.Hit(e.owningEnemy, e.owningEnemy.currentAttack.damage);
+    if(e.owningEnemy.currentAttack.damage > 0) {
+        frauki.Hit(e.owningEnemy, e.owningEnemy.currentAttack.damage);
+    }
+
 }
 
 

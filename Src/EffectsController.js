@@ -35,6 +35,18 @@ EffectsController = function() {
     this.splashLeft.maxParticleScale = 1.1;
     this.splashLeft.minParticleScale = 0.8;
 
+    this.posSpark = game.add.emitter(0, 0, 100);
+    this.posSpark.makeParticles('Misc', ['Sparks0000']); 
+    this.posSpark.gravity = -700;
+    this.posSpark.maxParticleScale = 1;
+    this.posSpark.minParticleScale = 1;
+
+    this.negSpark = game.add.emitter(0, 0, 100);
+    this.negSpark.makeParticles('Misc', ['Sparks0001']); 
+    this.negSpark.gravity = -700;
+    this.negSpark._maxParticleScale = 1;
+    this.negSpark._minParticleScale = 1;
+
     //unassigned particles will be set to move towards this destination
     this.activeDest = null;
     this.enemySource = null;
@@ -335,4 +347,60 @@ EffectsController.prototype.ForceField = function() {
     this.forceField.visible = true;
     frauki.states.forceFieldActive = true;
     this.forceField.animations.play('activate');
+};
+
+EffectsController.prototype.SparkSplash = function(posSrc, negSrc) {
+
+    var x = (posSrc.body.center.x + negSrc.body.center.x) / 2;
+    var y = (posSrc.body.center.y + negSrc.body.center.y) / 2;
+
+    this.posSpark.x = x;
+    this.posSpark.y = y;
+    this.negSpark.x = x;
+    this.negSpark.y = y;
+
+    var vel = new Phaser.Point(negSrc.body.center.x - posSrc.body.center.x, negSrc.body.center.y - posSrc.body.center.y);
+    vel = vel.normalize();
+
+    vel.x *= 120;
+    vel.y *= 120;
+
+    if(vel.x < 0) {
+        this.posSpark.minParticleSpeed.x = vel.x + 25;
+        this.posSpark.maxParticleSpeed.x = vel.x - 25;
+    } else {
+        this.posSpark.minParticleSpeed.x = vel.x - 25;
+        this.posSpark.maxParticleSpeed.x = vel.x + 25;
+    }
+
+    if(vel.y < 0) {
+        this.posSpark.minParticleSpeed.y = vel.y + 25;
+        this.posSpark.maxParticleSpeed.y = vel.y - 25;
+    } else {
+        this.posSpark.minParticleSpeed.y = vel.y - 25;
+        this.posSpark.maxParticleSpeed.y = vel.y + 25;
+    }
+
+    this.posSpark.explode(500, 35);
+
+    vel.x *= -1;
+    vel.y *= -1;
+
+    if(vel.x < 0) {
+        this.negSpark.minParticleSpeed.x = vel.x + 25;
+        this.negSpark.maxParticleSpeed.x = vel.x - 25;
+    } else {
+        this.negSpark.minParticleSpeed.x = vel.x - 25;
+        this.negSpark.maxParticleSpeed.x = vel.x + 25;
+    }
+
+    if(vel.y < 0) {
+        this.negSpark.minParticleSpeed.y = vel.y + 25;
+        this.negSpark.maxParticleSpeed.y = vel.y - 25;
+    } else {
+        this.negSpark.minParticleSpeed.y = vel.y - 25;
+        this.negSpark.maxParticleSpeed.y = vel.y + 25;
+    }
+
+    this.negSpark.explode(500, 35);
 };
