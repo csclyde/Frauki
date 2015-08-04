@@ -11,12 +11,12 @@ Enemy.prototype.types['KR32'] =  function() {
     this.animations.add('hurt', ['KR32/Hurt0000', 'KR32/Hurt0001'], 8, true, false);
 
     this.energy = 5;
-    this.weight = 0.8;
     this.baseStunDuration = 600;
 
     this.mode = 'defensive';
 
     /*
+    this.weight = 0.8;
     this.damage = 5;
     */
 
@@ -33,6 +33,7 @@ Enemy.prototype.types['KR32'] =  function() {
 
 			this.timers.SetTimer('mode_change', game.rnd.between(1000, 2000));
 		}
+
 	};
 
 	this.CanCauseDamage = function() { return false; }
@@ -80,7 +81,7 @@ Enemy.prototype.types['KR32'] =  function() {
 	};
 
 	this.Blocking = function() {
-		if(this.PlayerDistance() < 200) {
+		if(this.PlayerDistance() < 200 && Math.abs(this.body.velocity.x < 30)) {
 			this.PlayAnim('walk_back');
 
 			if(this.direction === 'left') {

@@ -7,6 +7,14 @@ AudioController = function() {
     events.subscribe('stop_music', this.StopMusic, this);
     events.subscribe('stop_all_music', this.StopAllMusic, this);
 
+    events.subscribe('stop_attack_sounds', function() {
+        for(var key in this.sounds) {
+            if(key.indexOf('attack') > -1) {
+                this.sounds[key].stop();
+            }
+        }
+    }, this);
+
     this.sounds = {};
     this.music = {};
 

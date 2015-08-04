@@ -163,12 +163,6 @@ Player.prototype.postStateUpdate = function() {
         this.movement.rollBoost = 0;
     }
 
-    // if(this.state === this.Crouching || this.state === this.Rolling || this.state === this.Flipping) {
-    //     this.body.height = 30;
-    // } else {
-    //     this.body.height = 50;
-    // }
-
     if(this.Attacking()) {
         game.physics.arcade.overlap(frauki.attackRect, Frogland.GetCurrentObjectGroup(), EnemyHit);
         game.physics.arcade.overlap(frauki.attackRect, projectileController.projectiles, ProjectileHit);
@@ -189,7 +183,7 @@ Player.prototype.update = function() {
 };
 
 Player.prototype.SetDirection = function(dir) {
-    if(this.states.direction !== dir) {
+    if(this.states.direction !== dir && this.animations.paused === false) {
         this.states.direction = dir;
 
         dir === 'left' ? this.scale.x = -1 : this.scale.x = 1;
@@ -278,6 +272,9 @@ Player.prototype.LandHit = function(e, damage) {
 
     frauki.body.velocity.x = vel.x;
     frauki.body.velocity.y = vel.y;
+
+    //frauki.animations.paused = true;
+    //game.time.events.add(200, function() { frauki.animations.paused = false; }, this);
 
     if(damage > 0) {
         effectsController.SlowHit(function() {

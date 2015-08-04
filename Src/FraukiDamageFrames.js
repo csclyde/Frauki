@@ -239,7 +239,7 @@ var fraukiDamageFrames = {
 		damage: 3,
 		knockback: 3,
 		priority: 1,
-		juggle: 5
+		juggle: 1
 	},
 
 	'ForceField0000': {
@@ -247,7 +247,7 @@ var fraukiDamageFrames = {
 		damage: 0,
 		knockback: 1,
 		priority: 1,
-		juggle: 5
+		juggle: 1
 	},
 
 	'ForceField0001': {
@@ -255,7 +255,7 @@ var fraukiDamageFrames = {
 		damage: 0,
 		knockback: 1,
 		priority: 1,
-		juggle: 3
+		juggle: 1
 	},
 
 	'ForceField0002': {
@@ -263,7 +263,7 @@ var fraukiDamageFrames = {
 		damage: 0,
 		knockback: 1,
 		priority: 1,
-		juggle: 2
+		juggle: 1
 	},
 
 	'ForceField0003': {

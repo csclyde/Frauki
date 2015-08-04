@@ -263,6 +263,9 @@ function ClashSwords(e, f) {
     e.body.velocity.x = vel.x;
     e.body.velocity.y = vel.y;
 
+    events.publish('stop_attack_sounds', {});
+    events.publish('play_sound', {name: 'clang'});
+
     //console.log(e.body.velocity.x, e.body.velocity.y);
 };
 
