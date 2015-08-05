@@ -142,11 +142,13 @@ Enemy.prototype.update = function() {
 
     //if they are attacking and facing each other
     if(this.Attacking()) {
+
         if((this.direction === 'left' && frauki.states.direction === 'right' && frauki.body.center.x < this.body.center.x) ||
            (this.direction === 'right' && frauki.states.direction === 'left' && frauki.body.center.x > this.body.center.x) ) 
         {
             game.physics.arcade.overlap(this.attackRect, frauki.attackRect, ClashSwords);
         }
+
 
         game.physics.arcade.overlap(this.attackRect, frauki, EnemyAttackConnect);
     }
@@ -264,6 +266,9 @@ function ClashSwords(e, f) {
     events.publish('stop_attack_sounds', {});
     events.publish('play_sound', {name: 'clang'});
 
+    e.timers.SetTimer('hit', 300);
+    frauki.timers.SetTimer('frauki_hit', 300)
+
     //console.log(e.body.velocity.x, e.body.velocity.y);
 };
 
@@ -342,6 +347,14 @@ Enemy.prototype.RollDice = function(sides, thresh) {
     else
         return false;
 };
+
+Enemy.prototype.FacePlayer = function() {
+    if(this.body.center.x < frauki.body.center.x) {
+        this.SetDirection('right');
+    } else {
+        this.SetDirection('left');
+    }
+}
 
 Enemy.prototype.ChargeAtPlayer = function(speed) {
 

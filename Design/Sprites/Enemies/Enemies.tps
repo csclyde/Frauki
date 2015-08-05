@@ -198,6 +198,7 @@
             <filename>Mask</filename>
             <filename>Fungu</filename>
             <filename>KR32</filename>
+            <filename>A3PZ</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

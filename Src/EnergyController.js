@@ -76,20 +76,20 @@ EnergyController.prototype.UpdateEnergy = function() {
 	if(this.energyBar.scale.x < 0)
 		this.energyBar.scale.x = 0;
 
-	this.restingPointMarker.cameraOffset.x = (pixel.width * 0.27 + cameraController.camX / pixel.scale) + (90 * (this.neutralPoint / 30));
-	this.restingPointMarker.cameraOffset.y = (pixel.height * 0.3 + cameraController.camY / pixel.scale) - 2;
+	this.restingPointMarker.cameraOffset.x = Math.round(pixel.width * 0.27 + cameraController.camX / pixel.scale) + (90 * (this.neutralPoint / 30));
+	this.restingPointMarker.cameraOffset.y = Math.round(pixel.height * 0.3 + cameraController.camY / pixel.scale) - 2;
 
-	this.energyBar.cameraOffset.x = (pixel.width * 0.27 + cameraController.camX / pixel.scale) + 2;
-	this.energyBar.cameraOffset.y = (pixel.height * 0.3 + cameraController.camY / pixel.scale) + 2;
+	this.energyBar.cameraOffset.x = Math.round(pixel.width * 0.27 + cameraController.camX / pixel.scale) + 2;
+	this.energyBar.cameraOffset.y = Math.round(pixel.height * 0.3 + cameraController.camY / pixel.scale) + 2;
 
-	this.energyBarWhite.cameraOffset.x = (pixel.width * 0.27 + cameraController.camX / pixel.scale) + 2;
-	this.energyBarWhite.cameraOffset.y = (pixel.height * 0.3 + cameraController.camY / pixel.scale) + 2;
+	this.energyBarWhite.cameraOffset.x = Math.round(pixel.width * 0.27 + cameraController.camX / pixel.scale) + 2;
+	this.energyBarWhite.cameraOffset.y = Math.round(pixel.height * 0.3 + cameraController.camY / pixel.scale) + 2;
 
-	this.energyBarRed.cameraOffset.x = (pixel.width * 0.27 + cameraController.camX / pixel.scale) + 2;
-	this.energyBarRed.cameraOffset.y = (pixel.height * 0.3 + cameraController.camY / pixel.scale) + 2;
+	this.energyBarRed.cameraOffset.x = Math.round(pixel.width * 0.27 + cameraController.camX / pixel.scale) + 2;
+	this.energyBarRed.cameraOffset.y = Math.round(pixel.height * 0.3 + cameraController.camY / pixel.scale) + 2;
 
-	this.barContainer.cameraOffset.x = pixel.width * 0.27 + cameraController.camX / pixel.scale;
-	this.barContainer.cameraOffset.y = pixel.height * 0.3 + cameraController.camY / pixel.scale;
+	this.barContainer.cameraOffset.x = Math.round(pixel.width * 0.27 + cameraController.camX / pixel.scale);
+	this.barContainer.cameraOffset.y = Math.round(pixel.height * 0.3 + cameraController.camY / pixel.scale);
 };
 
 EnergyController.prototype.UseEnergy = function(amt) {

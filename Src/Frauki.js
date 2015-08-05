@@ -285,7 +285,7 @@ Player.prototype.LandHit = function(e, damage) {
 
 ////////////////ACTIONS//////////////////
 Player.prototype.Run = function(params) {
-    if(this.state === this.Hurting || (this.state === this.Rolling && this.movement.rollPop === false) || this.state === this.AttackStab) 
+    if(!this.timers.TimerUp('frauki_hit') || (this.state === this.Rolling && this.movement.rollPop === false) || this.state === this.AttackStab) 
         return;
 
     if(params.dir === 'left') {
@@ -330,7 +330,7 @@ Player.prototype.StartStopRun = function(params) {
 };
 
 Player.prototype.Jump = function(params) {
-    if(this.state === this.Hurting) 
+    if(!this.timers.TimerUp('frauki_hit')) 
         return;
 
     if(params.jump) {
@@ -532,7 +532,7 @@ Player.prototype.Hit = function(e, damage) {
     this.body.center.x < e.body.center.x ? this.body.velocity.x = -200 : this.body.velocity.x = 200;
 
     this.state = this.Hurting;
-    this.timers.SetTimer('frauki_grace', 1000);
+    this.timers.SetTimer('frauki_grace', 500);
     this.timers.SetTimer('frauki_hit', 500 * (damage / 4));
 };
 
