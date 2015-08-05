@@ -4,7 +4,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
 	this.anchor.setTo(.5, 1);
 
     this.animations.add('idle', ['A3PZ/Stand0000'], 10, true, false);
-    this.animations.add('windup1', ['A3PZ/Attack0001', 'A3PZ/Attack0002'], 18, false, false);
+    this.animations.add('windup1', ['A3PZ/Attack0001', 'A3PZ/Attack0002'], 10, false, false);
     this.animations.add('attack1', ['A3PZ/Attack0003', 'A3PZ/Attack0004', 'A3PZ/Attack0005', 'A3PZ/Attack0006', 'A3PZ/Attack0007'], 18, false, false);
     this.animations.add('windup2', ['A3PZ/Attack0008', 'A3PZ/Attack0009'], 10, false, false);
     this.animations.add('attack2', ['A3PZ/Attack0010', 'A3PZ/Attack0011', 'A3PZ/Attack0012', 'A3PZ/Attack0013', 'A3PZ/Attack0014'], 18, false, false);
@@ -77,7 +77,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
 			this.FacePlayer();
 
 			if(this.PlayerDistance() < 200) {
-				if(frauki.Attacking()) {
+				if(frauki.Attacking() && this.timers.TimerUp('attack')) {
 					this.state = this.Slashing1;
 				} else {
 					this.Attack();
@@ -92,6 +92,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
 		if(this.animations.currentAnim.isFinished) {
 			this.state = this.Slashing1;
+			this.timers.SetTimer('slash_hold', 200);
 		}
 	};
 
@@ -104,15 +105,9 @@ Enemy.prototype.types['A3PZ'] =  function() {
 			this.body.velocity.x = 200;
 		}
 
-		if(this.animations.currentAnim.isFinished) {
-
-			if(this.PlayerDistance() < 100) {
-				this.state = this.Windup2;
-				this.FacePlayer();
-			} else {
-				this.state = this.Idling;
-				this.timers.SetTimer('attack', 500 + Math.random() * 1000);
-			}
+		if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
+			this.state = this.Windup2;
+			//this.FacePlayer();
 		}
 	};
 
@@ -121,6 +116,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
 		if(this.animations.currentAnim.isFinished) {
 			this.state = this.Slashing2;
+			this.timers.SetTimer('slash_hold', 200);
 		}
 	};
 
@@ -133,9 +129,9 @@ Enemy.prototype.types['A3PZ'] =  function() {
 			this.body.velocity.x = 200;
 		}
 
-		if(this.animations.currentAnim.isFinished) {
+		if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
 			this.state = this.Idling;
-			this.timers.SetTimer('attack', 500 + Math.random() * 1000);
+			this.timers.SetTimer('attack', 500 + Math.random() * 500);
 		}
 	};
 
@@ -172,8 +168,16 @@ Enemy.prototype.types['A3PZ'] =  function() {
 			juggle: 0
 		},
 
+		'A3PZ/Attack0006': {
+			x: 50, y: -15, w: 15, h: 40,
+			damage: 1,
+			knockback: 0,
+			priority: 1,
+			juggle: 0
+		},
+
 		'A3PZ/Attack0010': {
-			x: 10, y: -20, w: 50, h: 75,
+			x: 20, y: -20, w: 50, h: 75,
 			damage: 2,
 			knockback: 0,
 			priority: 1,
@@ -188,7 +192,15 @@ Enemy.prototype.types['A3PZ'] =  function() {
 			juggle: 0
 		},
 
-		'A3PZ/Attack0011': {
+		'A3PZ/Attack0012': {
+			x: 18, y: 20, w: 20, h: 30,
+			damage: 1,
+			knockback: 0,
+			priority: 1,
+			juggle: 0
+		},
+
+		'A3PZ/Attack0012': {
 			x: 18, y: 20, w: 20, h: 30,
 			damage: 1,
 			knockback: 0,
