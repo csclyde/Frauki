@@ -38,8 +38,8 @@ AudioController = function() {
                 that.music[music.Name].loopSong = music.Loop ? 1 : 0;
                 that.music[music.Name].volume = music.Volume;
 
-                if(music.Name === 'Surface') {
-                    //that.music[music.Name].play();
+                if(music.Name === 'Ruins') {
+                    that.music[music.Name].play();
                 }
             } 
         };
@@ -79,7 +79,7 @@ AudioController.prototype.StopSound = function(params) {
 
 AudioController.prototype.PlayMusic = function(params) {
     if(!!params.name && !!this.music[params.name] && !!this.music[params.name].play) {
-            //this.music[params.name].play();
+            this.music[params.name].play();
     }
 };
 
