@@ -81,7 +81,7 @@ Enemy.prototype.types['KR32'] =  function() {
 	};
 
 	this.Blocking = function() {
-		if(this.PlayerDistance() < 200 && Math.abs(this.body.velocity.x < 30)) {
+		if(Math.abs(this.body.velocity.x < 30)) {
 			this.PlayAnim('walk_back');
 
 			if(this.direction === 'left') {
@@ -108,6 +108,8 @@ Enemy.prototype.types['KR32'] =  function() {
 		if(this.PlayerDistance() < 120 && !frauki.Attacking() && this.body.onFloor()) {
 			this.Attack();
 		}
+
+		//respond if the player is attacking and in the personal space? dodge?
 
 	};
 

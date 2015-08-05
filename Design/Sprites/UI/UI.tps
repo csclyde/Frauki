@@ -198,6 +198,8 @@
             <filename>Frames/EnergyBar0002.png</filename>
             <filename>Frames/EnergyBar0000.png</filename>
             <filename>Frames/EnergyBar0001.png</filename>
+            <filename>Frames/EnergyBar0004.png</filename>
+            <filename>Frames/EnergyBar0003.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

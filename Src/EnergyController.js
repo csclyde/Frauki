@@ -16,6 +16,16 @@ EnergyController.prototype.Create = function() {
 	this.energyBar.fixedToCamera = true;
 	this.energyBar.anchor.x = 0;
 
+	this.energyBarWhite = game.add.image(9, 9, 'UI', 'EnergyBar0003');
+	this.energyBarWhite.fixedToCamera = true;
+	this.energyBarWhite.anchor.x = 0;
+	this.energyBarWhite.visible = false;
+
+	this.energyBarRed = game.add.image(9, 9, 'UI', 'EnergyBar0004');
+	this.energyBarRed.fixedToCamera = true;
+	this.energyBarRed.anchor.x = 0;
+	this.energyBarRed.visible = false;
+
 	this.restingPointMarker = game.add.image(this.energyBar.x + (this.energyBar.width / 2) - 2, 5, 'UI', 'EnergyBar0002');
 	this.restingPointMarker.fixedToCamera = true;
 };
@@ -60,14 +70,23 @@ EnergyController.prototype.UpdateEnergy = function() {
 		Main.Restart();
 
 	this.energyBar.scale.x = this.energy / 30;
+	this.energyBarWhite.scale.x = this.energy / 30;
+	this.energyBarRed.scale.x = this.energy / 30;
 
 	if(this.energyBar.scale.x < 0)
 		this.energyBar.scale.x = 0;
 
-	this.restingPointMarker.cameraOffset.x = 10 + (90 * (this.neutralPoint / 30));
+	this.restingPointMarker.cameraOffset.x = (pixel.width * 0.27 + cameraController.camX / pixel.scale) + (90 * (this.neutralPoint / 30));
+	this.restingPointMarker.cameraOffset.y = (pixel.height * 0.3 + cameraController.camY / pixel.scale) - 2;
 
 	this.energyBar.cameraOffset.x = (pixel.width * 0.27 + cameraController.camX / pixel.scale) + 2;
 	this.energyBar.cameraOffset.y = (pixel.height * 0.3 + cameraController.camY / pixel.scale) + 2;
+
+	this.energyBarWhite.cameraOffset.x = (pixel.width * 0.27 + cameraController.camX / pixel.scale) + 2;
+	this.energyBarWhite.cameraOffset.y = (pixel.height * 0.3 + cameraController.camY / pixel.scale) + 2;
+
+	this.energyBarRed.cameraOffset.x = (pixel.width * 0.27 + cameraController.camX / pixel.scale) + 2;
+	this.energyBarRed.cameraOffset.y = (pixel.height * 0.3 + cameraController.camY / pixel.scale) + 2;
 
 	this.barContainer.cameraOffset.x = pixel.width * 0.27 + cameraController.camX / pixel.scale;
 	this.barContainer.cameraOffset.y = pixel.height * 0.3 + cameraController.camY / pixel.scale;
@@ -105,6 +124,11 @@ EnergyController.prototype.AddPower = function(amt) {
 
 EnergyController.prototype.RemovePower = function(amt) {
 	this.neutralPoint -= amt * 2;
+
+	this.energyBar.visible = false;
+	this.energyBarRed.visible = true;
+
+	game.time.events.add(300, function() { this.energyBar.visible = true; this.energyBarRed.visible = false; }, this)
 };
 
 EnergyController.prototype.GetEnergyPercentage = function() {
