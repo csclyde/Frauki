@@ -38,7 +38,7 @@ AudioController = function() {
                 that.music[music.Name].loopSong = music.Loop ? 1 : 0;
                 that.music[music.Name].volume = music.Volume;
 
-                if(music.Name === 'Ruins') {
+                if(music.Name === 'Surface') {
                     that.music[music.Name].play();
                 }
             } 
