@@ -39,7 +39,7 @@ AudioController = function() {
                 that.music[music.Name].volume = music.Volume;
 
                 if(music.Name === 'Ruins') {
-                    //that.music[music.Name].play();
+                    that.music[music.Name].play();
                 }
             } 
         };
