@@ -278,7 +278,7 @@ Player.prototype.LandHit = function(e, damage) {
 
     if(damage > 0 && e.maxEnergy > 1) {
         effectsController.SlowHit(function() {
-            events.publish('camera_shake', {magnitudeX: 15 * damage, magnitudeY: 5, duration: 100});
+            events.publish('camera_shake', {magnitudeX: 10 * damage, magnitudeY: 3, duration: 80});
         });
     }
 };
@@ -520,10 +520,9 @@ Player.prototype.Hit = function(e, damage) {
         damage /= 2;
     }
 
-    effectsController.ParticleSpray(this.body, e.body, 'negative', e.PlayerDirection(), damage);
+    effectsController.ParticleSpray(this.body, e.body, 'negative', null, damage);
 
     energyController.RemovePower(damage / 4);
-    energyController.RemoveEnergy(damage / 1.5);
 
     console.log('Frauki is taking ' + damage + ' damage');
 
