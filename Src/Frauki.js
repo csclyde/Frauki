@@ -743,9 +743,6 @@ Player.prototype.Hurting = function() {
 Player.prototype.AttackFront = function() {
     this.PlayAnim('attack_front');
 
-    var anim = this.animations.getAnimation('attack_front');
-    anim.delay = 1000 / (10 + (energyController.GetEnergyPercentage() * 8));
-
     if(this.Attacking()) {
         this.body.maxVelocity.x = PLAYER_ROLL_SPEED();
         this.body.acceleration.x *= 3;
