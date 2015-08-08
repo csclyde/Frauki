@@ -143,10 +143,12 @@ Enemy.prototype.update = function() {
     //if they are attacking and facing each other
     if(this.Attacking()) {
 
-        if((this.direction === 'left' && frauki.states.direction === 'right' && frauki.body.center.x < this.body.center.x) ||
-           (this.direction === 'right' && frauki.states.direction === 'left' && frauki.body.center.x > this.body.center.x) ) 
-        {
-            game.physics.arcade.overlap(this.attackRect, frauki.attackRect, ClashSwords);
+        if(this.timers.TimerUp('hit')) {
+            if((this.direction === 'left' && frauki.states.direction === 'right' && frauki.body.center.x < this.body.center.x) ||
+               (this.direction === 'right' && frauki.states.direction === 'left' && frauki.body.center.x > this.body.center.x) ) 
+            {
+                game.physics.arcade.overlap(this.attackRect, frauki.attackRect, ClashSwords);
+            }
         }
 
 
@@ -268,8 +270,6 @@ function ClashSwords(e, f) {
 
     e.timers.SetTimer('hit', 300);
     frauki.timers.SetTimer('frauki_hit', 300)
-
-    //console.log(e.body.velocity.x, e.body.velocity.y);
 };
 
 function EnemyAttackConnect(e, f) {
@@ -278,7 +278,7 @@ function EnemyAttackConnect(e, f) {
         frauki.Hit(e.owningEnemy, e.owningEnemy.currentAttack.damage);
     }
 
-}
+};
 
 
 //provide utility functions here that the specific enemies can all use

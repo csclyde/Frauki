@@ -81,7 +81,7 @@ Enemy.prototype.types['KR32'] =  function() {
 	};
 
 	this.Blocking = function() {
-		if(Math.abs(this.body.velocity.x < 30)) {
+		if(Math.abs(this.body.velocity.x) < 30) {
 			this.PlayAnim('walk_back');
 
 			if(this.direction === 'left') {

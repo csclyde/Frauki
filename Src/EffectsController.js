@@ -192,17 +192,18 @@ EffectsController.prototype.ParticleSpray = function(source, dest, color, dir, a
     var vel = new Phaser.Point(source.x - dest.x, source.y - dest.y);
     vel = vel.normalize();
 
-    vel.x *= 1750;
-    vel.y *= 1750;
-
-    var minVel = Phaser.Point.rotate(vel, 0, 0, 20, true);
-    var maxVel = Phaser.Point.rotate(vel, 0, 0, -20, true);
+    var minVel = Phaser.Point.rotate(vel.clone(), 0, 0, 20, true, 1);
+    var maxVel = Phaser.Point.rotate(vel.clone(), 0, 0, -20, true, 1);
+    
+    minVel.x *= 1750;
+    minVel.y *= 1750;
+    maxVel.x *= 1750;
+    maxVel.y *= 1750;
 
     effect.minParticleSpeed.x = minVel.x;
     effect.maxParticleSpeed.x = maxVel.x;
     effect.minParticleSpeed.y = minVel.y;
     effect.maxParticleSpeed.y = maxVel.y;
-
 
     effect.x = source.x || 0;
     effect.y = source.y || 0;
@@ -280,47 +281,6 @@ EffectsController.prototype.DiceEnemy = function(enemy, x, y) {
         game.time.events.add(2000, function() { p.destroy(); } );
     });
 
-    // var that = this;
-
-    // //clear previous pieces
-    // this.pieces.forEach(function(p) {
-    //     if(!!p) p.destroy();
-    // });
-
-    // this.pieces = [];
-
-    // var spr = game.add.sprite(0, 0, 'EnemySprites', enemy.animations.currentFrame.name);
-
-    // var bmd = game.add.bitmapData(enemy.animations.currentFrame.width, enemy.animations.currentFrame.height);
-    // bmd.draw(spr, enemy.body.offset.x, enemy.body.offset.y, enemy.animations.currentFrame.width, enemy.animations.currentFrame.height);
-    // bmd.update();
-    // var image = new Image();
-    // image.src = bmd.canvas.toDataURL();
-
-    // bmd = null;
-
-    // var shattered = new Shatter(image, game.rnd.between(2, 5));
-
-    // shattered.images.forEach(function(p, index) {
-
-    //     var key = 'shatter' + index;
-    //     game.cache.addImage(key, null, p.image);
-
-    //     var spr = game.add.sprite(x, y, key);
-    //     that.pieces.push(spr);
-    //     game.physics.enable(spr, Phaser.Physics.ARCADE);
-    //     spr.offsetX = -p.image.x;
-    //     spr.offsetY = -p.image.y;
-    //     spr.anchor.setTo(0.5, 0.5);
-
-    //     //randomly set the velocity, rotation, and lifespan
-    //     spr.body.velocity.x = game.rnd.between(-100, 100);
-    //     spr.body.velocity.y = game.rnd.between(-100, -300);
-    //     spr.body.angularVelocity = game.rnd.between(500, 1000);
-
-    //     game.time.events.add(2000, function() { spr.destroy(); spr = null; } );
-    // });
-
 };
 
 EffectsController.prototype.MakeHearts = function(amt) {
@@ -358,12 +318,6 @@ EffectsController.prototype.SlowHit = function(callback) {
     t.onComplete.add(callback)
     t.start();
 
-    // game.paused = true;
-
-    // setTimeout(function() {
-    //     game.paused = false;
-    //     if(!!callback) callback();
-    // }, 50);
 };
 
 EffectsController.prototype.ForceField = function() {
@@ -375,40 +329,41 @@ EffectsController.prototype.ForceField = function() {
 
 EffectsController.prototype.SparkSplash = function(posSrc, negSrc) {
 
-    var x = (posSrc.body.center.x + negSrc.body.center.x) / 2;
-    var y = (posSrc.body.center.y + negSrc.body.center.y) / 2;
+    var x = (posSrc.body.x + (posSrc.width / 2) + negSrc.body.x + (negSrc.width / 2)) / 2;
+    var y = (posSrc.body.y + (posSrc.height / 2) + negSrc.body.y + (negSrc.height / 2)) / 2;
 
     this.posSpark.x = x;
     this.posSpark.y = y;
     this.negSpark.x = x;
     this.negSpark.y = y;
 
-    var vel = new Phaser.Point(negSrc.body.center.x - posSrc.body.center.x, negSrc.body.center.y - posSrc.body.center.y);
+    var vel = new Phaser.Point(posSrc.body.center.x - negSrc.body.center.x, posSrc.body.center.y - negSrc.body.center.y);
     vel = vel.normalize();
 
-    vel.x *= 120;
-    vel.y *= 120;
-
-    var minVel = Phaser.Point.rotate(vel, 0, 0, 20, true);
-    var maxVel = Phaser.Point.rotate(vel, 0, 0, -20, true);
+    var minVel = Phaser.Point.rotate(vel.clone(), 0, 0, 20, true, 1);
+    var maxVel = Phaser.Point.rotate(vel.clone(), 0, 0, -20, true, 1);
+    
+    minVel.x *= 120;
+    minVel.y *= 120;
+    maxVel.x *= 120;
+    maxVel.y *= 120;
 
     this.posSpark.minParticleSpeed.x = minVel.x;
-    this.posSpark.maxParticleSpeed.x = maxVel.x;
     this.posSpark.minParticleSpeed.y = minVel.y;
+    this.posSpark.maxParticleSpeed.x = maxVel.x;
     this.posSpark.maxParticleSpeed.y = maxVel.y;
 
     this.posSpark.explode(500, 20);
 
-    vel.x *= -1;
-    vel.y *= -1;
+    minVel.x *= -1;
+    minVel.y *= -1;
+    maxVel.x *= -1;
+    maxVel.y *= -1;
 
-    var minVel = Phaser.Point.rotate(vel, 0, 0, 20, true);
-    var maxVel = Phaser.Point.rotate(vel, 0, 0, -20, true);
-
-    this.negSpark.minParticleSpeed.x = minVel.x;
-    this.negSpark.maxParticleSpeed.x = maxVel.x;
-    this.negSpark.minParticleSpeed.y = minVel.y;
-    this.negSpark.maxParticleSpeed.y = maxVel.y;
+    this.negSpark.minParticleSpeed.x = maxVel.x;
+    this.negSpark.maxParticleSpeed.x = minVel.x;
+    this.negSpark.minParticleSpeed.y = maxVel.y;
+    this.negSpark.maxParticleSpeed.y = minVel.y;
 
     this.negSpark.explode(500, 20);
 };
