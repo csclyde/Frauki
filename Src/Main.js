@@ -37,7 +37,7 @@ Main.update = function() {
 };
 
 Main.render = function() {
-    game.debug.body(frauki);
+    //game.debug.body(frauki);
     //game.debug.body(frauki.attackRect);
 
     // Frogland.objectGroup_3.forEach(function(o) {
@@ -45,9 +45,9 @@ Main.render = function() {
     //     if(!!o.attackRect) game.debug.body(o.attackRect);
     // });
 
-    Frogland.door1Group.forEach(function(o) {
-        game.debug.body(o);
-    });
+    // Frogland.door1Group.forEach(function(o) {
+    //     game.debug.body(o);
+    // });
 
     /*projectileController.projectiles.forEach(function(o) {
         game.debug.body(o);

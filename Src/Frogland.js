@@ -56,9 +56,9 @@ Frogland.Create = function() {
     this.map.createFromObjects('Doors_3', 67, 'Misc', 'Door0000', true, false, this.door3Group, Door, false);
 
     //make all the doors invisible
-    // this.door1Group.forEach(function(d) { d.alpha = 0; });
-    // this.door2Group.forEach(function(d) { d.alpha = 0; });
-    // this.door3Group.forEach(function(d) { d.alpha = 0; });
+    this.door1Group.forEach(function(d) { d.alpha = 0; });
+    this.door2Group.forEach(function(d) { d.alpha = 0; });
+    this.door3Group.forEach(function(d) { d.alpha = 0; });
 
     this.PreprocessTiles(4);
     this.PreprocessTiles(3);
