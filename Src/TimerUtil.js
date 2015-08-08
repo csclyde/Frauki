@@ -4,6 +4,12 @@ TimerUtil = function() {
 
 TimerUtil.prototype.SetTimer = function(name, duration, callback, callbackContext) {
 	//this.timers[name] = game.time.now + duration;
+
+	if(duration === 0) {
+		this.timers[name] = 'ready';
+		return;
+	}
+	
 	this.timers[name] = 'waiting';
 	game.time.events.add(duration, function() { this.timers[name] = 'ready'; }, this);
 }

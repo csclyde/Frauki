@@ -354,7 +354,7 @@ Frogland.CollideFraukiWithProjectile = function(f, p) {
 
     if(p.projType === 'tar' || p.projType === 'spore') {
         if(p.owningEnemy.state !== p.owningEnemy.Dying) {
-            frauki.Hit(f, p.owningEnemy);
+            frauki.Hit(p.owningEnemy, p.owningEnemy.damage);
         }
         
         p.destroy();

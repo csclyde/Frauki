@@ -6,7 +6,7 @@
         <key>texturePackerVersion</key>
         <string>3.9.1</string>
         <key>fileName</key>
-        <string>D:/gamedev/Frauki/Design/Sprites/Enemies/Enemies.tps</string>
+        <string>D:/gamedev/Frauki/Design/Sprites/Enemies/DeathPieces/DeathPieces.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -38,7 +38,7 @@
         <key>dataFormat</key>
         <string>json</string>
         <key>textureFileName</key>
-        <filename>../../../Data/Sprites/Enemies.png</filename>
+        <filename>../../../../Data/Sprites/DeathPieces.png</filename>
         <key>flipPVR</key>
         <false/>
         <key>pvrCompressionQuality</key>
@@ -72,7 +72,7 @@
             </struct>
         </struct>
         <key>shapePadding</key>
-        <uint>1</uint>
+        <uint>2</uint>
         <key>jpgQuality</key>
         <uint>80</uint>
         <key>pngOptimizationLevel</key>
@@ -84,7 +84,7 @@
         <key>textureFormat</key>
         <enum type="SettingsBase::TextureFormat">png</enum>
         <key>borderPadding</key>
-        <uint>1</uint>
+        <uint>2</uint>
         <key>maxTextureSize</key>
         <QSize>
             <key>width</key>
@@ -147,7 +147,7 @@
             <key>data</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>../../../Data/Sprites/Enemies.json</filename>
+                <filename>../../../../Data/Sprites/DeathPieces.json</filename>
             </struct>
         </map>
         <key>multiPack</key>
@@ -182,7 +182,7 @@
             <key>trimThreshold</key>
             <uint>1</uint>
             <key>trimMode</key>
-            <enum type="SpriteSettings::TrimMode">Trim</enum>
+            <enum type="SpriteSettings::TrimMode">Crop</enum>
             <key>heuristicMask</key>
             <false/>
             <key>pivotPoint</key>
@@ -190,15 +190,15 @@
         </struct>
         <key>fileList</key>
         <array>
-            <filename>Buzzar</filename>
             <filename>CreeperThistle</filename>
-            <filename>Insectoid</filename>
-            <filename>Sporoid</filename>
-            <filename>Haystax</filename>
-            <filename>Mask</filename>
             <filename>Fungu</filename>
+            <filename>Haystax</filename>
+            <filename>Insectoid</filename>
             <filename>KR32</filename>
+            <filename>Mask</filename>
+            <filename>Sporoid</filename>
             <filename>A3PZ</filename>
+            <filename>Buzzar</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

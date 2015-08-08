@@ -15,7 +15,8 @@ FileMap.Atlas = [
 	{ Name: 'Frauki', File: 'Data/Sprites/Frauki.json', Img: 'Data/Sprites/Frauki.png' },
 	{ Name: 'EnemySprites', File: 'Data/Sprites/Enemies.json', Img: 'Data/Sprites/Enemies.png' },
 	{ Name: 'Misc', File: 'Data/Sprites/Misc.json', Img: 'Data/Sprites/Misc.png' },
-	{ Name: 'UI', File: 'Data/Sprites/UI.json', Img: 'Data/Sprites/UI.png' }
+	{ Name: 'UI', File: 'Data/Sprites/UI.json', Img: 'Data/Sprites/UI.png' },
+	{ Name: 'DeathPieces', File: 'Data/Sprites/DeathPieces.json', Img: 'Data/Sprites/DeathPieces.png' }
 ];
 
 FileMap.Audio = [

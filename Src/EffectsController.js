@@ -256,46 +256,67 @@ EffectsController.prototype.Splash = function(tile) {
 
 EffectsController.prototype.DiceEnemy = function(enemy, x, y) {
 
-    var that = this;
+    var pieces = [];
 
-    //clear previous pieces
-    this.pieces.forEach(function(p) {
-        if(!!p) p.destroy();
-    });
+    var i = 0;
+    while(game.cache.getFrameData('DeathPieces').getFrameByName(enemy.enemyName + '/Dead000' + i)) {
+        pieces.push(game.add.sprite(x, y, 'DeathPieces', enemy.enemyName + '/Dead000' + i));
+        i++;
+    }
 
-    this.pieces = [];
+    pieces.forEach(function(p) {
+        game.physics.enable(p, Phaser.Physics.ARCADE);
 
-    var spr = game.add.sprite(0, 0, 'EnemySprites', enemy.animations.currentFrame.name);
-
-    var bmd = game.add.bitmapData(enemy.animations.currentFrame.width, enemy.animations.currentFrame.height);
-    bmd.draw(spr, enemy.body.offset.x, enemy.body.offset.y, enemy.animations.currentFrame.width, enemy.animations.currentFrame.height);
-    bmd.update();
-    var image = new Image();
-    image.src = bmd.canvas.toDataURL();
-
-    bmd = null;
-
-    var shattered = new Shatter(image, game.rnd.between(2, 5));
-
-    shattered.images.forEach(function(p, index) {
-
-        var key = 'shatter' + index;
-        game.cache.addImage(key, null, p.image);
-
-        var spr = game.add.sprite(x, y, key);
-        that.pieces.push(spr);
-        game.physics.enable(spr, Phaser.Physics.ARCADE);
-        spr.offsetX = -p.image.x;
-        spr.offsetY = -p.image.y;
-        spr.anchor.setTo(0.5, 0.5);
+        p.anchor.setTo(0.5, 0.5);
 
         //randomly set the velocity, rotation, and lifespan
-        spr.body.velocity.x = game.rnd.between(-100, 100);
-        spr.body.velocity.y = game.rnd.between(-100, -300);
-        spr.body.angularVelocity = game.rnd.between(500, 1000);
+        p.body.velocity.x = game.rnd.between(-100, 100);
+        p.body.velocity.y = game.rnd.between(-100, -600);
+        p.body.angularVelocity = game.rnd.between(500, 1500);
 
-        game.time.events.add(2000, function() { spr.destroy(); spr = null; } );
+        game.time.events.add(2000, function() { p.destroy(); } );
     });
+
+    // var that = this;
+
+    // //clear previous pieces
+    // this.pieces.forEach(function(p) {
+    //     if(!!p) p.destroy();
+    // });
+
+    // this.pieces = [];
+
+    // var spr = game.add.sprite(0, 0, 'EnemySprites', enemy.animations.currentFrame.name);
+
+    // var bmd = game.add.bitmapData(enemy.animations.currentFrame.width, enemy.animations.currentFrame.height);
+    // bmd.draw(spr, enemy.body.offset.x, enemy.body.offset.y, enemy.animations.currentFrame.width, enemy.animations.currentFrame.height);
+    // bmd.update();
+    // var image = new Image();
+    // image.src = bmd.canvas.toDataURL();
+
+    // bmd = null;
+
+    // var shattered = new Shatter(image, game.rnd.between(2, 5));
+
+    // shattered.images.forEach(function(p, index) {
+
+    //     var key = 'shatter' + index;
+    //     game.cache.addImage(key, null, p.image);
+
+    //     var spr = game.add.sprite(x, y, key);
+    //     that.pieces.push(spr);
+    //     game.physics.enable(spr, Phaser.Physics.ARCADE);
+    //     spr.offsetX = -p.image.x;
+    //     spr.offsetY = -p.image.y;
+    //     spr.anchor.setTo(0.5, 0.5);
+
+    //     //randomly set the velocity, rotation, and lifespan
+    //     spr.body.velocity.x = game.rnd.between(-100, 100);
+    //     spr.body.velocity.y = game.rnd.between(-100, -300);
+    //     spr.body.angularVelocity = game.rnd.between(500, 1000);
+
+    //     game.time.events.add(2000, function() { spr.destroy(); spr = null; } );
+    // });
 
 };
 
