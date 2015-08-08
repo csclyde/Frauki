@@ -14,7 +14,6 @@ FileMap.Images = [
 FileMap.Atlas = [
 	{ Name: 'Frauki', File: 'Data/Sprites/Frauki.json', Img: 'Data/Sprites/Frauki.png' },
 	{ Name: 'EnemySprites', File: 'Data/Sprites/Enemies.json', Img: 'Data/Sprites/Enemies.png' },
-	{ Name: 'Door', File: 'Data/Sprites/Doors.json', Img: 'Data/Sprites/Doors.png' },
 	{ Name: 'Misc', File: 'Data/Sprites/Misc.json', Img: 'Data/Sprites/Misc.png' },
 	{ Name: 'UI', File: 'Data/Sprites/UI.json', Img: 'Data/Sprites/UI.png' }
 ];

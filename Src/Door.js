@@ -6,8 +6,10 @@ Door = function(game, x, y, name) {
     //enable its physics body
     game.physics.enable(this, Phaser.Physics.ARCADE);
     
-    this.body.setSize(32, 70, 0, 0);
+    this.body.setSize(16, 16, -4, 0);
     this.anchor.setTo(0.5, 0.5);
+
+    this.x += 16;
     
     this.SetDirection('left');
 
@@ -18,7 +20,7 @@ Door = function(game, x, y, name) {
     this.visible = false;
 
     this.animations.add('closed', ['Door0000'], 10, true, false);
-
+    this.animations.add('fgrandad', ['Door0000'], 10, true, false);
 };
 
 Door.prototype = Object.create(Phaser.Sprite.prototype);

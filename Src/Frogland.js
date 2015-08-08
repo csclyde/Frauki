@@ -51,14 +51,14 @@ Frogland.Create = function() {
     this.door2Group = game.add.group();
     this.door3Group = game.add.group();
 
-    this.map.createFromObjects('Doors_1', 67, 'Door', 'Door0000', true, false, this.door1Group, Door, false);
-    this.map.createFromObjects('Doors_2', 67, 'Door', 'Door0000', true, false, this.door2Group, Door, false);
-    this.map.createFromObjects('Doors_3', 67, 'Door', 'Door0000', true, false, this.door3Group, Door, false);
+    this.map.createFromObjects('Doors_1', 67, 'Misc', 'Door0000', true, false, this.door1Group, Door, false);
+    this.map.createFromObjects('Doors_2', 67, 'Misc', 'Door0000', true, false, this.door2Group, Door, false);
+    this.map.createFromObjects('Doors_3', 67, 'Misc', 'Door0000', true, false, this.door3Group, Door, false);
 
     //make all the doors invisible
-    this.door1Group.forEach(function(d) { d.alpha = 0; });
-    this.door2Group.forEach(function(d) { d.alpha = 0; });
-    this.door3Group.forEach(function(d) { d.alpha = 0; });
+    // this.door1Group.forEach(function(d) { d.alpha = 0; });
+    // this.door2Group.forEach(function(d) { d.alpha = 0; });
+    // this.door3Group.forEach(function(d) { d.alpha = 0; });
 
     this.PreprocessTiles(4);
     this.PreprocessTiles(3);
@@ -139,7 +139,7 @@ Frogland.CreateObjectsLayer = function(layer) {
     this.map.createFromObjects('Objects_' + layer, 68, 'Misc', 'EnergyBitPos0000', true, false, this[currLayer], EnergyNugg, false);
 
     //create the doors
-    this.map.createFromObjects('Objects_' + layer, 67, 'Door', 'Door0000', true, false, this[currLayer], Door, false)
+    this.map.createFromObjects('Objects_' + layer, 67, 'Misc', 'Door0000', true, false, this[currLayer], Door, false)
 
     //inform each enemy of its own layer
     this[currLayer].forEach(function(obj) {

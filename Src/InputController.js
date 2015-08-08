@@ -30,6 +30,11 @@ InputController = function() {
     this.roll.onDown.add(function() { events.publish('player_roll', {}); }, this);
 
     this.up.onDown.add(function() { 
+
+        if(!frauki.body.onFloor()) {
+            return;
+        }
+        
         //switch between layers if they are in a doorway
         if(game.physics.arcade.overlap(frauki, Frogland.door1Group)) {
             if(Frogland.currentLayer === 3) Frogland.ChangeLayer(2);
