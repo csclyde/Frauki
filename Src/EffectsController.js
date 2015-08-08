@@ -195,10 +195,13 @@ EffectsController.prototype.ParticleSpray = function(source, dest, color, dir, a
     vel.x *= 1750;
     vel.y *= 1750;
 
-    effect.minParticleSpeed.x = vel.x;
-    effect.maxParticleSpeed.x = vel.x;
-    effect.minParticleSpeed.y = vel.y;
-    effect.maxParticleSpeed.y = vel.y;
+    var minVel = Phaser.Point.rotate(vel, 0, 0, 20, true);
+    var maxVel = Phaser.Point.rotate(vel, 0, 0, -20, true);
+
+    effect.minParticleSpeed.x = minVel.x;
+    effect.maxParticleSpeed.x = maxVel.x;
+    effect.minParticleSpeed.y = minVel.y;
+    effect.maxParticleSpeed.y = maxVel.y;
 
 
     effect.x = source.x || 0;
@@ -386,42 +389,26 @@ EffectsController.prototype.SparkSplash = function(posSrc, negSrc) {
     vel.x *= 120;
     vel.y *= 120;
 
-    if(vel.x < 0) {
-        this.posSpark.minParticleSpeed.x = vel.x + 25;
-        this.posSpark.maxParticleSpeed.x = vel.x - 25;
-    } else {
-        this.posSpark.minParticleSpeed.x = vel.x - 25;
-        this.posSpark.maxParticleSpeed.x = vel.x + 25;
-    }
+    var minVel = Phaser.Point.rotate(vel, 0, 0, 20, true);
+    var maxVel = Phaser.Point.rotate(vel, 0, 0, -20, true);
 
-    if(vel.y < 0) {
-        this.posSpark.minParticleSpeed.y = vel.y + 25;
-        this.posSpark.maxParticleSpeed.y = vel.y - 25;
-    } else {
-        this.posSpark.minParticleSpeed.y = vel.y - 25;
-        this.posSpark.maxParticleSpeed.y = vel.y + 25;
-    }
+    this.posSpark.minParticleSpeed.x = minVel.x;
+    this.posSpark.maxParticleSpeed.x = maxVel.x;
+    this.posSpark.minParticleSpeed.y = minVel.y;
+    this.posSpark.maxParticleSpeed.y = maxVel.y;
 
-    this.posSpark.explode(500, 35);
+    this.posSpark.explode(500, 20);
 
     vel.x *= -1;
     vel.y *= -1;
 
-    if(vel.x < 0) {
-        this.negSpark.minParticleSpeed.x = vel.x + 25;
-        this.negSpark.maxParticleSpeed.x = vel.x - 25;
-    } else {
-        this.negSpark.minParticleSpeed.x = vel.x - 25;
-        this.negSpark.maxParticleSpeed.x = vel.x + 25;
-    }
+    var minVel = Phaser.Point.rotate(vel, 0, 0, 20, true);
+    var maxVel = Phaser.Point.rotate(vel, 0, 0, -20, true);
 
-    if(vel.y < 0) {
-        this.negSpark.minParticleSpeed.y = vel.y + 25;
-        this.negSpark.maxParticleSpeed.y = vel.y - 25;
-    } else {
-        this.negSpark.minParticleSpeed.y = vel.y - 25;
-        this.negSpark.maxParticleSpeed.y = vel.y + 25;
-    }
+    this.negSpark.minParticleSpeed.x = minVel.x;
+    this.negSpark.maxParticleSpeed.x = maxVel.x;
+    this.negSpark.minParticleSpeed.y = minVel.y;
+    this.negSpark.maxParticleSpeed.y = maxVel.y;
 
-    this.negSpark.explode(500, 35);
+    this.negSpark.explode(500, 20);
 };
