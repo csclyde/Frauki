@@ -290,7 +290,7 @@
 },
 "CreeperThistle/CreeperThistle0002":
 {
-	"frame": {"x":1568,"y":32,"w":37,"h":30},
+	"frame": {"x":1567,"y":32,"w":37,"h":30},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":4,"y":3,"w":37,"h":30},
@@ -488,16 +488,16 @@
 },
 "KR32/Attack0005":
 {
-	"frame": {"x":1384,"y":1,"w":110,"h":63},
+	"frame": {"x":1384,"y":1,"w":109,"h":63},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":59,"y":65,"w":110,"h":63},
+	"spriteSourceSize": {"x":59,"y":65,"w":109,"h":63},
 	"sourceSize": {"w":200,"h":200},
 	"pivot": {"x":0.5,"y":0.5}
 },
 "KR32/Attack0006":
 {
-	"frame": {"x":1495,"y":1,"w":72,"h":63},
+	"frame": {"x":1494,"y":1,"w":72,"h":63},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":59,"y":65,"w":72,"h":63},
@@ -644,8 +644,8 @@
 	"version": "1.0",
 	"image": "Enemies.png",
 	"format": "RGBA8888",
-	"size": {"w":1636,"h":128},
+	"size": {"w":1635,"h":128},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:1a2ba9c02f0dfa38efe7e641a41046b2:c544a522b362cbfcdf480950f6804ccc:b1585ba32d60cf5440f3fdffe8c37c76$"
+	"smartupdate": "$TexturePacker:SmartUpdate:f9837aa8e0e038a61c0c14e82761ab9d:d9166841cf21651ad218e0d151912dcc:b1585ba32d60cf5440f3fdffe8c37c76$"
 }
 }
