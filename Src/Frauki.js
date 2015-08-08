@@ -72,14 +72,7 @@ Player = function (game, x, y, name) {
 
         //this allows an inverted seaquence of inputs for the jump slash
         if(this.state === this.AttackFront && this.body.onFloor() === false && !this.timers.TimerUp('updash_timer')) {
-            if(energyController.UseEnergy(6)) {
-                this.state = this.AttackJump;
-                this.movement.jumpSlashVelocity = -(PLAYER_JUMP_SLASH_SPEED());
-                game.add.tween(this.movement).to({jumpSlashVelocity:0}, 400, Phaser.Easing.Quartic.Out, true);
-                this.states.hasFlipped = true;
-        
-                events.publish('play_sound', {name: 'attack_slash', restart: true });
-            }
+            this.JumpSlash();
         }
 
     }, this);
@@ -391,8 +384,11 @@ Player.prototype.Jump = function(params) {
             }
         }
     } else if(this.body.velocity.y < 0 && this.state !== this.Flipping) {
-        if(this.body.velocity.y < 0)
-            this.tweens.stopJump = game.add.tween(this.body.velocity).to({y: 0}, 100, Phaser.Easing.Exponential.In, true);
+        if(this.body.velocity.y < 0) {
+            //this.tweens.stopJump = game.add.tween(this.body.velocity).to({y: 0}, 100, Phaser.Easing.Exponential.In, true);
+            this.body.velocity.y /= 2;
+        }
+
     }
 };
 
@@ -402,11 +398,7 @@ Player.prototype.Crouch = function(params) {
     this.timers.SetTimer('frauki_dash', 200);
 
     if(this.state === this.AttackFront && this.body.onFloor() === false && !this.timers.TimerUp('smash_timer')) {
-        if(energyController.UseEnergy(6)) {
-            this.state = this.AttackDiveCharge;
-            this.movement.diveVelocity = 950;
-            events.publish('play_sound', {name: 'attack_dive_charge', restart: true });
-        }
+        this.DiveSlash();
     }
 };
 
@@ -417,56 +409,73 @@ Player.prototype.Slash = function(params) {
 
     //diving dash
     if(!this.timers.TimerUp('frauki_dash') && this.states.crouching && (this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling)) {
-        if(energyController.UseEnergy(6)) {
-            this.state = this.AttackDiveCharge;
-            this.movement.diveVelocity = 950;
-            events.publish('play_sound', {name: 'attack_dive_charge', restart: true });
-        }
+        this.DiveSlash();
     }
     //running dash
     else if(this.state === this.Rolling || this.state === this.Kicking) {
-        if(energyController.UseEnergy(6)) {
-            this.state = this.AttackStab;
-    
-            var dir = this.GetDirectionMultiplier();
-            
-            this.movement.rollVelocity = 0;
-            this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: dir * PLAYER_RUN_SLASH_SPEED()}, 300, Phaser.Easing.Exponential.InOut, false).to({rollVelocity: 0}, 500, Phaser.Easing.Exponential.InOut, false);
-            this.tweens.roll.start();
-
-            events.publish('play_sound', {name: 'attack_stab', restart: true });
-            
-        }
+        this.StabSlash();
     }
     //upwards dash attack
     else if(this.states.upPressed && (this.state === this.Peaking || this.state === this.Jumping) && this.states.hasFlipped === false) {
-        if(energyController.UseEnergy(6)) {
-            this.state = this.AttackJump;
-            this.movement.jumpSlashVelocity = -(PLAYER_JUMP_SLASH_SPEED());
-            game.add.tween(this.movement).to({jumpSlashVelocity:0}, 400, Phaser.Easing.Quartic.Out, true);
-            this.states.hasFlipped = true;
-    
-            events.publish('play_sound', {name: 'attack_slash', restart: true });
-        }
+        this.JumpSlash();
     }
     //normal slashes while standing or running
     else if(this.state === this.Standing || this.state === this.Landing || this.state === this.AttackStab || this.state === this.Running || this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling || this.state === this.Flipping || this.state === this.Crouching) {
-        if(energyController.UseEnergy(5)) {
-            if(this.states.upPressed) {
-                this.state = this.AttackOverhead;
-            } else {
-                this.state = this.AttackFront;
-            }
-
-            events.publish('play_sound', {name: 'attack_slash', restart: true });
-        }
-    } else {
+        this.FrontSlash();
+    } 
+    else {
         console.log('An attack was attempted in an unresolved state ', this.state);
     }
 
     this.timers.SetTimer('frauki_slash', 400 * (1 / energyController.GetEnergyPercentage()));
     this.timers.SetTimer('smash_timer', 200);
     this.timers.SetTimer('updash_timer', 200);
+};
+
+Player.prototype.FrontSlash = function() {
+    if(energyController.UseEnergy(5)) {
+        if(this.states.upPressed) {
+            this.state = this.AttackOverhead;
+        } else {
+            this.state = this.AttackFront;
+        }
+
+        events.publish('play_sound', {name: 'attack_slash', restart: true });
+    }
+};
+
+Player.prototype.DiveSlash = function() {
+    if(energyController.UseEnergy(6)) {
+        this.state = this.AttackDiveCharge;
+        this.movement.diveVelocity = 950;
+        events.publish('play_sound', {name: 'attack_dive_charge', restart: true });
+    }
+};
+
+Player.prototype.JumpSlash = function() {
+    if(energyController.UseEnergy(6)) {
+        this.state = this.AttackJump;
+        
+        this.body.velocity.y = -2000;
+        this.states.hasFlipped = true;
+
+        events.publish('play_sound', {name: 'attack_slash', restart: true });
+    }
+};
+
+Player.prototype.StabSlash = function() {
+    if(energyController.UseEnergy(6)) {
+        this.state = this.AttackStab;
+
+        var dir = this.GetDirectionMultiplier();
+        
+        this.movement.rollVelocity = 0;
+        this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: dir * PLAYER_RUN_SLASH_SPEED()}, 300, Phaser.Easing.Exponential.InOut, false).to({rollVelocity: 0}, 500, Phaser.Easing.Exponential.InOut, false);
+        this.tweens.roll.start();
+
+        events.publish('play_sound', {name: 'attack_stab', restart: true });
+        
+    }
 };
 
 Player.prototype.Roll = function(params) {
@@ -766,9 +775,6 @@ Player.prototype.AttackFront = function() {
 Player.prototype.AttackOverhead = function() {
     this.PlayAnim('attack_overhead');
 
-    var anim = this.animations.getAnimation('attack_overhead');
-    anim.delay = 1000 / (10 + (energyController.GetEnergyPercentage() * 8));
-
     if(this.body.onFloor()) {
         this.body.velocity.x /= 2;
     }
@@ -878,13 +884,14 @@ Player.prototype.AttackDiveLand = function() {
 Player.prototype.AttackJump = function() {
     this.PlayAnim('attack_overhead');
 
-    var anim = this.animations.getAnimation('attack_overhead');
-    anim.delay = 1000 / (10 + (energyController.GetEnergyPercentage() * 8));
+    //this.body.velocity.x /= 1.01;
 
-    this.body.velocity.x /= 1.1;
+    if(this.body.velocity.y < 0) {
+        this.body.gravity.y = game.physics.arcade.gravity.y * 1.5;
+    }
 
-    if(this.movement.jumpSlashVelocity !== 0)
-        this.body.velocity.y = this.movement.jumpSlashVelocity;
+    // if(this.movement.jumpSlashVelocity !== 0)
+    //     this.body.velocity.y = this.movement.jumpSlashVelocity;
 
     if(this.animations.currentAnim.isFinished) {
         this.state = this.Jumping;
@@ -908,4 +915,4 @@ Player.prototype.Kicking = function() {
             this.state = this.Jumping;
         }
     }
-}
+};
