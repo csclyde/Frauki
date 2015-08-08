@@ -37,6 +37,8 @@ EnergyNugg.prototype.create = function() {
 };
 
 EnergyNugg.prototype.update = function() {
+    if(!this.body.enable)
+        return;
 
     if(!!this.state)
         this.state();

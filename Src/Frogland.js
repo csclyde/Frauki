@@ -97,13 +97,32 @@ Frogland.Update = function() {
     frauki.states.flowUp = false;
     frauki.states.flowLeft = false;
 
+    this.GetCurrentObjectGroup().forEach(function(o) {
+        var padding = 20;
+
+        if(o.spriteType !== 'enemy') {
+
+            if(o.body.x > game.camera.x - padding &&
+               o.body.y > game.camera.y - padding &&
+               o.body.x < game.camera.x + game.camera.width + padding &&
+               o.body.y < game.camera.y + game.camera.height + padding) {
+                o.body.enable = true;
+            } else {
+                o.body.enable = false;
+            }
+        }
+
+    });
+
     game.physics.arcade.collide(frauki, this.GetCurrentCollisionLayer(), null, this.CheckEnvironmentalCollisions);
     //game.physics.arcade.collide(this.NPCs, this.GetCurrentCollisionLayer());
     game.physics.arcade.collide(frauki, this.GetCurrentObjectGroup(), this.CollideFraukiWithObject, this.OverlapFraukiWithObject);
     game.physics.arcade.collide(this.GetCurrentObjectGroup(), this.GetCurrentCollisionLayer());
-    game.physics.arcade.collide(this.GetCurrentObjectGroup(), this.GetCurrentObjectGroup(), null, this.OverlapEnemiesWithSelf);
+    //game.physics.arcade.collide(this.GetCurrentObjectGroup(), this.GetCurrentObjectGroup(), null, this.OverlapEnemiesWithSelf);
 
-    game.physics.arcade.overlap(frauki, projectileController.projectiles, this.CollideFraukiWithProjectile);
+    if(projectileController.projectiles.countLiving() > 0) {
+        game.physics.arcade.overlap(frauki, projectileController.projectiles, this.CollideFraukiWithProjectile);
+    }
 
     this.plx1.cameraOffset.x = -(game.camera.x * 0.45) + 280;
     this.plx1.cameraOffset.y = -(game.camera.y * 0.30) + 220;

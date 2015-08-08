@@ -18,21 +18,6 @@ Enemy.prototype.types['Sporoid'] =  function() {
     this.weight = 0.3;
     this.damage = 3;
 
-    this.Spore = game.add.emitter(0, 0, 100);
-	this.Spore.makeParticles('Misc', 'spore0000');
-    this.Spore.gravity = -775;
-    this.Spore.visible = false;
-
-    this.Spore.maxParticleScale = 0.4;
-    this.Spore.minParticleScale = 0.1;
-
-    this.Spore.minParticleSpeed.y = -20;
-    this.Spore.maxParticleSpeed.y = 20;
-
-    this.Spore.maxParticleSpeed.x = 20;
-    this.Spore.minParticleSpeed.x = -20;
-    this.Spore.start(false, 5000, 400);
-
 	this.updateFunction = function() {
 
 		//get the alignment right
@@ -53,11 +38,11 @@ Enemy.prototype.types['Sporoid'] =  function() {
 	};
 
 	this.Activate = function() {
-		this.Spore.visible = true;
+		
 	};
 
 	this.Deactivate = function() {
-		this.Spore.visible = false;
+		
 	};
 
 	///////////////////////////////ACTIONS////////////////////////////////////
@@ -95,11 +80,11 @@ Enemy.prototype.types['Sporoid'] =  function() {
 
 	this.Reset = function() {
 		this.state = this.Idling;
-		this.Spore.start(false, 5000, 400);
+		
 	};
 
 	this.Die = function() {
-		this.Spore.destroy(true, true);
+		
 	}
 
 	////////////////////////////////STATES////////////////////////////////////
@@ -108,9 +93,6 @@ Enemy.prototype.types['Sporoid'] =  function() {
 		
 		this.body.velocity.y = Math.sin(game.time.now / 300) * 50 + (Math.random() * 40 - 20);
 		this.body.velocity.x = Math.sin(game.time.now / 1000) * 20;
-
-		this.Spore.x = this.body.center.x;
-		this.Spore.y = this.body.center.y;
 
 		if(this.PlayerIsVisible() && this.timers.TimerUp('shoot')) {
 			this.Shoot();

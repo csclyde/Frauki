@@ -165,7 +165,7 @@ Enemy.prototype.Attacking = function() {
 };
 
 Enemy.prototype.WithinCameraRange = function() {
-    var padding = 200;
+    var padding = 20;
 
     if(this.body.x > game.camera.x - padding &&
        this.body.y > game.camera.y - padding &&

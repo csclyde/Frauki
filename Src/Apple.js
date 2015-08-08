@@ -28,7 +28,9 @@ Apple.prototype.create = function() {
 };
 
 Apple.prototype.update = function() {
-
+    if(!this.body.enable)
+        return;
+    
     if(!!this.state)
         this.state();
 };

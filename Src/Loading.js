@@ -53,12 +53,12 @@ Loading.preload = function() {
 
 Loading.create = function() {
 
-    //game.add.plugin(Phaser.Plugin.Debug);
+    game.add.plugin(Phaser.Plugin.Debug);
 
     game.physics.startSystem(Phaser.Physics.ARCADE);
     game.physics.arcade.gravity.y = 800;
 
-    game.time.desiredFps = 60;
+    //game.time.desiredFps = 60;
 
     game.state.start('Main');
 };
