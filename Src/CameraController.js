@@ -3,9 +3,6 @@ Y_VEL_DIV = 10;
 
 CameraController = function() {
 
-	game.camera.bounds = null;//Phaser.Rectangle.inflate(game.camera.bounds, pixel.width * pixel.scale, 0);
-	//game.camera.bounds.inflate()
-
 	this.camX = 0;
 	this.camY = 0;
 
