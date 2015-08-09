@@ -28,8 +28,6 @@ Frogland.Create = function() {
     this.backgroundLayer_2 = this.map.createLayer('Background_2');
     this.backgroundLayer_2.visible = +this.map.properties.startLayer === 2;
 
-    this.CreateNPCs();
-
     frauki = new Player(game, this.map.properties.startX * 16, this.map.properties.startY * 16, 'Frauki');
     game.add.existing(frauki);
 
@@ -266,7 +264,7 @@ Frogland.PreprocessTiles = function(layer) {
            
     }, this, 0, 0, this.map.width, this.map.height, 'Collision_' + layer);
 
-    var waterTiles = [383, 384, 385, 386, 387, 388, 548, 549, 550, 580, 581, 582, 612, 613, 614]; 
+    var waterTiles = [383, 384, 385, 386, 387, 388, 548, 549, 550, 580, 581, 582, 612, 613, 614, 577, 578, 579]; 
     var draftTiles = [545, 546, 547];
 
     this.map.forEach(function(tile) {
@@ -496,22 +494,25 @@ Frogland.AnimateTiles = function() {
     viewBottom = Math.ceil((game.camera.height / 16));
 
     if(viewLeft < 0) viewLeft = 0;
-    if(viewLeft > 110) viewLeft = 110;
+    if(viewLeft > 155) viewLeft = 155;
     if(viewTop < 0) viewTop = 0;
 
     // if(viewLeft < 0) viewLeft = 0;
     // if(viewTop < 0) viewTop = 0;
 
     var animatedTiles = [
-        [383, 384, 385],
-        [386, 387, 388],
-        [545, 546, 547],
-        [548, 549, 550],
-        [580, 581, 582],
-        [612, 613, 614]
+        [383, 384, 385], //surface
+        [386, 387, 388], //water
+        [545, 546, 547], //air vent
+        [548, 549, 550], //left flow
+        [577, 578, 579], //big splashers
+        [580, 581, 582], //right flow
+        [612, 613, 614]  //down flow
     ];
 
     this.map.forEach(function(tile) {
+
+        //console.log('found animated tile');
 
         for(var i = 0; i < animatedTiles.length; i++) {
             if(tile.index === animatedTiles[i][0]) tile.index = 999;
@@ -522,45 +523,3 @@ Frogland.AnimateTiles = function() {
            
     }, this, viewLeft, viewTop, viewRight, viewBottom, 'Foreground_' + Frogland.currentLayer); 
 };
-
-function TilesHit(f, t) {
-    if(t.index === 7) {
-        Frogland.DislodgeTile(t);
-    }
-};
-
-Frogland.CreateNPCs = function() {
-    // this.NPCs = [];
-
-    // irena = game.add.sprite(156 * 16, 53 * 16, 'EnemySprites', 'NPCs/Irena');
-    // game.physics.enable(irena, Phaser.Physics.ARCADE);
-
-    // irena.body.setSize(11, 50, 0, 5);
-
-    // this.NPCs.push(irena);
-
-
-    // cool = game.add.sprite(194 * 16, 55 * 16, 'EnemySprites', 'NPCs/Cool Frog');
-    // game.physics.enable(cool, Phaser.Physics.ARCADE);
-
-    // cool.body.setSize(11, 50, 0, 5);
-
-    // this.NPCs.push(cool);
-
-
-    // dapper = game.add.sprite(123 * 16, 57 * 16, 'EnemySprites', 'NPCs/Dapper Frog');
-    // game.physics.enable(dapper, Phaser.Physics.ARCADE);
-
-    // dapper.body.setSize(11, 50, 0, 19);
-    // dapper.scale.x = -1;
-
-    // this.NPCs.push(dapper);
-
-
-    // biggie = game.add.sprite(105 * 16, 41 * 16, 'EnemySprites', 'NPCs/Big Frog');
-    // game.physics.enable(biggie, Phaser.Physics.ARCADE);
-
-    // biggie.body.setSize(11, 50, 0, 25);
-
-    // this.NPCs.push(biggie);
-}

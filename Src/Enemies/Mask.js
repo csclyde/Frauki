@@ -6,7 +6,7 @@ Enemy.prototype.types['Mask'] =  function() {
     this.animations.add('idle', ['Mask/Mask0000'], 10, true, false);
     this.animations.add('shit', ['Hop0000'], 10, true, false);
 
-    this.energy = 4;
+    this.energy = 2;
     /*
     this.weight = 0.5;
     this.damage = 5;

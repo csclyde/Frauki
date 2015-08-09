@@ -90,7 +90,6 @@ InputController = function() {
             Main.gamepadIcon.visible = false;
         },
         onDown: function(buttonCode, value){
-            console.log('gamepad button down', buttonCode, value);
 
             switch(buttonCode) {
                 case 0:
@@ -128,7 +127,6 @@ InputController = function() {
             }
         },
         onUp: function(buttonCode, value){
-            console.log('gamepad button up', buttonCode, value);
             
             switch(buttonCode) {
                 case 0:

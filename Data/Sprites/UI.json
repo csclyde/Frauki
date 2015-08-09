@@ -2,7 +2,7 @@
 
 "EnergyBar0000":
 {
-	"frame": {"x":2,"y":66,"w":98,"h":13},
+	"frame": {"x":2,"y":2,"w":98,"h":13},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":1,"y":1,"w":98,"h":13},
@@ -11,7 +11,7 @@
 },
 "EnergyBar0001":
 {
-	"frame": {"x":102,"y":66,"w":94,"h":9},
+	"frame": {"x":2,"y":17,"w":94,"h":9},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":3,"y":15,"w":94,"h":9},
@@ -20,7 +20,7 @@
 },
 "EnergyBar0002":
 {
-	"frame": {"x":238,"y":24,"w":5,"h":17},
+	"frame": {"x":358,"y":2,"w":5,"h":17},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":43,"y":9,"w":5,"h":17},
@@ -29,7 +29,7 @@
 },
 "EnergyBar0003":
 {
-	"frame": {"x":154,"y":2,"w":94,"h":9},
+	"frame": {"x":98,"y":17,"w":94,"h":9},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":3,"y":15,"w":94,"h":9},
@@ -38,25 +38,16 @@
 },
 "EnergyBar0004":
 {
-	"frame": {"x":154,"y":13,"w":94,"h":9},
+	"frame": {"x":102,"y":2,"w":94,"h":9},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":3,"y":15,"w":94,"h":9},
 	"sourceSize": {"w":94,"h":9},
 	"pivot": {"x":0.5,"y":0.555556}
 },
-"Gamepad0000":
-{
-	"frame": {"x":2,"y":2,"w":150,"h":62},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":7,"y":14,"w":150,"h":62},
-	"sourceSize": {"w":150,"h":62},
-	"pivot": {"x":0.5,"y":0.580645}
-},
 "Gamepad0001":
 {
-	"frame": {"x":154,"y":52,"w":22,"h":9},
+	"frame": {"x":194,"y":13,"w":22,"h":9},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":2,"w":22,"h":9},
@@ -65,7 +56,7 @@
 },
 "Upgrades0000":
 {
-	"frame": {"x":154,"y":24,"w":26,"h":26},
+	"frame": {"x":218,"y":2,"w":26,"h":26},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":6,"y":6,"w":26,"h":26},
@@ -74,7 +65,7 @@
 },
 "Upgrades0001":
 {
-	"frame": {"x":182,"y":24,"w":26,"h":26},
+	"frame": {"x":246,"y":2,"w":26,"h":26},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":6,"y":6,"w":26,"h":26},
@@ -83,7 +74,7 @@
 },
 "Upgrades0002":
 {
-	"frame": {"x":198,"y":52,"w":26,"h":26},
+	"frame": {"x":274,"y":2,"w":26,"h":26},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":6,"y":6,"w":26,"h":26},
@@ -92,7 +83,7 @@
 },
 "Upgrades0003":
 {
-	"frame": {"x":210,"y":24,"w":26,"h":26},
+	"frame": {"x":302,"y":2,"w":26,"h":26},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":6,"y":6,"w":26,"h":26},
@@ -101,7 +92,7 @@
 },
 "Upgrades0004":
 {
-	"frame": {"x":226,"y":52,"w":26,"h":26},
+	"frame": {"x":330,"y":2,"w":26,"h":26},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":6,"y":6,"w":26,"h":26},
@@ -113,8 +104,8 @@
 	"version": "1.0",
 	"image": "UI.png",
 	"format": "RGBA8888",
-	"size": {"w":255,"h":81},
+	"size": {"w":365,"h":30},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:77ce753e47d43da7b21480000915af51:60547ac2c3b166dd554c6fa2002ba7cf:4b774b923918ecd961888279dba3ffad$"
+	"smartupdate": "$TexturePacker:SmartUpdate:86e386d0161b276cc1d27f91a80804b1:964cad5b885e69253b049abf63b83269:4b774b923918ecd961888279dba3ffad$"
 }
 }
