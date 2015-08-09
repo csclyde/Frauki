@@ -19,6 +19,10 @@ Main.create = function() {
     energyController.Create();
     effectsController = new EffectsController();
     projectileController = new ProjectileController();
+
+    this.gamepadIcon = game.add.image(150, 150, 'UI', 'Gamepad0001');
+    this.gamepadIcon.fixedToCamera = true;
+    this.gamepadIcon.alpha = 0.5;
 };
 
 Main.update = function() {
@@ -33,6 +37,9 @@ Main.update = function() {
     energyController.UpdateEnergy();
     projectileController.Update();
     triggerController.Update(Frogland.currentLayer);
+
+    this.gamepadIcon.cameraOffset.x = Math.round(pixel.width * 0.27 + cameraController.camX / pixel.scale);
+    this.gamepadIcon.cameraOffset.y = Math.round(pixel.height * 0.3 + cameraController.camY / pixel.scale) + 240;
 
 };
 

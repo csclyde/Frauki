@@ -200,6 +200,8 @@
             <filename>Frames/EnergyBar0001.png</filename>
             <filename>Frames/EnergyBar0004.png</filename>
             <filename>Frames/EnergyBar0003.png</filename>
+            <filename>Frames/Gamepad0000.png</filename>
+            <filename>Frames/Gamepad0001.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

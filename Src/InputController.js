@@ -1,6 +1,20 @@
 InputController = function() {
     this.timers = new TimerUtil();
 
+    this.dpad = {};
+    this.dpad.up = false;
+    this.dpad.down = false;
+    this.dpad.left = false;
+    this.dpad.right = false;
+
+    events.subscribe('player_run', function(params) { 
+        if(params.dir === 'left') { inputController.dpad.left = params.run; }
+        if(params.dir === 'right') { inputController.dpad.right = params.run; }
+    });
+
+    events.subscribe('control_up', function(params) { inputController.dpad.up = params.pressed; } );
+    events.subscribe('player_crouch', function(params) { inputController.dpad.down = params.crouch; } );
+
 	this.jump 		= game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 	this.up 		= game.input.keyboard.addKey(Phaser.Keyboard.UP);
 	this.crouch 	= game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
@@ -65,32 +79,98 @@ InputController = function() {
     game.input.gamepad.addCallbacks(this, {
         onConnect: function(){
             console.log('gamepad connected');
-            console.log(game.input.gamepad.pad2)
         },
         onDisconnect: function(){
-            
+            console.log('gamepad disconnected');
         },
         onDown: function(buttonCode, value){
-            //events.publish('player_jump', {jump: true});
+            console.log('gamepad button down', buttonCode, value);
+
+            switch(buttonCode) {
+                case 0:
+                    events.publish('player_jump', {jump: true});
+                break;
+
+                case 1:
+                    events.publish('player_roll', {});
+                break;
+
+                case 2:
+                    events.publish('player_slash', {});
+                break;
+
+                case 3:
+
+                break;
+
+                case 12:
+                    events.publish('control_up', {pressed: true});
+                break;
+
+                case 13:
+                    events.publish('player_crouch', {crouch: true});
+                break;
+
+                case 14:
+                    events.publish('player_run', {run:true, dir: 'left'});
+                break;
+
+                case 15:
+                    events.publish('player_run', {run:true, dir:'right'});
+                break;
+
+            }
         },
         onUp: function(buttonCode, value){
-            //events.publish('player_jump', {jump: true});
+            console.log('gamepad button up', buttonCode, value);
+            
+            switch(buttonCode) {
+                case 0:
+                    events.publish('player_jump', {jump: false});
+                break;
+
+                case 1:
+                break;
+
+                case 2:
+                break;
+
+                case 3:
+
+                break;
+
+                case 12:
+                    events.publish('control_up', {pressed: false});
+                break;
+
+                case 13:
+                    events.publish('player_crouch', {crouch: false});
+                break;
+
+                case 14:
+                    events.publish('player_run', {run:false, dir: 'left'});
+                break;
+
+                case 15:
+                    events.publish('player_run', {run:false, dir:'right'});
+                break;
+
+            }
         },
         onAxis: function(axisState) {
-            
         },
         onFloat: function(buttonCode, value) {
-            
         }
     });
+
 };
 
 InputController.prototype.UpdateInput = function() {
 
-	if (this.runLeft.isDown) {
+	if (this.dpad.left) {
         frauki.Run({dir:'left'});
     }
-    else if (this.runRight.isDown) {
+    else if (this.dpad.right) {
         frauki.Run({dir:'right'});
     }
     else {

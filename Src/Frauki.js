@@ -236,10 +236,10 @@ Player.prototype.Attacking = function() {
 
 Player.prototype.GetDirectionMultiplier = function() {
     var dir = 1;
-    if(inputController.runLeft.isDown) {
+    if(inputController.dpad.left) {
         this.SetDirection('left');
         dir = -1;
-    } else if (inputController.runRight.isDown) {
+    } else if (inputController.dpad.right) {
         this.SetDirection('right');
         dir = 1;
     } else if(this.states.direction === 'left') {
@@ -328,7 +328,7 @@ Player.prototype.Jump = function(params) {
 
     if(params.jump) {
         //drop through cloud tiles
-        if(inputController.crouch.isDown && this.states.onCloud) {
+        if(inputController.dpad.down && this.states.onCloud) {
             this.states.droppingThroughCloud = true;
 
             var dropTime = 200;
@@ -561,7 +561,7 @@ Player.prototype.Standing = function() {
 
 Player.prototype.Running = function() {
 
-    if((frauki.states.flowLeft || frauki.states.flowRight) && !inputController.runLeft.isDown && !inputController.runRight.isDown) {
+    if((frauki.states.flowLeft || frauki.states.flowRight) && !inputController.dpad.left && !inputController.dpad.right) {
         this.PlayAnim('fall');
     } else {
         this.PlayAnim('run');
@@ -714,7 +714,7 @@ Player.prototype.Rolling = function() {
 
         if(this.body.velocity.y > 150) {
             this.state = this.Falling;
-        } else if(!inputController.runLeft.isDown && !inputController.runRight.isDown && this.body.onFloor()) {
+        } else if(!inputController.dpad.left && !inputController.dpad.right && this.body.onFloor()) {
             if(this.states.crouching) {
                 this.state = this.Crouching;
                 this.PlayAnim('crouch');
@@ -756,13 +756,13 @@ Player.prototype.AttackFront = function() {
         this.body.maxVelocity.x = PLAYER_ROLL_SPEED();
         this.body.acceleration.x *= 3;
 
-        if(this.body.velocity.y > 0 && (inputController.runLeft.isDown || inputController.runRight.isDown)) {
+        if(this.body.velocity.y > 0 && (inputController.dpad.left || inputController.dpad.right)) {
             this.body.velocity.y = 0;
         }
     }
 
     if(this.animations.currentAnim.isFinished) {
-        if(inputController.crouch.isDown && !inputController.runLeft.isDown && !inputController.runRight.isDown && this.body.onFloor()) {
+        if(inputController.dpad.down && !inputController.dpad.left && !inputController.dpad.right && this.body.onFloor()) {
             this.state = this.Crouching;
             this.PlayAnim('crouch');
             this.animations.currentAnim.setFrame('Crouch0008');
@@ -808,7 +808,7 @@ Player.prototype.AttackStab = function() {
         
         if(this.body.velocity.y > 150) {
             this.state = this.Falling;
-        } else if((inputController.runLeft.isDown || inputController.runRight.isDown) && this.body.onFloor()) {
+        } else if((inputController.dpad.left || inputController.dpad.right) && this.body.onFloor()) {
             this.state = this.Running;
         } else {
             this.state = this.Standing;
