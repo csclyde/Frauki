@@ -23,6 +23,10 @@ Main.create = function() {
     this.gamepadIcon = game.add.image(150, 150, 'UI', 'Gamepad0001');
     this.gamepadIcon.fixedToCamera = true;
     this.gamepadIcon.alpha = 0.5;
+
+    if(game.input.gamepad.padsConnected === 0) {
+        this.gamepadIcon.visible = false;
+    }
 };
 
 Main.update = function() {
