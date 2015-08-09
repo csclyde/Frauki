@@ -43,8 +43,12 @@ InputController = function() {
     this.slash.onDown.add(function() { events.publish('player_slash', {}); }, this);
     this.roll.onDown.add(function() { events.publish('player_roll', {}); }, this);
 
-    this.up.onDown.add(function() { 
+    events.subscribe('control_up', function(params) { 
 
+        if(params.pressed === false) {
+            return;
+        }
+        
         if(!frauki.body.onFloor()) {
             return;
         }
