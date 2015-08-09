@@ -514,10 +514,12 @@ Player.prototype.Roll = function(params) {
     this.timers.SetTimer('frauki_grace', 300);
 };
 
-Player.prototype.Hit = function(e, damage) {
+Player.prototype.Hit = function(e, damage, grace_duration) {
 
     if(this.state === this.Hurting || e.state === e.Hurting || frauki.Attacking() || frauki.Grace())
         return;
+
+    grace_duration = grace_duration || 1000;
 
     events.publish('play_sound', {name: 'ouch'});
 
@@ -535,12 +537,10 @@ Player.prototype.Hit = function(e, damage) {
 
     console.log('Frauki is taking ' + damage + ' damage');
 
-    e.poise = e.initialPoise;
-
     this.body.center.x < e.body.center.x ? this.body.velocity.x = -200 : this.body.velocity.x = 200;
 
     this.state = this.Hurting;
-    this.timers.SetTimer('frauki_grace', 650);
+    this.timers.SetTimer('frauki_grace', grace_duration);
     this.timers.SetTimer('frauki_hit', 500 * (damage / 4));
 };
 

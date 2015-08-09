@@ -202,7 +202,7 @@ Enemy.prototype.PlayAnim = function(name) {
 
 function EnemyHit(f, e) {
     
-    if(e.spriteType !== 'enemy' || e.state === e.Hurting || !e.Vulnerable() || e.state === e.Dying || e.Attacking())
+    if(e.spriteType !== 'enemy' || e.state === e.Hurting || !e.Vulnerable() || e.state === e.Dying)
         return;
 
     //seperate conditional to prevent crash!
@@ -250,6 +250,14 @@ function EnemyHit(f, e) {
 
 function ClashSwords(e, f) {
 
+    console.log(frauki.currentAttack.priority, e.owningEnemy.currentAttack.priority);
+    
+    //if fraukis attack has priority over the enemies attack, they cant block it
+    if(frauki.currentAttack.priority > e.owningEnemy.currentAttack.priority) {
+        game.physics.arcade.overlap(frauki.attackRect, e.owningEnemy, EnemyHit);
+        return;
+    }
+
     effectsController.SparkSplash(e, frauki.attackRect);
 
     e = e.owningEnemy;
@@ -275,7 +283,7 @@ function ClashSwords(e, f) {
 function EnemyAttackConnect(e, f) {
 
     if(e.owningEnemy.currentAttack.damage > 0) {
-        frauki.Hit(e.owningEnemy, e.owningEnemy.currentAttack.damage);
+        frauki.Hit(e.owningEnemy, e.owningEnemy.currentAttack.damage, 500);
     }
 
 };

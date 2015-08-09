@@ -38,12 +38,7 @@ Enemy.prototype.types['KR32'] =  function() {
 
 	this.CanCauseDamage = function() { return false; }
 	this.CanChangeDirection = function() { return false; }
-	this.Vulnerable = function() { 
-		if(this.Attacking())
-			return false;
-		else 
-			return true;
-	};
+	this.Vulnerable = function() { return true; };
 
 
 	///////////////////////////////ACTIONS////////////////////////////////////
@@ -105,7 +100,7 @@ Enemy.prototype.types['KR32'] =  function() {
 		}
 
 
-		if(this.PlayerDistance() < 120 && !frauki.Attacking() && this.body.onFloor()) {
+		if(this.PlayerDistance() < 120 && !frauki.Attacking() && this.body.onFloor() && frauki.body.center.y > this.body.center.y - 50) {
 			this.Attack();
 		}
 
@@ -155,7 +150,7 @@ Enemy.prototype.types['KR32'] =  function() {
 			x: 18, y: -8, w: 10, h: 40,
 			damage: 0,
 			knockback: 0,
-			priority: 1,
+			priority: 2,
 			juggle: 0
 		},
 
@@ -163,7 +158,7 @@ Enemy.prototype.types['KR32'] =  function() {
 			x: 18, y: -8, w: 10, h: 40,
 			damage: 0,
 			knockback: 0,
-			priority: 1,
+			priority: 2,
 			juggle: 0
 		},
 
@@ -171,7 +166,7 @@ Enemy.prototype.types['KR32'] =  function() {
 			x: 18, y: -8, w: 10, h: 40,
 			damage: 0,
 			knockback: 0,
-			priority: 1,
+			priority: 2,
 			juggle: 0
 		},
 
@@ -179,7 +174,7 @@ Enemy.prototype.types['KR32'] =  function() {
 			x: 18, y: -8, w: 10, h: 40,
 			damage: 0,
 			knockback: 0,
-			priority: 1,
+			priority: 2,
 			juggle: 0
 		},
 
@@ -187,7 +182,7 @@ Enemy.prototype.types['KR32'] =  function() {
 			x: 18, y: -8, w: 10, h: 40,
 			damage: 0,
 			knockback: 0,
-			priority: 1,
+			priority: 2,
 			juggle: 0
 		},
 
@@ -195,7 +190,7 @@ Enemy.prototype.types['KR32'] =  function() {
 			x: 18, y: -8, w: 10, h: 40,
 			damage: 0,
 			knockback: 0,
-			priority: 1,
+			priority: 2,
 			juggle: 0
 		},
 
@@ -203,7 +198,7 @@ Enemy.prototype.types['KR32'] =  function() {
 			x: 18, y: -8, w: 10, h: 40,
 			damage: 0,
 			knockback: 0,
-			priority: 1,
+			priority: 2,
 			juggle: 0
 		},
 

@@ -104,7 +104,7 @@ var fraukiDamageFrames = {
 		x: -25, y: 0, w: 50, h: 40,
 		damage: 3,
 		knockback: 1.4,
-		priority: 1,
+		priority: 2,
 		juggle: 0
 	},
 
@@ -113,7 +113,7 @@ var fraukiDamageFrames = {
 		x: 0, y: 15, w: 83, h: 10,
 		damage: 2,
 		knockback: 1,
-		priority: 1,
+		priority: 2,
 		juggle: 0
 	},
 	
@@ -122,7 +122,7 @@ var fraukiDamageFrames = {
 		x: 0, y: 15, w: 83, h: 12,
 		damage: 2,
 		knockback: 0.8,
-		priority: 1,
+		priority: 2,
 		juggle: 0
 	},
 
@@ -131,7 +131,7 @@ var fraukiDamageFrames = {
 		x: 0, y: 15, w: 83, h: 12,
 		damage: 2,
 		knockback: 0.8,
-		priority: 1,
+		priority: 2,
 		juggle: 0
 	},
 
@@ -140,7 +140,7 @@ var fraukiDamageFrames = {
 		x: 0, y: 15, w: 83, h: 12,
 		damage: 1,
 		knockback: 0.4,
-		priority: 1,
+		priority: 2,
 		juggle: 0
 	},
 
@@ -174,7 +174,7 @@ var fraukiDamageFrames = {
 		x: -10, y: -5, w: 28, h: 45,
 		damage: 4,
 		knockback: 3,
-		priority: 1,
+		priority: 3,
 		juggle: 3
 	},
 
@@ -182,7 +182,7 @@ var fraukiDamageFrames = {
 		x: -10, y: 15, w: 28, h: 50,
 		damage: 3,
 		knockback: 3,
-		priority: 1,
+		priority: 3,
 		juggle: 3
 	},
 
@@ -190,7 +190,7 @@ var fraukiDamageFrames = {
 		x: -2, y: 40, w: 13, h: 33,
 		damage: 2,
 		knockback: 1.5,
-		priority: 1,
+		priority: 3,
 		juggle: 2
 	},
 
@@ -198,7 +198,7 @@ var fraukiDamageFrames = {
 		x: -2, y: 40, w: 13, h: 33,
 		damage: 2,
 		knockback: 1.5,
-		priority: 1,
+		priority: 3,
 		juggle: 2
 	},
 
@@ -206,7 +206,7 @@ var fraukiDamageFrames = {
 		x: -2, y: 40, w: 13, h: 33,
 		damage: 2,
 		knockback: 1.5,
-		priority: 1,
+		priority: 3,
 		juggle: 2
 	},
 
@@ -214,7 +214,7 @@ var fraukiDamageFrames = {
 		x: -2, y: 40, w: 13, h: 33,
 		damage: 2,
 		knockback: 1.5,
-		priority: 1,
+		priority: 3,
 		juggle: 2
 	},
 
@@ -222,7 +222,7 @@ var fraukiDamageFrames = {
 		x: -2, y: 40, w: 13, h: 33,
 		damage: 2,
 		knockback: 1.5,
-		priority: 1,
+		priority: 3,
 		juggle: 2
 	},
 
@@ -230,7 +230,7 @@ var fraukiDamageFrames = {
 		x: -2, y: 40, w: 13, h: 33,
 		damage: 2,
 		knockback: 1.5,
-		priority: 1,
+		priority: 3,
 		juggle: 2
 	},
 
@@ -238,7 +238,7 @@ var fraukiDamageFrames = {
 		x: -30, y: -8, w: 70, h: 55,
 		damage: 3,
 		knockback: 3,
-		priority: 1,
+		priority: 2,
 		juggle: 1
 	},
 
