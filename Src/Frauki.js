@@ -339,7 +339,7 @@ Player.prototype.Jump = function(params) {
         }
         
         //normal jump
-        if(this.state === this.Standing || this.state === this.Running || this.state === this.Landing || this.state === this.Crouching || (this.state === this.AttackFront && this.body.onFloor())) {
+        if(this.state === this.Standing || this.state === this.Running || this.state === this.Landing || this.state === this.Crouching || (this.state === this.AttackFront && this.body.onFloor()) || (this.state === this.AttackOverhead && this.body.onFloor())) {
             this.body.velocity.y = PLAYER_JUMP_VEL();
             events.publish('play_sound', {name: 'jump'});
         }

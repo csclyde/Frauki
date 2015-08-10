@@ -100,7 +100,7 @@ Enemy.prototype.types['KR32'] =  function() {
 		}
 
 
-		if(this.PlayerDistance() < 120 && !frauki.Attacking() && this.body.onFloor() && frauki.body.center.y > this.body.center.y - 50) {
+		if(this.PlayerDistance() < 120 && !frauki.Attacking() && this.body.onFloor() && frauki.body.center.y > this.body.center.y - 50 && frauki.state !== frauki.AttackStab) {
 			this.Attack();
 		}
 

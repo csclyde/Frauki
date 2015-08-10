@@ -19,14 +19,9 @@ Frogland.Create = function() {
     this.map.addTilesetImage('Doodads');
     this.map.addTilesetImage('Collision');
 
-    this.backgroundLayer_4 = this.map.createLayer('Background_4');
-    this.backgroundLayer_4.visible = +this.map.properties.startLayer === 4;
-
-    this.backgroundLayer_3 = this.map.createLayer('Background_3');
-    this.backgroundLayer_3.visible = +this.map.properties.startLayer === 3;
-
-    this.backgroundLayer_2 = this.map.createLayer('Background_2');
-    this.backgroundLayer_2.visible = +this.map.properties.startLayer === 2;
+    this.CreateBackgroundLayer(4, +this.map.properties.startLayer === 4);
+    this.CreateBackgroundLayer(3, +this.map.properties.startLayer === 3);
+    this.CreateBackgroundLayer(2, +this.map.properties.startLayer === 2);
 
     frauki = new Player(game, this.map.properties.startX * 16, this.map.properties.startY * 16, 'Frauki');
     game.add.existing(frauki);
@@ -39,9 +34,19 @@ Frogland.Create = function() {
     this.CreateObjectsLayer(3);
     this.CreateObjectsLayer(2);
 
-    this.CreateMapLayer(4, +this.map.properties.startLayer === 4);
-    this.CreateMapLayer(3, +this.map.properties.startLayer === 3);
-    this.CreateMapLayer(2, +this.map.properties.startLayer === 2);
+    this.CreateMidgroundLayer(4, +this.map.properties.startLayer === 4);
+    this.CreateMidgroundLayer(3, +this.map.properties.startLayer === 3);
+    this.CreateMidgroundLayer(2, +this.map.properties.startLayer === 2);
+
+    //effectsController.piecesGroup = game.add.group();
+
+    this.CreateForegroundLayer(4, +this.map.properties.startLayer === 4);
+    this.CreateForegroundLayer(3, +this.map.properties.startLayer === 3);
+    this.CreateForegroundLayer(2, +this.map.properties.startLayer === 2);
+
+    this.CreateCollisionLayer(4);
+    this.CreateCollisionLayer(3);
+    this.CreateCollisionLayer(2);
     
 
     this.enemyPool = game.add.group();
@@ -127,15 +132,23 @@ Frogland.Update = function() {
     //this.plx2.tilePosition.x = -(game.camera.x * 0.9);
 };
 
-Frogland.CreateMapLayer = function(layer, visible) {
+Frogland.CreateBackgroundLayer = function(layer, visible) {
+    this['backgroundLayer_' + layer] = this.map.createLayer('Background_' + layer);
+    this['backgroundLayer_' + layer].visible = visible;
+};
 
+Frogland.CreateMidgroundLayer = function(layer, visible) {
     this['midgroundLayer_' + layer] = this.map.createLayer('Midground_' + layer);
     this['midgroundLayer_' + layer].resizeWorld();
     this['midgroundLayer_' + layer].visible = visible;
-    
+};
+
+Frogland.CreateForegroundLayer = function(layer, visible) {
     this['foregroundLayer_' + layer] = this.map.createLayer('Foreground_' + layer);
     this['foregroundLayer_' + layer].visible = visible;
+};
 
+Frogland.CreateCollisionLayer = function(layer) {
     this['collisionLayer_' + layer] = this.map.createLayer('Collision_' + layer);
     this.map.setCollision([1, 3, 4, 5, 7, 9], true, 'Collision_' + layer);
     this['collisionLayer_' + layer].visible = false;

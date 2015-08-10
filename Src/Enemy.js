@@ -165,7 +165,7 @@ Enemy.prototype.Attacking = function() {
 };
 
 Enemy.prototype.WithinCameraRange = function() {
-    var padding = 20;
+    var padding = 50;
 
     if(this.body.x > game.camera.x - padding &&
        this.body.y > game.camera.y - padding &&
@@ -217,7 +217,7 @@ function EnemyHit(f, e) {
     if(e.body.velocity.x < 50) e.body.velocity.x = 50;
     e.body.velocity.x *= e.PlayerDirMod();
     
-    e.body.velocity.y = -200 + (frauki.currentAttack.juggle * -1000);
+    e.body.velocity.y = -200 + (frauki.currentAttack.juggle * -300);
 
     e.timers.SetTimer('hit', e.baseStunDuration * damage);
 
@@ -226,7 +226,7 @@ function EnemyHit(f, e) {
 
     e.energy -= damage;
 
-    console.log('Enemy is taking ' + damage + ', now at ' + e.energy + '/' + e.maxEnergy);
+    console.log('Enemy is taking ' + damage + ', now at ' + e.energy + '/' + e.maxEnergy, 'x: ' + e.body.velocity.x, 'y: ' + e.body.velocity.y);
 
     if(e.energy <= 0) {
 
@@ -251,7 +251,7 @@ function EnemyHit(f, e) {
 function ClashSwords(e, f) {
 
     console.log(frauki.currentAttack.priority, e.owningEnemy.currentAttack.priority);
-    
+
     //if fraukis attack has priority over the enemies attack, they cant block it
     if(frauki.currentAttack.priority > e.owningEnemy.currentAttack.priority) {
         game.physics.arcade.overlap(frauki.attackRect, e.owningEnemy, EnemyHit);

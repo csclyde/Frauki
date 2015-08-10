@@ -80,7 +80,6 @@ EffectsController.prototype.UpdateEffects = function() {
         this.forceField.visible = false;
         frauki.states.forceFieldActive = false;
     }
-
 };
 
 EffectsController.prototype.LoadMapEffects = function(layer) {
@@ -294,8 +293,9 @@ EffectsController.prototype.DiceEnemy = function(enemy, x, y) {
         p.body.angularVelocity = game.rnd.between(500, 1500);
 
         game.time.events.add(2000, function() { p.destroy(); } );
-    });
 
+        //effectsController.piecesGroup.addChild(p);
+    });
 };
 
 EffectsController.prototype.MakeHearts = function(amt) {
@@ -325,14 +325,12 @@ EffectsController.prototype.MakeHearts = function(amt) {
             h.destroy();
         }, 700 + Math.random() * 300);
     })
-
 };
 
 EffectsController.prototype.SlowHit = function(callback) {
     var t = game.add.tween(game.time).to( { slowMotion: 4 }, 50, Phaser.Easing.Quartic.Out, false).to( { slowMotion: 1 }, 100, Phaser.Easing.Exponential.In, false);
     t.onComplete.add(callback)
     t.start();
-
 };
 
 EffectsController.prototype.ForceField = function() {
