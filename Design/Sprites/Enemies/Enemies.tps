@@ -199,6 +199,7 @@
             <filename>Fungu</filename>
             <filename>KR32</filename>
             <filename>A3PZ</filename>
+            <filename>HWK9</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
