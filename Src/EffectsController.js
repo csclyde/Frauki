@@ -47,6 +47,7 @@ EffectsController = function() {
     this.forceField.visible = false;
 
     this.pieces = [];
+    this.dicedPieces = game.add.group();
 
     this.loadedEffects = [];
 
@@ -80,6 +81,8 @@ EffectsController.prototype.UpdateEffects = function() {
         this.forceField.visible = false;
         frauki.states.forceFieldActive = false;
     }
+
+    game.physics.arcade.collide(this.dicedPieces, Frogland.GetCurrentCollisionLayer());
 };
 
 EffectsController.prototype.LoadMapEffects = function(layer) {
@@ -286,15 +289,18 @@ EffectsController.prototype.DiceEnemy = function(enemy, x, y) {
         game.physics.enable(p, Phaser.Physics.ARCADE);
 
         p.anchor.setTo(0.5, 0.5);
+        p.body.bounce.setTo(0.5);
+        p.body.angularDrag = 600;
+        p.body.drag.x = 100;
 
         //randomly set the velocity, rotation, and lifespan
-        p.body.velocity.x = game.rnd.between(-100, 100);
-        p.body.velocity.y = game.rnd.between(-100, -600);
-        p.body.angularVelocity = game.rnd.between(500, 1500);
+        p.body.velocity.x = game.rnd.between(-150, 150);
+        p.body.velocity.y = game.rnd.between(-100, -400);
+        p.body.angularVelocity = game.rnd.between(500, 1000);
 
         game.time.events.add(2000, function() { p.destroy(); } );
 
-        //effectsController.piecesGroup.addChild(p);
+        effectsController.dicedPieces.addChild(p);
     });
 };
 
