@@ -277,16 +277,10 @@ Frogland.PreprocessTiles = function(layer) {
            
     }, this, 0, 0, this.map.width, this.map.height, 'Collision_' + layer);
 
-    var waterTiles = [383, 384, 385, 386, 387, 388, 548, 549, 550, 580, 581, 582, 612, 613, 614, 577, 578, 579]; 
-    var draftTiles = [545, 546, 547];
-
     this.map.forEach(function(tile) {
-        if(waterTiles.indexOf(tile.index) > -1) {
-            tile.alpha = 0.3;
-        }
 
-        if(draftTiles.indexOf(tile.index) > -1) {
-            tile.alpha = 0.2;
+        if(!!tile.properties && !!tile.properties.alpha) {
+            tile.alpha = tile.properties.alpha;
         }
 
     }, this, 0, 0, this.map.width, this.map.height, 'Foreground_' + layer);
