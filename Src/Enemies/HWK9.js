@@ -5,7 +5,9 @@ Enemy.prototype.types['HWK9'] =  function() {
 
     this.animations.add('idle', ['HWK9/Stand0000'], 10, true, false);
     this.animations.add('flip', ['HWK9/Flip0000', 'HWK9/Flip0001', 'HWK9/Flip0002', 'HWK9/Flip0003', 'HWK9/Flip0004', 'HWK9/Flip0005'], 18, true, false);
-    this.animations.add('attack1', ['HWK9/AttackDash0000', 'HWK9/AttackDash0001', 'HWK9/AttackDash0002'], 18, false, false);
+    this.animations.add('windup', ['HWK9/AttackDash0000'], 18, false, false);
+    this.animations.add('attack1', ['HWK9/AttackDash0001', 'HWK9/AttackDash0002'], 18, false, false);
+    this.animations.add('block', ['HWK9/Block000'], 18, true, false);
     this.animations.add('hurt', ['HWK9/Stand0000'], 8, true, false);
 
     this.energy = 7;
@@ -51,13 +53,6 @@ Enemy.prototype.types['HWK9'] =  function() {
         this.state = this.Idling;
     };
 
-    this.Attack = function() {
-    	if(!this.timers.TimerUp('attack')) {
-    		return;
-    	}
-
-    };
-
     this.Dodge = function() {
     	if(!this.timers.TimerUp('dodge_timer')) {
     		return;
@@ -66,6 +61,17 @@ Enemy.prototype.types['HWK9'] =  function() {
     	this.state = this.PreFlipping;
 
     	this.timers.SetTimer('flip_timer', 100);
+    };
+
+    this.Attack = function() {
+    	if(!this.timers.TimerUp('attack')) {
+    		return;
+    	}
+
+    	this.state = this.Windup;
+    	this.timers.SetTimer('attack', 400);
+    	this.body.velocity.x = 0;
+
     };
 
 	////////////////////////////////STATES////////////////////////////////////
@@ -81,10 +87,30 @@ Enemy.prototype.types['HWK9'] =  function() {
 		}
 	};
 
-	this.Slashing = function() {
-		this.PlayAnim('attack');
+	this.Windup = function() {
+		this.PlayAnim('windup');
 
-		if(this.animations.currentAnim.isFinished) {
+		this.body.velocity.y = 0;
+		
+		if(this.timers.TimerUp('attack')) {
+			this.state = this.Slashing;
+			this.timers.SetTimer('attack', 600);
+
+			if(this.direction === 'left') {
+	    		this.body.velocity.x = -700;
+	    	} else {
+	    		this.body.velocity.x = 700;
+	    	}
+		}
+
+	};
+
+	this.Slashing = function() {
+		this.PlayAnim('attack1');
+
+		this.body.velocity.y = 0;
+
+		if(this.timers.TimerUp('attack')) {
 			this.state = this.Idling;
 			this.timers.SetTimer('attack', 500 + Math.random() * 1000);
 		}
@@ -102,12 +128,16 @@ Enemy.prototype.types['HWK9'] =  function() {
 
 	    	this.state = this.Flipping;
 
-	    	this.timers.SetTimer('flip_timer', 1000);
+	    	this.timers.SetTimer('flip_timer', 800);
 		}
 	};
 
 	this.Flipping = function() {
 		this.PlayAnim('flip');
+
+		if(!frauki.body.onFloor()) {
+			this.Attack();
+		}
 
 		if(this.timers.TimerUp('flip_timer') || this.body.onFloor()) {
 			this.state = this.Idling;
@@ -126,6 +156,14 @@ Enemy.prototype.types['HWK9'] =  function() {
 
 	this.attackFrames = {
 		'HWK9/Block0000': {
+			x: 18, y: -8, w: 10, h: 40,
+			damage: 0,
+			knockback: 0,
+			priority: 1,
+			juggle: 0
+		},
+
+		'HWK9/AttackDash0001': {
 			x: 18, y: -8, w: 10, h: 40,
 			damage: 0,
 			knockback: 0,

@@ -543,7 +543,7 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
     this.timers.SetTimer('frauki_grace', grace_duration);
     this.timers.SetTimer('frauki_hit', 500 * (damage / 4));
 
-    effectsController.SlowHit(150);
+    effectsController.SlowHit(90);
 };
 
 //////////////////STATES/////////////////
