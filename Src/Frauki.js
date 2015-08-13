@@ -270,9 +270,9 @@ Player.prototype.LandHit = function(e, damage) {
     //game.time.events.add(200, function() { frauki.animations.paused = false; }, this);
 
     if(damage > 0 && e.maxEnergy > 1) {
-        effectsController.SlowHit(function() {
-            events.publish('camera_shake', {magnitudeX: 10 * damage, magnitudeY: 3, duration: 80});
-        });
+        effectsController.SlowHit(150);
+    } else if(damage === 0) {
+        effectsController.SlowHit(60);
     }
 };
 
@@ -542,6 +542,8 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
     this.state = this.Hurting;
     this.timers.SetTimer('frauki_grace', grace_duration);
     this.timers.SetTimer('frauki_hit', 500 * (damage / 4));
+
+    effectsController.SlowHit(150);
 };
 
 //////////////////STATES/////////////////

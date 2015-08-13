@@ -277,7 +277,7 @@ function ClashSwords(e, f) {
     events.publish('play_sound', {name: 'clang'});
 
     e.timers.SetTimer('hit', 300);
-    frauki.timers.SetTimer('frauki_hit', 300)
+    frauki.timers.SetTimer('frauki_hit', 300);
 };
 
 function EnemyAttackConnect(e, f) {

@@ -47,7 +47,9 @@ EffectsController = function() {
     this.forceField.visible = false;
 
     this.pieces = [];
-    this.dicedPieces = game.add.group();
+    this.dicedPieces4 = game.add.group(Frogland.objectGroup_4);
+    this.dicedPieces3 = game.add.group(Frogland.objectGroup_3);
+    this.dicedPieces2 = game.add.group(Frogland.objectGroup_2);
 
     this.loadedEffects = [];
 
@@ -82,7 +84,9 @@ EffectsController.prototype.UpdateEffects = function() {
         frauki.states.forceFieldActive = false;
     }
 
-    game.physics.arcade.collide(this.dicedPieces, Frogland.GetCurrentCollisionLayer());
+    game.physics.arcade.collide(this.dicedPieces4, Frogland.GetCurrentCollisionLayer());
+    game.physics.arcade.collide(this.dicedPieces3, Frogland.GetCurrentCollisionLayer());
+    game.physics.arcade.collide(this.dicedPieces2, Frogland.GetCurrentCollisionLayer());
 };
 
 EffectsController.prototype.LoadMapEffects = function(layer) {
@@ -149,6 +153,7 @@ function UpdateParticle(p) {
     if(p.body.x > p.destBody.x && p.body.x < p.destBody.x + p.destBody.width && p.body.y > p.destBody.y && p.body.y < p.destBody.y + p.destBody.height) {
         
         if(p.destBody === frauki.body) events.publish('play_sound', {name: 'energy_bit', restart: true });
+        effectsController.EnergySplash(p.body, 60);
         
         p.destBody = null;
         p.kill();
@@ -298,9 +303,9 @@ EffectsController.prototype.DiceEnemy = function(enemy, x, y) {
         p.body.velocity.y = game.rnd.between(-100, -400);
         p.body.angularVelocity = game.rnd.between(500, 1000);
 
-        game.time.events.add(2000, function() { p.destroy(); } );
+        game.time.events.add(2000, function() { p.body.enable = false; } );
 
-        effectsController.dicedPieces.addChild(p);
+        effectsController['dicedPieces' + enemy.owningLayer].addChild(p);
     });
 };
 
@@ -333,9 +338,8 @@ EffectsController.prototype.MakeHearts = function(amt) {
     })
 };
 
-EffectsController.prototype.SlowHit = function(callback) {
-    var t = game.add.tween(game.time).to( { slowMotion: 4 }, 50, Phaser.Easing.Quartic.Out, false).to( { slowMotion: 1 }, 100, Phaser.Easing.Exponential.In, false);
-    t.onComplete.add(callback)
+EffectsController.prototype.SlowHit = function(duration) {
+    var t = game.add.tween(game.time).to( { slowMotion: 4 }, Math.round(duration * 0.33), Phaser.Easing.Quartic.Out, false).to( { slowMotion: 1 }, Math.round(duration * 0.66), Phaser.Easing.Exponential.In, false);
     t.start();
 };
 
@@ -385,4 +389,17 @@ EffectsController.prototype.SparkSplash = function(posSrc, negSrc) {
     this.negSpark.maxParticleSpeed.y = minVel.y;
 
     this.negSpark.explode(500, 20);
+};
+
+EffectsController.prototype.EnergySplash = function(src, intensity) {
+
+    this.posSpark.x = src.x;
+    this.posSpark.y = src.y;
+
+    this.posSpark.minParticleSpeed.x = -intensity;
+    this.posSpark.minParticleSpeed.y = -intensity;
+    this.posSpark.maxParticleSpeed.x = intensity;
+    this.posSpark.maxParticleSpeed.y = intensity;
+
+    this.posSpark.explode(500, 30);
 };

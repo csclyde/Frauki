@@ -103,7 +103,7 @@ Frogland.Update = function() {
     this.GetCurrentObjectGroup().forEach(function(o) {
         var padding = 20;
 
-        if(o.spriteType !== 'enemy') {
+        if(o.spriteType !== 'enemy' && !!o.body) {
 
             if(o.body.x > game.camera.x - padding &&
                o.body.y > game.camera.y - padding &&
@@ -313,7 +313,7 @@ Frogland.ChangeLayer = function(newLayer) {
 
     currentObjectLayer.forEach(function(obj) {
         game.add.tween(obj).to({alpha: 0}, 200, Phaser.Easing.Linear.None, true);
-        obj.body.enable = false;
+        if(!!obj.body) obj.body.enable = false;
     });
 
     this.currentLayer = newLayer;
@@ -338,7 +338,7 @@ Frogland.ChangeLayer = function(newLayer) {
     currentObjectLayer.forEach(function(obj) {
         obj.alpha = 0;
         game.add.tween(obj).to({alpha: 1}, 200, Phaser.Easing.Linear.None, true);
-        obj.body.enable = true;
+        if(!!obj.body) obj.body.enable = true;
     });
 };
 

@@ -25,7 +25,7 @@ CameraController = function() {
 //camera is controlled in player centric space
 CameraController.prototype.UpdateCamera = function() {
 	
-	var xOffset = frauki.states.direction === 'left' ? -5 : 5;
+	var xOffset = frauki.states.direction === 'left' ? -15 : 15;
 	var yOffset = frauki.body.velocity.y > 0 ? 20 : 0;
 
 	yOffset += (frauki.states.crouching ? 35 : 0);
@@ -53,6 +53,9 @@ CameraController.prototype.UpdateCamera = function() {
 	} else {
 		this.shakeX = 0;
 	}
+
+	this.camX += this.shakeX;
+	this.camY += this.shakeY;
 
 	this.camX = Math.abs(dist) < 0.2 ? Math.round(this.camX) : this.camX;
 	this.camY = Math.abs(dist) < 0.2 ? Math.round(this.camY) : this.camY;
