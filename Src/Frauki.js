@@ -480,7 +480,7 @@ Player.prototype.StabSlash = function() {
 
 Player.prototype.Roll = function(params) {
 
-    if(!this.timers.TimerUp('frauki_roll'))
+    if(!this.timers.TimerUp('frauki_roll') || this.state === this.Hurting)
         return;
 
     if(this.body.onFloor()) {
