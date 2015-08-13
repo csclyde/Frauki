@@ -6,7 +6,7 @@
          "name":"Background_2",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -17,7 +17,7 @@
          "name":"Midground_2",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -2951,7 +2951,7 @@
          "name":"Background_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -2962,7 +2962,7 @@
          "name":"Midground_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -7564,9 +7564,9 @@
  "orientation":"orthogonal",
  "properties":
     {
-     "startLayer":"4",
-     "startX":"169",
-     "startY":"111"
+     "startLayer":"3",
+     "startX":"127",
+     "startY":"58"
     },
  "renderorder":"right-down",
  "tileheight":16,
