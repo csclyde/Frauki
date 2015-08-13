@@ -5,13 +5,13 @@
   <property name="startX" value="128"/>
   <property name="startY" value="55"/>
  </properties>
- <tileset firstgid="1" name="Collision" tilewidth="16" tileheight="16" tilecount="64">
+ <tileset firstgid="1" name="Collision" tilewidth="16" tileheight="16">
   <image source="../CollisionKey.png" width="128" height="128"/>
  </tileset>
- <tileset firstgid="65" name="SpawnKey" tilewidth="16" tileheight="16" tilecount="240">
+ <tileset firstgid="65" name="SpawnKey" tilewidth="16" tileheight="16">
   <image source="../SpawnKey.png" width="320" height="192"/>
  </tileset>
- <tileset firstgid="305" name="FrogtownTiles" tilewidth="16" tileheight="16" tilecount="1024">
+ <tileset firstgid="305" name="FrogtownTiles" tilewidth="16" tileheight="16">
   <image source="FrogtownTiles.png" width="512" height="512"/>
   <tile id="1">
    <properties>
@@ -249,13 +249,13 @@
    </properties>
   </tile>
  </tileset>
- <tileset firstgid="1329" name="DepthsTiles" tilewidth="16" tileheight="16" tilecount="1024">
+ <tileset firstgid="1329" name="DepthsTiles" tilewidth="16" tileheight="16">
   <image source="DepthsTiles.png" width="512" height="512"/>
  </tileset>
- <tileset firstgid="2353" name="TerraceTiles" tilewidth="16" tileheight="16" tilecount="300">
+ <tileset firstgid="2353" name="TerraceTiles" tilewidth="16" tileheight="16">
   <image source="TerraceTiles.png" width="320" height="240"/>
  </tileset>
- <tileset firstgid="2653" name="Doodads" tilewidth="16" tileheight="16" tilecount="1600">
+ <tileset firstgid="2653" name="Doodads" tilewidth="16" tileheight="16">
   <image source="Doodads.png" width="640" height="640"/>
  </tileset>
  <layer name="Background_2" width="200" height="330" visible="0">

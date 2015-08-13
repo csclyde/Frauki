@@ -2,7 +2,7 @@ var Frogland = {};
 
 Frogland.Create = function() {
 
-    this.bg = game.add.tileSprite(0, 0, pixel.width * pixel.scale, pixel.height * pixel.scale, 'Background');
+    this.bg = game.add.tileSprite(0, 0, pixel.width * 1.5, pixel.height * 1.5, 'Background');
     this.bg.fixedToCamera = true;
     this.bg.autoScroll(-2, 0);
 

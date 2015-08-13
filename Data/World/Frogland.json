@@ -7583,7 +7583,6 @@
 
             },
          "spacing":0,
-         "tilecount":64,
          "tileheight":16,
          "tilewidth":16
         }, 
@@ -7599,7 +7598,6 @@
 
             },
          "spacing":0,
-         "tilecount":240,
          "tileheight":16,
          "tilewidth":16
         }, 
@@ -7615,7 +7613,6 @@
 
             },
          "spacing":0,
-         "tilecount":1024,
          "tileheight":16,
          "tileproperties":
             {
@@ -7822,7 +7819,6 @@
 
             },
          "spacing":0,
-         "tilecount":1024,
          "tileheight":16,
          "tilewidth":16
         }, 
@@ -7838,7 +7834,6 @@
 
             },
          "spacing":0,
-         "tilecount":300,
          "tileheight":16,
          "tilewidth":16
         }, 
@@ -7854,7 +7849,6 @@
 
             },
          "spacing":0,
-         "tilecount":1600,
          "tileheight":16,
          "tilewidth":16
         }],
