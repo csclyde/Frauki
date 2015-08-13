@@ -114,10 +114,19 @@ Enemy.prototype.types['KR32'] =  function() {
 		if(this.animations.currentAnim.isFinished) {
 			this.state = this.Slashing;
 
-			if(this.direction === 'left') {
-				this.body.velocity.x = -500;
+			if(this.PlayerDistance() < 30) {
+				if(this.direction === 'left') {
+					this.body.velocity.x = 200;
+				} else {
+					this.body.velocity.x = -200;
+				}
 			} else {
-				this.body.velocity.x = 500;
+				if(this.direction === 'left') {
+					this.body.velocity.x = -500;
+				} else {
+					this.body.velocity.x = 500;
+				}
+				
 			}
 		}
 	}
