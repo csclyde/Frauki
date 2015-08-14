@@ -403,3 +403,11 @@ EffectsController.prototype.EnergySplash = function(src, intensity) {
 
     this.posSpark.explode(500, 30);
 };
+
+EffectsController.prototype.Explosion = function(src) {
+    var boom = game.add.sprite(src.x - 50, src.y - 50, 'Misc');
+    boom.animations.add('boom', ['Explosion0000', 'Explosion0001', 'Explosion0002', 'Explosion0003', 'Explosion0004'], 10, false, false);
+    boom.animations.play('boom');
+    boom.animations.currentAnim.killOnComplete = true;
+
+};

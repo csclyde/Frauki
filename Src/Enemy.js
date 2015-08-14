@@ -233,6 +233,7 @@ function EnemyHit(f, e) {
         e.Die();
         e.state = e.Dying;
 
+        effectsController.Explosion(e.body.center);
         effectsController.DiceEnemy(e, e.body.center.x, e.body.center.y);
 
         damage = e.maxEnergy;

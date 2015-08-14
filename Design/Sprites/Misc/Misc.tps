@@ -190,58 +190,7 @@
         </struct>
         <key>fileList</key>
         <array>
-            <filename>Frames/AngelKiss0002.png</filename>
-            <filename>Frames/AngelKiss0003.png</filename>
-            <filename>Frames/AngelKiss0004.png</filename>
-            <filename>Frames/AngelKiss0005.png</filename>
-            <filename>Frames/AngelKiss0006.png</filename>
-            <filename>Frames/Apple0000.png</filename>
-            <filename>Frames/Apple0001.png</filename>
-            <filename>Frames/EnergyBitNeg0000.png</filename>
-            <filename>Frames/EnergyBitNeg0001.png</filename>
-            <filename>Frames/EnergyBitNeg0002.png</filename>
-            <filename>Frames/EnergyBitNeg0003.png</filename>
-            <filename>Frames/EnergyBitNeg0004.png</filename>
-            <filename>Frames/EnergyBitNeg0005.png</filename>
-            <filename>Frames/EnergyBitPos0000.png</filename>
-            <filename>Frames/EnergyBitPos0001.png</filename>
-            <filename>Frames/EnergyBitPos0002.png</filename>
-            <filename>Frames/EnergyBitPos0003.png</filename>
-            <filename>Frames/EnergyBitPos0004.png</filename>
-            <filename>Frames/EnergyBitPos0005.png</filename>
-            <filename>Frames/Fluff0000.png</filename>
-            <filename>Frames/Heart0000.png</filename>
-            <filename>Frames/Heart0001.png</filename>
-            <filename>Frames/JumpDust0000.png</filename>
-            <filename>Frames/JumpDust0001.png</filename>
-            <filename>Frames/JumpDust0002.png</filename>
-            <filename>Frames/JumpDust0003.png</filename>
-            <filename>Frames/JumpDust0004.png</filename>
-            <filename>Frames/JumpDust0005.png</filename>
-            <filename>Frames/JumpDust0006.png</filename>
-            <filename>Frames/RunDust0000.png</filename>
-            <filename>Frames/RunDust0001.png</filename>
-            <filename>Frames/RunDust0002.png</filename>
-            <filename>Frames/RunDust0003.png</filename>
-            <filename>Frames/Splash0000.png</filename>
-            <filename>Frames/Splash0001.png</filename>
-            <filename>Frames/AngelKiss0000.png</filename>
-            <filename>Frames/AngelKiss0001.png</filename>
-            <filename>Frames/spore0000.png</filename>
-            <filename>Frames/Tiles0000.png</filename>
-            <filename>Frames/Tiles0001.png</filename>
-            <filename>Frames/Tiles0002.png</filename>
-            <filename>Frames/Splash0002.png</filename>
-            <filename>Frames/Splash0003.png</filename>
-            <filename>Frames/ForceField0005.png</filename>
-            <filename>Frames/ForceField0000.png</filename>
-            <filename>Frames/ForceField0001.png</filename>
-            <filename>Frames/ForceField0002.png</filename>
-            <filename>Frames/ForceField0003.png</filename>
-            <filename>Frames/ForceField0004.png</filename>
-            <filename>Frames/Sparks0000.png</filename>
-            <filename>Frames/Sparks0001.png</filename>
-            <filename>Frames/Door0000.png</filename>
+            <filename>Frames</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
