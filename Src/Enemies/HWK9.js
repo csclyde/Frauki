@@ -10,7 +10,7 @@ Enemy.prototype.types['HWK9'] =  function() {
     this.animations.add('block', ['HWK9/Block0000'], 18, true, false);
     this.animations.add('hurt', ['HWK9/Stand0000'], 8, true, false);
 
-    this.energy = 7;
+    this.energy = 5;
     this.baseStunDuration = 500;
 
 
@@ -24,6 +24,9 @@ Enemy.prototype.types['HWK9'] =  function() {
     
 	this.updateFunction = function() {
 
+		if(this.state !== this.Slashing && !this.body.allowGravity) {
+			this.body.allowGravity = true;
+		}
 	};
 
 	this.CanCauseDamage = function() { return false; }
@@ -69,7 +72,7 @@ Enemy.prototype.types['HWK9'] =  function() {
     	}
 
     	this.state = this.Windup;
-    	this.timers.SetTimer('attack', 0);
+    	this.timers.SetTimer('attack', 300);
     	this.body.velocity.x = 0;
 
     };
@@ -134,7 +137,7 @@ Enemy.prototype.types['HWK9'] =  function() {
 
 		if(this.timers.TimerUp('attack')) {
 			this.state = this.Idling;
-			this.timers.SetTimer('attack', 500 + Math.random() * 1000);
+			this.timers.SetTimer('attack', 1000 + Math.random() * 1000);
 			this.body.allowGravity = true;
 		}
 	};
@@ -161,19 +164,15 @@ Enemy.prototype.types['HWK9'] =  function() {
 
 	    	this.state = this.Flipping;
 
-	    	this.timers.SetTimer('flip_timer', game.rnd.between(300, 1200));
+	    	this.timers.SetTimer('flip_timer', game.rnd.between(500, 1000));
 		}
 	};
 
 	this.Flipping = function() {
 		this.PlayAnim('flip');
 
-		if(!frauki.body.onFloor()) {
-			this.Attack();
-		}
-
 		if(this.timers.TimerUp('flip_timer') || this.body.onFloor()) {
-			this.QuickAttack();
+			this.Attack();
 
 			this.timers.SetTimer('dodge_timer', game.rnd.between(2000, 4000));
 		}
