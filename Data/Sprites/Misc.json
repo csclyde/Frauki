@@ -329,8 +329,8 @@
 	"frame": {"x":382,"y":2,"w":13,"h":19},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":92,"y":105,"w":13,"h":19},
-	"sourceSize": {"w":200,"h":200},
+	"spriteSourceSize": {"x":43,"y":47,"w":13,"h":19},
+	"sourceSize": {"w":100,"h":100},
 	"pivot": {"x":0.5,"y":0.5}
 },
 "JumpDust0001":
@@ -338,8 +338,8 @@
 	"frame": {"x":305,"y":33,"w":23,"h":29},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":87,"y":93,"w":23,"h":29},
-	"sourceSize": {"w":200,"h":200},
+	"spriteSourceSize": {"x":38,"y":35,"w":23,"h":29},
+	"sourceSize": {"w":100,"h":100},
 	"pivot": {"x":0.5,"y":0.5}
 },
 "JumpDust0002":
@@ -347,8 +347,8 @@
 	"frame": {"x":223,"y":36,"w":24,"h":26},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":87,"y":93,"w":24,"h":26},
-	"sourceSize": {"w":200,"h":200},
+	"spriteSourceSize": {"x":38,"y":35,"w":24,"h":26},
+	"sourceSize": {"w":100,"h":100},
 	"pivot": {"x":0.5,"y":0.5}
 },
 "JumpDust0003":
@@ -356,8 +356,8 @@
 	"frame": {"x":278,"y":36,"w":25,"h":23},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":86,"y":92,"w":25,"h":23},
-	"sourceSize": {"w":200,"h":200},
+	"spriteSourceSize": {"x":37,"y":34,"w":25,"h":23},
+	"sourceSize": {"w":100,"h":100},
 	"pivot": {"x":0.5,"y":0.5}
 },
 "JumpDust0004":
@@ -365,8 +365,8 @@
 	"frame": {"x":355,"y":2,"w":25,"h":22},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":86,"y":91,"w":25,"h":22},
-	"sourceSize": {"w":200,"h":200},
+	"spriteSourceSize": {"x":37,"y":33,"w":25,"h":22},
+	"sourceSize": {"w":100,"h":100},
 	"pivot": {"x":0.5,"y":0.5}
 },
 "JumpDust0005":
@@ -374,8 +374,8 @@
 	"frame": {"x":249,"y":36,"w":27,"h":23},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":85,"y":90,"w":27,"h":23},
-	"sourceSize": {"w":200,"h":200},
+	"spriteSourceSize": {"x":36,"y":32,"w":27,"h":23},
+	"sourceSize": {"w":100,"h":100},
 	"pivot": {"x":0.5,"y":0.5}
 },
 "JumpDust0006":
@@ -383,8 +383,8 @@
 	"frame": {"x":330,"y":31,"w":27,"h":22},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":84,"y":90,"w":27,"h":22},
-	"sourceSize": {"w":200,"h":200},
+	"spriteSourceSize": {"x":35,"y":32,"w":27,"h":22},
+	"sourceSize": {"w":100,"h":100},
 	"pivot": {"x":0.5,"y":0.5}
 },
 "RunDust0000":
@@ -592,6 +592,6 @@
 	"format": "RGBA8888",
 	"size": {"w":467,"h":64},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:0a8ee230d7cba1a2c2abcf85d8a71240:e5b80b3deb847226c230a50a89d92a3b:65678b973d3ac8e1dd536acb732dd5ab$"
+	"smartupdate": "$TexturePacker:SmartUpdate:ce347df06caa72ec9ac45245beec2e3f:df445a37d6efaee07b5b86e5a92a50b9:65678b973d3ac8e1dd536acb732dd5ab$"
 }
 }

@@ -623,6 +623,9 @@ Player.prototype.Falling = function() {
         else {
             this.state = this.Running;
         }
+
+        effectsController.JumpDust(frauki.body.center);
+        
     } else if(this.body.velocity.y < 0) {
         this.state = this.Jumping;
     }

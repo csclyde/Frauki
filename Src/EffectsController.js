@@ -413,3 +413,12 @@ EffectsController.prototype.Explosion = function(src) {
     boom.animations.currentAnim.killOnComplete = true;
 
 };
+
+EffectsController.prototype.JumpDust = function(src) {
+    var dust = game.add.sprite(src.x - 50, src.y - 30, 'Misc');
+    dust.animations.add('dust', ['JumpDust0000', 'JumpDust0001', 'JumpDust0002', 'JumpDust0003', 'JumpDust0004', 'JumpDust0005', 'JumpDust0006'], 10, false, false);
+    dust.animations.play('dust');
+    dust.alpha = 0.5;
+    dust.animations.currentAnim.killOnComplete = true;
+
+};
