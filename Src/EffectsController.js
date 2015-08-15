@@ -24,13 +24,13 @@ EffectsController = function() {
     this.splashLeft.minParticleScale = 0.8;
 
     this.posSpark = game.add.emitter(0, 0, 100);
-    this.posSpark.makeParticles('Misc', ['Sparks0000']); 
+    this.posSpark.makeParticles('Misc', ['Sparks0000', 'Sparks0001', 'Sparks0002', 'Sparks0003', 'Sparks0004']); 
     this.posSpark.gravity = -700;
     this.posSpark.maxParticleScale = 1;
     this.posSpark.minParticleScale = 1;
 
     this.negSpark = game.add.emitter(0, 0, 100);
-    this.negSpark.makeParticles('Misc', ['Sparks0001']); 
+    this.negSpark.makeParticles('Misc', ['Sparks0005', 'Sparks0006', 'Sparks0007', 'Sparks0008', 'Sparks0009']); 
     this.negSpark.gravity = -700;
     this.negSpark._maxParticleScale = 1;
     this.negSpark._minParticleScale = 1;
@@ -152,8 +152,10 @@ function UpdateParticle(p) {
 
     if(p.body.x > p.destBody.x && p.body.x < p.destBody.x + p.destBody.width && p.body.y > p.destBody.y && p.body.y < p.destBody.y + p.destBody.height) {
         
-        if(p.destBody === frauki.body) events.publish('play_sound', {name: 'energy_bit', restart: true });
-        effectsController.EnergySplash(p.body, 60);
+        if(p.destBody === frauki.body) {
+            events.publish('play_sound', {name: 'energy_bit', restart: true });
+            effectsController.EnergySplash(p.body, 60);
+        }
         
         p.destBody = null;
         p.kill();
@@ -214,13 +216,15 @@ EffectsController.prototype.ParticleSpray = function(source, dest, color, dir, a
     var vel = new Phaser.Point(source.x - dest.x, source.y - dest.y);
     vel = vel.normalize();
 
-    var minVel = Phaser.Point.rotate(vel.clone(), 0, 0, 20, true, 1);
-    var maxVel = Phaser.Point.rotate(vel.clone(), 0, 0, -20, true, 1);
+    var minVel = Phaser.Point.rotate(vel.clone(), 0, 0, 30, true, 1);
+    var maxVel = Phaser.Point.rotate(vel.clone(), 0, 0, -30, true, 1);
     
-    minVel.x *= 1750;
-    minVel.y *= 1750;
-    maxVel.x *= 1750;
-    maxVel.y *= 1750;
+    // minVel.x *= 1750;
+    // minVel.y *= 1750;
+    // maxVel.x *= 1750;
+    // maxVel.y *= 1750;
+    maxVel.setMagnitude(1750);
+    minVel.setMagnitude(1750);
 
     effect.minParticleSpeed.x = minVel.x;
     effect.maxParticleSpeed.x = maxVel.x;
@@ -363,20 +367,18 @@ EffectsController.prototype.SparkSplash = function(posSrc, negSrc) {
     var vel = new Phaser.Point(posSrc.body.center.x - negSrc.body.center.x, posSrc.body.center.y - negSrc.body.center.y);
     vel = vel.normalize();
 
-    var minVel = Phaser.Point.rotate(vel.clone(), 0, 0, 20, true, 1);
-    var maxVel = Phaser.Point.rotate(vel.clone(), 0, 0, -20, true, 1);
-    
-    minVel.x *= 120;
-    minVel.y *= 120;
-    maxVel.x *= 120;
-    maxVel.y *= 120;
+    var minVel = Phaser.Point.rotate(vel.clone(), 0, 0, 30, true, 1);
+    var maxVel = Phaser.Point.rotate(vel.clone(), 0, 0, -30, true, 1);
+
+    minVel.setMagnitude(150);
+    maxVel.setMagnitude(150);
 
     this.posSpark.minParticleSpeed.x = minVel.x;
     this.posSpark.minParticleSpeed.y = minVel.y;
     this.posSpark.maxParticleSpeed.x = maxVel.x;
     this.posSpark.maxParticleSpeed.y = maxVel.y;
 
-    this.posSpark.explode(500, 20);
+    this.posSpark.explode(500, 10);
 
     minVel.x *= -1;
     minVel.y *= -1;
@@ -388,10 +390,10 @@ EffectsController.prototype.SparkSplash = function(posSrc, negSrc) {
     this.negSpark.minParticleSpeed.y = maxVel.y;
     this.negSpark.maxParticleSpeed.y = minVel.y;
 
-    this.negSpark.explode(500, 20);
+    this.negSpark.explode(500, 10);
 };
 
-EffectsController.prototype.EnergySplash = function(src, intensity) {
+EffectsController.prototype.EnergySplash = function(src, intensity, direction) {
 
     this.posSpark.x = src.x;
     this.posSpark.y = src.y;
@@ -399,9 +401,9 @@ EffectsController.prototype.EnergySplash = function(src, intensity) {
     this.posSpark.minParticleSpeed.x = -intensity;
     this.posSpark.minParticleSpeed.y = -intensity;
     this.posSpark.maxParticleSpeed.x = intensity;
-    this.posSpark.maxParticleSpeed.y = intensity;
-
-    this.posSpark.explode(500, 30);
+    this.posSpark.maxParticleSpeed.y = intensity;   
+   
+    this.posSpark.explode(500, 8);
 };
 
 EffectsController.prototype.Explosion = function(src) {

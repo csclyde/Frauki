@@ -259,7 +259,7 @@ function ClashSwords(e, f) {
         return;
     }
 
-    effectsController.SparkSplash(e, frauki.attackRect);
+    effectsController.SparkSplash(frauki.attackRect, e);
 
     e = e.owningEnemy;
 
@@ -268,8 +268,7 @@ function ClashSwords(e, f) {
     var vel = new Phaser.Point(e.body.center.x - frauki.body.center.x, e.body.center.y - frauki.body.center.y);
     vel = vel.normalize();
 
-    vel.x *= 300;
-    vel.y *= 300;
+    vel.setMagnitude(300);
 
     e.body.velocity.x = vel.x;
     e.body.velocity.y = vel.y;

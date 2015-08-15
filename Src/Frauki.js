@@ -29,7 +29,6 @@ Player = function (game, x, y, name) {
     
     this.tweens = {};
     this.tweens.roll = null;
-    this.tweens.stopJump = null;
 
     this.states = {};
     this.states.direction = 'right';
@@ -346,7 +345,7 @@ Player.prototype.Jump = function(params) {
         //double jump
         else if(this.states.hasFlipped === false && this.state !== this.Rolling && this.state !== this.AttackStab && this.state !== this.AttackOverhead) {
             if(energyController.UseEnergy(1)) {
-                if(this.tweens.stopJump) { this.tweens.stopJump.stop(); }
+                //if(this.tweens.stopJump) { this.tweens.stopJump.stop(); }
     
                 this.body.velocity.y = PLAYER_DOUBLE_JUMP_VEL();
                 this.state = this.Flipping;
@@ -385,7 +384,6 @@ Player.prototype.Jump = function(params) {
         }
     } else if(this.body.velocity.y < 0 && this.state !== this.Flipping) {
         if(this.body.velocity.y < 0) {
-            //this.tweens.stopJump = game.add.tween(this.body.velocity).to({y: 0}, 100, Phaser.Easing.Exponential.In, true);
             this.body.velocity.y /= 2;
         }
 
