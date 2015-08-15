@@ -123,7 +123,7 @@ EnergyController.prototype.AddPower = function(amt) {
 };
 
 EnergyController.prototype.RemovePower = function(amt) {
-	this.neutralPoint -= amt * 2;
+	this.neutralPoint -= amt * 3;
 
 	this.energyBar.visible = false;
 	this.energyBarRed.visible = true;

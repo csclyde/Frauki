@@ -624,7 +624,7 @@ Player.prototype.Falling = function() {
             this.state = this.Running;
         }
 
-        effectsController.JumpDust(frauki.body.center);
+        if(!frauki.states.inWater) effectsController.JumpDust(frauki.body.center);
 
     } else if(this.body.velocity.y < 0) {
         this.state = this.Jumping;
