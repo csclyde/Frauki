@@ -19,7 +19,7 @@ Enemy.prototype.types['HWK9'] =  function() {
     this.damage = 5;
     */
 
-    this.body.drag.x = 300;
+    this.body.drag.x = 700;
     this.body.bounce.y = 0;
     
 	this.updateFunction = function() {
@@ -171,7 +171,12 @@ Enemy.prototype.types['HWK9'] =  function() {
 	this.Flipping = function() {
 		this.PlayAnim('flip');
 
-		if(this.timers.TimerUp('flip_timer') || this.body.onFloor()) {
+		if(this.body.onFloor()) {
+			this.timers.SetTimer('dodge_timer', game.rnd.between(2000, 4000));
+			this.state = this.Idling;
+		}
+
+		if(this.timers.TimerUp('flip_timer')) {
 			this.Attack();
 
 			this.timers.SetTimer('dodge_timer', game.rnd.between(2000, 4000));

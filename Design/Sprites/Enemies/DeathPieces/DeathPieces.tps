@@ -199,6 +199,7 @@
             <filename>Sporoid</filename>
             <filename>A3PZ</filename>
             <filename>Buzzar</filename>
+            <filename>HWK9</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
