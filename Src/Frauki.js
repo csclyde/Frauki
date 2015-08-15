@@ -104,10 +104,10 @@ Player.prototype.preStateUpdate = function() {
 
         //position the dust
         if(this.states.direction === 'right') {
-            this.runDust.x = this.body.x - 15;
+            this.runDust.x = this.body.x - 22;
             this.runDust.scale.x = 1;
         } else {
-            this.runDust.x = this.body.x + 25;
+            this.runDust.x = this.body.x + 32;
             this.runDust.scale.x = -1;
         }
     } else {
@@ -625,7 +625,7 @@ Player.prototype.Falling = function() {
         }
 
         effectsController.JumpDust(frauki.body.center);
-        
+
     } else if(this.body.velocity.y < 0) {
         this.state = this.Jumping;
     }
