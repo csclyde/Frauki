@@ -445,7 +445,7 @@ Player.prototype.FrontSlash = function() {
 };
 
 Player.prototype.DiveSlash = function() {
-    if(energyController.UseEnergy(6)) {
+    if(energyController.UseEnergy(3)) {
         this.state = this.AttackDiveCharge;
         this.movement.diveVelocity = 950;
         events.publish('play_sound', {name: 'attack_dive_charge', restart: true });
