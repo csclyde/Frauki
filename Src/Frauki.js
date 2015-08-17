@@ -408,7 +408,7 @@ Player.prototype.Slash = function(params) {
     //     return;
 
     //diving dash
-    if(!this.timers.TimerUp('frauki_dash') && this.states.crouching && (this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling)) {
+    if(!this.timers.TimerUp('frauki_dash') && this.states.crouching && (this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling || this.state === this.Flipping)) {
         this.DiveSlash();
     }
     //running dash
@@ -510,7 +510,7 @@ Player.prototype.Roll = function(params) {
         effectsController.ForceField();
     }
 
-    this.timers.SetTimer('frauki_roll', 450);
+    this.timers.SetTimer('frauki_roll', 250);
     this.timers.SetTimer('frauki_grace', 300);
 };
 
