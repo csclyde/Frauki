@@ -54,8 +54,8 @@ CameraController.prototype.UpdateCamera = function() {
 		this.shakeX = 0;
 	}
 
-	this.camX += this.shakeX;
-	this.camY += this.shakeY;
+	//this.camX += this.shakeX;
+	//this.camY += this.shakeY;
 
 	this.camX = Math.abs(dist) < 0.2 ? Math.round(this.camX) : this.camX;
 	this.camY = Math.abs(dist) < 0.2 ? Math.round(this.camY) : this.camY;

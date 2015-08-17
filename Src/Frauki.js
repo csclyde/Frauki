@@ -327,13 +327,15 @@ Player.prototype.Jump = function(params) {
 
     if(params.jump) {
         //drop through cloud tiles
-        if(inputController.dpad.down && this.states.onCloud) {
+        if(inputController.dpad.down && this.states.onCloud && this.state !== this.Rolling) {
             this.states.droppingThroughCloud = true;
 
             var dropTime = 200;
             if(frauki.states.inWater) dropTime *= 2;
 
             game.time.events.add(dropTime, function() { frauki.states.droppingThroughCloud = false; } );
+            this.timers.SetTimer('frauki_dash', 200);
+
             return;
         }
         
@@ -367,7 +369,6 @@ Player.prototype.Jump = function(params) {
                 this.movement.rollBoost /= (PLAYER_ROLL_SPEED() - PLAYER_SPEED());
                 this.movement.rollBoost *= 150;
     
-                //this.tweens.roll.stop();
                 this.movement.rollVelocity = 0;
 
                 //if they are holding away from the roll, dont go crazy
@@ -377,10 +378,11 @@ Player.prototype.Jump = function(params) {
     
                 //add a little boost to their jump
                 this.body.velocity.y = PLAYER_JUMP_VEL() - 50;
-                events.publish('play_sound', {name: 'jump'});
             } else {
-                this.state = this.Jumping;
+                this.body.velocity.y = PLAYER_JUMP_VEL();
             }
+            
+            events.publish('play_sound', {name: 'jump'});
         }
     } else if(this.body.velocity.y < 0 && this.state !== this.Flipping) {
         if(this.body.velocity.y < 0) {
@@ -443,7 +445,7 @@ Player.prototype.FrontSlash = function() {
 };
 
 Player.prototype.DiveSlash = function() {
-    if(energyController.UseEnergy(3)) {
+    if(energyController.UseEnergy(7)) {
         this.state = this.AttackDiveCharge;
         this.movement.diveVelocity = 950;
         events.publish('play_sound', {name: 'attack_dive_charge', restart: true });
@@ -508,7 +510,7 @@ Player.prototype.Roll = function(params) {
         effectsController.ForceField();
     }
 
-    this.timers.SetTimer('frauki_roll', 650);
+    this.timers.SetTimer('frauki_roll', 450);
     this.timers.SetTimer('frauki_grace', 300);
 };
 
@@ -839,18 +841,6 @@ Player.prototype.AttackDiveFall = function() {
     this.body.velocity.y = 20000;//this.movement.diveVelocity / (frauki.states.inUpdraft ? 3 : 1);
     
     this.body.maxVelocity.x = 100;
-    
-    //use some energy every tenth of a second
-    if(this.timers.TimerUp('frauki_dive')) {
-        //if they run out of energy, the attack fizzles into a fall
-        if(!energyController.UseEnergy(1)) {
-            this.movement.diveVelocity = 0;
-            this.state = this.Falling;
-            events.publish('stop_sound', {name: 'attack_dive_fall'});
-        }
-        
-        this.timers.SetTimer('frauki_dive', 50);
-    }
 
     if(this.body.onFloor()) {
         this.movement.diveVelocity = 0;
