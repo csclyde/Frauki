@@ -26,7 +26,17 @@ Frogland.Create = function() {
     this.CreateBackgroundLayer(3, +this.map.properties.startLayer === 3);
     this.CreateBackgroundLayer(2, +this.map.properties.startLayer === 2);
 
-    frauki = new Player(game, this.map.properties.startX * 16, this.map.properties.startY * 16, 'Frauki');
+    var fraukiStartX, fraukiStartY;
+
+    if(true) {
+        fraukiStartX = 2025;
+        fraukiStartY = 1050;
+    } else {
+        fraukiStartX = this.map.properties.startX * 16;
+        fraukiStartY = this.map.properties.startY * 16;
+    }
+
+    frauki = new Player(game, fraukiStartX, fraukiStartY, 'Frauki');
     game.add.existing(frauki);
 
     game.camera.focusOnXY(frauki.body.x, frauki.body.y);
@@ -289,6 +299,16 @@ Frogland.PreprocessTiles = function(layer) {
         }
 
     }, this, 0, 0, this.map.width, this.map.height, 'Foreground_' + layer);
+
+    this.animatedTiles = [];
+    //get animations
+    this.map.forEach(function(tile) {
+
+        if(!this.animatedTiles[tile.y] && tile.index !== -1) this.animatedTiles[tile.y] = [];
+
+        if(tile.index !== -1) this.animatedTiles[tile.y][tile.x] = tile.index;
+
+    }, this, 0, 0, 5, 20, 'Foreground_4');
 };
 
 Frogland.GetCurrentObjectGroup = function() {
@@ -512,25 +532,42 @@ Frogland.AnimateTiles = function() {
     // if(viewLeft < 0) viewLeft = 0;
     // if(viewTop < 0) viewTop = 0;
 
-    var animatedTiles = [
-        [383, 384, 385], //surface
-        [386, 387, 388], //water
-        [545, 546, 547], //air vent
-        [548, 549, 550], //left flow
-        [577, 578, 579], //big splashers
-        [580, 581, 582], //right flow
-        [612, 613, 614]  //down flow
-    ];
+    // var animatedTiles = [
+    //     [383, 384, 385], //surface
+    //     [386, 387, 388], //water
+    //     [545, 546, 547], //air vent
+    //     [548, 549, 550], //left flow
+    //     [577, 578, 579], //big splashers
+    //     [580, 581, 582], //right flow
+    //     [612, 613, 614]  //down flow
+    // ];
 
     this.map.forEach(function(tile) {
 
         //console.log('found animated tile');
 
-        for(var i = 0; i < animatedTiles.length; i++) {
-            if(tile.index === animatedTiles[i][0]) tile.index = 999;
-            if(tile.index === animatedTiles[i][2]) tile.index = animatedTiles[i][0];
-            if(tile.index === animatedTiles[i][1]) tile.index = animatedTiles[i][2];
-            if(tile.index === 999) tile.index = animatedTiles[i][1];
+        for(var i = 0; i < this.animatedTiles.length; i++) {
+
+            var animLength = this.animatedTiles[i].length;
+
+            if(!this.animatedTiles[i] || animLength <= 1) {
+                continue;
+            }
+
+            //loop the final tile back to the start
+            if(tile.index === this.animatedTiles[i][animLength - 1]) {
+                tile.index = this.animatedTiles[i][0]; 
+                continue;
+            }
+
+            //increment the rest
+            for(var j = 0; j < animLength - 1; j++) {
+                if(tile.index === this.animatedTiles[i][j]) {
+                    tile.index = this.animatedTiles[i][j + 1];
+                    break;
+                }
+            }
+        
         }
            
     }, this, viewLeft, viewTop, viewRight, viewBottom, 'Foreground_' + Frogland.currentLayer); 

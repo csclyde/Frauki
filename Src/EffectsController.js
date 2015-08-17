@@ -219,10 +219,6 @@ EffectsController.prototype.ParticleSpray = function(source, dest, color, dir, a
     var minVel = Phaser.Point.rotate(vel.clone(), 0, 0, 30, true, 1);
     var maxVel = Phaser.Point.rotate(vel.clone(), 0, 0, -30, true, 1);
     
-    // minVel.x *= 1750;
-    // minVel.y *= 1750;
-    // maxVel.x *= 1750;
-    // maxVel.y *= 1750;
     maxVel.setMagnitude(1750);
     minVel.setMagnitude(1750);
 
@@ -239,6 +235,13 @@ EffectsController.prototype.ParticleSpray = function(source, dest, color, dir, a
     this.activeDest = dest;
 
 	effect.start(false, 2000, 5, amt, amt);
+};
+
+EffectsController.prototype.EnergyBitSpray = function(amt) {
+
+    for(var i = 0; i < amt; i++) {
+        
+    }
 };
 
 EffectsController.prototype.Splash = function(tile) {
@@ -372,8 +375,6 @@ EffectsController.prototype.SparkSplash = function(posSrc, negSrc) {
 
     minVel.setMagnitude(150);
     maxVel.setMagnitude(150);
-
-    console.log(minVel, maxVel);
 
     this.posSpark.minParticleSpeed.x = minVel.x;
     this.posSpark.minParticleSpeed.y = minVel.y;
