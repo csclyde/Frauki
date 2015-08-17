@@ -373,6 +373,8 @@ EffectsController.prototype.SparkSplash = function(posSrc, negSrc) {
     minVel.setMagnitude(150);
     maxVel.setMagnitude(150);
 
+    console.log(minVel, maxVel);
+
     this.posSpark.minParticleSpeed.x = minVel.x;
     this.posSpark.minParticleSpeed.y = minVel.y;
     this.posSpark.maxParticleSpeed.x = maxVel.x;

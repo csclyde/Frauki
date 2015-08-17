@@ -6,6 +6,9 @@ Frogland.Create = function() {
     this.bg.fixedToCamera = true;
     this.bg.autoScroll(-2, 0);
 
+    this.plx2 = game.add.image(0, 0, 'parallax2');
+    this.plx2.fixedToCamera = true;
+
     this.plx1 = game.add.image(0, 0, 'parallax1');
     this.plx1.fixedToCamera = true;
 
@@ -129,7 +132,9 @@ Frogland.Update = function() {
 
     this.plx1.cameraOffset.x = -(game.camera.x * 0.45) + 280;
     this.plx1.cameraOffset.y = -(game.camera.y * 0.30) + 220;
-    //this.plx2.tilePosition.x = -(game.camera.x * 0.9);
+
+    this.plx2.cameraOffset.x = -(game.camera.x * 0.40) + 400;
+    this.plx2.cameraOffset.y = -(game.camera.y * 0.25) + 180;
 };
 
 Frogland.CreateBackgroundLayer = function(layer, visible) {

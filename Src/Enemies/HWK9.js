@@ -19,7 +19,7 @@ Enemy.prototype.types['HWK9'] =  function() {
     this.damage = 5;
     */
 
-    this.body.drag.x = 700;
+    this.body.drag.x = 1000;
     this.body.bounce.y = 0;
     
 	this.updateFunction = function() {
@@ -61,9 +61,17 @@ Enemy.prototype.types['HWK9'] =  function() {
     		return;
     	}
 
-    	this.state = this.PreFlipping;
+    	this.state = this.Flipping;
 
-    	this.timers.SetTimer('flip_timer', 100);
+    	this.timers.SetTimer('flip_timer', game.rnd.between(500, 1000));
+
+    	this.body.velocity.y = -400;
+
+    	if(this.direction === 'left') {
+    		this.body.velocity.x = 400;
+    	} else {
+    		this.body.velocity.x = -400;
+    	}
     };
 
     this.Attack = function() {
@@ -89,7 +97,7 @@ Enemy.prototype.types['HWK9'] =  function() {
 
     this.Block = function() {
     	this.state = this.Blocking;
-    	this.timers.SetTimer('block', 600);
+    	this.timers.SetTimer('block', game.rnd.between(600, 1200));
     };
 
 	////////////////////////////////STATES////////////////////////////////////
@@ -101,7 +109,7 @@ Enemy.prototype.types['HWK9'] =  function() {
 
 			if(this.PlayerDistance() < 120) {
 
-				if(frauki.Attacking()) {
+				if(frauki.Attacking() || !this.timers.TimerUp('dodge_timer')) {
 					this.Block();
 				} else {
 					this.Dodge();
@@ -123,9 +131,11 @@ Enemy.prototype.types['HWK9'] =  function() {
 			var attackVector = new Phaser.Point(frauki.body.x - this.body.x, frauki.body.y - this.body.y);
 			attackVector = attackVector.normalize();
 
-			attackVector.setMagnitude(600);
+			attackVector.setMagnitude(800);
 
 			this.body.velocity = attackVector;
+
+			this.FacePlayer();
 		}
 
 	};
@@ -145,26 +155,18 @@ Enemy.prototype.types['HWK9'] =  function() {
 	this.Blocking = function() {
 		this.PlayAnim('block');
 
+		if(frauki.state === frauki.AttackStab) {
+			this.Dodge();
+		}
+
 		if(this.timers.TimerUp('block')) {
 
-			this.QuickAttack();
+			if(this.PlayerDistance() < 120) {
+				this.Dodge();
+			} else if(this.PlayerDistance() > 120) {
+				this.QuickAttack();
+			}
 
-		}
-	};
-
-	this.PreFlipping = function() {
-		if(this.timers.TimerUp('flip_timer')) {
-			this.body.velocity.y = -400;
-
-	    	if(this.direction === 'left') {
-	    		this.body.velocity.x = 400;
-	    	} else {
-	    		this.body.velocity.x = -400;
-	    	}
-
-	    	this.state = this.Flipping;
-
-	    	this.timers.SetTimer('flip_timer', game.rnd.between(500, 1000));
 		}
 	};
 
@@ -172,14 +174,16 @@ Enemy.prototype.types['HWK9'] =  function() {
 		this.PlayAnim('flip');
 
 		if(this.body.onFloor()) {
-			this.timers.SetTimer('dodge_timer', game.rnd.between(2000, 4000));
+			console.log('dude landed');
+
+			this.timers.SetTimer('dodge_timer', game.rnd.between(1000, 3000));
 			this.state = this.Idling;
 		}
 
 		if(this.timers.TimerUp('flip_timer')) {
 			this.Attack();
 
-			this.timers.SetTimer('dodge_timer', game.rnd.between(2000, 4000));
+			this.timers.SetTimer('dodge_timer', game.rnd.between(1000, 3000));
 		}
 	};
 
