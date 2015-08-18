@@ -2,6 +2,7 @@ EnergyController = function() {
 
 	this.energy = 15;
 	this.neutralPoint = 15;
+	this.zeal = 0;
 	this.tickTimer = 0;
 	this.gracePeriod = 0;
 
@@ -9,24 +10,32 @@ EnergyController = function() {
 };
 
 EnergyController.prototype.Create = function() {
-	this.barContainer = game.add.image(7, 7, 'UI', 'EnergyBar0000');
-	this.barContainer.fixedToCamera = true;
 
-	this.energyBar = game.add.image(9, 9, 'UI', 'EnergyBar0001');
+	this.barBackground = game.add.image(7, 7, 'UI', 'EnergyBar0001');
+	this.barBackground.fixedToCamera = true;
+
+	this.energyBar = game.add.image(9, 9, 'UI', 'EnergyBar0002');
 	this.energyBar.fixedToCamera = true;
 	this.energyBar.anchor.x = 0;
+
+	this.zealBar = game.add.image(9, 20, 'UI', 'EnergyBar0006');
+	this.zealBar.fixedToCamera = true;
+	this.zealBar.anchor.x = 0;
 
 	this.energyBarWhite = game.add.image(9, 9, 'UI', 'EnergyBar0003');
 	this.energyBarWhite.fixedToCamera = true;
 	this.energyBarWhite.anchor.x = 0;
 	this.energyBarWhite.visible = false;
 
-	this.energyBarRed = game.add.image(9, 9, 'UI', 'EnergyBar0004');
+	this.energyBarRed = game.add.image(9, 9, 'UI', 'EnergyBar0003');
 	this.energyBarRed.fixedToCamera = true;
 	this.energyBarRed.anchor.x = 0;
 	this.energyBarRed.visible = false;
 
-	this.restingPointMarker = game.add.image(this.energyBar.x + (this.energyBar.width / 2) - 2, 5, 'UI', 'EnergyBar0002');
+	this.barContainer = game.add.image(7, 7, 'UI', 'EnergyBar0000');
+	this.barContainer.fixedToCamera = true;
+
+	this.restingPointMarker = game.add.image(this.energyBar.x + (this.energyBar.width / 2) - 2, 5, 'UI', 'EnergyBar0005');
 	this.restingPointMarker.fixedToCamera = true;
 };
 
@@ -64,6 +73,9 @@ EnergyController.prototype.UpdateEnergy = function() {
 	if(this.energy > 30)
 		this.energy = 30;
 
+	if(this.zeal > 30)
+		this.zeal = 30;
+
 	if(this.neutralPoint > 30)
 		this.neutralPoint = 30;
 	if(this.neutralPoint <= 0)
@@ -72,6 +84,7 @@ EnergyController.prototype.UpdateEnergy = function() {
 	this.energyBar.scale.x = this.energy / 30;
 	this.energyBarWhite.scale.x = this.energy / 30;
 	this.energyBarRed.scale.x = this.energy / 30;
+	this.zealBar.scale.x = this.zeal / 30;
 
 	if(this.energyBar.scale.x < 0)
 		this.energyBar.scale.x = 0;
@@ -79,8 +92,11 @@ EnergyController.prototype.UpdateEnergy = function() {
 	this.restingPointMarker.cameraOffset.x = Math.round(pixel.width * 0.27 + cameraController.camX / pixel.scale) + (81 * (this.neutralPoint / 30));
 	this.restingPointMarker.cameraOffset.y = Math.round(pixel.height * 0.3 + cameraController.camY / pixel.scale) + 2;
 
-	this.energyBar.cameraOffset.x = Math.round(pixel.width * 0.27 + cameraController.camX / pixel.scale) + 2;
+	this.energyBar.cameraOffset.x = Math.round(pixel.width * 0.27 + cameraController.camX / pixel.scale) + 2;// - 82  + 82 * (this.energy / 30);
 	this.energyBar.cameraOffset.y = Math.round(pixel.height * 0.3 + cameraController.camY / pixel.scale) + 2;
+
+	this.zealBar.cameraOffset.x = Math.round(pixel.width * 0.27 + cameraController.camX / pixel.scale) + 2;// - 82  + 82 * (this.energy / 30);
+	this.zealBar.cameraOffset.y = Math.round(pixel.height * 0.3 + cameraController.camY / pixel.scale) + 13;
 
 	this.energyBarWhite.cameraOffset.x = Math.round(pixel.width * 0.27 + cameraController.camX / pixel.scale) + 2;
 	this.energyBarWhite.cameraOffset.y = Math.round(pixel.height * 0.3 + cameraController.camY / pixel.scale) + 2;
@@ -90,6 +106,10 @@ EnergyController.prototype.UpdateEnergy = function() {
 
 	this.barContainer.cameraOffset.x = Math.round(pixel.width * 0.27 + cameraController.camX / pixel.scale);
 	this.barContainer.cameraOffset.y = Math.round(pixel.height * 0.3 + cameraController.camY / pixel.scale);
+
+	this.barBackground.cameraOffset.x = Math.round(pixel.width * 0.27 + cameraController.camX / pixel.scale) + 2;
+	this.barBackground.cameraOffset.y = Math.round(pixel.height * 0.3 + cameraController.camY / pixel.scale) + 2;
+
 };
 
 EnergyController.prototype.UseEnergy = function(amt) {
@@ -135,4 +155,12 @@ EnergyController.prototype.GetEnergyPercentage = function() {
 	var percentageCurve = [0.5, 1, 2];
 
 	return game.math.catmullRomInterpolation(percentageCurve, this.energy / 30);
+};
+
+EnergyController.prototype.AddZeal = function(amt) {
+	this.zeal += amt;
+};
+
+EnergyController.prototype.RemoveZeal = function(amt) {
+	this.zeal -= amt;
 };

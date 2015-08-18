@@ -237,6 +237,10 @@ function EnemyHit(f, e) {
         effectsController.DiceEnemy(e, e.body.center.x, e.body.center.y);
 
         damage = e.maxEnergy;
+
+        energyController.AddPower(e.maxEnergy / 4);
+        effectsController.MakeHearts(e.maxEnergy / 4);
+
     } else {
         e.TakeHit();
     }   

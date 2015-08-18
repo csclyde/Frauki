@@ -155,6 +155,7 @@ function UpdateParticle(p) {
         if(p.destBody === frauki.body) {
             events.publish('play_sound', {name: 'energy_bit', restart: true });
             effectsController.EnergySplash(p.body, 60);
+            energyController.AddZeal(1);
         }
         
         p.destBody = null;
@@ -234,14 +235,12 @@ EffectsController.prototype.ParticleSpray = function(source, dest, color, dir, a
 
     this.activeDest = dest;
 
-	effect.start(false, 2000, 5, amt, amt);
+	effect.start(false, 0, 5, amt, amt);
 };
 
 EffectsController.prototype.EnergyBitSpray = function(amt) {
 
-    for(var i = 0; i < amt; i++) {
-        
-    }
+    for(var i = 0; i < amt; i++) {}
 };
 
 EffectsController.prototype.Splash = function(tile) {

@@ -29,12 +29,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
 	this.CanCauseDamage = function() { return false; }
 	this.CanChangeDirection = function() { return false; }
-	this.Vulnerable = function() { 
-		if(this.Attacking())
-			return false;
-		else 
-			return true;
-	};
+	this.Vulnerable = function() { return true; };
 
 
 	///////////////////////////////ACTIONS////////////////////////////////////
