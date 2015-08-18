@@ -549,7 +549,8 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
     this.timers.SetTimer('frauki_grace', grace_duration);
     this.timers.SetTimer('frauki_hit', 500 * (damage / 4));
 
-    effectsController.SlowHit(90);
+    if(energyController.neutralPoint > 0)
+        effectsController.SlowHit(90);
 };
 
 //////////////////STATES/////////////////
@@ -838,7 +839,7 @@ Player.prototype.AttackDiveCharge = function() {
         this.timers.SetTimer('frauki_dive', 0);
 
         events.publish('play_sound', {name: 'attack_dive_fall'});
-        
+
         effectsController.EnergyStreak();
     }
 };

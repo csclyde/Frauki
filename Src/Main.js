@@ -90,13 +90,12 @@ Main.Restart = function() {
         frauki.x = frauki.initialX; //fraukiSpawnX;
         frauki.y = frauki.initialY; //fraukiSpawnY;
         energyController.energy = 15;
-        energyController.health = 100;
-        energyController.power = 0;
+        energyController.charge = 0;
         energyController.neutralPoint = 15;
         game.time.slowMotion = 1;
         game.world.alpha = 1;
 
-        Main.restarting = false;
+        //Main.restarting = false;
 
         Frogland.objectGroup_4.destroy();
         Frogland.objectGroup_3.destroy();
@@ -105,6 +104,8 @@ Main.Restart = function() {
         Frogland.CreateObjectsLayer(4);
         Frogland.CreateObjectsLayer(3);
         Frogland.CreateObjectsLayer(2);
+
+        var cameraMoveTween = game.add.tween(game.camera)
 
     });
 };
