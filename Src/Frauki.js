@@ -534,7 +534,7 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
     effectsController.ParticleSpray(this.body, e.body, 'negative', null, damage);
 
     energyController.RemovePower(damage / 4);
-    energyController.RemoveZeal(damage);
+    energyController.RemoveZeal(damage * 2);
 
     console.log('Frauki is taking ' + damage + ' damage');
 
