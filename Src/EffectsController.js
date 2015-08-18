@@ -25,15 +25,13 @@ EffectsController = function() {
 
     this.posSpark = game.add.emitter(0, 0, 100);
     this.posSpark.makeParticles('Misc', ['Sparks0000', 'Sparks0001', 'Sparks0002', 'Sparks0003', 'Sparks0004']); 
-    this.posSpark.gravity = -700;
-    this.posSpark.maxParticleScale = 1;
-    this.posSpark.minParticleScale = 1;
+    this.posSpark.gravity = -750;
+    this.posSpark.particleDrag.setTo(100);
 
     this.negSpark = game.add.emitter(0, 0, 100);
     this.negSpark.makeParticles('Misc', ['Sparks0005', 'Sparks0006', 'Sparks0007', 'Sparks0008', 'Sparks0009']); 
-    this.negSpark.gravity = -700;
-    this.negSpark._maxParticleScale = 1;
-    this.negSpark._minParticleScale = 1;
+    this.negSpark.gravity = -750;
+    this.negSpark.particleDrag.setTo(100);
 
     //unassigned particles will be set to move towards this destination
     this.activeDest = null;
@@ -50,6 +48,13 @@ EffectsController = function() {
     this.dicedPieces4 = game.add.group(Frogland.objectGroup_4);
     this.dicedPieces3 = game.add.group(Frogland.objectGroup_3);
     this.dicedPieces2 = game.add.group(Frogland.objectGroup_2);
+
+    this.energyStreak = game.add.emitter(0, 0, 100);
+    this.energyStreak.makeParticles('Misc', ['Sparks0000', 'Sparks0001', 'Sparks0002', 'Sparks0003', 'Sparks0004']); 
+    this.energyStreak.gravity = -780;
+    this.energyStreak.particleDrag.setTo(100);
+    this.energyStreak.minParticleSpeed.setTo(-80);
+    this.energyStreak.maxParticleSpeed.setTo(80);
 
     this.loadedEffects = [];
 
@@ -83,6 +88,11 @@ EffectsController.prototype.UpdateEffects = function() {
         this.forceField.visible = false;
         frauki.states.forceFieldActive = false;
     }
+
+    this.energyStreak.x = frauki.attackRect.body.x;
+    this.energyStreak.y = frauki.attackRect.body.y;
+    this.energyStreak.width = frauki.attackRect.body.width;
+    this.energyStreak.height = frauki.attackRect.body.height;
 
     game.physics.arcade.collide(this.dicedPieces4, Frogland.GetCurrentCollisionLayer());
     game.physics.arcade.collide(this.dicedPieces3, Frogland.GetCurrentCollisionLayer());
@@ -154,8 +164,8 @@ function UpdateParticle(p) {
         
         if(p.destBody === frauki.body) {
             events.publish('play_sound', {name: 'energy_bit', restart: true });
-            effectsController.EnergySplash(p.body, 60);
-            energyController.AddZeal(1);
+            effectsController.EnergySplash(p.body, 100);
+            energyController.AddCharge(1);
         }
         
         p.destBody = null;
@@ -373,7 +383,7 @@ EffectsController.prototype.SparkSplash = function(posSrc, negSrc) {
     var maxVel = Phaser.Point.rotate(vel.clone(), 0, 0, -30, true, 1);
 
     minVel.setMagnitude(150);
-    maxVel.setMagnitude(150);
+    maxVel.setMagnitude(175);
 
     this.posSpark.minParticleSpeed.x = minVel.x;
     this.posSpark.minParticleSpeed.y = minVel.y;
@@ -405,7 +415,7 @@ EffectsController.prototype.EnergySplash = function(src, intensity, direction) {
     this.posSpark.maxParticleSpeed.x = intensity;
     this.posSpark.maxParticleSpeed.y = intensity;   
    
-    this.posSpark.explode(500, 8);
+    this.posSpark.explode(500, 6);
 };
 
 EffectsController.prototype.Explosion = function(src) {
@@ -423,4 +433,8 @@ EffectsController.prototype.JumpDust = function(src) {
     dust.alpha = 0.5;
     dust.animations.currentAnim.killOnComplete = true;
 
+};
+
+EffectsController.prototype.EnergyStreak = function() {
+    this.energyStreak.flow(200, 5, 1, 60, true);
 };

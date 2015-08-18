@@ -410,18 +410,22 @@ Player.prototype.Slash = function(params) {
     //diving dash
     if(!this.timers.TimerUp('frauki_dash') && this.states.crouching && (this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling || this.state === this.Flipping)) {
         this.DiveSlash();
+        effectsController.EnergyStreak();
     }
     //running dash
     else if(this.state === this.Rolling || this.state === this.Kicking) {
         this.StabSlash();
+        effectsController.EnergyStreak();
     }
     //upwards dash attack
     else if(this.states.upPressed && (this.state === this.Peaking || this.state === this.Jumping) && this.states.hasFlipped === false) {
         this.JumpSlash();
+        effectsController.EnergyStreak();
     }
     //normal slashes while standing or running
     else if(this.state === this.Standing || this.state === this.Landing || this.state === this.AttackStab || this.state === this.Running || this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling || this.state === this.Flipping || this.state === this.Crouching) {
         this.FrontSlash();
+        effectsController.EnergyStreak();
     } 
     else {
         console.log('An attack was attempted in an unresolved state ', this.state);
@@ -439,6 +443,7 @@ Player.prototype.FrontSlash = function() {
         } else {
             this.state = this.AttackFront;
         }
+
 
         events.publish('play_sound', {name: 'attack_slash', restart: true });
     }
@@ -534,7 +539,7 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
     effectsController.ParticleSpray(this.body, e.body, 'negative', null, damage);
 
     energyController.RemovePower(damage / 4);
-    energyController.RemoveZeal(damage * 2);
+    energyController.RemoveCharge(damage * 2);
 
     console.log('Frauki is taking ' + damage + ' damage');
 
@@ -833,6 +838,8 @@ Player.prototype.AttackDiveCharge = function() {
         this.timers.SetTimer('frauki_dive', 0);
 
         events.publish('play_sound', {name: 'attack_dive_fall'});
+        
+        effectsController.EnergyStreak();
     }
 };
 
@@ -852,6 +859,8 @@ Player.prototype.AttackDiveFall = function() {
         events.publish('play_sound', {name: 'attack_dive_land'});
 
         this.state = this.AttackDiveLand;
+
+        effectsController.EnergyStreak();
 
     } 
 };
