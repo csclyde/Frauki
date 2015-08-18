@@ -190,17 +190,7 @@
         </struct>
         <key>fileList</key>
         <array>
-            <filename>Frames/Upgrades0000.png</filename>
-            <filename>Frames/Upgrades0001.png</filename>
-            <filename>Frames/Upgrades0002.png</filename>
-            <filename>Frames/Upgrades0003.png</filename>
-            <filename>Frames/Upgrades0004.png</filename>
-            <filename>Frames/EnergyBar0002.png</filename>
-            <filename>Frames/EnergyBar0000.png</filename>
-            <filename>Frames/EnergyBar0001.png</filename>
-            <filename>Frames/EnergyBar0004.png</filename>
-            <filename>Frames/EnergyBar0003.png</filename>
-            <filename>Frames/Gamepad0001.png</filename>
+            <filename>Frames</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

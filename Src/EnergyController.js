@@ -76,8 +76,8 @@ EnergyController.prototype.UpdateEnergy = function() {
 	if(this.energyBar.scale.x < 0)
 		this.energyBar.scale.x = 0;
 
-	this.restingPointMarker.cameraOffset.x = Math.round(pixel.width * 0.27 + cameraController.camX / pixel.scale) + (90 * (this.neutralPoint / 30));
-	this.restingPointMarker.cameraOffset.y = Math.round(pixel.height * 0.3 + cameraController.camY / pixel.scale) - 2;
+	this.restingPointMarker.cameraOffset.x = Math.round(pixel.width * 0.27 + cameraController.camX / pixel.scale) + (81 * (this.neutralPoint / 30));
+	this.restingPointMarker.cameraOffset.y = Math.round(pixel.height * 0.3 + cameraController.camY / pixel.scale) + 2;
 
 	this.energyBar.cameraOffset.x = Math.round(pixel.width * 0.27 + cameraController.camX / pixel.scale) + 2;
 	this.energyBar.cameraOffset.y = Math.round(pixel.height * 0.3 + cameraController.camY / pixel.scale) + 2;

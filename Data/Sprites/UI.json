@@ -2,52 +2,70 @@
 
 "EnergyBar0000":
 {
-	"frame": {"x":2,"y":2,"w":98,"h":13},
+	"frame": {"x":58,"y":66,"w":97,"h":19},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":1,"y":1,"w":98,"h":13},
-	"sourceSize": {"w":98,"h":13},
-	"pivot": {"x":0.5,"y":1.46154}
+	"spriteSourceSize": {"x":1,"y":7,"w":97,"h":19},
+	"sourceSize": {"w":97,"h":19},
+	"pivot": {"x":0.505155,"y":0.684211}
 },
 "EnergyBar0001":
 {
-	"frame": {"x":2,"y":17,"w":94,"h":9},
+	"frame": {"x":58,"y":115,"w":90,"h":9},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":3,"y":15,"w":94,"h":9},
-	"sourceSize": {"w":94,"h":9},
-	"pivot": {"x":0.5,"y":0.555556}
+	"spriteSourceSize": {"x":3,"y":3,"w":90,"h":9},
+	"sourceSize": {"w":90,"h":9},
+	"pivot": {"x":0.522222,"y":1.88889}
 },
 "EnergyBar0002":
 {
-	"frame": {"x":358,"y":2,"w":5,"h":17},
+	"frame": {"x":154,"y":13,"w":11,"h":9},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":43,"y":9,"w":5,"h":17},
-	"sourceSize": {"w":5,"h":17},
-	"pivot": {"x":1.4,"y":0.647059}
+	"spriteSourceSize": {"x":38,"y":9,"w":11,"h":9},
+	"sourceSize": {"w":11,"h":9},
+	"pivot": {"x":1.09091,"y":1.22222}
 },
 "EnergyBar0003":
 {
-	"frame": {"x":98,"y":17,"w":94,"h":9},
+	"frame": {"x":86,"y":87,"w":90,"h":9},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":3,"y":15,"w":94,"h":9},
-	"sourceSize": {"w":94,"h":9},
-	"pivot": {"x":0.5,"y":0.555556}
+	"spriteSourceSize": {"x":3,"y":3,"w":90,"h":9},
+	"sourceSize": {"w":90,"h":9},
+	"pivot": {"x":0.522222,"y":1.88889}
 },
 "EnergyBar0004":
 {
-	"frame": {"x":102,"y":2,"w":94,"h":9},
+	"frame": {"x":86,"y":98,"w":90,"h":9},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":3,"y":15,"w":94,"h":9},
-	"sourceSize": {"w":94,"h":9},
-	"pivot": {"x":0.5,"y":0.555556}
+	"spriteSourceSize": {"x":3,"y":3,"w":90,"h":9},
+	"sourceSize": {"w":90,"h":9},
+	"pivot": {"x":0.522222,"y":1.88889}
+},
+"EnergyBar0005":
+{
+	"frame": {"x":86,"y":109,"w":52,"h":4},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":7,"y":8,"w":52,"h":4},
+	"sourceSize": {"w":52,"h":4},
+	"pivot": {"x":0.826923,"y":3}
+},
+"Gamepad0000":
+{
+	"frame": {"x":2,"y":2,"w":150,"h":62},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":7,"y":14,"w":150,"h":62},
+	"sourceSize": {"w":150,"h":62},
+	"pivot": {"x":0.5,"y":0.580645}
 },
 "Gamepad0001":
 {
-	"frame": {"x":194,"y":13,"w":22,"h":9},
+	"frame": {"x":154,"y":2,"w":22,"h":9},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":2,"w":22,"h":9},
@@ -56,7 +74,7 @@
 },
 "Upgrades0000":
 {
-	"frame": {"x":218,"y":2,"w":26,"h":26},
+	"frame": {"x":2,"y":66,"w":26,"h":26},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":6,"y":6,"w":26,"h":26},
@@ -65,7 +83,7 @@
 },
 "Upgrades0001":
 {
-	"frame": {"x":246,"y":2,"w":26,"h":26},
+	"frame": {"x":2,"y":94,"w":26,"h":26},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":6,"y":6,"w":26,"h":26},
@@ -74,7 +92,7 @@
 },
 "Upgrades0002":
 {
-	"frame": {"x":274,"y":2,"w":26,"h":26},
+	"frame": {"x":30,"y":66,"w":26,"h":26},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":6,"y":6,"w":26,"h":26},
@@ -83,7 +101,7 @@
 },
 "Upgrades0003":
 {
-	"frame": {"x":302,"y":2,"w":26,"h":26},
+	"frame": {"x":30,"y":94,"w":26,"h":26},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":6,"y":6,"w":26,"h":26},
@@ -92,7 +110,7 @@
 },
 "Upgrades0004":
 {
-	"frame": {"x":330,"y":2,"w":26,"h":26},
+	"frame": {"x":58,"y":87,"w":26,"h":26},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":6,"y":6,"w":26,"h":26},
@@ -104,8 +122,8 @@
 	"version": "1.0",
 	"image": "UI.png",
 	"format": "RGBA8888",
-	"size": {"w":365,"h":30},
+	"size": {"w":178,"h":126},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:86e386d0161b276cc1d27f91a80804b1:964cad5b885e69253b049abf63b83269:4b774b923918ecd961888279dba3ffad$"
+	"smartupdate": "$TexturePacker:SmartUpdate:f42e8c39b034d5481662aba67dd920ae:1111848e6ac5b83f437cf2f4edb1b4e2:4b774b923918ecd961888279dba3ffad$"
 }
 }
