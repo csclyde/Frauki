@@ -24,12 +24,12 @@ EffectsController = function() {
     this.splashLeft.minParticleScale = 0.8;
 
     this.posSpark = game.add.emitter(0, 0, 100);
-    this.posSpark.makeParticles('Misc', ['Sparks0000', 'Sparks0001', 'Sparks0002', 'Sparks0003', 'Sparks0004']); 
+    this.posSpark.makeParticles('Misc', ['Sparks0000', 'Sparks0001', 'Sparks0002', 'Sparks0003', 'Sparks0004', 'Sparks0005', 'Sparks0006']); 
     this.posSpark.gravity = -750;
     this.posSpark.particleDrag.setTo(100);
 
     this.negSpark = game.add.emitter(0, 0, 100);
-    this.negSpark.makeParticles('Misc', ['Sparks0005', 'Sparks0006', 'Sparks0007', 'Sparks0008', 'Sparks0009']); 
+    this.negSpark.makeParticles('Misc', ['Sparks0007', 'Sparks0008', 'Sparks0009', 'Sparks0010', 'Sparks0011', 'Sparks0012', 'Sparks0013']); 
     this.negSpark.gravity = -750;
     this.negSpark.particleDrag.setTo(100);
 
