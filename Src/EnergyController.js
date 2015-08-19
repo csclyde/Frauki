@@ -1,12 +1,22 @@
 EnergyController = function() {
 
+	var that  = this;
+
 	this.energy = 15;
 	this.neutralPoint = 15;
 	this.charge = 0;
+	this.activeCharge = 0;
 	this.tickTimer = 0;
 	this.gracePeriod = 0;
 
+	this.timers = new TimerUtil();
+
+	this.charging = false;
+
 	this.energyUsageTimestamp = 0;
+
+	events.subscribe('player_power_slash', function() { that.charge = 0; });
+
 };
 
 EnergyController.prototype.Create = function() {
@@ -65,7 +75,7 @@ EnergyController.prototype.UpdateEnergy = function() {
 				}
 			}
 		}
-		
+
 		this.tickTimer = game.time.now + 20;
 	}
 
@@ -76,6 +86,7 @@ EnergyController.prototype.UpdateEnergy = function() {
 	if(this.charge > 30)
 		this.charge = 30;
 
+
 	if(this.charge < 0) {
 		this.charge = 0;
 	}
@@ -84,6 +95,7 @@ EnergyController.prototype.UpdateEnergy = function() {
 		this.neutralPoint = 30;
 	if(this.neutralPoint <= 0)
 		Main.Restart();
+
 
 	this.energyBar.scale.x = this.energy / 30;
 	this.energyBarWhite.scale.x = this.energy / 30;

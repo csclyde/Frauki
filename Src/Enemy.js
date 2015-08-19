@@ -209,15 +209,15 @@ function EnemyHit(f, e) {
     if(!e.timers.TimerUp('hit'))
         return;
 
-    var damage = frauki.currentAttack.damage * (energyController.GetEnergyPercentage() > 1 ? energyController.GetEnergyPercentage() : 1);
+    var damage = frauki.GetCurrentDamage();//frauki.currentAttack.damage;
 
     //fraukis knockback will increase the amount that the enemy is moved. The weight
     //of the enemy will work against that. 
-    e.body.velocity.x = (600 * frauki.currentAttack.knockback) - (600 * e.weight);
+    e.body.velocity.x = (600 * frauki.GetCurrentKnockback()) - (600 * e.weight);
     if(e.body.velocity.x < 50) e.body.velocity.x = 50;
     e.body.velocity.x *= e.PlayerDirMod();
     
-    e.body.velocity.y = -200 + (frauki.currentAttack.juggle * -300);
+    e.body.velocity.y = -200 + (frauki.GetCurrentJuggle() * -300);
 
     e.timers.SetTimer('hit', e.baseStunDuration * damage);
 
@@ -255,10 +255,10 @@ function EnemyHit(f, e) {
 
 function ClashSwords(e, f) {
 
-    console.log(frauki.currentAttack.priority, e.owningEnemy.currentAttack.priority);
+    console.log(frauki.GetCurrentPriority(), e.owningEnemy.currentAttack.priority);
 
     //if fraukis attack has priority over the enemies attack, they cant block it
-    if(frauki.currentAttack.priority > e.owningEnemy.currentAttack.priority) {
+    if(frauki.GetCurrentPriority() > e.owningEnemy.currentAttack.priority) {
         game.physics.arcade.overlap(frauki.attackRect, e.owningEnemy, EnemyHit);
         return;
     }

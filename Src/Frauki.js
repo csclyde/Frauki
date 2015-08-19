@@ -54,6 +54,10 @@ Player = function (game, x, y, name) {
     this.movement.rollPrevVel = 0;
     this.movement.rollDirection = 1;
 
+    this.attack = {};
+    this.attack.chargeBonus = 0;
+    this.attack.activeCharge = 0;
+
     this.timers = new TimerUtil();
 
     this.currentAttack = {};
@@ -64,6 +68,7 @@ Player = function (game, x, y, name) {
     events.subscribe('player_jump', this.Jump, this);
     events.subscribe('player_crouch', this.Crouch, this);
     events.subscribe('player_slash', this.Slash, this);
+    events.subscribe('player_power_slash', this.Slash, this);
     events.subscribe('player_roll', this.Roll, this);
     events.subscribe('player_run', this.StartStopRun, this);
     events.subscribe('control_up', function(params) { 
@@ -224,6 +229,22 @@ Player.prototype.UpdateAttackGeometry = function() {
         this.attackRect.body.width = 0;
         this.attackRect.body.height = 0;
     }
+};
+
+Player.prototype.GetCurrentDamage = function() {
+    return this.currentAttack.damage + this.currentAttack.damage * (this.attack.chargeBonus);
+};
+
+Player.prototype.GetCurrentKnockback = function() {
+    return this.currentAttack.knockback + this.currentAttack.knockback * (this.attack.chargeBonus);
+};
+
+Player.prototype.GetCurrentJuggle = function() {
+    return this.currentAttack.juggle + this.currentAttack.juggle * (this.attack.chargeBonus);
+};
+
+Player.prototype.GetCurrentPriority = function() {
+    return this.currentAttack.priority + this.currentAttack.priority * (this.attack.chargeBonus);
 };
 
 Player.prototype.Attacking = function() {
@@ -403,6 +424,12 @@ Player.prototype.Slash = function(params) {
 
     // if(!this.timers.TimerUp('frauki_slash'))
     //     return;
+
+    if(!!params && !!params.chargeBonus) {
+        this.attack.chargeBonus = params.chargeBonus;
+    } else {
+        this.attack.chargeBonus = 0;
+    }
 
     //diving dash
     if(!this.timers.TimerUp('frauki_dash') && this.states.crouching && (this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling || this.state === this.Flipping)) {
@@ -772,6 +799,8 @@ Player.prototype.AttackFront = function() {
         } else { 
             this.state = this.Standing;
         }
+
+        this.attack.chargeBonus = 0;
     }
 };
 
@@ -784,6 +813,8 @@ Player.prototype.AttackOverhead = function() {
     
     if(this.animations.currentAnim.isFinished) {
         this.state = this.Standing;
+
+        this.attack.chargeBonus = 0;
     }
 };
 
@@ -816,6 +847,8 @@ Player.prototype.AttackStab = function() {
         } else {
             this.state = this.Standing;
         }
+
+        this.attack.chargeBonus = 0;
     }
 };
 
@@ -873,6 +906,8 @@ Player.prototype.AttackDiveLand = function() {
         else {
             this.state = this.Running;
         }
+
+        this.attack.chargeBonus = 0;
     }
 };
 
@@ -890,6 +925,7 @@ Player.prototype.AttackJump = function() {
 
     if(this.animations.currentAnim.isFinished) {
         this.state = this.Jumping;
+        this.attack.chargeBonus = 0;
     }
 };
 
