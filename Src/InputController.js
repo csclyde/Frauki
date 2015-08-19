@@ -21,7 +21,7 @@ InputController = function() {
 	this.runLeft 	= game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
 	this.runRight 	= game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
 	this.slash		= game.input.keyboard.addKey(Phaser.Keyboard.Z);
-    this.powerSlash = game.input.keyboard.addKey(Phaser.Keyboard.C);
+    this.weapon     = game.input.keyboard.addKey(Phaser.Keyboard.C);
 	this.roll		= game.input.keyboard.addKey(Phaser.Keyboard.X);
     this.pause      = game.input.keyboard.addKey(Phaser.Keyboard.Q);
 	this.testButton = game.input.keyboard.addKey(Phaser.Keyboard.P);
@@ -43,6 +43,9 @@ InputController = function() {
 
     this.slash.onDown.add(function() { events.publish('player_slash', {}); }, this);
     this.roll.onDown.add(function() { events.publish('player_roll', {}); }, this);
+
+    this.slash.onDown.add(function() { events.publish('activate_weapon', { activate: true }); }, this);
+    this.slash.onUp.add(function() { events.publish('activate_weapon', { activate: false }); }, this);
 
     events.subscribe('control_up', function(params) { 
 
@@ -106,7 +109,7 @@ InputController = function() {
                 break;
 
                 case 3:
-                    events.publish('player_power_slash', { chargeBonus: energyController.charge / 30 });
+                    events.publish('activate_weapon', { activate: true });
                 break;
 
                 case 12:
@@ -141,7 +144,7 @@ InputController = function() {
                 break;
 
                 case 3:
-
+                    events.publish('activate_weapon', { activate: false });
                 break;
 
                 case 12:

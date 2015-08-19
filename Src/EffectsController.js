@@ -40,10 +40,6 @@ EffectsController = function() {
 
     this.particleType = 'pos';
 
-    this.forceField = game.add.sprite(0, 0, 'Misc');
-    this.forceField.animations.add('activate', ['ForceField0000', 'ForceField0001', 'ForceField0002', 'ForceField0003', 'ForceField0004', 'ForceField0005'], 14, false, false);
-    this.forceField.visible = false;
-
     this.pieces = [];
     this.dicedPieces4 = game.add.group(Frogland.objectGroup_4);
     this.dicedPieces3 = game.add.group(Frogland.objectGroup_3);
@@ -79,14 +75,6 @@ EffectsController.prototype.Update = function() {
         this.positiveBits.y = this.enemySource.y;
         this.positiveBits.width = this.enemySource.width;
         this.positiveBits.height = this.enemySource.height;
-    }
-
-    this.forceField.x = frauki.body.x - 43;
-    this.forceField.y = frauki.body.y - 30;
-
-    if(this.forceField.animations.currentAnim.isFinished) {
-        this.forceField.visible = false;
-        frauki.states.forceFieldActive = false;
     }
 
     this.energyStreak.x = frauki.attackRect.body.x;
@@ -357,13 +345,6 @@ EffectsController.prototype.MakeHearts = function(amt) {
 EffectsController.prototype.SlowHit = function(duration) {
     var t = game.add.tween(game.time).to( { slowMotion: 4 }, Math.round(duration * 0.33), Phaser.Easing.Quartic.Out, false).to( { slowMotion: 1 }, Math.round(duration * 0.66), Phaser.Easing.Exponential.In, false);
     t.start();
-};
-
-EffectsController.prototype.ForceField = function() {
-
-    this.forceField.visible = true;
-    frauki.states.forceFieldActive = true;
-    this.forceField.animations.play('activate');
 };
 
 EffectsController.prototype.SparkSplash = function(posSrc, negSrc) {

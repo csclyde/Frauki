@@ -6,6 +6,8 @@ WeaponController = function() {
   this.timers = new TimerUtil();
   
   events.subscribe('activate_weapon', this.ToggleWeapon, this);
+
+  this.ForceField.Init();
 };
 
 WeaponController.prototype.create = function() {
@@ -18,6 +20,8 @@ WeaponController.prototype.Update = function() {
             this.currentWeapon.Update();
         }
     }
+
+    this.ForceField.UpdateOverride();
 };
 
 WeaponController.prototype.ToggleWeapon = function(params) {
@@ -34,18 +38,18 @@ WeaponController.prototype.ToggleWeapon = function(params) {
 
 //returns null of there is no current attck geometry
 WeaponController.prototype.GetAttackGeometry = function() {
-    if(this.currentWeapon === this.Mace && this.weaponActive) {
-        return {x: this.Mace.mace.x,  y: this.Mace.mace.y, w: this.Mace.mace.width, h: this.Mace.mace.height,
-            damage: 1,
-            knockback: 1,
-            penetration: 0
-        }
+    if(!!this.currentWeapon) {
+        return this.currentWeapon.GetDamageFrame();
     }
 
     return null;
 };
 
 WeaponController.prototype.Bomb = {
+    Init: function() {
+
+    },
+
     Start: function() {
         //the initial activity when you press the button
     },
@@ -68,6 +72,10 @@ WeaponController.prototype.Bomb = {
 };
 
 WeaponController.prototype.Mace = {
+    Init: function() {
+
+    },
+
     Start: function() {
         //the initial activity when you press the button
         if(this.mace === null) {
@@ -85,7 +93,7 @@ WeaponController.prototype.Mace = {
         this.mace.body.velocity.x = 0;
         this.mace.body.velocity.y = 0;
 
-        energyController.RemoveEnergy(2);
+        energyController.RemoveCharge(2);
     },
     
     Update: function() {
@@ -117,7 +125,7 @@ WeaponController.prototype.Mace = {
         weaponController.attackGeometry = this.mace.body;
 
         if(weaponController.timers.TimerUp('mace_depletion')) {
-            energyController.RemoveEnergy(0.1);
+            energyController.RemoveCharge(0.1);
             weaponController.timers.SetTimer('mace_depletion', 200);
         }
     },
@@ -127,13 +135,17 @@ WeaponController.prototype.Mace = {
         this.mace.visible = false;
         
         this.mace.body.enable = false;
-        energyController.RemoveEnergy(2);
+        energyController.RemoveCharge(2);
     },
 
     mace: null
 };
 
 WeaponController.prototype.Bubble = {
+    Init: function() {
+
+    },
+
     Start: function() {
         //the initial activity when you press the button
     },
@@ -148,20 +160,103 @@ WeaponController.prototype.Bubble = {
 };
 
 WeaponController.prototype.ForceField = {
+    Init: function() {
+        this.forceField = game.add.sprite(0, 0, 'Misc');
+        this.forceField.animations.add('activate', ['ForceField0000', 'ForceField0001', 'ForceField0002', 'ForceField0003', 'ForceField0004', 'ForceField0005'], 14, false, false);
+        this.forceField.visible = false;
+    },
+
+    GetDamageFrame: function() {
+        if(this.forceField.visible) {
+            return this.DamageFrames[this.forceField.animations.currentFrame.name];
+        } else {
+            return null;
+        }
+    },
+
     Start: function() {
-    //the initial activity when you press the button
+
+        if(energyController.charge > 1 && this.forceField.visible === false) {
+            this.forceField.animations.play('activate');
+            this.forceField.visible = true;
+            energyController.RemoveCharge(1);
+        }
+
     },
 
     Update: function() {
-    //what to do while updating (only called while active)
+    },
+
+    UpdateOverride: function() {
+        this.forceField.x = frauki.body.x - 43;
+        this.forceField.y = frauki.body.y - 30;
+
+        if(this.forceField.visible && this.forceField.animations.currentAnim.isFinished) {
+            this.forceField.visible = false;
+        }
     },
 
     Stop: function() {
-    //the final activity when they release the button
+    },
+
+    DamageFrames: {
+        'ForceField0000': {
+            x: 0, y: 15, w: 10, h: 10,
+            damage: 0,
+            knockback: 1,
+            priority: 1,
+            juggle: 1
+        },
+
+        'ForceField0001': {
+            x: -5, y: 10, w: 20, h: 20,
+            damage: 0,
+            knockback: 1,
+            priority: 1,
+            juggle: 1
+        },
+
+        'ForceField0002': {
+            x: -14, y: -2, w: 40, h: 40,
+            damage: 0,
+            knockback: 1,
+            priority: 1,
+            juggle: 1
+        },
+
+        'ForceField0003': {
+            x: -17, y: -3, w: 45, h: 45,
+            damage: 0,
+            knockback: 1,
+            priority: 1,
+            juggle: 1
+        },
+
+        'ForceField0004': {
+            x: 0, y: 0, w: 10, h: 10,
+            damage: 0,
+            knockback: 0,
+            priority: 1,
+            juggle: 0
+        },
+
+        'ForceField0005': {
+            x: 0, y: 0, w: 10, h: 10,
+            damage: 0,
+            knockback: 0,
+            priority: 1,
+            juggle: 0
+        }
     }
+
+
 };  
 
 WeaponController.prototype.Jumper = {
+    Init: function() {
+
+    },
+
     Start: function() {
         //the initial activity when you press the button
         if(energyController.GetEnergy() >= 0) {

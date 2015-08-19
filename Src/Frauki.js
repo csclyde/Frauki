@@ -42,7 +42,6 @@ Player = function (game, x, y, name) {
     this.states.droppingThroughCloud = false;
     this.states.onLeftSlope = false;
     this.states.onRightSlope = false;
-    this.states.forceFieldActive = false;
 
     this.movement = {};
     this.movement.rollVelocity = 0;
@@ -205,8 +204,8 @@ Player.prototype.UpdateAttackGeometry = function() {
     if(weaponController.GetAttackGeometry()) {
         this.currentAttack = weaponController.GetAttackGeometry();
 
-        this.attackRect.body.x = this.currentAttack.x; 
-        this.attackRect.body.y = this.currentAttack.y; 
+        this.attackRect.body.x = this.currentAttack.x + this.body.x; 
+        this.attackRect.body.y = this.currentAttack.y + this.body.y; 
         this.attackRect.body.width = this.currentAttack.w; 
         this.attackRect.body.height = this.currentAttack.h;
 

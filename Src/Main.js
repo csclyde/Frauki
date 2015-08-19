@@ -7,7 +7,6 @@ Main.create = function() {
     energyController = new EnergyController();
     audioController = new AudioController();
     triggerController = new TriggerController();
-    weaponController = new WeaponController();
     scriptRunner = new ScriptRunner();
     timerUtil = new TimerUtil();
 
@@ -19,6 +18,7 @@ Main.create = function() {
     
     energyController.Create();
     effectsController = new EffectsController();
+    weaponController = new WeaponController();
     projectileController = new ProjectileController();
 
     this.gamepadIcon = game.add.image(150, 150, 'UI', 'Gamepad0001');
