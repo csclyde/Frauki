@@ -144,13 +144,12 @@ Enemy.prototype.update = function() {
     if(this.Attacking()) {
 
         if(this.timers.TimerUp('hit')) {
-            if((this.direction === 'left' && frauki.states.direction === 'right' && frauki.body.center.x < this.body.center.x) ||
-               (this.direction === 'right' && frauki.states.direction === 'left' && frauki.body.center.x > this.body.center.x) ) 
+            if((this.direction === 'left' && frauki.states.direction === 'right' && frauki.body.center.x < this.body.center.x + 10) ||
+               (this.direction === 'right' && frauki.states.direction === 'left' && frauki.body.center.x > this.body.center.x - 10) ) 
             {
                 game.physics.arcade.overlap(this.attackRect, frauki.attackRect, ClashSwords);
             }
         }
-
 
         game.physics.arcade.overlap(this.attackRect, frauki, EnemyAttackConnect);
     }
@@ -165,7 +164,7 @@ Enemy.prototype.Attacking = function() {
 };
 
 Enemy.prototype.WithinCameraRange = function() {
-    var padding = 50;
+    var padding = 150;
 
     if(this.body.x > game.camera.x - padding &&
        this.body.y > game.camera.y - padding &&

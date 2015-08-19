@@ -439,12 +439,12 @@ Player.prototype.Slash = function(params) {
     }
 
     //diving dash
-    if(!this.timers.TimerUp('frauki_dash') && this.states.crouching && (this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling || this.state === this.Flipping)) {
+    if(!this.timers.TimerUp('frauki_dash') && this.states.crouching && (this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling)) {
         this.DiveSlash();
         effectsController.EnergyStreak();
     }
     //running dash
-    else if(this.state === this.Rolling || this.state === this.Kicking) {
+    else if(this.state === this.Rolling || this.state === this.Flipping) {
         this.StabSlash();
         effectsController.EnergyStreak();
     }

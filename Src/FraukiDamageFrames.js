@@ -73,7 +73,7 @@ var fraukiDamageFrames = {
 
 	//overhead swing
 	'Attack Overhead0006': {
-		x: -30, y: -32, w: 75, h: 60,
+		x: -30, y: -28, w: 75, h: 60,
 		damage: 2.5,
 		knockback: 0,
 		priority: 2,
@@ -82,29 +82,11 @@ var fraukiDamageFrames = {
 
 	//overhead swing
 	'Attack Overhead0007': {
-		x: -30, y: -32, w: 75, h: 60,
+		x: -30, y: -28, w: 75, h: 60,
 		damage: 2,
 		knockback: 0,
 		priority: 2,
 		juggle: 1
-	},
-
-	//overhead swing
-	'Attack Overhead0008': {
-		x: -30, y: -32, w: 75, h: 60,
-		damage: 2,
-		knockback: 0.1,
-		priority: 2,
-		juggle: 0.4
-	},
-
-	//overhead swing
-	'Attack Overhead0009': {
-		x: -30, y: -32, w: 75, h: 60,
-		damage: 0.5,
-		knockback: 0.1,
-		priority: 2,
-		juggle: 0.2
 	},
 	
 	//stab, big short initial shape

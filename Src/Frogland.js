@@ -26,14 +26,16 @@ Frogland.Create = function() {
     this.CreateBackgroundLayer(3, +this.map.properties.startLayer === 3);
     this.CreateBackgroundLayer(2, +this.map.properties.startLayer === 2);
 
-    var fraukiStartX, fraukiStartY;
+    var fraukiStartX, fraukiStartY, startLayer;
 
-    if(false) {
+    if(true) {
         fraukiStartX = 2025;
         fraukiStartY = 1050;
+        startLayer = 3;
     } else {
         fraukiStartX = this.map.properties.startX * 16;
         fraukiStartY = this.map.properties.startY * 16;
+        startLayer = +this.map.properties.startLayer;
     }
 
     frauki = new Player(game, fraukiStartX, fraukiStartY, 'Frauki');
@@ -47,15 +49,15 @@ Frogland.Create = function() {
     this.CreateObjectsLayer(3);
     this.CreateObjectsLayer(2);
 
-    this.CreateMidgroundLayer(4, +this.map.properties.startLayer === 4);
-    this.CreateMidgroundLayer(3, +this.map.properties.startLayer === 3);
-    this.CreateMidgroundLayer(2, +this.map.properties.startLayer === 2);
+    this.CreateMidgroundLayer(4, startLayer === 4);
+    this.CreateMidgroundLayer(3, startLayer === 3);
+    this.CreateMidgroundLayer(2, startLayer === 2);
 
     //effectsController.piecesGroup = game.add.group();
 
-    this.CreateForegroundLayer(4, +this.map.properties.startLayer === 4);
-    this.CreateForegroundLayer(3, +this.map.properties.startLayer === 3);
-    this.CreateForegroundLayer(2, +this.map.properties.startLayer === 2);
+    this.CreateForegroundLayer(4, startLayer === 4);
+    this.CreateForegroundLayer(3, startLayer === 3);
+    this.CreateForegroundLayer(2, startLayer === 2);
 
     this.CreateCollisionLayer(4);
     this.CreateCollisionLayer(3);

@@ -63,9 +63,9 @@ Enemy.prototype.types['HWK9'] =  function() {
 
     	this.state = this.Flipping;
 
-    	this.timers.SetTimer('flip_timer', game.rnd.between(500, 1000));
+    	this.timers.SetTimer('flip_timer', game.rnd.between(500, 800));
 
-    	this.body.velocity.y = -500;
+    	this.body.velocity.y = -450;
 
     	if(this.direction === 'left') {
     		this.body.velocity.x = 400;
@@ -155,7 +155,9 @@ Enemy.prototype.types['HWK9'] =  function() {
 	this.Blocking = function() {
 		this.PlayAnim('block');
 
-		if(frauki.state === frauki.AttackStab) {
+		this.FacePlayer();
+
+		if(frauki.state === frauki.AttackStab || frauki.state === frauki.AttackDiveCharge) {
 			this.Dodge();
 		}
 
@@ -174,7 +176,6 @@ Enemy.prototype.types['HWK9'] =  function() {
 		this.PlayAnim('flip');
 
 		if(this.body.onFloor()) {
-			console.log('dude landed');
 
 			this.timers.SetTimer('dodge_timer', game.rnd.between(800, 2000));
 			this.state = this.Idling;
@@ -201,7 +202,7 @@ Enemy.prototype.types['HWK9'] =  function() {
 
 	this.attackFrames = {
 		'HWK9/Block0000': {
-			x: -4, y: 2, w: 32, h: 22,
+			x: -4, y: 2, w: 32, h: 32,
 			damage: 0,
 			knockback: 0,
 			priority: 1,
@@ -212,11 +213,19 @@ Enemy.prototype.types['HWK9'] =  function() {
 			x: 12, y: -30, w: 65, h: 100,
 			damage: 5,
 			knockback: 0,
-			priority: 1,
+			priority: 2,
 			juggle: 0
 		},
 
 		'HWK9/AttackDash0002': {
+			x: 12, y: -30, w: 65, h: 100,
+			damage: 5,
+			knockback: 0,
+			priority: 2,
+			juggle: 0
+		},
+
+		'HWK9/AttackDash0003': {
 			x: 25, y: -40, w: 40, h: 60,
 			damage: 3,
 			knockback: 0,
