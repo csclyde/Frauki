@@ -49,7 +49,7 @@ EnergyController.prototype.Create = function() {
 	this.restingPointMarker.fixedToCamera = true;
 };
 
-EnergyController.prototype.UpdateEnergy = function() {
+EnergyController.prototype.Update = function() {
 
 	var energyDiff = this.energy - this.neutralPoint;
 	var step = 0.15;

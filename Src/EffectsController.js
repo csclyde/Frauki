@@ -61,7 +61,7 @@ EffectsController = function() {
     this.LoadMapEffects(2);
 };
 
-EffectsController.prototype.UpdateEffects = function() {
+EffectsController.prototype.Update = function() {
 
     this.activeDest = frauki.body;
     this.positiveBits.forEachAlive(UpdateParticle, this);

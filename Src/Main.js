@@ -7,6 +7,7 @@ Main.create = function() {
     energyController = new EnergyController();
     audioController = new AudioController();
     triggerController = new TriggerController();
+    weaponController = new WeaponController();
     scriptRunner = new ScriptRunner();
     timerUtil = new TimerUtil();
 
@@ -35,11 +36,12 @@ Main.update = function() {
     
     Frogland.Update();
 
-    cameraController.UpdateCamera();
-    inputController.UpdateInput();
-    effectsController.UpdateEffects();
-    energyController.UpdateEnergy();
+    cameraController.Update();
+    inputController.Update();
+    effectsController.Update();
+    energyController.Update();
     projectileController.Update();
+    weaponController.Update();
     triggerController.Update(Frogland.currentLayer);
 
     this.gamepadIcon.cameraOffset.x = Math.round(pixel.width * 0.27 + cameraController.camX / pixel.scale);

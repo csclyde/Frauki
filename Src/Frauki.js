@@ -200,12 +200,20 @@ Player.prototype.Grace = function() {
 
 Player.prototype.UpdateAttackGeometry = function() {
 
-    //if the force field is active, then use its geometry
-    if(this.states.forceFieldActive) {
-        this.currentAttack = fraukiDamageFrames[effectsController.forceField.animations.currentFrame.name];
+    //first, check the weapon controller for an attack geometry override
+    //barring that, find the normal attack geometry
+    if(weaponController.GetAttackGeometry()) {
+        this.currentAttack = weaponController.GetAttackGeometry();
+
+        this.attackRect.body.x = this.currentAttack.x; 
+        this.attackRect.body.y = this.currentAttack.y; 
+        this.attackRect.body.width = this.currentAttack.w; 
+        this.attackRect.body.height = this.currentAttack.h;
+
+        return;
     }
-    //check for a frame mod and apply its mods
-    else if(this.animations.currentFrame) {
+
+    if(this.animations.currentFrame) {
         this.currentAttack = fraukiDamageFrames[this.animations.currentFrame.name];
     } 
 

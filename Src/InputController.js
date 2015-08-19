@@ -170,7 +170,7 @@ InputController = function() {
 
 };
 
-InputController.prototype.UpdateInput = function() {
+InputController.prototype.Update = function() {
 
 	if (this.dpad.left) {
         frauki.Run({dir:'left'});

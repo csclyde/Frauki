@@ -23,7 +23,7 @@ CameraController = function() {
 }
 
 //camera is controlled in player centric space
-CameraController.prototype.UpdateCamera = function() {
+CameraController.prototype.Update = function() {
 	
 	var xOffset = frauki.states.direction === 'left' ? -15 : 15;
 	var yOffset = frauki.body.velocity.y > 0 ? 20 : 0;
