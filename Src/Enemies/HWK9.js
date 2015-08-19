@@ -10,7 +10,7 @@ Enemy.prototype.types['HWK9'] =  function() {
     this.animations.add('block', ['HWK9/Block0000'], 18, true, false);
     this.animations.add('hurt', ['HWK9/Stand0000'], 8, true, false);
 
-    this.energy = 5;
+    this.energy = 7;
     this.baseStunDuration = 500;
 
 
@@ -65,7 +65,7 @@ Enemy.prototype.types['HWK9'] =  function() {
 
     	this.timers.SetTimer('flip_timer', game.rnd.between(500, 1000));
 
-    	this.body.velocity.y = -400;
+    	this.body.velocity.y = -500;
 
     	if(this.direction === 'left') {
     		this.body.velocity.x = 400;
@@ -176,14 +176,14 @@ Enemy.prototype.types['HWK9'] =  function() {
 		if(this.body.onFloor()) {
 			console.log('dude landed');
 
-			this.timers.SetTimer('dodge_timer', game.rnd.between(1000, 3000));
+			this.timers.SetTimer('dodge_timer', game.rnd.between(800, 2000));
 			this.state = this.Idling;
 		}
 
 		if(this.timers.TimerUp('flip_timer')) {
 			this.Attack();
 
-			this.timers.SetTimer('dodge_timer', game.rnd.between(1000, 3000));
+			this.timers.SetTimer('dodge_timer', game.rnd.between(800, 2000));
 		}
 	};
 
@@ -191,7 +191,11 @@ Enemy.prototype.types['HWK9'] =  function() {
 		this.PlayAnim('hurt');
 
 		if(this.timers.TimerUp('hit')) {
-			this.state = this.Idling;
+			if(this.timers.TimerUp('dodge_timer')) {
+				this.Dodge();
+			} else {
+				this.Block();
+			}
 		}
 	};
 

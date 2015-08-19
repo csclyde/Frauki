@@ -176,10 +176,10 @@ WeaponController.prototype.ForceField = {
 
     Start: function() {
 
-        if(energyController.charge > 1 && this.forceField.visible === false) {
+        if(energyController.charge >= 3 && this.forceField.visible === false) {
             this.forceField.animations.play('activate');
             this.forceField.visible = true;
-            energyController.RemoveCharge(1);
+            energyController.RemoveCharge(3);
         }
 
     },
