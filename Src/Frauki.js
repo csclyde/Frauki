@@ -265,9 +265,6 @@ Player.prototype.LandHit = function(e, damage) {
     frauki.body.velocity.x = vel.x;
     frauki.body.velocity.y = vel.y;
 
-    //frauki.animations.paused = true;
-    //game.time.events.add(200, function() { frauki.animations.paused = false; }, this);
-
     if(damage > 0 && e.maxEnergy > 1) {
         effectsController.SlowHit(150);
     } else if(damage === 0) {
@@ -507,13 +504,7 @@ Player.prototype.Roll = function(params) {
         this.movement.rollStart = game.time.now;
         this.movement.rollPop = false;
         this.movement.rollPrevVel = 0;
-    } else {
-
-        if(!energyController.UseEnergy(1))
-            return;
-        
-        effectsController.ForceField();
-    }
+    } 
 
     this.timers.SetTimer('frauki_roll', 250);
     this.timers.SetTimer('frauki_grace', 300);
