@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="330" tilewidth="16" tileheight="16" nextobjectid="483">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="330" tilewidth="16" tileheight="16" nextobjectid="484">
  <properties>
-  <property name="startLayer" value="3"/>
+  <property name="startLayer" value="4"/>
   <property name="startX" value="82"/>
   <property name="startY" value="75"/>
  </properties>
@@ -4625,7 +4625,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="Objects_4" visible="0">
+ <objectgroup name="Objects_4">
   <object id="313" gid="86" x="1024" y="2208" width="16" height="16"/>
   <object id="314" gid="86" x="1024" y="2032" width="16" height="16"/>
   <object id="315" gid="85" x="784" y="2064" width="16" height="16"/>
@@ -4739,11 +4739,11 @@
   <object id="424" gid="68" x="980.667" y="1579.33" width="16" height="16"/>
   <object id="425" gid="68" x="767.333" y="2636.67" width="16" height="16"/>
   <object id="426" gid="100" x="2395" y="1825" width="16" height="16"/>
-  <object id="477" gid="100" x="1468" y="1288" width="16" height="16"/>
   <object id="478" gid="87" x="297" y="2272" width="16" height="16"/>
   <object id="479" gid="96" x="201" y="1823" width="16" height="16"/>
   <object id="480" gid="89" x="39" y="2040" width="16" height="16"/>
   <object id="482" gid="85" x="202" y="2530" width="16" height="16"/>
+  <object id="483" gid="98" x="1539.33" y="1296" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Triggers_4" visible="0"/>
  <objectgroup name="Doors_1" visible="0">

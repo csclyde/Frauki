@@ -48,7 +48,7 @@ Enemy.prototype.SetDefaultValues = function() {
     this.energy = 5;
     this.damage = 3;
     this.inScope = false;
-    this.baseStunDuration = 300;
+    this.baseStunDuration = 400;
 };
 
 Enemy.prototype.UpdateFunction = function() {};
@@ -200,7 +200,7 @@ Enemy.prototype.PlayAnim = function(name) {
 };
 
 function EnemyHit(f, e) {
-    
+
     if(e.spriteType !== 'enemy' || e.state === e.Hurting || !e.Vulnerable() || e.state === e.Dying)
         return;
 
@@ -247,7 +247,7 @@ function EnemyHit(f, e) {
     frauki.LandHit(e, damage);
 
     events.publish('play_sound', { name: 'attack_connect' });
-    effectsController.ParticleSpray(e.body, frauki.body, 'positive', e.EnemyDirection(), damage * 2);  
+    effectsController.ParticleSpray(e.body, frauki.body, 'positive', e.EnemyDirection(), damage * 2); 
 
     if(e.energy <= 0) { e.destroy(); }
 };
@@ -279,7 +279,7 @@ function ClashSwords(e, f) {
     events.publish('stop_attack_sounds', {});
     events.publish('play_sound', {name: 'clang'});
 
-    e.timers.SetTimer('hit', 300);
+    e.timers.SetTimer('hit', 400);
     frauki.timers.SetTimer('frauki_hit', 300);
 };
 

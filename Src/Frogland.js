@@ -22,10 +22,6 @@ Frogland.Create = function() {
     this.map.addTilesetImage('Doodads');
     this.map.addTilesetImage('Collision');
 
-    this.CreateBackgroundLayer(4, +this.map.properties.startLayer === 4);
-    this.CreateBackgroundLayer(3, +this.map.properties.startLayer === 3);
-    this.CreateBackgroundLayer(2, +this.map.properties.startLayer === 2);
-
     var fraukiStartX, fraukiStartY, startLayer;
 
     if(true) {
@@ -37,13 +33,17 @@ Frogland.Create = function() {
         fraukiStartY = this.map.properties.startY * 16;
         startLayer = +this.map.properties.startLayer;
     }
+    
+    this.CreateBackgroundLayer(4, startLayer === 4);
+    this.CreateBackgroundLayer(3, startLayer === 3);
+    this.CreateBackgroundLayer(2, startLayer === 2);
 
     frauki = new Player(game, fraukiStartX, fraukiStartY, 'Frauki');
     game.add.existing(frauki);
 
     game.camera.focusOnXY(frauki.body.x, frauki.body.y);
 
-    this.currentLayer = +this.map.properties.startLayer;
+    this.currentLayer = startLayer;
     
     this.CreateObjectsLayer(4);
     this.CreateObjectsLayer(3);

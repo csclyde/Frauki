@@ -64,6 +64,8 @@ Enemy.prototype.types['KR32'] =  function() {
     	}
 
     	this.state = this.Windup;
+
+    	this.timers.SetTimer('windup', 250 + game.rnd.between(0, 100));
     };
 
 	////////////////////////////////STATES////////////////////////////////////
@@ -100,25 +102,26 @@ Enemy.prototype.types['KR32'] =  function() {
 		}
 
 
-		if(this.PlayerDistance() < 120 && !frauki.Attacking() && this.body.onFloor() && frauki.body.center.y > this.body.center.y - 50 && frauki.state !== frauki.AttackStab) {
+		if(this.PlayerDistance() < 160 && !frauki.Attacking() && this.body.onFloor() && frauki.body.center.y > this.body.center.y - 50 && frauki.state !== frauki.AttackStab) {
 			this.Attack();
 		}
 
-		//respond if the player is attacking and in the personal space? dodge?
+		//can game the time when they attack by jumping over. when they land the timer is ready and so they will always attack
+		//at that instant. need to reset attack timer when player is attackable
 
 	};
 
 	this.Windup = function() {
 		this.PlayAnim('windup');
 
-		if(this.animations.currentAnim.isFinished) {
+		if(this.timers.TimerUp('windup')) {
 			this.state = this.Slashing;
 
 			if(this.PlayerDistance() < 30) {
 				if(this.direction === 'left') {
-					this.body.velocity.x = 200;
+					this.body.velocity.x = 300;
 				} else {
-					this.body.velocity.x = -200;
+					this.body.velocity.x = -300;
 				}
 			} else {
 				if(this.direction === 'left') {
@@ -151,12 +154,13 @@ Enemy.prototype.types['KR32'] =  function() {
 
 		if(this.timers.TimerUp('hit')) {
 			this.state = this.Idling;
+			this.timers.SetTimer('attack', 500 + Math.random() * 1000);
 		}
 	};
 
 	this.attackFrames = {
 		'KR32/Block0000': {
-			x: 18, y: -8, w: 10, h: 40,
+			x: 18, y: -8, w: 10, h: 60,
 			damage: 0,
 			knockback: 0,
 			priority: 2,
@@ -164,7 +168,7 @@ Enemy.prototype.types['KR32'] =  function() {
 		},
 
 		'KR32/Walk0000': {
-			x: 18, y: -8, w: 10, h: 40,
+			x: 18, y: -8, w: 10, h: 60,
 			damage: 0,
 			knockback: 0,
 			priority: 2,
@@ -172,7 +176,7 @@ Enemy.prototype.types['KR32'] =  function() {
 		},
 
 		'KR32/Walk0001': {
-			x: 18, y: -8, w: 10, h: 40,
+			x: 18, y: -8, w: 10, h: 60,
 			damage: 0,
 			knockback: 0,
 			priority: 2,
@@ -180,7 +184,7 @@ Enemy.prototype.types['KR32'] =  function() {
 		},
 
 		'KR32/Walk0002': {
-			x: 18, y: -8, w: 10, h: 40,
+			x: 18, y: -8, w: 10, h: 60,
 			damage: 0,
 			knockback: 0,
 			priority: 2,
@@ -188,7 +192,7 @@ Enemy.prototype.types['KR32'] =  function() {
 		},
 
 		'KR32/Walk0003': {
-			x: 18, y: -8, w: 10, h: 40,
+			x: 18, y: -8, w: 10, h: 60,
 			damage: 0,
 			knockback: 0,
 			priority: 2,
@@ -196,7 +200,7 @@ Enemy.prototype.types['KR32'] =  function() {
 		},
 
 		'KR32/Walk0004': {
-			x: 18, y: -8, w: 10, h: 40,
+			x: 18, y: -8, w: 10, h: 60,
 			damage: 0,
 			knockback: 0,
 			priority: 2,
@@ -204,7 +208,7 @@ Enemy.prototype.types['KR32'] =  function() {
 		},
 
 		'KR32/Walk0005': {
-			x: 18, y: -8, w: 10, h: 40,
+			x: 18, y: -8, w: 10, h: 60,
 			damage: 0,
 			knockback: 0,
 			priority: 2,
@@ -212,7 +216,7 @@ Enemy.prototype.types['KR32'] =  function() {
 		},
 
 		'KR32/Attack0001': {
-			x: 35, y: -3, w: 35, h: 50,
+			x: 15, y: -3, w: 55, h: 50,
 			damage: 3,
 			knockback: 0.5,
 			priority: 1,
@@ -220,7 +224,7 @@ Enemy.prototype.types['KR32'] =  function() {
 		},
 
 		'KR32/Attack0002': {
-			x: 35, y: -3, w: 35, h: 50,
+			x: 15, y: -3, w: 55, h: 50,
 			damage: 2,
 			knockback: 0.3,
 			priority: 1,
@@ -228,7 +232,7 @@ Enemy.prototype.types['KR32'] =  function() {
 		},
 
 		'KR32/Attack0003': {
-			x: 35, y: -3, w: 35, h: 50,
+			x: 15, y: -3, w: 55, h: 50,
 			damage: 2,
 			knockback: 0.3,
 			priority: 1,
@@ -236,7 +240,7 @@ Enemy.prototype.types['KR32'] =  function() {
 		},
 
 		'KR32/Attack0004': {
-			x: 35, y: -3, w: 35, h: 50,
+			x: 15, y: -3, w: 55, h: 50,
 			damage: 2,
 			knockback: 0.3,
 			priority: 1,
