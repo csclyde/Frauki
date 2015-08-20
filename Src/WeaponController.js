@@ -1,5 +1,5 @@
 WeaponController = function() {
-  this.currentWeapon = this.ForceField;
+  this.currentWeapon = this.Jumper;
   this.weaponActive = false;
   this.attackGeometry = null;
 
@@ -248,8 +248,6 @@ WeaponController.prototype.ForceField = {
             juggle: 0
         }
     }
-
-
 };  
 
 WeaponController.prototype.Jumper = {
@@ -259,22 +257,28 @@ WeaponController.prototype.Jumper = {
 
     Start: function() {
         //the initial activity when you press the button
-        if(energyController.GetEnergy() >= 0) {
+        if(energyController.charge >= 0) {
             frauki.states.dashing = true;
             
-            //set direction based on which way youre holding the buttons
-            if(inputController.up.isDown) {
-                frauki.body.velocity.y = -500;
-            } else if(inputController.crouch.isDown) {
-                frauki.body.velocity.y = 500;
-            }
+            // //set direction based on which way youre holding the buttons
+            // if(inputController.up.isDown) {
+            //     frauki.body.velocity.y = -500;
+            // } else if(inputController.crouch.isDown) {
+            //     frauki.body.velocity.y = 500;
+            // }
 
-            if(inputController.runLeft.isDown) {
-                frauki.body.velocity.x = -500;
-            } else if(inputController.runRight.isDown) {
-                frauki.body.velocity.x = 500;
-            }
+            // if(inputController.runLeft.isDown) {
+            //     frauki.body.velocity.x = -500;
+            // } else if(inputController.runRight.isDown) {
+            //     frauki.body.velocity.x = 500;
+            // }
             //energyController.RemoveEnergy(15);
+
+            var vel = frauki.body.velocity.clone();
+            vel = vel.normalize();
+            vel.setMagnitude(500);
+
+            frauki.body.velocity = vel;
 
             game.time.events.add(300, function() { frauki.states.dashing = false; } );
         }
@@ -286,5 +290,9 @@ WeaponController.prototype.Jumper = {
     
     Stop: function() {
         //the final activity when they release the button
+    },
+
+    GetDamageFrame: function() {
+        return null;
     }
 };

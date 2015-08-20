@@ -9,10 +9,10 @@ Enemy.prototype.types['A3PZ'] =  function() {
     this.animations.add('windup1', ['A3PZ/Attack0001', 'A3PZ/Attack0002'], 10, false, false);
     this.animations.add('attack1', ['A3PZ/Attack0003', 'A3PZ/Attack0004', 'A3PZ/Attack0005', 'A3PZ/Attack0006', 'A3PZ/Attack0007'], 18, false, false);
     this.animations.add('windup2', ['A3PZ/Attack0008', 'A3PZ/Attack0009'], 10, false, false);
-    this.animations.add('attack2', ['A3PZ/Attack0010', 'A3PZ/Attack0011', 'A3PZ/Attack0012', 'A3PZ/Attack0013', 'A3PZ/Attack0014'], 18, false, false);
+    this.animations.add('attack2', ['A3PZ/Attack0010', 'A3PZ/Attack0011', 'A3PZ/Attack0012', 'A3PZ/Attack0013', 'A3PZ/Attack0014'], 14, false, false);
     this.animations.add('hurt', ['A3PZ/Hurt0000', 'A3PZ/Hurt0001'], 8, true, false);
 
-    this.energy = 3;
+    this.energy = 4;
     this.baseStunDuration = 500;
 
 
@@ -147,8 +147,13 @@ Enemy.prototype.types['A3PZ'] =  function() {
 		}
 
 		if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
-			this.state = this.Idling;
-			this.timers.SetTimer('attack', 1000 + Math.random() * 500);
+			if(this.PlayerDistance() < 100) {
+				this.FacePlayer();
+				this.Attack();
+			} else {
+				this.state = this.Idling;
+				this.timers.SetTimer('attack', 1000 + Math.random() * 500);
+			}
 		}
 	};
 

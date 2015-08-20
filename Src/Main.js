@@ -97,7 +97,7 @@ Main.Restart = function() {
         game.time.slowMotion = 1;
         game.world.alpha = 1;
 
-        //Main.restarting = false;
+        Main.restarting = false;
 
         Frogland.objectGroup_4.destroy();
         Frogland.objectGroup_3.destroy();
