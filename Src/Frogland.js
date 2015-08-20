@@ -99,7 +99,7 @@ Frogland.Create = function() {
         Frogland.AnimateTiles();
     }, 100);
 
-    game.camera.bounds.inflate(98, 0);
+    game.camera.bounds.inflate(120, 0);
 };
 
 Frogland.Update = function() {
