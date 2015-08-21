@@ -161,7 +161,7 @@ Player.prototype.postStateUpdate = function() {
     }
 
     if(this.Attacking()) {
-        game.physics.arcade.overlap(frauki.attackRect, Frogland.GetCurrentObjectGroup(), EnemyHit);
+        game.physics.arcade.overlap(frauki.attackRect, Frogland.GetCurrentObjectGroup(), Frogland.OverlapAttackWithObject);
         game.physics.arcade.overlap(frauki.attackRect, projectileController.projectiles, ProjectileHit);
         //game.physics.arcade.overlap(frauki.attackRect, Frogland.GetCurrentCollisionLayer(), TilesHit);
     }

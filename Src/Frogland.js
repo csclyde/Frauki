@@ -178,17 +178,21 @@ Frogland.CreateObjectsLayer = function(layer) {
     this[currLayer] = game.add.group();
     this[currLayer].enableBody = true;
 
+    FileMap.Junk.forEach(function(junk) {
+        Frogland.map.createFromObjects('Objects_' + layer, junk.Tile, 'Junk', junk.Name, true, true, that[currLayer], Junk, false);
+    });
+
     //create each enemy for this layer
     FileMap.Enemies.forEach(function(enemy) {
-        Frogland.map.createFromObjects('Objects_' + layer, enemy.Tile, enemy.Name, null, true, false, that[currLayer], Enemy, false);
+        Frogland.map.createFromObjects('Objects_' + layer, enemy.Tile, enemy.Name, null, true, true, that[currLayer], Enemy, false);
     });
 
     //create all the apples
-    this.map.createFromObjects('Objects_' + layer, 66, 'Misc', 'Apple0000', true, false, this[currLayer], Apple, false);
-    this.map.createFromObjects('Objects_' + layer, 68, 'Misc', 'EnergyBitPos0000', true, false, this[currLayer], EnergyNugg, false);
+    this.map.createFromObjects('Objects_' + layer, 66, 'Misc', 'Apple0000', true, true, this[currLayer], Apple, false);
+    this.map.createFromObjects('Objects_' + layer, 68, 'Misc', 'EnergyBitPos0000', true, true, this[currLayer], EnergyNugg, false);
 
     //create the doors
-    this.map.createFromObjects('Objects_' + layer, 67, 'Misc', 'Door0000', true, false, this[currLayer], Door, false)
+    this.map.createFromObjects('Objects_' + layer, 67, 'Misc', 'Door0000', true, true, this[currLayer], Door, false);
 
     //inform each enemy of its own layer
     this[currLayer].forEach(function(obj) {
@@ -393,9 +397,22 @@ Frogland.OverlapFraukiWithObject = function(f, o) {
         OpenDoor(f, o);
 
         return true;
+    } else if(o.spriteType === 'junk') {
+        
     }
 
     return true;
+};
+
+Frogland.OverlapAttackWithObject = function(f, o) {
+    if(o.spriteType === 'enemy') {
+        EnemyHit(f, o);
+    } else if(o.spriteType === 'junk') {
+        o.kill();
+
+        effectsController.Explosion(o.body.center);
+        effectsController.DiceEnemy(o, o.body.center.x, o.body.center.y);
+    }
 };
 
 Frogland.CollideFraukiWithObject = function(f, o) {   
