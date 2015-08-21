@@ -1,5 +1,5 @@
 WeaponController = function() {
-  this.currentWeapon = this.Jumper;
+  this.currentWeapon = this.ForceField;
   this.weaponActive = false;
   this.attackGeometry = null;
 

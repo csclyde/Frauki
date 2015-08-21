@@ -372,7 +372,31 @@ Enemy.prototype.ChargeAtPlayer = function(speed) {
     game.physics.arcade.moveToXY(this, frauki.body.center.x, frauki.body.center.y, speed);
 };
 
-Enemy.prototype.SeekPlayer = function() {
-    
-      
+Enemy.prototype.FraukiVulnerableState = function() {
+
+    var vulnerableFrames = [
+        'Attack Dive0019',
+        'Attack Dive0020',
+        'Attack Dive0021',
+        'Attack Dive0022',
+        'Attack Dive0023',
+        'Attack Dive0024',
+        'Attack Dive0025',
+        'Attack Dive0026',
+        'Attack Dive0027',
+        'Attack Dive0028',
+        'Attack Stab0011',
+        'Attack Stab0012',
+        'Attack Stab0013',
+        'Attack Stab0014',
+        'Attack Stab0015',
+        'Attack Stab0016',
+        'Attack Stab0017'
+    ];
+
+    if(vulnerableFrames.indexOf(frauki.animations.currentFrame.name) > -1) {
+        return true;
+    } else {
+        return false;
+    }
 };
