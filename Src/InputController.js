@@ -44,8 +44,8 @@ InputController = function() {
     this.slash.onDown.add(function() { events.publish('player_slash', {}); }, this);
     this.roll.onDown.add(function() { events.publish('player_roll', {}); }, this);
 
-    this.slash.onDown.add(function() { events.publish('activate_weapon', { activate: true }); }, this);
-    this.slash.onUp.add(function() { events.publish('activate_weapon', { activate: false }); }, this);
+    this.weapon.onDown.add(function() { events.publish('activate_weapon', { activate: true }); }, this);
+    this.weapon.onUp.add(function() { events.publish('activate_weapon', { activate: false }); }, this);
 
     events.subscribe('control_up', function(params) { 
 

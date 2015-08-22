@@ -41,7 +41,7 @@ Frogland.Create = function() {
     frauki = new Player(game, fraukiStartX, fraukiStartY, 'Frauki');
     game.add.existing(frauki);
 
-    game.camera.focusOnXY(frauki.body.x, frauki.body.y);
+    game.camera.focusOnXY(frauki.x, frauki.y);
 
     this.currentLayer = startLayer;
     
@@ -179,7 +179,7 @@ Frogland.CreateObjectsLayer = function(layer) {
     this[currLayer].enableBody = true;
 
     FileMap.Junk.forEach(function(junk) {
-        Frogland.map.createFromObjects('Objects_' + layer, junk.Tile, 'Junk', junk.Name, true, true, that[currLayer], Junk, false);
+        Frogland.map.createFromObjects('Objects_' + layer, junk.Tile, 'Junk', junk.Name, true, true, that[currLayer], Junk, true);
     });
 
     //create each enemy for this layer
@@ -398,7 +398,7 @@ Frogland.OverlapFraukiWithObject = function(f, o) {
 
         return true;
     } else if(o.spriteType === 'junk') {
-        
+        return false;
     }
 
     return true;

@@ -144,8 +144,8 @@ Enemy.prototype.update = function() {
     if(this.Attacking()) {
 
         if(this.timers.TimerUp('hit')) {
-            if((this.direction === 'left' && frauki.states.direction === 'right' && frauki.body.center.x < this.body.center.x + 10) ||
-               (this.direction === 'right' && frauki.states.direction === 'left' && frauki.body.center.x > this.body.center.x - 10) ) 
+            if((this.direction === 'left' && frauki.body.center.x < this.body.center.x + 20) ||
+               (this.direction === 'right' && frauki.body.center.x > this.body.center.x - 20) ) 
             {
                 game.physics.arcade.overlap(this.attackRect, frauki.attackRect, ClashSwords);
             }
