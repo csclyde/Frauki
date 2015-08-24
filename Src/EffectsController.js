@@ -420,9 +420,11 @@ EffectsController.prototype.EnergyStreak = function() {
     this.energyStreak.flow(200, 5, 1, 60, true);
 };
 
-EffectsController.prototype.ClashStreak = function(x, y) {
-    var clash = game.add.sprite(x - 50, y - 82, 'Misc');
-    clash.animations.add('clash', ['Clash0000'], 1, false, false);
+EffectsController.prototype.ClashStreak = function(x, y, angle) {
+    var clash = game.add.sprite(x, y, 'Misc');
+    clash.anchor.setTo(0.5);
+    clash.animations.add('clash', ['Clash0000'], 5, false, false);
     clash.animations.play('clash');
     clash.animations.currentAnim.killOnComplete = true;
+    clash.rotation = angle;
 };

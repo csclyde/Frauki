@@ -86,8 +86,8 @@
 	"frame": {"x":51,"y":2,"w":5,"h":71},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":96,"y":65,"w":5,"h":71},
-	"sourceSize": {"w":200,"h":200},
+	"spriteSourceSize": {"x":46,"y":15,"w":5,"h":71},
+	"sourceSize": {"w":100,"h":100},
 	"pivot": {"x":0.5,"y":0.5}
 },
 "Door0000":
@@ -736,6 +736,6 @@
 	"format": "RGBA8888",
 	"size": {"w":62,"h":512},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:788dd30c468efb437a30bec1f843fa4b:1ceed7adde030350afd7efded94f60c5:65678b973d3ac8e1dd536acb732dd5ab$"
+	"smartupdate": "$TexturePacker:SmartUpdate:b51904c718d5ee7af88e0c70b4f53ba6:0d29d3b89b2542d2c6f9429ae08a9e90:65678b973d3ac8e1dd536acb732dd5ab$"
 }
 }
