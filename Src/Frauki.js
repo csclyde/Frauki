@@ -293,6 +293,8 @@ Player.prototype.LandHit = function(e, damage) {
     frauki.body.velocity.x = vel.x;
     frauki.body.velocity.y = vel.y;
 
+    effectsController.ClashStreak(e.body.center.x, e.body.center.y);
+
     if(damage > 0 && e.maxEnergy > 1) {
         effectsController.SlowHit(150);
     } else if(damage === 0) {

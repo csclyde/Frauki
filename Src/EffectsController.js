@@ -419,3 +419,10 @@ EffectsController.prototype.JumpDust = function(src) {
 EffectsController.prototype.EnergyStreak = function() {
     this.energyStreak.flow(200, 5, 1, 60, true);
 };
+
+EffectsController.prototype.ClashStreak = function(x, y) {
+    var clash = game.add.sprite(x - 50, y - 82, 'Misc');
+    clash.animations.add('clash', ['Clash0000'], 1, false, false);
+    clash.animations.play('clash');
+    clash.animations.currentAnim.killOnComplete = true;
+};
