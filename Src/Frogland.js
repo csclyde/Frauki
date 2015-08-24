@@ -41,6 +41,8 @@ Frogland.Create = function() {
     frauki = new Player(game, fraukiStartX, fraukiStartY, 'Frauki');
     game.add.existing(frauki);
 
+    this.effectsGroup = game.add.group();
+
     game.camera.focusOnXY(frauki.x, frauki.y);
 
     this.currentLayer = startLayer;

@@ -401,14 +401,14 @@ EffectsController.prototype.EnergySplash = function(src, intensity, direction) {
 
 EffectsController.prototype.Explosion = function(src) {
     var boom = game.add.sprite(src.x - 50, src.y - 50, 'Misc');
-    boom.animations.add('boom', ['Explosion0000', 'Explosion0001', 'Explosion0002', 'Explosion0003', 'Explosion0004'], 8, false, false);
+    boom.animations.add('boom', ['Explosion0000', 'Explosion0001', 'Explosion0002', 'Explosion0003', 'Explosion0004', 'Explosion0005'], 12, false, false);
     boom.animations.play('boom');
     boom.animations.currentAnim.killOnComplete = true;
 
 };
 
 EffectsController.prototype.JumpDust = function(src) {
-    var dust = game.add.sprite(src.x - 50, src.y - 30, 'Misc');
+    var dust = game.add.sprite(src.x - 50, src.y - 30, 'Misc', null, Frogland.effectsGroup);
     dust.animations.add('dust', ['JumpDust0000', 'JumpDust0001', 'JumpDust0002', 'JumpDust0003', 'JumpDust0004', 'JumpDust0005', 'JumpDust0006'], 10, false, false);
     dust.animations.play('dust');
     dust.alpha = 0.5;

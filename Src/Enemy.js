@@ -238,7 +238,7 @@ function EnemyHit(f, e) {
         damage = e.maxEnergy;
 
         energyController.AddPower(e.maxEnergy / 4);
-        effectsController.MakeHearts(e.maxEnergy / 4);
+        //effectsController.MakeHearts(e.maxEnergy / 4);
 
     } else {
         e.TakeHit();
