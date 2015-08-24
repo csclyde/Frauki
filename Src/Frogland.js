@@ -132,7 +132,7 @@ Frogland.Update = function() {
 
     });
 
-    game.physics.arcade.collide(frauki, this.GetCurrentCollisionLayer(), null, this.CheckEnvironmentalCollisions);
+    game.physics.arcade.collide(frauki, this.GetCurrentCollisionLayer(), null, this.CollideFraukiWithEnvironment);
     //game.physics.arcade.collide(this.NPCs, this.GetCurrentCollisionLayer());
     game.physics.arcade.collide(frauki, this.GetCurrentObjectGroup(), this.CollideFraukiWithObject, this.OverlapFraukiWithObject);
     game.physics.arcade.collide(this.GetCurrentObjectGroup(), this.GetCurrentCollisionLayer());
@@ -410,7 +410,7 @@ Frogland.OverlapAttackWithObject = function(f, o) {
     } else if(o.spriteType === 'junk') {
         o.kill();
 
-        effectsController.Explosion(o.body.center);
+        effectsController.ClashStreak(o.body.center.x, o.body.center.y, game.rnd.between(1, 2));
         effectsController.DiceEnemy(o, o.body.center.x, o.body.center.y);
     }
 };
@@ -429,7 +429,7 @@ Frogland.CollideFraukiWithProjectile = function(f, p) {
     }
 };
 
-Frogland.CheckEnvironmentalCollisions = function(f, tile) {
+Frogland.CollideFraukiWithEnvironment = function(f, tile) {
     //13 - 16
 
     //solid tile

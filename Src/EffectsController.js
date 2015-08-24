@@ -401,7 +401,7 @@ EffectsController.prototype.EnergySplash = function(src, intensity, direction) {
 
 EffectsController.prototype.Explosion = function(src) {
     var boom = game.add.sprite(src.x - 50, src.y - 50, 'Misc');
-    boom.animations.add('boom', ['Explosion0000', 'Explosion0001', 'Explosion0002', 'Explosion0003', 'Explosion0004'], 10, false, false);
+    boom.animations.add('boom', ['Explosion0000', 'Explosion0001', 'Explosion0002', 'Explosion0003', 'Explosion0004'], 8, false, false);
     boom.animations.play('boom');
     boom.animations.currentAnim.killOnComplete = true;
 
@@ -423,7 +423,7 @@ EffectsController.prototype.EnergyStreak = function() {
 EffectsController.prototype.ClashStreak = function(x, y, angle) {
     var clash = game.add.sprite(x, y, 'Misc');
     clash.anchor.setTo(0.5);
-    clash.animations.add('clash', ['Clash0000'], 5, false, false);
+    clash.animations.add('clash', ['Clash0000', 'Clash0001', 'Clash0002', 'Clash0003'], 18, false, false);
     clash.animations.play('clash');
     clash.animations.currentAnim.killOnComplete = true;
     clash.rotation = angle;
