@@ -84,6 +84,7 @@ Player = function (game, x, y, name) {
     this.runDust = game.add.sprite(0, 0, 'Misc');
     this.runDust.animations.add('dust', ['RunDust0000', 'RunDust0001', 'RunDust0002', 'RunDust0003'], 10, true, false);
     this.runDust.play('dust');
+    this.runDust.alpha = 0.5;
 };
 
 Player.prototype = Object.create(Phaser.Sprite.prototype);
@@ -160,7 +161,7 @@ Player.prototype.postStateUpdate = function() {
     }
 
     if(this.Attacking()) {
-        game.physics.arcade.overlap(frauki.attackRect, Frogland.GetCurrentObjectGroup(), EnemyHit);
+        game.physics.arcade.overlap(frauki.attackRect, Frogland.GetCurrentObjectGroup(), Frogland.OverlapAttackWithObject);
         game.physics.arcade.overlap(frauki.attackRect, projectileController.projectiles, ProjectileHit);
         //game.physics.arcade.overlap(frauki.attackRect, Frogland.GetCurrentCollisionLayer(), TilesHit);
     }

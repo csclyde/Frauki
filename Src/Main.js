@@ -66,13 +66,29 @@ Main.render = function() {
         game.debug.body(o);
     });*/
 
+    var drawX = -(pixel.width * (pixel.scale / 4));
+
+    var camDistEdge = game.camera.bounds.right - (game.camera.x + game.camera.width);
+    //console.log(camDistEdge, cameraController.camX);
+    if(camDistEdge < cameraController.camX) cameraController.camX = camDistEdge;
+
+    camDistEdge = game.camera.bounds.x - game.camera.x;
+
+    if(camDistEdge > cameraController.camX) cameraController.camX = camDistEdge;
+    
+    //if(!game.camera.atLimit.x) 
+    drawX -= cameraController.camX;
+
     pixel.context.drawImage(
         game.canvas, 0, 0, game.width, game.height, 
-        -(pixel.width * (pixel.scale / 4)) - cameraController.camX, 
+        drawX, 
         -(pixel.height * (pixel.scale / 4)) - cameraController.camY, 
         game.width * pixel.scale, 
         game.height * pixel.scale
     );
+
+    //game.camera.bounds.x = 0;
+    //game.camera.bounds.right = game.world.width + 98 + cameraController.camX;
 };
 
 Main.Restart = function() {
@@ -97,7 +113,7 @@ Main.Restart = function() {
         game.time.slowMotion = 1;
         game.world.alpha = 1;
 
-        //Main.restarting = false;
+        Main.restarting = false;
 
         Frogland.objectGroup_4.destroy();
         Frogland.objectGroup_3.destroy();

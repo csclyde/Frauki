@@ -289,8 +289,8 @@ EffectsController.prototype.DiceEnemy = function(enemy, x, y) {
     var pieces = [];
 
     var i = 0;
-    while(game.cache.getFrameData('DeathPieces').getFrameByName(enemy.enemyName + '/Dead000' + i)) {
-        pieces.push(game.add.sprite(x, y, 'DeathPieces', enemy.enemyName + '/Dead000' + i));
+    while(game.cache.getFrameData('Pieces').getFrameByName(enemy.enemyName + '/Dead000' + i)) {
+        pieces.push(game.add.sprite(x, y, 'Pieces', enemy.enemyName + '/Dead000' + i));
         i++;
     }
 

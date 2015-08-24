@@ -59,13 +59,27 @@ Enemy.prototype.types['KR32'] =  function() {
     };
 
     this.Attack = function() {
-    	if(!this.timers.TimerUp('attack')) {
+    	if(!this.timers.TimerUp('attack') && !this.FraukiVulnerableState()) {
     		return;
     	}
 
     	this.state = this.Windup;
 
     	this.timers.SetTimer('windup', 250 + game.rnd.between(0, 100));
+    };
+
+    this.Recoil = function() {
+    	this.state - this.Blocking;
+
+    	this.FacePlayer();
+
+    	if(this.direction === 'left') {
+    		this.body.velocity.x = 400;
+    	} else {
+    		this.body.velocity.x = -400;
+    	}
+
+    	this.body.velocity.y = -100;
     };
 
 	////////////////////////////////STATES////////////////////////////////////
@@ -91,23 +105,20 @@ Enemy.prototype.types['KR32'] =  function() {
 			this.PlayAnim('block');
 		}
 
-		if(frauki.body.center.x < this.body.center.x) {
-			this.SetDirection('left');
-		} else {
-			this.SetDirection('right');
-		}
+		this.FacePlayer();
 
 		if(!this.PlayerIsVisible()) {
 			this.state = this.Idling;
 		}
 
+		//if the player is out of reach, dont let the attack timer expire
+		if(frauki.body.center.y < this.body.center.y - 50) {
+			this.timers.SetTimer('attack', 500 + Math.random() * 1000);
+		}
 
 		if(this.PlayerDistance() < 160 && !frauki.Attacking() && this.body.onFloor() && frauki.body.center.y > this.body.center.y - 50 && frauki.state !== frauki.AttackStab) {
 			this.Attack();
 		}
-
-		//can game the time when they attack by jumping over. when they land the timer is ready and so they will always attack
-		//at that instant. need to reset attack timer when player is attackable
 
 	};
 
@@ -144,7 +155,13 @@ Enemy.prototype.types['KR32'] =  function() {
 		}
 
 		if(this.animations.currentAnim.isFinished) {
-			this.state = this.Blocking;
+
+			if(this.PlayerDistance() < 100) {
+				this.Recoil();
+			} else {
+				this.state = this.Blocking;
+			}
+
 			this.timers.SetTimer('attack', 500 + Math.random() * 1000);
 		}
 	};

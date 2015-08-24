@@ -4,9 +4,9 @@
         <key>fileFormatVersion</key>
         <int>3</int>
         <key>texturePackerVersion</key>
-        <string>3.9.1</string>
+        <string>3.7.1</string>
         <key>fileName</key>
-        <string>D:/gamedev/Frauki/Design/Sprites/Enemies/DeathPieces/DeathPieces.tps</string>
+        <string>C:/Users/user/Documents/gamedev/Frauki/Design/Sprites/Junk/Junk.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -38,13 +38,11 @@
         <key>dataFormat</key>
         <string>json</string>
         <key>textureFileName</key>
-        <filename>../../../../Data/Sprites/DeathPieces.png</filename>
+        <filename>../../../Data/Sprites/Junk.png</filename>
         <key>flipPVR</key>
         <false/>
         <key>pvrCompressionQuality</key>
         <enum type="SettingsBase::PvrCompressionQuality">PVR_QUALITY_NORMAL</enum>
-        <key>atfCompressData</key>
-        <false/>
         <key>mipMapMinSize</key>
         <uint>32768</uint>
         <key>etc1CompressionQuality</key>
@@ -72,7 +70,7 @@
             </struct>
         </struct>
         <key>shapePadding</key>
-        <uint>2</uint>
+        <uint>1</uint>
         <key>jpgQuality</key>
         <uint>80</uint>
         <key>pngOptimizationLevel</key>
@@ -84,7 +82,7 @@
         <key>textureFormat</key>
         <enum type="SettingsBase::TextureFormat">png</enum>
         <key>borderPadding</key>
-        <uint>2</uint>
+        <uint>1</uint>
         <key>maxTextureSize</key>
         <QSize>
             <key>width</key>
@@ -147,7 +145,7 @@
             <key>data</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>../../../../Data/Sprites/DeathPieces.json</filename>
+                <filename>../../../Data/Sprites/Junk.json</filename>
             </struct>
         </map>
         <key>multiPack</key>
@@ -182,7 +180,7 @@
             <key>trimThreshold</key>
             <uint>1</uint>
             <key>trimMode</key>
-            <enum type="SpriteSettings::TrimMode">Crop</enum>
+            <enum type="SpriteSettings::TrimMode">Trim</enum>
             <key>heuristicMask</key>
             <false/>
             <key>pivotPoint</key>
@@ -190,16 +188,7 @@
         </struct>
         <key>fileList</key>
         <array>
-            <filename>CreeperThistle</filename>
-            <filename>Fungu</filename>
-            <filename>Haystax</filename>
-            <filename>Insectoid</filename>
-            <filename>KR32</filename>
-            <filename>Mask</filename>
-            <filename>Sporoid</filename>
-            <filename>A3PZ</filename>
-            <filename>Buzzar</filename>
-            <filename>HWK9</filename>
+            <filename>Barrel</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

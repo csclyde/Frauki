@@ -1,0 +1,21 @@
+{"frames": {
+
+"Barrel/Barrel0000":
+{
+	"frame": {"x":1,"y":1,"w":30,"h":37},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":79,"y":91,"w":30,"h":37},
+	"sourceSize": {"w":200,"h":200},
+	"pivot": {"x":0.5,"y":0.5}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "Junk.png",
+	"format": "RGBA8888",
+	"size": {"w":32,"h":39},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:cca11eb1999b8ee8ceeda3132a2e4000:08ce076e8c47f32f77f0263dee24d956:831845a21f0accda2f2aa80233051662$"
+}
+}

@@ -16,7 +16,8 @@ FileMap.Atlas = [
 	{ Name: 'EnemySprites', File: 'Data/Sprites/Enemies.json', Img: 'Data/Sprites/Enemies.png' },
 	{ Name: 'Misc', File: 'Data/Sprites/Misc.json', Img: 'Data/Sprites/Misc.png' },
 	{ Name: 'UI', File: 'Data/Sprites/UI.json', Img: 'Data/Sprites/UI.png' },
-	{ Name: 'DeathPieces', File: 'Data/Sprites/DeathPieces.json', Img: 'Data/Sprites/DeathPieces.png' }
+	{ Name: 'Pieces', File: 'Data/Sprites/Pieces.json', Img: 'Data/Sprites/Pieces.png' },
+	{ Name: 'Junk', File: 'Data/Sprites/Junk.json', Img: 'Data/Sprites/Junk.png' }
 ];
 
 FileMap.Audio = [
@@ -62,4 +63,8 @@ FileMap.Enemies = [
 	{ Name: 'KR32', Tile: 98 },
 	{ Name: 'A3PZ', Tile: 99 },
 	{ Name: 'HWK9', Tile: 100 }
+];
+
+FileMap.Junk = [
+	{ Name: 'Barrel/Barrel0000', Tile: 105 }
 ];
