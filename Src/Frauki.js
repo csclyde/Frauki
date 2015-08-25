@@ -571,9 +571,9 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
     console.log('Frauki is taking ' + damage + ' damage');
 
     if(this.body.center.x < e.body.center.x) {
-        this.body.velocity.x = -50000;
+        this.body.velocity.x = -500;
     } else {
-        this.body.velocity.x = 50000;
+        this.body.velocity.x = 500;
     } 
 
     this.state = this.Hurting;
