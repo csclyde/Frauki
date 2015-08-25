@@ -282,8 +282,6 @@ Player.prototype.GetDirectionMultiplier = function() {
 };
 
 Player.prototype.LandHit = function(e, damage) {
-    //energyController.AddPower(damage / 5);
-    //energyController.energy += damage;
 
     var vel = new Phaser.Point(frauki.body.center.x - e.body.center.x, frauki.body.center.y - e.body.center.y);
     vel = vel.normalize();
