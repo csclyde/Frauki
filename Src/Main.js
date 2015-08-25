@@ -16,10 +16,10 @@ Main.create = function() {
 
     Frogland.Create();
     
-    energyController.Create();
     effectsController = new EffectsController();
     weaponController = new WeaponController();
     projectileController = new ProjectileController();
+    energyController.Create();
 
     this.gamepadIcon = game.add.image(150, 150, 'UI', 'Gamepad0001');
     this.gamepadIcon.fixedToCamera = true;
@@ -68,15 +68,13 @@ Main.render = function() {
 
     var drawX = -(pixel.width * (pixel.scale / 4));
 
+    //set up correct camera edge behavior
     var camDistEdge = game.camera.bounds.right - (game.camera.x + game.camera.width);
-    //console.log(camDistEdge, cameraController.camX);
     if(camDistEdge < cameraController.camX) cameraController.camX = camDistEdge;
 
     camDistEdge = game.camera.bounds.x - game.camera.x;
-
     if(camDistEdge > cameraController.camX) cameraController.camX = camDistEdge;
     
-    //if(!game.camera.atLimit.x) 
     drawX -= cameraController.camX;
 
     pixel.context.drawImage(
@@ -86,9 +84,6 @@ Main.render = function() {
         game.width * pixel.scale, 
         game.height * pixel.scale
     );
-
-    //game.camera.bounds.x = 0;
-    //game.camera.bounds.right = game.world.width + 98 + cameraController.camX;
 };
 
 Main.Restart = function() {

@@ -12,9 +12,6 @@ Frogland.Create = function() {
     this.plx1 = game.add.image(0, 0, 'parallax1');
     this.plx1.fixedToCamera = true;
 
-    // this.plx2 = game.add.tileSprite(0, 0, pixel.width / pixel.scale, pixel.height / pixel.scale, 'parallax2');
-    // this.plx2.fixedToCamera = true;
-
     this.map = game.add.tilemap('Frogland');
     this.map.addTilesetImage('FrogtownTiles');
     this.map.addTilesetImage('DepthsTiles');
@@ -33,6 +30,8 @@ Frogland.Create = function() {
         fraukiStartY = this.map.properties.startY * 16;
         startLayer = +this.map.properties.startLayer;
     }
+
+    this.currentLayer = startLayer;
     
     this.CreateBackgroundLayer(4, startLayer === 4);
     this.CreateBackgroundLayer(3, startLayer === 3);
@@ -40,13 +39,10 @@ Frogland.Create = function() {
 
     frauki = new Player(game, fraukiStartX, fraukiStartY, 'Frauki');
     game.add.existing(frauki);
+    game.camera.focusOnXY(frauki.x, frauki.y);
 
     this.effectsGroup = game.add.group();
 
-    game.camera.focusOnXY(frauki.x, frauki.y);
-
-    this.currentLayer = startLayer;
-    
     this.CreateObjectsLayer(4);
     this.CreateObjectsLayer(3);
     this.CreateObjectsLayer(2);
@@ -54,8 +50,6 @@ Frogland.Create = function() {
     this.CreateMidgroundLayer(4, startLayer === 4);
     this.CreateMidgroundLayer(3, startLayer === 3);
     this.CreateMidgroundLayer(2, startLayer === 2);
-
-    //effectsController.piecesGroup = game.add.group();
 
     this.CreateForegroundLayer(4, startLayer === 4);
     this.CreateForegroundLayer(3, startLayer === 3);
@@ -65,20 +59,11 @@ Frogland.Create = function() {
     this.CreateCollisionLayer(3);
     this.CreateCollisionLayer(2);
     
-
     this.enemyPool = game.add.group();
-    this.door1Group = game.add.group();
-    this.door2Group = game.add.group();
-    this.door3Group = game.add.group();
 
-    this.map.createFromObjects('Doors_1', 67, 'Misc', 'Door0000', true, false, this.door1Group, Door, false);
-    this.map.createFromObjects('Doors_2', 67, 'Misc', 'Door0000', true, false, this.door2Group, Door, false);
-    this.map.createFromObjects('Doors_3', 67, 'Misc', 'Door0000', true, false, this.door3Group, Door, false);
-
-    //make all the doors invisible
-    this.door1Group.forEach(function(d) { d.alpha = 0; });
-    this.door2Group.forEach(function(d) { d.alpha = 0; });
-    this.door3Group.forEach(function(d) { d.alpha = 0; });
+    this.CreateDoorLayer(1);
+    this.CreateDoorLayer(2);
+    this.CreateDoorLayer(3);
 
     this.PreprocessTiles(4);
     this.PreprocessTiles(3);
@@ -87,15 +72,6 @@ Frogland.Create = function() {
     triggerController.CreateTriggers(4);
     triggerController.CreateTriggers(3);
     triggerController.CreateTriggers(2);
-
-    this.easyStar_4 = game.plugins.add(Phaser.Plugin.PathFinderPlugin);
-    this.easyStar_4.setGrid(this.collisionLayer_4.layer.data, [-1]);
-
-    this.easyStar_3 = game.plugins.add(Phaser.Plugin.PathFinderPlugin);
-    this.easyStar_3.setGrid(this.collisionLayer_3.layer.data, [-1]);
-
-    this.easyStar_2 = game.plugins.add(Phaser.Plugin.PathFinderPlugin);
-    this.easyStar_2.setGrid(this.collisionLayer_2.layer.data, [-1]);
 
     setInterval(function() {
         Frogland.AnimateTiles();
@@ -121,27 +97,22 @@ Frogland.Update = function() {
         var padding = 20;
 
         if(o.spriteType !== 'enemy' && !!o.body) {
-
-            if(o.body.x > game.camera.x - padding &&
-               o.body.y > game.camera.y - padding &&
-               o.body.x < game.camera.x + game.camera.width + padding &&
-               o.body.y < game.camera.y + game.camera.height + padding) {
+            if(o.body.x > game.camera.x - padding && o.body.y > game.camera.y - padding && o.body.x < game.camera.x + game.camera.width + padding && o.body.y < game.camera.y + game.camera.height + padding
+                && o.owningLayer === Frogland.currentLayer) {
                 o.body.enable = true;
             } else {
                 o.body.enable = false;
             }
         }
-
     });
 
-    game.physics.arcade.collide(frauki, this.GetCurrentCollisionLayer(), null, this.CollideFraukiWithEnvironment);
-    //game.physics.arcade.collide(this.NPCs, this.GetCurrentCollisionLayer());
-    game.physics.arcade.collide(frauki, this.GetCurrentObjectGroup(), this.CollideFraukiWithObject, this.OverlapFraukiWithObject);
+    game.physics.arcade.collide(frauki, this.GetCurrentCollisionLayer(), null, Collision.CollideFraukiWithEnvironment);
+    game.physics.arcade.collide(frauki, this.GetCurrentObjectGroup(), Collision.CollideFraukiWithObject, Collision.OverlapFraukiWithObject);
     game.physics.arcade.collide(this.GetCurrentObjectGroup(), this.GetCurrentCollisionLayer());
     //game.physics.arcade.collide(this.GetCurrentObjectGroup(), this.GetCurrentObjectGroup(), null, this.OverlapEnemiesWithSelf);
 
     if(projectileController.projectiles.countLiving() > 0) {
-        game.physics.arcade.overlap(frauki, projectileController.projectiles, this.CollideFraukiWithProjectile);
+        game.physics.arcade.overlap(frauki, projectileController.projectiles, Collision.CollideFraukiWithProjectile);
     }
 
     this.plx1.cameraOffset.x = -(game.camera.x * 0.45) + 280;
@@ -205,6 +176,12 @@ Frogland.CreateObjectsLayer = function(layer) {
             obj.body.enable = false;
         }
     });    
+};
+
+Frogland.CreateDoorLayer = function(layer) {
+    this['door' + layer + 'Group'] = game.add.group();
+    this.map.createFromObjects('Doors_' + layer, 67, 'Misc', 'Door0000', true, false, this['door' + layer + 'Group'], Door, false);
+    this['door' + layer + 'Group'].forEach(function(d) { d.alpha = 0; });
 };
 
 //spawns some random enemies
@@ -305,7 +282,6 @@ Frogland.PreprocessTiles = function(layer) {
         if(!!tile.properties && !!tile.properties.alpha) {
             tile.alpha = tile.properties.alpha;
         }
-
     }, this, 0, 0, this.map.width, this.map.height, 'Foreground_' + layer);
 
     this.animatedTiles = [];
@@ -375,149 +351,6 @@ Frogland.ChangeLayer = function(newLayer) {
     });
 };
 
-//this is called when a collision happens. if it returns false the two will not be separated
-Frogland.OverlapFraukiWithObject = function(f, o) {
-    if(o.spriteType == 'apple') {
-
-        EatApple(f, o);
-        return false;
-
-    } else if(o.spriteType === 'energyNugg') {
-
-        EatEnergyNugg(f, o);
-        return false;
-
-    } else if(o.spriteType === 'enemy') {
-
-        if(o.CanCauseDamage() && o.state !== o.Dying) {
-            frauki.Hit(o, o.damage);
-        }
-
-        return false;
-    } else if(o.spriteType === 'door') {
-
-        OpenDoor(f, o);
-
-        return true;
-    } else if(o.spriteType === 'junk') {
-        return false;
-    }
-
-    return true;
-};
-
-Frogland.OverlapAttackWithObject = function(f, o) {
-    if(o.spriteType === 'enemy') {
-        EnemyHit(f, o);
-    } else if(o.spriteType === 'junk') {
-        o.kill();
-
-        effectsController.ClashStreak(o.body.center.x, o.body.center.y, game.rnd.between(1, 2));
-        effectsController.DiceEnemy(o, o.body.center.x, o.body.center.y);
-    }
-};
-
-Frogland.CollideFraukiWithObject = function(f, o) {   
-};
-
-Frogland.CollideFraukiWithProjectile = function(f, p) {
-
-    if(p.projType === 'tar' || p.projType === 'spore') {
-        if(p.owningEnemy.state !== p.owningEnemy.Dying) {
-            frauki.Hit(p.owningEnemy, p.owningEnemy.damage);
-        }
-        
-        p.destroy();
-    }
-};
-
-Frogland.CollideFraukiWithEnvironment = function(f, tile) {
-    //13 - 16
-
-    //solid tile
-    if(tile.index === 1 || tile.index === 9) { 
-        return true;
-
-    //water
-    } else if(tile.index === 2 || tile.index === 10 || tile.index === 13 || tile.index === 14 || tile.index === 15 || tile.index === 16) { 
-        frauki.states.inWater = true;
-
-        if(tile.index === 10) effectsController.Splash(tile);
-
-        if(tile.index === 13) frauki.states.flowDown = true;
-        if(tile.index === 14) frauki.states.flowRight = true;
-        if(tile.index === 15) frauki.states.flowUp = true;
-        if(tile.index === 16) frauki.states.flowLeft = true;
-
-        
-        return false;
-
-    //trick wall
-    } else if(tile.index === 3) {
-        if(frauki.state === frauki.Rolling) {
-            return false;
-        } else {
-            return true;
-        }
-
-    //cloud tile
-    } else if(tile.index === 4) { 
-        frauki.states.onCloud = true;
-
-        if(frauki.states.droppingThroughCloud) {
-            return false;
-        } else {
-            return true;
-        }
-
-    //falling tiles and attackable tiles
-    } else if(tile.index === 5) { 
-
-
-        if(tile.dislodged === true) {
-            return false;
-        }
-        
-        if(tile.waitingToFall !== true && frauki.body.center.y < tile.worldY) {
-            Frogland.DislodgeTile(tile); 
-            tile.waitingToFall = true;
-        }
-
-        return true;
-
-    } else if(tile.index === 7) {
-
-        if(tile.dislodged === true) {
-            return false;
-        }
-
-        return true;
-
-    //updraft
-    } else if(tile.index === 11) {
-        frauki.states.inUpdraft = true;
-
-    //spikes
-    } else if(tile.index === 12) {
-
-    //left slope
-    } else if(tile.index === 17) {
-        frauki.states.onLeftSlope = true;
-
-    //right slope
-    } else if(tile.index === 18) {
-        frauki.states.onRightSlope = true;
-    }
-};
-
-Frogland.OverlapEnemiesWithSelf = function(o1, o2) {
-    if(o1.enemyName && o2.enemyName && o1.enemyName === o2.enemyName) {
-        return true;
-    } else {
-        return false;
-    }
-};
-
 Frogland.DislodgeTile = function(tile) {
     if(tile && (tile.index === 5 || tile.index === 7) && tile.dislodged !== true) {
         
@@ -550,22 +383,7 @@ Frogland.AnimateTiles = function() {
     if(viewLeft > 155) viewLeft = 155;
     if(viewTop < 0) viewTop = 0;
 
-    // if(viewLeft < 0) viewLeft = 0;
-    // if(viewTop < 0) viewTop = 0;
-
-    // var animatedTiles = [
-    //     [383, 384, 385], //surface
-    //     [386, 387, 388], //water
-    //     [545, 546, 547], //air vent
-    //     [548, 549, 550], //left flow
-    //     [577, 578, 579], //big splashers
-    //     [580, 581, 582], //right flow
-    //     [612, 613, 614]  //down flow
-    // ];
-
     this.map.forEach(function(tile) {
-
-        //console.log('found animated tile');
 
         for(var i = 0; i < this.animatedTiles.length; i++) {
 
