@@ -159,7 +159,20 @@ EnergyController.prototype.AddPower = function(amt) {
 };
 
 EnergyController.prototype.RemovePower = function(amt) {
-	this.neutralPoint -= amt * 3;
+
+	amt *= 3;
+
+	if(this.energy > this.neutralPoint) {
+		if(this.energy - this.neutralPoint > amt) {
+			this.energy -= amt;
+		} else {
+			amt -= (this.energy - this.neutralPoint);
+			this.neutralPoint -= amt;
+			this.energy = this.neutralPoint;
+		}
+	} else {
+		this.neutralPoint -= amt;
+	}
 
 	this.energyBar.visible = false;
 	this.energyBarRed.visible = true;
