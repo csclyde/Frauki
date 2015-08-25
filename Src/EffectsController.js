@@ -11,6 +11,10 @@ EffectsController = function() {
     this.positiveBits.makeParticles('Misc', ['EnergyBitPos0000', 'EnergyBitPos0001', 'EnergyBitPos0002', 'EnergyBitPos0003', 'EnergyBitPos0004', 'EnergyBitPos0005']); //array of strings here for multiple sprites
     this.positiveBits.gravity = -800;
 
+    this.neutralBits = game.add.emitter(0, 0, 100);
+    this.neutralBits.makeParticles('Misc', ['EnergyBitNeutral0000', 'EnergyBitNeutral0001', 'EnergyBitNeutral0002', 'EnergyBitNeutral0003', 'EnergyBitNeutral0004', 'EnergyBitNeutral0005']); //array of strings here for multiple sprites
+    this.neutralBits.gravity = -800;
+
     this.splashRight = game.add.emitter(0, 0, 100);
     this.splashRight.makeParticles('Misc', ['Splash0000', 'Splash0001']); 
     this.splashRight.gravity = 400;
@@ -61,6 +65,8 @@ EffectsController.prototype.Update = function() {
 
     this.activeDest = frauki.body;
     this.positiveBits.forEachAlive(UpdateParticle, this);
+
+    this.neutralBits.forEachAlive(UpdateParticle, this);
 
     this.activeDest = this.enemyDest;
     this.negativeBits.forEachAlive(UpdateParticle, this);
@@ -151,9 +157,15 @@ function UpdateParticle(p) {
     if(p.body.x > p.destBody.x && p.body.x < p.destBody.x + p.destBody.width && p.body.y > p.destBody.y && p.body.y < p.destBody.y + p.destBody.height) {
         
         if(p.destBody === frauki.body) {
+
             events.publish('play_sound', {name: 'energy_bit', restart: true });
-            effectsController.EnergySplash(p.body, 100);
-            energyController.AddCharge(1);
+            
+            if(p.parent === effectsController.positiveBits) {
+                energyController.AddPower(0.2);
+            } else if(p.parent === effectsController.neutralBits) {
+                effectsController.EnergySplash(p.body, 100);
+                energyController.AddCharge(1);
+            }
         }
         
         p.destBody = null;
@@ -210,7 +222,10 @@ EffectsController.prototype.ParticleSpray = function(source, dest, color, dir, a
     else if(color === 'negative') {
         effect = this.negativeBits;
         this.enemyDest = dest;
-	}
+	} else if(color === 'neutral') {
+        effect = this.neutralBits;
+        this.enemySource = source;
+    }
 
     var vel = new Phaser.Point(source.x - dest.x, source.y - dest.y);
     vel = vel.normalize();
