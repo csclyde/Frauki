@@ -1,6 +1,6 @@
 Enemy.prototype.types['CreeperThistle'] =  function() {
 
-    this.body.setSize(30, 25, 0, 0);
+    this.body.setSize(30, 25, 0, -4);
     this.anchor.setTo(.5, 1);
 
     var frames = ["CreeperThistle/CreeperThistle0000", "CreeperThistle/CreeperThistle0001", "CreeperThistle/CreeperThistle0002", "CreeperThistle/CreeperThistle0003"];

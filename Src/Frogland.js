@@ -43,6 +43,10 @@ Frogland.Create = function() {
 
     this.effectsGroup = game.add.group();
 
+    this.CreateCollisionLayer(4);
+    this.CreateCollisionLayer(3);
+    this.CreateCollisionLayer(2);
+
     this.CreateObjectsLayer(4);
     this.CreateObjectsLayer(3);
     this.CreateObjectsLayer(2);
@@ -55,9 +59,6 @@ Frogland.Create = function() {
     this.CreateForegroundLayer(3, startLayer === 3);
     this.CreateForegroundLayer(2, startLayer === 2);
 
-    this.CreateCollisionLayer(4);
-    this.CreateCollisionLayer(3);
-    this.CreateCollisionLayer(2);
     
     this.enemyPool = game.add.group();
 
@@ -175,7 +176,9 @@ Frogland.CreateObjectsLayer = function(layer) {
             obj.alpha = 0;
             obj.body.enable = false;
         }
-    });    
+    });  
+
+    game.physics.arcade.collide(this[currLayer], this['collisionLayer_' + layer]);  
 };
 
 Frogland.CreateDoorLayer = function(layer) {
