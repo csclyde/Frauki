@@ -37,6 +37,11 @@ EffectsController = function() {
     this.negSpark.gravity = -750;
     this.negSpark.particleDrag.setTo(100);
 
+    this.neutralSpark = game.add.emitter(0, 0, 100);
+    this.neutralSpark.makeParticles('Misc', ['Sparks0014', 'Sparks0015', 'Sparks0016', 'Sparks0017', 'Sparks0018']); 
+    this.neutralSpark.gravity = -750;
+    this.neutralSpark.particleDrag.setTo(100);
+
     //unassigned particles will be set to move towards this destination
     this.activeDest = null;
     this.enemySource = null;
@@ -159,12 +164,13 @@ function UpdateParticle(p) {
         if(p.destBody === frauki.body) {
 
             events.publish('play_sound', {name: 'energy_bit', restart: true });
-            
+
             if(p.parent === effectsController.positiveBits) {
                 energyController.AddPower(0.2);
+                effectsController.EnergySplash(p.body, 100, 'positive');
             } else if(p.parent === effectsController.neutralBits) {
-                effectsController.EnergySplash(p.body, 100);
                 energyController.AddCharge(1);
+                effectsController.EnergySplash(p.body, 100, 'neutral');
             }
         }
         
@@ -401,17 +407,29 @@ EffectsController.prototype.SparkSplash = function(posSrc, negSrc) {
     this.negSpark.explode(500, 10);
 };
 
-EffectsController.prototype.EnergySplash = function(src, intensity, direction) {
+EffectsController.prototype.EnergySplash = function(src, intensity, color) {
 
-    this.posSpark.x = src.x;
-    this.posSpark.y = src.y;
+    if(color === 'positive') {
+        this.posSpark.x = src.x;
+        this.posSpark.y = src.y;
 
-    this.posSpark.minParticleSpeed.x = -intensity;
-    this.posSpark.minParticleSpeed.y = -intensity;
-    this.posSpark.maxParticleSpeed.x = intensity;
-    this.posSpark.maxParticleSpeed.y = intensity;   
-   
-    this.posSpark.explode(500, 6);
+        this.posSpark.minParticleSpeed.x = -intensity;
+        this.posSpark.minParticleSpeed.y = -intensity;
+        this.posSpark.maxParticleSpeed.x = intensity;
+        this.posSpark.maxParticleSpeed.y = intensity;   
+       
+        this.posSpark.explode(500, 6);
+    } else if(color === 'neutral') {
+        this.neutralSpark.x = src.x;
+        this.neutralSpark.y = src.y;
+
+        this.neutralSpark.minParticleSpeed.x = -intensity;
+        this.neutralSpark.minParticleSpeed.y = -intensity;
+        this.neutralSpark.maxParticleSpeed.x = intensity;
+        this.neutralSpark.maxParticleSpeed.y = intensity;   
+       
+        this.neutralSpark.explode(500, 6);
+    }
 };
 
 EffectsController.prototype.Explosion = function(src) {

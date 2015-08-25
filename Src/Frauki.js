@@ -557,7 +557,6 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
     events.publish('play_sound', {name: 'ouch'});
 
     this.body.velocity.y = -300;
-    this.body.velocity.x *= 0.1;
 
     //if they are crouching, half damage
     if(frauki.state === this.Crouching) {
@@ -571,7 +570,11 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
 
     console.log('Frauki is taking ' + damage + ' damage');
 
-    this.body.center.x < e.body.center.x ? this.body.velocity.x = -200 : this.body.velocity.x = 200;
+    if(this.body.center.x < e.body.center.x) {
+        this.body.velocity.x = -50000;
+    } else {
+        this.body.velocity.x = 50000;
+    } 
 
     this.state = this.Hurting;
     this.timers.SetTimer('frauki_grace', grace_duration);
@@ -777,6 +780,8 @@ Player.prototype.Rolling = function() {
 
 Player.prototype.Hurting = function() {
     this.PlayAnim('hit');
+
+    this.body.drag.x = 0;
 
     if(this.timers.TimerUp('frauki_hit') && !Main.restarting) {
         if(this.body.velocity.y > 0) {
