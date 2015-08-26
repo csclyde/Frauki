@@ -44,7 +44,6 @@ Player = function (game, x, y, name) {
     this.states.onRightSlope = false;
 
     this.movement = {};
-    this.movement.rollVelocity = 0;
     this.movement.diveVelocity = 0;
     this.movement.jumpSlashVelocity = 0;
     this.movement.rollBoost = 0;
@@ -289,8 +288,10 @@ Player.prototype.LandHit = function(e, damage) {
     vel.x *= 300;
     vel.y *= 300;
 
-    frauki.body.velocity.x = vel.x;
-    frauki.body.velocity.y = vel.y;
+    if(this.state !== this.AttackStab) {
+        frauki.body.velocity.x = vel.x;
+        frauki.body.velocity.y = vel.y;
+    }
 
     if(damage > 0) {
         effectsController.ClashStreak(e.body.center.x, e.body.center.y, game.rnd.between(1, 2));
@@ -396,8 +397,6 @@ Player.prototype.Jump = function(params) {
                 this.movement.rollBoost = Math.abs(this.body.velocity.x) - PLAYER_SPEED(); 
                 this.movement.rollBoost /= (PLAYER_ROLL_SPEED() - PLAYER_SPEED());
                 this.movement.rollBoost *= 150;
-    
-                this.movement.rollVelocity = 0;
 
                 //if they are holding away from the roll, dont go crazy
                 if(this.movement.rollDirection !== this.GetDirectionMultiplier()) {
@@ -506,11 +505,21 @@ Player.prototype.StabSlash = function() {
     if(energyController.UseEnergy(6)) {
         this.state = this.AttackStab;
 
-        var dir = this.GetDirectionMultiplier();
+        // var dir = this.GetDirectionMultiplier();
         
-        this.movement.rollVelocity = 0;
-        this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: dir * PLAYER_RUN_SLASH_SPEED()}, 300, Phaser.Easing.Exponential.InOut, false).to({rollVelocity: 0}, 500, Phaser.Easing.Exponential.InOut, false);
-        this.tweens.roll.start();
+        // this.movement.rollVelocity = 0;
+        // this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: dir * PLAYER_RUN_SLASH_SPEED()}, 300, Phaser.Easing.Exponential.InOut, false).to({rollVelocity: 0}, 500, Phaser.Easing.Exponential.InOut, false);
+        // this.tweens.roll.start();
+
+        var dir = this.GetDirectionMultiplier();
+
+        this.body.maxVelocity.x = PLAYER_ROLL_SPEED();
+        this.body.velocity.x = 0;
+
+        this.movement.rollStage = 0;
+        this.movement.rollDirection = dir;
+        this.movement.rollStart = game.time.now;
+        this.movement.rollPrevVel = 0;
 
         events.publish('play_sound', {name: 'attack_stab', restart: true });
         
@@ -532,8 +541,6 @@ Player.prototype.Roll = function(params) {
         var dir = this.GetDirectionMultiplier();
 
         this.body.maxVelocity.x = PLAYER_ROLL_SPEED();
-
-        this.movement.rollVelocity = dir * PLAYER_SPEED();
         this.body.velocity.x = PLAYER_SPEED() * this.GetDirectionMultiplier();
 
         this.movement.rollStage = 0;
@@ -773,8 +780,6 @@ Player.prototype.Rolling = function() {
         } else {
             this.state = this.Standing;
         }
-
-        this.movement.rollVelocity = 0;
     }
 };
 
@@ -837,23 +842,37 @@ Player.prototype.AttackStab = function() {
     this.PlayAnim('attack_stab');
 
     //override the max velocity
-    this.body.maxVelocity.x = PLAYER_RUN_SLASH_SPEED();
-    this.body.velocity.x = this.movement.rollVelocity;
+    //this.body.maxVelocity.x = PLAYER_RUN_SLASH_SPEED();
 
-    var frameName = this.animations.currentFrame;
+
+    this.body.maxVelocity.x = PLAYER_RUN_SLASH_SPEED();
+
+    var dur = game.time.now - this.movement.rollStart;
+
+    //pickup stage
+    if(Math.abs(this.body.velocity.x) < PLAYER_RUN_SLASH_SPEED() && this.movement.rollStage === 0 && dur <= 130) {
+        dur /= 100;
+        this.body.acceleration.x = this.movement.rollDirection * 3000 * (game.math.catmullRomInterpolation([0, 0.7, 1, 1, 0.7, 0], dur) || 1);
+
+    //ready to switch to release
+    } else if(Math.abs(this.body.velocity.x) == PLAYER_RUN_SLASH_SPEED() && this.movement.rollStage === 0) {
+        this.movement.rollStage = 1;
+        this.movement.rollStart = game.time.now;
+
+    //release stage
+    } else if(this.movement.rollStage === 1 && this.movement.rollPop === false) {
+        dur /= 200;
+        this.body.acceleration.x = 0;
+        this.body.drag.x = 4000 * (game.math.catmullRomInterpolation([0.1, 0.7, 1, 1, 0.7, 0.1], dur) || 1);
+    }
+
+
+    var frameName = this.animations.currentFrame.name;
     if(frameName === 'Attack Stab0006' || frameName === 'Attack Stab0007' || frameName === 'Attack Stab0008' || frameName === 'Attack Stab0009' || frameName === 'Attack Stab0010' || frameName === 'Attack Stab0011') {
         this.body.velocity.y = 0;
     }
 
-    // if(this.body.velocity.y < 0) {
-    //     this.state = this.Jumping;
-    //     this.movement.rollVelocity = 0;
-    // } 
-
     if(this.animations.currentAnim.isFinished) {
-
-        this.tweens.roll.stop();
-        this.movement.rollVelocity = 0;
         
         if(this.body.velocity.y > 150) {
             this.state = this.Falling;
@@ -941,24 +960,5 @@ Player.prototype.AttackJump = function() {
     if(this.animations.currentAnim.isFinished) {
         this.state = this.Jumping;
         this.attack.chargeBonus = 0;
-    }
-};
-
-Player.prototype.Kicking = function() {
-    this.PlayAnim('kick');
-    this.body.velocity.x = this.movement.rollVelocity;
-
-    if(this.body.velocity.x !== 0 && this.body.onFloor()) {
-            this.state = this.Running;
-    } else if(this.body.velocity.x === 0 && this.body.onFloor()) {
-        this.state = this.Landing;
-    }
-
-    if(this.timers.TimerUp('frauki_kick')) {
-        if(this.body.velocity.y >= 0) {
-            this.state = this.Falling;
-        } else if(this.body.velocity.y < 0) {
-            this.state = this.Jumping;
-        }
     }
 };
