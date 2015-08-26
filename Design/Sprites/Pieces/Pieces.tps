@@ -201,6 +201,7 @@
             <filename>Buzzar</filename>
             <filename>HWK9</filename>
             <filename>Barrel</filename>
+            <filename>Plant</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

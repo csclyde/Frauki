@@ -191,6 +191,7 @@
         <key>fileList</key>
         <array>
             <filename>Barrel</filename>
+            <filename>Plant</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

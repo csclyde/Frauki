@@ -1,5 +1,6 @@
 Junk = function(game, x, y, name) {
     //instantiate the sprite
+    console.log(name);
     Phaser.Sprite.call(this, game, x, y, 'Junk', name);
     this.spriteType = 'junk';
 
@@ -7,7 +8,7 @@ Junk = function(game, x, y, name) {
     game.physics.enable(this, Phaser.Physics.ARCADE);
     this.body.collideWorldBounds = true;
 
-    this.enemyName = 'Barrel';
+    this.enemyName = name.split('/')[0];
 
 
     this.initialX = this.body.x;

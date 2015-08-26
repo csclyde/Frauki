@@ -2,10 +2,19 @@
 
 "Barrel/Barrel0000":
 {
-	"frame": {"x":1,"y":1,"w":30,"h":37},
+	"frame": {"x":1,"y":72,"w":30,"h":37},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":79,"y":91,"w":30,"h":37},
+	"sourceSize": {"w":200,"h":200},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"Plant/Plant0000":
+{
+	"frame": {"x":1,"y":1,"w":47,"h":70},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":64,"y":58,"w":47,"h":70},
 	"sourceSize": {"w":200,"h":200},
 	"pivot": {"x":0.5,"y":0.5}
 }},
@@ -14,8 +23,8 @@
 	"version": "1.0",
 	"image": "Junk.png",
 	"format": "RGBA8888",
-	"size": {"w":32,"h":39},
+	"size": {"w":49,"h":110},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:55dc302f021df5dbec14c460f284a6e3:e94dd579530299ce9270168e620228fc:831845a21f0accda2f2aa80233051662$"
+	"smartupdate": "$TexturePacker:SmartUpdate:921b9e7dbe60d91a7728031c6bc1f06a:7041da7fa4363c2dd36a68adad34c916:831845a21f0accda2f2aa80233051662$"
 }
 }

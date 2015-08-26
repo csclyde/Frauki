@@ -153,7 +153,7 @@ Frogland.CreateObjectsLayer = function(layer) {
     this[currLayer].enableBody = true;
 
     FileMap.Junk.forEach(function(junk) {
-        Frogland.map.createFromObjects('Objects_' + layer, junk.Tile, 'Junk', junk.Name, true, true, that[currLayer], Junk, true);
+        Frogland.map.createFromObjects('Objects_' + layer, junk.Tile, junk.Name, junk.Name, true, true, that[currLayer], Junk, true);
     });
 
     //create each enemy for this layer

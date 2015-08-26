@@ -66,5 +66,6 @@ FileMap.Enemies = [
 ];
 
 FileMap.Junk = [
-	{ Name: 'Barrel/Barrel0000', Tile: 105 }
+	{ Name: 'Barrel/Barrel0000', Tile: 105 },
+	{ Name: 'Plant/Plant0000', Tile: 106 }
 ];
