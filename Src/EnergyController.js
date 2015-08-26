@@ -66,7 +66,7 @@ EnergyController.prototype.Update = function() {
 			this.energy = this.neutralPoint;
 		} else {
 			if(this.energy > this.neutralPoint) {
-				this.energy -= step / 50;
+				this.energy -= step / 100;
 			} else {
 				if(this.energy < 0) {
 					this.energy += step * 0.8;
@@ -172,6 +172,10 @@ EnergyController.prototype.RemovePower = function(amt) {
 		}
 	} else {
 		this.neutralPoint -= amt;
+
+		if(this.energy > this.neutralPoint) {
+			this.energy = this.neutralPoint;
+		}
 	}
 
 	this.energyBar.visible = false;

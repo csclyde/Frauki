@@ -110,15 +110,19 @@ Main.Restart = function() {
 
         Main.restarting = false;
 
-        Frogland.objectGroup_4.destroy();
-        Frogland.objectGroup_3.destroy();
-        Frogland.objectGroup_2.destroy();
+        Frogland.objectGroup_4.removeAll(true);
+        Frogland.objectGroup_3.removeAll(true);
+        Frogland.objectGroup_2.removeAll(true);
 
         Frogland.CreateObjectsLayer(4);
         Frogland.CreateObjectsLayer(3);
         Frogland.CreateObjectsLayer(2);
 
-        var cameraMoveTween = game.add.tween(game.camera)
+        effectsController.dicedPieces4 = game.add.group(Frogland.objectGroup_4);
+        effectsController.dicedPieces3 = game.add.group(Frogland.objectGroup_3);
+        effectsController.dicedPieces2 = game.add.group(Frogland.objectGroup_2);
+
+        //var cameraMoveTween = game.add.tween(game.camera)
 
     });
 };
