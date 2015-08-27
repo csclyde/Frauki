@@ -21,7 +21,7 @@ Frogland.Create = function() {
 
     var fraukiStartX, fraukiStartY, startLayer;
 
-    if(true) {
+    if(false) {
         fraukiStartX = 2025;
         fraukiStartY = 1050;
         startLayer = 3;

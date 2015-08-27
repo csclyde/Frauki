@@ -1,6 +1,6 @@
 Enemy.prototype.types['Mask'] =  function() {
 
-	this.body.setSize(67, 25, 0, 0);
+	this.body.setSize(20, 40, 0, -12);
 	this.anchor.setTo(.5, 1);
 
     this.animations.add('idle', ['Mask/Mask0000'], 10, true, false);

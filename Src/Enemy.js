@@ -238,7 +238,8 @@ function EnemyHit(f, e) {
 
         damage = e.maxEnergy;
 
-        energyController.AddPower(e.maxEnergy / 2);
+        //energyController.AddPower(e.maxEnergy / 2);
+        effectsController.SpawnEnergyNuggets(e.body.center, frauki.body.center, 'positive', e.EnemyDirection(), e.maxEnergy / 2); 
         //effectsController.MakeHearts(e.maxEnergy / 4);
 
     } else {
@@ -248,7 +249,6 @@ function EnemyHit(f, e) {
     frauki.LandHit(e, damage);
 
     events.publish('play_sound', { name: 'attack_connect' });
-    //effectsController.SpawnEnergyNuggets(e.body.center, frauki.body.center, 'neutral', e.EnemyDirection(), damage * 2); 
 
     if(e.energy <= 0) { e.destroy(); }
 };
