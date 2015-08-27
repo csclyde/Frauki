@@ -458,7 +458,7 @@ Player.prototype.Slash = function(params) {
         effectsController.EnergyStreak();
     }
     //normal slashes while standing or running
-    else if(this.state === this.Standing || this.state === this.Landing || this.state === this.AttackStab || this.state === this.Running || this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling || this.state === this.Flipping || this.state === this.Crouching) {
+    else if(this.state === this.Standing || this.state === this.Landing || this.state === this.Running || this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling || this.state === this.Flipping || this.state === this.Crouching) {
         this.FrontSlash();
         effectsController.EnergyStreak();
     } 
@@ -858,15 +858,15 @@ Player.prototype.AttackStab = function() {
 
         this.body.velocity.x = 0;
 
-        if(game.time.now > this.movement.rollStart + 100) {
+        if(game.time.now > this.movement.rollStart + 200) {
             this.movement.rollStage = 1;
             this.movement.rollStart = game.time.now;
         }
 
     //pickup stage
     } else if(Math.abs(this.body.velocity.x) < PLAYER_RUN_SLASH_SPEED() && this.movement.rollStage === 1 && dur <= 130) {
-        dur /= 150;
-        this.body.acceleration.x = this.movement.rollDirection * 5000 * (game.math.catmullRomInterpolation([0, 0.1, 0.2, 0.4, 0.8, 1], dur) || 1);
+        dur /= 120;
+        this.body.acceleration.x = this.movement.rollDirection * 6000 * (game.math.catmullRomInterpolation([0, 0.1, 0.2, 0.4, 0.8, 1], dur) || 1);
 
     //ready to switch to release
     } else if(Math.abs(this.body.velocity.x) == PLAYER_RUN_SLASH_SPEED() && this.movement.rollStage === 1) {
