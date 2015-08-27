@@ -161,6 +161,10 @@ Frogland.CreateObjectsLayer = function(layer) {
         Frogland.map.createFromObjects('Objects_' + layer, enemy.Tile, enemy.Name, null, true, true, that[currLayer], Enemy, false);
     });
 
+    FileMap.Runes.forEach(function(rune) {
+        Frogland.map.createFromObjects('Objects_' + layer, rune.Tile, rune.Name, rune.Name, true, true, that[currLayer], TechnoRune, true);
+    });
+
     //create all the apples
     this.map.createFromObjects('Objects_' + layer, 66, 'Misc', 'Apple0000', true, true, this[currLayer], Apple, false);
     this.map.createFromObjects('Objects_' + layer, 68, 'Misc', 'EnergyBitPos0000', true, true, this[currLayer], EnergyNugg, false);
