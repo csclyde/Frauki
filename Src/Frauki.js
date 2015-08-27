@@ -853,21 +853,31 @@ Player.prototype.AttackStab = function() {
 
     var dur = game.time.now - this.movement.rollStart;
 
+    //delay stage
+    if(this.movement.rollStage === 0) {
+
+        this.body.velocity.x = 0;
+
+        if(game.time.now > this.movement.rollStart + 100) {
+            this.movement.rollStage = 1;
+            this.movement.rollStart = game.time.now;
+        }
+
     //pickup stage
-    if(Math.abs(this.body.velocity.x) < PLAYER_RUN_SLASH_SPEED() && this.movement.rollStage === 0 && dur <= 130) {
-        dur /= 100;
-        this.body.acceleration.x = this.movement.rollDirection * 3000 * (game.math.catmullRomInterpolation([0, 0.7, 1, 1, 0.7, 0], dur) || 1);
+    } else if(Math.abs(this.body.velocity.x) < PLAYER_RUN_SLASH_SPEED() && this.movement.rollStage === 1 && dur <= 130) {
+        dur /= 150;
+        this.body.acceleration.x = this.movement.rollDirection * 5000 * (game.math.catmullRomInterpolation([0, 0.1, 0.2, 0.4, 0.8, 1], dur) || 1);
 
     //ready to switch to release
-    } else if(Math.abs(this.body.velocity.x) == PLAYER_RUN_SLASH_SPEED() && this.movement.rollStage === 0) {
-        this.movement.rollStage = 1;
+    } else if(Math.abs(this.body.velocity.x) == PLAYER_RUN_SLASH_SPEED() && this.movement.rollStage === 1) {
+        this.movement.rollStage = 2;
         this.movement.rollStart = game.time.now;
 
     //release stage
-    } else if(this.movement.rollStage === 1 && this.movement.rollPop === false) {
+    } else if(this.movement.rollStage === 2 && this.movement.rollPop === false) {
         dur /= 200;
         this.body.acceleration.x = 0;
-        this.body.drag.x = 4000 * (game.math.catmullRomInterpolation([0.1, 0.7, 1, 1, 0.7, 0.1], dur) || 1);
+        this.body.drag.x = 2000 * (game.math.catmullRomInterpolation([0.1, 0.7, 1, 1, 0.7, 0.1], dur) || 1);
     }
 
 
