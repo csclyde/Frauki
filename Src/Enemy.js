@@ -232,6 +232,7 @@ function EnemyHit(f, e) {
         e.Die();
         e.state = e.Dying;
 
+        effectsController.EnergySplash(e.body.center, 200, 'negative');
         effectsController.Explosion(e.body.center);
         effectsController.DiceEnemy(e, e.body.center.x, e.body.center.y);
 
@@ -247,7 +248,7 @@ function EnemyHit(f, e) {
     frauki.LandHit(e, damage);
 
     events.publish('play_sound', { name: 'attack_connect' });
-    effectsController.ParticleSpray(e.body.center, frauki.body.center, 'neutral', e.EnemyDirection(), damage * 2); 
+    effectsController.SpawnEnergyNuggets(e.body.center, frauki.body.center, 'neutral', e.EnemyDirection(), damage * 2); 
 
     if(e.energy <= 0) { e.destroy(); }
 };

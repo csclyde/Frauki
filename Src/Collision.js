@@ -38,8 +38,8 @@ Collision.OverlapAttackWithObject = function(f, o) {
 
         var probTable = [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 3];
 
-        effectsController.ParticleSpray(o.body.center, frauki.body.center, 'neutral', null, probTable[Math.round(Math.random() * (probTable.length - 1))]);
-        effectsController.ParticleSpray(o.body.center, frauki.body.center, 'positive', null, probTable[Math.round(Math.random() * (probTable.length - 1))]);
+        effectsController.SpawnEnergyNuggets(o.body.center, frauki.body.center, 'neutral', null, probTable[Math.round(Math.random() * (probTable.length - 1))]);
+        effectsController.SpawnEnergyNuggets(o.body.center, frauki.body.center, 'positive', null, probTable[Math.round(Math.random() * (probTable.length - 1))]);
 
         effectsController.ClashStreak(o.body.center.x, o.body.center.y, game.rnd.between(1, 2));
         effectsController.DiceEnemy(o, o.body.center.x, o.body.center.y);

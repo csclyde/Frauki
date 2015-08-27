@@ -88,10 +88,18 @@ EffectsController.prototype.Update = function() {
         this.positiveBits.height = this.enemySource.height;
     }
 
-    this.energyStreak.x = frauki.attackRect.body.x;
-    this.energyStreak.y = frauki.attackRect.body.y;
-    this.energyStreak.width = frauki.attackRect.body.width;
-    this.energyStreak.height = frauki.attackRect.body.height;
+       
+    if(frauki.state === frauki.Rolling || frauki.state === frauki.Flipping) {
+        this.energyStreak.x = frauki.body.x;
+        this.energyStreak.y = frauki.body.bottom;
+        this.energyStreak.width = frauki.body.width;
+        this.energyStreak.height = 1;
+    } else {
+        this.energyStreak.x = frauki.attackRect.body.x;
+        this.energyStreak.y = frauki.attackRect.body.y;
+        this.energyStreak.width = frauki.attackRect.body.width;
+        this.energyStreak.height = frauki.attackRect.body.height;
+    }
 
     game.physics.arcade.collide(this.dicedPieces4, Frogland.GetCurrentCollisionLayer());
     game.physics.arcade.collide(this.dicedPieces3, Frogland.GetCurrentCollisionLayer());
@@ -213,7 +221,7 @@ function UpdateParticle(p) {
     }
 };
 
-EffectsController.prototype.ParticleSpray = function(source, dest, color, dir, amt) {
+EffectsController.prototype.SpawnEnergyNuggets = function(source, dest, color, dir, amt) {
 
     if(amt === 0) return;
     
@@ -255,11 +263,6 @@ EffectsController.prototype.ParticleSpray = function(source, dest, color, dir, a
     this.activeDest = dest;
 
 	effect.start(false, 0, 5, amt, amt);
-};
-
-EffectsController.prototype.EnergyBitSpray = function(amt) {
-
-    for(var i = 0; i < amt; i++) {}
 };
 
 EffectsController.prototype.Splash = function(tile) {
@@ -429,6 +432,16 @@ EffectsController.prototype.EnergySplash = function(src, intensity, color) {
         this.neutralSpark.maxParticleSpeed.y = intensity;   
        
         this.neutralSpark.explode(500, 6);
+    } else if(color === 'negative') {
+        this.negSpark.x = src.x;
+        this.negSpark.y = src.y;
+
+        this.negSpark.minParticleSpeed.x = -intensity;
+        this.negSpark.minParticleSpeed.y = -intensity;
+        this.negSpark.maxParticleSpeed.x = intensity;
+        this.negSpark.maxParticleSpeed.y = intensity;   
+       
+        this.negSpark.explode(500, 6);
     }
 };
 

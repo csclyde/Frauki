@@ -385,6 +385,8 @@ Player.prototype.Jump = function(params) {
 
                 events.publish('play_sound', {name: 'airhike'});
                 events.publish('stop_sound', {name: 'attack_dive_fall'});
+
+                effectsController.EnergyStreak();
             }
         }
         //roll jump
@@ -552,6 +554,8 @@ Player.prototype.Roll = function(params) {
 
     this.timers.SetTimer('frauki_roll', 250);
     this.timers.SetTimer('frauki_grace', 300);
+
+    effectsController.EnergyStreak();
 };
 
 Player.prototype.Hit = function(e, damage, grace_duration) {
@@ -570,7 +574,7 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
         damage /= 2;
     }
 
-    effectsController.ParticleSpray(this.body, e.body, 'negative', null, damage);
+    effectsController.SpawnEnergyNuggets(this.body, e.body, 'negative', null, damage);
 
     energyController.RemovePower(damage / 4);
     energyController.RemoveCharge(damage * 2);

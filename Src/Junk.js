@@ -1,6 +1,5 @@
 Junk = function(game, x, y, name) {
     //instantiate the sprite
-    console.log(name);
     Phaser.Sprite.call(this, game, x, y, 'Junk', name);
     this.spriteType = 'junk';
 
