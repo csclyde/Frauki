@@ -53,7 +53,6 @@ Player = function (game, x, y, name) {
     this.movement.rollDirection = 1;
 
     this.attack = {};
-    this.attack.chargeBonus = 0;
     this.attack.activeCharge = 0;
 
     this.timers = new TimerUtil();
@@ -239,19 +238,19 @@ Player.prototype.UpdateAttackGeometry = function() {
 };
 
 Player.prototype.GetCurrentDamage = function() {
-    return this.currentAttack.damage + this.currentAttack.damage * (this.attack.chargeBonus);
+    return this.currentAttack.damage - ((this.currentAttack.damage / 2) * energyController.GetDifficultyModifier());
 };
 
 Player.prototype.GetCurrentKnockback = function() {
-    return this.currentAttack.knockback + this.currentAttack.knockback * (this.attack.chargeBonus);
+    return this.currentAttack.knockback;
 };
 
 Player.prototype.GetCurrentJuggle = function() {
-    return this.currentAttack.juggle + this.currentAttack.juggle * (this.attack.chargeBonus);
+    return this.currentAttack.juggle;
 };
 
 Player.prototype.GetCurrentPriority = function() {
-    return this.currentAttack.priority + this.currentAttack.priority * (this.attack.chargeBonus);
+    return this.currentAttack.priority;
 };
 
 Player.prototype.Attacking = function() {
@@ -298,7 +297,7 @@ Player.prototype.LandHit = function(e, damage) {
     }
 
     if(damage > 0 && e.maxEnergy > 1) {
-        effectsController.SlowHit(150);
+        effectsController.SlowHit(120);
     } else if(damage === 0) {
         effectsController.SlowHit(60);
     }
@@ -436,12 +435,6 @@ Player.prototype.Slash = function(params) {
     // if(!this.timers.TimerUp('frauki_slash'))
     //     return;
 
-    if(!!params && !!params.chargeBonus) {
-        this.attack.chargeBonus = params.chargeBonus;
-    } else {
-        this.attack.chargeBonus = 0;
-    }
-
     //diving dash
     if(!this.timers.TimerUp('frauki_dash') && this.states.crouching && (this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling)) {
         this.DiveSlash();
@@ -560,6 +553,8 @@ Player.prototype.Roll = function(params) {
 
 Player.prototype.Hit = function(e, damage, grace_duration) {
 
+    damage = damage + damage * energyController.GetDifficultyModifier();
+
     if(this.state === this.Hurting || e.state === e.Hurting || frauki.Attacking() || frauki.Grace())
         return;
 
@@ -576,8 +571,8 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
 
     effectsController.SpawnEnergyNuggets(this.body, e.body, 'negative', null, damage);
 
-    energyController.RemovePower(damage / 4);
-    energyController.RemoveCharge(damage * 2);
+    energyController.RemovePower(damage);
+    energyController.RemoveCharge(damage);
 
     console.log('Frauki is taking ' + damage + ' damage');
 
@@ -589,7 +584,7 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
 
     this.state = this.Hurting;
     this.timers.SetTimer('frauki_grace', grace_duration);
-    this.timers.SetTimer('frauki_hit', 500 * (damage / 4));
+    this.timers.SetTimer('frauki_hit', 700);
 
     if(energyController.neutralPoint > 0)
         effectsController.SlowHit(90);
@@ -823,8 +818,6 @@ Player.prototype.AttackFront = function() {
         } else { 
             this.state = this.Standing;
         }
-
-        this.attack.chargeBonus = 0;
     }
 };
 
@@ -837,8 +830,6 @@ Player.prototype.AttackOverhead = function() {
     
     if(this.animations.currentAnim.isFinished) {
         this.state = this.Standing;
-
-        this.attack.chargeBonus = 0;
     }
 };
 
@@ -883,7 +874,7 @@ Player.prototype.AttackStab = function() {
 
     var frameName = this.animations.currentFrame.name;
     if(frameName === 'Attack Stab0006' || frameName === 'Attack Stab0007' || frameName === 'Attack Stab0008' || frameName === 'Attack Stab0009' || frameName === 'Attack Stab0010' || frameName === 'Attack Stab0011') {
-        this.body.velocity.y = 0;
+        //this.body.velocity.y = 0;
     }
 
     if(this.animations.currentAnim.isFinished) {
@@ -895,8 +886,6 @@ Player.prototype.AttackStab = function() {
         } else {
             this.state = this.Standing;
         }
-
-        this.attack.chargeBonus = 0;
     }
 };
 
@@ -954,8 +943,6 @@ Player.prototype.AttackDiveLand = function() {
         else {
             this.state = this.Running;
         }
-
-        this.attack.chargeBonus = 0;
     }
 };
 
@@ -973,6 +960,5 @@ Player.prototype.AttackJump = function() {
 
     if(this.animations.currentAnim.isFinished) {
         this.state = this.Jumping;
-        this.attack.chargeBonus = 0;
     }
 };

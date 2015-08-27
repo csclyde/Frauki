@@ -208,7 +208,7 @@ function EnemyHit(f, e) {
     if(!e.timers.TimerUp('hit'))
         return;
 
-    var damage = frauki.GetCurrentDamage();//frauki.currentAttack.damage;
+    var damage = frauki.GetCurrentDamage();
 
     //fraukis knockback will increase the amount that the enemy is moved. The weight
     //of the enemy will work against that. 

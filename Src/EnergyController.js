@@ -160,8 +160,6 @@ EnergyController.prototype.AddPower = function(amt) {
 
 EnergyController.prototype.RemovePower = function(amt) {
 
-	amt *= 3;
-
 	if(this.energy > this.neutralPoint) {
 		if(this.energy - this.neutralPoint > amt) {
 			this.energy -= amt;
@@ -196,4 +194,10 @@ EnergyController.prototype.AddCharge = function(amt) {
 
 EnergyController.prototype.RemoveCharge = function(amt) {
 	this.charge -= amt;
+};
+
+EnergyController.prototype.GetDifficultyModifier = function() {
+	var percentageCurve = [-0.5, 0, 1];
+
+	return game.math.catmullRomInterpolation(percentageCurve, this.neutralPoint / 30);
 };
