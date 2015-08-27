@@ -441,7 +441,7 @@ EffectsController.prototype.EnergySplash = function(src, intensity, color) {
         this.negSpark.maxParticleSpeed.x = intensity;
         this.negSpark.maxParticleSpeed.y = intensity;   
        
-        this.negSpark.explode(500, 6);
+        this.negSpark.explode(600, 10);
     }
 };
 
@@ -469,7 +469,7 @@ EffectsController.prototype.EnergyStreak = function() {
 EffectsController.prototype.ClashStreak = function(x, y, angle) {
     var clash = game.add.sprite(x, y, 'Misc');
     clash.anchor.setTo(0.5);
-    clash.animations.add('clash', ['Clash0000', 'Clash0001', 'Clash0002', 'Clash0003'], 18, false, false);
+    clash.animations.add('clash', ['Clash0001', 'Clash0002', 'Clash0003'], 10, false, false);
     clash.animations.play('clash');
     clash.animations.currentAnim.killOnComplete = true;
     clash.rotation = angle;

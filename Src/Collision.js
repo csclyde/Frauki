@@ -43,6 +43,7 @@ Collision.OverlapAttackWithObject = function(f, o) {
 
         effectsController.ClashStreak(o.body.center.x, o.body.center.y, game.rnd.between(1, 2));
         effectsController.DiceEnemy(o, o.body.center.x, o.body.center.y);
+        events.publish('camera_shake', {magnitudeX: 10, magnitudeY: 5, duration: 150});
     }
 };
 

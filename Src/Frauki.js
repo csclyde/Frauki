@@ -292,14 +292,17 @@ Player.prototype.LandHit = function(e, damage) {
         frauki.body.velocity.y = vel.y;
     }
 
+    energyController.AddCharge(damage);
+
     if(damage > 0) {
         effectsController.ClashStreak(e.body.center.x, e.body.center.y, game.rnd.between(1, 2));
+        //events.publish('camera_shake', {magnitudeX: 20, magnitudeY: 5, duration: 250});
     }
 
     if(damage > 0 && e.maxEnergy > 1) {
-        effectsController.SlowHit(120);
+        effectsController.SlowHit(140);
     } else if(damage === 0) {
-        effectsController.SlowHit(60);
+        effectsController.SlowHit(80);
     }
 };
 
@@ -569,7 +572,7 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
         damage /= 2;
     }
 
-    effectsController.SpawnEnergyNuggets(this.body, e.body, 'negative', null, damage);
+    //effectsController.SpawnEnergyNuggets(this.body, e.body, 'negative', null, damage);
 
     energyController.RemovePower(damage);
     energyController.RemoveCharge(damage);
@@ -585,9 +588,10 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
     this.state = this.Hurting;
     this.timers.SetTimer('frauki_grace', grace_duration);
     this.timers.SetTimer('frauki_hit', 700);
+    effectsController.EnergySplash(frauki.body.center, 100, 'negative');
 
     if(energyController.neutralPoint > 0)
-        effectsController.SlowHit(90);
+        effectsController.SlowHit(120);
 };
 
 //////////////////STATES/////////////////
@@ -915,7 +919,7 @@ Player.prototype.AttackDiveFall = function() {
     if(this.body.onFloor()) {
         this.movement.diveVelocity = 0;
 
-        events.publish('camera_shake', {magnitudeX: 15, magnitudeY: 5, duration: 250});
+        events.publish('camera_shake', {magnitudeX: 20, magnitudeY: 5, duration: 250});
 
         events.publish('stop_sound', {name: 'attack_dive_fall'});
         events.publish('play_sound', {name: 'attack_dive_land'});

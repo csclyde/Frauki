@@ -248,7 +248,7 @@ function EnemyHit(f, e) {
     frauki.LandHit(e, damage);
 
     events.publish('play_sound', { name: 'attack_connect' });
-    effectsController.SpawnEnergyNuggets(e.body.center, frauki.body.center, 'neutral', e.EnemyDirection(), damage * 2); 
+    //effectsController.SpawnEnergyNuggets(e.body.center, frauki.body.center, 'neutral', e.EnemyDirection(), damage * 2); 
 
     if(e.energy <= 0) { e.destroy(); }
 };
