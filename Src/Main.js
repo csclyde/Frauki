@@ -98,6 +98,8 @@ Main.Restart = function() {
     game.time.slowMotion = 5;
     var fadeOutTween = game.add.tween(game.world).to({alpha:0}, 1000, Phaser.Easing.Linear.None, true);
 
+    setTimeout(function() { events.publish('play_music', { name: 'Surface' } ); }, 10000);
+
     fadeOutTween.onComplete.add(function() {
         Frogland.ChangeLayer(3);
         frauki.x = frauki.initialX; //fraukiSpawnX;
@@ -121,6 +123,24 @@ Main.Restart = function() {
         effectsController.dicedPieces4 = game.add.group(Frogland.objectGroup_4);
         effectsController.dicedPieces3 = game.add.group(Frogland.objectGroup_3);
         effectsController.dicedPieces2 = game.add.group(Frogland.objectGroup_2);
+
+        triggerController.triggerLayers['Triggers_4'].forEach(function(trig) {
+            trig.enterFired = false;
+            trig.stayFired = false;
+            trig.exitFired = false;
+        });
+
+        triggerController.triggerLayers['Triggers_3'].forEach(function(trig) {
+            trig.enterFired = false;
+            trig.stayFired = false;
+            trig.exitFired = false;
+        });
+
+        triggerController.triggerLayers['Triggers_3'].forEach(function(trig) {
+            trig.enterFired = false;
+            trig.stayFired = false;
+            trig.exitFired = false;
+        });
 
         //var cameraMoveTween = game.add.tween(game.camera)
 
