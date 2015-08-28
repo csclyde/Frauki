@@ -137,7 +137,7 @@ var fraukiDamageFrames = {
 	//stab taper off
 	'Attack Stab0009': {
 		x: 0, y: 15, w: 83, h: 12,
-		damage: 0.5,
+		damage: 1,
 		knockback: 0,
 		priority: 1,
 		juggle: 0
@@ -146,7 +146,7 @@ var fraukiDamageFrames = {
 	//stab, taper off
 	'Attack Stab0010': {
 		x: 0, y: 15, w: 83, h: 12,
-		damage: 0,
+		damage: 1,
 		knockback: 0,
 		priority: 1,
 		juggle: 0

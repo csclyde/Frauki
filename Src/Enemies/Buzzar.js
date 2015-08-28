@@ -58,7 +58,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
         this.stingRestTimer = game.time.now + 300 + (Math.random() * 1500);
 
         this.state = this.PreStinging;
-        this.squashTween = game.add.tween(this.scale).to({y: 0.7}, 600, Phaser.Easing.Exponential.Out, true);
+        //this.squashTween = game.add.tween(this.scale).to({y: 0.7}, 600, Phaser.Easing.Exponential.Out, true);
     };
 
     this.ChangeDirection = function() {
@@ -116,7 +116,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
         if(game.time.now > this.stingTimer) {
             this.stingTimer = game.time.now + 2000;
             this.state = this.Stinging;
-            this.squashTween = game.add.tween(this.scale).to({y: 1.5}, 200, Phaser.Easing.Exponential.In, true);
+            //this.squashTween = game.add.tween(this.scale).to({y: 1.5}, 200, Phaser.Easing.Exponential.In, true);
             game.physics.arcade.moveToXY(this, frauki.body.center.x, frauki.body.center.y, 450);
         }
     };

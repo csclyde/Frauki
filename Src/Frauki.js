@@ -95,6 +95,12 @@ Player.prototype.preStateUpdate = function() {
     //maintain the roll boost when they jump without a key down
     if(this.movement.rollBoost > 0) {
         this.body.velocity.x = (PLAYER_SPEED() + this.movement.rollBoost) * this.movement.rollDirection;
+
+        if(this.body.velocity.x < 0 && !inputController.dpad.left) {
+            this.movement.rollBoost -= 200 * (game.time.elapsedMS / 1000);
+        } else if(this.body.velocity.x > 0 && !inputController.dpad.right) {
+            this.movement.rollBoost -= 200 * (game.time.elapsedMS / 1000);
+        }
     }
 
     this.body.gravity.y = 0;
@@ -123,7 +129,7 @@ Player.prototype.postStateUpdate = function() {
     if(this.states.inWater) {
         if(this.states.flowLeft || this.states.flowRight) {
             this.body.maxVelocity.x *= 2;
-        } else {
+        } else if(this.state !== this.Rolling && this.state !== this.AttackStab) {
             this.body.maxVelocity.x *= 0.7;
         }
 
