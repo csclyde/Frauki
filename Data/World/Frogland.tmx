@@ -2,8 +2,8 @@
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="330" tilewidth="16" tileheight="16" nextobjectid="559">
  <properties>
   <property name="startLayer" value="4"/>
-  <property name="startX" value="176"/>
-  <property name="startY" value="196"/>
+  <property name="startX" value="86"/>
+  <property name="startY" value="147"/>
  </properties>
  <tileset firstgid="1" name="Collision" tilewidth="16" tileheight="16">
   <image source="../CollisionKey.png" width="128" height="128"/>

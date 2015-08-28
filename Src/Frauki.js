@@ -131,7 +131,7 @@ Player.prototype.postStateUpdate = function() {
     }
 
     if(this.states.inUpdraft) {
-        this.body.acceleration.y = -1000;
+        this.body.acceleration.y = -1200;
 
         if(this.body.velocity.y > 300) {
             //this.body.velocity.y = 300;
@@ -287,7 +287,7 @@ Player.prototype.LandHit = function(e, damage) {
     vel.x *= 300;
     vel.y *= 300;
 
-    if(this.state !== this.AttackStab) {
+    if(this.state !== this.AttackStab && this.state !== this.AttackDiveFall) {
         frauki.body.velocity.x = vel.x;
         frauki.body.velocity.y = vel.y;
     }
@@ -380,7 +380,12 @@ Player.prototype.Jump = function(params) {
             if(energyController.UseEnergy(1)) {
                 //if(this.tweens.stopJump) { this.tweens.stopJump.stop(); }
     
-                this.body.velocity.y = PLAYER_DOUBLE_JUMP_VEL();
+                if(this.body.velocity.y > PLAYER_DOUBLE_JUMP_VEL()) {
+                    this.body.velocity.y = PLAYER_DOUBLE_JUMP_VEL();
+                } else {
+                    this.body.velocity.y += PLAYER_DOUBLE_JUMP_VEL();
+                }
+
                 this.state = this.Flipping;
                 this.states.hasFlipped = true;
                 this.timers.SetTimer('frauki_grace', 300);
@@ -439,12 +444,12 @@ Player.prototype.Slash = function(params) {
     //     return;
 
     //diving dash
-    if(!this.timers.TimerUp('frauki_dash') && this.states.crouching && (this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling)) {
+    if(!this.timers.TimerUp('frauki_dash') && this.states.crouching && (this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling || this.state === this.Flipping)) {
         this.DiveSlash();
         effectsController.EnergyStreak();
     }
     //running dash
-    else if(this.state === this.Rolling || this.state === this.Flipping) {
+    else if(this.state === this.Rolling || (this.state === this.Flipping && !this.states.upPressed && !this.states.crouching)) {
         this.StabSlash();
         effectsController.EnergyStreak();
     }
@@ -806,7 +811,7 @@ Player.prototype.AttackFront = function() {
     this.PlayAnim('attack_front');
 
     if(this.Attacking()) {
-        this.body.maxVelocity.x = PLAYER_ROLL_SPEED();
+        this.body.maxVelocity.x = PLAYER_ROLL_SPEED() - 200;
         this.body.acceleration.x *= 3;
 
         if(this.body.velocity.y > 0 && (inputController.dpad.left || inputController.dpad.right)) {
@@ -877,9 +882,13 @@ Player.prototype.AttackStab = function() {
 
 
     var frameName = this.animations.currentFrame.name;
-    if(frameName === 'Attack Stab0006' || frameName === 'Attack Stab0007' || frameName === 'Attack Stab0008' || frameName === 'Attack Stab0009' || frameName === 'Attack Stab0010' || frameName === 'Attack Stab0011') {
-        //this.body.velocity.y = 0;
+    if(frameName === 'Attack Stab0004' || frameName === 'Attack Stab0005' ||frameName === 'Attack Stab0006' || frameName === 'Attack Stab0007' || frameName === 'Attack Stab0008') {
+        this.body.velocity.y = 0;
     }
+
+    // if(this.Attacking()) {
+    //     this.body.velocity.y = 0;
+    // }
 
     if(this.animations.currentAnim.isFinished) {
         
@@ -906,17 +915,23 @@ Player.prototype.AttackDiveCharge = function() {
         events.publish('play_sound', {name: 'attack_dive_fall'});
 
         effectsController.EnergyStreak();
+        this.body.velocity.y = 20000;
     }
 };
 
 Player.prototype.AttackDiveFall = function() {
     this.PlayAnim('attack_dive_fall');
     this.body.maxVelocity.y = this.movement.diveVelocity;
-    this.body.velocity.y = 20000;//this.movement.diveVelocity / (frauki.states.inUpdraft ? 3 : 1);
+    //this.body.acceleration.y = 20000;//this.movement.diveVelocity / (frauki.states.inUpdraft ? 3 : 1);
     
     this.body.maxVelocity.x = 100;
 
-    if(this.body.onFloor()) {
+    if(this.body.velocity.y < 0) {
+        this.state = this.Jumping;
+        events.publish('stop_sound', {name: 'attack_dive_fall'});
+        this.movement.diveVelocity = 0;
+
+    } else if(this.body.onFloor()) {
         this.movement.diveVelocity = 0;
 
         events.publish('camera_shake', {magnitudeX: 20, magnitudeY: 5, duration: 250});
