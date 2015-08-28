@@ -152,28 +152,20 @@ var fraukiDamageFrames = {
 		juggle: 0
 	},
 
-	'Kick0000': {
-		x: 0, y: 25, w: 25, h: 20,
-		damage: 0,
-		knockback: 3.0,
-		priority: 1,
-		juggle: 0
-	},
-
 	'Attack Dive0010': {
 		x: -10, y: -5, w: 28, h: 45,
 		damage: 4,
-		knockback: 3,
+		knockback: 2,
 		priority: 3,
-		juggle: 1
+		juggle: -1
 	},
 
 	'Attack Dive0011': {
 		x: -10, y: 15, w: 28, h: 50,
 		damage: 3,
-		knockback: 3,
+		knockback: 2,
 		priority: 3,
-		juggle: 1
+		juggle: -1
 	},
 
 	'Attack Dive0012': {
@@ -181,7 +173,7 @@ var fraukiDamageFrames = {
 		damage: 2,
 		knockback: 1.5,
 		priority: 3,
-		juggle: 1
+		juggle: -1
 	},
 
 	'Attack Dive0013': {
@@ -189,7 +181,7 @@ var fraukiDamageFrames = {
 		damage: 2,
 		knockback: 1.5,
 		priority: 3,
-		juggle: 1
+		juggle: -1
 	},
 
 	'Attack Dive0014': {
@@ -197,7 +189,7 @@ var fraukiDamageFrames = {
 		damage: 2,
 		knockback: 1.5,
 		priority: 3,
-		juggle: 1
+		juggle: -1
 	},
 
 	'Attack Dive0015': {
@@ -205,7 +197,7 @@ var fraukiDamageFrames = {
 		damage: 2,
 		knockback: 1.5,
 		priority: 3,
-		juggle: 1
+		juggle: -1
 	},
 
 	'Attack Dive0016': {
@@ -213,7 +205,7 @@ var fraukiDamageFrames = {
 		damage: 2,
 		knockback: 1.5,
 		priority: 3,
-		juggle: 1
+		juggle: -1
 	},
 
 	'Attack Dive0017': {
@@ -221,15 +213,15 @@ var fraukiDamageFrames = {
 		damage: 2,
 		knockback: 1.5,
 		priority: 3,
-		juggle: 1
+		juggle: -1
 	},
 
 	'Attack Dive0018': {
 		x: -30, y: -8, w: 70, h: 55,
 		damage: 3,
-		knockback: 3,
+		knockback: 2,
 		priority: 2,
-		juggle: 1
+		juggle: -1
 	}
 
 };
