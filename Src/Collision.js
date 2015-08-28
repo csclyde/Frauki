@@ -34,17 +34,8 @@ Collision.OverlapAttackWithObject = function(f, o) {
     if(o.spriteType === 'enemy') {
         EnemyHit(f, o);
     } else if(o.spriteType === 'junk') {
-        o.kill();
 
-        var probTable = [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 3];
-
-        effectsController.SpawnEnergyNuggets(o.body.center, frauki.body.center, 'neutral', null, probTable[Math.round(Math.random() * (probTable.length - 1))]);
-        effectsController.SpawnEnergyNuggets(o.body.center, frauki.body.center, 'positive', null, probTable[Math.round(Math.random() * (probTable.length - 1))]);
-
-        effectsController.ClashStreak(o.body.center.x, o.body.center.y, game.rnd.between(1, 2));
-        effectsController.DiceEnemy(o, o.body.center.x, o.body.center.y);
-        events.publish('camera_shake', {magnitudeX: 10, magnitudeY: 5, duration: 150});
-        events.publish('play_sound', {name: 'smash'});
+        o.JunkHit();
     }
 };
 

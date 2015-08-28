@@ -229,28 +229,31 @@ function EnemyHit(f, e) {
 
     if(e.energy <= 0) {
 
-        e.Die();
-        e.state = e.Dying;
+        e.timers.SetTimer('hit', 500);
+        
+        setTimeout(function() {
+            e.Die();
+            e.state = e.Dying;
 
-        effectsController.EnergySplash(e.body.center, 200, 'negative');
-        effectsController.Explosion(e.body.center);
-        effectsController.DiceEnemy(e, e.body.center.x, e.body.center.y);
+            effectsController.EnergySplash(e.body.center, 200, 'negative');
+            effectsController.Explosion(e.body.center);
+            effectsController.DiceEnemy(e, e.body.center.x, e.body.center.y);
 
-        damage = e.maxEnergy;
+            damage = e.maxEnergy;
 
-        //energyController.AddPower(e.maxEnergy / 2);
-        effectsController.SpawnEnergyNuggets(e.body.center, frauki.body.center, 'positive', e.EnemyDirection(), e.maxEnergy / 2); 
-        //effectsController.MakeHearts(e.maxEnergy / 4);
+            //energyController.AddPower(e.maxEnergy / 2);
+            effectsController.SpawnEnergyNuggets(e.body.center, frauki.body.center, 'positive', e.EnemyDirection(), e.maxEnergy / 2); 
+            //effectsController.MakeHearts(e.maxEnergy / 4);
+
+            e.destroy();
+        }, 300);
 
     } else {
         e.TakeHit();
+        events.publish('play_sound', { name: 'attack_connect' });
     }   
 
     frauki.LandHit(e, damage);
-
-    events.publish('play_sound', { name: 'attack_connect' });
-
-    if(e.energy <= 0) { e.destroy(); }
 };
 
 function ClashSwords(e, f) {
