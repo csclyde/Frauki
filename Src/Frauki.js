@@ -486,7 +486,6 @@ Player.prototype.FrontSlash = function() {
             this.state = this.AttackFront;
         }
 
-
         events.publish('play_sound', {name: 'attack_slash', restart: true });
     }
 };
@@ -598,7 +597,7 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
 
     this.state = this.Hurting;
     this.timers.SetTimer('frauki_grace', grace_duration);
-    this.timers.SetTimer('frauki_hit', 700);
+    this.timers.SetTimer('frauki_hit', 600);
     effectsController.EnergySplash(frauki.body.center, 100, 'negative');
 
     if(energyController.neutralPoint > 0)

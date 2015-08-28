@@ -47,7 +47,7 @@ Enemy.prototype.types['Fungu'] =  function() {
 				projectileController.Spore(this);
 			}
 
-			this.timers.SetTimer('shoot', 500);
+			this.timers.SetTimer('shoot', 700);
 		}
 	};
 
