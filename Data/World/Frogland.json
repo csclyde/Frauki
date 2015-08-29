@@ -2910,7 +2910,7 @@
          "name":"Lighting_3",
          "opacity":0.600000023841858,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
