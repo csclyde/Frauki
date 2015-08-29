@@ -65,7 +65,10 @@
 
             var pixel = { scale: 3, canvas: null, context: null, width: 480, height: 270 };
 
-            if(window.innerWidth < pixel.width * 3) {
+            if(window.innerWidth < pixel.width * 2) {
+                pixel.scale = 1;
+                pixel.what = 3;
+            } else if(window.innerWidth < pixel.width * 3) {
                 pixel.scale = 2;
                 pixel.what = 4;
             } else if(window.innerWidth < pixel.width * 4) {
