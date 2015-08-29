@@ -6,6 +6,7 @@ FileMap.Images = [
 	{ Name: 'TerraceTiles', File: 'Data/World/TerraceTiles.png' },
 	{ Name: 'Doodads', File: 'Data/World/Doodads.png' },
 	{ Name: 'Collision', File: 'Data/CollisionKey.png' },
+	{ Name: 'Lighting', File: 'Data/World/Lighting.png' },
 	{ Name: 'Background', File: 'Data/World/Sky.png' },
 	{ Name: 'parallax1', File: 'Data/World/Parallax1.png' },
 	{ Name: 'parallax2', File: 'Data/World/Parallax2.png' }

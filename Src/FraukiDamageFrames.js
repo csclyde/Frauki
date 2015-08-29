@@ -219,7 +219,7 @@ var fraukiDamageFrames = {
 	'Attack Dive0018': {
 		x: -30, y: -8, w: 70, h: 55,
 		damage: 3,
-		knockback: 2,
+		knockback: 1.75,
 		priority: 2,
 		juggle: -1
 	}

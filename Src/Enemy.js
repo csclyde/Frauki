@@ -48,7 +48,7 @@ Enemy.prototype.SetDefaultValues = function() {
     this.energy = 5;
     this.damage = 3;
     this.inScope = false;
-    this.baseStunDuration = 500;
+    this.baseStunDuration = 600;
 };
 
 Enemy.prototype.UpdateFunction = function() {};
@@ -218,7 +218,7 @@ function EnemyHit(f, e) {
     
     e.body.velocity.y = -200 + (frauki.GetCurrentJuggle() * -200);
 
-    e.timers.SetTimer('hit', e.baseStunDuration + (50 * damage));
+    e.timers.SetTimer('hit', e.baseStunDuration + (100 * damage));
 
     e.poise -= damage;
     e.state = e.Hurting;
