@@ -36,7 +36,8 @@ FileMap.Audio = [
 	{ Name: 'airhike', File: 'Data/Sfx/airhike.wav', Volume: 0.3, Loop: false },
 	{ Name: 'energy_bit', File: 'Data/Sfx/energy_bit.wav', Volume: 0.2, Loop: false },
 	{ Name: 'clang', File: 'Data/Sfx/clang.wav', Volume: 0.3, Loop: false },
-	{ Name: 'smash', File: 'Data/Sfx/smash.wav', Volume: 0.7, Loop: false }
+	{ Name: 'smash', File: 'Data/Sfx/smash.wav', Volume: 0.7, Loop: false },
+	{ Name: 'robosplosion', File: 'Data/Sfx/robosplosion.wav', Volume: 0.9, Loop: false }
 ];
 
 FileMap.Music = [

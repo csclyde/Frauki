@@ -229,7 +229,7 @@ function EnemyHit(f, e) {
 
     if(e.energy <= 0) {
 
-        e.timers.SetTimer('hit', 500);
+        e.timers.SetTimer('hit', 800);
 
         e.body.velocity.x *= 1.2;
         e.body.velocity.y *= 1.2;
@@ -249,7 +249,9 @@ function EnemyHit(f, e) {
             //effectsController.MakeHearts(e.maxEnergy / 4);
 
             e.destroy();
-        }, game.rnd.between(250, 350));
+        }, 700);
+
+        events.publish('play_sound', { name: 'robosplosion' });
 
     } else {
         e.TakeHit();
