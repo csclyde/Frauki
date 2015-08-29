@@ -290,8 +290,7 @@ Player.prototype.LandHit = function(e, damage) {
     var vel = new Phaser.Point(frauki.body.center.x - e.body.center.x, frauki.body.center.y - e.body.center.y);
     vel = vel.normalize();
 
-    vel.x *= 300;
-    vel.y *= 300;
+    vel = vel.setMagnitude(300);
 
     if(this.state !== this.AttackStab && this.state !== this.AttackDiveFall) {
         frauki.body.velocity.x = vel.x;

@@ -230,7 +230,10 @@ function EnemyHit(f, e) {
     if(e.energy <= 0) {
 
         e.timers.SetTimer('hit', 500);
-        
+
+        e.body.velocity.x *= 1.2;
+        e.body.velocity.y *= 1.2;
+
         setTimeout(function() {
             e.Die();
             e.state = e.Dying;
@@ -246,7 +249,7 @@ function EnemyHit(f, e) {
             //effectsController.MakeHearts(e.maxEnergy / 4);
 
             e.destroy();
-        }, 300);
+        }, game.rnd.between(250, 350));
 
     } else {
         e.TakeHit();

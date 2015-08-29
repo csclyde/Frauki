@@ -35,7 +35,7 @@ Collision.OverlapAttackWithObject = function(f, o) {
         EnemyHit(f, o);
     } else if(o.spriteType === 'junk') {
 
-        o.JunkHit();
+        o.JunkHit(o);
     }
 };
 
