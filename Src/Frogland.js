@@ -21,7 +21,7 @@ Frogland.Create = function() {
 
     var fraukiStartX, fraukiStartY, startLayer;
 
-    if(true) {
+    if(false) {
         fraukiStartX = 2025;
         fraukiStartY = 1050;
         startLayer = 3;
@@ -119,8 +119,14 @@ Frogland.Update = function() {
     this.plx1.cameraOffset.x = -(game.camera.x * 0.45) + 280;
     this.plx1.cameraOffset.y = -(game.camera.y * 0.30) + 220;
 
+    if(game.camera.y > 80 * 16) this.plx1.visible = false;
+    else this.plx1.visible = true;
+
     this.plx2.cameraOffset.x = -(game.camera.x * 0.40) + 400;
     this.plx2.cameraOffset.y = -(game.camera.y * 0.25) + 180;
+
+    if(game.camera.y > 80 * 16) this.plx2.visible = false;
+    else this.plx2.visible = true;
 };
 
 Frogland.CreateBackgroundLayer = function(layer, visible) {
