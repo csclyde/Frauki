@@ -13,6 +13,8 @@ Enemy.prototype.types['HWK9'] =  function() {
     this.energy = 7;
     this.baseStunDuration = 500;
 
+    this.robotic = true;
+
 
     /*
     this.weight = 0.8;

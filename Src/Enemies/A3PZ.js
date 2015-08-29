@@ -15,6 +15,8 @@ Enemy.prototype.types['A3PZ'] =  function() {
     this.energy = 4;
     this.baseStunDuration = 500;
 
+    this.robotic = true;
+
 
     /*
     this.weight = 0.8;

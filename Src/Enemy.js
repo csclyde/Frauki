@@ -249,14 +249,15 @@ function EnemyHit(f, e) {
             //effectsController.MakeHearts(e.maxEnergy / 4);
 
             e.destroy();
-        }, 700);
+        }, e.robotic ? 700 : game.rnd.between(250, 350));
 
-        events.publish('play_sound', { name: 'robosplosion' });
+        if(e.robotic) events.publish('play_sound', { name: 'robosplosion' });
 
     } else {
         e.TakeHit();
-        events.publish('play_sound', { name: 'attack_connect' });
-    }   
+    }
+
+    events.publish('play_sound', { name: 'attack_connect' });
 
     frauki.LandHit(e, damage);
 };
