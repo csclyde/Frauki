@@ -327,8 +327,8 @@ EffectsController.prototype.DiceEnemy = function(enemy, x, y) {
         p.body.drag.x = 100;
 
         //randomly set the velocity, rotation, and lifespan
-        p.body.velocity.x = game.rnd.between(-150, 150) + enemy.body.velocity.x;
-        p.body.velocity.y = game.rnd.between(-100, -400) + enemy.body.velocity.y;
+        p.body.velocity.x = game.rnd.between(-150, 150) + enemy.body.velocity.x * 0.5;
+        p.body.velocity.y = game.rnd.between(-100, -400) + enemy.body.velocity.y * 0.5;
         p.body.angularVelocity = game.rnd.between(500, 1000);
 
         game.time.events.add(4000, function() { p.body.enable = false; } );

@@ -95,7 +95,7 @@ Frogland.Update = function() {
     frauki.states.flowLeft = false;
 
     this.GetCurrentObjectGroup().forEach(function(o) {
-        var padding = 20;
+        var padding = 100;
 
         if(o.spriteType !== 'enemy' && !!o.body) {
             if(o.body.x > game.camera.x - padding && o.body.y > game.camera.y - padding && o.body.x < game.camera.x + game.camera.width + padding && o.body.y < game.camera.y + game.camera.height + padding
