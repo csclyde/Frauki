@@ -32,14 +32,125 @@ Collision.OverlapFraukiWithObject = function(f, o) {
 
 Collision.OverlapAttackWithObject = function(f, o) {
     if(o.spriteType === 'enemy') {
-        EnemyHit(f, o);
+        Collision.OverlapAttackWithEnemy(f, o);
     } else if(o.spriteType === 'junk') {
 
         o.JunkHit(o);
     }
 };
 
-Collision.CollideFraukiWithObject = function(f, o) {   
+Collision.OverlapAttackWithEnemy = function(f, e) {
+
+    if(e.spriteType !== 'enemy' || e.state === e.Hurting || !e.Vulnerable() || e.state === e.Dying)
+        return;
+
+    //seperate conditional to prevent crash!
+    if(!e.timers.TimerUp('hit'))
+        return;
+
+    var damage = frauki.GetCurrentDamage();
+
+    //fraukis knockback will increase the amount that the enemy is moved. The weight
+    //of the enemy will work against that. 
+    e.body.velocity.x = (600 * frauki.GetCurrentKnockback()) - (600 * e.weight);
+    if(e.body.velocity.x < 50) e.body.velocity.x = 50;
+    e.body.velocity.x *= e.PlayerDirMod();
+    
+    e.body.velocity.y = -200 + (frauki.GetCurrentJuggle() * -200);
+
+    e.timers.SetTimer('hit', e.baseStunDuration + (100 * damage));
+
+    e.poise -= damage;
+    e.state = e.Hurting;
+
+    e.energy -= damage;
+
+    console.log('Enemy is taking ' + damage + ', now at ' + e.energy + '/' + e.maxEnergy, 'x: ' + e.body.velocity.x, 'y: ' + e.body.velocity.y);
+
+    if(e.energy <= 0) {
+
+        e.timers.SetTimer('hit', 1000);
+
+        e.body.velocity.x *= 1.2;
+        e.body.velocity.y *= 1.2;
+
+        setTimeout(function() {
+            e.Die();
+            e.state = e.Dying;
+
+            effectsController.EnergySplash(e.body.center, 200, 'negative');
+            effectsController.Explosion(e.body.center);
+            effectsController.DiceEnemy(e, e.body.center.x, e.body.center.y);
+
+            damage = e.maxEnergy;
+
+            //energyController.AddPower(e.maxEnergy / 2);
+            effectsController.SpawnEnergyNuggets(e.body.center, frauki.body.center, 'positive', e.EnemyDirection(), e.maxEnergy / 2); 
+            //effectsController.MakeHearts(e.maxEnergy / 4);
+
+            e.destroy();
+        }, e.robotic ? 800 : game.rnd.between(250, 350));
+
+        if(e.robotic) events.publish('play_sound', { name: 'robosplosion' });
+
+    } else {
+        e.TakeHit();
+    }
+
+    events.publish('play_sound', { name: 'attack_connect' });
+
+    frauki.LandHit(e, damage);
+};
+
+Collision.OverlapAttackWithEnemyAttack = function(e, f) {
+
+    console.log(frauki.GetCurrentPriority(), e.owningEnemy.currentAttack.priority);
+
+    //if fraukis attack has priority over the enemies attack, they cant block it
+    if(frauki.GetCurrentPriority() > e.owningEnemy.currentAttack.priority) {
+        game.physics.arcade.overlap(frauki.attackRect, e.owningEnemy, Collision.OverlapAttackWithEnemy);
+        return;
+    }
+
+    effectsController.SparkSplash(frauki.attackRect, e);
+
+    e = e.owningEnemy;
+
+    frauki.LandHit(e, 0);
+
+    var vel = new Phaser.Point(e.body.center.x - frauki.body.center.x, e.body.center.y - frauki.body.center.y);
+    vel = vel.normalize();
+
+    vel.setMagnitude(300);
+
+    e.body.velocity.x = vel.x;
+    e.body.velocity.y = vel.y;
+
+    events.publish('stop_attack_sounds', {});
+    events.publish('play_sound', {name: 'clang'});
+
+    e.timers.SetTimer('hit', 400);
+    frauki.timers.SetTimer('frauki_hit', 300);
+};
+
+Collision.OverlapEnemyAttackWithFrauki = function(e, f) {
+
+    if(e.owningEnemy.currentAttack.damage > 0) {
+        frauki.Hit(e.owningEnemy, e.owningEnemy.currentAttack.damage, 500);
+    }
+
+};
+
+Collision.OverlapEnemiesWithSelf = function(o1, o2) {
+    if(o1.enemyName && o2.enemyName && o1.enemyName === o2.enemyName) {
+        return true;
+    } else {
+        return false;
+    }
+};
+
+Collision.OverlapAttackWithEnvironment = function(a, t) {
+    
 };
 
 Collision.CollideFraukiWithProjectile = function(f, p) {
@@ -129,13 +240,5 @@ Collision.CollideFraukiWithEnvironment = function(f, tile) {
     //right slope
     } else if(tile.index === 18) {
         frauki.states.onRightSlope = true;
-    }
-};
-
-Collision.OverlapEnemiesWithSelf = function(o1, o2) {
-    if(o1.enemyName && o2.enemyName && o1.enemyName === o2.enemyName) {
-        return true;
-    } else {
-        return false;
     }
 };
