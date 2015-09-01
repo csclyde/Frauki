@@ -69,11 +69,8 @@ Main.render = function() {
     // var rekt = triggerController.triggerLayers['Triggers_3'][0];
     // game.debug.geom(new Phaser.Rectangle(rekt.x, rekt.y, rekt.width, rekt.height));
 
-    var rekt = effectsController.loadedEffects[0];
-    game.debug.geom(new Phaser.Rectangle(rekt.x, rekt.y, rekt.width, rekt.height));
-
-    var rekt = effectsController.loadedEffects[1];
-    game.debug.geom(new Phaser.Rectangle(rekt.x, rekt.y, rekt.width, rekt.height));
+    // var rekt = effectsController.loadedEffects[0];
+    // game.debug.geom(new Phaser.Rectangle(rekt.x, rekt.y, rekt.width, rekt.height));
 
     var drawX = -(pixel.width * (pixel.scale / 4));
 
