@@ -152,7 +152,7 @@ Collision.OverlapObjectsWithSelf = function(o1, o2) {
 };
 
 Collision.OverlapAttackWithEnvironment = function(a, t) {
-
+    //effectsController.EnergySplash(frauki.currentAttack, 100, 'positive');
 };
 
 Collision.CollideFraukiWithProjectile = function(f, p) {

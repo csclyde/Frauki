@@ -12,7 +12,7 @@ var fraukiDamageFrames = {
 	//followthrough of the front slash, is behind you
 	'Attack Front0003': {
 		x: -35, y: 0, w: 35, h: 15,
-		damage: 0.5,
+		damage: 1,
 		knockback: 0.1,
 		priority: 1,
 		juggle: 0
@@ -30,7 +30,7 @@ var fraukiDamageFrames = {
 	//return to the followthrough, smaller and weaker
 	'Attack Front0005': {
 		x: -30, y: 0, w: 25, h: 15,
-		damage: 0.5,
+		damage: 1,
 		knockback: 0.1,
 		priority: 1,
 		juggle: 0
@@ -38,7 +38,7 @@ var fraukiDamageFrames = {
 	
 	'Attack Overhead0002': {
 		x: -15, y: 15, w: 15, h: 15,
-		damage: 0.5,
+		damage: 1,
 		knockback: 0,
 		priority: 2,
 		juggle: 0
