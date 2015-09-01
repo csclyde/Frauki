@@ -57,7 +57,7 @@ TriggerController.prototype.Update = function(currentLayer) {
         var trigger = currentLayer[i];
 
         //if the player intersects with this trigger
-        if(this.Intersects(frauki, trigger)) {
+        if(this.Intersects(frauki.body, trigger)) {
 
             //if the flag is unset, they just entered the trigger
             if(trigger.playerInside === false) {

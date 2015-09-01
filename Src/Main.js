@@ -66,6 +66,9 @@ Main.render = function() {
         game.debug.body(o);
     });*/
 
+    //var rekt = triggerController.triggerLayers['Triggers_3'][0];
+    //game.debug.geom(new Phaser.Rectangle(rekt.x, rekt.y, rekt.width, rekt.height));
+
     var drawX = -(pixel.width * (pixel.scale / 4));
 
     //set up correct camera edge behavior
