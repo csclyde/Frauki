@@ -2,6 +2,10 @@ TechnoRune = function(game, x, y, name) {
     //instantiate the sprite
     Phaser.Sprite.call(this, game, x, y, 'Misc');
     this.spriteType = 'TechnoRune';
+
+    console.log(x, y);
+
+    console.log(this.x, this.y);
     
     //enable its physics body
     game.physics.enable(this, Phaser.Physics.ARCADE);
@@ -10,12 +14,16 @@ TechnoRune = function(game, x, y, name) {
     this.anchor.setTo(0.5, 0.5);
     this.body.bounce.y = 0.5;
 
+    console.log(this.body.x, this.body.y);
+
 
     //this.body.gravity.y = game.physics.arcade.gravity.y * 2;
 
     this.state = this.Idle;
 
     this.body.allowGravity = false;
+
+    this.runeName = name;
 
     this.animations.add('idle', ['Runes0000'], 20, true, false);
     this.animations.add('eaten', ['Runes0000'], 10, false, false);

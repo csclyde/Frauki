@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="330" tilewidth="16" tileheight="16" nextobjectid="613">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="330" tilewidth="16" tileheight="16" nextobjectid="616">
  <properties>
   <property name="debug" value="false"/>
   <property name="startLayer" value="3"/>
@@ -4042,6 +4042,7 @@
   <object id="610" gid="105" x="968" y="1412" width="16" height="16"/>
   <object id="611" name="drip" type="effect" x="1789" y="1354.5" width="50" height="7.5"/>
   <object id="612" name="drip" type="effect" x="1759.67" y="1350.83" width="50" height="7.5"/>
+  <object id="613" gid="125" x="2161.83" y="943.5" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Triggers_3" visible="0">
   <object id="311" name="stop_music" x="2921" y="1006" width="85.6633" height="71">

@@ -52,6 +52,14 @@ Player = function (game, x, y, name) {
     this.movement.rollPrevVel = 0;
     this.movement.rollDirection = 1;
 
+    this.upgrades = {};
+    this.upgrades.roll = true;
+    this.upgrades.hike = true;
+    this.upgrades.attackFront = true;
+    this.upgrades.attackOverhead = false;
+    this.upgrades.attackStab = false;
+    this.upgrades.attackDive = false;
+
     this.attack = {};
     this.attack.activeCharge = 0;
 
@@ -382,7 +390,7 @@ Player.prototype.Jump = function(params) {
             events.publish('play_sound', {name: 'jump'});
         }
         //double jump
-        else if(this.states.hasFlipped === false && this.state !== this.Rolling && this.state !== this.AttackStab && this.state !== this.AttackOverhead) {
+        else if(this.states.hasFlipped === false && this.state !== this.Rolling && this.state !== this.AttackStab && this.state !== this.AttackOverhead && this.upgrades.hike) {
             if(energyController.UseEnergy(1)) {
                 //if(this.tweens.stopJump) { this.tweens.stopJump.stop(); }
     
@@ -479,7 +487,7 @@ Player.prototype.Slash = function(params) {
 };
 
 Player.prototype.FrontSlash = function() {
-    if(energyController.UseEnergy(5)) {
+    if(this.upgrades.attackFront && energyController.UseEnergy(5)) {
         if(this.states.upPressed) {
             this.state = this.AttackOverhead;
         } else {
@@ -491,7 +499,7 @@ Player.prototype.FrontSlash = function() {
 };
 
 Player.prototype.DiveSlash = function() {
-    if(energyController.UseEnergy(7)) {
+    if(this.upgrades.attackDive && energyController.UseEnergy(7)) {
         this.state = this.AttackDiveCharge;
         this.movement.diveVelocity = 950;
         events.publish('play_sound', {name: 'attack_dive_charge', restart: true });
@@ -499,7 +507,7 @@ Player.prototype.DiveSlash = function() {
 };
 
 Player.prototype.JumpSlash = function() {
-    if(energyController.UseEnergy(6)) {
+    if(this.upgrades.attackOverhead && energyController.UseEnergy(6)) {
         this.state = this.AttackJump;
         
         this.body.velocity.y = -2000;
@@ -510,7 +518,7 @@ Player.prototype.JumpSlash = function() {
 };
 
 Player.prototype.StabSlash = function() {
-    if(energyController.UseEnergy(6)) {
+    if(this.upgrades.attackStab && energyController.UseEnergy(6)) {
         this.state = this.AttackStab;
 
         // var dir = this.GetDirectionMultiplier();
@@ -536,7 +544,7 @@ Player.prototype.StabSlash = function() {
 
 Player.prototype.Roll = function(params) {
 
-    if(!this.timers.TimerUp('frauki_roll') || this.state === this.Hurting)
+    if(!this.timers.TimerUp('frauki_roll') || this.state === this.Hurting || !this.upgrades.roll)
         return;
 
     if(this.body.onFloor()) {
