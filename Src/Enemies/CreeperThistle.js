@@ -12,7 +12,7 @@ Enemy.prototype.types['CreeperThistle'] =  function() {
     this.animations.add('idle', frames, 10, true, false);
     this.animations.add('shit', ["CreeperThistle/CreeperThistle0000"], 10, true, false);
 
-    this.energy = 1;
+    this.energy = 0.5;
     this.body.immovable = true;
     //this.body.allowGravity = false;
 

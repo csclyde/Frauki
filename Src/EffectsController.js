@@ -63,10 +63,24 @@ EffectsController = function() {
 
     this.loadedEffects = [];
 
+    this.LoadMapEffects(4);
+    this.LoadMapEffects(3);
     this.LoadMapEffects(2);
 };
 
 EffectsController.prototype.Update = function() {
+
+    this.loadedEffects.forEach(function(o) {
+        var padding = 100;
+
+        if(o.x > game.camera.x - padding && o.y > game.camera.y - padding && o.x < game.camera.x + game.camera.width + padding && o.y < game.camera.y + game.camera.height + padding
+            && o.owningLayer === Frogland.currentLayer) {
+            o.on = true;
+        } else {
+            o.on = false;
+        }
+        
+    });
 
     this.activeDest = frauki.body;
     this.positiveBits.forEachAlive(UpdateParticle, this);
@@ -104,6 +118,7 @@ EffectsController.prototype.Update = function() {
     game.physics.arcade.collide(this.dicedPieces4, Frogland.GetCurrentCollisionLayer());
     game.physics.arcade.collide(this.dicedPieces3, Frogland.GetCurrentCollisionLayer());
     game.physics.arcade.collide(this.dicedPieces2, Frogland.GetCurrentCollisionLayer());
+    game.physics.arcade.collide(this.loadedEffects, Frogland.GetCurrentCollisionLayer(), Collision.CollideEffectWithWorld);
 };
 
 EffectsController.prototype.LoadMapEffects = function(layer) {
@@ -125,6 +140,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 splasherLeft.maxParticleSpeed.x = 10;
                 splasherLeft.minParticleSpeed.y = -80;
                 splasherLeft.maxParticleSpeed.y = -130;
+                splasherLeft.owningLayer = layer;
                 splasherLeft.start(false, 200, 5);
 
                 var splasherRight = game.add.emitter(o.x + o.width / 2, o.y);
@@ -138,10 +154,29 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 splasherRight.maxParticleSpeed.x = 50;
                 splasherRight.minParticleSpeed.y = -80;
                 splasherRight.maxParticleSpeed.y = -130;
+                splasherRight.owningLayer = layer;
                 splasherRight.start(false, 200, 5);
 
                 that.loadedEffects.push(splasherLeft);
                 that.loadedEffects.push(splasherRight);
+            } else if(o.name === 'drip') {
+
+                var dripper = game.add.emitter(o.x, o.y);
+                dripper.width = o.width;
+                dripper.height = o.height;
+                dripper.makeParticles('Misc', ['Drip0000', 'Drip0001'], 20);
+                dripper.gravity = -200;
+                dripper.maxParticleSpeed.setTo(0);
+                dripper.minParticleSpeed.setTo(0);
+                dripper.minRotation = 0;
+                dripper.maxRotation = 0;
+                dripper.bounce.setTo(0.5);
+                dripper.start(false, 1500, game.rnd.between(1200, 2000));
+                dripper.effectType = 'drip';
+                dripper.alpha = 0.5;
+                dripper.owningLayer = layer;
+
+                that.loadedEffects.push(dripper);
             }
         }
     });
@@ -473,4 +508,13 @@ EffectsController.prototype.ClashStreak = function(x, y, angle) {
     clash.animations.play('clash');
     clash.animations.currentAnim.killOnComplete = true;
     clash.rotation = angle;
+};
+
+EffectsController.prototype.DripSplash = function(src) {
+    var dripSplash = game.add.sprite(src.x - 10, src.y - 3, 'Misc');
+    dripSplash.animations.add('splish', ['DripSplash0000', 'DripSplash0001', 'DripSplash0002', 'DripSplash0003', 'DripSplash0004'], 18, false, false);
+    dripSplash.animations.play('splish');
+    dripSplash.animations.currentAnim.killOnComplete = true;
+    dripSplash.alpha = 0.5;
+
 };

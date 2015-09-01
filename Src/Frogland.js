@@ -22,7 +22,7 @@ Frogland.Create = function() {
 
     var fraukiStartX, fraukiStartY, startLayer;
 
-    if(true) {
+    if(this.map.properties.debug === 'false') {
         fraukiStartX = 2025;
         fraukiStartY = 1050;
         startLayer = 3;

@@ -244,3 +244,9 @@ Collision.CollideFraukiWithEnvironment = function(f, tile) {
         frauki.states.onRightSlope = true;
     }
 };
+
+Collision.CollideEffectWithWorld = function(e, w) {
+    effectsController.DripSplash(e);
+    e.kill();
+    return true;
+};
