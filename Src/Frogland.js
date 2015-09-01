@@ -114,7 +114,7 @@ Frogland.Update = function() {
     game.physics.arcade.collide(frauki, this.GetCurrentCollisionLayer(), null, Collision.CollideFraukiWithEnvironment);
     game.physics.arcade.collide(frauki, this.GetCurrentObjectGroup(), Collision.CollideFraukiWithObject, Collision.OverlapFraukiWithObject);
     game.physics.arcade.collide(this.GetCurrentObjectGroup(), this.GetCurrentCollisionLayer());
-    //game.physics.arcade.collide(this.GetCurrentObjectGroup(), this.GetCurrentObjectGroup(), null, this.OverlapEnemiesWithSelf);
+    //game.physics.arcade.collide(this.GetCurrentObjectGroup(), this.GetCurrentObjectGroup(), null, Collision.OverlapObjectsWithSelf);
 
     if(projectileController.projectiles.countLiving() > 0) {
         game.physics.arcade.overlap(frauki, projectileController.projectiles, Collision.CollideFraukiWithProjectile);

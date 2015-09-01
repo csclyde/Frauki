@@ -141,8 +141,10 @@ Collision.OverlapEnemyAttackWithFrauki = function(e, f) {
 
 };
 
-Collision.OverlapEnemiesWithSelf = function(o1, o2) {
-    if(o1.enemyName && o2.enemyName && o1.enemyName === o2.enemyName) {
+Collision.OverlapObjectsWithSelf = function(o1, o2) {
+    if(o1.spriteType === 'enemy' && o2.spriteType === 'enemy') {
+        return true;
+    } else if(o1.spriteType === 'junk' && o2.spriteType === 'junk') {
         return true;
     } else {
         return false;
@@ -150,7 +152,7 @@ Collision.OverlapEnemiesWithSelf = function(o1, o2) {
 };
 
 Collision.OverlapAttackWithEnvironment = function(a, t) {
-    
+
 };
 
 Collision.CollideFraukiWithProjectile = function(f, p) {
