@@ -56,9 +56,9 @@ Player = function (game, x, y, name) {
     this.upgrades.roll = true;
     this.upgrades.hike = true;
     this.upgrades.attackFront = true;
-    this.upgrades.attackOverhead = false;
-    this.upgrades.attackStab = false;
-    this.upgrades.attackDive = false;
+    this.upgrades.attackOverhead = true;
+    this.upgrades.attackStab = true;
+    this.upgrades.attackDive = true;
 
     this.attack = {};
     this.attack.activeCharge = 0;
@@ -487,58 +487,72 @@ Player.prototype.Slash = function(params) {
 };
 
 Player.prototype.FrontSlash = function() {
-    if(this.upgrades.attackFront && energyController.UseEnergy(5)) {
-        if(this.states.upPressed) {
-            this.state = this.AttackOverhead;
-        } else {
-            this.state = this.AttackFront;
-        }
+    if(this.upgrades.attackFront) {
+        if(energyController.UseEnergy(5)) {
+            if(this.upgrades.attackOverhead && this.states.upPressed) {
+                this.state = this.AttackOverhead;
+            } else {
+                this.state = this.AttackFront;
+            }
 
-        events.publish('play_sound', {name: 'attack_slash', restart: true });
-    }
+            events.publish('play_sound', {name: 'attack_slash', restart: true });
+        }
+    } 
 };
 
 Player.prototype.DiveSlash = function() {
-    if(this.upgrades.attackDive && energyController.UseEnergy(7)) {
-        this.state = this.AttackDiveCharge;
-        this.movement.diveVelocity = 950;
-        events.publish('play_sound', {name: 'attack_dive_charge', restart: true });
+    if(this.upgrades.attackDive) {
+        if(energyController.UseEnergy(7)) {
+            this.state = this.AttackDiveCharge;
+            this.movement.diveVelocity = 950;
+            events.publish('play_sound', {name: 'attack_dive_charge', restart: true });
+        }
+    } else {
+        this.FrontSlash();
     }
 };
 
 Player.prototype.JumpSlash = function() {
-    if(this.upgrades.attackOverhead && energyController.UseEnergy(6)) {
-        this.state = this.AttackJump;
-        
-        this.body.velocity.y = -2000;
-        this.states.hasFlipped = true;
+    if(this.upgrades.attackOverhead) {
+        if(energyController.UseEnergy(6)) {
+            this.state = this.AttackJump;
+            
+            this.body.velocity.y = -2000;
+            this.states.hasFlipped = true;
 
-        events.publish('play_sound', {name: 'attack_slash', restart: true });
+            events.publish('play_sound', {name: 'attack_slash', restart: true });
+        }
+    } else {
+        this.FrontSlash();
     }
 };
 
 Player.prototype.StabSlash = function() {
-    if(this.upgrades.attackStab && energyController.UseEnergy(6)) {
-        this.state = this.AttackStab;
+    if(this.upgrades.attackStab) {
+        if(energyController.UseEnergy(6)) {
+            this.state = this.AttackStab;
 
-        // var dir = this.GetDirectionMultiplier();
-        
-        // this.movement.rollVelocity = 0;
-        // this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: dir * PLAYER_RUN_SLASH_SPEED()}, 300, Phaser.Easing.Exponential.InOut, false).to({rollVelocity: 0}, 500, Phaser.Easing.Exponential.InOut, false);
-        // this.tweens.roll.start();
+            // var dir = this.GetDirectionMultiplier();
+            
+            // this.movement.rollVelocity = 0;
+            // this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: dir * PLAYER_RUN_SLASH_SPEED()}, 300, Phaser.Easing.Exponential.InOut, false).to({rollVelocity: 0}, 500, Phaser.Easing.Exponential.InOut, false);
+            // this.tweens.roll.start();
 
-        var dir = this.GetDirectionMultiplier();
+            var dir = this.GetDirectionMultiplier();
 
-        this.body.maxVelocity.x = PLAYER_ROLL_SPEED();
-        this.body.velocity.x = 0;
+            this.body.maxVelocity.x = PLAYER_ROLL_SPEED();
+            this.body.velocity.x = 0;
 
-        this.movement.rollStage = 0;
-        this.movement.rollDirection = dir;
-        this.movement.rollStart = game.time.now;
-        this.movement.rollPrevVel = 0;
+            this.movement.rollStage = 0;
+            this.movement.rollDirection = dir;
+            this.movement.rollStart = game.time.now;
+            this.movement.rollPrevVel = 0;
 
-        events.publish('play_sound', {name: 'attack_stab', restart: true });
-        
+            events.publish('play_sound', {name: 'attack_stab', restart: true });
+            
+        }
+    } else {
+        this.FrontSlash();
     }
 };
 
