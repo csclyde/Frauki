@@ -105,7 +105,7 @@ Frogland.Update = function() {
     this.GetCurrentObjectGroup().forEach(function(o) {
         var padding = 100;
 
-        if(o.spriteType !== 'enemy' && !!o.body) {
+        if(o.spriteType !== 'enemy' && o.spriteType !== 'door' && !!o.body) {
             if(o.body.x > game.camera.x - padding && o.body.y > game.camera.y - padding && o.body.x < game.camera.x + game.camera.width + padding && o.body.y < game.camera.y + game.camera.height + padding
                 && o.owningLayer === Frogland.currentLayer) {
                 o.body.enable = true;
@@ -195,17 +195,14 @@ Frogland.CreateObjectsLayer = function(layer) {
     this[currLayer].forEach(function(obj) {
         obj.owningLayer = layer;
 
-        if(Frogland.currentLayer !== layer) {
-            obj.alpha = 0;
-            obj.body.enable = false;
-        }
 
         if(obj.spriteType === 'door') {
             if(Frogland.openDoors.indexOf(obj.id) > -1) {
-
-                console.log('we opening now');
                 OpenDoor(frauki, obj, true);
             }
+        } else if(Frogland.currentLayer !== layer) {
+            obj.alpha = 0;
+            obj.body.enable = false;
         }
     });  
 
