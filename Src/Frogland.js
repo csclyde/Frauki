@@ -20,6 +20,10 @@ Frogland.Create = function() {
     this.map.addTilesetImage('Collision');
     //this.map.addTilesetImage('Lighting');
 
+    this.openDoors = JSON.parse(localStorage.getItem('fraukiDoors')) || [];
+
+    console.log(this.openDoors);
+
     var fraukiStartX, fraukiStartY, startLayer;
 
     if(this.map.properties.debug === 'false') {
@@ -194,6 +198,14 @@ Frogland.CreateObjectsLayer = function(layer) {
         if(Frogland.currentLayer !== layer) {
             obj.alpha = 0;
             obj.body.enable = false;
+        }
+
+        if(obj.spriteType === 'door') {
+            if(Frogland.openDoors.indexOf(obj.id) > -1) {
+
+                console.log('we opening now');
+                OpenDoor(frauki, obj, true);
+            }
         }
     });  
 

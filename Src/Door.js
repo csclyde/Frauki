@@ -47,9 +47,9 @@ Door.prototype.SetDirection = function(dir) {
     }
 };
 
-function OpenDoor(f, d) {
+function OpenDoor(f, d, override) {
     if(d.state === d.Closed) {
-        if((d.facing === 'left' && f.body.center.x > d.body.center.x) || (d.facing === 'right' && f.body.center.x < d.body.center.x)) {
+        if((d.facing === 'left' && f.body.center.x > d.body.center.x) || (d.facing === 'right' && f.body.center.x < d.body.center.x) || override) {
             var openTween = game.add.tween(d.body).to({y: d.body.y + 70}, 2000, Phaser.Easing.Quintic.InOut, true);
 
             //disable the body after its opened
@@ -58,6 +58,11 @@ function OpenDoor(f, d) {
             }, d);
 
             d.state = d.Opening;
+
+            if(Frogland.openDoors.indexOf(d.id) === -1) {
+                Frogland.openDoors.push(d.id);
+                localStorage.setItem('fraukiDoors', JSON.stringify(Frogland.openDoors));
+            }
         }
     }
 };
