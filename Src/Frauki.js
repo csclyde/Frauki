@@ -314,9 +314,9 @@ Player.prototype.LandHit = function(e, damage) {
     }
 
     if(damage > 0 && e.maxEnergy > 1) {
-        effectsController.SlowHit(140);
+        effectsController.SlowHit(700);
     } else if(damage === 0) {
-        effectsController.SlowHit(80);
+        effectsController.SlowHit(400);
     }
 };
 
@@ -623,7 +623,7 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
     effectsController.EnergySplash(frauki.body.center, 100, 'negative');
 
     if(energyController.neutralPoint > 0)
-        effectsController.SlowHit(120);
+        effectsController.SlowHit(600);
 };
 
 //////////////////STATES/////////////////
