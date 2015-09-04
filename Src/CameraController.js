@@ -20,6 +20,8 @@ CameraController = function() {
 	events.subscribe('control_up', this.RaiseCamera, this);
 	events.subscribe('camera_shake', this.ScreenShake, this);
 
+	this.panning = false;
+
 }
 
 //camera is controlled in player centric space
@@ -64,7 +66,10 @@ CameraController.prototype.Update = function() {
 	var newCamY = (this.camY + frauki.body.y + this.shakeY + (frauki.body.height - 50));
 	
 	//game.camera.focusOnXY(newCamX, newCamY);
-	game.camera.focusOnXY(frauki.body.center.x, frauki.body.center.y);
+
+	if(this.panning === false) {
+		game.camera.focusOnXY(frauki.body.center.x, frauki.body.center.y);
+	}
 
 	this.prevXVel = frauki.body.velocity.x;
 	this.prevYVel = frauki.body.velocity.y;
