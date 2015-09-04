@@ -239,6 +239,7 @@ var fraukiAnimations = [
 	{ Name: 'hit', Frames:  ['Hit0000', 'Hit0001'],  Fps: 10 , Loop: true },
 	{ Name: 'kick', Frames:  ['Kick0000', 'Kick0001'],  Fps: 18 , Loop: false },
 	{ Name: 'roll_jump', Frames:  ['Roll0009', 'Roll0010', 'Roll0011', 'Roll0012'],  Fps: 18 , Loop: false },
+	{ Name: 'materialize', Frames:  ['Materialize0000', 'Materialize0001', 'Materialize0002', 'Materialize0003', 'Materialize0004', 'Materialize0005', 'Materialize0006', 'Materialize0007', 'Materialize0008', 'Materialize0009', 'Materialize0010'],  Fps: 18 , Loop: false },
 
 	{ Name: 'attack_front', Frames:  ['Attack Front0001', 'Attack Front0002', 'Attack Front0003', 'Attack Front0004', 'Attack Front0005', 'Attack Front0006', 'Attack Front0007', 'Attack Front0007', 'Attack Front0008', 'Attack Front0009'], Fps: 18, Loop: false },
 	{ Name: 'attack_overhead', Frames:  ['Attack Overhead0000', 'Attack Overhead0001', 'Attack Overhead0002', 'Attack Overhead0003', 'Attack Overhead0004', 'Attack Overhead0005', 'Attack Overhead0006', 'Attack Overhead0007', 'Attack Overhead0008', 'Attack Overhead0009', 'Attack Overhead0010', 'Attack Overhead0011', 'Attack Overhead0011'], Fps: 18, Loop: false },

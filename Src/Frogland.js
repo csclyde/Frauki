@@ -62,10 +62,6 @@ Frogland.Create = function() {
     this.CreateForegroundLayer(3, startLayer === 3);
     this.CreateForegroundLayer(2, startLayer === 2);
 
-    // this.CreateLightingLayer(4, startLayer === 4);
-    // this.CreateLightingLayer(3, startLayer === 3);
-    // this.CreateLightingLayer(2, startLayer === 2);
-
     this.enemyPool = game.add.group();
 
     this.CreateDoorLayer(1);
@@ -149,11 +145,6 @@ Frogland.CreateMidgroundLayer = function(layer, visible) {
 Frogland.CreateForegroundLayer = function(layer, visible) {
     this['foregroundLayer_' + layer] = this.map.createLayer('Foreground_' + layer);
     this['foregroundLayer_' + layer].visible = visible;
-};
-
-Frogland.CreateLightingLayer = function(layer, visible) {
-    this['lightingLayer_' + layer] = this.map.createLayer('Lighting_' + layer);
-    this['lightingLayer_' + layer].visible = visible;
 };
 
 Frogland.CreateCollisionLayer = function(layer) {
@@ -313,13 +304,6 @@ Frogland.PreprocessTiles = function(layer) {
         }
     }, this, 0, 0, this.map.width, this.map.height, 'Foreground_' + layer);
 
-    // this.map.forEach(function(tile) {
-
-    //     if(!!tile.properties && !!tile.properties.alpha) {
-    //         tile.alpha = tile.properties.alpha;
-    //     }
-    // }, this, 0, 0, this.map.width, this.map.height, 'Lighting_' + layer);
-
     this.animatedTiles = [];
     //get animations
     this.map.forEach(function(tile) {
@@ -356,7 +340,6 @@ Frogland.ChangeLayer = function(newLayer) {
     game.add.tween(currentForgroundLayer).to({alpha: 0}, 300, Phaser.Easing.Linear.None, true);
     game.add.tween(currentMidgroundLayer).to({alpha: 0}, 300, Phaser.Easing.Linear.None, true);
     game.add.tween(currentBackgroundLayer).to({alpha: 0}, 300, Phaser.Easing.Linear.None, true);
-    //game.add.tween(currentLightingLayer).to({alpha: 0}, 300, Phaser.Easing.Linear.None, true);
 
     currentObjectLayer.forEach(function(obj) {
         game.add.tween(obj).to({alpha: 0}, 200, Phaser.Easing.Linear.None, true);
@@ -378,13 +361,10 @@ Frogland.ChangeLayer = function(newLayer) {
     currentMidgroundLayer.alpha = 0;
     currentBackgroundLayer.visible = true;
     currentBackgroundLayer.alpha = 0;
-    //currentLightingLayer.visible = true;
-    //currentLightingLayer.alpha = 0;
 
     game.add.tween(currentForgroundLayer).to({alpha: 1}, 200, Phaser.Easing.Linear.None, true);
     game.add.tween(currentMidgroundLayer).to({alpha: 1}, 200, Phaser.Easing.Linear.None, true);
     game.add.tween(currentBackgroundLayer).to({alpha: 1}, 200, Phaser.Easing.Linear.None, true);
-    //game.add.tween(currentLightingLayer).to({alpha: 1}, 200, Phaser.Easing.Linear.None, true);
 
     currentObjectLayer.forEach(function(obj) {
         obj.alpha = 0;

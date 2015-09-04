@@ -24,7 +24,7 @@ Player = function (game, x, y, name) {
         this.animations.add(anim.Name, anim.Frames, anim.Fps, anim.Loop, false);
     }, this);
 
-    this.state = this.Standing;
+    this.state = this.Materializing;
     this.PlayAnim('stand');
     
     this.tweens = {};
@@ -310,14 +310,15 @@ Player.prototype.LandHit = function(e, damage) {
 
     if(damage > 0) {
         effectsController.ClashStreak(e.body.center.x, e.body.center.y, game.rnd.between(1, 2));
-        //events.publish('camera_shake', {magnitudeX: 20, magnitudeY: 5, duration: 250});
+        events.publish('camera_shake', {magnitudeX: 20, magnitudeY: 5, duration: 250});
     }
 
     if(damage > 0 && e.maxEnergy > 1) {
-        effectsController.SlowHit(700);
+        effectsController.SlowHit(800);
     } else if(damage === 0) {
         effectsController.SlowHit(400);
     }
+
 };
 
 ////////////////ACTIONS//////////////////
@@ -833,6 +834,14 @@ Player.prototype.Hurting = function() {
         }  
     }
 };
+
+Player.prototype.Materializing = function() {
+    this.PlayAnim('materialize');
+
+    if(this.animations.currentAnim.isFinished) {
+        this.state = this.Standing;
+    }
+}
 
 Player.prototype.AttackFront = function() {
     this.PlayAnim('attack_front');

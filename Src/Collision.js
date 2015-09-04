@@ -103,6 +103,7 @@ Collision.OverlapAttackWithEnemy = function(f, e) {
     }
 
     events.publish('play_sound', { name: 'attack_connect' });
+    effectsController.EnergySplash(e.body.center, 150, 'negative');
 
     frauki.LandHit(e, damage);
 };

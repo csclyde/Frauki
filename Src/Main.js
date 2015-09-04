@@ -112,6 +112,7 @@ Main.Restart = function() {
         Frogland.ChangeLayer(3);
         frauki.x = frauki.initialX; //fraukiSpawnX;
         frauki.y = frauki.initialY; //fraukiSpawnY;
+        frauki.state = frauki.Materializing;
         energyController.energy = 15;
         energyController.charge = 0;
         energyController.neutralPoint = 15;
