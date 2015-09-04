@@ -28,6 +28,55 @@ Main.create = function() {
     if(game.input.gamepad.padsConnected === 0) {
         this.gamepadIcon.visible = false;
     }
+
+    game.physics.arcade.computeVelocity = function (axis, body, velocity, acceleration, drag, max) {
+
+                if (max === undefined) { max = 10000; }
+
+                if (axis === 1 && body.allowGravity)
+                {
+                    velocity += (this.gravity.x + body.gravity.x) * this.game.time.physicsElapsed;
+                }
+                else if (axis === 2 && body.allowGravity)
+                {
+                    velocity += (this.gravity.y + body.gravity.y) * this.game.time.physicsElapsed;
+                }
+
+                if (acceleration)
+                {
+                    velocity += acceleration * this.game.time.physicsElapsed;
+                }
+                else if (drag)
+                {
+                    drag *= this.game.time.physicsElapsed;
+
+                    if (velocity - drag > 0)
+                    {
+                        velocity -= drag;
+                    }
+                    else if (velocity + drag < 0)
+                    {
+                        velocity += drag;
+                    }
+                    else
+                    {
+                        velocity = 0;
+                    }
+                }
+
+                if (velocity > max)
+                {
+                    velocity = max;
+                }
+                else if (velocity < -max)
+                {
+                    velocity = -max;
+                }
+
+                return velocity;
+
+                console.log('big booty');
+        };
 };
 
 Main.update = function() {

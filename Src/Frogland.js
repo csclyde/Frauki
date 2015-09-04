@@ -22,8 +22,6 @@ Frogland.Create = function() {
 
     this.openDoors = JSON.parse(localStorage.getItem('fraukiDoors')) || [];
 
-    console.log(this.openDoors);
-
     var fraukiStartX, fraukiStartY, startLayer;
 
     if(this.map.properties.debug === 'false') {
