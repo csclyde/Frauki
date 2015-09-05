@@ -182,6 +182,26 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 dripper.owningLayer = layer;
 
                 that.loadedEffects.push(dripper);
+            } else if(o.name === 'fluff') {
+
+                var fluffer = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
+                // fluffer.x = o.x;
+                // fluffer.y = o.y;
+                fluffer.width = o.width;
+                fluffer.height = o.height;
+                fluffer.makeParticles('Misc', ['Fluff0000', 'Fluff0001', 'Fluff0002', 'Fluff0003'], 200);
+                fluffer.gravity = -795;
+                fluffer.maxParticleSpeed.setTo(10);
+                fluffer.minParticleSpeed.setTo(-10);
+                fluffer.minRotation = -10;
+                fluffer.maxRotation = 10;
+                fluffer.start(false, 3000, 700);
+                fluffer.effectType = 'fluff';
+                fluffer.alpha = 0.8;
+                fluffer.owningLayer = layer;
+
+                that.loadedEffects.push(fluffer);
+
             }
         }
     });

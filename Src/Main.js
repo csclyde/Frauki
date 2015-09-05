@@ -71,8 +71,9 @@ Main.render = function() {
     // var rekt = triggerController.triggerLayers['Triggers_3'][0];
     // game.debug.geom(new Phaser.Rectangle(rekt.x, rekt.y, rekt.width, rekt.height));
 
-    // var rekt = effectsController.loadedEffects[0];
-    // game.debug.geom(new Phaser.Rectangle(rekt.x, rekt.y, rekt.width, rekt.height));
+    // effectsController.loadedEffects.forEach(function(o) {
+    //     game.debug.geom(new Phaser.Rectangle(o.x, o.y, o.width, o.height));
+    // });
 
     var drawX = -(pixel.width * (pixel.scale / 4));
 
@@ -119,7 +120,7 @@ Main.Restart = function() {
         // panTween.onComplete.add(function() {
         //     cameraController.panning = false;
         // });
-        
+
         frauki.state = frauki.Materializing;
         frauki.SetDirection('right');
 
