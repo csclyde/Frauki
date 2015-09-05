@@ -110,6 +110,7 @@ Main.Restart = function() {
     setTimeout(function() { events.publish('play_music', { name: 'Surface' } ); }, 10000);
 
     fadeOutTween.onComplete.add(function() {
+        frauki.alpha = 1;
         Frogland.ChangeLayer(3);
         frauki.x = frauki.initialX; //fraukiSpawnX;
         frauki.y = frauki.initialY; //fraukiSpawnY;
