@@ -252,7 +252,7 @@ Collision.CollideFraukiWithEnvironment = function(f, tile) {
 };
 
 Collision.CollideEffectWithWorld = function(e, w) {
-    if(e.effectType === 'drip') {
+    if(e.parent.effectType === 'drip') {
         effectsController.DripSplash(e);
         e.kill();
         return true;
