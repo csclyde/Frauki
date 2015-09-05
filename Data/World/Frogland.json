@@ -2879,7 +2879,7 @@
          "name":"Foreground_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
