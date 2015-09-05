@@ -175,8 +175,7 @@ Player.prototype.postStateUpdate = function() {
     if(this.Attacking()) {
         game.physics.arcade.overlap(frauki.attackRect, Frogland.GetCurrentObjectGroup(), Collision.OverlapAttackWithObject);
         game.physics.arcade.overlap(frauki.attackRect, projectileController.projectiles, ProjectileHit);
-        game.physics.arcade.overlap(frauki.attackRect, Frogland.GetCurrentCollisionLayer(), Collision.OverlapAttackWithEnvironment);
-        //game.physics.arcade.overlap(frauki.attackRect, Frogland.GetCurrentCollisionLayer(), TilesHit);
+        //game.physics.arcade.overlap(frauki.attackRect, Frogland.GetCurrentCollisionLayer(), Collision.OverlapAttackWithEnvironment);
     }
     
     if(this.state === this.Running && this.animations.currentAnim.name === 'run') {
@@ -621,7 +620,7 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
     this.state = this.Hurting;
     this.timers.SetTimer('frauki_grace', grace_duration);
     this.timers.SetTimer('frauki_hit', 600);
-    effectsController.EnergySplash(frauki.body.center, 100, 'negative');
+    //effectsController.EnergySplash(frauki.body.center, 100, 'negative', 30);
 
     if(energyController.neutralPoint > 0)
         effectsController.SlowHit(600);

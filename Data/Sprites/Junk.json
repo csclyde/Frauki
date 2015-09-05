@@ -2,7 +2,7 @@
 
 "Barrel/Barrel0000":
 {
-	"frame": {"x":1,"y":72,"w":30,"h":37},
+	"frame": {"x":1,"y":111,"w":30,"h":37},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":30,"h":37},
@@ -17,14 +17,23 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":47,"h":70},
 	"sourceSize": {"w":47,"h":70},
 	"pivot": {"x":0.5,"y":0.5}
+},
+"Pot/Pot0000":
+{
+	"frame": {"x":1,"y":72,"w":37,"h":38},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":37,"h":38},
+	"sourceSize": {"w":37,"h":38},
+	"pivot": {"x":0.5,"y":0.5}
 }},
 "meta": {
 	"app": "http://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "Junk.png",
 	"format": "RGBA8888",
-	"size": {"w":49,"h":110},
+	"size": {"w":49,"h":149},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:b7af4cd20f001d40d51cedfca55f41ae:7041da7fa4363c2dd36a68adad34c916:831845a21f0accda2f2aa80233051662$"
+	"smartupdate": "$TexturePacker:SmartUpdate:8a4ef2fc4e765cb28d7a64f5034215fa:e6eb6015fb50bdcf99025792066773f4:831845a21f0accda2f2aa80233051662$"
 }
 }

@@ -42,6 +42,11 @@ EffectsController = function() {
     this.neutralSpark.gravity = -750;
     this.neutralSpark.particleDrag.setTo(100);
 
+    this.attackReflection = game.add.emitter(0, 0, 500);
+    this.attackReflection.makeParticles('Misc', ['Sparks0000', 'Sparks0001', 'Sparks0002', 'Sparks0003', 'Sparks0004', 'Sparks0005', 'Sparks0006']); 
+    this.attackReflection.gravity = -750;
+    this.attackReflection.particleDrag.setTo(100);
+
     //unassigned particles will be set to move towards this destination
     this.activeDest = null;
     this.enemySource = null;
@@ -445,38 +450,41 @@ EffectsController.prototype.SparkSplash = function(posSrc, negSrc) {
     this.negSpark.explode(500, 10);
 };
 
-EffectsController.prototype.EnergySplash = function(src, intensity, color) {
+EffectsController.prototype.EnergySplash = function(src, intensity, color, amt, vel) {
+
+    amt = amt || 6;
+    vel = vel || { x: 0, y: 0 };
 
     if(color === 'positive') {
         this.posSpark.x = src.x;
         this.posSpark.y = src.y;
 
-        this.posSpark.minParticleSpeed.x = -intensity;
-        this.posSpark.minParticleSpeed.y = -intensity;
-        this.posSpark.maxParticleSpeed.x = intensity;
-        this.posSpark.maxParticleSpeed.y = intensity;   
+        this.posSpark.minParticleSpeed.x = -intensity + vel.x;
+        this.posSpark.minParticleSpeed.y = -intensity + vel.y;
+        this.posSpark.maxParticleSpeed.x = intensity + vel.x;
+        this.posSpark.maxParticleSpeed.y = intensity + vel.y;   
        
-        this.posSpark.explode(500, 6);
+        this.posSpark.explode(700, amt);
     } else if(color === 'neutral') {
         this.neutralSpark.x = src.x;
         this.neutralSpark.y = src.y;
 
-        this.neutralSpark.minParticleSpeed.x = -intensity;
-        this.neutralSpark.minParticleSpeed.y = -intensity;
-        this.neutralSpark.maxParticleSpeed.x = intensity;
-        this.neutralSpark.maxParticleSpeed.y = intensity;   
+        this.neutralSpark.minParticleSpeed.x = -intensity + vel.x;
+        this.neutralSpark.minParticleSpeed.y = -intensity + vel.y;
+        this.neutralSpark.maxParticleSpeed.x = intensity + vel.x;
+        this.neutralSpark.maxParticleSpeed.y = intensity + vel.y;   
        
-        this.neutralSpark.explode(500, 6);
+        this.neutralSpark.explode(700, amt);
     } else if(color === 'negative') {
         this.negSpark.x = src.x;
         this.negSpark.y = src.y;
 
-        this.negSpark.minParticleSpeed.x = -intensity;
-        this.negSpark.minParticleSpeed.y = -intensity;
-        this.negSpark.maxParticleSpeed.x = intensity;
-        this.negSpark.maxParticleSpeed.y = intensity;   
+        this.negSpark.minParticleSpeed.x = -intensity + vel.x;
+        this.negSpark.minParticleSpeed.y = -intensity + vel.y;
+        this.negSpark.maxParticleSpeed.x = intensity + vel.x;
+        this.negSpark.maxParticleSpeed.y = intensity + vel.y;   
        
-        this.negSpark.explode(600, 10);
+        this.negSpark.explode(700, amt);
     }
 };
 
@@ -517,4 +525,19 @@ EffectsController.prototype.DripSplash = function(src) {
     dripSplash.animations.currentAnim.killOnComplete = true;
     dripSplash.alpha = 0.5;
 
+};
+
+EffectsController.prototype.AttackReflection = function() {
+
+    if(frauki.Attacking()) {
+        this.attackReflection.x = frauki.attackRect.body.center.x;
+        this.attackReflection.y = frauki.attackRect.body.center.y;
+
+        this.attackReflection.minParticleSpeed.x = -100;
+        this.attackReflection.minParticleSpeed.y = -100;
+        this.attackReflection.maxParticleSpeed.x = 100;
+        this.attackReflection.maxParticleSpeed.y = 100;   
+       
+        this.attackReflection.explode(700, 10);
+    }
 };

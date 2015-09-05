@@ -202,6 +202,7 @@
             <filename>HWK9</filename>
             <filename>Barrel</filename>
             <filename>Plant</filename>
+            <filename>Pot</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

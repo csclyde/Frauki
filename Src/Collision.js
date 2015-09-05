@@ -83,7 +83,7 @@ Collision.OverlapAttackWithEnemy = function(f, e) {
             e.Die();
             e.state = e.Dying;
 
-            effectsController.EnergySplash(e.body.center, 200, 'negative');
+            effectsController.EnergySplash(e.body.center, 200, 'negative', 20);
             effectsController.Explosion(e.body.center);
             effectsController.DiceEnemy(e, e.body.center.x, e.body.center.y);
 
@@ -103,7 +103,7 @@ Collision.OverlapAttackWithEnemy = function(f, e) {
     }
 
     events.publish('play_sound', { name: 'attack_connect' });
-    effectsController.EnergySplash(e.body.center, 150, 'negative');
+    effectsController.EnergySplash(e.body.center, 100, 'negative', 15, e.body.velocity);
 
     frauki.LandHit(e, damage);
 };
@@ -139,10 +139,14 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
     frauki.timers.SetTimer('frauki_hit', 300);
 };
 
+Collision.OverlapAttackWithEnvironment = function(a, t) {
+    effectsController.AttackReflection();
+};
+
 Collision.OverlapEnemyAttackWithFrauki = function(e, f) {
 
     if(e.owningEnemy.currentAttack.damage > 0) {
-        frauki.Hit(e.owningEnemy, e.owningEnemy.currentAttack.damage, 500);
+        frauki.Hit(e.owningEnemy, e.owningEnemy.currentAttack.damage, 650);
     }
 
 };
@@ -155,10 +159,6 @@ Collision.OverlapObjectsWithSelf = function(o1, o2) {
     } else {
         return false;
     }
-};
-
-Collision.OverlapAttackWithEnvironment = function(a, t) {
-    //effectsController.EnergySplash(frauki.currentAttack, 100, 'positive');
 };
 
 Collision.CollideFraukiWithProjectile = function(f, p) {
