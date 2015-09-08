@@ -308,7 +308,7 @@ EffectsController.prototype.SpawnEnergyNuggets = function(source, dest, color, d
     var maxVel = Phaser.Point.rotate(vel.clone(), 0, 0, -30, true, 1);
     
     maxVel.setMagnitude(1750);
-    minVel.setMagnitude(1750);
+    minVel.setMagnitude(1400);
 
     effect.minParticleSpeed.x = minVel.x;
     effect.maxParticleSpeed.x = maxVel.x;
