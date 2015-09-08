@@ -90,7 +90,7 @@ Collision.OverlapAttackWithEnemy = function(f, e) {
             damage = e.maxEnergy;
 
             //energyController.AddPower(e.maxEnergy / 2);
-            effectsController.SpawnEnergyNuggets(e.body.center, frauki.body.center, 'positive', e.EnemyDirection(), e.maxEnergy / 2); 
+            effectsController.SpawnEnergyNuggets(e.body.center, frauki.body.center, 'positive', e.EnemyDirection(), e.maxEnergy); 
             //effectsController.MakeHearts(e.maxEnergy / 4);
 
             e.destroy();
