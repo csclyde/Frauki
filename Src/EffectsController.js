@@ -281,7 +281,7 @@ function UpdateParticle(p) {
     }
 };
 
-EffectsController.prototype.SpawnEnergyNuggets = function(source, dest, color, dir, amt) {
+EffectsController.prototype.SpawnEnergyNuggets = function(source, dest, color, amt) {
 
     if(amt === 0) return;
     
@@ -301,7 +301,7 @@ EffectsController.prototype.SpawnEnergyNuggets = function(source, dest, color, d
         this.enemySource = source;
     }
 
-    var vel = new Phaser.Point(source.x - dest.x, source.y - dest.y);
+    var vel = new Phaser.Point(source.center.x - dest.x, source.center.y - dest.y);
     vel = vel.normalize();
 
     var minVel = Phaser.Point.rotate(vel.clone(), 0, 0, 30, true, 1);
@@ -310,10 +310,10 @@ EffectsController.prototype.SpawnEnergyNuggets = function(source, dest, color, d
     maxVel.setMagnitude(1750);
     minVel.setMagnitude(1400);
 
-    effect.minParticleSpeed.x = minVel.x;
-    effect.maxParticleSpeed.x = maxVel.x;
-    effect.minParticleSpeed.y = minVel.y;
-    effect.maxParticleSpeed.y = maxVel.y;
+    effect.minParticleSpeed.x = minVel.x + source.velocity.x;
+    effect.maxParticleSpeed.x = maxVel.x + source.velocity.x;
+    effect.minParticleSpeed.y = minVel.y + source.velocity.y;
+    effect.maxParticleSpeed.y = maxVel.y + source.velocity.y;
 
     effect.x = source.x || 0;
     effect.y = source.y || 0;

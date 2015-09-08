@@ -604,7 +604,7 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
         damage /= 2;
     }
 
-    //effectsController.SpawnEnergyNuggets(this.body, e.body, 'negative', null, damage);
+    //effectsController.SpawnEnergyNuggets(this.body, e.body, 'negative', damage);
 
     energyController.RemovePower(damage);
     energyController.RemoveCharge(damage);

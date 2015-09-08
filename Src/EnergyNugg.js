@@ -46,7 +46,7 @@ EnergyNugg.prototype.update = function() {
 
 function EatEnergyNugg(f, a) {
     
-    effectsController.SpawnEnergyNuggets({ x: a.body.center.x, y: a.body.center.y }, frauki.body, 'positive', (Math.random() < 0.5 ? 'left' : 'right'), 1);
+    effectsController.SpawnEnergyNuggets(a.body, frauki.body, 'positive', 1);
 
     a.kill();
 
