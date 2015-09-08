@@ -56,9 +56,9 @@ Player = function (game, x, y, name) {
     this.upgrades.roll = true;
     this.upgrades.hike = true;
     this.upgrades.attackFront = true;
-    this.upgrades.attackOverhead = true;
-    this.upgrades.attackStab = true;
-    this.upgrades.attackDive = true;
+    this.upgrades.attackOverhead = false;
+    this.upgrades.attackStab = false;
+    this.upgrades.attackDive = false;
 
     this.attack = {};
     this.attack.activeCharge = 0;
@@ -905,12 +905,12 @@ Player.prototype.AttackStab = function() {
         }
 
     //pickup stage
-    } else if(Math.abs(this.body.velocity.x) < PLAYER_RUN_SLASH_SPEED() && this.movement.rollStage === 1 && dur <= 130) {
-        dur /= 120;
+    } else if(this.movement.rollStage === 1 && Math.abs(this.body.velocity.x) < PLAYER_RUN_SLASH_SPEED() && dur <= 200) {
+        dur /= 200;
         this.body.acceleration.x = this.movement.rollDirection * 6000 * (game.math.catmullRomInterpolation([0, 0.1, 0.2, 0.4, 0.8, 1], dur) || 1);
 
     //ready to switch to release
-    } else if(Math.abs(this.body.velocity.x) == PLAYER_RUN_SLASH_SPEED() && this.movement.rollStage === 1) {
+    } else if(this.movement.rollStage === 1) {
         this.movement.rollStage = 2;
         this.movement.rollStart = game.time.now;
 

@@ -45,9 +45,20 @@ TechnoRune.prototype.update = function() {
         this.state();
 };
 
-function EatTechnoRune(f, a) {
+function EatTechnoRune(f, r) {
 
-    a.kill();
+    effectsController.EnergySplash(r.body, 100, 'positive');
+    
+    if(r.runeName === 'Stab') {
+        frauki.upgrades.attackStab = true;
+        frauki.StabSlash();
+    } else if(r.runeName === 'Dive') {
+        frauki.upgrades.attackDive = true;
+    } else if(r.runeName === 'Overhead') {
+        frauki.upgrades.attackOverhead = true;
+    }
+
+    r.kill();
 
 };
 
@@ -59,5 +70,5 @@ TechnoRune.prototype.PlayAnim = function(name) {
 TechnoRune.prototype.Idle = function() {
     this.PlayAnim('idle');
 
-    this.body.velocity.y = Math.sin((game.time.now / 150) + this.rando) * 15;
+    this.body.velocity.y = Math.sin(game.time.now / 150) * 15;
 };

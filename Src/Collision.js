@@ -26,8 +26,7 @@ Collision.OverlapFraukiWithObject = function(f, o) {
     } else if(o.spriteType === 'junk') {
         return false;
     } else if(o.spriteType === 'TechnoRune') {
-        effectsController.EnergySplash(o.body, 100, 'positive');
-        frauki.upgrades.attackStab = true;
+        EatTechnoRune(f, o);
         o.destroy();
         return false;
     }
