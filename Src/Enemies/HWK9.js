@@ -10,7 +10,7 @@ Enemy.prototype.types['HWK9'] =  function() {
     this.animations.add('block', ['HWK9/Block0000'], 18, true, false);
     this.animations.add('hurt', ['HWK9/Stand0000'], 8, true, false);
 
-    this.energy = 7;
+    this.energy = 6;
     this.baseStunDuration = 500;
 
     this.robotic = true;
@@ -82,7 +82,7 @@ Enemy.prototype.types['HWK9'] =  function() {
     	}
 
     	this.state = this.Windup;
-    	this.timers.SetTimer('attack', 300);
+    	this.timers.SetTimer('attack', 600);
     	this.body.velocity.x = 0;
 
     };
@@ -93,7 +93,7 @@ Enemy.prototype.types['HWK9'] =  function() {
     	}
 
     	this.state = this.Windup;
-    	this.timers.SetTimer('attack', 100);
+    	this.timers.SetTimer('attack', 300);
     	this.body.velocity.x = 0;
     }
 
@@ -133,7 +133,7 @@ Enemy.prototype.types['HWK9'] =  function() {
 			var attackVector = new Phaser.Point(frauki.body.x - this.body.x, frauki.body.y - this.body.y);
 			attackVector = attackVector.normalize();
 
-			attackVector.setMagnitude(800);
+			attackVector.setMagnitude(700);
 
 			this.body.velocity = attackVector;
 
@@ -215,7 +215,7 @@ Enemy.prototype.types['HWK9'] =  function() {
 			x: 12, y: -30, w: 65, h: 100,
 			damage: 5,
 			knockback: 0,
-			priority: 2,
+			priority: 1,
 			juggle: 0
 		},
 
@@ -223,7 +223,7 @@ Enemy.prototype.types['HWK9'] =  function() {
 			x: 12, y: -30, w: 65, h: 100,
 			damage: 5,
 			knockback: 0,
-			priority: 2,
+			priority: 1,
 			juggle: 0
 		},
 
