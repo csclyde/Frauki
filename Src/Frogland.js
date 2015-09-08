@@ -170,7 +170,9 @@ Frogland.CreateObjectsLayer = function(layer) {
     });
 
     FileMap.Runes.forEach(function(rune) {
-        Frogland.map.createFromObjects('Objects_' + layer, rune.Tile, rune.Name, rune.Name, true, true, that[currLayer], TechnoRune, false);
+        if(frauki.upgradeSaves.indexOf(rune.Name) === -1) {
+            Frogland.map.createFromObjects('Objects_' + layer, rune.Tile, rune.Name, rune.Name, true, true, that[currLayer], TechnoRune, false);
+        }
     });
 
     //create all the apples

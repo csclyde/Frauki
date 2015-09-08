@@ -2,10 +2,6 @@ TechnoRune = function(game, x, y, name) {
     //instantiate the sprite
     Phaser.Sprite.call(this, game, x, y, 'Misc');
     this.spriteType = 'TechnoRune';
-
-    console.log(x, y);
-
-    console.log(this.x, this.y);
     
     //enable its physics body
     game.physics.enable(this, Phaser.Physics.ARCADE);
@@ -13,9 +9,6 @@ TechnoRune = function(game, x, y, name) {
     this.body.setSize(32, 32, 0, 0);
     this.anchor.setTo(0.5, 0.5);
     this.body.bounce.y = 0.5;
-
-    console.log(this.body.x, this.body.y);
-
 
     //this.body.gravity.y = game.physics.arcade.gravity.y * 2;
 
@@ -25,8 +18,16 @@ TechnoRune = function(game, x, y, name) {
 
     this.runeName = name;
 
-    this.animations.add('idle', ['Runes0000'], 20, true, false);
-    this.animations.add('eaten', ['Runes0000'], 10, false, false);
+    if(this.runeName === 'Overhead') {
+        this.runeFrame = 'Runes0000';
+    } else if(this.runeName === 'Stab') {
+        this.runeFrame = 'Runes0001';
+    } else if(this.runeName === 'Dive') {
+        this.runeFrame = 'Runes0002';
+    }
+
+    this.animations.add('idle', [this.runeFrame], 20, true, false);
+    this.animations.add('eaten', [this.runeFrame], 10, false, false);
 
 };
 
@@ -56,6 +57,11 @@ function EatTechnoRune(f, r) {
         frauki.upgrades.attackDive = true;
     } else if(r.runeName === 'Overhead') {
         frauki.upgrades.attackOverhead = true;
+    }
+
+    if(frauki.upgradeSaves.indexOf(r.runeName) === -1) {
+        frauki.upgradeSaves.push(r.runeName);
+        localStorage.setItem('fraukiUpgrades', JSON.stringify(frauki.upgradeSaves));
     }
 
     r.kill();

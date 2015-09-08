@@ -52,13 +52,15 @@ Player = function (game, x, y, name) {
     this.movement.rollPrevVel = 0;
     this.movement.rollDirection = 1;
 
+    this.upgradeSaves = JSON.parse(localStorage.getItem('fraukiUpgrades')) || [];
+
     this.upgrades = {};
     this.upgrades.roll = true;
     this.upgrades.hike = true;
     this.upgrades.attackFront = true;
-    this.upgrades.attackOverhead = false;
-    this.upgrades.attackStab = false;
-    this.upgrades.attackDive = false;
+    this.upgrades.attackOverhead = this.upgradeSaves.indexOf('Overhead') > -1;
+    this.upgrades.attackStab = this.upgradeSaves.indexOf('Stab') > -1;
+    this.upgrades.attackDive = this.upgradeSaves.indexOf('Dive') > -1;
 
     this.attack = {};
     this.attack.activeCharge = 0;
