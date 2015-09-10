@@ -1,4 +1,4 @@
-PLAYER_SPEED = function() { return 160; }
+PLAYER_SPEED = function() { return 200; }
 PLAYER_ROLL_SPEED = function() { return 600; }
 PLAYER_RUN_SLASH_SPEED = function() { return  650; }
 PLAYER_JUMP_VEL = function() { return -350; }
