@@ -200,6 +200,7 @@
             <filename>KR32</filename>
             <filename>A3PZ</filename>
             <filename>HWK9</filename>
+            <filename>Butterfly</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

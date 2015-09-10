@@ -49,9 +49,6 @@ function EatEnergyNugg(f, a) {
     effectsController.SpawnEnergyNuggets(a.body, frauki.body, 'positive', 1);
 
     a.kill();
-
-    energyController.AddPower(0.1);
-    energyController.energy += 1;
 };
 
 EnergyNugg.prototype.PlayAnim = function(name) {

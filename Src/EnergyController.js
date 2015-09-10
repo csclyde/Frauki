@@ -150,6 +150,10 @@ EnergyController.prototype.RemoveEnergy = function(amt) {
 	}
 };
 
+EnergyController.prototype.AddEnergy = function(amt) {
+	this.energy += amt;
+};
+
 EnergyController.prototype.GetEnergy = function() {
 	return this.energy > 0 ? (Math.round(this.energy * 10) / 10) : 0;
 };

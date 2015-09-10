@@ -622,7 +622,7 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
     this.state = this.Hurting;
     this.timers.SetTimer('frauki_grace', grace_duration);
     this.timers.SetTimer('frauki_hit', 600);
-    //effectsController.EnergySplash(frauki.body.center, 100, 'negative', 30);
+    effectsController.EnergySplash(frauki.body.center, 100, 'positive', 30, frauki.body.velocity);
 
     if(energyController.neutralPoint > 0) {
         effectsController.SlowHit(600);

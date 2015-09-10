@@ -235,6 +235,7 @@ function UpdateParticle(p) {
 
             if(p.parent === effectsController.positiveBits) {
                 energyController.AddPower(0.15);
+                energyController.AddEnergy(1);
                 effectsController.EnergySplash(p.body, 100, 'positive');
             } else if(p.parent === effectsController.neutralBits) {
                 energyController.AddCharge(1);
