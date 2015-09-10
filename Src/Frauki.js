@@ -58,9 +58,9 @@ Player = function (game, x, y, name) {
     this.upgrades.roll = true;
     this.upgrades.hike = true;
     this.upgrades.attackFront = true;
-    this.upgrades.attackOverhead = this.upgradeSaves.indexOf('Overhead') > -1;
-    this.upgrades.attackStab = this.upgradeSaves.indexOf('Stab') > -1;
-    this.upgrades.attackDive = this.upgradeSaves.indexOf('Dive') > -1;
+    this.upgrades.attackOverhead = true; //this.upgradeSaves.indexOf('Overhead') > -1;
+    this.upgrades.attackStab = true; //this.upgradeSaves.indexOf('Stab') > -1;
+    this.upgrades.attackDive = true; //this.upgradeSaves.indexOf('Dive') > -1;
 
     this.attack = {};
     this.attack.activeCharge = 0;

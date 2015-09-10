@@ -75,6 +75,14 @@ Main.render = function() {
     //     game.debug.geom(new Phaser.Rectangle(o.x, o.y, o.width, o.height));
     // });
 
+    // if(!!weaponController.Lob.lobbies) {
+    //     weaponController.Lob.lobbies.forEach(function(o) {
+    //         if(!!o.body) {
+    //             game.debug.geom(new Phaser.Rectangle(o.body.x, o.body.y, o.body.width, o.body.height));
+    //         }
+    //     });  
+    // }
+
     var drawX = -(pixel.width * (pixel.scale / 4));
 
     //set up correct camera edge behavior

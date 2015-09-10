@@ -5,46 +5,46 @@ EffectsController = function() {
 
     this.negativeBits = game.add.emitter(0, 0, 100);
     this.negativeBits.makeParticles('Misc', ['EnergyBitNeg0000', 'EnergyBitNeg0001', 'EnergyBitNeg0002', 'EnergyBitNeg0003', 'EnergyBitNeg0004', 'EnergyBitNeg0005']);
-    this.negativeBits.gravity = -200;
+    this.negativeBits.gravity = -150;
 
     this.positiveBits = game.add.emitter(0, 0, 100);
     this.positiveBits.makeParticles('Misc', ['EnergyBitPos0000', 'EnergyBitPos0001', 'EnergyBitPos0002', 'EnergyBitPos0003', 'EnergyBitPos0004', 'EnergyBitPos0005']); //array of strings here for multiple sprites
-    this.positiveBits.gravity = -800;
+    this.positiveBits.gravity = -600;
 
     this.neutralBits = game.add.emitter(0, 0, 100);
     this.neutralBits.makeParticles('Misc', ['EnergyBitNeutral0000', 'EnergyBitNeutral0001', 'EnergyBitNeutral0002', 'EnergyBitNeutral0003', 'EnergyBitNeutral0004', 'EnergyBitNeutral0005']); //array of strings here for multiple sprites
-    this.neutralBits.gravity = -800;
+    this.neutralBits.gravity = -600;
 
     this.splashRight = game.add.emitter(0, 0, 100);
     this.splashRight.makeParticles('Misc', ['Splash0000', 'Splash0001']); 
-    this.splashRight.gravity = 400;
+    this.splashRight.gravity = 300;
     this.splashRight.maxParticleScale = 1.1;
     this.splashRight.minParticleScale = 0.8;
 
     this.splashLeft = game.add.emitter(0, 0, 100);
     this.splashLeft.makeParticles('Misc', ['Splash0002', 'Splash0003']); 
-    this.splashLeft.gravity = 400;
+    this.splashLeft.gravity = 300;
     this.splashLeft.maxParticleScale = 1.1;
     this.splashLeft.minParticleScale = 0.8;
 
     this.posSpark = game.add.emitter(0, 0, 100);
     this.posSpark.makeParticles('Misc', ['Sparks0000', 'Sparks0001', 'Sparks0002', 'Sparks0003', 'Sparks0004', 'Sparks0005', 'Sparks0006']); 
-    this.posSpark.gravity = -750;
+    this.posSpark.gravity = -560;
     this.posSpark.particleDrag.setTo(100);
 
     this.negSpark = game.add.emitter(0, 0, 100);
     this.negSpark.makeParticles('Misc', ['Sparks0007', 'Sparks0008', 'Sparks0009', 'Sparks0010', 'Sparks0011', 'Sparks0012', 'Sparks0013']); 
-    this.negSpark.gravity = -750;
+    this.negSpark.gravity = -560;
     this.negSpark.particleDrag.setTo(100);
 
     this.neutralSpark = game.add.emitter(0, 0, 100);
     this.neutralSpark.makeParticles('Misc', ['Sparks0014', 'Sparks0015', 'Sparks0016', 'Sparks0017', 'Sparks0018']); 
-    this.neutralSpark.gravity = -750;
+    this.neutralSpark.gravity = -560;
     this.neutralSpark.particleDrag.setTo(100);
 
     this.attackReflection = game.add.emitter(0, 0, 500);
     this.attackReflection.makeParticles('Misc', ['Sparks0000', 'Sparks0001', 'Sparks0002', 'Sparks0003', 'Sparks0004', 'Sparks0005', 'Sparks0006']); 
-    this.attackReflection.gravity = -750;
+    this.attackReflection.gravity = -560;
     this.attackReflection.particleDrag.setTo(100);
 
     //unassigned particles will be set to move towards this destination
@@ -61,7 +61,7 @@ EffectsController = function() {
 
     this.energyStreak = game.add.emitter(0, 0, 100);
     this.energyStreak.makeParticles('Misc', ['Sparks0000', 'Sparks0001', 'Sparks0002', 'Sparks0003', 'Sparks0004']); 
-    this.energyStreak.gravity = -780;
+    this.energyStreak.gravity = -580;
     this.energyStreak.particleDrag.setTo(100);
     this.energyStreak.minParticleSpeed.setTo(-80);
     this.energyStreak.maxParticleSpeed.setTo(80);
@@ -138,7 +138,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 splasherLeft.width = o.width / 2;
                 splasherLeft.height = o.height;
                 splasherLeft.makeParticles('Misc', ['Splash0002', 'Splash0003'], 100); 
-                splasherLeft.gravity = 400;
+                splasherLeft.gravity = 300;
                 splasherLeft.maxParticleScale = 1.1;
                 splasherLeft.minParticleScale = 0.8;
                 splasherLeft.minParticleSpeed.x = -50;
@@ -152,7 +152,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 splasherRight.width = o.width / 2;
                 splasherRight.height = o.height;
                 splasherRight.makeParticles('Misc', ['Splash0000', 'Splash0001'], 100); 
-                splasherRight.gravity = 400;
+                splasherRight.gravity = 300;
                 splasherRight.maxParticleScale = 1.1;
                 splasherRight.minParticleScale = 0.8;
                 splasherRight.minParticleSpeed.x = -10;
@@ -170,7 +170,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 dripper.width = o.width;
                 dripper.height = o.height;
                 dripper.makeParticles('Misc', ['Drip0000', 'Drip0001'], 20);
-                dripper.gravity = -200;
+                dripper.gravity = -150;
                 dripper.maxParticleSpeed.setTo(0);
                 dripper.minParticleSpeed.setTo(0);
                 dripper.minRotation = 0;
@@ -190,7 +190,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 fluffer.width = o.width;
                 fluffer.height = o.height;
                 fluffer.makeParticles('Misc', ['Fluff0000', 'Fluff0001', 'Fluff0002', 'Fluff0003'], 200);
-                fluffer.gravity = -795;
+                fluffer.gravity = -595;
                 fluffer.maxParticleSpeed.setTo(10);
                 fluffer.minParticleSpeed.setTo(-10);
                 fluffer.minRotation = -10;
@@ -238,7 +238,7 @@ function UpdateParticle(p) {
                 energyController.AddEnergy(1);
                 effectsController.EnergySplash(p.body, 100, 'positive');
             } else if(p.parent === effectsController.neutralBits) {
-                energyController.AddCharge(1);
+                energyController.AddCharge(4);
                 effectsController.EnergySplash(p.body, 100, 'neutral');
             }
         }
@@ -409,7 +409,7 @@ EffectsController.prototype.MakeHearts = function(amt) {
         heart.animations.add('idle', ['Heart0000', 'Heart0001'], 4, true, false);
         heart.play('idle');
 
-        heart.body.gravity.y = - 800;
+        heart.body.gravity.y = -500;
 
         heart.body.drag.x = 300;
         heart.body.drag.y = 100;

@@ -1,5 +1,5 @@
 WeaponController = function() {
-  this.currentWeapon = this.ForceField;
+  this.currentWeapon = this.Lob;
   this.weaponActive = false;
   this.attackGeometry = null;
 
@@ -8,6 +8,7 @@ WeaponController = function() {
   events.subscribe('activate_weapon', this.ToggleWeapon, this);
 
   this.ForceField.Init();
+  this.Lob.Init();
 };
 
 WeaponController.prototype.create = function() {
@@ -22,6 +23,7 @@ WeaponController.prototype.Update = function() {
     }
 
     this.ForceField.UpdateOverride();
+    this.Lob.UpdateOverride();
 };
 
 WeaponController.prototype.ToggleWeapon = function(params) {
@@ -69,6 +71,60 @@ WeaponController.prototype.Bomb = {
     },
 
     power: 0
+};
+
+WeaponController.prototype.Lob = {
+    Init: function() {
+        this.lobbies = [];
+    },
+
+    Start: function() {
+        var lob = game.add.sprite(frauki.body.center.x, frauki.body.center.y, 'Frauki');
+        lob.anchor.setTo(0.5);
+        game.physics.enable(lob, Phaser.Physics.ARCADE);
+        lob.body.setSize(10, 10, 0, 0);
+        lob.animations.add('activate', ['Lob0000', 'Lob0001', 'Lob0002'], 14, false, false);
+        lob.animations.add('shit', ['Lob0000', 'Lob0001', 'Lob0002'], 14, false, false);
+        lob.animations.play('activate');
+
+        lob.scale.x = (frauki.states.direction === 'right'? 1 : -1);
+
+        lob.body.velocity.x = frauki.body.velocity.x + 400 * (frauki.states.direction === 'right'? 1 : -1);
+        lob.body.velocity.y = game.rnd.between(-50, -100);
+        lob.body.gravity.y = -300;
+
+        this.lobbies.push(lob);
+    },
+    
+    Update: function() {
+        //what to do while updating (only called while active)
+    },
+    
+    Stop: function() {
+        //the final activity when they release the button
+    },
+
+    GetDamageFrame: function() {
+        return null;
+    },
+
+    UpdateOverride: function() {
+
+        var toDestroy = [];
+
+        game.physics.arcade.collide(this.lobbies, Frogland.GetCurrentCollisionLayer(), function(l, t) {
+            toDestroy.push(l);
+            effectsController.EnergySplash(l.body.center, 200, 'positive', 30, l.body.velocity);
+        });
+
+        var i = toDestroy.length;
+        while(i--) {
+            toDestroy[i].destroy();
+            toDestroy[i] = null;
+        }
+
+        //remove dead lobs from the list
+    }
 };
 
 WeaponController.prototype.Mace = {
