@@ -41,7 +41,7 @@ Loading.create = function() {
     //game.add.plugin(Phaser.Plugin.Debug);
 
     game.physics.startSystem(Phaser.Physics.ARCADE);
-    game.physics.arcade.gravity.y = 800;
+    game.physics.arcade.gravity.y = 600;
 
     game.time.desiredFps = 60;
 

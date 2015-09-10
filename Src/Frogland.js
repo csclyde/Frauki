@@ -40,11 +40,11 @@ Frogland.Create = function() {
     this.CreateBackgroundLayer(3, startLayer === 3);
     this.CreateBackgroundLayer(2, startLayer === 2);
 
+    this.effectsGroup = game.add.group();
+    
     frauki = new Player(game, fraukiStartX, fraukiStartY, 'Frauki');
     game.add.existing(frauki);
     game.camera.focusOnXY(frauki.x, frauki.y);
-
-    this.effectsGroup = game.add.group();
 
     this.CreateCollisionLayer(4);
     this.CreateCollisionLayer(3);

@@ -1,8 +1,8 @@
-PLAYER_SPEED = function() { return 230; }
+PLAYER_SPEED = function() { return 160; }
 PLAYER_ROLL_SPEED = function() { return 600; }
 PLAYER_RUN_SLASH_SPEED = function() { return  650; }
-PLAYER_JUMP_VEL = function() { return -400; }
-PLAYER_DOUBLE_JUMP_VEL = function() { return -350; }
+PLAYER_JUMP_VEL = function() { return -350; }
+PLAYER_DOUBLE_JUMP_VEL = function() { return -275; }
 PLAYER_JUMP_SLASH_SPEED = function() { return 1075; }
 
 Player = function (game, x, y, name) {
