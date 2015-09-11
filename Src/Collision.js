@@ -45,7 +45,7 @@ Collision.OverlapAttackWithObject = function(f, o) {
 
 Collision.OverlapAttackWithEnemy = function(f, e) {
 
-    if(e.spriteType !== 'enemy' || e.state === e.Hurting || !e.Vulnerable() || e.state === e.Dying)
+    if(e.spriteType !== 'enemy' || !e.Vulnerable() || e.state === e.Dying)
         return;
 
     //seperate conditional to prevent crash!
@@ -75,6 +75,7 @@ Collision.OverlapAttackWithEnemy = function(f, e) {
     if(e.energy <= 0) {
 
         e.timers.SetTimer('hit', 1000);
+        e.timers.SetTimer('grace', 1000);
 
         e.body.velocity.x *= 1.2;
         e.body.velocity.y *= 1.2;
@@ -264,11 +265,38 @@ Collision.CollideEffectWithWorld = function(e, w) {
 
 Collision.OverlapLobWithEnemy = function(l, e) {
     if(e.spriteType !== 'enemy' || e.state === e.Hurting || !e.Vulnerable() || e.state === e.Dying)
-        return;
+        return false;
 
     //seperate conditional to prevent crash!
     if(!e.timers.TimerUp('hit'))
-        return;
+        return false;
+
+    if(!!e.currentAttack && e.currentAttack.priority >= 2) {
+        //effectsController.SparkSplash(l, e);
+
+        var vel = new Phaser.Point(e.body.center.x - l.body.center.x, e.body.center.y - l.body.center.y);
+        vel = vel.normalize();
+
+        vel.setMagnitude(300);
+
+        e.body.velocity.x = vel.x;
+        e.body.velocity.y = vel.y;
+
+        events.publish('stop_attack_sounds', {});
+        events.publish('play_sound', {name: 'clang'});
+
+        l.body.velocity.x *= -1;
+        l.body.velocity.y *= -1;
+
+        effectsController.EnergySplash(l.body.center, 200, 'neutral', 30);
+
+        setTimeout(function() {
+            l.destroy(); 
+            l = null;
+        }, 5);
+
+        return false;
+    }
 
     var damage = 0;
 
@@ -279,11 +307,23 @@ Collision.OverlapLobWithEnemy = function(l, e) {
     
     e.body.velocity.y = -200;
 
-    e.timers.SetTimer('hit', 500);
+    e.timers.SetTimer('hit', 800);
+    e.timers.SetTimer('grace', 0);
 
     e.state = e.Hurting;
 
     e.TakeHit();
 
+    l.body.enable = false;
+
+    effectsController.EnergySplash(l.body.center, 200, 'neutral', 30);
+
+    setTimeout(function() {
+        l.destroy(); 
+        l = null;
+    }, 5);
+
     events.publish('play_sound', { name: 'attack_connect' });
+
+    return false;
 };

@@ -80,6 +80,7 @@ InputController = function() {
 
     this.testButton2.onDown.add(function() { 
         energyController.neutralPoint += 2;
+        energyController.charge += 4;
     });
 
     game.input.gamepad.start();

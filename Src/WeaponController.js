@@ -115,14 +115,16 @@ WeaponController.prototype.Lob = {
 
     UpdateOverride: function() {
 
+        this.lobbies = this.lobbies.filter(function(n) { return n !== null && n.body !== null });
+
         var toDestroy = [];
 
         game.physics.arcade.collide(this.lobbies, Frogland.GetCurrentCollisionLayer(), function(l, t) {
             toDestroy.push(l);
-            effectsController.EnergySplash(l.body.center, 200, 'positive', 30, l.body.velocity);
+            effectsController.EnergySplash(l.body.center, 200, 'neutral', 30, l.body.velocity);
         });
 
-        game.physics.arcade.overlap(this.lobbies, Frogland.GetCurrentObjectGroup(), Collision.OverlapLobWithEnemy);
+        game.physics.arcade.overlap(this.lobbies, Frogland.GetCurrentObjectGroup(), null, Collision.OverlapLobWithEnemy);
 
         var i = toDestroy.length;
         while(i--) {
