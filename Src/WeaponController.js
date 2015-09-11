@@ -30,10 +30,12 @@ WeaponController.prototype.ToggleWeapon = function(params) {
     this.weaponActive = params.activate;
     
     if(this.currentWeapon != null) {
-        if(params.activate) {
+        if(params.activate && frauki.timers.TimerUp('grace')) {
             this.currentWeapon.Start();
-        } else {
+            this.weaponActive = true;
+        } else if(this.weaponActive) {
             this.currentWeapon.Stop();
+            this.weaponActive = false;
         }
     }
 };
