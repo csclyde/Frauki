@@ -99,6 +99,12 @@ WeaponController.prototype.Lob = {
         lob.body.gravity.y = -300;
         lob.body.collideWorldBounds = true;
 
+        frauki.body.velocity.y -= 100;
+        frauki.body.velocity.x += (frauki.states.direction === 'right'? -800 : 800);
+
+        effectsController.EnergySplash(frauki.body.center, 80, 'neutral', 6);
+        events.publish('camera_shake', {magnitudeX: 8, magnitudeY: 6, duration: 200});
+
         this.lobbies.push(lob);
     },
     
