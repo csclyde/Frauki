@@ -84,7 +84,7 @@ WeaponController.prototype.Lob = {
             return;
         }
 
-        var lob = game.add.sprite(frauki.body.center.x, frauki.body.center.y, 'Frauki');
+        var lob = game.add.sprite(frauki.body.center.x + (frauki.states.direction === 'right' ? 20 : -20), frauki.body.center.y, 'Frauki');
         lob.anchor.setTo(0.5);
         game.physics.enable(lob, Phaser.Physics.ARCADE);
         lob.body.setSize(10, 10, 0, 0);
@@ -97,6 +97,7 @@ WeaponController.prototype.Lob = {
         lob.body.velocity.x = frauki.body.velocity.x + 400 * (frauki.states.direction === 'right'? 1 : -1);
         lob.body.velocity.y = game.rnd.between(-50, -100);
         lob.body.gravity.y = -300;
+        lob.body.collideWorldBounds = true;
 
         this.lobbies.push(lob);
     },
