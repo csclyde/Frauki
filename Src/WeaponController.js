@@ -79,6 +79,11 @@ WeaponController.prototype.Lob = {
     },
 
     Start: function() {
+
+        if(!energyController.UseCharge(3)) {
+            return;
+        }
+
         var lob = game.add.sprite(frauki.body.center.x, frauki.body.center.y, 'Frauki');
         lob.anchor.setTo(0.5);
         game.physics.enable(lob, Phaser.Physics.ARCADE);
@@ -116,6 +121,8 @@ WeaponController.prototype.Lob = {
             toDestroy.push(l);
             effectsController.EnergySplash(l.body.center, 200, 'positive', 30, l.body.velocity);
         });
+
+        game.physics.arcade.overlap(this.lobbies, Frogland.GetCurrentObjectGroup(), Collision.OverlapLobWithEnemy);
 
         var i = toDestroy.length;
         while(i--) {

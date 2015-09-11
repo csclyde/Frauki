@@ -49,7 +49,7 @@ Collision.OverlapAttackWithEnemy = function(f, e) {
         return;
 
     //seperate conditional to prevent crash!
-    if(!e.timers.TimerUp('hit'))
+    if(!e.timers.TimerUp('grace'))
         return;
 
     var damage = frauki.GetCurrentDamage();
@@ -63,6 +63,7 @@ Collision.OverlapAttackWithEnemy = function(f, e) {
     e.body.velocity.y = -200 + (frauki.GetCurrentJuggle() * -200);
 
     e.timers.SetTimer('hit', e.baseStunDuration + (100 * damage));
+    e.timers.SetTimer('grace', e.baseStunDuration + (100 * damage) + 200);
 
     e.poise -= damage;
     e.state = e.Hurting;
@@ -135,7 +136,7 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
     events.publish('stop_attack_sounds', {});
     events.publish('play_sound', {name: 'clang'});
 
-    e.timers.SetTimer('hit', 400);
+    e.timers.SetTimer('grace', 400);
     frauki.timers.SetTimer('frauki_hit', 300);
 };
 
@@ -259,4 +260,30 @@ Collision.CollideEffectWithWorld = function(e, w) {
     }
 
     return false;
+};
+
+Collision.OverlapLobWithEnemy = function(l, e) {
+    if(e.spriteType !== 'enemy' || e.state === e.Hurting || !e.Vulnerable() || e.state === e.Dying)
+        return;
+
+    //seperate conditional to prevent crash!
+    if(!e.timers.TimerUp('hit'))
+        return;
+
+    var damage = 0;
+
+    //fraukis knockback will increase the amount that the enemy is moved. The weight
+    //of the enemy will work against that. 
+    e.body.velocity.x = 300;
+    e.body.velocity.x *= e.PlayerDirMod();
+    
+    e.body.velocity.y = -200;
+
+    e.timers.SetTimer('hit', 500);
+
+    e.state = e.Hurting;
+
+    e.TakeHit();
+
+    events.publish('play_sound', { name: 'attack_connect' });
 };

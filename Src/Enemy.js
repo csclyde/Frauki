@@ -143,7 +143,7 @@ Enemy.prototype.update = function() {
     //if they are attacking and facing each other
     if(this.Attacking()) {
 
-        if(this.timers.TimerUp('hit')) {
+        if(this.timers.TimerUp('grace')) {
             if((this.direction === 'left' && frauki.body.center.x < this.body.center.x + 20) ||
                (this.direction === 'right' && frauki.body.center.x > this.body.center.x - 20) ) 
             {

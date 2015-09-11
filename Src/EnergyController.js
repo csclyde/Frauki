@@ -200,6 +200,15 @@ EnergyController.prototype.RemoveCharge = function(amt) {
 	this.charge -= amt;
 };
 
+EnergyController.prototype.UseCharge = function(amt) {
+	if(this.charge >= amt) {
+		this.charge -= amt;
+		return true;
+	} else {
+		return false;
+	}
+};
+
 EnergyController.prototype.GetDifficultyModifier = function() {
 	var percentageCurve = [-0.5, 0, 1];
 
