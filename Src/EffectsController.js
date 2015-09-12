@@ -202,6 +202,24 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
 
                 that.loadedEffects.push(fluffer);
 
+            } else if(o.name === 'bubbles') {
+
+                var bubbler = game.add.emitter(o.x, o.y);
+                bubbler.width = o.width;
+                bubbler.height = o.height;
+                bubbler.makeParticles('Misc', ['Bubbles0000', 'Bubbles0001', 'Bubbles0002', 'Bubbles0003'], 20);
+                bubbler.gravity = -600;
+                bubbler.maxParticleSpeed.setTo(0);
+                bubbler.minParticleSpeed.setTo(0);
+                bubbler.minParticleSpeed.y = -25;
+                bubbler.maxParticleSpeed.y = -50;
+                bubbler.minRotation = 0;
+                bubbler.maxRotation = 0;
+                bubbler.bounce.setTo(0.5);
+                bubbler.start(false, 1200, game.rnd.between(800, 1200));
+                bubbler.effectType = 'bubbles';
+                bubbler.alpha = 0.5;
+                bubbler.owningLayer = layer;
             }
         }
     });
