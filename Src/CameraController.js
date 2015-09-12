@@ -88,8 +88,8 @@ CameraController.prototype.RaiseCamera = function(params) {
 }
 
 CameraController.prototype.ScreenShake = function(params) {
-	this.shakeMagnitudeX = params.magnitudeX;
-	this.shakeMagnitudeY = params.magnitudeY;
+	this.shakeMagnitudeX = params.magnitudeX * pixel.scale;
+	this.shakeMagnitudeY = params.magnitudeY * pixel.scale;
 	
 	game.add.tween(this).to({shakeMagnitudeX: 0}, params.duration, Phaser.Easing.Linear.None, true);
 	game.add.tween(this).to({shakeMagnitudeY: 0}, params.duration, Phaser.Easing.Linear.None, true);
