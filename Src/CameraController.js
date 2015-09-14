@@ -38,7 +38,6 @@ CameraController.prototype.Update = function() {
 		}
 	}
 
-
 	var idealX = (frauki.body.velocity.x / X_VEL_DIV) + xOffset * pixel.scale;
 	var dist = idealX - this.camX;
 
@@ -47,7 +46,7 @@ CameraController.prototype.Update = function() {
 	var idealY = (frauki.body.velocity.y / Y_VEL_DIV) + yOffset * pixel.scale;
 	var dist = idealY - this.camY;
 
-	this.camY += dist * 5 * game.time.physicsElapsed;
+	this.camY += dist * 3 * game.time.physicsElapsed;
 
 	//do the screen shake
 	if(this.shakeMagnitudeX > 0) {

@@ -548,6 +548,7 @@ Player.prototype.StabSlash = function() {
             this.movement.rollDirection = dir;
             this.movement.rollStart = game.time.now;
             this.movement.rollPrevVel = 0;
+            this.movement.rollPop = false;
 
             events.publish('play_sound', {name: 'attack_stab', restart: true });
             
@@ -922,6 +923,8 @@ Player.prototype.AttackStab = function() {
         this.body.acceleration.x = 0;
         this.body.drag.x = 2000 * (game.math.catmullRomInterpolation([0.1, 0.7, 1, 1, 0.7, 0.1], dur) || 1);
     }
+
+    console.log(this.movement.rollStage);
 
 
     var frameName = this.animations.currentFrame.name;
