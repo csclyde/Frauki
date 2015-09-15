@@ -549,6 +549,7 @@ Player.prototype.StabSlash = function() {
             this.movement.rollStart = game.time.now;
             this.movement.rollPrevVel = 0;
             this.movement.rollPop = false;
+            this.movement.stabFrames = 0;
 
             events.publish('play_sound', {name: 'attack_stab', restart: true });
             
@@ -580,6 +581,7 @@ Player.prototype.Roll = function(params) {
         this.movement.rollStart = game.time.now;
         this.movement.rollPop = false;
         this.movement.rollPrevVel = 0;
+        this.movement.rollFrames = 0;
     } 
 
     this.timers.SetTimer('frauki_roll', 250);
@@ -771,23 +773,19 @@ Player.prototype.Rolling = function() {
     
     this.body.maxVelocity.x = PLAYER_ROLL_SPEED();
 
-    var dur = game.time.now - this.movement.rollStart;
-
     //pickup stage
-    if(Math.abs(this.body.velocity.x) < PLAYER_ROLL_SPEED() && this.movement.rollStage === 0 && dur <= 130) {
-        dur /= 130;
-        this.body.acceleration.x = this.movement.rollDirection * 5000 * game.math.catmullRomInterpolation([0, 0.7, 1, 1, 0.7, 0], dur);
+    if(this.movement.rollStage === 0 && this.movement.rollFrames <= 10) {
+        this.body.acceleration.x = this.movement.rollDirection * 5000 * (game.math.catmullRomInterpolation([0, 0.7, 1, 1, 0.7, 0], this.movement.rollFrames / 10) || 0);
 
     //ready to switch to release
-    } else if(Math.abs(this.body.velocity.x) == PLAYER_ROLL_SPEED() && this.movement.rollStage === 0) {
+    } else if(this.movement.rollStage === 0) {
         this.movement.rollStage = 1;
-        this.movement.rollStart = game.time.now;
+        this.movement.rollFrames = 0;
 
     //release stage
     } else if(this.movement.rollStage === 1 && this.movement.rollPop === false) {
-        dur /= 300;
         this.body.acceleration.x = 0;
-        this.body.drag.x = 1500 * game.math.catmullRomInterpolation([0.1, 0.7, 1, 1, 0.7, 0.1], dur);
+        this.body.drag.x = 1500 * (game.math.catmullRomInterpolation([0.1, 0.7, 1, 1, 0.7, 0.1], this.movement.rollFrames / 10) || 0.1);
     }
 
     //if they are against a wall, transfer their horizontal acceleration into vertical acceleration
@@ -802,7 +800,10 @@ Player.prototype.Rolling = function() {
         this.movement.rollPop = true;
     }
 
+    console.log(this.movement.rollStage);
+
     this.movement.rollPrevVel = this.body.velocity.x;
+    this.movement.rollFrames += 1;
 
     if(this.animations.currentAnim.isFinished) {
 
@@ -895,46 +896,37 @@ Player.prototype.AttackStab = function() {
 
     this.body.maxVelocity.x = PLAYER_RUN_SLASH_SPEED();
 
-    var dur = game.time.now - this.movement.rollStart;
-
     //delay stage
     if(this.movement.rollStage === 0) {
 
         this.body.velocity.x = 0;
 
-        if(game.time.now > this.movement.rollStart + 200) {
+        if(this.movement.stabFrames >= 10) {
             this.movement.rollStage = 1;
-            this.movement.rollStart = game.time.now;
+            this.movement.stabFrames = 0;
         }
 
     //pickup stage
-    } else if(this.movement.rollStage === 1 && Math.abs(this.body.velocity.x) < PLAYER_RUN_SLASH_SPEED() && dur <= 200) {
-        dur /= 200;
-        this.body.acceleration.x = this.movement.rollDirection * 6000 * (game.math.catmullRomInterpolation([0, 0.1, 0.2, 0.4, 0.8, 1], dur) || 1);
+    } else if(this.movement.rollStage === 1 && this.movement.stabFrames <= 15) {
+        this.body.acceleration.x = this.movement.rollDirection * 6000 * (game.math.catmullRomInterpolation([0, 0.1, 0.2, 0.4, 0.8, 1], this.movement.stabFrames / 15) || 1);
 
     //ready to switch to release
     } else if(this.movement.rollStage === 1) {
         this.movement.rollStage = 2;
-        this.movement.rollStart = game.time.now;
+        this.movement.stabFrames = 0;
 
     //release stage
     } else if(this.movement.rollStage === 2 && this.movement.rollPop === false) {
-        dur /= 200;
         this.body.acceleration.x = 0;
-        this.body.drag.x = 2000 * (game.math.catmullRomInterpolation([0.1, 0.7, 1, 1, 0.7, 0.1], dur) || 1);
+        this.body.drag.x = 2000 * (game.math.catmullRomInterpolation([0.1, 0.7, 1, 1, 0.7, 0.1], this.movement.stabFrames / 30) || 1);
     }
-
-    console.log(this.movement.rollStage);
-
 
     var frameName = this.animations.currentFrame.name;
     if(frameName === 'Attack Stab0004' || frameName === 'Attack Stab0005' ||frameName === 'Attack Stab0006' || frameName === 'Attack Stab0007' || frameName === 'Attack Stab0008') {
         this.body.velocity.y = 0;
     }
 
-    // if(this.Attacking()) {
-    //     this.body.velocity.y = 0;
-    // }
+    this.movement.stabFrames += 1;
 
     if(this.animations.currentAnim.isFinished) {
         
