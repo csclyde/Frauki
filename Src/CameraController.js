@@ -90,8 +90,8 @@ CameraController.prototype.ScreenShake = function(params) {
 	this.shakeMagnitudeX = params.magnitudeX * pixel.scale;
 	this.shakeMagnitudeY = params.magnitudeY * pixel.scale;
 	
-	game.add.tween(this).to({shakeMagnitudeX: 0}, params.duration, Phaser.Easing.Linear.None, true);
-	game.add.tween(this).to({shakeMagnitudeY: 0}, params.duration, Phaser.Easing.Linear.None, true);
+	this.shakeXTween = game.add.tween(this).to({shakeMagnitudeX: 0}, params.duration, Phaser.Easing.Linear.None, true);
+	this.shakeYTween = game.add.tween(this).to({shakeMagnitudeY: 0}, params.duration, Phaser.Easing.Linear.None, true);
 
 	//a sine function that is multiplied by the magnitude. The magnitude has a tween set to 0 based on the duration
 }

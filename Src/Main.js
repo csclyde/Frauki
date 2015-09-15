@@ -117,6 +117,11 @@ Main.Restart = function() {
 
     setTimeout(function() { events.publish('play_music', { name: 'Surface' } ); }, 10000);
 
+    cameraController.shakeMagnitudeX = 0;
+    cameraController.shakeMagnitudeY = 0;
+    cameraController.shakeXTween.stop();
+    cameraController.shakeYTween.stop();
+
     fadeOutTween.onComplete.add(function() {
         frauki.alpha = 1;
         Frogland.ChangeLayer(3);
