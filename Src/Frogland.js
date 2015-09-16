@@ -182,6 +182,15 @@ Frogland.CreateObjectsLayer = function(layer) {
     //create the doors
     this.map.createFromObjects('Objects_' + layer, 67, 'Misc', 'Door0000', true, true, this[currLayer], Door, false);
 
+    this.ball = game.add.sprite(85 * 16, 41 * 16, 'Misc', 'Ball0000', this[currLayer]);
+    game.physics.enable(this.ball, Phaser.Physics.ARCADE);
+    this.ball.body.bounce.setTo(0.8);
+    this.ball.body.drag.setTo(200);
+    this.ball.spriteType = 'ball';
+    this.ball.body.collideWorldBounds = true;
+
+    console.log(this[currLayer]);
+
     //inform each enemy of its own layer
     this[currLayer].forEach(function(obj) {
         obj.owningLayer = layer;

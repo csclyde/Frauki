@@ -29,6 +29,8 @@ Collision.OverlapFraukiWithObject = function(f, o) {
         EatTechnoRune(f, o);
         o.destroy();
         return false;
+    } else if(o.spriteType === 'ball') {
+        return true;
     }
 
     return true;
@@ -40,6 +42,14 @@ Collision.OverlapAttackWithObject = function(f, o) {
     } else if(o.spriteType === 'junk') {
 
         o.JunkHit(o);
+    } else if(o.spriteType === 'ball') {
+        var vel = new Phaser.Point(o.body.center.x - frauki.body.center.x, o.body.center.y - frauki.body.center.y);
+        vel = vel.normalize();
+
+        vel.setMagnitude(800);
+
+        o.body.velocity.x = vel.x + frauki.body.velocity.x;
+        o.body.velocity.y = vel.y - 200 + frauki.body.velocity.y;
     }
 };
 
