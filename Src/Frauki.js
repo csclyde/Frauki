@@ -785,7 +785,7 @@ Player.prototype.Rolling = function() {
     //release stage
     } else if(this.movement.rollStage === 1 && this.movement.rollPop === false) {
         this.body.acceleration.x = 0;
-        this.body.drag.x = 1500 * (game.math.catmullRomInterpolation([0.1, 0.7, 1, 1, 0.7, 0.1], this.movement.rollFrames / 10) || 0.1);
+        this.body.drag.x = 1500 * (game.math.catmullRomInterpolation([0.1, 0.7, 1, 1, 0.7, 0.1], this.movement.rollFrames / 10) || 1);
     }
 
     //if they are against a wall, transfer their horizontal acceleration into vertical acceleration
