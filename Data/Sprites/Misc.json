@@ -85,9 +85,9 @@
 {
 	"frame": {"x":2,"y":224,"w":40,"h":40},
 	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":6,"y":6,"w":40,"h":40},
-	"sourceSize": {"w":50,"h":50},
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":40},
+	"sourceSize": {"w":40,"h":40},
 	"pivot": {"x":0.5,"y":0.5}
 },
 "Bubbles0000":
@@ -934,6 +934,6 @@
 	"format": "RGBA8888",
 	"size": {"w":51,"h":786},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:b63d546cbefd8c311511f7dab1e8fd9f:b8c5d80eab76914b7fbf3b2db6b18df3:65678b973d3ac8e1dd536acb732dd5ab$"
+	"smartupdate": "$TexturePacker:SmartUpdate:652ef496dd743492d50bd3a694ca689f:8ed10b4da88ef7404dcf1d8966232f46:65678b973d3ac8e1dd536acb732dd5ab$"
 }
 }

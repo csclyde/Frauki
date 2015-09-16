@@ -30,7 +30,12 @@ Collision.OverlapFraukiWithObject = function(f, o) {
         o.destroy();
         return false;
     } else if(o.spriteType === 'ball') {
-        return true;
+        if(frauki.state !== frauki.Rolling) {
+            o.body.angularVelocity = 200;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     return true;
@@ -50,6 +55,7 @@ Collision.OverlapAttackWithObject = function(f, o) {
 
         o.body.velocity.x = vel.x + frauki.body.velocity.x;
         o.body.velocity.y = vel.y - 200 + frauki.body.velocity.y;
+        o.body.angularVelocity = 1000;
     }
 };
 

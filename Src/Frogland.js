@@ -99,7 +99,7 @@ Frogland.Update = function() {
     this.GetCurrentObjectGroup().forEach(function(o) {
         var padding = 100;
 
-        if(o.spriteType !== 'enemy' && o.spriteType !== 'door' && !!o.body) {
+        if(o.spriteType !== 'enemy' && o.spriteType !== 'door' && !!o.body && o.spriteType !== 'ball') {
             if(o.body.x > game.camera.x - padding && o.body.y > game.camera.y - padding && o.body.x < game.camera.x + game.camera.width + padding && o.body.y < game.camera.y + game.camera.height + padding
                 && o.owningLayer === Frogland.currentLayer) {
                 o.body.enable = true;
@@ -186,8 +186,11 @@ Frogland.CreateObjectsLayer = function(layer) {
     game.physics.enable(this.ball, Phaser.Physics.ARCADE);
     this.ball.body.bounce.setTo(0.8);
     this.ball.body.drag.setTo(200);
+    this.ball.anchor.setTo(0.5);
+    this.ball.body.angularDrag = 500;
     this.ball.spriteType = 'ball';
     this.ball.body.collideWorldBounds = true;
+    this.ball.body.maxVelocity.setTo(700);
 
     console.log(this[currLayer]);
 
