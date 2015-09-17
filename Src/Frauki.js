@@ -800,8 +800,6 @@ Player.prototype.Rolling = function() {
         this.movement.rollPop = true;
     }
 
-    console.log(this.movement.rollStage);
-
     this.movement.rollPrevVel = this.body.velocity.x;
     this.movement.rollFrames += 1;
 

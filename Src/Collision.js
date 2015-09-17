@@ -31,7 +31,21 @@ Collision.OverlapFraukiWithObject = function(f, o) {
         return false;
     } else if(o.spriteType === 'ball') {
         if(frauki.state !== frauki.Rolling) {
-            o.body.angularVelocity = 200;
+
+            if(frauki.body.y + frauki.body.height <= o.body.y + 1) {
+                var vel = new Phaser.Point(o.body.center.x - frauki.body.center.x, o.body.center.y - frauki.body.center.y);
+                vel = vel.normalize();
+
+                vel.setMagnitude(400);
+
+                frauki.body.velocity.x = vel.x;
+                frauki.body.velocity.y = vel.y;
+            } else if(frauki.body.center.x > o.body.center.x) {
+                o.body.angularVelocity = -200;
+            } else {
+                o.body.angularVelocity = 200;
+            }
+
             return true;
         } else {
             return false;
@@ -55,7 +69,12 @@ Collision.OverlapAttackWithObject = function(f, o) {
 
         o.body.velocity.x = vel.x + frauki.body.velocity.x;
         o.body.velocity.y = vel.y - 200 + frauki.body.velocity.y;
-        o.body.angularVelocity = 1000;
+
+        if(frauki.body.center.x > o.body.center.x) {
+            o.body.angularVelocity = -800;
+        } else {
+            o.body.angularVelocity = 800;
+        }
     }
 };
 
@@ -175,6 +194,13 @@ Collision.OverlapObjectsWithSelf = function(o1, o2) {
         return true;
     } else if(o1.spriteType === 'junk' && o2.spriteType === 'junk') {
         return true;
+    } else if(o1.spriteType === 'ball' && o2.spriteType === 'junk') {
+        if(o1.body.velocity.getMagnitude() > 200) {
+            o2.JunkHit(o2);
+            return true;
+        } else {
+            return false;
+        }
     } else {
         return false;
     }
