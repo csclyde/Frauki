@@ -31,9 +31,15 @@ Collision.OverlapFraukiWithObject = function(f, o) {
         return false;
     } else if(o.spriteType === 'ball') {
         if(frauki.state !== frauki.Rolling) {
-
             if(frauki.body.velocity.y > 0 && frauki.body.y + frauki.body.height >= o.body.y - 1) {
-                frauki.body.velocity.y = -frauki.body.velocity.y;
+                //frauki.body.velocity.y = -frauki.body.velocity.y;
+
+                if(frauki.body.velocity.x !== 0) {
+                    o.body.velocity.x = frauki.body.velocity.x + game.rnd.between(-100, 100);
+                    o.body.angularVelocity = o.body.velocity.x;
+                }
+
+                frauki.body.blocked.down = true;
 
             } else if(frauki.body.center.x > o.body.center.x) {
                 o.body.angularVelocity = -200;
