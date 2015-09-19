@@ -180,6 +180,8 @@ Frogland.CreateObjectsLayer = function(layer) {
     this.map.createFromObjects('Objects_' + layer, 68, 'Misc', 'EnergyBitPos0000', true, true, this[currLayer], EnergyNugg, false);
     this.map.createFromObjects('Objects_' + layer, 69, 'Misc', 'Checkpoint0000', true, true, this[currLayer], Checkpoint, false);
 
+    //activate the correct checkpoint
+    if(!localStorage.getItem('fraukiCheckpoint')) localStorage.setItem('fraukiCheckpoint', '0');
     //create the doors
     this.map.createFromObjects('Objects_' + layer, 67, 'Misc', 'Door0000', true, true, this[currLayer], Door, false);
 
@@ -203,6 +205,10 @@ Frogland.CreateObjectsLayer = function(layer) {
         if(obj.spriteType === 'door') {
             if(Frogland.openDoors.indexOf(obj.id) > -1) {
                 OpenDoor(frauki, obj, true);
+            }
+        } else if(obj.spriteType === 'checkpoint') {
+            if(obj.id == localStorage.getItem('fraukiCheckpoint')) {
+                obj.CheckpointHit();
             }
         } else if(Frogland.currentLayer !== layer) {
             obj.alpha = 0;

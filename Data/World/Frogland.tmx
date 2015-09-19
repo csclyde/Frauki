@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="330" tilewidth="16" tileheight="16" nextobjectid="750">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="330" tilewidth="16" tileheight="16" nextobjectid="753">
  <properties>
   <property name="debug" value="false"/>
   <property name="startLayer" value="4"/>
@@ -3434,6 +3434,16 @@
   <object id="718" gid="127" x="1520" y="2178.67" width="16" height="16"/>
   <object id="727" name="bubbles" type="effect" x="1008.67" y="444.667" width="12.6667" height="9.33333"/>
   <object id="728" name="bubbles" type="effect" x="1777.33" y="1345" width="36" height="4.66667"/>
+  <object id="750" gid="69" x="2029" y="927" width="16" height="16">
+   <properties>
+    <property name="id" value="0"/>
+   </properties>
+  </object>
+  <object id="751" gid="69" x="2427" y="1293" width="16" height="16">
+   <properties>
+    <property name="id" value="1"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="Triggers_3" visible="0">
   <object id="311" name="stop_music" x="2921" y="1006" width="85.6633" height="71">

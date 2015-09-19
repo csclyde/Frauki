@@ -37,5 +37,7 @@ Checkpoint.prototype.CheckpointHit = function(o) {
         check.active = false;
     });
 
+    localStorage.setItem('fraukiCheckpoint', this.id);
+
 	this.active = true;
 };
