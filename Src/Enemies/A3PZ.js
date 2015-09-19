@@ -1,7 +1,7 @@
 Enemy.prototype.types['A3PZ'] =  function() {
 
-	this.body.setSize(15, 50, 0, -72);
-	this.anchor.setTo(.5, 1);
+    this.body.setSize(15, 50, 0, -72);
+    this.anchor.setTo(.5, 1);
 
     this.animations.add('idle', ['A3PZ/Stand0000'], 10, true, false);
     this.animations.add('walk', ['A3PZ/Walk0000', 'A3PZ/Walk0001', 'A3PZ/Walk0002', 'A3PZ/Walk0003', 'A3PZ/Walk0004', 'A3PZ/Walk0005'], 8, true, false);
@@ -25,237 +25,240 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
     this.body.drag.x = 800;
     
-	this.updateFunction = function() {
+    this.updateFunction = function() {
 
-	};
+    };
 
-	this.CanCauseDamage = function() { return false; }
-	this.CanChangeDirection = function() { return false; }
-	this.Vulnerable = function() { return true; };
+    this.CanCauseDamage = function() { return false; }
+    this.CanChangeDirection = function() { return false; }
+    this.Vulnerable = function() { return true; };
 
 
-	///////////////////////////////ACTIONS////////////////////////////////////
+    ///////////////////////////////ACTIONS////////////////////////////////////
 
-	this.TakeHit = function(power) {
-		if(!this.timers.TimerUp('hit')) {
-			return;
-		}
+    this.TakeHit = function(power) {
+        if(!this.timers.TimerUp('hit')) {
+            return;
+        }
 
-	    this.timers.SetTimer('hit', 800);
+        this.timers.SetTimer('hit', 800);
 
-	    this.state = this.Hurting;
-	};
+        this.state = this.Hurting;
+    };
 
-	this.Die = function() {
+    this.Die = function() {
         this.state = this.Idling;
     };
 
     this.Attack = function() {
-    	if(!this.timers.TimerUp('attack')) {
-    		return;
-    	}
+        if(!this.timers.TimerUp('attack')) {
+            return;
+        }
 
-    	this.state = this.Windup1;
+        this.timers.SetTimer('slash_hold', 400);
+
+        this.state = this.Windup1;
 
     };
 
     this.Dodge = function() {
-    	if(!this.timers.TimerUp('dodge')) {
-    		return;
-    	}
+        if(!this.timers.TimerUp('dodge')) {
+            return;
+        }
 
-    	this.FacePlayer();
+        this.FacePlayer();
 
-    	if(this.direction === 'left') {
-    		this.body.velocity.x = 300;
-    	} else {
-    		this.body.velocity.x = -300;
-    	}
+        if(this.direction === 'left') {
+            this.body.velocity.x = 300;
+        } else {
+            this.body.velocity.x = -300;
+        }
 
-    	this.body.velocity.y = -100;
+        this.body.velocity.y = -100;
 
-    	this.state = this.Dodging;
+        this.state = this.Dodging;
 
-    	this.timers.SetTimer('dodge_hold', 100);
+        this.timers.SetTimer('dodge_hold', 100);
     }
 
-	////////////////////////////////STATES////////////////////////////////////
-	this.Idling = function() {
-		
-		if(this.PlayerIsVisible()) {
-			this.PlayAnim('walk');
+    ////////////////////////////////STATES////////////////////////////////////
+    this.Idling = function() {
+        
+        if(this.PlayerIsVisible()) {
+            this.PlayAnim('walk');
 
-			if(this.direction === 'left') {
-				this.body.velocity.x = -75;
-			} else {
-				this.body.velocity.x = 75;
-			}
+            if(this.direction === 'left') {
+                this.body.velocity.x = -75;
+            } else {
+                this.body.velocity.x = 75;
+            }
 
-			this.FacePlayer();
+            this.FacePlayer();
 
-			if(this.PlayerDistance() < 200) {
-				if(frauki.Attacking()) {
-					this.Dodge();
-				} else {
-					this.Attack();
-				}
-			}
+            if(this.PlayerDistance() < 200) {
+                if(frauki.Attacking()) {
+                    this.Dodge();
+                } else {
+                    this.Attack();
+                }
+            }
 
-		} else {
-			this.PlayAnim('idle');
-		}
-	};
+        } else {
+            this.PlayAnim('idle');
+        }
+    };
 
-	this.Windup1 = function() {
-		this.PlayAnim('windup1');
+    this.Windup1 = function() {
+        this.PlayAnim('windup1');
 
-		if(this.animations.currentAnim.isFinished) {
-			this.state = this.Slashing1;
-			this.timers.SetTimer('slash_hold', 400);
-		}
-	};
+        if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
+            this.state = this.Slashing1;
+            this.timers.SetTimer('slash_hold', 600);
+        }
+    };
 
-	this.Slashing1 = function() {
-		this.PlayAnim('attack1');
+    this.Slashing1 = function() {
+        this.PlayAnim('attack1');
 
-		if(this.direction === 'left') {
-			this.body.velocity.x = -200;
-		} else {
-			this.body.velocity.x = 200;
-		}
+        if(this.direction === 'left') {
+            this.body.velocity.x = -200;
+        } else {
+            this.body.velocity.x = 200;
+        }
 
-		if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
-			this.state = this.Windup2;
-			//this.FacePlayer();
-		}
-	};
+        if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
+            this.state = this.Windup2;
+            this.timers.SetTimer('slash_hold', 400);
+            //this.FacePlayer();
+        }
+    };
 
-	this.Windup2 = function() {
-		this.PlayAnim('windup2');
+    this.Windup2 = function() {
+        this.PlayAnim('windup2');
 
-		if(this.animations.currentAnim.isFinished) {
-			this.state = this.Slashing2;
-			this.timers.SetTimer('slash_hold', 400);
-		}
-	};
+        if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
+            this.state = this.Slashing2;
+            this.timers.SetTimer('slash_hold', 600);
+        }
+    };
 
-	this.Slashing2 = function() {
-		this.PlayAnim('attack2');
+    this.Slashing2 = function() {
+        this.PlayAnim('attack2');
 
-		if(this.direction === 'left') {
-			this.body.velocity.x = -200;
-		} else {
-			this.body.velocity.x = 200;
-		}
+        if(this.direction === 'left') {
+            this.body.velocity.x = -200;
+        } else {
+            this.body.velocity.x = 200;
+        }
 
-		if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
-			if(this.PlayerDistance() < 100) {
-				this.FacePlayer();
-				this.Attack();
-			} else {
-				this.state = this.Idling;
-				this.timers.SetTimer('attack', 1000 + Math.random() * 500);
-			}
-		}
-	};
+        if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
+            if(this.PlayerDistance() < 100) {
+                this.FacePlayer();
+                this.Attack();
+            } else {
+                this.state = this.Idling;
+                this.timers.SetTimer('attack', 1000 + Math.random() * 500);
+            }
+        }
+    };
 
-	this.Dodging = function() {
-		this.PlayAnim('block');
+    this.Dodging = function() {
+        this.PlayAnim('block');
 
-		console.log('blocking');
+        console.log('blocking');
 
-		if(this.timers.TimerUp('dodge_hold')) {
-			if(this.PlayerDistance() < 200) {
-				this.Attack();
-			} else {
-				this.state = this.Idling;
-			}
+        if(this.timers.TimerUp('dodge_hold')) {
+            if(this.PlayerDistance() < 200) {
+                this.Attack();
+            } else {
+                this.state = this.Idling;
+            }
 
-			this.timers.SetTimer('dodge', 750);
-		}
-	}
+            this.timers.SetTimer('dodge', 750);
+        }
+    }
 
-	this.Hurting = function() {
-		this.PlayAnim('hurt');
+    this.Hurting = function() {
+        this.PlayAnim('hurt');
 
-		if(this.timers.TimerUp('hit')) {
-			this.state = this.Idling;
-		}
-	};
+        if(this.timers.TimerUp('hit')) {
+            this.state = this.Idling;
+        }
+    };
 
-	this.attackFrames = {
-		'A3PZ/Attack0003': {
-			x: 0, y: 7, w: 80, h: 20,
-			damage: 2,
-			knockback: 0,
-			priority: 1,
-			juggle: 0
-		},
+    this.attackFrames = {
+        'A3PZ/Attack0003': {
+            x: 0, y: 7, w: 80, h: 20,
+            damage: 2,
+            knockback: 0,
+            priority: 1,
+            juggle: 0
+        },
 
-		'A3PZ/Attack0004': {
-			x: 50, y: -15, w: 15, h: 40,
-			damage: 2,
-			knockback: 0,
-			priority: 1,
-			juggle: 0
-		},
+        'A3PZ/Attack0004': {
+            x: 50, y: -15, w: 15, h: 40,
+            damage: 2,
+            knockback: 0,
+            priority: 1,
+            juggle: 0
+        },
 
-		'A3PZ/Attack0005': {
-			x: 50, y: -15, w: 15, h: 40,
-			damage: 1,
-			knockback: 0,
-			priority: 1,
-			juggle: 0
-		},
+        'A3PZ/Attack0005': {
+            x: 50, y: -15, w: 15, h: 40,
+            damage: 1,
+            knockback: 0,
+            priority: 1,
+            juggle: 0
+        },
 
-		'A3PZ/Attack0006': {
-			x: 50, y: -15, w: 15, h: 40,
-			damage: 1,
-			knockback: 0,
-			priority: 1,
-			juggle: 0
-		},
+        'A3PZ/Attack0006': {
+            x: 50, y: -15, w: 15, h: 40,
+            damage: 1,
+            knockback: 0,
+            priority: 1,
+            juggle: 0
+        },
 
-		'A3PZ/Attack0010': {
-			x: 20, y: -20, w: 50, h: 75,
-			damage: 2,
-			knockback: 0,
-			priority: 1,
-			juggle: 0
-		},
+        'A3PZ/Attack0010': {
+            x: 20, y: -20, w: 50, h: 75,
+            damage: 2,
+            knockback: 0,
+            priority: 1,
+            juggle: 0
+        },
 
-		'A3PZ/Attack0011': {
-			x: 18, y: 20, w: 20, h: 30,
-			damage: 2,
-			knockback: 0,
-			priority: 1,
-			juggle: 0
-		},
+        'A3PZ/Attack0011': {
+            x: 18, y: 20, w: 20, h: 30,
+            damage: 2,
+            knockback: 0,
+            priority: 1,
+            juggle: 0
+        },
 
-		'A3PZ/Attack0012': {
-			x: 18, y: 20, w: 20, h: 30,
-			damage: 1,
-			knockback: 0,
-			priority: 1,
-			juggle: 0
-		},
+        'A3PZ/Attack0012': {
+            x: 18, y: 20, w: 20, h: 30,
+            damage: 1,
+            knockback: 0,
+            priority: 1,
+            juggle: 0
+        },
 
-		'A3PZ/Attack0012': {
-			x: 18, y: 20, w: 20, h: 30,
-			damage: 1,
-			knockback: 0,
-			priority: 1,
-			juggle: 0
-		},
+        'A3PZ/Attack0012': {
+            x: 18, y: 20, w: 20, h: 30,
+            damage: 1,
+            knockback: 0,
+            priority: 1,
+            juggle: 0
+        },
 
-		'A3PZ/Block0000': {
-			x: 18, y: -8, w: 10, h: 40,
-			damage: 0,
-			knockback: 0,
-			priority: 1,
-			juggle: 0
-		},
+        'A3PZ/Block0000': {
+            x: 18, y: -8, w: 10, h: 40,
+            damage: 0,
+            knockback: 0,
+            priority: 1,
+            juggle: 0
+        },
 
-	};
+    };
 
 };

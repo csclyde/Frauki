@@ -51,6 +51,8 @@ Collision.OverlapFraukiWithObject = function(f, o) {
         } else {
             return false;
         }
+    } else if(o.spriteType === 'checkpoint') {
+        return false;
     }
 
     return true;
@@ -76,6 +78,8 @@ Collision.OverlapAttackWithObject = function(f, o) {
         } else {
             o.body.angularVelocity = 800;
         }
+    } else if(o.spriteType === 'checkpoint') {
+        o.CheckpointHit();
     }
 };
 
@@ -191,7 +195,7 @@ Collision.OverlapEnemyAttackWithFrauki = function(e, f) {
 };
 
 Collision.OverlapObjectsWithSelf = function(o1, o2) {
-    if(o1.spriteType === 'enemy' && o2.spriteType === 'enemy') {
+    if(o1.spriteType === 'enemy' && o2.spriteType === 'enemy' && o1.robotic === o2.robotic) {
         return true;
     } else if(o1.spriteType === 'junk' && o2.spriteType === 'junk') {
         return true;

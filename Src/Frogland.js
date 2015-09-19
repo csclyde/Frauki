@@ -178,6 +178,7 @@ Frogland.CreateObjectsLayer = function(layer) {
     //create all the apples
     this.map.createFromObjects('Objects_' + layer, 66, 'Misc', 'Apple0000', true, true, this[currLayer], Apple, false);
     this.map.createFromObjects('Objects_' + layer, 68, 'Misc', 'EnergyBitPos0000', true, true, this[currLayer], EnergyNugg, false);
+    this.map.createFromObjects('Objects_' + layer, 69, 'Misc', 'Checkpoint0000', true, true, this[currLayer], Checkpoint, false);
 
     //create the doors
     this.map.createFromObjects('Objects_' + layer, 67, 'Misc', 'Door0000', true, true, this[currLayer], Door, false);
