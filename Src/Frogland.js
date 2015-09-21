@@ -195,8 +195,6 @@ Frogland.CreateObjectsLayer = function(layer) {
     this.ball.body.collideWorldBounds = true;
     this.ball.body.maxVelocity.setTo(700);
 
-    console.log(this[currLayer]);
-
     //inform each enemy of its own layer
     this[currLayer].forEach(function(obj) {
         obj.owningLayer = layer;

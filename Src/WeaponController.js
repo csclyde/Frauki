@@ -9,6 +9,13 @@ WeaponController = function() {
 
   this.ForceField.Init();
   this.Lob.Init();
+
+  this.upgradeSaves = JSON.parse(localStorage.getItem('fraukiUpgrades')) || [];
+
+  this.upgrades = {};
+  this.upgrages.lob = this.upgradeSaves.indexOf('Lob') > -1;
+  this.upgrades.shield = this.upgradeSaves.indexOf('Shield') > -1;
+  this.upgrades.mace = this.upgradeSaves.indexOf('Mace') > -1;
 };
 
 WeaponController.prototype.create = function() {
