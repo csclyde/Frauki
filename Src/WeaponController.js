@@ -1,5 +1,5 @@
 WeaponController = function() {
-  this.currentWeapon = this.Lob;
+  this.currentWeapon = this.Saw;
   this.weaponActive = false;
   this.attackGeometry = null;
 
@@ -9,6 +9,7 @@ WeaponController = function() {
 
   this.ForceField.Init();
   this.Lob.Init();
+  this.Saw.Init();
 
   this.upgradeSaves = JSON.parse(localStorage.getItem('fraukiUpgrades')) || [];
 
@@ -16,6 +17,7 @@ WeaponController = function() {
   this.upgrades.lob = this.upgradeSaves.indexOf('Lob') > -1;
   this.upgrades.shield = this.upgradeSaves.indexOf('Shield') > -1;
   this.upgrades.mace = this.upgradeSaves.indexOf('Mace') > -1;
+  this.upgrades.saw = this.upgradeSaves.indexOf('Saw') > -1;
 };
 
 WeaponController.prototype.create = function() {
@@ -31,6 +33,7 @@ WeaponController.prototype.Update = function() {
 
     this.ForceField.UpdateOverride();
     this.Lob.UpdateOverride();
+    this.Saw.UpdateOverride();
 };
 
 WeaponController.prototype.ToggleWeapon = function(params) {
@@ -326,6 +329,85 @@ WeaponController.prototype.ForceField = {
             damage: 0,
             knockback: 0,
             priority: 1,
+            juggle: 0
+        }
+    }
+};  
+
+WeaponController.prototype.Saw = {
+    Init: function() {
+        this.saw = game.add.sprite(0, 0, 'Misc');
+        this.saw.animations.add('activate', ['Saw0000', 'Saw0001', 'Saw0002', 'Saw0000', 'Saw0001', 'Saw0002', 'Saw0000', 'Saw0001', 'Saw0002'], 30, false, false);
+        this.saw.visible = false;
+        this.saw.alpha = 0.8;
+        this.saw.anchor.x = 0.5;
+    },
+
+    GetDamageFrame: function() {
+        if(this.saw.visible) {
+            return this.DamageFrames[this.saw.animations.currentFrame.name];
+        } else {
+            return null;
+        }
+    },
+
+    Start: function() {
+
+        if(energyController.charge >= 6 && frauki.Roll()) {
+            this.saw.animations.play('activate');
+            this.saw.visible = true;
+            energyController.RemoveCharge(6);
+
+
+            if(frauki.states.direction === 'right') {
+                this.saw.scale.x = 1;
+            } else {
+                this.saw.scale.x = -1;
+            }
+
+            events.publish('camera_shake', {magnitudeX: 12, magnitudeY: 12, duration: 600});
+        }
+
+    },
+
+    Update: function() {
+    },
+
+    UpdateOverride: function() {
+        this.saw.x = frauki.body.x + 5;
+        this.saw.y = frauki.body.y - 20;
+
+        if(this.saw.visible && this.saw.animations.currentAnim.isFinished) {
+            this.saw.visible = false;
+        }
+    },
+
+    Stop: function() {
+    },
+
+    DamageFrames: {
+
+        'Saw0000': {
+            x: -5, y: 10, w: 20, h: 20,
+            damage: 2.5,
+            knockback: 1,
+            priority: 3,
+            juggle: 0
+        },
+
+        'Saw0001': {
+            x: -5, y: 10, w: 20, h: 20,
+            damage: 2.5,
+            knockback: 1,
+            priority: 3,
+            juggle: 0
+        },
+
+        'Saw0002': {
+            x: -5, y: 10, w: 20, h: 20,
+            damage: 2.5,
+            knockback: 1,
+            priority: 3,
             juggle: 0
         }
     }

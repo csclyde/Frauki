@@ -83,6 +83,11 @@ Main.render = function() {
     //     });  
     // }
 
+    if(!!weaponController.GetAttackGeometry()) {
+        game.debug.geom(new Phaser.Rectangle(weaponController.GetAttackGeometry().x, weaponController.GetAttackGeometry().y, weaponController.GetAttackGeometry().w, weaponController.GetAttackGeometry().h));
+    }
+
+
     var drawX = -(pixel.width * (pixel.scale / 4));
 
     //set up correct camera edge behavior
@@ -97,7 +102,7 @@ Main.render = function() {
     pixel.context.drawImage(
         game.canvas, 0, 0, game.width, game.height, 
         drawX + cameraController.shakeX, 
-        -(pixel.height * (pixel.scale / 4)) - cameraController.camY, 
+        -(pixel.height * (pixel.scale / 4)) - cameraController.camY + cameraController.shakeY, 
         game.width * pixel.scale, 
         game.height * pixel.scale
     );

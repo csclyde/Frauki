@@ -390,27 +390,6 @@ Player.prototype.Jump = function(params) {
             this.body.velocity.y = PLAYER_JUMP_VEL();
             events.publish('play_sound', {name: 'jump'});
         }
-        //double jump
-        else if(this.states.hasFlipped === false && this.state !== this.Rolling && this.state !== this.AttackStab && this.state !== this.AttackOverhead && this.upgrades.hike) {
-            if(energyController.UseEnergy(1)) {
-                //if(this.tweens.stopJump) { this.tweens.stopJump.stop(); }
-    
-                if(this.body.velocity.y > PLAYER_DOUBLE_JUMP_VEL()) {
-                    this.body.velocity.y = PLAYER_DOUBLE_JUMP_VEL();
-                } else {
-                    this.body.velocity.y += PLAYER_DOUBLE_JUMP_VEL();
-                }
-
-                this.state = this.Flipping;
-                this.states.hasFlipped = true;
-                this.timers.SetTimer('frauki_grace', 300);
-
-                events.publish('play_sound', {name: 'airhike'});
-                events.publish('stop_sound', {name: 'attack_dive_fall'});
-
-                effectsController.EnergyStreak();
-            }
-        }
         //roll jump
         else if(this.state === this.Rolling) {
             if(energyController.UseEnergy(3)) { 
@@ -435,11 +414,35 @@ Player.prototype.Jump = function(params) {
             
             events.publish('play_sound', {name: 'jump'});
         }
+        //double jump
+        else {
+            this.DoubleJump();
+        }
     } else if(this.body.velocity.y < 0 && this.state !== this.Flipping) {
         if(this.body.velocity.y < 0) {
             this.body.velocity.y /= 2;
         }
 
+    }
+};
+
+Player.prototype.DoubleJump = function() {
+    if(this.states.hasFlipped === false && this.state !== this.Rolling && this.state !== this.AttackStab && this.state !== this.AttackOverhead && this.upgrades.hike && energyController.UseEnergy(1)) {
+
+        if(this.body.velocity.y > PLAYER_DOUBLE_JUMP_VEL()) {
+            this.body.velocity.y = PLAYER_DOUBLE_JUMP_VEL();
+        } else {
+            this.body.velocity.y += PLAYER_DOUBLE_JUMP_VEL();
+        }
+
+        this.state = this.Flipping;
+        this.states.hasFlipped = true;
+        this.timers.SetTimer('frauki_grace', 300);
+
+        events.publish('play_sound', {name: 'airhike'});
+        events.publish('stop_sound', {name: 'attack_dive_fall'});
+
+        effectsController.EnergyStreak();
     }
 };
 
@@ -562,12 +565,12 @@ Player.prototype.StabSlash = function() {
 Player.prototype.Roll = function(params) {
 
     if(!this.timers.TimerUp('frauki_roll') || this.state === this.Hurting || !this.upgrades.roll)
-        return;
+        return false;
 
     if(this.body.onFloor()) {
         
         if(!energyController.UseEnergy(1))
-            return;
+            return false;
 
         this.state = this.Rolling;
 
@@ -582,12 +585,16 @@ Player.prototype.Roll = function(params) {
         this.movement.rollPop = false;
         this.movement.rollPrevVel = 0;
         this.movement.rollFrames = 0;
-    } 
+    } else {
+        this.DoubleJump();
+    }
 
     this.timers.SetTimer('frauki_roll', 250);
     this.timers.SetTimer('frauki_grace', 300);
 
     effectsController.EnergyStreak();
+
+    return true;
 };
 
 Player.prototype.Hit = function(e, damage, grace_duration) {

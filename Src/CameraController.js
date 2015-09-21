@@ -55,6 +55,12 @@ CameraController.prototype.Update = function() {
 		this.shakeX = 0;
 	}
 
+	if(this.shakeMagnitudeY > 0) {
+		this.shakeY = Math.sin(game.time.now * 3) * this.shakeMagnitudeY;
+	} else {
+		this.shakeY = 0;
+	}
+
 	//this.camX += this.shakeX;
 	//this.camY += this.shakeY;
 

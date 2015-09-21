@@ -159,7 +159,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
         //move to a point somewhere above fraukis head
         var locus = {};
         locus.x = frauki.body.center.x + (Math.sin(game.time.now / 150) * 50);
-        locus.y = frauki.body.center.y - 300 + (Math.sin(game.time.now / 50) * 100 + (Math.random() * 40 - 20));
+        locus.y = frauki.body.center.y - 200 + (Math.sin(game.time.now / 50) * 100 + (Math.random() * 40 - 20));
 
         game.physics.arcade.moveToXY(this, locus.x, locus.y, 40);
 
