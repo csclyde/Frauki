@@ -54,6 +54,8 @@ Frogland.Create = function() {
     this.CreateObjectsLayer(3);
     this.CreateObjectsLayer(2);
 
+    this.SpawnFrauki();
+
     this.CreateMidgroundLayer(4, startLayer === 4);
     this.CreateMidgroundLayer(3, startLayer === 3);
     this.CreateMidgroundLayer(2, startLayer === 2);
@@ -129,6 +131,40 @@ Frogland.Update = function() {
 
     if(game.camera.y > 80 * 16) this.plx2.visible = false;
     else this.plx2.visible = true;
+};
+
+Frogland.SpawnFrauki = function() {
+    if(Frogland.map.properties.debug === 'false') {
+
+        Frogland.objectGroup_2.forEach(function(obj) {
+            if(obj.spriteType === 'checkpoint' && obj.id == localStorage.getItem('fraukiCheckpoint')) {
+                frauki.x = obj.x;
+                frauki.y = obj.y;
+                Frogland.ChangeLayer(obj.owningLayer);   
+            } 
+        });  
+
+        Frogland.objectGroup_3.forEach(function(obj) {
+            if(obj.spriteType === 'checkpoint' && obj.id == localStorage.getItem('fraukiCheckpoint')) {
+                frauki.x = obj.x;
+                frauki.y = obj.y;
+                Frogland.ChangeLayer(obj.owningLayer);   
+            } 
+        }); 
+
+        Frogland.objectGroup_4.forEach(function(obj) {
+            if(obj.spriteType === 'checkpoint' && obj.id == localStorage.getItem('fraukiCheckpoint')) {
+                frauki.x = obj.x;
+                frauki.y = obj.y;
+                Frogland.ChangeLayer(obj.owningLayer);   
+            } 
+        }); 
+
+    } else {
+        fraukiStartX = this.map.properties.startX * 16;
+        fraukiStartY = this.map.properties.startY * 16;
+        startLayer = +this.map.properties.startLayer;
+    }
 };
 
 Frogland.CreateBackgroundLayer = function(layer, visible) {

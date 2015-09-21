@@ -124,9 +124,7 @@ Main.Restart = function() {
 
     fadeOutTween.onComplete.add(function() {
         frauki.alpha = 1;
-        Frogland.ChangeLayer(3);
-        frauki.x = frauki.initialX; //fraukiSpawnX;
-        frauki.y = frauki.initialY; //fraukiSpawnY;
+        Frogland.SpawnFrauki();
 
         // cameraController.panning = true;
 
