@@ -262,7 +262,7 @@ function UpdateParticle(p) {
                 energyController.AddEnergy(1);
                 effectsController.EnergySplash(p.body, 100, 'positive');
             } else if(p.parent === effectsController.neutralBits) {
-                energyController.AddCharge(3);
+                energyController.AddCharge(2);
                 effectsController.EnergySplash(p.body, 100, 'neutral');
             }
         }
