@@ -54,8 +54,6 @@ Frogland.Create = function() {
     this.CreateObjectsLayer(3);
     this.CreateObjectsLayer(2);
 
-    this.SpawnFrauki();
-
     this.CreateMidgroundLayer(4, startLayer === 4);
     this.CreateMidgroundLayer(3, startLayer === 3);
     this.CreateMidgroundLayer(2, startLayer === 2);
@@ -81,6 +79,8 @@ Frogland.Create = function() {
     setInterval(function() {
         Frogland.AnimateTiles();
     }, 100);
+
+    this.SpawnFrauki();
 
     game.camera.bounds.inflate(120, 0);
 };

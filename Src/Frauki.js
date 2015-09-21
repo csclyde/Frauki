@@ -302,7 +302,7 @@ Player.prototype.LandHit = function(e, damage) {
 
     vel = vel.setMagnitude(300);
 
-    if(this.state !== this.AttackStab && this.state !== this.AttackDiveFall) {
+    if(this.state !== this.AttackStab && this.state !== this.AttackDiveFall && this.state !== this.Rolling) {
         frauki.body.velocity.x = vel.x;
         frauki.body.velocity.y = vel.y;
     }

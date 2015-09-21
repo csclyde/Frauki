@@ -353,10 +353,10 @@ WeaponController.prototype.Saw = {
 
     Start: function() {
 
-        if(energyController.charge >= 6 && frauki.Roll()) {
+        if(energyController.charge >= 10 && frauki.Roll()) {
             this.saw.animations.play('activate');
             this.saw.visible = true;
-            energyController.RemoveCharge(6);
+            energyController.RemoveCharge(10);
 
 
             if(frauki.states.direction === 'right') {
@@ -375,7 +375,7 @@ WeaponController.prototype.Saw = {
 
     UpdateOverride: function() {
         this.saw.x = frauki.body.x + 5;
-        this.saw.y = frauki.body.y - 20;
+        this.saw.y = frauki.body.y - 15;
 
         if(this.saw.visible && this.saw.animations.currentAnim.isFinished) {
             this.saw.visible = false;
