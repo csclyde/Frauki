@@ -608,7 +608,7 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
 
     events.publish('play_sound', {name: 'ouch'});
 
-    this.body.velocity.y = -300;
+    this.body.velocity.y = -250;
 
     //if they are crouching, half damage
     if(frauki.state === this.Crouching) {
@@ -630,7 +630,7 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
 
     this.state = this.Hurting;
     this.timers.SetTimer('frauki_grace', grace_duration);
-    this.timers.SetTimer('frauki_hit', 600);
+    this.timers.SetTimer('frauki_hit', 500);
     effectsController.EnergySplash(frauki.body.center, 100, 'positive', 30, frauki.body.velocity);
     events.publish('camera_shake', {magnitudeX: 8, magnitudeY: 5, duration: 500});
 

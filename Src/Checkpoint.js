@@ -3,13 +3,16 @@ Checkpoint = function(game, x, y, name) {
     Phaser.Sprite.call(this, game, x, y, 'Misc');
     this.spriteType = 'checkpoint';
 
-    this.animations.add('active', ['Checkpoint0000'], 10, true, false);
-    this.animations.add('inactive', ['Checkpoint0001'], 10, true, false);
+    this.animations.add('active', ['Checkpoint0000', 'Checkpoint0001', 'Checkpoint0002', 'Checkpoint0003', 'Checkpoint0004'], 10, true, false);
+    this.animations.add('inactive', ['Checkpoint0005'], 10, true, false);
+
+    this.anchor.setTo(0.5, 0.5);
 
     //enable its physics body
     game.physics.enable(this, Phaser.Physics.ARCADE);
     this.body.collideWorldBounds = true;
     this.body.moves = false;
+    this.body.setSize(30, 30, 0, 0);
 
     this.active = false;
 
