@@ -7,6 +7,7 @@ Junk = function(game, x, y, name) {
     game.physics.enable(this, Phaser.Physics.ARCADE);
     this.body.collideWorldBounds = true;
     this.body.bounce.setTo(0.5);
+    this.body.drag.setTo(200);
 
     this.enemyName = name.split('/')[0];
 

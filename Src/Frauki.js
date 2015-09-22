@@ -635,7 +635,7 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
     events.publish('camera_shake', {magnitudeX: 8, magnitudeY: 5, duration: 500});
 
     if(energyController.neutralPoint > 0) {
-        effectsController.SlowHit(600);
+        effectsController.SlowHit(400);
     } else {
         setTimeout(function() {
             frauki.alpha = 0;

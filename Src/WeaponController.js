@@ -337,7 +337,7 @@ WeaponController.prototype.ForceField = {
 WeaponController.prototype.Saw = {
     Init: function() {
         this.saw = game.add.sprite(0, 0, 'Misc');
-        this.saw.animations.add('activate', ['Saw0000', 'Saw0001', 'Saw0002', 'Saw0000', 'Saw0001', 'Saw0002', 'Saw0000', 'Saw0001', 'Saw0002'], 30, false, false);
+        this.saw.animations.add('activate', ['Saw0000', 'Saw0001', 'Saw0002', 'Saw0000', 'Saw0001', 'Saw0002', 'Saw0000', 'Saw0001', 'Saw0002'], 24, false, false);
         this.saw.visible = false;
         this.saw.alpha = 0.8;
         this.saw.anchor.x = 0.5;
