@@ -13,7 +13,7 @@ Player = function (game, x, y, name) {
 
     this.body.collideWorldBounds = true;
     this.body.setSize(11, 50, 0, -75);
-    this.body.maxVelocity.y = 500;
+    this.body.maxVelocity.y = 250;
     this.body.drag.x = 2000;
 
     this.initialX = x;
@@ -689,7 +689,7 @@ Player.prototype.Jumping = function() {
 Player.prototype.Peaking = function() {
     this.PlayAnim('peak');
 
-    this.body.gravity.y = game.physics.arcade.gravity.y * 2;
+    this.body.gravity.y = game.physics.arcade.gravity.y * 1.5;
 
     if(this.body.velocity.y < 0) {
         this.state = this.Jumping;
@@ -704,7 +704,7 @@ Player.prototype.Falling = function() {
     this.PlayAnim('fall');
 
     if(!this.states.inUpdraft) {
-        this.body.gravity.y = game.physics.arcade.gravity.y * 2;
+        this.body.gravity.y = game.physics.arcade.gravity.y * 1.5;
     }
 
     //if they jump into water, make sure they slow the hell down
