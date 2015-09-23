@@ -99,10 +99,12 @@ Main.render = function() {
     
     drawX -= cameraController.camX;
 
+    var drawY = -(pixel.height * (pixel.scale / 4)) - cameraController.camY;
+
     pixel.context.drawImage(
         game.canvas, 0, 0, game.width, game.height, 
         drawX + cameraController.shakeX, 
-        -(pixel.height * (pixel.scale / 4)) - cameraController.camY + cameraController.shakeY, 
+        drawY + cameraController.shakeY, 
         game.width * pixel.scale, 
         game.height * pixel.scale
     );

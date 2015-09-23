@@ -22,6 +22,9 @@ CameraController = function() {
 
 	this.panning = false;
 
+	game.camera.width = 480;
+	game.camera.height = 270;
+
 }
 
 //camera is controlled in player centric space
@@ -72,9 +75,10 @@ CameraController.prototype.Update = function() {
 	
 	//game.camera.focusOnXY(newCamX, newCamY);
 
-	if(this.panning === false) {
-		game.camera.focusOnXY(frauki.body.center.x, frauki.body.center.y);
-	}
+	//game.camera.focusOnXY(frauki.body.center.x, frauki.body.center.y);
+	game.camera.x = (game.camera.x + ((frauki.body.center.x - game.camera.x) * 0.2)) - 75;
+	game.camera.y = (game.camera.y + ((frauki.body.center.y - game.camera.y) * 0.2)) - 40;
+
 
 	this.prevXVel = frauki.body.velocity.x;
 	this.prevYVel = frauki.body.velocity.y;
