@@ -128,15 +128,19 @@ Collision.OverlapAttackWithEnemy = function(f, e) {
 
             var enemBody = e.body.center.clone();
 
-            for(var i = 0, max = game.rnd.between(3, 5); i < max; i++) {
-                setTimeout(function() {
-                    var pt = enemBody.clone();
-                    pt.x += game.rnd.between(-20, 20);
-                    pt.y += game.rnd.between(-20, 20);
+            if(e.robotic) {
+                for(var i = 0, max = game.rnd.between(3, 5); i < max; i++) {
+                    setTimeout(function() {
+                        var pt = enemBody.clone();
+                        pt.x += game.rnd.between(-20, 20);
+                        pt.y += game.rnd.between(-20, 20);
 
-                    effectsController.Explosion(pt);
-                }, i * game.rnd.between(150, 200));
-            };
+                        effectsController.Explosion(pt);
+                    }, i * game.rnd.between(150, 200));
+                };
+            } else {
+                effectsController.Explosion(e.body.center);
+            }
 
             effectsController.DiceEnemy(e, e.body.center.x, e.body.center.y);
 
