@@ -22,8 +22,8 @@ CameraController = function() {
 
 	this.panning = false;
 
-	game.camera.width = 480;
-	game.camera.height = 270;
+	game.camera.width = 480 * 1.5;
+	game.camera.height = 270 * 1.5;
 
 }
 
