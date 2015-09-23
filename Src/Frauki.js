@@ -1,4 +1,4 @@
-PLAYER_SPEED = function() { return 200; }
+PLAYER_SPEED = function() { return 160; }
 PLAYER_ROLL_SPEED = function() { return 600; }
 PLAYER_RUN_SLASH_SPEED = function() { return  650; }
 PLAYER_JUMP_VEL = function() { return -350; }
@@ -13,7 +13,7 @@ Player = function (game, x, y, name) {
 
     this.body.collideWorldBounds = true;
     this.body.setSize(11, 50, 0, -75);
-    this.body.maxVelocity.y = 250;
+    this.body.maxVelocity.y = 10;
     this.body.drag.x = 2000;
 
     this.initialX = x;
@@ -100,7 +100,7 @@ Player.prototype.constructor = Player;
 
 Player.prototype.preStateUpdate = function() {
     this.body.maxVelocity.x = PLAYER_SPEED() + this.movement.rollBoost;
-    this.body.maxVelocity.y = 500;
+    this.body.maxVelocity.y = 350;
 
     //maintain the roll boost when they jump without a key down
     if(this.movement.rollBoost > 0) {

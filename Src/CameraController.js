@@ -76,8 +76,8 @@ CameraController.prototype.Update = function() {
 	//game.camera.focusOnXY(newCamX, newCamY);
 
 	//game.camera.focusOnXY(frauki.body.center.x, frauki.body.center.y);
-	game.camera.x = (game.camera.x + ((frauki.body.center.x - game.camera.x) * 0.2)) - 75;
-	game.camera.y = (game.camera.y + ((frauki.body.center.y - game.camera.y) * 0.2)) - 40;
+	game.camera.x = (game.camera.x + ((frauki.body.center.x - game.camera.x) * 0.1)) - 36;
+	game.camera.y = (game.camera.y + ((frauki.body.center.y - game.camera.y) * 0.1)) - 20;
 
 
 	this.prevXVel = frauki.body.velocity.x;
