@@ -38,7 +38,7 @@ Enemy.prototype.types['Haystax'] =  function() {
 	};
 
 	this.Spit = function() {
-		this.timers.SetTimer('spit', 1000 + (Math.random() * 3000));
+		this.timers.SetTimer('spit', 500 + (Math.random() * 500));
 		this.state = this.PoppedUp;
 
 		projectileController.Tarball(this);

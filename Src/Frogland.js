@@ -139,7 +139,7 @@ Frogland.SpawnFrauki = function() {
         Frogland.objectGroup_2.forEach(function(obj) {
             if(obj.spriteType === 'checkpoint' && obj.id == localStorage.getItem('fraukiCheckpoint')) {
                 frauki.x = obj.x;
-                frauki.y = obj.y;
+                frauki.y = obj.y + 20;
                 Frogland.ChangeLayer(obj.owningLayer);   
             } 
         });  
@@ -147,7 +147,7 @@ Frogland.SpawnFrauki = function() {
         Frogland.objectGroup_3.forEach(function(obj) {
             if(obj.spriteType === 'checkpoint' && obj.id == localStorage.getItem('fraukiCheckpoint')) {
                 frauki.x = obj.x;
-                frauki.y = obj.y;
+                frauki.y = obj.y + 20;
                 Frogland.ChangeLayer(obj.owningLayer);   
             } 
         }); 
@@ -155,7 +155,7 @@ Frogland.SpawnFrauki = function() {
         Frogland.objectGroup_4.forEach(function(obj) {
             if(obj.spriteType === 'checkpoint' && obj.id == localStorage.getItem('fraukiCheckpoint')) {
                 frauki.x = obj.x;
-                frauki.y = obj.y;
+                frauki.y = obj.y + 20;
                 Frogland.ChangeLayer(obj.owningLayer);   
             } 
         }); 

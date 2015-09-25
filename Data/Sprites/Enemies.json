@@ -464,8 +464,8 @@
 	"frame": {"x":205,"y":113,"w":18,"h":21},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":41,"y":43,"w":18,"h":21},
-	"sourceSize": {"w":100,"h":100},
+	"spriteSourceSize": {"x":1,"y":1,"w":18,"h":21},
+	"sourceSize": {"w":21,"h":23},
 	"pivot": {"x":0.5,"y":0.5}
 },
 "Haystax/Tarball0001":
@@ -473,8 +473,8 @@
 	"frame": {"x":224,"y":113,"w":19,"h":18},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":41,"y":44,"w":19,"h":18},
-	"sourceSize": {"w":100,"h":100},
+	"spriteSourceSize": {"x":1,"y":2,"w":19,"h":18},
+	"sourceSize": {"w":21,"h":23},
 	"pivot": {"x":0.5,"y":0.5}
 },
 "Insectoid/Die0000":
@@ -772,6 +772,6 @@
 	"format": "RGBA8888",
 	"size": {"w":2041,"h":135},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:3ad50923b94c410ad047541cd4ee4e58:742b45f9997634bc156ba139933505d4:b1585ba32d60cf5440f3fdffe8c37c76$"
+	"smartupdate": "$TexturePacker:SmartUpdate:17c24f1ec535f211902335a5a0bb8d83:14f1a0a09f61cf1ff067085bc85bbe4e:b1585ba32d60cf5440f3fdffe8c37c76$"
 }
 }

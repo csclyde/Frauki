@@ -15,10 +15,10 @@ Enemy.prototype.types['HWK9'] =  function() {
 
     this.robotic = true;
 
+    this.damage = 4;
 
     /*
     this.weight = 0.8;
-    this.damage = 5;
     */
 
     this.body.drag.x = 1000;
