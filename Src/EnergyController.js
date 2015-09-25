@@ -37,7 +37,7 @@ EnergyController.prototype.Create = function() {
 	this.energyBarWhite.anchor.x = 0;
 	this.energyBarWhite.visible = false;
 
-	this.energyBarRed = game.add.image(9, 9, 'UI', 'EnergyBar0003');
+	this.energyBarRed = game.add.image(9, 9, 'UI', 'EnergyBar0004');
 	this.energyBarRed.fixedToCamera = true;
 	this.energyBarRed.anchor.x = 0;
 	this.energyBarRed.visible = false;
@@ -96,9 +96,17 @@ EnergyController.prototype.Update = function() {
 	if(this.neutralPoint <= 0)
 		Main.Restart();
 
+	if(this.InBeastMode() && this.energyBar.visible) {
+		this.energyBar.visible = false;
+		this.energyBarWhite.visible = true;
+	} else if(!this.InBeastMode() && this.energyBarWhite.visible) {
+		this.energyBar.visible = true;
+		this.energyBarWhite.visible = false;
+	}
+
 
 	this.energyBar.scale.x = this.energy / 30;
-	this.energyBarWhite.scale.x = this.energy / 30;
+	//this.energyBarWhite.scale.x = this.energy / 30;
 	this.energyBarRed.scale.x = this.energy / 30;
 	this.chargeBar.scale.x = this.charge / 30;
 
@@ -129,7 +137,10 @@ EnergyController.prototype.Update = function() {
 };
 
 EnergyController.prototype.UseEnergy = function(amt) {
-	if(this.energy > 0) {
+	//if they are below a threshold, they are in beast mode
+	if(this.InBeastMode()) {
+		return true;
+	} else if(this.energy > 0) {
 		this.energy -= amt / 1;
 		this.gracePeriod = game.time.now + 600;
 		this.energyUsageTimestamp = game.time.now;
@@ -161,6 +172,14 @@ EnergyController.prototype.GetEnergy = function() {
 EnergyController.prototype.AddPower = function(amt) {
 	this.neutralPoint += amt;
 };
+
+EnergyController.prototype.InBeastMode = function() {
+	if(this.neutralPoint < 6) {
+		return true;
+	} else {
+		return false;
+	}
+}
 
 EnergyController.prototype.RemovePower = function(amt) {
 
