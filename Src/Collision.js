@@ -6,29 +6,35 @@ Collision.OverlapFraukiWithObject = function(f, o) {
         EatApple(f, o);
         return false;
 
+
     } else if(o.spriteType === 'energyNugg') {
 
         EatEnergyNugg(f, o);
         return false;
 
-    } else if(o.spriteType === 'enemy') {
 
+    } else if(o.spriteType === 'enemy') {
         if(o.CanCauseDamage() && o.state !== o.Dying) {
             frauki.Hit(o, o.damage);
         }
-
         return false;
+
+
     } else if(o.spriteType === 'door') {
-
         OpenDoor(f, o);
-
         return true;
+
+
     } else if(o.spriteType === 'junk') {
         return false;
+
+
     } else if(o.spriteType === 'TechnoRune') {
         EatTechnoRune(f, o);
         o.destroy();
         return false;
+
+
     } else if(o.spriteType === 'ball') {
         if(frauki.state !== frauki.Rolling) {
             if(frauki.body.velocity.y > 0 && frauki.body.y + frauki.body.height >= o.body.y - 1) {
@@ -51,8 +57,11 @@ Collision.OverlapFraukiWithObject = function(f, o) {
         } else {
             return false;
         }
+
+
     } else if(o.spriteType === 'checkpoint') {
         return false;
+
     }
 
     return true;
@@ -198,16 +207,11 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
     frauki.timers.SetTimer('frauki_hit', 300);
 };
 
-Collision.OverlapAttackWithEnvironment = function(a, t) {
-    effectsController.AttackReflection();
-};
-
 Collision.OverlapEnemyAttackWithFrauki = function(e, f) {
 
     if(e.owningEnemy.currentAttack.damage > 0) {
         frauki.Hit(e.owningEnemy, e.owningEnemy.currentAttack.damage, 650);
     }
-
 };
 
 Collision.OverlapObjectsWithSelf = function(o1, o2) {
@@ -225,6 +229,71 @@ Collision.OverlapObjectsWithSelf = function(o1, o2) {
     } else {
         return false;
     }
+};
+
+Collision.OverlapLobWithEnemy = function(l, e) {
+    if(e.spriteType !== 'enemy' || e.state === e.Hurting || !e.Vulnerable() || e.state === e.Dying)
+        return false;
+
+    //seperate conditional to prevent crash!
+    if(!e.timers.TimerUp('hit'))
+        return false;
+
+    if(!!e.currentAttack && e.currentAttack.priority >= 2) {
+        //effectsController.SparkSplash(l, e);
+
+        var vel = new Phaser.Point(e.body.center.x - l.body.center.x, e.body.center.y - l.body.center.y);
+        vel = vel.normalize();
+
+        vel.setMagnitude(300);
+
+        e.body.velocity.x = vel.x;
+        e.body.velocity.y = vel.y;
+
+        events.publish('stop_attack_sounds', {});
+        events.publish('play_sound', {name: 'clang'});
+
+        l.body.velocity.x *= -1;
+        l.body.velocity.y *= -1;
+
+        effectsController.EnergySplash(l.body.center, 200, 'neutral', 30);
+
+        setTimeout(function() {
+            l.destroy(); 
+            l = null;
+        }, 5);
+
+        return false;
+    }
+
+    var damage = 0;
+
+    //fraukis knockback will increase the amount that the enemy is moved. The weight
+    //of the enemy will work against that. 
+    e.body.velocity.x = 300;
+    e.body.velocity.x *= e.PlayerDirMod();
+    
+    e.body.velocity.y = -200;
+
+    e.timers.SetTimer('hit', 800);
+    e.timers.SetTimer('grace', 0);
+
+    e.state = e.Hurting;
+
+    e.TakeHit();
+
+    l.body.enable = false;
+
+    effectsController.EnergySplash(l.body.center, 200, 'neutral', 30);
+
+    setTimeout(function() {
+        l.destroy(); 
+        l = null;
+    }, 5);
+
+    events.publish('play_sound', { name: 'attack_connect' });
+
+    return false;
 };
 
 Collision.CollideFraukiWithProjectile = function(f, p) {
@@ -327,67 +396,3 @@ Collision.CollideEffectWithWorld = function(e, w) {
     return false;
 };
 
-Collision.OverlapLobWithEnemy = function(l, e) {
-    if(e.spriteType !== 'enemy' || e.state === e.Hurting || !e.Vulnerable() || e.state === e.Dying)
-        return false;
-
-    //seperate conditional to prevent crash!
-    if(!e.timers.TimerUp('hit'))
-        return false;
-
-    if(!!e.currentAttack && e.currentAttack.priority >= 2) {
-        //effectsController.SparkSplash(l, e);
-
-        var vel = new Phaser.Point(e.body.center.x - l.body.center.x, e.body.center.y - l.body.center.y);
-        vel = vel.normalize();
-
-        vel.setMagnitude(300);
-
-        e.body.velocity.x = vel.x;
-        e.body.velocity.y = vel.y;
-
-        events.publish('stop_attack_sounds', {});
-        events.publish('play_sound', {name: 'clang'});
-
-        l.body.velocity.x *= -1;
-        l.body.velocity.y *= -1;
-
-        effectsController.EnergySplash(l.body.center, 200, 'neutral', 30);
-
-        setTimeout(function() {
-            l.destroy(); 
-            l = null;
-        }, 5);
-
-        return false;
-    }
-
-    var damage = 0;
-
-    //fraukis knockback will increase the amount that the enemy is moved. The weight
-    //of the enemy will work against that. 
-    e.body.velocity.x = 300;
-    e.body.velocity.x *= e.PlayerDirMod();
-    
-    e.body.velocity.y = -200;
-
-    e.timers.SetTimer('hit', 800);
-    e.timers.SetTimer('grace', 0);
-
-    e.state = e.Hurting;
-
-    e.TakeHit();
-
-    l.body.enable = false;
-
-    effectsController.EnergySplash(l.body.center, 200, 'neutral', 30);
-
-    setTimeout(function() {
-        l.destroy(); 
-        l = null;
-    }, 5);
-
-    events.publish('play_sound', { name: 'attack_connect' });
-
-    return false;
-};

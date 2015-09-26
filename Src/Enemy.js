@@ -76,22 +76,9 @@ Enemy.prototype.Respawn = function() {
     this.state = this.Idling;
 };
 
-Enemy.prototype.UpdateParentage = function() {
-    if(this.WithinCameraRange() && this.alive && this.owningLayer === Frogland.currentLayer) {
-        this.body.enable = true;
-        this.Activate();
-        return true;
-    } else {
-
-        this.body.enable = false;
-        this.Deactivate();
-        return false;
-    }
-};
-
 Enemy.prototype.update = function() {
 
-    if(!this.UpdateParentage()) {
+    if(!this.body.enable) {
         return;
     }
 

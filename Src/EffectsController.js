@@ -84,8 +84,7 @@ EffectsController.prototype.Update = function() {
     this.loadedEffects.forEach(function(o) {
         var padding = 100;
 
-        if(o.x > game.camera.x - padding && o.y > game.camera.y - padding && o.x < game.camera.x + game.camera.width + padding && o.y < game.camera.y + game.camera.height + padding
-            && o.owningLayer === Frogland.currentLayer) {
+        if(o.owningLayer === Frogland.currentLayer && o.x > game.camera.x - padding && o.y > game.camera.y - padding && o.x < game.camera.x + game.camera.width + padding && o.y < game.camera.y + game.camera.height + padding) {
             o.on = true;
         } else {
             o.on = false;

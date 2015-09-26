@@ -101,9 +101,8 @@ Frogland.Update = function() {
     this.GetCurrentObjectGroup().forEach(function(o) {
         var padding = 100;
 
-        if(o.spriteType !== 'enemy' && o.spriteType !== 'door' && !!o.body && o.spriteType !== 'ball') {
-            if(o.body.x > game.camera.x - padding && o.body.y > game.camera.y - padding && o.body.x < game.camera.x + game.camera.width + padding && o.body.y < game.camera.y + game.camera.height + padding
-                && o.owningLayer === Frogland.currentLayer) {
+        if(o.spriteType !== 'door' && !!o.body && o.spriteType !== 'ball') {
+            if(o.owningLayer === Frogland.currentLayer && o.body.x > game.camera.x - padding && o.body.y > game.camera.y - padding && o.body.x < game.camera.x + game.camera.width + padding && o.body.y < game.camera.y + game.camera.height + padding) {
                 o.body.enable = true;
             } else {
                 o.body.enable = false;
@@ -112,9 +111,9 @@ Frogland.Update = function() {
     });
 
     game.physics.arcade.collide(frauki, this.GetCurrentCollisionLayer(), null, Collision.CollideFraukiWithEnvironment);
-    game.physics.arcade.collide(frauki, this.GetCurrentObjectGroup(), Collision.CollideFraukiWithObject, Collision.OverlapFraukiWithObject);
+    game.physics.arcade.collide(frauki, this.GetCurrentObjectGroup(), null, Collision.OverlapFraukiWithObject);
     game.physics.arcade.collide(this.GetCurrentObjectGroup(), this.GetCurrentCollisionLayer());
-    game.physics.arcade.collide(this.GetCurrentObjectGroup(), this.GetCurrentObjectGroup(), null, Collision.OverlapObjectsWithSelf);
+    //game.physics.arcade.collide(this.GetCurrentObjectGroup(), this.GetCurrentObjectGroup(), null, Collision.OverlapObjectsWithSelf);
 
     if(projectileController.projectiles.countLiving() > 0) {
         game.physics.arcade.overlap(frauki, projectileController.projectiles, Collision.CollideFraukiWithProjectile);
