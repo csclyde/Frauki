@@ -148,10 +148,6 @@ Player.prototype.postStateUpdate = function() {
 
     if(this.states.inUpdraft) {
         this.body.acceleration.y = -750;
-
-        if(this.body.velocity.y > 300) {
-            //this.body.velocity.y = 300;
-        }
     } else {
         this.body.acceleration.y = 0;
     }
@@ -253,18 +249,22 @@ Player.prototype.UpdateAttackGeometry = function() {
 };
 
 Player.prototype.GetCurrentDamage = function() {
+
     return this.currentAttack.damage - ((this.currentAttack.damage / 2) * energyController.GetDifficultyModifier());
 };
 
 Player.prototype.GetCurrentKnockback = function() {
+
     return this.currentAttack.knockback;
 };
 
 Player.prototype.GetCurrentJuggle = function() {
+
     return this.currentAttack.juggle;
 };
 
 Player.prototype.GetCurrentPriority = function() {
+
     return this.currentAttack.priority;
 };
 
@@ -318,8 +318,9 @@ Player.prototype.LandHit = function(e, damage) {
     } else if(damage === 0) {
         effectsController.SlowHit(400);
     }
-
 };
+
+
 ////////////////ACTIONS//////////////////
 Player.prototype.Run = function(params) {
     if(!this.timers.TimerUp('frauki_hit') || (this.state === this.Rolling && this.movement.rollPop === false) || this.state === this.AttackStab) 
@@ -854,7 +855,7 @@ Player.prototype.Materializing = function() {
     if(this.animations.currentAnim.isFinished) {
         this.state = this.Standing;
     }
-}
+};
 
 Player.prototype.AttackFront = function() {
     this.PlayAnim('attack_front');
