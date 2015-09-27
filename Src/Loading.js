@@ -5,6 +5,8 @@ Loading.preload = function() {
 
     game.canvas.style['display'] = 'none';
     pixel.canvas = Phaser.Canvas.create(pixel.width * pixel.scale, pixel.height * pixel.scale);
+    pixel.canvas.width = pixel.width * pixel.scale;
+    pixel.canvas.height = pixel.height *  pixel.scale;
     pixel.context = pixel.canvas.getContext('2d');
     Phaser.Canvas.addToDOM(pixel.canvas);
     Phaser.Canvas.setSmoothingEnabled(pixel.context, false);

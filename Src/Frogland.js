@@ -98,8 +98,9 @@ Frogland.Update = function() {
     frauki.states.flowUp = false;
     frauki.states.flowLeft = false;
 
-    this.GetCurrentObjectGroup().forEach(function(o) {
+    for(var i = 0, max = this.GetCurrentObjectGroup().children.length; i < max; i++) {
         var padding = 100;
+        var o = this.GetCurrentObjectGroup().children[i];
 
         if(o.spriteType !== 'door' && !!o.body && o.spriteType !== 'ball') {
             if(o.owningLayer === Frogland.currentLayer && o.body.x > game.camera.x - padding && o.body.y > game.camera.y - padding && o.body.x < game.camera.x + game.camera.width + padding && o.body.y < game.camera.y + game.camera.height + padding) {
@@ -108,12 +109,12 @@ Frogland.Update = function() {
                 o.body.enable = false;
             }
         }
-    });
+        
+    }
 
     game.physics.arcade.collide(frauki, this.GetCurrentCollisionLayer(), null, Collision.CollideFraukiWithEnvironment);
     game.physics.arcade.collide(frauki, this.GetCurrentObjectGroup(), null, Collision.OverlapFraukiWithObject);
     game.physics.arcade.collide(this.GetCurrentObjectGroup(), this.GetCurrentCollisionLayer());
-    //game.physics.arcade.collide(this.GetCurrentObjectGroup(), this.GetCurrentObjectGroup(), null, Collision.OverlapObjectsWithSelf);
 
     if(projectileController.projectiles.countLiving() > 0) {
         game.physics.arcade.overlap(frauki, projectileController.projectiles, Collision.CollideFraukiWithProjectile);
@@ -327,33 +328,35 @@ Frogland.PreprocessTiles = function(layer) {
     //special procesing for collision tiles
     this.map.forEach(function(tile) {
 
-        if(tile.index === 4 || tile.index === 12) {
-            tile.collideLeft = false;
-            tile.collideRight = false;
-            tile.collideUp = true;
-            tile.collideDown = false;
-            tile.faceUp = true;
-            tile.faceDown = false;
-            tile.faceLeft = false;
-            tile.faceRight = false;
+        if(!!tile) {
+            if(tile.index === 4 || tile.index === 12) {
+                tile.collideLeft = false;
+                tile.collideRight = false;
+                tile.collideUp = true;
+                tile.collideDown = false;
+                tile.faceUp = true;
+                tile.faceDown = false;
+                tile.faceLeft = false;
+                tile.faceRight = false;
 
-        //drop tiles
-        } else if(tile.index === 6) {
-            tile.collideLeft = false;
-            tile.collideRight = false;
-            tile.collideUp = false;
-            tile.collideDown = true;
-            tile.faceUp = false;
-            tile.faceDown = true;
-            tile.faceLeft = false;
-            tile.faceRight = false;
+            //drop tiles
+            } else if(tile.index === 6) {
+                tile.collideLeft = false;
+                tile.collideRight = false;
+                tile.collideUp = false;
+                tile.collideDown = true;
+                tile.faceUp = false;
+                tile.faceDown = true;
+                tile.faceLeft = false;
+                tile.faceRight = false;
+            }
         }
            
     }, this, 0, 0, this.map.width, this.map.height, 'Collision_' + layer);
 
     this.map.forEach(function(tile) {
 
-        if(!!tile.properties && !!tile.properties.alpha) {
+        if(!!tile && !!tile.properties && !!tile.properties.alpha) {
             tile.alpha = tile.properties.alpha;
         }
     }, this, 0, 0, this.map.width, this.map.height, 'Foreground_' + layer);
@@ -361,10 +364,11 @@ Frogland.PreprocessTiles = function(layer) {
     this.animatedTiles = [];
     //get animations
     this.map.forEach(function(tile) {
+        if(!!tile) {
+            if(!this.animatedTiles[tile.y] && tile.index !== -1) this.animatedTiles[tile.y] = [];
+            if(tile.index !== -1) this.animatedTiles[tile.y][tile.x] = tile.index;
+        }
 
-        if(!this.animatedTiles[tile.y] && tile.index !== -1) this.animatedTiles[tile.y] = [];
-
-        if(tile.index !== -1) this.animatedTiles[tile.y][tile.x] = tile.index;
 
     }, this, 0, 0, 5, 20, 'Foreground_4');
 };
