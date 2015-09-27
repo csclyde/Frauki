@@ -71,6 +71,8 @@ EffectsController = function() {
     this.energyStreak.particleDrag.setTo(100);
     this.energyStreak.minParticleSpeed.setTo(-80);
     this.energyStreak.maxParticleSpeed.setTo(80);
+    this.energyStreak.maxParticleScale = 1;
+    this.energyStreak.minParticleScale = 1;
 
     this.loadedEffects = [];
 

@@ -319,6 +319,8 @@ Player.prototype.LandHit = function(e, damage) {
     } else if(damage === 0) {
         effectsController.SlowHit(400);
     }
+
+    this.states.hasFlipped = false;
 };
 
 
@@ -609,7 +611,7 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
 
     events.publish('play_sound', {name: 'ouch'});
 
-    this.body.velocity.y = -250;
+    this.body.velocity.y = -150;
 
     //if they are crouching, half damage
     if(frauki.state === this.Crouching) {
