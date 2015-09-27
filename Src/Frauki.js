@@ -1,4 +1,4 @@
-PLAYER_SPEED = function() { return 160; }
+PLAYER_SPEED = function() { return 200; }
 PLAYER_ROLL_SPEED = function() { return 600; }
 PLAYER_RUN_SLASH_SPEED = function() { return  650; }
 PLAYER_JUMP_VEL = function() { return -350; }
@@ -780,6 +780,8 @@ Player.prototype.Flipping = function() {
 
 Player.prototype.Rolling = function() {
     this.PlayAnim('roll');
+
+    console.log(this.movement.rollStage);
     
     this.body.maxVelocity.x = PLAYER_ROLL_SPEED();
 
@@ -796,6 +798,8 @@ Player.prototype.Rolling = function() {
     } else if(this.movement.rollStage === 1 && this.movement.rollPop === false) {
         this.body.acceleration.x = 0;
         this.body.drag.x = 1500 * (game.math.catmullRomInterpolation([0.1, 0.7, 1, 1, 0.7, 0.1], this.movement.rollFrames / 10) || 1);
+    } else if(this.movement.rollStage === 2) {
+        this.body.maxVelocity.x = PLAYER_SPEED();
     }
 
     //if they are against a wall, transfer their horizontal acceleration into vertical acceleration
@@ -808,6 +812,8 @@ Player.prototype.Rolling = function() {
         popBoost *= -300;
         this.body.velocity.y = popBoost;
         this.movement.rollPop = true;
+
+        this.movement.rollStage = 2;
     }
 
     this.movement.rollPrevVel = this.body.velocity.x;

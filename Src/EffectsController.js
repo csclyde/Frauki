@@ -499,7 +499,9 @@ EffectsController.prototype.SparkSplash = function(posSrc, negSrc) {
 EffectsController.prototype.EnergySplash = function(src, intensity, color, amt, vel) {
 
     amt = amt || 6;
-    vel = vel || { x: 0, y: 0 };
+    vel = vel || new Phaser.Point(0, 0);
+    vel = vel.clone();
+    vel.setMagnitude(vel.getMagnitude() / 2);
 
     if(color === 'positive') {
         this.posSpark.x = src.x;
