@@ -23,9 +23,10 @@ InputController = function() {
 	this.slash		= game.input.keyboard.addKey(Phaser.Keyboard.Z);
     this.weapon     = game.input.keyboard.addKey(Phaser.Keyboard.C);
 	this.roll		= game.input.keyboard.addKey(Phaser.Keyboard.X);
-    this.pause      = game.input.keyboard.addKey(Phaser.Keyboard.Q);
+    this.shoulderR      = game.input.keyboard.addKey(Phaser.Keyboard.Q);
 	this.testButton = game.input.keyboard.addKey(Phaser.Keyboard.P);
     this.testButton2 = game.input.keyboard.addKey(Phaser.Keyboard.O);
+    this.shoulderR  = game.input.keyboard.addKey(Phaser.Keyboard.Q)
 
     this.runLeft.onDown.add(function() { events.publish('player_run', {run:true, dir:'left'}); }, this);
     this.runLeft.onUp.add(function() { events.publish('player_run', {run:false, dir: 'left'}); }, this);
@@ -70,8 +71,12 @@ InputController = function() {
         }
     });
 
-    this.pause.onDown.add(function() {
-        game.paused = !game.paused;
+    this.shoulderR.onDown.add(function() {
+        events.publish('activate_speech', {});
+    });
+
+    this.shoulderR.onUp.add(function() {
+        events.publish('deactivate_speech', {});
     });
 
     this.testButton.onDown.add(function() { 
