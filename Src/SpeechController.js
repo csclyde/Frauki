@@ -52,9 +52,12 @@ SpeechController.prototype.LoadSpeechZones = function(layer) {
 	Frogland.map.objects['Objects_' + layer].forEach(function(o) {
         if(o.type === 'speech') {
         	var zone = new Phaser.Rectangle(o.x, o.y, o.width, o.height);
-            
+        	zone.owningLayer = layer;
+            zone.text = o.properties.text;
 
-            that.speechZones.push(splasherLeft);
+            console.log(o);
+
+            that.speechZones.push(zone);
              
         }
     });
@@ -87,6 +90,16 @@ SpeechController.prototype.Update = function() {
 SpeechController.prototype.ShowSpeech = function() {
 	this.displayIndex = 0;
 	this.text.setText('');
+
+	for(var i = 0; i < this.speechZones.length; i++) {
+		var zone = this.speechZones[i];
+		console.log(zone);
+		if(zone.owningLayer === Frogland.currentLayer) {
+			this.SetText(zone.text);
+			break;
+		}
+	}
+
 	this.portraitBox.visible = true;
 	this.portrait.visible = true;
 	this.dialogBox.visible = true;
@@ -102,6 +115,12 @@ SpeechController.prototype.HideSpeech = function() {
 };
 
 SpeechController.prototype.SetText = function(text) {
+	if(!text) {
+		this.currentText = 'undefined';
+		this.displayIndex = 0;
+		return;
+	}
+
 	var words = text.split(' ');
 
 	this.processedText = [];
