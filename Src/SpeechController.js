@@ -23,7 +23,11 @@ SpeechController.prototype.Create = function() {
 	this.portrait.fixedToCamera = true;
 	this.portrait.visible = false;
 
-	this.text = game.add.bitmapText(0, 0, 'font', 'This is a test to see if Frauki is cool', 18);
+	this.currentText = '';
+
+	this.SetText('This is a test to see if Frauki is cool and this is to pad out the text because i am implementing text wrapping and eventually multiple screens of text for really obnoxiously long bits of text.');
+
+	this.text = game.add.bitmapText(0, 0, 'font', this.currentText, 18);
 	this.text.fixedToCamera = true;
 	this.text.visible = false;
 };
@@ -42,6 +46,8 @@ SpeechController.prototype.Update = function() {
 	this.text.cameraOffset.x = Math.round(pixel.width * 0.5 + cameraController.camX / pixel.scale) + 2;// - 82  + 82 * (this.energy / 30);
 	this.text.cameraOffset.y = Math.round(pixel.height * 0.82 + cameraController.camY / pixel.scale) + 2;
 
+	this.text.setText(this.currentText);
+
 };
 
 SpeechController.prototype.ShowSpeech = function() {
@@ -56,4 +62,30 @@ SpeechController.prototype.HideSpeech = function() {
 	this.portrait.visible = false;
 	this.dialogBox.visible = false;
 	this.text.visible = false;
+};
+
+SpeechController.prototype.SetText = function(text) {
+	var words = text.split(' ');
+
+	this.processedText = [];
+
+	//three lines of text
+	for(var i = 0; i < 6; i++) {
+		var line = '';
+		var charCount = 0;
+
+		//each one a max of 40 chars
+		while(words.length > 0) {
+			//pop words off the front of the word list
+			if(line.length + words[0].length + 1 > 39) {
+				break;
+			}
+
+			line += words.shift() + ' ';
+		}
+
+		this.processedText.push(line);
+	}
+
+	this.currentText = this.processedText.join('\n');
 };
