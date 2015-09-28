@@ -19,7 +19,7 @@ Loading.preload = function() {
     pixel.canvas.style['width'] = pixel.canvas.width;
 
     pixel.context.drawImage(game.canvas, 0, 0, game.width, game.height, 0, 0, pixel.width * pixel.scale, pixel.height * pixel.scale);
-    
+
     game.load.tilemap('Frogland', 'Data/World/Frogland.json', null, Phaser.Tilemap.TILED_JSON);
 
     //load images
@@ -36,6 +36,8 @@ Loading.preload = function() {
     FileMap.Audio.forEach(function(audio) {
         game.load.audio(audio.Name, audio.File);
     });
+
+    game.load.bitmapFont('font', 'Design/Sprites/UI/nokia16black.png', 'Design/Sprites/UI/nokia16black.xml');
 };
 
 Loading.create = function() {

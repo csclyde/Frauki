@@ -22,6 +22,10 @@ SpeechController.prototype.Create = function() {
 	this.portrait = game.add.image(80, 70, 'UI', 'PortraitsFraukiNeutral');
 	this.portrait.fixedToCamera = true;
 	this.portrait.visible = false;
+
+	this.text = game.add.bitmapText(0, 0, 'font', 'This is a test to see if Frauki is cool', 18);
+	this.text.fixedToCamera = true;
+	this.text.visible = false;
 };
 
 SpeechController.prototype.Update = function() {
@@ -35,16 +39,21 @@ SpeechController.prototype.Update = function() {
 	this.dialogBox.cameraOffset.x = Math.round(pixel.width * 0.42 + cameraController.camX / pixel.scale) + 2;// - 82  + 82 * (this.energy / 30);
 	this.dialogBox.cameraOffset.y = Math.round(pixel.height * 0.8 + cameraController.camY / pixel.scale) + 2;
 
+	this.text.cameraOffset.x = Math.round(pixel.width * 0.5 + cameraController.camX / pixel.scale) + 2;// - 82  + 82 * (this.energy / 30);
+	this.text.cameraOffset.y = Math.round(pixel.height * 0.82 + cameraController.camY / pixel.scale) + 2;
+
 };
 
 SpeechController.prototype.ShowSpeech = function() {
 	this.portraitBox.visible = true;
 	this.portrait.visible = true;
 	this.dialogBox.visible = true;
+	this.text.visible = true;
 };
 
 SpeechController.prototype.HideSpeech = function() {
 	this.portraitBox.visible = false;
 	this.portrait.visible = false;
 	this.dialogBox.visible = false;
+	this.text.visible = false;
 };
