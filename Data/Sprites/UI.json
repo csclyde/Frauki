@@ -2,7 +2,7 @@
 
 "EnergyBar0000":
 {
-	"frame": {"x":142,"y":66,"w":97,"h":19},
+	"frame": {"x":497,"y":66,"w":97,"h":19},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":1,"y":7,"w":97,"h":19},
@@ -11,7 +11,7 @@
 },
 "EnergyBar0001":
 {
-	"frame": {"x":154,"y":2,"w":90,"h":15},
+	"frame": {"x":497,"y":87,"w":90,"h":15},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":3,"y":9,"w":90,"h":15},
@@ -20,7 +20,7 @@
 },
 "EnergyBar0002":
 {
-	"frame": {"x":154,"y":19,"w":90,"h":9},
+	"frame": {"x":497,"y":104,"w":90,"h":9},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":3,"y":10,"w":90,"h":9},
@@ -29,7 +29,7 @@
 },
 "EnergyBar0003":
 {
-	"frame": {"x":154,"y":30,"w":90,"h":9},
+	"frame": {"x":596,"y":66,"w":90,"h":9},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":3,"y":13,"w":90,"h":9},
@@ -38,7 +38,7 @@
 },
 "EnergyBar0004":
 {
-	"frame": {"x":154,"y":41,"w":90,"h":9},
+	"frame": {"x":596,"y":77,"w":90,"h":9},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":3,"y":14,"w":90,"h":9},
@@ -47,7 +47,7 @@
 },
 "EnergyBar0005":
 {
-	"frame": {"x":178,"y":52,"w":11,"h":9},
+	"frame": {"x":677,"y":2,"w":11,"h":9},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":82,"y":3,"w":11,"h":9},
@@ -56,7 +56,7 @@
 },
 "EnergyBar0006":
 {
-	"frame": {"x":142,"y":87,"w":52,"h":4},
+	"frame": {"x":497,"y":115,"w":52,"h":4},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":7,"y":8,"w":52,"h":4},
@@ -65,7 +65,7 @@
 },
 "Gamepad0000":
 {
-	"frame": {"x":2,"y":2,"w":150,"h":62},
+	"frame": {"x":497,"y":2,"w":150,"h":62},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":7,"y":14,"w":150,"h":62},
@@ -74,16 +74,34 @@
 },
 "Gamepad0001":
 {
-	"frame": {"x":154,"y":52,"w":22,"h":9},
+	"frame": {"x":673,"y":88,"w":22,"h":9},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":2,"w":22,"h":9},
 	"sourceSize": {"w":22,"h":9},
 	"pivot": {"x":3.72727,"y":5.33333}
 },
+"Speech0000":
+{
+	"frame": {"x":392,"y":2,"w":103,"h":117},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":8,"y":34,"w":103,"h":117},
+	"sourceSize": {"w":103,"h":117},
+	"pivot": {"x":2.25243,"y":0.564103}
+},
+"Speech0001":
+{
+	"frame": {"x":2,"y":2,"w":388,"h":117},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":85,"y":34,"w":388,"h":117},
+	"sourceSize": {"w":388,"h":117},
+	"pivot": {"x":0.399485,"y":0.564103}
+},
 "Upgrades0000":
 {
-	"frame": {"x":2,"y":66,"w":26,"h":26},
+	"frame": {"x":649,"y":2,"w":26,"h":26},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":6,"y":6,"w":26,"h":26},
@@ -92,7 +110,7 @@
 },
 "Upgrades0001":
 {
-	"frame": {"x":30,"y":66,"w":26,"h":26},
+	"frame": {"x":649,"y":30,"w":26,"h":26},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":6,"y":6,"w":26,"h":26},
@@ -101,7 +119,7 @@
 },
 "Upgrades0002":
 {
-	"frame": {"x":58,"y":66,"w":26,"h":26},
+	"frame": {"x":589,"y":88,"w":26,"h":26},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":6,"y":6,"w":26,"h":26},
@@ -110,7 +128,7 @@
 },
 "Upgrades0003":
 {
-	"frame": {"x":86,"y":66,"w":26,"h":26},
+	"frame": {"x":617,"y":88,"w":26,"h":26},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":6,"y":6,"w":26,"h":26},
@@ -119,7 +137,7 @@
 },
 "Upgrades0004":
 {
-	"frame": {"x":114,"y":66,"w":26,"h":26},
+	"frame": {"x":645,"y":88,"w":26,"h":26},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":6,"y":6,"w":26,"h":26},
@@ -131,8 +149,8 @@
 	"version": "1.0",
 	"image": "UI.png",
 	"format": "RGBA8888",
-	"size": {"w":246,"h":94},
+	"size": {"w":697,"h":121},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:3b547be2d85857a8ceb39d483b152c60:3bf672f13c03fb00ccb8b34ff0325814:4b774b923918ecd961888279dba3ffad$"
+	"smartupdate": "$TexturePacker:SmartUpdate:df2dea5d655e894321367c376cbacfe0:2e7c6cce2ed1eb9515d4169fe7a54e07:4b774b923918ecd961888279dba3ffad$"
 }
 }

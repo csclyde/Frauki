@@ -96,6 +96,8 @@ InputController = function() {
         },
         onDown: function(buttonCode, value){
 
+            console.log(buttonCode);
+
             switch(buttonCode) {
                 case 0:
                     events.publish('player_jump', {jump: true});
@@ -111,6 +113,20 @@ InputController = function() {
 
                 case 3:
                     events.publish('activate_weapon', { activate: true });
+                break;
+
+                case 8: //select
+                case 9: //start
+                break;
+
+                case 5: //right shoulder
+                case 7: //right shoulder
+                    events.publish('activate_speech', {});
+                break;
+
+                case 4: //left shoulder
+                case 6: //left shoulder
+
                 break;
 
                 case 12:
@@ -146,6 +162,20 @@ InputController = function() {
 
                 case 3:
                     events.publish('activate_weapon', { activate: false });
+                break;
+
+                case 8: //select
+                case 9: //start
+                break;
+
+                case 5: //right shoulder
+                case 7: //right shoulder
+                    events.publish('deactivate_speech', {});
+                break;
+
+                case 4: //left shoulder
+                case 6: //left shoulder
+
                 break;
 
                 case 12:
