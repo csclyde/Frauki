@@ -5,6 +5,12 @@ SpeechController = function() {
 	events.subscribe('activate_speech', this.ShowSpeech, this);
 	events.subscribe('deactivate_speech', this.HideSpeech, this);
 
+	events.subscribe('player_slash', function(params) {
+		this.displayIndex = this.currentText.length;
+	}, this);
+
+	this.timers = new TimerUtil();
+
 };
 
 SpeechController.prototype.Create = function() {
@@ -24,6 +30,7 @@ SpeechController.prototype.Create = function() {
 	this.portrait.visible = false;
 
 	this.currentText = '';
+
 
 	this.SetText('This is a test to see if Frauki is cool and this is to pad out the text because i am implementing text wrapping and eventually multiple screens of text for really obnoxiously long bits of text.');
 
@@ -46,11 +53,18 @@ SpeechController.prototype.Update = function() {
 	this.text.cameraOffset.x = Math.round(pixel.width * 0.5 + cameraController.camX / pixel.scale) + 2;// - 82  + 82 * (this.energy / 30);
 	this.text.cameraOffset.y = Math.round(pixel.height * 0.82 + cameraController.camY / pixel.scale) + 2;
 
-	this.text.setText(this.currentText);
+	if(this.text.visible && this.displayIndex < this.currentText.length && this.timers.TimerUp('display_progress')) {
+		this.displayIndex += 1;
+		this.timers.SetTimer('display_progress', 2);
+	}
+
+	this.text.setText(this.currentText.slice(0, this.displayIndex));
 
 };
 
 SpeechController.prototype.ShowSpeech = function() {
+	this.displayIndex = 0;
+	this.text.setText('');
 	this.portraitBox.visible = true;
 	this.portrait.visible = true;
 	this.dialogBox.visible = true;
@@ -62,6 +76,7 @@ SpeechController.prototype.HideSpeech = function() {
 	this.portrait.visible = false;
 	this.dialogBox.visible = false;
 	this.text.visible = false;
+	this.displayIndex = 0;
 };
 
 SpeechController.prototype.SetText = function(text) {
@@ -88,4 +103,5 @@ SpeechController.prototype.SetText = function(text) {
 	}
 
 	this.currentText = this.processedText.join('\n');
+	this.displayIndex = 0;
 };
