@@ -96,8 +96,6 @@ InputController = function() {
         },
         onDown: function(buttonCode, value){
 
-            console.log(buttonCode);
-
             switch(buttonCode) {
                 case 0:
                     events.publish('player_jump', {jump: true});

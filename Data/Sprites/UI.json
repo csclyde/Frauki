@@ -29,7 +29,7 @@
 },
 "EnergyBar0003":
 {
-	"frame": {"x":596,"y":66,"w":90,"h":9},
+	"frame": {"x":497,"y":115,"w":90,"h":9},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":3,"y":13,"w":90,"h":9},
@@ -38,7 +38,7 @@
 },
 "EnergyBar0004":
 {
-	"frame": {"x":596,"y":77,"w":90,"h":9},
+	"frame": {"x":589,"y":106,"w":90,"h":9},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":3,"y":14,"w":90,"h":9},
@@ -47,7 +47,7 @@
 },
 "EnergyBar0005":
 {
-	"frame": {"x":677,"y":2,"w":11,"h":9},
+	"frame": {"x":624,"y":66,"w":11,"h":9},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":82,"y":3,"w":11,"h":9},
@@ -56,7 +56,7 @@
 },
 "EnergyBar0006":
 {
-	"frame": {"x":497,"y":115,"w":52,"h":4},
+	"frame": {"x":589,"y":117,"w":52,"h":4},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":7,"y":8,"w":52,"h":4},
@@ -74,12 +74,21 @@
 },
 "Gamepad0001":
 {
-	"frame": {"x":673,"y":88,"w":22,"h":9},
+	"frame": {"x":681,"y":106,"w":22,"h":9},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":2,"w":22,"h":9},
 	"sourceSize": {"w":22,"h":9},
 	"pivot": {"x":3.72727,"y":5.33333}
+},
+"PortraitsFraukiNeutral":
+{
+	"frame": {"x":649,"y":2,"w":54,"h":102},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":3,"y":8,"w":54,"h":102},
+	"sourceSize": {"w":54,"h":102},
+	"pivot": {"x":0.5,"y":0.460784}
 },
 "Speech0000":
 {
@@ -101,7 +110,7 @@
 },
 "Upgrades0000":
 {
-	"frame": {"x":649,"y":2,"w":26,"h":26},
+	"frame": {"x":705,"y":2,"w":26,"h":26},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":6,"y":6,"w":26,"h":26},
@@ -110,7 +119,7 @@
 },
 "Upgrades0001":
 {
-	"frame": {"x":649,"y":30,"w":26,"h":26},
+	"frame": {"x":705,"y":30,"w":26,"h":26},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":6,"y":6,"w":26,"h":26},
@@ -119,7 +128,7 @@
 },
 "Upgrades0002":
 {
-	"frame": {"x":589,"y":88,"w":26,"h":26},
+	"frame": {"x":705,"y":58,"w":26,"h":26},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":6,"y":6,"w":26,"h":26},
@@ -128,7 +137,7 @@
 },
 "Upgrades0003":
 {
-	"frame": {"x":617,"y":88,"w":26,"h":26},
+	"frame": {"x":705,"y":86,"w":26,"h":26},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":6,"y":6,"w":26,"h":26},
@@ -137,7 +146,7 @@
 },
 "Upgrades0004":
 {
-	"frame": {"x":645,"y":88,"w":26,"h":26},
+	"frame": {"x":596,"y":66,"w":26,"h":26},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":6,"y":6,"w":26,"h":26},
@@ -149,8 +158,8 @@
 	"version": "1.0",
 	"image": "UI.png",
 	"format": "RGBA8888",
-	"size": {"w":697,"h":121},
+	"size": {"w":733,"h":126},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:df2dea5d655e894321367c376cbacfe0:2e7c6cce2ed1eb9515d4169fe7a54e07:4b774b923918ecd961888279dba3ffad$"
+	"smartupdate": "$TexturePacker:SmartUpdate:68fd096fa57c7d6ab742733e1b649a2a:997995f839b87023ec65d6a2301d2b3d:4b774b923918ecd961888279dba3ffad$"
 }
 }

@@ -780,8 +780,6 @@ Player.prototype.Flipping = function() {
 
 Player.prototype.Rolling = function() {
     this.PlayAnim('roll');
-
-    console.log(this.movement.rollStage);
     
     this.body.maxVelocity.x = PLAYER_ROLL_SPEED();
 
