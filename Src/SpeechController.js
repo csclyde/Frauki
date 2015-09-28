@@ -37,6 +37,28 @@ SpeechController.prototype.Create = function() {
 	this.text = game.add.bitmapText(0, 0, 'font', this.currentText, 18);
 	this.text.fixedToCamera = true;
 	this.text.visible = false;
+
+	this.speechZones = [];
+
+	this.LoadSpeechZones(4);
+	this.LoadSpeechZones(3);
+	this.LoadSpeechZones(2);
+
+};
+
+SpeechController.prototype.LoadSpeechZones = function(layer) {
+	var that = this;
+
+	Frogland.map.objects['Objects_' + layer].forEach(function(o) {
+        if(o.type === 'speech') {
+        	var zone = new Phaser.Rectangle(o.x, o.y, o.width, o.height);
+            
+
+            that.speechZones.push(splasherLeft);
+             
+        }
+    });
+
 };
 
 SpeechController.prototype.Update = function() {
@@ -55,7 +77,7 @@ SpeechController.prototype.Update = function() {
 
 	if(this.text.visible && this.displayIndex < this.currentText.length && this.timers.TimerUp('display_progress')) {
 		this.displayIndex += 1;
-		this.timers.SetTimer('display_progress', 2);
+		this.timers.SetTimer('display_progress', 1);
 	}
 
 	this.text.setText(this.currentText.slice(0, this.displayIndex));
