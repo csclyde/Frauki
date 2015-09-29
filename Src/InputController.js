@@ -123,6 +123,7 @@ InputController = function() {
                 break;
 
                 case 5: //right shoulder
+                    break;
                 case 7: //right shoulder
                     events.publish('activate_speech', {});
                 break;
