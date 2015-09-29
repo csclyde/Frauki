@@ -44,6 +44,7 @@ CameraController.prototype.Update = function() {
 	var idealX = (frauki.body.velocity.x / X_VEL_DIV) + xOffset * pixel.scale;
 	var dist = idealX - this.camX;
 
+
 	this.camX += dist * 3 * game.time.physicsElapsed;
 
 	var idealY = (frauki.body.velocity.y / Y_VEL_DIV) + yOffset * pixel.scale;

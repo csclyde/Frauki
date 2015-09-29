@@ -238,11 +238,9 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
             sparkles.minParticleSpeed.setTo(0);
             sparkles.minRotation = 0;
             sparkles.maxRotation = 0;
-            sparkles.minScale = 1;
-            sparkles.maxScale = 1;
+            sparkles.setScale();
             sparkles.start(false, 200, 100);
-            sparkles.effectType = 'fluff';
-            sparkles.alpha = 0.8;
+            sparkles.effectType = 'sparkles';
             sparkles.owningLayer = layer;
 
             that.loadedEffects.push(sparkles);

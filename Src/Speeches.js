@@ -53,6 +53,26 @@ var Speeches = {
 
 	'ohh': 'Oh... I thought there would be something up here.',
 
-	'cant_see': 'I can barely see past all these vines.. but I can feel something up ahead'
+	'cant_see': 'I can barely see past all these vines.. but I can feel something up ahead',
+
+	'prickly_stuff': 'What is this prickly stuff any way? It\'s really annoying.',
+
+	'ceiling': 'I can barely see the ceiling, it\'s so high. I wonder how this is all still standing.',
+
+	'up_there': 'Hmm I wonder how I can get up there.',
+
+	'whew': 'Whew, that was tricky.',
+
+	'look_down': 'Don\'t look down... Don\'t look down...',
+
+	'fire': 'The fire is warm. Maybe I can dry my socks off a little bit',
+
+	'dont_eat': 'No matter how tasty it looks, don\'t eat that mushroom...',
+
+	'nibble': 'Just a little nibble couldn\'t hurt... could it?',
+
+	'cold': 'This water is so cold',
+
+	
 
 };
