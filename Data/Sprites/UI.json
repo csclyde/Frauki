@@ -2,7 +2,7 @@
 
 "EnergyBar0000":
 {
-	"frame": {"x":497,"y":66,"w":97,"h":19},
+	"frame": {"x":546,"y":94,"w":97,"h":19},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":1,"y":7,"w":97,"h":19},
@@ -11,7 +11,7 @@
 },
 "EnergyBar0001":
 {
-	"frame": {"x":497,"y":87,"w":90,"h":15},
+	"frame": {"x":58,"y":98,"w":90,"h":15},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":3,"y":9,"w":90,"h":15},
@@ -20,7 +20,7 @@
 },
 "EnergyBar0002":
 {
-	"frame": {"x":497,"y":104,"w":90,"h":9},
+	"frame": {"x":150,"y":98,"w":90,"h":9},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":3,"y":10,"w":90,"h":9},
@@ -29,7 +29,7 @@
 },
 "EnergyBar0003":
 {
-	"frame": {"x":497,"y":115,"w":90,"h":9},
+	"frame": {"x":242,"y":98,"w":90,"h":9},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":3,"y":13,"w":90,"h":9},
@@ -38,7 +38,7 @@
 },
 "EnergyBar0004":
 {
-	"frame": {"x":589,"y":106,"w":90,"h":9},
+	"frame": {"x":334,"y":98,"w":90,"h":9},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":3,"y":14,"w":90,"h":9},
@@ -47,7 +47,7 @@
 },
 "EnergyBar0005":
 {
-	"frame": {"x":624,"y":66,"w":11,"h":9},
+	"frame": {"x":450,"y":98,"w":11,"h":9},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":82,"y":3,"w":11,"h":9},
@@ -56,7 +56,7 @@
 },
 "EnergyBar0006":
 {
-	"frame": {"x":589,"y":117,"w":52,"h":4},
+	"frame": {"x":2,"y":106,"w":52,"h":4},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":7,"y":8,"w":52,"h":4},
@@ -65,7 +65,7 @@
 },
 "Gamepad0000":
 {
-	"frame": {"x":497,"y":2,"w":150,"h":62},
+	"frame": {"x":546,"y":2,"w":150,"h":62},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":7,"y":14,"w":150,"h":62},
@@ -74,7 +74,7 @@
 },
 "Gamepad0001":
 {
-	"frame": {"x":681,"y":106,"w":22,"h":9},
+	"frame": {"x":426,"y":98,"w":22,"h":9},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":2,"w":22,"h":9},
@@ -83,7 +83,7 @@
 },
 "PortraitsFraukiNeutral":
 {
-	"frame": {"x":649,"y":2,"w":54,"h":102},
+	"frame": {"x":2,"y":2,"w":54,"h":102},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":3,"y":8,"w":54,"h":102},
@@ -92,25 +92,25 @@
 },
 "Speech0000":
 {
-	"frame": {"x":392,"y":2,"w":103,"h":117},
+	"frame": {"x":448,"y":2,"w":96,"h":94},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":8,"y":34,"w":103,"h":117},
-	"sourceSize": {"w":103,"h":117},
-	"pivot": {"x":2.25243,"y":0.564103}
+	"spriteSourceSize": {"x":8,"y":57,"w":96,"h":94},
+	"sourceSize": {"w":96,"h":94},
+	"pivot": {"x":2.41667,"y":0.457447}
 },
 "Speech0001":
 {
-	"frame": {"x":2,"y":2,"w":388,"h":117},
+	"frame": {"x":58,"y":2,"w":388,"h":94},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":85,"y":34,"w":388,"h":117},
-	"sourceSize": {"w":388,"h":117},
-	"pivot": {"x":0.399485,"y":0.564103}
+	"spriteSourceSize": {"x":85,"y":57,"w":388,"h":94},
+	"sourceSize": {"w":388,"h":94},
+	"pivot": {"x":0.399485,"y":0.457447}
 },
 "Upgrades0000":
 {
-	"frame": {"x":705,"y":2,"w":26,"h":26},
+	"frame": {"x":546,"y":66,"w":26,"h":26},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":6,"y":6,"w":26,"h":26},
@@ -119,7 +119,7 @@
 },
 "Upgrades0001":
 {
-	"frame": {"x":705,"y":30,"w":26,"h":26},
+	"frame": {"x":574,"y":66,"w":26,"h":26},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":6,"y":6,"w":26,"h":26},
@@ -128,7 +128,7 @@
 },
 "Upgrades0002":
 {
-	"frame": {"x":705,"y":58,"w":26,"h":26},
+	"frame": {"x":602,"y":66,"w":26,"h":26},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":6,"y":6,"w":26,"h":26},
@@ -137,7 +137,7 @@
 },
 "Upgrades0003":
 {
-	"frame": {"x":705,"y":86,"w":26,"h":26},
+	"frame": {"x":630,"y":66,"w":26,"h":26},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":6,"y":6,"w":26,"h":26},
@@ -146,7 +146,7 @@
 },
 "Upgrades0004":
 {
-	"frame": {"x":596,"y":66,"w":26,"h":26},
+	"frame": {"x":658,"y":66,"w":26,"h":26},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":6,"y":6,"w":26,"h":26},
@@ -158,8 +158,8 @@
 	"version": "1.0",
 	"image": "UI.png",
 	"format": "RGBA8888",
-	"size": {"w":733,"h":126},
+	"size": {"w":698,"h":115},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:8e3a62355483d80473f367cb7d1e1b01:cf78ff0f1bcf2988d848efe813dc1c59:4b774b923918ecd961888279dba3ffad$"
+	"smartupdate": "$TexturePacker:SmartUpdate:23a7333bb1b4d47b5efa3fdbb7cba217:3d287ec7019c2552401ed4b559b0aa6f:4b774b923918ecd961888279dba3ffad$"
 }
 }
