@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="215" tilewidth="16" tileheight="16" backgroundcolor="#55d5ed" nextobjectid="801">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="215" tilewidth="16" tileheight="16" backgroundcolor="#55d5ed" nextobjectid="812">
  <properties>
   <property name="debug" value="false"/>
   <property name="startLayer" value="4"/>
@@ -1368,6 +1368,9 @@
   <object id="658" gid="107" x="1766.5" y="1566.5" width="16" height="16"/>
   <object id="717" gid="126" x="2537.5" y="2169" width="16" height="16"/>
   <object id="756" gid="95" x="1574.33" y="2696" width="16" height="16"/>
+  <object id="804" name="wet_clay" type="speech" x="2303" y="1374.5" width="48.5" height="62.5"/>
+  <object id="805" name="dew" type="speech" x="2096" y="1328.5" width="48" height="63"/>
+  <object id="806" name="draft" type="speech" x="1918.5" y="1328.5" width="47.5" height="64"/>
  </objectgroup>
  <objectgroup name="Triggers_2" visible="0">
   <object id="179" name="stop_music" x="456.667" y="1071.33" width="169.333" height="109.333"/>
@@ -2541,6 +2544,14 @@
   <object id="796" name="shade_tree" type="speech" x="1442.5" y="657" width="140.5" height="79.5"/>
   <object id="798" name="phone" type="speech" x="2157" y="896" width="21" height="33.5"/>
   <object id="799" name="hole_sign" type="speech" x="2876" y="939.5" width="40.5" height="36.5"/>
+  <object id="801" name="pillar" type="speech" x="2889" y="1298.5" width="39" height="61"/>
+  <object id="802" name="jerk" type="speech" x="1995.5" y="1203.5" width="91" height="52"/>
+  <object id="803" name="mushrooms" type="speech" x="1990.5" y="1669" width="55.5" height="25.5"/>
+  <object id="807" name="dripping" type="speech" x="1754.5" y="1547.5" width="77.5" height="52"/>
+  <object id="808" name="fresh" type="speech" x="1805" y="1115.5" width="132.5" height="108"/>
+  <object id="809" name="extract" type="speech" x="843" y="1003" width="34.5" height="60"/>
+  <object id="810" name="spores" type="speech" x="1066.5" y="1665" width="94.5" height="64.5"/>
+  <object id="811" name="delicate_flower" type="speech" x="2835.5" y="1708.25" width="41.25" height="49.75"/>
  </objectgroup>
  <objectgroup name="Triggers_3" visible="0">
   <object id="311" name="stop_music" x="2921" y="1006" width="85.6633" height="71">

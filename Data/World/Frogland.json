@@ -2802,6 +2802,51 @@
                  "width":16,
                  "x":1574.33,
                  "y":2696
+                }, 
+                {
+                 "height":62.5,
+                 "id":804,
+                 "name":"wet_clay",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":48.5,
+                 "x":2303,
+                 "y":1374.5
+                }, 
+                {
+                 "height":63,
+                 "id":805,
+                 "name":"dew",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":48,
+                 "x":2096,
+                 "y":1328.5
+                }, 
+                {
+                 "height":64,
+                 "id":806,
+                 "name":"draft",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":47.5,
+                 "x":1918.5,
+                 "y":1328.5
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -6813,6 +6858,126 @@
                  "width":40.5,
                  "x":2876,
                  "y":939.5
+                }, 
+                {
+                 "height":61,
+                 "id":801,
+                 "name":"pillar",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":39,
+                 "x":2889,
+                 "y":1298.5
+                }, 
+                {
+                 "height":52,
+                 "id":802,
+                 "name":"jerk",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":91,
+                 "x":1995.5,
+                 "y":1203.5
+                }, 
+                {
+                 "height":25.5,
+                 "id":803,
+                 "name":"mushrooms",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":55.5,
+                 "x":1990.5,
+                 "y":1669
+                }, 
+                {
+                 "height":52,
+                 "id":807,
+                 "name":"dripping",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":77.5,
+                 "x":1754.5,
+                 "y":1547.5
+                }, 
+                {
+                 "height":108,
+                 "id":808,
+                 "name":"fresh",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":132.5,
+                 "x":1805,
+                 "y":1115.5
+                }, 
+                {
+                 "height":60,
+                 "id":809,
+                 "name":"extract",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":34.5,
+                 "x":843,
+                 "y":1003
+                }, 
+                {
+                 "height":64.5,
+                 "id":810,
+                 "name":"spores",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":94.5,
+                 "x":1066.5,
+                 "y":1665
+                }, 
+                {
+                 "height":49.75,
+                 "id":811,
+                 "name":"delicate_flower",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":41.25,
+                 "x":2835.5,
+                 "y":1708.25
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -10385,7 +10550,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":801,
+ "nextobjectid":812,
  "orientation":"orthogonal",
  "properties":
     {
