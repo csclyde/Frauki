@@ -173,7 +173,6 @@ InputController = function() {
 
                 case 5: //right shoulder
                 case 7: //right shoulder
-                    events.publish('deactivate_speech', {});
                 break;
 
                 case 4: //left shoulder
