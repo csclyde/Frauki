@@ -228,6 +228,24 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 bubbler.alpha = 0.5;
                 bubbler.owningLayer = layer;
             }
+        } else if(o.type === 'speech') {
+            var sparkles = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
+            sparkles.width = o.width;
+            sparkles.height = o.height;
+            sparkles.makeParticles('Misc', ['Sparkles0000', 'Sparkles0001', 'Sparkles0002', 'Sparkles0003', 'Sparkles0004', 'Sparkles0005'], 200);
+            sparkles.gravity = -600;
+            sparkles.maxParticleSpeed.setTo(0);
+            sparkles.minParticleSpeed.setTo(0);
+            sparkles.minRotation = 0;
+            sparkles.maxRotation = 0;
+            sparkles.minScale = 1;
+            sparkles.maxScale = 1;
+            sparkles.start(false, 200, 100);
+            sparkles.effectType = 'fluff';
+            sparkles.alpha = 0.8;
+            sparkles.owningLayer = layer;
+
+            that.loadedEffects.push(sparkles);
         }
     });
 };
