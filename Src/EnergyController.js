@@ -21,32 +21,16 @@ EnergyController = function() {
 
 EnergyController.prototype.Create = function() {
 
-	this.barBackground = game.add.image(7, 7, 'UI', 'EnergyBar0001');
-	this.barBackground.fixedToCamera = true;
+	// this.energyBarWhite = game.add.image(9, 9, 'UI', 'EnergyBar0003');
+	// this.energyBarWhite.fixedToCamera = true;
+	// this.energyBarWhite.anchor.x = 0;
+	// this.energyBarWhite.visible = false;
 
-	this.energyBar = game.add.image(9, 9, 'UI', 'EnergyBar0002');
-	this.energyBar.fixedToCamera = true;
-	this.energyBar.anchor.x = 0;
+	// this.energyBarRed = game.add.image(9, 9, 'UI', 'EnergyBar0004');
+	// this.energyBarRed.fixedToCamera = true;
+	// this.energyBarRed.anchor.x = 0;
+	// this.energyBarRed.visible = false;
 
-	this.chargeBar = game.add.image(9, 20, 'UI', 'EnergyBar0006');
-	this.chargeBar.fixedToCamera = true;
-	this.chargeBar.anchor.x = 0;
-
-	this.energyBarWhite = game.add.image(9, 9, 'UI', 'EnergyBar0003');
-	this.energyBarWhite.fixedToCamera = true;
-	this.energyBarWhite.anchor.x = 0;
-	this.energyBarWhite.visible = false;
-
-	this.energyBarRed = game.add.image(9, 9, 'UI', 'EnergyBar0004');
-	this.energyBarRed.fixedToCamera = true;
-	this.energyBarRed.anchor.x = 0;
-	this.energyBarRed.visible = false;
-
-	this.barContainer = game.add.image(7, 7, 'UI', 'EnergyBar0000');
-	this.barContainer.fixedToCamera = true;
-
-	this.restingPointMarker = game.add.image(this.energyBar.x + (this.energyBar.width / 2) - 2, 5, 'UI', 'EnergyBar0005');
-	this.restingPointMarker.fixedToCamera = true;
 };
 
 EnergyController.prototype.Update = function() {
@@ -96,43 +80,13 @@ EnergyController.prototype.Update = function() {
 	if(this.neutralPoint <= 0)
 		Main.Restart();
 
-	if(this.InBeastMode() && this.energyBar.visible) {
-		this.energyBar.visible = false;
-		this.energyBarWhite.visible = true;
-	} else if(!this.InBeastMode() && this.energyBarWhite.visible) {
-		this.energyBar.visible = true;
-		this.energyBarWhite.visible = false;
-	}
-
-
-	this.energyBar.scale.x = this.energy / 30;
-	//this.energyBarWhite.scale.x = this.energy / 30;
-	this.energyBarRed.scale.x = this.energy / 30;
-	this.chargeBar.scale.x = this.charge / 30;
-
-	if(this.energyBar.scale.x < 0)
-		this.energyBar.scale.x = 0;
-
-	this.restingPointMarker.cameraOffset.x = Math.round(pixel.width * 0.27 + cameraController.camX / pixel.scale) + (81 * (this.neutralPoint / 30));
-	this.restingPointMarker.cameraOffset.y = Math.round(pixel.height * 0.3 + cameraController.camY / pixel.scale) + 2;
-
-	this.energyBar.cameraOffset.x = Math.round(pixel.width * 0.27 + cameraController.camX / pixel.scale) + 2;// - 82  + 82 * (this.energy / 30);
-	this.energyBar.cameraOffset.y = Math.round(pixel.height * 0.3 + cameraController.camY / pixel.scale) + 2;
-
-	this.chargeBar.cameraOffset.x = Math.round(pixel.width * 0.27 + cameraController.camX / pixel.scale) + 2;// - 82  + 82 * (this.energy / 30);
-	this.chargeBar.cameraOffset.y = Math.round(pixel.height * 0.3 + cameraController.camY / pixel.scale) + 13;
-
-	this.energyBarWhite.cameraOffset.x = Math.round(pixel.width * 0.27 + cameraController.camX / pixel.scale) + 2;
-	this.energyBarWhite.cameraOffset.y = Math.round(pixel.height * 0.3 + cameraController.camY / pixel.scale) + 2;
-
-	this.energyBarRed.cameraOffset.x = Math.round(pixel.width * 0.27 + cameraController.camX / pixel.scale) + 2;
-	this.energyBarRed.cameraOffset.y = Math.round(pixel.height * 0.3 + cameraController.camY / pixel.scale) + 2;
-
-	this.barContainer.cameraOffset.x = Math.round(pixel.width * 0.27 + cameraController.camX / pixel.scale);
-	this.barContainer.cameraOffset.y = Math.round(pixel.height * 0.3 + cameraController.camY / pixel.scale);
-
-	this.barBackground.cameraOffset.x = Math.round(pixel.width * 0.27 + cameraController.camX / pixel.scale) + 2;
-	this.barBackground.cameraOffset.y = Math.round(pixel.height * 0.3 + cameraController.camY / pixel.scale) + 2;
+	// if(this.InBeastMode() && this.energyBar.visible) {
+	// 	this.energyBar.visible = false;
+	// 	this.energyBarWhite.visible = true;
+	// } else if(!this.InBeastMode() && this.energyBarWhite.visible) {
+	// 	this.energyBar.visible = true;
+	// 	this.energyBarWhite.visible = false;
+	// }
 
 };
 
@@ -199,10 +153,6 @@ EnergyController.prototype.RemovePower = function(amt) {
 		}
 	}
 
-	this.energyBar.visible = false;
-	this.energyBarRed.visible = true;
-
-	game.time.events.add(300, function() { this.energyBar.visible = true; this.energyBarRed.visible = false; }, this)
 };
 
 EnergyController.prototype.GetEnergyPercentage = function() {

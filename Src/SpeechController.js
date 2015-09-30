@@ -33,6 +33,8 @@ SpeechController.prototype.Create = function() {
 	this.portrait.fixedToCamera = true;
 	this.portrait.visible = false;
 
+	this.speechVisible = false;
+
 	this.currentText = '';
 
 
@@ -69,17 +71,17 @@ SpeechController.prototype.LoadSpeechZones = function(layer) {
 
 SpeechController.prototype.Update = function() {
 
-	this.portraitBox.cameraOffset.x = Math.round(pixel.width * 0.27 + cameraController.camX / pixel.scale) + 2;// - 82  + 82 * (this.energy / 30);
-	this.portraitBox.cameraOffset.y = Math.round(pixel.height * 0.86 + cameraController.camY / pixel.scale) + 2;
+	this.portraitBox.cameraOffset.x = (pixel.width * 0.27 + cameraController.camX / pixel.scale) + 2;// - 82  + 82 * (this.energy / 30);
+	this.portraitBox.cameraOffset.y = (pixel.height * 0.86 + cameraController.camY / pixel.scale) + 2;
 
-	this.portrait.cameraOffset.x = Math.round(pixel.width * 0.27 + cameraController.camX / pixel.scale) + 10;// - 82  + 82 * (this.energy / 30);
-	this.portrait.cameraOffset.y = Math.round(pixel.height * 0.80 + cameraController.camY / pixel.scale) + 10;
+	this.portrait.cameraOffset.x = (pixel.width * 0.27 + cameraController.camX / pixel.scale) + 10;// - 82  + 82 * (this.energy / 30);
+	this.portrait.cameraOffset.y = (pixel.height * 0.80 + cameraController.camY / pixel.scale) + 10;
 
-	this.dialogBox.cameraOffset.x = Math.round(pixel.width * 0.42 + cameraController.camX / pixel.scale) + 2;// - 82  + 82 * (this.energy / 30);
-	this.dialogBox.cameraOffset.y = Math.round(pixel.height * 0.86 + cameraController.camY / pixel.scale) + 2;
+	this.dialogBox.cameraOffset.x = (pixel.width * 0.42 + cameraController.camX / pixel.scale) + 2;// - 82  + 82 * (this.energy / 30);
+	this.dialogBox.cameraOffset.y = (pixel.height * 0.86 + cameraController.camY / pixel.scale) + 2;
 
-	this.text.cameraOffset.x = Math.round(pixel.width * 0.5 + cameraController.camX / pixel.scale) + 2;// - 82  + 82 * (this.energy / 30);
-	this.text.cameraOffset.y = Math.round(pixel.height * 0.88 + cameraController.camY / pixel.scale) + 2;
+	this.text.cameraOffset.x = (pixel.width * 0.5 + cameraController.camX / pixel.scale) + 2;// - 82  + 82 * (this.energy / 30);
+	this.text.cameraOffset.y = (pixel.height * 0.88 + cameraController.camY / pixel.scale) + 2;
 
 	if(this.text.visible && this.displayIndex < this.currentText.length && this.timers.TimerUp('display_progress')) {
 		this.displayIndex += 1;
@@ -118,6 +120,8 @@ SpeechController.prototype.ShowSpeech = function() {
 			this.dialogBox.visible = true;
 			this.text.visible = true;
 
+			this.speechVisible = true;
+
 			this.timers.SetTimer('auto_hide', 4000);
 
 			break;
@@ -131,6 +135,8 @@ SpeechController.prototype.HideSpeech = function() {
 	this.dialogBox.visible = false;
 	this.text.visible = false;
 	this.displayIndex = 0;
+
+	this.speechVisible = false;
 };
 
 SpeechController.prototype.SetText = function(text) {

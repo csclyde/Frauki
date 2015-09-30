@@ -38,6 +38,8 @@ Loading.preload = function() {
     });
 
     game.load.bitmapFont('font', 'Design/Sprites/UI/nokia16black.png', 'Design/Sprites/UI/nokia16black.xml');
+
+    game.renderer.renderSession.roundPixels = true;
 };
 
 Loading.create = function() {

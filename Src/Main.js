@@ -111,6 +111,9 @@ Main.render = function() {
         game.width * pixel.scale, 
         game.height * pixel.scale
     );
+
+    this.DrawUI();
+
 };
 
 Main.Restart = function() {
@@ -187,4 +190,52 @@ Main.Restart = function() {
         //var cameraMoveTween = game.add.tween(game.camera)
 
     });
+};
+
+Main.DrawUI = function() {
+    
+    this.RenderTextureFromAtlas('UI', 'EnergyBar0001', 12 * pixel.scale, 12 * pixel.scale);
+
+    this.RenderTextureFromAtlas('UI', 'EnergyBar0002', 12 * pixel.scale, 12 * pixel.scale, energyController.energy / 30);
+    this.RenderTextureFromAtlas('UI', 'EnergyBar0005', 12 * pixel.scale + (81 * pixel.scale * (energyController.neutralPoint / 30)), 12 * pixel.scale);
+    this.RenderTextureFromAtlas('UI', 'EnergyBar0006', 12 * pixel.scale, 23 * pixel.scale, energyController.charge / 30);
+
+    this.RenderTextureFromAtlas('UI', 'EnergyBar0000', 10 * pixel.scale, 10 * pixel.scale);
+
+    if(speechController.speechVisible) {
+
+        // pixel.context.globalAlpha = 0.7;
+        // this.RenderTextureFromAtlas('UI', 'Speech0000', 20, 520);
+        // this.RenderTextureFromAtlas('UI', 'Speech0001', 240, 520);
+        // pixel.context.globalAlpha = 1;
+
+        // this.RenderTextureFromAtlas('UI', 'PortraitsFraukiNeutral', 50, 495);
+        
+    }
+};
+
+Main.RenderTextureFromAtlas = function(atlas, frame, x, y, scaleX, scaleY) {
+    if(scaleX !== 0) scaleX = scaleX || 1;
+    if(scaleY !== 0) scaleY = scaleY || 1;
+
+    var frame = game.cache.getFrameByName(atlas, frame);
+    var texture = PIXI.TextureCache[frame.uuid];
+
+    trim =  texture.trim;
+    
+    if(trim){
+      offset = {x: trim.x, y: trim.y}
+    }else{
+      offset = {x: 0, y:0}
+    }
+
+    pixel.context.drawImage(texture.baseTexture.source,
+                           texture.frame.x,
+                           texture.frame.y,
+                           texture.frame.width,
+                           texture.frame.height,
+                           offset.x + x,
+                           offset.y + y,
+                           texture.frame.width * pixel.scale * scaleX,
+                           texture.frame.height * pixel.scale * scaleY);
 };
