@@ -202,6 +202,21 @@ Main.DrawUI = function() {
 
     this.RenderTextureFromAtlas('UI', 'EnergyBar0000', 10 * pixel.scale, 10 * pixel.scale);
 
+
+    pixel.context.globalAlpha = weaponController.currentWeapon === weaponController.weaponList[0] ? 1 : 0.3;
+
+    this.RenderTextureFromAtlas('UI', 'UpgradeIconSaw', 100 * pixel.scale, 10 * pixel.scale);
+
+    pixel.context.globalAlpha = weaponController.currentWeapon === weaponController.weaponList[1] ? 1 : 0.3;
+
+    this.RenderTextureFromAtlas('UI', 'UpgradeIconLob', 125 * pixel.scale, 10 * pixel.scale);
+
+    pixel.context.globalAlpha = weaponController.currentWeapon === weaponController.weaponList[2] ? 1 : 0.3;
+
+    this.RenderTextureFromAtlas('UI', 'UpgradeIconShield', 150 * pixel.scale, 10 * pixel.scale);
+
+    pixel.context.globalAlpha = 1;
+
     if(speechController.speechVisible) {
 
         // pixel.context.globalAlpha = 0.7;

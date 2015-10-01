@@ -120,15 +120,18 @@ InputController = function() {
 
                 case 8: //select
                 case 9: //start
-                break;
-
-                case 5: //right shoulder
-                    break;
-                case 7: //right shoulder
                     events.publish('activate_speech', {});
                 break;
 
+                case 5: //right shoulder
+                    weaponController.Next();
+                    break;
+                case 7: //right shoulder
+                break;
+
                 case 4: //left shoulder
+                    weaponController.Prev();
+                    break;
                 case 6: //left shoulder
 
                 break;

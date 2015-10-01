@@ -40,7 +40,6 @@ TriggerController.prototype.triggers['start_underwater_music'] = {
 
 TriggerController.prototype.triggers['ruins_music'] = {
 	enter: function(params) {
-		console.log('yeh');
 		events.publish('play_music', { name: 'Ruins' } );
 	},
 

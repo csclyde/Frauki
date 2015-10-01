@@ -1,27 +1,51 @@
 WeaponController = function() {
-  this.currentWeapon = this.Saw;
-  this.weaponActive = false;
-  this.attackGeometry = null;
+    this.currentWeapon = this.Saw;
+    this.weaponActive = false;
+    this.attackGeometry = null;
 
-  this.timers = new TimerUtil();
-  
-  events.subscribe('activate_weapon', this.ToggleWeapon, this);
+    this.timers = new TimerUtil();
 
-  this.ForceField.Init();
-  this.Lob.Init();
-  this.Saw.Init();
+    events.subscribe('activate_weapon', this.ToggleWeapon, this);
 
-  this.upgradeSaves = JSON.parse(localStorage.getItem('fraukiUpgrades')) || [];
+    this.ForceField.Init();
+    this.Lob.Init();
+    this.Saw.Init();
 
-  this.upgrades = {};
-  this.upgrades.lob = this.upgradeSaves.indexOf('Lob') > -1;
-  this.upgrades.shield = this.upgradeSaves.indexOf('Shield') > -1;
-  this.upgrades.mace = this.upgradeSaves.indexOf('Mace') > -1;
-  this.upgrades.saw = this.upgradeSaves.indexOf('Saw') > -1;
+    this.upgradeSaves = JSON.parse(localStorage.getItem('fraukiUpgrades')) || [];
+
+    this.upgrades = {};
+    this.upgrades.lob = this.upgradeSaves.indexOf('Lob') > -1;
+    this.upgrades.shield = this.upgradeSaves.indexOf('Shield') > -1;
+    this.upgrades.mace = this.upgradeSaves.indexOf('Mace') > -1;
+    this.upgrades.saw = this.upgradeSaves.indexOf('Saw') > -1;
+
+    this.weaponList = [
+        this.Saw,
+        this.Lob,
+        this.ForceField
+    ];
 };
 
 WeaponController.prototype.create = function() {
   
+};
+
+WeaponController.prototype.Next = function() {
+    var index = this.weaponList.indexOf(this.currentWeapon);
+    if(index === this.weaponList.length - 1) {
+        this.currentWeapon = this.weaponList[0];
+    } else {
+        this.currentWeapon = this.weaponList[index + 1];
+    }
+};
+
+WeaponController.prototype.Prev = function() {
+    var index = this.weaponList.indexOf(this.currentWeapon);
+    if(index === 0) {
+        this.currentWeapon = this.weaponList[this.weaponList.length - 1];
+    } else {
+        this.currentWeapon = this.weaponList[index - 1];
+    }
 };
 
 WeaponController.prototype.Update = function() {
