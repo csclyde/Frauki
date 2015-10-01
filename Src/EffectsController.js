@@ -239,7 +239,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
             sparkles.minRotation = 0;
             sparkles.maxRotation = 0;
             sparkles.setScale();
-            sparkles.start(false, 200, 100);
+            setTimeout(function() { sparkles.start(false, 200, 100); }, game.rnd.between(0, 1000));
             sparkles.effectType = 'sparkles';
             sparkles.owningLayer = layer;
 

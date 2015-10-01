@@ -71,8 +71,8 @@ var Speeches = {
 
 	'nibble': 'Just a little nibble couldn\'t hurt... could it?',
 
-	'cold': 'This water is so cold',
+	'cold': 'This water is so cold, it\'s making my knees shake',
 
-	
+	'ellipses': '...',
 
 };
