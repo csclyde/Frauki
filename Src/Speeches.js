@@ -75,4 +75,12 @@ var Speeches = {
 
 	'ellipses': '...',
 
+	'anyone_home': 'Is anyone home? I better not peep',
+
+	'football': 'Football is fun! I wonder if maybe I could score a goal',
+
+	'sorry_plant': 'Sorry plant',
+
+	
+
 };
