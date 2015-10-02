@@ -31,21 +31,24 @@ EffectsController = function() {
     this.splashLeft.minParticleScale = 0.8;
 
     this.posSpark = game.add.emitter(0, 0, 100);
-    this.posSpark.makeParticles('Misc', ['Sparks0000', 'Sparks0001', 'Sparks0002', 'Sparks0003', 'Sparks0004', 'Sparks0005', 'Sparks0006']); 
+    this.posSpark.makeParticles('Misc', ['Sparks0000', 'Sparks0001', 'Sparks0002', 'Sparks0003', 'Sparks0004', 'Sparks0005']); 
     this.posSpark.gravity = -560;
     this.posSpark.particleDrag.setTo(100);
+    this.posSpark.setRotation(0, 0);
     //Frogland.effectsGroup.addChild(this.posSpark);
 
     this.negSpark = game.add.emitter(0, 0, 100);
-    this.negSpark.makeParticles('Misc', ['Sparks0007', 'Sparks0008', 'Sparks0009', 'Sparks0010', 'Sparks0011', 'Sparks0012', 'Sparks0013']); 
+    this.negSpark.makeParticles('Misc', ['Sparks0006', 'Sparks0007', 'Sparks0008', 'Sparks0009', 'Sparks0010', 'Sparks0011']); 
     this.negSpark.gravity = -560;
     this.negSpark.particleDrag.setTo(100);
+    this.negSpark.setRotation(0, 0);
     //Frogland.effectsGroup.addChild(this.negSpark);
 
     this.neutralSpark = game.add.emitter(0, 0, 100);
-    this.neutralSpark.makeParticles('Misc', ['Sparks0014', 'Sparks0015', 'Sparks0016', 'Sparks0017', 'Sparks0018']); 
+    this.neutralSpark.makeParticles('Misc', ['Sparks0012', 'Sparks0013', 'Sparks0014', 'Sparks0015', 'Sparks0016']); 
     this.neutralSpark.gravity = -560;
     this.neutralSpark.particleDrag.setTo(100);
+    this.neutralSpark.setRotation(0, 0);
     //Frogland.effectsGroup.addChild(this.neutralSpark);
 
     this.attackReflection = game.add.emitter(0, 0, 500);
