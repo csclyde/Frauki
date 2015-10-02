@@ -110,6 +110,8 @@ WeaponController.prototype.Bomb = {
 };
 
 WeaponController.prototype.Lob = {
+    FrameName: 'UpgradeIconLob',
+
     Init: function() {
         this.lobbies = [];
     },
@@ -180,6 +182,8 @@ WeaponController.prototype.Lob = {
 };
 
 WeaponController.prototype.Mace = {
+    FrameName: 'UpgradeIconMace',
+
     Init: function() {
 
     },
@@ -268,6 +272,8 @@ WeaponController.prototype.Bubble = {
 };
 
 WeaponController.prototype.ForceField = {
+    FrameName: 'UpgradeIconShield',
+
     Init: function() {
         this.forceField = game.add.sprite(0, 0, 'Misc');
         this.forceField.animations.add('activate', ['ForceField0000', 'ForceField0001', 'ForceField0002', 'ForceField0003', 'ForceField0004', 'ForceField0005'], 14, false, false);
@@ -359,6 +365,8 @@ WeaponController.prototype.ForceField = {
 };  
 
 WeaponController.prototype.Saw = {
+    FrameName: 'UpgradeIconSaw',
+    
     Init: function() {
         this.saw = game.add.sprite(0, 0, 'Misc');
         this.saw.animations.add('activate', ['Saw0000', 'Saw0001', 'Saw0002', 'Saw0000', 'Saw0001', 'Saw0002', 'Saw0000', 'Saw0001', 'Saw0002'], 24, false, false);
