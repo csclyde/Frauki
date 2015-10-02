@@ -37,7 +37,7 @@ Loading.preload = function() {
         game.load.audio(audio.Name, audio.File);
     });
 
-    game.load.bitmapFont('font', 'Design/Sprites/UI/nokia16black.png', 'Design/Sprites/UI/nokia16black.xml');
+    game.load.bitmapFont('font', 'Design/Sprites/UI/pixelFont_0.png', 'Design/Sprites/UI/pixelFont.fnt');
 
     game.renderer.renderSession.roundPixels = true;
 };

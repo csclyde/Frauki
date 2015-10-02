@@ -71,17 +71,17 @@ SpeechController.prototype.LoadSpeechZones = function(layer) {
 
 SpeechController.prototype.Update = function() {
 
-	this.portraitBox.cameraOffset.x = (pixel.width * 0.27 + cameraController.camX / pixel.scale) + 2;// - 82  + 82 * (this.energy / 30);
-	this.portraitBox.cameraOffset.y = (pixel.height * 0.86 + cameraController.camY / pixel.scale) + 2;
+	this.portraitBox.cameraOffset.x = 140; //(pixel.width * 0.27 + cameraController.camX / pixel.scale) + 2;// - 82  + 82 * (this.energy / 30);
+	this.portraitBox.cameraOffset.y = 230; //(pixel.height * 0.86 + cameraController.camY / pixel.scale) + 2;
 
-	this.portrait.cameraOffset.x = (pixel.width * 0.27 + cameraController.camX / pixel.scale) + 10;// - 82  + 82 * (this.energy / 30);
-	this.portrait.cameraOffset.y = (pixel.height * 0.80 + cameraController.camY / pixel.scale) + 10;
+	this.portrait.cameraOffset.x = 150; //(pixel.width * 0.27 + cameraController.camX / pixel.scale) + 10;// - 82  + 82 * (this.energy / 30);
+	this.portrait.cameraOffset.y = 220; //(pixel.height * 0.80 + cameraController.camY / pixel.scale) + 10;
 
-	this.dialogBox.cameraOffset.x = (pixel.width * 0.42 + cameraController.camX / pixel.scale) + 2;// - 82  + 82 * (this.energy / 30);
-	this.dialogBox.cameraOffset.y = (pixel.height * 0.86 + cameraController.camY / pixel.scale) + 2;
+	this.dialogBox.cameraOffset.x = 215; //(pixel.width * 0.42 + cameraController.camX / pixel.scale) + 2;// - 82  + 82 * (this.energy / 30);
+	this.dialogBox.cameraOffset.y = 230; //(pixel.height * 0.86 + cameraController.camY / pixel.scale) + 2;
 
-	this.text.cameraOffset.x = (pixel.width * 0.5 + cameraController.camX / pixel.scale) + 2;// - 82  + 82 * (this.energy / 30);
-	this.text.cameraOffset.y = (pixel.height * 0.88 + cameraController.camY / pixel.scale) + 2;
+	this.text.cameraOffset.x = 250; //(pixel.width * 0.5 + cameraController.camX / pixel.scale) + 2;// - 82  + 82 * (this.energy / 30);
+	this.text.cameraOffset.y = 240; //(pixel.height * 0.88 + cameraController.camY / pixel.scale) + 2;
 
 	if(this.text.visible && this.displayIndex < this.currentText.length && this.timers.TimerUp('display_progress')) {
 		this.displayIndex += 1;

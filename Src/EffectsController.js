@@ -6,29 +6,34 @@ EffectsController = function() {
     this.negativeBits = game.add.emitter(0, 0, 100);
     this.negativeBits.makeParticles('Misc', ['EnergyBitNeg0000', 'EnergyBitNeg0001', 'EnergyBitNeg0002', 'EnergyBitNeg0003', 'EnergyBitNeg0004', 'EnergyBitNeg0005']);
     this.negativeBits.gravity = -150;
+    this.negativeBits.setRotation(0, 0);
     Frogland.effectsGroup.addChild(this.negativeBits);
 
     this.positiveBits = game.add.emitter(0, 0, 100);
     this.positiveBits.makeParticles('Misc', ['EnergyBitPos0000', 'EnergyBitPos0001', 'EnergyBitPos0002', 'EnergyBitPos0003', 'EnergyBitPos0004', 'EnergyBitPos0005']); //array of strings here for multiple sprites
     this.positiveBits.gravity = -600;
+    this.positiveBits.setRotation(0, 0);
     //Frogland.effectsGroup.addChild(this.positveBits);
 
     this.neutralBits = game.add.emitter(0, 0, 100);
     this.neutralBits.makeParticles('Misc', ['EnergyBitNeutral0000', 'EnergyBitNeutral0001', 'EnergyBitNeutral0002', 'EnergyBitNeutral0003', 'EnergyBitNeutral0004', 'EnergyBitNeutral0005']); //array of strings here for multiple sprites
     this.neutralBits.gravity = -600;
+    this.neutralBits.setRotation(0, 0);
     //Frogland.effectsGroup.addChild(this.neutralBits);
 
     this.splashRight = game.add.emitter(0, 0, 100);
     this.splashRight.makeParticles('Misc', ['Splash0000', 'Splash0001']); 
     this.splashRight.gravity = 300;
-    this.splashRight.maxParticleScale = 1.1;
-    this.splashRight.minParticleScale = 0.8;
+    this.splashRight.maxParticleScale = 1;
+    this.splashRight.minParticleScale = 1;
+    this.splashRight.setRotation(0, 0);
 
     this.splashLeft = game.add.emitter(0, 0, 100);
     this.splashLeft.makeParticles('Misc', ['Splash0002', 'Splash0003']); 
     this.splashLeft.gravity = 300;
-    this.splashLeft.maxParticleScale = 1.1;
-    this.splashLeft.minParticleScale = 0.8;
+    this.splashLeft.maxParticleScale = 1;
+    this.splashLeft.minParticleScale = 1;
+    this.splashLeft.setRotation(0, 0);
 
     this.posSpark = game.add.emitter(0, 0, 100);
     this.posSpark.makeParticles('Misc', ['Sparks0000', 'Sparks0001', 'Sparks0002', 'Sparks0003', 'Sparks0004', 'Sparks0005']); 
@@ -55,6 +60,7 @@ EffectsController = function() {
     this.attackReflection.makeParticles('Misc', ['Sparks0000', 'Sparks0001', 'Sparks0002', 'Sparks0003', 'Sparks0004', 'Sparks0005', 'Sparks0006']); 
     this.attackReflection.gravity = -560;
     this.attackReflection.particleDrag.setTo(100);
+    this.attackReflection.setRotation(0, 0);
 
     //unassigned particles will be set to move towards this destination
     this.activeDest = null;
@@ -76,6 +82,7 @@ EffectsController = function() {
     this.energyStreak.maxParticleSpeed.setTo(80);
     this.energyStreak.maxParticleScale = 1;
     this.energyStreak.minParticleScale = 1;
+    this.energyStreak.setRotation(0, 0);
 
     this.loadedEffects = [];
 
@@ -149,13 +156,14 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 splasherLeft.height = o.height;
                 splasherLeft.makeParticles('Misc', ['Splash0002', 'Splash0003'], 100); 
                 splasherLeft.gravity = 300;
-                splasherLeft.maxParticleScale = 1.1;
-                splasherLeft.minParticleScale = 0.8;
+                splasherLeft.maxParticleScale = 1;
+                splasherLeft.minParticleScale = 1;
                 splasherLeft.minParticleSpeed.x = -50;
                 splasherLeft.maxParticleSpeed.x = 10;
                 splasherLeft.minParticleSpeed.y = -80;
                 splasherLeft.maxParticleSpeed.y = -130;
                 splasherLeft.owningLayer = layer;
+                splasherLeft.setRotation(0, 0);
                 splasherLeft.start(false, 200, 5);
 
                 var splasherRight = game.add.emitter(o.x + o.width / 2, o.y);
@@ -163,13 +171,14 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 splasherRight.height = o.height;
                 splasherRight.makeParticles('Misc', ['Splash0000', 'Splash0001'], 100); 
                 splasherRight.gravity = 300;
-                splasherRight.maxParticleScale = 1.1;
-                splasherRight.minParticleScale = 0.8;
+                splasherRight.maxParticleScale = 1;
+                splasherRight.minParticleScale = 1;
                 splasherRight.minParticleSpeed.x = -10;
                 splasherRight.maxParticleSpeed.x = 50;
                 splasherRight.minParticleSpeed.y = -80;
                 splasherRight.maxParticleSpeed.y = -130;
                 splasherRight.owningLayer = layer;
+                splasherRight.setRotation(0, 0);
                 splasherRight.start(false, 200, 5);
 
                 that.loadedEffects.push(splasherLeft);
@@ -183,8 +192,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 dripper.gravity = -150;
                 dripper.maxParticleSpeed.setTo(0);
                 dripper.minParticleSpeed.setTo(0);
-                dripper.minRotation = 0;
-                dripper.maxRotation = 0;
+                dripper.setRotation(0, 0);
                 dripper.bounce.setTo(0.5);
                 dripper.start(false, 1500, game.rnd.between(1200, 2000));
                 dripper.effectType = 'drip';
@@ -203,8 +211,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 fluffer.gravity = -595;
                 fluffer.maxParticleSpeed.setTo(10);
                 fluffer.minParticleSpeed.setTo(-10);
-                fluffer.minRotation = -10;
-                fluffer.maxRotation = 10;
+                fluffer.setRotation(0, 0);
                 fluffer.start(false, 3000, 700);
                 fluffer.effectType = 'fluff';
                 fluffer.alpha = 0.8;
@@ -223,8 +230,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 bubbler.minParticleSpeed.setTo(0);
                 bubbler.minParticleSpeed.y = -25;
                 bubbler.maxParticleSpeed.y = -50;
-                bubbler.minRotation = 0;
-                bubbler.maxRotation = 0;
+                bubbler.setRotation(0, 0);
                 bubbler.bounce.setTo(0.5);
                 bubbler.start(false, 1200, game.rnd.between(800, 1200));
                 bubbler.effectType = 'bubbles';
