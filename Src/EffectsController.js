@@ -3,19 +3,19 @@ MAX_FLUFF_SPEED = 20;
 EffectsController = function() {
     this.timers = new TimerUtil();
 
-    this.negativeBits = game.add.emitter(0, 0, 30);
+    this.negativeBits = game.add.emitter(0, 0, 15);
     this.negativeBits.makeParticles('Misc', ['EnergyBitNeg0000', 'EnergyBitNeg0001', 'EnergyBitNeg0002', 'EnergyBitNeg0003', 'EnergyBitNeg0004', 'EnergyBitNeg0005']);
     this.negativeBits.gravity = -150;
     this.negativeBits.setRotation(0, 0);
     Frogland.effectsGroup.addChild(this.negativeBits);
 
-    this.positiveBits = game.add.emitter(0, 0, 30);
+    this.positiveBits = game.add.emitter(0, 0, 15);
     this.positiveBits.makeParticles('Misc', ['EnergyBitPos0000', 'EnergyBitPos0001', 'EnergyBitPos0002', 'EnergyBitPos0003', 'EnergyBitPos0004', 'EnergyBitPos0005']); //array of strings here for multiple sprites
     this.positiveBits.gravity = -600;
     this.positiveBits.setRotation(0, 0);
     //Frogland.effectsGroup.addChild(this.positveBits);
 
-    this.neutralBits = game.add.emitter(0, 0, 30);
+    this.neutralBits = game.add.emitter(0, 0, 15);
     this.neutralBits.makeParticles('Misc', ['EnergyBitNeutral0000', 'EnergyBitNeutral0001', 'EnergyBitNeutral0002', 'EnergyBitNeutral0003', 'EnergyBitNeutral0004', 'EnergyBitNeutral0005']); //array of strings here for multiple sprites
     this.neutralBits.gravity = -600;
     this.neutralBits.setRotation(0, 0);
@@ -35,20 +35,20 @@ EffectsController = function() {
     this.splashLeft.minParticleScale = 1;
     this.splashLeft.setRotation(0, 0);
 
-    this.posSpark = game.add.emitter(0, 0, 100);
+    this.posSpark = game.add.emitter(0, 0, 50);
     this.posSpark.makeParticles('Misc', ['Sparks0000', 'Sparks0001', 'Sparks0002', 'Sparks0003', 'Sparks0004', 'Sparks0005']); 
     this.posSpark.gravity = -560;
     this.posSpark.particleDrag.setTo(100);
     this.posSpark.setRotation(0, 0);
     //Frogland.effectsGroup.addChild(this.posSpark);
 
-    this.negSpark = game.add.emitter(0, 0, 100);
+    this.negSpark = game.add.emitter(0, 0, 50);
     this.negSpark.makeParticles('Misc', ['Sparks0006', 'Sparks0007', 'Sparks0008', 'Sparks0009', 'Sparks0010', 'Sparks0011']); 
     this.negSpark.gravity = -560;
     this.negSpark.particleDrag.setTo(100);
     this.negSpark.setRotation(0, 0);
 
-    this.neutralSpark = game.add.emitter(0, 0, 100);
+    this.neutralSpark = game.add.emitter(0, 0, 50);
     this.neutralSpark.makeParticles('Misc', ['Sparks0012', 'Sparks0013', 'Sparks0014', 'Sparks0015', 'Sparks0016']); 
     this.neutralSpark.gravity = -560;
     this.neutralSpark.particleDrag.setTo(100);
@@ -66,7 +66,7 @@ EffectsController = function() {
     this.dicedPieces3 = game.add.group(Frogland.objectGroup_3);
     this.dicedPieces2 = game.add.group(Frogland.objectGroup_2);
 
-    this.energyStreak = game.add.emitter(0, 0, 100);
+    this.energyStreak = game.add.emitter(0, 0, 50);
     this.energyStreak.makeParticles('Misc', ['Sparks0000', 'Sparks0001', 'Sparks0002', 'Sparks0003', 'Sparks0004']); 
     this.energyStreak.gravity = -580;
     this.energyStreak.particleDrag.setTo(100);
@@ -180,7 +180,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 var dripper = game.add.emitter(o.x, o.y);
                 dripper.width = o.width;
                 dripper.height = o.height;
-                dripper.makeParticles('Misc', ['Drip0000', 'Drip0001'], 20);
+                dripper.makeParticles('Misc', ['Drip0000', 'Drip0001'], 2);
                 dripper.gravity = -150;
                 dripper.maxParticleSpeed.setTo(0);
                 dripper.minParticleSpeed.setTo(0);
@@ -216,7 +216,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 var bubbler = game.add.emitter(o.x, o.y);
                 bubbler.width = o.width;
                 bubbler.height = o.height;
-                bubbler.makeParticles('Misc', ['Bubbles0000', 'Bubbles0001', 'Bubbles0002', 'Bubbles0003'], 10);
+                bubbler.makeParticles('Misc', ['Bubbles0000', 'Bubbles0001', 'Bubbles0002', 'Bubbles0003'], 5);
                 bubbler.gravity = -600;
                 bubbler.maxParticleSpeed.setTo(0);
                 bubbler.minParticleSpeed.setTo(0);

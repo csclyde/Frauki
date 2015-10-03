@@ -36,7 +36,7 @@ CameraController.prototype.Update = function() {
 	yOffset += (frauki.states.crouching ? 35 : 0);
 
 	if(frauki.states.upPressed) {
-		if(!game.physics.arcade.overlap(frauki, Frogland.door1Group) && !game.physics.arcade.overlap(frauki, Frogland.door2Group)) {
+		if(!game.physics.arcade.overlap(frauki, Frogland.door1Group) && !game.physics.arcade.overlap(frauki, Frogland.door2Group) && !speechController.FraukiInSpeechZone()) {
 			yOffset -= 25;
 		}
 	}

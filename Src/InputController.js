@@ -54,6 +54,8 @@ InputController = function() {
             return;
         }
 
+        events.publish('activate_speech', {});
+
         if(!frauki.body.onFloor()) {
             return;
         }

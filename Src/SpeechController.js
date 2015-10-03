@@ -104,7 +104,7 @@ SpeechController.prototype.ShowSpeech = function() {
 			this.HideSpeech();
 		}
 
-		return;
+		return false;
 	}
 
 	this.displayIndex = 0;
@@ -124,9 +124,23 @@ SpeechController.prototype.ShowSpeech = function() {
 
 			this.timers.SetTimer('auto_hide', 4000);
 
-			break;
+			return true;
 		}
 	}
+
+	return false;
+};
+
+SpeechController.prototype.FraukiInSpeechZone = function() {
+	for(var i = 0; i < this.speechZones.length; i++) {
+		var zone = this.speechZones[i];
+		if(zone.owningLayer === Frogland.currentLayer && frauki.body.x + frauki.body.width > zone.x && frauki.body.x < zone.x + zone.width && frauki.body.y + frauki.body.height > zone.y && frauki.body.y < zone.y + zone.height) {
+			return true;
+		}
+	}
+
+	return false;
+
 };
 
 SpeechController.prototype.HideSpeech = function() {
