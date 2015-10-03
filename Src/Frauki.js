@@ -99,6 +99,12 @@ Player.prototype = Object.create(Phaser.Sprite.prototype);
 Player.prototype.constructor = Player;
 
 Player.prototype.preStateUpdate = function() {
+
+    //when they hit something the roll boost should be lost
+    if(this.movement.rollBoost > 0 && this.body.velocity.x === 0) {
+        this.movement.rollBoost = 0;
+    }
+
     this.body.maxVelocity.x = PLAYER_SPEED() + this.movement.rollBoost;
     this.body.maxVelocity.y = 350;
 

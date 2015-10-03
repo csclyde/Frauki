@@ -228,6 +228,9 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 bubbler.effectType = 'bubbles';
                 bubbler.alpha = 0.5;
                 bubbler.owningLayer = layer;
+
+                that.loadedEffects.push(bubbler);
+                
             }
         } else if(o.type === 'speech') {
             var sparkles = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
