@@ -205,6 +205,8 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
 
     e.timers.SetTimer('grace', 400);
     frauki.timers.SetTimer('frauki_hit', 300);
+
+    if(!!e.Block) e.Block();
 };
 
 Collision.OverlapEnemyAttackWithFrauki = function(e, f) {

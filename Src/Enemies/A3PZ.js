@@ -61,9 +61,9 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
     };
 
-    this.Dodge = function() {
+    this.Dodge = function(duration) {
         if(!this.timers.TimerUp('dodge')) {
-            return;
+            return false;
         }
 
         this.FacePlayer();
@@ -78,7 +78,13 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
         this.state = this.Dodging;
 
-        this.timers.SetTimer('dodge_hold', 100);
+        this.timers.SetTimer('dodge_hold', duration || 300);
+
+        return true;
+    };
+
+    this.Block = function() {
+        this.Attack();
     }
 
     ////////////////////////////////STATES////////////////////////////////////
@@ -165,8 +171,6 @@ Enemy.prototype.types['A3PZ'] =  function() {
     this.Dodging = function() {
         this.PlayAnim('block');
 
-        console.log('blocking');
-
         if(this.timers.TimerUp('dodge_hold')) {
             if(this.PlayerDistance() < 200) {
                 this.Attack();
@@ -182,7 +186,9 @@ Enemy.prototype.types['A3PZ'] =  function() {
         this.PlayAnim('hurt');
 
         if(this.timers.TimerUp('hit')) {
-            this.state = this.Idling;
+            if(!this.Dodge(game.rnd.between(700, 1300))) {
+                this.state = this.Idling;
+            }
         }
     };
 
