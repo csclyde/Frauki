@@ -29,14 +29,40 @@ SpeechController.prototype.Create = function() {
 	this.dialogBox.alpha = 0.7;
 	this.dialogBox.visible = false;
 
-	this.portrait = game.add.image(80, 70, 'UI', 'PortraitsFraukiNeutral');
-	this.portrait.fixedToCamera = true;
-	this.portrait.visible = false;
+	this.portraits = {};
+
+	this.portraits['Neutral'] = game.add.image(80, 70, 'UI', 'PortraitsFraukiNeutral');
+	this.portraits['Neutral'].fixedToCamera = true;
+	this.portraits['Neutral'].visible = false;
+
+	this.portraits['Mad'] = game.add.image(80, 70, 'UI', 'PortraitsFraukiMad');
+	this.portraits['Mad'].fixedToCamera = true;
+	this.portraits['Mad'].visible = false;
+
+	this.portraits['Dazed'] = game.add.image(80, 70, 'UI', 'PortraitsFraukiDazed');
+	this.portraits['Dazed'].fixedToCamera = true;
+	this.portraits['Dazed'].visible = false;
+
+	this.portraits['Peaceful'] = game.add.image(80, 70, 'UI', 'PortraitsFraukiPeaceful');
+	this.portraits['Peaceful'].fixedToCamera = true;
+	this.portraits['Peaceful'].visible = false;
+
+	this.portraits['Enticed'] = game.add.image(80, 70, 'UI', 'PortraitsFraukiEnticed');
+	this.portraits['Enticed'].fixedToCamera = true;
+	this.portraits['Enticed'].visible = false;
+
+	this.portraits['Displeased'] = game.add.image(80, 70, 'UI', 'PortraitsFraukiDispleased');
+	this.portraits['Displeased'].fixedToCamera = true;
+	this.portraits['Displeased'].visible = false;
+
+	this.portraits['Mischeif'] = game.add.image(80, 70, 'UI', 'PortraitsFraukiMischeif');
+	this.portraits['Mischeif'].fixedToCamera = true;
+	this.portraits['Mischeif'].visible = false;
 
 	this.speechVisible = false;
 
 	this.currentText = '';
-
+	this.currentPortrait = 'Neutral';
 
 	this.SetText('');
 
@@ -74,8 +100,10 @@ SpeechController.prototype.Update = function() {
 	this.portraitBox.cameraOffset.x = 140; //(pixel.width * 0.27 + cameraController.camX / pixel.scale) + 2;// - 82  + 82 * (this.energy / 30);
 	this.portraitBox.cameraOffset.y = 230; //(pixel.height * 0.86 + cameraController.camY / pixel.scale) + 2;
 
-	this.portrait.cameraOffset.x = 150; //(pixel.width * 0.27 + cameraController.camX / pixel.scale) + 10;// - 82  + 82 * (this.energy / 30);
-	this.portrait.cameraOffset.y = 220; //(pixel.height * 0.80 + cameraController.camY / pixel.scale) + 10;
+	for(var key in this.portraits) {
+		this.portraits[key].cameraOffset.x = 150; //(pixel.width * 0.27 + cameraController.camX / pixel.scale) + 10;// - 82  + 82 * (this.energy / 30);
+		this.portraits[key].cameraOffset.y = 220; //(pixel.height * 0.80 + cameraController.camY / pixel.scale) + 10;
+	}
 
 	this.dialogBox.cameraOffset.x = 215; //(pixel.width * 0.42 + cameraController.camX / pixel.scale) + 2;// - 82  + 82 * (this.energy / 30);
 	this.dialogBox.cameraOffset.y = 230; //(pixel.height * 0.86 + cameraController.camY / pixel.scale) + 2;
@@ -113,10 +141,11 @@ SpeechController.prototype.ShowSpeech = function() {
 	for(var i = 0; i < this.speechZones.length; i++) {
 		var zone = this.speechZones[i];
 		if(zone.owningLayer === Frogland.currentLayer && frauki.body.x + frauki.body.width > zone.x && frauki.body.x < zone.x + zone.width && frauki.body.y + frauki.body.height > zone.y && frauki.body.y < zone.y + zone.height) {
-			this.SetText(Speeches[zone.name]);
+			this.SetText(Speeches[zone.name].text);
 
+			this.currentPortrait = Speeches[zone.name].portrait || 'Neutral';
 			this.portraitBox.visible = true;
-			this.portrait.visible = true;
+			this.portraits[this.currentPortrait].visible = true;
 			this.dialogBox.visible = true;
 			this.text.visible = true;
 
@@ -145,7 +174,7 @@ SpeechController.prototype.FraukiInSpeechZone = function() {
 
 SpeechController.prototype.HideSpeech = function() {
 	this.portraitBox.visible = false;
-	this.portrait.visible = false;
+	this.portraits[this.currentPortrait].visible = false;
 	this.dialogBox.visible = false;
 	this.text.visible = false;
 	this.displayIndex = 0;

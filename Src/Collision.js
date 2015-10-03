@@ -138,7 +138,7 @@ Collision.OverlapAttackWithEnemy = function(f, e) {
             var enemBody = e.body.center.clone();
 
             if(e.robotic) {
-                for(var i = 0, max = game.rnd.between(3, 5); i < max; i++) {
+                for(var i = 0, max = game.rnd.between(2, 4); i < max; i++) {
                     setTimeout(function() {
                         var pt = enemBody.clone();
                         pt.x += game.rnd.between(-20, 20);

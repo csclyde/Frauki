@@ -558,7 +558,6 @@ EffectsController.prototype.Explosion = function(src) {
     boom.animations.add('boom', ['Explosion0000', 'Explosion0001', 'Explosion0002', 'Explosion0003', 'Explosion0004', 'Explosion0005', 'Explosion0006'], 18, false, false);
     boom.animations.play('boom');
     boom.animations.currentAnim.killOnComplete = true;
-
 };
 
 EffectsController.prototype.JumpDust = function(src) {
@@ -567,10 +566,10 @@ EffectsController.prototype.JumpDust = function(src) {
     dust.animations.play('dust');
     dust.alpha = 0.5;
     dust.animations.currentAnim.killOnComplete = true;
-
 };
 
 EffectsController.prototype.EnergyStreak = function() {
+
     this.energyStreak.flow(200, 5, 1, 60, true);
 };
 
