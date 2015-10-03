@@ -1,5 +1,4 @@
 WeaponController = function() {
-    this.currentWeapon = this.Saw;
     this.weaponActive = false;
     this.attackGeometry = null;
 
@@ -7,7 +6,7 @@ WeaponController = function() {
 
     events.subscribe('activate_weapon', this.ToggleWeapon, this);
 
-    this.ForceField.Init();
+    this.Shield.Init();
     this.Lob.Init();
     this.Saw.Init();
 
@@ -19,11 +18,21 @@ WeaponController = function() {
     this.upgrades.mace = this.upgradeSaves.indexOf('Mace') > -1;
     this.upgrades.saw = this.upgradeSaves.indexOf('Saw') > -1;
 
-    this.weaponList = [
-        this.Saw,
-        this.Lob,
-        this.ForceField
-    ];
+    this.weaponList = [];
+
+    if(this.upgradeSaves.indexOf('Lob') > -1) {
+        this.weaponList.push(this.Lob);
+    }
+
+    if(this.upgradeSaves.indexOf('Shield') > -1) {
+        this.weaponList.push(this.Shield);
+    }
+
+    if(this.upgradeSaves.indexOf('Saw') > -1) {
+        this.weaponList.push(this.Saw);
+    }
+
+    this.currentWeapon = this.weaponList[0] || null;
 };
 
 WeaponController.prototype.create = function() {
@@ -55,7 +64,7 @@ WeaponController.prototype.Update = function() {
         }
     }
 
-    this.ForceField.UpdateOverride();
+    this.Shield.UpdateOverride();
     this.Lob.UpdateOverride();
     this.Saw.UpdateOverride();
 };
@@ -271,7 +280,7 @@ WeaponController.prototype.Bubble = {
     }
 };
 
-WeaponController.prototype.ForceField = {
+WeaponController.prototype.Shield = {
     FrameName: 'UpgradeIconShield',
 
     Init: function() {
