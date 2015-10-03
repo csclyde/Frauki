@@ -7,15 +7,16 @@ Enemy.prototype.types['HWK9'] =  function() {
     this.animations.add('flip', ['HWK9/Flip0000', 'HWK9/Flip0001', 'HWK9/Flip0002', 'HWK9/Flip0003', 'HWK9/Flip0004', 'HWK9/Flip0005'], 18, true, false);
     this.animations.add('windup', ['HWK9/AttackDash0000'], 18, false, false);
     this.animations.add('attack1', ['HWK9/AttackDash0001', 'HWK9/AttackDash0002'], 18, false, false);
+    this.animations.add('after_slash', ['HWK9/AttackDash0003'], 18, false, false);
     this.animations.add('block', ['HWK9/Block0000'], 18, true, false);
     this.animations.add('hurt', ['HWK9/Stand0000'], 8, true, false);
 
-    this.energy = 6;
+    this.energy = 5;
     this.baseStunDuration = 500;
 
     this.robotic = true;
 
-    this.damage = 4;
+    this.damage = 3;
 
     /*
     this.weight = 0.8;
@@ -128,7 +129,7 @@ Enemy.prototype.types['HWK9'] =  function() {
 		
 		if(this.timers.TimerUp('attack')) {
 			this.state = this.Slashing;
-			this.timers.SetTimer('attack', 600);
+			this.timers.SetTimer('attack', 400);
 
 			var attackVector = new Phaser.Point(frauki.body.x - this.body.x, frauki.body.y - this.body.y);
 			attackVector = attackVector.normalize();
@@ -148,11 +149,20 @@ Enemy.prototype.types['HWK9'] =  function() {
 		this.body.allowGravity = false;
 
 		if(this.timers.TimerUp('attack')) {
-			this.state = this.Idling;
-			this.timers.SetTimer('attack', 1000 + Math.random() * 1000);
+			this.state = this.AfterSlash;
+			this.timers.SetTimer('attack', 400);
 			this.body.allowGravity = true;
 		}
 	};
+
+	this.AfterSlash = function() {
+		this.PlayAnim('after_slash');
+
+		if(this.timers.TimerUp('attack')) {
+			this.state = this.Idling;
+			this.timers.SetTimer('attack', 1000 + Math.random() * 1000);
+		}
+	}
 
 	this.Blocking = function() {
 		this.PlayAnim('block');
@@ -227,13 +237,13 @@ Enemy.prototype.types['HWK9'] =  function() {
 			juggle: 0
 		},
 
-		'HWK9/AttackDash0003': {
-			x: 25, y: -40, w: 40, h: 60,
-			damage: 3,
-			knockback: 0,
-			priority: 1,
-			juggle: 0
-		}
+		// 'HWK9/AttackDash0003': {
+		// 	x: 25, y: -40, w: 40, h: 60,
+		// 	damage: 3,
+		// 	knockback: 0,
+		// 	priority: 1,
+		// 	juggle: 0
+		// }
 
 	};
 

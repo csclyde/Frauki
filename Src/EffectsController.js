@@ -3,32 +3,32 @@ MAX_FLUFF_SPEED = 20;
 EffectsController = function() {
     this.timers = new TimerUtil();
 
-    this.negativeBits = game.add.emitter(0, 0, 100);
+    this.negativeBits = game.add.emitter(0, 0, 30);
     this.negativeBits.makeParticles('Misc', ['EnergyBitNeg0000', 'EnergyBitNeg0001', 'EnergyBitNeg0002', 'EnergyBitNeg0003', 'EnergyBitNeg0004', 'EnergyBitNeg0005']);
     this.negativeBits.gravity = -150;
     this.negativeBits.setRotation(0, 0);
     Frogland.effectsGroup.addChild(this.negativeBits);
 
-    this.positiveBits = game.add.emitter(0, 0, 100);
+    this.positiveBits = game.add.emitter(0, 0, 30);
     this.positiveBits.makeParticles('Misc', ['EnergyBitPos0000', 'EnergyBitPos0001', 'EnergyBitPos0002', 'EnergyBitPos0003', 'EnergyBitPos0004', 'EnergyBitPos0005']); //array of strings here for multiple sprites
     this.positiveBits.gravity = -600;
     this.positiveBits.setRotation(0, 0);
     //Frogland.effectsGroup.addChild(this.positveBits);
 
-    this.neutralBits = game.add.emitter(0, 0, 100);
+    this.neutralBits = game.add.emitter(0, 0, 30);
     this.neutralBits.makeParticles('Misc', ['EnergyBitNeutral0000', 'EnergyBitNeutral0001', 'EnergyBitNeutral0002', 'EnergyBitNeutral0003', 'EnergyBitNeutral0004', 'EnergyBitNeutral0005']); //array of strings here for multiple sprites
     this.neutralBits.gravity = -600;
     this.neutralBits.setRotation(0, 0);
     //Frogland.effectsGroup.addChild(this.neutralBits);
 
-    this.splashRight = game.add.emitter(0, 0, 100);
+    this.splashRight = game.add.emitter(0, 0, 10);
     this.splashRight.makeParticles('Misc', ['Splash0000', 'Splash0001']); 
     this.splashRight.gravity = 300;
     this.splashRight.maxParticleScale = 1;
     this.splashRight.minParticleScale = 1;
     this.splashRight.setRotation(0, 0);
 
-    this.splashLeft = game.add.emitter(0, 0, 100);
+    this.splashLeft = game.add.emitter(0, 0, 10);
     this.splashLeft.makeParticles('Misc', ['Splash0002', 'Splash0003']); 
     this.splashLeft.gravity = 300;
     this.splashLeft.maxParticleScale = 1;
@@ -47,20 +47,12 @@ EffectsController = function() {
     this.negSpark.gravity = -560;
     this.negSpark.particleDrag.setTo(100);
     this.negSpark.setRotation(0, 0);
-    //Frogland.effectsGroup.addChild(this.negSpark);
 
     this.neutralSpark = game.add.emitter(0, 0, 100);
     this.neutralSpark.makeParticles('Misc', ['Sparks0012', 'Sparks0013', 'Sparks0014', 'Sparks0015', 'Sparks0016']); 
     this.neutralSpark.gravity = -560;
     this.neutralSpark.particleDrag.setTo(100);
     this.neutralSpark.setRotation(0, 0);
-    //Frogland.effectsGroup.addChild(this.neutralSpark);
-
-    this.attackReflection = game.add.emitter(0, 0, 500);
-    this.attackReflection.makeParticles('Misc', ['Sparks0000', 'Sparks0001', 'Sparks0002', 'Sparks0003', 'Sparks0004', 'Sparks0005', 'Sparks0006']); 
-    this.attackReflection.gravity = -560;
-    this.attackReflection.particleDrag.setTo(100);
-    this.attackReflection.setRotation(0, 0);
 
     //unassigned particles will be set to move towards this destination
     this.activeDest = null;
@@ -154,7 +146,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 var splasherLeft = game.add.emitter(o.x, o.y);
                 splasherLeft.width = o.width / 2;
                 splasherLeft.height = o.height;
-                splasherLeft.makeParticles('Misc', ['Splash0002', 'Splash0003'], 100); 
+                splasherLeft.makeParticles('Misc', ['Splash0002', 'Splash0003'], 10); 
                 splasherLeft.gravity = 300;
                 splasherLeft.maxParticleScale = 1;
                 splasherLeft.minParticleScale = 1;
@@ -169,7 +161,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 var splasherRight = game.add.emitter(o.x + o.width / 2, o.y);
                 splasherRight.width = o.width / 2;
                 splasherRight.height = o.height;
-                splasherRight.makeParticles('Misc', ['Splash0000', 'Splash0001'], 100); 
+                splasherRight.makeParticles('Misc', ['Splash0000', 'Splash0001'], 10); 
                 splasherRight.gravity = 300;
                 splasherRight.maxParticleScale = 1;
                 splasherRight.minParticleScale = 1;
@@ -207,7 +199,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 // fluffer.y = o.y;
                 fluffer.width = o.width;
                 fluffer.height = o.height;
-                fluffer.makeParticles('Misc', ['Fluff0000', 'Fluff0001', 'Fluff0002', 'Fluff0003'], 200);
+                fluffer.makeParticles('Misc', ['Fluff0000', 'Fluff0001', 'Fluff0002', 'Fluff0003'], 100);
                 fluffer.gravity = -595;
                 fluffer.maxParticleSpeed.setTo(10);
                 fluffer.minParticleSpeed.setTo(-10);
@@ -224,7 +216,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 var bubbler = game.add.emitter(o.x, o.y);
                 bubbler.width = o.width;
                 bubbler.height = o.height;
-                bubbler.makeParticles('Misc', ['Bubbles0000', 'Bubbles0001', 'Bubbles0002', 'Bubbles0003'], 20);
+                bubbler.makeParticles('Misc', ['Bubbles0000', 'Bubbles0001', 'Bubbles0002', 'Bubbles0003'], 10);
                 bubbler.gravity = -600;
                 bubbler.maxParticleSpeed.setTo(0);
                 bubbler.minParticleSpeed.setTo(0);
@@ -241,7 +233,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
             var sparkles = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
             sparkles.width = o.width;
             sparkles.height = o.height;
-            sparkles.makeParticles('Misc', ['Sparkles0000', 'Sparkles0001', 'Sparkles0002', 'Sparkles0003', 'Sparkles0004', 'Sparkles0005'], 200);
+            sparkles.makeParticles('Misc', ['Sparkles0000', 'Sparkles0001', 'Sparkles0002', 'Sparkles0003', 'Sparkles0004'], 25);
             sparkles.gravity = -600;
             sparkles.maxParticleSpeed.setTo(0);
             sparkles.minParticleSpeed.setTo(0);
@@ -563,7 +555,7 @@ EffectsController.prototype.EnergySplash = function(src, intensity, color, amt, 
 
 EffectsController.prototype.Explosion = function(src) {
     var boom = game.add.sprite(src.x - 50, src.y - 50, 'Misc');
-    boom.animations.add('boom', ['Explosion0000', 'Explosion0001', 'Explosion0002', 'Explosion0003', 'Explosion0004', 'Explosion0005', 'Explosion0006'], 12, false, false);
+    boom.animations.add('boom', ['Explosion0000', 'Explosion0001', 'Explosion0002', 'Explosion0003', 'Explosion0004', 'Explosion0005', 'Explosion0006'], 18, false, false);
     boom.animations.play('boom');
     boom.animations.currentAnim.killOnComplete = true;
 
@@ -598,19 +590,4 @@ EffectsController.prototype.DripSplash = function(src) {
     dripSplash.animations.currentAnim.killOnComplete = true;
     dripSplash.alpha = 0.5;
 
-};
-
-EffectsController.prototype.AttackReflection = function() {
-
-    if(frauki.Attacking()) {
-        this.attackReflection.x = frauki.attackRect.body.center.x;
-        this.attackReflection.y = frauki.attackRect.body.center.y;
-
-        this.attackReflection.minParticleSpeed.x = -100;
-        this.attackReflection.minParticleSpeed.y = -100;
-        this.attackReflection.maxParticleSpeed.x = 100;
-        this.attackReflection.maxParticleSpeed.y = 100;   
-       
-        this.attackReflection.explode(700, 10);
-    }
 };

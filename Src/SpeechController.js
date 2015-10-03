@@ -158,7 +158,7 @@ SpeechController.prototype.SetText = function(text) {
 		//each one a max of 40 chars
 		while(words.length > 0) {
 			//pop words off the front of the word list
-			if(line.length + words[0].length + 1 > 39) {
+			if(line.length + words[0].length + 1 > 36) {
 				break;
 			}
 
