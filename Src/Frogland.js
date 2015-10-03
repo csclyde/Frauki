@@ -462,6 +462,7 @@ Frogland.AnimateTiles = function() {
     if(viewLeft < 0) viewLeft = 0;
     if(viewLeft > 155) viewLeft = 155;
     if(viewTop < 0) viewTop = 0;
+    if(viewTop > 193) viewTop = 193;
 
     this.map.forEach(function(tile) {
 
