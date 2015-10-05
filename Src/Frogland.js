@@ -16,6 +16,7 @@ Frogland.Create = function() {
     this.map.addTilesetImage('FrogtownTiles');
     this.map.addTilesetImage('DepthsTiles');
     this.map.addTilesetImage('TerraceTiles');
+    this.map.addTilesetImage('GreatTree');
     this.map.addTilesetImage('Doodads');
     this.map.addTilesetImage('Collision');
     //this.map.addTilesetImage('Lighting');

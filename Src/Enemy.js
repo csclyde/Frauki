@@ -140,7 +140,6 @@ Enemy.prototype.update = function() {
 
         game.physics.arcade.overlap(this.attackRect, frauki, Collision.OverlapEnemyAttackWithFrauki);
     }
-
 };
 
 Enemy.prototype.Attacking = function() {

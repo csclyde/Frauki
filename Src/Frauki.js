@@ -625,6 +625,7 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
     }
 
     //effectsController.SpawnEnergyNuggets(this.body, e.body, 'negative', damage);
+    effectsController.EnergySplash(frauki.body.center, 100, 'positive', 20, frauki.body.velocity);
 
     energyController.RemovePower(damage);
     energyController.AddCharge(damage / 10);
@@ -640,7 +641,6 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
     this.state = this.Hurting;
     this.timers.SetTimer('frauki_grace', grace_duration);
     this.timers.SetTimer('frauki_hit', 500);
-    effectsController.EnergySplash(frauki.body.center, 100, 'positive', 30, frauki.body.velocity);
     events.publish('camera_shake', {magnitudeX: 8, magnitudeY: 5, duration: 500});
 
     if(energyController.neutralPoint > 0) {
