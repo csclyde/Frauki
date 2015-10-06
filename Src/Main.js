@@ -32,7 +32,6 @@ Main.create = function() {
     }
 
     this.physicsSlowMo = 1;
-
 };
 
 Main.update = function() {
@@ -52,7 +51,6 @@ Main.update = function() {
 
     this.gamepadIcon.cameraOffset.x = Math.round(pixel.width * 0.27 + cameraController.camX / pixel.scale);
     this.gamepadIcon.cameraOffset.y = Math.round(pixel.height * 0.3 + cameraController.camY / pixel.scale) + 240;
-
 };
 
 Main.render = function() {
@@ -114,7 +112,6 @@ Main.render = function() {
     );
 
     this.DrawUI();
-
 };
 
 Main.Restart = function() {
