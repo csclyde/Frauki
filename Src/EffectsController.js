@@ -591,5 +591,8 @@ EffectsController.prototype.DripSplash = function(src) {
     dripSplash.animations.play('splish');
     dripSplash.animations.currentAnim.killOnComplete = true;
     dripSplash.alpha = 0.5;
+};
+
+EffectsController.prototype.KeyholeTransiton = function() {
 
 };

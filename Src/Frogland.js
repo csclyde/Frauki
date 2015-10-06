@@ -430,6 +430,8 @@ Frogland.ChangeLayer = function(newLayer) {
         game.add.tween(obj).to({alpha: 1}, 200, Phaser.Easing.Linear.None, true);
         if(!!obj.body) obj.body.enable = true;
     });
+
+    effectsController.KeyholeTransiton();
 };
 
 Frogland.DislodgeTile = function(tile) {
