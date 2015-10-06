@@ -430,7 +430,7 @@ Frogland.ChangeLayer = function(newLayer) {
         if(!!obj.body) obj.body.enable = true;
     });
 
-    effectsController.KeyholeTransiton();
+    //effectsController.KeyholeTransiton();
 };
 
 Frogland.DislodgeTile = function(tile) {
