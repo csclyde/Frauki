@@ -32,6 +32,7 @@ Main.create = function() {
     }
 
     this.physicsSlowMo = 1;
+
 };
 
 Main.update = function() {

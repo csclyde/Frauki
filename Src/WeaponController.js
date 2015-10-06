@@ -285,7 +285,7 @@ WeaponController.prototype.Shield = {
 
     Init: function() {
         this.forceField = game.add.sprite(0, 0, 'Misc');
-        this.forceField.animations.add('activate', ['ForceField0000', 'ForceField0001', 'ForceField0002', 'ForceField0003', 'ForceField0004', 'ForceField0005'], 14, false, false);
+        this.forceField.animations.add('activate', ['ForceField0000', 'ForceField0001', 'ForceField0002', 'ForceField0003', 'ForceField0004', 'ForceField0005', 'ForceField0006', 'ForceField0007', 'ForceField0008'], 18, false, false);
         this.forceField.visible = false;
     },
 

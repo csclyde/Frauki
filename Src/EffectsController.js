@@ -558,7 +558,7 @@ EffectsController.prototype.EnergySplash = function(src, intensity, color, amt, 
 
 EffectsController.prototype.Explosion = function(src) {
     var boom = game.add.sprite(src.x - 50, src.y - 50, 'Misc');
-    boom.animations.add('boom', ['Explosion0000', 'Explosion0001', 'Explosion0002', 'Explosion0003', 'Explosion0004', 'Explosion0005', 'Explosion0006'], 18, false, false);
+    boom.animations.add('boom', ['Explosion0000', 'Explosion0001', 'Explosion0002', 'Explosion0003', 'Explosion0004', 'Explosion0005', 'Explosion0006', 'Explosion0007'], 18, false, false);
     boom.animations.play('boom');
     boom.animations.currentAnim.killOnComplete = true;
 };
