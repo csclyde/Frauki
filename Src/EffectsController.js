@@ -78,9 +78,7 @@ EffectsController = function() {
 
     this.loadedEffects = [];
 
-    this.LoadMapEffects(4);
     this.LoadMapEffects(3);
-    this.LoadMapEffects(2);
 };
 
 EffectsController.prototype.Update = function() {

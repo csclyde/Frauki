@@ -72,9 +72,7 @@ SpeechController.prototype.Create = function() {
 
 	this.speechZones = [];
 
-	this.LoadSpeechZones(4);
 	this.LoadSpeechZones(3);
-	this.LoadSpeechZones(2);
 
 };
 

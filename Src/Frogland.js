@@ -36,9 +36,7 @@ Frogland.Create = function() {
 
     this.currentLayer = startLayer;
     
-    this.CreateBackgroundLayer(4, startLayer === 4);
     this.CreateBackgroundLayer(3, startLayer === 3);
-    this.CreateBackgroundLayer(2, startLayer === 2);
 
     this.effectsGroup = game.add.group();
     
@@ -46,21 +44,13 @@ Frogland.Create = function() {
     game.add.existing(frauki);
     game.camera.focusOnXY(frauki.x, frauki.y);
 
-    this.CreateCollisionLayer(4);
     this.CreateCollisionLayer(3);
-    this.CreateCollisionLayer(2);
 
-    this.CreateObjectsLayer(4);
     this.CreateObjectsLayer(3);
-    this.CreateObjectsLayer(2);
 
-    this.CreateMidgroundLayer(4, startLayer === 4);
     this.CreateMidgroundLayer(3, startLayer === 3);
-    this.CreateMidgroundLayer(2, startLayer === 2);
 
-    this.CreateForegroundLayer(4, startLayer === 4);
     this.CreateForegroundLayer(3, startLayer === 3);
-    this.CreateForegroundLayer(2, startLayer === 2);
 
     this.enemyPool = game.add.group();
 
@@ -68,13 +58,9 @@ Frogland.Create = function() {
     this.CreateDoorLayer(2);
     this.CreateDoorLayer(3);
 
-    this.PreprocessTiles(4);
     this.PreprocessTiles(3);
-    this.PreprocessTiles(2);
 
-    triggerController.CreateTriggers(4);
     triggerController.CreateTriggers(3);
-    triggerController.CreateTriggers(2);
 
     setInterval(function() {
         Frogland.AnimateTiles();
@@ -134,15 +120,7 @@ Frogland.Update = function() {
 };
 
 Frogland.SpawnFrauki = function() {
-    if(Frogland.map.properties.debug === 'false') {
-
-        Frogland.objectGroup_2.forEach(function(obj) {
-            if(obj.spriteType === 'checkpoint' && obj.id == localStorage.getItem('fraukiCheckpoint')) {
-                frauki.x = obj.x;
-                frauki.y = obj.y + 20;
-                Frogland.ChangeLayer(obj.owningLayer);   
-            } 
-        });  
+    if(Frogland.map.properties.debug === 'false') { 
 
         Frogland.objectGroup_3.forEach(function(obj) {
             if(obj.spriteType === 'checkpoint' && obj.id == localStorage.getItem('fraukiCheckpoint')) {
@@ -150,15 +128,7 @@ Frogland.SpawnFrauki = function() {
                 frauki.y = obj.y + 20;
                 Frogland.ChangeLayer(obj.owningLayer);   
             } 
-        }); 
-
-        Frogland.objectGroup_4.forEach(function(obj) {
-            if(obj.spriteType === 'checkpoint' && obj.id == localStorage.getItem('fraukiCheckpoint')) {
-                frauki.x = obj.x;
-                frauki.y = obj.y + 20;
-                Frogland.ChangeLayer(obj.owningLayer);   
-            } 
-        }); 
+        });  
 
     } else {
         fraukiStartX = this.map.properties.startX * 16;
@@ -384,7 +354,7 @@ Frogland.GetCurrentCollisionLayer = function() {
 };
 
 Frogland.ChangeLayer = function(newLayer) {
-
+    return;
     if(this.currentLayer == newLayer) return;
 
     //get the current layer
