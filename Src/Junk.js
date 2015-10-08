@@ -41,7 +41,7 @@ Junk.prototype.JunkHit = function(o) {
 	setTimeout(function() {
 
 	    effectsController.SpawnEnergyNuggets(o.body, frauki.body, 'neutral', probTable[Math.round(Math.random() * (probTable.length - 1))]);
-	    effectsController.SpawnEnergyNuggets(o.body, frauki.body, 'positive', probTable[Math.round(Math.random() * (probTable.length - 1))]);
+	    //effectsController.SpawnEnergyNuggets(o.body, frauki.body, 'positive', probTable[Math.round(Math.random() * (probTable.length - 1))]);
 
 	    effectsController.ClashStreak(o.body.center.x, o.body.center.y, game.rnd.between(1, 2));
 	    effectsController.DiceEnemy(o, o.body.center.x, o.body.center.y);

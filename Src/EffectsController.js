@@ -279,7 +279,7 @@ function UpdateParticle(p) {
             events.publish('play_sound', {name: 'energy_bit', restart: true });
 
             if(p.parent === effectsController.positiveBits) {
-                energyController.AddPower(0.15);
+                energyController.AddPower(0.5);
                 energyController.AddEnergy(1);
                 effectsController.EnergySplash(p.body, 100, 'positive');
             } else if(p.parent === effectsController.neutralBits) {

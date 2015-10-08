@@ -40,6 +40,7 @@ var Speeches = {
 	'anyone_home': { text: 'Is anyone home? I better not peep', portrait: 'Mischeif' },
 	'football': { text: 'Football is fun! I wonder if maybe I could score a goal' },
 	'sorry_plant': { text: 'Sorry plant' },
+	'maybe_if': { text: 'Maybe if I...' },
 	
 
 };

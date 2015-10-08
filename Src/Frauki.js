@@ -257,7 +257,7 @@ Player.prototype.UpdateAttackGeometry = function() {
 
 Player.prototype.GetCurrentDamage = function() {
 
-    return this.currentAttack.damage - ((this.currentAttack.damage / 2) * energyController.GetDifficultyModifier());
+    return this.currentAttack.damage;
 };
 
 Player.prototype.GetCurrentKnockback = function() {
@@ -608,7 +608,7 @@ Player.prototype.Roll = function(params) {
 
 Player.prototype.Hit = function(e, damage, grace_duration) {
 
-    damage = damage + damage * energyController.GetDifficultyModifier();
+    damage = damage * 2;
 
     if(this.state === this.Hurting || e.state === e.Hurting || frauki.Attacking() || frauki.Grace())
         return;
