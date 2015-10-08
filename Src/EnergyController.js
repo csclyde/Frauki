@@ -35,7 +35,7 @@ EnergyController.prototype.Create = function() {
 
 EnergyController.prototype.Update = function() {
 
-	var energyDiff = this.energy - this.neutralPoint;
+	var energyDiff = this.energy - 15;
 	var step = 0.20;
 
 	if(game.time.now - this.energyUsageTimestamp > 2000) {
@@ -47,9 +47,9 @@ EnergyController.prototype.Update = function() {
 	//if the timer is up, tick the energy and reset the timer
 	if(game.time.now > this.tickTimer && game.time.now > this.gracePeriod && !frauki.Attacking() && frauki.state !== frauki.Rolling) {
 		if(Math.abs(energyDiff) < step) {
-			this.energy = this.neutralPoint;
+			this.energy = 15;
 		} else {
-			if(this.energy > this.neutralPoint) {
+			if(this.energy > 15) {
 				this.energy -= step / 100;
 			} else {
 				if(this.energy < 0) {
@@ -64,8 +64,8 @@ EnergyController.prototype.Update = function() {
 	}
 
 	//clamp the enrgy and neutral point;
-	if(this.energy > 30)
-		this.energy = 30;
+	if(this.energy > 15)
+		this.energy = 15;
 
 	if(this.charge > 30)
 		this.charge = 30;
@@ -137,21 +137,23 @@ EnergyController.prototype.InBeastMode = function() {
 
 EnergyController.prototype.RemovePower = function(amt) {
 
-	if(this.energy > this.neutralPoint) {
-		if(this.energy - this.neutralPoint > amt) {
-			this.energy -= amt;
-		} else {
-			amt -= (this.energy - this.neutralPoint);
-			this.neutralPoint -= amt;
-			this.energy = this.neutralPoint;
-		}
-	} else {
-		this.neutralPoint -= amt;
+	this.neutralPoint -= amt;
+	
+	// if(this.energy > this.neutralPoint) {
+	// 	if(this.energy - this.neutralPoint > amt) {
+	// 		this.energy -= amt;
+	// 	} else {
+	// 		amt -= (this.energy - this.neutralPoint);
+	// 		this.neutralPoint -= amt;
+	// 		this.energy = this.neutralPoint;
+	// 	}
+	// } else {
+	// 	this.neutralPoint -= amt;
 
-		if(this.energy > this.neutralPoint) {
-			this.energy = this.neutralPoint;
-		}
-	}
+	// 	if(this.energy > this.neutralPoint) {
+	// 		this.energy = this.neutralPoint;
+	// 	}
+	// }
 
 };
 

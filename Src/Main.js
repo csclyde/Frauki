@@ -194,7 +194,7 @@ Main.DrawUI = function() {
     
     this.RenderTextureFromAtlas('UI', 'EnergyBar0001', 12 * pixel.scale, 12 * pixel.scale);
 
-    this.RenderTextureFromAtlas('UI', 'EnergyBar0002', 12 * pixel.scale, 12 * pixel.scale, energyController.energy / 30);
+    this.RenderTextureFromAtlas('UI', 'EnergyBar0002', 12 * pixel.scale, 12 * pixel.scale, energyController.energy / 15);
     this.RenderTextureFromAtlas('UI', 'EnergyBar0005', 12 * pixel.scale + (81 * pixel.scale * (energyController.neutralPoint / 30)), 12 * pixel.scale);
     this.RenderTextureFromAtlas('UI', 'EnergyBar0006', 12 * pixel.scale, 23 * pixel.scale, energyController.charge / 30);
 

@@ -67,7 +67,7 @@ AudioController.prototype.PlaySound = function(params) {
             that.sounds['attack_dive_fall'].stop();
             that.sounds['attack_dive_land'].stop();
         }
-        this.sounds[params.name].play();
+        //this.sounds[params.name].play();
     }
 };
 
@@ -79,7 +79,7 @@ AudioController.prototype.StopSound = function(params) {
 
 AudioController.prototype.PlayMusic = function(params) {
     if(!!params.name && !!this.music[params.name] && !!this.music[params.name].play) {
-            this.music[params.name].play();
+            //this.music[params.name].play();
     }
 };
 
