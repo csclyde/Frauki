@@ -110,6 +110,7 @@ Collision.OverlapAttackWithEnemy = function(f, e) {
     e.body.velocity.x *= e.PlayerDirMod();
     
     e.body.velocity.y = -200 + (frauki.GetCurrentJuggle() * -200);
+    if(e.robotic) e.body.velocity.y /= 2;
 
     e.timers.SetTimer('hit', e.baseStunDuration + (100 * damage));
     e.timers.SetTimer('grace', e.baseStunDuration + (100 * damage) + 200);
@@ -197,7 +198,7 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
     vel.setMagnitude(300);
 
     e.body.velocity.x = vel.x;
-    e.body.velocity.y = vel.y;
+    e.body.velocity.y = vel.y / 2;
 
     events.publish('stop_attack_sounds', {});
     events.publish('play_sound', {name: 'clang'});

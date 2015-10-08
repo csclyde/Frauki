@@ -7,12 +7,12 @@ Enemy.prototype.types['A3PZ'] =  function() {
     this.animations.add('walk', ['A3PZ/Walk0000', 'A3PZ/Walk0001', 'A3PZ/Walk0002', 'A3PZ/Walk0003', 'A3PZ/Walk0004', 'A3PZ/Walk0005'], 8, true, false);
     this.animations.add('block', ['A3PZ/Block0000'], 18, false, false);
     this.animations.add('windup1', ['A3PZ/Attack0001', 'A3PZ/Attack0002'], 10, false, false);
-    this.animations.add('attack1', ['A3PZ/Attack0003', 'A3PZ/Attack0004', 'A3PZ/Attack0005', 'A3PZ/Attack0006', 'A3PZ/Attack0007'], 22, false, false);
+    this.animations.add('attack1', ['A3PZ/Attack0003', 'A3PZ/Attack0004', 'A3PZ/Attack0005', 'A3PZ/Attack0006', 'A3PZ/Attack0007'], 18, false, false);
     this.animations.add('windup2', ['A3PZ/Attack0008', 'A3PZ/Attack0009'], 10, false, false);
-    this.animations.add('attack2', ['A3PZ/Attack0010', 'A3PZ/Attack0011', 'A3PZ/Attack0012', 'A3PZ/Attack0013', 'A3PZ/Attack0014'], 24, false, false);
+    this.animations.add('attack2', ['A3PZ/Attack0010', 'A3PZ/Attack0011', 'A3PZ/Attack0012', 'A3PZ/Attack0013', 'A3PZ/Attack0014'], 18, false, false);
     this.animations.add('hurt', ['A3PZ/Hurt0000', 'A3PZ/Hurt0001'], 8, true, false);
 
-    this.energy = 3;
+    this.energy = 5;
     this.baseStunDuration = 500;
 
     this.robotic = true;
@@ -55,7 +55,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
             return;
         }
 
-        this.timers.SetTimer('slash_hold', 400);
+        this.timers.SetTimer('slash_hold', 100);
 
         this.state = this.Windup1;
 
@@ -78,13 +78,19 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
         this.state = this.Dodging;
 
-        this.timers.SetTimer('dodge_hold', duration || 300);
+        this.timers.SetTimer('dodge_hold', duration || 700);
 
         return true;
     };
 
     this.Block = function() {
-        this.Attack();
+        //this.Dodge(game.rnd.between(1000, 2000));
+
+        if(this.state === this.Dodging) {
+            this.Attack();
+        } else {
+            this.Dodge();
+        }
     }
 
     ////////////////////////////////STATES////////////////////////////////////
@@ -102,9 +108,9 @@ Enemy.prototype.types['A3PZ'] =  function() {
             this.FacePlayer();
 
             if(this.PlayerDistance() < 200) {
-                if(frauki.Attacking()) {
+                if(frauki.InAttackAnim()) {
                     this.Dodge();
-                } else {
+                } else if(this.PlayerDistance() < 125) {
                     this.Attack();
                 }
             }
@@ -119,7 +125,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
             this.state = this.Slashing1;
-            this.timers.SetTimer('slash_hold', 600);
+            this.timers.SetTimer('slash_hold', 400);
         }
     };
 
@@ -127,14 +133,14 @@ Enemy.prototype.types['A3PZ'] =  function() {
         this.PlayAnim('attack1');
 
         if(this.direction === 'left') {
-            this.body.velocity.x = -200;
+            this.body.velocity.x = -250;
         } else {
-            this.body.velocity.x = 200;
+            this.body.velocity.x = 250;
         }
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
             this.state = this.Windup2;
-            this.timers.SetTimer('slash_hold', 400);
+            this.timers.SetTimer('slash_hold', 300);
             //this.FacePlayer();
         }
     };
@@ -144,7 +150,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
             this.state = this.Slashing2;
-            this.timers.SetTimer('slash_hold', 600);
+            this.timers.SetTimer('slash_hold', 400);
         }
     };
 
@@ -163,7 +169,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
                 this.Attack();
             } else {
                 this.state = this.Idling;
-                this.timers.SetTimer('attack', 1000 + Math.random() * 500);
+                this.timers.SetTimer('attack', 2000 + Math.random() * 1000);
             }
         }
     };
@@ -171,14 +177,14 @@ Enemy.prototype.types['A3PZ'] =  function() {
     this.Dodging = function() {
         this.PlayAnim('block');
 
-        if(this.timers.TimerUp('dodge_hold')) {
+        if(this.timers.TimerUp('dodge_hold') && !frauki.InAttackAnim()) {
             if(this.PlayerDistance() < 200) {
                 this.Attack();
             } else {
                 this.state = this.Idling;
             }
 
-            this.timers.SetTimer('dodge', 750);
+            this.timers.SetTimer('dodge', 600);
         }
     }
 
@@ -186,7 +192,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
         this.PlayAnim('hurt');
 
         if(this.timers.TimerUp('hit')) {
-            if(!this.Dodge(game.rnd.between(700, 1300))) {
+            if(!this.Dodge(game.rnd.between(800, 1500))) {
                 this.state = this.Idling;
             }
         }
@@ -202,7 +208,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
         },
 
         'A3PZ/Attack0004': {
-            x: 50, y: -15, w: 25, h: 60,
+            x: 75, y: -15, w: 25, h: 60,
             damage: 2,
             knockback: 0,
             priority: 1,
@@ -210,7 +216,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
         },
 
         'A3PZ/Attack0005': {
-            x: 50, y: -15, w: 25, h: 60,
+            x: 75, y: -15, w: 25, h: 40,
             damage: 1,
             knockback: 0,
             priority: 1,
@@ -218,7 +224,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
         },
 
         'A3PZ/Attack0006': {
-            x: 50, y: -15, w: 25, h: 60,
+            x: 75, y: -15, w: 25, h: 20,
             damage: 1,
             knockback: 0,
             priority: 1,
@@ -226,7 +232,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
         },
 
         'A3PZ/Attack0010': {
-            x: 20, y: -20, w: 75, h: 110,
+            x: 30, y: -20, w: 75, h: 110,
             damage: 2,
             knockback: 0,
             priority: 1,
@@ -234,7 +240,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
         },
 
         'A3PZ/Attack0011': {
-            x: 18, y: 20, w: 30, h: 45,
+            x: 50, y: 20, w: 30, h: 45,
             damage: 2,
             knockback: 0,
             priority: 1,
@@ -242,7 +248,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
         },
 
         'A3PZ/Attack0012': {
-            x: 18, y: 20, w: 30, h: 45,
+            x: 50, y: 20, w: 30, h: 45,
             damage: 1,
             knockback: 0,
             priority: 1,
@@ -250,7 +256,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
         },
 
         'A3PZ/Attack0012': {
-            x: 18, y: 20, w: 30, h: 45,
+            x: 50, y: 20, w: 30, h: 45,
             damage: 1,
             knockback: 0,
             priority: 1,
@@ -258,7 +264,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
         },
 
         'A3PZ/Block0000': {
-            x: 27, y: -8, w: 15, h: 60,
+            x: 20, y: -8, w: 45, h: 80,
             damage: 0,
             knockback: 0,
             priority: 1,

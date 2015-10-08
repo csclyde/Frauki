@@ -7,7 +7,7 @@
          "name":"Background_2",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -18,7 +18,7 @@
          "name":"Midground_2",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -29,7 +29,7 @@
          "name":"Foreground_2",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -3037,7 +3037,7 @@
          "name":"Background_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -3048,7 +3048,7 @@
          "name":"Midground_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -3059,7 +3059,7 @@
          "name":"Foreground_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -4281,22 +4281,6 @@
                  "width":16,
                  "x":1902.67,
                  "y":519.333
-                }, 
-                {
-                 "gid":98,
-                 "height":16,
-                 "id":1116,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":1778.67,
-                 "y":628
                 }, 
                 {
                  "gid":99,
@@ -7235,10 +7219,26 @@
                  "width":16,
                  "x":2890,
                  "y":1402.67
+                }, 
+                {
+                 "gid":99,
+                 "height":16,
+                 "id":1550,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":1543,
+                 "y":596
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "width":0,
          "x":0,
          "y":0
@@ -10985,7 +10985,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":1550,
+ "nextobjectid":1551,
  "orientation":"orthogonal",
  "properties":
     {

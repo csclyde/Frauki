@@ -282,6 +282,17 @@ Player.prototype.Attacking = function() {
         return false;
 };
 
+Player.prototype.InAttackAnim = function() {
+    var frameName = this.animations.currentAnim.name;
+
+    if(['attack_front', 'attack_overhead', 'attack_stab', 'attack_dive_charge', 'attack_dive_fall', 'attack_dive_land'].indexOf(frameName) > -1) {
+        return true;
+    } else {
+        return false;
+    }
+
+};
+
 Player.prototype.GetDirectionMultiplier = function() {
     var dir = 1;
     if(inputController.dpad.left) {
