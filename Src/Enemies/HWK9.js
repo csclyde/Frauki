@@ -225,7 +225,7 @@ Enemy.prototype.types['HWK9'] =  function() {
 
 		'HWK9/AttackDash0001': {
 			x: 12, y: -30, w: 65, h: 100,
-			damage: 2.5,
+			damage: 2.2,
 			knockback: 0,
 			priority: 2,
 			juggle: 0
@@ -233,7 +233,7 @@ Enemy.prototype.types['HWK9'] =  function() {
 
 		'HWK9/AttackDash0002': {
 			x: 12, y: -30, w: 65, h: 100,
-			damage: 2.5,
+			damage: 2.2,
 			knockback: 0,
 			priority: 2,
 			juggle: 0

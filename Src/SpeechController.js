@@ -59,6 +59,10 @@ SpeechController.prototype.Create = function() {
 	this.portraits['Mischeif'].fixedToCamera = true;
 	this.portraits['Mischeif'].visible = false;
 
+	this.portraits['Silly'] = game.add.image(80, 70, 'UI', 'PortraitsFraukiSilly');
+	this.portraits['Silly'].fixedToCamera = true;
+	this.portraits['Silly'].visible = false;
+
 	this.speechVisible = false;
 
 	this.currentText = '';

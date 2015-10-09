@@ -16,8 +16,8 @@ var Speeches = {
 	'delicate_flower': { text: 'This flower looks delicate... I wonder how long it’s been growing' },
 	'door_info': { text: 'It won\'t open from this side.' },
 	'strange_wall': { text: 'This wall looks strange...' },
-	'weak_floor': { text: 'The floor looks pretty messed up. Better be careful not to fall.' },
-	'more_flowers': { text: 'More of these flowers. The scent is wonderful.' },
+	'weak_floor': { text: 'The floor looks pretty messed up.', portrait: 'Displeased' },
+	'more_flowers': { text: 'More of these flowers. The scent is wonderful.', portrait: 'Peaceful' },
 	'how_standing': { text: 'How is this thing even standing?' },
 	'down_there': { text: 'Hmm I wonder what\'s down there.' },
 	'jump_in': { text: 'Should I jump in? It looks pretty scary, I might get blown around' },
@@ -40,7 +40,7 @@ var Speeches = {
 	'anyone_home': { text: 'Is anyone home? I better not peep', portrait: 'Mischeif' },
 	'football': { text: 'Football is fun! I wonder if maybe I could score a goal' },
 	'sorry_plant': { text: 'Sorry plant' },
-	'maybe_if': { text: 'Maybe if I...' },
-	
+	'maybe_if': { text: 'Maybe if I just...' },
+	'hidden_goodies': { text: 'He he, hidden goodies!', portrait: 'Silly'}
 
 };
