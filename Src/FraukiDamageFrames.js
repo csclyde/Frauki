@@ -170,7 +170,7 @@ var fraukiDamageFrames = {
 
 	'Attack Dive0012': {
 		x: -2, y: 40, w: 13, h: 33,
-		damage: 2,
+		damage: 2.5,
 		knockback: 1.5,
 		priority: 3,
 		juggle: -1
@@ -178,7 +178,7 @@ var fraukiDamageFrames = {
 
 	'Attack Dive0013': {
 		x: -2, y: 40, w: 13, h: 33,
-		damage: 2,
+		damage: 2.5,
 		knockback: 1.5,
 		priority: 3,
 		juggle: -1
@@ -186,7 +186,7 @@ var fraukiDamageFrames = {
 
 	'Attack Dive0014': {
 		x: -2, y: 40, w: 13, h: 33,
-		damage: 2,
+		damage: 2.5,
 		knockback: 1.5,
 		priority: 3,
 		juggle: -1
@@ -194,7 +194,7 @@ var fraukiDamageFrames = {
 
 	'Attack Dive0015': {
 		x: -2, y: 40, w: 13, h: 33,
-		damage: 2,
+		damage: 2.5,
 		knockback: 1.5,
 		priority: 3,
 		juggle: -1
@@ -202,7 +202,7 @@ var fraukiDamageFrames = {
 
 	'Attack Dive0016': {
 		x: -2, y: 40, w: 13, h: 33,
-		damage: 2,
+		damage: 2.5,
 		knockback: 1.5,
 		priority: 3,
 		juggle: -1
@@ -210,7 +210,7 @@ var fraukiDamageFrames = {
 
 	'Attack Dive0017': {
 		x: -2, y: 40, w: 13, h: 33,
-		damage: 2,
+		damage: 2.5,
 		knockback: 1.5,
 		priority: 3,
 		juggle: -1

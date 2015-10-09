@@ -16,10 +16,10 @@ Enemy.prototype.types['HWK9'] =  function() {
 
     this.robotic = true;
 
-    this.damage = 3;
 
     /*
     this.weight = 0.8;
+    this.damage = 3;
     */
 
     this.body.drag.x = 1000;
@@ -35,11 +35,13 @@ Enemy.prototype.types['HWK9'] =  function() {
 	this.CanCauseDamage = function() { return false; }
 	this.CanChangeDirection = function() { return false; }
 	this.Vulnerable = function() {
-		if(this.state === this.Flipping) {
-			return false;
-		} else {
-			return true;
-		} 
+		// if(this.state === this.Flipping) {
+		// 	return false;
+		// } else {
+		// 	return true;
+		// } 
+
+		return true;
 	}
 
 
@@ -68,7 +70,7 @@ Enemy.prototype.types['HWK9'] =  function() {
 
     	this.timers.SetTimer('flip_timer', game.rnd.between(500, 800));
 
-    	this.body.velocity.y = -450;
+    	this.body.velocity.y = -400;
 
     	if(this.direction === 'left') {
     		this.body.velocity.x = 400;
@@ -134,7 +136,7 @@ Enemy.prototype.types['HWK9'] =  function() {
 			var attackVector = new Phaser.Point(frauki.body.x - this.body.x, frauki.body.y - this.body.y);
 			attackVector = attackVector.normalize();
 
-			attackVector.setMagnitude(700);
+			attackVector.setMagnitude(600);
 
 			this.body.velocity = attackVector;
 
@@ -223,17 +225,17 @@ Enemy.prototype.types['HWK9'] =  function() {
 
 		'HWK9/AttackDash0001': {
 			x: 12, y: -30, w: 65, h: 100,
-			damage: 5,
+			damage: 2.5,
 			knockback: 0,
-			priority: 1,
+			priority: 2,
 			juggle: 0
 		},
 
 		'HWK9/AttackDash0002': {
 			x: 12, y: -30, w: 65, h: 100,
-			damage: 5,
+			damage: 2.5,
 			knockback: 0,
-			priority: 1,
+			priority: 2,
 			juggle: 0
 		},
 

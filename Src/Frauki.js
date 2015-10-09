@@ -664,6 +664,10 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
     }
 };
 
+Player.prototype.Interrupt = function() {
+    this.state = this.Standing;
+};
+
 //////////////////STATES/////////////////
 Player.prototype.Standing = function() {
     this.PlayAnim('stand');

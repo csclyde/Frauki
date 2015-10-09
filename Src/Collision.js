@@ -178,11 +178,16 @@ Collision.OverlapAttackWithEnemy = function(f, e) {
 
 Collision.OverlapAttackWithEnemyAttack = function(e, f) {
 
-    console.log(frauki.GetCurrentPriority(), e.owningEnemy.currentAttack.priority);
+    console.log('Frauki: ' + frauki.GetCurrentPriority(), 'Enemy:' + e.owningEnemy.currentAttack.priority);
 
     //if fraukis attack has priority over the enemies attack, they cant block it
     if(frauki.GetCurrentPriority() > e.owningEnemy.currentAttack.priority) {
         game.physics.arcade.overlap(frauki.attackRect, e.owningEnemy, Collision.OverlapAttackWithEnemy);
+        return;
+    } else if(frauki.GetCurrentPriority() < e.owningEnemy.currentAttack.priority && e.owningEnemy.currentAttack.damage > 0) {
+        console.log('overriding block');
+        frauki.Interrupt();
+        game.physics.arcade.overlap(e, frauki, Collision.OverlapEnemyAttackWithFrauki);
         return;
     }
 
@@ -211,7 +216,7 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
 
 Collision.OverlapEnemyAttackWithFrauki = function(e, f) {
 
-    if(e.owningEnemy.currentAttack.damage > 0) {
+    if(!!e.owningEnemy && e.owningEnemy.currentAttack.damage > 0) {
         frauki.Hit(e.owningEnemy, e.owningEnemy.currentAttack.damage, 650);
     }
 };
