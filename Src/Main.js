@@ -159,6 +159,8 @@ Main.Restart = function() {
         Frogland.objectGroup_3.removeAll(true);
         Frogland.objectGroup_2.removeAll(true);
 
+        console.log(Frogland.objectGroup_4);
+
         Frogland.CreateObjectsLayer(4);
         Frogland.CreateObjectsLayer(3);
         Frogland.CreateObjectsLayer(2);

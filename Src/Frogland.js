@@ -103,7 +103,7 @@ Frogland.Update = function() {
         var o = this.GetCurrentObjectGroup().children[i];
 
         if(o.spriteType !== 'door' && !!o.body && o.spriteType !== 'ball') {
-            if(o.owningLayer === Frogland.currentLayer && o.body.x > game.camera.x - padding && o.body.y > game.camera.y - padding && o.body.x < game.camera.x + game.camera.width + padding && o.body.y < game.camera.y + game.camera.height + padding) {
+            if(o.body.x > game.camera.x - padding && o.body.y > game.camera.y - padding && o.body.x < game.camera.x + game.camera.width + padding && o.body.y < game.camera.y + game.camera.height + padding) {
                 o.body.enable = true;
             } else {
                 o.body.enable = false;
