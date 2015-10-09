@@ -80,6 +80,7 @@ Enemy.prototype.types['KR32'] =  function() {
 		// }
 
     	this.state = this.Stabbing;
+    	this.FacePlayer();
     };
 
     this.Recoil = function() {
@@ -132,7 +133,7 @@ Enemy.prototype.types['KR32'] =  function() {
 
 		if(this.PlayerDistance() < 160 && !frauki.InAttackAnim() && this.body.onFloor() && frauki.body.center.y > this.body.center.y - 50) {
 
-			if(this.PlayerDistance() < 45) {
+			if(this.PlayerDistance() < 75) {
 				this.AttackStab();
 			} else {
 				this.Attack();
@@ -195,7 +196,12 @@ Enemy.prototype.types['KR32'] =  function() {
 		this.PlayAnim('hurt');
 
 		if(this.timers.TimerUp('hit')) {
-			this.state = this.Idling;
+			if(this.PlayerDistance() < 75) {
+				this.AttackStab();
+			} else {
+				this.state = this.Idling;
+			}
+
 			this.timers.SetTimer('attack', 500 + Math.random() * 1000);
 		}
 	};
