@@ -8,6 +8,7 @@ Enemy.prototype.types['KR32'] =  function() {
     this.animations.add('walk_back', ['KR32/Walk0000', 'KR32/Walk0001', 'KR32/Walk0002', 'KR32/Walk0003', 'KR32/Walk0004', 'KR32/Walk0005'], 10, true, false);
     this.animations.add('windup', ['KR32/Attack0000'], 5,  false, false);
     this.animations.add('attack', ['KR32/Attack0001', 'KR32/Attack0002', 'KR32/Attack0003', 'KR32/Attack0004', 'KR32/Attack0005', 'KR32/Attack0006', 'KR32/Attack0007', 'KR32/Attack0008'], 18, false, false);
+    this.animations.add('attack_stab', ['KR32/Stab0001', 'KR32/Stab0002', 'KR32/Stab0003', 'KR32/Stab0004'], 12, false, false);
     this.animations.add('hurt', ['KR32/Hurt0000', 'KR32/Hurt0001'], 8, true, false);
 
     this.energy = 4;
@@ -70,8 +71,19 @@ Enemy.prototype.types['KR32'] =  function() {
     	this.timers.SetTimer('windup', 250 + game.rnd.between(0, 100));
     };
 
+    this.AttackStab = function() {
+    	
+  //   	if(this.direction === 'left') {
+		// 	this.body.velocity.x = 300;
+		// } else {
+		// 	this.body.velocity.x = -300;
+		// }
+
+    	this.state = this.Stabbing;
+    };
+
     this.Recoil = function() {
-    	this.state - this.Blocking;
+    	this.state = this.Blocking;
 
     	this.FacePlayer();
 
@@ -118,8 +130,13 @@ Enemy.prototype.types['KR32'] =  function() {
 			this.timers.SetTimer('attack', 500 + Math.random() * 1000);
 		}
 
-		if(this.PlayerDistance() < 160 && !frauki.Attacking() && this.body.onFloor() && frauki.body.center.y > this.body.center.y - 50 && frauki.state !== frauki.AttackStab) {
-			this.Attack();
+		if(this.PlayerDistance() < 160 && !frauki.InAttackAnim() && this.body.onFloor() && frauki.body.center.y > this.body.center.y - 50) {
+
+			if(this.PlayerDistance() < 45) {
+				this.AttackStab();
+			} else {
+				this.Attack();
+			}
 		}
 
 	};
@@ -130,19 +147,10 @@ Enemy.prototype.types['KR32'] =  function() {
 		if(this.timers.TimerUp('windup')) {
 			this.state = this.Slashing;
 
-			if(this.PlayerDistance() < 30) {
-				if(this.direction === 'left') {
-					this.body.velocity.x = 300;
-				} else {
-					this.body.velocity.x = -300;
-				}
+			if(this.direction === 'left') {
+				this.body.velocity.x = -500;
 			} else {
-				if(this.direction === 'left') {
-					this.body.velocity.x = -500;
-				} else {
-					this.body.velocity.x = 500;
-				}
-				
+				this.body.velocity.x = 500;
 			}
 		}
 	}
@@ -155,6 +163,21 @@ Enemy.prototype.types['KR32'] =  function() {
 		} else {
 			this.animations.currentAnim.delay = 1000 / 18;
 		}
+
+		if(this.animations.currentAnim.isFinished) {
+
+			if(this.PlayerDistance() < 100) {
+				this.Recoil();
+			} else {
+				this.state = this.Blocking;
+			}
+
+			this.timers.SetTimer('attack', 500 + Math.random() * 1000);
+		}
+	};
+
+	this.Stabbing = function() {
+		this.PlayAnim('attack_stab');
 
 		if(this.animations.currentAnim.isFinished) {
 
@@ -263,6 +286,14 @@ Enemy.prototype.types['KR32'] =  function() {
 			damage: 2,
 			knockback: 0.3,
 			priority: 1,
+			juggle: 0
+		},
+
+		'KR32/Stab0003': {
+			x: 20, y: 12, w: 60, h: 10,
+			damage: 2,
+			knockback: 0.2,
+			priority: 3,
 			juggle: 0
 		}
 

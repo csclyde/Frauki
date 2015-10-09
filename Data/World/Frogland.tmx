@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="200" tilewidth="16" tileheight="16" backgroundcolor="#55d5ed" nextobjectid="1551">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="200" tilewidth="16" tileheight="16" backgroundcolor="#55d5ed" nextobjectid="1552">
  <properties>
   <property name="debug" value="false"/>
   <property name="startLayer" value="4"/>
@@ -2482,7 +2482,7 @@
     <property name="id" value="above_flower"/>
    </properties>
   </object>
-  <object id="1550" gid="99" x="1543" y="596" width="16" height="16"/>
+  <object id="1551" gid="98" x="1557.33" y="617.333" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Triggers_3" visible="0">
   <object id="1302" name="ruins_music" x="1624.24" y="950.3" width="1578.79" height="796.97">
