@@ -153,7 +153,7 @@ Player.prototype.postStateUpdate = function() {
     }
 
     if(this.states.inUpdraft) {
-        this.body.acceleration.y = -750;
+        this.body.acceleration.y = -720;
         this.body.maxVelocity.y = 500;
     } else {
         this.body.acceleration.y = 0;
@@ -290,7 +290,6 @@ Player.prototype.InAttackAnim = function() {
     } else {
         return false;
     }
-
 };
 
 Player.prototype.GetDirectionMultiplier = function() {

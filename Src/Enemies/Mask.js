@@ -7,9 +7,9 @@ Enemy.prototype.types['Mask'] =  function() {
     this.animations.add('shit', ['Hop0000'], 10, true, false);
 
     this.energy = 2;
+    this.damage = 3;
     /*
     this.weight = 0.5;
-    this.damage = 5;
     this.baseStunDuration = 500;
     this.poise = 10;
     */

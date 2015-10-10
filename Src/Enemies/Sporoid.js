@@ -16,7 +16,7 @@ Enemy.prototype.types['Sporoid'] =  function() {
     this.energy = 0.8;
     
     this.weight = 0.3;
-    this.damage = 3;
+    this.damage = 1.5;
 
 	this.updateFunction = function() {
 

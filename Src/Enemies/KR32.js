@@ -11,7 +11,7 @@ Enemy.prototype.types['KR32'] =  function() {
     this.animations.add('attack_stab', ['KR32/Stab0001', 'KR32/Stab0002', 'KR32/Stab0003', 'KR32/Stab0004'], 12, false, false);
     this.animations.add('hurt', ['KR32/Hurt0000', 'KR32/Hurt0001'], 8, true, false);
 
-    this.energy = 40;
+    this.energy = 4;
     this.baseStunDuration = 400;
 
     this.mode = 'defensive';
