@@ -29,7 +29,7 @@ FileMap.Audio = [
 	{ Name: 'attack_connect', File: 'Data/Sfx/attack_connect.wav', Volume: 0.4, Loop: false },
 
 	{ Name: 'jump', File: 'Data/Sfx/jump.wav', Volume: 0.3, Loop: false },
-	{ Name: 'ouch', File: 'Data/Sfx/ouch.wav', Volume: 0.7, Loop: false },
+	{ Name: 'ouch', File: 'Data/Sfx/Ouch.wav', Volume: 0.7, Loop: false },
 	{ Name: 'running', File: 'Data/Sfx/run.wav', Volume: 0.2, Loop: true },
 	{ Name: 'slide', File: 'Data/Sfx/slide.wav', Volume: 0.3, Loop: false },
 	{ Name: 'no_energy', File: 'Data/Sfx/no_energy.wav', Volume: 0.7, Loop: false },
