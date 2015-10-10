@@ -194,7 +194,6 @@ Frogland.CreateObjectsLayer = function(layer) {
     var currLayer = 'objectGroup_' + layer;
 
     if(!this[currLayer]) this[currLayer] = game.add.group();
-    this[currLayer].enableBody = true;
 
     FileMap.Junk.forEach(function(junk) {
         Frogland.map.createFromObjects('Objects_' + layer, junk.Tile, junk.Name, junk.Name, true, true, that[currLayer], Junk, true);

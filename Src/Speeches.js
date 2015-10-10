@@ -12,7 +12,7 @@ var Speeches = {
 	'dripping': { text: 'Eee, the water is dripping on me', portrait: 'Mischeif' },
 	'fresh': { text: 'The air smells fresh in this room', portrait: 'Peaceful' },
 	'extract': { text: 'It looks like they were extracting something here' },
-	'spores': { text: 'The spores are making me dizzy', portrait: 'Dazed' },
+	'spores': { text: 'These spores are making me dizzy', portrait: 'Dazed' },
 	'delicate_flower': { text: 'This flower looks delicate... I wonder how long it’s been growing' },
 	'door_info': { text: 'It won\'t open from this side.' },
 	'strange_wall': { text: 'This wall looks strange...' },
