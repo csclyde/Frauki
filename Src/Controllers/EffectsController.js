@@ -7,7 +7,7 @@ EffectsController = function() {
     this.negativeBits.makeParticles('Misc', ['EnergyBitNeg0000', 'EnergyBitNeg0001', 'EnergyBitNeg0002', 'EnergyBitNeg0003', 'EnergyBitNeg0004', 'EnergyBitNeg0005']);
     this.negativeBits.gravity = -150;
     this.negativeBits.setRotation(0, 0);
-    Frogland.effectsGroup.addChild(this.negativeBits);
+    //Frogland.effectsGroup.addChild(this.negativeBits);
 
     this.positiveBits = game.add.emitter(0, 0, 15);
     this.positiveBits.makeParticles('Misc', ['EnergyBitPos0000', 'EnergyBitPos0001', 'EnergyBitPos0002', 'EnergyBitPos0003', 'EnergyBitPos0004', 'EnergyBitPos0005']); //array of strings here for multiple sprites
@@ -266,8 +266,6 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
 
                 that.loadedEffects.push(sprayer);
 
-                console.log('wuuut')
-
             }
 
         } else if(o.type === 'speech') {
@@ -275,7 +273,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
             sparkles.width = o.width;
             sparkles.height = o.height;
             sparkles.makeParticles('Misc', ['Sparkles0000', 'Sparkles0001', 'Sparkles0002', 'Sparkles0003', 'Sparkles0004'], 25);
-            sparkles.gravity = -400;
+            sparkles.gravity = -600;
             sparkles.maxParticleSpeed.setTo(0);
             sparkles.minParticleSpeed.setTo(0);
             sparkles.minRotation = 0;
