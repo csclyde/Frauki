@@ -7,7 +7,7 @@
          "name":"Background_2",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -18,7 +18,7 @@
          "name":"Midground_2",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -29,7 +29,7 @@
          "name":"Foreground_2",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -2421,21 +2421,6 @@
                  "y":1544.67
                 }, 
                 {
-                 "height":9.5,
-                 "id":1016,
-                 "name":"splash",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"effect",
-                 "visible":true,
-                 "width":36.75,
-                 "x":2776.25,
-                 "y":2523.25
-                }, 
-                {
                  "gid":66,
                  "height":16,
                  "id":1017,
@@ -2548,201 +2533,6 @@
                  "y":2456
                 }, 
                 {
-                 "height":62.5,
-                 "id":1024,
-                 "name":"wet_clay",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":48.5,
-                 "x":2303,
-                 "y":1134.5
-                }, 
-                {
-                 "height":63,
-                 "id":1025,
-                 "name":"dew",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":48,
-                 "x":2096,
-                 "y":1088.5
-                }, 
-                {
-                 "height":64,
-                 "id":1026,
-                 "name":"draft",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":47.5,
-                 "x":1918.5,
-                 "y":1088.5
-                }, 
-                {
-                 "height":66,
-                 "id":1027,
-                 "name":"how_standing",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":84,
-                 "x":2686.67,
-                 "y":1516.67
-                }, 
-                {
-                 "height":34.3333,
-                 "id":1028,
-                 "name":"fire",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":35.3333,
-                 "x":636.667,
-                 "y":684.33
-                }, 
-                {
-                 "height":66.6667,
-                 "id":1029,
-                 "name":"dont_eat",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":72,
-                 "x":339,
-                 "y":814.67
-                }, 
-                {
-                 "height":64.3333,
-                 "id":1030,
-                 "name":"nibble",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":36,
-                 "x":447,
-                 "y":1870.33
-                }, 
-                {
-                 "height":63.6667,
-                 "id":1031,
-                 "name":"cold",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":291.5,
-                 "x":875.5,
-                 "y":1728.67
-                }, 
-                {
-                 "height":6,
-                 "id":1032,
-                 "name":"drip",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"effect",
-                 "visible":true,
-                 "width":34,
-                 "x":430,
-                 "y":1372.5
-                }, 
-                {
-                 "height":6,
-                 "id":1033,
-                 "name":"drip",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"effect",
-                 "visible":true,
-                 "width":34,
-                 "x":576.5,
-                 "y":1342.5
-                }, 
-                {
-                 "height":6,
-                 "id":1034,
-                 "name":"drip",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"effect",
-                 "visible":true,
-                 "width":34,
-                 "x":767,
-                 "y":1341
-                }, 
-                {
-                 "height":6,
-                 "id":1035,
-                 "name":"drip",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"effect",
-                 "visible":true,
-                 "width":34,
-                 "x":670.5,
-                 "y":1358
-                }, 
-                {
-                 "height":172,
-                 "id":1036,
-                 "name":"ellipses",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":528.667,
-                 "x":318.667,
-                 "y":1378
-                }, 
-                {
                  "gid":106,
                  "height":16,
                  "id":1037,
@@ -2757,21 +2547,6 @@
                  "width":16,
                  "x":1766,
                  "y":1333
-                }, 
-                {
-                 "height":54.3333,
-                 "id":1038,
-                 "name":"sorry_plant",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":48.3333,
-                 "x":1756.67,
-                 "y":1304.33
                 }, 
                 {
                  "gid":69,
@@ -3023,6 +2798,231 @@
                  "width":118,
                  "x":426.667,
                  "y":1068
+                }, 
+                {
+                 "height":34.3333,
+                 "id":1630,
+                 "name":"fire",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":35.3333,
+                 "x":637.000166666667,
+                 "y":682.759696969697
+                }, 
+                {
+                 "height":63,
+                 "id":1631,
+                 "name":"dew",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":48,
+                 "x":2096.33316666667,
+                 "y":1086.9296969697
+                }, 
+                {
+                 "height":66.6667,
+                 "id":1632,
+                 "name":"dont_eat",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":72,
+                 "x":339.333166666667,
+                 "y":813.099696969697
+                }, 
+                {
+                 "height":6,
+                 "id":1633,
+                 "name":"drip",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"effect",
+                 "visible":true,
+                 "width":34,
+                 "x":767.333166666667,
+                 "y":1339.4296969697
+                }, 
+                {
+                 "height":64,
+                 "id":1634,
+                 "name":"draft",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":47.5,
+                 "x":1918.83316666667,
+                 "y":1086.9296969697
+                }, 
+                {
+                 "height":6,
+                 "id":1635,
+                 "name":"drip",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"effect",
+                 "visible":true,
+                 "width":34,
+                 "x":670.833166666667,
+                 "y":1356.4296969697
+                }, 
+                {
+                 "height":54.3333,
+                 "id":1636,
+                 "name":"sorry_plant",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":48.3333,
+                 "x":1757.00316666667,
+                 "y":1302.7596969697
+                }, 
+                {
+                 "height":64.3333,
+                 "id":1637,
+                 "name":"nibble",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":36,
+                 "x":447.333166666667,
+                 "y":1868.7596969697
+                }, 
+                {
+                 "height":66,
+                 "id":1638,
+                 "name":"how_standing",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":84,
+                 "x":2687.00316666667,
+                 "y":1515.0996969697
+                }, 
+                {
+                 "height":6,
+                 "id":1639,
+                 "name":"drip",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"effect",
+                 "visible":true,
+                 "width":34,
+                 "x":430.333166666667,
+                 "y":1370.9296969697
+                }, 
+                {
+                 "height":172,
+                 "id":1640,
+                 "name":"ellipses",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":528.667,
+                 "x":319.000166666667,
+                 "y":1376.4296969697
+                }, 
+                {
+                 "height":6,
+                 "id":1641,
+                 "name":"drip",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"effect",
+                 "visible":true,
+                 "width":34,
+                 "x":576.833166666667,
+                 "y":1340.9296969697
+                }, 
+                {
+                 "height":62.5,
+                 "id":1642,
+                 "name":"wet_clay",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":48.5,
+                 "x":2303.33316666667,
+                 "y":1132.9296969697
+                }, 
+                {
+                 "height":9.5,
+                 "id":1643,
+                 "name":"splash",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"effect",
+                 "visible":true,
+                 "width":36.75,
+                 "x":2776.58316666667,
+                 "y":2521.6796969697
+                }, 
+                {
+                 "height":63.6667,
+                 "id":1644,
+                 "name":"cold",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":291.5,
+                 "x":877.25,
+                 "y":1729.16665
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -3037,7 +3037,7 @@
          "name":"Background_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -3048,7 +3048,7 @@
          "name":"Midground_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -3059,7 +3059,7 @@
          "name":"Foreground_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -5517,51 +5517,6 @@
                  "y":1163.5
                 }, 
                 {
-                 "height":7.5,
-                 "id":1199,
-                 "name":"drip",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"effect",
-                 "visible":true,
-                 "width":50,
-                 "x":1789,
-                 "y":1114.5
-                }, 
-                {
-                 "height":7.5,
-                 "id":1200,
-                 "name":"drip",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"effect",
-                 "visible":true,
-                 "width":50,
-                 "x":1759.67,
-                 "y":1110.83
-                }, 
-                {
-                 "height":7.5,
-                 "id":1201,
-                 "name":"drip",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"effect",
-                 "visible":true,
-                 "width":3.66667,
-                 "x":1528.71,
-                 "y":1295.29
-                }, 
-                {
                  "gid":68,
                  "height":16,
                  "id":1202,
@@ -6010,51 +5965,6 @@
                  "y":1334
                 }, 
                 {
-                 "height":81.3333,
-                 "id":1230,
-                 "name":"fluff",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"effect",
-                 "visible":true,
-                 "width":158.5,
-                 "x":1469.5,
-                 "y":413.333
-                }, 
-                {
-                 "height":306,
-                 "id":1231,
-                 "name":"fluff",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"effect",
-                 "visible":true,
-                 "width":179,
-                 "x":944,
-                 "y":1830
-                }, 
-                {
-                 "height":135,
-                 "id":1232,
-                 "name":"fluff",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"effect",
-                 "visible":true,
-                 "width":194,
-                 "x":777,
-                 "y":1677
-                }, 
-                {
                  "gid":68,
                  "height":16,
                  "id":1233,
@@ -6167,36 +6077,6 @@
                  "y":1938.67
                 }, 
                 {
-                 "height":9.33333,
-                 "id":1240,
-                 "name":"bubbles",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"effect",
-                 "visible":true,
-                 "width":12.6667,
-                 "x":1008.67,
-                 "y":204.667
-                }, 
-                {
-                 "height":4.66667,
-                 "id":1241,
-                 "name":"bubbles",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"effect",
-                 "visible":true,
-                 "width":36,
-                 "x":1777.33,
-                 "y":1105
-                }, 
-                {
                  "gid":69,
                  "height":16,
                  "id":1242,
@@ -6227,21 +6107,6 @@
                  "width":16,
                  "x":2735,
                  "y":1822.33
-                }, 
-                {
-                 "height":57.3333,
-                 "id":1245,
-                 "name":"fluff",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"effect",
-                 "visible":true,
-                 "width":67.6667,
-                 "x":1070.67,
-                 "y":1427
                 }, 
                 {
                  "gid":68,
@@ -6789,171 +6654,6 @@
                  "y":517.333
                 }, 
                 {
-                 "height":25.5,
-                 "id":1282,
-                 "name":"tomatoes",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":118,
-                 "x":1646,
-                 "y":469
-                }, 
-                {
-                 "height":79.5,
-                 "id":1283,
-                 "name":"shade_tree",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":140.5,
-                 "x":1442.5,
-                 "y":417
-                }, 
-                {
-                 "height":33.5,
-                 "id":1284,
-                 "name":"phone",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":21,
-                 "x":2157,
-                 "y":656
-                }, 
-                {
-                 "height":36.5,
-                 "id":1285,
-                 "name":"hole_sign",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":40.5,
-                 "x":2876,
-                 "y":699.5
-                }, 
-                {
-                 "height":61,
-                 "id":1286,
-                 "name":"pillar",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":39,
-                 "x":2889,
-                 "y":1058.5
-                }, 
-                {
-                 "height":52,
-                 "id":1287,
-                 "name":"jerk",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":91,
-                 "x":1995.5,
-                 "y":963.5
-                }, 
-                {
-                 "height":25.5,
-                 "id":1288,
-                 "name":"mushrooms",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":55.5,
-                 "x":1990.5,
-                 "y":1429
-                }, 
-                {
-                 "height":52,
-                 "id":1289,
-                 "name":"dripping",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":77.5,
-                 "x":1754.5,
-                 "y":1307.5
-                }, 
-                {
-                 "height":108,
-                 "id":1290,
-                 "name":"fresh",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":132.5,
-                 "x":1805,
-                 "y":875.5
-                }, 
-                {
-                 "height":60,
-                 "id":1291,
-                 "name":"extract",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":34.5,
-                 "x":843,
-                 "y":763
-                }, 
-                {
-                 "height":64.5,
-                 "id":1292,
-                 "name":"spores",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":94.5,
-                 "x":1066.5,
-                 "y":1425
-                }, 
-                {
                  "height":49.75,
                  "id":1293,
                  "name":"delicate_flower",
@@ -6967,81 +6667,6 @@
                  "width":41.25,
                  "x":2835.5,
                  "y":1468.25
-                }, 
-                {
-                 "height":48.25,
-                 "id":1294,
-                 "name":"door_info",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":35.25,
-                 "x":2981.25,
-                 "y":1035.25
-                }, 
-                {
-                 "height":70,
-                 "id":1295,
-                 "name":"strange_wall",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":38,
-                 "x":2250,
-                 "y":1913.67
-                }, 
-                {
-                 "height":48,
-                 "id":1296,
-                 "name":"weak_floor",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":33,
-                 "x":2163.67,
-                 "y":1935
-                }, 
-                {
-                 "height":30.3333,
-                 "id":1297,
-                 "name":"more_flowers",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":113,
-                 "x":977,
-                 "y":2129.33
-                }, 
-                {
-                 "height":45.3333,
-                 "id":1298,
-                 "name":"anyone_home",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":41.3333,
-                 "x":1066.33,
-                 "y":417.667
                 }, 
                 {
                  "height":16,
@@ -7124,21 +6749,6 @@
                  "y":472
                 }, 
                 {
-                 "height":62.5,
-                 "id":1556,
-                 "name":"hidden_goodies",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":240.5,
-                 "x":1599.5,
-                 "y":1522
-                }, 
-                {
                  "gid":95,
                  "height":16,
                  "id":1557,
@@ -7153,36 +6763,6 @@
                  "width":16,
                  "x":1713.5,
                  "y":1677.5
-                }, 
-                {
-                 "height":48.5,
-                 "id":1558,
-                 "name":"flower_helper",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":62.25,
-                 "x":2174,
-                 "y":1694.75
-                }, 
-                {
-                 "height":74.5,
-                 "id":1559,
-                 "name":"go_away",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":115,
-                 "x":2043,
-                 "y":2148.5
                 }, 
                 {
                  "gid":67,
@@ -7214,36 +6794,6 @@
          "name":"Triggers_3",
          "objects":[
                 {
-                 "height":63,
-                 "id":1565,
-                 "name":"dizzy",
-                 "properties":
-                    {
-                     "once":"false"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":79,
-                 "x":1068,
-                 "y":1425
-                }, 
-                {
-                 "height":82,
-                 "id":1567,
-                 "name":"light",
-                 "properties":
-                    {
-                     "once":"false"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":113.333,
-                 "x":1465.33,
-                 "y":413.667
-                }, 
-                {
                  "height":226,
                  "id":1568,
                  "name":"light",
@@ -7252,7 +6802,7 @@
                      "once":"false"
                     },
                  "rotation":0,
-                 "type":"",
+                 "type":"trigger",
                  "visible":true,
                  "width":113.333,
                  "x":1035.91,
@@ -7267,7 +6817,7 @@
                      "once":"false"
                     },
                  "rotation":0,
-                 "type":"",
+                 "type":"trigger",
                  "visible":true,
                  "width":113.333,
                  "x":782.833,
@@ -7282,26 +6832,11 @@
                      "once":"false"
                     },
                  "rotation":0,
-                 "type":"",
+                 "type":"trigger",
                  "visible":true,
                  "width":221.667,
                  "x":673.333,
                  "y":2081
-                }, 
-                {
-                 "height":96,
-                 "id":1571,
-                 "name":"light",
-                 "properties":
-                    {
-                     "once":"false"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":103.5,
-                 "x":1842.5,
-                 "y":892
                 }, 
                 {
                  "height":409.917,
@@ -7312,11 +6847,476 @@
                      "once":"false"
                     },
                  "rotation":0,
-                 "type":"",
+                 "type":"trigger",
                  "visible":true,
                  "width":569.5,
                  "x":811.833,
                  "y":608.75
+                }, 
+                {
+                 "height":79.5,
+                 "id":1574,
+                 "name":"shade_tree",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":140.5,
+                 "x":1441.75,
+                 "y":416.168183333333
+                }, 
+                {
+                 "height":61,
+                 "id":1575,
+                 "name":"pillar",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":39,
+                 "x":2888.25,
+                 "y":1057.66818333333
+                }, 
+                {
+                 "height":30.3333,
+                 "id":1576,
+                 "name":"more_flowers",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":113,
+                 "x":976.25,
+                 "y":2128.49818333333
+                }, 
+                {
+                 "height":306,
+                 "id":1577,
+                 "name":"fluff",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"effect",
+                 "visible":true,
+                 "width":179,
+                 "x":943.25,
+                 "y":1829.16818333333
+                }, 
+                {
+                 "height":48.5,
+                 "id":1578,
+                 "name":"flower_helper",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":62.25,
+                 "x":2173.25,
+                 "y":1693.91818333333
+                }, 
+                {
+                 "height":36.5,
+                 "id":1579,
+                 "name":"hole_sign",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":40.5,
+                 "x":2875.25,
+                 "y":698.668183333333
+                }, 
+                {
+                 "height":64.5,
+                 "id":1580,
+                 "name":"spores",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":94.5,
+                 "x":1065.75,
+                 "y":1424.16818333333
+                }, 
+                {
+                 "height":81.3333,
+                 "id":1581,
+                 "name":"fluff",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"effect",
+                 "visible":true,
+                 "width":158.5,
+                 "x":1468.75,
+                 "y":412.501183333334
+                }, 
+                {
+                 "height":135,
+                 "id":1582,
+                 "name":"fluff",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"effect",
+                 "visible":true,
+                 "width":194,
+                 "x":776.25,
+                 "y":1676.16818333333
+                }, 
+                {
+                 "height":96,
+                 "id":1583,
+                 "name":"light",
+                 "properties":
+                    {
+                     "once":"false"
+                    },
+                 "rotation":0,
+                 "type":"trigger",
+                 "visible":true,
+                 "width":103.5,
+                 "x":1841.75,
+                 "y":891.168183333333
+                }, 
+                {
+                 "height":7.5,
+                 "id":1584,
+                 "name":"drip",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"effect",
+                 "visible":true,
+                 "width":50,
+                 "x":1758.92,
+                 "y":1109.99818333333
+                }, 
+                {
+                 "height":108,
+                 "id":1585,
+                 "name":"fresh",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":132.5,
+                 "x":1804.25,
+                 "y":874.668183333333
+                }, 
+                {
+                 "height":25.5,
+                 "id":1586,
+                 "name":"tomatoes",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":118,
+                 "x":1645.25,
+                 "y":468.168183333333
+                }, 
+                {
+                 "height":82,
+                 "id":1587,
+                 "name":"light",
+                 "properties":
+                    {
+                     "once":"false"
+                    },
+                 "rotation":0,
+                 "type":"trigger",
+                 "visible":true,
+                 "width":113.333,
+                 "x":1464.58,
+                 "y":412.835183333333
+                }, 
+                {
+                 "height":52,
+                 "id":1588,
+                 "name":"dripping",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":77.5,
+                 "x":1753.75,
+                 "y":1306.66818333333
+                }, 
+                {
+                 "height":45.3333,
+                 "id":1589,
+                 "name":"anyone_home",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":41.3333,
+                 "x":1065.58,
+                 "y":416.835183333333
+                }, 
+                {
+                 "height":63,
+                 "id":1590,
+                 "name":"dizzy",
+                 "properties":
+                    {
+                     "once":"false"
+                    },
+                 "rotation":0,
+                 "type":"trigger",
+                 "visible":true,
+                 "width":79,
+                 "x":1067.25,
+                 "y":1424.16818333333
+                }, 
+                {
+                 "height":48.25,
+                 "id":1591,
+                 "name":"door_info",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":35.25,
+                 "x":2980.5,
+                 "y":1034.41818333333
+                }, 
+                {
+                 "height":25.5,
+                 "id":1592,
+                 "name":"mushrooms",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":55.5,
+                 "x":1989.75,
+                 "y":1428.16818333333
+                }, 
+                {
+                 "height":4.66667,
+                 "id":1593,
+                 "name":"bubbles",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"effect",
+                 "visible":true,
+                 "width":36,
+                 "x":1776.58,
+                 "y":1104.16818333333
+                }, 
+                {
+                 "height":9.33333,
+                 "id":1594,
+                 "name":"bubbles",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"effect",
+                 "visible":true,
+                 "width":12.6667,
+                 "x":1007.92,
+                 "y":203.835183333333
+                }, 
+                {
+                 "height":7.5,
+                 "id":1595,
+                 "name":"drip",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"effect",
+                 "visible":true,
+                 "width":50,
+                 "x":1788.25,
+                 "y":1113.66818333333
+                }, 
+                {
+                 "height":33.5,
+                 "id":1596,
+                 "name":"phone",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":21,
+                 "x":2156.25,
+                 "y":655.168183333333
+                }, 
+                {
+                 "height":52,
+                 "id":1605,
+                 "name":"jerk",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":91,
+                 "x":1996.16666666667,
+                 "y":963.333333333333
+                }, 
+                {
+                 "height":57.3333,
+                 "id":1606,
+                 "name":"fluff",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"effect",
+                 "visible":true,
+                 "width":67.6667,
+                 "x":1071.33666666667,
+                 "y":1426.83333333333
+                }, 
+                {
+                 "height":60,
+                 "id":1607,
+                 "name":"extract",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":34.5,
+                 "x":843.666666666667,
+                 "y":762.833333333333
+                }, 
+                {
+                 "height":70,
+                 "id":1608,
+                 "name":"strange_wall",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":38,
+                 "x":2250.66666666667,
+                 "y":1913.50333333333
+                }, 
+                {
+                 "height":74.5,
+                 "id":1609,
+                 "name":"go_away",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":115,
+                 "x":2043.66666666667,
+                 "y":2148.33333333333
+                }, 
+                {
+                 "height":7.5,
+                 "id":1610,
+                 "name":"drip",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"effect",
+                 "visible":true,
+                 "width":3.66667,
+                 "x":1529.37666666667,
+                 "y":1295.12333333333
+                }, 
+                {
+                 "height":62.5,
+                 "id":1611,
+                 "name":"hidden_goodies",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":240.5,
+                 "x":1600.16666666667,
+                 "y":1521.83333333333
+                }, 
+                {
+                 "height":48,
+                 "id":1612,
+                 "name":"weak_floor",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":33,
+                 "x":2164.33666666667,
+                 "y":1934.83333333333
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -9119,21 +9119,6 @@
                  "y":2588
                 }, 
                 {
-                 "height":9.17,
-                 "id":1414,
-                 "name":"splash",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"effect",
-                 "visible":true,
-                 "width":45.0417,
-                 "x":3026.62,
-                 "y":2809.33
-                }, 
-                {
                  "gid":67,
                  "height":16,
                  "id":1415,
@@ -9389,36 +9374,6 @@
                  "width":16,
                  "x":1472,
                  "y":2816
-                }, 
-                {
-                 "height":131.5,
-                 "id":1432,
-                 "name":"fluff",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"effect",
-                 "visible":true,
-                 "width":120,
-                 "x":2387,
-                 "y":1862
-                }, 
-                {
-                 "height":5,
-                 "id":1433,
-                 "name":"drip",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"effect",
-                 "visible":true,
-                 "width":6.5,
-                 "x":793.167,
-                 "y":2479.5
                 }, 
                 {
                  "gid":89,
@@ -10301,216 +10256,6 @@
                  "y":2264
                 }, 
                 {
-                 "height":76.75,
-                 "id":1491,
-                 "name":"down_there",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":16.25,
-                 "x":1440.5,
-                 "y":2529.75
-                }, 
-                {
-                 "height":55,
-                 "id":1492,
-                 "name":"jump_in",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":47,
-                 "x":1392.25,
-                 "y":2121
-                }, 
-                {
-                 "height":51.3333,
-                 "id":1493,
-                 "name":"tanks",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":58.6667,
-                 "x":1351,
-                 "y":2234
-                }, 
-                {
-                 "height":52,
-                 "id":1494,
-                 "name":"yum_apple",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":48.5,
-                 "x":768,
-                 "y":2364
-                }, 
-                {
-                 "height":43.5,
-                 "id":1495,
-                 "name":"yuck_ground",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":93,
-                 "x":777.5,
-                 "y":2516.5
-                }, 
-                {
-                 "height":45.5,
-                 "id":1496,
-                 "name":"secret_garden",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":94.5,
-                 "x":12.5,
-                 "y":2644.5
-                }, 
-                {
-                 "height":36,
-                 "id":1497,
-                 "name":"ohh",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":32,
-                 "x":31.5,
-                 "y":2139.5
-                }, 
-                {
-                 "height":58.3333,
-                 "id":1498,
-                 "name":"cant_see",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":47,
-                 "x":919,
-                 "y":385.667
-                }, 
-                {
-                 "height":49.5,
-                 "id":1499,
-                 "name":"prickly_stuff",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":51.5,
-                 "x":1743,
-                 "y":1345.5
-                }, 
-                {
-                 "height":67.5,
-                 "id":1500,
-                 "name":"ceiling",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":134.5,
-                 "x":964,
-                 "y":2554.5
-                }, 
-                {
-                 "height":52.5,
-                 "id":1501,
-                 "name":"up_there",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":72.5,
-                 "x":437,
-                 "y":1653.5
-                }, 
-                {
-                 "height":73.3333,
-                 "id":1502,
-                 "name":"whew",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":30.6667,
-                 "x":2,
-                 "y":1145.33
-                }, 
-                {
-                 "height":57.3333,
-                 "id":1503,
-                 "name":"look_down",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":28.6667,
-                 "x":964.667,
-                 "y":1302
-                }, 
-                {
-                 "height":9.17,
-                 "id":1549,
-                 "name":"splash",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"effect",
-                 "visible":true,
-                 "width":45.0417,
-                 "x":2744.62,
-                 "y":2810.83
-                }, 
-                {
                  "gid":85,
                  "height":16,
                  "id":1560,
@@ -10554,7 +10299,262 @@
          "draworder":"topdown",
          "height":0,
          "name":"Triggers_4",
-         "objects":[],
+         "objects":[
+                {
+                 "height":45.5,
+                 "id":1613,
+                 "name":"secret_garden",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":94.5,
+                 "x":12.0327863636362,
+                 "y":2642.27256060606
+                }, 
+                {
+                 "height":49.5,
+                 "id":1614,
+                 "name":"prickly_stuff",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":51.5,
+                 "x":1742.53278636364,
+                 "y":1343.27256060606
+                }, 
+                {
+                 "height":52,
+                 "id":1615,
+                 "name":"yum_apple",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":48.5,
+                 "x":767.532786363636,
+                 "y":2361.77256060606
+                }, 
+                {
+                 "height":57.3333,
+                 "id":1616,
+                 "name":"look_down",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":28.6667,
+                 "x":964.199786363636,
+                 "y":1299.77256060606
+                }, 
+                {
+                 "height":67.5,
+                 "id":1617,
+                 "name":"ceiling",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":134.5,
+                 "x":963.532786363636,
+                 "y":2552.27256060606
+                }, 
+                {
+                 "height":76.75,
+                 "id":1618,
+                 "name":"down_there",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":16.25,
+                 "x":1440.03278636364,
+                 "y":2527.52256060606
+                }, 
+                {
+                 "height":131.5,
+                 "id":1619,
+                 "name":"fluff",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"effect",
+                 "visible":true,
+                 "width":120,
+                 "x":2386.53278636364,
+                 "y":1859.77256060606
+                }, 
+                {
+                 "height":9.17,
+                 "id":1620,
+                 "name":"splash",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"effect",
+                 "visible":true,
+                 "width":45.0417,
+                 "x":2744.15278636364,
+                 "y":2808.60256060606
+                }, 
+                {
+                 "height":9.17,
+                 "id":1621,
+                 "name":"splash",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"effect",
+                 "visible":true,
+                 "width":45.0417,
+                 "x":3026.15278636364,
+                 "y":2807.10256060606
+                }, 
+                {
+                 "height":36,
+                 "id":1622,
+                 "name":"ohh",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":32,
+                 "x":31.0327863636362,
+                 "y":2137.27256060606
+                }, 
+                {
+                 "height":58.3333,
+                 "id":1623,
+                 "name":"cant_see",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":47,
+                 "x":918.532786363636,
+                 "y":383.439560606061
+                }, 
+                {
+                 "height":52.5,
+                 "id":1624,
+                 "name":"up_there",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":72.5,
+                 "x":436.532786363636,
+                 "y":1651.27256060606
+                }, 
+                {
+                 "height":5,
+                 "id":1625,
+                 "name":"drip",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"effect",
+                 "visible":true,
+                 "width":6.5,
+                 "x":792.699786363636,
+                 "y":2477.27256060606
+                }, 
+                {
+                 "height":73.3333,
+                 "id":1626,
+                 "name":"whew",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":30.6667,
+                 "x":1.53278636363621,
+                 "y":1143.10256060606
+                }, 
+                {
+                 "height":43.5,
+                 "id":1627,
+                 "name":"yuck_ground",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":93,
+                 "x":777.032786363636,
+                 "y":2514.27256060606
+                }, 
+                {
+                 "height":55,
+                 "id":1628,
+                 "name":"jump_in",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":47,
+                 "x":1393.125,
+                 "y":2119.83335
+                }, 
+                {
+                 "height":51.3333,
+                 "id":1629,
+                 "name":"tanks",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":58.6667,
+                 "x":1351.875,
+                 "y":2232.83335
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":false,
@@ -10979,7 +10979,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":1574,
+ "nextobjectid":1645,
  "orientation":"orthogonal",
  "properties":
     {

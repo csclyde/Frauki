@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="180" tilewidth="16" tileheight="16" backgroundcolor="#55d5ed" nextobjectid="1574">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="180" tilewidth="16" tileheight="16" backgroundcolor="#55d5ed" nextobjectid="1645">
  <properties>
   <property name="debug" value="false"/>
   <property name="startLayer" value="4"/>
@@ -329,7 +329,7 @@
  <tileset firstgid="2653" name="Doodads" tilewidth="16" tileheight="16" tilecount="1600">
   <image source="Doodads.png" width="640" height="640"/>
  </tileset>
- <layer name="Background_2" width="200" height="180" visible="0">
+ <layer name="Background_2" width="200" height="180">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -513,7 +513,7 @@
 1489,1489,1489,1489,1489,668,668,668,668,668,668,668,668,667,668,668,668,667,667,669,668,667,667,667,668,667,668,667,668,667,667,669,667,667,668,668,667,667,669,669,668,668,667,668,667,667,669,669,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,667,667,667,822,823,668,669,669,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,1489,981,982,983,982,982,982,981,981,983,982,983,983,982,983,983,983,981,982,982,982,983,982,981,981,983,983,983,982,982,982
 </data>
  </layer>
- <layer name="Midground_2" width="200" height="180" visible="0">
+ <layer name="Midground_2" width="200" height="180">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -697,7 +697,7 @@
 1811,1845,1811,1813,1845,1813,1844,1844,1812,1843,1812,1845,1811,1811,1845,1813,1813,1844,1843,1843,1843,1812,1843,1813,1843,1843,1813,1813,1843,1844,1812,1811,1813,1843,1811,1811,1845,1811,1813,1845,1844,1845,1812,1811,1813,1845,1813,1843,1843,1845,1812,1811,1845,1845,1811,1844,1844,1843,1844,1843,1844,1812,1844,1811,1843,1844,1845,1843,1845,1812,1845,1811,1811,1844,1811,1813,1843,1813,1812,1811,1843,1811,1844,1845,1811,1811,1845,1844,1813,1813,1844,1812,1844,1811,1811,1811,1811,1844,1845,1843,1812,1813,1812,1845,1844,1813,1844,1844,1843,1813,1845,1813,1813,1843,1812,1811,1811,1844,1843,1812,1844,1813,1845,1845,1844,1845,1811,1812,978,1811,0,0,0,980,1813,1811,1811,1845,1813,1813,1845,1844,1845,1843,1811,1843,1843,1811,1813,1844,1844,1843,1845,1811,1811,1845,1845,1811,1811,1812,1811,1811,1844,1812,1813,1845,1843,1812,1812,1812,1843,1813,1845,1844,1843,1844,1845,1811,1813,1811,1811,1843,1845,1844,1811,1813,1843,1843,1845,1844,1845,1813,1845,1844,1811,1844,1844,1813,1812,1845
 </data>
  </layer>
- <layer name="Foreground_2" width="200" height="180" visible="0">
+ <layer name="Foreground_2" width="200" height="180">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -1224,7 +1224,6 @@
   <object id="1013" gid="68" x="944" y="1040" width="16" height="16"/>
   <object id="1014" gid="99" x="1457.33" y="1265.33" width="16" height="16"/>
   <object id="1015" gid="99" x="1883.33" y="1544.67" width="16" height="16"/>
-  <object id="1016" name="splash" type="effect" x="2776.25" y="2523.25" width="36.75" height="9.5"/>
   <object id="1017" gid="66" x="704" y="1664" width="16" height="16"/>
   <object id="1018" gid="107" x="1934.5" y="1131" width="16" height="16"/>
   <object id="1019" gid="107" x="2108.5" y="1134.5" width="16" height="16"/>
@@ -1232,21 +1231,7 @@
   <object id="1021" gid="107" x="2759" y="1558.5" width="16" height="16"/>
   <object id="1022" gid="126" x="2537.5" y="1929" width="16" height="16"/>
   <object id="1023" gid="95" x="1574.33" y="2456" width="16" height="16"/>
-  <object id="1024" name="wet_clay" type="speech" x="2303" y="1134.5" width="48.5" height="62.5"/>
-  <object id="1025" name="dew" type="speech" x="2096" y="1088.5" width="48" height="63"/>
-  <object id="1026" name="draft" type="speech" x="1918.5" y="1088.5" width="47.5" height="64"/>
-  <object id="1027" name="how_standing" type="speech" x="2686.67" y="1516.67" width="84" height="66"/>
-  <object id="1028" name="fire" type="speech" x="636.667" y="684.33" width="35.3333" height="34.3333"/>
-  <object id="1029" name="dont_eat" type="speech" x="339" y="814.67" width="72" height="66.6667"/>
-  <object id="1030" name="nibble" type="speech" x="447" y="1870.33" width="36" height="64.3333"/>
-  <object id="1031" name="cold" type="speech" x="875.5" y="1728.67" width="291.5" height="63.6667"/>
-  <object id="1032" name="drip" type="effect" x="430" y="1372.5" width="34" height="6"/>
-  <object id="1033" name="drip" type="effect" x="576.5" y="1342.5" width="34" height="6"/>
-  <object id="1034" name="drip" type="effect" x="767" y="1341" width="34" height="6"/>
-  <object id="1035" name="drip" type="effect" x="670.5" y="1358" width="34" height="6"/>
-  <object id="1036" name="ellipses" type="speech" x="318.667" y="1378" width="528.667" height="172"/>
   <object id="1037" gid="106" x="1766" y="1333" width="16" height="16"/>
-  <object id="1038" name="sorry_plant" type="speech" x="1756.67" y="1304.33" width="48.3333" height="54.3333"/>
   <object id="1530" gid="69" x="217.333" y="1518.67" width="16" height="16">
    <properties>
     <property name="id" value="drip_chamber"/>
@@ -1273,8 +1258,23 @@
  <objectgroup name="Triggers_2" visible="0">
   <object id="1039" name="stop_music" x="456.667" y="831.33" width="169.333" height="109.333"/>
   <object id="1040" name="start_underwater_music" x="426.667" y="1068" width="118" height="61.3333"/>
+  <object id="1630" name="fire" type="speech" x="637" y="682.76" width="35.3333" height="34.3333"/>
+  <object id="1631" name="dew" type="speech" x="2096.33" y="1086.93" width="48" height="63"/>
+  <object id="1632" name="dont_eat" type="speech" x="339.333" y="813.1" width="72" height="66.6667"/>
+  <object id="1633" name="drip" type="effect" x="767.333" y="1339.43" width="34" height="6"/>
+  <object id="1634" name="draft" type="speech" x="1918.83" y="1086.93" width="47.5" height="64"/>
+  <object id="1635" name="drip" type="effect" x="670.833" y="1356.43" width="34" height="6"/>
+  <object id="1636" name="sorry_plant" type="speech" x="1757" y="1302.76" width="48.3333" height="54.3333"/>
+  <object id="1637" name="nibble" type="speech" x="447.333" y="1868.76" width="36" height="64.3333"/>
+  <object id="1638" name="how_standing" type="speech" x="2687" y="1515.1" width="84" height="66"/>
+  <object id="1639" name="drip" type="effect" x="430.333" y="1370.93" width="34" height="6"/>
+  <object id="1640" name="ellipses" type="speech" x="319" y="1376.43" width="528.667" height="172"/>
+  <object id="1641" name="drip" type="effect" x="576.833" y="1340.93" width="34" height="6"/>
+  <object id="1642" name="wet_clay" type="speech" x="2303.33" y="1132.93" width="48.5" height="62.5"/>
+  <object id="1643" name="splash" type="effect" x="2776.58" y="2521.68" width="36.75" height="9.5"/>
+  <object id="1644" name="cold" type="speech" x="877.25" y="1729.17" width="291.5" height="63.6667"/>
  </objectgroup>
- <layer name="Background_3" width="200" height="180">
+ <layer name="Background_3" width="200" height="180" visible="0">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -1458,7 +1458,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="Midground_3" width="200" height="180">
+ <layer name="Midground_3" width="200" height="180" visible="0">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -1642,7 +1642,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="Foreground_3" width="200" height="180">
+ <layer name="Foreground_3" width="200" height="180" visible="0">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -2183,9 +2183,6 @@
   <object id="1196" gid="105" x="1123.5" y="1097" width="16" height="16"/>
   <object id="1197" gid="105" x="1081.5" y="1098.5" width="16" height="16"/>
   <object id="1198" gid="105" x="987" y="1163.5" width="16" height="16"/>
-  <object id="1199" name="drip" type="effect" x="1789" y="1114.5" width="50" height="7.5"/>
-  <object id="1200" name="drip" type="effect" x="1759.67" y="1110.83" width="50" height="7.5"/>
-  <object id="1201" name="drip" type="effect" x="1528.71" y="1295.29" width="3.66667" height="7.5"/>
   <object id="1202" gid="68" x="1824" y="1536" width="16" height="16"/>
   <object id="1203" gid="68" x="1824" y="1568" width="16" height="16"/>
   <object id="1204" gid="68" x="1808" y="1552" width="16" height="16"/>
@@ -2214,9 +2211,6 @@
   <object id="1227" gid="105" x="831.333" y="1502" width="16" height="16"/>
   <object id="1228" gid="105" x="806" y="1502.67" width="16" height="16"/>
   <object id="1229" gid="107" x="1844.5" y="1334" width="16" height="16"/>
-  <object id="1230" name="fluff" type="effect" x="1469.5" y="413.333" width="158.5" height="81.3333"/>
-  <object id="1231" name="fluff" type="effect" x="944" y="1830" width="179" height="306"/>
-  <object id="1232" name="fluff" type="effect" x="777" y="1677" width="194" height="135"/>
   <object id="1233" gid="68" x="1456" y="912" width="16" height="16"/>
   <object id="1234" gid="68" x="1472" y="896" width="16" height="16"/>
   <object id="1235" gid="68" x="1456" y="880" width="16" height="16"/>
@@ -2224,8 +2218,6 @@
   <object id="1237" gid="68" x="1488" y="880" width="16" height="16"/>
   <object id="1238" gid="68" x="1504" y="896" width="16" height="16"/>
   <object id="1239" gid="127" x="1520" y="1938.67" width="16" height="16"/>
-  <object id="1240" name="bubbles" type="effect" x="1008.67" y="204.667" width="12.6667" height="9.33333"/>
-  <object id="1241" name="bubbles" type="effect" x="1777.33" y="1105" width="36" height="4.66667"/>
   <object id="1242" gid="69" x="2029" y="687" width="16" height="16">
    <properties>
     <property name="id" value="0"/>
@@ -2236,7 +2228,6 @@
     <property name="id" value="1"/>
    </properties>
   </object>
-  <object id="1245" name="fluff" type="effect" x="1070.67" y="1427" width="67.6667" height="57.3333"/>
   <object id="1247" gid="68" x="1840" y="896" width="16" height="16"/>
   <object id="1248" gid="68" x="1872" y="896" width="16" height="16"/>
   <object id="1249" gid="68" x="1904" y="896" width="16" height="16"/>
@@ -2276,23 +2267,7 @@
   <object id="1279" gid="68" x="2794" y="662" width="16" height="16"/>
   <object id="1280" gid="68" x="2792.67" y="518.667" width="16" height="16"/>
   <object id="1281" gid="68" x="2678.33" y="517.333" width="16" height="16"/>
-  <object id="1282" name="tomatoes" type="speech" x="1646" y="469" width="118" height="25.5"/>
-  <object id="1283" name="shade_tree" type="speech" x="1442.5" y="417" width="140.5" height="79.5"/>
-  <object id="1284" name="phone" type="speech" x="2157" y="656" width="21" height="33.5"/>
-  <object id="1285" name="hole_sign" type="speech" x="2876" y="699.5" width="40.5" height="36.5"/>
-  <object id="1286" name="pillar" type="speech" x="2889" y="1058.5" width="39" height="61"/>
-  <object id="1287" name="jerk" type="speech" x="1995.5" y="963.5" width="91" height="52"/>
-  <object id="1288" name="mushrooms" type="speech" x="1990.5" y="1429" width="55.5" height="25.5"/>
-  <object id="1289" name="dripping" type="speech" x="1754.5" y="1307.5" width="77.5" height="52"/>
-  <object id="1290" name="fresh" type="speech" x="1805" y="875.5" width="132.5" height="108"/>
-  <object id="1291" name="extract" type="speech" x="843" y="763" width="34.5" height="60"/>
-  <object id="1292" name="spores" type="speech" x="1066.5" y="1425" width="94.5" height="64.5"/>
   <object id="1293" name="delicate_flower" type="speech" x="2835.5" y="1468.25" width="41.25" height="49.75"/>
-  <object id="1294" name="door_info" type="speech" x="2981.25" y="1035.25" width="35.25" height="48.25"/>
-  <object id="1295" name="strange_wall" type="speech" x="2250" y="1913.67" width="38" height="70"/>
-  <object id="1296" name="weak_floor" type="speech" x="2163.67" y="1935" width="33" height="48"/>
-  <object id="1297" name="more_flowers" type="speech" x="977" y="2129.33" width="113" height="30.3333"/>
-  <object id="1298" name="anyone_home" type="speech" x="1066.33" y="417.667" width="41.3333" height="45.3333"/>
   <object id="1299" x="192" y="2096" height="16"/>
   <object id="1300" gid="68" x="176" y="2112" width="16" height="16"/>
   <object id="1301" gid="67" x="2890" y="1242.67" width="16" height="16">
@@ -2303,10 +2278,7 @@
   </object>
   <object id="1553" gid="85" x="2340.67" y="1428.67" width="16" height="16"/>
   <object id="1554" gid="85" x="1380.67" y="472" width="16" height="16"/>
-  <object id="1556" name="hidden_goodies" type="speech" x="1599.5" y="1522" width="240.5" height="62.5"/>
   <object id="1557" gid="95" x="1713.5" y="1677.5" width="16" height="16"/>
-  <object id="1558" name="flower_helper" type="speech" x="2174" y="1694.75" width="62.25" height="48.5"/>
-  <object id="1559" name="go_away" type="speech" x="2043" y="2148.5" width="115" height="74.5"/>
   <object id="1564" gid="67" x="954" y="1354" width="16" height="16">
    <properties>
     <property name="facing" value="right"/>
@@ -2315,41 +2287,69 @@
   </object>
  </objectgroup>
  <objectgroup name="Triggers_3" visible="0">
-  <object id="1565" name="dizzy" x="1068" y="1425" width="79" height="63">
+  <object id="1568" name="light" type="trigger" x="1035.91" y="1947.5" width="113.333" height="226">
    <properties>
     <property name="once" value="false"/>
    </properties>
   </object>
-  <object id="1567" name="light" x="1465.33" y="413.667" width="113.333" height="82">
+  <object id="1569" name="light" type="trigger" x="782.833" y="1986.5" width="113.333" height="76">
    <properties>
     <property name="once" value="false"/>
    </properties>
   </object>
-  <object id="1568" name="light" x="1035.91" y="1947.5" width="113.333" height="226">
+  <object id="1570" name="dark" type="trigger" x="673.333" y="2081" width="221.667" height="94.5">
    <properties>
     <property name="once" value="false"/>
    </properties>
   </object>
-  <object id="1569" name="light" x="782.833" y="1986.5" width="113.333" height="76">
+  <object id="1572" name="dark" type="trigger" x="811.833" y="608.75" width="569.5" height="409.917">
    <properties>
     <property name="once" value="false"/>
    </properties>
   </object>
-  <object id="1570" name="dark" x="673.333" y="2081" width="221.667" height="94.5">
+  <object id="1574" name="shade_tree" type="speech" x="1441.75" y="416.168" width="140.5" height="79.5"/>
+  <object id="1575" name="pillar" type="speech" x="2888.25" y="1057.67" width="39" height="61"/>
+  <object id="1576" name="more_flowers" type="speech" x="976.25" y="2128.5" width="113" height="30.3333"/>
+  <object id="1577" name="fluff" type="effect" x="943.25" y="1829.17" width="179" height="306"/>
+  <object id="1578" name="flower_helper" type="speech" x="2173.25" y="1693.92" width="62.25" height="48.5"/>
+  <object id="1579" name="hole_sign" type="speech" x="2875.25" y="698.668" width="40.5" height="36.5"/>
+  <object id="1580" name="spores" type="speech" x="1065.75" y="1424.17" width="94.5" height="64.5"/>
+  <object id="1581" name="fluff" type="effect" x="1468.75" y="412.501" width="158.5" height="81.3333"/>
+  <object id="1582" name="fluff" type="effect" x="776.25" y="1676.17" width="194" height="135"/>
+  <object id="1583" name="light" type="trigger" x="1841.75" y="891.168" width="103.5" height="96">
    <properties>
     <property name="once" value="false"/>
    </properties>
   </object>
-  <object id="1571" name="light" x="1842.5" y="892" width="103.5" height="96">
+  <object id="1584" name="drip" type="effect" x="1758.92" y="1110" width="50" height="7.5"/>
+  <object id="1585" name="fresh" type="speech" x="1804.25" y="874.668" width="132.5" height="108"/>
+  <object id="1586" name="tomatoes" type="speech" x="1645.25" y="468.168" width="118" height="25.5"/>
+  <object id="1587" name="light" type="trigger" x="1464.58" y="412.835" width="113.333" height="82">
    <properties>
     <property name="once" value="false"/>
    </properties>
   </object>
-  <object id="1572" name="dark" x="811.833" y="608.75" width="569.5" height="409.917">
+  <object id="1588" name="dripping" type="speech" x="1753.75" y="1306.67" width="77.5" height="52"/>
+  <object id="1589" name="anyone_home" type="speech" x="1065.58" y="416.835" width="41.3333" height="45.3333"/>
+  <object id="1590" name="dizzy" type="trigger" x="1067.25" y="1424.17" width="79" height="63">
    <properties>
     <property name="once" value="false"/>
    </properties>
   </object>
+  <object id="1591" name="door_info" type="speech" x="2980.5" y="1034.42" width="35.25" height="48.25"/>
+  <object id="1592" name="mushrooms" type="speech" x="1989.75" y="1428.17" width="55.5" height="25.5"/>
+  <object id="1593" name="bubbles" type="effect" x="1776.58" y="1104.17" width="36" height="4.66667"/>
+  <object id="1594" name="bubbles" type="effect" x="1007.92" y="203.835" width="12.6667" height="9.33333"/>
+  <object id="1595" name="drip" type="effect" x="1788.25" y="1113.67" width="50" height="7.5"/>
+  <object id="1596" name="phone" type="speech" x="2156.25" y="655.168" width="21" height="33.5"/>
+  <object id="1605" name="jerk" type="speech" x="1996.17" y="963.333" width="91" height="52"/>
+  <object id="1606" name="fluff" type="effect" x="1071.34" y="1426.83" width="67.6667" height="57.3333"/>
+  <object id="1607" name="extract" type="speech" x="843.667" y="762.833" width="34.5" height="60"/>
+  <object id="1608" name="strange_wall" type="speech" x="2250.67" y="1913.5" width="38" height="70"/>
+  <object id="1609" name="go_away" type="speech" x="2043.67" y="2148.33" width="115" height="74.5"/>
+  <object id="1610" name="drip" type="effect" x="1529.38" y="1295.12" width="3.66667" height="7.5"/>
+  <object id="1611" name="hidden_goodies" type="speech" x="1600.17" y="1521.83" width="240.5" height="62.5"/>
+  <object id="1612" name="weak_floor" type="speech" x="2164.34" y="1934.83" width="33" height="48"/>
  </objectgroup>
  <layer name="Background_4" width="200" height="180" visible="0">
   <data encoding="csv">
@@ -3197,7 +3197,6 @@
   <object id="1411" gid="100" x="2634" y="2382" width="16" height="16"/>
   <object id="1412" gid="95" x="2710" y="2589" width="16" height="16"/>
   <object id="1413" gid="95" x="2406" y="2588" width="16" height="16"/>
-  <object id="1414" name="splash" type="effect" x="3026.62" y="2809.33" width="45.0417" height="9.17"/>
   <object id="1415" gid="67" x="648" y="1156.67" width="16" height="16">
    <properties>
     <property name="facing" value="left"/>
@@ -3219,8 +3218,6 @@
   <object id="1428" gid="68" x="1472" y="2656" width="16" height="16"/>
   <object id="1429" gid="68" x="1456" y="2736" width="16" height="16"/>
   <object id="1430" gid="68" x="1472" y="2816" width="16" height="16"/>
-  <object id="1432" name="fluff" type="effect" x="2387" y="1862" width="120" height="131.5"/>
-  <object id="1433" name="drip" type="effect" x="793.167" y="2479.5" width="6.5" height="5"/>
   <object id="1434" gid="89" x="848.667" y="2408" width="16" height="16"/>
   <object id="1435" gid="89" x="873.333" y="2406.67" width="16" height="16"/>
   <object id="1436" gid="85" x="374.667" y="2657.33" width="16" height="16"/>
@@ -3280,20 +3277,6 @@
     <property name="id" value="4"/>
    </properties>
   </object>
-  <object id="1491" name="down_there" type="speech" x="1440.5" y="2529.75" width="16.25" height="76.75"/>
-  <object id="1492" name="jump_in" type="speech" x="1392.25" y="2121" width="47" height="55"/>
-  <object id="1493" name="tanks" type="speech" x="1351" y="2234" width="58.6667" height="51.3333"/>
-  <object id="1494" name="yum_apple" type="speech" x="768" y="2364" width="48.5" height="52"/>
-  <object id="1495" name="yuck_ground" type="speech" x="777.5" y="2516.5" width="93" height="43.5"/>
-  <object id="1496" name="secret_garden" type="speech" x="12.5" y="2644.5" width="94.5" height="45.5"/>
-  <object id="1497" name="ohh" type="speech" x="31.5" y="2139.5" width="32" height="36"/>
-  <object id="1498" name="cant_see" type="speech" x="919" y="385.667" width="47" height="58.3333"/>
-  <object id="1499" name="prickly_stuff" type="speech" x="1743" y="1345.5" width="51.5" height="49.5"/>
-  <object id="1500" name="ceiling" type="speech" x="964" y="2554.5" width="134.5" height="67.5"/>
-  <object id="1501" name="up_there" type="speech" x="437" y="1653.5" width="72.5" height="52.5"/>
-  <object id="1502" name="whew" type="speech" x="2" y="1145.33" width="30.6667" height="73.3333"/>
-  <object id="1503" name="look_down" type="speech" x="964.667" y="1302" width="28.6667" height="57.3333"/>
-  <object id="1549" name="splash" type="effect" x="2744.62" y="2810.83" width="45.0417" height="9.17"/>
   <object id="1560" gid="85" x="657" y="1934" width="16" height="16"/>
   <object id="1561" gid="67" x="1136" y="1784" width="16" height="16">
    <properties>
@@ -3302,7 +3285,25 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="Triggers_4" visible="0"/>
+ <objectgroup name="Triggers_4" visible="0">
+  <object id="1613" name="secret_garden" type="speech" x="12.0328" y="2642.27" width="94.5" height="45.5"/>
+  <object id="1614" name="prickly_stuff" type="speech" x="1742.53" y="1343.27" width="51.5" height="49.5"/>
+  <object id="1615" name="yum_apple" type="speech" x="767.533" y="2361.77" width="48.5" height="52"/>
+  <object id="1616" name="look_down" type="speech" x="964.2" y="1299.77" width="28.6667" height="57.3333"/>
+  <object id="1617" name="ceiling" type="speech" x="963.533" y="2552.27" width="134.5" height="67.5"/>
+  <object id="1618" name="down_there" type="speech" x="1440.03" y="2527.52" width="16.25" height="76.75"/>
+  <object id="1619" name="fluff" type="effect" x="2386.53" y="1859.77" width="120" height="131.5"/>
+  <object id="1620" name="splash" type="effect" x="2744.15" y="2808.6" width="45.0417" height="9.17"/>
+  <object id="1621" name="splash" type="effect" x="3026.15" y="2807.1" width="45.0417" height="9.17"/>
+  <object id="1622" name="ohh" type="speech" x="31.0328" y="2137.27" width="32" height="36"/>
+  <object id="1623" name="cant_see" type="speech" x="918.533" y="383.44" width="47" height="58.3333"/>
+  <object id="1624" name="up_there" type="speech" x="436.533" y="1651.27" width="72.5" height="52.5"/>
+  <object id="1625" name="drip" type="effect" x="792.7" y="2477.27" width="6.5" height="5"/>
+  <object id="1626" name="whew" type="speech" x="1.53279" y="1143.1" width="30.6667" height="73.3333"/>
+  <object id="1627" name="yuck_ground" type="speech" x="777.033" y="2514.27" width="93" height="43.5"/>
+  <object id="1628" name="jump_in" type="speech" x="1393.12" y="2119.83" width="47" height="55"/>
+  <object id="1629" name="tanks" type="speech" x="1351.88" y="2232.83" width="58.6667" height="51.3333"/>
+ </objectgroup>
  <objectgroup name="Doors_1" visible="0">
   <properties>
    <property name="Desc" value="Connects layers 2 and 3"/>

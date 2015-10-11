@@ -19,6 +19,10 @@ TriggerController.prototype.CreateTriggers = function(layer) {
 
         var trigger = this.triggerLayers['Triggers_' + layer][i];
 
+        if(trigger.type !== 'trigger') {
+            continue;
+        }
+
         trigger.once =  trigger.properties.once === 'true' ? true : false;
         delete trigger.properties.once;
 
