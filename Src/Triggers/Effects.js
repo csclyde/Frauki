@@ -40,3 +40,30 @@ TriggerController.prototype.triggers['dark'] = {
 		effectsController.ScreenDark(false);
 	}
 }
+
+TriggerController.prototype.triggers['regen'] = {
+
+	enter: function(params) {
+		triggerController.tickTimer = 0;
+	},
+
+	stay: function(params) {
+
+		var energyDiff = Math.abs(this.neutralPoint - 30);
+		var step = 0.10;
+
+		//if the timer is up, tick the neutralPoint and reset the timer
+		if(game.time.now > triggerController.tickTimer) {
+			if(energyDiff < step) {
+				energyController.neutralPoint = 30;
+			} else {
+				energyController.neutralPoint += step;
+			}
+
+			triggerController.tickTimer = game.time.now + 20;
+		}
+	},
+
+	exit: function(params) {
+	}
+}

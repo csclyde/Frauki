@@ -248,13 +248,34 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
 
                 that.loadedEffects.push(bubbler);
                 
+            } else if(o.name === 'energy_spray') {
+
+                var sprayer = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
+                // sprayer.x = o.x;
+                // sprayer.y = o.y;
+                sprayer.width = o.width;
+                sprayer.height = o.height;
+                sprayer.makeParticles('Misc', ['Sparks0000', 'Sparks0001', 'Sparks0002', 'Sparks0003', 'Sparks0004', 'Sparks0005'], 20);
+                sprayer.gravity = -595;
+                sprayer.maxParticleSpeed.setTo(10, 100);
+                sprayer.minParticleSpeed.setTo(-400, -100);
+                sprayer.setRotation(0, 0);
+                sprayer.start(false, 300, 10);
+                sprayer.effectType = 'energy_spray';
+                sprayer.owningLayer = layer;
+
+                that.loadedEffects.push(sprayer);
+
+                console.log('wuuut')
+
             }
+
         } else if(o.type === 'speech') {
             var sparkles = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
             sparkles.width = o.width;
             sparkles.height = o.height;
             sparkles.makeParticles('Misc', ['Sparkles0000', 'Sparkles0001', 'Sparkles0002', 'Sparkles0003', 'Sparkles0004'], 25);
-            sparkles.gravity = -600;
+            sparkles.gravity = -400;
             sparkles.maxParticleSpeed.setTo(0);
             sparkles.minParticleSpeed.setTo(0);
             sparkles.minRotation = 0;

@@ -1,7 +1,7 @@
 var Speeches = {
 	'hole_sign': { text: 'It reads: Watch out for danger! This hole is not safe to jump into.' },
-	'phone': { text: 'There’s still a noise when I pick it up.' },
-	'tomatoes': { text: 'Mmm, what juicy little apples... or are they tomatoes?', portrait: 'Enticed' },
+	'phone': { text: 'There’s still a noise when I pick it up. Hello?' },
+	'tomatoes': { text: 'Mmm, what juicy little apples. Oh wait... they\'re just tomatoes' },
 	'shade_tree': { text: 'This looks like a good spot for a nap.' },
 	'pillar': { text: 'This looks dangerous...', portrait: 'Displeased' },
 	'jerk': { text: 'Sneaky jerk', portrait: 'Mad' },
@@ -11,7 +11,7 @@ var Speeches = {
 	'draft': { text: 'I can’t see anything out the window, but I can feel a breeze coming through' },
 	'dripping': { text: 'Eee, the water is dripping on me', portrait: 'Mischeif' },
 	'fresh': { text: 'The air smells fresh in this room', portrait: 'Peaceful' },
-	'extract': { text: 'It looks like they were extracting something here' },
+	'extract': { text: 'It looks like they were extracting something here.' },
 	'spores': { text: 'These spores are making me dizzy', portrait: 'Dazed' },
 	'delicate_flower': { text: 'This flower looks delicate... I wonder how long it’s been growing' },
 	'door_info': { text: 'It won\'t open from this side.' },
@@ -44,5 +44,6 @@ var Speeches = {
 	'hidden_goodies': { text: 'He he, hidden goodies!', portrait: 'Silly'},
 	'flower_helper': { text: 'You\'re a lucky little flower, getting all this light through the window.' },
 	'go_away': { text: 'Go away you brute!', portrait: 'Mad' },
+	'refreshing': { text: 'Oh my... that\'s quite refreshing.', portrait: 'Mischeif' },
 
 };
