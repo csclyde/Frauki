@@ -32,6 +32,7 @@ Main.create = function() {
     }
 
     this.physicsSlowMo = 1;
+    this.currentAlpha = 1;
 };
 
 Main.update = function() {
@@ -216,7 +217,7 @@ Main.DrawUI = function() {
 
     // this.RenderTextureFromAtlas('UI', 'UpgradeIconShield', 150 * pixel.scale, 10 * pixel.scale);
 
-    pixel.context.globalAlpha = 1;
+    pixel.context.globalAlpha = this.currentAlpha;
 
     if(speechController.speechVisible) {
 

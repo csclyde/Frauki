@@ -390,7 +390,6 @@ Frogland.ChangeLayer = function(newLayer) {
     var currentForgroundLayer = this['foregroundLayer_' + this.currentLayer];
     var currentMidgroundLayer = this['midgroundLayer_' + this.currentLayer];
     var currentBackgroundLayer = this['backgroundLayer_' + this.currentLayer];
-    //var currentLightingLayer = this['lightingLayer_' + this.currentLayer];
     var currentCollisionLayer = this.GetCurrentCollisionLayer();
     var currentObjectLayer = this.GetCurrentObjectGroup();
 
@@ -403,12 +402,13 @@ Frogland.ChangeLayer = function(newLayer) {
         if(!!obj.body) obj.body.enable = false;
     });
 
+    triggerController.ForceExit(this.currentLayer);
+
     this.currentLayer = newLayer;
 
     currentForgroundLayer = this['foregroundLayer_' + this.currentLayer];
     currentMidgroundLayer = this['midgroundLayer_' + this.currentLayer];
     currentBackgroundLayer = this['backgroundLayer_' + this.currentLayer];
-    //currentLightingLayer = this['lightingLayer_' + this.currentLayer];
     currentCollisionLayer = this.GetCurrentCollisionLayer();
     currentObjectLayer = this.GetCurrentObjectGroup();
 
@@ -429,7 +429,6 @@ Frogland.ChangeLayer = function(newLayer) {
         if(!!obj.body) obj.body.enable = true;
     });
 
-    //effectsController.KeyholeTransiton();
 };
 
 Frogland.DislodgeTile = function(tile) {

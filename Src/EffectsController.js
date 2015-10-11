@@ -76,6 +76,23 @@ EffectsController = function() {
     this.energyStreak.minParticleScale = 1;
     this.energyStreak.setRotation(0, 0);
 
+    var screenLightBmd = game.add.bitmapData(game.width, game.height);
+    screenLightBmd.ctx.fillStyle = 'white';
+    screenLightBmd.ctx.fillRect(0,0, game.width, game.height);
+    this.screenLight = game.add.sprite(0, 0, screenLightBmd);
+    this.screenLight.alpha = 0.5;
+    this.screenLight.fixedToCamera = true;
+    this.screenLight.visible = false;
+
+    var screenDarkBmd = game.add.bitmapData(game.width, game.height);
+    screenDarkBmd.ctx.fillStyle = 'black';
+    screenDarkBmd.ctx.fillRect(0,0, game.width, game.height);
+    this.screenDark = game.add.sprite(0, 0, screenDarkBmd);
+    this.screenDark.alpha = 0.5;
+    this.screenDark.fixedToCamera = true;
+    this.screenDark.visible = false;
+
+
     this.loadedEffects = [];
 
     this.LoadMapEffects(4);
@@ -595,4 +612,24 @@ EffectsController.prototype.DripSplash = function(src) {
 
 EffectsController.prototype.KeyholeTransiton = function() {
 
+};
+
+EffectsController.prototype.ScreenLight = function(show) {
+    if(show) {
+        this.screenLight.alpha = 0;
+        this.screenLight.visible = true;
+        game.add.tween(this.screenLight).to( { alpha: 0.1 }, 300, Phaser.Easing.Linear.None, true);
+    } else {
+        game.add.tween(this.screenLight).to( { alpha: 0 }, 300, Phaser.Easing.Linear.None, true);
+    }
+};
+
+EffectsController.prototype.ScreenDark = function(show) {
+    if(show) {
+        this.screenDark.alpha = 0;
+        this.screenDark.visible = true;
+        game.add.tween(this.screenDark).to( { alpha: 0.3 }, 300, Phaser.Easing.Linear.None, true);
+    } else {
+        game.add.tween(this.screenDark).to( { alpha: 0 }, 300, Phaser.Easing.Linear.None, true);
+    }
 };

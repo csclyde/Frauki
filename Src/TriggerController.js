@@ -102,6 +102,38 @@ TriggerController.prototype.Update = function(currentLayer) {
     }
 };
 
+TriggerController.prototype.ForceExit = function(currentLayer) {
+    currentLayer = this.triggerLayers['Triggers_' + currentLayer];
+
+    //loop through all triggers on the current layer and see if any in
+    //the active zone around or within the camera
+
+    var activeTriggers = [];
+
+    var i = currentLayer.length;
+    while(i--) {
+        var trigger = currentLayer[i];
+
+        //if the player intersects with this trigger
+        if(this.Intersects(frauki.body, trigger)) {
+            //if the flag is set, they just exited the trigger
+            if(trigger.playerInside === true) {
+
+                if(!trigger.exitFired || !trigger.once) {
+                    //so call the exit function of the trigger
+                    if(!!trigger.exit) trigger.exit(trigger.properties);
+
+                    trigger.exitFired = true;
+                }
+
+                //and unset the flag
+                trigger.playerInside = false;
+            }
+        }
+
+    }
+};
+
 TriggerController.prototype.Intersects = function(body, trigger) {
     if (body.right <= trigger.x) { return false; }
     if (body.bottom <= trigger.y) { return false; }

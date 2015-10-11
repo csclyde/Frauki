@@ -7203,7 +7203,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "width":0,
          "x":0,
          "y":0
@@ -7214,9 +7214,9 @@
          "name":"Triggers_3",
          "objects":[
                 {
-                 "height":796.97,
-                 "id":1302,
-                 "name":"ruins_music",
+                 "height":63,
+                 "id":1565,
+                 "name":"dizzy",
                  "properties":
                     {
                      "once":"false"
@@ -7224,13 +7224,103 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":1578.79,
-                 "x":1624.24,
-                 "y":790.3
+                 "width":79,
+                 "x":1068,
+                 "y":1425
+                }, 
+                {
+                 "height":82,
+                 "id":1567,
+                 "name":"light",
+                 "properties":
+                    {
+                     "once":"false"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":113.333333333333,
+                 "x":1465.33333333333,
+                 "y":413.666666666667
+                }, 
+                {
+                 "height":226,
+                 "id":1568,
+                 "name":"light",
+                 "properties":
+                    {
+                     "once":"false"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":113.333,
+                 "x":1035.90925757576,
+                 "y":1947.5
+                }, 
+                {
+                 "height":76,
+                 "id":1569,
+                 "name":"light",
+                 "properties":
+                    {
+                     "once":"false"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":113.333,
+                 "x":782.8335,
+                 "y":1986.5
+                }, 
+                {
+                 "height":94.5,
+                 "id":1570,
+                 "name":"dark",
+                 "properties":
+                    {
+                     "once":"false"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":221.6665,
+                 "x":673.3335,
+                 "y":2081
+                }, 
+                {
+                 "height":96,
+                 "id":1571,
+                 "name":"light",
+                 "properties":
+                    {
+                     "once":"false"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":103.5,
+                 "x":1842.5,
+                 "y":892
+                }, 
+                {
+                 "height":409.916666666667,
+                 "id":1572,
+                 "name":"dark",
+                 "properties":
+                    {
+                     "once":"false"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":569.500166666666,
+                 "x":811.833166666667,
+                 "y":608.75
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "width":0,
          "x":0,
          "y":0
@@ -10873,7 +10963,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":1565,
+ "nextobjectid":1573,
  "orientation":"orthogonal",
  "properties":
     {
