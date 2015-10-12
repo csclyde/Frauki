@@ -12,6 +12,16 @@ Frogland.Create = function() {
     this.plx1 = game.add.image(0, 0, 'parallax1');
     this.plx1.fixedToCamera = true;
 
+    this.clouds1 = game.add.tileSprite(0, 0, 1024, pixel.height * 1.5, 'clouds1');
+    this.clouds1.fixedToCamera = true;
+    this.clouds1.cameraOffset.y = -100;
+    this.clouds1.autoScroll(-2, 0);
+
+    this.clouds2 = game.add.tileSprite(0, 0, 1024, pixel.height * 1.5, 'clouds2');
+    this.clouds2.fixedToCamera = true;
+    this.clouds1.cameraOffset.y = -100;
+    this.clouds2.autoScroll(-3, 0);
+
     this.map = game.add.tilemap('Frogland');
     this.map.addTilesetImage('FrogtownTiles');
     this.map.addTilesetImage('DepthsTiles');
@@ -131,6 +141,18 @@ Frogland.Update = function() {
 
     if(game.camera.y > 80 * 16) this.plx2.visible = false;
     else this.plx2.visible = true;
+
+    this.clouds1.cameraOffset.x = -(game.camera.x * 0.40) + 400;
+    this.clouds1.cameraOffset.y = -(game.camera.y * 0.25) + 75;
+
+    if(game.camera.y > 80 * 16) this.clouds1.visible = false;
+    else this.clouds1.visible = true;
+
+    this.clouds2.cameraOffset.x = -(game.camera.x * 0.40) + 400;
+    this.clouds2.cameraOffset.y = -(game.camera.y * 0.25) + 75;
+
+    if(game.camera.y > 80 * 16) this.clouds2.visible = false;
+    else this.clouds2.visible = true;
 };
 
 Frogland.SpawnFrauki = function() {

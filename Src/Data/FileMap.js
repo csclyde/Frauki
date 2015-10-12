@@ -8,7 +8,9 @@ FileMap.Images = [
 	{ Name: 'Collision', File: 'Data/CollisionKey.png' },
 	{ Name: 'Background', File: 'Data/World/Sky.png' },
 	{ Name: 'parallax1', File: 'Data/World/Parallax1.png' },
-	{ Name: 'parallax2', File: 'Data/World/Parallax2.png' }
+	{ Name: 'parallax2', File: 'Data/World/Parallax2.png' },
+	{ Name: 'clouds1', File: 'Data/World/Clouds1.png' },
+	{ Name: 'clouds2', File: 'Data/World/Clouds2.png' },
 ];
 
 FileMap.Atlas = [

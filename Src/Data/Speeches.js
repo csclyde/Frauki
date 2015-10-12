@@ -45,5 +45,6 @@ var Speeches = {
 	'flower_helper': { text: 'You\'re a lucky little flower, getting all this light through the window.' },
 	'go_away': { text: 'Go away you brute!', portrait: 'Mad' },
 	'refreshing': { text: 'Oh my... that\'s quite refreshing.', portrait: 'Mischeif' },
+	'flower_bloom': { text: 'How can a flower bloom in a dark room? I don\'t trust it.', portrait: 'Displeased' },
 
 };
