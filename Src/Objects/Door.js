@@ -59,6 +59,8 @@ function OpenDoor(f, d, override) {
 
             d.state = d.Opening;
 
+            console.log('Opening door ' + d.id);
+
             if(Frogland.openDoors.indexOf(d.id) === -1) {
                 Frogland.openDoors.push(d.id);
                 localStorage.setItem('fraukiDoors', JSON.stringify(Frogland.openDoors));
