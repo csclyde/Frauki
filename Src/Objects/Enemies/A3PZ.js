@@ -55,7 +55,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
             return;
         }
 
-        this.timers.SetTimer('slash_hold', 100);
+        this.timers.SetTimer('slash_hold', 500);
 
         this.state = this.Windup1;
 
@@ -125,7 +125,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
             this.state = this.Slashing1;
-            this.timers.SetTimer('slash_hold', 400);
+            this.timers.SetTimer('slash_hold', 500);
         }
     };
 
@@ -140,7 +140,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
             this.state = this.Windup2;
-            this.timers.SetTimer('slash_hold', 300);
+            this.timers.SetTimer('slash_hold', 500);
             //this.FacePlayer();
         }
     };
@@ -150,7 +150,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
             this.state = this.Slashing2;
-            this.timers.SetTimer('slash_hold', 400);
+            this.timers.SetTimer('slash_hold', 500);
         }
     };
 
