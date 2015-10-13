@@ -12,7 +12,7 @@ TechnoRune = function(game, x, y, name) {
 
     //this.body.gravity.y = game.physics.arcade.gravity.y * 2;
 
-    this.state = this.Idle;
+    this.state = this.Active;
 
     this.body.allowGravity = false;
 
@@ -20,14 +20,19 @@ TechnoRune = function(game, x, y, name) {
 
     if(this.runeName === 'Lob') {
         this.runeFrame = 'Runes0000';
+        this.runeFrameInactive = 'Runes0003';
     } else if(this.runeName === 'Shield') {
         this.runeFrame = 'Runes0001';
+        this.runeFrameInactive = 'Runes0004';
     } else if(this.runeName === 'Saw') {
         this.runeFrame = 'Runes0002';
+        this.runeFrameInactive = 'Runes0005';
     }
 
-    this.animations.add('idle', [this.runeFrame], 20, true, false);
-    this.animations.add('eaten', [this.runeFrame], 10, false, false);
+    console.log(this.runeFrame, this.runeFrameInactive);
+
+    this.animations.add('active', [this.runeFrame], 1, true, false);
+    this.animations.add('inactive', [this.runeFrame], 1, true, false);
 
 };
 
@@ -36,6 +41,7 @@ TechnoRune.prototype.constructor = TechnoRune;
 
 TechnoRune.prototype.create = function() {
 
+    weaponController.runes.push(this);
 };
 
 TechnoRune.prototype.update = function() {
@@ -49,15 +55,6 @@ TechnoRune.prototype.update = function() {
 function EatTechnoRune(f, r) {
 
     effectsController.EnergySplash(r.body, 100, 'neutral');
-    
-    if(r.runeName === 'Stab') {
-        frauki.upgrades.attackStab = true;
-        frauki.StabSlash();
-    } else if(r.runeName === 'Dive') {
-        frauki.upgrades.attackDive = true;
-    } else if(r.runeName === 'Overhead') {
-        frauki.upgrades.attackOverhead = true;
-    }
 
     frauki.upgradeSaves = [];
     frauki.upgradeSaves.push(r.runeName);
@@ -67,8 +64,6 @@ function EatTechnoRune(f, r) {
 
     energyController.MaxCharge();
 
-    //r.kill();
-
 };
 
 TechnoRune.prototype.PlayAnim = function(name) {
@@ -76,8 +71,13 @@ TechnoRune.prototype.PlayAnim = function(name) {
         this.animations.play(name);
 };
 
-TechnoRune.prototype.Idle = function() {
-    this.PlayAnim('idle');
+TechnoRune.prototype.Active = function() {
+    this.PlayAnim('inactive');
 
     this.body.velocity.y = Math.sin(game.time.now / 150) * 15;
+};
+
+TechnoRune.prototype.Inactive = function() {
+    this.PlayAnim('inactive');
+
 };

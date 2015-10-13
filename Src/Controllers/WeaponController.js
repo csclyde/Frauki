@@ -33,6 +33,8 @@ WeaponController = function() {
     }
 
     this.currentWeapon = this.weaponList[0] || null;
+
+    this.runes = [];
 };
 
 WeaponController.prototype.create = function() {
@@ -61,6 +63,14 @@ WeaponController.prototype.EquipNewWeapon = function(name) {
     this.weaponList = [];
     this.weaponList.push(this[name]);
     this.Next();
+
+    for(var i = 0, max = this.runes.length; i < max; i++) {
+        if(name === this.runes[i].runeName) {
+            this.runes[i].state = this.runes[i].Active;
+        } else {
+            this.runes[i].state = this.runes[i].Inactive;
+        }
+    }
 }
 
 WeaponController.prototype.Update = function() {
