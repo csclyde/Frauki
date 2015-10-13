@@ -138,13 +138,6 @@ Main.Restart = function() {
         frauki.alpha = 1;
         Frogland.SpawnFrauki();
 
-        // cameraController.panning = true;
-
-        // var panTween = game.add.tween( game.camera ).to( { x: frauki.initialX, y: frauki.initialy}, 2000, Phaser.Easing.Quartic.InOut, true);
-        // panTween.onComplete.add(function() {
-        //     cameraController.panning = false;
-        // });
-
         frauki.state = frauki.Materializing;
         frauki.SetDirection('right');
 

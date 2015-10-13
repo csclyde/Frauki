@@ -29,6 +29,8 @@ TechnoRune = function(game, x, y, name) {
     this.animations.add('idle', [this.runeFrame], 20, true, false);
     this.animations.add('eaten', [this.runeFrame], 10, false, false);
 
+    this.animations.play('idle');
+
 };
 
 TechnoRune.prototype = Object.create(Phaser.Sprite.prototype);
@@ -48,7 +50,7 @@ TechnoRune.prototype.update = function() {
 
 function EatTechnoRune(f, r) {
 
-    effectsController.EnergySplash(r.body, 100, 'positive');
+    effectsController.EnergySplash(r.body, 100, 'neutral');
     
     if(r.runeName === 'Stab') {
         frauki.upgrades.attackStab = true;
@@ -59,12 +61,13 @@ function EatTechnoRune(f, r) {
         frauki.upgrades.attackOverhead = true;
     }
 
-    if(frauki.upgradeSaves.indexOf(r.runeName) === -1) {
-        frauki.upgradeSaves.push(r.runeName);
-        localStorage.setItem('fraukiUpgrades', JSON.stringify(frauki.upgradeSaves));
-    }
+    frauki.upgradeSaves = [];
+    frauki.upgradeSaves.push(r.runeName);
+    localStorage.setItem('fraukiUpgrades', JSON.stringify(frauki.upgradeSaves));
 
-    r.kill();
+    weaponController.EquipNewWeapon(r.runeName);
+
+    //r.kill();
 
 };
 

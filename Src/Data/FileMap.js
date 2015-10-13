@@ -78,5 +78,5 @@ FileMap.Junk = [
 FileMap.Runes = [
 	{ Name: 'Lob', Tile: 125 },
 	{ Name: 'Shield', Tile: 126 },
-	{ Name: 'Mace', Tile: 127 }
+	{ Name: 'Saw', Tile: 127 }
 ];

@@ -57,6 +57,12 @@ WeaponController.prototype.Prev = function() {
     }
 };
 
+WeaponController.prototype.EquipNewWeapon = function(name) {
+    this.weaponList = [];
+    this.weaponList.push(this[name]);
+    this.Next();
+}
+
 WeaponController.prototype.Update = function() {
     if(this.currentWeapon != null) {
         if(this.weaponActive === true) {

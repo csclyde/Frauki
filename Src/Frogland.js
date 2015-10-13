@@ -227,9 +227,7 @@ Frogland.CreateObjectsLayer = function(layer) {
     });
 
     FileMap.Runes.forEach(function(rune) {
-        if(frauki.upgradeSaves.indexOf(rune.Name) === -1) {
-            Frogland.map.createFromObjects('Objects_' + layer, rune.Tile, rune.Name, rune.Name, true, true, that[currLayer], TechnoRune, false);
-        }
+        Frogland.map.createFromObjects('Objects_' + layer, rune.Tile, rune.Name, rune.Name, true, true, that[currLayer], TechnoRune, false);
     });
 
     //create all the apples
@@ -259,7 +257,9 @@ Frogland.CreateObjectsLayer = function(layer) {
 
         if(obj.spriteType === 'door') {
             if(Frogland.openDoors.indexOf(obj.id) > -1) {
-                OpenDoor(frauki, obj, true);
+                obj.body.enable = false;
+                obj.visible = false;
+                //OpenDoor(frauki, obj, true);
             }
         } else if(obj.spriteType === 'checkpoint') {
             if(obj.id == localStorage.getItem('fraukiCheckpoint')) {
@@ -450,7 +450,6 @@ Frogland.ChangeLayer = function(newLayer) {
         game.add.tween(obj).to({alpha: 1}, 200, Phaser.Easing.Linear.None, true);
         if(!!obj.body) obj.body.enable = true;
     });
-
 };
 
 Frogland.DislodgeTile = function(tile) {
@@ -465,10 +464,12 @@ Frogland.DislodgeTile = function(tile) {
         projectileController.FallingTile(tile);
 
         setTimeout(function() { 
-            Frogland.DislodgeTile(Frogland.map.getTile(tile.x - 1, tile.y, 'Collision_' + Frogland.currentLayer));
-            Frogland.DislodgeTile(Frogland.map.getTile(tile.x + 1, tile.y, 'Collision_' + Frogland.currentLayer));
-            Frogland.DislodgeTile(Frogland.map.getTile(tile.x, tile.y - 1, 'Collision_' + Frogland.currentLayer));
-            Frogland.DislodgeTile(Frogland.map.getTile(tile.x, tile.y + 1, 'Collision_' + Frogland.currentLayer));
+            if(!!tile) {
+                Frogland.DislodgeTile(Frogland.map.getTile(tile.x - 1, tile.y, 'Collision_' + Frogland.currentLayer));
+                Frogland.DislodgeTile(Frogland.map.getTile(tile.x + 1, tile.y, 'Collision_' + Frogland.currentLayer));
+                Frogland.DislodgeTile(Frogland.map.getTile(tile.x, tile.y - 1, 'Collision_' + Frogland.currentLayer));
+                Frogland.DislodgeTile(Frogland.map.getTile(tile.x, tile.y + 1, 'Collision_' + Frogland.currentLayer));
+            }
         }, (Math.random() * 80));
     }
 };
