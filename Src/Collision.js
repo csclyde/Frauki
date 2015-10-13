@@ -30,8 +30,6 @@ Collision.OverlapFraukiWithObject = function(f, o) {
 
 
     } else if(o.spriteType === 'TechnoRune') {
-        EatTechnoRune(f, o);
-        o.destroy();
         return false;
 
 
@@ -89,6 +87,8 @@ Collision.OverlapAttackWithObject = function(f, o) {
         }
     } else if(o.spriteType === 'checkpoint') {
         o.CheckpointHit();
+    } else if(o.spriteType === 'TechnoRune') {
+        EatTechnoRune(f, o);
     }
 };
 

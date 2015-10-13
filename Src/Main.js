@@ -142,7 +142,7 @@ Main.Restart = function() {
         frauki.SetDirection('right');
 
         energyController.energy = 30;
-        energyController.charge = 0;
+        energyController.charge = 30;
         energyController.neutralPoint = 30;
         game.time.slowMotion = 1;
         game.world.alpha = 1;

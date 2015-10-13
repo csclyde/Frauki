@@ -4,7 +4,7 @@ EnergyController = function() {
 
 	this.energy = 30;
 	this.neutralPoint = 30;
-	this.charge = 0;
+	this.charge = 30;
 	this.activeCharge = 0;
 	this.tickTimer = 0;
 	this.gracePeriod = 0;
@@ -184,4 +184,9 @@ EnergyController.prototype.GetDifficultyModifier = function() {
 	var percentageCurve = [-0.5, 0, 1];
 
 	return game.math.catmullRomInterpolation(percentageCurve, this.neutralPoint / 30);
+};
+
+
+EnergyController.prototype.MaxCharge = function() {
+	this.charge = 30;
 };

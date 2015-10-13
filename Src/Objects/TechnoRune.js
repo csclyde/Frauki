@@ -18,18 +18,16 @@ TechnoRune = function(game, x, y, name) {
 
     this.runeName = name;
 
-    if(this.runeName === 'Overhead') {
+    if(this.runeName === 'Lob') {
         this.runeFrame = 'Runes0000';
-    } else if(this.runeName === 'Stab') {
+    } else if(this.runeName === 'Shield') {
         this.runeFrame = 'Runes0001';
-    } else if(this.runeName === 'Dive') {
+    } else if(this.runeName === 'Saw') {
         this.runeFrame = 'Runes0002';
     }
 
     this.animations.add('idle', [this.runeFrame], 20, true, false);
     this.animations.add('eaten', [this.runeFrame], 10, false, false);
-
-    this.animations.play('idle');
 
 };
 
@@ -66,6 +64,8 @@ function EatTechnoRune(f, r) {
     localStorage.setItem('fraukiUpgrades', JSON.stringify(frauki.upgradeSaves));
 
     weaponController.EquipNewWeapon(r.runeName);
+
+    energyController.MaxCharge();
 
     //r.kill();
 
