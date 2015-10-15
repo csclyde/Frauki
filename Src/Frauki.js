@@ -292,6 +292,16 @@ Player.prototype.InAttackAnim = function() {
     }
 };
 
+Player.prototype.InPreAttackAnim = function() {
+    var frameName = this.animations.currentFrame.name;
+
+    if(['Attack Stab0000', 'Attack Stab0000', 'Attack Stab0001', 'Attack Stab0001', 'Attack Stab0002', 'Attack Stab0003'].indexOf(frameName) > -1) {
+        return true;
+    } else {
+        return false;
+    }
+};
+
 Player.prototype.GetDirectionMultiplier = function() {
     var dir = 1;
     if(inputController.dpad.left) {

@@ -79,8 +79,8 @@ Enemy.prototype.types['KR32'] =  function() {
 		// 	this.body.velocity.x = -300;
 		// }
 
-    	this.state = this.Stabbing;
     	this.FacePlayer();
+    	this.state = this.Stabbing;
     };
 
     this.Recoil = function() {
@@ -135,7 +135,7 @@ Enemy.prototype.types['KR32'] =  function() {
 
 			if(this.PlayerDistance() < 75) {
 				this.AttackStab();
-			} else {
+			} else if(!frauki.InPreAttackAnim()) {
 				this.Attack();
 			}
 		}
@@ -179,6 +179,8 @@ Enemy.prototype.types['KR32'] =  function() {
 
 	this.Stabbing = function() {
 		this.PlayAnim('attack_stab');
+
+		this.FacePlayer();
 
 		if(this.animations.currentAnim.isFinished) {
 
@@ -296,7 +298,7 @@ Enemy.prototype.types['KR32'] =  function() {
 		},
 
 		'KR32/Stab0003': {
-			x: 20, y: 12, w: 60, h: 10,
+			x: 0, y: 12, w: 80, h: 10,
 			damage: 1,
 			knockback: 0.2,
 			priority: 3,
