@@ -149,7 +149,7 @@ EffectsController.prototype.Update = function() {
     game.physics.arcade.collide(this.dicedPieces4, Frogland.GetCurrentCollisionLayer());
     game.physics.arcade.collide(this.dicedPieces3, Frogland.GetCurrentCollisionLayer());
     game.physics.arcade.collide(this.dicedPieces2, Frogland.GetCurrentCollisionLayer());
-    game.physics.arcade.collide(this.loadedEffects, Frogland.GetCurrentCollisionLayer(), Collision.CollideEffectWithWorld);
+    game.physics.arcade.collide(this.loadedEffects, Frogland.GetCurrentCollisionLayer(), Collision.CollideEffectWithWorld, Collision.OverlapEffectWithWorld);
 };
 
 EffectsController.prototype.LoadMapEffects = function(layer) {
@@ -160,7 +160,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
     Frogland.map.objects['Triggers_' + layer].forEach(function(o) {
         if(o.type === 'effect') {
             if(o.name === 'splash') {
-                var splasherLeft = game.add.emitter(o.x, o.y);
+                var splasherLeft = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
                 splasherLeft.width = o.width / 2;
                 splasherLeft.height = o.height;
                 splasherLeft.makeParticles('Misc', ['Splash0002', 'Splash0003'], 10); 
@@ -194,7 +194,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 that.loadedEffects.push(splasherRight);
             } else if(o.name === 'drip') {
 
-                var dripper = game.add.emitter(o.x, o.y);
+                var dripper = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
                 dripper.width = o.width;
                 dripper.height = o.height;
                 dripper.makeParticles('Misc', ['Drip0000', 'Drip0001'], 2);
@@ -230,7 +230,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
 
             } else if(o.name === 'bubbles') {
 
-                var bubbler = game.add.emitter(o.x, o.y);
+                var bubbler = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
                 bubbler.width = o.width;
                 bubbler.height = o.height;
                 bubbler.makeParticles('Misc', ['Bubbles0000', 'Bubbles0001', 'Bubbles0002', 'Bubbles0003'], 5);
@@ -597,6 +597,7 @@ EffectsController.prototype.Explosion = function(src) {
     boom.animations.add('boom', ['Explosion0000', 'Explosion0001', 'Explosion0002', 'Explosion0003', 'Explosion0004', 'Explosion0005', 'Explosion0006', 'Explosion0007'], 18, false, false);
     boom.animations.play('boom');
     boom.animations.currentAnim.killOnComplete = true;
+    events.publish('camera_shake', {magnitudeX: 10, magnitudeY: 8, duration: 200});
 };
 
 EffectsController.prototype.JumpDust = function(src) {
@@ -627,10 +628,6 @@ EffectsController.prototype.DripSplash = function(src) {
     dripSplash.animations.play('splish');
     dripSplash.animations.currentAnim.killOnComplete = true;
     dripSplash.alpha = 0.5;
-};
-
-EffectsController.prototype.KeyholeTransiton = function() {
-
 };
 
 EffectsController.prototype.ScreenLight = function(show) {

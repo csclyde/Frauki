@@ -55,7 +55,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
             return;
         }
 
-        this.timers.SetTimer('slash_hold', 500);
+        this.timers.SetTimer('slash_hold', 400);
 
         this.state = this.Windup1;
 
@@ -115,6 +115,11 @@ Enemy.prototype.types['A3PZ'] =  function() {
                 }
             }
 
+            //console.log(this.animations.currentFrame.name);
+            if(this.animations.currentFrame.name === 'A3PZ/Walk0001' || this.animations.currentFrame.name === 'A3PZ/Walk0004') {
+                events.publish('camera_shake', {magnitudeX: 3, magnitudeY: 2, duration: 50});
+            }
+
         } else {
             this.PlayAnim('idle');
         }
@@ -125,7 +130,8 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
             this.state = this.Slashing1;
-            this.timers.SetTimer('slash_hold', 500);
+            this.timers.SetTimer('slash_hold', 400);
+            events.publish('camera_shake', {magnitudeX: 10, magnitudeY: 3, duration: 200});
         }
     };
 
@@ -140,7 +146,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
             this.state = this.Windup2;
-            this.timers.SetTimer('slash_hold', 500);
+            this.timers.SetTimer('slash_hold', 400);
             //this.FacePlayer();
         }
     };
@@ -150,7 +156,8 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
             this.state = this.Slashing2;
-            this.timers.SetTimer('slash_hold', 500);
+            this.timers.SetTimer('slash_hold', 400);
+            events.publish('camera_shake', {magnitudeX: 10, magnitudeY: 3, duration: 200});
         }
     };
 

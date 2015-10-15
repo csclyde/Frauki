@@ -327,7 +327,7 @@ Player.prototype.LandHit = function(e, damage) {
 
     if(damage > 0) {
         effectsController.ClashStreak(e.body.center.x, e.body.center.y, game.rnd.between(1, 2));
-        events.publish('camera_shake', {magnitudeX: 12, magnitudeY: 8, duration: 350});
+        events.publish('camera_shake', {magnitudeX: 15, magnitudeY: 10, duration: 400});
     }
 
     if(damage > 0 && e.maxEnergy > 1) {
