@@ -29,7 +29,7 @@ var Speeches = {
 	'cant_see': { text: 'I can barely see past all these vines.. but I can feel something up ahead' },
 	'prickly_stuff': { text: 'What is this prickly stuff any way? It\'s really annoying.', portrait: 'Mad' },
 	'ceiling': { text: 'I can barely see the ceiling, it\'s so high. I wonder how this is all still standing.' },
-	'up_there': { text: 'Hmm I wonder how I can get up there.' },
+	'up_there': { text: 'Hmm I wonder if I can get up there.' },
 	'whew': { text: 'Whew, that was tricky.' },
 	'look_down': { text: 'Don\'t look down... Don\'t look down...', portrait: 'Dazed' },
 	'fire': { text: 'The fire is warm. Maybe I can dry my socks off a little bit' },

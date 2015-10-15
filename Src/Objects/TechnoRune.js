@@ -29,8 +29,6 @@ TechnoRune = function(game, x, y, name) {
         this.runeFrameInactive = 'Runes0005';
     }
 
-    console.log(this.runeFrame, this.runeFrameInactive);
-
     this.animations.add('active', [this.runeFrame], 1, true, false);
     this.animations.add('inactive', [this.runeFrame], 1, true, false);
 

@@ -125,9 +125,9 @@ Main.Restart = function() {
 
     this.restarting = true;
     game.time.slowMotion = 5;
-    var fadeOutTween = game.add.tween(game.world).to({alpha:0}, 1000, Phaser.Easing.Linear.None, true);
+    var fadeOutTween = effectsController.Fade(true);//game.add.tween(game.world).to({alpha:0}, 1000, Phaser.Easing.Linear.None, true);
 
-    setTimeout(function() { events.publish('play_music', { name: 'Surface' } ); }, 10000);
+    //setTimeout(function() { events.publish('play_music', { name: 'Surface' } ); }, 10000);
 
     cameraController.shakeMagnitudeX = 0;
     cameraController.shakeMagnitudeY = 0;
@@ -145,7 +145,8 @@ Main.Restart = function() {
         energyController.charge = 30;
         energyController.neutralPoint = 30;
         game.time.slowMotion = 1;
-        game.world.alpha = 1;
+        //game.world.alpha = 1;
+        effectsController.Fade(false);
 
         Main.restarting = false;
 
