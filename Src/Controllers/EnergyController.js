@@ -92,9 +92,7 @@ EnergyController.prototype.Update = function() {
 
 EnergyController.prototype.UseEnergy = function(amt) {
 	//if they are below a threshold, they are in beast mode
-	if(this.InBeastMode()) {
-		return true;
-	} else if(this.energy > 0) {
+	if(this.energy > 0) {
 		this.energy -= amt / 1;
 		this.gracePeriod = game.time.now + 600;
 		this.energyUsageTimestamp = game.time.now;

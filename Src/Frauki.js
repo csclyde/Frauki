@@ -387,7 +387,7 @@ Player.prototype.StartStopRun = function(params) {
 };
 
 Player.prototype.Jump = function(params) {
-    if(!this.timers.TimerUp('frauki_hit')) 
+    if(!this.timers.TimerUp('frauki_hit') || this.state === this.AttackDiveLand) 
         return;
 
     if(params.jump) {
@@ -583,12 +583,12 @@ Player.prototype.StabSlash = function() {
 
 Player.prototype.Roll = function(params) {
 
-    if(!this.timers.TimerUp('frauki_roll') || this.state === this.Hurting || !this.upgrades.roll)
+    if(!this.timers.TimerUp('frauki_roll') || this.state === this.Hurting || !this.upgrades.roll || this.InAttackAnim())
         return false;
 
     if(this.body.onFloor()) {
         
-        if(!energyController.UseEnergy(1))
+        if(!energyController.UseEnergy(3))
             return false;
 
         this.state = this.Rolling;
@@ -618,7 +618,7 @@ Player.prototype.Roll = function(params) {
 
 Player.prototype.Hit = function(e, damage, grace_duration) {
 
-    damage = damage * 2.5;
+    damage = damage * 5;
 
     if(this.state === this.Hurting || e.state === e.Hurting || frauki.Attacking() || frauki.Grace())
         return;
