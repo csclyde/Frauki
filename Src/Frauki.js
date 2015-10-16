@@ -295,7 +295,7 @@ Player.prototype.InAttackAnim = function() {
 Player.prototype.InPreAttackAnim = function() {
     var frameName = this.animations.currentFrame.name;
 
-    if(['Attack Stab0000', 'Attack Stab0000', 'Attack Stab0001', 'Attack Stab0001', 'Attack Stab0002', 'Attack Stab0003'].indexOf(frameName) > -1) {
+    if(['Attack Stab0000', 'Attack Stab0000', 'Attack Stab0001', 'Attack Stab0001', 'Attack Stab0002', 'Attack Stab0003', 'Attack Front0001'].indexOf(frameName) > -1) {
         return true;
     } else {
         return false;
@@ -642,7 +642,7 @@ Player.prototype.Roll = function(params) {
 
 Player.prototype.Hit = function(e, damage, grace_duration) {
 
-    damage = damage * 5;
+    damage = damage * 4;
 
     if(this.state === this.Hurting || e.state === e.Hurting || frauki.Attacking() || frauki.Grace())
         return;

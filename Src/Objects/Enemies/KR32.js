@@ -199,7 +199,7 @@ Enemy.prototype.types['KR32'] =  function() {
 
 		if(this.timers.TimerUp('hit')) {
 			if(this.PlayerDistance() < 75) {
-				this.AttackStab();
+				this.Recoil();
 			} else {
 				this.state = this.Idling;
 			}

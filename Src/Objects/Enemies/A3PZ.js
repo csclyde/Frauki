@@ -78,7 +78,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
         this.state = this.Dodging;
 
-        this.timers.SetTimer('dodge_hold', duration || 700);
+        this.timers.SetTimer('dodge_hold', duration || 600);
 
         return true;
     };
@@ -184,7 +184,10 @@ Enemy.prototype.types['A3PZ'] =  function() {
     this.Dodging = function() {
         this.PlayAnim('block');
 
-        if(this.timers.TimerUp('dodge_hold') && !frauki.InAttackAnim()) {
+        if(this.timers.TimerUp('dodge_hold') && !frauki.InPreAttackAnim() && !frauki.Attacking()) {
+
+            this.FacePlayer();
+
             if(this.PlayerDistance() < 200) {
                 this.Attack();
             } else {
