@@ -507,7 +507,7 @@ Player.prototype.Slash = function(params) {
     }
     //normal slashes while standing or running
     else if(this.state === this.Standing || this.state === this.Landing || this.state === this.Running || this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling || this.state === this.Flipping || this.state === this.Crouching) {
-        if(inputController.dpad.left || inputController.dpad.right) {
+        if(!this.timers.TimerUp('frauki_dash')) {
             this.LungeSlash();
         } else {
             this.FrontSlash();
@@ -911,6 +911,15 @@ Player.prototype.Materializing = function() {
 
 Player.prototype.AttackFront = function() {
     this.PlayAnim('attack_front');
+
+    if(this.Attacking()) {
+        this.body.maxVelocity.x = PLAYER_ROLL_SPEED() - 200;
+        this.body.acceleration.x *= 3;
+
+        if(this.body.velocity.y > 0) {
+            this.body.velocity.y = 0;
+        }
+    }
 
     if(this.animations.currentAnim.isFinished) {
         if(inputController.dpad.down && !inputController.dpad.left && !inputController.dpad.right && this.body.onFloor()) {
