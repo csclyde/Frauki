@@ -507,7 +507,12 @@ Player.prototype.Slash = function(params) {
     }
     //normal slashes while standing or running
     else if(this.state === this.Standing || this.state === this.Landing || this.state === this.Running || this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling || this.state === this.Flipping || this.state === this.Crouching) {
-        this.FrontSlash();
+        if(inputController.dpad.left || inputController.dpad.right) {
+            this.LungeSlash();
+        } else {
+            this.FrontSlash();
+        }
+
         effectsController.EnergyStreak();
     } 
     else {
@@ -533,6 +538,14 @@ Player.prototype.FrontSlash = function() {
     } 
 };
 
+Player.prototype.LungeSlash = function() {
+    if(energyController.UseEnergy(5)) {
+        this.state = this.AttackLunge;
+
+        events.publish('play_sound', {name: 'attack_slash', restart: true });
+    }
+};
+
 Player.prototype.DiveSlash = function() {
     if(this.upgrades.attackDive) {
         if(energyController.UseEnergy(7)) {
@@ -550,7 +563,8 @@ Player.prototype.JumpSlash = function() {
         if(energyController.UseEnergy(6)) {
             this.state = this.AttackJump;
             
-            this.body.velocity.y = -2000;
+            this.body.maxVelocity.y = 800;
+            this.body.velocity.y = -500;
             this.states.hasFlipped = true;
 
             events.publish('play_sound', {name: 'attack_slash', restart: true });
@@ -898,13 +912,29 @@ Player.prototype.Materializing = function() {
 Player.prototype.AttackFront = function() {
     this.PlayAnim('attack_front');
 
+    if(this.animations.currentAnim.isFinished) {
+        if(inputController.dpad.down && !inputController.dpad.left && !inputController.dpad.right && this.body.onFloor()) {
+            this.state = this.Crouching;
+            this.PlayAnim('crouch');
+            this.animations.currentAnim.setFrame('Crouch0008');
+        } else { 
+            this.state = this.Standing;
+        }
+    }
+};
+
+Player.prototype.AttackLunge = function() {
+    this.PlayAnim('attack_lunge');
+
     if(this.Attacking()) {
         this.body.maxVelocity.x = PLAYER_ROLL_SPEED() - 200;
-        this.body.acceleration.x *= 3;
+        this.body.acceleration.x = this.states.direction === 'left' ? -4500 : 4500;
 
-        if(this.body.velocity.y > 0 && (inputController.dpad.left || inputController.dpad.right)) {
+        if(this.body.velocity.y > 0) {
             this.body.velocity.y = 0;
         }
+    } else {
+        this.body.velocity.x /= 1.2;
     }
 
     if(this.animations.currentAnim.isFinished) {
@@ -1050,6 +1080,7 @@ Player.prototype.AttackJump = function() {
     this.PlayAnim('attack_overhead');
 
     //this.body.velocity.x /= 1.01;
+    this.body.maxVelocity.y = 800;
 
     if(this.body.velocity.y < 0) {
         this.body.gravity.y = game.physics.arcade.gravity.y * 1.5;
