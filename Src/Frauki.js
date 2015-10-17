@@ -976,6 +976,10 @@ Player.prototype.AttackFall = function() {
     this.body.gravity.y = game.physics.arcade.gravity.y * 3;
     this.body.maxVelocity.y = 450;
 
+    if(!this.Attacking()) {
+        this.body.velocity.x /= 1.2;
+    }
+
     if(this.animations.currentAnim.isFinished) {
         if(this.body.onFloor()) {
         
