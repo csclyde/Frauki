@@ -505,8 +505,13 @@ Player.prototype.Slash = function(params) {
         this.JumpSlash();
         effectsController.EnergyStreak();
     }
+    //falling slash
+    else if(this.state === this.Peaking || this.state === this.Falling) {
+        this.FallSlash();
+        effectsController.EnergyStreak();
+    }
     //normal slashes while standing or running
-    else if(this.state === this.Standing || this.state === this.Landing || this.state === this.Running || this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling || this.state === this.Flipping || this.state === this.Crouching) {
+    else if(this.state === this.Standing || this.state === this.Landing || this.state === this.Running || this.state === this.Jumping || this.state === this.Flipping || this.state === this.Crouching) {
         if(!this.timers.TimerUp('frauki_dash')) {
             this.LungeSlash();
         } else {
@@ -541,6 +546,14 @@ Player.prototype.FrontSlash = function() {
 Player.prototype.LungeSlash = function() {
     if(energyController.UseEnergy(5)) {
         this.state = this.AttackLunge;
+
+        events.publish('play_sound', {name: 'attack_slash', restart: true });
+    }
+};
+
+Player.prototype.FallSlash = function() {
+    if(energyController.UseEnergy(5)) {
+        this.state = this.AttackFall;
 
         events.publish('play_sound', {name: 'attack_slash', restart: true });
     }
@@ -953,6 +966,34 @@ Player.prototype.AttackLunge = function() {
             this.animations.currentAnim.setFrame('Crouch0008');
         } else { 
             this.state = this.Standing;
+        }
+    }
+};
+
+Player.prototype.AttackFall = function() {
+    this.PlayAnim('attack_fall');
+
+    this.body.gravity.y = game.physics.arcade.gravity.y * 3;
+
+    if(this.animations.currentAnim.isFinished) {
+        if(this.body.onFloor()) {
+        
+            if(this.body.velocity.x === 0) {
+                if(this.states.crouching)
+                    this.state = this.Crouching;
+                else
+                    this.state = this.Landing;
+            }
+            else {
+                this.state = this.Running;
+            }
+
+            if(!frauki.states.inWater) effectsController.JumpDust(frauki.body.center);
+
+        } else if(this.body.velocity.y < 0) {
+            this.state = this.Jumping;
+        } else {
+            this.state = this.Falling;
         }
     }
 };
