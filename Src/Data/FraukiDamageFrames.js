@@ -39,7 +39,7 @@ var fraukiDamageFrames = {
 
 
 	'Attack Lunge0002': {
-		x: 40, y: 8, w: 46, h: 30,
+		x: 36, y: 8, w: 46, h: 30,
 		damage: 0.5,
 		knockback: 0.1,
 		priority: 0,
@@ -47,7 +47,7 @@ var fraukiDamageFrames = {
 	},
 
 	'Attack Lunge0003': {
-		x: 40, y: 10, w: 46, h: 30,
+		x: 36, y: 10, w: 46, h: 30,
 		damage: 0.5,
 		knockback: 0.1,
 		priority: 0,
@@ -55,7 +55,7 @@ var fraukiDamageFrames = {
 	},
 
 	'Attack Lunge0004': {
-		x: 40, y: 10, w: 46, h: 30,
+		x: 36, y: 10, w: 46, h: 30,
 		damage: 0.5,
 		knockback: 0.1,
 		priority: 0,
@@ -208,7 +208,7 @@ var fraukiDamageFrames = {
 		juggle: 0
 	},
 
-	
+
 
 	'Attack Dive0010': {
 		x: -10, y: -5, w: 28, h: 45,
