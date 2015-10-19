@@ -28,7 +28,6 @@ Frogland.Create = function() {
     this.map.addTilesetImage('TerraceTiles');
     this.map.addTilesetImage('Doodads');
     this.map.addTilesetImage('Collision');
-    //this.map.addTilesetImage('Lighting');
 
     this.openDoors = JSON.parse(localStorage.getItem('fraukiDoors')) || [];
 

@@ -42,6 +42,7 @@ Player = function (game, x, y, name) {
     this.states.droppingThroughCloud = false;
     this.states.onLeftSlope = false;
     this.states.onRightSlope = false;
+    this.states.attackFallLanded = false;
 
     this.movement = {};
     this.movement.diveVelocity = 0;
@@ -285,7 +286,7 @@ Player.prototype.Attacking = function() {
 Player.prototype.InAttackAnim = function() {
     var frameName = this.animations.currentAnim.name;
 
-    if(['attack_front', 'attack_overhead', 'attack_stab', 'attack_dive_charge', 'attack_dive_fall', 'attack_dive_land'].indexOf(frameName) > -1) {
+    if(['attack_front', 'attack_overhead', 'attack_stab', 'attack_dive_charge', 'attack_dive_fall', 'attack_dive_land', 'attack_fall', 'attack_lunge'].indexOf(frameName) > -1) {
         return true;
     } else {
         return false;
@@ -397,7 +398,7 @@ Player.prototype.StartStopRun = function(params) {
 };
 
 Player.prototype.Jump = function(params) {
-    if(!this.timers.TimerUp('frauki_hit') || this.state === this.AttackDiveLand) 
+    if(!this.timers.TimerUp('frauki_hit') || this.state === this.AttackDiveLand || this.state === this.AttackFall) 
         return;
 
     if(params.jump) {
@@ -456,7 +457,7 @@ Player.prototype.Jump = function(params) {
 };
 
 Player.prototype.DoubleJump = function() {
-    if(this.states.hasFlipped === false && this.state !== this.Rolling && this.state !== this.AttackStab && this.state !== this.AttackOverhead && this.upgrades.hike && energyController.UseEnergy(1)) {
+    if(this.states.hasFlipped === false && this.state !== this.Rolling && this.state !== this.AttackStab && this.state !== this.AttackOverhead && this.state !== this.AttackFall && energyController.UseEnergy(1)) {
 
         if(this.body.velocity.y > PLAYER_DOUBLE_JUMP_VEL()) {
             this.body.velocity.y = PLAYER_DOUBLE_JUMP_VEL();
@@ -620,7 +621,7 @@ Player.prototype.StabSlash = function() {
 
 Player.prototype.Roll = function(params) {
 
-    if(!this.timers.TimerUp('frauki_roll') || this.state === this.Hurting || !this.upgrades.roll || this.InAttackAnim())
+    if(!this.timers.TimerUp('frauki_roll') || this.state === this.Hurting || this.InAttackAnim())
         return false;
 
     if(this.body.onFloor()) {
@@ -980,6 +981,12 @@ Player.prototype.AttackFall = function() {
         this.body.velocity.x /= 1.2;
     }
 
+    //create dust when they land
+    if(!frauki.states.inWater && !this.states.attackFallLanded && this.body.onFloor()) {
+        effectsController.JumpDust(frauki.body.center);
+        this.states.attackFallLanded = true;
+    }
+
     if(this.animations.currentAnim.isFinished) {
         if(this.body.onFloor()) {
         
@@ -987,19 +994,19 @@ Player.prototype.AttackFall = function() {
                 if(this.states.crouching)
                     this.state = this.Crouching;
                 else
-                    this.state = this.Landing;
+                    this.state = this.Standing;
             }
             else {
                 this.state = this.Running;
             }
-
-            if(!frauki.states.inWater) effectsController.JumpDust(frauki.body.center);
 
         } else if(this.body.velocity.y < 0) {
             this.state = this.Jumping;
         } else {
             this.state = this.Falling;
         }
+
+        this.states.attackFallLanded = false;
     }
 };
 
