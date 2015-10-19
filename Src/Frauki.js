@@ -197,7 +197,7 @@ Player.prototype.update = function() {
 };
 
 Player.prototype.SetDirection = function(dir) {
-    if(this.states.direction !== dir && this.animations.paused === false) {
+    if(this.states.direction !== dir && this.animations.paused === false && !this.InAttackAnim()) {
         this.states.direction = dir;
 
         dir === 'left' ? this.scale.x = -1 : this.scale.x = 1;
@@ -357,11 +357,11 @@ Player.prototype.Run = function(params) {
         return;
 
     if(params.dir === 'left') {
-        this.body.acceleration.x = -1500;
         this.SetDirection('left');
+        if(this.states.direction === 'left') this.body.acceleration.x = -1500;
     } else if(params.dir === 'right') {
-        this.body.acceleration.x = 1500;
         this.SetDirection('right');
+        if(this.states.direction === 'right') this.body.acceleration.x = 1500;
     } else {
         this.body.acceleration.x = 0;
 
