@@ -286,7 +286,7 @@ Player.prototype.Attacking = function() {
 Player.prototype.InAttackAnim = function() {
     var frameName = this.animations.currentAnim.name;
 
-    if(['attack_front', 'attack_overhead', 'attack_stab', 'attack_dive_charge', 'attack_dive_fall', 'attack_dive_land', 'attack_fall', 'attack_lunge'].indexOf(frameName) > -1) {
+    if(['attack_front', 'attack_overhead', 'attack_jump', 'attack_stab', 'attack_dive_charge', 'attack_dive_fall', 'attack_dive_land', 'attack_fall', 'attack_lunge'].indexOf(frameName) > -1) {
         return true;
     } else {
         return false;
@@ -502,7 +502,7 @@ Player.prototype.Slash = function(params) {
         effectsController.EnergyStreak();
     }
     //upwards dash attack
-    else if(this.states.upPressed && (this.state === this.Peaking || this.state === this.Jumping) && this.states.hasFlipped === false) {
+    else if(this.state === this.Jumping && this.states.hasFlipped === false) {
         this.JumpSlash();
         effectsController.EnergyStreak();
     }
@@ -573,18 +573,14 @@ Player.prototype.DiveSlash = function() {
 };
 
 Player.prototype.JumpSlash = function() {
-    if(this.upgrades.attackOverhead) {
-        if(energyController.UseEnergy(6)) {
-            this.state = this.AttackJump;
-            
-            this.body.maxVelocity.y = 800;
-            this.body.velocity.y = -500;
-            this.states.hasFlipped = true;
+    if(energyController.UseEnergy(6)) {
+        this.state = this.AttackJump;
+        
+        this.body.maxVelocity.y = 800;
+        this.body.velocity.y = -500;
+        this.states.hasFlipped = true;
 
-            events.publish('play_sound', {name: 'attack_slash', restart: true });
-        }
-    } else {
-        this.FrontSlash();
+        events.publish('play_sound', {name: 'attack_slash', restart: true });
     }
 };
 
@@ -1139,7 +1135,7 @@ Player.prototype.AttackDiveLand = function() {
 };
 
 Player.prototype.AttackJump = function() {
-    this.PlayAnim('attack_overhead');
+    this.PlayAnim('attack_jump');
 
     //this.body.velocity.x /= 1.01;
     this.body.maxVelocity.y = 800;
