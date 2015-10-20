@@ -7,7 +7,7 @@
          "name":"Background_2",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -18,7 +18,7 @@
          "name":"Midground_2",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -29,7 +29,7 @@
          "name":"Foreground_2",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -2577,8 +2577,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":1087.33,
-                 "y":1398.67
+                 "x":1074.83,
+                 "y":1409.67
                 }, 
                 {
                  "gid":87,
@@ -2593,8 +2593,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":1054,
-                 "y":1260
+                 "x":1073.5,
+                 "y":1284.5
                 }, 
                 {
                  "gid":95,
@@ -2609,8 +2609,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":1083.33,
-                 "y":1138.67
+                 "x":1070.33,
+                 "y":1134.67
                 }, 
                 {
                  "gid":86,
@@ -2625,8 +2625,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":1070.67,
-                 "y":992
+                 "x":1073.67,
+                 "y":986
                 }, 
                 {
                  "gid":89,
@@ -2793,7 +2793,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "width":0,
          "x":0,
          "y":0
@@ -3131,7 +3131,7 @@
          "name":"Background_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -3142,7 +3142,7 @@
          "name":"Midground_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -3153,7 +3153,7 @@
          "name":"Foreground_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -10699,7 +10699,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":1673,
+ "nextobjectid":1674,
  "orientation":"orthogonal",
  "properties":
     {
