@@ -98,6 +98,11 @@ CameraController.prototype.RaiseCamera = function(params) {
 }
 
 CameraController.prototype.ScreenShake = function(params) {
+
+	if(Main.restarting === true) {
+		return;
+	}
+
 	this.shakeMagnitudeX = params.magnitudeX * pixel.scale;
 	this.shakeMagnitudeY = params.magnitudeY * pixel.scale;
 	
