@@ -73,7 +73,7 @@ var fraukiDamageFrames = {
 	},
 
 	'Attack Jump0002': {
-		x: 30, y: -28, w: 20, h: 60,
+		x: 30, y: -35, w: 20, h: 60,
 		damage: 1.2,
 		knockback: 0.1,
 		priority: 0,
@@ -81,7 +81,7 @@ var fraukiDamageFrames = {
 	},
 
 	'Attack Jump0003': {
-		x: 20, y: -40, w: 10, h: 30,
+		x: 10, y: -30, w: 10, h: 30,
 		damage: 1.2,
 		knockback: 0.1,
 		priority: 0,
@@ -312,7 +312,7 @@ var fraukiDamageFrames = {
 };
 
 var fraukiAnimations = [
-	{ Name: 'stand', Frames:  ['Stand0000'],  Fps: 10 , Loop: true },
+	{ Name: 'stand', Frames:  ['Stand0000'],  Fps: 1 , Loop: true },
 	{ Name: 'run', Frames:  ['Run0000', 'Run0001', 'Run0002', 'Run0003', 'Run0004', 'Run0005', 'Run0006', 'Run0007'],  Fps: 13 , Loop: true },
 	{ Name: 'jump', Frames:  ['Jump0000', 'Jump0001', 'Jump0002', 'Jump0003', 'Jump0004'],  Fps: 10 , Loop: true },
 	{ Name: 'peak', Frames:  ['Peak0000', 'Peak0001'],  Fps: 14 , Loop: false },

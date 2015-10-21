@@ -358,10 +358,10 @@ Player.prototype.Run = function(params) {
 
     if(params.dir === 'left') {
         this.SetDirection('left');
-        if(this.states.direction === 'left') this.body.acceleration.x = -1500;
+        this.body.acceleration.x = -1500;
     } else if(params.dir === 'right') {
         this.SetDirection('right');
-        if(this.states.direction === 'right') this.body.acceleration.x = 1500;
+        this.body.acceleration.x = 1500;
     } else {
         this.body.acceleration.x = 0;
 
@@ -416,7 +416,7 @@ Player.prototype.Jump = function(params) {
         }
         
         //normal jump
-        if(this.state === this.Standing || this.state === this.Running || this.state === this.Landing || this.state === this.Crouching || (this.state === this.AttackFront && this.body.onFloor()) || (this.state === this.AttackOverhead && this.body.onFloor())) {
+        if(this.state === this.Standing || this.state === this.Running || this.state === this.Landing || this.state === this.Crouching) {
             this.body.velocity.y = PLAYER_JUMP_VEL();
             events.publish('play_sound', {name: 'jump'});
         }
@@ -443,6 +443,11 @@ Player.prototype.Jump = function(params) {
             }
             
             events.publish('play_sound', {name: 'jump'});
+        }
+        //overhead into jump atack
+        else if(this.state === this.AttackOverhead) {
+            this.JumpSlash();
+            console.log('kk');
         }
         //double jump
         else {
@@ -502,7 +507,7 @@ Player.prototype.Slash = function(params) {
         effectsController.EnergyStreak();
     }
     //upwards dash attack
-    else if(this.state === this.Jumping && this.states.hasFlipped === false) {
+    else if((this.state === this.Jumping || (this.state === this.Peaking && inputController.dpad.up) || (this.state === this.Falling && inputController.dpad.up)) && this.states.hasFlipped === false) {
         this.JumpSlash();
         effectsController.EnergyStreak();
     }
@@ -576,8 +581,12 @@ Player.prototype.JumpSlash = function() {
     if(energyController.UseEnergy(6)) {
         this.state = this.AttackJump;
         
-        this.body.maxVelocity.y = 800;
-        this.body.velocity.y = -500;
+        if(this.body.velocity.y > PLAYER_DOUBLE_JUMP_VEL()) {
+            this.body.velocity.y = PLAYER_DOUBLE_JUMP_VEL();
+        } else {
+            this.body.velocity.y += PLAYER_DOUBLE_JUMP_VEL();
+        }
+
         this.states.hasFlipped = true;
 
         events.publish('play_sound', {name: 'attack_slash', restart: true });
@@ -1136,16 +1145,6 @@ Player.prototype.AttackDiveLand = function() {
 
 Player.prototype.AttackJump = function() {
     this.PlayAnim('attack_jump');
-
-    //this.body.velocity.x /= 1.01;
-    this.body.maxVelocity.y = 800;
-
-    if(this.body.velocity.y < 0) {
-        this.body.gravity.y = game.physics.arcade.gravity.y * 1.5;
-    }
-
-    // if(this.movement.jumpSlashVelocity !== 0)
-    //     this.body.velocity.y = this.movement.jumpSlashVelocity;
 
     if(this.animations.currentAnim.isFinished) {
         this.state = this.Jumping;
