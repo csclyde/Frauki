@@ -156,7 +156,7 @@ Collision.OverlapAttackWithEnemy = function(f, e) {
 
             damage = e.maxEnergy;
 
-            effectsController.SpawnEnergyNuggets(e.body, frauki.body, 'positive', e.maxEnergy); 
+            effectsController.SpawnEnergyNuggets(e.body, frauki.body, 'positive', e.maxEnergy * 3); 
             events.publish('camera_shake', {magnitudeX: 10, magnitudeY: 6, duration: 350 });
             //effectsController.MakeHearts(e.maxEnergy / 4);
 

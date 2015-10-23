@@ -1,9 +1,8 @@
 PLAYER_SPEED = function() { return 200; }
-PLAYER_ROLL_SPEED = function() { return 600; }
-PLAYER_RUN_SLASH_SPEED = function() { return  650; }
+PLAYER_ROLL_SPEED = function() { return 500; }
+PLAYER_RUN_SLASH_SPEED = function() { return  550; }
 PLAYER_JUMP_VEL = function() { return -350; }
 PLAYER_DOUBLE_JUMP_VEL = function() { return -275; }
-PLAYER_JUMP_SLASH_SPEED = function() { return 1075; }
 
 Player = function (game, x, y, name) {
 
@@ -955,8 +954,8 @@ Player.prototype.AttackLunge = function() {
     this.PlayAnim('attack_lunge');
 
     if(this.Attacking()) {
-        this.body.maxVelocity.x = PLAYER_ROLL_SPEED() - 200;
-        this.body.acceleration.x = this.states.direction === 'left' ? -4500 : 4500;
+        this.body.maxVelocity.x = PLAYER_ROLL_SPEED();
+        this.body.acceleration.x = this.states.direction === 'left' ? -2500 : 2500;
 
         if(this.body.velocity.y > 0) {
             this.body.velocity.y = 0;
