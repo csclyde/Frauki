@@ -100,7 +100,7 @@ var fraukiDamageFrames = {
 	},
 	
 	'Attack Fall0003': {
-		x: 40, y: 10, w: 30, h: 40,
+		x: 10, y: 10, w: 60, h: 40,
 		damage: 1.5,
 		knockback: 0.1,
 		priority: 1.5,
@@ -108,7 +108,7 @@ var fraukiDamageFrames = {
 	},
 
 	'Attack Fall0004': {
-		x: 35, y: 35, w: 30, h: 15,
+		x: 5, y: 35, w: 60, h: 15,
 		damage: 1.5,
 		knockback: 0.3,
 		priority: 1.5,
