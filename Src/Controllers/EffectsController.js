@@ -512,11 +512,11 @@ EffectsController.prototype.SlowHit = function(duration) {
     var t = game.add.tween(Main).to( { physicsSlowMo: 0.1 }, Math.round(duration * 0.2), Phaser.Easing.Exponential.InOut, false).to( { physicsSlowMo: 1 }, Math.round(duration * 0.8), Phaser.Easing.Exponential.InOut, false);
     t.start();
 
-    var currAnim = frauki.animations.currentAnim;
-    var currSpeed = frauki.animations.currentAnim.speed;
+    //var currAnim = frauki.animations.currentAnim;
+    //var currSpeed = frauki.animations.currentAnim.speed;
 
-    var t2 = game.add.tween(currAnim).to( { speed: currSpeed * 0.3 }, Math.round(duration * 0.2), Phaser.Easing.Exponential.InOut, false).to( { speed: currSpeed }, Math.round(duration * 0.8), Phaser.Easing.Exponential.InOut, false);
-    t2.start();
+    //var t2 = game.add.tween(currAnim).to( { speed: currSpeed * 0.3 }, Math.round(duration * 0.2), Phaser.Easing.Exponential.InOut, false).to( { speed: currSpeed }, Math.round(duration * 0.8), Phaser.Easing.Exponential.InOut, false);
+    //t2.start();
 };
 
 EffectsController.prototype.SparkSplash = function(posSrc, negSrc) {
