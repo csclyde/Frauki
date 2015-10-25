@@ -210,6 +210,11 @@ Frogland.CreateCollisionLayer = function(layer) {
     this['collisionLayer_' + layer].visible = false;
 };
 
+//this should be called every frame, and create objects that do not yet exist, right off camera. 
+//first, loop through all objects. collect the ones that are within the frame and padding, and
+//have not been flagged as spanwed yet. These are the things that will be create. There can be 
+//another function called when you die that destroys everything and resets all the flags.
+//Also make sure that when something is destroyed, it is totally destroyed and garbage collected.
 Frogland.CreateObjectsLayer = function(layer) {
     var that = this;
     var currLayer = 'objectGroup_' + layer;
