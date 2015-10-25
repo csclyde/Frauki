@@ -130,38 +130,7 @@ Collision.OverlapAttackWithEnemy = function(f, e) {
         e.body.velocity.x *= 1.2;
         e.body.velocity.y *= 1.2;
 
-        setTimeout(function() {
-            e.Die();
-            e.state = e.Dying;
-
-            effectsController.EnergySplash(e.body.center, 200, 'negative', 20);
-
-            var enemBody = e.body.center.clone();
-
-            if(e.robotic) {
-                for(var i = 0, max = game.rnd.between(2, 4); i < max; i++) {
-                    setTimeout(function() {
-                        var pt = enemBody.clone();
-                        pt.x += game.rnd.between(-20, 20);
-                        pt.y += game.rnd.between(-20, 20);
-
-                        effectsController.Explosion(pt);
-                    }, i * game.rnd.between(150, 200));
-                };
-            } else {
-                effectsController.Explosion(e.body.center);
-            }
-
-            effectsController.DiceEnemy(e, e.body.center.x, e.body.center.y);
-
-            damage = e.maxEnergy;
-
-            effectsController.SpawnEnergyNuggets(e.body, frauki.body, 'positive', e.maxEnergy * 3); 
-            events.publish('camera_shake', {magnitudeX: 10, magnitudeY: 6, duration: 350 });
-            //effectsController.MakeHearts(e.maxEnergy / 4);
-
-            e.destroy();
-        }, e.robotic ? 800 : game.rnd.between(250, 350));
+        setTimeout(DestroyEnemy, e.robotic ? 800 : game.rnd.between(250, 350), e);
 
         if(e.robotic) events.publish('play_sound', { name: 'robosplosion' });
 

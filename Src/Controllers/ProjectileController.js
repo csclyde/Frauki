@@ -88,7 +88,7 @@ ProjectileController.prototype.Update = function() {
 	this.projectiles.forEach(function(p) {
 
 		if(game.time.now - p.spawnTime > p.lifeTime && p.lifeTime !== 0) {
-			p.kill();
+			p.destroy();
 			childrenToRemove.push(p);
 		} else if(p.solid) {
 			game.physics.arcade.collide(p, Frogland.GetCurrentCollisionLayer(), this.CollideProjectileWithWorld, this.CollideProjectileWithWorld);

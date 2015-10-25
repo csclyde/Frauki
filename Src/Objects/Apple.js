@@ -55,7 +55,7 @@ function EatApple(f, a) {
     a.spinTween = game.add.tween(a.body).to({angularVelocity: 0}, 3000, Phaser.Easing.Exponential.In, true);
 
     a.spinTween.onComplete.add(function() { 
-        game.time.events.add(1000, function(){ a.kill(); } );
+        game.time.events.add(1000, function(){ a.destroy(); } );
     }, a);
 
     energyController.AddPower(5);
