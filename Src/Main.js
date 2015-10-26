@@ -134,6 +134,8 @@ Main.Restart = function() {
     cameraController.shakeXTween.stop();
     cameraController.shakeYTween.stop();
 
+    Frogland.CompileObjectList();
+
     fadeOutTween.onComplete.add(function() {
         frauki.alpha = 1;
         Frogland.SpawnFrauki();
