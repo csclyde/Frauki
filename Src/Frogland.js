@@ -468,6 +468,7 @@ Frogland.PreprocessTiles = function(layer) {
 
 
     }, this, 0, 0, 5, 20, 'Foreground_4');
+
 };
 
 Frogland.GetCurrentObjectGroup = function() {
@@ -559,35 +560,40 @@ Frogland.AnimateTiles = function() {
     viewBottom = Math.ceil((game.camera.height / 16));
 
     if(viewLeft < 0) viewLeft = 0;
-    if(viewLeft > 155) viewLeft = 155;
+    if(viewLeft + viewRight > 200) viewLeft = 200 - viewRight;
     if(viewTop < 0) viewTop = 0;
-    if(viewTop > 193) viewTop = 193;
+    if(viewTop + viewBottom > 600) viewTop = 600 - viewBottom;
 
     this.map.forEach(function(tile) {
 
-        for(var i = 0; i < this.animatedTiles.length; i++) {
+        if(!!tile) {
+            for(var i = 0; i < this.animatedTiles.length; i++) {
 
-            var animLength = this.animatedTiles[i].length;
+                var animLength = this.animatedTiles[i].length;
 
-            if(!this.animatedTiles[i] || animLength <= 1) {
-                continue;
-            }
-
-            //loop the final tile back to the start
-            if(tile.index === this.animatedTiles[i][animLength - 1]) {
-                tile.index = this.animatedTiles[i][0]; 
-                continue;
-            }
-
-            //increment the rest
-            for(var j = 0; j < animLength - 1; j++) {
-                if(tile.index === this.animatedTiles[i][j]) {
-                    tile.index = this.animatedTiles[i][j + 1];
-                    break;
+                if(!this.animatedTiles[i] || animLength <= 1) {
+                    continue;
                 }
+
+                //loop the final tile back to the start
+                if(tile.index === this.animatedTiles[i][animLength - 1]) {
+                    tile.index = this.animatedTiles[i][0]; 
+                    continue;
+                }
+
+                //increment the rest
+                for(var j = 0; j < animLength - 1; j++) {
+                    if(tile.index === this.animatedTiles[i][j]) {
+                        tile.index = this.animatedTiles[i][j + 1];
+                        break;
+                    }
+                }
+            
             }
-        
         }
+
            
     }, this, viewLeft, viewTop, viewRight, viewBottom, 'Foreground_' + Frogland.currentLayer); 
+
+    Frogland['foregroundLayer_' + Frogland.currentLayer].dirty = true;
 };
