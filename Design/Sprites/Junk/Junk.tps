@@ -193,6 +193,7 @@
             <filename>Barrel</filename>
             <filename>Plant</filename>
             <filename>Pot</filename>
+            <filename>Egg</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

@@ -2,16 +2,25 @@
 
 "Barrel/Barrel0000":
 {
-	"frame": {"x":1,"y":111,"w":30,"h":37},
+	"frame": {"x":114,"y":40,"w":30,"h":37},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":30,"h":37},
 	"sourceSize": {"w":30,"h":37},
 	"pivot": {"x":0.5,"y":0.5}
 },
+"Egg/Egg0000":
+{
+	"frame": {"x":1,"y":1,"w":64,"h":95},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":95},
+	"sourceSize": {"w":64,"h":95},
+	"pivot": {"x":0.5,"y":0.5}
+},
 "Plant/Plant0000":
 {
-	"frame": {"x":1,"y":1,"w":47,"h":70},
+	"frame": {"x":66,"y":1,"w":47,"h":70},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":47,"h":70},
@@ -20,7 +29,7 @@
 },
 "Pot/Pot0000":
 {
-	"frame": {"x":1,"y":72,"w":37,"h":38},
+	"frame": {"x":114,"y":1,"w":37,"h":38},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":37,"h":38},
@@ -32,8 +41,8 @@
 	"version": "1.0",
 	"image": "Junk.png",
 	"format": "RGBA8888",
-	"size": {"w":49,"h":149},
+	"size": {"w":152,"h":97},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:64a9fc1c3cf559a99e6fe347160d1b69:b14598504f4cd130974ac47c867861ad:831845a21f0accda2f2aa80233051662$"
+	"smartupdate": "$TexturePacker:SmartUpdate:f00924292ba09f2da47126a63661005a:f51e831356d17a14cf2a53f1ddc8ead5:831845a21f0accda2f2aa80233051662$"
 }
 }

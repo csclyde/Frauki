@@ -108,10 +108,12 @@ Enemy.prototype.types['A3PZ'] =  function() {
             this.FacePlayer();
 
             if(this.PlayerDistance() < 200) {
-                if(frauki.InAttackAnim()) {
+                if(frauki.InPreAttackAnim() || frauki.Attacking()) {
                     this.Dodge();
                 } else if(this.PlayerDistance() < 125) {
                     this.Attack();
+                } else {
+                    this.state = this.Dodging;
                 }
             }
 
