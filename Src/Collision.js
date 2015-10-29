@@ -105,11 +105,11 @@ Collision.OverlapAttackWithEnemy = function(f, e) {
 
     //fraukis knockback will increase the amount that the enemy is moved. The weight
     //of the enemy will work against that. 
-    e.body.velocity.x = (600 * frauki.GetCurrentKnockback()) - (600 * e.weight);
+    e.body.velocity.x = (800 * frauki.GetCurrentKnockback()) - (800 * e.weight);
     if(e.body.velocity.x < 50) e.body.velocity.x = 50;
     e.body.velocity.x *= e.PlayerDirMod();
     
-    e.body.velocity.y = -200 + (frauki.GetCurrentJuggle() * -200);
+    e.body.velocity.y = -300 + (frauki.GetCurrentJuggle() * -300);
     if(e.robotic) e.body.velocity.y /= 2;
 
     e.timers.SetTimer('hit', e.baseStunDuration + (100 * damage));
@@ -127,8 +127,8 @@ Collision.OverlapAttackWithEnemy = function(f, e) {
         e.timers.SetTimer('hit', 1000);
         e.timers.SetTimer('grace', 1000);
 
-        e.body.velocity.x *= 1.2;
-        e.body.velocity.y *= 1.2;
+        //e.body.velocity.x *= 1.2;
+        //e.body.velocity.y *= 1.2;
 
         setTimeout(DestroyEnemy, e.robotic ? 800 : game.rnd.between(250, 350), e);
 
