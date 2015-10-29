@@ -44,6 +44,7 @@ Junk.prototype.JunkHit = function(o) {
 	    //effectsController.SpawnEnergyNuggets(o.body, frauki.body, 'positive', probTable[Math.round(Math.random() * (probTable.length - 1))]);
 
 	    effectsController.ClashStreak(o.body.center.x, o.body.center.y, game.rnd.between(1, 2));
+        effectsController.Dust(o.body.center.x, o.body.center.y);
 	    effectsController.DiceEnemy(o, o.body.center.x, o.body.center.y);
 	    events.publish('camera_shake', {magnitudeX: 10, magnitudeY: 5, duration: 150});
 	    events.publish('play_sound', {name: 'smash'});

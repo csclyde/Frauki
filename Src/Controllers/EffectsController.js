@@ -456,7 +456,7 @@ EffectsController.prototype.DiceEnemy = function(enemy, x, y) {
 
     var i = 0;
     while(game.cache.getFrameData('Pieces').getFrameByName(enemy.enemyName + '/Dead000' + i)) {
-        pieces.push(game.add.sprite(x, y, 'Pieces', enemy.enemyName + '/Dead000' + i));
+        pieces.push(game.add.sprite(x + game.rnd.between(-20, 20), y + game.rnd.between(-20, 20), 'Pieces', enemy.enemyName + '/Dead000' + i));
         i++;
     }
 
@@ -611,6 +611,14 @@ EffectsController.prototype.JumpDust = function(src) {
     dust.animations.add('dust', ['JumpDust0000', 'JumpDust0001', 'JumpDust0002', 'JumpDust0003', 'JumpDust0004', 'JumpDust0005', 'JumpDust0006'], 10, false, false);
     dust.animations.play('dust');
     dust.alpha = 0.5;
+    dust.animations.currentAnim.killOnComplete = true;
+};
+
+EffectsController.prototype.Dust = function(x, y) {
+    var dust = game.add.sprite(x - 50, y - 50, 'Misc', null, Frogland.effectsGroup);
+    dust.animations.add('dust', ['Dust0000', 'Dust0001', 'Dust0002', 'Dust0003', 'Dust0004', 'Dust0005'], 10, false, false);
+    dust.animations.play('dust');
+    dust.alpha = 0.8;
     dust.animations.currentAnim.killOnComplete = true;
 };
 
