@@ -109,7 +109,7 @@ Frogland.Update = function() {
     frauki.states.flowUp = false;
     frauki.states.flowLeft = false;
 
-    //this.SpawnNearbyObjects();
+    this.SpawnNearbyObjects();
 
     for(var i = 0, max = this.GetCurrentObjectGroup().children.length; i < max; i++) {
         var padding = 100;
@@ -224,14 +224,14 @@ Frogland.CreateObjectsLayer = function(layer) {
 
     if(!this[currLayer]) this[currLayer] = game.add.group();
 
-    FileMap.Junk.forEach(function(junk) {
-        Frogland.map.createFromObjects('Objects_' + layer, junk.Tile, junk.Name, junk.Name, true, true, that[currLayer], Junk, true);
-    });
+    // FileMap.Junk.forEach(function(junk) {
+    //     Frogland.map.createFromObjects('Objects_' + layer, junk.Tile, junk.Name, junk.Name, true, true, that[currLayer], Junk, true);
+    // });
 
     //create each enemy for this layer
-    FileMap.Enemies.forEach(function(enemy) {
-        Frogland.map.createFromObjects('Objects_' + layer, enemy.Tile, enemy.Name, null, true, true, that[currLayer], Enemy, false);
-    });
+    // FileMap.Enemies.forEach(function(enemy) {
+    //     Frogland.map.createFromObjects('Objects_' + layer, enemy.Tile, enemy.Name, null, true, true, that[currLayer], Enemy, false);
+    // });
 
     FileMap.Runes.forEach(function(rune) {
         Frogland.map.createFromObjects('Objects_' + layer, rune.Tile, rune.Name, rune.Name, true, true, that[currLayer], TechnoRune, false);
@@ -239,7 +239,7 @@ Frogland.CreateObjectsLayer = function(layer) {
 
     //create all the apples
     this.map.createFromObjects('Objects_' + layer, 66, 'Misc', 'Apple0000', true, true, this[currLayer], Apple, false);
-    this.map.createFromObjects('Objects_' + layer, 68, 'Misc', 'EnergyBitPos0000', true, true, this[currLayer], EnergyNugg, false);
+    //this.map.createFromObjects('Objects_' + layer, 68, 'Misc', 'EnergyBitPos0000', true, true, this[currLayer], EnergyNugg, false);
     this.map.createFromObjects('Objects_' + layer, 69, 'Misc', 'Checkpoint0000', true, true, this[currLayer], Checkpoint, false);
 
     //activate the correct checkpoint
@@ -300,10 +300,13 @@ Frogland.CompileObjectList = function() {
     this.map.objects['Objects_4'].forEach(function(o) {
         that.latentObjects.Objects_4.push({ id: o.gid, x: o.x, y: o.y });
     });
+
 };
 
 Frogland.SpawnNearbyObjects = function() {
     var objLayer = this.latentObjects['Objects_' + this.currentLayer];
+
+    var spawnedObjs = [];
 
     for(var i = 0, max = objLayer.length; i < max; i++) {
         var padding = 200;
@@ -313,12 +316,17 @@ Frogland.SpawnNearbyObjects = function() {
 
         if(o.x > game.camera.x - padding && o.y > game.camera.y - padding && o.x < game.camera.x + game.camera.width + padding && o.y < game.camera.y + game.camera.height + padding) {
             this.SpawnObject(o);
+            spawnedObjs.push(o);
         } 
-        
+    }
+
+    for(var i = 0, max = spawnedObjs.length; i < max; i++) {
+        objLayer.splice(objLayer.indexOf(spawnedObjs[i]), 1);
     }
 };
 
 Frogland.SpawnObject = function(o) {
+    var that = this;
 
     var currLayer = 'objectGroup_' + Frogland.currentLayer;
     if(!this[currLayer]) this[currLayer] = game.add.group();
@@ -328,24 +336,35 @@ Frogland.SpawnObject = function(o) {
     FileMap.Junk.forEach(function(junk) {
         if(o.id === junk.Tile) {
             newObj = new Junk(game, o.x, o.y, junk.Name, junk.Name);
+            newObj.y -= newObj.height;
         }
     });
 
-    // FileMap.Enemies.forEach(function(enemy) {
-    //     Frogland.map.createFromObjects('Objects_' + layer, enemy.Tile, enemy.Name, null, true, true, that[currLayer], Enemy, false);
-    // });
+    FileMap.Enemies.forEach(function(enemy) {
+        if(o.id === enemy.Tile) {
+            newObj = new Enemy(game, o.x, o.y, enemy.Name, enemy.Name);
+            //newObj.y -= newObj.height;
+        }
+
+        //Frogland.map.createFromObjects('Objects_' + layer, enemy.Tile, enemy.Name, null, true, true, that[currLayer], Enemy, false);
+    });
 
     // FileMap.Runes.forEach(function(rune) {
     //     Frogland.map.createFromObjects('Objects_' + layer, rune.Tile, rune.Name, rune.Name, true, true, that[currLayer], TechnoRune, false);
     // });
 
     // this.map.createFromObjects('Objects_' + layer, 66, 'Misc', 'Apple0000', true, true, this[currLayer], Apple, false);
-    // this.map.createFromObjects('Objects_' + layer, 68, 'Misc', 'EnergyBitPos0000', true, true, this[currLayer], EnergyNugg, false);
+    
+    if(o.id === 68) {
+        newObj = new EnergyNugg(game, o.x, o.y, 'Misc', 'EnergyBitPos0000');
+        //this.map.createFromObjects('Objects_' + layer, 68, 'Misc', 'EnergyBitPos0000', true, true, this[currLayer], EnergyNugg, false);
+    }
  
-    o.owningLayer = Frogland.currentLayer;
 
     if(newObj !== null) {
         this[currLayer].add(newObj);
+        newObj.owningLayer = Frogland.currentLayer;
+        
         Frogland.latentObjects['Objects_' + Frogland.currentLayer].splice(Frogland.latentObjects['Objects_' + Frogland.currentLayer].indexOf(o), 1);
     }
 };
