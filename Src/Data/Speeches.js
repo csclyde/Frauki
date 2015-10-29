@@ -47,5 +47,6 @@ var Speeches = {
 	'refreshing': { text: 'Oh my... that\'s quite refreshing.', portrait: 'Mischeif' },
 	'flower_bloom': { text: 'How can a flower bloom in a dark room? I don\'t trust it.', portrait: 'Displeased' },
 	'treasures': { text: 'Wow, look at all these treasures. Well, I don\'t have any use for them.' },
+	'thats_me': { text: 'Is that... me?', portrait: 'Displeased' }
 
 };
