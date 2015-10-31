@@ -564,6 +564,7 @@ Player.prototype.FallSlash = function() {
         this.state = this.AttackFall;
 
         events.publish('play_sound', {name: 'attack_slash', restart: true });
+        this.timers.SetTimer('fall_attack_wait', 1000);
     }
 };
 
@@ -984,8 +985,9 @@ Player.prototype.AttackFall = function() {
     this.body.gravity.y = game.physics.arcade.gravity.y * 3;
     this.body.maxVelocity.y = 450;
 
-    if(!this.Attacking()) {
-        this.body.velocity.x /= 1.2;
+    if(!this.Attacking() && this.body.onFloor()) {
+        this.body.velocity.x = 0;
+        this.body.acceleration.x = 0;
     }
 
     //create dust when they land
@@ -994,7 +996,7 @@ Player.prototype.AttackFall = function() {
         this.states.attackFallLanded = true;
     }
 
-    if(this.animations.currentAnim.isFinished) {
+    if(this.animations.currentAnim.isFinished && this.timers.TimerUp('fall_attack_wait')) {
         if(this.body.onFloor()) {
         
             if(this.body.velocity.x === 0) {

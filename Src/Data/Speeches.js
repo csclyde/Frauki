@@ -1,5 +1,5 @@
 var Speeches = {
-	'hole_sign': { text: 'It reads: Watch out for danger! This hole is not safe to jump into.' },
+	'hole_sign': { text: 'It reads: Watch out for danger! This hole is not safe to jump into. Leave what\'s down there alone.' },
 	'phone': { text: 'There’s still a noise when I pick it up. Hello?' },
 	'tomatoes': { text: 'Mmm, what juicy little apples. Oh wait... they\'re just tomatoes' },
 	'shade_tree': { text: 'This looks like a good spot for a nap.' },
@@ -47,6 +47,11 @@ var Speeches = {
 	'refreshing': { text: 'Oh my... that\'s quite refreshing.', portrait: 'Mischeif' },
 	'flower_bloom': { text: 'How can a flower bloom in a dark room? I don\'t trust it.', portrait: 'Displeased' },
 	'treasures': { text: 'Wow, look at all these treasures. Well, I don\'t have any use for them.' },
-	'thats_me': { text: 'Is that... me?', portrait: 'Displeased' }
+	'thats_me': { text: 'Is that... me?', portrait: 'Displeased' },
+	'garden': { text: 'It reads: To those who come after, this world is a garden.' },
+	'journal1': { text: 'It reads: I take a greenergy suppository every morning, there\'s really no better way to start the day.', portrait: 'Displeased' },
+	'journal2': { text: 'It reads: Greenergy on the rocks, greenergy tendies, greenergy muffins... yes please!' },
+	'journal3': { text: 'It reads: I only eat the highest quality, most delectable, most subtle and transcendent greenergy. Nothing less will do.' },
+	'sweetnasty': { text: 'It reads: Good bye you sweet nasty world!!!' },
 
 };
