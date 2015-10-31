@@ -564,7 +564,7 @@ Player.prototype.FallSlash = function() {
         this.state = this.AttackFall;
 
         events.publish('play_sound', {name: 'attack_slash', restart: true });
-        this.timers.SetTimer('fall_attack_wait', 1000);
+        this.timers.SetTimer('fall_attack_wait', 800);
     }
 };
 

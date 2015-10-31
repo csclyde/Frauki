@@ -134,8 +134,6 @@ Main.Restart = function() {
     cameraController.shakeXTween.stop();
     cameraController.shakeYTween.stop();
 
-    Frogland.CompileObjectList();
-
     fadeOutTween.onComplete.add(function() {
         frauki.alpha = 1;
         Frogland.SpawnFrauki();
@@ -183,6 +181,8 @@ Main.Restart = function() {
             trig.stayFired = false;
             trig.exitFired = false;
         });
+
+        Frogland.CompileObjectList();
 
         //var cameraMoveTween = game.add.tween(game.camera)
 
