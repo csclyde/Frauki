@@ -9,6 +9,7 @@ Main.create = function() {
     triggerController = new TriggerController();
     scriptRunner = new ScriptRunner();
     timerUtil = new TimerUtil();
+    objectController = new ObjectController();
 
     triggerController.Create(map);
 
@@ -38,6 +39,7 @@ Main.create = function() {
 Main.update = function() {
 
     frauki.UpdateAttackGeometry();
+    objectController.Update();
     
     Frogland.Update();
 
@@ -182,7 +184,7 @@ Main.Restart = function() {
             trig.exitFired = false;
         });
 
-        Frogland.CompileObjectList();
+        objectController.CompileObjectList();
 
         //var cameraMoveTween = game.add.tween(game.camera)
 
