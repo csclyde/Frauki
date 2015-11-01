@@ -52,6 +52,7 @@ var Speeches = {
 	'journal1': { text: 'It reads: I take a greenergy suppository every morning, there\'s really no better way to start the day.', portrait: 'Displeased' },
 	'journal2': { text: 'It reads: Greenergy on the rocks, greenergy tendies, greenergy muffins... yes please!' },
 	'journal3': { text: 'It reads: I only eat the highest quality, most delectable, most subtle and transcendent greenergy. Nothing less will do.' },
-	'sweetnasty': { text: 'It reads: Good bye you sweet nasty world!!!' },
+	'sweetnasty': { text: 'It reads: Good bye you sweet world!!!' },
+	'maint': { text: 'It reads: Maintenence access. Beware pipe currents.' },
 
 };
