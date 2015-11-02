@@ -2,7 +2,7 @@
 
 "Barrel0000":
 {
-	"frame": {"x":114,"y":40,"w":30,"h":37},
+	"frame": {"x":114,"y":1,"w":30,"h":37},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":30,"h":37},
@@ -29,11 +29,20 @@
 },
 "Pot0000":
 {
-	"frame": {"x":114,"y":1,"w":37,"h":38},
+	"frame": {"x":110,"y":72,"w":37,"h":38},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":37,"h":38},
 	"sourceSize": {"w":37,"h":38},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"Pot20000":
+{
+	"frame": {"x":66,"y":72,"w":43,"h":42},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":43,"h":42},
+	"sourceSize": {"w":43,"h":42},
 	"pivot": {"x":0.5,"y":0.5}
 }},
 "meta": {
@@ -41,8 +50,8 @@
 	"version": "1.0",
 	"image": "Junk.png",
 	"format": "RGBA8888",
-	"size": {"w":152,"h":97},
+	"size": {"w":148,"h":115},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:d45612d37efcd2ebc2b324bf8e832454:81e6ac3c3e86bba204c0cfe6eb331bdf:831845a21f0accda2f2aa80233051662$"
+	"smartupdate": "$TexturePacker:SmartUpdate:7013618aebbbd6f2564e706d37df1fbf:493108e53fb0704eea0b111ca75b33f7:831845a21f0accda2f2aa80233051662$"
 }
 }
