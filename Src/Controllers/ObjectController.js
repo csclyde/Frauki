@@ -92,7 +92,7 @@ ObjectController.prototype.DestroyFarawayObjects = function() {
         //splice out the destroyed objects
         this.createdObjects = this.createdObjects.filter(function(e) { return !!e} );
     }
-}
+};
 
 ObjectController.prototype.SpawnObject = function(o) {
 
@@ -135,7 +135,7 @@ ObjectController.prototype.SpawnObject = function(o) {
         Frogland[currLayer].add(newObj);
         newObj.owningLayer = Frogland.currentLayer;
 
-        this.latentObjects['Objects_' + Frogland.currentLayer].splice(this.latentObjects['Objects_' + Frogland.currentLayer].indexOf(o), 1);
+        //this.latentObjects['Objects_' + Frogland.currentLayer].splice(this.latentObjects['Objects_' + Frogland.currentLayer].indexOf(o), 1);
     	this.createdObjects.push(newObj);
 
     	//console.log('Creating object', this.createdObjects.length);
