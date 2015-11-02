@@ -15,10 +15,11 @@ ObjectController.prototype.Create = function() {
 ObjectController.prototype.Update = function() {
 	if(!Main.restarting) {
 		this.SpawnNearbyObjects();
-		this.DestroyFarawayObjects();
+		//this.DestroyFarawayObjects();
 	}
 
 	//console.log(this.objCount);
+	//this.createdObjects = this.createdObjects.filter(function(e) { return !e.destroyPhase } );
 };
 
 ObjectController.prototype.CompileObjectList = function() {
@@ -30,15 +31,15 @@ ObjectController.prototype.CompileObjectList = function() {
     };
 
     Frogland.map.objects['Objects_2'].forEach(function(o) {
-        that.latentObjects.Objects_2.push({ id: o.gid, x: o.x, y: o.y });
+        that.latentObjects.Objects_2.push({ id: o.gid, x: o.x, y: o.y, u: that.latentObjects.Objects_2.length });
     });
 
     Frogland.map.objects['Objects_3'].forEach(function(o) {
-        that.latentObjects.Objects_3.push({ id: o.gid, x: o.x, y: o.y });
+        that.latentObjects.Objects_3.push({ id: o.gid, x: o.x, y: o.y, u: that.latentObjects.Objects_3.length });
     });
 
     Frogland.map.objects['Objects_4'].forEach(function(o) {
-        that.latentObjects.Objects_4.push({ id: o.gid, x: o.x, y: o.y });
+        that.latentObjects.Objects_4.push({ id: o.gid, x: o.x, y: o.y, u: that.latentObjects.Objects_4.length });
     });
 };
 
@@ -82,12 +83,14 @@ ObjectController.prototype.DestroyFarawayObjects = function() {
 
         if(o.x < leftBound || o.y < topBound || o.x > rightBound || o.y > bottomBound) {
             this.latentObjects['Objects_' + Frogland.currentLayer].push(o.latent);
-            this.createdObjects.splice(this.createdObjects.indexOf(o), 1);
+            //this.createdObjects.splice(this.createdObjects.indexOf(o), 1);
             o.destroy();
+            o = null;
             console.log('Destroying object', this.createdObjects.length);
         } 
 
         //splice out the destroyed objects
+        this.createdObjects = this.createdObjects.filter(function(e) { return !!e} );
     }
 }
 
@@ -98,32 +101,36 @@ ObjectController.prototype.SpawnObject = function(o) {
 
     var newObj = null;
 
-    FileMap.Junk.forEach(function(junk) {
-        if(o.id === junk.Tile) {
-            newObj = new Junk(game, o.x, o.y, junk.Name, junk.Name);
-            newObj.y -= newObj.height;
-            newObj.latent = o;
-        }
-    });
-
-    FileMap.Enemies.forEach(function(enemy) {
-        if(o.id === enemy.Tile) {
-            newObj = new Enemy(game, o.x, o.y, enemy.Name, enemy.Name);
-            newObj.latent = o;
-        }
-    });
-
     if(o.id === 66) {
         newObj = new Apple(game, o.x, o.y, 'Misc', 'Apple0000');
         newObj.latent = o;
     }
-
-    if(o.id === 68) {
+    else if(o.id === 68) {
         newObj = new EnergyNugg(game, o.x, o.y, 'Misc', 'EnergyBitPos0000');
         newObj.latent = o;
     }
- 
+    else if(o.id >= 85 && o.id <= 104) {
+	    FileMap.Enemies.forEach(function(enemy) {
+	        if(o.id === enemy.Tile) {
+	            newObj = new Enemy(game, o.x, o.y, enemy.Name, enemy.Name);
+	            newObj.latent = o;
+	        }
+	    });
+    }
+    else if(o.id >= 105 && o.id <= 124) {
+	    FileMap.Junk.forEach(function(junk) {
+	        if(o.id === junk.Tile) {
+	            newObj = new Junk(game, o.x, o.y, junk.Name, junk.Name);
+	            newObj.y -= newObj.height;
+	            newObj.latent = o;
+	        }
+	    });
+    } else {
+    	console.log('Unknown object', o);
+    }
 
+
+ 
     if(newObj !== null) {
         Frogland[currLayer].add(newObj);
         newObj.owningLayer = Frogland.currentLayer;
@@ -131,6 +138,6 @@ ObjectController.prototype.SpawnObject = function(o) {
         this.latentObjects['Objects_' + Frogland.currentLayer].splice(this.latentObjects['Objects_' + Frogland.currentLayer].indexOf(o), 1);
     	this.createdObjects.push(newObj);
 
-    	console.log('Creating object', this.createdObjects.length);
+    	//console.log('Creating object', this.createdObjects.length);
     }
 };
