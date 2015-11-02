@@ -9,9 +9,9 @@ Enemy.prototype.types['Fungu'] =  function() {
 
     this.energy = 1.5;
 
+    this.damage = 1;
     /*
     this.weight = 0.5;
-    this.damage = 5;
     this.baseStunDuration = 500;
     this.poise = 10;
     */
