@@ -85,17 +85,13 @@ CameraController.prototype.Update = function() {
 	this.prevYVel = frauki.body.velocity.y;
 }
 
-CameraController.prototype.SetRepulsiveTiles = function(tileArray) {
-	this.repulsiveTiles = tileArray;
-}
-
 CameraController.prototype.CrouchCamera = function(params) {
 	this.retweenY = true;
-}
+};
 
 CameraController.prototype.RaiseCamera = function(params) {
 	this.retweenY = true;
-}
+};
 
 CameraController.prototype.ScreenShake = function(params) {
 
@@ -103,8 +99,8 @@ CameraController.prototype.ScreenShake = function(params) {
 		return;
 	}
 
-	this.shakeMagnitudeX = params.magnitudeX * pixel.scale;
-	this.shakeMagnitudeY = params.magnitudeY * pixel.scale;
+	this.shakeMagnitudeX = params.magnitudeX * pixel.scale + (game.rnd.between(1, 2) == 1 ? -1 : 1);
+	this.shakeMagnitudeY = params.magnitudeY * pixel.scale + (game.rnd.between(1, 2) == 1 ? -1 : 1);
 	
 	this.shakeXTween = game.add.tween(this).to({shakeMagnitudeX: 0}, params.duration, Phaser.Easing.Linear.None, true);
 	this.shakeYTween = game.add.tween(this).to({shakeMagnitudeY: 0}, params.duration, Phaser.Easing.Linear.None, true);
