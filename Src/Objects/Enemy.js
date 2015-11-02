@@ -18,7 +18,7 @@ Enemy = function(game, x, y, name) {
         console.log('Enemy of type ' + name + ' was not found');
     }
 
-    this.enemyName = name;
+    this.objectName = name;
     this.state = this.Idling;
 
     //capture any initial values that were set in the specific enemy set up
@@ -164,7 +164,7 @@ function DestroyEnemy(e) {
         effectsController.Explosion(e.body.center);
     }
 
-    effectsController.DiceEnemy(e, e.body.center.x, e.body.center.y);
+    effectsController.DiceObject(e, e.body.center.x, e.body.center.y);
 
     damage = e.maxEnergy;
 

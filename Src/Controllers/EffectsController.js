@@ -450,13 +450,13 @@ EffectsController.prototype.Splash = function(tile) {
     }
 };
 
-EffectsController.prototype.DiceEnemy = function(enemy, x, y) {
+EffectsController.prototype.DiceObject = function(object, x, y) {
 
     var pieces = [];
 
     var i = 0;
-    while(game.cache.getFrameData('Pieces').getFrameByName(enemy.enemyName + '/Dead000' + i)) {
-        pieces.push(game.add.sprite(x + game.rnd.between(-20, 20), y + game.rnd.between(-20, 20), 'Pieces', enemy.enemyName + '/Dead000' + i));
+    while(game.cache.getFrameData('Pieces').getFrameByName(object.objectName + '000' + i)) {
+        pieces.push(game.add.sprite(x + game.rnd.between(-20, 20), y + game.rnd.between(-20, 20), 'Pieces', object.objectName + '000' + i));
         i++;
     }
 
@@ -469,13 +469,13 @@ EffectsController.prototype.DiceEnemy = function(enemy, x, y) {
         p.body.drag.x = 100;
 
         //randomly set the velocity, rotation, and lifespan
-        p.body.velocity.x = game.rnd.between(-150, 150) + enemy.body.velocity.x * 0.5;
-        p.body.velocity.y = game.rnd.between(-100, -400) + enemy.body.velocity.y * 0.5;
+        p.body.velocity.x = game.rnd.between(-150, 150) + object.body.velocity.x * 0.5;
+        p.body.velocity.y = game.rnd.between(-100, -400) + object.body.velocity.y * 0.5;
         p.body.angularVelocity = game.rnd.between(500, 1000);
 
         game.time.events.add(4000, function() { p.body.enable = false; } );
 
-        effectsController['dicedPieces' + enemy.owningLayer].addChild(p);
+        effectsController['dicedPieces' + object.owningLayer].addChild(p);
     });
 };
 

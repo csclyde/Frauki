@@ -70,10 +70,10 @@ FileMap.Enemies = [
 ];
 
 FileMap.Junk = [
-	{ Name: 'Barrel/Barrel0000', Tile: 105 },
-	{ Name: 'Plant/Plant0000', Tile: 106 },
-	{ Name: 'Pot/Pot0000', Tile: 107 },
-	{ Name: 'Egg/Egg0000', Tile: 108 },
+	{ Name: 'Barrel', Tile: 105 },
+	{ Name: 'Plant', Tile: 106 },
+	{ Name: 'Pot', Tile: 107 },
+	{ Name: 'Egg', Tile: 108 },
 ];
 
 FileMap.Runes = [

@@ -1,6 +1,6 @@
 {"frames": {
 
-"Barrel/Barrel0000":
+"Barrel0000":
 {
 	"frame": {"x":114,"y":40,"w":30,"h":37},
 	"rotated": false,
@@ -9,7 +9,7 @@
 	"sourceSize": {"w":30,"h":37},
 	"pivot": {"x":0.5,"y":0.5}
 },
-"Egg/Egg0000":
+"Egg0000":
 {
 	"frame": {"x":1,"y":1,"w":64,"h":95},
 	"rotated": false,
@@ -18,7 +18,7 @@
 	"sourceSize": {"w":64,"h":95},
 	"pivot": {"x":0.5,"y":0.5}
 },
-"Plant/Plant0000":
+"Plant0000":
 {
 	"frame": {"x":66,"y":1,"w":47,"h":70},
 	"rotated": false,
@@ -27,7 +27,7 @@
 	"sourceSize": {"w":47,"h":70},
 	"pivot": {"x":0.5,"y":0.5}
 },
-"Pot/Pot0000":
+"Pot0000":
 {
 	"frame": {"x":114,"y":1,"w":37,"h":38},
 	"rotated": false,
@@ -43,6 +43,6 @@
 	"format": "RGBA8888",
 	"size": {"w":152,"h":97},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:715c930906532d571afead979974f6cf:81e6ac3c3e86bba204c0cfe6eb331bdf:831845a21f0accda2f2aa80233051662$"
+	"smartupdate": "$TexturePacker:SmartUpdate:d45612d37efcd2ebc2b324bf8e832454:81e6ac3c3e86bba204c0cfe6eb331bdf:831845a21f0accda2f2aa80233051662$"
 }
 }

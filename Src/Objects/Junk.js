@@ -1,6 +1,6 @@
 Junk = function(game, x, y, name) {
     //instantiate the sprite
-    Phaser.Sprite.call(this, game, x, y, 'Junk', name);
+    Phaser.Sprite.call(this, game, x, y, 'Junk', name + '0000');
     this.spriteType = 'junk';
 
     //enable its physics body
@@ -9,7 +9,7 @@ Junk = function(game, x, y, name) {
     this.body.bounce.setTo(0.5);
     this.body.drag.setTo(200);
 
-    this.enemyName = name.split('/')[0];
+    this.objectName = 'Junk' + name;
 
     this.destroyed = false;
 
@@ -45,7 +45,7 @@ Junk.prototype.JunkHit = function(o) {
 
 	    effectsController.ClashStreak(o.body.center.x, o.body.center.y, game.rnd.between(1, 2));
         effectsController.Dust(o.body.center.x, o.body.center.y);
-	    effectsController.DiceEnemy(o, o.body.center.x, o.body.center.y);
+	    effectsController.DiceObject(o, o.body.center.x, o.body.center.y);
 	    events.publish('camera_shake', {magnitudeX: 10, magnitudeY: 5, duration: 150});
 	    events.publish('play_sound', {name: 'smash'});
 	    o.destroy();

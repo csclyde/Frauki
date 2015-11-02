@@ -180,7 +180,7 @@ Enemy.prototype.types['KR32'] =  function() {
 	this.Stabbing = function() {
 		this.PlayAnim('attack_stab');
 
-		this.FacePlayer();
+		//this.FacePlayer();
 
 		if(this.animations.currentAnim.isFinished) {
 

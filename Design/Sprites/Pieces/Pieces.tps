@@ -4,9 +4,9 @@
         <key>fileFormatVersion</key>
         <int>3</int>
         <key>texturePackerVersion</key>
-        <string>3.9.1</string>
+        <string>3.7.1</string>
         <key>fileName</key>
-        <string>D:/gamedev/Frauki/Design/Sprites/Pieces/Pieces.tps</string>
+        <string>C:/Users/user/Documents/gamedev/Frauki/Design/Sprites/Pieces/Pieces.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -43,8 +43,6 @@
         <false/>
         <key>pvrCompressionQuality</key>
         <enum type="SettingsBase::PvrCompressionQuality">PVR_QUALITY_NORMAL</enum>
-        <key>atfCompressData</key>
-        <false/>
         <key>mipMapMinSize</key>
         <uint>32768</uint>
         <key>etc1CompressionQuality</key>
@@ -166,7 +164,7 @@
         <key>trimSpriteNames</key>
         <true/>
         <key>prependSmartFolderName</key>
-        <true/>
+        <false/>
         <key>cleanTransparentPixels</key>
         <true/>
         <key>globalSpriteSettings</key>
@@ -190,20 +188,7 @@
         </struct>
         <key>fileList</key>
         <array>
-            <filename>CreeperThistle</filename>
-            <filename>Fungu</filename>
-            <filename>Haystax</filename>
-            <filename>Insectoid</filename>
-            <filename>KR32</filename>
-            <filename>Mask</filename>
-            <filename>Sporoid</filename>
-            <filename>A3PZ</filename>
-            <filename>Buzzar</filename>
-            <filename>HWK9</filename>
-            <filename>Barrel</filename>
-            <filename>Plant</filename>
-            <filename>Pot</filename>
-            <filename>Egg</filename>
+            <filename>Frames</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

@@ -164,7 +164,7 @@
         <key>trimSpriteNames</key>
         <true/>
         <key>prependSmartFolderName</key>
-        <true/>
+        <false/>
         <key>cleanTransparentPixels</key>
         <true/>
         <key>globalSpriteSettings</key>
@@ -188,10 +188,7 @@
         </struct>
         <key>fileList</key>
         <array>
-            <filename>Barrel</filename>
-            <filename>Plant</filename>
-            <filename>Pot</filename>
-            <filename>Egg</filename>
+            <filename>Frames</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
