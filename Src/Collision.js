@@ -138,9 +138,14 @@ Collision.OverlapAttackWithEnemy = function(f, e) {
         e.TakeHit();
     }
 
-    events.publish('play_sound', { name: 'attack_connect' });
     effectsController.SpawnEnergyNuggets(e.body, frauki.body, 'neutral', damage);
-    effectsController.EnergySplash(e.body.center, 100, 'negative', 15, e.body.velocity);
+    
+    if(damage > 0) {
+        events.publish('play_sound', { name: 'attack_connect' });
+        effectsController.EnergySplash(e.body.center, 100, 'negative', 15, e.body.velocity);
+    } else {
+        events.publish('play_sound', { name: 'clang' });
+    }
 
     frauki.LandHit(e, damage);
 };
