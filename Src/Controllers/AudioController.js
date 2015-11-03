@@ -20,7 +20,7 @@ AudioController = function() {
 
     //load audio
     FileMap.Audio.forEach(function(audio) {
-        //game.load.audio(audio.Name, audio.File);
+        game.load.audio(audio.Name, audio.File);
         that.sounds[audio.Name] = game.add.audio(audio.Name, audio.Volume, audio.Loop);
     });
 
@@ -39,7 +39,7 @@ AudioController = function() {
                 that.music[music.Name].volume = music.Volume;
 
                 if(music.Name === 'Surface') {
-                    //that.music[music.Name].play();
+                    that.music[music.Name].play();
                 }
             } 
         };
