@@ -145,7 +145,7 @@ Main.Restart = function() {
 
         energyController.energy = 30;
         energyController.charge = 30;
-        energyController.neutralPoint = 30;
+        energyController.neutralPoint = 15;
         game.time.slowMotion = 1;
         //game.world.alpha = 1;
         effectsController.Fade(false);

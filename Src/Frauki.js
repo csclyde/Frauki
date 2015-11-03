@@ -664,7 +664,7 @@ Player.prototype.Roll = function(params) {
 
 Player.prototype.Hit = function(e, damage, grace_duration) {
 
-    damage = damage * 4;
+    damage = damage * 2.5;
 
     if(this.state === this.Hurting || e.state === e.Hurting || frauki.Attacking() || frauki.Grace())
         return;

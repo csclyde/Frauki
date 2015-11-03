@@ -3,7 +3,7 @@ EnergyController = function() {
 	var that  = this;
 
 	this.energy = 30;
-	this.neutralPoint = 30;
+	this.neutralPoint = 15;
 	this.charge = 30;
 	this.activeCharge = 0;
 	this.tickTimer = 0;
