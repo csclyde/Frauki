@@ -60,6 +60,10 @@ Collision.OverlapFraukiWithObject = function(f, o) {
     } else if(o.spriteType === 'checkpoint') {
         return false;
 
+    } else if(o.spriteType === 'bigNugg') {
+        effectsController.SpawnEnergyNuggets(a.body, frauki.body, 'positive', o.energyAmount);
+        o.destroy();
+        return false;
     }
 
     return true;

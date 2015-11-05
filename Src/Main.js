@@ -137,6 +137,18 @@ Main.Restart = function() {
     cameraController.shakeYTween.stop();
 
     fadeOutTween.onComplete.add(function() {
+        var biggy = game.add.sprite(frauki.body.center.x, frauki.body.center.y, 'Misc');
+        game.physics.enable(biggy, Phaser.Physics.ARCADE);
+
+        biggy.body.allowGravity = false;
+        biggy.animations.add('idle', ['BigNugg0000', 'BigNugg0001', 'BigNugg0002', 'BigNugg0003', 'BigNugg0004', 'BigNugg0005'], 14, true, false);
+        biggy.play('idle');
+        biggy.body.setSize(96, 96, 0, 0);
+        biggy.anchor.setTo(0.5, 0.5);
+        biggy.spriteType = 'bigNugg';
+        biggy.energyAmount = 15;
+        Frogland.GetCurrentObjectGroup().add(biggy);
+
         frauki.alpha = 1;
         Frogland.SpawnFrauki();
 
@@ -155,8 +167,6 @@ Main.Restart = function() {
         Frogland.objectGroup_4.removeAll(true);
         Frogland.objectGroup_3.removeAll(true);
         Frogland.objectGroup_2.removeAll(true);
-
-        console.log(Frogland.objectGroup_4);
 
         Frogland.CreateObjectsLayer(4);
         Frogland.CreateObjectsLayer(3);
@@ -185,6 +195,8 @@ Main.Restart = function() {
         });
 
         objectController.CompileObjectList();
+
+
 
         //var cameraMoveTween = game.add.tween(game.camera)
 
