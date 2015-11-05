@@ -961,7 +961,7 @@ Player.prototype.Hanging = function() {
         this.PlayAnim('fall');
     } else if(topTile !== null) {
         this.PlayAnim('hang');
-        this.body.velocity.y /= 1.4;
+        this.body.velocity.y /= 1.2;
     }
 
     if(!this.body.onWall()) {
