@@ -452,7 +452,7 @@ Player.prototype.Jump = function(params) {
             console.log('kk');
         }
         //double jump
-        else {
+        else if(!this.InAttackAnim()) {
             this.DoubleJump();
         }
     } else if(this.body.velocity.y < 0 && this.state !== this.Flipping) {
@@ -466,10 +466,12 @@ Player.prototype.Jump = function(params) {
 Player.prototype.DoubleJump = function() {
     if(this.states.hasFlipped === false && this.state !== this.Rolling && this.state !== this.AttackStab && this.state !== this.AttackOverhead && this.state !== this.AttackFall && energyController.UseEnergy(1)) {
 
-        if(this.body.velocity.y > PLAYER_DOUBLE_JUMP_VEL()) {
-            this.body.velocity.y = PLAYER_DOUBLE_JUMP_VEL();
+        var jumpVel = this.state === this.Hanging ? PLAYER_JUMP_VEL() : PLAYER_DOUBLE_JUMP_VEL();
+
+        if(this.body.velocity.y > jumpVel) {
+            this.body.velocity.y = jumpVel;
         } else {
-            this.body.velocity.y += PLAYER_DOUBLE_JUMP_VEL();
+            this.body.velocity.y += jumpVel;
         }
 
         this.state = this.Flipping;
@@ -761,6 +763,10 @@ Player.prototype.Peaking = function() {
 
     this.body.gravity.y = game.physics.arcade.gravity.y * 1.5;
 
+    if(this.body.onWall()) {
+        this.state = this.Hanging;
+    }
+
     if(this.body.velocity.y < 0) {
         this.state = this.Jumping;
     } else if(this.body.onFloor()) {
@@ -780,6 +786,10 @@ Player.prototype.Falling = function() {
     //if they jump into water, make sure they slow the hell down
     if(this.states.inWater && this.body.velocity.y > 300) {
         this.body.velocity.y = 300;
+    }
+
+    if(this.body.onWall()) {
+        this.state = this.Hanging;
     }
 
     if(this.body.onFloor()) {
@@ -928,6 +938,34 @@ Player.prototype.Materializing = function() {
 
     if(this.animations.currentAnim.isFinished) {
         this.state = this.Standing;
+    }
+};
+
+Player.prototype.Hanging = function() {
+    //get the tiles at the top corner of the bounding box. If the bottom one
+    //is solid and the top one is not, stop moving
+
+    var xLoc = this.body.x;
+    xLoc += (this.states.direction === 'right' ? frauki.body.width + 1 : -1);
+
+    var bottomTile = Frogland.map.getTileWorldXY(xLoc, this.body.y, 16, 16, Frogland.GetCurrentCollisionLayer());
+    var topTile = Frogland.map.getTileWorldXY(xLoc, this.body.y - 5, 16, 16, Frogland.GetCurrentCollisionLayer());
+
+    if(topTile === null && bottomTile !== null) {
+        this.body.velocity.y = 0;
+        this.body.acceleration.y = 0;
+        this.body.gravity.y = -600;
+        this.states.hasFlipped = false;
+        this.PlayAnim('hang');
+    } else if(topTile === null) {
+        this.PlayAnim('fall');
+    } else if(topTile !== null) {
+        this.PlayAnim('hang');
+        this.body.velocity.y /= 1.4;
+    }
+
+    if(!this.body.onWall()) {
+        this.state = this.Falling;
     }
 };
 
