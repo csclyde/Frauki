@@ -952,11 +952,13 @@ Player.prototype.Hanging = function() {
     var topTile = Frogland.map.getTileWorldXY(xLoc, this.body.y - 5, 16, 16, Frogland.GetCurrentCollisionLayer());
 
     if(topTile === null && bottomTile !== null) {
+        this.PlayAnim('hang');
+
         this.body.velocity.y = 0;
         this.body.acceleration.y = 0;
         this.body.gravity.y = -600;
         this.states.hasFlipped = false;
-        this.PlayAnim('hang');
+
     } else if(topTile === null) {
         this.PlayAnim('fall');
     } else if(topTile !== null) {
@@ -966,6 +968,10 @@ Player.prototype.Hanging = function() {
 
     if(!this.body.onWall()) {
         this.state = this.Falling;
+    } 
+
+    if(this.body.onFloor()) {
+        this.state = this.Standing;
     }
 };
 
