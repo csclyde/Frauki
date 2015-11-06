@@ -959,11 +959,8 @@ Player.prototype.Hanging = function() {
         this.body.gravity.y = -600;
         this.states.hasFlipped = false;
 
-    } else if(topTile === null) {
+    } else {
         this.PlayAnim('fall');
-    } else if(topTile !== null) {
-        this.PlayAnim('hang');
-        this.body.velocity.y /= 1.2;
     }
 
     if(!this.body.onWall()) {
