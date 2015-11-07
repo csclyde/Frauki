@@ -763,10 +763,6 @@ Player.prototype.Peaking = function() {
 
     this.body.gravity.y = game.physics.arcade.gravity.y * 1.5;
 
-    if(this.body.onWall()) {
-        this.state = this.Hanging;
-    }
-
     if(this.body.velocity.y < 0) {
         this.state = this.Jumping;
     } else if(this.body.onFloor()) {
@@ -789,7 +785,18 @@ Player.prototype.Falling = function() {
     }
 
     if(this.body.onWall()) {
-        this.state = this.Hanging;
+        
+        var xLoc = this.body.x;
+        xLoc += (this.states.direction === 'right' ? frauki.body.width + 1 : -1);
+
+        var bottomTile = Frogland.map.getTileWorldXY(xLoc, this.body.y, 16, 16, Frogland.GetCurrentCollisionLayer());
+        var topTile = Frogland.map.getTileWorldXY(xLoc, this.body.y - 5, 16, 16, Frogland.GetCurrentCollisionLayer());
+
+        //console.log(topTile, bottomTile);
+
+        if(topTile === null && bottomTile !== null) {
+            this.state = this.Hanging;
+        }
     }
 
     if(this.body.onFloor()) {
@@ -942,26 +949,12 @@ Player.prototype.Materializing = function() {
 };
 
 Player.prototype.Hanging = function() {
-    //get the tiles at the top corner of the bounding box. If the bottom one
-    //is solid and the top one is not, stop moving
+    this.PlayAnim('hang');
 
-    var xLoc = this.body.x;
-    xLoc += (this.states.direction === 'right' ? frauki.body.width + 1 : -1);
-
-    var bottomTile = Frogland.map.getTileWorldXY(xLoc, this.body.y, 16, 16, Frogland.GetCurrentCollisionLayer());
-    var topTile = Frogland.map.getTileWorldXY(xLoc, this.body.y - 5, 16, 16, Frogland.GetCurrentCollisionLayer());
-
-    if(topTile === null && bottomTile !== null) {
-        this.PlayAnim('hang');
-
-        this.body.velocity.y = 0;
-        this.body.acceleration.y = 0;
-        this.body.gravity.y = -600;
-        this.states.hasFlipped = false;
-
-    } else {
-        this.PlayAnim('fall');
-    }
+    this.body.velocity.y = 0;
+    this.body.acceleration.y = 0;
+    this.body.gravity.y = -600;
+    this.states.hasFlipped = false;
 
     if(!this.body.onWall()) {
         this.state = this.Falling;
