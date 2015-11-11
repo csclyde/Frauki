@@ -87,7 +87,7 @@ Frogland.Create = function() {
 
     this.SpawnFrauki();
 
-    game.camera.bounds.inflate(120, 0);
+    //game.camera.bounds.inflate(120, 0);
 
     objectController.CompileObjectList();
 };

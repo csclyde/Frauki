@@ -92,24 +92,10 @@ Main.render = function() {
         game.debug.geom(new Phaser.Rectangle(weaponController.GetAttackGeometry().x, weaponController.GetAttackGeometry().y, weaponController.GetAttackGeometry().w, weaponController.GetAttackGeometry().h));
     }
 
-
-    var drawX = -(pixel.width * (pixel.scale / 4));
-
-    //set up correct camera edge behavior
-    var camDistEdge = game.camera.bounds.right - (game.camera.x + game.camera.width);
-    if(camDistEdge < cameraController.camX) cameraController.camX = camDistEdge;
-
-    camDistEdge = game.camera.bounds.x - game.camera.x;
-    if(camDistEdge > cameraController.camX) cameraController.camX = camDistEdge;
-    
-    drawX -= cameraController.camX;
-
-    var drawY = -(pixel.height * (pixel.scale / 4)) - cameraController.camY;
-
     pixel.context.drawImage(
         game.canvas, 0, 0, game.width, game.height, 
-        drawX + cameraController.shakeX, 
-        drawY + cameraController.shakeY, 
+        0,
+        0,
         game.width * pixel.scale, 
         game.height * pixel.scale
     );

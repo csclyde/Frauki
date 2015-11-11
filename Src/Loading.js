@@ -125,7 +125,6 @@ Loading.create = function() {
         this._dy = this.deltaY();
 
         this._reset = false;
-
     };
 
 
@@ -160,6 +159,5 @@ Loading.create = function() {
             }
 
             return velocity;
-
-        };
+    };
 };
