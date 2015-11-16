@@ -94,7 +94,8 @@ Enemy.prototype.types['A3PZ'] =  function() {
     };
 
     this.LandHit = function() {
-        this.Dodge(1200, true);
+        //this.Dodge(1200, true);
+        this.hasHit = true;
     }
 
     ////////////////////////////////STATES////////////////////////////////////
@@ -151,9 +152,15 @@ Enemy.prototype.types['A3PZ'] =  function() {
         }
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
-            this.state = this.Windup2;
-            this.timers.SetTimer('slash_hold', 400);
-            //this.FacePlayer();
+
+            if(this.hasHit) {
+                this.Dodge(1200, true);
+                this.hasHit = false;
+            } else {
+                this.state = this.Windup2;
+                this.timers.SetTimer('slash_hold', 400);
+                //this.FacePlayer();
+            }
         }
     };
 
@@ -178,8 +185,13 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
             if(this.PlayerDistance() < 100) {
-                this.FacePlayer();
-                this.Attack();
+                if(this.hasHit) {
+                    this.hasHit = false;
+                    this.Dodge();
+                } else {
+                    this.FacePlayer();
+                    this.Attack();
+                }
             } else {
                 this.state = this.Idling;
                 this.timers.SetTimer('attack', 2000 + Math.random() * 1000);
