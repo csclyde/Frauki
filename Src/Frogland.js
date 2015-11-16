@@ -127,19 +127,19 @@ Frogland.Update = function() {
     }
 
     this.clouds1.cameraOffset.x = -(game.camera.x * 0.10) + 0;
-    this.clouds1.cameraOffset.y = -(game.camera.y * 0.05) + 100;
+    this.clouds1.cameraOffset.y = -(game.camera.y * 0.05) + 0;
 
     // if(game.camera.y > 80 * 16) this.clouds1.visible = false;
     // else this.clouds1.visible = true;
 
     this.clouds2.cameraOffset.x = -(game.camera.x * 0.15) + 0;
-    this.clouds2.cameraOffset.y = -(game.camera.y * 0.06) + 120;
+    this.clouds2.cameraOffset.y = -(game.camera.y * 0.06) + 20;
 
     // if(game.camera.y > 80 * 16) this.clouds2.visible = false;
     // else this.clouds2.visible = true;
 
     this.plx1.cameraOffset.x = -(game.camera.x * 0.20) + 0;
-    this.plx1.cameraOffset.y = -(game.camera.y * 0.08) + 320;
+    this.plx1.cameraOffset.y = -(game.camera.y * 0.08) + 220;
 
     // if(game.camera.y > 80 * 16) this.plx1.visible = false;
     // else this.plx1.visible = true;

@@ -197,6 +197,10 @@ Collision.OverlapEnemyAttackWithFrauki = function(e, f) {
 
     if(!!e.owningEnemy && e.owningEnemy.currentAttack.damage > 0) {
         frauki.Hit(e.owningEnemy, e.owningEnemy.currentAttack.damage, 650);
+
+        if(!!e.owningEnemy.LandHit) {
+            e.owningEnemy.LandHit();
+        }
     }
 };
 
@@ -316,7 +320,7 @@ Collision.CollideFraukiWithEnvironment = function(f, tile) {
 
     //trick wall
     } else if(tile.index === 3) {
-        if(frauki.state === frauki.Rolling) {
+        if(frauki.state === frauki.Rolling || frauki.InAttackAnim()) {
             return false;
         } else {
             return true;

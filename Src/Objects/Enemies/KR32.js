@@ -68,7 +68,7 @@ Enemy.prototype.types['KR32'] =  function() {
 
     	this.state = this.Windup;
 
-    	this.timers.SetTimer('windup', 350 + game.rnd.between(0, 50));
+    	this.timers.SetTimer('windup', 400 + game.rnd.between(0, 50));
     };
 
     this.AttackStab = function() {

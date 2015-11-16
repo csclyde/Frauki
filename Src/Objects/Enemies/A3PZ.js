@@ -61,8 +61,8 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
     };
 
-    this.Dodge = function(duration) {
-        if(!this.timers.TimerUp('dodge')) {
+    this.Dodge = function(duration, override) {
+        if(!this.timers.TimerUp('dodge') && !override) {
             return false;
         }
 
@@ -91,6 +91,10 @@ Enemy.prototype.types['A3PZ'] =  function() {
         } else {
             this.Dodge();
         }
+    };
+
+    this.LandHit = function() {
+        this.Dodge(1200, true);
     }
 
     ////////////////////////////////STATES////////////////////////////////////
