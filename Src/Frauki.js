@@ -482,6 +482,7 @@ Player.prototype.DoubleJump = function() {
         events.publish('stop_sound', {name: 'attack_dive_fall'});
 
         effectsController.EnergyStreak();
+        effectsController.SpriteTrail(frauki, 150, 400, 300);
     }
 };
 
@@ -652,15 +653,15 @@ Player.prototype.Roll = function(params) {
         this.movement.rollPop = false;
         this.movement.rollPrevVel = 0;
         this.movement.rollFrames = 0;
+
+        effectsController.EnergyStreak();
+        effectsController.SpriteTrail(frauki, 100, 400, 300);
     } else {
         this.DoubleJump();
     }
 
     this.timers.SetTimer('frauki_roll', 250);
     this.timers.SetTimer('frauki_grace', 300);
-
-    effectsController.EnergyStreak();
-    //effectsController.SpriteTrail(frauki, 80, 400, 300);
 
     return true;
 };
