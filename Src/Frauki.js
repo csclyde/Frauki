@@ -660,6 +660,7 @@ Player.prototype.Roll = function(params) {
     this.timers.SetTimer('frauki_grace', 300);
 
     effectsController.EnergyStreak();
+    //effectsController.SpriteTrail(frauki, 80, 400, 300);
 
     return true;
 };

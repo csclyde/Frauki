@@ -673,3 +673,30 @@ EffectsController.prototype.Fade = function(show) {
         return game.add.tween(this.screenDark).to( { alpha: 0 }, 1000, Phaser.Easing.Linear.None, true);
     }
 };
+
+EffectsController.prototype.SpriteTrail = function(sprite, freq, duration, dropoff) {
+    //the goal is to call a function every freq, until duration has passed.
+    //the function will create an image that is of the sprites current frame,
+    //at the current position, then tween its alpha to fade out. 
+    //Is there some way to tint the sprite?
+
+    //var frame = game.cache.getFrameByName(atlas, frame);
+
+    var numTrails = Math.floor(duration / freq);
+    for(var i = 0; i < numTrails; i++) {
+        game.time.events.add(i * freq, AddSprite);
+    }
+
+    function AddSprite() {
+        console.log(sprite.animations.currentFrame);
+        var texture = PIXI.TextureCache[sprite.animations.currentFrame.uuid];
+
+        var trailSprite = game.add.image(sprite.x, sprite.y - 126, texture, null, Frogland.effectsGroup);
+        trailSprite.scale.x = sprite.scale.x;
+
+        var fadeTween = game.add.tween(trailSprite).to({alpha: 0}, dropoff, Phaser.Easing.Linear.None, true);
+        fadeTween.onComplete.add(function() {
+            trailSprite.destroy();
+        });
+    }
+};
