@@ -498,28 +498,21 @@ Player.prototype.Crouch = function(params) {
 
 Player.prototype.Slash = function(params) {
 
-    // if(!this.timers.TimerUp('frauki_slash'))
-    //     return;
-
     //diving dash
     if(!this.timers.TimerUp('frauki_dash') && this.states.crouching && (this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling || this.state === this.Flipping)) {
         this.DiveSlash();
-        effectsController.EnergyStreak();
     }
     //running dash
     else if(this.state === this.Rolling || (this.state === this.Flipping && !this.states.upPressed && !this.states.crouching)) {
         this.StabSlash();
-        effectsController.EnergyStreak();
     }
     //upwards dash attack
     else if((this.state === this.Jumping || (this.state === this.Peaking && inputController.dpad.up) || (this.state === this.Falling && inputController.dpad.up)) && this.states.hasFlipped === false) {
         this.JumpSlash();
-        effectsController.EnergyStreak();
     }
     //falling slash
     else if(this.state === this.Peaking || this.state === this.Falling) {
         this.FallSlash();
-        effectsController.EnergyStreak();
     }
     //normal slashes while standing or running
     else if(this.state === this.Standing || this.state === this.Landing || this.state === this.Running || this.state === this.Jumping || this.state === this.Flipping || this.state === this.Crouching) {
@@ -527,13 +520,14 @@ Player.prototype.Slash = function(params) {
             this.LungeSlash();
         } else {
             this.FrontSlash();
-        }
-
-        effectsController.EnergyStreak();
+        } 
     } 
     else {
         console.log('An attack was attempted in an unresolved state ', this.state);
+        return;
     }
+
+    effectsController.EnergyStreak();
 
     this.timers.SetTimer('frauki_slash', 400 * (1 / energyController.GetEnergyPercentage()));
     this.timers.SetTimer('smash_timer', 200);
