@@ -54,5 +54,6 @@ var Speeches = {
 	'journal3': { text: 'It reads: I only eat the highest quality, most delectable, most subtle and transcendent greenergy. Nothing less will do.' },
 	'sweetnasty': { text: 'It reads: Good bye you sweet world!!!' },
 	'maint': { text: 'It reads: Maintenence access. Beware pipe currents.' },
+	'spaceship_question': { text: 'It looks like this thing crashed into the ground. Hrm, I can\'t get the door open from this side.' },
 
 };
