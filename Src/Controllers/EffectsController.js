@@ -693,7 +693,8 @@ EffectsController.prototype.SpriteTrail = function(sprite, freq, duration, dropo
         console.log(sprite.animations.currentFrame);
         var texture = PIXI.TextureCache[sprite.animations.currentFrame.uuid];
 
-        var trailSprite = game.add.image(sprite.x, sprite.y - 126 + (50 - sprite.animations.currentFrame.height), texture, null, Frogland.effectsGroup);
+        var trailSprite = game.add.image(sprite.body.center.x, sprite.body.center.y + (50 - sprite.animations.currentFrame.height) / 2, texture, null, Frogland.effectsGroup);
+        trailSprite.anchor.setTo(0.5);
         trailSprite.scale.x = sprite.scale.x;
         trailSprite.tint = 0x0dff94;
 

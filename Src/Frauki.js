@@ -482,7 +482,7 @@ Player.prototype.DoubleJump = function() {
         events.publish('stop_sound', {name: 'attack_dive_fall'});
 
         effectsController.EnergyStreak();
-        effectsController.SpriteTrail(frauki, 150, 400, 300);
+        effectsController.SpriteTrail(frauki, 150, 600, 300);
     }
 };
 
@@ -649,7 +649,7 @@ Player.prototype.Roll = function(params) {
         this.movement.rollFrames = 0;
 
         effectsController.EnergyStreak();
-        effectsController.SpriteTrail(frauki, 100, 400, 300);
+        effectsController.SpriteTrail(frauki, 100, 600, 300);
     } else {
         this.DoubleJump();
     }
