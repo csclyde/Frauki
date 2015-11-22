@@ -509,7 +509,7 @@ EffectsController.prototype.MakeHearts = function(amt) {
 };
 
 EffectsController.prototype.SlowHit = function(duration) {
-    var t = game.add.tween(Main).to( { physicsSlowMo: 0.1 }, Math.round(duration * 0.2), Phaser.Easing.Exponential.InOut, false).to( { physicsSlowMo: 1 }, Math.round(duration * 0.8), Phaser.Easing.Exponential.InOut, false);
+    var t = game.add.tween(Main).to( { physicsSlowMo: 0.1 }, Math.round(duration * 0.2), Phaser.Easing.Exponential.Out, false).to( { physicsSlowMo: 1 }, Math.round(duration * 0.8), Phaser.Easing.Exponential.In, false);
     t.start();
 
     //var currAnim = frauki.animations.currentAnim;
@@ -630,7 +630,7 @@ EffectsController.prototype.EnergyStreak = function() {
 EffectsController.prototype.ClashStreak = function(x, y, angle) {
     var clash = game.add.sprite(x, y, 'Misc');
     clash.anchor.setTo(0.5);
-    clash.animations.add('clash', ['Clash0001', 'Clash0002', 'Clash0003'], 10, false, false);
+    clash.animations.add('clash', ['Clash0001', 'Clash0002', 'Clash0003'], 8, false, false);
     clash.animations.play('clash');
     clash.animations.currentAnim.killOnComplete = true;
     clash.rotation = angle;
@@ -652,6 +652,13 @@ EffectsController.prototype.ScreenLight = function(show) {
     } else {
         game.add.tween(this.screenLight).to( { alpha: 0 }, 300, Phaser.Easing.Linear.None, true);
     }
+};
+
+EffectsController.prototype.ScreenFlash = function() {
+    this.screenLight.alpha = 0;
+    this.screenLight.visible = true;
+    var flash = game.add.tween(this.screenLight).to( { alpha: 0.5 }, 50, Phaser.Easing.Quartic.In, false).to( { alpha: 0 }, 150, Phaser.Easing.Quartic.Out, false);
+    flash.start();
 };
 
 EffectsController.prototype.ScreenDark = function(show) {
