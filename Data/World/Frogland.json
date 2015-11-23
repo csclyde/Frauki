@@ -7,7 +7,7 @@
          "name":"Background_2",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -18,7 +18,7 @@
          "name":"Midground_2",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -29,7 +29,7 @@
          "name":"Foreground_2",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -2812,10 +2812,55 @@
                  "width":78.5,
                  "x":896,
                  "y":4334.5
+                }, 
+                {
+                 "height":20.6666,
+                 "id":1724,
+                 "name":"leaves_green",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"effect",
+                 "visible":true,
+                 "width":102.6459,
+                 "x":333.8541,
+                 "y":3737.1667
+                }, 
+                {
+                 "height":16.8332999999998,
+                 "id":1725,
+                 "name":"leaves_green",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"effect",
+                 "visible":true,
+                 "width":76.1459,
+                 "x":529.8541,
+                 "y":3737.6667
+                }, 
+                {
+                 "height":20.3332999999998,
+                 "id":1726,
+                 "name":"leaves_green",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"effect",
+                 "visible":true,
+                 "width":106.6459,
+                 "x":699.8541,
+                 "y":3737.1667
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "width":0,
          "x":0,
          "y":0
@@ -2826,7 +2871,7 @@
          "name":"Background_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -2837,7 +2882,7 @@
          "name":"Midground_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -2848,7 +2893,7 @@
          "name":"Foreground_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -6707,10 +6752,40 @@
                  "width":48.2918,
                  "x":2445.18743333333,
                  "y":3384.33336666667
+                }, 
+                {
+                 "height":19.6666333333328,
+                 "id":1722,
+                 "name":"leaves_green",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"effect",
+                 "visible":true,
+                 "width":140.1459,
+                 "x":1473.8541,
+                 "y":3557.6667
+                }, 
+                {
+                 "height":20.6666,
+                 "id":1723,
+                 "name":"leaves_green",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"effect",
+                 "visible":true,
+                 "width":48.2918,
+                 "x":1443.18743333333,
+                 "y":3071.6667
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "width":0,
          "x":0,
          "y":0
@@ -10220,7 +10295,7 @@
              "Desc":"Connects layers 3 and 4"
             },
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "width":0,
          "x":0,
          "y":0
@@ -10305,7 +10380,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":1722,
+ "nextobjectid":1727,
  "orientation":"orthogonal",
  "properties":
     {
