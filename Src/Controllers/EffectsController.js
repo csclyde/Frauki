@@ -266,6 +266,42 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
 
                 that.loadedEffects.push(sprayer);
 
+            } else if(o.name === 'leaves_green') {
+
+                var leaves = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
+                leaves.width = o.width;
+                leaves.height = o.height;
+                leaves.makeParticles('Misc', ['Leaves0000', 'Leaves0001', 'Leaves0002'], 10);
+                leaves.gravity = -600;
+                leaves.maxParticleSpeed.y = 35;
+                leaves.minParticleSpeed.y = 10;
+                leaves.maxParticleSpeed.x = 40;
+                leaves.minParticleSpeed.x = -40;
+                leaves.setRotation(0, 0);
+                leaves.start(false, 1500, 800);
+                leaves.effectType = 'leaves';
+                //leaves.alpha = 0.5;
+                leaves.owningLayer = layer;
+
+                that.loadedEffects.push(leaves);
+            } else if(o.name === 'leaves_brown') {
+
+                var leaves = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
+                leaves.width = o.width;
+                leaves.height = o.height;
+                leaves.makeParticles('Misc', ['Leaves0003', 'Leaves0004', 'Leaves0005'], 10);
+                leaves.gravity = -600;
+                leaves.maxParticleSpeed.y = 35;
+                leaves.minParticleSpeed.y = 10;
+                leaves.maxParticleSpeed.x = 40;
+                leaves.minParticleSpeed.x = -40;
+                leaves.setRotation(0, 0);
+                leaves.start(false, 1500, 800);
+                leaves.effectType = 'leaves';
+                //leaves.alpha = 0.5;
+                leaves.owningLayer = layer;
+
+                that.loadedEffects.push(leaves);
             }
 
         } else if(o.type === 'speech') {

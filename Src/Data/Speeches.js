@@ -37,7 +37,7 @@ var Speeches = {
 	'nibble': { text: 'Just a little nibble couldn\'t hurt... could it?', portrait: 'Mischeif' },
 	'cold': { text: 'This water is so cold, it\'s making my knees shake', portrait: 'Displeased' },
 	'ellipses': { text: '...', portrait: 'Peaceful' },
-	'anyone_home': { text: 'Is anyone home? I better not peep', portrait: 'Mischeif' },
+	'anyone_home': { text: 'Looks like no one is home.' },
 	'football': { text: 'Football is fun! I wonder if maybe I could score a goal' },
 	'sorry_plant': { text: 'Sorry plant' },
 	'maybe_if': { text: 'Maybe if I just...' },
@@ -55,5 +55,7 @@ var Speeches = {
 	'sweetnasty': { text: 'It reads: Good bye you sweet world!!!' },
 	'maint': { text: 'It reads: Maintenence access. Beware pipe currents.' },
 	'spaceship_question': { text: 'It looks like this thing crashed into the ground. Hrm, I can\'t get the door open from this side.' },
+	'pouring_joy': { text: 'It reads: I can barely withstand the joy pouring into me! Goodbye!' },
+	'another_sky': { text: 'It reads: So, we will find another sky. So it goes.' },
 
 };
