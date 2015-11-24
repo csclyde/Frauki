@@ -201,11 +201,6 @@ Frogland.CreateCollisionLayer = function(layer) {
     this['collisionLayer_' + layer].visible = false;
 };
 
-//this should be called every frame, and create objects that do not yet exist, right off camera. 
-//first, loop through all objects. collect the ones that are within the frame and padding, and
-//have not been flagged as spanwed yet. These are the things that will be create. There can be 
-//another function called when you die that destroys everything and resets all the flags.
-//Also make sure that when something is destroyed, it is totally destroyed and garbage collected.
 Frogland.CreateObjectsLayer = function(layer) {
     var that = this;
     var currLayer = 'objectGroup_' + layer;
@@ -259,8 +254,18 @@ Frogland.CreateObjectsLayer = function(layer) {
 
 Frogland.CreateDoorLayer = function(layer) {
     this['door' + layer + 'Group'] = game.add.group();
-    this.map.createFromObjects('Doors_' + layer, 67, 'Misc', 'Door0000', true, false, this['door' + layer + 'Group'], Door, false);
-    this['door' + layer + 'Group'].forEach(function(d) { d.alpha = 0; });
+    var doorGroup = this['door' + layer + 'Group'];
+    //this.map.createFromObjects('Doors_' + layer, 67, 'Misc', 'Door0000', true, false, this['door' + layer + 'Group'], Door, false);
+
+    Frogland.map.objects['Doors_' + layer].forEach(function(o) {
+        var door = game.add.sprite(o.x, o.y);
+        game.physics.enable(door, Phaser.Physics.ARCADE);
+        door.body.setSize(o.width, o.height);
+        door.body.allowGravity = false;
+        doorGroup.add(door);
+    });
+
+    //this['door' + layer + 'Group'].forEach(function(d) { d.alpha = 0; });
 };
 
 //spawns some random enemies
