@@ -263,8 +263,6 @@ Frogland.CreateDoorLayer = function(layer) {
         door.body.setSize(o.width, o.height);
         door.body.allowGravity = false;
 
-        console.log(door, o);
-
         doorGroup.add(door);
     });
 
