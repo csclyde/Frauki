@@ -37,20 +37,20 @@ EffectsController = function() {
 
     this.posSpark = game.add.emitter(0, 0, 50);
     this.posSpark.makeParticles('Misc', ['Sparks0000', 'Sparks0001', 'Sparks0002', 'Sparks0003', 'Sparks0004', 'Sparks0005']); 
-    this.posSpark.gravity = -500;
+    this.posSpark.gravity = -400;
     this.posSpark.particleDrag.setTo(100);
     this.posSpark.setRotation(0, 0);
     //Frogland.effectsGroup.addChild(this.posSpark);
 
     this.negSpark = game.add.emitter(0, 0, 50);
     this.negSpark.makeParticles('Misc', ['Sparks0006', 'Sparks0007', 'Sparks0008', 'Sparks0009', 'Sparks0010', 'Sparks0011']); 
-    this.negSpark.gravity = -560;
+    this.negSpark.gravity = -400;
     this.negSpark.particleDrag.setTo(100);
     this.negSpark.setRotation(0, 0);
 
     this.neutralSpark = game.add.emitter(0, 0, 50);
     this.neutralSpark.makeParticles('Misc', ['Sparks0012', 'Sparks0013', 'Sparks0014', 'Sparks0015', 'Sparks0016']); 
-    this.neutralSpark.gravity = -560;
+    this.neutralSpark.gravity = -400;
     this.neutralSpark.particleDrag.setTo(100);
     this.neutralSpark.setRotation(0, 0);
 
@@ -571,15 +571,15 @@ EffectsController.prototype.SparkSplash = function(posSrc, negSrc) {
     var minVel = Phaser.Point.rotate(vel.clone(), 0, 0, 30, true, 1);
     var maxVel = Phaser.Point.rotate(vel.clone(), 0, 0, -30, true, 1);
 
-    minVel.setMagnitude(150);
-    maxVel.setMagnitude(175);
+    minVel.setMagnitude(50);
+    maxVel.setMagnitude(75);
 
     this.posSpark.minParticleSpeed.x = minVel.x;
-    this.posSpark.minParticleSpeed.y = minVel.y;
+    this.posSpark.minParticleSpeed.y = minVel.y - 25;
     this.posSpark.maxParticleSpeed.x = maxVel.x;
     this.posSpark.maxParticleSpeed.y = maxVel.y;
 
-    this.posSpark.explode(500, 10);
+    this.posSpark.explode(1200, 10);
 
     minVel.x *= -1;
     minVel.y *= -1;
@@ -588,10 +588,10 @@ EffectsController.prototype.SparkSplash = function(posSrc, negSrc) {
 
     this.negSpark.minParticleSpeed.x = maxVel.x;
     this.negSpark.maxParticleSpeed.x = minVel.x;
-    this.negSpark.minParticleSpeed.y = maxVel.y;
+    this.negSpark.minParticleSpeed.y = maxVel.y - 25;
     this.negSpark.maxParticleSpeed.y = minVel.y;
 
-    this.negSpark.explode(500, 10);
+    this.negSpark.explode(1200, 10);
 };
 
 EffectsController.prototype.EnergySplash = function(src, intensity, color, amt, vel) {
@@ -600,37 +600,44 @@ EffectsController.prototype.EnergySplash = function(src, intensity, color, amt, 
     vel = vel || new Phaser.Point(0, 0);
     vel = vel.clone();
     vel.setMagnitude(vel.getMagnitude() / 3);
+    intensity /= 1.5;
 
     if(color === 'positive') {
         this.posSpark.x = src.x;
         this.posSpark.y = src.y;
+        this.posSpark.width = src.width;
+        this.posSpark.height = src.height;
 
         this.posSpark.minParticleSpeed.x = -intensity + vel.x;
-        this.posSpark.minParticleSpeed.y = -intensity + vel.y;
+        this.posSpark.minParticleSpeed.y = -intensity + vel.y - 50;
         this.posSpark.maxParticleSpeed.x = intensity + vel.x;
         this.posSpark.maxParticleSpeed.y = intensity + vel.y;   
        
-        this.posSpark.explode(700, amt);
+        this.posSpark.explode(1000, amt);
     } else if(color === 'neutral') {
         this.neutralSpark.x = src.x;
         this.neutralSpark.y = src.y;
+        this.neutralSpark.width = src.width;
+        this.neutralSpark.height = src.height;
 
         this.neutralSpark.minParticleSpeed.x = -intensity + vel.x;
-        this.neutralSpark.minParticleSpeed.y = -intensity + vel.y;
+        this.neutralSpark.minParticleSpeed.y = -intensity + vel.y - 50;
         this.neutralSpark.maxParticleSpeed.x = intensity + vel.x;
         this.neutralSpark.maxParticleSpeed.y = intensity + vel.y;   
        
-        this.neutralSpark.explode(700, amt);
+        this.neutralSpark.explode(1000, amt);
     } else if(color === 'negative') {
         this.negSpark.x = src.x;
         this.negSpark.y = src.y;
+        this.negSpark.width = src.width;
+        this.negSpark.height = src.height;
 
         this.negSpark.minParticleSpeed.x = -intensity + vel.x;
-        this.negSpark.minParticleSpeed.y = -intensity + vel.y;
+        this.negSpark.minParticleSpeed.y = -intensity + vel.y - 50;
         this.negSpark.maxParticleSpeed.x = intensity + vel.x;
         this.negSpark.maxParticleSpeed.y = intensity + vel.y;   
        
-        this.negSpark.explode(700, amt);
+        this.negSpark.explode(1000, amt);
     }
 };
 
@@ -660,7 +667,7 @@ EffectsController.prototype.Dust = function(x, y) {
 
 EffectsController.prototype.EnergyStreak = function() {
 
-    this.energyStreak.flow(200, 5, 1, 60, true);
+    this.energyStreak.flow(500, 5, 1, 60, true);
 };
 
 EffectsController.prototype.ClashStreak = function(x, y, angle) {

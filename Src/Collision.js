@@ -146,7 +146,7 @@ Collision.OverlapAttackWithEnemy = function(f, e) {
     
     if(damage > 0) {
         events.publish('play_sound', { name: 'attack_connect' });
-        effectsController.EnergySplash(e.body.center, 100, 'negative', 15, e.body.velocity);
+        effectsController.EnergySplash(e.body, 100, 'negative', 15, e.body.velocity);
     } else {
         events.publish('play_sound', { name: 'clang' });
     }
@@ -246,7 +246,7 @@ Collision.OverlapLobWithEnemy = function(l, e) {
         l.body.velocity.x *= -1;
         l.body.velocity.y *= -1;
 
-        effectsController.EnergySplash(l.body.center, 200, 'neutral', 30);
+        effectsController.EnergySplash(l.body, 200, 'neutral', 30);
 
         setTimeout(function() {
             l.destroy(); 
@@ -274,7 +274,7 @@ Collision.OverlapLobWithEnemy = function(l, e) {
 
     l.body.enable = false;
 
-    effectsController.EnergySplash(l.body.center, 200, 'neutral', 30);
+    effectsController.EnergySplash(l.body, 200, 'neutral', 30);
 
     setTimeout(function() {
         l.destroy(); 

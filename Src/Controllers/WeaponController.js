@@ -165,7 +165,7 @@ WeaponController.prototype.Lob = {
         frauki.body.velocity.y -= 100;
         frauki.body.velocity.x += (frauki.states.direction === 'right'? -800 : 800);
 
-        effectsController.EnergySplash(frauki.body.center, 80, 'neutral', 6);
+        effectsController.EnergySplash(frauki.body, 80, 'neutral', 6);
         events.publish('camera_shake', {magnitudeX: 8, magnitudeY: 6, duration: 200});
 
         this.lobbies.push(lob);
@@ -191,7 +191,7 @@ WeaponController.prototype.Lob = {
 
         game.physics.arcade.collide(this.lobbies, Frogland.GetCurrentCollisionLayer(), function(l, t) {
             toDestroy.push(l);
-            effectsController.EnergySplash(l.body.center, 200, 'neutral', 30, l.body.velocity);
+            effectsController.EnergySplash(l.body, 200, 'neutral', 30, l.body.velocity);
         });
 
         game.physics.arcade.overlap(this.lobbies, Frogland.GetCurrentObjectGroup(), null, Collision.OverlapLobWithEnemy);

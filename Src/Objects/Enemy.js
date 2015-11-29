@@ -146,7 +146,7 @@ function DestroyEnemy(e) {
     e.Die();
     e.state = e.Dying;
 
-    effectsController.EnergySplash(e.body.center, 200, 'negative', 20);
+    effectsController.EnergySplash(e.body, 200, 'negative', 20);
 
     var enemBody = e.body.center.clone();
 

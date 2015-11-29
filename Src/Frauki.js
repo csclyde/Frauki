@@ -679,7 +679,7 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
     }
 
     //effectsController.SpawnEnergyNuggets(this.body, e.body, 'negative', damage);
-    effectsController.EnergySplash(frauki.body.center, 100, 'positive', 20, frauki.body.velocity);
+    effectsController.EnergySplash(frauki.body, 100, 'positive', 20, frauki.body.velocity);
 
     energyController.RemovePower(damage);
     energyController.AddCharge(damage / 10);
@@ -703,7 +703,7 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
     } else {
         setTimeout(function() {
             frauki.alpha = 0;
-            effectsController.EnergySplash(frauki.body.center, 200, 'positive', 50, frauki.body.velocity);
+            effectsController.EnergySplash(frauki.body, 200, 'positive', 50, frauki.body.velocity);
         }, 2000);
     }
 };
