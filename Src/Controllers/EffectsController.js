@@ -37,7 +37,7 @@ EffectsController = function() {
 
     this.posSpark = game.add.emitter(0, 0, 50);
     this.posSpark.makeParticles('Misc', ['Sparks0000', 'Sparks0001', 'Sparks0002', 'Sparks0003', 'Sparks0004', 'Sparks0005']); 
-    this.posSpark.gravity = -560;
+    this.posSpark.gravity = -500;
     this.posSpark.particleDrag.setTo(100);
     this.posSpark.setRotation(0, 0);
     //Frogland.effectsGroup.addChild(this.posSpark);
@@ -278,7 +278,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 leaves.maxParticleSpeed.x = 40;
                 leaves.minParticleSpeed.x = -40;
                 leaves.setRotation(0, 0);
-                leaves.start(false, 2000, 800);
+                leaves.start(false, 2000, 2500);
                 leaves.effectType = 'leaves';
                 //leaves.alpha = 0.5;
                 leaves.owningLayer = layer;
@@ -296,7 +296,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 leaves.maxParticleSpeed.x = 40;
                 leaves.minParticleSpeed.x = -40;
                 leaves.setRotation(0, 0);
-                leaves.start(false, 2000, 800);
+                leaves.start(false, 2000, 2500);
                 leaves.effectType = 'leaves';
                 //leaves.alpha = 0.5;
                 leaves.owningLayer = layer;
@@ -726,7 +726,6 @@ EffectsController.prototype.SpriteTrail = function(sprite, freq, duration, dropo
     }
 
     function AddSprite() {
-        console.log(sprite.animations.currentFrame);
         var texture = PIXI.TextureCache[sprite.animations.currentFrame.uuid];
 
         var trailSprite = game.add.image(sprite.body.center.x, sprite.body.center.y + (50 - sprite.animations.currentFrame.height) / 2, texture, null, Frogland.effectsGroup);
