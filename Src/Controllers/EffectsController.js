@@ -92,6 +92,14 @@ EffectsController = function() {
     this.screenDark.fixedToCamera = true;
     this.screenDark.visible = false;
 
+    this.goddess = game.add.image(0, 0, 'Misc', 'Goddess0000');
+    this.goddess.fixedToCamera = true;
+    this.goddess.alpha = 0;
+    this.goddess.visible = false;
+    this.goddess.anchor.setTo(0.5);
+    this.goddess.cameraOffset.x = 320;
+    this.goddess.cameraOffset.y = 180;
+
 
     this.loadedEffects = [];
 
@@ -718,7 +726,7 @@ EffectsController.prototype.Fade = function(show) {
     if(show) {
         this.screenDark.alpha = 0;
         this.screenDark.visible = true;
-        return game.add.tween(this.screenDark).to( { alpha: 1 }, 1000, Phaser.Easing.Linear.None, true);
+        return game.add.tween(this.screenDark).to( { alpha: 1 }, 1200, Phaser.Easing.Linear.None, true);
     } else {
         return game.add.tween(this.screenDark).to( { alpha: 0 }, 1000, Phaser.Easing.Linear.None, true);
     }
@@ -744,5 +752,15 @@ EffectsController.prototype.SpriteTrail = function(sprite, freq, duration, dropo
         fadeTween.onComplete.add(function() {
             trailSprite.destroy();
         });
+    }
+};
+
+EffectsController.prototype.Goddess = function(show) {
+    if(show) {
+        this.goddess.alpha = 0;
+        this.goddess.visible = true;
+        game.add.tween(this.goddess).to( { alpha: 0.8 }, 1500, Phaser.Easing.Cubic.In, true);
+    } else {
+        game.add.tween(this.goddess).to( { alpha: 0 }, 500, Phaser.Easing.Linear.None, true);
     }
 };

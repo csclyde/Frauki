@@ -113,7 +113,8 @@ Main.Restart = function() {
 
     this.restarting = true;
     game.time.slowMotion = 5;
-    var fadeOutTween = effectsController.Fade(true);//game.add.tween(game.world).to({alpha:0}, 1000, Phaser.Easing.Linear.None, true);
+    var fadeOutTween = effectsController.Fade(true);
+    effectsController.Goddess(true);
 
     //setTimeout(function() { events.publish('play_music', { name: 'Surface' } ); }, 10000);
 
@@ -181,6 +182,8 @@ Main.Restart = function() {
         });
 
         objectController.CompileObjectList();
+
+        effectsController.Goddess(false);
 
 
 
