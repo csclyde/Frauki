@@ -98,7 +98,8 @@ EffectsController = function() {
     this.goddess.visible = false;
     this.goddess.anchor.setTo(0.5);
     this.goddess.cameraOffset.x = 320;
-    this.goddess.cameraOffset.y = 180;
+    this.goddess.cameraOffset.y = 200;
+    game.add.tween(this.goddess.cameraOffset).to({y: 160}, 200, Phaser.Easing.Sinusoidal.InOut, true, 0, -1, true);
 
 
     this.loadedEffects = [];
