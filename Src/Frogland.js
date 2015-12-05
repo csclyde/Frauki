@@ -106,7 +106,7 @@ Frogland.Update = function() {
     frauki.states.flowLeft = false;
 
     for(var i = 0, max = this.GetCurrentObjectGroup().children.length; i < max; i++) {
-        var padding = 100;
+        var padding = 300;
         var o = this.GetCurrentObjectGroup().children[i];
 
         if(o.spriteType !== 'door' && !!o.body && o.spriteType !== 'ball') {

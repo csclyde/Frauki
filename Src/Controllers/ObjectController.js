@@ -5,11 +5,9 @@ ObjectController = function() {
 	this.timers = new TimerUtil();
 
 	this.createdObjects = [];
-
 };
 
 ObjectController.prototype.Create = function() {
-
 };
 
 ObjectController.prototype.Update = function() {
@@ -17,9 +15,6 @@ ObjectController.prototype.Update = function() {
 		this.SpawnNearbyObjects();
 		//this.DestroyFarawayObjects();
 	}
-
-	//console.log(this.objCount);
-	//this.createdObjects = this.createdObjects.filter(function(e) { return !e.destroyPhase } );
 };
 
 ObjectController.prototype.CompileObjectList = function() {
@@ -49,15 +44,15 @@ ObjectController.prototype.SpawnNearbyObjects = function() {
     var spawnedObjs = [];
 
     for(var i = 0, max = objLayer.length; i < max; i++) {
-        var padding = 200;
+        var padding = 350;
         var o = objLayer[i];
 
         if(!o || o.id == 67) continue;
 
-        var leftBound = frauki.body.center.x - (game.camera.width / 2) - padding;
-        var rightBound = frauki.body.center.x + (game.camera.width / 2) + padding;
-        var topBound = frauki.body.center.y - (game.camera.height / 2) - padding;
-        var bottomBound = frauki.body.center.y + (game.camera.height / 2) + padding;
+        var leftBound = game.camera.x - padding;
+        var rightBound = game.camera.x + game.camera.width + padding;
+        var topBound = game.camera.y - padding;
+        var bottomBound = game.camera.y + game.camera.height + padding;
 
         if(o.x > leftBound && o.y > topBound && o.x < rightBound && o.y < bottomBound) {
             this.SpawnObject(o);

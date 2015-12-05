@@ -3824,7 +3824,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="Objects_3" visible="0">
+ <objectgroup name="Objects_3">
   <object id="1041" gid="87" x="1992" y="3720.33" width="16" height="16"/>
   <object id="1042" gid="89" x="2125.33" y="4622.67" width="16" height="16"/>
   <object id="1043" gid="89" x="2106.67" y="4625.33" width="16" height="16"/>
@@ -3887,7 +3887,7 @@
   <object id="1112" gid="68" x="2272" y="2736" width="16" height="16"/>
   <object id="1114" gid="68" x="2336" y="2736" width="16" height="16"/>
   <object id="1115" gid="68" x="1902.67" y="2759.33" width="16" height="16"/>
-  <object id="1117" gid="99" x="2650.66" y="3476" width="16" height="16"/>
+  <object id="1117" gid="99" x="2656" y="3504" width="16" height="16"/>
   <object id="1119" gid="98" x="2661.33" y="3941.33" width="16" height="16"/>
   <object id="1120" gid="99" x="1650.67" y="4598.67" width="16" height="16"/>
   <object id="1122" gid="99" x="570.667" y="4502.67" width="16" height="16"/>
@@ -3902,7 +3902,7 @@
   <object id="1132" gid="95" x="1104" y="3103" width="16" height="16"/>
   <object id="1133" gid="89" x="971" y="3098" width="16" height="16"/>
   <object id="1134" gid="89" x="931" y="3098" width="16" height="16"/>
-  <object id="1135" gid="100" x="535" y="3310" width="16" height="16"/>
+  <object id="1135" gid="100" x="528" y="3360" width="16" height="16"/>
   <object id="1136" gid="91" x="156" y="4221" width="16" height="16"/>
   <object id="1137" gid="89" x="190" y="4479" width="16" height="16"/>
   <object id="1138" gid="89" x="225" y="4479" width="16" height="16"/>
@@ -3919,10 +3919,10 @@
    </properties>
   </object>
   <object id="1148" gid="106" x="1839" y="2873" width="16" height="16"/>
-  <object id="1149" gid="106" x="2755" y="2824" width="16" height="16"/>
+  <object id="1149" gid="106" x="2768" y="2832" width="16" height="16"/>
   <object id="1150" gid="106" x="3077" y="3123" width="16" height="16"/>
   <object id="1151" gid="106" x="2324" y="3094" width="16" height="16"/>
-  <object id="1152" gid="106" x="1597.5" y="2874" width="16" height="16"/>
+  <object id="1152" gid="106" x="1600" y="2880" width="16" height="16"/>
   <object id="1153" gid="106" x="3083" y="3970" width="16" height="16"/>
   <object id="1154" gid="95" x="1157.5" y="3780.5" width="16" height="16"/>
   <object id="1174" gid="67" x="1584" y="3622" width="16" height="16">
@@ -3934,8 +3934,8 @@
   <object id="1175" gid="68" x="1488" y="4240" width="16" height="16"/>
   <object id="1176" gid="68" x="1536" y="4240" width="16" height="16"/>
   <object id="1178" gid="68" x="1440" y="4240" width="16" height="16"/>
-  <object id="1179" gid="105" x="1422.5" y="3041.5" width="16" height="16"/>
-  <object id="1180" gid="105" x="1453.5" y="3039.5" width="16" height="16"/>
+  <object id="1179" gid="105" x="1424" y="3040" width="16" height="16"/>
+  <object id="1180" gid="105" x="1456" y="3040" width="16" height="16"/>
   <object id="1182" gid="105" x="1316.5" y="3071.5" width="16" height="16"/>
   <object id="1183" gid="105" x="900.5" y="3366" width="16" height="16"/>
   <object id="1184" gid="105" x="877" y="3365.5" width="16" height="16"/>
@@ -4042,7 +4042,7 @@
   <object id="1690" gid="109" x="1918.67" y="3373.33" width="16" height="16"/>
   <object id="1691" gid="109" x="2380" y="3465.33" width="16" height="16"/>
   <object id="1692" gid="109" x="2274.67" y="3696" width="16" height="16"/>
-  <object id="1693" gid="109" x="1486" y="3035" width="16" height="16"/>
+  <object id="1693" gid="109" x="1488" y="3040" width="16" height="16"/>
   <object id="1694" gid="109" x="1509.33" y="3611.33" width="16" height="16"/>
   <object id="1695" gid="109" x="1760.67" y="3856" width="16" height="16"/>
   <object id="1696" gid="107" x="2146.33" y="4125.33" width="16" height="16"/>
