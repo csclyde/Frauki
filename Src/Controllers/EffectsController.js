@@ -76,6 +76,12 @@ EffectsController = function() {
     this.energyStreak.minParticleScale = 1;
     this.energyStreak.setRotation(0, 0);
 
+    this.loadedEffects = [];
+
+    this.LoadMapEffects(4);
+    this.LoadMapEffects(3);
+    this.LoadMapEffects(2);
+    
     var screenLightBmd = game.add.bitmapData(game.width, game.height);
     screenLightBmd.ctx.fillStyle = 'white';
     screenLightBmd.ctx.fillRect(0,0, game.width, game.height);
@@ -88,9 +94,7 @@ EffectsController = function() {
     screenDarkBmd.ctx.fillStyle = 'black';
     screenDarkBmd.ctx.fillRect(0,0, game.width, game.height);
     this.screenDark = game.add.sprite(0, 0, screenDarkBmd);
-    this.screenDark.alpha = 0.5;
     this.screenDark.fixedToCamera = true;
-    this.screenDark.visible = false;
 
     this.goddess = game.add.image(0, 0, 'Misc', 'Goddess0000');
     this.goddess.fixedToCamera = true;
@@ -102,11 +106,6 @@ EffectsController = function() {
     game.add.tween(this.goddess.cameraOffset).to({y: 160}, 200, Phaser.Easing.Sinusoidal.InOut, true, 0, -1, true);
 
 
-    this.loadedEffects = [];
-
-    this.LoadMapEffects(4);
-    this.LoadMapEffects(3);
-    this.LoadMapEffects(2);
 };
 
 EffectsController.prototype.Update = function() {

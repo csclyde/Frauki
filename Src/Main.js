@@ -34,6 +34,11 @@ Main.create = function() {
 
     this.physicsSlowMo = 1;
     this.currentAlpha = 1;
+
+    cameraController.camX = frauki.x;
+    cameraController.camY = frauki.y;
+    
+    effectsController.Fade(false);
 };
 
 Main.update = function() {

@@ -39,7 +39,6 @@ CameraController.prototype.Update = function() {
 	}
 
 	var idealX = xOffset + frauki.body.center.x;
-
 	var idealY = yOffset + frauki.body.center.y;
 
 	//do the screen shake
