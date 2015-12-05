@@ -36,12 +36,13 @@ EnergyController.prototype.Create = function() {
 EnergyController.prototype.Update = function() {
 
 	var energyDiff = this.energy - 15;
-	var step = 0.20;
+	var step = 0.05;
 
-	if(game.time.now - this.energyUsageTimestamp > 2000) {
-		step += 0.1;
+	//
+	if(game.time.now - this.energyUsageTimestamp > 4000) {
+		step += 0.3;
 	} else {
-		step += ((game.time.now - this.energyUsageTimestamp) / 2000) * 0.1;
+		step += ((game.time.now - this.energyUsageTimestamp) / 4000) * 0.3;
 	}
 
 	//if the timer is up, tick the energy and reset the timer
