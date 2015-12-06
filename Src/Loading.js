@@ -44,7 +44,7 @@ Loading.preload = function() {
 
 Loading.create = function() {
 
-    game.add.plugin(Phaser.Plugin.Debug);
+    //game.add.plugin(Phaser.Plugin.Debug);
 
     game.physics.startSystem(Phaser.Physics.ARCADE);
     game.physics.arcade.gravity.y = 600;
@@ -127,7 +127,6 @@ Loading.create = function() {
         this._reset = false;
     };
 
-
     game.physics.arcade.computeVelocity = function (axis, body, velocity, acceleration, drag, max) {
 
             if (max === undefined) { max = 10000; }
@@ -159,5 +158,62 @@ Loading.create = function() {
             }
 
             return velocity;
+    };
+
+    Phaser.Sprite.prototype.preUpdate = function() {
+
+        if (!this.preUpdateInWorld())
+        {
+            return false;
+        }
+
+        if (!this.preUpdateLifeSpan())
+        {
+            return false;
+        }
+
+        if (!this.preUpdatePhysics())
+        {
+            return false;
+        }
+
+        return this.preUpdateCore();
+
+    };
+
+    Phaser.Component.PhysicsBody.preUpdate = function () {
+
+        if(this.body.enable) {
+            if (this.fresh && this.exists)
+            {
+                this.world.setTo(this.parent.position.x + this.position.x, this.parent.position.y + this.position.y);
+                this.worldTransform.tx = this.world.x;
+                this.worldTransform.ty = this.world.y;
+
+                this.previousPosition.set(this.world.x, this.world.y);
+                this.previousRotation = this.rotation;
+
+                if (this.body)
+                {
+                    this.body.preUpdate();
+                }
+
+                this.fresh = false;
+
+                return false;
+            }
+
+            this.previousPosition.set(this.world.x, this.world.y);
+            this.previousRotation = this.rotation;
+        }
+
+        if (!this._exists || !this.parent.exists)
+        {
+            this.renderOrderID = -1;
+            return false;
+        }
+
+        return true;
+
     };
 };

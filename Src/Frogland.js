@@ -81,9 +81,9 @@ Frogland.Create = function() {
     triggerController.CreateTriggers(3);
     triggerController.CreateTriggers(2);
 
-    setInterval(function() {
-        Frogland.AnimateTiles();
-    }, 100);
+    // setInterval(function() {
+    //     Frogland.AnimateTiles();
+    // }, 100);
 
     this.SpawnFrauki();
 
@@ -407,6 +407,13 @@ Frogland.ChangeLayer = function(newLayer) {
     game.add.tween(currentForgroundLayer).to({alpha: 0}, 300, Phaser.Easing.Linear.None, true);
     game.add.tween(currentMidgroundLayer).to({alpha: 0}, 300, Phaser.Easing.Linear.None, true);
     game.add.tween(currentBackgroundLayer).to({alpha: 0}, 300, Phaser.Easing.Linear.None, true);
+
+    currentForgroundLayer.visible = false;
+    currentForgroundLayer.alpha = 0;
+    currentMidgroundLayer.visible = false;
+    currentMidgroundLayer.alpha = 0;
+    currentBackgroundLayer.visible = false;
+    currentBackgroundLayer.alpha = 0;
 
     currentObjectLayer.forEach(function(obj) {
         game.add.tween(obj).to({alpha: 0}, 200, Phaser.Easing.Linear.None, true);

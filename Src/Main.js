@@ -39,6 +39,13 @@ Main.create = function() {
     cameraController.camY = frauki.y;
     
     effectsController.Fade(false);
+
+    this.UITextures = {};
+    this.UITextures.EnergyBar0000 = PIXI.TextureCache[game.cache.getFrameByName('UI', 'EnergyBar0000').uuid];
+    this.UITextures.EnergyBar0001 = PIXI.TextureCache[game.cache.getFrameByName('UI', 'EnergyBar0001').uuid];
+    this.UITextures.EnergyBar0002 = PIXI.TextureCache[game.cache.getFrameByName('UI', 'EnergyBar0002').uuid];
+    this.UITextures.EnergyBar0005 = PIXI.TextureCache[game.cache.getFrameByName('UI', 'EnergyBar0005').uuid];
+    this.UITextures.EnergyBar0006 = PIXI.TextureCache[game.cache.getFrameByName('UI', 'EnergyBar0006').uuid];
 };
 
 Main.update = function() {
@@ -93,9 +100,9 @@ Main.render = function() {
     //     });  
     // }
 
-    if(!!weaponController.GetAttackGeometry()) {
-        game.debug.geom(new Phaser.Rectangle(weaponController.GetAttackGeometry().x, weaponController.GetAttackGeometry().y, weaponController.GetAttackGeometry().w, weaponController.GetAttackGeometry().h));
-    }
+    // if(!!weaponController.GetAttackGeometry()) {
+    //     game.debug.geom(new Phaser.Rectangle(weaponController.GetAttackGeometry().x, weaponController.GetAttackGeometry().y, weaponController.GetAttackGeometry().w, weaponController.GetAttackGeometry().h));
+    // }
 
     pixel.context.drawImage(
         game.canvas, 0, 0, game.width, game.height, 
@@ -239,13 +246,18 @@ Main.RenderTextureFromAtlas = function(atlas, frame, x, y, scaleX, scaleY) {
     if(scaleX !== 0) scaleX = scaleX || 1;
     if(scaleY !== 0) scaleY = scaleY || 1;
 
-    var frame = game.cache.getFrameByName(atlas, frame);
-    var texture = PIXI.TextureCache[frame.uuid];
+    var texture;
 
-    trim =  texture.trim;
+    if(!this.UITextures[frame]) {
+        texture = PIXI.TextureCache[game.cache.getFrameByName(atlas, frame).uuid];
+    } else {
+        texture = this.UITextures[frame];
+    }
     
-    if(trim){
-      offset = {x: trim.x, y: trim.y}
+    var offset;
+
+    if(texture.trim){
+      offset = {x: texture.trim.x, y: texture.trim.y}
     }else{
       offset = {x: 0, y:0}
     }
