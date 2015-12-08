@@ -142,7 +142,7 @@ Collision.OverlapAttackWithEnemy = function(f, e) {
         e.TakeHit();
     }
 
-    effectsController.SpawnEnergyNuggets(e.body, frauki.body, 'neutral', damage);
+    effectsController.SpawnEnergyNuggets(e.body, frauki.body, 'positive', damage * 3);
     
     if(damage > 0) {
         events.publish('play_sound', { name: 'attack_connect' });

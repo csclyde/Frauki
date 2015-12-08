@@ -142,6 +142,10 @@ Enemy.prototype.update = function() {
     }
 };
 
+Enemy.TakeHit = function() {
+
+};
+
 function DestroyEnemy(e) {
     e.Die();
     e.state = e.Dying;
@@ -174,7 +178,7 @@ function DestroyEnemy(e) {
 
     e.destroy();
     e = null;
-}
+};
 
 Enemy.prototype.Attacking = function() {
     if(!!this.attackRect && this.attackRect.body.width !== 0)

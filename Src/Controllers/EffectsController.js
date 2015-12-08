@@ -359,7 +359,7 @@ function UpdateParticle(p) {
             events.publish('play_sound', {name: 'energy_bit', restart: true });
 
             if(p.parent === effectsController.positiveBits) {
-                energyController.AddPower(0.5);
+                //energyController.AddPower(0.5);
                 energyController.AddEnergy(1);
                 effectsController.EnergySplash(p.body, 100, 'positive');
             } else if(p.parent === effectsController.neutralBits) {
@@ -726,14 +726,15 @@ EffectsController.prototype.Fade = function(show) {
     if(show) {
         this.screenDark.alpha = 0;
         this.screenDark.visible = true;
-        return game.add.tween(this.screenDark).to( { alpha: 1 }, 1200, Phaser.Easing.Linear.None, true);
+        return game.add.tween(this.screenDark).to( { alpha: 1 }, 2000, Phaser.Easing.Linear.None, true);
     } else {
         return game.add.tween(this.screenDark).to( { alpha: 0 }, 1000, Phaser.Easing.Linear.None, true);
     }
 };
 
-EffectsController.prototype.SpriteTrail = function(sprite, freq, duration, dropoff) {
-    //needs to be correctly aligned on both x and y
+EffectsController.prototype.SpriteTrail = function(sprite, freq, duration, dropoff, tint) {
+    
+    tint = tint || 0x0dff94;
 
     var numTrails = Math.floor(duration / freq);
     for(var i = 0; i < numTrails; i++) {
@@ -743,10 +744,13 @@ EffectsController.prototype.SpriteTrail = function(sprite, freq, duration, dropo
     function AddSprite() {
         var texture = PIXI.TextureCache[sprite.animations.currentFrame.uuid];
 
-        var trailSprite = game.add.image(sprite.body.center.x, sprite.body.center.y + (50 - sprite.animations.currentFrame.height) / 2, texture, null, Frogland.effectsGroup);
-        trailSprite.anchor.setTo(0.5);
+        var trailSprite = game.add.image(sprite.x - (sprite.animations.currentFrame.width / 2) * sprite.scale.x, sprite.y - 100 - (sprite.animations.currentFrame.height / 2), texture, null, Frogland.effectsGroup);
+        trailSprite.anchor.setTo(0);
         trailSprite.scale.x = sprite.scale.x;
-        trailSprite.tint = 0x0dff94;
+        trailSprite.tint = tint;
+        trailSprite.alpha = 0.8;
+
+        console.log(frauki.y - frauki.body.y);
 
         var fadeTween = game.add.tween(trailSprite).to({alpha: 0}, dropoff, Phaser.Easing.Linear.None, true);
         fadeTween.onComplete.add(function() {
