@@ -486,7 +486,7 @@ Player.prototype.DoubleJump = function() {
         events.publish('stop_sound', {name: 'attack_dive_fall'});
 
         effectsController.EnergyStreak();
-        effectsController.SpriteTrail(frauki, 150, 600, 300);
+        effectsController.SpriteTrail(frauki, 150, 400, 300);
     }
 };
 
@@ -548,7 +548,7 @@ Player.prototype.FrontSlash = function() {
             events.publish('play_sound', {name: 'attack_slash', restart: true });
 
             effectsController.EnergyStreak();
-            effectsController.SpriteTrail(frauki, 150, 600, 300);
+            effectsController.SpriteTrail(frauki, 150, 500, 300);
         }
     } 
 };
@@ -560,7 +560,7 @@ Player.prototype.LungeSlash = function() {
         events.publish('play_sound', {name: 'attack_slash', restart: true });
 
         effectsController.EnergyStreak();
-        effectsController.SpriteTrail(frauki, 150, 600, 300);
+        effectsController.SpriteTrail(frauki, 150, 500, 300);
     }
 };
 
@@ -572,7 +572,7 @@ Player.prototype.FallSlash = function() {
         this.timers.SetTimer('fall_attack_wait', 800);
 
         effectsController.EnergyStreak();
-        effectsController.SpriteTrail(frauki, 150, 600, 300);
+        effectsController.SpriteTrail(frauki, 150, 500, 300);
     }
 };
 
@@ -585,7 +585,7 @@ Player.prototype.DiveSlash = function() {
             events.publish('play_sound', {name: 'attack_dive_charge', restart: true });
 
             effectsController.EnergyStreak();
-            effectsController.SpriteTrail(frauki, 150, 600, 300);
+            effectsController.SpriteTrail(frauki, 150, 500, 300);
         }
     } else {
         this.FrontSlash();
@@ -607,7 +607,7 @@ Player.prototype.JumpSlash = function() {
         events.publish('play_sound', {name: 'attack_slash', restart: true });
 
         effectsController.EnergyStreak();
-        effectsController.SpriteTrail(frauki, 150, 600, 300);
+        effectsController.SpriteTrail(frauki, 150, 400, 300);
     }
 };
 
@@ -637,7 +637,7 @@ Player.prototype.StabSlash = function() {
             events.publish('play_sound', {name: 'attack_stab', restart: true });
 
             effectsController.EnergyStreak();
-            effectsController.SpriteTrail(frauki, 150, 1000, 300);
+            effectsController.SpriteTrail(frauki, 150, 800, 300);
             
         }
     } else {
@@ -670,7 +670,7 @@ Player.prototype.Roll = function(params) {
         this.movement.rollFrames = 0;
 
         effectsController.EnergyStreak();
-        effectsController.SpriteTrail(frauki, 100, 600, 300);
+        effectsController.SpriteTrail(frauki, 100, 400, 300);
     } else {
         this.DoubleJump();
     }
@@ -717,7 +717,7 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
     this.timers.SetTimer('frauki_grace', grace_duration);
     this.timers.SetTimer('frauki_hit', 500);
     events.publish('camera_shake', {magnitudeX: 8, magnitudeY: 5, duration: 500});
-    effectsController.SpriteTrail(frauki, 150, 1000, 300, 0xf20069);
+    effectsController.SpriteTrail(frauki, 200, 800, 300, 0xf20069);
 
     if(energyController.neutralPoint > 0) {
         effectsController.ScreenFlash();
@@ -888,7 +888,7 @@ Player.prototype.Rolling = function() {
 
     //pickup stage
     if(this.movement.rollStage === 0 && this.movement.rollFrames <= 10) {
-        this.body.acceleration.x = this.movement.rollDirection * 5000 * (game.math.catmullRomInterpolation([0, 0.7, 1, 1, 0.7, 0], this.movement.rollFrames / 10) || 0);
+        this.body.acceleration.x = this.movement.rollDirection * 4000 * (game.math.catmullRomInterpolation([0, 0.7, 1, 1, 0.7, 0], this.movement.rollFrames / 10) || 0);
 
     //ready to switch to release
     } else if(this.movement.rollStage === 0) {

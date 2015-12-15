@@ -140,10 +140,16 @@ Enemy.prototype.update = function() {
 
         game.physics.arcade.overlap(this.attackRect, frauki, Collision.OverlapEnemyAttackWithFrauki);
     }
+    
+
+    if(this.state === this.Hurting) {
+        this.body.bounce.setTo(0.5);
+    } else {
+        this.body.bounce.setTo(0);
+    }
 };
 
 Enemy.TakeHit = function() {
-
 };
 
 function DestroyEnemy(e) {

@@ -750,8 +750,6 @@ EffectsController.prototype.SpriteTrail = function(sprite, freq, duration, dropo
         trailSprite.tint = tint;
         trailSprite.alpha = 0.8;
 
-        console.log(frauki.y - frauki.body.y);
-
         var fadeTween = game.add.tween(trailSprite).to({alpha: 0}, dropoff, Phaser.Easing.Linear.None, true);
         fadeTween.onComplete.add(function() {
             trailSprite.destroy();

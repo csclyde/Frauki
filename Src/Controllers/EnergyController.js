@@ -16,7 +16,6 @@ EnergyController = function() {
 	this.energyUsageTimestamp = 0;
 
 	events.subscribe('player_power_slash', function() { that.charge = 0; });
-
 };
 
 EnergyController.prototype.Create = function() {
@@ -30,7 +29,6 @@ EnergyController.prototype.Create = function() {
 	// this.energyBarRed.fixedToCamera = true;
 	// this.energyBarRed.anchor.x = 0;
 	// this.energyBarRed.visible = false;
-
 };
 
 EnergyController.prototype.Update = function() {
@@ -40,9 +38,9 @@ EnergyController.prototype.Update = function() {
 
 	//
 	if(game.time.now - this.energyUsageTimestamp > 2000) {
-		step += 0.1;
+		step += 0.15;
 	} else {
-		step += ((game.time.now - this.energyUsageTimestamp) / 2000) * 0.1;
+		step += ((game.time.now - this.energyUsageTimestamp) / 2000) * 0.15;
 	}
 
 	if(this.energy * 2 > this.neutralPoint) {
@@ -92,7 +90,6 @@ EnergyController.prototype.Update = function() {
 	// 	this.energyBar.visible = true;
 	// 	this.energyBarWhite.visible = false;
 	// }
-
 };
 
 EnergyController.prototype.UseEnergy = function(amt) {
@@ -106,7 +103,6 @@ EnergyController.prototype.UseEnergy = function(amt) {
 		events.publish('play_sound', {name: 'no_energy'});
 		return false;
 	}
-	
 };
 
 EnergyController.prototype.RemoveEnergy = function(amt) {
@@ -157,7 +153,6 @@ EnergyController.prototype.RemovePower = function(amt) {
 	// 		this.energy = this.neutralPoint;
 	// 	}
 	// }
-
 };
 
 EnergyController.prototype.GetEnergyPercentage = function() {
@@ -188,7 +183,6 @@ EnergyController.prototype.GetDifficultyModifier = function() {
 
 	return game.math.catmullRomInterpolation(percentageCurve, this.neutralPoint / 30);
 };
-
 
 EnergyController.prototype.MaxCharge = function() {
 	this.charge = 30;

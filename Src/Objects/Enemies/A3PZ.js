@@ -23,7 +23,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
     this.weight = 0.8;
     */
 
-    this.body.drag.x = 800;
+    //this.body.drag.x = 800;
     
     this.updateFunction = function() {
 
@@ -83,14 +83,13 @@ Enemy.prototype.types['A3PZ'] =  function() {
         return true;
     };
 
-    this.Block = function() {
-        //this.Dodge(game.rnd.between(1000, 2000));
+    this.Block = function(duration) {
 
-        if(this.state === this.Dodging) {
-            this.Attack();
-        } else {
-            this.Dodge();
-        }
+        this.FacePlayer();
+
+        this.state = this.Dodging;
+
+        this.timers.SetTimer('dodge_hold', duration || 600);
     };
 
     this.LandHit = function() {
@@ -220,9 +219,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
         this.PlayAnim('hurt');
 
         if(this.timers.TimerUp('hit') && this.body.onFloor()) {
-            if(!this.Dodge(game.rnd.between(800, 1500))) {
-                this.state = this.Idling;
-            }
+            this.Block();
         }
     };
 

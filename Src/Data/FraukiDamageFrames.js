@@ -96,7 +96,7 @@ var fraukiDamageFrames = {
 		damage: 1.5,
 		knockback: 1,
 		priority: 1.5,
-		juggle: 0
+		juggle: -1
 	},
 	
 	'Attack Fall0003': {
@@ -104,7 +104,7 @@ var fraukiDamageFrames = {
 		damage: 1.5,
 		knockback: 0.1,
 		priority: 1.5,
-		juggle: 0
+		juggle: -1
 	},
 
 	'Attack Fall0004': {
@@ -112,7 +112,7 @@ var fraukiDamageFrames = {
 		damage: 1.5,
 		knockback: 0.3,
 		priority: 1.5,
-		juggle: 0
+		juggle: -1
 	},
 
 
