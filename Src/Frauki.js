@@ -996,6 +996,12 @@ Player.prototype.AttackFront = function() {
         }
     }
 
+    if(this.states.direction === 'right' && this.body.acceleration.x < 0) {
+        this.body.velocity.x /= 10;
+    } else if(this.states.direction === 'left' && this.body.acceleration.x > 0) {
+        this.body.velocity.x /= 10;
+    }
+
     if(this.animations.currentAnim.isFinished) {
         if(inputController.dpad.down && !inputController.dpad.left && !inputController.dpad.right && this.body.onFloor()) {
             this.state = this.Crouching;
