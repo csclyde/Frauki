@@ -114,7 +114,7 @@ Collision.OverlapAttackWithEnemy = function(f, e) {
     e.body.velocity.x *= e.PlayerDirMod();
     
     e.body.velocity.y = -300 + (frauki.GetCurrentJuggle() * -300);
-    if(e.robotic) e.body.velocity.y /= 2;
+    if(e.robotic) e.body.velocity.y /= 3;
 
     e.timers.SetTimer('hit', e.baseStunDuration + (100 * damage));
     e.timers.SetTimer('grace', e.baseStunDuration + (100 * damage) + 200);

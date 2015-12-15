@@ -46,7 +46,7 @@ CameraController.prototype.Update = function() {
 	//this.camX += this.shakeX;
 	//this.camY += this.shakeY;
 
-	this.camX += (idealX - this.camX) * 0.2;
+	this.camX += (idealX - this.camX) * 0.15;
 	this.camY += (idealY - this.camY) * 0.1;
 
 	game.camera.focusOnXY(this.camX, this.camY);

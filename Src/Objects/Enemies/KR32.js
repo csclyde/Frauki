@@ -197,7 +197,7 @@ Enemy.prototype.types['KR32'] =  function() {
 	this.Hurting = function() {
 		this.PlayAnim('hurt');
 
-		if(this.timers.TimerUp('hit')) {
+		if(this.timers.TimerUp('hit') && this.body.onFloor()) {
 			if(this.PlayerDistance() < 75) {
 				this.Recoil();
 			} else {

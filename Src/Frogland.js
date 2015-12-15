@@ -395,25 +395,22 @@ Frogland.GetCurrentCollisionLayer = function() {
 
 Frogland.ChangeLayer = function(newLayer) {
 
-    if(this.currentLayer == newLayer) return;
+    if(this.currentLayer == newLayer || Frogland.changingLayer === true) return;
+
+    Frogland.changingLayer = true;
+    setTimeout(function() { Frogland.changingLayer = false; }, 350);
 
     //get the current layer
     var currentForgroundLayer = this['foregroundLayer_' + this.currentLayer];
     var currentMidgroundLayer = this['midgroundLayer_' + this.currentLayer];
     var currentBackgroundLayer = this['backgroundLayer_' + this.currentLayer];
-    var currentCollisionLayer = this.GetCurrentCollisionLayer();
     var currentObjectLayer = this.GetCurrentObjectGroup();
 
-    game.add.tween(currentForgroundLayer).to({alpha: 0}, 300, Phaser.Easing.Linear.None, true);
-    game.add.tween(currentMidgroundLayer).to({alpha: 0}, 300, Phaser.Easing.Linear.None, true);
-    game.add.tween(currentBackgroundLayer).to({alpha: 0}, 300, Phaser.Easing.Linear.None, true);
+    game.add.tween(currentForgroundLayer).to({alpha: 0}, 300, Phaser.Easing.Linear.None, true).onComplete.add(function() { currentForgroundLayer.visible = false; });
+    game.add.tween(currentMidgroundLayer).to({alpha: 0}, 300, Phaser.Easing.Linear.None, true).onComplete.add(function() { currentMidgroundLayer.visible = false; });
+    game.add.tween(currentBackgroundLayer).to({alpha: 0}, 300, Phaser.Easing.Linear.None, true).onComplete.add(function() { currentBackgroundLayer.visible = false; });
 
-    currentForgroundLayer.visible = false;
-    currentForgroundLayer.alpha = 0;
-    currentMidgroundLayer.visible = false;
-    currentMidgroundLayer.alpha = 0;
-    currentBackgroundLayer.visible = false;
-    currentBackgroundLayer.alpha = 0;
+
 
     currentObjectLayer.forEach(function(obj) {
         game.add.tween(obj).to({alpha: 0}, 200, Phaser.Easing.Linear.None, true);
@@ -424,24 +421,23 @@ Frogland.ChangeLayer = function(newLayer) {
 
     this.currentLayer = newLayer;
 
-    currentForgroundLayer = this['foregroundLayer_' + this.currentLayer];
-    currentMidgroundLayer = this['midgroundLayer_' + this.currentLayer];
-    currentBackgroundLayer = this['backgroundLayer_' + this.currentLayer];
-    currentCollisionLayer = this.GetCurrentCollisionLayer();
-    currentObjectLayer = this.GetCurrentObjectGroup();
+    var newForgroundLayer = this['foregroundLayer_' + this.currentLayer];
+    var newMidgroundLayer = this['midgroundLayer_' + this.currentLayer];
+    var newBackgroundLayer = this['backgroundLayer_' + this.currentLayer];
+    var newObjectLayer = this.GetCurrentObjectGroup();
 
-    currentForgroundLayer.visible = true;
-    currentForgroundLayer.alpha = 0;
-    currentMidgroundLayer.visible = true;
-    currentMidgroundLayer.alpha = 0;
-    currentBackgroundLayer.visible = true;
-    currentBackgroundLayer.alpha = 0;
+    newForgroundLayer.visible = true;
+    newForgroundLayer.alpha = 0;
+    newMidgroundLayer.visible = true;
+    newMidgroundLayer.alpha = 0;
+    newBackgroundLayer.visible = true;
+    newBackgroundLayer.alpha = 0;
 
-    game.add.tween(currentForgroundLayer).to({alpha: 1}, 200, Phaser.Easing.Linear.None, true);
-    game.add.tween(currentMidgroundLayer).to({alpha: 1}, 200, Phaser.Easing.Linear.None, true);
-    game.add.tween(currentBackgroundLayer).to({alpha: 1}, 200, Phaser.Easing.Linear.None, true);
+    game.add.tween(newForgroundLayer).to({alpha: 1}, 200, Phaser.Easing.Linear.None, true);
+    game.add.tween(newMidgroundLayer).to({alpha: 1}, 200, Phaser.Easing.Linear.None, true);
+    game.add.tween(newBackgroundLayer).to({alpha: 1}, 200, Phaser.Easing.Linear.None, true);
 
-    currentObjectLayer.forEach(function(obj) {
+    newObjectLayer.forEach(function(obj) {
         obj.alpha = 0;
         game.add.tween(obj).to({alpha: 1}, 200, Phaser.Easing.Linear.None, true);
         if(!!obj.body) obj.body.enable = true;

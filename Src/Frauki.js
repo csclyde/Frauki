@@ -79,7 +79,12 @@ Player = function (game, x, y, name) {
     events.subscribe('player_roll', this.Roll, this);
     events.subscribe('player_run', this.StartStopRun, this);
     events.subscribe('control_up', function(params) { 
+
         this.states.upPressed = params.pressed;
+
+        if(frauki.state === this.Hurting) {
+            return;
+        }
 
         //this allows an inverted seaquence of inputs for the jump slash
         if(this.state === this.AttackFront && this.body.onFloor() === false && !this.timers.TimerUp('updash_timer')) {
@@ -449,7 +454,6 @@ Player.prototype.Jump = function(params) {
         //overhead into jump atack
         else if(this.state === this.AttackOverhead) {
             this.JumpSlash();
-            console.log('kk');
         }
         //double jump
         else if(!this.InAttackAnim()) {
@@ -1008,7 +1012,7 @@ Player.prototype.AttackLunge = function() {
 
     if(this.Attacking()) {
         this.body.maxVelocity.x = PLAYER_ROLL_SPEED();
-        this.body.acceleration.x = this.states.direction === 'left' ? -2500 : 2500;
+        this.body.acceleration.x = this.states.direction === 'left' ? -1000 : 1000;
 
         if(this.body.velocity.y > 0) {
             this.body.velocity.y = 0;

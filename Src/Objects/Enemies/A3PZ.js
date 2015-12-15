@@ -219,7 +219,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
     this.Hurting = function() {
         this.PlayAnim('hurt');
 
-        if(this.timers.TimerUp('hit')) {
+        if(this.timers.TimerUp('hit') && this.body.onFloor()) {
             if(!this.Dodge(game.rnd.between(800, 1500))) {
                 this.state = this.Idling;
             }
