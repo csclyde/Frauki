@@ -30,6 +30,8 @@ Enemy = function(game, x, y, name) {
     game.physics.enable(this.attackRect, Phaser.Physics.ARCADE);
     this.attackRect.body.setSize(0, 0, 0, 0);
     this.attackRect.owningEnemy = this;
+
+    this.body.drag.x = 600;
 };
 
 Enemy.prototype = Object.create(Phaser.Sprite.prototype);

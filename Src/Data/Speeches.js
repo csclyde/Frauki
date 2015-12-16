@@ -57,5 +57,6 @@ var Speeches = {
 	'spaceship_question': { text: 'It looks like this thing crashed into the ground. Hrm, I can\'t get the door open from this side.' },
 	'pouring_joy': { text: 'It reads: I can barely withstand the joy pouring into me! Goodbye!' },
 	'another_sky': { text: 'It reads: So, we will find another sky. So it goes.' },
+	'behold_goddess': { text: 'It reads: The Goddess has appeared, and we are forgiven' },
 
 };

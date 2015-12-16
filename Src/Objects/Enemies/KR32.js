@@ -23,7 +23,7 @@ Enemy.prototype.types['KR32'] =  function() {
     this.damage = 5;
     */
 
-    this.body.drag.x = 800;
+    //this.body.drag.x = 800;
     
 	this.updateFunction = function() {
 		if(this.timers.TimerUp('mode_change')) {
@@ -89,9 +89,9 @@ Enemy.prototype.types['KR32'] =  function() {
     	this.FacePlayer();
 
     	if(this.direction === 'left') {
-    		this.body.velocity.x = 400;
+    		this.body.velocity.x = 200;
     	} else {
-    		this.body.velocity.x = -400;
+    		this.body.velocity.x = -200;
     	}
 
     	this.body.velocity.y = -100;
@@ -149,9 +149,9 @@ Enemy.prototype.types['KR32'] =  function() {
 			this.state = this.Slashing;
 
 			if(this.direction === 'left') {
-				this.body.velocity.x = -500;
+				this.body.velocity.x = -300;
 			} else {
-				this.body.velocity.x = 500;
+				this.body.velocity.x = 300;
 			}
 		}
 	}

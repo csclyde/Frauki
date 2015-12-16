@@ -176,7 +176,7 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
     var vel = new Phaser.Point(e.body.center.x - frauki.body.center.x, e.body.center.y - frauki.body.center.y);
     vel = vel.normalize();
 
-    vel.setMagnitude(300);
+    vel.setMagnitude(500);
 
     e.body.velocity.x = vel.x;
     e.body.velocity.y = vel.y / 2;
