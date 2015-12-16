@@ -46,13 +46,13 @@ Enemy.prototype.types['Mask'] =  function() {
 		}
 
 		if(this.direction === 'left') {
-			this.body.acceleration.x = -500;
+			this.body.acceleration.x = -1000;
 
 			if(this.body.touching.left) {
 				this.SetDirection('right');
 			}
 		} else if(this.direction === 'right') {
-			this.body.acceleration.x = 500;
+			this.body.acceleration.x = 1000;
 
 			if(this.body.touching.right) {
 				this.SetDirection('left');

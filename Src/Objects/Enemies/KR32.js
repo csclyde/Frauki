@@ -149,9 +149,9 @@ Enemy.prototype.types['KR32'] =  function() {
 			this.state = this.Slashing;
 
 			if(this.direction === 'left') {
-				this.body.velocity.x = -300;
+				this.body.velocity.x = -400;
 			} else {
-				this.body.velocity.x = 300;
+				this.body.velocity.x = 400;
 			}
 		}
 	}

@@ -107,7 +107,7 @@ Collision.OverlapAttackWithEnemy = function(f, e) {
 
     var damage = frauki.GetCurrentDamage();
 
-    e.body.velocity.x = (400 * frauki.GetCurrentKnockback()) + 200;
+    e.body.velocity.x = (300 * frauki.GetCurrentKnockback()) + 200;
     e.body.velocity.x *= e.PlayerDirMod();
     
     e.body.velocity.y = (frauki.GetCurrentJuggle() * -400) - 200;
@@ -176,7 +176,7 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
     var vel = new Phaser.Point(e.body.center.x - frauki.body.center.x, e.body.center.y - frauki.body.center.y);
     vel = vel.normalize();
 
-    vel.setMagnitude(500);
+    vel.setMagnitude(400);
 
     e.body.velocity.x = vel.x;
     e.body.velocity.y = vel.y / 2;
