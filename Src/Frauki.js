@@ -300,7 +300,7 @@ Player.prototype.InAttackAnim = function() {
 Player.prototype.InPreAttackAnim = function() {
     var frameName = this.animations.currentFrame.name;
 
-    if(['Attack Stab0000', 'Attack Stab0000', 'Attack Stab0001', 'Attack Stab0001', 'Attack Stab0002', 'Attack Stab0003', 'Attack Front0001'].indexOf(frameName) > -1) {
+    if(['Attack Stab0000', 'Attack Stab0000', 'Attack Stab0001', 'Attack Stab0002', 'Attack Stab0003', 'Attack Front0001', 'Attack Fall0000', 'Attack Fall0001'].indexOf(frameName) > -1) {
         return true;
     } else {
         return false;

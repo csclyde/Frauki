@@ -126,7 +126,7 @@ Collision.OverlapAttackWithEnemy = function(f, e) {
     if(e.energy <= 0) {
 
         e.timers.SetTimer('hit', 1000);
-        e.timers.SetTimer('grace', 1000);
+        e.timers.SetTimer('grace', 300);
 
         //e.body.velocity.x *= 1.2;
         //e.body.velocity.y *= 1.2;

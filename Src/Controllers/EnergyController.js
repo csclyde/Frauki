@@ -38,13 +38,9 @@ EnergyController.prototype.Update = function() {
 
 	//
 	if(game.time.now - this.energyUsageTimestamp > 2000) {
-		step += 0.15;
+		step += 0.10;
 	} else {
-		step += ((game.time.now - this.energyUsageTimestamp) / 2000) * 0.15;
-	}
-
-	if(this.energy * 2 > this.neutralPoint) {
-		step /= 2;
+		step += ((game.time.now - this.energyUsageTimestamp) / 2000) * 0.10;
 	}
 
 	//if the timer is up, tick the energy and reset the timer

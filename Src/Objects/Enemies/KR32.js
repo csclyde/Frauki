@@ -131,7 +131,7 @@ Enemy.prototype.types['KR32'] =  function() {
 			this.timers.SetTimer('attack', 500 + Math.random() * 1000);
 		}
 
-		if(this.PlayerDistance() < 160 && !frauki.Attacking() && this.body.onFloor() && frauki.body.center.y > this.body.center.y - 50) {
+		if(this.PlayerDistance() < 160 && !frauki.InPreAttackAnim() && !frauki.Attacking() && this.body.onFloor() && frauki.body.center.y > this.body.center.y - 50) {
 
 			if(this.PlayerDistance() < 75) {
 				this.AttackStab();

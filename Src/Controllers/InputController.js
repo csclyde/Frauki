@@ -15,37 +15,120 @@ InputController = function() {
     events.subscribe('control_up', function(params) { inputController.dpad.up = params.pressed; } );
     events.subscribe('player_crouch', function(params) { inputController.dpad.down = params.crouch; } );
 
-	this.jump 		= game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-	this.up 		= game.input.keyboard.addKey(Phaser.Keyboard.UP);
-	this.crouch 	= game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
-	this.runLeft 	= game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
-	this.runRight 	= game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
-	this.slash		= game.input.keyboard.addKey(Phaser.Keyboard.Z);
-    this.weapon     = game.input.keyboard.addKey(Phaser.Keyboard.C);
-	this.roll		= game.input.keyboard.addKey(Phaser.Keyboard.X);
-    this.shoulderR  = game.input.keyboard.addKey(Phaser.Keyboard.Q);
 	this.testButton = game.input.keyboard.addKey(Phaser.Keyboard.P);
     this.testButton2 = game.input.keyboard.addKey(Phaser.Keyboard.O);
 
-    this.runLeft.onDown.add(function() { events.publish('player_run', {run:true, dir:'left'}); }, this);
-    this.runLeft.onUp.add(function() { events.publish('player_run', {run:false, dir: 'left'}); }, this);
-    this.runRight.onDown.add(function() { events.publish('player_run', {run:true, dir:'right'}); }, this);
-    this.runRight.onUp.add(function() { events.publish('player_run', {run:false, dir: 'right'}); }, this);
+    this.testButton.onDown.add(function() { events.publish('stop_all_music'); });
 
-    this.up.onDown.add(function() { events.publish('control_up', {pressed: true}); }, this);
-    this.up.onUp.add(function() { events.publish('control_up', {pressed: false}); }, this);
+    this.testButton2.onDown.add(function() { 
+        energyController.neutralPoint += 2;
+        energyController.charge += 4;
+    });
 
-    this.jump.onDown.add(function() {   events.publish('player_jump', {jump: true}); }, this);
-    this.jump.onUp.add(function() {     events.publish('player_jump', {jump: false}); }, this);
+    this.binds = {};
+    this.binds.jump       = Phaser.Keyboard.SPACEBAR;
+    this.binds.up         = Phaser.Keyboard.UP;
+    this.binds.crouch     = Phaser.Keyboard.DOWN;
+    this.binds.runLeft    = Phaser.Keyboard.LEFT;
+    this.binds.runRight   = Phaser.Keyboard.RIGHT;
+    this.binds.slash      = Phaser.Keyboard.Z;
+    this.binds.weapon     = Phaser.Keyboard.C;
+    this.binds.roll       = Phaser.Keyboard.X;
+    this.binds.shoulderR  = Phaser.Keyboard.Q;
 
-    this.crouch.onDown.add(function() { events.publish('player_crouch', {crouch: true}); }, this);
-    this.crouch.onUp.add(function() {   events.publish('player_crouch', {crouch: false}); }, this);
+    this.bindList = [this.binds.jump, this.binds.up, this.binds.crouch, this.binds.runLeft, this.binds.runRight, this.binds.slash, this.binds.weapon, this.binds.roll, this.binds.shoulderR];
 
-    this.slash.onDown.add(function() { events.publish('player_slash', {}); }, this);
-    this.roll.onDown.add(function() { events.publish('player_roll', {}); }, this);
+    game.input.keyboard.onDownCallback = function(e) {
 
-    this.weapon.onDown.add(function() { events.publish('activate_weapon', { activate: true }); }, this);
-    this.weapon.onUp.add(function() { events.publish('activate_weapon', { activate: false }); }, this);
+        if(this.mappingMode) {
+            //assign the keycode to the current key
+            //advance the key index
+
+            //if the index is the length of the key array, reset it and exit mapping mode
+
+            return;
+        }
+
+        switch(e.keyCode) {
+
+            case this.binds.jump:
+                events.publish('player_jump', {jump: true});
+            break;
+
+            case this.binds.up:
+                events.publish('control_up', {pressed: true});
+            break;
+
+            case this.binds.crouch:
+                events.publish('player_crouch', {crouch: true});
+            break;
+
+            case this.binds.runLeft:
+                events.publish('player_run', {run:true, dir:'left'});
+            break;
+
+            case this.binds.runRight:
+                events.publish('player_run', {run:true, dir:'right'});
+            break;
+
+            case this.binds.slash:
+                events.publish('player_slash', {});
+            break;
+
+            case this.binds.weapon:
+                events.publish('activate_weapon', { activate: true });
+            break;
+
+            case this.binds.roll:
+                events.publish('player_roll', {});
+            break;
+
+            case this.binds.shoulderR:
+                weaponController.Next();
+            break;
+
+        }
+    }
+
+    game.input.keyboard.onUpCallback = function(e) {
+
+        switch(e.keyCode) {
+            
+            case this.binds.jump:
+                events.publish('player_jump', {jump: false});
+            break;
+
+            case this.binds.up:
+                events.publish('control_up', {pressed: false});
+            break;
+
+            case this.binds.crouch:
+                events.publish('player_crouch', {crouch: false});
+            break;
+
+            case this.binds.runLeft:
+                events.publish('player_run', {run:false, dir: 'left'});
+            break;
+
+            case this.binds.runRight:
+                events.publish('player_run', {run:false, dir: 'right'});
+            break;
+
+            case this.binds.slash:
+            break;
+
+            case this.binds.weapon:
+                events.publish('activate_weapon', { activate: false });
+            break;
+
+            case this.binds.roll:
+            break;
+
+            case this.binds.shoulderR:
+            break;
+
+        }
+    }
 
     events.subscribe('control_up', function(params) { 
 
@@ -72,18 +155,7 @@ InputController = function() {
         }
     });
 
-    this.shoulderR.onDown.add(function() {
-        weaponController.Next();
-    });
-
-    this.testButton.onDown.add(function() { 
-        events.publish('stop_all_music');
-    });
-
-    this.testButton2.onDown.add(function() { 
-        energyController.neutralPoint += 2;
-        energyController.charge += 4;
-    });
+   
 
     game.input.gamepad.start();
 
