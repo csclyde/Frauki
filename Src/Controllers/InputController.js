@@ -40,6 +40,10 @@ InputController = function() {
 
     game.input.keyboard.onDownCallback = function(e) {
 
+        if(Main.restarting) {
+            return;
+        }
+
         if(this.mappingMode) {
             //assign the keycode to the current key
             //advance the key index
@@ -91,6 +95,10 @@ InputController = function() {
     }
 
     game.input.keyboard.onUpCallback = function(e) {
+
+        if(Main.restarting) {
+            return;
+        }
 
         switch(e.keyCode) {
             
@@ -170,6 +178,10 @@ InputController = function() {
         },
         onDown: function(buttonCode, value){
 
+            if(Main.restarting) {
+                return;
+            }
+
             switch(buttonCode) {
                 case 0:
                     events.publish('player_jump', {jump: true});
@@ -224,6 +236,10 @@ InputController = function() {
             }
         },
         onUp: function(buttonCode, value){
+
+            if(Main.restarting) {
+                return;
+            }
             
             switch(buttonCode) {
                 case 0:

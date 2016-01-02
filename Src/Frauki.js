@@ -762,7 +762,7 @@ Player.prototype.Running = function() {
         this.state = this.Standing;
     } else if(this.body.velocity.y < 0) {
         this.state = this.Jumping;
-    } else if(this.body.velocity.y > 150) {
+    } else if(this.body.velocity.y > 20) {
         this.state = this.Peaking;
     }
 };
