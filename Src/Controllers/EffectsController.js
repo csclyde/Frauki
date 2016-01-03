@@ -310,6 +310,24 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 leaves.owningLayer = layer;
 
                 that.loadedEffects.push(leaves);
+            } else if(o.name === 'spirits') {
+                var spirits = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
+                spirits.width = o.width;
+                spirits.height = o.height;
+                spirits.makeParticles('Misc', ['Spirit0000', 'Spirit0001', 'Spirit0002', 'Spirit0003'], 10);
+                spirits.gravity = -600;
+                spirits.alpha = 0.15;
+                spirits.particleDrag.setTo(0);
+                spirits.maxParticleSpeed.setTo(15);
+                spirits.minParticleSpeed.setTo(-15);
+                spirits.minRotation = 0;
+                spirits.maxRotation = 0;
+                spirits.setScale();
+                spirits.start(false, 5000, 4000);
+                spirits.effectType = 'spirits';
+                spirits.owningLayer = layer;
+
+                that.loadedEffects.push(spirits);
             }
 
         } else if(o.type === 'speech') {
