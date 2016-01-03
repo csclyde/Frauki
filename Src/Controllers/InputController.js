@@ -40,54 +40,56 @@ InputController = function() {
 
     game.input.keyboard.onDownCallback = function(e) {
 
+        if(e.repeat) return;
+
         if(Main.restarting) {
             return;
         }
 
-        if(this.mappingMode) {
-            //assign the keycode to the current key
-            //advance the key index
+        // if(this.mappingMode) {
+        //     //assign the keycode to the current key
+        //     //advance the key index
 
-            //if the index is the length of the key array, reset it and exit mapping mode
+        //     //if the index is the length of the key array, reset it and exit mapping mode
 
-            return;
-        }
+        //     return;
+        // }
 
         switch(e.keyCode) {
 
-            case this.binds.jump:
+            case inputController.binds.jump:
                 events.publish('player_jump', {jump: true});
             break;
 
-            case this.binds.up:
+            case inputController.binds.up:
                 events.publish('control_up', {pressed: true});
             break;
 
-            case this.binds.crouch:
+            case inputController.binds.crouch:
                 events.publish('player_crouch', {crouch: true});
             break;
 
-            case this.binds.runLeft:
+            case inputController.binds.runLeft:
                 events.publish('player_run', {run:true, dir:'left'});
             break;
 
-            case this.binds.runRight:
+            case inputController.binds.runRight:
                 events.publish('player_run', {run:true, dir:'right'});
             break;
 
-            case this.binds.slash:
+            case inputController.binds.slash:
                 events.publish('player_slash', {});
             break;
 
-            case this.binds.weapon:
+            case inputController.binds.weapon:
                 events.publish('activate_weapon', { activate: true });
             break;
 
-            case this.binds.roll:
+            case inputController.binds.roll:
                 events.publish('player_roll', {});
             break;
 
-            case this.binds.shoulderR:
+            case inputController.binds.shoulderR:
                 weaponController.Next();
             break;
 
@@ -102,37 +104,37 @@ InputController = function() {
 
         switch(e.keyCode) {
             
-            case this.binds.jump:
+            case inputController.binds.jump:
                 events.publish('player_jump', {jump: false});
             break;
 
-            case this.binds.up:
+            case inputController.binds.up:
                 events.publish('control_up', {pressed: false});
             break;
 
-            case this.binds.crouch:
+            case inputController.binds.crouch:
                 events.publish('player_crouch', {crouch: false});
             break;
 
-            case this.binds.runLeft:
+            case inputController.binds.runLeft:
                 events.publish('player_run', {run:false, dir: 'left'});
             break;
 
-            case this.binds.runRight:
+            case inputController.binds.runRight:
                 events.publish('player_run', {run:false, dir: 'right'});
             break;
 
-            case this.binds.slash:
+            case inputController.binds.slash:
             break;
 
-            case this.binds.weapon:
+            case inputController.binds.weapon:
                 events.publish('activate_weapon', { activate: false });
             break;
 
-            case this.binds.roll:
+            case inputController.binds.roll:
             break;
 
-            case this.binds.shoulderR:
+            case inputController.binds.shoulderR:
             break;
 
         }
