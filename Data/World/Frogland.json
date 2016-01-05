@@ -5282,8 +5282,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":2029,
-                 "y":3087
+                 "x":2016,
+                 "y":3088
                 }, 
                 {
                  "gid":68,
@@ -6090,10 +6090,26 @@
                  "width":16,
                  "x":2034.67,
                  "y":3497.33
+                }, 
+                {
+                 "gid":70,
+                 "height":16,
+                 "id":1776,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":2248.33333333333,
+                 "y":3071.33333333333
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "width":0,
          "x":0,
          "y":0
@@ -7019,7 +7035,7 @@
                  "y":4476.67
                 }, 
                 {
-                 "height":16.0000000000005,
+                 "height":16,
                  "id":1769,
                  "name":"spirits",
                  "properties":
@@ -7029,12 +7045,12 @@
                  "rotation":0,
                  "type":"effect",
                  "visible":true,
-                 "width":199.333333333333,
+                 "width":199.333,
                  "x":1746,
-                 "y":3373.33333333333
+                 "y":3373.33
                 }, 
                 {
-                 "height":126.666666666667,
+                 "height":126.667,
                  "id":1770,
                  "name":"spirits",
                  "properties":
@@ -7045,7 +7061,7 @@
                  "type":"effect",
                  "visible":true,
                  "width":149,
-                 "x":1648.66666666667,
+                 "x":1648.67,
                  "y":2940
                 }, 
                 {
@@ -7091,10 +7107,10 @@
                  "visible":true,
                  "width":263.125,
                  "x":656.875,
-                 "y":4228.41666666667
+                 "y":4228.42
                 }, 
                 {
-                 "height":44.886363636364,
+                 "height":44.8864,
                  "id":1774,
                  "name":"spirits",
                  "properties":
@@ -7104,12 +7120,12 @@
                  "rotation":0,
                  "type":"effect",
                  "visible":true,
-                 "width":67.4886363636363,
-                 "x":1470.32954545455,
-                 "y":4431.84090909091
+                 "width":67.4886,
+                 "x":1470.33,
+                 "y":4431.84
                 }, 
                 {
-                 "height":32.916666666667,
+                 "height":32.9167,
                  "id":1775,
                  "name":"spirits",
                  "properties":
@@ -7120,7 +7136,7 @@
                  "type":"effect",
                  "visible":true,
                  "width":82.125,
-                 "x":2702.54166666667,
+                 "x":2702.54,
                  "y":4222.75
                 }],
          "opacity":1,
@@ -10649,7 +10665,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":1776,
+ "nextobjectid":1777,
  "orientation":"orthogonal",
  "properties":
     {

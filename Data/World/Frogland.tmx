@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="400" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="1776">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="400" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="1777">
  <properties>
   <property name="debug" value="false"/>
   <property name="startLayer" value="3"/>
@@ -3824,7 +3824,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="Objects_3" visible="0">
+ <objectgroup name="Objects_3">
   <object id="1041" gid="87" x="1992" y="3720.33" width="16" height="16"/>
   <object id="1042" gid="89" x="2125.33" y="4622.67" width="16" height="16"/>
   <object id="1043" gid="89" x="2106.67" y="4625.33" width="16" height="16"/>
@@ -3987,7 +3987,7 @@
   <object id="1236" gid="68" x="1488" y="3312" width="16" height="16"/>
   <object id="1237" gid="68" x="1488" y="3280" width="16" height="16"/>
   <object id="1238" gid="68" x="1504" y="3296" width="16" height="16"/>
-  <object id="1242" gid="69" x="2029" y="3087" width="16" height="16">
+  <object id="1242" gid="69" x="2016" y="3088" width="16" height="16">
    <properties>
     <property name="id" value="0"/>
    </properties>
@@ -4077,6 +4077,7 @@
   <object id="1758" gid="98" x="2463.33" y="4722" width="16" height="16"/>
   <object id="1759" gid="86" x="2442.67" y="4590.67" width="16" height="16"/>
   <object id="1767" gid="66" x="2034.67" y="3497.33" width="16" height="16"/>
+  <object id="1776" gid="70" x="2248.33" y="3071.33" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Triggers_3">
   <object id="1568" name="light" type="trigger" x="1035.91" y="4347.5" width="113.333" height="226">

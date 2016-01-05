@@ -780,7 +780,7 @@ Player.prototype.Jumping = function() {
 Player.prototype.Peaking = function() {
     this.PlayAnim('peak');
 
-    this.body.gravity.y = game.physics.arcade.gravity.y * 1.5;
+    this.body.gravity.y = game.physics.arcade.gravity.y * 1.2;
 
     if(this.body.velocity.y < 0) {
         this.state = this.Jumping;
@@ -795,7 +795,7 @@ Player.prototype.Falling = function() {
     this.PlayAnim('fall');
 
     if(!this.states.inUpdraft) {
-        this.body.gravity.y = game.physics.arcade.gravity.y * 1.5;
+        this.body.gravity.y = game.physics.arcade.gravity.y * 1.2;
     }
 
     //if they jump into water, make sure they slow the hell down

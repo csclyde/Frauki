@@ -64,6 +64,9 @@ Collision.OverlapFraukiWithObject = function(f, o) {
         effectsController.SpawnEnergyNuggets(a.body, frauki.body, 'positive', o.energyAmount);
         o.destroy();
         return false;
+    } else if(o.spriteType === 'shard') {
+        PickUpShard(f, o);
+        return false;
     }
 
     return true;

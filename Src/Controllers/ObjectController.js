@@ -103,6 +103,9 @@ ObjectController.prototype.SpawnObject = function(o) {
     else if(o.id === 68) {
         newObj = new EnergyNugg(game, o.x, o.y, 'Misc', 'EnergyBitPos0000');
         newObj.latent = o;
+    } else if(o.id === 70) {
+        newObj = new Shard(game, o.x, o.y, 'Misc', 'Shard0000');
+        newObj.latent = o;
     }
     else if(o.id >= 85 && o.id <= 104) {
 	    FileMap.Enemies.forEach(function(enemy) {
