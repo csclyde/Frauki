@@ -84,14 +84,14 @@ Shard.prototype.Carried = function() {
     this.body.acceleration.y = Math.sin(angle) * -500;// - (yDist * 5);
 
     if((frauki.body.center.x < this.body.center.x && this.body.velocity.x > 0) || (frauki.body.center.x > this.body.center.x && this.body.velocity.x < 0))
-        this.body.acceleration.x *= 4;
+        this.body.acceleration.x *= 1.5;
 
     if((frauki.body.center.y < this.body.center.y && this.body.velocity.y > 0) || (frauki.body.center.y > this.body.center.y && this.body.velocity.y < 0))
-        this.body.acceleration.y *= 4;
+        this.body.acceleration.y *= 1.5;
 
 
-    if (this.body.velocity.getMagnitude() > 300) {
-        this.body.velocity.setMagnitude(300);
+    if (this.body.velocity.getMagnitude() > 400) {
+        this.body.velocity.setMagnitude(400);
     }
 
     if (this.body.velocity.getMagnitude() < 100) {

@@ -286,6 +286,14 @@ Collision.OverlapLobWithEnemy = function(l, e) {
     return false;
 };
 
+Collision.OverlapObjectsWithEnvironment = function(o, e) {
+    if(o.spriteType === 'shard') {
+        //return false;
+    }
+
+    return true;
+};
+
 Collision.CollideFraukiWithProjectile = function(f, p) {
 
     if(p.projType === 'tar' || p.projType === 'spore') {
