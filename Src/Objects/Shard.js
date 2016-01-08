@@ -9,12 +9,14 @@ Shard = function(game, x, y, name) {
     this.body.setSize(16, 16, 0, 2);
     this.anchor.setTo(0.5, 0.5);
     this.body.bounce.y = 0.5;
-    this.body.drag.setTo(300);
+    this.body.drag.setTo(3000);
     //this.body.gravity.y = game.physics.arcade.gravity.y * 2;
 
     this.state = this.Floating;
 
     this.body.allowGravity = false;
+
+    this.timers = new TimerUtil();
 
     this.animations.add('floating', ['Shard0000'], 10, false, false);
     this.animations.add('carried', ['Shard0000'], 10, false, false);
@@ -37,10 +39,12 @@ Shard.prototype.update = function() {
 };
 
 function PickUpShard(f, a) {
-    if(a.state === a.Carried)
+    if(a.state === a.Carried || !a.timers.TimerUp('pickup_delay'))
         return;
     
     a.state = a.Carried;
+    a.owner = f;
+    f.carriedShard = a;
 
     // a.body.allowGravity = true;
 
@@ -62,6 +66,23 @@ function PickUpShard(f, a) {
     // energyController.AddPower(5);
 };
 
+function DropShard(shard) {
+
+    if(!!shard && !!shard.owner) {
+        shard.body.velocity.x = shard.owner.body.velocity.x * 1;
+        shard.body.velocity.y = shard.owner.body.velocity.y * 1;
+
+        shard.owner.carriedShard = null;
+        shard.owner = null;
+        shard.state = shard.Floating;
+
+        shard.timers.SetTimer('pickup_delay', 1500);
+
+        console.log('actually dropping shard');
+
+    }
+};
+
 Shard.prototype.PlayAnim = function(name) {
     if(this.animations.currentAnim.name !== name)
         this.animations.play(name);
@@ -71,22 +92,23 @@ Shard.prototype.Floating = function() {
     this.PlayAnim('floating');
 
     this.body.velocity.y = Math.sin(game.time.now / 150) * 30;
+    this.body.acceleration.x = 0;
 };
 
 Shard.prototype.Carried = function() {
     this.PlayAnim('carried');
 
-    var xDist = this.body.center.x - frauki.body.center.x;
-    var yDist = this.body.center.y - frauki.body.center.y;
+    var xDist = this.body.center.x - this.owner.body.center.x;
+    var yDist = this.body.center.y - this.owner.body.center.y;
 
     var angle = Math.atan2(yDist, xDist); 
     this.body.acceleration.x = Math.cos(angle) * -500;// - (xDist * 5);    
     this.body.acceleration.y = Math.sin(angle) * -500;// - (yDist * 5);
 
-    if((frauki.body.center.x < this.body.center.x && this.body.velocity.x > 0) || (frauki.body.center.x > this.body.center.x && this.body.velocity.x < 0))
+    if((this.owner.body.center.x < this.body.center.x && this.body.velocity.x > 0) || (this.owner.body.center.x > this.body.center.x && this.body.velocity.x < 0))
         this.body.acceleration.x *= 1.5;
 
-    if((frauki.body.center.y < this.body.center.y && this.body.velocity.y > 0) || (frauki.body.center.y > this.body.center.y && this.body.velocity.y < 0))
+    if((this.owner.body.center.y < this.body.center.y && this.body.velocity.y > 0) || (this.owner.body.center.y > this.body.center.y && this.body.velocity.y < 0))
         this.body.acceleration.y *= 1.5;
 
 
@@ -99,8 +121,8 @@ Shard.prototype.Carried = function() {
     }
 
     if(xDist > 300 || yDist > 300) {
-        this.x = frauki.body.center.x;
-        this.y = frauki.body.center.y;
+        this.x = this.owner.body.center.x;
+        this.y = this.owner.body.center.y;
     }
 
 };

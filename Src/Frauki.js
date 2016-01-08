@@ -728,6 +728,11 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
             effectsController.EnergySplash(frauki.body, 200, 'positive', 50, frauki.body.velocity);
         }, 2000);
     }
+
+    //drop shard
+    if(!!this.carriedShard) {
+        DropShard(this.carriedShard);
+    }
 };
 
 Player.prototype.Interrupt = function() {
