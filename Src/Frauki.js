@@ -731,7 +731,11 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
 
     //drop shard
     if(!!this.carriedShard) {
-        DropShard(this.carriedShard);
+        if(e.robotic) {
+            PickUpShard(e, this.carriedShard);
+        } else {
+            DropShard(this.carriedShard);
+        }
     }
 };
 

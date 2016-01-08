@@ -39,7 +39,7 @@ Shard.prototype.update = function() {
 };
 
 function PickUpShard(f, a) {
-    if(a.state === a.Carried || !a.timers.TimerUp('pickup_delay'))
+    if(f === frauki && !a.timers.TimerUp('pickup_delay'))
         return;
     
     a.state = a.Carried;
@@ -106,10 +106,10 @@ Shard.prototype.Carried = function() {
     this.body.acceleration.y = Math.sin(angle) * -500;// - (yDist * 5);
 
     if((this.owner.body.center.x < this.body.center.x && this.body.velocity.x > 0) || (this.owner.body.center.x > this.body.center.x && this.body.velocity.x < 0))
-        this.body.acceleration.x *= 1.5;
+        this.body.acceleration.x *= 2;
 
     if((this.owner.body.center.y < this.body.center.y && this.body.velocity.y > 0) || (this.owner.body.center.y > this.body.center.y && this.body.velocity.y < 0))
-        this.body.acceleration.y *= 1.5;
+        this.body.acceleration.y *= 2;
 
 
     if (this.body.velocity.getMagnitude() > 400) {

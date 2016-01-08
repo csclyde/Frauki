@@ -65,7 +65,10 @@ Collision.OverlapFraukiWithObject = function(f, o) {
         o.destroy();
         return false;
     } else if(o.spriteType === 'shard') {
-        PickUpShard(f, o);
+        if(!o.owner) {
+            PickUpShard(f, o);
+        }
+        
         return false;
     }
 
@@ -152,6 +155,10 @@ Collision.OverlapAttackWithEnemy = function(f, e) {
     }
 
     frauki.LandHit(e, damage);
+
+    if(!!e.carriedShard) {
+        DropShard(e.carriedShard);
+    }
 };
 
 Collision.OverlapAttackWithEnemyAttack = function(e, f) {
