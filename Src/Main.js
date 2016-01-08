@@ -128,6 +128,9 @@ Main.Restart = function() {
     var fadeOutTween = effectsController.Fade(true);
     effectsController.Goddess(true);
 
+    events.publish('player_run', {run:false, dir: 'left'});
+    events.publish('player_run', {run:false, dir: 'right'});
+
     //setTimeout(function() { events.publish('play_music', { name: 'Surface' } ); }, 10000);
 
     cameraController.shakeMagnitudeX = 0;

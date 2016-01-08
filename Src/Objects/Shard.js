@@ -41,6 +41,8 @@ Shard.prototype.update = function() {
 function PickUpShard(f, a) {
     if(f === frauki && !a.timers.TimerUp('pickup_delay'))
         return;
+
+    if(!!a.owner) a.owner.carriedShard = null;
     
     a.state = a.Carried;
     a.owner = f;
