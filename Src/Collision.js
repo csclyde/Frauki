@@ -113,14 +113,14 @@ Collision.OverlapAttackWithEnemy = function(f, e) {
 
     var damage = frauki.GetCurrentDamage();
 
-    e.body.velocity.x = (300 * frauki.GetCurrentKnockback()) + 200;
+    e.body.velocity.x = (250 * frauki.GetCurrentKnockback()) + 200;
     e.body.velocity.x *= e.PlayerDirMod();
     
-    e.body.velocity.y = (frauki.GetCurrentJuggle() * -400) - 200;
+    e.body.velocity.y = (frauki.GetCurrentJuggle() * -200) - 200;
     //if(e.robotic) e.body.velocity.y /= 2;
 
-    e.timers.SetTimer('hit', e.baseStunDuration + (500 * damage));
-    e.timers.SetTimer('grace', e.baseStunDuration + (500 * damage));
+    e.timers.SetTimer('hit', e.baseStunDuration + (250 * damage));
+    e.timers.SetTimer('grace', e.baseStunDuration + (250 * damage));
 
     e.poise -= damage;
     e.state = e.Hurting;
@@ -156,7 +156,7 @@ Collision.OverlapAttackWithEnemy = function(f, e) {
 
     frauki.LandHit(e, damage);
 
-    if(!!e.carriedShard) {
+    if(!!e.carriedShard && damage >= 1) {
         DropShard(e.carriedShard);
     }
 };
@@ -203,7 +203,7 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
 Collision.OverlapEnemyAttackWithFrauki = function(e, f) {
 
     if(!!e.owningEnemy && e.owningEnemy.currentAttack.damage > 0) {
-        frauki.Hit(e.owningEnemy, e.owningEnemy.currentAttack.damage, 650);
+        frauki.Hit(e.owningEnemy, e.owningEnemy.currentAttack.damage * (!!e.owningEnemy.carriedShard ? 2 : 1), 650);
 
         if(!!e.owningEnemy.LandHit) {
             e.owningEnemy.LandHit();

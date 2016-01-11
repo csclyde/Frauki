@@ -262,7 +262,7 @@ Player.prototype.UpdateAttackGeometry = function() {
 
 Player.prototype.GetCurrentDamage = function() {
 
-    return this.currentAttack.damage;
+    return this.currentAttack.damage * (!!this.carriedShard ? 2 : 1);
 };
 
 Player.prototype.GetCurrentKnockback = function() {

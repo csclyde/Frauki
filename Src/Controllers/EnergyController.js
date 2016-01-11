@@ -34,7 +34,7 @@ EnergyController.prototype.Create = function() {
 EnergyController.prototype.Update = function() {
 
 	var energyDiff = this.energy - 15;
-	var step = 0.05;
+	var step = (!!frauki.carriedShard ? 0.075 : 0.05);
 
 	//
 	if(game.time.now - this.energyUsageTimestamp > 2000) {
