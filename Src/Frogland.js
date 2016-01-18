@@ -269,6 +269,28 @@ Frogland.CreateDoorLayer = function(layer) {
     //this['door' + layer + 'Group'].forEach(function(d) { d.alpha = 0; });
 };
 
+Frogland.ClearObjectLayer = function(layer) {
+    var currLayer = Frogland['objectGroup_' + layer];
+    var shards = [];
+
+    //get the prism shards out of the object group
+    currLayer.forEach(function(o) {
+        if(o.spriteType === 'shard') {
+            shards.push(o);
+            currLayer.remove(o);
+        }
+    });
+
+    //remove and destroy all other objects
+    currLayer.removeAll(true);
+
+    //return the prisms to the object group
+    var i = shards.length;
+    while(i--) {
+        currLayer.add(shards[i]);
+    }
+};
+
 //spawns some random enemies
 Frogland.ThunderDome = function(x, y) {
 

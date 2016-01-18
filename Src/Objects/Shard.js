@@ -9,6 +9,7 @@ Shard = function(game, x, y, name) {
     this.body.setSize(16, 16, 0, 2);
     this.anchor.setTo(0.5, 0.5);
     this.body.bounce.y = 0.5;
+    this.body.bounce.x = 0.5;
     this.body.drag.setTo(3000);
     //this.body.gravity.y = game.physics.arcade.gravity.y * 2;
 
@@ -108,10 +109,10 @@ Shard.prototype.Carried = function() {
     this.body.acceleration.y = Math.sin(angle) * -500;// - (yDist * 5);
 
     if((this.owner.body.center.x < this.body.center.x && this.body.velocity.x > 0) || (this.owner.body.center.x > this.body.center.x && this.body.velocity.x < 0))
-        this.body.acceleration.x *= 2;
+        this.body.acceleration.x *= 3;
 
     if((this.owner.body.center.y < this.body.center.y && this.body.velocity.y > 0) || (this.owner.body.center.y > this.body.center.y && this.body.velocity.y < 0))
-        this.body.acceleration.y *= 2;
+        this.body.acceleration.y *= 3;
 
 
     if (this.body.velocity.getMagnitude() > 400) {

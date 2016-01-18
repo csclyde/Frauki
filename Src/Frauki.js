@@ -727,14 +727,16 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
             frauki.alpha = 0;
             effectsController.EnergySplash(frauki.body, 200, 'positive', 50, frauki.body.velocity);
         }, 2000);
+
+        if(!!this.carriedShard) {
+            DropShard(this.carriedShard);
+        }
     }
 
     //drop shard
     if(!!this.carriedShard) {
         if(e.robotic) {
             PickUpShard(e, this.carriedShard);
-        } else {
-            DropShard(this.carriedShard);
         }
     }
 };

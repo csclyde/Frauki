@@ -166,6 +166,8 @@ Main.Restart = function() {
 
         Main.restarting = false;
 
+        console.log(Frogland.objectGroup_4);
+        
         Frogland.objectGroup_4.removeAll(true);
         Frogland.objectGroup_3.removeAll(true);
         Frogland.objectGroup_2.removeAll(true);
