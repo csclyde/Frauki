@@ -468,12 +468,6 @@ Frogland.ChangeLayer = function(newLayer) {
     newBackgroundLayer.visible = true;
     newBackgroundLayer.alpha = 0;
 
-    if(!!frauki.carriedShard) {
-        newObjectLayer.add(frauki.carriedShard);
-        frauki.carriedShard.x = frauki.body.center.x;
-        frauki.carriedShard.y = frauki.body.center.y;
-    }
-
     game.add.tween(newForgroundLayer).to({alpha: 1}, 200, Phaser.Easing.Linear.None, true);
     game.add.tween(newMidgroundLayer).to({alpha: 1}, 200, Phaser.Easing.Linear.None, true);
     game.add.tween(newBackgroundLayer).to({alpha: 1}, 200, Phaser.Easing.Linear.None, true);

@@ -58,5 +58,6 @@ var Speeches = {
 	'pouring_joy': { text: 'Something is carved into the wall: I can barely withstand the joy pouring into me! Goodbye!' },
 	'another_sky': { text: 'Something is carved into the wall: So, we will find another sky. So it goes.' },
 	'behold_goddess': { text: 'Something is carved into the wall: The Goddess has appeared, and we are forgiven' },
+	'mountain_view': { text: 'I can see the mountain from out of those windows. What a lovely day.', portrait: 'Silly' },
 
 };
