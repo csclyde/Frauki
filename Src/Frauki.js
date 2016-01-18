@@ -326,37 +326,6 @@ Player.prototype.GetDirectionMultiplier = function() {
     return dir;
 };
 
-Player.prototype.LandHit = function(e, damage) {
-
-    var vel = new Phaser.Point(frauki.body.center.x - e.body.center.x, frauki.body.center.y - e.body.center.y);
-    vel = vel.normalize();
-
-    vel = vel.setMagnitude(300);
-
-    if(this.state !== this.AttackStab && this.state !== this.AttackDiveFall && this.state !== this.Rolling) {
-        frauki.body.velocity.x = vel.x;
-        frauki.body.velocity.y = vel.y;
-    }
-
-    energyController.AddCharge(damage);
-
-    if(damage > 0) {
-        effectsController.ClashStreak(e.body.center.x, e.body.center.y, game.rnd.between(1, 2));
-        //events.publish('camera_shake', {magnitudeX: 15, magnitudeY: 10, duration: 400});
-    }
-
-    if(damage > 0 && e.maxEnergy > 1) {
-        effectsController.SlowHit(800);
-    } else if(damage === 0) {
-        effectsController.SlowHit(400);
-    }
-
-    this.states.hasFlipped = false;
-
-    frauki.animations.paused = true;
-    setTimeout(function() { frauki.animations.paused = false; }, 150);
-};
-
 
 ////////////////ACTIONS//////////////////
 Player.prototype.Run = function(params) {
@@ -681,6 +650,37 @@ Player.prototype.Roll = function(params) {
     return true;
 };
 
+Player.prototype.LandHit = function(e, damage) {
+
+    var vel = new Phaser.Point(frauki.body.center.x - e.body.center.x, frauki.body.center.y - e.body.center.y);
+    vel = vel.normalize();
+
+    vel = vel.setMagnitude(300);
+
+    if(this.state !== this.AttackStab && this.state !== this.AttackDiveFall && this.state !== this.Rolling) {
+        frauki.body.velocity.x = vel.x;
+        frauki.body.velocity.y = vel.y;
+    }
+
+    energyController.AddCharge(damage);
+
+    if(damage > 0) {
+        effectsController.ClashStreak(e.body.center.x, e.body.center.y, game.rnd.between(1, 2));
+        //events.publish('camera_shake', {magnitudeX: 15, magnitudeY: 10, duration: 400});
+    }
+
+    if(damage > 0 && e.maxEnergy > 1) {
+        effectsController.SlowHit(800);
+    } else if(damage === 0) {
+        effectsController.SlowHit(400);
+    }
+
+    this.states.hasFlipped = false;
+
+    frauki.animations.paused = true;
+    setTimeout(function() { frauki.animations.paused = false; }, 150);
+};
+
 Player.prototype.Hit = function(e, damage, grace_duration) {
 
     damage = damage * 3;
@@ -727,17 +727,11 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
             frauki.alpha = 0;
             effectsController.EnergySplash(frauki.body, 200, 'positive', 50, frauki.body.velocity);
         }, 2000);
-
-        if(!!this.carriedShard) {
-            DropShard(this.carriedShard);
-        }
     }
 
-    //drop shard
+    //allow the enemy to steal the shard
     if(!!this.carriedShard) {
-        if(e.robotic) {
-            PickUpShard(e, this.carriedShard);
-        }
+        PickUpShard(e, this.carriedShard); 
     }
 };
 

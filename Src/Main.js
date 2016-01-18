@@ -167,6 +167,8 @@ Main.Restart = function() {
         Main.restarting = false;
 
         console.log(Frogland.objectGroup_4);
+
+        PrepareShardsForDeath();
         
         Frogland.objectGroup_4.removeAll(true);
         Frogland.objectGroup_3.removeAll(true);

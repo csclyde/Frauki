@@ -67,6 +67,12 @@ Frogland.Create = function() {
     this.CreateForegroundLayer(3, startLayer === 3);
     this.CreateForegroundLayer(2, startLayer === 2);
 
+    this.shardGroup = game.add.group();
+
+    this.CreateShards(4);
+    this.CreateShards(3);
+    this.CreateShards(2);
+
     this.enemyPool = game.add.group();
 
     this.CreateDoorLayer(1);
@@ -121,6 +127,7 @@ Frogland.Update = function() {
     game.physics.arcade.collide(frauki, this.GetCurrentCollisionLayer(), null, Collision.CollideFraukiWithEnvironment);
     game.physics.arcade.collide(frauki, this.GetCurrentObjectGroup(), null, Collision.OverlapFraukiWithObject);
     game.physics.arcade.collide(this.GetCurrentObjectGroup(), this.GetCurrentCollisionLayer(), null, Collision.OverlapObjectsWithEnvironment);
+    game.physics.arcade.overlap(frauki, this.shardGroup, null, Collision.OverlapFraukiWithShard);
 
     if(projectileController.projectiles.countLiving() > 0) {
         game.physics.arcade.overlap(frauki, projectileController.projectiles, Collision.CollideFraukiWithProjectile);
@@ -217,6 +224,7 @@ Frogland.CreateObjectsLayer = function(layer) {
     if(!localStorage.getItem('fraukiCheckpoint')) localStorage.setItem('fraukiCheckpoint', '0');
     //create the doors
     this.map.createFromObjects('Objects_' + layer, 67, 'Misc', 'Door0000', true, true, this[currLayer], Door, false);
+    
 
     this.ball = game.add.sprite(55 * 16, 26 * 16, 'Misc', 'Ball0000', this[currLayer]);
     game.physics.enable(this.ball, Phaser.Physics.ARCADE);
@@ -267,6 +275,11 @@ Frogland.CreateDoorLayer = function(layer) {
     });
 
     //this['door' + layer + 'Group'].forEach(function(d) { d.alpha = 0; });
+};
+
+Frogland.CreateShards = function(layer) {
+
+    this.map.createFromObjects('Objects_' + layer, 70, 'Misc', 'Shard0000', true, true, Frogland.shardGroup, Shard, false);
 };
 
 Frogland.ClearObjectLayer = function(layer) {

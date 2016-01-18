@@ -95,11 +95,22 @@ Shard.prototype.Floating = function() {
     this.PlayAnim('floating');
 
     this.body.velocity.y = Math.sin(game.time.now / 150) * 30;
+    this.body.velocity.x = 0;
+    this.body.acceleration.y = 0;
     this.body.acceleration.x = 0;
 };
 
 Shard.prototype.Carried = function() {
     this.PlayAnim('carried');
+
+    //if the owner dies
+    if(!this.owner || !this.owner.body) {
+        this.state = this.Floating;
+        this.body.velocity.y = 0;
+        this.body.velocity.x = 0;
+        this.owner = null;
+        return;
+    }
 
     var xDist = this.body.center.x - this.owner.body.center.x;
     var yDist = this.body.center.y - this.owner.body.center.y;
@@ -129,3 +140,15 @@ Shard.prototype.Carried = function() {
     }
 
 };
+
+function PrepareShardsForDeath() {
+    Frogland.shardGroup.forEach(function(s) {
+        if(!!s.owner && !!s.owner.body) {
+            s.x = s.owner.body.center.x;
+            s.y = s.owner.body.center.y;
+        }
+
+        DropShard(s);
+
+    });
+}
