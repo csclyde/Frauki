@@ -70,7 +70,7 @@ TechnoRune.prototype.PlayAnim = function(name) {
 };
 
 TechnoRune.prototype.Active = function() {
-    this.PlayAnim('inactive');
+    this.PlayAnim('active');
 
     this.body.velocity.y = Math.sin(game.time.now / 150) * 15;
 };

@@ -4,9 +4,9 @@
         <key>fileFormatVersion</key>
         <int>3</int>
         <key>texturePackerVersion</key>
-        <string>3.7.1</string>
+        <string>3.9.1</string>
         <key>fileName</key>
-        <string>C:/Users/user/Documents/gamedev/Frauki/Design/Sprites/Enemies/Enemies.tps</string>
+        <string>D:/gamedev/Frauki/Design/Sprites/Enemies/Enemies.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -43,6 +43,8 @@
         <false/>
         <key>pvrCompressionQuality</key>
         <enum type="SettingsBase::PvrCompressionQuality">PVR_QUALITY_NORMAL</enum>
+        <key>atfCompressData</key>
+        <false/>
         <key>mipMapMinSize</key>
         <uint>32768</uint>
         <key>etc1CompressionQuality</key>
@@ -199,6 +201,7 @@
             <filename>A3PZ</filename>
             <filename>HWK9</filename>
             <filename>Butterfly</filename>
+            <filename>Frogman</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

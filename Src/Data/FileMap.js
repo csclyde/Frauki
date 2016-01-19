@@ -66,7 +66,8 @@ FileMap.Enemies = [
 	{ Name: 'Skelegon', Tile: 97 },
 	{ Name: 'KR32', Tile: 98 },
 	{ Name: 'A3PZ', Tile: 99 },
-	{ Name: 'HWK9', Tile: 100 }
+	{ Name: 'HWK9', Tile: 100 },
+	{ Name: 'Frogman', Tile: 101 }
 ];
 
 FileMap.Junk = [
