@@ -10442,10 +10442,25 @@
                  "width":32.6666666666667,
                  "x":1455.66666666667,
                  "y":3008
+                }, 
+                {
+                 "height":64.5,
+                 "id":1804,
+                 "name":"strike_down",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":66.5,
+                 "x":2862.5,
+                 "y":3311.5
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "width":0,
          "x":0,
          "y":0
@@ -10873,7 +10888,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":1804,
+ "nextobjectid":1805,
  "orientation":"orthogonal",
  "properties":
     {

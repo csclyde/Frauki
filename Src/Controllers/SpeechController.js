@@ -63,6 +63,10 @@ SpeechController.prototype.Create = function() {
 	this.portraits['Silly'].fixedToCamera = true;
 	this.portraits['Silly'].visible = false;
 
+	this.portraits['Frogman'] = game.add.image(80, 70, 'UI', 'PortraitsFrogman');
+	this.portraits['Frogman'].fixedToCamera = true;
+	this.portraits['Frogman'].visible = false;
+
 	this.speechVisible = false;
 
 	this.currentText = '';

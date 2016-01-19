@@ -2,7 +2,7 @@
 
 "EnergyBar0000":
 {
-	"frame": {"x":952,"y":94,"w":97,"h":20},
+	"frame": {"x":1002,"y":94,"w":97,"h":20},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":1,"y":7,"w":97,"h":20},
@@ -11,7 +11,7 @@
 },
 "EnergyBar0001":
 {
-	"frame": {"x":452,"y":98,"w":90,"h":15},
+	"frame": {"x":544,"y":98,"w":90,"h":15},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":3,"y":9,"w":90,"h":15},
@@ -20,7 +20,7 @@
 },
 "EnergyBar0002":
 {
-	"frame": {"x":652,"y":98,"w":90,"h":9},
+	"frame": {"x":452,"y":103,"w":90,"h":9},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":3,"y":10,"w":90,"h":9},
@@ -47,7 +47,7 @@
 },
 "EnergyBar0005":
 {
-	"frame": {"x":1051,"y":94,"w":11,"h":9},
+	"frame": {"x":952,"y":98,"w":11,"h":9},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":82,"y":3,"w":11,"h":9},
@@ -65,7 +65,7 @@
 },
 "Gamepad0000":
 {
-	"frame": {"x":940,"y":2,"w":150,"h":62},
+	"frame": {"x":1002,"y":2,"w":150,"h":62},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":7,"y":14,"w":150,"h":62},
@@ -153,9 +153,18 @@
 	"sourceSize": {"w":54,"h":102},
 	"pivot": {"x":0.5,"y":0.460784}
 },
+"PortraitsFrogman":
+{
+	"frame": {"x":452,"y":2,"w":60,"h":99},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":11,"w":60,"h":99},
+	"sourceSize": {"w":60,"h":99},
+	"pivot": {"x":0.5,"y":0.444444}
+},
 "Speech0000":
 {
-	"frame": {"x":842,"y":2,"w":96,"h":94},
+	"frame": {"x":904,"y":2,"w":96,"h":94},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":8,"y":57,"w":96,"h":94},
@@ -164,7 +173,7 @@
 },
 "Speech0001":
 {
-	"frame": {"x":452,"y":2,"w":388,"h":94},
+	"frame": {"x":514,"y":2,"w":388,"h":94},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":85,"y":57,"w":388,"h":94},
@@ -173,7 +182,7 @@
 },
 "UpgradeIconLob":
 {
-	"frame": {"x":544,"y":98,"w":34,"h":14},
+	"frame": {"x":636,"y":98,"w":34,"h":14},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":4,"y":16,"w":34,"h":14},
@@ -182,7 +191,7 @@
 },
 "UpgradeIconSaw":
 {
-	"frame": {"x":580,"y":98,"w":34,"h":14},
+	"frame": {"x":672,"y":98,"w":34,"h":14},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":3,"y":15,"w":34,"h":14},
@@ -191,7 +200,7 @@
 },
 "UpgradeIconShield":
 {
-	"frame": {"x":616,"y":98,"w":34,"h":14},
+	"frame": {"x":708,"y":98,"w":34,"h":14},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":3,"y":15,"w":34,"h":14},
@@ -200,7 +209,7 @@
 },
 "Upgrades0000":
 {
-	"frame": {"x":940,"y":66,"w":26,"h":26},
+	"frame": {"x":1002,"y":66,"w":26,"h":26},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":6,"y":6,"w":26,"h":26},
@@ -209,7 +218,7 @@
 },
 "Upgrades0001":
 {
-	"frame": {"x":968,"y":66,"w":26,"h":26},
+	"frame": {"x":1030,"y":66,"w":26,"h":26},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":6,"y":6,"w":26,"h":26},
@@ -218,7 +227,7 @@
 },
 "Upgrades0002":
 {
-	"frame": {"x":996,"y":66,"w":26,"h":26},
+	"frame": {"x":1058,"y":66,"w":26,"h":26},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":6,"y":6,"w":26,"h":26},
@@ -227,7 +236,7 @@
 },
 "Upgrades0003":
 {
-	"frame": {"x":1024,"y":66,"w":26,"h":26},
+	"frame": {"x":1086,"y":66,"w":26,"h":26},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":6,"y":6,"w":26,"h":26},
@@ -236,7 +245,7 @@
 },
 "Upgrades0004":
 {
-	"frame": {"x":1052,"y":66,"w":26,"h":26},
+	"frame": {"x":1114,"y":66,"w":26,"h":26},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":6,"y":6,"w":26,"h":26},
@@ -248,8 +257,8 @@
 	"version": "1.0",
 	"image": "UI.png",
 	"format": "RGBA8888",
-	"size": {"w":1092,"h":116},
+	"size": {"w":1154,"h":116},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:18fbf10b72baa7ed29ecac4787256786:f445e556b7a5f618c55895229de28af7:4b774b923918ecd961888279dba3ffad$"
+	"smartupdate": "$TexturePacker:SmartUpdate:1ea890da4e6983a67602a5508f30771b:846c5fceccf43e5f848580615a8bcaed:4b774b923918ecd961888279dba3ffad$"
 }
 }

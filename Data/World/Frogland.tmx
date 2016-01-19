@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="400" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="1804">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="400" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="1805">
  <properties>
   <property name="debug" value="false"/>
   <property name="startLayer" value="3"/>
@@ -6016,7 +6016,7 @@
   <object id="1802" gid="107" x="2417.5" y="3196.5" width="16" height="16"/>
   <object id="1803" gid="101" x="2885" y="3346" width="16" height="16"/>
  </objectgroup>
- <objectgroup name="Triggers_4" visible="0">
+ <objectgroup name="Triggers_4">
   <object id="1613" name="secret_garden" type="speech" x="12.0328" y="5042.27" width="94.5" height="45.5"/>
   <object id="1614" name="prickly_stuff" type="speech" x="1742.53" y="3743.27" width="51.5" height="49.5"/>
   <object id="1615" name="yum_apple" type="speech" x="767.533" y="4761.77" width="48.5" height="52"/>
@@ -6036,6 +6036,7 @@
   <object id="1656" name="drip" type="effect" x="879" y="3660" width="4.5" height="5.5"/>
   <object id="1760" name="drip" type="effect" x="1020.5" y="3690" width="36" height="5"/>
   <object id="1784" name="mountain_view" type="speech" x="1455.67" y="3008" width="32.6667" height="32"/>
+  <object id="1804" name="strike_down" type="speech" x="2862.5" y="3311.5" width="66.5" height="64.5"/>
  </objectgroup>
  <objectgroup name="Doors_1" visible="0">
   <properties>
