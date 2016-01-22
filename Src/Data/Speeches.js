@@ -38,7 +38,6 @@ var Speeches = {
 	'cold': { text: 'This water is so cold, it\'s making my knees shake', portrait: 'Displeased' },
 	'ellipses': { text: '...', portrait: 'Peaceful' },
 	'anyone_home': { text: 'Looks like no one is home.' },
-	'football': { text: 'Football is fun! I wonder if maybe I could score a goal' },
 	'sorry_plant': { text: 'Sorry plant' },
 	'maybe_if': { text: 'Maybe if I just...' },
 	'hidden_goodies': { text: 'He he, hidden goodies!', portrait: 'Silly'},
@@ -49,9 +48,6 @@ var Speeches = {
 	'treasures': { text: 'Wow, look at all these treasures. Well, I don\'t have any use for them.' },
 	'thats_me': { text: 'Is that... me?', portrait: 'Displeased' },
 	'garden': { text: 'Something is carved into the wall: To those who come after, this world is a garden.' },
-	'journal1': { text: 'Something is carved into the wall: I take a greenergy suppository every morning, there\'s really no better way to start the day.', portrait: 'Displeased' },
-	'journal2': { text: 'Something is carved into the wall: Greenergy on the rocks, greenergy tendies, greenergy muffins... yes please!' },
-	'journal3': { text: 'Something is carved into the wall: I only eat the highest quality, most delectable, most subtle and transcendent greenergy. Nothing less will do.' },
 	'sweetnasty': { text: 'Something is carved into the wall: Good bye you sweet world!!!' },
 	'maint': { text: 'Something is engraved into the wall: Maintenence access. Beware pipe currents.' },
 	'spaceship_question': { text: 'It looks like this thing crashed into the ground. Hrm, I can\'t get the door open from this side.' },
@@ -61,4 +57,9 @@ var Speeches = {
 	'mountain_view': { text: 'I can see the mountain from out of those windows. What a lovely day.', portrait: 'Silly' },
 	'strike_down': { text: 'Strike me down Frauki, and get this lil\' crystal baby back to its momma!', portrait: 'Frogman' },
 
+	'journal1': { text: 'Something is carved into the wall: I take a greenergy suppository every morning, there\'s really no better way to start the day.', portrait: 'Displeased' },
+	'journal2': { text: 'Something is carved into the wall: Greenergy on the rocks, greenergy tendies, greenergy muffins... yes please!' },
+	'journal3': { text: 'Something is carved into the wall: I only eat the highest quality, most delectable, most subtle and transcendent greenergy. Nothing less will do.' },
+	'bad_knees': { text: 'I always wanted to see the world from the top of Frog Mountain. My knees have gotten pretty bad though.' },
+	'football': { text: 'Football is fun! I wonder if maybe I could score a goal' },
 };
