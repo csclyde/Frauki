@@ -55,7 +55,8 @@ var Speeches = {
 	'another_sky': { text: 'Something is carved into the wall: So, we will find another sky. So it goes.' },
 	'behold_goddess': { text: 'Something is carved into the wall: The Goddess has appeared, and we are forgiven' },
 	'mountain_view': { text: 'I can see the mountain from out of those windows. What a lovely day.', portrait: 'Silly' },
-	'strike_down': { text: 'Strike me down Frauki, and get this lil\' crystal baby back to its momma!', portrait: 'Frogman' },
+	'strike_down': { text: 'Frauki?? The Goddess is ailing, please return this crystal to her... And don\'t let any jerks take it!', portrait: 'Irena' },
+	'way_blocked': { text: 'Hmm... the way is blocked. Maybe I can find a way around.' },
 
 	'journal1': { text: 'Something is carved into the wall: I take a greenergy suppository every morning, there\'s really no better way to start the day.', portrait: 'Displeased' },
 	'journal2': { text: 'Something is carved into the wall: Greenergy on the rocks, greenergy tendies, greenergy muffins... yes please!' },

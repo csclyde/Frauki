@@ -1,9 +1,9 @@
-Enemy.prototype.types['Frogman'] =  function() {
+Enemy.prototype.types['NPC'] =  function() {
 
 	this.body.setSize(25, 50, 0, -17);
 	this.anchor.setTo(0.5, 1);
 
-    this.animations.add('idle', ['Frogman/Frogman0000'], 10, true, false);
+    this.animations.add('idle', ['Irena/Irena0000'], 10, true, false);
     this.animations.add('shit', ['Hop0000'], 10, true, false);
 
     this.energy = 0.5;
@@ -14,6 +14,8 @@ Enemy.prototype.types['Frogman'] =  function() {
     this.baseStunDuration = 500;
     this.poise = 10;
     */
+
+    this.objectName = 'Irena';
     
 	this.updateFunction = function() {
 

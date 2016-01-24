@@ -421,7 +421,7 @@ Player.prototype.Jump = function(params) {
             events.publish('play_sound', {name: 'jump'});
         }
         //overhead into jump atack
-        else if(this.state === this.AttackOverhead) {
+        else if(this.state === this.AttackOverhead || this.state === this.AttackFront) {
             this.JumpSlash();
         }
         //double jump
@@ -489,7 +489,7 @@ Player.prototype.Slash = function(params) {
     }
     //normal slashes while standing or running
     else if(this.state === this.Standing || this.state === this.Landing || this.state === this.Running || this.state === this.Jumping || this.state === this.Flipping || this.state === this.Crouching) {
-        if(!this.timers.TimerUp('frauki_dash')) {
+        if(!this.timers.TimerUp('frauki_dash') && (inputController.dpad.left || inputController.dpad.right)) {
             this.LungeSlash();
         } else {
             this.FrontSlash();

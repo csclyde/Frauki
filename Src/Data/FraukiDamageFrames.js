@@ -73,7 +73,7 @@ var fraukiDamageFrames = {
 	},
 
 	'Attack Jump0002': {
-		x: 30, y: -35, w: 20, h: 60,
+		x: 20, y: -45, w: 30, h: 80,
 		damage: 1.2,
 		knockback: 0.1,
 		priority: 0,
@@ -81,7 +81,7 @@ var fraukiDamageFrames = {
 	},
 
 	'Attack Jump0003': {
-		x: 2, y: -30, w: 18, h: 30,
+		x: -5, y: -50, w: 18, h: 40,
 		damage: 1.2,
 		knockback: 0.1,
 		priority: 0,

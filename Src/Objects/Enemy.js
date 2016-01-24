@@ -12,13 +12,14 @@ Enemy = function(game, x, y, name) {
     this.SetDefaultValues();
     this.attackFrames = {};
     
+    this.objectName = name;
+    
     if(!!this.types[name]) {
         this.types[name].apply(this);
     } else {
         console.log('Enemy of type ' + name + ' was not found');
     }
 
-    this.objectName = name;
     this.state = this.Idling;
 
     //capture any initial values that were set in the specific enemy set up
@@ -252,7 +253,7 @@ Enemy.prototype.PlayerDistance = function() {
 Enemy.prototype.PlayerIsVisible = function() {
 
     return true;
-    
+
     var ray = new Phaser.Line(frauki.body.center.x, frauki.body.center.y, this.body.center.x, this.body.center.y);
     var collideTiles = Frogland.GetCurrentCollisionLayer().getRayCastTiles(ray, 1, true);
 
