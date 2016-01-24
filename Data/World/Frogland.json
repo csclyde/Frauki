@@ -7092,7 +7092,7 @@
          "name":"Collision_4",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -10105,7 +10105,7 @@
                  "name":"",
                  "properties":
                     {
-
+                     "speech":"strike_down"
                     },
                  "rotation":0,
                  "type":"",
@@ -10177,22 +10177,6 @@
                  "width":16,
                  "x":2935,
                  "y":3344
-                }, 
-                {
-                 "gid":87,
-                 "height":16,
-                 "id":1814,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":2596.5,
-                 "y":3324.5
                 }, 
                 {
                  "gid":85,
@@ -10524,21 +10508,6 @@
                  "y":2996
                 }, 
                 {
-                 "height":64.5,
-                 "id":1804,
-                 "name":"strike_down",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"speech",
-                 "visible":true,
-                 "width":66.5,
-                 "x":2862.5,
-                 "y":3311.5
-                }, 
-                {
                  "height":4.66667,
                  "id":1813,
                  "name":"bubbles",
@@ -10645,7 +10614,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "width":0,
          "x":0,
          "y":0

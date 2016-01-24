@@ -22,6 +22,8 @@ Shard = function(game, x, y, name) {
     this.animations.add('floating', ['Shard0000'], 10, false, false);
     this.animations.add('carried', ['Shard0000'], 10, false, false);
 
+    this.currentLayer = Frogland.shardLayer;
+
 };
 
 Shard.prototype = Object.create(Phaser.Sprite.prototype);
@@ -94,6 +96,8 @@ Shard.prototype.PlayAnim = function(name) {
 Shard.prototype.Floating = function() {
     this.PlayAnim('floating');
 
+    this.body.drag.setTo(0);
+
     this.body.velocity.y = Math.sin(game.time.now / 150) * 30;
     this.body.velocity.x = 0;
     this.body.acceleration.y = 0;
@@ -102,6 +106,8 @@ Shard.prototype.Floating = function() {
 
 Shard.prototype.Carried = function() {
     this.PlayAnim('carried');
+
+    this.body.drag.setTo(3000);
 
     //if the owner dies
     if(!this.owner || !this.owner.body) {
@@ -149,6 +155,19 @@ function PrepareShardsForDeath() {
         }
 
         DropShard(s);
+
+    });
+};
+
+function SetShardVisibility() {
+    Frogland.shardGroup.forEach(function(s) {
+        if(s.currentLayer === Frogland.currentLayer) {
+            s.visible = true;
+            s.body.enable = true;
+        } else {
+            s.visible = false;
+            s.body.enable = false;
+        }
 
     });
 }

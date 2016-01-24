@@ -73,6 +73,8 @@ Frogland.Create = function() {
     this.CreateShards(3);
     this.CreateShards(2);
 
+    SetShardVisibility();
+
     this.enemyPool = game.add.group();
 
     this.CreateDoorLayer(1);
@@ -279,6 +281,7 @@ Frogland.CreateDoorLayer = function(layer) {
 
 Frogland.CreateShards = function(layer) {
 
+    this.shardLayer = layer;
     this.map.createFromObjects('Objects_' + layer, 70, 'Misc', 'Shard0000', true, true, Frogland.shardGroup, Shard, false);
 };
 
@@ -441,19 +444,20 @@ Frogland.ChangeLayer = function(newLayer) {
     var currentBackgroundLayer = this['backgroundLayer_' + this.currentLayer];
     var currentObjectLayer = this.GetCurrentObjectGroup();
 
+    //fade out current layers
     game.add.tween(currentForgroundLayer).to({alpha: 0}, 300, Phaser.Easing.Linear.None, true).onComplete.add(function() { currentForgroundLayer.visible = false; });
     game.add.tween(currentMidgroundLayer).to({alpha: 0}, 300, Phaser.Easing.Linear.None, true).onComplete.add(function() { currentMidgroundLayer.visible = false; });
     game.add.tween(currentBackgroundLayer).to({alpha: 0}, 300, Phaser.Easing.Linear.None, true).onComplete.add(function() { currentBackgroundLayer.visible = false; });
-
-
 
     currentObjectLayer.forEach(function(obj) {
         game.add.tween(obj).to({alpha: 0}, 200, Phaser.Easing.Linear.None, true);
         if(!!obj.body) obj.body.enable = false;
     });
 
+    //force a trigger the player is standing in to exit out
     triggerController.ForceExit(this.currentLayer);
 
+    //update the layer
     this.currentLayer = newLayer;
 
     var newForgroundLayer = this['foregroundLayer_' + this.currentLayer];
@@ -461,6 +465,7 @@ Frogland.ChangeLayer = function(newLayer) {
     var newBackgroundLayer = this['backgroundLayer_' + this.currentLayer];
     var newObjectLayer = this.GetCurrentObjectGroup();
 
+    //bring in the new layers
     newForgroundLayer.visible = true;
     newForgroundLayer.alpha = 0;
     newMidgroundLayer.visible = true;
@@ -477,6 +482,13 @@ Frogland.ChangeLayer = function(newLayer) {
         game.add.tween(obj).to({alpha: 1}, 200, Phaser.Easing.Linear.None, true);
         if(!!obj.body) obj.body.enable = true;
     });
+
+    //update fraukis shard current layer
+    if(!!frauki.carriedShard) {
+        frauki.carriedShard.currentLayer = newLayer;
+    }
+
+    SetShardVisibility();
 
 };
 

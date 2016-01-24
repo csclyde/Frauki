@@ -25,16 +25,17 @@ ObjectController.prototype.CompileObjectList = function() {
         Objects_4: []
     };
 
+
     Frogland.map.objects['Objects_2'].forEach(function(o) {
-        that.latentObjects.Objects_2.push({ id: o.gid, x: o.x, y: o.y, u: that.latentObjects.Objects_2.length });
+        that.latentObjects.Objects_2.push({ id: o.gid, x: o.x, y: o.y, u: that.latentObjects.Objects_2.length, properties: o.properties });
     });
 
     Frogland.map.objects['Objects_3'].forEach(function(o) {
-        that.latentObjects.Objects_3.push({ id: o.gid, x: o.x, y: o.y, u: that.latentObjects.Objects_3.length });
+        that.latentObjects.Objects_3.push({ id: o.gid, x: o.x, y: o.y, u: that.latentObjects.Objects_3.length, properties: o.properties });
     });
 
     Frogland.map.objects['Objects_4'].forEach(function(o) {
-        that.latentObjects.Objects_4.push({ id: o.gid, x: o.x, y: o.y, u: that.latentObjects.Objects_4.length });
+        that.latentObjects.Objects_4.push({ id: o.gid, x: o.x, y: o.y, u: that.latentObjects.Objects_4.length, properties: o.properties });
     });
 };
 
@@ -85,7 +86,7 @@ ObjectController.prototype.DestroyFarawayObjects = function() {
         } 
 
         //splice out the destroyed objects
-        this.createdObjects = this.createdObjects.filter(function(e) { return !!e} );
+        this.createdObjects = this.createdObjects.filter(function(e) { return !!e; } );
     }
 };
 
@@ -129,10 +130,13 @@ ObjectController.prototype.SpawnObject = function(o) {
     if(newObj !== null) {
         Frogland[currLayer].add(newObj);
         newObj.owningLayer = Frogland.currentLayer;
-
-        //this.latentObjects['Objects_' + Frogland.currentLayer].splice(this.latentObjects['Objects_' + Frogland.currentLayer].indexOf(o), 1);
     	this.createdObjects.push(newObj);
 
-    	//console.log('Creating object', this.createdObjects.length);
+        // //if the object has speech associated wtih it
+        // if(!!o.properties.speech) {
+
+        //     newObj.body.speechName = o.properties.speech;
+        //     speechController.speechZones.push(newObj.body);
+        // }
     }
 };

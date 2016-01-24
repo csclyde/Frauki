@@ -94,11 +94,22 @@ SpeechController.prototype.LoadSpeechZones = function(layer) {
         	var zone = new Phaser.Rectangle(o.x, o.y, o.width, o.height);
         	zone.owningLayer = layer;
             zone.text = o.properties.text;
-            zone.name = o.name;
+            zone.speechName = o.name;
 
             that.speechZones.push(zone);
              
         }
+    });
+
+    Frogland.map.objects['Objects_' + layer].forEach(function(o) {
+    	if(!!o.properties.speech) {
+    		var zone = new Phaser.Rectangle(o.x, o.y, o.width, o.height);
+        	zone.owningLayer = layer;
+            zone.speechName = o.properties.speech;
+
+            that.speechZones.push(zone);
+    	}
+
     });
 
 };
@@ -149,9 +160,9 @@ SpeechController.prototype.ShowSpeech = function() {
 	for(var i = 0; i < this.speechZones.length; i++) {
 		var zone = this.speechZones[i];
 		if(zone.owningLayer === Frogland.currentLayer && frauki.body.x + frauki.body.width > zone.x && frauki.body.x < zone.x + zone.width && frauki.body.y + frauki.body.height > zone.y && frauki.body.y < zone.y + zone.height) {
-			this.SetText(Speeches[zone.name].text);
+			this.SetText(Speeches[zone.speechName].text);
 
-			this.currentPortrait = Speeches[zone.name].portrait || 'Neutral';
+			this.currentPortrait = Speeches[zone.speechName].portrait || 'Neutral';
 			this.portraitBox.visible = true;
 			this.portraits[this.currentPortrait].visible = true;
 			this.dialogBox.visible = true;
@@ -159,7 +170,7 @@ SpeechController.prototype.ShowSpeech = function() {
 
 			this.speechVisible = true;
 
-			this.timers.SetTimer('auto_hide', 4000);
+			this.timers.SetTimer('auto_hide', 6000);
 
 			return true;
 		}
