@@ -253,7 +253,9 @@ Frogland.CreateObjectsLayer = function(layer) {
             if(obj.id == localStorage.getItem('fraukiCheckpoint')) {
                 obj.CheckpointHit();
             }
-        } else if(Frogland.currentLayer !== layer) {
+        }
+
+        if(Frogland.currentLayer !== layer) {
             obj.alpha = 0;
             obj.body.enable = false;
         }
@@ -285,6 +287,7 @@ Frogland.CreateShards = function(layer) {
     this.map.createFromObjects('Objects_' + layer, 70, 'Shard0000', 'Shard0000', true, true, Frogland.shardGroup, Shard, false);
     this.map.createFromObjects('Objects_' + layer, 71, 'Shard0001', 'Shard0001', true, true, Frogland.shardGroup, Shard, false);
     this.map.createFromObjects('Objects_' + layer, 72, 'Shard0002', 'Shard0002', true, true, Frogland.shardGroup, Shard, false);
+    this.map.createFromObjects('Objects_' + layer, 73, 'Shard0003', 'Shard0003', true, true, Frogland.shardGroup, Shard, false);
 };
 
 Frogland.ClearObjectLayer = function(layer) {

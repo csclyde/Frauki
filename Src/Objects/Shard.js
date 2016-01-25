@@ -2,8 +2,6 @@ Shard = function(game, x, y, name) {
     //instantiate the sprite
     Phaser.Sprite.call(this, game, x, y, 'Misc');
     this.spriteType = 'shard';
-
-    console.log(name);
     
     //enable its physics body
     game.physics.enable(this, Phaser.Physics.ARCADE);
