@@ -685,6 +685,10 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
 
     damage = damage * 3;
 
+    if(GetCurrentShardType() === 'Will') {
+        damage /= 1.5;
+    }
+
     if(this.state === this.Hurting || e.state === e.Hurting || frauki.Attacking() || frauki.Grace())
         return;
 
