@@ -23,6 +23,7 @@ Shard = function(game, x, y, name) {
     this.animations.add('carried', [name], 10, false, false);
 
     this.currentLayer = Frogland.shardLayer;
+    this.shardFrame = name;
 
 };
 
@@ -170,4 +171,20 @@ function SetShardVisibility() {
         }
 
     });
-}
+};
+
+function GetCurrentShardType() {
+    if(!!frauki.carriedShard) {
+        if(frauki.carriedShard.shardFrame === 'Shard0000') {
+            return 'Wit';
+        } else if(frauki.carriedShard.shardFrame === 'Shard0001') {
+            return 'Will';
+        } else if(frauki.carriedShard.shardFrame === 'Shard0002') {
+            return 'Luck';
+        } else if(frauki.carriedShard.shardFrame === 'Shard0003') {
+            return 'Power';
+        } 
+    } else {
+        return 'None';
+    }
+};

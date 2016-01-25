@@ -214,10 +214,22 @@ Main.Restart = function() {
 Main.DrawUI = function() {
     
     this.RenderTextureFromAtlas('UI', 'EnergyBar0001', 12 * pixel.scale, 12 * pixel.scale);
+    this.RenderTextureFromAtlas('UI', 'EnergyBar0001', 12 * pixel.scale, 24 * pixel.scale);
 
-    this.RenderTextureFromAtlas('UI', 'EnergyBar0002', 12 * pixel.scale, 12 * pixel.scale, energyController.energy / 15);
-    this.RenderTextureFromAtlas('UI', 'EnergyBar0005', 12 * pixel.scale + (81 * pixel.scale * (energyController.neutralPoint / 30)), 12 * pixel.scale);
-    this.RenderTextureFromAtlas('UI', 'EnergyBar0006', 12 * pixel.scale, 23 * pixel.scale, energyController.charge / 30);
+    if(GetCurrentShardType() === 'Wit') {
+        //render the white bar in the back
+        this.RenderTextureFromAtlas('UI', 'EnergyBar0003', 12 * pixel.scale, 23 * pixel.scale, energyController.energy / 15);
+
+        //then oscillate the opacity green bar on top
+        this.RenderTextureFromAtlas('UI', 'EnergyBar0002', 12 * pixel.scale, 23 * pixel.scale, energyController.energy / 15, 1, (Math.sin(game.time.now / 80) + 1) / 2);
+
+    } else {
+        this.RenderTextureFromAtlas('UI', 'EnergyBar0002', 12 * pixel.scale, 24 * pixel.scale, energyController.energy / 15);
+    }
+
+    this.RenderTextureFromAtlas('UI', 'EnergyBar0004', 12 * pixel.scale, 12 * pixel.scale, energyController.neutralPoint / 30);
+    //this.RenderTextureFromAtlas('UI', 'EnergyBar0005', 12 * pixel.scale + (81 * pixel.scale * (energyController.neutralPoint / 30)), 12 * pixel.scale);
+    this.RenderTextureFromAtlas('UI', 'EnergyBar0006', 12 * pixel.scale, 34 * pixel.scale, energyController.charge / 30);
 
     this.RenderTextureFromAtlas('UI', 'EnergyBar0000', 10 * pixel.scale, 10 * pixel.scale);
 
@@ -249,9 +261,15 @@ Main.DrawUI = function() {
     }
 };
 
-Main.RenderTextureFromAtlas = function(atlas, frame, x, y, scaleX, scaleY) {
+Main.RenderTextureFromAtlas = function(atlas, frame, x, y, scaleX, scaleY, alpha) {
+    var oldAlpha = pixel.context.globalAlpha;
+    pixel.context.globalAlpha = alpha || oldAlpha;
+
     if(scaleX !== 0) scaleX = scaleX || 1;
     if(scaleY !== 0) scaleY = scaleY || 1;
+
+    if(scaleX < 0) scaleX = 0;
+    if(scaleY < 0) scaleY = 0;
 
     var texture;
 
@@ -278,4 +296,6 @@ Main.RenderTextureFromAtlas = function(atlas, frame, x, y, scaleX, scaleY) {
                            offset.y + y,
                            texture.frame.width * pixel.scale * scaleX,
                            texture.frame.height * pixel.scale * scaleY);
+
+    pixel.context.globalAlpha = oldAlpha;
 };

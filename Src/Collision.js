@@ -135,6 +135,10 @@ Collision.OverlapAttackWithEnemy = function(f, e) {
 
         if(e.robotic) events.publish('play_sound', { name: 'robosplosion' });
 
+        if(!!e.carriedShard) {
+            DropShard(e.carriedShard);
+        }
+
     } else {
         e.TakeHit();
     }
@@ -149,10 +153,6 @@ Collision.OverlapAttackWithEnemy = function(f, e) {
     }
 
     frauki.LandHit(e, damage);
-
-    if(!!e.carriedShard && damage >= 1) {
-        DropShard(e.carriedShard);
-    }
 };
 
 Collision.OverlapAttackWithEnemyAttack = function(e, f) {
