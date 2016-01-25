@@ -282,7 +282,9 @@ Frogland.CreateDoorLayer = function(layer) {
 Frogland.CreateShards = function(layer) {
 
     this.shardLayer = layer;
-    this.map.createFromObjects('Objects_' + layer, 70, 'Misc', 'Shard0000', true, true, Frogland.shardGroup, Shard, false);
+    this.map.createFromObjects('Objects_' + layer, 70, 'Shard0000', 'Shard0000', true, true, Frogland.shardGroup, Shard, false);
+    this.map.createFromObjects('Objects_' + layer, 71, 'Shard0001', 'Shard0001', true, true, Frogland.shardGroup, Shard, false);
+    this.map.createFromObjects('Objects_' + layer, 72, 'Shard0002', 'Shard0002', true, true, Frogland.shardGroup, Shard, false);
 };
 
 Frogland.ClearObjectLayer = function(layer) {

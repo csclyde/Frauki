@@ -1,7 +1,9 @@
 Shard = function(game, x, y, name) {
     //instantiate the sprite
-    Phaser.Sprite.call(this, game, x, y, name);
+    Phaser.Sprite.call(this, game, x, y, 'Misc');
     this.spriteType = 'shard';
+
+    console.log(name);
     
     //enable its physics body
     game.physics.enable(this, Phaser.Physics.ARCADE);
@@ -19,8 +21,8 @@ Shard = function(game, x, y, name) {
 
     this.timers = new TimerUtil();
 
-    this.animations.add('floating', ['Shard0000'], 10, false, false);
-    this.animations.add('carried', ['Shard0000'], 10, false, false);
+    this.animations.add('floating', [name], 10, false, false);
+    this.animations.add('carried', [name], 10, false, false);
 
     this.currentLayer = Frogland.shardLayer;
 
