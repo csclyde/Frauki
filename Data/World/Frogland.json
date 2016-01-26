@@ -10195,9 +10195,9 @@
                  "y":3050.5
                 }, 
                 {
-                 "gid":71,
+                 "gid":72,
                  "height":16,
-                 "id":1827,
+                 "id":1828,
                  "name":"",
                  "properties":
                     {
@@ -10207,8 +10207,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":2945.33333333333,
-                 "y":3344
+                 "x":2944,
+                 "y":3341.5
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -11057,7 +11057,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":1828,
+ "nextobjectid":1829,
  "orientation":"orthogonal",
  "properties":
     {

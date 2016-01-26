@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="400" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="1828">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="400" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="1829">
  <properties>
   <property name="debug" value="false"/>
   <property name="startLayer" value="3"/>
@@ -6022,7 +6022,7 @@
   <object id="1807" gid="66" x="2857.17" y="3145.67" width="16" height="16"/>
   <object id="1823" gid="85" x="2735.5" y="3145.5" width="16" height="16"/>
   <object id="1824" gid="68" x="1464" y="3050.5" width="16" height="16"/>
-  <object id="1827" gid="71" x="2945.33" y="3344" width="16" height="16"/>
+  <object id="1828" gid="72" x="2944" y="3341.5" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Triggers_4" visible="0">
   <object id="1613" name="secret_garden" type="speech" x="12.0328" y="5042.27" width="94.5" height="45.5"/>

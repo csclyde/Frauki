@@ -318,7 +318,7 @@ WeaponController.prototype.Shield = {
         if(energyController.charge >= 3 && this.forceField.visible === false) {
             this.forceField.animations.play('activate');
             this.forceField.visible = true;
-            energyController.RemoveCharge(3);
+            energyController.RemoveCharge(5);
         }
 
     },

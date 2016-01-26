@@ -13,7 +13,7 @@ Enemy = function(game, x, y, name) {
     this.attackFrames = {};
     
     this.objectName = name;
-    
+
     if(!!this.types[name]) {
         this.types[name].apply(this);
     } else {
@@ -181,7 +181,11 @@ function DestroyEnemy(e) {
 
     damage = e.maxEnergy;
 
-    effectsController.SpawnEnergyNuggets(e.body, frauki.body, 'positive', e.maxEnergy * 3); 
+    effectsController.SpawnEnergyNuggets(e.body, frauki.body, 'positive', e.maxEnergy * (GetCurrentShardType() === 'Luck' ? 2 : 1)); 
+    effectsController.SpawnEnergyNuggets(e.body, frauki.body, 'neutral', e.maxEnergy * (GetCurrentShardType() === 'Luck' ? 2 : 1)); 
+
+    console.log(GetCurrentShardType());
+
     events.publish('camera_shake', {magnitudeX: 10, magnitudeY: 6, duration: 350 });
     //effectsController.MakeHearts(e.maxEnergy / 4);
 
