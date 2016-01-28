@@ -418,3 +418,9 @@ Collision.OverlapFraukiWithShard = function(f, s) {
     
     return false;
 };
+
+Collision.OverlapShardWithObject = function(s, o) {
+    if(o.spriteType === 'door') {
+        OpenDoor(frauki, o);
+    }
+};

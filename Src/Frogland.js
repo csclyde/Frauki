@@ -2,6 +2,8 @@ var Frogland = {};
 
 Frogland.Create = function() {
 
+    this.timers = new TimerUtil();
+
     this.bg = game.add.tileSprite(0, 0, pixel.width * 1.5, pixel.height * 1.5, 'Background');
     this.bg.fixedToCamera = true;
     this.bg.autoScroll(-2, 0);
@@ -130,6 +132,11 @@ Frogland.Update = function() {
     game.physics.arcade.collide(frauki, this.GetCurrentObjectGroup(), null, Collision.OverlapFraukiWithObject);
     game.physics.arcade.collide(this.GetCurrentObjectGroup(), this.GetCurrentCollisionLayer(), null, Collision.OverlapObjectsWithEnvironment);
     game.physics.arcade.overlap(frauki, this.shardGroup, null, Collision.OverlapFraukiWithShard);
+
+    if(!!frauki.carriedShard && this.timers.TimerUp('shard_object_check')) {
+        game.physics.arcade.overlap(this.shardGroup, this.GetCurrentObjectGroup(), null, Collision.OverlapShardWithObject);
+        this.timers.SetTimer('shard_object_check', 500);
+    }
 
     if(projectileController.projectiles.countLiving() > 0) {
         game.physics.arcade.overlap(frauki, projectileController.projectiles, Collision.CollideFraukiWithProjectile);

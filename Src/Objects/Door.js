@@ -22,9 +22,12 @@ Door = function(game, x, y, name) {
 
     this.animations.add('left', ['Door0000'], 10, true, false); 
     this.animations.add('right', ['Door0001'], 10, true, false); 
-    this.animations.add('prism', ['Door0002'], 10, true, false); 
-    this.animations.add('left_dead', ['Door0003'], 10, true, false); 
-    this.animations.add('right_dead', ['Door0004'], 10, true, false); 
+    this.animations.add('wit', ['Door0002'], 10, true, false); 
+    this.animations.add('will', ['Door0003'], 10, true, false); 
+    this.animations.add('luck', ['Door0004'], 10, true, false); 
+    this.animations.add('power', ['Door0005'], 10, true, false); 
+    this.animations.add('left_dead', ['Door0006'], 10, true, false); 
+    this.animations.add('right_dead', ['Door0007'], 10, true, false); 
 
     this.animations.add('opening', ['Door0000'], 10, false, false);
 };
@@ -102,8 +105,14 @@ Door.prototype.Closed = function() {
         this.PlayAnim('left');
     } else if(this.facing === 'right') { 
         this.PlayAnim('right');
-    } else if(!!this.prism) {
-        this.PlayAnim('prism');
+    } else if(this.prism === 'Wit') {
+        this.PlayAnim('wit');
+    } else if(this.prism === 'Will') {
+        this.PlayAnim('will');
+    } else if(this.prism === 'Luck') {
+        this.PlayAnim('luck');
+    } else if(this.prism === 'Power') {
+        this.PlayAnim('power');
     }
 };
 
@@ -112,8 +121,14 @@ Door.prototype.Opening = function() {
         this.PlayAnim('left_dead');
     } else if(this.facing === 'right') { 
         this.PlayAnim('right_dead');
-    } else if(!!this.prism) {
-        this.PlayAnim('prism');
+    } else if(this.prism === 'Wit') {
+        this.PlayAnim('wit');
+    } else if(this.prism === 'Will') {
+        this.PlayAnim('will');
+    } else if(this.prism === 'Luck') {
+        this.PlayAnim('luck');
+    } else if(this.prism === 'Power') {
+        this.PlayAnim('power');
     }
 
     this.state = this.Open;
