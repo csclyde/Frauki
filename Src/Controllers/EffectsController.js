@@ -784,3 +784,38 @@ EffectsController.prototype.Goddess = function(show) {
         game.add.tween(this.goddess).to( { alpha: 0 }, 500, Phaser.Easing.Linear.None, true);
     }
 };
+
+EffectsController.prototype.ExplodeDoorSeal = function(door) {
+
+    //create all the little broken pieces
+    var pieces = [];
+
+    console.log(door);
+
+    var i = 0;
+    while(game.cache.getFrameData('Pieces').getFrameByName('DoorSeal000' + i)) {
+        pieces.push(game.add.sprite(door.x + game.rnd.between(-20, 20), door.y + game.rnd.between(-20, 20), 'Pieces', 'DoorSeal000' + i));
+        i++;
+    }
+
+    pieces.forEach(function(p) {
+        game.physics.enable(p, Phaser.Physics.ARCADE);
+
+        p.anchor.setTo(0.5, 0.5);
+        p.body.bounce.setTo(0.5);
+        p.body.angularDrag = 600;
+        p.body.drag.x = 100;
+
+        //randomly set the velocity, rotation, and lifespan
+        p.body.velocity.x = game.rnd.between(-150, 150);
+        p.body.velocity.y = game.rnd.between(-100, -400);
+        p.body.angularVelocity = game.rnd.between(500, 1000);
+
+        game.time.events.add(4000, function() { p.body.enable = false; } );
+
+        effectsController['dicedPieces' + Frogland.currentLayer].addChild(p);
+    });
+
+    //make a particle spray
+    effectsController.EnergySplash(door.body, 100, 'positive', 20, frauki.body.velocity);
+};

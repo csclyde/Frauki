@@ -2,7 +2,7 @@ var fraukiDamageFrames = {
 	
 	//slash across in front of yourself
 	'Attack Front0002': {
-		x: 0, y: 10, w: 65, h: 34,
+		x: 0, y: 10, w: 85, h: 34,
 		damage: 1,
 		knockback: 1,
 		priority: 1,
@@ -145,8 +145,8 @@ var fraukiDamageFrames = {
 
 	//overhead swing
 	'Attack Overhead0005': {
-		x: -30, y: -15, w: 45, h: 30,
-		damage: 2,
+		x: -30, y: -30, w: 85, h: 75,
+		damage: 2.5,
 		knockback: 0.1,
 		priority: 2,
 		juggle: 0.5

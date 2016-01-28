@@ -12,7 +12,7 @@ Door = function(game, x, y, name) {
     this.x += 8;
     this.y += 8;
     
-    this.SetDirection('left');
+    //this.SetDirection('left');
 
     this.state = this.Closed;
 
@@ -20,7 +20,12 @@ Door = function(game, x, y, name) {
     this.body.immovable = true;
     this.visible = false;
 
-    this.animations.add('closed', ['Door0000'], 10, true, false);
+    this.animations.add('left', ['Door0000'], 10, true, false); 
+    this.animations.add('right', ['Door0001'], 10, true, false); 
+    this.animations.add('prism', ['Door0002'], 10, true, false); 
+    this.animations.add('left_dead', ['Door0003'], 10, true, false); 
+    this.animations.add('right_dead', ['Door0004'], 10, true, false); 
+
     this.animations.add('opening', ['Door0000'], 10, false, false);
 };
 
@@ -50,22 +55,38 @@ Door.prototype.SetDirection = function(dir) {
 
 function OpenDoor(f, d, override) {
     if(d.state === d.Closed) {
-        if((d.facing === 'left' && f.body.center.x > d.body.center.x) || (d.facing === 'right' && f.body.center.x < d.body.center.x) || !!override) {
-            var openTween = game.add.tween(d.body).to({y: d.body.y + 70}, 2000, Phaser.Easing.Quintic.InOut, true);
 
-            //disable the body after its opened
-            openTween.onComplete.add(function() {
-                this.body.enable = false;
-            }, d);
+        //if they attack the back side of the door
+        if(frauki.Attacking()) {
+            if((d.facing === 'left' && f.body.center.x > d.body.center.x) || (d.facing === 'right' && f.body.center.x < d.body.center.x) || !!override) {
+                PerformOpen();
+                console.log('Opening door with attack:' + d.id);
 
-            d.state = d.Opening;
-
-            console.log('Opening door ' + d.id);
-
-            if(Frogland.openDoors.indexOf(d.id) === -1) {
-                Frogland.openDoors.push(d.id);
-                localStorage.setItem('fraukiDoors', JSON.stringify(Frogland.openDoors));
+                effectsController.ExplodeDoorSeal(d);
             }
+        }
+
+        //or if its a shard door and they are holding the right shard
+        if(d.prism === GetCurrentShardType()) {
+            PerformOpen();
+            console.log('Opening door with prism shard:' + d.id);
+        }
+    }
+
+    function PerformOpen() {
+        var openTween = game.add.tween(d.body).to({y: d.body.y + 70}, 2000, Phaser.Easing.Quintic.InOut, true);
+
+        //disable the body after its opened
+        openTween.onComplete.add(function() {
+            this.body.enable = false;
+        }, d);
+
+        d.state = d.Opening;
+
+
+        if(Frogland.openDoors.indexOf(d.id) === -1) {
+            Frogland.openDoors.push(d.id);
+            localStorage.setItem('fraukiDoors', JSON.stringify(Frogland.openDoors));
         }
     }
 };
@@ -76,11 +97,24 @@ Door.prototype.PlayAnim = function(name) {
 };
 
 Door.prototype.Closed = function() {
-    this.PlayAnim('closed');
+
+    if(this.facing === 'left') {
+        this.PlayAnim('left');
+    } else if(this.facing === 'right') { 
+        this.PlayAnim('right');
+    } else if(!!this.prism) {
+        this.PlayAnim('prism');
+    }
 };
 
 Door.prototype.Opening = function() {
-    this.PlayAnim('closed');
+    if(this.facing === 'left') {
+        this.PlayAnim('left_dead');
+    } else if(this.facing === 'right') { 
+        this.PlayAnim('right_dead');
+    } else if(!!this.prism) {
+        this.PlayAnim('prism');
+    }
 
     this.state = this.Open;
 };

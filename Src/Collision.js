@@ -93,6 +93,8 @@ Collision.OverlapAttackWithObject = function(f, o) {
         o.CheckpointHit();
     } else if(o.spriteType === 'TechnoRune') {
         EatTechnoRune(f, o);
+    } else if(o.spriteType === 'door') {
+        OpenDoor(frauki, o);
     }
 };
 

@@ -69,7 +69,7 @@ Main.update = function() {
 };
 
 Main.render = function() {
-    //game.debug.body(frauki);
+    // game.debug.body(frauki);
     //game.debug.body(frauki.attackRect);
 
     // Frogland.objectGroup_4.forEach(function(o) {
