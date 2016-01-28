@@ -119,6 +119,16 @@ Shard.prototype.Carried = function() {
         return;
     }
 
+    if(this.openingDoor) {
+        console.log('opening door');
+        this.body.velocity.x = 0;
+        this.body.acceleration.x = 0;
+        this.body.velocity.y = 0;
+        this.body.acceleration.y = 0;
+        
+        return;
+    }
+
     var xDist = this.body.center.x - this.owner.body.center.x;
     var yDist = this.body.center.y - this.owner.body.center.y;
 

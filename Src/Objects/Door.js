@@ -66,12 +66,30 @@ function OpenDoor(f, d, override) {
                 console.log('Opening door with attack:' + d.id);
 
                 effectsController.ExplodeDoorSeal(d);
+                effectsController.ScreenFlash();
+                
             }
         }
 
         //or if its a shard door and they are holding the right shard
-        if(d.prism === GetCurrentShardType()) {
-            PerformOpen();
+        if(d.prism === GetCurrentShardType() && !d.waitingToOpen) {
+
+            d.waitingToOpen = true;
+
+            //get the prism frauki is carrying
+            var prism = frauki.carriedShard;
+
+            prism.openingDoor = true;
+
+            //tween its position to the center of the door
+            var shardTween = game.add.tween(prism.body).to({x: d.body.x + 0, y: d.body.y + 24}, 1000, Phaser.Easing.Exponential.Out, true);
+            shardTween.onComplete.add(function() {
+                //when the tween is done, perform the door opening
+                effectsController.ScreenFlash();
+                PerformOpen();
+                prism.openingDoor = false;
+            });
+
             console.log('Opening door with prism shard:' + d.id);
         }
     }
