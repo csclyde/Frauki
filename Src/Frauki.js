@@ -449,7 +449,7 @@ Player.prototype.DoubleJump = function() {
 
         this.state = this.Flipping;
         this.states.hasFlipped = true;
-        this.timers.SetTimer('frauki_grace', 300);
+        //this.timers.SetTimer('frauki_grace', 300);
 
         events.publish('play_sound', {name: 'airhike'});
         events.publish('stop_sound', {name: 'attack_dive_fall'});
@@ -645,7 +645,7 @@ Player.prototype.Roll = function(params) {
     }
 
     this.timers.SetTimer('frauki_roll', 250);
-    this.timers.SetTimer('frauki_grace', 300);
+    //this.timers.SetTimer('frauki_grace', 300);
 
     return true;
 };
