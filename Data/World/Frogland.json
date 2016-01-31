@@ -2904,7 +2904,7 @@
          "name":"Collision_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -4096,8 +4096,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":2407.33,
-                 "y":3466.67
+                 "x":2504.33,
+                 "y":3501.17
                 }, 
                 {
                  "gid":105,
@@ -5653,8 +5653,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":2380,
-                 "y":3465.33
+                 "x":2477,
+                 "y":3499.83
                 }, 
                 {
                  "gid":109,

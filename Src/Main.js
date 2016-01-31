@@ -204,7 +204,7 @@ Main.Restart = function() {
 
         effectsController.Goddess(false);
 
-
+        Frogland.ResetFallenTiles();
 
         //var cameraMoveTween = game.add.tween(game.camera)
 

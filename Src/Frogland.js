@@ -100,6 +100,9 @@ Frogland.Create = function() {
     //game.camera.bounds.inflate(120, 0);
 
     objectController.CompileObjectList();
+
+    //this will store fallen tiles, so that when you die they can be reset
+    this.fallenTiles = [];
 };
 
 Frogland.Update = function() {
@@ -501,17 +504,20 @@ Frogland.ChangeLayer = function(newLayer) {
     }
 
     SetShardVisibility();
-
 };
 
 Frogland.DislodgeTile = function(tile) {
     if(tile && (tile.index === 5 || tile.index === 7) && tile.dislodged !== true) {
         
-        mgTile = Frogland.map.getTile(tile.x, tile.y, 'Midground_' + this.currentLayer);
+        //get the visible tile from the midground, and make it invisible
+        var mgTile = Frogland.map.getTile(tile.x, tile.y, 'Midground_' + this.currentLayer);
         mgTile.alpha = 0;
+
         Frogland['midgroundLayer_' + this.currentLayer].dirty = true;
 
         tile.dislodged = true;
+
+        Frogland.fallenTiles.push(tile);
 
         projectileController.FallingTile(tile);
 
@@ -523,6 +529,19 @@ Frogland.DislodgeTile = function(tile) {
                 Frogland.DislodgeTile(Frogland.map.getTile(tile.x, tile.y + 1, 'Collision_' + Frogland.currentLayer));
             }
         }, (Math.random() * 80));
+    }
+};
+
+Frogland.ResetFallenTiles = function() {
+    var i = this.fallenTiles.length;
+    while(i--) {
+        var tile = this.fallenTiles[i];
+        
+        tile.dislodged = false;
+        tile.waitingToFall = false;
+
+        var mgTile = this.map.getTile(tile.x, tile.y, 'Midground_' + this.currentLayer);
+        mgTile.alpha = 1;
     }
 };
 
