@@ -312,7 +312,7 @@ Collision.CollideFraukiWithEnvironment = function(f, tile) {
     //13 - 16
 
     //solid tile
-    if(tile.index === 1 || tile.index === 9) { 
+    if(tile.index === 1 || tile.index === 8 || tile.index === 9) { 
         return true;
 
     //water

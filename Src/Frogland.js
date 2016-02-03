@@ -216,7 +216,7 @@ Frogland.CreateForegroundLayer = function(layer, visible) {
 
 Frogland.CreateCollisionLayer = function(layer) {
     this['collisionLayer_' + layer] = this.map.createLayer('Collision_' + layer);
-    this.map.setCollision([1, 3, 4, 5, 7, 9], true, 'Collision_' + layer);
+    this.map.setCollision([1, 3, 4, 5, 7, 8, 9], true, 'Collision_' + layer);
     this['collisionLayer_' + layer].visible = false;
 };
 
@@ -412,6 +412,19 @@ Frogland.PreprocessTiles = function(layer) {
                 tile.faceDown = true;
                 tile.faceLeft = false;
                 tile.faceRight = false;
+            
+            //tiles with all faces colliding
+            } else if(tile.index === 8) {
+                tile.collideLeft = true;
+                tile.collideRight = true;
+                tile.collideUp = true;
+                tile.collideDown = true;
+                tile.faceUp = true;
+                tile.faceDown = true;
+                tile.faceLeft = true;
+                tile.faceRight = true;
+
+                console.log('rug tile');
             }
         }
            

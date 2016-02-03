@@ -163,6 +163,7 @@ InputController = function() {
             if(Frogland.currentLayer === 2) Frogland.ChangeLayer(4);
             else if(Frogland.currentLayer === 4) Frogland.ChangeLayer(2);
         }
+
     });
 
    
