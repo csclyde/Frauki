@@ -57,9 +57,9 @@ Frogland.Create = function() {
     this.CreateCollisionLayer(3);
     this.CreateCollisionLayer(2);
 
-    this.CreateObjectsLayer(4);
-    this.CreateObjectsLayer(3);
-    this.CreateObjectsLayer(2);
+    objectController.CreateObjectsLayer(4);
+    objectController.CreateObjectsLayer(3);
+    objectController.CreateObjectsLayer(2);
 
     this.CreateMidgroundLayer(4, startLayer === 4);
     this.CreateMidgroundLayer(3, startLayer === 3);
@@ -218,60 +218,6 @@ Frogland.CreateCollisionLayer = function(layer) {
     this['collisionLayer_' + layer] = this.map.createLayer('Collision_' + layer);
     this.map.setCollision([1, 3, 4, 5, 7, 8, 9], true, 'Collision_' + layer);
     this['collisionLayer_' + layer].visible = false;
-};
-
-Frogland.CreateObjectsLayer = function(layer) {
-    var that = this;
-    var currLayer = 'objectGroup_' + layer;
-
-    if(!this[currLayer]) this[currLayer] = game.add.group();
-
-    FileMap.Runes.forEach(function(rune) {
-        Frogland.map.createFromObjects('Objects_' + layer, rune.Tile, rune.Name, rune.Name, true, true, that[currLayer], TechnoRune, false);
-    });
-
-    this.map.createFromObjects('Objects_' + layer, 69, 'Misc', 'Checkpoint0000', true, true, this[currLayer], Checkpoint, false);
-
-    //activate the correct checkpoint
-    if(!localStorage.getItem('fraukiCheckpoint')) localStorage.setItem('fraukiCheckpoint', '0');
-    //create the doors
-    this.map.createFromObjects('Objects_' + layer, 67, 'Misc', 'Door0000', true, true, this[currLayer], Door, false);
-    
-
-    this.ball = game.add.sprite(55 * 16, 26 * 16, 'Misc', 'Ball0000', this[currLayer]);
-    game.physics.enable(this.ball, Phaser.Physics.ARCADE);
-    this.ball.body.bounce.setTo(0.8);
-    this.ball.body.drag.setTo(200);
-    this.ball.anchor.setTo(0.5);
-    this.ball.body.angularDrag = 500;
-    this.ball.spriteType = 'ball';
-    this.ball.body.collideWorldBounds = true;
-    this.ball.body.maxVelocity.setTo(700);
-
-    //inform each enemy of its own layer
-    this[currLayer].forEach(function(obj) {
-        obj.owningLayer = layer;
-
-
-        if(obj.spriteType === 'door') {
-            if(Frogland.openDoors.indexOf(obj.id) > -1) {
-                obj.body.enable = false;
-                obj.visible = false;
-                //OpenDoor(frauki, obj, true);
-            }
-        } else if(obj.spriteType === 'checkpoint') {
-            if(obj.id == localStorage.getItem('fraukiCheckpoint')) {
-                obj.CheckpointHit();
-            }
-        }
-
-        if(Frogland.currentLayer !== layer) {
-            obj.alpha = 0;
-            obj.body.enable = false;
-        }
-    });  
-
-    //game.physics.arcade.collide(this[currLayer], this['collisionLayer_' + layer]);  
 };
 
 Frogland.CreateDoorLayer = function(layer) {

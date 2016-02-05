@@ -67,7 +67,7 @@ function OpenDoor(f, d, override) {
     //if they attack the back side of the door
     if(frauki.Attacking()) {
         if((d.facing === 'left' && f.body.center.x > d.body.center.x) || (d.facing === 'right' && f.body.center.x < d.body.center.x) || !!override) {
-            PerformOpen(d);
+            PerformOpen(d, true);
             console.log('Opening door with attack:' + d.id);
 
             effectsController.ExplodeDoorSeal(d);
@@ -92,7 +92,7 @@ function OpenDoor(f, d, override) {
         shardTween.onComplete.add(function() {
             //when the tween is done, perform the door opening
             effectsController.ScreenFlash();
-            PerformOpen(d);
+            PerformOpen(d, true);
             prism.openingDoor = false;
         });
 
@@ -128,13 +128,13 @@ function OpenDoorById(id) {
     });
 
     if(!!door) {
-        PerformOpen(door);
+        PerformOpen(door, false);
     } else {
         console.log('Cant find door with id: ' + id);
     }
 };
 
-function PerformOpen(d) {
+function PerformOpen(d, save) {
     var openTween = game.add.tween(d.body).to({y: d.body.y + 70}, 2000, Phaser.Easing.Quintic.InOut, true);
 
     //disable the body after its opened
@@ -145,7 +145,7 @@ function PerformOpen(d) {
     d.state = d.Opening;
 
 
-    if(Frogland.openDoors.indexOf(d.id) === -1) {
+    if(Frogland.openDoors.indexOf(d.id) === -1 && save) {
         Frogland.openDoors.push(d.id);
         localStorage.setItem('fraukiDoors', JSON.stringify(Frogland.openDoors));
     }

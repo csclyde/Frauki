@@ -25,25 +25,26 @@ AudioController = function() {
     });
 
     FileMap.Music.forEach(function(music) {
-        that.music[music.Name] = {};
+        // that.music[music.Name] = {};
 
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', music.File, true);
-        xhr.responseType = 'arraybuffer';
-        xhr.onload = function(e) {
-            if(this.status == 200){
-                var uInt8Array = new Uint8Array(this.response);
-                that.music[music.Name] = window.neoart.F2Player(null);
-                that.music[music.Name].load(this.response);
-                that.music[music.Name].loopSong = music.Loop ? 1 : 0;
-                that.music[music.Name].volume = music.Volume;
+        // var xhr = new XMLHttpRequest();
+        // xhr.open('GET', music.File, true);
+        // xhr.responseType = 'arraybuffer';
+        // xhr.onload = function(e) {
+        //     if(this.status == 200){
+        //         var uInt8Array = new Uint8Array(this.response);
+        //         that.music[music.Name] = window.neoart.F2Player(null);
+        //         that.music[music.Name].load(this.response);
+        //         that.music[music.Name].loopSong = music.Loop ? 1 : 0;
+        //         that.music[music.Name].volume = music.Volume;
 
-                if(music.Name === 'Surface') {
-                    //that.music[music.Name].play();
-                }
-            } 
-        };
-        xhr.send();
+        //         console.log(that.music[music.Name]);
+        //     } 
+        // };
+        // xhr.send();
+
+        game.load.audio(music.Name, music.File);
+        that.music[music.Name] = game.add.audio(music.Name, music.Volume, music.Loop);
     });
 };
 
@@ -67,7 +68,8 @@ AudioController.prototype.PlaySound = function(params) {
             that.sounds['attack_dive_fall'].stop();
             that.sounds['attack_dive_land'].stop();
         }
-        //this.sounds[params.name].play();
+        
+        this.sounds[params.name].play();
     }
 };
 
@@ -85,9 +87,7 @@ AudioController.prototype.PlayMusic = function(params) {
 
 AudioController.prototype.StopMusic = function(params) {
     if(!!params.name && !!this.music[params.name] && !!this.music[params.name].stop) {
-        this.music[params.name].stop();
-        this.music[params.name].isPlaying = false;
-
+        this.music[params.name].pause();
     }
 };
 
@@ -95,7 +95,7 @@ AudioController.prototype.StopAllMusic = function(params) {
     for(var key in this.music) {
         if(!this.music.hasOwnProperty(key)) continue;
 
-        if(!!this.music[key] && !!this.music[key].stop) this.music[key].stop();
+        if(!!this.music[key]) this.music[key].pause();
     }
 }
 

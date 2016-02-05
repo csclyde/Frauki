@@ -167,3 +167,56 @@ ObjectController.prototype.SpawnObject = function(o) {
         }
     }
 };
+
+ObjectController.prototype.CreateObjectsLayer = function(layer) {
+    var that = Frogland;
+    if(!Frogland['objectGroup_' + layer]) Frogland['objectGroup_' + layer] = game.add.group();
+
+    var currLayer = Frogland['objectGroup_' + layer];
+
+
+    FileMap.Runes.forEach(function(rune) {
+        Frogland.map.createFromObjects('Objects_' + layer, rune.Tile, rune.Name, rune.Name, true, true, that[currLayer], TechnoRune, false);
+    });
+
+    Frogland.map.createFromObjects('Objects_' + layer, 69, 'Misc', 'Checkpoint0000', true, true, currLayer, Checkpoint, false);
+
+    //activate the correct checkpoint
+    if(!localStorage.getItem('fraukiCheckpoint')) localStorage.setItem('fraukiCheckpoint', '0');
+    //create the doors
+    Frogland.map.createFromObjects('Objects_' + layer, 67, 'Misc', 'Door0000', true, true, currLayer, Door, false);
+    
+
+    // Frogland.ball = game.add.sprite(55 * 16, 26 * 16, 'Misc', 'Ball0000', currLayer);
+    // game.physics.enable(Frogland.ball, Phaser.Physics.ARCADE);
+    // Frogland.ball.body.bounce.setTo(0.8);
+    // Frogland.ball.body.drag.setTo(200);
+    // Frogland.ball.anchor.setTo(0.5);
+    // Frogland.ball.body.angularDrag = 500;
+    // Frogland.ball.spriteType = 'ball';
+    // Frogland.ball.body.collideWorldBounds = true;
+    // Frogland.ball.body.maxVelocity.setTo(700);
+
+    //inform each object of its own layer
+    currLayer.forEach(function(obj) {
+        obj.owningLayer = layer;
+
+
+        if(obj.spriteType === 'door') {
+            if(Frogland.openDoors.indexOf(obj.id) > -1) {
+                obj.body.enable = false;
+                obj.visible = false;
+                //OpenDoor(frauki, obj, true);
+            }
+        } else if(obj.spriteType === 'checkpoint') {
+            if(obj.id == localStorage.getItem('fraukiCheckpoint')) {
+                obj.CheckpointHit();
+            }
+        }
+
+        if(Frogland.currentLayer !== layer) {
+            obj.alpha = 0;
+            obj.body.enable = false;
+        }
+    });  
+};

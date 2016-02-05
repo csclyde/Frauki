@@ -1,53 +1,35 @@
-
-TriggerController.prototype.triggers['stop_music'] = {
-	enter: function(params) {
+TriggerController.prototype.triggers['music_left_right'] = {
+	enter: function(params, trigger) {
 		events.publish('stop_all_music');
 	},
 
-	stay: function(params) {
+	stay: function(params, trigger) {
 
 	},
 
-	exit: function(params) {
+	exit: function(params, trigger) {
+		if(frauki.body.center.x < trigger.x) {
+			events.publish('play_music', { name: params.left } );
+		} else {
+			events.publish('play_music', { name: params.right } );
+		}
 	}
 }
 
-TriggerController.prototype.triggers['start_ruins_music'] = {
-	enter: function(params) {
-		events.publish('play_music', { name: 'Ruins' } );
+TriggerController.prototype.triggers['music_up_down'] = {
+	enter: function(params, trigger) {
+		events.publish('stop_all_music');
 	},
 
-	stay: function(params) {
-
-	},
-
-	exit: function(params) {
-	}
-}
-
-TriggerController.prototype.triggers['start_underwater_music'] = {
-	enter: function(params) {
-		events.publish('play_music', { name: 'Underwater' } );
-	},
-
-	stay: function(params) {
+	stay: function(params, trigger) {
 
 	},
 
-	exit: function(params) {
-	}
-}
-
-TriggerController.prototype.triggers['ruins_music'] = {
-	enter: function(params) {
-		events.publish('play_music', { name: 'Ruins' } );
-	},
-
-	stay: function(params) {
-
-	},
-
-	exit: function(params) {
-		events.publish('stop_music', { name: 'Ruins' } );
+	exit: function(params, trigger) {
+		if(frauki.body.center.y < trigger.y) {
+			events.publish('play_music', { name: params.up } );
+		} else {
+			events.publish('play_music', { name: params.down } );
+		}
 	}
 }
