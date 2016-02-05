@@ -28,8 +28,13 @@ Door = function(game, x, y, name) {
     this.animations.add('power', ['Door0005'], 10, true, false); 
     this.animations.add('left_dead', ['Door0006'], 10, true, false); 
     this.animations.add('right_dead', ['Door0007'], 10, true, false); 
+    this.animations.add('skull', ['Door0008'], 10, true, false);
 
     this.animations.add('opening', ['Door0000'], 10, false, false);
+
+    events.subscribe('open_door', function(params) {
+        OpenDoorById(params.door_name);
+    });
 };
 
 Door.prototype = Object.create(Phaser.Sprite.prototype);
@@ -62,7 +67,7 @@ function OpenDoor(f, d, override) {
         //if they attack the back side of the door
         if(frauki.Attacking()) {
             if((d.facing === 'left' && f.body.center.x > d.body.center.x) || (d.facing === 'right' && f.body.center.x < d.body.center.x) || !!override) {
-                PerformOpen();
+                PerformOpen(d);
                 console.log('Opening door with attack:' + d.id);
 
                 effectsController.ExplodeDoorSeal(d);
@@ -86,31 +91,76 @@ function OpenDoor(f, d, override) {
             shardTween.onComplete.add(function() {
                 //when the tween is done, perform the door opening
                 effectsController.ScreenFlash();
-                PerformOpen();
+                PerformOpen(d);
                 prism.openingDoor = false;
             });
 
             console.log('Opening door with prism shard:' + d.id);
         }
     }
+};
 
-    function PerformOpen() {
-        var openTween = game.add.tween(d.body).to({y: d.body.y + 70}, 2000, Phaser.Easing.Quintic.InOut, true);
+function OpenDoorById(id) {
 
-        //disable the body after its opened
-        openTween.onComplete.add(function() {
-            this.body.enable = false;
-        }, d);
+    var door = null;
 
-        d.state = d.Opening;
+    //find the door
+    Frogland.objectGroup_2.forEach(function(d) {
+        if(d.spriteType === 'door' && d.id === id) {
+            door = d;
 
-
-        if(Frogland.openDoors.indexOf(d.id) === -1) {
-            Frogland.openDoors.push(d.id);
-            localStorage.setItem('fraukiDoors', JSON.stringify(Frogland.openDoors));
+            //stop looking
+            return false;
         }
+    });
+
+    Frogland.objectGroup_3.forEach(function(d) {
+        if(d.spriteType === 'door' && d.id === id) {
+            door = d;
+
+            //stop looking
+            return false;
+        }
+    });
+
+    Frogland.objectGroup_4.forEach(function(d) {
+        if(d.spriteType === 'door' && d.id === id) {
+            door = d;
+
+            //stop looking
+            return false;
+        }
+    });
+
+    //if we found the door
+    if(!!door) {
+        //open it with an override
+
+        OpenDoor(frauki, door, true);
+
+    //if not
+    } else {
+        //report the problem
+        console.log('Cant find door with id: ' + id);
     }
 };
+
+function PerformOpen(d) {
+    var openTween = game.add.tween(d.body).to({y: d.body.y + 70}, 2000, Phaser.Easing.Quintic.InOut, true);
+
+    //disable the body after its opened
+    openTween.onComplete.add(function() {
+        this.body.enable = false;
+    }, d);
+
+    d.state = d.Opening;
+
+
+    if(Frogland.openDoors.indexOf(d.id) === -1) {
+        Frogland.openDoors.push(d.id);
+        localStorage.setItem('fraukiDoors', JSON.stringify(Frogland.openDoors));
+    }
+}
 
 Door.prototype.PlayAnim = function(name) {
     if(this.animations.currentAnim.name !== name)
@@ -119,7 +169,9 @@ Door.prototype.PlayAnim = function(name) {
 
 Door.prototype.Closed = function() {
 
-    if(this.facing === 'left') {
+    if(!!this.closed_graphic) {
+        this.PlayAnim(this.closed_graphic);
+    } else if(this.facing === 'left') {
         this.PlayAnim('left');
     } else if(this.facing === 'right') { 
         this.PlayAnim('right');
@@ -131,11 +183,14 @@ Door.prototype.Closed = function() {
         this.PlayAnim('luck');
     } else if(this.prism === 'Power') {
         this.PlayAnim('power');
-    }
+    } 
 };
 
 Door.prototype.Opening = function() {
-    if(this.facing === 'left') {
+    
+    if(!!this.open_graphic) {
+        this.PlayAnim(this.open_graphic);
+    } else if(this.facing === 'left') {
         this.PlayAnim('left_dead');
     } else if(this.facing === 'right') { 
         this.PlayAnim('right_dead');

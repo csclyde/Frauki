@@ -40,10 +40,13 @@ ObjectController.prototype.CompileObjectList = function() {
 };
 
 ObjectController.prototype.SpawnNearbyObjects = function() {
+
+    //get the latent objects
     var objLayer = this.latentObjects['Objects_' + Frogland.currentLayer];
 
     var spawnedObjs = [];
 
+    //go through them all and see if any are within range to be created
     for(var i = 0, max = objLayer.length; i < max; i++) {
         var padding = 350;
         var o = objLayer[i];
@@ -61,6 +64,7 @@ ObjectController.prototype.SpawnNearbyObjects = function() {
         } 
     }
 
+    //remove the object from the list of latent objects
     for(var i = 0, max = spawnedObjs.length; i < max; i++) {
         objLayer.splice(objLayer.indexOf(spawnedObjs[i]), 1);
     }
@@ -131,6 +135,7 @@ ObjectController.prototype.SpawnObject = function(o) {
         Frogland[currLayer].add(newObj);
         newObj.owningLayer = Frogland.currentLayer;
     	this.createdObjects.push(newObj);
+        newObj.properties = o.properties;
 
         // //if the object has speech associated wtih it
         // if(!!o.properties.speech) {
@@ -138,5 +143,27 @@ ObjectController.prototype.SpawnObject = function(o) {
         //     newObj.body.speechName = o.properties.speech;
         //     speechController.speechZones.push(newObj.body);
         // }
+
+        //check for signals attached to the object
+        if(!!newObj.properties.on_death) {
+            newObj.events.onDestroy.add(function() {
+                //decopose the signal data
+                var signalData = this.properties.on_death.split(',');
+                var signalName = signalData.shift();
+
+                var params = {};
+
+                while(signalData.length) {
+
+                    var paramData = signalData.shift();
+                    paramData = paramData.split(':');
+
+                    params[paramData[0]] = paramData[1];
+                }
+
+                events.publish(signalName, params);
+
+            }, newObj);
+        }
     }
 };
