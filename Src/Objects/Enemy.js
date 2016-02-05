@@ -254,7 +254,7 @@ Enemy.prototype.PlayerDistance = function() {
 
 Enemy.prototype.PlayerIsVisible = function() {
 
-    return true;
+    return this.WithinCameraRange();
 
     var ray = new Phaser.Line(frauki.body.center.x, frauki.body.center.y, this.body.center.x, this.body.center.y);
     var collideTiles = Frogland.GetCurrentCollisionLayer().getRayCastTiles(ray, 1, true);
