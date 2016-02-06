@@ -4091,6 +4091,8 @@
    <properties>
     <property name="closed_graphic" value="skull"/>
     <property name="id" value="second_enem"/>
+    <property name="open_graphic" value="skull_open"/>
+    <property name="open_sound" value="skull_door"/>
    </properties>
   </object>
   <object id="1851" gid="67" x="1731" y="3258" width="16" height="16">
@@ -4106,7 +4108,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="Triggers_3">
+ <objectgroup name="Triggers_3" visible="0">
   <object id="1568" name="light" type="trigger" x="1035.91" y="4347.5" width="113.333" height="226">
    <properties>
     <property name="once" value="false"/>
@@ -5823,7 +5825,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="Objects_4" visible="0">
+ <objectgroup name="Objects_4">
   <object id="1303" gid="86" x="1024" y="4368" width="16" height="16"/>
   <object id="1304" gid="86" x="1024" y="4192" width="16" height="16"/>
   <object id="1305" gid="85" x="784" y="4224" width="16" height="16"/>
@@ -6046,6 +6048,7 @@
   <object id="1831" type="shard" gid="67" x="2984.5" y="3354" width="16" height="16">
    <properties>
     <property name="id" value="first_prism_door"/>
+    <property name="open_sound" value="crystal_door"/>
     <property name="prism" value="Will"/>
    </properties>
   </object>
@@ -6066,6 +6069,8 @@
    <properties>
     <property name="closed_graphic" value="skull"/>
     <property name="id" value="first_enem"/>
+    <property name="open_graphic" value="skull_open"/>
+    <property name="open_sound" value="skull_door"/>
    </properties>
   </object>
  </objectgroup>

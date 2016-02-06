@@ -29,6 +29,7 @@ Door = function(game, x, y, name) {
     this.animations.add('left_dead', ['Door0006'], 10, true, false); 
     this.animations.add('right_dead', ['Door0007'], 10, true, false); 
     this.animations.add('skull', ['Door0008'], 10, true, false);
+    this.animations.add('skull_open', ['Door0009'], 10, true, false);
 
     this.animations.add('opening', ['Door0000'], 10, false, false);
 
@@ -143,6 +144,13 @@ function PerformOpen(d, save) {
     }, d);
 
     d.state = d.Opening;
+
+    //play a sound if one is specified
+    if(!!d.open_sound) {
+        events.publish('play_sound', {name: d.open_sound, restart: true });
+    } else {
+        events.publish('play_sound', {name: 'door_break', restart: true });
+    }
 
 
     if(Frogland.openDoors.indexOf(d.id) === -1 && save) {

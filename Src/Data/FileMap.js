@@ -39,7 +39,11 @@ FileMap.Audio = [
 	{ Name: 'energy_bit', File: 'Data/Sfx/energy_bit.wav', Volume: 0.2, Loop: false },
 	{ Name: 'clang', File: 'Data/Sfx/clang.wav', Volume: 0.3, Loop: false },
 	{ Name: 'smash', File: 'Data/Sfx/smash.wav', Volume: 0.7, Loop: false },
-	{ Name: 'robosplosion', File: 'Data/Sfx/robosplosion.wav', Volume: 0.9, Loop: false }
+	{ Name: 'robosplosion', File: 'Data/Sfx/robosplosion.wav', Volume: 0.9, Loop: false },
+
+	{ Name: 'door_break', File: 'Data/Sfx/door_break.wav', Volume: 0.9, Loop: false },
+	{ Name: 'crystal_door', File: 'Data/Sfx/crystal_door.wav', Volume: 0.9, Loop: false },
+	{ Name: 'skull_door', File: 'Data/Sfx/skull_door.wav', Volume: 0.9, Loop: false },
 ];
 
 FileMap.Music = [

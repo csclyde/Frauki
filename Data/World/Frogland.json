@@ -5894,7 +5894,9 @@
                  "properties":
                     {
                      "closed_graphic":"skull",
-                     "id":"second_enem"
+                     "id":"second_enem",
+                     "open_graphic":"skull_open",
+                     "open_sound":"skull_door"
                     },
                  "rotation":0,
                  "type":"",
@@ -6822,7 +6824,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "width":0,
          "x":0,
          "y":0
@@ -9944,6 +9946,7 @@
                  "properties":
                     {
                      "id":"first_prism_door",
+                     "open_sound":"crystal_door",
                      "prism":"Will"
                     },
                  "rotation":0,
@@ -10011,7 +10014,9 @@
                  "properties":
                     {
                      "closed_graphic":"skull",
-                     "id":"first_enem"
+                     "id":"first_enem",
+                     "open_graphic":"skull_open",
+                     "open_sound":"skull_door"
                     },
                  "rotation":0,
                  "type":"",
@@ -10022,7 +10027,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "width":0,
          "x":0,
          "y":0
