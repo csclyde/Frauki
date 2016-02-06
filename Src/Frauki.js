@@ -75,7 +75,6 @@ Player = function (game, x, y, name) {
     events.subscribe('player_jump', this.Jump, this);
     events.subscribe('player_crouch', this.Crouch, this);
     events.subscribe('player_slash', this.Slash, this);
-    events.subscribe('player_power_slash', this.Slash, this);
     events.subscribe('player_roll', this.Roll, this);
     events.subscribe('player_run', this.StartStopRun, this);
     events.subscribe('control_up', function(params) { 
@@ -290,7 +289,7 @@ Player.prototype.Attacking = function() {
 Player.prototype.InAttackAnim = function() {
     var frameName = this.animations.currentAnim.name;
 
-    if(['attack_front', 'attack_overhead', 'attack_jump', 'attack_stab', 'attack_dive_charge', 'attack_dive_fall', 'attack_dive_land', 'attack_fall', 'attack_lunge'].indexOf(frameName) > -1) {
+    if(['attack_front', 'attack_overhead', 'attack_jump', 'attack_stab', 'attack_dive_charge', 'attack_dive_fall', 'attack_dive_land', 'attack_fall', 'attack_lunge', 'attack_whiff'].indexOf(frameName) > -1) {
         return true;
     } else {
         return false;
@@ -471,6 +470,9 @@ Player.prototype.Crouch = function(params) {
 
 Player.prototype.Slash = function(params) {
 
+    //stop the current weapon
+    events.publish('activate_weapon', { activate: false });
+
     //diving dash
     if(!this.timers.TimerUp('frauki_dash') && this.states.crouching && (this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling || this.state === this.Flipping)) {
         this.DiveSlash();
@@ -629,6 +631,7 @@ Player.prototype.StabSlash = function() {
 };
 
 Player.prototype.WhiffSlash = function() {
+
     this.state = this.AttackWhiff;
 };
 
@@ -1037,6 +1040,8 @@ Player.prototype.AttackFront = function() {
         } else { 
             this.state = this.Standing;
         }
+
+        if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true });
     }
 };
 
@@ -1051,6 +1056,8 @@ Player.prototype.AttackWhiff = function() {
         } else { 
             this.state = this.Standing;
         }
+
+        if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true });
     }
 };
 
@@ -1076,6 +1083,8 @@ Player.prototype.AttackLunge = function() {
         } else { 
             this.state = this.Standing;
         }
+
+        if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true });
     }
 };
 
@@ -1116,6 +1125,8 @@ Player.prototype.AttackFall = function() {
         }
 
         this.states.attackFallLanded = false;
+
+        if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true });
     }
 };
 
@@ -1128,6 +1139,8 @@ Player.prototype.AttackOverhead = function() {
     
     if(this.animations.currentAnim.isFinished) {
         this.state = this.Standing;
+
+        if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true });
     }
 };
 
@@ -1181,6 +1194,8 @@ Player.prototype.AttackStab = function() {
         } else {
             this.state = this.Standing;
         }
+
+        if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true });
     }
 };
 
@@ -1244,6 +1259,8 @@ Player.prototype.AttackDiveLand = function() {
         else {
             this.state = this.Running;
         }
+
+        if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true });
     }
 };
 
@@ -1252,5 +1269,6 @@ Player.prototype.AttackJump = function() {
 
     if(this.animations.currentAnim.isFinished) {
         this.state = this.Jumping;
+        if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true });
     }
 };

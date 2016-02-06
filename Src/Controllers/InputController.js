@@ -7,6 +7,9 @@ InputController = function() {
     this.dpad.left = false;
     this.dpad.right = false;
 
+    this.buttons = {};
+    this.buttons.rShoulder = false;
+
     events.subscribe('player_run', function(params) { 
         if(params.dir === 'left') { inputController.dpad.left = params.run; }
         if(params.dir === 'right') { inputController.dpad.right = params.run; }
@@ -82,7 +85,6 @@ InputController = function() {
             break;
 
             case inputController.binds.weapon:
-                events.publish('activate_weapon', { activate: true });
             break;
 
             case inputController.binds.roll:
@@ -90,7 +92,9 @@ InputController = function() {
             break;
 
             case inputController.binds.shoulderR:
-                weaponController.Next();
+                events.publish('activate_weapon', { activate: true });
+                this.buttons.rShoulder = true;
+                //weaponController.Next();
             break;
 
         }
@@ -128,13 +132,14 @@ InputController = function() {
             break;
 
             case inputController.binds.weapon:
-                events.publish('activate_weapon', { activate: false });
             break;
 
             case inputController.binds.roll:
             break;
 
             case inputController.binds.shoulderR:
+                events.publish('activate_weapon', { activate: false });
+                this.buttons.rShoulder = false;
             break;
 
         }
@@ -199,7 +204,6 @@ InputController = function() {
                 break;
 
                 case 3:
-                    events.publish('activate_weapon', { activate: true });
                 break;
 
                 case 8: //select
@@ -208,13 +212,14 @@ InputController = function() {
                 break;
 
                 case 5: //right shoulder
-                    weaponController.Next();
-                    break;
+                    //weaponController.Next();
                 case 7: //right shoulder
+                    events.publish('activate_weapon', { activate: true });
+                    this.buttons.rShoulder = true;
                 break;
 
                 case 4: //left shoulder
-                    weaponController.Prev();
+                    //weaponController.Prev();
                     break;
                 case 6: //left shoulder
 
@@ -256,7 +261,6 @@ InputController = function() {
                 break;
 
                 case 3:
-                    events.publish('activate_weapon', { activate: false });
                 break;
 
                 case 8: //select
@@ -265,6 +269,8 @@ InputController = function() {
 
                 case 5: //right shoulder
                 case 7: //right shoulder
+                    events.publish('activate_weapon', { activate: false });
+                    this.buttons.rShoulder = false;
                 break;
 
                 case 4: //left shoulder

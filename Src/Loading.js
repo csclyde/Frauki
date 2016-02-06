@@ -37,6 +37,11 @@ Loading.preload = function() {
         game.load.audio(audio.Name, audio.File);
     });
 
+    //load music
+    FileMap.Music.forEach(function(music) {
+        game.load.audio(music.Name, music.File);
+    });
+
     game.load.bitmapFont('font', 'Design/Sprites/UI/pixelFont_0.png', 'Design/Sprites/UI/pixelFont.fnt');
 
     game.renderer.renderSession.roundPixels = true;

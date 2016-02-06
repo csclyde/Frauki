@@ -4106,7 +4106,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="Triggers_3" visible="0">
+ <objectgroup name="Triggers_3">
   <object id="1568" name="light" type="trigger" x="1035.91" y="4347.5" width="113.333" height="226">
    <properties>
     <property name="once" value="false"/>

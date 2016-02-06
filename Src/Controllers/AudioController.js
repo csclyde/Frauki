@@ -20,7 +20,6 @@ AudioController = function() {
 
     //load audio
     FileMap.Audio.forEach(function(audio) {
-        game.load.audio(audio.Name, audio.File);
         that.sounds[audio.Name] = game.add.audio(audio.Name, audio.Volume, audio.Loop);
     });
 
@@ -43,7 +42,6 @@ AudioController = function() {
         // };
         // xhr.send();
 
-        game.load.audio(music.Name, music.File);
         that.music[music.Name] = game.add.audio(music.Name, music.Volume, music.Loop);
     });
 };
@@ -81,7 +79,7 @@ AudioController.prototype.StopSound = function(params) {
 
 AudioController.prototype.PlayMusic = function(params) {
     if(!!params.name && !!this.music[params.name] && !!this.music[params.name].play) {
-            //this.music[params.name].play();
+            this.music[params.name].play();
     }
 };
 

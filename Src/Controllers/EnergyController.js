@@ -14,21 +14,10 @@ EnergyController = function() {
 	this.charging = false;
 
 	this.energyUsageTimestamp = 0;
-
-	events.subscribe('player_power_slash', function() { that.charge = 0; });
 };
 
 EnergyController.prototype.Create = function() {
 
-	// this.energyBarWhite = game.add.image(9, 9, 'UI', 'EnergyBar0003');
-	// this.energyBarWhite.fixedToCamera = true;
-	// this.energyBarWhite.anchor.x = 0;
-	// this.energyBarWhite.visible = false;
-
-	// this.energyBarRed = game.add.image(9, 9, 'UI', 'EnergyBar0004');
-	// this.energyBarRed.fixedToCamera = true;
-	// this.energyBarRed.anchor.x = 0;
-	// this.energyBarRed.visible = false;
 };
 
 EnergyController.prototype.Update = function() {
@@ -43,8 +32,12 @@ EnergyController.prototype.Update = function() {
 		step += ((game.time.now - this.energyUsageTimestamp) / 2000) * 0.10;
 	}
 
+	if(frauki.InAttackAnim() || frauki.Attacking() || frauki.state === frauki.Rolling) {
+		step /= 10;
+	}
+
 	//if the timer is up, tick the energy and reset the timer
-	if(game.time.now > this.tickTimer && game.time.now > this.gracePeriod && !frauki.Attacking() && frauki.state !== frauki.Rolling) {
+	if(game.time.now > this.tickTimer && game.time.now > this.gracePeriod) {
 		if(Math.abs(energyDiff) < step) {
 			this.energy = 15;
 		} else {

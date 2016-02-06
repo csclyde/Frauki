@@ -109,6 +109,16 @@ Collision.OverlapAttackWithEnemy = function(f, e) {
 
     var damage = frauki.GetCurrentDamage();
 
+    //if frauki is blocking
+    if(damage <= 0){
+        if(e.CanCauseDamage()) {
+            energyController.energy -= e.damage * 3;
+        } else {
+            return;
+        }
+
+    }
+
     e.body.velocity.x = (250 * frauki.GetCurrentKnockback()) + 200;
     e.body.velocity.x *= e.PlayerDirMod();
     
@@ -159,6 +169,10 @@ Collision.OverlapAttackWithEnemy = function(f, e) {
 
 Collision.OverlapAttackWithEnemyAttack = function(e, f) {
 
+    //if both attacks are zero damage, do nothing
+    if(e.owningEnemy.currentAttack.damage <= 0 && frauki.GetCurrentDamage() <= 0)
+        return;
+
     console.log('Frauki: ' + frauki.GetCurrentPriority(), 'Enemy:' + e.owningEnemy.currentAttack.priority);
 
     //if fraukis attack has priority over the enemies attack, they cant block it
@@ -192,6 +206,8 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
 
     e.timers.SetTimer('grace', 400);
     frauki.timers.SetTimer('frauki_hit', 300);
+
+    energyController.energy -= e.currentAttack.damage * 3;
 
     if(!!e.Block) e.Block();
 };

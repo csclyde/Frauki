@@ -88,11 +88,14 @@ WeaponController.prototype.Update = function() {
 WeaponController.prototype.ToggleWeapon = function(params) {
     this.weaponActive = params.activate;
     
+    //if they have a weapon
     if(this.currentWeapon != null) {
-        if(params.activate && frauki.timers.TimerUp('grace') && frauki.state !== frauki.Hurting) {
+        //and the toggle is to activate it
+        if(params.activate && frauki.state !== frauki.Hurting) {
             this.currentWeapon.Start();
             this.weaponActive = true;
-        } else if(this.weaponActive) {
+        //otherwise, if the toggle is to deactivate it
+        } else {
             this.currentWeapon.Stop();
             this.weaponActive = false;
         }
@@ -301,8 +304,11 @@ WeaponController.prototype.Shield = {
 
     Init: function() {
         this.forceField = game.add.sprite(0, 0, 'Misc');
-        this.forceField.animations.add('activate', ['ForceField0000', 'ForceField0001', 'ForceField0002', 'ForceField0003', 'ForceField0004', 'ForceField0005', 'ForceField0006', 'ForceField0007', 'ForceField0008'], 18, false, false);
+        this.forceField.animations.add('open', ['ForceField0000'], 18, false, false);
+        this.forceField.animations.add('active', ['ForceField0001', 'ForceField0002'], 20, true, false);
+        this.forceField.animations.add('close', ['ForceField0003', 'ForceField0004', 'ForceField0005', 'ForceField0006', 'ForceField0007', 'ForceField0008'], 18, false, false);
         this.forceField.visible = false;
+        this.forceField.alpha = 0.5;
     },
 
     GetDamageFrame: function() {
@@ -315,27 +321,31 @@ WeaponController.prototype.Shield = {
 
     Start: function() {
 
-        if(energyController.charge >= 3 && this.forceField.visible === false) {
-            this.forceField.animations.play('activate');
+        if(this.forceField.visible === false) {
+            this.forceField.animations.play('open');
             this.forceField.visible = true;
-            energyController.RemoveCharge(5);
         }
 
     },
 
     Update: function() {
+        if(this.forceField.animations.currentAnim.name === 'open' && this.forceField.animations.currentAnim.isFinished)
+        this.forceField.animations.play('active');
     },
 
     UpdateOverride: function() {
         this.forceField.x = frauki.body.x - 43;
         this.forceField.y = frauki.body.y - 30;
 
-        if(this.forceField.visible && this.forceField.animations.currentAnim.isFinished) {
+        if(this.forceField.visible && this.forceField.animations.currentAnim.name === 'close' && this.forceField.animations.currentAnim.isFinished) {
             this.forceField.visible = false;
         }
     },
 
     Stop: function() {
+        this.forceField.animations.play('close');
+
+        console.log('stopping sheild');
     },
 
     DamageFrames: {
