@@ -176,13 +176,14 @@ ObjectController.prototype.CreateObjectsLayer = function(layer) {
 
 
     FileMap.Runes.forEach(function(rune) {
-        Frogland.map.createFromObjects('Objects_' + layer, rune.Tile, rune.Name, rune.Name, true, true, that[currLayer], TechnoRune, false);
+        Frogland.map.createFromObjects('Objects_' + layer, rune.Tile, rune.Name, rune.Name, true, true, currLayer, TechnoRune, false);
     });
 
     Frogland.map.createFromObjects('Objects_' + layer, 69, 'Misc', 'Checkpoint0000', true, true, currLayer, Checkpoint, false);
 
     //activate the correct checkpoint
     if(!localStorage.getItem('fraukiCheckpoint')) localStorage.setItem('fraukiCheckpoint', '0');
+
     //create the doors
     Frogland.map.createFromObjects('Objects_' + layer, 67, 'Misc', 'Door0000', true, true, currLayer, Door, false);
     

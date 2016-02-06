@@ -489,11 +489,13 @@ Player.prototype.Slash = function(params) {
     }
     //normal slashes while standing or running
     else if(this.state === this.Standing || this.state === this.Landing || this.state === this.Running || this.state === this.Jumping || this.state === this.Flipping || this.state === this.Crouching) {
-        if(!this.timers.TimerUp('frauki_dash') && (inputController.dpad.left || inputController.dpad.right)) {
-            this.LungeSlash();
-        } else {
-            this.FrontSlash();
-        } 
+        // if(!this.timers.TimerUp('frauki_dash') && (inputController.dpad.left || inputController.dpad.right)) {
+        //     this.LungeSlash();
+        // } else {
+        //     this.FrontSlash();
+        // } 
+
+        this.FrontSlash();
     } 
     else {
         console.log('An attack was attempted in an unresolved state ', this.state);
@@ -518,6 +520,8 @@ Player.prototype.FrontSlash = function() {
 
             effectsController.EnergyStreak();
             effectsController.SpriteTrail(frauki, 150, 500, 300);
+        } else {
+            this.WhiffSlash();
         }
     } 
 };
@@ -530,6 +534,8 @@ Player.prototype.LungeSlash = function() {
 
         effectsController.EnergyStreak();
         effectsController.SpriteTrail(frauki, 150, 500, 300);
+    } else {
+        this.WhiffSlash();
     }
 };
 
@@ -542,6 +548,8 @@ Player.prototype.FallSlash = function() {
 
         effectsController.EnergyStreak();
         effectsController.SpriteTrail(frauki, 150, 500, 300);
+    } else {
+        this.WhiffSlash();
     }
 };
 
@@ -555,6 +563,8 @@ Player.prototype.DiveSlash = function() {
 
             effectsController.EnergyStreak();
             effectsController.SpriteTrail(frauki, 150, 500, 300);
+        } else {
+            this.WhiffSlash();
         }
     } else {
         this.FrontSlash();
@@ -577,6 +587,8 @@ Player.prototype.JumpSlash = function() {
 
         effectsController.EnergyStreak();
         effectsController.SpriteTrail(frauki, 150, 400, 300);
+    } else {
+        this.WhiffSlash();
     }
 };
 
@@ -608,10 +620,16 @@ Player.prototype.StabSlash = function() {
             effectsController.EnergyStreak();
             effectsController.SpriteTrail(frauki, 150, 800, 300);
             
+        } else {
+            this.WhiffSlash();
         }
     } else {
         this.FrontSlash();
     }
+};
+
+Player.prototype.WhiffSlash = function() {
+    this.state = this.AttackWhiff;
 };
 
 Player.prototype.Roll = function(params) {
@@ -1010,6 +1028,20 @@ Player.prototype.AttackFront = function() {
     } else if(this.states.direction === 'left' && this.body.acceleration.x > 0) {
         this.body.velocity.x /= 10;
     }
+
+    if(this.animations.currentAnim.isFinished) {
+        if(inputController.dpad.down && !inputController.dpad.left && !inputController.dpad.right && this.body.onFloor()) {
+            this.state = this.Crouching;
+            this.PlayAnim('crouch');
+            this.animations.currentAnim.setFrame('Crouch0008');
+        } else { 
+            this.state = this.Standing;
+        }
+    }
+};
+
+Player.prototype.AttackWhiff = function() {
+    this.PlayAnim('attack_whiff');
 
     if(this.animations.currentAnim.isFinished) {
         if(inputController.dpad.down && !inputController.dpad.left && !inputController.dpad.right && this.body.onFloor()) {
