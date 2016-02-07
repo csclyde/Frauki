@@ -143,9 +143,9 @@ Main.Restart = function() {
         frauki.state = frauki.Materializing;
         frauki.SetDirection('right');
 
-        energyController.energy = 15;
-        energyController.charge = 30;
-        energyController.neutralPoint = 30;
+        energyController.ResetEnergy();
+        energyController.ResetCharge();
+        energyController.ResetHealth();
         game.time.slowMotion = 1;
         //game.world.alpha = 1;
         effectsController.Fade(false);
@@ -202,25 +202,25 @@ Main.DrawUI = function() {
     this.RenderTextureFromAtlas('UI', 'EnergyBar0001', 12 * pixel.scale, 24 * pixel.scale);
 
     //the stamina bar
-    this.RenderTextureFromAtlas('UI', 'EnergyBar0002', 12 * pixel.scale, 23 * pixel.scale, energyController.energy / 15);
+    this.RenderTextureFromAtlas('UI', 'EnergyBar0002', 12 * pixel.scale, 23 * pixel.scale, energyController.GetEnergy() / 15);
 
     //if theyre carrying the wit shard
     if(GetCurrentShardType() === 'Wit') {
         //oscillate the opacity of the white bar on top
-        this.RenderTextureFromAtlas('UI', 'EnergyBar0003', 12 * pixel.scale, 23 * pixel.scale, energyController.energy / 15, 1, (Math.sin(game.time.now / 80) + 1) / 2);
+        this.RenderTextureFromAtlas('UI', 'EnergyBar0003', 12 * pixel.scale, 23 * pixel.scale, energyController.GetEnergy() / 15, 1, (Math.sin(game.time.now / 80) + 1) / 2);
     }
 
     //the health bar
-    this.RenderTextureFromAtlas('UI', 'EnergyBar0004', 12 * pixel.scale, 12 * pixel.scale, energyController.neutralPoint / 30);
+    this.RenderTextureFromAtlas('UI', 'EnergyBar0004', 12 * pixel.scale, 12 * pixel.scale, energyController.GetHealth() / 30);
 
     //oscillate the white bar on top of the health if they have will
     if(GetCurrentShardType() === 'Will') {
         //oscillate the opacity of the white bar on top
-        this.RenderTextureFromAtlas('UI', 'EnergyBar0003', 12 * pixel.scale, 12 * pixel.scale, energyController.neutralPoint / 30, 1, (Math.sin(game.time.now / 80) + 1) / 2);
+        this.RenderTextureFromAtlas('UI', 'EnergyBar0003', 12 * pixel.scale, 12 * pixel.scale, energyController.GetHealth() / 30, 1, (Math.sin(game.time.now / 80) + 1) / 2);
     }
 
     //the special bar
-    this.RenderTextureFromAtlas('UI', 'EnergyBar0006', 12 * pixel.scale, 34 * pixel.scale, energyController.charge / 30);
+    this.RenderTextureFromAtlas('UI', 'EnergyBar0006', 12 * pixel.scale, 34 * pixel.scale, energyController.GetCharge() / 30);
 
     //finally, the frame on top of everything else
     this.RenderTextureFromAtlas('UI', 'EnergyBar0000', 10 * pixel.scale, 10 * pixel.scale);

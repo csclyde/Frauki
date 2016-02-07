@@ -24,8 +24,8 @@ InputController = function() {
     this.testButton.onDown.add(function() { events.publish('stop_all_music'); });
 
     this.testButton2.onDown.add(function() { 
-        energyController.neutralPoint += 2;
-        energyController.charge += 4;
+        energyController.AddHealth(2);
+        energyController.AddCharge(4);
     });
 
     this.binds = {};

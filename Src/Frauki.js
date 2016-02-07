@@ -504,7 +504,6 @@ Player.prototype.Slash = function(params) {
         return;
     }
 
-    this.timers.SetTimer('frauki_slash', 400 * (1 / energyController.GetEnergyPercentage()));
     this.timers.SetTimer('smash_timer', 200);
     this.timers.SetTimer('updash_timer', 200);
 };
@@ -727,7 +726,7 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
     //effectsController.SpawnEnergyNuggets(this.body, e.body, 'negative', damage);
     effectsController.EnergySplash(frauki.body, 100, 'positive', 20, frauki.body.velocity);
 
-    energyController.RemovePower(damage);
+    energyController.RemoveHealth(damage);
     energyController.AddCharge(damage / 10);
 
     console.log('Frauki is taking ' + damage + ' damage');
@@ -744,7 +743,7 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
     events.publish('camera_shake', {magnitudeX: 8, magnitudeY: 5, duration: 500});
     effectsController.SpriteTrail(frauki, 200, 800, 300, 0xf20069);
 
-    if(energyController.neutralPoint > 0) {
+    if(energyController.GetHealth() > 0) {
         effectsController.ScreenFlash();
         effectsController.SlowHit(400);
     } else {

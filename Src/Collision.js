@@ -112,7 +112,7 @@ Collision.OverlapAttackWithEnemy = function(f, e) {
     //if frauki is blocking
     if(damage <= 0){
         if(e.CanCauseDamage()) {
-            energyController.energy -= e.damage * 3;
+            energyController.RemoveEnergy(e.damage * 3);
         } else {
             return;
         }
@@ -207,7 +207,7 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
     e.timers.SetTimer('grace', 400);
     frauki.timers.SetTimer('frauki_hit', 300);
 
-    energyController.energy -= e.currentAttack.damage * 3;
+    energyController.RemoveEnergy(e.currentAttack.damage * 3);
 
     if(!!e.Block) e.Block();
 };

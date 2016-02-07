@@ -2,22 +2,19 @@ EnergyController = function() {
 
 	var that  = this;
 
-	this.energy = 30;
-	this.neutralPoint = 30;
+	this.energy = 15;
+	this.health = 30;
 	this.charge = 30;
-	this.activeCharge = 0;
+
 	this.tickTimer = 0;
 	this.gracePeriod = 0;
 
 	this.timers = new TimerUtil();
 
-	this.charging = false;
-
 	this.energyUsageTimestamp = 0;
 };
 
 EnergyController.prototype.Create = function() {
-
 };
 
 EnergyController.prototype.Update = function() {
@@ -67,9 +64,9 @@ EnergyController.prototype.Update = function() {
 		this.charge = 0;
 	}
 
-	if(this.neutralPoint > 30)
-		this.neutralPoint = 30;
-	if(this.neutralPoint <= 0)
+	if(this.health > 30)
+		this.health = 30;
+	if(this.health <= 0)
 		Main.Restart();
 
 	// if(this.InBeastMode() && this.energyBar.visible) {
@@ -104,57 +101,78 @@ EnergyController.prototype.RemoveEnergy = function(amt) {
 };
 
 EnergyController.prototype.AddEnergy = function(amt) {
+
 	this.energy += amt;
 };
 
 EnergyController.prototype.GetEnergy = function() {
+	
 	return this.energy > 0 ? (Math.round(this.energy * 10) / 10) : 0;
 };
 
-EnergyController.prototype.AddPower = function(amt) {
-	this.neutralPoint += amt;
+EnergyController.prototype.AddHealth = function(amt) {
+
+	this.health += amt;
 };
 
-EnergyController.prototype.InBeastMode = function() {
-	if(this.neutralPoint < 6) {
-		return true;
-	} else {
-		return false;
-	}
-}
+EnergyController.prototype.RemoveHealth = function(amt) {
 
-EnergyController.prototype.RemovePower = function(amt) {
-
-	this.neutralPoint -= amt;
+	this.health -= amt;
 	
-	// if(this.energy > this.neutralPoint) {
-	// 	if(this.energy - this.neutralPoint > amt) {
+	// if(this.energy > this.health) {
+	// 	if(this.energy - this.health > amt) {
 	// 		this.energy -= amt;
 	// 	} else {
-	// 		amt -= (this.energy - this.neutralPoint);
-	// 		this.neutralPoint -= amt;
-	// 		this.energy = this.neutralPoint;
+	// 		amt -= (this.energy - this.health);
+	// 		this.health -= amt;
+	// 		this.energy = this.health;
 	// 	}
 	// } else {
-	// 	this.neutralPoint -= amt;
+	// 	this.health -= amt;
 
-	// 	if(this.energy > this.neutralPoint) {
-	// 		this.energy = this.neutralPoint;
+	// 	if(this.energy > this.health) {
+	// 		this.energy = this.health;
 	// 	}
 	// }
 };
 
-EnergyController.prototype.GetEnergyPercentage = function() {
-	var percentageCurve = [0.5, 1, 2];
+EnergyController.prototype.GetHealth = function() {
 
-	return game.math.catmullRomInterpolation(percentageCurve, this.energy / 30);
+	return this.health;
+};
+
+EnergyController.prototype.GetEnergy = function() {
+
+	return this.energy;
+};
+
+EnergyController.prototype.GetCharge = function() {
+
+	return this.charge;
+};
+
+EnergyController.prototype.ResetHealth = function() {
+
+	this.health = 30;
+};
+
+EnergyController.prototype.ResetEnergy = function() {
+
+	this.energy = 15;
+};
+
+EnergyController.prototype.ResetCharge = function() {
+
+	this.charge = 30;
 };
 
 EnergyController.prototype.AddCharge = function(amt) {
+
 	this.charge += amt;
 };
 
 EnergyController.prototype.RemoveCharge = function(amt) {
+
 	this.charge -= amt;
 };
 
@@ -167,12 +185,7 @@ EnergyController.prototype.UseCharge = function(amt) {
 	}
 };
 
-EnergyController.prototype.GetDifficultyModifier = function() {
-	var percentageCurve = [-0.5, 0, 1];
-
-	return game.math.catmullRomInterpolation(percentageCurve, this.neutralPoint / 30);
-};
-
 EnergyController.prototype.MaxCharge = function() {
+
 	this.charge = 30;
 };

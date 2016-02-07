@@ -49,15 +49,15 @@ TriggerController.prototype.triggers['regen'] = {
 
 	stay: function(params) {
 
-		var energyDiff = Math.abs(this.neutralPoint - 30);
+		var energyDiff = Math.abs(energyController.GetHealth() - 30);
 		var step = 0.10;
 
-		//if the timer is up, tick the neutralPoint and reset the timer
+		//if the timer is up, tick the health and reset the timer
 		if(game.time.now > triggerController.tickTimer) {
 			if(energyDiff < step) {
-				energyController.neutralPoint = 30;
+				energyController.ResetHealth();
 			} else {
-				energyController.neutralPoint += step;
+				energyController.AddHealth(step);
 			}
 
 			triggerController.tickTimer = game.time.now + 20;

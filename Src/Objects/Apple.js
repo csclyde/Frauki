@@ -58,7 +58,7 @@ function EatApple(f, a) {
         game.time.events.add(1000, function(){ a.destroy(); } );
     }, a);
 
-    energyController.AddPower(5);
+    energyController.AddHealth(5);
 };
 
 Apple.prototype.PlayAnim = function(name) {

@@ -420,7 +420,7 @@ WeaponController.prototype.Saw = {
 
     Start: function() {
 
-        if(energyController.charge >= 10 && frauki.Roll()) {
+        if(energyController.GetCharge() >= 10 && frauki.Roll()) {
             this.saw.animations.play('activate');
             this.saw.visible = true;
             energyController.RemoveCharge(10);
@@ -487,7 +487,7 @@ WeaponController.prototype.Jumper = {
 
     Start: function() {
         //the initial activity when you press the button
-        if(energyController.charge >= 0) {
+        if(energyController.GetCharge() >= 0) {
             frauki.states.dashing = true;
             
             // //set direction based on which way youre holding the buttons
