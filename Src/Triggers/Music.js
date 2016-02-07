@@ -1,6 +1,6 @@
 TriggerController.prototype.triggers['music_left_right'] = {
 	enter: function(params, trigger) {
-		events.publish('stop_all_music');
+		events.publish('stop_all_music', { fadeOut: 300 });
 	},
 
 	stay: function(params, trigger) {
@@ -18,7 +18,7 @@ TriggerController.prototype.triggers['music_left_right'] = {
 
 TriggerController.prototype.triggers['music_up_down'] = {
 	enter: function(params, trigger) {
-		events.publish('stop_all_music');
+		events.publish('stop_all_music', { fadeOut: 300 });
 	},
 
 	stay: function(params, trigger) {
