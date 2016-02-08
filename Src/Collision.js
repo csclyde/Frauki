@@ -133,7 +133,7 @@ Collision.OverlapAttackWithEnemy = function(f, e) {
 
     e.energy -= damage;
 
-    console.log('Enemy is taking ' + damage + ', now at ' + e.energy + '/' + e.maxEnergy, 'x: ' + e.body.velocity.x, 'y: ' + e.body.velocity.y);
+    console.log('Enemy taking ' + damage + ', at ' + e.energy + '/' + e.maxEnergy);
 
     if(e.energy <= 0) {
 

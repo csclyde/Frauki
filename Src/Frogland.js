@@ -27,8 +27,6 @@ Frogland.Create = function() {
     this.map.addTilesetImage('Doodads');
     this.map.addTilesetImage('Collision');
 
-    this.openDoors = JSON.parse(localStorage.getItem('fraukiDoors')) || [];
-
     var fraukiStartX, fraukiStartY, startLayer;
 
     if(this.map.properties.debug === 'false') {
@@ -168,7 +166,7 @@ Frogland.SpawnFrauki = function() {
     if(Frogland.map.properties.debug === 'false') {
 
         Frogland.objectGroup_2.forEach(function(obj) {
-            if(obj.spriteType === 'checkpoint' && obj.id == localStorage.getItem('fraukiCheckpoint')) {
+            if(obj.spriteType === 'checkpoint' && obj.id == GameData.GetCheckpoint()) {
                 frauki.x = obj.x;
                 frauki.y = obj.y + 20;
                 Frogland.ChangeLayer(obj.owningLayer);   
@@ -176,7 +174,7 @@ Frogland.SpawnFrauki = function() {
         });  
 
         Frogland.objectGroup_3.forEach(function(obj) {
-            if(obj.spriteType === 'checkpoint' && obj.id == localStorage.getItem('fraukiCheckpoint')) {
+            if(obj.spriteType === 'checkpoint' && obj.id == GameData.GetCheckpoint()) {
                 frauki.x = obj.x;
                 frauki.y = obj.y + 20;
                 Frogland.ChangeLayer(obj.owningLayer);   
@@ -184,7 +182,7 @@ Frogland.SpawnFrauki = function() {
         }); 
 
         Frogland.objectGroup_4.forEach(function(obj) {
-            if(obj.spriteType === 'checkpoint' && obj.id == localStorage.getItem('fraukiCheckpoint')) {
+            if(obj.spriteType === 'checkpoint' && obj.id == GameData.GetCheckpoint()) {
                 frauki.x = obj.x;
                 frauki.y = obj.y + 20;
                 Frogland.ChangeLayer(obj.owningLayer);   
@@ -282,8 +280,6 @@ Frogland.PreprocessTiles = function(layer) {
                 tile.faceDown = true;
                 tile.faceLeft = true;
                 tile.faceRight = true;
-
-                console.log('rug tile');
             }
         }
            

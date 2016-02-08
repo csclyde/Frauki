@@ -32,12 +32,6 @@ Checkpoint.prototype.update = function() {
     } else {
         this.animations.play('inactive');
     }
-
-    // if(Frogland.currentLayer !== this.owningLayer) {
-    //     this.visible = false;
-    // } else {
-    //     this.visible = true;
-    // }
 };
 
 Checkpoint.prototype.CheckpointHit = function(o) {
@@ -46,7 +40,7 @@ Checkpoint.prototype.CheckpointHit = function(o) {
         check.active = false;
     });
 
-    localStorage.setItem('fraukiCheckpoint', this.id);
+    GameData.SetCheckpoint(this.id);
 
 	this.active = true;
 };

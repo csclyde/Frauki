@@ -54,9 +54,7 @@ function EatTechnoRune(f, r) {
 
     effectsController.EnergySplash(r.body, 100, 'neutral');
 
-    frauki.upgradeSaves = [];
-    frauki.upgradeSaves.push(r.runeName);
-    localStorage.setItem('fraukiUpgrades', JSON.stringify(frauki.upgradeSaves));
+    GameData.SetUpgrade(r.runeName);
 
     weaponController.EquipNewWeapon(r.runeName);
 

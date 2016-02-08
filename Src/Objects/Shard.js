@@ -83,9 +83,6 @@ function DropShard(shard) {
         shard.state = shard.Floating;
 
         shard.timers.SetTimer('pickup_delay', 1500);
-
-        console.log('actually dropping shard');
-
     }
 };
 
@@ -120,7 +117,6 @@ Shard.prototype.Carried = function() {
     }
 
     if(this.openingDoor) {
-        console.log('opening door');
         this.body.velocity.x = 0;
         this.body.acceleration.x = 0;
         this.body.velocity.y = 0;

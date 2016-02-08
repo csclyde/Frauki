@@ -52,15 +52,13 @@ Player = function (game, x, y, name) {
     this.movement.rollPrevVel = 0;
     this.movement.rollDirection = 1;
 
-    this.upgradeSaves = JSON.parse(localStorage.getItem('fraukiUpgrades')) || [];
-
     this.upgrades = {};
     this.upgrades.roll = true;
     this.upgrades.hike = true;
     this.upgrades.attackFront = true;
-    this.upgrades.attackOverhead = true; //this.upgradeSaves.indexOf('Overhead') > -1;
-    this.upgrades.attackStab = true; //this.upgradeSaves.indexOf('Stab') > -1;
-    this.upgrades.attackDive = true; //this.upgradeSaves.indexOf('Dive') > -1;
+    this.upgrades.attackOverhead = true;
+    this.upgrades.attackStab = true;
+    this.upgrades.attackDive = true;
 
     this.attack = {};
     this.attack.activeCharge = 0;
@@ -709,7 +707,7 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
         damage /= 1.5;
     }
 
-    if(this.state === this.Hurting || e.state === e.Hurting || frauki.Attacking() || frauki.Grace())
+    if(this.state === this.Hurting || e.state === e.Hurting || frauki.Grace())
         return;
 
     grace_duration = grace_duration || 1000;

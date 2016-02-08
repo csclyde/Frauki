@@ -10,25 +10,17 @@ WeaponController = function() {
     this.Lob.Init();
     this.Saw.Init();
 
-    this.upgradeSaves = JSON.parse(localStorage.getItem('fraukiUpgrades')) || [];
-
-    this.upgrades = {};
-    this.upgrades.lob = this.upgradeSaves.indexOf('Lob') > -1;
-    this.upgrades.shield = this.upgradeSaves.indexOf('Shield') > -1;
-    this.upgrades.mace = this.upgradeSaves.indexOf('Mace') > -1;
-    this.upgrades.saw = this.upgradeSaves.indexOf('Saw') > -1;
-
     this.weaponList = [];
 
-    if(this.upgradeSaves.indexOf('Lob') > -1) {
+    if(GameData.HasUpgrade('Lob')) {
         this.weaponList.push(this.Lob);
     }
 
-    if(this.upgradeSaves.indexOf('Shield') > -1) {
+    if(GameData.HasUpgrade('Shield')) {
         this.weaponList.push(this.Shield);
     }
 
-    if(this.upgradeSaves.indexOf('Saw') > -1) {
+    if(GameData.HasUpgrade('Saw')) {
         this.weaponList.push(this.Saw);
     }
 
@@ -344,8 +336,6 @@ WeaponController.prototype.Shield = {
 
     Stop: function() {
         this.forceField.animations.play('close');
-
-        console.log('stopping sheild');
     },
 
     DamageFrames: {

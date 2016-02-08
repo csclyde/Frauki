@@ -153,9 +153,8 @@ function PerformOpen(d, save) {
     }
 
 
-    if(Frogland.openDoors.indexOf(d.id) === -1 && save) {
-        Frogland.openDoors.push(d.id);
-        localStorage.setItem('fraukiDoors', JSON.stringify(Frogland.openDoors));
+    if(save) {
+        GameData.AddOpenDoor(d.id);
     }
 }
 

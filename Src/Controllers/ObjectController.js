@@ -147,23 +147,9 @@ ObjectController.prototype.SpawnObject = function(o) {
         //check for signals attached to the object
         if(!!newObj.properties.on_death) {
             newObj.events.onDestroy.add(function() {
-                //decopose the signal data
-                var signalData = this.properties.on_death.split(',');
-                var signalName = signalData.shift();
+                ComposeAndEmitSignal(newObj.properties.on_death);
 
-                var params = {};
-
-                while(signalData.length) {
-
-                    var paramData = signalData.shift();
-                    paramData = paramData.split(':');
-
-                    params[paramData[0]] = paramData[1];
-                }
-
-                events.publish(signalName, params);
-
-            }, newObj);
+            });
         }
     }
 };
@@ -182,7 +168,7 @@ ObjectController.prototype.CreateObjectsLayer = function(layer) {
     Frogland.map.createFromObjects('Objects_' + layer, 69, 'Misc', 'Checkpoint0000', true, true, currLayer, Checkpoint, false);
 
     //activate the correct checkpoint
-    if(!localStorage.getItem('fraukiCheckpoint')) localStorage.setItem('fraukiCheckpoint', '0');
+    if(!GameData.GetCheckpoint()) GameData.SetCheckpoint('0');
 
     //create the doors
     Frogland.map.createFromObjects('Objects_' + layer, 67, 'Misc', 'Door0000', true, true, currLayer, Door, false);
@@ -204,13 +190,13 @@ ObjectController.prototype.CreateObjectsLayer = function(layer) {
 
 
         if(obj.spriteType === 'door') {
-            if(Frogland.openDoors.indexOf(obj.id) > -1) {
+            if(GameData.IsDoorOpen(obj.id)) {
                 obj.body.enable = false;
                 obj.visible = false;
                 //OpenDoor(frauki, obj, true);
             }
         } else if(obj.spriteType === 'checkpoint') {
-            if(obj.id == localStorage.getItem('fraukiCheckpoint')) {
+            if(obj.id == GameData.GetCheckpoint()) {
                 obj.CheckpointHit();
             }
         }
@@ -221,3 +207,20 @@ ObjectController.prototype.CreateObjectsLayer = function(layer) {
         }
     });  
 };
+
+function ComposeAndEmitSignal(data) {
+    var signalData = data.split(',');
+    var signalName = signalData.shift();
+
+    var params = {};
+
+    while(signalData.length) {
+
+        var paramData = signalData.shift();
+        paramData = paramData.split(':');
+
+        params[paramData[0]] = paramData[1];
+    }
+
+    events.publish(signalName, params);
+}

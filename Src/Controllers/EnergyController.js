@@ -69,13 +69,6 @@ EnergyController.prototype.Update = function() {
 	if(this.health <= 0)
 		Main.Restart();
 
-	// if(this.InBeastMode() && this.energyBar.visible) {
-	// 	this.energyBar.visible = false;
-	// 	this.energyBarWhite.visible = true;
-	// } else if(!this.InBeastMode() && this.energyBarWhite.visible) {
-	// 	this.energyBar.visible = true;
-	// 	this.energyBarWhite.visible = false;
-	// }
 };
 
 EnergyController.prototype.UseEnergy = function(amt) {
