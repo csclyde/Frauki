@@ -6,12 +6,23 @@ EnergyController = function() {
 	this.health = 30;
 	this.charge = 30;
 
+	this.latentHealth = 0;
+
 	this.tickTimer = 0;
 	this.gracePeriod = 0;
 
 	this.timers = new TimerUtil();
 
 	this.energyUsageTimestamp = 0;
+
+	events.subscribe('player_heal', function(params) {
+		if(this.remainingApples > 0) {
+			this.AddHealth(10);
+			this.remainingApples--;
+		}
+	}, this);
+
+	this.remainingApples = GameData.GetMaxApples();
 };
 
 EnergyController.prototype.Create = function() {
@@ -50,6 +61,19 @@ EnergyController.prototype.Update = function() {
 		}
 
 		this.tickTimer = game.time.now + 20;
+	}
+
+	//if there is latent health present, start adding it to the actual health
+	if(this.latentHealth > 0) {
+		var healthStep = 0.08;
+
+		if(this.latentHealth < healthStep) {
+			this.health += this.latentHealth;
+			this.latentHealth = 0;
+		} else {
+			this.latentHealth -= healthStep;
+			this.health += healthStep;
+		}
 	}
 
 	//clamp the enrgy and neutral point;
@@ -105,7 +129,7 @@ EnergyController.prototype.GetEnergy = function() {
 
 EnergyController.prototype.AddHealth = function(amt) {
 
-	this.health += amt;
+	this.latentHealth += amt;
 };
 
 EnergyController.prototype.RemoveHealth = function(amt) {
@@ -144,19 +168,13 @@ EnergyController.prototype.GetCharge = function() {
 	return this.charge;
 };
 
-EnergyController.prototype.ResetHealth = function() {
+EnergyController.prototype.Reset = function() {
 
 	this.health = 30;
-};
-
-EnergyController.prototype.ResetEnergy = function() {
-
 	this.energy = 15;
-};
-
-EnergyController.prototype.ResetCharge = function() {
-
 	this.charge = 30;
+	this.latentHealth = 0;
+	this.remainingApples = GameData.GetMaxApples();
 };
 
 EnergyController.prototype.AddCharge = function(amt) {
@@ -182,3 +200,12 @@ EnergyController.prototype.MaxCharge = function() {
 
 	this.charge = 30;
 };
+
+EnergyController.prototype.AddApple = function() {
+	if(this.remainingApples < GameData.GetMaxApples()) {
+		this.remainingApples++;
+		return true;
+	} else {
+		return false;
+	}
+}

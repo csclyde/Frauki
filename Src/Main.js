@@ -143,9 +143,7 @@ Main.Restart = function() {
         frauki.state = frauki.Materializing;
         frauki.SetDirection('right');
 
-        energyController.ResetEnergy();
-        energyController.ResetCharge();
-        energyController.ResetHealth();
+        energyController.Reset();
         game.time.slowMotion = 1;
         //game.world.alpha = 1;
         effectsController.Fade(false);
@@ -198,48 +196,57 @@ Main.Restart = function() {
 Main.DrawUI = function() {
     
     //render the energy bar backdrops
-    this.RenderTextureFromAtlas('UI', 'EnergyBar0001', 12 * pixel.scale, 12 * pixel.scale);
-    this.RenderTextureFromAtlas('UI', 'EnergyBar0001', 12 * pixel.scale, 24 * pixel.scale);
+    this.RenderTextureFromAtlas('UI', 'EnergyBar0001', 12, 12);
+    this.RenderTextureFromAtlas('UI', 'EnergyBar0001', 12, 24);
 
     //the stamina bar
-    this.RenderTextureFromAtlas('UI', 'EnergyBar0002', 12 * pixel.scale, 23 * pixel.scale, energyController.GetEnergy() / 15);
+    this.RenderTextureFromAtlas('UI', 'EnergyBar0002', 12, 23, energyController.GetEnergy() / 15);
 
     //if theyre carrying the wit shard
     if(GetCurrentShardType() === 'Wit') {
         //oscillate the opacity of the white bar on top
-        this.RenderTextureFromAtlas('UI', 'EnergyBar0003', 12 * pixel.scale, 23 * pixel.scale, energyController.GetEnergy() / 15, 1, (Math.sin(game.time.now / 80) + 1) / 2);
+        this.RenderTextureFromAtlas('UI', 'EnergyBar0003', 12, 23, energyController.GetEnergy() / 15, 1, (Math.sin(game.time.now / 80) + 1) / 2);
     }
 
     //the health bar
-    this.RenderTextureFromAtlas('UI', 'EnergyBar0004', 12 * pixel.scale, 12 * pixel.scale, energyController.GetHealth() / 30);
+    this.RenderTextureFromAtlas('UI', 'EnergyBar0004', 12, 12, energyController.GetHealth() / 30);
 
     //oscillate the white bar on top of the health if they have will
     if(GetCurrentShardType() === 'Will') {
         //oscillate the opacity of the white bar on top
-        this.RenderTextureFromAtlas('UI', 'EnergyBar0003', 12 * pixel.scale, 12 * pixel.scale, energyController.GetHealth() / 30, 1, (Math.sin(game.time.now / 80) + 1) / 2);
+        this.RenderTextureFromAtlas('UI', 'EnergyBar0003', 12, 12, energyController.GetHealth() / 30, 1, (Math.sin(game.time.now / 80) + 1) / 2);
     }
 
     //the special bar
-    this.RenderTextureFromAtlas('UI', 'EnergyBar0006', 12 * pixel.scale, 34 * pixel.scale, energyController.GetCharge() / 30);
+    this.RenderTextureFromAtlas('UI', 'EnergyBar0006', 12, 34, energyController.GetCharge() / 30);
 
     //finally, the frame on top of everything else
-    this.RenderTextureFromAtlas('UI', 'EnergyBar0000', 10 * pixel.scale, 10 * pixel.scale);
+    this.RenderTextureFromAtlas('UI', 'EnergyBar0000', 10, 10);
 
+    for(var i = 0; i < GameData.GetMaxApples(); i++) {
+        if(i < energyController.remainingApples) {
+            this.RenderTextureFromAtlas('Misc','Apple0000', 10 + (20 * i), 45); 
+        } else {
+            this.RenderTextureFromAtlas('Misc','Checkpoint0005', 10 + (20 * i), 45); 
+        }
+    }
 
     for(var i = 0; i < weaponController.weaponList.length; i++) {
         pixel.context.globalAlpha = weaponController.currentWeapon === weaponController.weaponList[i] ? 1 : 0.3;
-        this.RenderTextureFromAtlas('UI', weaponController.weaponList[i].FrameName, (100 + 25 * i) * pixel.scale, 10 * pixel.scale);
+        this.RenderTextureFromAtlas('UI', weaponController.weaponList[i].FrameName, (100 + 25 * i), 10);
     }
+
 
     // pixel.context.globalAlpha = weaponController.currentWeapon === weaponController.weaponList[1] ? 1 : 0.3;
 
-    // this.RenderTextureFromAtlas('UI', 'UpgradeIconLob', 125 * pixel.scale, 10 * pixel.scale);
+    // this.RenderTextureFromAtlas('UI', 'UpgradeIconLob', 125, 10);
 
     // pixel.context.globalAlpha = weaponController.currentWeapon === weaponController.weaponList[2] ? 1 : 0.3;
 
-    // this.RenderTextureFromAtlas('UI', 'UpgradeIconShield', 150 * pixel.scale, 10 * pixel.scale);
+    // this.RenderTextureFromAtlas('UI', 'UpgradeIconShield', 150, 10);
 
     pixel.context.globalAlpha = this.currentAlpha;
+
 
     if(speechController.speechVisible) {
 
@@ -262,6 +269,9 @@ Main.RenderTextureFromAtlas = function(atlas, frame, x, y, scaleX, scaleY, alpha
 
     if(scaleX < 0) scaleX = 0;
     if(scaleY < 0) scaleY = 0;
+
+    x *= pixel.scale;
+    y *= pixel.scale;
 
     var texture;
 

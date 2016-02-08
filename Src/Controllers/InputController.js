@@ -85,6 +85,7 @@ InputController = function() {
             break;
 
             case inputController.binds.weapon:
+                events.publish('player_heal', {});
             break;
 
             case inputController.binds.roll:
@@ -204,6 +205,7 @@ InputController = function() {
                 break;
 
                 case 3:
+                    events.publish('player_heal', {});
                 break;
 
                 case 8: //select

@@ -11,8 +11,6 @@ Door = function(game, x, y, name) {
 
     this.x += 8;
     this.y += 8;
-    
-    //this.SetDirection('left');
 
     this.state = this.Closed;
 

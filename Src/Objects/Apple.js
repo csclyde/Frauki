@@ -39,26 +39,26 @@ function EatApple(f, a) {
     if(a.state === a.Eaten)
         return;
     
-    a.state = a.Eaten;
+    if(energyController.AddApple()) {
+        a.state = a.Eaten;
 
-    a.body.allowGravity = true;
+        a.body.allowGravity = true;
 
-    a.body.velocity.y = -250;
+        a.body.velocity.y = -250;
 
-    if(frauki.body.center.x < a.body.center.x)
-        a.body.velocity.x = 75;
-    else
-        a.body.velocity.x = -75;
+        if(frauki.body.center.x < a.body.center.x)
+            a.body.velocity.x = 75;
+        else
+            a.body.velocity.x = -75;
 
-    a.body.angularVelocity = 1000;
+        a.body.angularVelocity = 1000;
 
-    a.spinTween = game.add.tween(a.body).to({angularVelocity: 0}, 3000, Phaser.Easing.Exponential.In, true);
+        a.spinTween = game.add.tween(a.body).to({angularVelocity: 0}, 3000, Phaser.Easing.Exponential.In, true);
 
-    a.spinTween.onComplete.add(function() { 
-        game.time.events.add(1000, function(){ a.destroy(); } );
-    }, a);
-
-    energyController.AddHealth(5);
+        a.spinTween.onComplete.add(function() { 
+            game.time.events.add(1000, function(){ a.destroy(); } );
+        }, a);
+    }
 };
 
 Apple.prototype.PlayAnim = function(name) {
