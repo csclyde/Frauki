@@ -54,6 +54,7 @@ Enemy.prototype.TakeHit = function() {};
 Enemy.prototype.Activate = function() {};
 Enemy.prototype.Deactivate = function() {};
 Enemy.prototype.TakeHit = function() {};
+Enemy.prototype.LandHit = function() {};
 
 Enemy.prototype.update = function() {
 
@@ -70,16 +71,6 @@ Enemy.prototype.update = function() {
     //in the act function, unique to each enemy type
     if(this.state()) {
         this.Act();
-    }
-
-    //update the facing of the enemy, assuming they are not being hit and
-    //there is no other precondition overriding their ability to turn
-    if(this.CanChangeDirection()) {
-        if(this.body.velocity.x > 0) {
-            this.SetDirection('right');
-        } else if(this.body.velocity.x < 0) {
-            this.SetDirection('left');
-        }
     }
     
     if(this.energy > this.maxEnergy)
@@ -105,11 +96,26 @@ Enemy.prototype.update = function() {
             this.attackRect.body.height = this.currentAttack.h;
         }
     }
+    else if(this.CanCauseDamage()) {
+        this.attackRect.body.x = this.body.x;
+        this.attackRect.body.y = this.body.y;
+        this.attackRect.body.width = this.body.width;
+        this.attackRect.body.height = this.body.height;
+
+        this.currentAttack = {
+            damage: this.damage,
+            knockback: 0,
+            priority: 2,
+            juggle: 0
+        };
+    } 
     else {
         this.attackRect.body.x = 0;
         this.attackRect.body.y = 0;
         this.attackRect.body.width = 0;
         this.attackRect.body.height = 0;
+
+        this.currentAttack = null;
     }
 
     //if they are attacking and facing each other
@@ -123,6 +129,8 @@ Enemy.prototype.update = function() {
             }
         }
 
+        game.physics.arcade.overlap(this.attackRect, frauki, Collision.OverlapEnemyAttackWithFrauki);
+    } else if(this.CanCauseDamage()) {
         game.physics.arcade.overlap(this.attackRect, frauki, Collision.OverlapEnemyAttackWithFrauki);
     }
     

@@ -14,11 +14,7 @@ Collision.OverlapFraukiWithObject = function(f, o) {
 
 
     } else if(o.spriteType === 'enemy') {
-        if(o.CanCauseDamage() && o.state !== o.Dying) {
-            frauki.Hit(o, o.damage);
-        }
         return false;
-
 
     } else if(o.spriteType === 'door') {
         OpenDoor(f, o);
@@ -215,11 +211,8 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
 Collision.OverlapEnemyAttackWithFrauki = function(e, f) {
 
     if(!!e.owningEnemy && e.owningEnemy.currentAttack.damage > 0) {
-        frauki.Hit(e.owningEnemy, e.owningEnemy.currentAttack.damage * (!!e.owningEnemy.carriedShard ? 2 : 1), 650);
-
-        if(!!e.owningEnemy.LandHit) {
-            e.owningEnemy.LandHit();
-        }
+        frauki.Hit(e.owningEnemy, e.owningEnemy.currentAttack.damage, 1000);
+        e.owningEnemy.LandHit();
     }
 };
 
