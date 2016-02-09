@@ -49,53 +49,42 @@ InputController = function() {
             return;
         }
 
-        // if(this.mappingMode) {
-        //     //assign the keycode to the current key
-        //     //advance the key index
-
-        //     //if the index is the length of the key array, reset it and exit mapping mode
-
-        //     return;
-        // }
-
         switch(e.keyCode) {
 
             case inputController.binds.jump:
-                events.publish('player_jump', {jump: true});
+                inputController.OnJump(true);
             break;
 
             case inputController.binds.up:
-                events.publish('control_up', {pressed: true});
+                inputController.OnUp(true);
             break;
 
             case inputController.binds.crouch:
-                events.publish('player_crouch', {crouch: true});
+                inputController.OnDown(true);
             break;
 
             case inputController.binds.runLeft:
-                events.publish('player_run', {run:true, dir:'left'});
+                inputController.OnLeft(true);
             break;
 
             case inputController.binds.runRight:
-                events.publish('player_run', {run:true, dir:'right'});
+                inputController.OnRight(true);
             break;
 
             case inputController.binds.slash:
-                events.publish('player_slash', {});
+                inputController.OnSlash(true);
             break;
 
             case inputController.binds.weapon:
-                events.publish('player_heal', {});
+                inputController.OnHeal(true);
             break;
 
             case inputController.binds.roll:
-                events.publish('player_roll', {});
+                inputController.OnRoll(true);
             break;
 
             case inputController.binds.shoulderR:
-                events.publish('activate_weapon', { activate: true });
-                this.buttons.rShoulder = true;
-                //weaponController.Next();
+                inputController.OnRShoulder(true);
             break;
 
         }
@@ -110,37 +99,39 @@ InputController = function() {
         switch(e.keyCode) {
             
             case inputController.binds.jump:
-                events.publish('player_jump', {jump: false});
+                inputController.OnJump(false);
             break;
 
             case inputController.binds.up:
-                events.publish('control_up', {pressed: false});
+                inputController.OnUp(false);
             break;
 
             case inputController.binds.crouch:
-                events.publish('player_crouch', {crouch: false});
+                inputController.OnDown(false);
             break;
 
             case inputController.binds.runLeft:
-                events.publish('player_run', {run:false, dir: 'left'});
+                inputController.OnLeft(false);
             break;
 
             case inputController.binds.runRight:
-                events.publish('player_run', {run:false, dir: 'right'});
+                inputController.OnRight(false);
             break;
 
             case inputController.binds.slash:
+                inputController.OnSlash(false);
             break;
 
             case inputController.binds.weapon:
+                inputController.OnHeal(false);
             break;
 
             case inputController.binds.roll:
+                inputController.OnRoll(false);
             break;
 
             case inputController.binds.shoulderR:
-                events.publish('activate_weapon', { activate: false });
-                this.buttons.rShoulder = false;
+                inputController.OnRShoulder(false);
             break;
 
         }
@@ -172,8 +163,6 @@ InputController = function() {
 
     });
 
-   
-
     game.input.gamepad.start();
 
     game.input.gamepad.addCallbacks(this, {
@@ -193,54 +182,48 @@ InputController = function() {
 
             switch(buttonCode) {
                 case 0:
-                    events.publish('player_jump', {jump: true});
+                    this.OnJump(true);
                 break;
 
                 case 1:
-                    events.publish('player_roll', {});
+                    this.OnRoll(true);
                 break;
 
                 case 2:
-                    events.publish('player_slash', {});
+                    this.OnSlash(true);
                 break;
 
                 case 3:
-                    events.publish('player_heal', {});
+                    this.OnHeal(true);
                 break;
 
                 case 8: //select
                 case 9: //start
-                    events.publish('activate_speech', {});
                 break;
 
                 case 5: //right shoulder
-                    //weaponController.Next();
                 case 7: //right shoulder
-                    events.publish('activate_weapon', { activate: true });
-                    this.buttons.rShoulder = true;
+                    this.OnRShoulder(true);
                 break;
 
                 case 4: //left shoulder
-                    //weaponController.Prev();
-                    break;
                 case 6: //left shoulder
-
                 break;
 
                 case 12:
-                    events.publish('control_up', {pressed: true});
+                    this.OnUp(true);
                 break;
 
                 case 13:
-                    events.publish('player_crouch', {crouch: true});
+                    this.OnDown(true);
                 break;
 
                 case 14:
-                    events.publish('player_run', {run:true, dir: 'left'});
+                    this.OnLeft(true);
                 break;
 
                 case 15:
-                    events.publish('player_run', {run:true, dir:'right'});
+                    this.OnRight(true);
                 break;
 
             }
@@ -253,16 +236,19 @@ InputController = function() {
             
             switch(buttonCode) {
                 case 0:
-                    events.publish('player_jump', {jump: false});
+                    this.OnJump(false);
                 break;
 
                 case 1:
+                    this.OnRoll(false);
                 break;
 
                 case 2:
+                    this.OnSlash(false);
                 break;
 
                 case 3:
+                    this.OnHeal(false);
                 break;
 
                 case 8: //select
@@ -271,29 +257,27 @@ InputController = function() {
 
                 case 5: //right shoulder
                 case 7: //right shoulder
-                    events.publish('activate_weapon', { activate: false });
-                    this.buttons.rShoulder = false;
+                    this.OnRShoulder(false);
                 break;
 
                 case 4: //left shoulder
                 case 6: //left shoulder
-
                 break;
 
                 case 12:
-                    events.publish('control_up', {pressed: false});
+                    this.OnUp(false);
                 break;
 
                 case 13:
-                    events.publish('player_crouch', {crouch: false});
+                    this.OnDown(false);
                 break;
 
                 case 14:
-                    events.publish('player_run', {run:false, dir: 'left'});
+                    this.OnLeft(false);
                 break;
 
                 case 15:
-                    events.publish('player_run', {run:false, dir:'right'});
+                    this.OnRight(false);
                 break;
 
             }
@@ -316,5 +300,89 @@ InputController.prototype.Update = function() {
     }
     else {
     	frauki.Run({dir:'still'});
+    }
+
+    //if they are charging their apple, and the timer is up
+    if(this.chargingApple && this.timers.TimerUp('apple_charge')) {
+        //stop them from charging
+        this.chargingApple = false;
+
+        //send the heal message
+        events.publish('player_heal', {});
+    }
+};
+
+InputController.prototype.OnJump = function(pressed) {
+    if(pressed) {
+        events.publish('player_jump', {jump: true});
+    } else {
+        events.publish('player_jump', {jump: false});
+    }
+};
+
+InputController.prototype.OnSlash = function(pressed) {
+    if(pressed) {
+        events.publish('player_slash', {});
+    } else {
+
+    }
+};
+
+InputController.prototype.OnRoll = function(pressed) {
+    if(pressed) {
+        events.publish('player_roll', {});
+    } else {
+
+    }
+};
+
+InputController.prototype.OnHeal = function(pressed) {
+    if(pressed) {
+        this.chargingApple = true;
+        this.timers.SetTimer('apple_charge', 500);
+    } else {
+        this.chargingApple = false;
+    }
+};
+
+InputController.prototype.OnLeft = function(pressed) {
+    if(pressed) {
+        events.publish('player_run', {run:true, dir:'left'});
+    } else {
+        events.publish('player_run', {run:false, dir: 'left'});
+    }
+};
+
+InputController.prototype.OnRight = function(pressed) {
+    if(pressed) {
+        events.publish('player_run', {run:true, dir:'right'});
+    } else {
+        events.publish('player_run', {run:false, dir: 'right'});
+    }
+};
+
+InputController.prototype.OnUp = function(pressed) {
+    if(pressed) {
+        events.publish('control_up', {pressed: true});
+    } else {
+        events.publish('control_up', {pressed: false});
+    }
+};
+
+InputController.prototype.OnDown = function(pressed) {
+    if(pressed) {
+        events.publish('player_crouch', {crouch: true});
+    } else {
+        events.publish('player_crouch', {crouch: false});
+    }
+};
+
+InputController.prototype.OnRShoulder = function(pressed) {
+    if(pressed) {
+        events.publish('activate_weapon', { activate: true });
+        this.buttons.rShoulder = true;
+    } else {
+        events.publish('activate_weapon', { activate: false });
+        this.buttons.rShoulder = false;
     }
 };

@@ -1,5 +1,5 @@
 PLAYER_SPEED = function() { return 200; }
-PLAYER_ROLL_SPEED = function() { return 550; }
+PLAYER_ROLL_SPEED = function() { return 450; }
 PLAYER_RUN_SLASH_SPEED = function() { return  550; }
 PLAYER_JUMP_VEL = function() { return -350; }
 PLAYER_DOUBLE_JUMP_VEL = function() { return -275; }
@@ -663,7 +663,7 @@ Player.prototype.Roll = function(params) {
     }
 
     this.timers.SetTimer('frauki_roll', 250);
-    //this.timers.SetTimer('frauki_grace', 300);
+    this.timers.SetTimer('frauki_grace', 300);
 
     return true;
 };
