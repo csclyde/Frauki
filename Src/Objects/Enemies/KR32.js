@@ -19,7 +19,6 @@ Enemy.prototype.types['KR32'] =  function() {
     this.robotic = true;
 
     /*
-    this.weight = 0.8;
     this.damage = 5;
     */
 

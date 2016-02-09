@@ -277,8 +277,7 @@ Collision.OverlapLobWithEnemy = function(l, e) {
 
     var damage = 0;
 
-    //fraukis knockback will increase the amount that the enemy is moved. The weight
-    //of the enemy will work against that. 
+    //fraukis knockback will increase the amount that the enemy is moved
     e.body.velocity.x = 300;
     e.body.velocity.x *= e.PlayerDirMod();
     

@@ -2,6 +2,7 @@ Enemy = function(game, x, y, name) {
     //instantiate the sprite
     Phaser.Sprite.call(this, game, x, y, 'EnemySprites');
     this.spriteType = 'enemy';
+    this.objectName = name;
 
     //enable its physics body
     game.physics.enable(this, Phaser.Physics.ARCADE);
@@ -11,9 +12,8 @@ Enemy = function(game, x, y, name) {
     
     this.SetDefaultValues();
     this.attackFrames = {};
-    
-    this.objectName = name;
 
+    //each enemy will modify this base structure, to customize it
     if(!!this.types[name]) {
         this.types[name].apply(this);
     } else {
@@ -27,35 +27,23 @@ Enemy = function(game, x, y, name) {
     this.initialX = this.body.x;
     this.initialY = this.body.y;
 
+    //set up an attackRect that will be used as the enemies attack
     this.attackRect = game.add.sprite(0, 0, null);
     game.physics.enable(this.attackRect, Phaser.Physics.ARCADE);
     this.attackRect.body.setSize(0, 0, 0, 0);
     this.attackRect.owningEnemy = this;
 
-    this.body.drag.x = 600;
+    
 };
 
 Enemy.prototype = Object.create(Phaser.Sprite.prototype);
 Enemy.prototype.constructor = Enemy;
 Enemy.prototype.types = {};
 
-Enemy.prototype.SetDefaultValues = function() {
-    this.body.maxVelocity.y = 1000;
-    this.body.maxVelocity.x = 1000;
-    this.body.drag.x = 300;
-    this.body.bounce.set(0.2);
-    this.anchor.setTo(.5, 1);
-    this.SetDirection('left');
-    this.weight = 0.5;
-    this.hitTimer = 0;
-    this.energy = 5;
-    this.damage = 3;
-    this.inScope = false;
-    this.baseStunDuration = 600;
-};
-
-Enemy.prototype.UpdateFunction = function() {};
-Enemy.prototype.Idling = function() {};
+//default functions
+Enemy.prototype.updateFunction = function() {};
+Enemy.prototype.Idling = function() { return false; };
+Enemy.prototype.Act = function() {};
 Enemy.prototype.Hurting = function() {};
 Enemy.prototype.Dying = function() {};
 Enemy.prototype.Die = function() { };
@@ -65,19 +53,7 @@ Enemy.prototype.CanChangeDirection = function() { return true; }
 Enemy.prototype.TakeHit = function() {};
 Enemy.prototype.Activate = function() {};
 Enemy.prototype.Deactivate = function() {};
-
-Enemy.prototype.Respawn = function() {
-
-    this.alive = true;
-    this.exists = true;
-    this.visible = true;
-    this.body.velocity.x = 0;
-    this.body.velocity.y = 0;
-    this.x = this.initialX;
-    this.y = this.initialY;
-    this.energy = this.maxEnergy;
-    this.state = this.Idling;
-};
+Enemy.prototype.TakeHit = function() {};
 
 Enemy.prototype.update = function() {
 
@@ -86,9 +62,15 @@ Enemy.prototype.update = function() {
     }
 
     //update function is the generic update function for the specific enemy,
-    //executed regardless of state. State is the actual state function
+    //executed regardless of state.
     this.updateFunction();
-    this.state();
+
+    //each state function for enemies will return true or false. true means that
+    //the enemy is ready to perform a new action. The action will be determined
+    //in the act function, unique to each enemy type
+    if(this.state()) {
+        this.Act();
+    }
 
     //update the facing of the enemy, assuming they are not being hit and
     //there is no other precondition overriding their ability to turn
@@ -152,7 +134,52 @@ Enemy.prototype.update = function() {
     }
 };
 
-Enemy.TakeHit = function() {
+Enemy.prototype.SetDefaultValues = function() {
+    this.body.maxVelocity.y = 1000;
+    this.body.maxVelocity.x = 1000;
+    this.body.drag.x = 600;
+    this.body.bounce.set(0.2);
+    this.anchor.setTo(.5, 1);
+    this.SetDirection('left');
+    this.energy = 5;
+    this.damage = 3;
+    this.baseStunDuration = 600;
+};
+
+Enemy.prototype.Respawn = function() {
+
+    this.alive = true;
+    this.exists = true;
+    this.visible = true;
+    this.body.velocity.x = 0;
+    this.body.velocity.y = 0;
+    this.x = this.initialX;
+    this.y = this.initialY;
+    this.energy = this.maxEnergy;
+    this.state = this.Idling;
+};
+
+Enemy.prototype.Attacking = function() {
+    if(!!this.attackRect && this.attackRect.body.width !== 0)
+        return true;
+    else
+        return false;
+};
+
+Enemy.prototype.SetDirection = function(dir) {
+    if(dir === 'left' && this.direction !== 'left') {
+        this.direction = 'left';
+        this.scale.x = -1;
+    }
+    else if(dir === 'right' && this.direction !== 'right') {
+        this.direction = 'right';
+        this.scale.x = 1;
+    }
+};
+
+Enemy.prototype.PlayAnim = function(name) {
+    if(this.animations.currentAnim.name !== name)
+        this.animations.play(name);
 };
 
 function DestroyEnemy(e) {
@@ -191,12 +218,30 @@ function DestroyEnemy(e) {
     e = null;
 };
 
-Enemy.prototype.Attacking = function() {
-    if(!!this.attackRect && this.attackRect.body.width !== 0)
-        return true;
-    else
-        return false;
-};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Enemy.prototype.WithinCameraRange = function() {
     var padding = 150;
@@ -216,22 +261,6 @@ Enemy.prototype.GetDirMod = function() {
     } else {
         return 1;
     }
-};
-
-Enemy.prototype.SetDirection = function(dir) {
-    if(dir === 'left' && this.direction !== 'left') {
-        this.direction = 'left';
-        this.scale.x = -1;
-    }
-    else if(dir === 'right' && this.direction !== 'right') {
-        this.direction = 'right';
-        this.scale.x = 1;
-    }
-};
-
-Enemy.prototype.PlayAnim = function(name) {
-    if(this.animations.currentAnim.name !== name)
-        this.animations.play(name);
 };
 
 //provide utility functions here that the specific enemies can all use

@@ -9,7 +9,6 @@ Enemy.prototype.types['Mask'] =  function() {
     this.energy = 2;
     this.damage = 1;
     /*
-    this.weight = 0.5;
     this.baseStunDuration = 500;
     this.poise = 10;
     */

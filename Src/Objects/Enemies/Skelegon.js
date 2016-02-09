@@ -12,7 +12,6 @@ Enemy.prototype.types['Skelegon'] =  function() {
     Math.random() > 0.5 ? this.SetDirection('left') : this.SetDirection('right');
 
     /*
-    this.weight = 0.5;
     this.baseStunDuration = 500;
     this.poise = 10;
     */

@@ -25,7 +25,6 @@ Enemy.prototype.types['Pincer'] =  function() {
     //game.physics.enable(this.bodies[0], Phaser.Physics.ARCADE);
 
     /*
-    this.weight = 0.5;
     this.energy = 5;
     this.damage = 5;
     this.baseStunDuration = 500;

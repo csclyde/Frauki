@@ -12,7 +12,6 @@ Enemy.prototype.types['Madman'] =  function() {
 
     this.rollTimer = 0;
     this.state = this.Idling;
-    this.weight = 0.8;
 
 	this.updateFunction = function() {
 	};
@@ -30,9 +29,6 @@ Enemy.prototype.types['Madman'] =  function() {
 		if(!this.timers.TimerUp('hit')) {
 			return;
 		}
-    
-	    //compute the velocity based on weight and attack knockback
-	    //this.body.velocity.y = -400 - this.weight;
 
 	    //a durability stat should modify how long they are stunned for. also, the amount of dmg
 	    this.hitTimer = game.time.now + 400;

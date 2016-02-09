@@ -6,7 +6,6 @@ Enemy.prototype.types['Haystax'] =  function() {
     this.animations.add('idle', ['Haystax/Idle0000'], 10, true, false);
     this.animations.add('up', ['Haystax/Idle0001'], 10, true, false);
 
-    this.weight = 1;
     this.energy = 4;
     this.damage = 3;
     this.baseStunDuration = 500;

@@ -13,7 +13,6 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
 
     /*
-    this.weight = 0.8;
     this.damage = 5;
     */
 

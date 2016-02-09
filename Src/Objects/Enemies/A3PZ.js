@@ -18,12 +18,6 @@ Enemy.prototype.types['A3PZ'] =  function() {
     this.robotic = true;
 
     this.damage = 4;
-
-    /*
-    this.weight = 0.8;
-    */
-
-    //this.body.drag.x = 800;
     
     this.updateFunction = function() {
 

@@ -7,7 +7,6 @@ Enemy.prototype.types[''] =  function() {
     this.animations.add('shit', ['Hop0000'], 10, true, false);
 
     /*
-    this.weight = 0.5;
     this.energy = 5;
     this.damage = 5;
     this.baseStunDuration = 500;

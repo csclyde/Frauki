@@ -7,7 +7,6 @@ Enemy.prototype.types['Bizarro'] =  function() {
 	this.animations.add('flip', ['Bizarro/Flip0000', 'Bizarro/Flip0001', 'Bizarro/Flip0002', 'Bizarro/Flip0003', 'Bizarro/Flip0004'], 14, true, false);
     this.animations.add('attack', ['Bizarro/Attack0003', 'Bizarro/Attack0003', 'Bizarro/Attack0003', 'Bizarro/Attack0003', 'Bizarro/Attack0003', 'Bizarro/Attack0003', 'Bizarro/Attack0003', 'Bizarro/Attack0003',], 14, false, false);
 
-    this.weight = 0.5;
     this.energy = 30;
     this.damage = 8;
     this.baseStunDuration = 500;

@@ -7,7 +7,6 @@ Enemy.prototype.types['Lancer'] =  function() {
 	this.animations.add('run', ['Lancer/Run0000', 'Lancer/Run0001', 'Lancer/Run0002', 'Lancer/Run0003', 'Lancer/Run0004', 'Lancer/Run0005', 'Lancer/Run0006', 'Lancer/Run0007'], 14, true, false);
     this.animations.add('attack', ['Lancer/Attack0000', 'Lancer/Attack0001', 'Lancer/Attack0002', 'Lancer/Attack0003', 'Lancer/Attack0004', 'Lancer/Attack0005', 'Lancer/Attack0006', 'Lancer/Attack0007', 'Lancer/Attack0008', 'Lancer/Attack0009', 'Lancer/Attack0010', 'Lancer/Attack0011', 'Lancer/Attack0012', 'Lancer/Attack0013', 'Lancer/Attack0014', 'Lancer/Attack0015', 'Lancer/Attack0016', 'Lancer/Attack0017', 'Lancer/Attack0018', 'Lancer/Attack0019'], 20, false, false);
 
-    this.weight = 0.5;
     this.energy = 8;
     this.damage = 12;
     this.baseStunDuration = 500;
