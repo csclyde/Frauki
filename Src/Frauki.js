@@ -469,7 +469,7 @@ Player.prototype.Crouch = function(params) {
 };
 
 Player.prototype.Heal = function(params) {
-    if(params.charging && frauki.body.onFloor()) {
+    if(params.charging) {
         this.state = this.Healing;
         this.timers.SetTimer('heal_charge', 1000); 
     } else {
@@ -1028,7 +1028,7 @@ Player.prototype.Healing = function() {
     this.PlayAnim('heal');
 
     this.body.velocity.x = 0;
-    
+    this.body.acceleration.x = 0;
 
     //if they are charging their apple, and the timer is up
     if(this.timers.TimerUp('heal_charge')) {
