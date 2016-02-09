@@ -137,32 +137,6 @@ InputController = function() {
         }
     }
 
-    events.subscribe('control_up', function(params) { 
-
-        if(params.pressed === false) {
-            return;
-        }
-
-        events.publish('activate_speech', {});
-
-        if(!frauki.body.onFloor()) {
-            return;
-        }
-        
-        //switch between layers if they are in a doorway
-        if(game.physics.arcade.overlap(frauki, Frogland.door1Group)) {
-            if(Frogland.currentLayer === 3) Frogland.ChangeLayer(2);
-            else if(Frogland.currentLayer === 2) Frogland.ChangeLayer(3);
-        } else if(game.physics.arcade.overlap(frauki, Frogland.door2Group)) {
-            if(Frogland.currentLayer === 3) Frogland.ChangeLayer(4);
-            else if(Frogland.currentLayer === 4) Frogland.ChangeLayer(3);
-        } else if(game.physics.arcade.overlap(frauki, Frogland.door3Group)) {
-            if(Frogland.currentLayer === 2) Frogland.ChangeLayer(4);
-            else if(Frogland.currentLayer === 4) Frogland.ChangeLayer(2);
-        }
-
-    });
-
     game.input.gamepad.start();
 
     game.input.gamepad.addCallbacks(this, {
@@ -301,15 +275,6 @@ InputController.prototype.Update = function() {
     else {
     	frauki.Run({dir:'still'});
     }
-
-    //if they are charging their apple, and the timer is up
-    if(this.chargingApple && this.timers.TimerUp('apple_charge')) {
-        //stop them from charging
-        this.chargingApple = false;
-
-        //send the heal message
-        events.publish('player_heal', {});
-    }
 };
 
 InputController.prototype.OnJump = function(pressed) {
@@ -339,9 +304,11 @@ InputController.prototype.OnRoll = function(pressed) {
 InputController.prototype.OnHeal = function(pressed) {
     if(pressed) {
         this.chargingApple = true;
-        this.timers.SetTimer('apple_charge', 500);
+        this.timers.SetTimer('apple_charge', 1000);
+
+        events.publish('player_heal', { charging: true });
     } else {
-        this.chargingApple = false;
+        events.publish('player_heal', { charging: false });
     }
 };
 
@@ -364,6 +331,24 @@ InputController.prototype.OnRight = function(pressed) {
 InputController.prototype.OnUp = function(pressed) {
     if(pressed) {
         events.publish('control_up', {pressed: true});
+
+        events.publish('activate_speech', {});
+
+        if(frauki.body.onFloor()) {
+            //switch between layers if they are in a doorway
+            if(game.physics.arcade.overlap(frauki, Frogland.door1Group)) {
+                if(Frogland.currentLayer === 3) Frogland.ChangeLayer(2);
+                else if(Frogland.currentLayer === 2) Frogland.ChangeLayer(3);
+            } else if(game.physics.arcade.overlap(frauki, Frogland.door2Group)) {
+                if(Frogland.currentLayer === 3) Frogland.ChangeLayer(4);
+                else if(Frogland.currentLayer === 4) Frogland.ChangeLayer(3);
+            } else if(game.physics.arcade.overlap(frauki, Frogland.door3Group)) {
+                if(Frogland.currentLayer === 2) Frogland.ChangeLayer(4);
+                else if(Frogland.currentLayer === 4) Frogland.ChangeLayer(2);
+            }
+        }
+        
+
     } else {
         events.publish('control_up', {pressed: false});
     }

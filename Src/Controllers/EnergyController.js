@@ -15,7 +15,7 @@ EnergyController = function() {
 
 	this.energyUsageTimestamp = 0;
 
-	events.subscribe('player_heal', function(params) {
+	events.subscribe('energy_heal', function(params) {
 		if(this.remainingApples > 0) {
 			this.AddHealth(18);
 			this.remainingApples--;
@@ -65,7 +65,7 @@ EnergyController.prototype.Update = function() {
 
 	//if there is latent health present, start adding it to the actual health
 	if(this.latentHealth > 0) {
-		var healthStep = 0.05;
+		var healthStep = 0.15;
 
 		if(this.latentHealth < healthStep) {
 			this.health += this.latentHealth;

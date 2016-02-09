@@ -1,8 +1,8 @@
-PLAYER_SPEED = function() { return 200; }
+PLAYER_SPEED = function() { return frauki.states.sheilded ? 130 : 180; }
 PLAYER_ROLL_SPEED = function() { return 450; }
 PLAYER_RUN_SLASH_SPEED = function() { return  550; }
-PLAYER_JUMP_VEL = function() { return -350; }
-PLAYER_DOUBLE_JUMP_VEL = function() { return -275; }
+PLAYER_JUMP_VEL = function() { return frauki.states.sheilded ? -250 : -350; }
+PLAYER_DOUBLE_JUMP_VEL = function() { return frauki.states.sheilded ? -200 : -275; }
 
 Player = function (game, x, y, name) {
 
@@ -42,6 +42,7 @@ Player = function (game, x, y, name) {
     this.states.onLeftSlope = false;
     this.states.onRightSlope = false;
     this.states.attackFallLanded = false;
+    this.states.sheilded = false;
 
     this.movement = {};
     this.movement.diveVelocity = 0;
@@ -75,6 +76,7 @@ Player = function (game, x, y, name) {
     events.subscribe('player_slash', this.Slash, this);
     events.subscribe('player_roll', this.Roll, this);
     events.subscribe('player_run', this.StartStopRun, this);
+    events.subscribe('player_heal', this.Heal, this);
     events.subscribe('control_up', function(params) { 
 
         this.states.upPressed = params.pressed;
@@ -463,6 +465,17 @@ Player.prototype.Crouch = function(params) {
 
     if(this.state === this.AttackFront && this.body.onFloor() === false && !this.timers.TimerUp('smash_timer')) {
         this.DiveSlash();
+    }
+};
+
+Player.prototype.Heal = function(params) {
+    if(params.charging && frauki.body.onFloor()) {
+        this.state = this.Healing;
+        this.timers.SetTimer('heal_charge', 1000); 
+    } else {
+        if(this.state === this.Healing) {
+            this.state = this.Standing;
+        }
     }
 };
 
@@ -1007,6 +1020,21 @@ Player.prototype.Hanging = function() {
     } 
 
     if(this.body.onFloor()) {
+        this.state = this.Standing;
+    }
+};
+
+Player.prototype.Healing = function() {
+    this.PlayAnim('heal');
+
+    this.body.velocity.x = 0;
+    
+
+    //if they are charging their apple, and the timer is up
+    if(this.timers.TimerUp('heal_charge')) {
+
+        //send the heal message
+        events.publish('energy_heal', {});
         this.state = this.Standing;
     }
 };

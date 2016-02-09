@@ -316,6 +316,8 @@ WeaponController.prototype.Shield = {
         if(this.forceField.visible === false) {
             this.forceField.animations.play('open');
             this.forceField.visible = true;
+
+            frauki.states.sheilded = true;
         }
 
     },
@@ -336,6 +338,7 @@ WeaponController.prototype.Shield = {
 
     Stop: function() {
         this.forceField.animations.play('close');
+        frauki.states.sheilded = false;
     },
 
     DamageFrames: {
