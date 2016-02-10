@@ -12,6 +12,22 @@ EnemyBehavior.WithinCameraRange = function(e) {
     return false;
 };
 
+EnemyBehavior.FaceToFace = function(e) {
+    if((e.direction === 'left' && frauki.body.center.x < e.body.center.x + 20) ||
+       (e.direction === 'right' && frauki.body.center.x > e.body.center.x - 20) )
+        return true;
+
+    return false;
+};
+
+EnemyBehavior.PathBlocked = function(e) {
+    if(e.body.onWall()) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 EnemyBehavior.GetDirMod = function(e) {
     if(e.direction === 'left') {
         return -1;
@@ -117,10 +133,21 @@ EnemyBehavior.Player.DirMod = function(e) {
     return frauki.body.center.x < e.body.center.x ? 1 : -1;
 };
 
+EnemyBehavior.Player.IsDangerous = function(e) {
+    if(EnemyBehavior.Player.IsNear(e, 150)) {
+        if(frauki.InPreAttackAnim()) {
+            return true;
+        } else if(frauki.Attacking() && frauki.currentAttack.damage > 0) {
+            return true;
+        }
+    }
+    
+    return false;
+}
 
-EnemyBehavior.Actions = {}
 
-EnemyBehavior.Actions.FacePlayer = function(e) {
+
+EnemyBehavior.FacePlayer = function(e) {
     if(e.body.center.x < frauki.body.center.x) {
         e.SetDirection('right');
     } else {
@@ -128,7 +155,22 @@ EnemyBehavior.Actions.FacePlayer = function(e) {
     }
 };
 
-EnemyBehavior.Actions.ChargeAtPlayer = function(e, speed) {
+EnemyBehavior.ChargeAtPlayer = function(e, speed) {
 
     game.physics.arcade.moveToXY(e, frauki.body.center.x, frauki.body.center.y, speed);
+};
+
+EnemyBehavior.WalkToPlayer = function(e, speed) {
+    e.body.velocity.x = speed * EnemyBehavior.Player.DirMod(e) * -1;
+    EnemyBehavior.FacePlayer(e);
+
+    if(EnemyBehavior.PathBlocked(e)) {
+        EnemyBehavior.JumpCurb(e);
+    }
+};
+
+EnemyBehavior.JumpCurb = function(e) {
+    if(e.body.onFloor()) {
+        e.body.velocity.y = -200;
+    }
 };

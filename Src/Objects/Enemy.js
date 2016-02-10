@@ -48,8 +48,7 @@ Enemy.prototype.Hurting = function() {};
 Enemy.prototype.Dying = function() {};
 Enemy.prototype.Die = function() { };
 Enemy.prototype.Vulnerable = function() { return true; }
-Enemy.prototype.CanCauseDamage = function() { return true; }
-Enemy.prototype.CanChangeDirection = function() { return true; }
+Enemy.prototype.CanCauseDamage = function() { return false; }
 Enemy.prototype.TakeHit = function() {};
 Enemy.prototype.Activate = function() {};
 Enemy.prototype.Deactivate = function() {};
@@ -76,6 +75,26 @@ Enemy.prototype.update = function() {
     if(this.energy > this.maxEnergy)
         this.energy = this.maxEnergy;
 
+    this.UpdateAttackGeometry();
+
+    //check for landed hits
+    if(this.Attacking()) {
+
+        if(this.timers.TimerUp('grace')) {
+            if(EnemyBehavior.FaceToFace(this)) {
+                game.physics.arcade.overlap(this.attackRect, frauki.attackRect, Collision.OverlapAttackWithEnemyAttack);
+            }
+        }
+
+        game.physics.arcade.overlap(this.attackRect, frauki, Collision.OverlapEnemyAttackWithFrauki);
+    } 
+    else if(this.CanCauseDamage()) {
+        game.physics.arcade.overlap(this.attackRect, frauki, Collision.OverlapEnemyAttackWithFrauki);
+    }
+
+};
+
+Enemy.prototype.UpdateAttackGeometry = function() {
     //check for and apply any existing attack frame
     //check for a frame mod and apply its mods
     if(this.animations.currentFrame) {
@@ -116,29 +135,6 @@ Enemy.prototype.update = function() {
         this.attackRect.body.height = 0;
 
         this.currentAttack = null;
-    }
-
-    //if they are attacking and facing each other
-    if(this.Attacking()) {
-
-        if(this.timers.TimerUp('grace')) {
-            if((this.direction === 'left' && frauki.body.center.x < this.body.center.x + 20) ||
-               (this.direction === 'right' && frauki.body.center.x > this.body.center.x - 20) ) 
-            {
-                game.physics.arcade.overlap(this.attackRect, frauki.attackRect, Collision.OverlapAttackWithEnemyAttack);
-            }
-        }
-
-        game.physics.arcade.overlap(this.attackRect, frauki, Collision.OverlapEnemyAttackWithFrauki);
-    } else if(this.CanCauseDamage()) {
-        game.physics.arcade.overlap(this.attackRect, frauki, Collision.OverlapEnemyAttackWithFrauki);
-    }
-    
-
-    if(this.state === this.Hurting) {
-        this.body.bounce.setTo(0.5);
-    } else {
-        this.body.bounce.setTo(0);
     }
 };
 

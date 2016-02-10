@@ -12,21 +12,34 @@ Enemy.prototype.types['A3PZ'] =  function() {
     this.animations.add('attack2', ['A3PZ/Attack0010', 'A3PZ/Attack0011', 'A3PZ/Attack0012', 'A3PZ/Attack0013', 'A3PZ/Attack0014'], 18, false, false);
     this.animations.add('hurt', ['A3PZ/Hurt0000', 'A3PZ/Hurt0001'], 8, true, false);
 
-    this.energy = 5;
+    this.energy = 50;
     this.baseStunDuration = 500;
 
     this.robotic = true;
-
-    this.damage = 4;
     
     this.updateFunction = function() {
 
     };
 
-    this.CanCauseDamage = function() { return false; }
-    this.CanChangeDirection = function() { return false; }
-    this.Vulnerable = function() { return true; };
+    this.Act = function() {
 
+        if(EnemyBehavior.Player.IsVisible(this)) {
+            if(EnemyBehavior.Player.IsDangerous(this)) {
+                this.Dodge();
+
+            } else if(EnemyBehavior.Player.IsNear(this, 100)) {
+                EnemyBehavior.FacePlayer(this);
+                this.Attack();
+            
+            } else {
+                this.state = this.Idling;
+                EnemyBehavior.WalkToPlayer(this, 75);
+            }
+        } else {
+            this.state = this.Idling;
+            this.body.velocity.x = 0;
+        }
+    };
 
     ///////////////////////////////ACTIONS////////////////////////////////////
 
@@ -89,40 +102,21 @@ Enemy.prototype.types['A3PZ'] =  function() {
     this.LandHit = function() {
         //this.Dodge(1200, true);
         this.hasHit = true;
-    }
+    };
 
     ////////////////////////////////STATES////////////////////////////////////
     this.Idling = function() {
-        
-        if(this.PlayerIsVisible()) {
+        if(this.body.velocity.x === 0) {
+            this.PlayAnim('idle');
+        } else {
             this.PlayAnim('walk');
 
-            if(this.direction === 'left') {
-                this.body.velocity.x = -75;
-            } else {
-                this.body.velocity.x = 75;
-            }
-
-            this.FacePlayer();
-
-            if(this.PlayerDistance() < 200) {
-                if(frauki.InPreAttackAnim() || frauki.Attacking()) {
-                    this.Dodge();
-                } else if(this.PlayerDistance() < 125) {
-                    this.Attack();
-                } else {
-                    this.state = this.Dodging;
-                }
-            }
-
-            //console.log(this.animations.currentFrame.name);
             if(this.animations.currentFrame.name === 'A3PZ/Walk0001' || this.animations.currentFrame.name === 'A3PZ/Walk0004') {
                 events.publish('camera_shake', {magnitudeX: 3, magnitudeY: 2, duration: 50});
             }
-
-        } else {
-            this.PlayAnim('idle');
         }
+
+        return true;
     };
 
     this.Windup1 = function() {
@@ -133,6 +127,8 @@ Enemy.prototype.types['A3PZ'] =  function() {
             this.timers.SetTimer('slash_hold', 400);
             events.publish('camera_shake', {magnitudeX: 10, magnitudeY: 3, duration: 200});
         }
+
+        return false;
     };
 
     this.Slashing1 = function() {
@@ -145,16 +141,11 @@ Enemy.prototype.types['A3PZ'] =  function() {
         }
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
-
-            if(this.hasHit) {
-                this.Dodge(1200, true);
-                this.hasHit = false;
-            } else {
-                this.state = this.Windup2;
-                this.timers.SetTimer('slash_hold', 400);
-                //this.FacePlayer();
-            }
+            this.state = this.Windup2;
+            //return true;
         }
+
+        return false;
     };
 
     this.Windup2 = function() {
@@ -165,6 +156,8 @@ Enemy.prototype.types['A3PZ'] =  function() {
             this.timers.SetTimer('slash_hold', 400);
             events.publish('camera_shake', {magnitudeX: 10, magnitudeY: 3, duration: 200});
         }
+
+        return false;
     };
 
     this.Slashing2 = function() {
@@ -177,44 +170,30 @@ Enemy.prototype.types['A3PZ'] =  function() {
         }
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
-            if(this.PlayerDistance() < 100) {
-                if(this.hasHit) {
-                    this.hasHit = false;
-                    this.Dodge();
-                } else {
-                    this.FacePlayer();
-                    this.Attack();
-                }
-            } else {
-                this.state = this.Idling;
-                this.timers.SetTimer('attack', 2000 + Math.random() * 1000);
-            }
+            return true;
         }
+
+        return false;
     };
 
     this.Dodging = function() {
         this.PlayAnim('block');
 
         if(this.timers.TimerUp('dodge_hold') && !frauki.InPreAttackAnim() && !frauki.Attacking()) {
-
-            this.FacePlayer();
-
-            if(this.PlayerDistance() < 200) {
-                this.Attack();
-            } else {
-                this.state = this.Idling;
-            }
-
-            this.timers.SetTimer('dodge', 600);
+            return true;
         }
+
+        return false;
     }
 
     this.Hurting = function() {
         this.PlayAnim('hurt');
 
         if(this.timers.TimerUp('hit') && this.body.onFloor()) {
-            this.Block();
+            return true;
         }
+
+        return false;
     };
 
     this.attackFrames = {
@@ -289,7 +268,6 @@ Enemy.prototype.types['A3PZ'] =  function() {
             priority: 2,
             juggle: 0
         },
-
     };
 
 };
