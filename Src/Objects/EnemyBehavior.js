@@ -174,3 +174,25 @@ EnemyBehavior.JumpCurb = function(e) {
         e.body.velocity.y = -200;
     }
 };
+
+/*
+The problem with this system is that actions are specified in the enemy,
+and in the enemybehavior. The current compromise is that the enemybehavior
+modifies the body, and the animations just respond to that. that will work
+for generic actions like jumping, but fails when you consider actions
+that are specific to a certain enemy, like different types of attack
+
+The difference currently between EB actions and specific actions, is that
+the specific actions can have states associated with them, while the EB
+actions do not. So, any EB action is transient, occuring once and possibly
+affecting the state.
+
+A specific example is the jump curb action. Ideally, we want the jump 
+curb action to jump the guy up, move him forward, then when he lands 
+determine if it worked. Its failure can then reverberate upwards in the tree
+and change the tactics of the enemy as a whole.
+
+That kind of behavior requires a stateful aspect to the enemy behavior.
+
+Alternatively all stateful choices can be made in the enemy states...
+*/
