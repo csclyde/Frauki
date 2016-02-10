@@ -33,7 +33,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
             
             } else {
                 this.state = this.Idling;
-                EnemyBehavior.WalkToPlayer(this, 75);
+                EnemyBehavior.WalkToPlayer(this, 75)
             }
         } else {
             this.state = this.Idling;
@@ -179,7 +179,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
     this.Dodging = function() {
         this.PlayAnim('block');
 
-        if(this.timers.TimerUp('dodge_hold') && !frauki.InPreAttackAnim() && !frauki.Attacking()) {
+        if(this.timers.TimerUp('dodge_hold') && !EnemyBehavior.Player.IsDangerous(this)) {
             return true;
         }
 

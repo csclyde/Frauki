@@ -1,5 +1,15 @@
 EnemyBehavior = {};
 
+EnemyBehavior.SetProp = function(e, key, val) {
+    if(!e.EBProps) e.EBProps = {};
+    e.EBProps[key] = val;
+};
+
+EnemyBehavior.GetProp = function(e, key) {
+    if(!e.EBProps) e.EBProps = {};
+    return e.EBProps[key];
+};
+
 EnemyBehavior.WithinCameraRange = function(e) {
     var padding = 150;
 
@@ -143,7 +153,7 @@ EnemyBehavior.Player.IsDangerous = function(e) {
     }
     
     return false;
-}
+};
 
 
 
@@ -167,11 +177,14 @@ EnemyBehavior.WalkToPlayer = function(e, speed) {
     if(EnemyBehavior.PathBlocked(e)) {
         EnemyBehavior.JumpCurb(e);
     }
+
+    return true;
 };
 
 EnemyBehavior.JumpCurb = function(e) {
     if(e.body.onFloor()) {
         e.body.velocity.y = -200;
+        EnemyBehavior.SetProp(e, 'jump_attempted', true);
     }
 };
 
@@ -195,4 +208,8 @@ and change the tactics of the enemy as a whole.
 That kind of behavior requires a stateful aspect to the enemy behavior.
 
 Alternatively all stateful choices can be made in the enemy states...
+
+The act function is essentially a request for a new instruction. When an enemy
+has completed their action or conditions change, the act function will assess
+all the variables and then give a new instruction to the enemy.
 */
