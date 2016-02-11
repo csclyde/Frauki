@@ -107,13 +107,13 @@ Enemy.prototype.types['Bizarro'] =  function() {
 	this.Idling = function() {
 		//this.PlayAnim('stand');
 
-		if(this.PlayerIsNear(70) && this.timers.TimerUp('roll_wait')) {
+		if(EnemyBehavior.Player.IsNear(this, 70) && this.timers.TimerUp('roll_wait')) {
 			this.Roll();
-		} else if(frauki.Attacking() && this.PlayerIsNear(150) && this.timers.TimerUp('bail_wait')) {
+		} else if(frauki.Attacking() && EnemyBehavior.Player.IsNear(this, 150) && this.timers.TimerUp('bail_wait')) {
 			this.Bail();
-		} else if(this.PlayerIsNear(150)) {
+		} else if(EnemyBehavior.Player.IsNear(this, 150)) {
 			this.Attack();
-		} else if(!this.PlayerIsNear(200) && this.PlayerIsNear(400)) {
+		} else if(!EnemyBehavior.Player.IsNear(this, 200) && EnemyBehavior.Player.IsNear(this, 400)) {
 			this.SlashAttack();
 		}
 

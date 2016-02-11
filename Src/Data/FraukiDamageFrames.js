@@ -322,6 +322,7 @@ var fraukiAnimations = [
 	{ Name: 'flip', Frames:  ['Flip0000', 'Flip0001', 'Flip0002', 'Flip0003', 'Flip0004'],  Fps: 14 , Loop: false },
 	{ Name: 'roll', Frames:  ['Roll0000', 'Roll0001', 'Roll0002', 'Roll0003', 'Roll0004', 'Roll0005', 'Roll0013'],  Fps: 18 , Loop: false },
 	{ Name: 'hit', Frames:  ['Hit0000', 'Hit0001'],  Fps: 10 , Loop: true },
+	{ Name: 'stun', Frames:  ['Hit0000'],  Fps: 10 , Loop: true },
 	{ Name: 'kick', Frames:  ['Kick0000', 'Kick0001'],  Fps: 18 , Loop: false },
 	{ Name: 'roll_jump', Frames:  ['Roll0009', 'Roll0010', 'Roll0011', 'Roll0012'],  Fps: 18 , Loop: false },
 	{ Name: 'materialize', Frames:  ['Materialize0000', 'Materialize0001', 'Materialize0002', 'Materialize0003', 'Materialize0004', 'Materialize0005', 'Materialize0006', 'Materialize0007', 'Materialize0008', 'Materialize0009', 'Materialize0010'],  Fps: 18 , Loop: false },

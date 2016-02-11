@@ -81,7 +81,7 @@ Enemy.prototype.types['Pincer'] =  function() {
 
 			this.body.velocity.setMagnitude(200);
 
-			if(this.PlayerIsVisible()) {
+			if(EnemyBehavior.Player.IsVisible(this)) {
 				this.playerWasSeen = true;
 			}
 		} else {
@@ -147,7 +147,7 @@ Enemy.prototype.types['Pincer'] =  function() {
 	this.Idling = function() {
 		this.PlayAnim('idle');
 
-		if(this.PlayerIsVisible()) {
+		if(EnemyBehavior.Player.IsVisible(this)) {
 			//this.state = this.Chasing;
 		}
 
@@ -171,7 +171,7 @@ Enemy.prototype.types['Pincer'] =  function() {
 
 		this.body.velocity.setMagnitude(200);
 
-		if(!this.PlayerIsVisible()) {
+		if(!EnemyBehavior.Player.IsVisible(this)) {
 			this.state = this.Idling;
 		}
 	};

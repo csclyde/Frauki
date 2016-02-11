@@ -46,7 +46,7 @@ Enemy.prototype.types['Fungu'] =  function() {
 		this.body.velocity.y = 0;
 
 		if(this.timers.TimerUp('shoot')) {
-			if(this.PlayerIsVisible()) {
+			if(EnemyBehavior.Player.IsVisible(this)) {
 				projectileController.Spore(this);
 			}
 

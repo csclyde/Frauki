@@ -59,7 +59,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
 	this.Idling = function() {
 		this.PlayAnim('idle');
 
-		if(this.PlayerIsVisible()) {
+		if(EnemyBehavior.Player.IsVisible(this)) {
 			
 		}
 	};

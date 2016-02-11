@@ -23,7 +23,7 @@ Player = function (game, x, y, name) {
         this.animations.add(anim.Name, anim.Frames, anim.Fps, anim.Loop, false);
     }, this);
 
-    this.state = this.Materializing;
+    this.ChangeState(this.Materializing);
     this.PlayAnim('stand');
     
     this.tweens = {};
@@ -213,6 +213,12 @@ Player.prototype.PlayAnim = function(name) {
     }
 };
 
+Player.prototype.ChangeState = function(newState) {
+    if(this.state !== this.Stunned) {
+        this.state = newState;
+    }
+};
+
 Player.prototype.Grace = function() {
 
     return !this.timers.TimerUp('frauki_grace');
@@ -398,7 +404,7 @@ Player.prototype.Jump = function(params) {
         //roll jump
         else if(this.state === this.Rolling) {
             if(energyController.UseEnergy(3)) { 
-                this.state = this.Jumping;
+                this.ChangeState(this.Jumping);
                 this.PlayAnim('roll_jump');
     
                 //roll boost is caluclated based on how close they were to the max roll speed
@@ -446,7 +452,7 @@ Player.prototype.DoubleJump = function() {
             this.body.velocity.y += jumpVel;
         }
 
-        this.state = this.Flipping;
+        this.ChangeState(this.Flipping);
         this.states.hasFlipped = true;
         //this.timers.SetTimer('frauki_grace', 300);
 
@@ -470,11 +476,11 @@ Player.prototype.Crouch = function(params) {
 
 Player.prototype.Heal = function(params) {
     if(params.charging) {
-        this.state = this.Healing;
+        this.ChangeState(this.Healing);
         this.timers.SetTimer('heal_charge', 1000); 
     } else {
         if(this.state === this.Healing) {
-            this.state = this.Standing;
+            this.ChangeState(this.Standing);
         }
     }
 };
@@ -523,9 +529,9 @@ Player.prototype.FrontSlash = function() {
     if(this.upgrades.attackFront) {
         if(energyController.UseEnergy(5)) {
             if(this.upgrades.attackOverhead && this.states.upPressed) {
-                this.state = this.AttackOverhead;
+                this.ChangeState(this.AttackOverhead);
             } else {
-                this.state = this.AttackFront;
+                this.ChangeState(this.AttackFront);
             }
 
             events.publish('play_sound', {name: 'attack_slash', restart: true });
@@ -540,7 +546,7 @@ Player.prototype.FrontSlash = function() {
 
 Player.prototype.LungeSlash = function() {
     if(energyController.UseEnergy(5)) {
-        this.state = this.AttackLunge;
+        this.ChangeState(this.AttackLunge);
 
         events.publish('play_sound', {name: 'attack_slash', restart: true });
 
@@ -553,7 +559,7 @@ Player.prototype.LungeSlash = function() {
 
 Player.prototype.FallSlash = function() {
     if(energyController.UseEnergy(5)) {
-        this.state = this.AttackFall;
+        this.ChangeState(this.AttackFall);
 
         events.publish('play_sound', {name: 'attack_slash', restart: true });
         this.timers.SetTimer('fall_attack_wait', 800);
@@ -568,7 +574,7 @@ Player.prototype.FallSlash = function() {
 Player.prototype.DiveSlash = function() {
     if(this.upgrades.attackDive) {
         if(energyController.UseEnergy(7)) {
-            this.state = this.AttackDiveCharge;
+            this.ChangeState(this.AttackDiveCharge);
             this.movement.diveVelocity = 950;
 
             events.publish('play_sound', {name: 'attack_dive_charge', restart: true });
@@ -585,7 +591,7 @@ Player.prototype.DiveSlash = function() {
 
 Player.prototype.JumpSlash = function() {
     if(energyController.UseEnergy(6)) {
-        this.state = this.AttackJump;
+        this.ChangeState(this.AttackJump);
         
         if(this.body.velocity.y > PLAYER_DOUBLE_JUMP_VEL()) {
             this.body.velocity.y = PLAYER_DOUBLE_JUMP_VEL();
@@ -607,7 +613,7 @@ Player.prototype.JumpSlash = function() {
 Player.prototype.StabSlash = function() {
     if(this.upgrades.attackStab) {
         if(energyController.UseEnergy(6)) {
-            this.state = this.AttackStab;
+            this.ChangeState(this.AttackStab);
 
             // var dir = this.GetDirectionMultiplier();
             
@@ -642,7 +648,7 @@ Player.prototype.StabSlash = function() {
 
 Player.prototype.WhiffSlash = function() {
 
-    this.state = this.AttackWhiff;
+    this.ChangeState(this.AttackWhiff);
 };
 
 Player.prototype.Roll = function(params) {
@@ -655,7 +661,7 @@ Player.prototype.Roll = function(params) {
         if(!energyController.UseEnergy(3))
             return false;
 
-        this.state = this.Rolling;
+        this.ChangeState(this.Rolling);
 
         var dir = this.GetDirectionMultiplier();
 
@@ -748,7 +754,7 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
         this.body.velocity.x = 500;
     } 
 
-    this.state = this.Hurting;
+    this.ChangeState(this.Hurting);
     this.timers.SetTimer('frauki_grace', grace_duration);
     this.timers.SetTimer('frauki_hit', 500);
     events.publish('camera_shake', {magnitudeX: 8, magnitudeY: 5, duration: 500});
@@ -772,7 +778,13 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
 
 Player.prototype.Interrupt = function() {
 
-    this.state = this.Standing;
+    this.ChangeState(this.Standing);
+};
+
+Player.prototype.Stun = function() {
+
+    this.ChangeState(this.Stunned);
+    this.timers.SetTimer('stunned', 1200);
 };
 
 //////////////////STATES/////////////////
@@ -780,13 +792,13 @@ Player.prototype.Standing = function() {
     this.PlayAnim('stand');
 
     if(this.body.velocity.y < 0) {
-        this.state = this.Jumping;
+        this.ChangeState(this.Jumping);
     } else if(this.body.velocity.y > 10) {
-        this.state = this.Falling;
+        this.ChangeState(this.Falling);
     } else if(this.body.velocity.x !== 0) {
-        this.state = this.Running;
+        this.ChangeState(this.Running);
     } else if(this.states.crouching) {
-        this.state = this.Crouching;
+        this.ChangeState(this.Crouching);
     }
 };
 
@@ -799,11 +811,11 @@ Player.prototype.Running = function() {
     }
 
     if(this.body.velocity.x === 0 && this.body.onFloor()) {
-        this.state = this.Standing;
+        this.ChangeState(this.Standing);
     } else if(this.body.velocity.y < 0) {
-        this.state = this.Jumping;
+        this.ChangeState(this.Jumping);
     } else if(this.body.velocity.y > 20) {
-        this.state = this.Peaking;
+        this.ChangeState(this.Peaking);
     }
 };
 
@@ -813,7 +825,7 @@ Player.prototype.Jumping = function() {
     }
 
     if(this.body.velocity.y >= 0) {
-        this.state = this.Peaking;
+        this.ChangeState(this.Peaking);
     }
 };
 
@@ -823,11 +835,11 @@ Player.prototype.Peaking = function() {
     this.body.gravity.y = game.physics.arcade.gravity.y * 1.2;
 
     if(this.body.velocity.y < 0) {
-        this.state = this.Jumping;
+        this.ChangeState(this.Jumping);
     } else if(this.body.onFloor()) {
-        this.state = this.Landing;
+        this.ChangeState(this.Landing);
     } else if(this.animations.currentAnim.isFinished) {
-        this.state = this.Falling;
+        this.ChangeState(this.Falling);
     }
 };
 
@@ -854,7 +866,7 @@ Player.prototype.Falling = function() {
         //console.log(topTile, bottomTile);
 
         if(topTile === null && bottomTile !== null) {
-            this.state = this.Hanging;
+            this.ChangeState(this.Hanging);
         }
     }
 
@@ -862,18 +874,18 @@ Player.prototype.Falling = function() {
         
         if(this.body.velocity.x === 0) {
             if(this.states.crouching)
-                this.state = this.Crouching;
+                this.ChangeState(this.Crouching);
             else
-                this.state = this.Landing;
+                this.ChangeState(this.Landing);
         }
         else {
-            this.state = this.Running;
+            this.ChangeState(this.Running);
         }
 
         if(!frauki.states.inWater) effectsController.JumpDust(frauki.body.center);
 
     } else if(this.body.velocity.y < 0) {
-        this.state = this.Jumping;
+        this.ChangeState(this.Jumping);
     }
 };
 
@@ -881,18 +893,18 @@ Player.prototype.Landing = function() {
     this.PlayAnim('land');
 
     if(this.body.velocity.y < 0) {
-        this.state = this.Jumping;
+        this.ChangeState(this.Jumping);
     }
     
     if(this.body.velocity.x !== 0) {
-        this.state = this.Running;
+        this.ChangeState(this.Running);
     }
 
     if(this.animations.currentAnim.isFinished) {
         if(this.body.velocity.x === 0) {
-            this.state = this.Standing;
+            this.ChangeState(this.Standing);
         } else {
-            this.state = this.Running;
+            this.ChangeState(this.Running);
         }
     }
 };
@@ -901,7 +913,7 @@ Player.prototype.Crouching = function() {
     this.PlayAnim('crouch');
 
     if(!this.states.crouching || this.body.velocity.x !== 0 || this.body.velocity.y !== 0) {
-        this.state = this.Standing;
+        this.ChangeState(this.Standing);
     }
 };
 
@@ -910,13 +922,13 @@ Player.prototype.Flipping = function() {
 
     if(this.animations.currentAnim.isFinished) {
         if(this.body.velocity.y > 0) {
-            this.state = this.Falling;
+            this.ChangeState(this.Falling);
         } else if(this.body.velocity.y < 0) {
-            this.state = this.Jumping;
+            this.ChangeState(this.Jumping);
         } else if(this.body.velocity.x !== 0 && this.body.onFloor()) {
-            this.state = this.Running;
+            this.ChangeState(this.Running);
         } else if(this.body.velocity.x === 0 && this.body.onFloor()) {
-            this.state = this.Landing;
+            this.ChangeState(this.Landing);
         }
     }
 };
@@ -963,22 +975,22 @@ Player.prototype.Rolling = function() {
     if(this.animations.currentAnim.isFinished) {
 
         if(this.body.velocity.y > 150) {
-            this.state = this.Falling;
+            this.ChangeState(this.Falling);
         } else if(!inputController.dpad.left && !inputController.dpad.right && this.body.onFloor()) {
             if(this.states.crouching) {
-                this.state = this.Crouching;
+                this.ChangeState(this.Crouching);
                 this.PlayAnim('crouch');
                 this.animations.currentAnim.setFrame('Crouch0005');
             } else {
-                this.state = this.Standing;
+                this.ChangeState(this.Standing);
             }
 
             this.body.velocity.x = 0;
 
         } else if(this.body.velocity.x !== 0 && this.body.onFloor()) {
-            this.state = this.Running;
+            this.ChangeState(this.Running);
         } else {
-            this.state = this.Standing;
+            this.ChangeState(this.Standing);
         }
     }
 };
@@ -990,11 +1002,11 @@ Player.prototype.Hurting = function() {
 
     if(this.timers.TimerUp('frauki_hit') && !Main.restarting) {
         if(this.body.velocity.y > 0) {
-            this.state = this.Falling;
+            this.ChangeState(this.Falling);
         } else if(this.body.velocity.x === 0) {
-            this.state = this.Standing;
+            this.ChangeState(this.Standing);
         } else {
-            this.state = this.Running;
+            this.ChangeState(this.Running);
         }  
     }
 };
@@ -1003,7 +1015,7 @@ Player.prototype.Materializing = function() {
     this.PlayAnim('materialize');
 
     if(this.animations.currentAnim.isFinished) {
-        this.state = this.Standing;
+        this.ChangeState(this.Standing);
     }
 };
 
@@ -1016,11 +1028,11 @@ Player.prototype.Hanging = function() {
     this.states.hasFlipped = false;
 
     if(!this.body.onWall()) {
-        this.state = this.Falling;
+        this.ChangeState(this.Falling);
     } 
 
     if(this.body.onFloor()) {
-        this.state = this.Standing;
+        this.ChangeState(this.Standing);
     }
 };
 
@@ -1035,6 +1047,14 @@ Player.prototype.Healing = function() {
 
         //send the heal message
         events.publish('energy_heal', {});
+        this.ChangeState(this.Standing);
+    }
+};
+
+Player.prototype.Stunned = function() {
+    this.PlayAnim('stun');
+
+    if(this.timers.TimerUp('stunned')) {
         this.state = this.Standing;
     }
 };
@@ -1059,11 +1079,11 @@ Player.prototype.AttackFront = function() {
 
     if(this.animations.currentAnim.isFinished) {
         if(inputController.dpad.down && !inputController.dpad.left && !inputController.dpad.right && this.body.onFloor()) {
-            this.state = this.Crouching;
+            this.ChangeState(this.Crouching);
             this.PlayAnim('crouch');
             this.animations.currentAnim.setFrame('Crouch0008');
         } else { 
-            this.state = this.Standing;
+            this.ChangeState(this.Standing);
         }
 
         if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true });
@@ -1075,11 +1095,11 @@ Player.prototype.AttackWhiff = function() {
 
     if(this.animations.currentAnim.isFinished) {
         if(inputController.dpad.down && !inputController.dpad.left && !inputController.dpad.right && this.body.onFloor()) {
-            this.state = this.Crouching;
+            this.ChangeState(this.Crouching);
             this.PlayAnim('crouch');
             this.animations.currentAnim.setFrame('Crouch0008');
         } else { 
-            this.state = this.Standing;
+            this.ChangeState(this.Standing);
         }
 
         if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true });
@@ -1102,11 +1122,11 @@ Player.prototype.AttackLunge = function() {
 
     if(this.animations.currentAnim.isFinished) {
         if(inputController.dpad.down && !inputController.dpad.left && !inputController.dpad.right && this.body.onFloor()) {
-            this.state = this.Crouching;
+            this.ChangeState(this.Crouching);
             this.PlayAnim('crouch');
             this.animations.currentAnim.setFrame('Crouch0008');
         } else { 
-            this.state = this.Standing;
+            this.ChangeState(this.Standing);
         }
 
         if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true });
@@ -1135,18 +1155,18 @@ Player.prototype.AttackFall = function() {
         
             if(this.body.velocity.x === 0) {
                 if(this.states.crouching)
-                    this.state = this.Crouching;
+                    this.ChangeState(this.Crouching);
                 else
-                    this.state = this.Standing;
+                    this.ChangeState(this.Standing);
             }
             else {
-                this.state = this.Running;
+                this.ChangeState(this.Running);
             }
 
         } else if(this.body.velocity.y < 0) {
-            this.state = this.Jumping;
+            this.ChangeState(this.Jumping);
         } else {
-            this.state = this.Falling;
+            this.ChangeState(this.Falling);
         }
 
         this.states.attackFallLanded = false;
@@ -1163,7 +1183,7 @@ Player.prototype.AttackOverhead = function() {
     }
     
     if(this.animations.currentAnim.isFinished) {
-        this.state = this.Standing;
+        this.ChangeState(this.Standing);
 
         if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true });
     }
@@ -1213,11 +1233,11 @@ Player.prototype.AttackStab = function() {
     if(this.animations.currentAnim.isFinished) {
         
         if(this.body.velocity.y > 150) {
-            this.state = this.Falling;
+            this.ChangeState(this.Falling);
         } else if((inputController.dpad.left || inputController.dpad.right) && this.body.onFloor()) {
-            this.state = this.Running;
+            this.ChangeState(this.Running);
         } else {
-            this.state = this.Standing;
+            this.ChangeState(this.Standing);
         }
 
         if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true });
@@ -1231,7 +1251,7 @@ Player.prototype.AttackDiveCharge = function() {
     this.body.maxVelocity.x = 1;
 
     if(this.animations.currentAnim.isFinished) {
-        this.state = this.AttackDiveFall;
+        this.ChangeState(this.AttackDiveFall);
         this.timers.SetTimer('frauki_dive', 0);
 
         events.publish('play_sound', {name: 'attack_dive_fall'});
@@ -1249,7 +1269,7 @@ Player.prototype.AttackDiveFall = function() {
     this.body.maxVelocity.x = 100;
 
     if(this.body.velocity.y < 0) {
-        this.state = this.Jumping;
+        this.ChangeState(this.Jumping);
         events.publish('stop_sound', {name: 'attack_dive_fall'});
         this.movement.diveVelocity = 0;
 
@@ -1261,7 +1281,7 @@ Player.prototype.AttackDiveFall = function() {
         events.publish('stop_sound', {name: 'attack_dive_fall'});
         events.publish('play_sound', {name: 'attack_dive_land'});
 
-        this.state = this.AttackDiveLand;
+        this.ChangeState(this.AttackDiveLand);
 
         effectsController.EnergyStreak();
 
@@ -1277,12 +1297,12 @@ Player.prototype.AttackDiveLand = function() {
     if(this.animations.currentAnim.isFinished) {
         if(this.body.velocity.x === 0) {
             if(this.states.crouching)
-                this.state = this.Crouching;
+                this.ChangeState(this.Crouching);
             else
-                this.state = this.Standing;
+                this.ChangeState(this.Standing);
         }
         else {
-            this.state = this.Running;
+            this.ChangeState(this.Running);
         }
 
         if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true });
@@ -1293,7 +1313,7 @@ Player.prototype.AttackJump = function() {
     this.PlayAnim('attack_jump');
 
     if(this.animations.currentAnim.isFinished) {
-        this.state = this.Jumping;
+        this.ChangeState(this.Jumping);
         if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true });
     }
 };

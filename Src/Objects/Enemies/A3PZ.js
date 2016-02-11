@@ -12,7 +12,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
     this.animations.add('attack2', ['A3PZ/Attack0010', 'A3PZ/Attack0011', 'A3PZ/Attack0012', 'A3PZ/Attack0013', 'A3PZ/Attack0014'], 18, false, false);
     this.animations.add('hurt', ['A3PZ/Hurt0000', 'A3PZ/Hurt0001'], 8, true, false);
 
-    this.energy = 50;
+    this.energy = 5;
     this.baseStunDuration = 500;
 
     this.robotic = true;
@@ -67,7 +67,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
             return;
         }
 
-        this.timers.SetTimer('slash_hold', 400);
+        this.timers.SetTimer('slash_hold', 500);
 
         this.state = this.Windup1;
 
@@ -78,7 +78,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
             return false;
         }
 
-        this.FacePlayer();
+        EnemyBehavior.FacePlayer(this);
 
         if(this.direction === 'left') {
             this.body.velocity.x = 300;
@@ -97,7 +97,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
     this.Block = function(duration) {
 
-        this.FacePlayer();
+        EnemyBehavior.FacePlayer(this);
 
         this.state = this.Dodging;
 
@@ -129,7 +129,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
             this.state = this.Slashing1;
-            this.timers.SetTimer('slash_hold', 400);
+            this.timers.SetTimer('slash_hold', 500);
             events.publish('camera_shake', {magnitudeX: 10, magnitudeY: 3, duration: 200});
         }
 
@@ -158,7 +158,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
             this.state = this.Slashing2;
-            this.timers.SetTimer('slash_hold', 400);
+            this.timers.SetTimer('slash_hold', 500);
             events.publish('camera_shake', {magnitudeX: 10, magnitudeY: 3, duration: 200});
         }
 

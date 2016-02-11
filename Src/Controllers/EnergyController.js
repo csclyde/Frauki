@@ -31,7 +31,7 @@ EnergyController.prototype.Create = function() {
 EnergyController.prototype.Update = function() {
 
 	var energyDiff = this.energy - 15;
-	var step = (GetCurrentShardType() === 'Wit' ? 0.1 : 0.05);
+	var step = 0.1;
 
 	//
 	if(game.time.now - this.energyUsageTimestamp > 2000) {

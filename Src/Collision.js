@@ -111,7 +111,7 @@ Collision.OverlapAttackWithEnemy = function(f, e) {
     }
 
     e.body.velocity.x = (250 * frauki.GetCurrentKnockback()) + 200;
-    e.body.velocity.x *= e.PlayerDirMod();
+    e.body.velocity.x *= EnemyBehavior.Player.DirMod(e);
     
     e.body.velocity.y = (frauki.GetCurrentJuggle() * -200) - 200;
     //if(e.robotic) e.body.velocity.y /= 2;
@@ -197,7 +197,12 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
     e.timers.SetTimer('grace', 400);
     frauki.timers.SetTimer('frauki_grace', 300);
 
-    energyController.RemoveEnergy(e.currentAttack.damage * 3);
+    energyController.RemoveEnergy(e.currentAttack.damage * 2);
+
+    if(energyController.GetEnergy() <= 0) {
+        events.publish('activate_weapon', { activate: false });
+        frauki.Stun();
+    }
 
     //if(!!e.Block) e.Block();
 };
@@ -265,7 +270,7 @@ Collision.OverlapLobWithEnemy = function(l, e) {
 
     //fraukis knockback will increase the amount that the enemy is moved
     e.body.velocity.x = 300;
-    e.body.velocity.x *= e.PlayerDirMod();
+    e.body.velocity.x *= EnemyBehavior.Player.DirMod(e);
     
     e.body.velocity.y = -200;
 

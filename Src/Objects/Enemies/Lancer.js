@@ -83,9 +83,9 @@ Enemy.prototype.types['Lancer'] =  function() {
 
 		//this.body.velocity.x = 0;
 
-		if(this.PlayerIsNear(75)) {
+		if(EnemyBehavior.Player.IsNear(this, 75)) {
 			this.Run();
-		} else if(this.PlayerIsNear(175) && this.timers.TimerUp('attack_wait')) {
+		} else if(EnemyBehavior.Player.IsNear(this, 175) && this.timers.TimerUp('attack_wait')) {
 			this.Attack();
 		}
 
@@ -110,10 +110,10 @@ Enemy.prototype.types['Lancer'] =  function() {
 			this.body.acceleration.x = -3000;
 		}
 
-		if(this.PlayerIsNear(100)) {
+		if(EnemyBehavior.Player.IsNear(this, 100)) {
 			this.Attack();
 		}
-		if(!this.PlayerIsNear(300)) {
+		if(!EnemyBehavior.Player.IsNear(this, 300)) {
 			this.state = this.Idling;
 			this.body.velocity.x = 0;
 			this.body.acceleration.x = 0;
