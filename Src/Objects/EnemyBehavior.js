@@ -1,5 +1,15 @@
 EnemyBehavior = {};
 
+EnemyBehavior.SetProp = function(e, key, val) {
+    if(!e.EBProps) e.EBProps = {};
+    e.EBProps[key] = val;
+};
+
+EnemyBehavior.GetProp = function(e, key) {
+    if(!e.EBProps) e.EBProps = {};
+    return e.EBProps[key];
+};
+
 EnemyBehavior.WithinCameraRange = function(e) {
     var padding = 150;
 
@@ -11,6 +21,22 @@ EnemyBehavior.WithinCameraRange = function(e) {
 
     return false;
 };
+
+EnemyBehavior.FaceToFace = function(e) {
+    if((e.direction === 'left' && frauki.body.center.x < e.body.center.x + 20) ||
+       (e.direction === 'right' && frauki.body.center.x > e.body.center.x - 20) )
+        return true;
+
+    return false;
+};
+
+EnemyBehavior.PathBlocked = function(e) {
+    if(e.body.onWall()) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 EnemyBehavior.GetDirMod = function(e) {
     if(e.direction === 'left') {
@@ -117,10 +143,31 @@ EnemyBehavior.Player.DirMod = function(e) {
     return frauki.body.center.x < e.body.center.x ? 1 : -1;
 };
 
+EnemyBehavior.Player.IsDangerous = function(e) {
+    if(EnemyBehavior.Player.IsNear(e, 150)) {
+        if(frauki.InPreAttackAnim()) {
+            return true;
+        } else if(frauki.Attacking() && frauki.currentAttack.damage > 0) {
+            return true;
+        }
+    }
+    
+    return false;
+};
 
-EnemyBehavior.Actions = {}
+EnemyBehavior.Player.MovingTowards = function(e) {
+    if(frauki.body.center.x < e.body.x && frauki.body.velocity.x > 0) {
+        return true;
+    } else if(frauki.body.center.x > e.body.x && frauki.body.velocity.x < 0) {
+        return true;
+    } else {
+        return false;
+    }
+};
 
-EnemyBehavior.Actions.FacePlayer = function(e) {
+
+
+EnemyBehavior.FacePlayer = function(e) {
     if(e.body.center.x < frauki.body.center.x) {
         e.SetDirection('right');
     } else {
@@ -128,7 +175,51 @@ EnemyBehavior.Actions.FacePlayer = function(e) {
     }
 };
 
-EnemyBehavior.Actions.ChargeAtPlayer = function(e, speed) {
+EnemyBehavior.ChargeAtPlayer = function(e, speed) {
 
     game.physics.arcade.moveToXY(e, frauki.body.center.x, frauki.body.center.y, speed);
 };
+
+EnemyBehavior.WalkToPlayer = function(e, speed) {
+    e.body.velocity.x = speed * EnemyBehavior.Player.DirMod(e) * -1;
+    EnemyBehavior.FacePlayer(e);
+
+    if(EnemyBehavior.PathBlocked(e)) {
+        EnemyBehavior.JumpCurb(e);
+    }
+
+    return true;
+};
+
+EnemyBehavior.JumpCurb = function(e) {
+    if(e.body.onFloor()) {
+        e.body.velocity.y = -200;
+        EnemyBehavior.SetProp(e, 'jump_attempted', true);
+    }
+};
+
+/*
+The problem with this system is that actions are specified in the enemy,
+and in the enemybehavior. The current compromise is that the enemybehavior
+modifies the body, and the animations just respond to that. that will work
+for generic actions like jumping, but fails when you consider actions
+that are specific to a certain enemy, like different types of attack
+
+The difference currently between EB actions and specific actions, is that
+the specific actions can have states associated with them, while the EB
+actions do not. So, any EB action is transient, occuring once and possibly
+affecting the state.
+
+A specific example is the jump curb action. Ideally, we want the jump 
+curb action to jump the guy up, move him forward, then when he lands 
+determine if it worked. Its failure can then reverberate upwards in the tree
+and change the tactics of the enemy as a whole.
+
+That kind of behavior requires a stateful aspect to the enemy behavior.
+
+Alternatively all stateful choices can be made in the enemy states...
+
+The act function is essentially a request for a new instruction. When an enemy
+has completed their action or conditions change, the act function will assess
+all the variables and then give a new instruction to the enemy.
+*/

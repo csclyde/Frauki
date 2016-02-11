@@ -42,18 +42,19 @@ Enemy.prototype.types = {};
 
 //default functions
 Enemy.prototype.updateFunction = function() {};
-Enemy.prototype.Idling = function() { return false; };
 Enemy.prototype.Act = function() {};
+Enemy.prototype.Idling = function() { return false; };
+Enemy.prototype.Stunned = function() { return true };
 Enemy.prototype.Hurting = function() {};
 Enemy.prototype.Dying = function() {};
 Enemy.prototype.Die = function() { };
 Enemy.prototype.Vulnerable = function() { return true; }
-Enemy.prototype.CanCauseDamage = function() { return true; }
-Enemy.prototype.CanChangeDirection = function() { return true; }
+Enemy.prototype.CanCauseDamage = function() { return false; }
 Enemy.prototype.TakeHit = function() {};
 Enemy.prototype.Activate = function() {};
 Enemy.prototype.Deactivate = function() {};
 Enemy.prototype.TakeHit = function() {};
+Enemy.prototype.LandHit = function() {};
 
 Enemy.prototype.update = function() {
 
@@ -71,20 +72,30 @@ Enemy.prototype.update = function() {
     if(this.state()) {
         this.Act();
     }
-
-    //update the facing of the enemy, assuming they are not being hit and
-    //there is no other precondition overriding their ability to turn
-    if(this.CanChangeDirection()) {
-        if(this.body.velocity.x > 0) {
-            this.SetDirection('right');
-        } else if(this.body.velocity.x < 0) {
-            this.SetDirection('left');
-        }
-    }
     
     if(this.energy > this.maxEnergy)
         this.energy = this.maxEnergy;
 
+    this.UpdateAttackGeometry();
+
+    //check for landed hits
+    if(this.Attacking()) {
+
+        if(this.timers.TimerUp('grace')) {
+            if(EnemyBehavior.FaceToFace(this)) {
+                game.physics.arcade.overlap(this.attackRect, frauki.attackRect, Collision.OverlapAttackWithEnemyAttack);
+            }
+        }
+
+        game.physics.arcade.overlap(this.attackRect, frauki, Collision.OverlapEnemyAttackWithFrauki);
+    } 
+    else if(this.CanCauseDamage()) {
+        game.physics.arcade.overlap(this.attackRect, frauki, Collision.OverlapEnemyAttackWithFrauki);
+    }
+
+};
+
+Enemy.prototype.UpdateAttackGeometry = function() {
     //check for and apply any existing attack frame
     //check for a frame mod and apply its mods
     if(this.animations.currentFrame) {
@@ -105,32 +116,26 @@ Enemy.prototype.update = function() {
             this.attackRect.body.height = this.currentAttack.h;
         }
     }
+    else if(this.CanCauseDamage()) {
+        this.attackRect.body.x = this.body.x;
+        this.attackRect.body.y = this.body.y;
+        this.attackRect.body.width = this.body.width;
+        this.attackRect.body.height = this.body.height;
+
+        this.currentAttack = {
+            damage: this.damage,
+            knockback: 0,
+            priority: 2,
+            juggle: 0
+        };
+    } 
     else {
         this.attackRect.body.x = 0;
         this.attackRect.body.y = 0;
         this.attackRect.body.width = 0;
         this.attackRect.body.height = 0;
-    }
 
-    //if they are attacking and facing each other
-    if(this.Attacking()) {
-
-        if(this.timers.TimerUp('grace')) {
-            if((this.direction === 'left' && frauki.body.center.x < this.body.center.x + 20) ||
-               (this.direction === 'right' && frauki.body.center.x > this.body.center.x - 20) ) 
-            {
-                game.physics.arcade.overlap(this.attackRect, frauki.attackRect, Collision.OverlapAttackWithEnemyAttack);
-            }
-        }
-
-        game.physics.arcade.overlap(this.attackRect, frauki, Collision.OverlapEnemyAttackWithFrauki);
-    }
-    
-
-    if(this.state === this.Hurting) {
-        this.body.bounce.setTo(0.5);
-    } else {
-        this.body.bounce.setTo(0);
+        this.currentAttack = null;
     }
 };
 
@@ -216,160 +221,4 @@ function DestroyEnemy(e) {
 
     e.destroy();
     e = null;
-};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Enemy.prototype.WithinCameraRange = function() {
-    var padding = 150;
-
-    if(this.body.x > game.camera.x - padding &&
-       this.body.y > game.camera.y - padding &&
-       this.body.x < game.camera.x + game.camera.width + padding &&
-       this.body.y < game.camera.y + game.camera.height + padding)
-        return true;
-
-    return false;
-};
-
-Enemy.prototype.GetDirMod = function() {
-    if(this.direction === 'left') {
-        return -1;
-    } else {
-        return 1;
-    }
-};
-
-//provide utility functions here that the specific enemies can all use
-Enemy.prototype.PlayerIsNear = function(radius) {
-
-    if(this.PlayerDistance() <= radius)
-        return true;
-    else
-        return false;
-};
-
-Enemy.prototype.PlayerDistance = function() {
-    var distX = frauki.body.center.x - this.body.center.x;
-    var distY = frauki.body.center.y - this.body.center.y;
-
-    var dist = Math.sqrt(distX * distX + distY * distY);
-
-    return dist;
-};
-
-Enemy.prototype.PlayerIsVisible = function() {
-
-    return this.WithinCameraRange();
-
-    var ray = new Phaser.Line(frauki.body.center.x, frauki.body.center.y, this.body.center.x, this.body.center.y);
-    var collideTiles = Frogland.GetCurrentCollisionLayer().getRayCastTiles(ray, 1, true);
-
-    var i = collideTiles.length;
-    while(i--) {
-        if(collideTiles[i].index === 1) return false;
-    }
-
-    return true;
-};
-
-Enemy.prototype.PlayerDirection = function() {
-    if(frauki.body.center.y < this.body.center.y - (this.body.height / 2))
-        return 'above';
-    if(frauki.body.center.y > this.body.center.y + (this.body.height / 2))
-        return 'below';
-    if(frauki.body.center.x < this.body.center.x)
-        return 'left';
-    if(frauki.body.center.x > this.body.center.x)
-        return 'right';
-};
-
-Enemy.prototype.PlayerDirMod = function() {
-
-    return frauki.body.center.x < this.body.center.x ? 1 : -1;
-};
-
-Enemy.prototype.EnemyDirection = function() {
-    if(frauki.body.center.y < this.body.center.y - (this.body.height / 2))
-        return 'below';
-    if(frauki.body.center.y > this.body.center.y + (this.body.height / 2))
-        return 'above';
-    if(frauki.body.center.x < this.body.center.x)
-        return 'right';
-    if(frauki.body.center.x > this.body.center.x)
-        return 'left';
-};
-
-Enemy.prototype.RollDice = function(sides, thresh) {
-    var roll = Math.random() * sides;
-
-    if(roll >= thresh)
-        return true;
-    else
-        return false;
-};
-
-Enemy.prototype.FacePlayer = function() {
-    if(this.body.center.x < frauki.body.center.x) {
-        this.SetDirection('right');
-    } else {
-        this.SetDirection('left');
-    }
-}
-
-Enemy.prototype.ChargeAtPlayer = function(speed) {
-
-    game.physics.arcade.moveToXY(this, frauki.body.center.x, frauki.body.center.y, speed);
-};
-
-Enemy.prototype.FraukiVulnerableState = function() {
-
-    var vulnerableFrames = [
-        'Attack Dive0019',
-        'Attack Dive0020',
-        'Attack Dive0021',
-        'Attack Dive0022',
-        'Attack Dive0023',
-        'Attack Dive0024',
-        'Attack Dive0025',
-        'Attack Dive0026',
-        'Attack Dive0027',
-        'Attack Dive0028',
-        'Attack Stab0011',
-        'Attack Stab0012',
-        'Attack Stab0013',
-        'Attack Stab0014',
-        'Attack Stab0015',
-        'Attack Stab0016',
-        'Attack Stab0017'
-    ];
-
-    if(vulnerableFrames.indexOf(frauki.animations.currentFrame.name) > -1) {
-        return true;
-    } else {
-        return false;
-    }
 };

@@ -61,7 +61,7 @@ Enemy.prototype.types['KR32'] =  function() {
     };
 
     this.Attack = function() {
-    	if(!this.timers.TimerUp('attack') && !this.FraukiVulnerableState()) {
+    	if(!this.timers.TimerUp('attack') && !EnemyBehavior.Player.IsVulnerable(this)) {
     		return;
     	}
 
@@ -78,14 +78,14 @@ Enemy.prototype.types['KR32'] =  function() {
 		// 	this.body.velocity.x = -300;
 		// }
 
-    	this.FacePlayer();
+    	EnemyBehavior.FacePlayer(this);
     	this.state = this.Stabbing;
     };
 
     this.Recoil = function() {
     	this.state = this.Blocking;
 
-    	this.FacePlayer();
+    	EnemyBehavior.FacePlayer(this);
 
     	if(this.direction === 'left') {
     		this.body.velocity.x = 200;
@@ -100,7 +100,7 @@ Enemy.prototype.types['KR32'] =  function() {
 	this.Idling = function() {
 		this.PlayAnim('idle');
 
-		if(this.PlayerIsVisible()) {
+		if(EnemyBehavior.Player.IsVisible(this)) {
 			this.state = this.Blocking;
 		}
 	};
@@ -119,9 +119,9 @@ Enemy.prototype.types['KR32'] =  function() {
 			this.PlayAnim('block');
 		}
 
-		this.FacePlayer();
+		EnemyBehavior.FacePlayer(this);
 
-		if(!this.PlayerIsVisible()) {
+		if(!EnemyBehavior.Player.IsVisible(this)) {
 			this.state = this.Idling;
 		}
 
@@ -130,9 +130,9 @@ Enemy.prototype.types['KR32'] =  function() {
 			this.timers.SetTimer('attack', 500 + Math.random() * 1000);
 		}
 
-		if(this.PlayerDistance() < 160 && !frauki.InPreAttackAnim() && !frauki.Attacking() && this.body.onFloor() && frauki.body.center.y > this.body.center.y - 50) {
+		if(EnemyBehavior.Player.Distance(this) < 160 && !frauki.InPreAttackAnim() && !frauki.Attacking() && this.body.onFloor() && frauki.body.center.y > this.body.center.y - 50) {
 
-			if(this.PlayerDistance() < 75) {
+			if(EnemyBehavior.Player.Distance(this) < 75) {
 				this.AttackStab();
 			} else if(!frauki.InPreAttackAnim()) {
 				this.Attack();
@@ -166,7 +166,7 @@ Enemy.prototype.types['KR32'] =  function() {
 
 		if(this.animations.currentAnim.isFinished) {
 
-			if(this.PlayerDistance() < 100) {
+			if(EnemyBehavior.Player.Distance(this) < 100) {
 				this.Recoil();
 			} else {
 				this.state = this.Blocking;
@@ -179,11 +179,11 @@ Enemy.prototype.types['KR32'] =  function() {
 	this.Stabbing = function() {
 		this.PlayAnim('attack_stab');
 
-		//this.FacePlayer();
+		//EnemyBehavior.FacePlayer(this);
 
 		if(this.animations.currentAnim.isFinished) {
 
-			if(this.PlayerDistance() < 100) {
+			if(EnemyBehavior.Player.Distance(this) < 100) {
 				this.Recoil();
 			} else {
 				this.state = this.Blocking;
@@ -197,7 +197,7 @@ Enemy.prototype.types['KR32'] =  function() {
 		this.PlayAnim('hurt');
 
 		if(this.timers.TimerUp('hit') && this.body.onFloor()) {
-			if(this.PlayerDistance() < 75) {
+			if(EnemyBehavior.Player.Distance(this) < 75) {
 				this.Recoil();
 			} else {
 				this.state = this.Idling;

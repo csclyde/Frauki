@@ -152,7 +152,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
     this.Idling = function() {
         this.PlayAnim('idle');
 
-        if(this.PlayerIsNear(50)) {
+        if(EnemyBehavior.Player.IsNear(this, 50)) {
             this.Scuttle();
         } else if(this.body.center.y < frauki.body.y && this.body.center.x > frauki.body.center.x - 20 && 
                   this.body.center.x < frauki.body.center.x + 20 && 
@@ -196,7 +196,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
             //parabolic arc
             //the duration of the hop is a function of how far apart the bug and
             //frauki are. The max time should be approx 1 second.
-            var duration = this.PlayerDistance() / 500;
+            var duration = EnemyBehavior.Player.Distance(this) / 500;
             this.body.velocity.x = (frauki.body.center.x - this.body.center.x) / duration;
             this.body.velocity.y = (frauki.body.center.y + -0.5 * game.physics.arcade.gravity.y * duration * duration - this.body.center.y) / duration;
 
@@ -266,7 +266,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
     this.Fleeing = function() {
 
-        if(this.PlayerDistance() > 400 || this.body.touching.left || this.body.touching.right) {
+        if(EnemyBehavior.Player.Distance(this) > 400 || this.body.touching.left || this.body.touching.right) {
             if(Math.abs(this.body.center.y - frauki.body.center.y) < 40) {
                 this.Scuttle();
             } else {

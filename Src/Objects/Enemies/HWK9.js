@@ -108,10 +108,10 @@ Enemy.prototype.types['HWK9'] =  function() {
 	this.Idling = function() {
 		this.PlayAnim('idle');
 
-		if(this.PlayerIsVisible()) {
-			this.FacePlayer();
+		if(EnemyBehavior.Player.IsVisible(this)) {
+			EnemyBehavior.FacePlayer(this);
 
-			if(this.PlayerDistance() < 120) {
+			if(EnemyBehavior.Player.Distance(this) < 120) {
 
 				if(frauki.Attacking() || !this.timers.TimerUp('dodge_timer')) {
 					this.Block();
@@ -139,7 +139,7 @@ Enemy.prototype.types['HWK9'] =  function() {
 
 			this.body.velocity = attackVector;
 
-			this.FacePlayer();
+			EnemyBehavior.FacePlayer(this);
 		}
 
 	};
@@ -168,7 +168,7 @@ Enemy.prototype.types['HWK9'] =  function() {
 	this.Blocking = function() {
 		this.PlayAnim('block');
 
-		this.FacePlayer();
+		EnemyBehavior.FacePlayer(this);
 
 		if(frauki.state === frauki.AttackStab || frauki.state === frauki.AttackDiveCharge) {
 			this.Dodge();
@@ -176,9 +176,9 @@ Enemy.prototype.types['HWK9'] =  function() {
 
 		if(this.timers.TimerUp('block')) {
 
-			if(this.PlayerDistance() < 120) {
+			if(EnemyBehavior.Player.Distance(this) < 120) {
 				this.Dodge();
-			} else if(this.PlayerDistance() > 120) {
+			} else if(EnemyBehavior.Player.Distance(this) > 120) {
 				this.QuickAttack();
 			}
 

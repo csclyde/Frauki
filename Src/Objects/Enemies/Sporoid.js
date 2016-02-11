@@ -93,7 +93,7 @@ Enemy.prototype.types['Sporoid'] =  function() {
 		this.body.velocity.y = Math.sin(game.time.now / 300) * 50 + (Math.random() * 40 - 20);
 		this.body.velocity.x = Math.sin(game.time.now / 1000) * 20;
 
-		// if(this.PlayerIsVisible() && this.timers.TimerUp('shoot')) {
+		// if(EnemyBehavior.Player.IsVisible(this) && this.timers.TimerUp('shoot')) {
 		// 	this.Shoot();
 		// }
 
@@ -105,12 +105,12 @@ Enemy.prototype.types['Sporoid'] =  function() {
 			case 'down': this.body.velocity.y += 30; break;
 		}
 
-		if(this.PlayerIsNear(80)) {
+		if(EnemyBehavior.Player.IsNear(this, 80)) {
 			this.Dash();
 			return;
 		}
 
-		if(this.PlayerIsNear(300)) {
+		if(EnemyBehavior.Player.IsNear(this, 300)) {
 			if(frauki.body.center.x < this.body.center.x)
 				this.body.velocity.x += 30;
 			else

@@ -100,7 +100,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
             this.wanderTimer = game.time.now + 1000 + (Math.random() * 200);
         }
 
-        if(this.PlayerIsVisible())
+        if(EnemyBehavior.Player.IsVisible(this))
             this.state = this.Creepin;
 
         if(this.body.onFloor() || this.body.onWall())
@@ -150,7 +150,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
     this.Creepin = function() {
     	this.PlayAnim('idle');
 
-        if(!this.PlayerIsVisible()) {
+        if(!EnemyBehavior.Player.IsVisible(this)) {
             //this.state = this.Idling;
             this.playerSeen = true;
         }
@@ -162,7 +162,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
 
         game.physics.arcade.moveToXY(this, locus.x, locus.y, 40);
 
-        if(Math.floor(Math.random() * 100) <= this.anger && game.time.now > this.stingRestTimer && this.PlayerIsVisible()) 
+        if(Math.floor(Math.random() * 100) <= this.anger && game.time.now > this.stingRestTimer && EnemyBehavior.Player.IsVisible(this)) 
             this.Sting();
     };
 

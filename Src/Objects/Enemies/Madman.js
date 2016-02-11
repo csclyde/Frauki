@@ -83,7 +83,7 @@ Enemy.prototype.types['Madman'] =  function() {
 	this.Idling = function() {
 		this.PlayAnim('idle');
 
-		if(this.PlayerIsNear(150) && this.body.onFloor()) {
+		if(EnemyBehavior.Player.IsNear(this, 150) && this.body.onFloor()) {
 			this.state = this.Dodge;
 		}
 		else if(Math.abs(this.body.center.y - frauki.body.center.y) < 40 && Math.abs(this.body.center.x - frauki.body.center.x) < 300 && this.body.onFloor()) {
