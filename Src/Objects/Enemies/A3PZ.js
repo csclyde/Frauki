@@ -29,7 +29,12 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
             } else if(EnemyBehavior.Player.IsNear(this, 100)) {
                 EnemyBehavior.FacePlayer(this);
-                this.Attack();
+
+                if(EnemyBehavior.Player.MovingTowards(this)) {
+                    this.Block(300);
+                } else {
+                    this.Attack();
+                }
             
             } else {
                 this.state = this.Idling;

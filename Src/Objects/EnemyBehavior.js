@@ -155,6 +155,16 @@ EnemyBehavior.Player.IsDangerous = function(e) {
     return false;
 };
 
+EnemyBehavior.Player.MovingTowards = function(e) {
+    if(frauki.body.center.x < e.body.x && frauki.body.velocity.x > 0) {
+        return true;
+    } else if(frauki.body.center.x > e.body.x && frauki.body.velocity.x < 0) {
+        return true;
+    } else {
+        return false;
+    }
+};
+
 
 
 EnemyBehavior.FacePlayer = function(e) {
