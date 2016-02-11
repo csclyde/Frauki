@@ -87,7 +87,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
         }       
 
         this.attackTimer = game.time.now + 600;
-        //this.squashTween = game.add.tween(this.scale).to({x: this.GetDirMod() * 0.7}, 600, Phaser.Easing.Exponential.Out, true);
+        //this.squashTween = game.add.tween(this.scale).to({x: EnemyBehavior.GetDirMod(this) * 0.7}, 600, Phaser.Easing.Exponential.Out, true);
         this.state = this.PreScuttling;
 
         
@@ -234,7 +234,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
         if(game.time.now > this.attackTimer) {
             this.attackTimer = game.time.now + 800;
             this.state = this.Scuttling;
-            this.scale.x = this.GetDirMod();
+            this.scale.x = EnemyBehavior.GetDirMod(this);
 
             if(this.direction === 'left') {
                 this.body.velocity.x = -450;

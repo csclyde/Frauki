@@ -134,7 +134,7 @@ function OpenDoorById(id) {
 };
 
 function PerformOpen(d, save) {
-    var openTween = game.add.tween(d.body).to({y: d.body.y + 70}, 2000, Phaser.Easing.Quintic.InOut, true);
+    var openTween = game.add.tween(d.body).to({y: d.body.y - 70}, 3000, Phaser.Easing.Quintic.InOut, true);
 
     //disable the body after its opened
     openTween.onComplete.add(function() {

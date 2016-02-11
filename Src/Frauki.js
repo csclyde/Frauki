@@ -334,7 +334,11 @@ Player.prototype.GetDirectionMultiplier = function() {
 
 ////////////////ACTIONS//////////////////
 Player.prototype.Run = function(params) {
-    if(!this.timers.TimerUp('frauki_hit') || (this.state === this.Rolling && this.movement.rollPop === false) || this.state === this.AttackStab) 
+
+    if(!this.timers.TimerUp('frauki_hit') || 
+        (this.state === this.Rolling && this.movement.rollPop === false) || 
+        this.state === this.AttackStab || 
+        this.state === this.Stunned) 
         return;
 
     if(params.dir === 'left') {
@@ -379,7 +383,10 @@ Player.prototype.StartStopRun = function(params) {
 };
 
 Player.prototype.Jump = function(params) {
-    if(!this.timers.TimerUp('frauki_hit') || this.state === this.AttackDiveLand || this.state === this.AttackFall) 
+    if(!this.timers.TimerUp('frauki_hit') || 
+        this.state === this.AttackDiveLand || 
+        this.state === this.AttackFall ||
+        this.state === this.Stunned) 
         return;
 
     if(params.jump) {
@@ -722,8 +729,8 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
 
     damage = damage * 3;
 
-    if(GetCurrentShardType() === 'Will') {
-        damage /= 1.5;
+    if(this.state === this.Stunned) {
+        damage *= 1.5;
     }
 
     if(this.state === this.Hurting || e.state === e.Hurting || frauki.Grace())
@@ -781,10 +788,18 @@ Player.prototype.Interrupt = function() {
     this.ChangeState(this.Standing);
 };
 
-Player.prototype.Stun = function() {
+Player.prototype.Stun = function(e) {
 
     this.ChangeState(this.Stunned);
     this.timers.SetTimer('stunned', 1200);
+
+    this.body.velocity.y = -300;
+
+    if(this.body.center.x < e.body.center.x) {
+        this.body.velocity.x = -100;
+    } else {
+        this.body.velocity.x = 100;
+    } 
 };
 
 //////////////////STATES/////////////////

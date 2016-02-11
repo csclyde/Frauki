@@ -16,6 +16,8 @@ Enemy.prototype.types['A3PZ'] =  function() {
     this.baseStunDuration = 500;
 
     this.robotic = true;
+
+    this.firstAttack = true;
     
     this.updateFunction = function() {
 
@@ -38,7 +40,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
             
             } else {
                 this.state = this.Idling;
-                EnemyBehavior.WalkToPlayer(this, 75)
+                EnemyBehavior.WalkToPlayer(this, 75);
             }
         } else {
             this.state = this.Idling;
@@ -69,7 +71,13 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
         this.timers.SetTimer('slash_hold', 500);
 
-        this.state = this.Windup1;
+        if(this.firstAttack) {
+            this.state = this.Windup1;
+        } else {
+            this.state = this.Windup2;
+        }
+
+        this.firstAttack = !this.firstAttack;
 
     };
 
@@ -147,7 +155,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
             this.state = this.Windup2;
-            //return true;
+            return true;
         }
 
         return false;

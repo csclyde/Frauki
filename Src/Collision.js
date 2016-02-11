@@ -201,7 +201,7 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
 
     if(energyController.GetEnergy() <= 0) {
         events.publish('activate_weapon', { activate: false });
-        frauki.Stun();
+        frauki.Stun(e);
     }
 
     //if(!!e.Block) e.Block();
