@@ -4,12 +4,12 @@ Enemy.prototype.types['Insectoid'] =  function() {
     this.anchor.setTo(0.5, 0.5);
 
     this.animations.add('idle', ['Insectoid/Hop0000'], 10, true, false);
-    this.animations.add('hop', ['Insectoid/Hop0001', 'Insectoid/Hop0002', 'Insectoid/Hop0003', 'Insectoid/Hop0004'], 10, false, false);
+    this.animations.add('hop', ['Insectoid/Hop0000', 'Insectoid/Hop0001', 'Insectoid/Hop0002'], 10, false, false);
     this.animations.add('die', ['Insectoid/Die0000', 'Insectoid/Die0001', 'Insectoid/Die0002', 'Insectoid/Die0003'], 10, false, false);
 
     this.attackTimer = 0;
     this.damage = 2;
-    this.energy = 30;
+    this.energy = 4;
 
     this.body.maxVelocity.y = 500;
 
@@ -19,6 +19,12 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
         if(this.state !== this.Diving && this.angle !== 0)
             this.angle = 0;
+
+        if(this.state === this.Hopping && !this.body.onFloor()) {
+            this.body.drag.x = 200;
+        } else {
+            this.body.drag.x = 600;
+        }
     };
 
     this.Act = function() {
@@ -27,23 +33,21 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
             if(this.body.onFloor()) {
 
-                if(EnemyBehavior.Player.IsDangerous(this)) {
+                if(EnemyBehavior.Player.IsDangerous(this) || EnemyBehavior.Player.IsNear(this, 20)) {
+                    this.Dodge();
+                }
+                else if(EnemyBehavior.Player.IsNear(this, 50)) {
                     this.Dodge();
                 } 
-                else if(EnemyBehavior.Player.IsNear(this, 50)) {
-                    
+                else if(!frauki.body.onFloor()) {
+                    this.Hop();
+                } 
+                else {
                     if(EnemyBehavior.RollDice(2, 1)) {
                         this.Scuttle();
                     } else {
                         this.Hop();
                     }
-                } 
-                else if(!frauki.body.onFloor()) {
-
-                    
-                    this.Hop();
-                } else {
-                    this.Hop();
                 }
 
             } else {
@@ -51,10 +55,6 @@ Enemy.prototype.types['Insectoid'] =  function() {
                     this.Dive();
                 }
             }
-
-            
-            
-            
 
         } else {
             this.state = this.Idling;
@@ -94,7 +94,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
         
         this.timers.SetTimer('attack', 500);
 
-        this.state = this.Hopping;
+        this.state = this.Dodging;
 
         this.body.velocity.y = -200;
 
@@ -135,10 +135,13 @@ Enemy.prototype.types['Insectoid'] =  function() {
         if(this.timers.TimerUp('attack')) {
             this.state = this.Hopping;
 
-            this.timers.SetTimer('attack', 1200);
+            this.timers.SetTimer('attack', game.rnd.between(1500, 2000));
 
+            EnemyBehavior.FacePlayer(this);
             EnemyBehavior.JumpToPoint(this, frauki.body.center.x, frauki.body.center.y); 
         }
+
+        return false;
     };
 
     this.Hopping = function() {
@@ -149,33 +152,39 @@ Enemy.prototype.types['Insectoid'] =  function() {
             this.PlayAnim('idle');
         }
 
-        if(this.timers.TimerUp('attack')) {
+        if(this.body.onFloor() && this.timers.TimerUp('attack')) {
             return true;
         }
+
+        return false;
     };
 
     this.PreScuttling = function() {
         this.PlayAnim('idle');      
 
         if(this.timers.TimerUp('attack')) {
-            this.timers.SetTimer('attack', 800);
+            this.timers.SetTimer('attack', 1200);
             this.state = this.Scuttling;
-            this.scale.x = EnemyBehavior.GetDirMod(this);
-
-            if(this.direction === 'left') {
-                this.body.velocity.x = -550;
-            } else {
-                this.body.velocity.x = 550;
-            }   
+            this.scale.x = EnemyBehavior.GetDirMod(this);  
         }
+
+        return false;
     };
 
     this.Scuttling = function() {
         this.PlayAnim('idle');
 
-        if(game.physics.arcade.intersects(this.body, frauki.body) || this.timers.TimerUp('attack')) {
+        if(this.direction === 'left') {
+            this.body.velocity.x = -450;
+        } else {
+            this.body.velocity.x = 450;
+        } 
+
+        if(this.timers.TimerUp('attack') || this.body.onWall()) {
             return true;
         }
+
+        return false;
     };
 
     this.Diving = function() {
@@ -187,6 +196,23 @@ Enemy.prototype.types['Insectoid'] =  function() {
         if(this.body.onFloor() || this.body.velocity.y <= 0) {
             return true;
         }
+
+        return false;
+    };
+
+    this.Dodging = function() {
+
+        if(!this.body.onFloor()) {
+            this.PlayAnim('hop');
+        } else {
+            this.PlayAnim('idle');
+        }
+
+        if(this.timers.TimerUp('attack')) {
+            return true;
+        }
+
+        return false;
     };
 
     this.Hurting = function() {
@@ -195,6 +221,8 @@ Enemy.prototype.types['Insectoid'] =  function() {
         if(this.timers.TimerUp('hit')) {
             return true;
         }
+
+        return false;
     };
 
 };
