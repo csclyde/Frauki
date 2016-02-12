@@ -91,19 +91,19 @@ EnemyBehavior.Player.IsVisible = function(e) {
 };
 
 EnemyBehavior.Player.IsBelow = function(e) {
-    if(this.body.center.y < frauki.body.y && 
-       this.body.center.x > frauki.body.center.x - 20 && 
-       this.body.center.x < frauki.body.center.x + 20 && 
-       !this.body.onFloor())
+    if(e.body.center.y < frauki.body.y && 
+       e.body.center.x > frauki.body.center.x - 20 && 
+       e.body.center.x < frauki.body.center.x + 20 && 
+       !e.body.onFloor())
         return true;
 
     return false;
 };
 
 EnemyBehavior.Player.IsAbove = function(e) {
-    if(this.body.center.y > frauki.body.y && 
-       this.body.center.x > frauki.body.center.x - 20 && 
-       this.body.center.x < frauki.body.center.x + 20)
+    if(e.body.center.y > frauki.body.y && 
+       e.body.center.x > frauki.body.center.x - 20 && 
+       e.body.center.x < frauki.body.center.x + 20)
         return true;
 
     return false;
@@ -198,28 +198,8 @@ EnemyBehavior.JumpCurb = function(e) {
     }
 };
 
-/*
-The problem with this system is that actions are specified in the enemy,
-and in the enemybehavior. The current compromise is that the enemybehavior
-modifies the body, and the animations just respond to that. that will work
-for generic actions like jumping, but fails when you consider actions
-that are specific to a certain enemy, like different types of attack
-
-The difference currently between EB actions and specific actions, is that
-the specific actions can have states associated with them, while the EB
-actions do not. So, any EB action is transient, occuring once and possibly
-affecting the state.
-
-A specific example is the jump curb action. Ideally, we want the jump 
-curb action to jump the guy up, move him forward, then when he lands 
-determine if it worked. Its failure can then reverberate upwards in the tree
-and change the tactics of the enemy as a whole.
-
-That kind of behavior requires a stateful aspect to the enemy behavior.
-
-Alternatively all stateful choices can be made in the enemy states...
-
-The act function is essentially a request for a new instruction. When an enemy
-has completed their action or conditions change, the act function will assess
-all the variables and then give a new instruction to the enemy.
-*/
+EnemyBehavior.JumpToPoint = function(e, x, y) {
+    var duration = EnemyBehavior.Player.Distance(e) / 500;
+    e.body.velocity.x = (x - e.body.center.x) / duration;
+    e.body.velocity.y = (y + -0.5 * game.physics.arcade.gravity.y * duration * duration - e.body.center.y) / duration;
+};

@@ -124,8 +124,8 @@ Enemy.prototype.UpdateAttackGeometry = function() {
 
         this.currentAttack = {
             damage: this.damage,
-            knockback: 0,
-            priority: 2,
+            knockback: 0.1,
+            priority: 0,
             juggle: 0
         };
     } 

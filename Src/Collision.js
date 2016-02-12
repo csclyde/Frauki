@@ -163,19 +163,23 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
     if(e.owningEnemy.currentAttack.damage <= 0 && frauki.GetCurrentDamage() <= 0)
         return;
 
-    // console.log('Frauki: ' + frauki.GetCurrentPriority(), 'Enemy:' + e.owningEnemy.currentAttack.priority);
+    console.log('Frauki: ' + frauki.GetCurrentPriority(), 'Enemy:' + e.owningEnemy.currentAttack.priority);
 
-    // //if fraukis attack has priority over the enemies attack, they cant block it
-    // if(frauki.GetCurrentPriority() > e.owningEnemy.currentAttack.priority) {
-    //     console.log('Frauki broke through enemy attack');
-    //     game.physics.arcade.overlap(frauki.attackRect, e.owningEnemy, Collision.OverlapAttackWithEnemy);
-    //     return;
-    // } else if(frauki.GetCurrentPriority() < e.owningEnemy.currentAttack.priority && e.owningEnemy.currentAttack.damage > 0) {
-    //     console.log('Enemy broke through Frauki attack');
-    //     frauki.Interrupt();
-    //     game.physics.arcade.overlap(e, frauki, Collision.OverlapEnemyAttackWithFrauki);
-    //     return;
-    // }
+    //if fraukis attack has priority over the enemies attack, they cant block it
+    if(frauki.GetCurrentPriority() > e.owningEnemy.currentAttack.priority) {
+        console.log('Frauki broke through enemy attack');
+
+        frauki.timers.SetTimer('frauki_grace', 300);
+        game.physics.arcade.overlap(frauki.attackRect, e.owningEnemy, Collision.OverlapAttackWithEnemy);
+        return;
+    } else if(frauki.GetCurrentPriority() < e.owningEnemy.currentAttack.priority && e.owningEnemy.currentAttack.damage > 0) {
+        console.log('Enemy broke through Frauki attack');
+        
+        frauki.Interrupt();
+        e.owningEnemy.timers.SetTimer('grace', 400);
+        game.physics.arcade.overlap(e, frauki, Collision.OverlapEnemyAttackWithFrauki);
+        return;
+    }
 
     effectsController.SparkSplash(frauki.attackRect, e);
 
