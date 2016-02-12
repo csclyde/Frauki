@@ -11,31 +11,14 @@ Enemy.prototype.types['Insectoid'] =  function() {
     this.damage = 2;
     this.energy = 30;
 
-    this.squashTween = null;
-
     this.body.maxVelocity.y = 500;
-
-    //this.body.bounce.set(0.5);
 
     this.updateFunction = function() {
         if(this.state === this.Hurting)
             return;
 
-        if(game.physics.arcade.distanceBetween(this, frauki) < 100 && this.state !== this.Hopping && frauki.state === frauki.Hurting) {
-            game.physics.arcade.overlap(this, frauki, function() {
-                this.Dodge(true);
-            }, null, this);
-        }
-
-        if(!!this.squashTween && !this.squashTween.isRunning) {
-            this.scale.y = 1;
-        }
-
         if(this.state !== this.Diving && this.angle !== 0)
             this.angle = 0;
-
-        if(this.state !== this.Diving && this.body.width !== 55)
-            this.body.setSize(55, 35, 0, 0);
     };
 
     this.Act = function() {
@@ -84,38 +67,32 @@ Enemy.prototype.types['Insectoid'] =  function() {
         } else {
             return false;
         }
-    }
+    };
 
     ///////////////////////////////ACTIONS////////////////////////////////////
     this.Hop = function() {
 
-        if(game.time.now < this.attackTimer)
-            return;
-
         EnemyBehavior.FacePlayer(this);
 
-        this.attackTimer = game.time.now + 500;
+        this.timers.SetTimer('attack', 500);
         this.state = this.PreHopping;
         //this.squashTween = game.add.tween(this.scale).to({y: 0.7}, 500, Phaser.Easing.Exponential.Out, true);
         //this.scale.y = 0.7;
     };
 
     this.Scuttle = function() {
-        if(game.time.now < this.attackTimer)
-            return;
 
         EnemyBehavior.FacePlayer(this);      
 
-        this.attackTimer = game.time.now + 600;
-        //this.squashTween = game.add.tween(this.scale).to({x: EnemyBehavior.GetDirMod(this) * 0.7}, 600, Phaser.Easing.Exponential.Out, true);
+        this.timers.SetTimer('attack', 600);
         this.state = this.PreScuttling;   
     };
 
-    this.Dodge = function(overrideFloorCondition) {
-        if(game.time.now < game.attackTimer && (!this.body.onFloor() || !!overrideFloorCondition))
-            return;
+    this.Dodge = function() {
 
-        this.attackTimer = game.time.now + 800;
+        EnemyBehavior.FacePlayer(this);
+        
+        this.timers.SetTimer('attack', 500);
 
         this.state = this.Hopping;
 
@@ -145,73 +122,43 @@ Enemy.prototype.types['Insectoid'] =  function() {
         this.timers.SetTimer('dive', 1000);
     };
 
-    this.Flee = function() {
-        this.state = this.Fleeing;
-
-        if(this.PlayerDirection() === 'left') {
-            this.body.velocity.x = 500;
-        } else if(this.PlayerDirection() === 'right') {
-            this.body.velocity.x = -500;
-        } else {
-            this.Dodge();
-        }
-    };
-
-    this.TakeHit = function(power) {
-
-        this.scale.y = 1;
-        this.attackTimer = 0;
-        
-        //if(this.RollDice(10, 3))
-            //this.Dodge();
-    };
-
     ////////////////////////////////STATES////////////////////////////////////
     this.Idling = function() {
         this.PlayAnim('idle');
 
-        if(game.time.now > this.attackTimer) {
-            return true;
-        } else {
-            return false;
-        }
+        return true;
     };
 
     this.PreHopping = function() {
         this.PlayAnim('idle');
 
-        if(game.time.now > this.attackTimer) {
+        if(this.timers.TimerUp('attack')) {
             this.state = this.Hopping;
-            this.scale.y = 1;
 
-            this.attackTimer = game.time.now + 1200;
+            this.timers.SetTimer('attack', 1200);
 
-            if(EnemyBehavior.RollDice(5, 3)) {
-                EnemyBehavior.JumpToPoint(this, frauki.body.center.x, frauki.body.center.y); 
-            } else {
-                EnemyBehavior.JumpToPoint(this, frauki.body.center.x, frauki.body.center.y - 15);
-            }
-
+            EnemyBehavior.JumpToPoint(this, frauki.body.center.x, frauki.body.center.y); 
         }
     };
 
     this.Hopping = function() {
-        this.PlayAnim('hop');
 
-        if(EnemyBehavior.Player.IsBelow(this)) {
-            this.Dive();
+        if(!this.body.onFloor()) {
+            this.PlayAnim('hop');
+        } else {
+            this.PlayAnim('idle');
         }
 
-        if(this.body.velocity.y >= 0 || this.body.onFloor()) {
-            this.state = this.Idling;
+        if(this.timers.TimerUp('attack')) {
+            return true;
         }
     };
 
     this.PreScuttling = function() {
         this.PlayAnim('idle');      
 
-        if(game.time.now > this.attackTimer) {
-            this.attackTimer = game.time.now + 800;
+        if(this.timers.TimerUp('attack')) {
+            this.timers.SetTimer('attack', 800);
             this.state = this.Scuttling;
             this.scale.x = EnemyBehavior.GetDirMod(this);
 
@@ -226,30 +173,19 @@ Enemy.prototype.types['Insectoid'] =  function() {
     this.Scuttling = function() {
         this.PlayAnim('idle');
 
-        if(game.physics.arcade.intersects(this.body, frauki.body) || game.time.now > this.attackTimer) {
+        if(game.physics.arcade.intersects(this.body, frauki.body) || this.timers.TimerUp('attack')) {
             return true;
         }
     };
 
     this.Diving = function() {
         if(frauki.body.center.x < this.body.center.x)
-            this.body.center.x--;
+            this.body.velocity.x = -20;
         else if(frauki.body.center.x > this.body.center.x)
-            this.body.center.x++;
+            this.body.velocity.x = +20;
         
         if(this.body.onFloor() || this.body.velocity.y <= 0) {
             return true;
-        }
-    };
-
-    this.Fleeing = function() {
-
-        if(EnemyBehavior.Player.Distance(this) > 400 || this.body.onWall()) {
-            if(Math.abs(this.body.center.y - frauki.body.center.y) < 40) {
-                this.Scuttle();
-            } else {
-                this.state = this.Idling;
-            }
         }
     };
 
@@ -257,17 +193,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
         this.PlayAnim('die');
 
         if(this.timers.TimerUp('hit')) {
-
-            var move = Math.random() * 3;
-
-            if(move < 1) {
-                this.Dodge(true);
-            } else if(move < 2) {
-                this.Hop();
-            } else {
-                return true;
-            }
-
+            return true;
         }
     };
 
