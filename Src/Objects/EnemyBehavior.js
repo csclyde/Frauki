@@ -75,19 +75,51 @@ EnemyBehavior.Player.Distance = function(e) {
     return dist;
 };
 
+EnemyBehavior.Player.Visibility = {};
 EnemyBehavior.Player.IsVisible = function(e) {
 
-    return EnemyBehavior.WithinCameraRange(e);
+    if(!EnemyBehavior.WithinCameraRange(e)) {
+        return false;
+    }
 
-    // var ray = new Phaser.Line(frauki.body.center.x, frauki.body.center.y, e.body.center.x, e.body.center.y);
-    // var collideTiles = Frogland.GetCurrentCollisionLayer().getRayCastTiles(ray, 1, true);
+    var refreshTime = 2000;
 
-    // var i = collideTiles.length;
-    // while(i--) {
-    //     if(collideTiles[i].index === 1) return false;
-    // }
+    //if the enemy is not cached, create an object for it
+    if(!this.Visibility[e.z]) {
+        this.Visibility[e.z] = { obj: e, timestamp: 0, result: false };
+    }
 
-    // return true;
+    //if the timestamp has expired
+    if(this.Visibility[e.z].timestamp + refreshTime < game.time.now || (EnemyBehavior.Player.IsNear(e, 200) && EnemyBehavior.Player.MovingTowards(e))) {
+        var ray = new Phaser.Line(frauki.body.center.x, frauki.body.center.y, e.body.center.x, e.body.center.y);
+        var collideTiles = Frogland.GetCurrentCollisionLayer().getRayCastTiles(ray, 4, true);
+
+        this.Visibility[e.z].timestamp = game.time.now;
+
+        this.Visibility[e.z].result = true;
+
+        var i = collideTiles.length;
+        while(i--) {
+            if(collideTiles[i].index === 1) { 
+                this.Visibility[e.z].result = false;
+                break;
+            }
+        }
+
+        console.log('Rechecking visibility: ' + this.Visibility[e.z].result);
+
+    }
+
+    return this.Visibility[e.z].result;
+    //return EnemyBehavior.WithinCameraRange(e);
+
+    
+
+    //this should cache the result along with a time stamp of when the result was
+    //collected. when requested again, the timestamp is checked. if enough time has
+    //elapsed (a few seconds), it ray casts again. it can be a longer amount of time
+    //going from true to false. false to true needs to be faster. it can also do a
+    //range check to eliminate obvious cases of non-sight.
 };
 
 EnemyBehavior.Player.IsBelow = function(e) {
