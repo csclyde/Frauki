@@ -5790,22 +5790,6 @@
                  "y":4590.67
                 }, 
                 {
-                 "gid":66,
-                 "height":16,
-                 "id":1767,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":2034.67,
-                 "y":3497.33
-                }, 
-                {
                  "gid":67,
                  "height":16,
                  "id":1779,
@@ -5941,10 +5925,44 @@
                  "width":16,
                  "x":2865,
                  "y":3353
+                }, 
+                {
+                 "gid":74,
+                 "height":16,
+                 "id":1857,
+                 "name":"",
+                 "properties":
+                    {
+                     "on_death":"open_door,door_name:first_orbule"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":2013,
+                 "y":3824
+                }, 
+                {
+                 "gid":67,
+                 "height":16,
+                 "id":1858,
+                 "name":"",
+                 "properties":
+                    {
+                     "closed_graphic":"skull",
+                     "id":"first_orbule",
+                     "open_sound":"skull_door"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":2106,
+                 "y":3830
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "width":0,
          "x":0,
          "y":0
@@ -10891,7 +10909,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":1857,
+ "nextobjectid":1859,
  "orientation":"orthogonal",
  "properties":
     {
@@ -10904,7 +10922,6 @@
  "tileheight":16,
  "tilesets":[
         {
-         "columns":8,
          "firstgid":1,
          "image":"..\/CollisionKey.png",
          "imageheight":128,
@@ -10921,7 +10938,6 @@
          "tilewidth":16
         }, 
         {
-         "columns":20,
          "firstgid":65,
          "image":"..\/SpawnKey.png",
          "imageheight":192,
@@ -10938,7 +10954,6 @@
          "tilewidth":16
         }, 
         {
-         "columns":32,
          "firstgid":305,
          "image":"FrogtownTiles.png",
          "imageheight":512,
@@ -11238,7 +11253,6 @@
          "tilewidth":16
         }, 
         {
-         "columns":32,
          "firstgid":1329,
          "image":"DepthsTiles.png",
          "imageheight":512,
@@ -11255,7 +11269,6 @@
          "tilewidth":16
         }, 
         {
-         "columns":20,
          "firstgid":2353,
          "image":"TerraceTiles.png",
          "imageheight":240,
@@ -11272,7 +11285,6 @@
          "tilewidth":16
         }, 
         {
-         "columns":40,
          "firstgid":2653,
          "image":"Doodads.png",
          "imageheight":640,

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="400" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="1857">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="400" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="1859">
  <properties>
   <property name="debug" value="false"/>
   <property name="startLayer" value="3"/>
   <property name="startX" value="68"/>
   <property name="startY" value="35"/>
  </properties>
- <tileset firstgid="1" name="Collision" tilewidth="16" tileheight="16" tilecount="64" columns="8">
+ <tileset firstgid="1" name="Collision" tilewidth="16" tileheight="16" tilecount="64">
   <image source="../CollisionKey.png" width="128" height="128"/>
  </tileset>
- <tileset firstgid="65" name="SpawnKey" tilewidth="16" tileheight="16" tilecount="240" columns="20">
+ <tileset firstgid="65" name="SpawnKey" tilewidth="16" tileheight="16" tilecount="240">
   <image source="../SpawnKey.png" width="320" height="192"/>
  </tileset>
- <tileset firstgid="305" name="FrogtownTiles" tilewidth="16" tileheight="16" tilecount="1024" columns="32">
+ <tileset firstgid="305" name="FrogtownTiles" tilewidth="16" tileheight="16" tilecount="1024">
   <image source="FrogtownTiles.png" width="512" height="512"/>
   <tile id="1">
    <properties>
@@ -365,13 +365,13 @@
    </properties>
   </tile>
  </tileset>
- <tileset firstgid="1329" name="DepthsTiles" tilewidth="16" tileheight="16" tilecount="1024" columns="32">
+ <tileset firstgid="1329" name="DepthsTiles" tilewidth="16" tileheight="16" tilecount="1024">
   <image source="DepthsTiles.png" width="512" height="512"/>
  </tileset>
- <tileset firstgid="2353" name="TerraceTiles" tilewidth="16" tileheight="16" tilecount="300" columns="20">
+ <tileset firstgid="2353" name="TerraceTiles" tilewidth="16" tileheight="16" tilecount="300">
   <image source="TerraceTiles.png" width="320" height="240"/>
  </tileset>
- <tileset firstgid="2653" name="Doodads" tilewidth="16" tileheight="16" tilecount="1600" columns="40">
+ <tileset firstgid="2653" name="Doodads" tilewidth="16" tileheight="16" tilecount="1600">
   <image source="Doodads.png" width="640" height="640"/>
  </tileset>
  <layer name="Background_2" width="200" height="400" visible="0">
@@ -3830,7 +3830,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="Objects_3" visible="0">
+ <objectgroup name="Objects_3">
   <object id="1042" gid="89" x="2125.33" y="4622.67" width="16" height="16"/>
   <object id="1043" gid="89" x="2106.67" y="4625.33" width="16" height="16"/>
   <object id="1044" gid="89" x="2088" y="4625.33" width="16" height="16"/>
@@ -4072,7 +4072,6 @@
   <object id="1751" gid="68" x="2544" y="4608" width="16" height="16"/>
   <object id="1758" gid="98" x="2463.33" y="4722" width="16" height="16"/>
   <object id="1759" gid="86" x="2442.67" y="4590.67" width="16" height="16"/>
-  <object id="1767" gid="66" x="2034.67" y="3497.33" width="16" height="16"/>
   <object id="1779" gid="67" x="2030.25" y="3095.5" width="16" height="16">
    <properties>
     <property name="facing" value="left"/>
@@ -4112,6 +4111,18 @@
    <properties>
     <property name="facing" value="right"/>
     <property name="id" value="first_shortcut"/>
+   </properties>
+  </object>
+  <object id="1857" gid="74" x="2013" y="3824" width="16" height="16">
+   <properties>
+    <property name="on_death" value="open_door,door_name:first_orbule"/>
+   </properties>
+  </object>
+  <object id="1858" gid="67" x="2106" y="3830" width="16" height="16">
+   <properties>
+    <property name="closed_graphic" value="skull"/>
+    <property name="id" value="first_orbule"/>
+    <property name="open_sound" value="skull_door"/>
    </properties>
   </object>
  </objectgroup>
