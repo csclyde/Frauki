@@ -14,7 +14,14 @@ Collision.OverlapFraukiWithObject = function(f, o) {
 
 
     } else if(o.spriteType === 'enemy') {
-        return false;
+        if(o.CanCauseDamage() || 
+            frauki.state === frauki.Rolling ||
+            frauki.state === frauki.Falling ||
+            frauki.state === frauki.Flipping) {
+            return false;
+        } else {
+            return true;
+        }
 
     } else if(o.spriteType === 'door') {
         OpenDoor(f, o);
@@ -166,7 +173,7 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
     console.log('Frauki: ' + frauki.GetCurrentPriority(), 'Enemy:' + e.owningEnemy.currentAttack.priority);
 
     //if fraukis attack has priority over the enemies attack, they cant block it
-    if(frauki.GetCurrentPriority() > e.owningEnemy.currentAttack.priority) {
+    if(frauki.GetCurrentPriority() > e.owningEnemy.currentAttack.priority && frauki.GetCurrentDamage() > 0) {
         console.log('Frauki broke through enemy attack');
 
         frauki.timers.SetTimer('frauki_grace', 300);
@@ -201,11 +208,14 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
     e.timers.SetTimer('grace', 400);
     frauki.timers.SetTimer('frauki_grace', 300);
 
-    energyController.RemoveEnergy(e.currentAttack.damage * 2);
 
-    if(energyController.GetEnergy() <= 0) {
-        events.publish('activate_weapon', { activate: false });
-        frauki.Stun(e);
+    if(energyController.GetEnergy() > 0) {
+        energyController.RemoveEnergy(e.currentAttack.damage * 2);
+
+        if(energyController.GetEnergy() <= 0) {
+            events.publish('activate_weapon', { activate: false });
+            frauki.Stun(e);
+        } 
     }
 
     //if(!!e.Block) e.Block();

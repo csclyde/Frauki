@@ -1,6 +1,6 @@
 Enemy.prototype.types['A3PZ'] =  function() {
 
-    this.body.setSize(25, 75, 0, -110);
+    this.body.setSize(35, 75, 0, -110);
     this.anchor.setTo(.5, 1);
 
     this.animations.add('idle', ['A3PZ/Stand0000'], 10, true, false);
@@ -26,7 +26,11 @@ Enemy.prototype.types['A3PZ'] =  function() {
     this.Act = function() {
 
         if(EnemyBehavior.Player.IsVisible(this)) {
-            if(EnemyBehavior.Player.IsDangerous(this)) {
+            if(this.hasHit) {
+                this.Dodge();
+                this.hasHit = false;
+            }
+            else if(EnemyBehavior.Player.IsDangerous(this)) {
                 this.Dodge();
 
             } else if(EnemyBehavior.Player.IsNear(this, 100)) {

@@ -36,5 +36,5 @@ GameData.AddOpenDoor = function(id) {
 };
 
 GameData.GetMaxApples = function() {
-    return 3;
+    return 2;
 };

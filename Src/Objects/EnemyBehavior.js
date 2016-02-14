@@ -82,15 +82,33 @@ EnemyBehavior.Player.IsVisible = function(e) {
         return false;
     }
 
-    var refreshTime = 2000;
-
     //if the enemy is not cached, create an object for it
     if(!this.Visibility[e.z]) {
         this.Visibility[e.z] = { obj: e, timestamp: 0, result: false };
     }
 
-    //if the timestamp has expired
-    if(this.Visibility[e.z].timestamp + refreshTime < game.time.now || (EnemyBehavior.Player.IsNear(e, 200) && EnemyBehavior.Player.MovingTowards(e))) {
+    //determine how often the check should be redone
+    var refreshTime = 2000;
+
+    if(this.Visibility[e.z].result === true) {
+        refreshTime = 3000;
+    } else {
+        var dist = EnemyBehavior.Player.Distance(e);
+
+        if(dist < 100) {
+            refreshTime = 500;
+        } else if(dist < 200) {
+            refreshTime = 1000;
+        }
+
+        if(EnemyBehavior.Player.MovingTowards(e)) {
+            refreshTime /= 2;
+        }
+        
+    }
+
+    //if the timestamp has expired, check for visibility
+    if(this.Visibility[e.z].timestamp + refreshTime < game.time.now) {
         var ray = new Phaser.Line(frauki.body.center.x, frauki.body.center.y, e.body.center.x, e.body.center.y);
         var collideTiles = Frogland.GetCurrentCollisionLayer().getRayCastTiles(ray, 4, true);
 
@@ -111,15 +129,6 @@ EnemyBehavior.Player.IsVisible = function(e) {
     }
 
     return this.Visibility[e.z].result;
-    //return EnemyBehavior.WithinCameraRange(e);
-
-    
-
-    //this should cache the result along with a time stamp of when the result was
-    //collected. when requested again, the timestamp is checked. if enough time has
-    //elapsed (a few seconds), it ray casts again. it can be a longer amount of time
-    //going from true to false. false to true needs to be faster. it can also do a
-    //range check to eliminate obvious cases of non-sight.
 };
 
 EnemyBehavior.Player.IsBelow = function(e) {

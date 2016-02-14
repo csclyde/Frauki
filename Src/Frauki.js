@@ -791,14 +791,14 @@ Player.prototype.Interrupt = function() {
 Player.prototype.Stun = function(e) {
 
     this.ChangeState(this.Stunned);
-    this.timers.SetTimer('stunned', 1200);
+    this.timers.SetTimer('stunned', 1500);
 
-    this.body.velocity.y = -300;
+    this.body.velocity.y = -200;
 
     if(this.body.center.x < e.body.center.x) {
-        this.body.velocity.x = -100;
+        this.body.velocity.x = -30;
     } else {
-        this.body.velocity.x = 100;
+        this.body.velocity.x = 30;
     } 
 };
 
