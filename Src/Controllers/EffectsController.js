@@ -726,7 +726,7 @@ EffectsController.prototype.ScreenLight = function(show) {
 EffectsController.prototype.ScreenFlash = function() {
     this.screenLight.alpha = 0;
     this.screenLight.visible = true;
-    var flash = game.add.tween(this.screenLight).to( { alpha: 0.5 }, 50, Phaser.Easing.Quartic.In, false).to( { alpha: 0 }, 150, Phaser.Easing.Quartic.Out, false);
+    var flash = game.add.tween(this.screenLight).to( { alpha: 0.8 }, 100, Phaser.Easing.Quartic.In, false).to( { alpha: 0 }, 150, Phaser.Easing.Quartic.Out, false);
     flash.start();
 };
 

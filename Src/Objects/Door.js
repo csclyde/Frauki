@@ -28,6 +28,7 @@ Door = function(game, x, y, name) {
     this.animations.add('right_dead', ['Door0007'], 10, true, false); 
     this.animations.add('skull', ['Door0008'], 10, true, false);
     this.animations.add('skull_open', ['Door0009'], 10, true, false);
+    this.animations.add('orb', ['Door0010'], 10, true, false);
 
     this.animations.add('opening', ['Door0000'], 10, false, false);
 

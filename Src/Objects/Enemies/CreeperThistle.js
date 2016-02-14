@@ -25,6 +25,10 @@ Enemy.prototype.types['CreeperThistle'] =  function() {
         this.rotation = this.Rotation;
     };
 
+    this.CanCauseDamage =  function() {
+        return true;
+    }
+
     ///////////////////////////////ACTIONS////////////////////////////////////
 
     this.TakeHit = function(power) {

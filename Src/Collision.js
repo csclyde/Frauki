@@ -27,6 +27,8 @@ Collision.OverlapFraukiWithObject = function(f, o) {
         OpenDoor(f, o);
         return true;
 
+    } else if(o.spriteType === 'orb') {
+        return false;
 
     } else if(o.spriteType === 'junk') {
         return false;

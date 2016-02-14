@@ -123,9 +123,6 @@ EnemyBehavior.Player.IsVisible = function(e) {
                 break;
             }
         }
-
-        console.log('Rechecking visibility: ' + this.Visibility[e.z].result);
-
     }
 
     return this.Visibility[e.z].result;

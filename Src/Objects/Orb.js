@@ -19,6 +19,8 @@ Orb = function(game, x, y, name) {
     this.animations.add('floating', ['Orb0000'], 10, false, false);
     this.animations.add('eaten', ['Orb0000'], 10, false, false);
 
+    this.floatPhase = game.rnd.between(1, 200);
+
 };
 
 Orb.prototype = Object.create(Phaser.Sprite.prototype);
@@ -54,5 +56,5 @@ Orb.prototype.PlayAnim = function(name) {
 Orb.prototype.Floating = function() {
     this.PlayAnim('floating');
 
-    this.body.velocity.y = Math.sin(game.time.now / 300) * 30;
+    this.body.velocity.y = Math.sin((game.time.now / 300) + this.floatPhase) * 30;
 };
