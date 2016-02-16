@@ -17,6 +17,8 @@ Enemy.prototype.types['Mask'] =  function() {
 
 	};
 
+	this.CanCauseDamage = function() { return true; }
+
 	///////////////////////////////ACTIONS////////////////////////////////////
 
 	this.TakeHit = function(power) {
