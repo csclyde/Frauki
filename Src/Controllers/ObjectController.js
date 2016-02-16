@@ -152,7 +152,6 @@ ObjectController.prototype.SpawnObject = function(o) {
         if(!!newObj.properties.on_death) {
             newObj.events.onDestroy.add(function() {
                 ComposeAndEmitSignal(newObj.properties.on_death);
-
             });
         }
     }

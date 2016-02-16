@@ -101,6 +101,10 @@ Frogland.Create = function() {
 
     //this will store fallen tiles, so that when you die they can be reset
     this.fallenTiles = [];
+
+    events.subscribe('open_door', function(params) {
+        OpenDoorById(params.door_name);
+    });
 };
 
 Frogland.Update = function() {

@@ -31,7 +31,7 @@ EnergyController.prototype.Create = function() {
 EnergyController.prototype.Update = function() {
 
 	var energyDiff = this.energy - 15;
-	var step = 0.1;
+	var step = 0.15;
 
 	//
 	if(game.time.now - this.energyUsageTimestamp > 2000) {
