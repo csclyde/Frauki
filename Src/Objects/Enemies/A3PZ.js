@@ -1,7 +1,7 @@
 Enemy.prototype.types['A3PZ'] =  function() {
 
-    this.body.setSize(35, 75, 0, -110);
-    this.anchor.setTo(.5, 1);
+    this.body.setSize(35, 75, 0, 0);
+    this.anchor.setTo(0.5, 0.5);
 
     this.animations.add('idle', ['A3PZ/Stand0000'], 10, true, false);
     this.animations.add('walk', ['A3PZ/Walk0000', 'A3PZ/Walk0001', 'A3PZ/Walk0002', 'A3PZ/Walk0003', 'A3PZ/Walk0004', 'A3PZ/Walk0005'], 6, true, false);

@@ -3,6 +3,8 @@ Junk = function(game, x, y, name) {
     Phaser.Sprite.call(this, game, x, y, 'Junk', name + '0000');
     this.spriteType = 'junk';
 
+    this.anchor.setTo(0.5);
+
     //enable its physics body
     game.physics.enable(this, Phaser.Physics.ARCADE);
     this.body.collideWorldBounds = true;

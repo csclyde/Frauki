@@ -125,7 +125,6 @@ ObjectController.prototype.SpawnObject = function(o) {
 	    FileMap.Junk.forEach(function(junk) {
 	        if(o.id === junk.Tile) {
 	            newObj = new Junk(game, o.x, o.y, junk.Name, junk.Name);
-	            newObj.y -= newObj.height;
 	            newObj.latent = o;
 	        }
 	    });
