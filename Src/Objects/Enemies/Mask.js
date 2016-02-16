@@ -39,7 +39,7 @@ Enemy.prototype.types['Mask'] =  function() {
 		this.PlayAnim('idle');
 
 		if(EnemyBehavior.Player.IsVisible(this)) {
-			this.body.maxVelocity.x = 300;
+			this.body.maxVelocity.x = 200;
 		} else {
 			this.body.maxVelocity.x = 100;
 		}
@@ -47,13 +47,13 @@ Enemy.prototype.types['Mask'] =  function() {
 		if(this.direction === 'left') {
 			this.body.acceleration.x = -1000;
 
-			if(this.body.touching.left) {
+			if(this.body.onWall()) {
 				this.SetDirection('right');
 			}
 		} else if(this.direction === 'right') {
 			this.body.acceleration.x = 1000;
 
-			if(this.body.touching.right) {
+			if(this.body.onWall()) {
 				this.SetDirection('left');
 			}
 		}

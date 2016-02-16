@@ -727,7 +727,7 @@ Player.prototype.LandHit = function(e, damage) {
 
 Player.prototype.Hit = function(e, damage, grace_duration) {
 
-    damage = damage * 3;
+    damage = damage * 4;
 
     if(this.state === this.Stunned) {
         damage *= 1.5;

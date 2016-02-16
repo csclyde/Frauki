@@ -73,7 +73,7 @@ function OpenDoor(f, d, override) {
     if(d.state !== d.Closed) return;
 
     //if they attack the back side of the door
-    if(frauki.Attacking()) {
+    if(frauki.Attacking() && frauki.GetCurrentDamage() > 0) {
         if((d.facing === 'left' && f.body.center.x > d.body.center.x) || (d.facing === 'right' && f.body.center.x < d.body.center.x) || !!override) {
             PerformOpen(d, true);
             console.log('Opening door with attack:' + d.id);
