@@ -20,10 +20,10 @@ Door = function(game, x, y, name) {
     this.thresholdAttempts = 1;
     this.openAttempts = 0;
 
-    this.animations.add('left', ['DoorSeal0000'], 10, true, false); 
-    this.animations.add('right', ['DoorSeal0001'], 10, true, false); 
-    this.animations.add('left_dead', ['DoorSeal0002'], 10, true, false); 
-    this.animations.add('right_dead', ['DoorSeal0003'], 10, true, false); 
+    this.animations.add('left', ['DoorSeal0000', 'DoorSeal0001', 'DoorSeal0002', 'DoorSeal0003', 'DoorSeal0004'], 10, true, false); 
+    this.animations.add('right', ['DoorSeal0005', 'DoorSeal0006', 'DoorSeal0007', 'DoorSeal0008', 'DoorSeal0009'], 10, true, false); 
+    this.animations.add('left_dead', ['DoorSeal0010'], 10, true, false); 
+    this.animations.add('right_dead', ['DoorSeal0011'], 10, true, false); 
 
     this.animations.add('wit', ['DoorPrism0000'], 10, true, false); 
     this.animations.add('will', ['DoorPrism0001'], 10, true, false); 

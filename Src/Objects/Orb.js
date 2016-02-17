@@ -16,7 +16,7 @@ Orb = function(game, x, y, name) {
 
     this.body.allowGravity = false;
 
-    this.animations.add('floating', ['Orb0000'], 10, false, false);
+    this.animations.add('floating', ['Orb0000', 'Orb0001', 'Orb0002', 'Orb0003'], 5, true, false);
     this.animations.add('eaten', ['Orb0000'], 10, false, false);
 
     this.floatPhase = game.rnd.between(1, 200);
