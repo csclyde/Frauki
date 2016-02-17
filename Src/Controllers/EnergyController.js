@@ -92,8 +92,8 @@ EnergyController.prototype.Update = function() {
 		this.health = 30;
 	if(this.health <= 0)
 		Main.Restart();
-
 };
+
 
 EnergyController.prototype.UseEnergy = function(amt) {
 	//if they are below a threshold, they are in beast mode
@@ -117,15 +117,37 @@ EnergyController.prototype.RemoveEnergy = function(amt) {
 	}
 };
 
+EnergyController.prototype.GetEnergy = function() {
+
+	return this.energy;
+};
+
 EnergyController.prototype.AddEnergy = function(amt) {
 
 	this.energy += amt;
 };
 
-EnergyController.prototype.GetEnergy = function() {
-	
-	return this.energy > 0 ? (Math.round(this.energy * 10) / 10) : 0;
+EnergyController.prototype.GetMaxEnergy = function() {
+
+	return 15;
 };
+
+EnergyController.prototype.EnergyBlock = function(e, dmg) {
+	if(this.GetEnergy() > 0) {
+        this.RemoveEnergy(dmg);
+
+        if(this.GetEnergy() <= 0) {
+            events.publish('activate_weapon', { activate: false });
+            //play stun sound
+            frauki.Stun(e);
+
+            return false;
+        } 
+    }
+
+    return true;
+};
+
 
 EnergyController.prototype.AddHealth = function(amt) {
 
@@ -158,23 +180,15 @@ EnergyController.prototype.GetHealth = function() {
 	return this.health;
 };
 
-EnergyController.prototype.GetEnergy = function() {
+EnergyController.prototype.GetMaxHealth = function() {
 
-	return this.energy;
+	return 30;
 };
+
 
 EnergyController.prototype.GetCharge = function() {
 
 	return this.charge;
-};
-
-EnergyController.prototype.Reset = function() {
-
-	this.health = 30;
-	this.energy = 15;
-	this.charge = 30;
-	this.latentHealth = 0;
-	this.remainingApples = GameData.GetMaxApples();
 };
 
 EnergyController.prototype.AddCharge = function(amt) {
@@ -201,6 +215,16 @@ EnergyController.prototype.MaxCharge = function() {
 	this.charge = 30;
 };
 
+
+EnergyController.prototype.Reset = function() {
+
+	this.health = 30;
+	this.energy = 15;
+	this.charge = 30;
+	this.latentHealth = 0;
+	this.remainingApples = GameData.GetMaxApples();
+};
+
 EnergyController.prototype.AddApple = function() {
 	if(this.remainingApples < GameData.GetMaxApples()) {
 		this.remainingApples++;
@@ -208,4 +232,9 @@ EnergyController.prototype.AddApple = function() {
 	} else {
 		return false;
 	}
-}
+};
+
+EnergyController.prototype.GetApples = function() {
+
+	return this.remainingApples;
+};

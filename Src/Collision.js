@@ -192,6 +192,9 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
         return;
     }
 
+    if(!energyController.EnergyBlock(e, e.owningEnemy.currentAttack.damage * 2)) return;
+   
+
     effectsController.SparkSplash(frauki.attackRect, e);
 
     e = e.owningEnemy;
@@ -213,16 +216,6 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
     frauki.timers.SetTimer('frauki_grace', 300);
 
 
-    if(energyController.GetEnergy() > 0) {
-        energyController.RemoveEnergy(e.currentAttack.damage * 2);
-
-        if(energyController.GetEnergy() <= 0) {
-            events.publish('activate_weapon', { activate: false });
-            frauki.Stun(e);
-        } 
-    }
-
-    //if(!!e.Block) e.Block();
 };
 
 Collision.OverlapEnemyAttackWithFrauki = function(e, f) {

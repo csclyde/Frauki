@@ -483,8 +483,12 @@ Player.prototype.Crouch = function(params) {
 
 Player.prototype.Heal = function(params) {
     if(params.charging) {
-        this.ChangeState(this.Healing);
-        this.timers.SetTimer('heal_charge', 1000); 
+        if(energyController.GetHealth() < energyController.GetMaxHealth() && energyController.GetApples() > 0) {
+            this.ChangeState(this.Healing);
+            this.timers.SetTimer('heal_charge', 1000); 
+        } else {
+            events.publish('play_sound', {name: 'no_energy'});
+        }
     } else {
         if(this.state === this.Healing) {
             this.ChangeState(this.Standing);

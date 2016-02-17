@@ -111,6 +111,7 @@ ProjectileController.prototype.CollideProjectileWithWorld = function(p, t) {
 
 function ProjectileHit(f, p) {
 	if(p.projType === 'tar' || p.projType === 'spore') {
+		energyController.EnergyBlock(p.owningEnemy, p.owningEnemy.damage * 2)
 		p.destroy();
 	}
 };
