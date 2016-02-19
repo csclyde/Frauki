@@ -224,7 +224,7 @@ Main.DrawUI = function() {
     this.RenderTextureFromAtlas('UI', 'EnergyBar0000', 10, 10);
 
     for(var i = 0; i < GameData.GetMaxApples(); i++) {
-        if(i < energyController.remainingApples) {
+        if(i < energyController.GetApples()) {
             this.RenderTextureFromAtlas('Misc','Apple0000', 10 + (20 * i), 45); 
         } else {
             this.RenderTextureFromAtlas('Misc','Checkpoint0005', 10 + (20 * i), 45); 

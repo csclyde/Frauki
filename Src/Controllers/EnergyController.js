@@ -19,6 +19,7 @@ EnergyController = function() {
 		if(this.remainingApples > 0) {
 			this.AddHealth(18);
 			this.remainingApples--;
+			effectsController.SpawnAppleCore(frauki.body.center.x, frauki.body.center.y);
 		}
 	}, this);
 

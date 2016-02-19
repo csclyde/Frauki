@@ -39,24 +39,17 @@ function EatApple(f, a) {
     if(a.state === a.Eaten)
         return;
     
-    if(energyController.AddApple()) {
+    if(energyController.GetApples() < GameData.GetMaxApples()) {
         a.state = a.Eaten;
+        Frogland.shardGroup.addChild(a);
 
-        a.body.allowGravity = true;
+        var xOffset = 10 + (20 * (energyController.GetApples() + 1));
 
-        a.body.velocity.y = -250;
+        a.zipTween = game.add.tween(a.body).to({x: game.camera.x + xOffset, y: game.camera.y + 52}, 2000, Phaser.Easing.Exponential.InOut, true);
 
-        if(frauki.body.center.x < a.body.center.x)
-            a.body.velocity.x = 75;
-        else
-            a.body.velocity.x = -75;
-
-        a.body.angularVelocity = 1000;
-
-        a.spinTween = game.add.tween(a.body).to({angularVelocity: 0}, 3000, Phaser.Easing.Exponential.In, true);
-
-        a.spinTween.onComplete.add(function() { 
-            game.time.events.add(1000, function(){ a.destroy(); } );
+        a.zipTween.onComplete.add(function() { 
+            a.destroy();
+            energyController.AddApple();
         }, a);
     }
 };
@@ -73,6 +66,6 @@ Apple.prototype.Fresh = function() {
 };
 
 Apple.prototype.Eaten = function() {
-    this.PlayAnim('eaten');
+    this.PlayAnim('fresh');
 
 };
