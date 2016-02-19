@@ -17,7 +17,8 @@ Collision.OverlapFraukiWithObject = function(f, o) {
         if(o.CanCauseDamage() || 
             frauki.state === frauki.Rolling ||
             frauki.state === frauki.Falling ||
-            frauki.state === frauki.Flipping) {
+            frauki.state === frauki.Flipping ||
+            (frauki.Attacking() && frauki.GetCurrentDamage() > 0)) {
             return false;
         } else {
             return true;
@@ -214,8 +215,6 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
 
     e.timers.SetTimer('grace', 400);
     frauki.timers.SetTimer('frauki_grace', 300);
-
-
 };
 
 Collision.OverlapEnemyAttackWithFrauki = function(e, f) {

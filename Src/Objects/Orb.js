@@ -42,7 +42,7 @@ function SmashOrb(f, o) {
     effectsController.ClashStreak(o.body.center.x, o.body.center.y, game.rnd.between(1, 2));
     effectsController.Dust(o.body.center.x, o.body.center.y);
     effectsController.ScreenFlash();
-    effectsController.DiceObject(o, o.body.center.x, o.body.center.y);
+    effectsController.DiceObject(o.objectName, o.body.center.x, o.body.center.y, o.body.velocity.x, o.body.velocity.y, o.owningLayer);
     events.publish('camera_shake', {magnitudeX: 10, magnitudeY: 5, duration: 150});
     events.publish('play_sound', {name: 'door_break'});
     o.destroy();

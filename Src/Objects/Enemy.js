@@ -208,7 +208,7 @@ function DestroyEnemy(e) {
         effectsController.Explosion(e.body.center);
     }
 
-    effectsController.DiceObject(e, e.body.center.x, e.body.center.y);
+    effectsController.DiceObject(e.objectName, e.body.center.x, e.body.center.y, e.body.velocity.x, e.body.velocity.y, e.owningLayer);
 
     damage = e.maxEnergy;
 

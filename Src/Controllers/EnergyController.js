@@ -142,6 +142,8 @@ EnergyController.prototype.EnergyBlock = function(e, dmg) {
             //play stun sound
             frauki.Stun(e);
 
+            effectsController.ShatterShield();
+
             return false;
         } 
     }

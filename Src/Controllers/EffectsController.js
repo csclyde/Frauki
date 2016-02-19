@@ -512,13 +512,13 @@ EffectsController.prototype.Splash = function(tile) {
     }
 };
 
-EffectsController.prototype.DiceObject = function(object, x, y) {
+EffectsController.prototype.DiceObject = function(name, x, y, xv, yv, layer) {
 
     var pieces = [];
 
     var i = 0;
-    while(game.cache.getFrameData('Pieces').getFrameByName(object.objectName + '000' + i)) {
-        pieces.push(game.add.sprite(x + game.rnd.between(-20, 20), y + game.rnd.between(-20, 20), 'Pieces', object.objectName + '000' + i));
+    while(game.cache.getFrameData('Pieces').getFrameByName(name + '000' + i)) {
+        pieces.push(game.add.sprite(x + game.rnd.between(-20, 20), y + game.rnd.between(-20, 20), 'Pieces', name + '000' + i));
         i++;
     }
 
@@ -531,13 +531,13 @@ EffectsController.prototype.DiceObject = function(object, x, y) {
         p.body.drag.x = 100;
 
         //randomly set the velocity, rotation, and lifespan
-        p.body.velocity.x = game.rnd.between(-150, 150) + object.body.velocity.x * 0.5;
-        p.body.velocity.y = game.rnd.between(-100, -400) + object.body.velocity.y * 0.5;
+        p.body.velocity.x = game.rnd.between(-150, 150) + xv * 0.5;
+        p.body.velocity.y = game.rnd.between(-100, -400) + yv * 0.5;
         p.body.angularVelocity = game.rnd.between(500, 1000);
 
         game.time.events.add(4000, function() { p.body.enable = false; } );
 
-        effectsController['dicedPieces' + object.owningLayer].addChild(p);
+        effectsController['dicedPieces' + layer].addChild(p);
     });
 };
 
@@ -846,32 +846,34 @@ EffectsController.prototype.SpawnAppleCore = function(x, y) {
     appleCore.spinTween.onComplete.add(function() { 
         game.time.events.add(1000, function(){ appleCore.destroy(); } );
     }, appleCore);
+};
 
-    /*
+EffectsController.prototype.ShatterShield = function() {
+
     var pieces = [];
 
     var i = 0;
-    while(game.cache.getFrameData('Pieces').getFrameByName(object.objectName + '000' + i)) {
-        pieces.push(game.add.sprite(x + game.rnd.between(-20, 20), y + game.rnd.between(-20, 20), 'Pieces', object.objectName + '000' + i));
+    while(game.cache.getFrameData('Pieces').getFrameByName('Shield000' + i)) {
+        pieces.push(game.add.sprite(frauki.body.center.x + game.rnd.between(-20, 20), frauki.body.center.y + game.rnd.between(-20, 20), 'Pieces', 'Shield000' + i));
         i++;
     }
 
     pieces.forEach(function(p) {
         game.physics.enable(p, Phaser.Physics.ARCADE);
 
-        p.anchor.setTo(0.5, 0.5);
+        p.anchor.setTo(0.5);
         p.body.bounce.setTo(0.5);
         p.body.angularDrag = 600;
         p.body.drag.x = 100;
+        p.alpha = 0.5;
 
         //randomly set the velocity, rotation, and lifespan
-        p.body.velocity.x = game.rnd.between(-150, 150) + object.body.velocity.x * 0.5;
-        p.body.velocity.y = game.rnd.between(-100, -400) + object.body.velocity.y * 0.5;
+        p.body.velocity.x = game.rnd.between(-150, 150) + frauki.body.velocity.x * 0.5;
+        p.body.velocity.y = game.rnd.between(-100, -200) + frauki.body.velocity.y * 0.5;
         p.body.angularVelocity = game.rnd.between(500, 1000);
 
-        game.time.events.add(4000, function() { p.body.enable = false; } );
+        game.time.events.add(1500, function() { p.destroy(); } );
 
-        effectsController['dicedPieces' + object.owningLayer].addChild(p);
+        effectsController['dicedPieces' + Frogland.currentLayer].addChild(p);
     });
-    */
 };
