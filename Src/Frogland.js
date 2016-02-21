@@ -133,11 +133,11 @@ Frogland.Update = function() {
         }
     }
 
-    game.physics.arcade.collide(frauki, this.GetCurrentCollisionLayer(), null, Collision.CollideFraukiWithEnvironment);
-    game.physics.arcade.collide(frauki, this.GetCurrentObjectGroup(), null, Collision.OverlapFraukiWithObject);
-    game.physics.arcade.collide(this.GetCurrentObjectGroup(), this.GetCurrentCollisionLayer(), null, Collision.OverlapObjectsWithEnvironment);
+    game.physics.arcade.collideSpriteVsTilemapLayer(frauki, this.GetCurrentCollisionLayer(), null, Collision.CollideFraukiWithEnvironment, null, false);
+    game.physics.arcade.collideSpriteVsGroup(frauki, this.GetCurrentObjectGroup(), null, Collision.OverlapFraukiWithObject, null, false);
+    game.physics.arcade.collideGroupVsTilemapLayer(this.GetCurrentObjectGroup(), this.GetCurrentCollisionLayer(), null, Collision.OverlapObjectsWithEnvironment, null, false);
     //game.physics.arcade.collide(this.GetCurrentObjectGroup(), undefined, null, Collision.OverlapObjectsWithSelf);
-    game.physics.arcade.overlap(frauki, this.shardGroup, null, Collision.OverlapFraukiWithShard);
+    game.physics.arcade.collideSpriteVsGroup(frauki, this.shardGroup, null, Collision.OverlapFraukiWithShard, null, true);
 
     if(!!frauki.carriedShard && this.timers.TimerUp('shard_object_check')) {
         game.physics.arcade.overlap(this.shardGroup, this.GetCurrentObjectGroup(), null, Collision.OverlapShardWithObject);
@@ -377,6 +377,7 @@ Frogland.ChangeLayer = function(newLayer) {
     }
 
     SetShardVisibility();
+    effectsController.ClearDicedPieces();
 };
 
 Frogland.DislodgeTile = function(tile) {

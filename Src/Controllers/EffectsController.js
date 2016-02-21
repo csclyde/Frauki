@@ -77,6 +77,7 @@ EffectsController = function() {
     this.energyStreak.setRotation(0, 0);
 
     this.loadedEffects = [];
+    this.loadedEffectsCollide = [];
 
     this.LoadMapEffects(4);
     this.LoadMapEffects(3);
@@ -121,6 +122,17 @@ EffectsController.prototype.Update = function() {
         
     });
 
+    this.loadedEffectsCollide.forEach(function(o) {
+        var padding = 100;
+
+        if(o.owningLayer === Frogland.currentLayer && o.x > game.camera.x - padding && o.y > game.camera.y - padding && o.x < game.camera.x + game.camera.width + padding && o.y < game.camera.y + game.camera.height + padding) {
+            o.on = true;
+        } else {
+            o.on = false;
+        }
+        
+    });
+
     this.activeDest = frauki.body;
     this.positiveBits.forEachAlive(UpdateParticle, this);
 
@@ -154,10 +166,10 @@ EffectsController.prototype.Update = function() {
         this.energyStreak.height = frauki.attackRect.body.height;
     }
 
-    game.physics.arcade.collide(this.dicedPieces4, Frogland.GetCurrentCollisionLayer());
-    game.physics.arcade.collide(this.dicedPieces3, Frogland.GetCurrentCollisionLayer());
-    game.physics.arcade.collide(this.dicedPieces2, Frogland.GetCurrentCollisionLayer());
-    game.physics.arcade.collide(this.loadedEffects, Frogland.GetCurrentCollisionLayer(), Collision.CollideEffectWithWorld, Collision.OverlapEffectWithWorld);
+    game.physics.arcade.collideGroupVsTilemapLayer(this['dicedPieces' + Frogland.currentLayer], Frogland.GetCurrentCollisionLayer(), null, null, null, false);
+    //game.physics.arcade.collide(this.dicedPieces3, Frogland.GetCurrentCollisionLayer());
+    //game.physics.arcade.collide(this.dicedPieces2, Frogland.GetCurrentCollisionLayer());
+    game.physics.arcade.collide(this.loadedEffectsCollide, Frogland.GetCurrentCollisionLayer(), Collision.CollideEffectWithWorld, Collision.OverlapEffectWithWorld);
 };
 
 EffectsController.prototype.LoadMapEffects = function(layer) {
@@ -216,7 +228,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 dripper.alpha = 0.5;
                 dripper.owningLayer = layer;
 
-                that.loadedEffects.push(dripper);
+                that.loadedEffectsCollide.push(dripper);
             } else if(o.name === 'fluff') {
 
                 var fluffer = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
@@ -535,10 +547,16 @@ EffectsController.prototype.DiceObject = function(name, x, y, xv, yv, layer) {
         p.body.velocity.y = game.rnd.between(-100, -400) + yv * 0.5;
         p.body.angularVelocity = game.rnd.between(500, 1000);
 
-        game.time.events.add(4000, function() { p.body.enable = false; } );
+        game.time.events.add(4000, function() { if(!!p && !!p.body) p.body.enable = false; } );
 
         effectsController['dicedPieces' + layer].addChild(p);
     });
+};
+
+EffectsController.prototype.ClearDicedPieces = function() {
+    this.dicedPieces4.removeAll(true);
+    this.dicedPieces3.removeAll(true);
+    this.dicedPieces2.removeAll(true);
 };
 
 EffectsController.prototype.MakeHearts = function(amt) {
@@ -571,7 +589,7 @@ EffectsController.prototype.MakeHearts = function(amt) {
 };
 
 EffectsController.prototype.SlowHit = function(duration) {
-    var t = game.add.tween(Main).to( { physicsSlowMo: 0.1 }, Math.round(duration * 0.2), Phaser.Easing.Exponential.Out, false).to( { physicsSlowMo: 1 }, Math.round(duration * 0.8), Phaser.Easing.Exponential.In, false);
+    var t = game.add.tween(Main).to( { physicsSlowMo: 0.2 }, Math.round(duration * 0.2), Phaser.Easing.Exponential.Out, false).to( { physicsSlowMo: 1 }, Math.round(duration * 0.8), Phaser.Easing.Exponential.In, false);
     t.start();
 
     //var currAnim = frauki.animations.currentAnim;
