@@ -1,7 +1,7 @@
 Enemy.prototype.types['KR32'] =  function() {
 
-	this.body.setSize(15, 56, 0, -72);
-	this.anchor.setTo(.5, 1);
+	this.body.setSize(15, 56, 0, 0);
+	this.anchor.setTo(.5);
 
     this.animations.add('idle', ['KR32/Stand0000'], 10, true, false);
     this.animations.add('block', ['KR32/Block0000'], 10, true, false);

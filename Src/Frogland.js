@@ -136,6 +136,7 @@ Frogland.Update = function() {
     game.physics.arcade.collide(frauki, this.GetCurrentCollisionLayer(), null, Collision.CollideFraukiWithEnvironment);
     game.physics.arcade.collide(frauki, this.GetCurrentObjectGroup(), null, Collision.OverlapFraukiWithObject);
     game.physics.arcade.collide(this.GetCurrentObjectGroup(), this.GetCurrentCollisionLayer(), null, Collision.OverlapObjectsWithEnvironment);
+    //game.physics.arcade.collide(this.GetCurrentObjectGroup(), undefined, null, Collision.OverlapObjectsWithSelf);
     game.physics.arcade.overlap(frauki, this.shardGroup, null, Collision.OverlapFraukiWithShard);
 
     if(!!frauki.carriedShard && this.timers.TimerUp('shard_object_check')) {
