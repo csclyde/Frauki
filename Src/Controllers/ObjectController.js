@@ -176,15 +176,17 @@ ObjectController.prototype.CreateObjectsLayer = function(layer) {
     Frogland.map.createFromObjects('Objects_' + layer, 67, 'Misc', 'Door0000', true, true, currLayer, Door, false);
     
 
-    // Frogland.ball = game.add.sprite(55 * 16, 26 * 16, 'Misc', 'Ball0000', currLayer);
-    // game.physics.enable(Frogland.ball, Phaser.Physics.ARCADE);
-    // Frogland.ball.body.bounce.setTo(0.8);
-    // Frogland.ball.body.drag.setTo(200);
-    // Frogland.ball.anchor.setTo(0.5);
-    // Frogland.ball.body.angularDrag = 500;
-    // Frogland.ball.spriteType = 'ball';
-    // Frogland.ball.body.collideWorldBounds = true;
-    // Frogland.ball.body.maxVelocity.setTo(700);
+    if(layer == 3) {
+        Frogland.ball = game.add.sprite(177 * 16, 270 * 16, 'Misc', 'Ball0000', currLayer);
+        game.physics.enable(Frogland.ball, Phaser.Physics.ARCADE);
+        Frogland.ball.body.bounce.setTo(0.8);
+        Frogland.ball.body.drag.setTo(200);
+        Frogland.ball.anchor.setTo(0.5);
+        Frogland.ball.body.angularDrag = 500;
+        Frogland.ball.spriteType = 'ball';
+        Frogland.ball.body.collideWorldBounds = true;
+        Frogland.ball.body.maxVelocity.setTo(700);
+    }
 
     //inform each object of its own layer
     currLayer.forEach(function(obj) {

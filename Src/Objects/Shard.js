@@ -52,6 +52,9 @@ function PickUpShard(f, a) {
     a.owner = f;
     f.carriedShard = a;
 
+    effectsController.ScreenFlash();
+    events.publish('play_sound', {name: 'crystal_door', restart: true });
+
     // a.body.allowGravity = true;
 
     // a.body.velocity.y = -250;

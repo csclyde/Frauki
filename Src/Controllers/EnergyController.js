@@ -143,6 +143,7 @@ EnergyController.prototype.EnergyBlock = function(e, dmg) {
             frauki.Stun(e);
 
             effectsController.ShatterShield();
+            events.publish('play_sound', {name: 'crystal_door', restart: true });
 
             return false;
         } 

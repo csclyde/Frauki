@@ -2,7 +2,7 @@ Enemy.prototype.types['Fungu'] =  function() {
 
 	this.body.setSize(25, 50, 0, 0);
 	this.body.moves = false;
-	this.anchor.setTo(0.5, 1);
+	this.anchor.setTo(0.5, 0.75);
 
     this.animations.add('idle', ['Fungu/Fungu0000'], 10, true, false);
     this.animations.add('shit', ['Hop0000'], 10, true, false);
