@@ -485,7 +485,7 @@ Player.prototype.Heal = function(params) {
     if(params.charging) {
         if(energyController.GetHealth() < energyController.GetMaxHealth() && energyController.GetApples() > 0) {
             this.ChangeState(this.Healing);
-            this.timers.SetTimer('heal_charge', 1000); 
+            this.timers.SetTimer('heal_charge', 1100); 
         } else {
             events.publish('play_sound', {name: 'no_energy'});
         }

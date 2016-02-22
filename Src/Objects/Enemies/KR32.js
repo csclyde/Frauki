@@ -148,9 +148,9 @@ Enemy.prototype.types['KR32'] =  function() {
 			this.state = this.Slashing;
 
 			if(this.direction === 'left') {
-				this.body.velocity.x = -400;
+				this.body.velocity.x = -550;
 			} else {
-				this.body.velocity.x = 400;
+				this.body.velocity.x = 550;
 			}
 		}
 	}
@@ -179,6 +179,8 @@ Enemy.prototype.types['KR32'] =  function() {
 	this.Stabbing = function() {
 		this.PlayAnim('attack_stab');
 
+		this.body.drag.x = 100;
+
 		//EnemyBehavior.FacePlayer(this);
 
 		if(this.animations.currentAnim.isFinished) {
@@ -188,6 +190,8 @@ Enemy.prototype.types['KR32'] =  function() {
 			} else {
 				this.state = this.Blocking;
 			}
+
+			this.body.drag.x = 600;
 
 			this.timers.SetTimer('attack', 500 + Math.random() * 1000);
 		}

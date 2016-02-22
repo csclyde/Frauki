@@ -1,13 +1,13 @@
 Enemy.prototype.types['HWK9'] =  function() {
 
-	this.body.setSize(15, 56, 0, -72);
-	this.anchor.setTo(.5, 1);
+	this.body.setSize(15, 56, 0, 0);
+	this.anchor.setTo(.5);
 
     this.animations.add('idle', ['HWK9/Stand0000'], 10, true, false);
     this.animations.add('flip', ['HWK9/Flip0000', 'HWK9/Flip0001', 'HWK9/Flip0002', 'HWK9/Flip0003', 'HWK9/Flip0004', 'HWK9/Flip0005'], 18, true, false);
-    this.animations.add('windup', ['HWK9/AttackDash0000'], 18, false, false);
-    this.animations.add('attack1', ['HWK9/AttackDash0001', 'HWK9/AttackDash0002', 'HWK9/AttackDash0003'], 18, false, false);
-    this.animations.add('after_slash', ['HWK9/AttackDash0003'], 18, false, false);
+    this.animations.add('windup', ['HWK9/AttackDash0000'], 1, false, false);
+    this.animations.add('attack1', ['HWK9/AttackDash0001', 'HWK9/AttackDash0002', 'HWK9/AttackDash0003'], 1, false, false);
+    this.animations.add('after_slash', ['HWK9/AttackDash0003'], 1, false, false);
     this.animations.add('block', ['HWK9/Block0000'], 18, true, false);
     this.animations.add('hurt', ['HWK9/Stand0000'], 8, true, false);
 
@@ -223,7 +223,7 @@ Enemy.prototype.types['HWK9'] =  function() {
 		},
 
 		'HWK9/AttackDash0001': {
-			x: 12, y: -30, w: 65, h: 100,
+			x: 49, y: -34, w: 25, h: 90,
 			damage: 2.2,
 			knockback: 0,
 			priority: 2,
@@ -231,7 +231,7 @@ Enemy.prototype.types['HWK9'] =  function() {
 		},
 
 		'HWK9/AttackDash0002': {
-			x: 12, y: -30, w: 65, h: 100,
+			x: 32, y: -46, w: 40, h: 50,
 			damage: 2.2,
 			knockback: 0,
 			priority: 2,

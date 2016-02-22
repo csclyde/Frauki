@@ -105,6 +105,8 @@ Frogland.Create = function() {
     events.subscribe('open_door', function(params) {
         OpenDoorById(params.door_name);
     });
+
+    game.physics.arcade.sortDirection = game.physics.arcade.TOP_BOTTOM
 };
 
 Frogland.Update = function() {
@@ -134,7 +136,7 @@ Frogland.Update = function() {
     }
 
     game.physics.arcade.collideSpriteVsTilemapLayer(frauki, this.GetCurrentCollisionLayer(), null, Collision.CollideFraukiWithEnvironment, null, false);
-    game.physics.arcade.collideSpriteVsGroup(frauki, this.GetCurrentObjectGroup(), null, Collision.OverlapFraukiWithObject, null, false);
+    game.physics.arcade.collideHandler(frauki, this.GetCurrentObjectGroup(), null, Collision.OverlapFraukiWithObject, null, false);
     game.physics.arcade.collideGroupVsTilemapLayer(this.GetCurrentObjectGroup(), this.GetCurrentCollisionLayer(), null, Collision.OverlapObjectsWithEnvironment, null, false);
     //game.physics.arcade.collide(this.GetCurrentObjectGroup(), undefined, null, Collision.OverlapObjectsWithSelf);
     game.physics.arcade.collideSpriteVsGroup(frauki, this.shardGroup, null, Collision.OverlapFraukiWithShard, null, true);

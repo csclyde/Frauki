@@ -17,6 +17,7 @@ TimerUtil.prototype.SetTimer = function(name, duration, callback, callbackContex
 	this.timers[name] = {};
 	this.timers[name].status = 'waiting';
 	this.timers[name].eventTimer = game.time.events.add(duration, function() { this.timers[name].status = 'ready'; }, this);
+	this.timers[name].timestamp = game.time.now;
 }
 
 TimerUtil.prototype.TimerUp = function(name) {
@@ -26,5 +27,13 @@ TimerUtil.prototype.TimerUp = function(name) {
 		return true;
 	}
 
-}
+};
+
+TimerUtil.prototype.Timestamp = function(name) {
+	if(!!this.timers[name]) {
+		return this.timers[name].timestamp;
+	} else {
+		return 0;
+	}
+};
 

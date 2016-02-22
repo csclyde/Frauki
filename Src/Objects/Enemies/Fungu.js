@@ -10,6 +10,7 @@ Enemy.prototype.types['Fungu'] =  function() {
     this.energy = 0.5;
 
     this.damage = 1;
+    this.shotCount = 0;
     /*
     this.baseStunDuration = 500;
     this.poise = 10;
@@ -50,7 +51,13 @@ Enemy.prototype.types['Fungu'] =  function() {
 				projectileController.Spore(this);
 			}
 
-			this.timers.SetTimer('shoot', 1000);
+			this.shotCount++;
+
+			if(this.shotCount % 3 === 0) {
+				this.timers.SetTimer('shoot', 1200);
+			} else {
+				this.timers.SetTimer('shoot', 500);
+			}
 		}
 	};
 
