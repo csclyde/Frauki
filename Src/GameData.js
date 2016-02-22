@@ -38,3 +38,30 @@ GameData.AddOpenDoor = function(id) {
 GameData.GetMaxApples = function() {
     return 2;
 };
+
+GameData.SaveShardPositions = function() {
+    var shardSave = {};
+
+    Frogland.shardGroup.forEach(function(s) {
+        shardSave[s.shardFrame] = {
+            x: Math.floor(s.x),
+            y: Math.floor(s.y),
+            layer: s.currentLayer,
+            dropped: (!s.returnedToChurch && s.pickedUp)
+        };
+    });
+
+    localStorage.setItem('fraukiShards', JSON.stringify(shardSave));
+};
+
+GameData.GetShardPosition = function(name) {
+    var shardSave = localStorage.getItem('fraukiShards');
+
+    if(!shardSave) return null;
+
+    shardSave = JSON.parse(shardSave);
+
+    if(!shardSave[name]) return null;
+
+    return shardSave[name];
+};

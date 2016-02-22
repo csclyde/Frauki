@@ -25,6 +25,17 @@ Shard = function(game, x, y, name) {
     this.currentLayer = Frogland.shardLayer;
     this.shardFrame = name;
 
+    var pos = GameData.GetShardPosition(name);
+
+    if(pos) {
+        console.log('moving shard', pos.x, pos.y, this.x, this.y);
+        this.x = pos.x;
+        this.y = pos.y;
+        this.currentLayer = pos.layer;
+        this.pickedUp = pos.dropped;
+        this.returnedToChurch = !pos.dropped;
+    }
+
 };
 
 Shard.prototype = Object.create(Phaser.Sprite.prototype);
@@ -53,6 +64,7 @@ function PickUpShard(f, a) {
     a.state = a.Carried;
     a.owner = f;
     f.carriedShard = a;
+    a.pickedUp = true;
 
     effectsController.ScreenFlash();
     events.publish('play_sound', {name: 'crystal_door', restart: true });

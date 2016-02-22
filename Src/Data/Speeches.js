@@ -1,7 +1,7 @@
 var Speeches = {
 	'hole_sign': { text: 'The sign says: Watch out for danger! This hole is not safe to jump into. Leave what\'s down there alone.' },
 	'phone': { text: 'There’s still a noise when I pick it up. Hello?' },
-	'tomatoes': { text: 'Mmm, what juicy little apples. Oh wait... they\'re just tomatoes' },
+	'tomatoes': { text: 'Mmm, what juicy little apples. Oh wait... they\'re just space tomatoes' },
 	'shade_tree': { text: 'This looks like a good spot for a nap.' },
 	'pillar': { text: 'This looks dangerous...', portrait: 'Displeased' },
 	'jerk': { text: 'Sneaky jerk', portrait: 'Mad' },

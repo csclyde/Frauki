@@ -880,12 +880,14 @@ Player.prototype.Falling = function() {
         xLoc += (this.states.direction === 'right' ? frauki.body.width + 1 : -1);
 
         var bottomTile = Frogland.map.getTileWorldXY(xLoc, this.body.y, 16, 16, Frogland.GetCurrentCollisionLayer());
-        var topTile = Frogland.map.getTileWorldXY(xLoc, this.body.y - 5, 16, 16, Frogland.GetCurrentCollisionLayer());
+        var topTile = Frogland.map.getTileWorldXY(xLoc, this.body.y - 3, 16, 16, Frogland.GetCurrentCollisionLayer());
+        var topTile2 = Frogland.map.getTileWorldXY(xLoc, this.body.y - 6, 16, 16, Frogland.GetCurrentCollisionLayer());
 
         //console.log(topTile, bottomTile);
 
-        if(topTile === null && bottomTile !== null) {
+        if((topTile === null || topTile2 === null) && bottomTile !== null) {
             this.ChangeState(this.Hanging);
+            frauki.body.y -= (frauki.body.y % 16) + 5;
         }
     }
 
@@ -913,10 +915,10 @@ Player.prototype.Landing = function() {
 
     if(this.body.velocity.y < 0) {
         this.ChangeState(this.Jumping);
-    }
-    
-    if(this.body.velocity.x !== 0) {
+    } else if(this.body.velocity.x !== 0) {
         this.ChangeState(this.Running);
+    } else if(this.states.crouching) {
+        this.ChangeState(this.Crouching);
     }
 
     if(this.animations.currentAnim.isFinished) {

@@ -151,6 +151,7 @@ Main.Restart = function() {
         Main.restarting = false;
 
         PrepareShardsForDeath();
+        GameData.SaveShardPositions();
         
         Frogland.objectGroup_4.removeAll(true);
         Frogland.objectGroup_3.removeAll(true);
@@ -276,6 +277,35 @@ Main.DrawUI = function() {
 
         // this.RenderTextureFromAtlas('UI', 'PortraitsFraukiNeutral', 50, 495);
         
+    }
+
+    //draw an arrow pointing towards the shard
+    if(GetCurrentShardType() === 'None') {
+
+        Frogland.shardGroup.forEach(function(s) {
+            if(s.pickedUp && !s.returnedToChurch) {
+                var diff = new Phaser.Point(s.body.center.x - frauki.body.center.x, s.body.center.y - frauki.body.center.y);
+                diff = diff.normalize();
+
+                diff.setMagnitude(90);
+
+                var opacity = 1;
+
+                if(s.currentLayer !== Frogland.currentLayer) {
+                    opacity = 0.5;
+                }
+
+                var shardIndicator = 'Shard0004';
+
+                if(s.shardFrame === 'Shard0000') shardIndicator = 'Shard0004';
+                if(s.shardFrame === 'Shard0001') shardIndicator = 'Shard0005';
+                if(s.shardFrame === 'Shard0002') shardIndicator = 'Shard0006';
+                if(s.shardFrame === 'Shard0003') shardIndicator = 'Shard0007';
+
+                Main.RenderTextureFromAtlas('Misc', shardIndicator, (game.camera.width / 2) + diff.x, (game.camera.height / 2) + diff.y, 1, 1, opacity);
+
+            }
+        });
     }
 };
 

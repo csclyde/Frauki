@@ -22,8 +22,11 @@ TriggerController.prototype.triggers['return_shard'] = {
 
 			//122 179
 
-			game.add.tween(shard).to({x: 122 * 16 + 1, y: 179 * 16 + 14}, 2000, Phaser.Easing.Exponential.InOut, true);
-			Frogland.effectsGroup.addChild(shard);
+			var placementTween = game.add.tween(shard).to({x: 122 * 16 + 1, y: 179 * 16 + 14}, 2000, Phaser.Easing.Exponential.InOut, true);
+			placementTween.onComplete.add(function() {
+				GameData.SaveShardPositions();
+			});
+			//Frogland.effectsGroup.addChild(shard);
 		}
 	},
 
