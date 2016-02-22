@@ -46,6 +46,8 @@ function PickUpShard(f, a) {
     if(f === frauki && !a.timers.TimerUp('pickup_delay'))
         return;
 
+    if(a.returnedToChurch === true) return;
+
     if(!!a.owner) a.owner.carriedShard = null;
     
     a.state = a.Carried;
@@ -98,8 +100,14 @@ Shard.prototype.Floating = function() {
     this.PlayAnim('floating');
 
     this.body.drag.setTo(0);
+    
+    if(!this.returnedToChurch) {
+        this.body.velocity.y = Math.sin(game.time.now / 150) * 30;
+    } else {
+        this.body.velocity.y = 0;
+    }
 
-    this.body.velocity.y = Math.sin(game.time.now / 150) * 30;
+
     this.body.velocity.x = 0;
     this.body.acceleration.y = 0;
     this.body.acceleration.x = 0;

@@ -7010,10 +7010,25 @@
                  "width":82.125,
                  "x":2702.54,
                  "y":4222.75
+                }, 
+                {
+                 "height":165.5,
+                 "id":1909,
+                 "name":"return_shard",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"trigger",
+                 "visible":true,
+                 "width":106,
+                 "x":1893.5,
+                 "y":2790.5
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "width":0,
          "x":0,
          "y":0
@@ -11110,7 +11125,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":1909,
+ "nextobjectid":1910,
  "orientation":"orthogonal",
  "properties":
     {
