@@ -28,7 +28,6 @@ Shard = function(game, x, y, name) {
     var pos = GameData.GetShardPosition(name);
 
     if(pos) {
-        console.log('moving shard', pos.x, pos.y, this.x, this.y);
         this.x = pos.x;
         this.y = pos.y;
         this.currentLayer = pos.layer;

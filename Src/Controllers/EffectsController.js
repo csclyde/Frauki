@@ -829,7 +829,7 @@ EffectsController.prototype.ExplodeDoorSeal = function(door) {
         p.body.velocity.y = game.rnd.between(-100, -400);
         p.body.angularVelocity = game.rnd.between(500, 1000);
 
-        game.time.events.add(4000, function() { p.body.enable = false; } );
+        game.time.events.add(4000, function() { if(!!p && !!p.body) p.body.enable = false; } );
 
         effectsController['dicedPieces' + Frogland.currentLayer].addChild(p);
     });

@@ -1,5 +1,5 @@
-PLAYER_SPEED = function() { return frauki.states.sheilded ? 130 : 180; }
-PLAYER_ROLL_SPEED = function() { return 450; }
+PLAYER_SPEED = function() { return frauki.states.sheilded ? 130 : 190; }
+PLAYER_ROLL_SPEED = function() { return 460; }
 PLAYER_RUN_SLASH_SPEED = function() { return  550; }
 PLAYER_JUMP_VEL = function() { return frauki.states.sheilded ? -250 : -350; }
 PLAYER_DOUBLE_JUMP_VEL = function() { return frauki.states.sheilded ? -200 : -275; }
@@ -343,10 +343,10 @@ Player.prototype.Run = function(params) {
 
     if(params.dir === 'left') {
         this.SetDirection('left');
-        this.body.acceleration.x = -1500;
+        this.body.acceleration.x = -1000;
     } else if(params.dir === 'right') {
         this.SetDirection('right');
-        this.body.acceleration.x = 1500;
+        this.body.acceleration.x = 1000;
     } else {
         this.body.acceleration.x = 0;
 
@@ -825,6 +825,8 @@ Player.prototype.Running = function() {
 
     if((frauki.states.flowLeft || frauki.states.flowRight) && !inputController.dpad.left && !inputController.dpad.right) {
         this.PlayAnim('fall');
+    } else if((inputController.dpad.left && this.body.velocity.x > 0) || (inputController.dpad.right && this.body.velocity.x < 0)) {
+        this.PlayAnim('slide');
     } else {
         this.PlayAnim('run');
     }
