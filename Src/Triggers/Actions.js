@@ -35,4 +35,4 @@ TriggerController.prototype.triggers['return_shard'] = {
 
 	exit: function(params) {
 	}
-}
+};

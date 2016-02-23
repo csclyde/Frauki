@@ -227,4 +227,4 @@ function ComposeAndEmitSignal(data) {
     }
 
     events.publish(signalName, params);
-}
+};
