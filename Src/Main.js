@@ -137,6 +137,9 @@ Main.Restart = function() {
     cameraController.shakeYTween.stop();
 
     fadeOutTween.onComplete.add(function() {
+        PrepareShardsForDeath();
+        GameData.SaveShardPositions();
+        
         frauki.alpha = 1;
         Frogland.SpawnFrauki();
 
@@ -150,8 +153,6 @@ Main.Restart = function() {
 
         Main.restarting = false;
 
-        PrepareShardsForDeath();
-        GameData.SaveShardPositions();
         
         Frogland.objectGroup_4.removeAll(true);
         Frogland.objectGroup_3.removeAll(true);

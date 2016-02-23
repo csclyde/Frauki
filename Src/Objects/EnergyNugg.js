@@ -59,5 +59,5 @@ EnergyNugg.prototype.PlayAnim = function(name) {
 EnergyNugg.prototype.Idle = function() {
     this.PlayAnim('idle');
 
-    this.body.velocity.y = Math.sin((game.time.now / 150) + this.rando) * 15;
+    this.body.velocity.y = Math.sin((game.time.now / 100) + this.rando) * 15;
 };
