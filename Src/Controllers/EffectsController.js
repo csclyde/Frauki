@@ -106,6 +106,12 @@ EffectsController = function() {
     this.goddess.cameraOffset.y = 200;
     game.add.tween(this.goddess.cameraOffset).to({y: 160}, 200, Phaser.Easing.Sinusoidal.InOut, true, 0, -1, true);
 
+    this.materializingApple = game.add.image(0, 0, 'Misc', 'Apple0000');
+    this.materializingApple.animations.add('mat', ['Apple0007', 'Apple0008', 'Apple0009', 'Apple0010', 'Apple0011', 'Apple0012'], 12, true, false);
+    this.materializingApple.animations.play('mat');
+    this.materializingApple.visible = false;
+    this.materializingApple.anchor.setTo(0.5);
+
 
 };
 
@@ -864,6 +870,17 @@ EffectsController.prototype.SpawnAppleCore = function(x, y) {
     appleCore.spinTween.onComplete.add(function() { 
         game.time.events.add(1000, function(){ appleCore.destroy(); } );
     }, appleCore);
+};
+
+EffectsController.prototype.MaterializeApple = function(x, y, show) {
+    this.materializingApple.x = x;
+    this.materializingApple.y = y;
+
+    if(show) {
+        this.materializingApple.visible = true;
+    } else {
+        this.materializingApple.visible = false;
+    }
 };
 
 EffectsController.prototype.ShatterShield = function() {
