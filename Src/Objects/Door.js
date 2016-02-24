@@ -33,6 +33,9 @@ Door = function(game, x, y, name) {
     this.animations.add('skull', ['DoorEnemy0000'], 10, true, false);
     this.animations.add('skull_open', ['DoorEnemy0001'], 10, true, false);
 
+    this.animations.add('mystery', ['DoorMystery0000'], 10, true, false);
+
+
     this.animations.add('orb_1_0', ['DoorOrb0000'], 10, true, false);
     this.animations.add('orb_1_1', ['DoorOrb0001'], 10, true, false);
     this.animations.add('orb_2_0', ['DoorOrb0002'], 10, true, false);

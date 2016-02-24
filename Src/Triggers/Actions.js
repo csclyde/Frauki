@@ -36,3 +36,15 @@ TriggerController.prototype.triggers['return_shard'] = {
 	exit: function(params) {
 	}
 };
+
+TriggerController.prototype.triggers['soccer_goal'] = {
+	enter: function(params) {
+		events.publish('open_door', { door_name: 'soccer_goal' });
+	},
+
+	stay: function(params) {
+	},
+
+	exit: function(params) {
+	}
+};

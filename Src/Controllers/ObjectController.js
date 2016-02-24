@@ -186,6 +186,8 @@ ObjectController.prototype.CreateObjectsLayer = function(layer) {
         Frogland.ball.spriteType = 'ball';
         Frogland.ball.body.collideWorldBounds = true;
         Frogland.ball.body.maxVelocity.setTo(700);
+
+        triggerController.RegisterTarget('ball', Frogland.ball);
     }
 
     //inform each object of its own layer

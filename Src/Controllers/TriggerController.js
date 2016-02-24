@@ -3,6 +3,7 @@ TriggerController = function() {
     this.timers = new TimerUtil();
 
     this.triggerLayers = {};
+    this.triggerTargets = {};
   
 };
 
@@ -25,6 +26,15 @@ TriggerController.prototype.CreateTriggers = function(layer) {
 
         trigger.once =  trigger.properties.once === 'true' ? true : false;
         delete trigger.properties.once;
+
+        //find the target
+        if(!!trigger.properties.target && !!this.triggerTargets[trigger.properties.target]) {
+            trigger.target = this.triggerTargets[trigger.properties.target];
+            delete trigger.properties.target;
+        } else {
+            trigger.target = frauki;
+        }
+
 
         trigger.x = Math.floor(trigger.x);
         trigger.y = Math.floor(trigger.y);
@@ -60,8 +70,10 @@ TriggerController.prototype.Update = function(currentLayer) {
     while(i--) {
         var trigger = currentLayer[i];
 
+        if(trigger.type !== 'trigger') continue;
+
         //if the player intersects with this trigger
-        if(this.Intersects(frauki.body, trigger)) {
+        if(this.Intersects(trigger.target.body, trigger)) {
 
             //if the flag is unset, they just entered the trigger
             if(trigger.playerInside === false) {
@@ -118,8 +130,10 @@ TriggerController.prototype.ForceExit = function(currentLayer) {
     while(i--) {
         var trigger = currentLayer[i];
 
+        if(trigger.type !== 'trigger') continue;
+
         //if the player intersects with this trigger
-        if(this.Intersects(frauki.body, trigger)) {
+        if(this.Intersects(trigger.target.body, trigger)) {
             //if the flag is set, they just exited the trigger
             if(trigger.playerInside === true) {
 
@@ -144,7 +158,11 @@ TriggerController.prototype.Intersects = function(body, trigger) {
     if (body.position.x >= trigger.width + trigger.x) { return false; }
     if (body.position.y >= trigger.height + trigger.y) { return false; }
     return true;
-}
+};
+
+TriggerController.prototype.RegisterTarget = function(name, obj) {
+    this.triggerTargets[name] = obj;
+};
 
 /* TRIGGER TEMPLATE
 
