@@ -197,6 +197,12 @@ Player.prototype.postStateUpdate = function() {
     } else {
         events.publish('stop_sound', {name: 'running'});
     }
+
+    if(!this.timers.TimerUp('frauki_invincible')) {
+        frauki.alpha = (((Math.sin(game.time.now / 50) + 1) / 2) * 0.4) + 0.5;
+    } else if(this.state !== this.Hurting) {
+        frauki.alpha = 1;
+    }
 };
 
 Player.prototype.update = function() {
@@ -492,6 +498,9 @@ Player.prototype.Heal = function(params) {
         if(energyController.GetHealth() < energyController.GetMaxHealth() && energyController.GetApples() > 0) {
             this.ChangeState(this.Healing);
             this.timers.SetTimer('heal_charge', 1100); 
+
+            this.timers.SetTimer('frauki_invincible', 0);
+            this.timers.SetTimer('frauki_grace', 0);
         } else {
             events.publish('play_sound', {name: 'no_energy'});
         }
@@ -540,6 +549,10 @@ Player.prototype.Slash = function(params) {
 
     this.timers.SetTimer('smash_timer', 200);
     this.timers.SetTimer('updash_timer', 200);
+
+    this.timers.SetTimer('frauki_invincible', 0);
+    this.timers.SetTimer('frauki_grace', 0);
+
 };
 
 Player.prototype.FrontSlash = function() {
@@ -1037,6 +1050,9 @@ Player.prototype.Hurting = function() {
         } else {
             this.ChangeState(this.Running);
         }  
+
+        this.timers.SetTimer('frauki_invincible', 2000);
+        this.timers.SetTimer('frauki_grace', 2000);
     }
 };
 

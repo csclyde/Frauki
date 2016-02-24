@@ -153,6 +153,9 @@ TriggerController.prototype.ForceExit = function(currentLayer) {
 };
 
 TriggerController.prototype.Intersects = function(body, trigger) {
+
+    if(!body || !trigger) return false;
+    
     if (body.right <= trigger.x) { return false; }
     if (body.bottom <= trigger.y) { return false; }
     if (body.position.x >= trigger.width + trigger.x) { return false; }

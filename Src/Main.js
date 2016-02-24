@@ -214,7 +214,7 @@ Main.DrawUI = function() {
     this.RenderTextureFromAtlas('UI', 'EnergyBar0004', 12, 12, energyController.GetHealth() / 30);
 
     //oscillate the white bar on top of the health if they have will
-    if(energyController.GetHealth() <= energyController.GetMaxHealth() * 0.3) {
+    if(energyController.GetHealth() <= energyController.GetMaxHealth() * 0.35) {
         //oscillate the opacity of the white bar on top
         this.RenderTextureFromAtlas('UI', 'EnergyBar0003', 12, 12, energyController.GetHealth() / 30, 1, (Math.sin(game.time.now / 80) + 1) / 2);
     }
