@@ -69,6 +69,10 @@ Enemy.prototype.types['Insectoid'] =  function() {
         }
     };
 
+    this.LandHit = function() {
+        this.Dodge();
+    };
+
     ///////////////////////////////ACTIONS////////////////////////////////////
     this.Hop = function() {
 
@@ -175,9 +179,9 @@ Enemy.prototype.types['Insectoid'] =  function() {
         this.PlayAnim('idle');
 
         if(this.direction === 'left') {
-            this.body.velocity.x = -450;
+            this.body.velocity.x = -425;
         } else {
-            this.body.velocity.x = 450;
+            this.body.velocity.x = 425;
         } 
 
         if(this.timers.TimerUp('attack') || this.body.onWall()) {

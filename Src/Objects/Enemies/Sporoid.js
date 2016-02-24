@@ -45,17 +45,6 @@ Enemy.prototype.types['Sporoid'] =  function() {
 	};
 
 	///////////////////////////////ACTIONS////////////////////////////////////
-	this.TakeHit = function(power) {
-		if(!this.timers.TimerUp('hit')) {
-			return;
-		}
-
-	    //a durability stat should modify how long they are stunned for. also, the amount of dmg
-	    this.timers.SetTimer('hit', 800);
-
-	    this.state = this.Hurting;
-	};
-
 	this.Dash = function() {
 		if(!this.timers.TimerUp('dash_wait'))
 			return;
@@ -81,10 +70,6 @@ Enemy.prototype.types['Sporoid'] =  function() {
 		this.state = this.Idling;
 		
 	};
-
-	this.Die = function() {
-		
-	}
 
 	////////////////////////////////STATES////////////////////////////////////
 	this.Idling = function() {

@@ -201,8 +201,6 @@
             <filename>A3PZ</filename>
             <filename>HWK9</filename>
             <filename>Butterfly</filename>
-            <filename>Frogman</filename>
-            <filename>Irena</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

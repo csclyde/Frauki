@@ -77,7 +77,11 @@ Collision.OverlapFraukiWithObject = function(f, o) {
 
 Collision.OverlapAttackWithObject = function(f, o) {
     if(o.spriteType === 'enemy') {
-        Collision.OverlapAttackWithEnemy(f, o);
+
+        if(frauki.GetCurrentDamage() > 0) {
+            Collision.OverlapAttackWithEnemy(f, o);
+        }
+
     } else if(o.spriteType === 'junk') {
 
         o.JunkHit(o);
@@ -108,99 +112,49 @@ Collision.OverlapAttackWithObject = function(f, o) {
 
 Collision.OverlapAttackWithEnemy = function(f, e) {
 
-    if(e.spriteType !== 'enemy' || !e.Vulnerable() || e.state === e.Dying)
-        return;
-
-    //seperate conditional to prevent crash!
-    if(!e.timers.TimerUp('grace') || e.state === e.Hurting)
+    if(e.spriteType !== 'enemy' || !e.Vulnerable() || e.state === e.Dying || e.state === e.Hurting)
         return;
 
     var damage = frauki.GetCurrentDamage();
 
-    //if frauki is blocking
-    if(damage <= 0){
-        return;
-    }
-
-    e.body.velocity.x = (250 * frauki.GetCurrentKnockback()) + 200;
-    e.body.velocity.x *= EnemyBehavior.Player.DirMod(e);
-    
-    e.body.velocity.y = (frauki.GetCurrentJuggle() * -200) - 200;
-    //if(e.robotic) e.body.velocity.y /= 2;
-
-    e.timers.SetTimer('hit', e.baseStunDuration + (250 * damage));
-    e.timers.SetTimer('grace', e.baseStunDuration + (250 * damage));
-
-    e.state = e.Hurting;
-
-    e.energy -= damage;
-
-    console.log('Enemy taking ' + damage + ', at ' + e.energy + '/' + e.maxEnergy);
-
-    if(e.energy <= 0) {
-
-        e.timers.SetTimer('hit', 1000);
-        e.timers.SetTimer('grace', 300);
-
-        //e.body.velocity.x *= 1.2;
-        //e.body.velocity.y *= 1.2;
-
-        setTimeout(DestroyEnemy, e.robotic ? 800 : game.rnd.between(250, 350), e);
-
-        if(e.robotic) events.publish('play_sound', { name: 'robosplosion' });
-
-        if(!!e.carriedShard) {
-            DropShard(e.carriedShard);
-        }
-
-    } else {
-        e.TakeHit();
-    }
+    e.TakeHit(damage);
+    frauki.LandHit(e, damage);
 
     effectsController.SpawnEnergyNuggets(e.body, frauki.body, 'positive', damage * 3);
-    
-    if(damage > 0) {
-        events.publish('play_sound', { name: 'attack_connect' });
-        effectsController.EnergySplash(e.body, 100, 'negative', 15, e.body.velocity);
-    } else {
-        events.publish('play_sound', { name: 'clang' });
-    }
 
-    frauki.LandHit(e, damage);
 };
 
 Collision.OverlapAttackWithEnemyAttack = function(e, f) {
-
-    //if both attacks are zero damage, do nothing
-    if(e.owningEnemy.currentAttack.damage <= 0 && frauki.GetCurrentDamage() <= 0)
-        return;
-
-    console.log('Frauki: ' + frauki.GetCurrentPriority(), 'Enemy:' + e.owningEnemy.currentAttack.priority);
-
-    //if fraukis attack has priority over the enemies attack, they cant block it
-    if(frauki.GetCurrentPriority() > e.owningEnemy.currentAttack.priority && frauki.GetCurrentDamage() > 0) {
-        console.log('Frauki broke through enemy attack');
-
-        frauki.timers.SetTimer('frauki_grace', 300);
-        game.physics.arcade.overlap(frauki.attackRect, e.owningEnemy, Collision.OverlapAttackWithEnemy);
-        return;
-    } else if(frauki.GetCurrentPriority() < e.owningEnemy.currentAttack.priority && e.owningEnemy.currentAttack.damage > 0) {
-        console.log('Enemy broke through Frauki attack');
-        
-        frauki.Interrupt();
-        e.owningEnemy.timers.SetTimer('grace', 400);
-        game.physics.arcade.overlap(e, frauki, Collision.OverlapEnemyAttackWithFrauki);
+    if(!frauki.timers.TimerUp('frauki_grace')) {
         return;
     }
 
-    if(!energyController.EnergyBlock(e, e.owningEnemy.currentAttack.damage * 2)) return;
-   
-
-    effectsController.SparkSplash(frauki.attackRect, e);
-
     e = e.owningEnemy;
 
+    //if both attacks are zero damage, do nothing
+    if(e.GetCurrentDamage() <= 0 && frauki.GetCurrentDamage() <= 0)
+        return;
+
+    //two tracks, they blocked with the shield or they blocked with an attack
+    if(frauki.states.shielded) {
+        energyController.RemoveEnergy(e.GetCurrentDamage() * 2);
+
+        if(energyController.GetEnergy() < 0) {
+            events.publish('activate_weapon', { activate: false });
+            //play stun sound
+            frauki.Stun(e);
+
+            effectsController.ShatterShield();
+            events.publish('play_sound', {name: 'crystal_door', restart: true });
+        }
+
+    } 
+
     frauki.LandHit(e, 0);
+    e.LandHit();
+    e.timers.SetTimer('attack', 0);
+
+    effectsController.SparkSplash(frauki.attackRect, e);
 
     var vel = new Phaser.Point(e.body.center.x - frauki.body.center.x, e.body.center.y - frauki.body.center.y);
     vel = vel.normalize();
@@ -209,18 +163,20 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
 
     e.body.velocity.x = vel.x;
     e.body.velocity.y = vel.y / 2;
-
+    
     events.publish('stop_attack_sounds', {});
     events.publish('play_sound', {name: 'clang'});
 
     e.timers.SetTimer('grace', 400);
-    frauki.timers.SetTimer('frauki_grace', 300);
+    frauki.timers.SetTimer('frauki_grace', 400);
 };
 
 Collision.OverlapEnemyAttackWithFrauki = function(e, f) {
-    if(!!e.owningEnemy && e.owningEnemy.currentAttack.damage > 0 && !frauki.Grace()) {
-        frauki.Hit(e.owningEnemy, e.owningEnemy.currentAttack.damage, 1000);
-        e.owningEnemy.LandHit();
+    e = e.owningEnemy;
+
+    if(e.GetCurrentDamage() > 0 && !frauki.Grace()) {
+        frauki.Hit(e, e.GetCurrentDamage(), 1000);
+        e.LandHit();
     }
 };
 

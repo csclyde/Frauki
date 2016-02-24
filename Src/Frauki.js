@@ -1,8 +1,8 @@
-PLAYER_SPEED = function() { return frauki.states.sheilded ? 130 : 190; }
+PLAYER_SPEED = function() { return frauki.states.shielded ? 130 : 190; }
 PLAYER_ROLL_SPEED = function() { return 460; }
 PLAYER_RUN_SLASH_SPEED = function() { return  550; }
-PLAYER_JUMP_VEL = function() { return frauki.states.sheilded ? -250 : -350; }
-PLAYER_DOUBLE_JUMP_VEL = function() { return frauki.states.sheilded ? -200 : -275; }
+PLAYER_JUMP_VEL = function() { return frauki.states.shielded ? -250 : -350; }
+PLAYER_DOUBLE_JUMP_VEL = function() { return frauki.states.shielded ? -200 : -275; }
 
 Player = function (game, x, y, name) {
 
@@ -42,7 +42,7 @@ Player = function (game, x, y, name) {
     this.states.onLeftSlope = false;
     this.states.onRightSlope = false;
     this.states.attackFallLanded = false;
-    this.states.sheilded = false;
+    this.states.shielded = false;
 
     this.movement = {};
     this.movement.diveVelocity = 0;
@@ -185,11 +185,6 @@ Player.prototype.postStateUpdate = function() {
     if(this.body.onFloor()) {
         this.states.hasFlipped = false;
         this.movement.rollBoost = 0;
-    }
-
-    if(this.Attacking()) {
-        game.physics.arcade.overlap(frauki.attackRect, Frogland.GetCurrentObjectGroup(), Collision.OverlapAttackWithObject);
-        game.physics.arcade.overlap(frauki.attackRect, projectileController.projectiles, ProjectileHit);
     }
     
     if(this.state === this.Running && this.animations.currentAnim.name === 'run') {
@@ -552,7 +547,6 @@ Player.prototype.Slash = function(params) {
 
     this.timers.SetTimer('frauki_invincible', 0);
     this.timers.SetTimer('frauki_grace', 0);
-
 };
 
 Player.prototype.FrontSlash = function() {
@@ -773,7 +767,7 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
     //effectsController.SpawnEnergyNuggets(this.body, e.body, 'negative', damage);
     effectsController.EnergySplash(frauki.body, 100, 'positive', 20, frauki.body.velocity);
 
-    energyController.RemoveHealth(damage);
+    //energyController.RemoveHealth(damage);
     energyController.AddCharge(damage / 10);
 
     console.log('Frauki is taking ' + damage + ' damage');
@@ -814,7 +808,7 @@ Player.prototype.Interrupt = function() {
 Player.prototype.Stun = function(e) {
 
     this.ChangeState(this.Stunned);
-    this.timers.SetTimer('stunned', 1500);
+    this.timers.SetTimer('stunned', 2000);
 
     this.body.velocity.y = -200;
 

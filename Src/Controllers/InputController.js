@@ -339,12 +339,20 @@ InputController.prototype.OnUp = function(pressed) {
             if(game.physics.arcade.overlap(frauki, Frogland.door1Group)) {
                 if(Frogland.currentLayer === 3) Frogland.ChangeLayer(2);
                 else if(Frogland.currentLayer === 2) Frogland.ChangeLayer(3);
+
+                this.inDoorway = true;
             } else if(game.physics.arcade.overlap(frauki, Frogland.door2Group)) {
                 if(Frogland.currentLayer === 3) Frogland.ChangeLayer(4);
                 else if(Frogland.currentLayer === 4) Frogland.ChangeLayer(3);
+
+                this.inDoorway = true;
             } else if(game.physics.arcade.overlap(frauki, Frogland.door3Group)) {
                 if(Frogland.currentLayer === 2) Frogland.ChangeLayer(4);
                 else if(Frogland.currentLayer === 4) Frogland.ChangeLayer(2);
+
+                this.inDoorway = true;
+            } else {
+                this.inDoorway = false;
             }
         }
         

@@ -317,7 +317,7 @@ WeaponController.prototype.Shield = {
             this.forceField.animations.play('open');
             this.forceField.visible = true;
 
-            frauki.states.sheilded = true;
+            frauki.states.shielded = true;
         }
 
     },
@@ -338,7 +338,7 @@ WeaponController.prototype.Shield = {
 
     Stop: function() {
         this.forceField.animations.play('close');
-        frauki.states.sheilded = false;
+        frauki.states.shielded = false;
     },
 
     DamageFrames: {
@@ -351,7 +351,7 @@ WeaponController.prototype.Shield = {
         },
 
         'ForceField0001': {
-            x: -5, y: 10, w: 20, h: 20,
+            x: -14, y: -2, w: 40, h: 54,
             damage: 0,
             knockback: 1,
             priority: 3,
@@ -359,7 +359,7 @@ WeaponController.prototype.Shield = {
         },
 
         'ForceField0002': {
-            x: -14, y: -2, w: 40, h: 40,
+            x: -14, y: -2, w: 40, h: 54,
             damage: 0,
             knockback: 1,
             priority: 3,
@@ -372,22 +372,6 @@ WeaponController.prototype.Shield = {
             knockback: 1,
             priority: 3,
             juggle: 1
-        },
-
-        'ForceField0004': {
-            x: 0, y: 0, w: 10, h: 10,
-            damage: 0,
-            knockback: 0,
-            priority: 3,
-            juggle: 0
-        },
-
-        'ForceField0005': {
-            x: 0, y: 0, w: 10, h: 10,
-            damage: 0,
-            knockback: 0,
-            priority: 3,
-            juggle: 0
         }
     }
 };  

@@ -31,9 +31,7 @@ Enemy = function(game, x, y, name) {
     this.attackRect = game.add.sprite(0, 0, null);
     game.physics.enable(this.attackRect, Phaser.Physics.ARCADE);
     this.attackRect.body.setSize(0, 0, 0, 0);
-    this.attackRect.owningEnemy = this;
-
-    
+    this.attackRect.owningEnemy = this;  
 };
 
 Enemy.prototype = Object.create(Phaser.Sprite.prototype);
@@ -50,10 +48,8 @@ Enemy.prototype.Dying = function() {};
 Enemy.prototype.Die = function() { };
 Enemy.prototype.Vulnerable = function() { return true; }
 Enemy.prototype.CanCauseDamage = function() { return false; }
-Enemy.prototype.TakeHit = function() {};
 Enemy.prototype.Activate = function() {};
 Enemy.prototype.Deactivate = function() {};
-Enemy.prototype.TakeHit = function() {};
 Enemy.prototype.LandHit = function() {};
 
 Enemy.prototype.update = function() {
@@ -72,26 +68,15 @@ Enemy.prototype.update = function() {
     if(this.state()) {
         this.Act();
     }
-    
-    if(this.energy > this.maxEnergy)
-        this.energy = this.maxEnergy;
 
     this.UpdateAttackGeometry();
 
     //check for landed hits
     if(this.Attacking()) {
-
-        if(this.timers.TimerUp('grace')) {
-            if(EnemyBehavior.FaceToFace(this)) {
-                game.physics.arcade.overlap(this.attackRect, frauki.attackRect, Collision.OverlapAttackWithEnemyAttack);
-            }
-        }
-
+        game.physics.arcade.overlap(this.attackRect, frauki.attackRect, Collision.OverlapAttackWithEnemyAttack);
         game.physics.arcade.overlap(this.attackRect, frauki, Collision.OverlapEnemyAttackWithFrauki);
     } 
-    else if(this.CanCauseDamage()) {
-        game.physics.arcade.overlap(this.attackRect, frauki, Collision.OverlapEnemyAttackWithFrauki);
-    }
+
 };
 
 Enemy.prototype.UpdateAttackGeometry = function() {
@@ -170,6 +155,22 @@ Enemy.prototype.Attacking = function() {
         return false;
 };
 
+Enemy.prototype.GetCurrentDamage = function() {
+    if(!!this.currentAttack) {
+        return this.currentAttack.damage;
+    } else {
+        return 0;
+    }
+};
+
+Enemy.prototype.GetCurrentPriority = function() {
+    if(!!this.currentAttack) {
+        return this.currentAttack.priority;
+    } else {
+        return 0;
+    }
+};
+
 Enemy.prototype.SetDirection = function(dir) {
     if(dir === 'left' && this.direction !== 'left') {
         this.direction = 'left';
@@ -184,6 +185,40 @@ Enemy.prototype.SetDirection = function(dir) {
 Enemy.prototype.PlayAnim = function(name) {
     if(this.animations.currentAnim.name !== name)
         this.animations.play(name);
+};
+
+Enemy.prototype.TakeHit = function(damage) {
+    if(!this.timers.TimerUp('hit') || !this.timers.TimerUp('grace')) {
+        return;
+    }
+
+    this.timers.SetTimer('hit', 800);
+
+    this.state = this.Hurting;
+    this.energy -= damage;
+
+    console.log('Enemy taking ' + damage + ', at ' + this.energy + '/' + this.maxEnergy);
+
+    //knock the enemy back
+    this.body.velocity.x = (250 * frauki.GetCurrentKnockback()) + 200;
+    this.body.velocity.x *= EnemyBehavior.Player.DirMod(this);
+    this.body.velocity.y = (frauki.GetCurrentJuggle() * -200) - 200;
+
+    events.publish('play_sound', { name: 'attack_connect' });
+    effectsController.EnergySplash(this.body, 100, 'negative', 15, this.body.velocity);
+
+    this.timers.SetTimer('hit', this.baseStunDuration + (250 * damage));
+    this.timers.SetTimer('grace', this.baseStunDuration + (250 * damage));
+
+
+    if(this.energy <= 0) {
+        this.timers.SetTimer('hit', 1000);
+        this.timers.SetTimer('grace', 300);
+
+        setTimeout(DestroyEnemy, this.robotic ? 800 : game.rnd.between(250, 350), this);
+
+        if(this.robotic) events.publish('play_sound', { name: 'robosplosion' });
+    }
 };
 
 function DestroyEnemy(e) {

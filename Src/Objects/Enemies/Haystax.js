@@ -26,16 +26,6 @@ Enemy.prototype.types['Haystax'] =  function() {
 
 	///////////////////////////////ACTIONS////////////////////////////////////
 
-	this.TakeHit = function(power) {
-		if(!this.timers.TimerUp('hit')) {
-			return;
-		}
-
-	    this.timers.SetTimer('hit', 800);
-
-	    this.state = this.Hurting;
-	};
-
 	this.Spit = function() {
 		this.timers.SetTimer('spit', 500 + (Math.random() * 500));
 		this.state = this.PoppedUp;

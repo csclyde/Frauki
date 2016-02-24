@@ -19,21 +19,6 @@ Enemy.prototype.types[''] =  function() {
 
 	///////////////////////////////ACTIONS////////////////////////////////////
 
-	this.TakeHit = function(power) {
-		if(!this.timers.TimerUp('hit')) {
-			return;
-		}
-
-	    this.timers.SetTimer('hit', 800);
-
-	    this.state = this.Hurting;
-	};
-
-	this.Die = function() {
-        this.anger = 1;
-        this.state = this.Idling;
-    };
-
 	////////////////////////////////STATES////////////////////////////////////
 	this.Idling = function() {
 		this.PlayAnim('idle');

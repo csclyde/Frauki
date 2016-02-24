@@ -45,17 +45,6 @@ Enemy.prototype.types['HWK9'] =  function() {
 
 
 	///////////////////////////////ACTIONS////////////////////////////////////
-
-	this.TakeHit = function(power) {
-		if(!this.timers.TimerUp('hit')) {
-			return;
-		}
-
-	    this.timers.SetTimer('hit', 800);
-
-	    this.state = this.Hurting;
-	};
-
 	this.Die = function() {
         this.state = this.Idling;
     };

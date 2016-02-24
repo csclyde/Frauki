@@ -133,25 +133,6 @@ EnergyController.prototype.GetMaxEnergy = function() {
 	return 15;
 };
 
-EnergyController.prototype.EnergyBlock = function(e, dmg) {
-	if(this.GetEnergy() > 0) {
-        this.RemoveEnergy(dmg);
-
-        if(this.GetEnergy() <= 0) {
-            events.publish('activate_weapon', { activate: false });
-            //play stun sound
-            frauki.Stun(e);
-
-            effectsController.ShatterShield();
-            events.publish('play_sound', {name: 'crystal_door', restart: true });
-
-            return false;
-        } 
-    }
-
-    return true;
-};
-
 
 EnergyController.prototype.AddHealth = function(amt) {
 

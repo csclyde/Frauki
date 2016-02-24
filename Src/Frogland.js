@@ -135,20 +135,7 @@ Frogland.Update = function() {
         }
     }
 
-    game.physics.arcade.collideSpriteVsTilemapLayer(frauki, this.GetCurrentCollisionLayer(), null, Collision.CollideFraukiWithEnvironment, null, false);
-    game.physics.arcade.collideHandler(frauki, this.GetCurrentObjectGroup(), null, Collision.OverlapFraukiWithObject, null, false);
-    game.physics.arcade.collideGroupVsTilemapLayer(this.GetCurrentObjectGroup(), this.GetCurrentCollisionLayer(), null, Collision.OverlapObjectsWithEnvironment, null, false);
-    //game.physics.arcade.collide(this.GetCurrentObjectGroup(), undefined, null, Collision.OverlapObjectsWithSelf);
-    game.physics.arcade.collideSpriteVsGroup(frauki, this.shardGroup, null, Collision.OverlapFraukiWithShard, null, true);
-
-    if(!!frauki.carriedShard && this.timers.TimerUp('shard_object_check')) {
-        game.physics.arcade.overlap(this.shardGroup, this.GetCurrentObjectGroup(), null, Collision.OverlapShardWithObject);
-        this.timers.SetTimer('shard_object_check', 500);
-    }
-
-    if(projectileController.projectiles.countLiving() > 0) {
-        game.physics.arcade.overlap(frauki, projectileController.projectiles, Collision.CollideFraukiWithProjectile);
-    }
+    this.HandleCollisions();
 
     this.clouds1.cameraOffset.x = -(game.camera.x * 0.10) + 0;
     this.clouds1.cameraOffset.y = -(game.camera.y * 0.05) + 0;
@@ -167,6 +154,36 @@ Frogland.Update = function() {
 
     // if(game.camera.y > 80 * 16) this.plx1.visible = false;
     // else this.plx1.visible = true;
+};
+
+Frogland.HandleCollisions = function() {
+    //moving objects collided with the world geometry
+    game.physics.arcade.collideSpriteVsTilemapLayer(frauki, this.GetCurrentCollisionLayer(), null, Collision.CollideFraukiWithEnvironment, null, false);
+    game.physics.arcade.collideGroupVsTilemapLayer(this.GetCurrentObjectGroup(), this.GetCurrentCollisionLayer(), null, Collision.OverlapObjectsWithEnvironment, null, false);
+
+    //frauki is collided with other moving objects
+    game.physics.arcade.collideHandler(frauki, this.GetCurrentObjectGroup(), null, Collision.OverlapFraukiWithObject, null, false);
+    game.physics.arcade.collideSpriteVsGroup(frauki, this.shardGroup, null, Collision.OverlapFraukiWithShard, null, true);
+
+    //overlap fraukis attack with objects and projectiles
+    if(frauki.Attacking()) {
+        game.physics.arcade.overlap(frauki.attackRect, Frogland.GetCurrentObjectGroup(), Collision.OverlapAttackWithObject);
+        game.physics.arcade.overlap(frauki.attackRect, projectileController.projectiles, ProjectileHit);
+    }
+
+    //objects are collided with themselves
+    //game.physics.arcade.collide(this.GetCurrentObjectGroup(), undefined, null, Collision.OverlapObjectsWithSelf);
+
+    //shards are checked against doors
+    if(!!frauki.carriedShard && this.timers.TimerUp('shard_object_check')) {
+        game.physics.arcade.overlap(this.shardGroup, this.GetCurrentObjectGroup(), null, Collision.OverlapShardWithObject);
+        this.timers.SetTimer('shard_object_check', 500);
+    }
+
+    //frauki is checked against projectiles
+    if(projectileController.projectiles.countLiving() > 0) {
+        game.physics.arcade.overlap(frauki, projectileController.projectiles, Collision.CollideFraukiWithProjectile);
+    }
 };
 
 Frogland.SpawnFrauki = function() {
