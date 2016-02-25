@@ -434,7 +434,7 @@ Frogland.ResetFallenTiles = function() {
         tile.waitingToFall = false;
 
         var mgTile = this.map.getTile(tile.x, tile.y, 'Midground_' + this.currentLayer);
-        mgTile.alpha = 1;
+        if(!!mgTile) mgTile.alpha = 1;
     }
 };
 
