@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="400" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="1916">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="400" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="1918">
  <properties>
   <property name="debug" value="false"/>
   <property name="startLayer" value="3"/>
@@ -5948,7 +5948,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="Objects_4" visible="0">
+ <objectgroup name="Objects_4">
   <object id="1303" gid="86" x="1024" y="4368" width="16" height="16"/>
   <object id="1304" gid="86" x="1024" y="4192" width="16" height="16"/>
   <object id="1305" gid="85" x="784" y="4224" width="16" height="16"/>
@@ -6188,7 +6188,7 @@
     <property name="id" value="first_to_smash"/>
    </properties>
   </object>
-  <object id="1849" gid="67" x="2826" y="3145" width="16" height="16">
+  <object id="1849" gid="67" x="2831.67" y="3143" width="16" height="16">
    <properties>
     <property name="closed_graphic" value="skull"/>
     <property name="id" value="first_enem"/>
@@ -6204,8 +6204,15 @@
    </properties>
   </object>
   <object id="1906" gid="70" x="931" y="2628.5" width="16" height="16"/>
+  <object id="1917" gid="67" x="2991.33" y="3144.33" width="16" height="16">
+   <properties>
+    <property name="closed_graphic" value="apple"/>
+    <property name="id" value="heal_trainer"/>
+    <property name="open_sound" value="skull_door"/>
+   </properties>
+  </object>
  </objectgroup>
- <objectgroup name="Triggers_4" visible="0">
+ <objectgroup name="Triggers_4">
   <object id="1613" name="secret_garden" type="speech" x="12.0328" y="5042.27" width="94.5" height="45.5"/>
   <object id="1614" name="prickly_stuff" type="speech" x="1742.53" y="3743.27" width="51.5" height="49.5"/>
   <object id="1615" name="yum_apple" type="speech" x="767.533" y="4761.77" width="48.5" height="52"/>
@@ -6226,13 +6233,14 @@
   <object id="1760" name="drip" type="effect" x="1020.5" y="3690" width="36" height="5"/>
   <object id="1784" name="mountain_view" type="speech" x="1440" y="2996" width="65.5" height="74.5"/>
   <object id="1813" name="bubbles" type="effect" x="2192.5" y="3180.92" width="65.25" height="4.66667"/>
-  <object id="1815" name="light" type="trigger" x="2602.67" y="3066" width="214.667" height="117.333"/>
+  <object id="1815" name="light" type="trigger" x="2641.67" y="3109.33" width="175.67" height="73.9997"/>
   <object id="1816" name="fluff" type="effect" x="1490" y="2960.67" width="246" height="109.333"/>
   <object id="1817" name="drip" type="effect" x="2207.71" y="3247.33" width="143.625" height="4.66667"/>
   <object id="1818" name="drip" type="effect" x="2440.85" y="2817" width="66.1458" height="4.66667"/>
   <object id="1820" name="spirits" type="effect" x="2190.67" y="2869.33" width="161.667" height="111.333"/>
   <object id="1830" name="leaves_brown" type="effect" x="2671.19" y="3084.5" width="45.6252" height="17"/>
   <object id="1838" name="drip" type="effect" x="1743.19" y="3036.17" width="80.8125" height="4.66667"/>
+  <object id="1916" name="heal_to_open_door" type="trigger" x="2872.67" y="3037.67" width="86.3333" height="135.667"/>
  </objectgroup>
  <objectgroup name="Doors_1" visible="0">
   <properties>

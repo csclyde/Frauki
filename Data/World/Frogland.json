@@ -7045,7 +7045,7 @@
                  "y":2790.5
                 }, 
                 {
-                 "height":69.8333333333339,
+                 "height":69.8333,
                  "id":1915,
                  "name":"soccer_goal",
                  "properties":
@@ -7055,9 +7055,9 @@
                  "rotation":0,
                  "type":"trigger",
                  "visible":true,
-                 "width":78.666666666667,
-                 "x":2449.83333333333,
-                 "y":4172.66666666667
+                 "width":78.6667,
+                 "x":2449.83,
+                 "y":4172.67
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -10259,8 +10259,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":2826,
-                 "y":3145
+                 "x":2831.66666666667,
+                 "y":3143
                 }, 
                 {
                  "gid":96,
@@ -10310,10 +10310,28 @@
                  "width":16,
                  "x":931,
                  "y":2628.5
+                }, 
+                {
+                 "gid":67,
+                 "height":16,
+                 "id":1917,
+                 "name":"",
+                 "properties":
+                    {
+                     "closed_graphic":"apple",
+                     "id":"heal_trainer",
+                     "open_sound":"skull_door"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":2991.33333333333,
+                 "y":3144.33333333333
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "width":0,
          "x":0,
          "y":0
@@ -10624,7 +10642,7 @@
                  "y":3180.92
                 }, 
                 {
-                 "height":117.333,
+                 "height":73.999666666667,
                  "id":1815,
                  "name":"light",
                  "properties":
@@ -10634,9 +10652,9 @@
                  "rotation":0,
                  "type":"trigger",
                  "visible":true,
-                 "width":214.667,
-                 "x":2602.67,
-                 "y":3066
+                 "width":175.670333333334,
+                 "x":2641.66666666667,
+                 "y":3109.33333333333
                 }, 
                 {
                  "height":109.333,
@@ -10727,10 +10745,25 @@
                  "width":80.8125,
                  "x":1743.19,
                  "y":3036.17
+                }, 
+                {
+                 "height":135.666666666667,
+                 "id":1916,
+                 "name":"heal_to_open_door",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"trigger",
+                 "visible":true,
+                 "width":86.3333333333335,
+                 "x":2872.66666666667,
+                 "y":3037.66666666667
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "width":0,
          "x":0,
          "y":0
@@ -11158,7 +11191,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":1916,
+ "nextobjectid":1918,
  "orientation":"orthogonal",
  "properties":
     {

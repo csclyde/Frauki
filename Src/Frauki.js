@@ -767,7 +767,7 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
     //effectsController.SpawnEnergyNuggets(this.body, e.body, 'negative', damage);
     effectsController.EnergySplash(frauki.body, 100, 'positive', 20, frauki.body.velocity);
 
-    //energyController.RemoveHealth(damage);
+    energyController.RemoveHealth(damage);
     energyController.AddCharge(damage / 10);
 
     console.log('Frauki is taking ' + damage + ' damage');
