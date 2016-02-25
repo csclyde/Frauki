@@ -22,7 +22,7 @@ EnemyBehavior.WithinCameraRange = function(e) {
     return false;
 };
 
-EnemyBehavior.FaceToFace = function(e) {
+EnemyBehavior.FacingPlayer = function(e) {
     if((e.direction === 'left' && frauki.body.center.x < e.body.center.x + 20) ||
        (e.direction === 'right' && frauki.body.center.x > e.body.center.x - 20) )
         return true;

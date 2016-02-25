@@ -78,8 +78,14 @@ Collision.OverlapFraukiWithObject = function(f, o) {
 Collision.OverlapAttackWithObject = function(f, o) {
     if(o.spriteType === 'enemy') {
 
+
         if(frauki.GetCurrentDamage() > 0) {
-            Collision.OverlapAttackWithEnemy(f, o);
+
+            //they can be hit if theyre not attacking, or they are attacking
+            //but facing away from the player
+            if(!o.Attacking() || !EnemyBehavior.FacingPlayer(o) || !o.robotic) {
+                Collision.OverlapAttackWithEnemy(f, o);
+            }
         }
 
     } else if(o.spriteType === 'junk') {
@@ -112,7 +118,7 @@ Collision.OverlapAttackWithObject = function(f, o) {
 
 Collision.OverlapAttackWithEnemy = function(f, e) {
 
-    if(e.spriteType !== 'enemy' || !e.Vulnerable() || e.state === e.Dying || e.state === e.Hurting)
+    if(e.spriteType !== 'enemy' || !e.timers.TimerUp('grace') || !e.Vulnerable() || e.state === e.Dying || e.state === e.Hurting)
         return;
 
     var damage = frauki.GetCurrentDamage();
@@ -121,7 +127,6 @@ Collision.OverlapAttackWithEnemy = function(f, e) {
     frauki.LandHit(e, damage);
 
     effectsController.SpawnEnergyNuggets(e.body, frauki.body, 'positive', damage * 3);
-
 };
 
 Collision.OverlapAttackWithEnemyAttack = function(e, f) {
@@ -135,7 +140,7 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
     if(e.GetCurrentDamage() <= 0 && frauki.GetCurrentDamage() <= 0)
         return;
 
-    //two tracks, they blocked with the shield or they blocked with an attack
+    //if theyre blocking with a shield than remove energy
     if(frauki.states.shielded) {
         energyController.RemoveEnergy(e.GetCurrentDamage() * 2);
 

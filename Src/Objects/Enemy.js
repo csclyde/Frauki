@@ -73,7 +73,11 @@ Enemy.prototype.update = function() {
 
     //check for landed hits
     if(this.Attacking()) {
-        game.physics.arcade.overlap(this.attackRect, frauki.attackRect, Collision.OverlapAttackWithEnemyAttack);
+
+        if(this.robotic) {
+            game.physics.arcade.overlap(this.attackRect, frauki.attackRect, Collision.OverlapAttackWithEnemyAttack);
+        }
+        
         game.physics.arcade.overlap(this.attackRect, frauki, Collision.OverlapEnemyAttackWithFrauki);
     } 
 
