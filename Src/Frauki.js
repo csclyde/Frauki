@@ -738,8 +738,8 @@ Player.prototype.LandHit = function(e, damage) {
 
     this.states.hasFlipped = false;
 
-    frauki.animations.paused = true;
-    setTimeout(function() { frauki.animations.paused = false; }, 150);
+    // frauki.animations.paused = true;
+    // setTimeout(function() { frauki.animations.paused = false; }, 150);
 };
 
 Player.prototype.Hit = function(e, damage, grace_duration) {

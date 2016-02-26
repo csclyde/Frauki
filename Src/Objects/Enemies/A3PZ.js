@@ -5,12 +5,12 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
     this.animations.add('idle', ['A3PZ/Stand0000'], 10, true, false);
     this.animations.add('walk', ['A3PZ/Walk0000', 'A3PZ/Walk0001', 'A3PZ/Walk0002', 'A3PZ/Walk0003', 'A3PZ/Walk0004', 'A3PZ/Walk0005'], 6, true, false);
-    this.animations.add('block', ['A3PZ/Block0000'], 18, false, false);
+    this.animations.add('block', ['A3PZ/Block0000', 'A3PZ/Block0001'], 18, true, false);
     this.animations.add('windup1', ['A3PZ/Attack0001', 'A3PZ/Attack0002'], 10, false, false);
-    this.animations.add('attack1', ['A3PZ/Attack0003', 'A3PZ/Attack0004', 'A3PZ/Attack0005', 'A3PZ/Attack0006', 'A3PZ/Attack0007'], 18, false, false);
-    this.animations.add('windup2', ['A3PZ/Attack0008', 'A3PZ/Attack0009'], 10, false, false);
-    this.animations.add('attack2', ['A3PZ/Attack0010', 'A3PZ/Attack0011', 'A3PZ/Attack0012', 'A3PZ/Attack0013', 'A3PZ/Attack0014'], 18, false, false);
-    this.animations.add('hurt', ['A3PZ/Hurt0000', 'A3PZ/Hurt0001'], 8, true, false);
+    this.animations.add('attack1', ['A3PZ/Attack0003', 'A3PZ/Attack0004', 'A3PZ/Attack0005'], 18, false, false);
+    this.animations.add('windup2', ['A3PZ/Attack0001', 'A3PZ/Attack0002'], 10, false, false);
+    this.animations.add('attack2', ['A3PZ/Attack0003', 'A3PZ/Attack0004', 'A3PZ/Attack0005'], 18, false, false);
+    this.animations.add('hurt', ['A3PZ/Hurt0000', 'A3PZ/Hurt0001'], 12, true, false);
 
     this.energy = 5;
     this.baseStunDuration = 500;
@@ -264,6 +264,14 @@ Enemy.prototype.types['A3PZ'] =  function() {
         },
 
         'A3PZ/Block0000': {
+            x: 20, y: -8, w: 45, h: 80,
+            damage: 0,
+            knockback: 0,
+            priority: 2,
+            juggle: 0
+        },
+
+        'A3PZ/Block0001': {
             x: 20, y: -8, w: 45, h: 80,
             damage: 0,
             knockback: 0,
