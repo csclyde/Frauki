@@ -169,9 +169,6 @@ ObjectController.prototype.CreateObjectsLayer = function(layer) {
 
     Frogland.map.createFromObjects('Objects_' + layer, 69, 'Misc', 'Checkpoint0000', true, true, currLayer, Checkpoint, false);
 
-    //activate the correct checkpoint
-    if(!GameData.GetCheckpoint()) GameData.SetCheckpoint('0');
-
     //create the doors
     Frogland.map.createFromObjects('Objects_' + layer, 67, 'Misc', 'Door0000', true, true, currLayer, Door, false);
     

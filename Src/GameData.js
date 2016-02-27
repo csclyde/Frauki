@@ -1,37 +1,63 @@
 var GameData = {};
 
+//When game data is requested, it is pulled from the data structure in memory. When
+//it is saved, it is put into the data structure, and then put into local storage.
+//So the only interaction with local storage is when the game loads, and when you
+//save something to it. It doesn't constantly read out of local storage
+GameData.data = {
+    version: '0.1',
+    dirty: true,
+
+    checkpoint: '0',
+    upgrades: [],
+    doors: [],
+    shards: {}
+};
+
+GameData.LoadDataFromStorage = function() {
+    var save_data = localStorage.getItem('save_data');
+
+    if(save_data) {
+        this.data = JSON.parse(save_data);
+    }
+};
+
+GameData.SaveDataToStorage = function() {
+    localStorage.setItem('save_data', JSON.stringify(this.data));
+};
+
 GameData.GetCheckpoint = function() {
-    return localStorage.getItem('fraukiCheckpoint');
+    return this.data.checkpoint;
 };
 
 GameData.SetCheckpoint = function(c) {
-    localStorage.setItem('fraukiCheckpoint', c);
+    if(this.data.checkpoint !== c) {
+        this.data.checkpoint = c;
+        this.SaveDataToStorage();
+    }
 };
 
 GameData.HasUpgrade = function(name) {
-    var upgradeSaves = JSON.parse(localStorage.getItem('fraukiUpgrades')) || [];
-    return (upgradeSaves.indexOf(name) > -1);
+    return (this.data.upgrades.indexOf(name) > -1);
 };
 
 GameData.SetUpgrade = function(name) {
-    localStorage.setItem('fraukiUpgrades', JSON.stringify([name]));
+    this.data.upgrades = [name];
+    this.SaveDataToStorage();
 };
 
 GameData.GetOpenDoors = function() {
-    JSON.parse(localStorage.getItem('fraukiDoors')) || [];
+    return this.data.doors;
 };
 
 GameData.IsDoorOpen = function(id) {
-    var openDoors = JSON.parse(localStorage.getItem('fraukiDoors')) || [];
-    return (openDoors.indexOf(id) > -1)
+    return (this.data.doors.indexOf(id) > -1);
 };
 
 GameData.AddOpenDoor = function(id) {
-    var openDoors = JSON.parse(localStorage.getItem('fraukiDoors')) || [];
-
-    if(openDoors.indexOf(id) === -1) {
-        openDoors.push(id);
-        localStorage.setItem('fraukiDoors', JSON.stringify(openDoors));
+    if(this.data.doors.indexOf(id) === -1) {
+        this.data.doors.push(id);
+        this.SaveDataToStorage();
     }
 };
 
@@ -51,17 +77,12 @@ GameData.SaveShardPositions = function() {
         };
     });
 
-    localStorage.setItem('fraukiShards', JSON.stringify(shardSave));
+    this.data.shards = shardSave;
+    this.SaveDataToStorage();
 };
 
 GameData.GetShardPosition = function(name) {
-    var shardSave = localStorage.getItem('fraukiShards');
+    if(!this.data.shards[name]) return null;
 
-    if(!shardSave) return null;
-
-    shardSave = JSON.parse(shardSave);
-
-    if(!shardSave[name]) return null;
-
-    return shardSave[name];
+    return this.data.shards[name];
 };

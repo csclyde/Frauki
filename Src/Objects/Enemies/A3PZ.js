@@ -8,8 +8,8 @@ Enemy.prototype.types['A3PZ'] =  function() {
     this.animations.add('block', ['A3PZ/Block0000', 'A3PZ/Block0001'], 18, true, false);
     this.animations.add('windup1', ['A3PZ/Attack0001', 'A3PZ/Attack0002'], 10, false, false);
     this.animations.add('attack1', ['A3PZ/Attack0003', 'A3PZ/Attack0004', 'A3PZ/Attack0005'], 18, false, false);
-    this.animations.add('windup2', ['A3PZ/Attack0001', 'A3PZ/Attack0002'], 10, false, false);
-    this.animations.add('attack2', ['A3PZ/Attack0003', 'A3PZ/Attack0004', 'A3PZ/Attack0005'], 18, false, false);
+    this.animations.add('windup2', ['A3PZ/Attack20001', 'A3PZ/Attack20002'], 10, false, false);
+    this.animations.add('attack2', ['A3PZ/Attack20003', 'A3PZ/Attack20004', 'A3PZ/Attack20005'], 18, false, false);
     this.animations.add('hurt', ['A3PZ/Hurt0000', 'A3PZ/Hurt0001'], 12, true, false);
 
     this.energy = 5;
