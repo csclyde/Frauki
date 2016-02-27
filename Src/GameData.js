@@ -11,7 +11,8 @@ GameData.data = {
     checkpoint: '0',
     upgrades: [],
     doors: [],
-    shards: {}
+    shards: {},
+    nuggets: 0
 };
 
 GameData.LoadDataFromStorage = function() {
@@ -19,6 +20,7 @@ GameData.LoadDataFromStorage = function() {
 
     if(save_data) {
         this.data = JSON.parse(save_data);
+        console.log('LOADING DATA', JSON.stringify(this.data));
     }
 };
 
@@ -62,7 +64,7 @@ GameData.AddOpenDoor = function(id) {
 };
 
 GameData.GetMaxApples = function() {
-    return 2;
+    return 1;
 };
 
 GameData.SaveShardPositions = function() {
@@ -86,3 +88,22 @@ GameData.GetShardPosition = function(name) {
 
     return this.data.shards[name];
 };
+
+GameData.GetNuggCount = function() {
+    return this.data.nuggets;
+};
+
+GameData.AddNugg = function() {
+    this.data.nuggets++;
+    this.SaveDataToStorage();
+
+    //save every 10th nugget
+    // if(this.data.nuggets % 10 === 0) {
+    //     this.SaveDataToStorage();
+    // }
+};
+
+GameData.ResetNuggCount = function() {
+    this.data.nuggets = 0;
+    this.SaveDataToStorage();
+}

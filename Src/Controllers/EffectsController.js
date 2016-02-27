@@ -396,7 +396,8 @@ function UpdateParticle(p) {
 
             if(p.parent === effectsController.positiveBits) {
                 //energyController.AddHealth(0.5);
-                energyController.AddEnergy(1);
+                //energyController.AddEnergy(1);
+                GameData.AddNugg();
                 effectsController.EnergySplash(p.body, 100, 'positive');
             } else if(p.parent === effectsController.neutralBits) {
                 energyController.AddCharge(2);

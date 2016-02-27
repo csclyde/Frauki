@@ -13,6 +13,12 @@ Collision.OverlapFraukiWithObject = function(f, o) {
         return false;
 
 
+    } else if(o.spriteType === 'BigNugg') {
+        EatBigNugg(f, o);
+        return false;
+    
+
+
     } else if(o.spriteType === 'enemy') {
         if(o.CanCauseDamage() || 
             frauki.state === frauki.Rolling ||

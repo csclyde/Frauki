@@ -139,6 +139,9 @@ Main.Restart = function() {
     fadeOutTween.onComplete.add(function() {
         PrepareShardsForDeath();
         GameData.SaveShardPositions();
+
+        var bigNugg = objectController.CreateBigNugg();
+        var bigNuggLayer = Frogland.currentLayer;
         
         frauki.alpha = 1;
         Frogland.SpawnFrauki();
@@ -165,6 +168,8 @@ Main.Restart = function() {
         effectsController.dicedPieces4 = game.add.group(Frogland.objectGroup_4);
         effectsController.dicedPieces3 = game.add.group(Frogland.objectGroup_3);
         effectsController.dicedPieces2 = game.add.group(Frogland.objectGroup_2);
+
+        Frogland['objectGroup_' + bigNuggLayer].addChild(bigNugg);
 
         triggerController.triggerLayers['Triggers_4'].forEach(function(trig) {
             trig.enterFired = false;

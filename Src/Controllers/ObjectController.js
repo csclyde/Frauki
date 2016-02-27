@@ -5,6 +5,9 @@ ObjectController = function() {
 	this.timers = new TimerUtil();
 
 	this.createdObjects = [];
+
+    this.doorList = [];
+    this.enemyList = [];
 };
 
 ObjectController.prototype.Create = function() {
@@ -118,6 +121,8 @@ ObjectController.prototype.SpawnObject = function(o) {
 	        if(o.id === enemy.Tile) {
 	            newObj = new Enemy(game, o.x, o.y, enemy.Name, enemy.Name);
 	            newObj.latent = o;
+
+                objectController.enemyList.push(newObj);
 	        }
 	    });
     }
@@ -154,6 +159,16 @@ ObjectController.prototype.SpawnObject = function(o) {
             });
         }
     }
+};
+
+ObjectController.prototype.CreateBigNugg = function() {
+    var nugg = new BigNugg(game, frauki.body.center.x, frauki.body.center.y, 'Misc');
+    //Frogland['objectGroup_' + Frogland.currentLayer].addChild(nugg);
+
+    nugg.nuggCount = GameData.GetNuggCount();
+    GameData.ResetNuggCount();
+
+    return nugg;
 };
 
 ObjectController.prototype.CreateObjectsLayer = function(layer) {
@@ -196,12 +211,16 @@ ObjectController.prototype.CreateObjectsLayer = function(layer) {
             if(GameData.IsDoorOpen(obj.id)) {
                 obj.body.enable = false;
                 obj.visible = false;
-                //OpenDoor(frauki, obj, true);
             }
+
+            objectController.doorList.push(obj);
+
         } else if(obj.spriteType === 'checkpoint') {
             if(obj.id == GameData.GetCheckpoint()) {
                 obj.CheckpointHit();
             }
+        } else if(obj.spriteType === 'enemy') {
+            objectController.enemyList.push(obj);
         }
 
         if(Frogland.currentLayer !== layer) {
