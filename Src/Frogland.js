@@ -126,6 +126,7 @@ Frogland.Update = function() {
         var padding = 300;
         var o = this.GetCurrentObjectGroup().children[i];
 
+        
         if(o.spriteType !== 'door' && !!o.body && o.spriteType !== 'ball') {
             if(o.body.x > game.camera.x - padding && o.body.y > game.camera.y - padding && o.body.x < game.camera.x + game.camera.width + padding && o.body.y < game.camera.y + game.camera.height + padding) {
                 o.body.enable = true;

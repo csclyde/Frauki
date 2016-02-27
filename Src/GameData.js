@@ -12,7 +12,8 @@ GameData.data = {
     upgrades: [],
     doors: [],
     shards: {},
-    nuggets: 0
+    nuggets: 0,
+    bignugg: null
 };
 
 GameData.LoadDataFromStorage = function() {
@@ -106,4 +107,19 @@ GameData.AddNugg = function() {
 GameData.ResetNuggCount = function() {
     this.data.nuggets = 0;
     this.SaveDataToStorage();
-}
+};
+
+GameData.UpdateBigNugg = function(x, y, count, layer) {
+    this.data.bignugg = { 
+        x: x,
+        y: y,
+        count: count,
+        layer: layer
+    };
+
+    this.SaveDataToStorage();
+};
+
+GameData.GetBigNugg = function() {
+    return this.data.bignugg;
+};

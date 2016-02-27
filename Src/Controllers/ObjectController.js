@@ -162,13 +162,7 @@ ObjectController.prototype.SpawnObject = function(o) {
 };
 
 ObjectController.prototype.CreateBigNugg = function() {
-    var nugg = new BigNugg(game, frauki.body.center.x, frauki.body.center.y, 'Misc');
-    //Frogland['objectGroup_' + Frogland.currentLayer].addChild(nugg);
-
-    nugg.nuggCount = GameData.GetNuggCount();
-    GameData.ResetNuggCount();
-
-    return nugg;
+    
 };
 
 ObjectController.prototype.CreateObjectsLayer = function(layer) {
@@ -200,6 +194,18 @@ ObjectController.prototype.CreateObjectsLayer = function(layer) {
         Frogland.ball.body.maxVelocity.setTo(700);
 
         triggerController.RegisterTarget('ball', Frogland.ball);
+    }
+
+    //create the big nugg if it exists
+    var bigNugg = GameData.GetBigNugg();
+
+    if(bigNugg && bigNugg.layer == layer) {
+        var nugg = new BigNugg(game, frauki.body.center.x, frauki.body.center.y, 'Misc', 'BigNugg0000');
+        currLayer.add(nugg);
+        nugg.owningLayer = Frogland.currentLayer;
+
+        nugg.nuggCount = GameData.GetNuggCount();
+        nugg.spriteType = 'BigNugg';
     }
 
     //inform each object of its own layer

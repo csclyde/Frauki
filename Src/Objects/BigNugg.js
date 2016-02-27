@@ -51,5 +51,5 @@ BigNugg.prototype.PlayAnim = function(name) {
 BigNugg.prototype.Idle = function() {
     this.PlayAnim('idle');
 
-    this.body.velocity.y = Math.sin((game.time.now / 100) + this.rando) * 15;
+    this.body.velocity.y = Math.sin(game.time.now / 100) * 15;
 };

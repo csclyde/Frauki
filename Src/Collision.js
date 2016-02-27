@@ -1,6 +1,7 @@
 var Collision = {};
 
 Collision.OverlapFraukiWithObject = function(f, o) {
+
     if(o.spriteType == 'apple') {
 
         EatApple(f, o);

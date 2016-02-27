@@ -135,13 +135,13 @@ Main.Restart = function() {
     cameraController.shakeMagnitudeY = 0;
     cameraController.shakeXTween.stop();
     cameraController.shakeYTween.stop();
+    
+    GameData.UpdateBigNugg(frauki.body.center.x, frauki.body.center.y, GameData.GetNuggCount(), Frogland.currentLayer);
 
     fadeOutTween.onComplete.add(function() {
         PrepareShardsForDeath();
         GameData.SaveShardPositions();
 
-        var bigNugg = objectController.CreateBigNugg();
-        var bigNuggLayer = Frogland.currentLayer;
         
         frauki.alpha = 1;
         Frogland.SpawnFrauki();
@@ -169,7 +169,7 @@ Main.Restart = function() {
         effectsController.dicedPieces3 = game.add.group(Frogland.objectGroup_3);
         effectsController.dicedPieces2 = game.add.group(Frogland.objectGroup_2);
 
-        Frogland['objectGroup_' + bigNuggLayer].addChild(bigNugg);
+        GameData.ResetNuggCount();
 
         triggerController.triggerLayers['Triggers_4'].forEach(function(trig) {
             trig.enterFired = false;
