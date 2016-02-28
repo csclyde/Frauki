@@ -191,6 +191,7 @@ Enemy.prototype.PlayAnim = function(name) {
 };
 
 Enemy.prototype.TakeHit = function(damage) {
+
     if(!this.timers.TimerUp('hit') || !this.timers.TimerUp('grace')) {
         return;
     }

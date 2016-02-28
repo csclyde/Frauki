@@ -80,8 +80,6 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
         this.timers.SetTimer('attack', 500);
         this.state = this.PreHopping;
-        //this.squashTween = game.add.tween(this.scale).to({y: 0.7}, 500, Phaser.Easing.Exponential.Out, true);
-        //this.scale.y = 0.7;
     };
 
     this.Scuttle = function() {

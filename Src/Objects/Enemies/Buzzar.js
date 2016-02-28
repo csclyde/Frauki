@@ -1,7 +1,7 @@
 Enemy.prototype.types['Buzzar'] =  function() {
 
-    this.body.setSize(16, 30, 0, 5);
-    this.anchor.setTo(0.5, 0.5);
+    this.body.setSize(16, 30, 0, 0);
+    this.anchor.setTo(0.5);
 
     this.animations.add('idle', ['Buzzar/Idle0000', 'Buzzar/Idle0001'], 20, true, false);
     this.animations.add('sting', ['Buzzar/Attack0000', 'Buzzar/Attack0001'], 20, false, false);
@@ -9,35 +9,63 @@ Enemy.prototype.types['Buzzar'] =  function() {
 
     this.wanderDirection = 'left';
 
-    this.hitVel = 0;
-
-    this.stingTimer = 0;
-    this.stingRestTimer = 0;
-
     this.anger = 1;
 
     this.hoverOffset = Math.random() * 300;
     
-    this.energy = 0.5;
+    this.energy = 2;
     this.damage = 2;
-    this.poise = 5;
-
-    this.wanderTimer = 0;
-
-    this.squashTween = null;
 
     this.baseStunDuration = 800;
-    this.playerSeen = false;
+
+    this.body.drag.setTo(0);
+
 
     this.updateFunction = function() {
-
-        if(!!this.squashTween && !this.squashTween.isRunning) {
-            this.scale.y = 1;
-        }
 
         this.body.allowGravity = false;
         this.body.gravity.y = 0;
 
+    };
+
+    this.Act = function() {
+
+        if(EnemyBehavior.Player.IsVisible(this)) {
+
+            if(this.timers.TimerUp('creep_waiting')) {
+                this.Sting();
+            } else {
+                this.Creep();
+            }
+
+        //     if(this.body.onFloor()) {
+
+        //         if(EnemyBehavior.Player.IsDangerous(this) || EnemyBehavior.Player.IsNear(this, 20)) {
+        //             this.Dodge();
+        //         }
+        //         else if(EnemyBehavior.Player.IsNear(this, 50)) {
+        //             this.Dodge();
+        //         } 
+        //         else if(!frauki.body.onFloor()) {
+        //             this.Hop();
+        //         } 
+        //         else {
+        //             if(EnemyBehavior.RollDice(2, 1)) {
+        //                 this.Scuttle();
+        //             } else {
+        //                 this.Hop();
+        //             }
+        //         }
+
+        //     } else {
+        //         if(EnemyBehavior.Player.IsBelow(this)) {
+        //             this.Dive();
+        //         }
+        //     }
+
+        } else {
+            this.state = this.Idling;
+        }
     };
 
     this.CanCauseDamage = function() {
@@ -53,24 +81,22 @@ Enemy.prototype.types['Buzzar'] =  function() {
         if(frauki.body.y <= this.body.y)
             return;
 
-        this.stingTimer = game.time.now + 600;
-        this.stingRestTimer = game.time.now + 300 + (Math.random() * 1500);
+        this.timers.SetTimer('attack', 600);
 
+        EnemyBehavior.FacePlayer(this);
         this.state = this.PreStinging;
-        //this.squashTween = game.add.tween(this.scale).to({y: 0.7}, 600, Phaser.Easing.Exponential.Out, true);
+    };
+
+    this.Creep = function() {
+        this.state = this.Creepin;
     };
 
     this.ChangeDirection = function() {
-        var dir = Math.random() * 4;
-
-        if(this.body.touching.left)
-            this.wanderDirection = 'right';
-        else if(this.body.touching.right)
+        if(this.wanderDirection === 'right') {
             this.wanderDirection = 'left';
-    };
-
-    this.TakeHit = function(power) {
-
+        } else {
+            this.wanderDirection = 'right';
+        }
     };
 
     this.Die = function() {
@@ -80,65 +106,56 @@ Enemy.prototype.types['Buzzar'] =  function() {
 
     ////////////////////////////////STATES////////////////////////////////////
     this.Idling = function() {
-
-        if(this.playerSeen === true) {
-            this.state = this.Creepin;
-        }
-        
         this.PlayAnim('idle');
-
         
         this.body.velocity.y = Math.sin((this.hoverOffset + game.time.now) / 250) * 100;
-        //this.body.velocity.x = Math.sin(game.time.now / 1000) * 20;
 
-        if(this.wanderTimer > game.time.now) {
-            switch(this.wanderDirection) {
-                case 'left': this.body.velocity.x -= 30; break;
-                case 'right': this.body.velocity.x += 30; break;
-            }
-
-            this.wanderTimer = game.time.now + 1000 + (Math.random() * 200);
+        if(this.wanderDirection === 'left') {
+            this.body.velocity.x = 100;
+        } else if(this.wanderDirection === 'right') {
+            this.body.velocity.x = -100;
         }
 
-        if(EnemyBehavior.Player.IsVisible(this))
-            this.state = this.Creepin;
-
-        if(this.body.onFloor() || this.body.onWall())
+        if(this.body.onWall()) {
             this.ChangeDirection();
+        }
+
+        return true;
     };
 
     this.PreStinging = function() {
         this.PlayAnim('idle');
+
         this.body.velocity.x = 0;
         this.body.velocity.y = 0;
 
-        if(game.time.now > this.stingTimer) {
-            this.stingTimer = game.time.now + 2000;
+        if(this.timers.TimerUp('attack')) {
+            this.timers.SetTimer('attack', 800);
             this.state = this.Stinging;
-            //this.squashTween = game.add.tween(this.scale).to({y: 1.5}, 200, Phaser.Easing.Exponential.In, true);
             game.physics.arcade.moveToXY(this, frauki.body.center.x, frauki.body.center.y, 450);
+            EnemyBehavior.FacePlayer(this);
         }
     };
 
     this.Stinging = function() {
         this.PlayAnim('sting');
 
-        if(this.game.time.now > this.stingTimer)
-            this.state = this.Idling;
+        // game.physics.arcade.overlap(this, frauki, function() {
+        //     this.timers.SetTimer('attack', 0);
+        // }, null, this);
 
-        if(this.body.onFloor() || this.body.onWall())
-            this.state = this.Idling;
+        if(this.timers.TimerUp('attack') || this.body.onFloor() || this.body.onWall()) {
+            this.timers.SetTimer('creep_waiting', 1000 + game.rnd.between(500, 1500));
+            return true;
+        }
 
-        game.physics.arcade.overlap(this, frauki, function() {
-            this.state = this.Idling;
-        }, null, this);
     };
 
     this.Hurting = function() {
     	this.PlayAnim('hurt');
 
         this.body.allowGravity = true;
-        this.body.gravity.y = game.physics.arcade.gravity.y * 2;
+        //this.body.gravity.y = game.physics.arcade.gravity.y * 2;
 
         if(this.timers.TimerUp('hit')) {
             this.state = this.Enraged;
@@ -150,20 +167,15 @@ Enemy.prototype.types['Buzzar'] =  function() {
     this.Creepin = function() {
     	this.PlayAnim('idle');
 
-        if(!EnemyBehavior.Player.IsVisible(this)) {
-            //this.state = this.Idling;
-            this.playerSeen = true;
-        }
-
         //move to a point somewhere above fraukis head
         var locus = {};
-        locus.x = frauki.body.center.x + (Math.sin(game.time.now / 150) * 50);
-        locus.y = frauki.body.center.y - 200 + (Math.sin(game.time.now / 50) * 100 + (Math.random() * 40 - 20));
+        locus.x = frauki.body.center.x + (Math.sin(game.time.now / 150) * 30);
+        locus.y = frauki.body.center.y - 150 + (Math.sin(game.time.now / 50) * 100 + (Math.random() * 40 - 20));
 
+        EnemyBehavior.FacePlayer(this);
         game.physics.arcade.moveToXY(this, locus.x, locus.y, 40);
 
-        if(Math.floor(Math.random() * 100) <= this.anger && game.time.now > this.stingRestTimer && EnemyBehavior.Player.IsVisible(this)) 
-            this.Sting();
+        return true;
     };
 
     this.Enraged = function() {
@@ -192,7 +204,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
             this.body.velocity.y = -600;
 
         if(this.timers.TimerUp('enraged')) {
-            this.state = this.Idling;
+            return true;
         }
     }
 
