@@ -812,6 +812,9 @@ Player.prototype.Stun = function(e) {
 
     this.body.velocity.y = -200;
 
+    this.body.acceleration.x = 0;
+    this.body.acceleration.y = 0;
+
     if(this.body.center.x < e.body.center.x) {
         this.body.velocity.x = -30;
     } else {
@@ -1034,7 +1037,7 @@ Player.prototype.Rolling = function() {
 Player.prototype.Hurting = function() {
     this.PlayAnim('hit');
 
-    this.body.drag.x = 0;
+    this.body.drag.x = 300;
 
     if(this.timers.TimerUp('frauki_hit') && !Main.restarting) {
         if(this.body.velocity.y > 0) {
@@ -1093,6 +1096,8 @@ Player.prototype.Healing = function() {
 Player.prototype.Stunned = function() {
     this.PlayAnim('stun');
 
+    this.body.drag.x = 400;
+
     if(this.timers.TimerUp('stunned')) {
         this.state = this.Standing;
     }
@@ -1125,7 +1130,7 @@ Player.prototype.AttackFront = function() {
             this.ChangeState(this.Standing);
         }
 
-        if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true });
+        if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true, override: true });
     }
 };
 
@@ -1141,7 +1146,7 @@ Player.prototype.AttackWhiff = function() {
             this.ChangeState(this.Standing);
         }
 
-        if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true });
+        if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true, override: true });
     }
 };
 
@@ -1168,7 +1173,7 @@ Player.prototype.AttackLunge = function() {
             this.ChangeState(this.Standing);
         }
 
-        if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true });
+        if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true, override: true });
     }
 };
 
@@ -1210,7 +1215,7 @@ Player.prototype.AttackFall = function() {
 
         this.states.attackFallLanded = false;
 
-        if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true });
+        if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true, override: true });
     }
 };
 
@@ -1224,7 +1229,7 @@ Player.prototype.AttackOverhead = function() {
     if(this.animations.currentAnim.isFinished) {
         this.ChangeState(this.Standing);
 
-        if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true });
+        if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true, override: true });
     }
 };
 
@@ -1279,7 +1284,7 @@ Player.prototype.AttackStab = function() {
             this.ChangeState(this.Standing);
         }
 
-        if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true });
+        if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true, override: true });
     }
 };
 
@@ -1344,7 +1349,7 @@ Player.prototype.AttackDiveLand = function() {
             this.ChangeState(this.Running);
         }
 
-        if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true });
+        if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true, override: true });
     }
 };
 
@@ -1353,6 +1358,6 @@ Player.prototype.AttackJump = function() {
 
     if(this.animations.currentAnim.isFinished) {
         this.ChangeState(this.Jumping);
-        if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true });
+        if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true, override: true });
     }
 };

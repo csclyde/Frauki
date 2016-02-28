@@ -5,6 +5,7 @@ Enemy.prototype.types['Fungu'] =  function() {
 	this.anchor.setTo(0.5, 0.75);
 
     this.animations.add('idle', ['Fungu/Fungu0000'], 10, true, false);
+    this.animations.add('shoot', ['Fungu/Fungu0001'], 10, true, false);
     this.animations.add('shit', ['Hop0000'], 10, true, false);
 
     this.energy = 0.5;
@@ -22,17 +23,28 @@ Enemy.prototype.types['Fungu'] =  function() {
 
 	this.CanCauseDamage = function() { return false; }
 
+	this.GetCurrentDamage = function() {
+	    return 1;
+	};
+
 	///////////////////////////////ACTIONS////////////////////////////////////
 
 
 	////////////////////////////////STATES////////////////////////////////////
 	this.Idling = function() {
-		this.PlayAnim('idle');
+		if(this.timers.TimerUp('shoot_anim')) {
+			this.PlayAnim('idle');
+		} else {
+			this.PlayAnim('shoot');
+		}
 
 		this.body.velocity.x = 0;
 		this.body.velocity.y = 0;
 
 		if(this.timers.TimerUp('shoot')) {
+
+			this.timers.SetTimer('shoot_anim', 300);
+			
 			if(EnemyBehavior.Player.IsVisible(this)) {
 				projectileController.Spore(this);
 			}

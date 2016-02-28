@@ -287,7 +287,12 @@ Collision.CollideFraukiWithProjectile = function(f, p) {
 
     if(p.projType === 'tar' || p.projType === 'spore') {
         if(p.owningEnemy.state !== p.owningEnemy.Dying) {
-            frauki.Hit(p.owningEnemy, p.owningEnemy.damage);
+            if(frauki.Attacking() || frauki.states.shielded) {
+                console.log('o long johnson')
+                Collision.OverlapAttackWithEnemyAttack(p, f);
+            } else {
+                frauki.Hit(p.owningEnemy, p.owningEnemy.damage);
+            }
         }
         
         p.destroy();

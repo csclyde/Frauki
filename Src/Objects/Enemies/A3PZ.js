@@ -215,41 +215,17 @@ Enemy.prototype.types['A3PZ'] =  function() {
             juggle: 0
         },
 
-        'A3PZ/Attack0006': {
-            x: 75, y: -15, w: 25, h: 20,
-            damage: 1,
-            knockback: 0,
-            priority: 1,
-            juggle: 0
-        },
-
-        'A3PZ/Attack0010': {
-            x: 30, y: -20, w: 75, h: 110,
+        'A3PZ/Attack20003': {
+            x: 50, y: 0, w: 70, h: 80,
             damage: 2,
             knockback: 0,
             priority: 1,
             juggle: 0
         },
 
-        'A3PZ/Attack0011': {
-            x: 50, y: 20, w: 30, h: 45,
+        'A3PZ/Attack20004': {
+            x: 100, y: 73, w: 35, h: 10,
             damage: 2,
-            knockback: 0,
-            priority: 1,
-            juggle: 0
-        },
-
-        'A3PZ/Attack0012': {
-            x: 50, y: 20, w: 30, h: 45,
-            damage: 1,
-            knockback: 0,
-            priority: 1,
-            juggle: 0
-        },
-
-        'A3PZ/Attack0012': {
-            x: 50, y: 20, w: 30, h: 45,
-            damage: 1,
             knockback: 0,
             priority: 1,
             juggle: 0

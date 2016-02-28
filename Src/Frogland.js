@@ -172,7 +172,6 @@ Frogland.HandleCollisions = function() {
     //overlap fraukis attack with objects and projectiles
     if(frauki.Attacking()) {
         game.physics.arcade.overlap(frauki.attackRect, Frogland.GetCurrentObjectGroup(), Collision.OverlapAttackWithObject);
-        game.physics.arcade.overlap(frauki.attackRect, projectileController.projectiles, ProjectileHit);
     }
 
     //objects are collided with themselves
@@ -196,7 +195,7 @@ Frogland.SpawnFrauki = function() {
         Frogland.objectGroup_2.forEach(function(obj) {
             if(obj.spriteType === 'checkpoint' && obj.id == GameData.GetCheckpoint()) {
                 frauki.x = obj.x;
-                frauki.y = obj.y + 20;
+                frauki.y = obj.y + frauki.body.height;
                 Frogland.ChangeLayer(obj.owningLayer);   
             } 
         });  
@@ -204,7 +203,7 @@ Frogland.SpawnFrauki = function() {
         Frogland.objectGroup_3.forEach(function(obj) {
             if(obj.spriteType === 'checkpoint' && obj.id == GameData.GetCheckpoint()) {
                 frauki.x = obj.x;
-                frauki.y = obj.y + 20;
+                frauki.y = obj.y + frauki.body.height;
                 Frogland.ChangeLayer(obj.owningLayer);   
             } 
         }); 
@@ -212,7 +211,7 @@ Frogland.SpawnFrauki = function() {
         Frogland.objectGroup_4.forEach(function(obj) {
             if(obj.spriteType === 'checkpoint' && obj.id == GameData.GetCheckpoint()) {
                 frauki.x = obj.x;
-                frauki.y = obj.y + 20;
+                frauki.y = obj.y + frauki.body.height;
                 Frogland.ChangeLayer(obj.owningLayer);   
             } 
         }); 
@@ -401,6 +400,7 @@ Frogland.ChangeLayer = function(newLayer) {
 
     SetShardVisibility();
     effectsController.ClearDicedPieces();
+    projectileController.DestroyAllProjectiles();
 };
 
 Frogland.DislodgeTile = function(tile) {

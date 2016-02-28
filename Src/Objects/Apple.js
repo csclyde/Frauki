@@ -13,7 +13,11 @@ Apple = function(game, x, y, name) {
 
     this.state = this.Fresh;
 
+    this.timers = new TimerUtil();
+
     this.body.allowGravity = false;
+
+    this.shakeMagnitudeX = 0;
 
     this.animations.add('fresh', ['Apple0000'], 10, false, false);
     this.animations.add('eaten', ['Apple0001'], 10, false, false);
@@ -43,14 +47,26 @@ function EatApple(f, a) {
         a.state = a.Eaten;
         Frogland.shardGroup.addChild(a);
 
-        var xOffset = 10 + (20 * (energyController.GetApples() + 1));
+        a.fixedToCamera = true;
+        a.cameraOffset.x = a.x - game.camera.x;
+        a.cameraOffset.y = a.y - game.camera.y;
 
-        a.zipTween = game.add.tween(a.body).to({x: game.camera.x + xOffset, y: game.camera.y + 52}, 2000, Phaser.Easing.Exponential.InOut, true);
+        var xOffset = (20 * (energyController.GetApples() + 1)) - 3;
+
+        a.zipTween = game.add.tween(a.cameraOffset).to({x: xOffset, y: 57}, 2000, Phaser.Easing.Exponential.InOut, true);
 
         a.zipTween.onComplete.add(function() { 
             a.destroy();
             energyController.AddApple();
         }, a);
+
+    } else if(a.timers.TimerUp('denial')) {
+        a.shakeMagnitudeX = 250;
+        game.add.tween(a).to({shakeMagnitudeX: 0}, 500, Phaser.Easing.Linear.None, true);
+
+        events.publish('play_sound', {name: 'no_energy'});
+
+        a.timers.SetTimer('denial', 2000);
     }
 };
 
@@ -62,7 +78,13 @@ Apple.prototype.PlayAnim = function(name) {
 Apple.prototype.Fresh = function() {
     this.PlayAnim('fresh');
 
-    this.body.velocity.y = Math.sin(game.time.now / 150) * 30;
+    if(this.shakeMagnitudeX > 0) {
+        this.body.velocity.x = Math.sin(game.time.now * 150) * this.shakeMagnitudeX;
+        this.body.velocity.y = 0;
+    } else {
+        this.body.velocity.y = Math.sin(game.time.now / 150) * 30;
+        this.body.velocity.x = 0;
+    }
 };
 
 Apple.prototype.Eaten = function() {

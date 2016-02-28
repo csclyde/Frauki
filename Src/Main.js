@@ -191,6 +191,8 @@ Main.Restart = function() {
 
         objectController.CompileObjectList();
 
+        projectileController.DestroyAllProjectiles();
+
         effectsController.Goddess(false);
 
         Frogland.ResetFallenTiles();

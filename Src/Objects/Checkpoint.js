@@ -15,6 +15,7 @@ Checkpoint = function(game, x, y, name) {
     this.body.setSize(30, 30, 0, 0);
 
     this.active = false;
+    this.alpha = 0;
 
     if(!Frogland.checkpoints) Frogland.checkpoints = [];
     Frogland.checkpoints.push(this);

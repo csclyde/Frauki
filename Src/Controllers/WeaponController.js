@@ -83,7 +83,7 @@ WeaponController.prototype.ToggleWeapon = function(params) {
     //if they have a weapon
     if(this.currentWeapon != null) {
         //and the toggle is to activate it
-        if(params.activate && frauki.state !== frauki.Hurting) {
+        if(params.activate && frauki.state !== frauki.Hurting && (!frauki.InAttackAnim() || params.override)) {
             this.currentWeapon.Start();
             this.weaponActive = true;
         //otherwise, if the toggle is to deactivate it
