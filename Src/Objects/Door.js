@@ -58,6 +58,12 @@ Door.prototype.create = function() {
 
 Door.prototype.update = function() {
 
+    if(this.state === this.Closed && this.owningLayer === Frogland.currentLayer && GameData.IsDoorOpen(this.id)) {
+        if(this.body.x > game.camera.x && this.body.y > game.camera.y && this.body.x < game.camera.x + game.camera.width && this.body.y < game.camera.y + game.camera.height) {
+            PerformOpen(this, false, true);
+        } 
+    }
+
     if(!!this.state)
         this.state();
 };
@@ -147,7 +153,8 @@ function OpenDoorById(id) {
     }
 };
 
-function PerformOpen(d, save) {
+function PerformOpen(d, save, silent) {
+    if(d.state !== d.Closed) return;
 
     //check that the door has received enough attempts to actually open
     if(++d.openAttempts < d.thresholdAttempts) {
@@ -155,27 +162,30 @@ function PerformOpen(d, save) {
         return;
     }
 
-    var openTween = game.add.tween(d.body).to({y: d.body.y - 70}, 3000, Phaser.Easing.Quintic.InOut, true);
+    var movementTarget = d.body.y - 64;
 
-    //disable the body after its opened
-    openTween.onComplete.add(function() {
-        this.body.enable = false;
-    }, d);
+    if(!!d.open_direction && d.open_direction === 'down') {
+        movementTarget = d.body.y + 64;
+    }
+
+    var openTween = game.add.tween(d.body).to({y: movementTarget}, 3000, Phaser.Easing.Quintic.InOut, true);
 
     d.state = d.Opening;
 
     //play a sound if one is specified
-    if(!!d.open_sound) {
-        events.publish('play_sound', {name: d.open_sound, restart: true });
-    } else {
-        events.publish('play_sound', {name: 'door_break', restart: true });
+    if(!silent) {
+        if(!!d.open_sound) {
+            events.publish('play_sound', {name: d.open_sound, restart: true });
+        } else {
+            events.publish('play_sound', {name: 'door_break', restart: true });
+        }
     }
 
 
     if(save) {
         GameData.AddOpenDoor(d.id);
     }
-}
+};
 
 Door.prototype.PlayAnim = function(name) {
     if(this.animations.currentAnim.name !== name)

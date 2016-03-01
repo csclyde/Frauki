@@ -75,8 +75,6 @@ Frogland.Create = function() {
 
     SetShardVisibility();
 
-    this.enemyPool = game.add.group();
-
     this.CreateDoorLayer(1);
     this.CreateDoorLayer(2);
     this.CreateDoorLayer(3);
@@ -277,36 +275,15 @@ Frogland.PreprocessTiles = function(layer) {
 
         if(!!tile) {
             if(tile.index === 4 || tile.index === 12) {
-                tile.collideLeft = false;
-                tile.collideRight = false;
-                tile.collideUp = true;
-                tile.collideDown = false;
-                tile.faceUp = true;
-                tile.faceDown = false;
-                tile.faceLeft = false;
-                tile.faceRight = false;
+                tile.setCollision(false, false, true, false);
 
             //drop tiles
             } else if(tile.index === 6) {
-                tile.collideLeft = false;
-                tile.collideRight = false;
-                tile.collideUp = false;
-                tile.collideDown = true;
-                tile.faceUp = false;
-                tile.faceDown = true;
-                tile.faceLeft = false;
-                tile.faceRight = false;
+                tile.setCollision(false, false, false, true);
             
             //tiles with all faces colliding
             } else if(tile.index === 8) {
-                tile.collideLeft = true;
-                tile.collideRight = true;
-                tile.collideUp = true;
-                tile.collideDown = true;
-                tile.faceUp = true;
-                tile.faceDown = true;
-                tile.faceLeft = true;
-                tile.faceRight = true;
+                tile.setCollision(true, true, true, true);
             }
         }
            

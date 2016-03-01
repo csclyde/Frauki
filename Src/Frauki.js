@@ -511,31 +511,27 @@ Player.prototype.Slash = function(params) {
     //stop the current weapon
     events.publish('activate_weapon', { activate: false });
 
+    var attackResult = false;
+
     //diving dash
     if(!this.timers.TimerUp('frauki_dash') && this.states.crouching && (this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling || this.state === this.Flipping)) {
-        this.DiveSlash();
+        attackResult = this.DiveSlash();
     }
     //running dash
     else if(this.state === this.Rolling || (this.state === this.Flipping && !this.states.upPressed && !this.states.crouching)) {
-        this.StabSlash();
+        attackResult = this.StabSlash();
     }
     //upwards dash attack
     else if((this.state === this.Jumping || (this.state === this.Peaking && inputController.dpad.up) || (this.state === this.Falling && inputController.dpad.up)) && this.states.hasFlipped === false) {
-        this.JumpSlash();
+        attackResult = this.JumpSlash();
     }
     //falling slash
     else if(this.state === this.Peaking || this.state === this.Falling) {
-        this.FallSlash();
+        attackResult = this.FallSlash();
     }
     //normal slashes while standing or running
     else if(this.state === this.Standing || this.state === this.Landing || this.state === this.Running || this.state === this.Jumping || this.state === this.Flipping || this.state === this.Crouching) {
-        // if(!this.timers.TimerUp('frauki_dash') && (inputController.dpad.left || inputController.dpad.right)) {
-        //     this.LungeSlash();
-        // } else {
-        //     this.FrontSlash();
-        // } 
-
-        this.FrontSlash();
+        attackResult = this.FrontSlash();
     } 
     else {
         console.log('An attack was attempted in an unresolved state ', this.state);
@@ -545,27 +541,32 @@ Player.prototype.Slash = function(params) {
     this.timers.SetTimer('smash_timer', 200);
     this.timers.SetTimer('updash_timer', 200);
 
-    this.timers.SetTimer('frauki_invincible', 0);
-    this.timers.SetTimer('frauki_grace', 0);
+    if(attackResult) {
+        this.timers.SetTimer('frauki_invincible', 0);
+        this.timers.SetTimer('frauki_grace', 0);
+
+        effectsController.EnergyStreak();
+        effectsController.SpriteTrail(frauki, 150, 500, 300);
+    } else {
+        this.WhiffSlash();
+    }
+
 };
 
 Player.prototype.FrontSlash = function() {
-    if(this.upgrades.attackFront) {
-        if(energyController.UseEnergy(5)) {
-            if(this.upgrades.attackOverhead && this.states.upPressed) {
-                this.ChangeState(this.AttackOverhead);
-            } else {
-                this.ChangeState(this.AttackFront);
-            }
-
-            events.publish('play_sound', {name: 'attack_slash', restart: true });
-
-            effectsController.EnergyStreak();
-            effectsController.SpriteTrail(frauki, 150, 500, 300);
+    if(energyController.UseEnergy(5)) {
+        if(this.upgrades.attackOverhead && this.states.upPressed) {
+            this.ChangeState(this.AttackOverhead);
         } else {
-            this.WhiffSlash();
+            this.ChangeState(this.AttackFront);
         }
-    } 
+
+        events.publish('play_sound', {name: 'attack_slash', restart: true });  
+
+        return true; 
+    }
+
+    return false;
 };
 
 Player.prototype.LungeSlash = function() {
@@ -574,11 +575,10 @@ Player.prototype.LungeSlash = function() {
 
         events.publish('play_sound', {name: 'attack_slash', restart: true });
 
-        effectsController.EnergyStreak();
-        effectsController.SpriteTrail(frauki, 150, 500, 300);
-    } else {
-        this.WhiffSlash();
+        return true;
     }
+
+    return false;
 };
 
 Player.prototype.FallSlash = function() {
@@ -588,29 +588,23 @@ Player.prototype.FallSlash = function() {
         events.publish('play_sound', {name: 'attack_slash', restart: true });
         this.timers.SetTimer('fall_attack_wait', 800);
 
-        effectsController.EnergyStreak();
-        effectsController.SpriteTrail(frauki, 150, 500, 300);
-    } else {
-        this.WhiffSlash();
+        return true;
     }
+
+    return false;
 };
 
 Player.prototype.DiveSlash = function() {
-    if(this.upgrades.attackDive) {
-        if(energyController.UseEnergy(7)) {
-            this.ChangeState(this.AttackDiveCharge);
-            this.movement.diveVelocity = 950;
+    if(energyController.UseEnergy(7)) {
+        this.ChangeState(this.AttackDiveCharge);
+        this.movement.diveVelocity = 950;
 
-            events.publish('play_sound', {name: 'attack_dive_charge', restart: true });
+        events.publish('play_sound', {name: 'attack_dive_charge', restart: true });
 
-            effectsController.EnergyStreak();
-            effectsController.SpriteTrail(frauki, 150, 500, 300);
-        } else {
-            this.WhiffSlash();
-        }
-    } else {
-        this.FrontSlash();
+        return true;
     }
+
+    return false;
 };
 
 Player.prototype.JumpSlash = function() {
@@ -627,47 +621,34 @@ Player.prototype.JumpSlash = function() {
 
         events.publish('play_sound', {name: 'attack_slash', restart: true });
 
-        effectsController.EnergyStreak();
-        effectsController.SpriteTrail(frauki, 150, 400, 300);
-    } else {
-        this.WhiffSlash();
+        return true;
     }
+
+    return false;
 };
 
 Player.prototype.StabSlash = function() {
-    if(this.upgrades.attackStab) {
-        if(energyController.UseEnergy(6)) {
-            this.ChangeState(this.AttackStab);
+    if(energyController.UseEnergy(6)) {
+        this.ChangeState(this.AttackStab);
 
-            // var dir = this.GetDirectionMultiplier();
-            
-            // this.movement.rollVelocity = 0;
-            // this.tweens.roll = game.add.tween(this.movement).to({rollVelocity: dir * PLAYER_RUN_SLASH_SPEED()}, 300, Phaser.Easing.Exponential.InOut, false).to({rollVelocity: 0}, 500, Phaser.Easing.Exponential.InOut, false);
-            // this.tweens.roll.start();
+        var dir = this.GetDirectionMultiplier();
 
-            var dir = this.GetDirectionMultiplier();
+        this.body.maxVelocity.x = PLAYER_ROLL_SPEED();
+        this.body.velocity.x = 0;
 
-            this.body.maxVelocity.x = PLAYER_ROLL_SPEED();
-            this.body.velocity.x = 0;
+        this.movement.rollStage = 0;
+        this.movement.rollDirection = dir;
+        this.movement.rollStart = game.time.now;
+        this.movement.rollPrevVel = 0;
+        this.movement.rollPop = false;
+        this.movement.stabFrames = 0;
 
-            this.movement.rollStage = 0;
-            this.movement.rollDirection = dir;
-            this.movement.rollStart = game.time.now;
-            this.movement.rollPrevVel = 0;
-            this.movement.rollPop = false;
-            this.movement.stabFrames = 0;
-
-            events.publish('play_sound', {name: 'attack_stab', restart: true });
-
-            effectsController.EnergyStreak();
-            effectsController.SpriteTrail(frauki, 150, 800, 300);
-            
-        } else {
-            this.WhiffSlash();
-        }
-    } else {
-        this.FrontSlash();
+        events.publish('play_sound', {name: 'attack_stab', restart: true });
+        
+        return true;
     }
+
+    return false;
 };
 
 Player.prototype.WhiffSlash = function() {

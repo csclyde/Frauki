@@ -55,6 +55,7 @@ TriggerController.prototype.triggers['heal_to_open_door'] = {
 		//or, if they are at full health and cant heal
 		if(energyController.GetApples() < GameData.GetMaxApples() || energyController.GetHealth() === energyController.GetMaxHealth()) {
 			events.publish('open_door', { door_name: 'heal_trainer' });
+			events.publish('open_door', { door_name: 'tutorial_goodie' });
 			this.appleUsed = true;
 		}
 	},
@@ -62,6 +63,7 @@ TriggerController.prototype.triggers['heal_to_open_door'] = {
 	stay: function(params) {
 		//keep checking for them to use an apple
 		if(energyController.GetApples() < GameData.GetMaxApples() && !this.appleUsed) {
+			events.publish('open_door', { door_name: 'tutorial_goodie' });
 			events.publish('open_door', { door_name: 'heal_trainer' });
 			this.appleUsed = true;
 		}

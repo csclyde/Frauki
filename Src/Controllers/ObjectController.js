@@ -214,11 +214,6 @@ ObjectController.prototype.CreateObjectsLayer = function(layer) {
 
 
         if(obj.spriteType === 'door') {
-            if(GameData.IsDoorOpen(obj.id)) {
-                obj.body.enable = false;
-                obj.visible = false;
-            }
-
             objectController.doorList.push(obj);
 
         } else if(obj.spriteType === 'checkpoint') {
