@@ -126,7 +126,6 @@ Main.Restart = function() {
     this.restarting = true;
     game.time.slowMotion = 5;
     var fadeOutTween = effectsController.Fade(true);
-    effectsController.Goddess(true);
 
     events.publish('player_run', {run:false, dir: 'left'});
     events.publish('player_run', {run:false, dir: 'right'});
@@ -188,8 +187,6 @@ Main.Restart = function() {
         objectController.CompileObjectList();
 
         projectileController.DestroyAllProjectiles();
-
-        effectsController.Goddess(false);
 
         Frogland.ResetFallenTiles();
 

@@ -886,6 +886,8 @@ Player.prototype.Falling = function() {
         if((topTile === null || topTile2 === null) && bottomTile !== null) {
             this.ChangeState(this.Hanging);
             frauki.body.y -= (frauki.body.y % 16) + 5;
+
+            console.log(!!topTile, !!topTile2)
         }
     }
 

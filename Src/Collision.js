@@ -393,7 +393,7 @@ Collision.OverlapEffectWithWorld = function(e, w) {
 
     if(w.index === 10) {
         if(e.parent.effectType === 'drip') {
-            effectsController.DripSplash(e);
+            effectsController.DripSplash(e, true);
             e.kill();
         }
     }
