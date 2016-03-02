@@ -23,7 +23,7 @@ EnergyController = function() {
 		}
 	}, this);
 
-	this.remainingApples = GameData.GetMaxApples();
+	this.remainingApples = 0;
 };
 
 EnergyController.prototype.Create = function() {
@@ -207,16 +207,12 @@ EnergyController.prototype.Reset = function() {
 	this.energy = 15;
 	this.charge = 30;
 	this.latentHealth = 0;
-	this.remainingApples = GameData.GetMaxApples();
+	this.remainingApples = 0;
 };
 
 EnergyController.prototype.AddApple = function() {
-	if(this.remainingApples < GameData.GetMaxApples()) {
-		this.remainingApples++;
-		return true;
-	} else {
-		return false;
-	}
+	this.remainingApples++;
+	return true;
 };
 
 EnergyController.prototype.GetApples = function() {

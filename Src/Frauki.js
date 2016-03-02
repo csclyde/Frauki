@@ -490,7 +490,7 @@ Player.prototype.Crouch = function(params) {
 
 Player.prototype.Heal = function(params) {
     if(params.charging) {
-        if(energyController.GetHealth() < energyController.GetMaxHealth() && energyController.GetApples() > 0) {
+        if(energyController.GetApples() > 0) {
             this.ChangeState(this.Healing);
             this.timers.SetTimer('heal_charge', 1100); 
 

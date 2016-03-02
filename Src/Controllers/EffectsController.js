@@ -789,7 +789,7 @@ EffectsController.prototype.SpriteTrail = function(sprite, freq, duration, dropo
         trailSprite.anchor.setTo(0);
         trailSprite.scale.x = sprite.scale.x;
         trailSprite.tint = tint;
-        trailSprite.alpha = 0.8;
+        trailSprite.alpha = 0.7;
 
         var fadeTween = game.add.tween(trailSprite).to({alpha: 0}, dropoff, Phaser.Easing.Linear.None, true);
         fadeTween.onComplete.add(function() {

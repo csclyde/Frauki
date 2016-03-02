@@ -228,31 +228,28 @@ Main.DrawUI = function() {
     //finally, the frame on top of everything else
     this.RenderTextureFromAtlas('UI', 'EnergyBar0000', 10, 10);
 
-    for(var i = 0; i < GameData.GetMaxApples(); i++) {
-        if(i < energyController.GetApples()) {
-            //if this is the last apple in the stable and they are healing
-            if(i === energyController.GetApples() - 1 && frauki.state === frauki.Healing) {
-                //drain the graphic
-                if(game.time.now - frauki.timers.Timestamp('heal_charge') < 200) {
-                    this.RenderTextureFromAtlas('Misc','Apple0002', 10 + (20 * i), 45); 
-                } else if(game.time.now - frauki.timers.Timestamp('heal_charge') < 400) {
-                    this.RenderTextureFromAtlas('Misc','Apple0003', 10 + (20 * i), 45); 
-                } else if(game.time.now - frauki.timers.Timestamp('heal_charge') < 600) {
-                    this.RenderTextureFromAtlas('Misc','Apple0004', 10 + (20 * i), 45); 
-                } else if(game.time.now - frauki.timers.Timestamp('heal_charge') < 800) {
-                    this.RenderTextureFromAtlas('Misc','Apple0005', 10 + (20 * i), 45); 
-                } else {
-                    this.RenderTextureFromAtlas('Misc','Apple0006', 10 + (20 * i), 45); 
-                }
-            
-            //otherwise, just draw the full apple
+    for(var i = 0; i < energyController.GetApples(); i++) {
+        //if this is the last apple in the stable and they are healing
+        if(i === energyController.GetApples() - 1 && frauki.state === frauki.Healing) {
+            //drain the graphic
+            if(game.time.now - frauki.timers.Timestamp('heal_charge') < 200) {
+                this.RenderTextureFromAtlas('Misc','Apple0002', 10 + (20 * i), 45); 
+            } else if(game.time.now - frauki.timers.Timestamp('heal_charge') < 400) {
+                this.RenderTextureFromAtlas('Misc','Apple0003', 10 + (20 * i), 45); 
+            } else if(game.time.now - frauki.timers.Timestamp('heal_charge') < 600) {
+                this.RenderTextureFromAtlas('Misc','Apple0004', 10 + (20 * i), 45); 
+            } else if(game.time.now - frauki.timers.Timestamp('heal_charge') < 800) {
+                this.RenderTextureFromAtlas('Misc','Apple0005', 10 + (20 * i), 45); 
             } else {
-                this.RenderTextureFromAtlas('Misc','Apple0000', 10 + (20 * i), 45); 
-                
+                this.RenderTextureFromAtlas('Misc','Apple0006', 10 + (20 * i), 45); 
             }
+        
+        //otherwise, just draw the full apple
         } else {
-            this.RenderTextureFromAtlas('Misc','Checkpoint0005', 10 + (20 * i), 45); 
+            this.RenderTextureFromAtlas('Misc','Apple0000', 10 + (20 * i), 45); 
+            
         }
+        
     }
 
     for(var i = 0; i < weaponController.weaponList.length; i++) {
