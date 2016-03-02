@@ -176,6 +176,10 @@ Enemy.prototype.types['Insectoid'] =  function() {
     this.Scuttling = function() {
         this.PlayAnim('idle');
 
+        if(EnemyBehavior.Player.IsDangerous(this)) {
+            this.Dodge();
+        }
+
         if(this.direction === 'left') {
             this.body.velocity.x = -425;
         } else {

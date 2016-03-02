@@ -196,18 +196,6 @@ ObjectController.prototype.CreateObjectsLayer = function(layer) {
         triggerController.RegisterTarget('ball', Frogland.ball);
     }
 
-    //create the big nugg if it exists
-    var bigNugg = GameData.GetBigNugg();
-
-    if(bigNugg && bigNugg.layer == layer) {
-        var nugg = new BigNugg(game, frauki.body.center.x, frauki.body.center.y, 'Misc', 'BigNugg0000');
-        currLayer.add(nugg);
-        nugg.owningLayer = Frogland.currentLayer;
-
-        nugg.nuggCount = GameData.GetNuggCount();
-        nugg.spriteType = 'BigNugg';
-    }
-
     //inform each object of its own layer
     currLayer.forEach(function(obj) {
         obj.owningLayer = layer;

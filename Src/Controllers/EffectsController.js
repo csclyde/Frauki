@@ -111,8 +111,6 @@ EffectsController = function() {
     this.materializingApple.animations.play('mat');
     this.materializingApple.visible = false;
     this.materializingApple.anchor.setTo(0.5);
-
-
 };
 
 EffectsController.prototype.Update = function() {
@@ -253,7 +251,6 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 fluffer.owningLayer = layer;
 
                 that.loadedEffects.push(fluffer);
-
             } else if(o.name === 'bubbles') {
 
                 var bubbler = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
@@ -267,7 +264,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 bubbler.maxParticleSpeed.y = -50;
                 bubbler.setRotation(0, 0);
                 bubbler.bounce.setTo(0.5);
-                bubbler.start(false, 1200, game.rnd.between(800, 1200));
+                bubbler.start(false, 1200, game.rnd.between(1200, 1800));
                 bubbler.effectType = 'bubbles';
                 bubbler.alpha = 0.5;
                 bubbler.owningLayer = layer;
@@ -291,7 +288,6 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 sprayer.owningLayer = layer;
 
                 that.loadedEffects.push(sprayer);
-
             } else if(o.name === 'leaves_green') {
 
                 var leaves = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
@@ -731,7 +727,9 @@ EffectsController.prototype.ClashStreak = function(x, y, angle) {
 };
 
 EffectsController.prototype.DripSplash = function(src) {
-    var dripSplash = game.add.sprite(src.x - 10, src.y - 3, 'Misc');
+    var yPos = src.y - (src.y % 16) + 2;
+
+    var dripSplash = game.add.sprite(src.x - 10, yPos, 'Misc');
     dripSplash.animations.add('splish', ['DripSplash0000', 'DripSplash0001', 'DripSplash0002', 'DripSplash0003', 'DripSplash0004'], 18, false, false);
     dripSplash.animations.play('splish');
     dripSplash.animations.currentAnim.killOnComplete = true;

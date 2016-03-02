@@ -43,10 +43,10 @@ Enemy.prototype.types['Fungu'] =  function() {
 
 		if(this.timers.TimerUp('shoot')) {
 
-			this.timers.SetTimer('shoot_anim', 300);
 			
 			if(EnemyBehavior.Player.IsVisible(this)) {
 				projectileController.Spore(this);
+				this.timers.SetTimer('shoot_anim', 300);
 			}
 
 			this.shotCount++;

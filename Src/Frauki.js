@@ -550,7 +550,6 @@ Player.prototype.Slash = function(params) {
     } else {
         this.WhiffSlash();
     }
-
 };
 
 Player.prototype.FrontSlash = function() {

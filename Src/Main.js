@@ -135,13 +135,10 @@ Main.Restart = function() {
     cameraController.shakeMagnitudeY = 0;
     cameraController.shakeXTween.stop();
     cameraController.shakeYTween.stop();
-    
-    GameData.UpdateBigNugg(frauki.body.center.x, frauki.body.center.y, GameData.GetNuggCount(), Frogland.currentLayer);
 
     fadeOutTween.onComplete.add(function() {
         PrepareShardsForDeath();
         GameData.SaveShardPositions();
-
         
         frauki.alpha = 1;
         Frogland.SpawnFrauki();
@@ -151,7 +148,6 @@ Main.Restart = function() {
 
         energyController.Reset();
         game.time.slowMotion = 1;
-        //game.world.alpha = 1;
         effectsController.Fade(false);
 
         Main.restarting = false;
