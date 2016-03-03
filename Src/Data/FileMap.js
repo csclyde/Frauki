@@ -11,6 +11,8 @@ FileMap.Images = [
 	{ Name: 'parallax2', File: 'Data/World/Parallax2.png' },
 	{ Name: 'clouds1', File: 'Data/World/Clouds1.png' },
 	{ Name: 'clouds2', File: 'Data/World/Clouds2.png' },
+
+	{ Name: 'cave', File: 'Data/World/Cave.png' },
 ];
 
 FileMap.Atlas = [

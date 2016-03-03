@@ -10,6 +10,7 @@ Main.create = function() {
     scriptRunner = new ScriptRunner();
     timerUtil = new TimerUtil();
     objectController = new ObjectController();
+    backdropController = new BackdropController();
 
     triggerController.Create(map);
 
@@ -63,6 +64,7 @@ Main.update = function() {
     weaponController.Update();
     speechController.Update();
     triggerController.Update(Frogland.currentLayer);
+    backdropController.Update();
 
     this.gamepadIcon.cameraOffset.x = Math.round(pixel.width * 0.27 + cameraController.camX / pixel.scale);
     this.gamepadIcon.cameraOffset.y = Math.round(pixel.height * 0.3 + cameraController.camY / pixel.scale) + 240;

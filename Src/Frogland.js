@@ -40,6 +40,8 @@ Frogland.Create = function() {
     }
 
     this.currentLayer = startLayer;
+
+    backdropController.LoadBackgrounds();
     
     this.CreateBackgroundLayer(4, startLayer === 4);
     this.CreateBackgroundLayer(3, startLayer === 3);
