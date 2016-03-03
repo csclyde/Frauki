@@ -56,6 +56,7 @@ Main.update = function() {
     
     Frogland.Update();
 
+    audioController.Update();
     cameraController.Update();
     inputController.Update();
     effectsController.Update();

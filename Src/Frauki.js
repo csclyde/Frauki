@@ -718,6 +718,8 @@ Player.prototype.LandHit = function(e, damage) {
 
     this.states.hasFlipped = false;
 
+    events.publish('stop_attack_sounds');
+
     // frauki.animations.paused = true;
     // setTimeout(function() { frauki.animations.paused = false; }, 150);
 };

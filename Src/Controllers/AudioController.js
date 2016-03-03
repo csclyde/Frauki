@@ -9,7 +9,7 @@ AudioController = function() {
 
     events.subscribe('stop_attack_sounds', function() {
         for(var key in this.sounds) {
-            if(key.indexOf('attack') > -1) {
+            if(key.indexOf('attack') > -1 && key !== 'attack_connect') {
                 this.sounds[key].stop();
             }
         }
@@ -17,6 +17,8 @@ AudioController = function() {
 
     this.sounds = {};
     this.music = {};
+
+    this.currentSong = null;
 
     //load audio
     FileMap.Audio.forEach(function(audio) {
@@ -43,10 +45,17 @@ AudioController = function() {
         // xhr.send();
 
         that.music[music.Name] = game.add.audio(music.Name, music.Volume, music.Loop);
+        that.music[music.Name].addMarker('matt', 15.06, 94.1, 0.5, true); //15.056 3.764
     });
 };
 
 AudioController.prototype.Update = function() {
+    // if(this.currentSong !== null) {
+    //     if(this.currentSong.currentTime > 20000) {
+    //         console.log('hwut')
+    //         this.currentSong.position = 10000;
+    //     }
+    // }
     
 };
 
@@ -79,13 +88,16 @@ AudioController.prototype.StopSound = function(params) {
 
 AudioController.prototype.PlayMusic = function(params) {
     if(!!params.name && !!this.music[params.name] && !!this.music[params.name].play) {
-            this.music[params.name].play();
+            this.music[params.name].play('matt');
+            this.currentSong = this.music[params.name];
+
     }
 };
 
 AudioController.prototype.StopMusic = function(params) {
     if(!!params.name && !!this.music[params.name] && !!this.music[params.name].stop) {
         this.music[params.name].pause();
+        this.currentSong = null;
     }
 };
 
