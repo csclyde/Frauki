@@ -26,36 +26,27 @@ AudioController = function() {
     });
 
     FileMap.Music.forEach(function(music) {
-        // that.music[music.Name] = {};
-
-        // var xhr = new XMLHttpRequest();
-        // xhr.open('GET', music.File, true);
-        // xhr.responseType = 'arraybuffer';
-        // xhr.onload = function(e) {
-        //     if(this.status == 200){
-        //         var uInt8Array = new Uint8Array(this.response);
-        //         that.music[music.Name] = window.neoart.F2Player(null);
-        //         that.music[music.Name].load(this.response);
-        //         that.music[music.Name].loopSong = music.Loop ? 1 : 0;
-        //         that.music[music.Name].volume = music.Volume;
-
-        //         console.log(that.music[music.Name]);
-        //     } 
-        // };
-        // xhr.send();
 
         that.music[music.Name] = game.add.audio(music.Name, music.Volume, music.Loop);
-        that.music[music.Name].addMarker('matt', 15.06, 94.1, 0.5, true); //15.056 3.764
+
+        for(var i = 0; i < music.Sections.length; i++) {
+            var section = music.Sections[i];
+
+            that.music[music.Name].addMarker(section.name, section.start, section.end, music.Volume, section.loop);
+
+            //if this isnt the last section, add in a section to follow it
+            if(i !== music.Sections.length - 1) {
+                that.music[music.Name].markers[section.name].nextSection = music.Sections[i + 1].name;
+            }
+        }
+        
     });
 };
 
 AudioController.prototype.Update = function() {
-    // if(this.currentSong !== null) {
-    //     if(this.currentSong.currentTime > 20000) {
-    //         console.log('hwut')
-    //         this.currentSong.position = 10000;
-    //     }
-    // }
+
+    //if the section ends and the thing does not loop, advance the section index
+    //and play the next section
     
 };
 
@@ -88,8 +79,7 @@ AudioController.prototype.StopSound = function(params) {
 
 AudioController.prototype.PlayMusic = function(params) {
     if(!!params.name && !!this.music[params.name] && !!this.music[params.name].play) {
-            this.music[params.name].play('matt');
-            this.currentSong = this.music[params.name];
+            this.music[params.name].play('body');
 
     }
 };
@@ -97,7 +87,6 @@ AudioController.prototype.PlayMusic = function(params) {
 AudioController.prototype.StopMusic = function(params) {
     if(!!params.name && !!this.music[params.name] && !!this.music[params.name].stop) {
         this.music[params.name].pause();
-        this.currentSong = null;
     }
 };
 

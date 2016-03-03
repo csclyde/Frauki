@@ -49,7 +49,12 @@ FileMap.Audio = [
 ];
 
 FileMap.Music = [
-	{ Name: 'Surface', File: 'Data/Music/Surface.ogg', Volume: 0.5, Loop: true },
+	{ Name: 'Surface', File: 'Data/Music/Surface.ogg', Volume: 0.5, Loop: true,
+		Sections: [
+			{ name: 'intro', start: 0, end: 15.06, loop: false },
+			{ name: 'body', start: 15.06, end: 94.1, loop: true }
+		]
+	},
 	// { Name: 'Ruins', File: 'Data/Music/Ruins.ogg', Volume: 0.5, Loop: true },
 	// { Name: 'Underwater', File: 'Data/Music/Underwater.xm', Volume: 0.5, Loop: true },
 	// { Name: 'Landfill', File: 'Data/Music/Landfill.xm', Volume: 0.5, Loop: true },
