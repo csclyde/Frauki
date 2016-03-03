@@ -39,9 +39,23 @@ AudioController = function() {
         }
 
         musicAudio.onMarkerComplete.add(function(m) {
-            if(m === 'intro') {
-                //musicAudio.play('body');
+            if(m === 'intro' && musicAudio.volume > 0) {
+                musicAudio.play('body');
             }
+        });
+
+        musicAudio.onStop.add(function(m) {
+            console.log('stop')
+        });
+
+        musicAudio.onLoop.add(function(m) {
+            if(musicAudio.volume > 0) {
+                musicAudio.play('body');
+            }
+        });
+
+        musicAudio.onPause.add(function(m) {
+            console.log('pause')
         });
         
     });
@@ -84,7 +98,7 @@ AudioController.prototype.StopSound = function(params) {
 AudioController.prototype.PlayMusic = function(params) {
     if(!!params.name && !!this.music[params.name] && !!this.music[params.name].play) {
 
-            this.music[params.name].play('body', 0, 0, true);
+            this.music[params.name].play('intro', 0, 0, false);
             this.music[params.name].fadeTo(params.fadeIn, this.music[params.name].volumeStatic);
 
     }
