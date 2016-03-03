@@ -16,8 +16,8 @@ BackdropController.prototype.Update = function() {
             o.visible = false;
         } else {
             o.visible = true;
-            o.tilePosition.x = game.camera.x * 0.1;
-            o.tilePosition.y = game.camera.y * 0.1;
+            o.tilePosition.x = game.camera.x * o.scrollFactorX;
+            o.tilePosition.y = game.camera.y * o.scrollFactorY;
         }
     });
 };
@@ -29,6 +29,16 @@ BackdropController.prototype.LoadBackgrounds = function() {
     Frogland.map.objects['Backdrop'].forEach(function(o) {
 
         var b = game.add.tileSprite(o.x, o.y, o.width, o.height, o.name, null, Frogland.backdrops);
+
+        if(o.properties.scroll) {
+            var scroll = o.properties.scroll.split(',');
+            b.scrollFactorX = +scroll[0];
+            b.scrollFactorY = +scroll[1];
+
+        } else {
+            b.scrollFactorX = 0.1;
+            b.scrollFactorY = 0.1;
+        }
         that.loadedBackdrops.push(b);
         
     });
