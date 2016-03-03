@@ -3961,22 +3961,6 @@
                 {
                  "gid":105,
                  "height":16,
-                 "id":1140,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":2976.5,
-                 "y":3492.5
-                }, 
-                {
-                 "gid":105,
-                 "height":16,
                  "id":1141,
                  "name":"",
                  "properties":
@@ -6143,7 +6127,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "width":0,
          "x":0,
          "y":0
@@ -6934,19 +6918,73 @@
                  "y":4172.67
                 }, 
                 {
-                 "height":60,
-                 "id":1936,
+                 "height":98,
+                 "id":1939,
                  "name":"music_left_right",
                  "properties":
                     {
+                     "fadeLeft":"500",
+                     "fadeRight":"500",
                      "right":"Surface"
                     },
                  "rotation":0,
                  "type":"trigger",
                  "visible":true,
-                 "width":92.6666666666665,
-                 "x":2000,
-                 "y":3056.66666666667
+                 "width":64,
+                 "x":3062.66666666667,
+                 "y":3288.66666666667
+                }, 
+                {
+                 "height":43.9999999999995,
+                 "id":1940,
+                 "name":"music_up_down",
+                 "properties":
+                    {
+                     "down":"Ruins",
+                     "fadeDown":"500",
+                     "fadeUp":"500"
+                    },
+                 "rotation":0,
+                 "type":"trigger",
+                 "visible":true,
+                 "width":76.666666666667,
+                 "x":2924.66666666667,
+                 "y":3374.66666666667
+                }, 
+                {
+                 "height":84.3333333333335,
+                 "id":1941,
+                 "name":"music_left_right",
+                 "properties":
+                    {
+                     "fadeLeft":"500",
+                     "fadeOut":"4000",
+                     "fadeRight":"500",
+                     "left":"Ruins"
+                    },
+                 "rotation":0,
+                 "type":"trigger",
+                 "visible":true,
+                 "width":43.3333333333335,
+                 "x":1750.66666666667,
+                 "y":3308.66666666667
+                }, 
+                {
+                 "height":44,
+                 "id":1942,
+                 "name":"music_up_down",
+                 "properties":
+                    {
+                     "fadeDown":"500",
+                     "fadeUp":"500",
+                     "up":"Surface"
+                    },
+                 "rotation":0,
+                 "type":"trigger",
+                 "visible":true,
+                 "width":76.6667,
+                 "x":2915.66665,
+                 "y":3138.33333333333
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -10670,6 +10708,23 @@
                  "width":86.3333,
                  "x":2872.67,
                  "y":3037.67
+                }, 
+                {
+                 "height":60,
+                 "id":1938,
+                 "name":"music_left_right",
+                 "properties":
+                    {
+                     "fadeLeft":"500",
+                     "fadeRight":"500",
+                     "left":"Surface"
+                    },
+                 "rotation":0,
+                 "type":"trigger",
+                 "visible":true,
+                 "width":92.6667,
+                 "x":1740.99998333333,
+                 "y":3055.33333333333
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -11116,7 +11171,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":1937,
+ "nextobjectid":1943,
  "orientation":"orthogonal",
  "properties":
     {

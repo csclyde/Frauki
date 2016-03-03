@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="400" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="1937">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="400" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="1943">
  <properties>
   <property name="debug" value="false"/>
   <property name="startLayer" value="3"/>
@@ -3888,7 +3888,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="Objects_3" visible="0">
+ <objectgroup name="Objects_3">
   <object id="1042" gid="89" x="2125.33" y="4622.67" width="16" height="16"/>
   <object id="1043" gid="89" x="2106.67" y="4625.33" width="16" height="16"/>
   <object id="1044" gid="89" x="2088" y="4625.33" width="16" height="16"/>
@@ -3962,7 +3962,6 @@
   <object id="1137" gid="89" x="190" y="4479" width="16" height="16"/>
   <object id="1138" gid="89" x="225" y="4479" width="16" height="16"/>
   <object id="1139" gid="95" x="168" y="3888" width="16" height="16"/>
-  <object id="1140" gid="105" x="2976.5" y="3492.5" width="16" height="16"/>
   <object id="1141" gid="105" x="2533.33" y="3507.67" width="16" height="16"/>
   <object id="1142" gid="105" x="1994" y="3505" width="16" height="16"/>
   <object id="1145" type="shard" gid="67" x="3016" y="3479.67" width="16" height="16">
@@ -4342,9 +4341,33 @@
     <property name="target" value="ball"/>
    </properties>
   </object>
-  <object id="1936" name="music_left_right" type="trigger" x="2000" y="3056.67" width="92.6667" height="60">
+  <object id="1939" name="music_left_right" type="trigger" x="3062.67" y="3288.67" width="64" height="98">
    <properties>
+    <property name="fadeLeft" value="500"/>
+    <property name="fadeRight" value="500"/>
     <property name="right" value="Surface"/>
+   </properties>
+  </object>
+  <object id="1940" name="music_up_down" type="trigger" x="2924.67" y="3374.67" width="76.6667" height="44">
+   <properties>
+    <property name="down" value="Ruins"/>
+    <property name="fadeDown" value="500"/>
+    <property name="fadeUp" value="500"/>
+   </properties>
+  </object>
+  <object id="1941" name="music_left_right" type="trigger" x="1750.67" y="3308.67" width="43.3333" height="84.3333">
+   <properties>
+    <property name="fadeLeft" value="500"/>
+    <property name="fadeOut" value="4000"/>
+    <property name="fadeRight" value="500"/>
+    <property name="left" value="Ruins"/>
+   </properties>
+  </object>
+  <object id="1942" name="music_up_down" type="trigger" x="2915.67" y="3138.33" width="76.6667" height="44">
+   <properties>
+    <property name="fadeDown" value="500"/>
+    <property name="fadeUp" value="500"/>
+    <property name="up" value="Surface"/>
    </properties>
   </object>
  </objectgroup>
@@ -6271,6 +6294,13 @@
   <object id="1830" name="leaves_brown" type="effect" x="2671.19" y="3084.5" width="45.6252" height="17"/>
   <object id="1838" name="drip" type="effect" x="1742.94" y="3051.92" width="80.8125" height="4.66667"/>
   <object id="1916" name="heal_to_open_door" type="trigger" x="2872.67" y="3037.67" width="86.3333" height="135.667"/>
+  <object id="1938" name="music_left_right" type="trigger" x="1741" y="3055.33" width="92.6667" height="60">
+   <properties>
+    <property name="fadeLeft" value="500"/>
+    <property name="fadeRight" value="500"/>
+    <property name="left" value="Surface"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="Doors_1" visible="0">
   <properties>

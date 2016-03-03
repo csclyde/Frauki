@@ -28,17 +28,21 @@ AudioController = function() {
     FileMap.Music.forEach(function(music) {
 
         that.music[music.Name] = game.add.audio(music.Name, music.Volume, music.Loop);
+        var musicAudio = that.music[music.Name];
+
+        that.music[music.Name].volumeStatic = music.Volume;
 
         for(var i = 0; i < music.Sections.length; i++) {
             var section = music.Sections[i];
 
-            that.music[music.Name].addMarker(section.name, section.start, section.end, music.Volume, section.loop);
-
-            //if this isnt the last section, add in a section to follow it
-            if(i !== music.Sections.length - 1) {
-                that.music[music.Name].markers[section.name].nextSection = music.Sections[i + 1].name;
-            }
+            musicAudio.addMarker(section.name, section.start, section.end, music.Volume, section.loop);
         }
+
+        musicAudio.onMarkerComplete.add(function(m) {
+            if(m === 'intro') {
+                //musicAudio.play('body');
+            }
+        });
         
     });
 };
@@ -79,7 +83,9 @@ AudioController.prototype.StopSound = function(params) {
 
 AudioController.prototype.PlayMusic = function(params) {
     if(!!params.name && !!this.music[params.name] && !!this.music[params.name].play) {
-            this.music[params.name].play('body');
+
+            this.music[params.name].play('body', 0, 0, true);
+            this.music[params.name].fadeTo(params.fadeIn, this.music[params.name].volumeStatic);
 
     }
 };
@@ -94,7 +100,7 @@ AudioController.prototype.StopAllMusic = function(params) {
     for(var key in this.music) {
         if(!this.music.hasOwnProperty(key)) continue;
 
-        if(!!this.music[key]) this.music[key].pause();
+        if(!!this.music[key]) this.music[key].fadeOut(params.fadeOut);
     }
 }
 
