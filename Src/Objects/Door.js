@@ -168,9 +168,14 @@ function PerformOpen(d, save, silent) {
         movementTarget = d.body.y + 64;
     }
 
-    var openTween = game.add.tween(d.body).to({y: movementTarget}, 3000, Phaser.Easing.Quintic.InOut, true);
+
+    setTimeout(function() {
+        //play sound
+    }, 2000);
 
     d.state = d.Opening;
+
+    var openDuration = 3000;
 
     //play a sound if one is specified
     if(!silent) {
@@ -179,8 +184,12 @@ function PerformOpen(d, save, silent) {
         } else {
             events.publish('play_sound', {name: 'door_break', restart: true });
         }
+
+        openDuration = 5000;
+        events.publish('camera_shake', {magnitudeX: 0.4, magnitudeY: 0, duration: 5000 });
     }
 
+    var openTween = game.add.tween(d.body).to({y: movementTarget}, openDuration, Phaser.Easing.Quintic.InOut, true);
 
     if(save) {
         GameData.AddOpenDoor(d.id);

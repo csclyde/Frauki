@@ -135,8 +135,8 @@ Main.Restart = function() {
 
     cameraController.shakeMagnitudeX = 0;
     cameraController.shakeMagnitudeY = 0;
-    cameraController.shakeXTween.stop();
-    cameraController.shakeYTween.stop();
+    if(cameraController.shakeXTween) cameraController.shakeXTween.stop();
+    if(cameraController.shakeYTween) cameraController.shakeYTween.stop();
 
     fadeOutTween.onComplete.add(function() {
         PrepareShardsForDeath();

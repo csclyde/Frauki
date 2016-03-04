@@ -41,27 +41,25 @@ CameraController.prototype.Update = function() {
 	var idealX = xOffset + frauki.body.center.x;
 	var idealY = yOffset + frauki.body.center.y;
 
-	//do the screen shake
-
-	//this.camX += this.shakeX;
-	//this.camY += this.shakeY;
-
 	this.camX += (idealX - this.camX) * 0.15;
 	this.camY += (idealY - this.camY) * 0.1;
 
 	game.camera.focusOnXY(this.camX, this.camY);
 
 	if(this.shakeMagnitudeX > 0) {
-		this.shakeX = Math.sin(game.time.now * 3) * this.shakeMagnitudeX;
+		this.shakeX = Math.sin(game.time.now * 60) * this.shakeMagnitudeX;
 	} else {
 		this.shakeX = 0;
 	}
 
 	if(this.shakeMagnitudeY > 0) {
-		this.shakeY = Math.sin(game.time.now * 3) * this.shakeMagnitudeY;
+		this.shakeY = Math.sin(game.time.now * 60) * this.shakeMagnitudeY;
 	} else {
 		this.shakeY = 0;
 	}
+
+	this.camX += this.shakeX;
+	this.camY += this.shakeY;
 };
 
 CameraController.prototype.CrouchCamera = function(params) {
@@ -78,8 +76,8 @@ CameraController.prototype.ScreenShake = function(params) {
 		return;
 	}
 
-	this.shakeMagnitudeX = params.magnitudeX * pixel.scale + (game.rnd.between(1, 2) == 1 ? -1 : 1);
-	this.shakeMagnitudeY = params.magnitudeY * pixel.scale + (game.rnd.between(1, 2) == 1 ? -1 : 1);
+	this.shakeMagnitudeX = params.magnitudeX;// * (game.rnd.between(0, 1) < 0.5 ? -1 : 1);
+	this.shakeMagnitudeY = params.magnitudeY;// * (game.rnd.between(0, 1) < 0.5 ? -1 : 1);
 	
 	this.shakeXTween = game.add.tween(this).to({shakeMagnitudeX: 0}, params.duration, Phaser.Easing.Linear.None, true);
 	this.shakeYTween = game.add.tween(this).to({shakeMagnitudeY: 0}, params.duration, Phaser.Easing.Linear.None, true);

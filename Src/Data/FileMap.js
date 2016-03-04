@@ -58,6 +58,7 @@ FileMap.Music = [
 
 	{ Name: 'Ruins', File: 'Data/Music/Ruins.ogg', Volume: 0.3, Loop: true,
 		Sections: [
+			{ name: 'intro', start: 0, end: 0, loop: false },
 			{ name: 'body', start: 0, end: 107, loop: true }
 		]
 	},

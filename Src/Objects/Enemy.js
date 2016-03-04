@@ -254,7 +254,7 @@ function DestroyEnemy(e) {
     effectsController.SpawnEnergyNuggets(e.body, frauki.body, 'positive', e.maxEnergy * (GetCurrentShardType() === 'Luck' ? 2 : 1)); 
     effectsController.SpawnEnergyNuggets(e.body, frauki.body, 'neutral', e.maxEnergy * (GetCurrentShardType() === 'Luck' ? 2 : 1)); 
 
-    events.publish('camera_shake', {magnitudeX: 10, magnitudeY: 6, duration: 350 });
+    events.publish('camera_shake', {magnitudeX: 8, magnitudeY: 2, duration: 350 });
     //effectsController.MakeHearts(e.maxEnergy / 4);
 
     e.destroy();

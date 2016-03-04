@@ -693,7 +693,7 @@ EffectsController.prototype.Explosion = function(src) {
     boom.animations.add('boom', ['Explosion0000', 'Explosion0001', 'Explosion0002', 'Explosion0003', 'Explosion0004', 'Explosion0005', 'Explosion0006', 'Explosion0007'], 18, false, false);
     boom.animations.play('boom');
     boom.animations.currentAnim.killOnComplete = true;
-    events.publish('camera_shake', {magnitudeX: 10, magnitudeY: 8, duration: 200});
+    events.publish('camera_shake', {magnitudeX: 5, magnitudeY: 2, duration: 200});
 };
 
 EffectsController.prototype.JumpDust = function(src) {

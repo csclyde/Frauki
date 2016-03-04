@@ -17,7 +17,7 @@ EventRouter.prototype.publish = function(eventName, parameters) {
 	}
 
 	this.events[eventName].forEach(function(el) {
-		el.func.apply(el.ctx, [parameters]);
+		el.func.apply(el.ctx, [parameters || {}]);
 	});
 };
 

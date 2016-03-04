@@ -114,7 +114,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
             this.PlayAnim('walk');
 
             if(this.animations.currentFrame.name === 'A3PZ/Walk0001' || this.animations.currentFrame.name === 'A3PZ/Walk0004') {
-                events.publish('camera_shake', {magnitudeX: 3, magnitudeY: 2, duration: 50});
+                events.publish('camera_shake', {magnitudeX: 0.5, magnitudeY: 0, duration: 50});
             }
         }
 
@@ -127,7 +127,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
             this.state = this.Slashing1;
             this.timers.SetTimer('slash_hold', 500);
-            events.publish('camera_shake', {magnitudeX: 10, magnitudeY: 3, duration: 200});
+            events.publish('camera_shake', {magnitudeX: 3, magnitudeY: 0, duration: 200});
         }
 
         return false;
@@ -156,7 +156,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
             this.state = this.Slashing2;
             this.timers.SetTimer('slash_hold', 500);
-            events.publish('camera_shake', {magnitudeX: 10, magnitudeY: 3, duration: 200});
+            events.publish('camera_shake', {magnitudeX: 3, magnitudeY: 0, duration: 200});
         }
 
         return false;

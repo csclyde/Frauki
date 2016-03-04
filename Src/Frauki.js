@@ -763,7 +763,6 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
     this.ChangeState(this.Hurting);
     this.timers.SetTimer('frauki_grace', grace_duration);
     this.timers.SetTimer('frauki_hit', 500);
-    events.publish('camera_shake', {magnitudeX: 8, magnitudeY: 5, duration: 500});
     effectsController.SpriteTrail(frauki, 200, 800, 300, 0xf20069);
 
     if(energyController.GetHealth() > 0) {
@@ -1302,7 +1301,7 @@ Player.prototype.AttackDiveFall = function() {
     } else if(this.body.onFloor()) {
         this.movement.diveVelocity = 0;
 
-        events.publish('camera_shake', {magnitudeX: 12, magnitudeY: 8, duration: 400});
+        events.publish('camera_shake', {magnitudeX: 6, magnitudeY: 2, duration: 400});
 
         events.publish('stop_sound', {name: 'attack_dive_fall'});
         events.publish('play_sound', {name: 'attack_dive_land'});

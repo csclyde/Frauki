@@ -44,18 +44,10 @@ AudioController = function() {
             }
         });
 
-        musicAudio.onStop.add(function(m) {
-            console.log('stop')
-        });
-
         musicAudio.onLoop.add(function(m) {
             if(musicAudio.volume > 0) {
                 musicAudio.play('body');
             }
-        });
-
-        musicAudio.onPause.add(function(m) {
-            console.log('pause')
         });
         
     });
@@ -114,7 +106,9 @@ AudioController.prototype.StopAllMusic = function(params) {
     for(var key in this.music) {
         if(!this.music.hasOwnProperty(key)) continue;
 
-        if(!!this.music[key]) this.music[key].fadeOut(params.fadeOut);
+        if(!!this.music[key]) {
+            this.music[key].fadeOut(params.fadeOut || 500);
+        }
     }
 }
 
