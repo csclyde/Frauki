@@ -64,7 +64,7 @@
          "name":"Background_2",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -75,7 +75,7 @@
          "name":"Midground_2",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -86,7 +86,7 @@
          "name":"Foreground_2",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -2539,7 +2539,6 @@
                     {
                      "closed_graphic":"orb",
                      "id":"third_orbule",
-                     "open_sound":"skull_door",
                      "thresholdAttempts":"3"
                     },
                  "rotation":0,
@@ -2669,7 +2668,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "width":0,
          "x":0,
          "y":0
@@ -3082,7 +3081,7 @@
          "name":"Background_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -3093,7 +3092,7 @@
          "name":"Midground_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -3104,7 +3103,7 @@
          "name":"Foreground_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -5695,8 +5694,7 @@
                  "properties":
                     {
                      "closed_graphic":"orb",
-                     "id":"first_orbule",
-                     "open_sound":"skull_door"
+                     "id":"first_orbule"
                     },
                  "rotation":0,
                  "type":"",
@@ -6127,7 +6125,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "width":0,
          "x":0,
          "y":0
@@ -6923,8 +6921,6 @@
                  "name":"music_left_right",
                  "properties":
                     {
-                     "fadeLeft":"500",
-                     "fadeRight":"500",
                      "right":"Surface"
                     },
                  "rotation":0,
@@ -6940,9 +6936,7 @@
                  "name":"music_up_down",
                  "properties":
                     {
-                     "down":"Ruins",
-                     "fadeDown":"500",
-                     "fadeUp":"500"
+                     "down":"Ruins"
                     },
                  "rotation":0,
                  "type":"trigger",
@@ -6957,9 +6951,7 @@
                  "name":"music_left_right",
                  "properties":
                     {
-                     "fadeLeft":"500",
                      "fadeOut":"4000",
-                     "fadeRight":"500",
                      "left":"Ruins"
                     },
                  "rotation":0,
@@ -6975,8 +6967,6 @@
                  "name":"music_up_down",
                  "properties":
                     {
-                     "fadeDown":"500",
-                     "fadeUp":"500",
                      "up":"Surface"
                     },
                  "rotation":0,
@@ -6988,7 +6978,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "width":0,
          "x":0,
          "y":0
@@ -10214,8 +10204,7 @@
                  "properties":
                     {
                      "closed_graphic":"apple",
-                     "id":"heal_trainer",
-                     "open_sound":"skull_door"
+                     "id":"heal_trainer"
                     },
                  "rotation":0,
                  "type":"",
@@ -10251,8 +10240,7 @@
                     {
                      "closed_graphic":"mystery",
                      "id":"tutorial_goodie",
-                     "open_direction":"down",
-                     "open_sound":"skull_door"
+                     "open_direction":"down"
                     },
                  "rotation":0,
                  "type":"",
@@ -10715,8 +10703,6 @@
                  "name":"music_left_right",
                  "properties":
                     {
-                     "fadeLeft":"500",
-                     "fadeRight":"500",
                      "left":"Surface"
                     },
                  "rotation":0,

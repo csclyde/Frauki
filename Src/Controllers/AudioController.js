@@ -6,6 +6,7 @@ AudioController = function() {
     events.subscribe('play_music', this.PlayMusic, this);
     events.subscribe('stop_music', this.StopMusic, this);
     events.subscribe('stop_all_music', this.StopAllMusic, this);
+    events.subscribe('fade_music', this.FadeMusic, this);
 
     events.subscribe('stop_attack_sounds', function() {
         for(var key in this.sounds) {
@@ -90,9 +91,9 @@ AudioController.prototype.StopSound = function(params) {
 AudioController.prototype.PlayMusic = function(params) {
     if(!!params.name && !!this.music[params.name] && !!this.music[params.name].play) {
 
-            this.music[params.name].play('intro', 0, 0, false);
-            this.music[params.name].fadeTo(params.fadeIn, this.music[params.name].volumeStatic);
+            this.music[params.name].play('intro', 0, this.music[params.name].volumeStatic, false);
 
+            this.currentMusic = this.music[params.name];
     }
 };
 
@@ -110,7 +111,17 @@ AudioController.prototype.StopAllMusic = function(params) {
             this.music[key].fadeOut(params.fadeOut || 500);
         }
     }
-}
+};
+
+AudioController.prototype.FadeMusic = function( params) {
+    //volume, duration
+
+    this.currentMusic.fadeTo(500, params.volume || 0);
+
+    game.time.events.add(params.duration || 0, function() {
+        audioController.currentMusic.fadeTo(500, audioController.currentMusic.volumeStatic);
+    });
+};
 
 //NOTES
 //Each element of the sounds object could be either a clip or an array. If

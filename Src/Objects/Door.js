@@ -176,7 +176,7 @@ function PerformOpen(d, save, silent) {
     if(!silent) {
         if(!!d.open_sound) {
             events.publish('play_sound', {name: d.open_sound, restart: true });
-        } else {
+        } else if(!!d.facing) {
             events.publish('play_sound', {name: 'door_break', restart: true });
         }
 
@@ -184,6 +184,7 @@ function PerformOpen(d, save, silent) {
         events.publish('camera_shake', {magnitudeX: 0.4, magnitudeY: 0, duration: 5000 });
 
         events.publish('play_sound', {name: 'door_rumble', restart: true });
+        events.publish('fade_music', { volume: 0.1, duration: 5000 });
         setTimeout(function() {
             //play sound
         }, 2000);
