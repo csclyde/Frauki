@@ -33,6 +33,7 @@ FileMap.Audio = [
 	{ Name: 'attack_connect', File: 'Data/Sfx/attack_connect.wav', Volume: 0.9, Loop: false },
 
 	{ Name: 'jump', File: 'Data/Sfx/jump.wav', Volume: 0.2, Loop: false },
+	{ Name: 'roll', File: 'Data/Sfx/roll.wav', Volume: 0.2, Loop: false },
 	{ Name: 'ouch', File: 'Data/Sfx/Ouch.wav', Volume: 0.7, Loop: false },
 	{ Name: 'running', File: 'Data/Sfx/run.wav', Volume: 0.2, Loop: true },
 	{ Name: 'slide', File: 'Data/Sfx/slide.wav', Volume: 0.3, Loop: false },
@@ -42,11 +43,16 @@ FileMap.Audio = [
 	{ Name: 'clang', File: 'Data/Sfx/clang.wav', Volume: 0.3, Loop: false },
 	{ Name: 'smash', File: 'Data/Sfx/smash.wav', Volume: 0.7, Loop: false },
 	{ Name: 'robosplosion', File: 'Data/Sfx/robosplosion.wav', Volume: 0.9, Loop: false },
+	{ Name: 'healing', File: 'Data/Sfx/healing.wav', Volume: 0.6, Loop: false },
+	{ Name: 'apple', File: 'Data/Sfx/apple.wav', Volume: 0.6, Loop: false },
+	{ Name: 'low_health', File: 'Data/Sfx/low_health.wav', Volume: 0.6, Loop: true },
 
 	{ Name: 'door_break', File: 'Data/Sfx/door_break.wav', Volume: 5.0, Loop: false },
 	{ Name: 'crystal_door', File: 'Data/Sfx/crystal_door.wav', Volume: 0.5, Loop: false },
 	{ Name: 'skull_door', File: 'Data/Sfx/skull_door.wav', Volume: 0.9, Loop: false },
 	{ Name: 'door_rumble', File: 'Data/Sfx/door_rumble.wav', Volume: 0.5, Loop: false },
+
+	{ Name: 'floor_crumble', File: 'Data/Sfx/crumble.wav', Volume: 0.5, Loop: false },
 ];
 
 FileMap.Music = [

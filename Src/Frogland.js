@@ -397,6 +397,9 @@ Frogland.DislodgeTile = function(tile) {
 
         projectileController.FallingTile(tile);
 
+        events.publish('play_sound', {name: 'floor_crumble'});
+
+
         setTimeout(function() { 
             if(!!tile) {
                 Frogland.DislodgeTile(Frogland.map.getTile(tile.x - 1, tile.y, 'Collision_' + Frogland.currentLayer));

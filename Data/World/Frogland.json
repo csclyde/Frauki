@@ -64,7 +64,7 @@
          "name":"Background_2",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -75,7 +75,7 @@
          "name":"Midground_2",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -86,7 +86,7 @@
          "name":"Foreground_2",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -2668,7 +2668,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "width":0,
          "x":0,
          "y":0
@@ -3081,7 +3081,7 @@
          "name":"Background_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -3092,7 +3092,7 @@
          "name":"Midground_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -3103,7 +3103,7 @@
          "name":"Foreground_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -5892,8 +5892,7 @@
                  "properties":
                     {
                      "closed_graphic":"orb",
-                     "id":"secret_chamber",
-                     "open_sound":"skull_door"
+                     "id":"secret_chamber"
                     },
                  "rotation":0,
                  "type":"",
@@ -6012,8 +6011,7 @@
                  "properties":
                     {
                      "closed_graphic":"mystery",
-                     "id":"soccer_goal",
-                     "open_sound":"skull_door"
+                     "id":"soccer_goal"
                     },
                  "rotation":0,
                  "type":"",
@@ -6125,7 +6123,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "width":0,
          "x":0,
          "y":0

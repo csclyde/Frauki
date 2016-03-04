@@ -681,6 +681,9 @@ Player.prototype.Roll = function(params) {
 
         effectsController.EnergyStreak();
         effectsController.SpriteTrail(frauki, 100, 400, 300);
+
+        events.publish('play_sound', {name: 'roll'});
+
     } else {
         this.DoubleJump();
     }
@@ -1071,6 +1074,9 @@ Player.prototype.Healing = function() {
         //send the heal message
         events.publish('energy_heal', {});
         this.ChangeState(this.Standing);
+        events.publish('play_sound', {name: 'apple'});
+        events.publish('play_sound', {name: 'healing'});
+
     }
 };
 
