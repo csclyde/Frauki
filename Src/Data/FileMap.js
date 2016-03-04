@@ -26,7 +26,7 @@ FileMap.Atlas = [
 
 FileMap.Audio = [
 	{ Name: 'attack_slash', File: 'Data/Sfx/attack_slash.wav', Volume: 0.8, Loop: false },
-	{ Name: 'attack_stab', File: 'Data/Sfx/attack_stab.wav', Volume: 0.5, Loop: false },
+	{ Name: 'attack_stab', File: 'Data/Sfx/attack_stab.wav', Volume: 0.8, Loop: false },
 	{ Name: 'attack_dive_charge', File: 'Data/Sfx/attack_dive_charge.wav', Volume: 0.4, Loop: false },
 	{ Name: 'attack_dive_fall', File: 'Data/Sfx/attack_dive_fall.wav', Volume: 0.4, Loop: true },
 	{ Name: 'attack_dive_land', File: 'Data/Sfx/attack_dive_land.wav', Volume: 0.5, Loop: false },
