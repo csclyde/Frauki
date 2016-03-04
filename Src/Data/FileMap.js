@@ -25,26 +25,26 @@ FileMap.Atlas = [
 ];
 
 FileMap.Audio = [
-	{ Name: 'attack_slash', File: 'Data/Sfx/attack_slash.wav', Volume: 0.9, Loop: false },
+	{ Name: 'attack_slash', File: 'Data/Sfx/attack_slash.wav', Volume: 0.8, Loop: false },
 	{ Name: 'attack_stab', File: 'Data/Sfx/attack_stab.wav', Volume: 0.5, Loop: false },
 	{ Name: 'attack_dive_charge', File: 'Data/Sfx/attack_dive_charge.wav', Volume: 0.4, Loop: false },
 	{ Name: 'attack_dive_fall', File: 'Data/Sfx/attack_dive_fall.wav', Volume: 0.4, Loop: true },
 	{ Name: 'attack_dive_land', File: 'Data/Sfx/attack_dive_land.wav', Volume: 0.5, Loop: false },
 	{ Name: 'attack_connect', File: 'Data/Sfx/attack_connect.wav', Volume: 0.9, Loop: false },
 
-	{ Name: 'jump', File: 'Data/Sfx/jump.wav', Volume: 0.3, Loop: false },
+	{ Name: 'jump', File: 'Data/Sfx/jump.wav', Volume: 0.2, Loop: false },
 	{ Name: 'ouch', File: 'Data/Sfx/Ouch.wav', Volume: 0.7, Loop: false },
 	{ Name: 'running', File: 'Data/Sfx/run.wav', Volume: 0.2, Loop: true },
 	{ Name: 'slide', File: 'Data/Sfx/slide.wav', Volume: 0.3, Loop: false },
 	{ Name: 'no_energy', File: 'Data/Sfx/no_energy.wav', Volume: 0.7, Loop: false },
-	{ Name: 'airhike', File: 'Data/Sfx/airhike.wav', Volume: 0.3, Loop: false },
+	{ Name: 'airhike', File: 'Data/Sfx/airhike.wav', Volume: 0.2, Loop: false },
 	{ Name: 'energy_bit', File: 'Data/Sfx/energy_bit.wav', Volume: 0.2, Loop: false },
 	{ Name: 'clang', File: 'Data/Sfx/clang.wav', Volume: 0.3, Loop: false },
 	{ Name: 'smash', File: 'Data/Sfx/smash.wav', Volume: 0.7, Loop: false },
 	{ Name: 'robosplosion', File: 'Data/Sfx/robosplosion.wav', Volume: 0.9, Loop: false },
 
-	{ Name: 'door_break', File: 'Data/Sfx/door_break.wav', Volume: 0.9, Loop: false },
-	{ Name: 'crystal_door', File: 'Data/Sfx/crystal_door.wav', Volume: 0.9, Loop: false },
+	{ Name: 'door_break', File: 'Data/Sfx/door_break.wav', Volume: 5.0, Loop: false },
+	{ Name: 'crystal_door', File: 'Data/Sfx/crystal_door.wav', Volume: 0.5, Loop: false },
 	{ Name: 'skull_door', File: 'Data/Sfx/skull_door.wav', Volume: 0.9, Loop: false },
 ];
 
