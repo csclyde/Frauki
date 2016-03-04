@@ -46,6 +46,7 @@ FileMap.Audio = [
 	{ Name: 'door_break', File: 'Data/Sfx/door_break.wav', Volume: 5.0, Loop: false },
 	{ Name: 'crystal_door', File: 'Data/Sfx/crystal_door.wav', Volume: 0.5, Loop: false },
 	{ Name: 'skull_door', File: 'Data/Sfx/skull_door.wav', Volume: 0.9, Loop: false },
+	{ Name: 'door_rumble', File: 'Data/Sfx/door_rumble.wav', Volume: 0.5, Loop: false },
 ];
 
 FileMap.Music = [

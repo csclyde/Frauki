@@ -168,11 +168,6 @@ function PerformOpen(d, save, silent) {
         movementTarget = d.body.y + 64;
     }
 
-
-    setTimeout(function() {
-        //play sound
-    }, 2000);
-
     d.state = d.Opening;
 
     var openDuration = 3000;
@@ -187,6 +182,11 @@ function PerformOpen(d, save, silent) {
 
         openDuration = 5000;
         events.publish('camera_shake', {magnitudeX: 0.4, magnitudeY: 0, duration: 5000 });
+
+        events.publish('play_sound', {name: 'door_rumble', restart: true });
+        setTimeout(function() {
+            //play sound
+        }, 2000);
     }
 
     var openTween = game.add.tween(d.body).to({y: movementTarget}, openDuration, Phaser.Easing.Quintic.InOut, true);
