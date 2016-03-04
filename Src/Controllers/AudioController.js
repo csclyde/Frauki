@@ -116,7 +116,7 @@ AudioController.prototype.StopAllMusic = function(params) {
 AudioController.prototype.FadeMusic = function( params) {
     //volume, duration
 
-    if(!!this.currentMusic) return;
+    if(!this.currentMusic) return;
 
     this.currentMusic.fadeTo(500, params.volume || 0);
 
