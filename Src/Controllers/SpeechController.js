@@ -13,6 +13,18 @@ SpeechController = function() {
 		}
 	}, this);
 
+	events.subscribe('player_roll', function(params) {
+		this.HideSpeech();
+	}, this);
+
+	events.subscribe('player_jump', function(params) {
+		this.HideSpeech();
+	}, this);
+
+	events.subscribe('player_heal', function(params) {
+		this.HideSpeech();
+	}, this);
+
 	this.timers = new TimerUtil();
 
 };

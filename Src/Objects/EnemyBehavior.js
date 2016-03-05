@@ -188,6 +188,8 @@ EnemyBehavior.Player.IsDangerous = function(e) {
         } else if(frauki.Attacking() && frauki.currentAttack.damage > 0) {
             return true;
         }
+    } else if(EnemyBehavior.Player.IsAbove(e) && frauki.state === frauki.AttackDiveCharge) {
+        return true;
     }
     
     return false;

@@ -28,7 +28,12 @@ Door = function(game, x, y, name) {
     this.animations.add('wit', ['DoorPrism0000'], 10, true, false); 
     this.animations.add('will', ['DoorPrism0001'], 10, true, false); 
     this.animations.add('luck', ['DoorPrism0002'], 10, true, false); 
-    this.animations.add('power', ['DoorPrism0003'], 10, true, false); 
+    this.animations.add('power', ['DoorPrism0003'], 10, true, false);
+
+    this.animations.add('wit_open', ['DoorPrism0004'], 10, true, false); 
+    this.animations.add('will_open', ['DoorPrism0005'], 10, true, false); 
+    this.animations.add('luck_open', ['DoorPrism0006'], 10, true, false); 
+    this.animations.add('power_open', ['DoorPrism0007'], 10, true, false); 
 
     this.animations.add('skull', ['DoorEnemy0000'], 10, true, false);
     this.animations.add('skull_open', ['DoorEnemy0001'], 10, true, false);
@@ -215,7 +220,6 @@ Door.prototype.Opening = function() {
 };
 
 Door.prototype.Open = function() {
-
 };
 
 Door.prototype.GetGraphicName = function() {
@@ -234,13 +238,13 @@ Door.prototype.GetGraphicName = function() {
         } else if(this.facing === 'right') { 
             return 'right_dead';
         } else if(this.prism === 'Wit') {
-            return 'wit';
+            return 'wit_open';
         } else if(this.prism === 'Will') {
-            return 'will';
+            return 'will_open';
         } else if(this.prism === 'Luck') {
-            return 'luck';
+            return 'luck_open';
         } else if(this.prism === 'Power') {
-            return 'power';
+            return 'power_open';
         }
         
     } else {
@@ -261,7 +265,4 @@ Door.prototype.GetGraphicName = function() {
             return 'power';
         }
     }
-
-
-    
 };

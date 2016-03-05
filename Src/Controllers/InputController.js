@@ -334,7 +334,7 @@ InputController.prototype.OnUp = function(pressed) {
 
         events.publish('activate_speech', {});
 
-        if(frauki.body.onFloor()) {
+        if(frauki.body.onFloor() && frauki.body.velocity.x < PLAYER_SPEED()) {
             //switch between layers if they are in a doorway
             if(game.physics.arcade.overlap(frauki, Frogland.door1Group)) {
                 if(Frogland.currentLayer === 3) Frogland.ChangeLayer(2);

@@ -142,11 +142,9 @@ Main.Restart = function() {
         PrepareShardsForDeath();
         GameData.SaveShardPositions();
         
-        frauki.alpha = 1;
         Frogland.SpawnFrauki();
 
-        frauki.state = frauki.Materializing;
-        frauki.SetDirection('right');
+        frauki.Reset();
 
         energyController.Reset();
         game.time.slowMotion = 1;

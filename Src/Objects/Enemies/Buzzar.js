@@ -145,7 +145,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
         // }, null, this);
 
         if(this.timers.TimerUp('attack') || this.body.onFloor() || this.body.onWall()) {
-            this.timers.SetTimer('creep_waiting', 1000 + game.rnd.between(500, 1500));
+            this.timers.SetTimer('creep_waiting', 3000 + game.rnd.between(500, 1500));
             return true;
         }
 
@@ -191,17 +191,17 @@ Enemy.prototype.types['Buzzar'] =  function() {
         else
             this.body.velocity.y -= 10;
 
-        if(this.body.velocity.x > 600)
-            this.body.velocity.x = 600;
+        if(this.body.velocity.x > 450)
+            this.body.velocity.x = 450;
 
-        if(this.body.velocity.x < -600)
-            this.body.velocity.x = -600;
+        if(this.body.velocity.x < -450)
+            this.body.velocity.x = -450;
 
-        if(this.body.velocity.y > 600)
-            this.body.velocity.y = 600;
+        if(this.body.velocity.y > 450)
+            this.body.velocity.y = 450;
 
-        if(this.body.velocity.y < -600)
-            this.body.velocity.y = -600;
+        if(this.body.velocity.y < -450)
+            this.body.velocity.y = -450;
 
         if(this.timers.TimerUp('enraged')) {
             return true;

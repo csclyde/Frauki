@@ -132,8 +132,6 @@ Collision.OverlapAttackWithEnemy = function(f, e) {
 
     e.TakeHit(damage);
     frauki.LandHit(e, damage);
-
-    effectsController.SpawnEnergyNuggets(e.body, frauki.body, 'positive', damage * 3);
 };
 
 Collision.OverlapAttackWithEnemyAttack = function(e, f) {

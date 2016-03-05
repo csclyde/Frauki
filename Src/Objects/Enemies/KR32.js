@@ -138,9 +138,9 @@ Enemy.prototype.types['KR32'] =  function() {
 			this.state = this.Slashing;
 
 			if(this.direction === 'left') {
-				this.body.velocity.x = -550;
+				this.body.velocity.x = -400;
 			} else {
-				this.body.velocity.x = 550;
+				this.body.velocity.x = 400;
 			}
 		}
 	}
@@ -162,7 +162,7 @@ Enemy.prototype.types['KR32'] =  function() {
 				this.state = this.Blocking;
 			}
 
-			this.timers.SetTimer('attack', 500 + Math.random() * 1000);
+			this.timers.SetTimer('attack', 2000 + Math.random() * 1000);
 		}
 	};
 
@@ -183,7 +183,7 @@ Enemy.prototype.types['KR32'] =  function() {
 
 			this.body.drag.x = 600;
 
-			this.timers.SetTimer('attack', 500 + Math.random() * 1000);
+			this.timers.SetTimer('attack', 2000 + Math.random() * 1000);
 		}
 	};
 

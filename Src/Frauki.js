@@ -30,39 +30,10 @@ Player = function (game, x, y, name) {
     this.tweens.roll = null;
 
     this.states = {};
-    this.states.direction = 'right';
-    this.states.crouching = false;
-    this.states.hasFlipped = false;
-    this.states.upPresseed = false;
-    this.states.wasAttacking = false;
-    this.states.inWater = false;
-    this.states.onCloud = false;
-    this.states.inUpdraft = false;
-    this.states.droppingThroughCloud = false;
-    this.states.onLeftSlope = false;
-    this.states.onRightSlope = false;
-    this.states.attackFallLanded = false;
-    this.states.shielded = false;
-
     this.movement = {};
-    this.movement.diveVelocity = 0;
-    this.movement.jumpSlashVelocity = 0;
-    this.movement.rollBoost = 0;
-    this.movement.startRollTime = game.time.now;
-    this.movement.rollPop = false;
-    this.movement.rollPrevVel = 0;
-    this.movement.rollDirection = 1;
-
     this.upgrades = {};
-    this.upgrades.roll = true;
-    this.upgrades.hike = true;
-    this.upgrades.attackFront = true;
-    this.upgrades.attackOverhead = true;
-    this.upgrades.attackStab = true;
-    this.upgrades.attackDive = true;
 
-    this.attack = {};
-    this.attack.activeCharge = 0;
+    this.Reset();
 
     this.timers = new TimerUtil();
 
@@ -302,7 +273,7 @@ Player.prototype.Attacking = function() {
 Player.prototype.InAttackAnim = function() {
     var frameName = this.animations.currentAnim.name;
 
-    if(['attack_front', 'attack_overhead', 'attack_jump', 'attack_stab', 'attack_dive_charge', 'attack_dive_fall', 'attack_dive_land', 'attack_fall', 'attack_lunge', 'attack_whiff'].indexOf(frameName) > -1) {
+    if(['attack_front', 'attack_overhead', 'attack_jump', 'attack_stab', 'attack_dive_charge', 'attack_dive_fall', 'attack_dive_land', 'attack_fall', 'attack_lunge'].indexOf(frameName) > -1) {
         return true;
     } else {
         return false;
@@ -336,6 +307,40 @@ Player.prototype.GetDirectionMultiplier = function() {
     }
     
     return dir;
+};
+
+Player.prototype.Reset = function() {
+    this.alpha = 1;
+    this.state = this.Materializing;
+    this.SetDirection('right');
+
+    this.states.crouching = false;
+    this.states.hasFlipped = false;
+    this.states.upPresseed = false;
+    this.states.wasAttacking = false;
+    this.states.inWater = false;
+    this.states.onCloud = false;
+    this.states.inUpdraft = false;
+    this.states.droppingThroughCloud = false;
+    this.states.onLeftSlope = false;
+    this.states.onRightSlope = false;
+    this.states.attackFallLanded = false;
+    this.states.shielded = false;
+
+    this.movement.diveVelocity = 0;
+    this.movement.jumpSlashVelocity = 0;
+    this.movement.rollBoost = 0;
+    this.movement.startRollTime = game.time.now;
+    this.movement.rollPop = false;
+    this.movement.rollPrevVel = 0;
+    this.movement.rollDirection = 1;
+
+    this.upgrades.roll = true;
+    this.upgrades.hike = true;
+    this.upgrades.attackFront = true;
+    this.upgrades.attackOverhead = true;
+    this.upgrades.attackStab = true;
+    this.upgrades.attackDive = true;
 };
 
 
