@@ -186,12 +186,6 @@ Player.prototype.postStateUpdate = function() {
         this.states.hasFlipped = false;
         this.movement.rollBoost = 0;
     }
-    
-    if(this.state === this.Running && this.animations.currentAnim.name === 'run') {
-        events.publish('play_sound', {name: 'running'});
-    } else {
-        events.publish('stop_sound', {name: 'running'});
-    }
 
     if(!this.timers.TimerUp('frauki_invincible')) {
         frauki.alpha = (((Math.sin(game.time.now / 50) + 1) / 2) * 0.4) + 0.5;
@@ -223,6 +217,12 @@ Player.prototype.PlayAnim = function(name) {
 Player.prototype.ChangeState = function(newState) {
     if(this.state !== this.Stunned) {
         this.state = newState;
+    }
+
+    if(newState === this.Running) {
+        events.publish('play_sound', {name: 'running'});
+    } else {
+        events.publish('stop_sound', {name: 'running'});
     }
 };
 
@@ -417,7 +417,7 @@ Player.prototype.Jump = function(params) {
         }
         //roll jump
         else if(this.state === this.Rolling) {
-            if(energyController.UseEnergy(3)) { 
+            if(energyController.UseEnergy(1)) { 
                 this.ChangeState(this.Jumping);
                 this.PlayAnim('roll_jump');
     
@@ -438,6 +438,7 @@ Player.prototype.Jump = function(params) {
             }
             
             events.publish('play_sound', {name: 'jump'});
+            events.publish('stop_sound', {name: 'roll'});
         }
         //overhead into jump atack
         else if(this.state === this.AttackOverhead || this.state === this.AttackFront) {

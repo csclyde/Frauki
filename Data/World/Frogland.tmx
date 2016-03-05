@@ -4246,7 +4246,7 @@
     <property name="thresholdAttempts" value="2"/>
    </properties>
   </object>
-  <object id="1929" gid="66" x="2234.5" y="3093.5" width="16" height="16"/>
+  <object id="1929" gid="66" x="2209.5" y="3036.5" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Triggers_3" visible="0">
   <object id="1568" name="light" type="trigger" x="1035.91" y="4347.5" width="113.333" height="226">
