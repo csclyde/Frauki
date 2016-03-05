@@ -8,7 +8,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
     this.animations.add('die', ['Insectoid/Die0000', 'Insectoid/Die0001', 'Insectoid/Die0002', 'Insectoid/Die0003'], 10, false, false);
 
     this.attackTimer = 0;
-    this.damage = 2;
+    this.damage = 1;
     this.energy = 4;
 
     this.body.maxVelocity.y = 500;

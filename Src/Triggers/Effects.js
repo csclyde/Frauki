@@ -52,7 +52,7 @@ TriggerController.prototype.triggers['regen'] = {
 
 	stay: function(params) {
 
-		var energyDiff = Math.abs(energyController.GetHealth() - 30);
+		var energyDiff = Math.abs(energyController.GetHealth() - energyController.GetMaxHealth());
 		var step = 0.10;
 
 		//if the timer is up, tick the health and reset the timer

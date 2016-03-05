@@ -553,7 +553,7 @@ Player.prototype.Slash = function(params) {
 };
 
 Player.prototype.FrontSlash = function() {
-    if(energyController.UseEnergy(5)) {
+    if(energyController.UseEnergy(4)) {
         if(this.upgrades.attackOverhead && this.states.upPressed) {
             this.ChangeState(this.AttackOverhead);
         } else {
@@ -569,7 +569,7 @@ Player.prototype.FrontSlash = function() {
 };
 
 Player.prototype.LungeSlash = function() {
-    if(energyController.UseEnergy(5)) {
+    if(energyController.UseEnergy(3)) {
         this.ChangeState(this.AttackLunge);
 
         events.publish('play_sound', {name: 'attack_slash', restart: true });
@@ -594,7 +594,7 @@ Player.prototype.FallSlash = function() {
 };
 
 Player.prototype.DiveSlash = function() {
-    if(energyController.UseEnergy(7)) {
+    if(energyController.UseEnergy(6)) {
         this.ChangeState(this.AttackDiveCharge);
         this.movement.diveVelocity = 950;
 
@@ -607,7 +607,7 @@ Player.prototype.DiveSlash = function() {
 };
 
 Player.prototype.JumpSlash = function() {
-    if(energyController.UseEnergy(6)) {
+    if(energyController.UseEnergy(4)) {
         this.ChangeState(this.AttackJump);
         
         if(this.body.velocity.y > PLAYER_DOUBLE_JUMP_VEL()) {
@@ -662,7 +662,7 @@ Player.prototype.Roll = function(params) {
 
     if(this.body.onFloor()) {
         
-        if(!energyController.UseEnergy(3))
+        if(!energyController.UseEnergy(1))
             return false;
 
         this.ChangeState(this.Rolling);
@@ -728,8 +728,6 @@ Player.prototype.LandHit = function(e, damage) {
 };
 
 Player.prototype.Hit = function(e, damage, grace_duration) {
-
-    damage = damage * 4;
 
     if(this.state === this.Stunned) {
         damage *= 1.5;

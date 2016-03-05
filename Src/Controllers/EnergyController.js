@@ -2,14 +2,11 @@ EnergyController = function() {
 
 	var that  = this;
 
-	this.energy = 15;
-	this.health = 30;
-	this.charge = 30;
+	this.energy = 12;
+	this.health = 12;
+	this.charge = 12;
 
 	this.latentHealth = 0;
-
-	this.tickTimer = 0;
-	this.gracePeriod = 0;
 
 	this.timers = new TimerUtil();
 
@@ -17,7 +14,7 @@ EnergyController = function() {
 
 	events.subscribe('energy_heal', function(params) {
 		if(this.remainingApples > 0) {
-			this.AddHealth(18);
+			this.AddHealth(8);
 			this.remainingApples--;
 			effectsController.SpawnAppleCore(frauki.body.center.x, frauki.body.y - 5);
 		}
@@ -31,76 +28,41 @@ EnergyController.prototype.Create = function() {
 
 EnergyController.prototype.Update = function() {
 
-	var energyDiff = this.energy - 15;
-	var step = 0.15;
-
-	//
-	if(game.time.now - this.energyUsageTimestamp > 2000) {
-		step += 0.10;
-	} else {
-		step += ((game.time.now - this.energyUsageTimestamp) / 2000) * 0.10;
-	}
-
-	if(frauki.InAttackAnim() || frauki.Attacking() || frauki.state === frauki.Rolling) {
-		step /= 10;
-	}
 
 	//if the timer is up, tick the energy and reset the timer
-	if(game.time.now > this.tickTimer && game.time.now > this.gracePeriod) {
-		if(Math.abs(energyDiff) < step) {
-			this.energy = 15;
-		} else {
-			if(this.energy > 15) {
-				this.energy -= step / 100;
-			} else {
-				if(this.energy < 0) {
-					this.energy += step * 0.8;
-				} else {
-					this.energy += step;
-				}
-			}
-		}
+	if(this.timers.TimerUp('energy_tick') && this.timers.TimerUp('energy_grace') && !frauki.InAttackAnim() && frauki.state !== frauki.Rolling) {
+		this.timers.SetTimer('energy_tick', 250);
 
-		this.tickTimer = game.time.now + 20;
+		if(this.energy < this.GetMaxEnergy()) {
+			this.energy++;
+		}
 	}
 
 	//if there is latent health present, start adding it to the actual health
-	if(this.latentHealth > 0) {
-		var healthStep = 0.15;
+	if(this.timers.TimerUp('health_tick') && this.latentHealth > 0) {
+		this.timers.SetTimer('health_tick', 200);
 
-		if(this.latentHealth < healthStep) {
-			this.health += this.latentHealth;
-			this.latentHealth = 0;
-		} else {
-			this.latentHealth -= healthStep;
-			this.health += healthStep;
+		if(this.health < this.GetMaxHealth()) {
+			this.health++;
+			this.latentHealth--;
 		}
 	}
-
-	//clamp the enrgy and neutral point;
-	if(this.energy > 15)
-		this.energy = 15;
-
-	if(this.charge > 30)
-		this.charge = 30;
-
 
 	if(this.charge < 0) {
 		this.charge = 0;
 	}
 
-	if(this.health > 30)
-		this.health = 30;
 	if(this.health <= 0)
 		Main.Restart();
 };
 
 
 EnergyController.prototype.UseEnergy = function(amt) {
+	amt = Math.floor(amt);
 	//if they are below a threshold, they are in beast mode
-	if(this.energy > 0) {
-		this.energy -= amt / 1;
-		this.gracePeriod = game.time.now + 600;
+	if(this.energy >= amt) {
+		this.energy -= amt;
+		this.timers.SetTimer('energy_grace', 1000);
 		this.energyUsageTimestamp = game.time.now;
 		return true;
 	} else {
@@ -110,12 +72,16 @@ EnergyController.prototype.UseEnergy = function(amt) {
 };
 
 EnergyController.prototype.RemoveEnergy = function(amt) {
+	amt = Math.floor(amt);
+
 	if(this.energy > 0) {
 		this.energy -= amt;
-		this.gracePeriod = game.time.now + 400;
+		this.timers.SetTimer('energy_grace', 1000);
 		this.energyUsageTimestamp = game.time.now;
 		return true;
 	}
+
+	return false;
 };
 
 EnergyController.prototype.GetEnergy = function() {
@@ -124,40 +90,32 @@ EnergyController.prototype.GetEnergy = function() {
 };
 
 EnergyController.prototype.AddEnergy = function(amt) {
+	amt = Math.floor(amt);
 
-	this.energy += amt;
+	if(this.energy + amt < this.GetMaxEnergy()) {
+		this.energy += amt;
+	} else {
+		this.energy = this.GetMaxEnergy();
+	}
 };
 
 EnergyController.prototype.GetMaxEnergy = function() {
 
-	return 15;
+	return 12;
 };
 
 
 EnergyController.prototype.AddHealth = function(amt) {
-
-	this.latentHealth += amt;
+	if(this.health + amt < this.GetMaxHealth()) {
+		this.latentHealth += Math.floor(amt);
+	} else {
+		this.latentHealth = this.GetMaxHealth() - this.health;
+	}
 };
 
 EnergyController.prototype.RemoveHealth = function(amt) {
 
-	this.health -= amt;
-	
-	// if(this.energy > this.health) {
-	// 	if(this.energy - this.health > amt) {
-	// 		this.energy -= amt;
-	// 	} else {
-	// 		amt -= (this.energy - this.health);
-	// 		this.health -= amt;
-	// 		this.energy = this.health;
-	// 	}
-	// } else {
-	// 	this.health -= amt;
-
-	// 	if(this.energy > this.health) {
-	// 		this.energy = this.health;
-	// 	}
-	// }
+	this.health -= Math.floor(amt);
 };
 
 EnergyController.prototype.GetHealth = function() {
@@ -167,7 +125,7 @@ EnergyController.prototype.GetHealth = function() {
 
 EnergyController.prototype.GetMaxHealth = function() {
 
-	return 30;
+	return 12;
 };
 
 
@@ -177,16 +135,23 @@ EnergyController.prototype.GetCharge = function() {
 };
 
 EnergyController.prototype.AddCharge = function(amt) {
+	amt = Math.floor(amt);
 
-	this.charge += amt;
+	if(this.charge + amt < this.GetMaxCharge()) {
+		this.charge += amt;
+	} else {
+		this.charge = this.GetMaxCharge();
+	}
 };
 
 EnergyController.prototype.RemoveCharge = function(amt) {
 
-	this.charge -= amt;
+	this.charge -= Math.floor(amt);
 };
 
 EnergyController.prototype.UseCharge = function(amt) {
+	amt = Math.floor(amt);
+
 	if(this.charge >= amt) {
 		this.charge -= amt;
 		return true;
@@ -197,15 +162,20 @@ EnergyController.prototype.UseCharge = function(amt) {
 
 EnergyController.prototype.MaxCharge = function() {
 
-	this.charge = 30;
+	this.charge = 12;
+};
+
+EnergyController.prototype.GetMaxCharge = function() {
+
+	return 12;
 };
 
 
 EnergyController.prototype.Reset = function() {
 
-	this.health = 30;
-	this.energy = 15;
-	this.charge = 30;
+	this.health = 12;
+	this.energy = 12;
+	this.charge = 12;
 	this.latentHealth = 0;
 	this.remainingApples = 0;
 };

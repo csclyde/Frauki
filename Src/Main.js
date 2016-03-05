@@ -42,11 +42,11 @@ Main.create = function() {
     effectsController.Fade(false);
 
     this.UITextures = {};
-    this.UITextures.EnergyBar0000 = PIXI.TextureCache[game.cache.getFrameByName('UI', 'EnergyBar0000').uuid];
-    this.UITextures.EnergyBar0001 = PIXI.TextureCache[game.cache.getFrameByName('UI', 'EnergyBar0001').uuid];
-    this.UITextures.EnergyBar0002 = PIXI.TextureCache[game.cache.getFrameByName('UI', 'EnergyBar0002').uuid];
-    this.UITextures.EnergyBar0005 = PIXI.TextureCache[game.cache.getFrameByName('UI', 'EnergyBar0005').uuid];
-    this.UITextures.EnergyBar0006 = PIXI.TextureCache[game.cache.getFrameByName('UI', 'EnergyBar0006').uuid];
+    // this.UITextures.EnergyBar0000 = PIXI.TextureCache[game.cache.getFrameByName('UI', 'EnergyBar0000').uuid];
+    // this.UITextures.EnergyBar0001 = PIXI.TextureCache[game.cache.getFrameByName('UI', 'EnergyBar0001').uuid];
+    // this.UITextures.EnergyBar0002 = PIXI.TextureCache[game.cache.getFrameByName('UI', 'EnergyBar0002').uuid];
+    // this.UITextures.EnergyBar0005 = PIXI.TextureCache[game.cache.getFrameByName('UI', 'EnergyBar0005').uuid];
+    // this.UITextures.EnergyBar0006 = PIXI.TextureCache[game.cache.getFrameByName('UI', 'EnergyBar0006').uuid];
 };
 
 Main.update = function() {
@@ -200,33 +200,59 @@ Main.Restart = function() {
 
 Main.DrawUI = function() {
     
-    //render the energy bar backdrops
-    this.RenderTextureFromAtlas('UI', 'EnergyBar0001', 12, 12);
-    this.RenderTextureFromAtlas('UI', 'EnergyBar0001', 12, 24);
+    this.RenderTextureFromAtlas('UI', 'HudFrame0001', 14, 13);
 
-    //the stamina bar
-    this.RenderTextureFromAtlas('UI', 'EnergyBar0002', 12, 23, energyController.GetEnergy() / 15);
+    //health pips
+    for(var i = 0, len = energyController.GetHealth(); i < len; i++) {
+        var pipFrame = '';
 
-    //if theyre carrying the wit shard
-    if(GetCurrentShardType() === 'Wit') {
-        //oscillate the opacity of the white bar on top
-        this.RenderTextureFromAtlas('UI', 'EnergyBar0003', 12, 23, energyController.GetEnergy() / 15, 1, (Math.sin(game.time.now / 80) + 1) / 2);
+        if(i < 3) {
+            pipFrame = 'HealthPips0000';
+        } else if(i < 6) {
+            pipFrame = 'HealthPips0001';
+        } else if(i < 9) {
+            pipFrame = 'HealthPips0002';
+        } else {
+            pipFrame = 'HealthPips0003';
+        }
+
+        this.RenderTextureFromAtlas('UI', pipFrame, 14 + (7 * i), 13);
     }
 
-    //the health bar
-    this.RenderTextureFromAtlas('UI', 'EnergyBar0004', 12, 12, energyController.GetHealth() / 30);
+    for(var i = 0, len = energyController.GetEnergy(); i < len; i++) {
+        var pipFrame = '';
 
-    //oscillate the white bar on top of the health if they have will
-    if(energyController.GetHealth() <= energyController.GetMaxHealth() * 0.35) {
-        //oscillate the opacity of the white bar on top
-        this.RenderTextureFromAtlas('UI', 'EnergyBar0003', 12, 12, energyController.GetHealth() / 30, 1, (Math.sin(game.time.now / 80) + 1) / 2);
+        if(i < 3) {
+            pipFrame = 'EnergyPips0000';
+        } else if(i < 6) {
+            pipFrame = 'EnergyPips0001';
+        } else if(i < 9) {
+            pipFrame = 'EnergyPips0002';
+        } else {
+            pipFrame = 'EnergyPips0003';
+        }
+
+        this.RenderTextureFromAtlas('UI', pipFrame, 14 + (7 * i), 24);
     }
 
-    //the special bar
-    this.RenderTextureFromAtlas('UI', 'EnergyBar0006', 12, 34, energyController.GetCharge() / 30);
+    for(var i = 0, len = energyController.GetCharge(); i < len; i++) {
+        var pipFrame = '';
+
+        if(i < 3) {
+            pipFrame = 'ChargePips0000';
+        } else if(i < 6) {
+            pipFrame = 'ChargePips0001';
+        } else if(i < 9) {
+            pipFrame = 'ChargePips0002';
+        } else {
+            pipFrame = 'ChargePips0003';
+        }
+
+        this.RenderTextureFromAtlas('UI', pipFrame, 15 + (5 * i), 35);
+    }
 
     //finally, the frame on top of everything else
-    this.RenderTextureFromAtlas('UI', 'EnergyBar0000', 10, 10);
+    this.RenderTextureFromAtlas('UI', 'HudFrame0000', 10, 10);
 
     for(var i = 0; i < energyController.GetApples(); i++) {
         //if this is the last apple in the stable and they are healing
