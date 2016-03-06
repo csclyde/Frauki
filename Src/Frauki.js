@@ -559,7 +559,7 @@ Player.prototype.Slash = function(params) {
 };
 
 Player.prototype.FrontSlash = function() {
-    if(energyController.UseEnergy(4)) {
+    if(energyController.UseEnergy(3)) {
         if(this.upgrades.attackOverhead && this.states.upPressed) {
             this.ChangeState(this.AttackOverhead);
         } else {
@@ -587,7 +587,7 @@ Player.prototype.LungeSlash = function() {
 };
 
 Player.prototype.FallSlash = function() {
-    if(energyController.UseEnergy(5)) {
+    if(energyController.UseEnergy(4)) {
         this.ChangeState(this.AttackFall);
 
         events.publish('play_sound', {name: 'attack_slash', restart: true });
@@ -633,7 +633,7 @@ Player.prototype.JumpSlash = function() {
 };
 
 Player.prototype.StabSlash = function() {
-    if(energyController.UseEnergy(6)) {
+    if(energyController.UseEnergy(5)) {
         this.ChangeState(this.AttackStab);
 
         var dir = this.GetDirectionMultiplier();

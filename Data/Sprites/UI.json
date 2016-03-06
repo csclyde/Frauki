@@ -144,6 +144,96 @@
 	"sourceSize": {"w":90,"h":25},
 	"pivot": {"x":0.511111,"y":0.56}
 },
+"Numbers0000":
+{
+	"frame": {"x":1134,"y":57,"w":9,"h":13},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":15,"y":13,"w":9,"h":13},
+	"sourceSize": {"w":9,"h":13},
+	"pivot": {"x":0.555556,"y":0.538462}
+},
+"Numbers0001":
+{
+	"frame": {"x":1126,"y":57,"w":5,"h":13},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":16,"y":13,"w":5,"h":13},
+	"sourceSize": {"w":5,"h":13},
+	"pivot": {"x":0.8,"y":0.538462}
+},
+"Numbers0002":
+{
+	"frame": {"x":1134,"y":72,"w":9,"h":13},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":14,"y":13,"w":9,"h":13},
+	"sourceSize": {"w":9,"h":13},
+	"pivot": {"x":0.666667,"y":0.538462}
+},
+"Numbers0003":
+{
+	"frame": {"x":1134,"y":87,"w":9,"h":13},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":14,"y":13,"w":9,"h":13},
+	"sourceSize": {"w":9,"h":13},
+	"pivot": {"x":0.666667,"y":0.538462}
+},
+"Numbers0004":
+{
+	"frame": {"x":1145,"y":61,"w":9,"h":13},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":14,"y":13,"w":9,"h":13},
+	"sourceSize": {"w":9,"h":13},
+	"pivot": {"x":0.666667,"y":0.538462}
+},
+"Numbers0005":
+{
+	"frame": {"x":1145,"y":76,"w":9,"h":13},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":14,"y":13,"w":9,"h":13},
+	"sourceSize": {"w":9,"h":13},
+	"pivot": {"x":0.666667,"y":0.538462}
+},
+"Numbers0006":
+{
+	"frame": {"x":1145,"y":91,"w":9,"h":13},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":14,"y":13,"w":9,"h":13},
+	"sourceSize": {"w":9,"h":13},
+	"pivot": {"x":0.666667,"y":0.538462}
+},
+"Numbers0007":
+{
+	"frame": {"x":1156,"y":61,"w":9,"h":13},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":14,"y":13,"w":9,"h":13},
+	"sourceSize": {"w":9,"h":13},
+	"pivot": {"x":0.666667,"y":0.538462}
+},
+"Numbers0008":
+{
+	"frame": {"x":1167,"y":61,"w":9,"h":13},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":14,"y":13,"w":9,"h":13},
+	"sourceSize": {"w":9,"h":13},
+	"pivot": {"x":0.666667,"y":0.538462}
+},
+"Numbers0009":
+{
+	"frame": {"x":1156,"y":76,"w":9,"h":13},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":14,"y":13,"w":9,"h":13},
+	"sourceSize": {"w":9,"h":13},
+	"pivot": {"x":0.666667,"y":0.538462}
+},
 "PortraitsFraukiDazed":
 {
 	"frame": {"x":2,"y":2,"w":56,"h":104},
@@ -313,6 +403,6 @@
 	"format": "RGBA8888",
 	"size": {"w":1184,"h":108},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:87ca6d271317c7c84c01f0f8d47c39bb:1a13d2ad565090581b7ec9da76efec9c:4b774b923918ecd961888279dba3ffad$"
+	"smartupdate": "$TexturePacker:SmartUpdate:edfea51c34bc95b8223b4a20036c8dd9:76d8525e5395e6d88e9e67497fc6e904:4b774b923918ecd961888279dba3ffad$"
 }
 }

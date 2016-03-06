@@ -704,6 +704,14 @@ EffectsController.prototype.JumpDust = function(src) {
     dust.animations.currentAnim.killOnComplete = true;
 };
 
+EffectsController.prototype.DoorDust = function(src) {
+    var dust = game.add.sprite(src.x - 50, src.y - 30, 'Misc', null, Frogland.effectsGroup);
+    dust.animations.add('dust', ['DoorDust0000', 'DoorDust0001', 'DoorDust0002', 'DoorDust0003', 'DoorDust0004'], 10, false, false);
+    dust.animations.play('dust');
+    dust.alpha = 0.5;
+    dust.animations.currentAnim.killOnComplete = true;
+};
+
 EffectsController.prototype.Dust = function(x, y) {
     var dust = game.add.sprite(x - 50, y - 50, 'Misc', null, Frogland.effectsGroup);
     dust.animations.add('dust', ['Dust0000', 'Dust0001', 'Dust0002', 'Dust0003', 'Dust0004', 'Dust0005'], 10, false, false);

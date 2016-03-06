@@ -91,9 +91,16 @@ AudioController.prototype.StopSound = function(params) {
 AudioController.prototype.PlayMusic = function(params) {
     if(!!params.name && !!this.music[params.name] && !!this.music[params.name].play) {
 
-            this.music[params.name].play('intro', 0, this.music[params.name].volumeStatic, false);
+        //this.music[params.name].stop();
+        if(this.music[params.name].isPlaying) {
+            if(!!this.music[params.name].fadeTween) this.music[params.name].fadeTween.stop();
 
-            this.currentMusic = this.music[params.name];
+            this.music[params.name].fadeTo(500, this.music[params.name].volumeStatic);
+        } else {
+            this.music[params.name].play('intro', 0, this.music[params.name].volumeStatic, false);
+        }
+
+        this.currentMusic = this.music[params.name];
     }
 };
 
@@ -107,7 +114,12 @@ AudioController.prototype.StopAllMusic = function(params) {
     for(var key in this.music) {
         if(!this.music.hasOwnProperty(key)) continue;
 
-        if(!!this.music[key]) {
+        if(!!this.music[key] && this.music[key].isPlaying) {
+
+            if(!!this.music[key].fadeTween && this.music[key].fadeTween.isRunning) {
+                this.music[key].fadeTween.stop();
+            }
+
             this.music[key].fadeOut(params.fadeOut || 500);
         }
     }

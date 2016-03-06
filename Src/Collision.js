@@ -320,7 +320,7 @@ Collision.CollideFraukiWithEnvironment = function(f, tile) {
 
     //trick wall
     } else if(tile.index === 3) {
-        if(frauki.state === frauki.Rolling || frauki.InAttackAnim()) {
+        if(frauki.state === frauki.Rolling) {
             return false;
         } else {
             return true;
@@ -349,7 +349,11 @@ Collision.CollideFraukiWithEnvironment = function(f, tile) {
             tile.waitingToFall = true;
         }
 
-        return true;
+        if(frauki.state === frauki.AttackDiveFall) {
+            return false;
+        } else {
+            return true;
+        }
 
     } else if(tile.index === 7) {
 

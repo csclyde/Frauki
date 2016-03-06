@@ -66,7 +66,8 @@ function PickUpShard(f, a) {
     a.pickedUp = true;
 
     effectsController.ScreenFlash();
-    events.publish('play_sound', {name: 'crystal_door', restart: true });
+    events.publish('play_sound', { name: 'fanfare_short' } );
+    
 
     // a.body.allowGravity = true;
 

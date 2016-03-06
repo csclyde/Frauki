@@ -52,6 +52,9 @@ function EatApple(f, a) {
 
     var xOffset = (20 * (energyController.GetApples() + 1)) - 3;
 
+    events.publish('play_sound', {name: 'crystal_door'});
+
+
     a.zipTween = game.add.tween(a.cameraOffset).to({x: xOffset, y: 57}, 2000, Phaser.Easing.Exponential.InOut, true);
 
     a.zipTween.onComplete.add(function() { 

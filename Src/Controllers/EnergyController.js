@@ -31,7 +31,7 @@ EnergyController.prototype.Update = function() {
 
 	//if the timer is up, tick the energy and reset the timer
 	if(this.timers.TimerUp('energy_tick') && this.timers.TimerUp('energy_grace') && !frauki.InAttackAnim() && frauki.state !== frauki.Rolling) {
-		this.timers.SetTimer('energy_tick', 250);
+		this.timers.SetTimer('energy_tick', 200);
 
 		if(this.energy < this.GetMaxEnergy()) {
 			this.energy++;

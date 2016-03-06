@@ -190,12 +190,13 @@ function PerformOpen(d, save, silent) {
 
         events.publish('play_sound', {name: 'door_rumble', restart: true });
         events.publish('fade_music', { volume: 0.1, duration: 5000 });
-        setTimeout(function() {
-            //play sound
-        }, 2000);
     }
 
     var openTween = game.add.tween(d.body).to({y: movementTarget}, openDuration, Phaser.Easing.Quintic.InOut, true);
+
+    setTimeout(function() {
+        effectsController.DoorDust({x: d.body.center.x, y: d.body.y + d.body.height - 20 });
+    }, openDuration - (openDuration / 5));
 
     if(save) {
         GameData.AddOpenDoor(d.id);

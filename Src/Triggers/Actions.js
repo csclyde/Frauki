@@ -25,8 +25,13 @@ TriggerController.prototype.triggers['return_shard'] = {
 			var placementTween = game.add.tween(shard).to({x: 122 * 16 + 1, y: 179 * 16 + 14}, 2000, Phaser.Easing.Exponential.InOut, true);
 			placementTween.onComplete.add(function() {
 				GameData.SaveShardPositions();
+				events.publish('play_sound', { name: 'fanfare_long' } );
 			});
+
+
 			//Frogland.effectsGroup.addChild(shard);
+
+
 		}
 	},
 

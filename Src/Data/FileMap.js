@@ -51,6 +51,8 @@ FileMap.Audio = [
 	{ Name: 'crystal_door', File: 'Data/Sfx/crystal_door.wav', Volume: 0.5, Loop: false },
 	{ Name: 'skull_door', File: 'Data/Sfx/skull_door.wav', Volume: 0.9, Loop: false },
 	{ Name: 'door_rumble', File: 'Data/Sfx/door_rumble.wav', Volume: 0.4, Loop: false },
+	{ Name: 'fanfare_long', File: 'Data/Sfx/fanfare_long.ogg', Volume: 0.1, Loop: false },
+	{ Name: 'fanfare_short', File: 'Data/Sfx/fanfare_short.wav', Volume: 0.1, Loop: false },
 
 	{ Name: 'floor_crumble', File: 'Data/Sfx/crumble.wav', Volume: 5.0, Loop: false },
 ];
@@ -69,6 +71,7 @@ FileMap.Music = [
 			{ name: 'body', start: 0, end: 107, loop: true }
 		]
 	},
+
 	// { Name: 'Ruins', File: 'Data/Music/Ruins.ogg', Volume: 0.5, Loop: true },
 	// { Name: 'Underwater', File: 'Data/Music/Underwater.xm', Volume: 0.5, Loop: true },
 	// { Name: 'Landfill', File: 'Data/Music/Landfill.xm', Volume: 0.5, Loop: true },

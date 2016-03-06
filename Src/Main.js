@@ -281,6 +281,18 @@ Main.DrawUI = function() {
         this.RenderTextureFromAtlas('UI', weaponController.weaponList[i].FrameName, (100 + 25 * i), 10);
     }
 
+    this.RenderTextureFromAtlas('Misc', 'EnergyBitPos0000', 565, 10);
+
+    //render the nugg amount, character by character
+    var nuggCountString = GameData.GetNuggCount().toString();
+
+    for(var i = 0, len = nuggCountString.length; i < len; i++) {
+        var charNum = nuggCountString[i];
+
+        this.RenderTextureFromAtlas('UI', 'Numbers000' + nuggCountString[i], 580 + (i * 10), 10);
+
+    }
+
 
     // pixel.context.globalAlpha = weaponController.currentWeapon === weaponController.weaponList[1] ? 1 : 0.3;
 
@@ -310,9 +322,17 @@ Main.DrawUI = function() {
         Frogland.shardGroup.forEach(function(s) {
             if(s.pickedUp && !s.returnedToChurch) {
                 var diff = new Phaser.Point(s.body.center.x - frauki.body.center.x, s.body.center.y - frauki.body.center.y);
+
+                var dist = diff.getMagnitude();
+
                 diff = diff.normalize();
 
-                diff.setMagnitude(90);
+                //diff.setMagnitude(90);
+                if(dist > 875) {
+                    diff.setMagnitude(90);
+                } else {
+                    diff.setMagnitude(25 + (dist / 10));
+                }
 
                 var opacity = 1;
 
