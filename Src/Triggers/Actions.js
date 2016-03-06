@@ -21,13 +21,17 @@ TriggerController.prototype.triggers['return_shard'] = {
 			DropShard(shard);
 
 			//122 179
+			var slowTween = game.add.tween(shard.body.velocity).to({x: 0, y: 0}, 500, Phaser.Easing.Exponential.Out, true);
 
-			var placementTween = game.add.tween(shard).to({x: 122 * 16 + 1, y: 179 * 16 + 14}, 2000, Phaser.Easing.Exponential.InOut, true);
-			placementTween.onComplete.add(function() {
-				GameData.SaveShardPositions();
-				events.publish('play_sound', { name: 'fanfare_long' } );
+			slowTween.onComplete.add(function() {
+				var placementTween = game.add.tween(shard).to({x: 122 * 16 + 1, y: 179 * 16 + 14}, 1500, Phaser.Easing.Exponential.InOut, true);
+				placementTween.onComplete.add(function() {
+					GameData.SaveShardPositions();
+					events.publish('play_sound', { name: 'fanfare_long' } );
+				});
 			});
 
+			
 
 			//Frogland.effectsGroup.addChild(shard);
 

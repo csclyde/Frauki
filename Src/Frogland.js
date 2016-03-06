@@ -47,6 +47,7 @@ Frogland.Create = function() {
     this.CreateBackgroundLayer(3, startLayer === 3);
     this.CreateBackgroundLayer(2, startLayer === 2);
 
+    this.placedShards = game.add.group();
     this.effectsGroup = game.add.group();
     
     frauki = new Player(game, fraukiStartX, fraukiStartY, 'Frauki');

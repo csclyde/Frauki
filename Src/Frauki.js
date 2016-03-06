@@ -376,7 +376,7 @@ Player.prototype.StartStopRun = function(params) {
         } else if(this.timers.TimerUp('frauki_dash')) {
             this.timers.SetTimer('frauki_dash', 200);
         //double tap to roll
-        } else if(params.dir === this.states.direction) {
+        } else if(params.dir === this.states.direction && frauki.body.onFloor()) {
             this.Roll();
             this.timers.SetTimer('frauki_dash', 200);
         }

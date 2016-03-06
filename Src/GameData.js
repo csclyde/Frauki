@@ -80,6 +80,15 @@ GameData.SaveShardPositions = function() {
         };
     });
 
+    Frogland.placedShards.forEach(function(s) {
+        shardSave[s.shardFrame] = {
+            x: Math.floor(s.x),
+            y: Math.floor(s.y),
+            layer: s.currentLayer,
+            dropped: (!s.returnedToChurch && s.pickedUp)
+        };
+    });
+
     this.data.shards = shardSave;
     this.SaveDataToStorage();
 };

@@ -32,7 +32,7 @@ Shard = function(game, x, y, name) {
         this.y = pos.y;
         this.currentLayer = pos.layer;
         this.pickedUp = pos.dropped;
-        this.returnedToChurch = !pos.dropped;
+        this.returnedToChurch = (pos.dropped === false);
     }
 
 };
@@ -45,11 +45,16 @@ Shard.prototype.create = function() {
 };
 
 Shard.prototype.update = function() {
+    if(this.returnedToChurch && this.parent !== Frogland.placedShards) {
+        Frogland.placedShards.addChild(this);
+    }
+
     if(!this.body.enable)
         return;
     
     if(!!this.state)
         this.state();
+
 };
 
 function PickUpShard(f, a) {
@@ -68,25 +73,6 @@ function PickUpShard(f, a) {
     effectsController.ScreenFlash();
     events.publish('play_sound', { name: 'fanfare_short' } );
     
-
-    // a.body.allowGravity = true;
-
-    // a.body.velocity.y = -250;
-
-    // if(frauki.body.center.x < a.body.center.x)
-    //     a.body.velocity.x = 75;
-    // else
-    //     a.body.velocity.x = -75;
-
-    // a.body.angularVelocity = 1000;
-
-    // a.spinTween = game.add.tween(a.body).to({angularVelocity: 0}, 3000, Phaser.Easing.Exponential.In, true);
-
-    // a.spinTween.onComplete.add(function() { 
-    //     game.time.events.add(1000, function(){ a.destroy(); } );
-    // }, a);
-
-    // energyController.AddHealth(5);
 };
 
 function DropShard(shard) {
