@@ -175,12 +175,12 @@ InputController = function() {
                 case 9: //start
                 break;
 
-                case 5: //right shoulder
+                //case 5: //right shoulder
                 case 7: //right shoulder
                     this.OnRShoulder(true);
                 break;
 
-                case 4: //left shoulder
+                //case 4: //left shoulder
                 case 6: //left shoulder
                 break;
 
@@ -229,12 +229,12 @@ InputController = function() {
                 case 9: //start
                 break;
 
-                case 5: //right shoulder
+                //case 5: //right shoulder
                 case 7: //right shoulder
                     this.OnRShoulder(false);
                 break;
 
-                case 4: //left shoulder
+                //case 4: //left shoulder
                 case 6: //left shoulder
                 break;
 

@@ -186,6 +186,17 @@ function SetShardVisibility() {
         }
 
     });
+
+    Frogland.placedShards.forEach(function(s) {
+        if(s.currentLayer === Frogland.currentLayer) {
+            s.visible = true;
+            s.body.enable = true;
+        } else {
+            s.visible = false;
+            s.body.enable = false;
+        }
+
+    });
 };
 
 function GetCurrentShardType() {

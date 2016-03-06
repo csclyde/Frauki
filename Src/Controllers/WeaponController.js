@@ -313,6 +313,11 @@ WeaponController.prototype.Shield = {
 
     Start: function() {
 
+            console.log('eh?')
+        if(!energyController.UseCharge(1)) {
+            return;
+        }
+
         if(this.forceField.visible === false && energyController.GetEnergy() > 0) {
             this.forceField.animations.play('open');
             this.forceField.visible = true;
