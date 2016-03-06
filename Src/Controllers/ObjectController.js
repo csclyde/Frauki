@@ -202,6 +202,7 @@ ObjectController.prototype.CreateObjectsLayer = function(layer) {
 
 
         if(obj.spriteType === 'door') {
+            obj.create();
             objectController.doorList.push(obj);
 
         } else if(obj.spriteType === 'checkpoint') {

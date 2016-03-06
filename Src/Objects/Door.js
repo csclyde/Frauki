@@ -20,45 +20,102 @@ Door = function(game, x, y, name) {
     this.thresholdAttempts = 1;
     this.openAttempts = 0;
 
-    this.animations.add('left', ['DoorSeal0000', 'DoorSeal0001', 'DoorSeal0002', 'DoorSeal0003', 'DoorSeal0004'], 10, true, false); 
-    this.animations.add('right', ['DoorSeal0005', 'DoorSeal0006', 'DoorSeal0007', 'DoorSeal0008', 'DoorSeal0009'], 10, true, false); 
-    this.animations.add('left_dead', ['DoorSeal0010'], 10, true, false); 
-    this.animations.add('right_dead', ['DoorSeal0011'], 10, true, false); 
-
-    this.animations.add('wit', ['DoorPrism0000'], 10, true, false); 
-    this.animations.add('will', ['DoorPrism0001'], 10, true, false); 
-    this.animations.add('luck', ['DoorPrism0002'], 10, true, false); 
-    this.animations.add('power', ['DoorPrism0003'], 10, true, false);
-
-    this.animations.add('wit_open', ['DoorPrism0004'], 10, true, false); 
-    this.animations.add('will_open', ['DoorPrism0005'], 10, true, false); 
-    this.animations.add('luck_open', ['DoorPrism0006'], 10, true, false); 
-    this.animations.add('power_open', ['DoorPrism0007'], 10, true, false); 
-
-    this.animations.add('skull', ['DoorEnemy0000'], 10, true, false);
-    this.animations.add('skull_open', ['DoorEnemy0001'], 10, true, false);
-
-    this.animations.add('mystery', ['DoorMystery0000'], 10, true, false);
-    this.animations.add('apple', ['DoorApple0000'], 10, true, false);
-
-
-    this.animations.add('orb_1_0', ['DoorOrb0000'], 10, true, false);
-    this.animations.add('orb_1_1', ['DoorOrb0001'], 10, true, false);
-    this.animations.add('orb_2_0', ['DoorOrb0002'], 10, true, false);
-    this.animations.add('orb_2_1', ['DoorOrb0003'], 10, true, false);
-    this.animations.add('orb_2_2', ['DoorOrb0004'], 10, true, false);
-    this.animations.add('orb_3_0', ['DoorOrb0005'], 10, true, false);
-    this.animations.add('orb_3_1', ['DoorOrb0006'], 10, true, false);
-    this.animations.add('orb_3_2', ['DoorOrb0007'], 10, true, false);
-    this.animations.add('orb_3_3', ['DoorOrb0008'], 10, true, false);
-
 };
 
 Door.prototype = Object.create(Phaser.Sprite.prototype);
 Door.prototype.constructor = Door;
 
 Door.prototype.create = function() {
+    switch(this.type) {
 
+        case 'stone_seal':
+            if(this.facing === 'left') {
+                this.animations.add('closed', ['DoorSeal0000', 'DoorSeal0001', 'DoorSeal0002', 'DoorSeal0003', 'DoorSeal0004'], 10, true, false);
+                this.animations.add('open', ['DoorSeal0010'], 10, true, false);
+            } else {
+                this.animations.add('closed', ['DoorSeal0005', 'DoorSeal0006', 'DoorSeal0007', 'DoorSeal0008', 'DoorSeal0009'], 10, true, false);
+                this.animations.add('open', ['DoorSeal0011'], 10, true, false);
+            }
+        break;
+
+
+        case 'metal_seal':
+            if(this.facing === 'left') {
+                this.animations.add('closed', ['DoorMetal0000', 'DoorMetal0001', 'DoorMetal0002', 'DoorMetal0003', 'DoorMetal0004'], 10, true, false);
+                this.animations.add('open', ['DoorMetal0010'], 10, true, false);
+            } else {
+                this.animations.add('closed', ['DoorMetal0005', 'DoorMetal0006', 'DoorMetal0007', 'DoorMetal0008', 'DoorMetal0009'], 10, true, false);
+                this.animations.add('open', ['DoorMetal0011'], 10, true, false);
+            }
+        break;
+
+
+        case 'shard':
+            if(this.prism === 'Wit') {
+                this.animations.add('closed', ['DoorPrism0000'], 10, true, false);
+                this.animations.add('open', ['DoorPrism0004'], 10, true, false);
+            } else if(this.prism === 'Will') {
+                this.animations.add('closed', ['DoorPrism0001'], 10, true, false);
+                this.animations.add('open', ['DoorPrism0005'], 10, true, false);
+            } else if(this.prism === 'Luck') {
+                this.animations.add('closed', ['DoorPrism0002'], 10, true, false);
+                this.animations.add('open', ['DoorPrism0006'], 10, true, false);
+            } else if(this.prism === 'Power') {
+                this.animations.add('closed', ['DoorPrism0003'], 10, true, false);
+                this.animations.add('open', ['DoorPrism0007'], 10, true, false);
+            }
+        break;
+
+
+        case 'enemy':
+            this.animations.add('closed', ['DoorEnemy0000'], 10, true, false);
+            this.animations.add('open', ['DoorEnemy0001'], 10, true, false);
+        break;
+
+
+        case 'mystery':
+            this.animations.add('closed', ['DoorMystery0000'], 10, true, false);
+            this.animations.add('open', ['DoorMystery0000'], 10, true, false);
+        break;
+
+
+        case 'heal':
+            this.animations.add('closed', ['DoorApple0000'], 10, true, false);
+            this.animations.add('open', ['DoorApple0000'], 10, true, false);
+        break;
+
+
+        case 'orb':
+            if(this.thresholdAttempts == 1) {
+                this.animations.add('closed', ['DoorOrb0000'], 10, true, false);
+                this.animations.add('open', ['DoorOrb0001'], 10, true, false);
+            } else if(this.thresholdAttempts == 2) {
+                this.animations.add('closed', ['DoorOrb0002'], 10, true, false);
+                this.animations.add('attempt_1', ['DoorOrb0003'], 10, true, false);
+                this.animations.add('open', ['DoorOrb0004'], 10, true, false);
+            } else if(this.thresholdAttempts == 3) {
+                this.animations.add('closed', ['DoorOrb0005'], 10, true, false);
+                this.animations.add('attempt_1', ['DoorOrb0006'], 10, true, false);
+                this.animations.add('attempt_2', ['DoorOrb0007'], 10, true, false);
+                this.animations.add('open', ['DoorOrb0008'], 10, true, false);
+            }
+        break;
+
+
+        default:
+            this.animations.add('closed', ['DoorMystery0000'], 10, true, false);
+            this.animations.add('open', ['DoorMystery0000'], 10, true, false);
+        break;
+    }
+
+
+   
+    
+    // this.animations.add('orb_2_1', ['DoorOrb0003'], 10, true, false);
+    
+    
+    // this.animations.add('orb_3_1', ['DoorOrb0006'], 10, true, false);
+    // this.animations.add('orb_3_2', ['DoorOrb0007'], 10, true, false); 
 };
 
 Door.prototype.update = function() {
@@ -71,17 +128,6 @@ Door.prototype.update = function() {
 
     if(!!this.state)
         this.state();
-};
-
-Door.prototype.SetDirection = function(dir) {
-    if(dir === 'left' && this.direction !== 'left') {
-        this.direction = 'left';
-        this.scale.x = -1;
-    }
-    else if(dir === 'right' && this.direction !== 'right') {
-        this.direction = 'right';
-        this.scale.x = 1;
-    }
 };
 
 function OpenDoor(f, d, override) {
@@ -120,30 +166,14 @@ function OpenDoor(f, d, override) {
         });
 
         console.log('Opening door with prism shard:' + d.id);
-    }
-    
+    }  
 };
 
 function OpenDoorById(id) {
 
     var door = null;
 
-    //find the door
-    Frogland.objectGroup_2.forEach(function(d) {
-        if(d.spriteType === 'door' && d.id === id) {
-            door = d;
-            return false;
-        }
-    });
-
-    Frogland.objectGroup_3.forEach(function(d) {
-        if(d.spriteType === 'door' && d.id === id) {
-            door = d;
-            return false;
-        }
-    });
-
-    Frogland.objectGroup_4.forEach(function(d) {
+    objectController.doorList.forEach(function(d) {
         if(d.spriteType === 'door' && d.id === id) {
             door = d;
             return false;
@@ -204,66 +234,24 @@ function PerformOpen(d, save, silent) {
 };
 
 Door.prototype.PlayAnim = function(name) {
-    if(this.animations.currentAnim.name !== name)
-        this.animations.play(name);
+    this.animations.play(name);
 };
 
 Door.prototype.Closed = function() {
-
-    this.PlayAnim(this.GetGraphicName());
+    //if the door takes a few events to open, and they have completed at least one
+    if(this.thresholdAttempts > 1 && this.openAttempts > 0) {
+        this.PlayAnim('attempt_' + this.openAttempts);
+    } else {
+        this.PlayAnim('closed');
+    }
 };
 
 Door.prototype.Opening = function() {
-    
-    this.PlayAnim(this.GetGraphicName());
+    this.PlayAnim('open');
 
     this.state = this.Open;
 };
 
 Door.prototype.Open = function() {
-};
-
-Door.prototype.GetGraphicName = function() {
-
-    if(this.closed_graphic === 'orb') {
-        return 'orb_' + this.thresholdAttempts + '_' + this.openAttempts;
-    }
-
-    if(this.state === this.Open || this.state === this.Opening) {
-        if(!!this.open_graphic) {
-            return this.open_graphic;
-        } else if(!!this.closed_graphic) {
-            return this.closed_graphic;
-        } else if(this.facing === 'left') {
-            return 'left_dead';
-        } else if(this.facing === 'right') { 
-            return 'right_dead';
-        } else if(this.prism === 'Wit') {
-            return 'wit_open';
-        } else if(this.prism === 'Will') {
-            return 'will_open';
-        } else if(this.prism === 'Luck') {
-            return 'luck_open';
-        } else if(this.prism === 'Power') {
-            return 'power_open';
-        }
-        
-    } else {
-
-        if(!!this.closed_graphic) {
-            return this.closed_graphic;
-        } else if(this.facing === 'left') {
-            return 'left';
-        } else if(this.facing === 'right') { 
-            return 'right';
-        } else if(this.prism === 'Wit') {
-            return 'wit';
-        } else if(this.prism === 'Will') {
-            return 'will';
-        } else if(this.prism === 'Luck') {
-            return 'luck';
-        } else if(this.prism === 'Power') {
-            return 'power';
-        }
-    }
+    this.PlayAnim('open');
 };
