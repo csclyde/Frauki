@@ -149,7 +149,22 @@ EnemyBehavior.Player.IsAbove = function(e) {
 
 EnemyBehavior.Player.IsVulnerable = function(e) {
 
+    if(!frauki.timers.TimerUp('frauki_invincible') || !frauki.timers.TimerUp('frauki_grace')) {
+        return false;
+    }
+
+    if(frauki.state === frauki.Rolling) {
+        return false;
+    }
+
     var vulnerableFrames = [
+        'Attack Dive0000',
+        'Attack Dive0001',
+        'Attack Dive0002',
+        'Attack Dive0003',
+        'Attack Dive0004',
+        'Attack Dive0005',
+
         'Attack Dive0019',
         'Attack Dive0020',
         'Attack Dive0021',
@@ -158,8 +173,10 @@ EnemyBehavior.Player.IsVulnerable = function(e) {
         'Attack Dive0024',
         'Attack Dive0025',
         'Attack Dive0026',
-        'Attack Dive0027',
-        'Attack Dive0028',
+
+        'Attack Stab0000',
+        'Attack Stab0001',
+
         'Attack Stab0011',
         'Attack Stab0012',
         'Attack Stab0013',
@@ -171,9 +188,14 @@ EnemyBehavior.Player.IsVulnerable = function(e) {
 
     if(vulnerableFrames.indexOf(frauki.animations.currentFrame.name) > -1) {
         return true;
-    } else {
-        return false;
     }
+
+    if(frauki.state === frauki.Falling && frauki.states.hasFlipped) {
+        return true;
+    }
+
+    //if none of this determined a vulnerable/invulnerable state, then just attack
+    return true;
 };
 
 EnemyBehavior.Player.DirMod = function(e) {
@@ -215,6 +237,14 @@ EnemyBehavior.FacePlayer = function(e) {
     }
 };
 
+EnemyBehavior.FaceAwayFromPlayer = function(e) {
+    if(e.body.center.x < frauki.body.center.x) {
+        e.SetDirection('left');
+    } else {
+        e.SetDirection('right');
+    }
+};
+
 EnemyBehavior.ChargeAtPlayer = function(e, speed) {
 
     game.physics.arcade.moveToXY(e, frauki.body.center.x, frauki.body.center.y, speed);
@@ -239,7 +269,9 @@ EnemyBehavior.JumpCurb = function(e) {
 };
 
 EnemyBehavior.JumpToPoint = function(e, x, y) {
-    var duration = EnemyBehavior.Player.Distance(e) / 500;
+    var duration = EnemyBehavior.Player.Distance(e) / 400;
+
+    console.log(duration);
     e.body.velocity.x = (x - e.body.center.x) / duration;
     e.body.velocity.y = (y + -0.5 * game.physics.arcade.gravity.y * duration * duration - e.body.center.y) / duration;
 };

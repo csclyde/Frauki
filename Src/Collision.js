@@ -28,12 +28,22 @@ Collision.OverlapFraukiWithObject = function(f, o) {
             (frauki.Attacking() && frauki.GetCurrentDamage() > 0)) {
             return false;
         } else {
-            return true;
+
+            if(frauki.body.y + frauki.body.height < o.body.y || o.body.y + o.body.height < frauki.body.y) {
+                return false;
+            } else {
+                return true;
+            }
         }
 
     } else if(o.spriteType === 'door') {
         OpenDoor(f, o);
-        return true;
+
+        if((o.state === o.Open || o.state === o.Opening) && frauki.state === frauki.Rolling) {
+            return false;
+        } else {
+            return true;
+        }
 
     } else if(o.spriteType === 'orb') {
         return false;
