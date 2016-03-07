@@ -4,25 +4,20 @@ Enemy.prototype.types['KR32'] =  function() {
 	this.anchor.setTo(.5);
 
     this.animations.add('idle', ['KR32/Stand0000'], 10, true, false);
-    this.animations.add('block', ['KR32/Block0000'], 10, true, false);
-    this.animations.add('walk_back', ['KR32/Walk0000', 'KR32/Walk0001', 'KR32/Walk0002', 'KR32/Walk0003', 'KR32/Walk0004', 'KR32/Walk0005'], 8, true, false);
+    this.animations.add('walk', ['KR32/Walk0000', 'KR32/Walk0001', 'KR32/Walk0002', 'KR32/Walk0003', 'KR32/Walk0004', 'KR32/Walk0005'], 8, true, false);
+    this.animations.add('walk_back', ['KR32/Walk0005', 'KR32/Walk0004', 'KR32/Walk0003', 'KR32/Walk0002', 'KR32/Walk0001', 'KR32/Walk0000'], 8, true, false);
+
     this.animations.add('windup', ['KR32/Attack0000'], 5,  false, false);
-    this.animations.add('attack', ['KR32/Attack0001', 'KR32/Attack0002', 'KR32/Attack0003', 'KR32/Attack0004', 'KR32/Attack0005', 'KR32/Attack0006', 'KR32/Attack0007', 'KR32/Attack0008'], 18, false, false);
+    this.animations.add('attack', ['KR32/Attack0001', 'KR32/Attack0002', 'KR32/Attack0003', 'KR32/Attack0004', 'KR32/Attack0005'], 18, false, false);
     this.animations.add('attack_stab', ['KR32/Stab0001', 'KR32/Stab0002', 'KR32/Stab0003', 'KR32/Stab0004'], 10, false, false);
     this.animations.add('hurt', ['KR32/Hurt0000', 'KR32/Hurt0001'], 8, true, false);
 
-    this.energy = 5;
+    this.energy = 3;
     this.baseStunDuration = 400;
 
     this.mode = 'defensive';
 
     this.robotic = true;
-
-    /*
-    this.damage = 5;
-    */
-
-    //this.body.drag.x = 800;
     
 	this.updateFunction = function() {
 		if(this.timers.TimerUp('mode_change')) {
@@ -38,96 +33,121 @@ Enemy.prototype.types['KR32'] =  function() {
 
 	};
 
-	this.CanCauseDamage = function() { return false; }
-	this.CanChangeDirection = function() { return false; }
-	this.Vulnerable = function() { return true; };
+	this.Act = function() {
+
+        if(EnemyBehavior.Player.IsVisible(this)) {
+
+ 			if(this.timers.TimerUp('dodge') && (
+ 				(EnemyBehavior.Player.IsDangerous(this) && EnemyBehavior.Player.MovingTowards(this)) || 
+ 				(EnemyBehavior.Player.IsDangerous(this) && EnemyBehavior.Player.IsNear(this, 100)) ||
+ 				(EnemyBehavior.Player.IsNear(this, 30))
+ 			  )) {
+                this.Recoil();
+
+            } else if(EnemyBehavior.Player.IsNear(this, 100)) {
+
+                if(this.timers.TimerUp('attack_wait') && EnemyBehavior.Player.IsVulnerable(this) && !EnemyBehavior.Player.MovingTowards(this) && frauki.body.onFloor()) {
+                	if(EnemyBehavior.Player.IsNear(this, 70)) {
+                		this.AttackStab();
+                	}
+	                else {
+	                	console.log(frauki.animations.currentFrame.name)
+	                    this.Attack();
+	                }
+                } else {
+                	this.state = this.Blocking;
+                }
+            
+            } else {
+                this.state = this.Blocking;
+            }
+        } else {
+            this.state = this.Idling;
+            this.body.velocity.x = 0;
+        }
+    };
+
 
 
 	///////////////////////////////ACTIONS////////////////////////////////////
-
-	this.Die = function() {
-        this.anger = 1;
-        this.state = this.Idling;
-    };
-
     this.Attack = function() {
-    	if(!this.timers.TimerUp('attack') && !EnemyBehavior.Player.IsVulnerable(this)) {
-    		return;
-    	}
-
+    	EnemyBehavior.FacePlayer(this);
     	this.state = this.Windup;
-
-    	this.timers.SetTimer('windup', 400 + game.rnd.between(0, 50));
+    	this.timers.SetTimer('windup', game.rnd.between(450, 500));
     };
 
     this.AttackStab = function() {
-    	
-  //   	if(this.direction === 'left') {
-		// 	this.body.velocity.x = 300;
-		// } else {
-		// 	this.body.velocity.x = -300;
-		// }
-
     	EnemyBehavior.FacePlayer(this);
     	this.state = this.Stabbing;
+		this.timers.SetTimer('attack_hold', 550);
+
     };
 
     this.Recoil = function() {
-    	this.state = this.Blocking;
+
+    	this.state = this.Recoiling;
 
     	EnemyBehavior.FacePlayer(this);
 
     	if(this.direction === 'left') {
-    		this.body.velocity.x = 200;
+    		this.body.velocity.x = 300;
     	} else {
-    		this.body.velocity.x = -200;
+    		this.body.velocity.x = -300;
     	}
+    	this.body.velocity.y = -150;
 
-    	this.body.velocity.y = -100;
+    	this.timers.SetTimer('dodge', game.rnd.between(750, 1000));
     };
 
 	////////////////////////////////STATES////////////////////////////////////
 	this.Idling = function() {
 		this.PlayAnim('idle');
 
-		if(EnemyBehavior.Player.IsVisible(this)) {
-			this.state = this.Blocking;
-		}
+		return true;
 	};
 
 	this.Blocking = function() {
-		if(Math.abs(this.body.velocity.x) < 30) {
-			this.PlayAnim('walk_back');
 
-			if(this.direction === 'left') {
-
-				this.body.velocity.x = this.mode === 'defensive' ? 25 : -25;
+		if(this.direction === 'left') {
+			if(this.mode === 'defensive') {
+				this.body.velocity.x = -25;
+				this.PlayAnim('walk_back');
 			} else {
-				this.body.velocity.x = this.mode === 'defensive' ? -25 : 25;
+				this.body.velocity.x = 25;
+				this.PlayAnim('walk');
+				
 			}
 		} else {
-			this.PlayAnim('block');
-		}
-
-		EnemyBehavior.FacePlayer(this);
-
-		if(!EnemyBehavior.Player.IsVisible(this)) {
-			this.state = this.Idling;
-		}
-
-		//if the player is out of reach, dont let the attack timer expire
-		if(frauki.body.center.y < this.body.center.y - 50) {
-			this.timers.SetTimer('attack', 500 + Math.random() * 1000);
-		}
-
-		if(EnemyBehavior.Player.Distance(this) < 160 && !frauki.InPreAttackAnim() && !frauki.Attacking() && this.body.onFloor() && frauki.body.center.y > this.body.center.y - 50) {
-
-			if(EnemyBehavior.Player.Distance(this) < 75) {
-				this.AttackStab();
-			} else if(!frauki.InPreAttackAnim()) {
-				this.Attack();
+			if(this.mode === 'defensive') {
+				this.body.velocity.x = 25;
+				this.PlayAnim('walk_back');
+			} else {
+				this.body.velocity.x = -25;
+				this.PlayAnim('walk');
 			}
 		}
+
+		if(this.body.onWall() && this.mode === 'defensive') {
+			this.mode = 'defensive';
+			this.timers.SetTimer('mode_change', game.rnd.between(1000, 2000));
+		}
+		
+		EnemyBehavior.FacePlayer(this);
+
+		return true;
+
+	};
+
+	this.Recoiling = function() {
+		this.PlayAnim('walk_back');
+		
+		if(this.body.onFloor()) {
+			this.timers.SetTimer('attack_wait', 0);
+
+			return true;
+		}
+
+		return false;
 
 	};
 
@@ -136,79 +156,52 @@ Enemy.prototype.types['KR32'] =  function() {
 
 		if(this.timers.TimerUp('windup')) {
 			this.state = this.Slashing;
+			this.timers.SetTimer('attack_hold', 550);
 
 			if(this.direction === 'left') {
-				this.body.velocity.x = -400;
+				this.body.velocity.x = -450;
 			} else {
-				this.body.velocity.x = 400;
+				this.body.velocity.x = 450;
 			}
 		}
+
+		return false;
 	}
 
 	this.Slashing = function() {
 		this.PlayAnim('attack');
 
-		if(this.animations.currentFrame.name === 'KR32/Attack0005') {
-			this.animations.currentAnim.delay = 500;
-		} else {
-			this.animations.currentAnim.delay = 1000 / 18;
+		if(this.animations.currentAnim.isFinished && this.timers.TimerUp('attack_hold')) {
+			this.timers.SetTimer('attack_wait', game.rnd.between(2000, 3000));
+			return true;
 		}
 
-		if(this.animations.currentAnim.isFinished) {
-
-			if(EnemyBehavior.Player.Distance(this) < 100) {
-				this.Recoil();
-			} else {
-				this.state = this.Blocking;
-			}
-
-			this.timers.SetTimer('attack', 2000 + Math.random() * 1000);
-		}
+		return false;
 	};
 
 	this.Stabbing = function() {
 		this.PlayAnim('attack_stab');
 
-		this.body.drag.x = 100;
-
-		//EnemyBehavior.FacePlayer(this);
-
-		if(this.animations.currentAnim.isFinished) {
-
-			if(EnemyBehavior.Player.Distance(this) < 100) {
-				this.Recoil();
-			} else {
-				this.state = this.Blocking;
-			}
-
-			this.body.drag.x = 600;
-
-			this.timers.SetTimer('attack', 2000 + Math.random() * 1000);
+		if(this.animations.currentAnim.isFinished && this.timers.TimerUp('attack_hold')) {
+			this.timers.SetTimer('attack_wait', game.rnd.between(600, 1000));
+			return true;
 		}
+
+		return false;
 	};
 
 	this.Hurting = function() {
 		this.PlayAnim('hurt');
 
 		if(this.timers.TimerUp('hit') && this.body.onFloor()) {
-			if(EnemyBehavior.Player.Distance(this) < 75) {
-				this.Recoil();
-			} else {
-				this.state = this.Idling;
-			}
-
-			this.timers.SetTimer('attack', 500 + Math.random() * 1000);
+    		this.timers.SetTimer('dodge', game.rnd.between(1500, 2000));
+			return true;
 		}
+
+		return false;
 	};
 
 	this.attackFrames = {
-		'KR32/Block0000': {
-			x: 18, y: -8, w: 10, h: 60,
-			damage: 0,
-			knockback: 0,
-			priority: 2,
-			juggle: 0
-		},
 
 		'KR32/Walk0000': {
 			x: 18, y: -8, w: 10, h: 60,
@@ -268,7 +261,7 @@ Enemy.prototype.types['KR32'] =  function() {
 
 		'KR32/Attack0002': {
 			x: 15, y: -3, w: 55, h: 50,
-			damage: 2,
+			damage: 3,
 			knockback: 0.3,
 			priority: 1,
 			juggle: 0
@@ -276,7 +269,7 @@ Enemy.prototype.types['KR32'] =  function() {
 
 		'KR32/Attack0003': {
 			x: 15, y: -3, w: 55, h: 50,
-			damage: 2,
+			damage: 3,
 			knockback: 0.3,
 			priority: 1,
 			juggle: 0
@@ -284,7 +277,7 @@ Enemy.prototype.types['KR32'] =  function() {
 
 		'KR32/Attack0004': {
 			x: 15, y: -3, w: 55, h: 50,
-			damage: 2,
+			damage: 3,
 			knockback: 0.3,
 			priority: 1,
 			juggle: 0

@@ -4,6 +4,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
     this.anchor.setTo(0.5);
 
     this.animations.add('idle', ['Buzzar/Idle0000', 'Buzzar/Idle0001'], 20, true, false);
+    this.animations.add('enraged', ['Buzzar/Enraged0000', 'Buzzar/Enraged0001', 'Buzzar/Enraged0002', 'Buzzar/Enraged0003', 'Buzzar/Enraged0004', 'Buzzar/Enraged0005', 'Buzzar/Enraged0006', 'Buzzar/Enraged0007', 'Buzzar/Enraged0008', 'Buzzar/Enraged0009'], 20, true, false);
     this.animations.add('sting', ['Buzzar/Attack0000', 'Buzzar/Attack0001'], 20, false, false);
     this.animations.add('hurt', ['Buzzar/Hurt0000', 'Buzzar/Hurt0001'], 20, true, false);
 
@@ -32,7 +33,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
 
         if(EnemyBehavior.Player.IsVisible(this)) {
 
-            if(this.timers.TimerUp('creep_waiting')) {
+            if(EnemyBehavior.Player.IsVulnerable(this) && this.timers.TimerUp('attack_wait')) {
                 this.Sting();
             } else {
                 this.Creep();
@@ -77,9 +78,6 @@ Enemy.prototype.types['Buzzar'] =  function() {
     };
 
     this.LandHit = function() {
-        if(this.state === this.Enraged) {
-            this.timers.SetTimer('enraged', 0);
-        }
     };
 
     ///////////////////////////////ACTIONS////////////////////////////////////
@@ -138,7 +136,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
         if(this.timers.TimerUp('attack')) {
             this.timers.SetTimer('attack', 800);
             this.state = this.Stinging;
-            game.physics.arcade.moveToXY(this, frauki.body.center.x, frauki.body.center.y, 450);
+            game.physics.arcade.moveToXY(this, frauki.body.center.x, frauki.body.center.y, 500);
             EnemyBehavior.FacePlayer(this);
         }
     };
@@ -151,7 +149,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
         // }, null, this);
 
         if(this.timers.TimerUp('attack') || this.body.onFloor() || this.body.onWall()) {
-            this.timers.SetTimer('creep_waiting', 3000 + game.rnd.between(500, 1500));
+            this.timers.SetTimer('attack_wait', 2000 + game.rnd.between(500, 1500));
             return true;
         }
 
@@ -185,7 +183,9 @@ Enemy.prototype.types['Buzzar'] =  function() {
     };
 
     this.Enraged = function() {
-        this.PlayAnim('idle');
+        this.PlayAnim('enraged');
+
+        EnemyBehavior.FacePlayer(this);
 
         if(this.body.x < frauki.body.x)
             this.body.velocity.x += 10;

@@ -147,7 +147,19 @@ EnemyBehavior.Player.IsAbove = function(e) {
     return false;
 };
 
+EnemyBehavior.Player.IsStunned = function(e) {
+    if(frauki.state === frauki.Stunned) {
+        return true;
+    }
+
+    return false;
+}
+
 EnemyBehavior.Player.IsVulnerable = function(e) {
+
+    if(frauki.state === frauki.Stunned) {
+        return true;
+    }
 
     if(!frauki.timers.TimerUp('frauki_invincible') || !frauki.timers.TimerUp('frauki_grace')) {
         return false;
@@ -158,6 +170,26 @@ EnemyBehavior.Player.IsVulnerable = function(e) {
     }
 
     var vulnerableFrames = [
+        'Attack Fall0005',
+        'Attack Fall0006',
+        'Attack Fall0007',
+        'Attack Fall0008',
+
+        'Attack Front0006',
+        'Attack Front0007',
+        'Attack Front0008',
+        'Attack Front0009',
+
+        'Attack Jump0004',
+        'Attack Jump0005',
+        'Attack Jump0006',
+
+        'Attack Overhead0008',
+        'Attack Overhead0009',
+        'Attack Overhead0010',
+        'Attack Overhead0011',
+        'Attack Overhead0012',
+
         'Attack Dive0000',
         'Attack Dive0001',
         'Attack Dive0002',
@@ -183,7 +215,7 @@ EnemyBehavior.Player.IsVulnerable = function(e) {
         'Attack Stab0014',
         'Attack Stab0015',
         'Attack Stab0016',
-        'Attack Stab0017'
+        'Attack Stab0017',
     ];
 
     if(vulnerableFrames.indexOf(frauki.animations.currentFrame.name) > -1) {
@@ -204,13 +236,15 @@ EnemyBehavior.Player.DirMod = function(e) {
 };
 
 EnemyBehavior.Player.IsDangerous = function(e) {
-    if(EnemyBehavior.Player.IsNear(e, 150)) {
-        if(frauki.InPreAttackAnim()) {
-            return true;
-        } else if(frauki.Attacking() && frauki.currentAttack.damage > 0) {
-            return true;
-        }
-    } else if(EnemyBehavior.Player.IsAbove(e) && frauki.state === frauki.AttackDiveCharge) {
+    if(EnemyBehavior.Player.IsAbove(e) && frauki.state === frauki.AttackDiveCharge) {
+        return true;
+    }
+
+    if(frauki.InPreAttackAnim()) {
+        return true;
+    } 
+
+    if(frauki.Attacking() && frauki.currentAttack.damage > 0) {
         return true;
     }
     

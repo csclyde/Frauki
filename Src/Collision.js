@@ -29,7 +29,7 @@ Collision.OverlapFraukiWithObject = function(f, o) {
             return false;
         } else {
 
-            if(frauki.body.y + frauki.body.height < o.body.y || o.body.y + o.body.height < frauki.body.y) {
+            if(frauki.body.y + frauki.body.height <= o.body.y || o.body.y + o.body.height <= frauki.body.y) {
                 return false;
             } else {
                 return true;
@@ -155,11 +155,12 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
     if(e.GetCurrentDamage() <= 0 && frauki.GetCurrentDamage() <= 0)
         return;
 
-    //if theyre blocking with a shield than remove energy
+    //if theyre blocking with a shield then remove energy
     if(frauki.states.shielded) {
+        energyController.RemoveCharge(1);
         energyController.RemoveEnergy(e.GetCurrentDamage() * 2);
 
-        if(energyController.GetEnergy() < 0) {
+        if(energyController.GetEnergy() <= 0) {
             events.publish('activate_weapon', { activate: false });
             //play stun sound
             frauki.Stun(e);
@@ -192,6 +193,11 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
 };
 
 Collision.OverlapEnemyAttackWithFrauki = function(e, f) {
+    if(frauki.states.shielded) {
+        Collision.OverlapAttackWithEnemyAttack(e, f);
+        return;
+    }
+
     e = e.owningEnemy;
 
     if(e.GetCurrentDamage() > 0 && !frauki.Grace()) {

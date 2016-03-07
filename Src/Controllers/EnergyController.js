@@ -10,8 +10,6 @@ EnergyController = function() {
 
 	this.timers = new TimerUtil();
 
-	this.energyUsageTimestamp = 0;
-
 	events.subscribe('energy_heal', function(params) {
 		if(this.remainingApples > 0) {
 			this.AddHealth(8);
@@ -30,7 +28,7 @@ EnergyController.prototype.Update = function() {
 
 
 	//if the timer is up, tick the energy and reset the timer
-	if(this.timers.TimerUp('energy_tick') && this.timers.TimerUp('energy_grace') && !frauki.InAttackAnim() && frauki.state !== frauki.Rolling) {
+	if(this.timers.TimerUp('energy_tick') && this.timers.TimerUp('energy_grace') && !frauki.InAttackAnim() && frauki.state !== frauki.Rolling && !frauki.states.shielded && frauki.state !== frauki.Hanging) {
 		this.timers.SetTimer('energy_tick', 200);
 
 		if(this.energy < this.GetMaxEnergy()) {
@@ -63,7 +61,6 @@ EnergyController.prototype.UseEnergy = function(amt) {
 	if(this.energy >= amt) {
 		this.energy -= amt;
 		this.timers.SetTimer('energy_grace', 1000);
-		this.energyUsageTimestamp = game.time.now;
 		return true;
 	} else {
 		events.publish('play_sound', {name: 'no_energy'});
@@ -77,7 +74,6 @@ EnergyController.prototype.RemoveEnergy = function(amt) {
 	if(this.energy > 0) {
 		this.energy -= amt;
 		this.timers.SetTimer('energy_grace', 1000);
-		this.energyUsageTimestamp = game.time.now;
 		return true;
 	}
 

@@ -31,7 +31,11 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
         if(EnemyBehavior.Player.IsVisible(this)) {
 
-            if(this.body.onFloor()) {
+            //if theyre stunned, seize the opportunity
+            if(EnemyBehavior.Player.IsStunned(this)) {
+                this.Hop();
+
+            } else if(this.body.onFloor()) {
 
                 if(EnemyBehavior.Player.IsDangerous(this) || (EnemyBehavior.Player.MovingTowards(this) && EnemyBehavior.Player.IsNear(this, 100))) {
                     this.Dodge();

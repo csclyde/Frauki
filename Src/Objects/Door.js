@@ -189,7 +189,7 @@ function OpenDoorById(id) {
 };
 
 function PerformOpen(d, save, silent) {
-    if(d.state !== d.Closed) return;
+    if(d.state !== d.Closed || !d.body) return;
 
     //check that the door has received enough attempts to actually open
     if(++d.openAttempts < d.thresholdAttempts) {

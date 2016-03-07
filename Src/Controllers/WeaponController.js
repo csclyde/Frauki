@@ -312,8 +312,6 @@ WeaponController.prototype.Shield = {
     },
 
     Start: function() {
-
-            console.log('eh?')
         if(!energyController.UseCharge(1)) {
             return;
         }
@@ -344,6 +342,8 @@ WeaponController.prototype.Shield = {
     Stop: function() {
         this.forceField.animations.play('close');
         frauki.states.shielded = false;
+        energyController.timers.SetTimer('energy_grace', 1000);
+
     },
 
     DamageFrames: {

@@ -283,7 +283,33 @@ Player.prototype.InAttackAnim = function() {
 Player.prototype.InPreAttackAnim = function() {
     var frameName = this.animations.currentFrame.name;
 
-    if(['Attack Stab0000', 'Attack Stab0000', 'Attack Stab0001', 'Attack Stab0002', 'Attack Stab0003', 'Attack Front0001', 'Attack Fall0000', 'Attack Fall0001'].indexOf(frameName) > -1) {
+    if(['Attack Stab0000', 
+        'Attack Stab0000', 
+        'Attack Stab0001', 
+        'Attack Stab0002', 
+        'Attack Stab0003', 
+
+        'Attack Dive0000', 
+        'Attack Dive0001', 
+        'Attack Dive0002', 
+        'Attack Dive0003', 
+        'Attack Dive0004',
+        'Attack Dive0005', 
+        'Attack Dive0006', 
+        'Attack Dive0007', 
+        'Attack Dive0008', 
+
+        'Attack Front0001',
+
+        'Attack Jump0000', 
+
+        'Attack Overhead0000', 
+        'Attack Overhead0001', 
+        'Attack Overhead0002', 
+        'Attack Overhead0003', 
+
+        'Attack Fall0000', 
+        'Attack Fall0001'].indexOf(frameName) > -1) {
         return true;
     } else {
         return false;
@@ -711,8 +737,6 @@ Player.prototype.LandHit = function(e, damage) {
         frauki.body.velocity.x = vel.x;
         frauki.body.velocity.y = vel.y;
     }
-
-    energyController.AddCharge(damage);
 
     if(damage > 0) {
         effectsController.ClashStreak(e.body.center.x, e.body.center.y, game.rnd.between(1, 2));
