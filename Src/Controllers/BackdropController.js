@@ -36,8 +36,8 @@ BackdropController.prototype.LoadBackgrounds = function() {
             b.scrollFactorY = +scroll[1];
 
         } else {
-            b.scrollFactorX = 0.25;
-            b.scrollFactorY = 0.25;
+            b.scrollFactorX = 0.15;
+            b.scrollFactorY = 0.15;
         }
         that.loadedBackdrops.push(b);
         

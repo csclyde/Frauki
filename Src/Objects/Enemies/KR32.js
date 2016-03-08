@@ -7,8 +7,8 @@ Enemy.prototype.types['KR32'] =  function() {
     this.animations.add('walk', ['KR32/Walk0000', 'KR32/Walk0001', 'KR32/Walk0002', 'KR32/Walk0003', 'KR32/Walk0004', 'KR32/Walk0005'], 8, true, false);
     this.animations.add('walk_back', ['KR32/Walk0005', 'KR32/Walk0004', 'KR32/Walk0003', 'KR32/Walk0002', 'KR32/Walk0001', 'KR32/Walk0000'], 8, true, false);
 
-    this.animations.add('windup', ['KR32/Attack0000'], 5,  false, false);
-    this.animations.add('attack', ['KR32/Attack0001', 'KR32/Attack0002', 'KR32/Attack0003', 'KR32/Attack0004', 'KR32/Attack0005'], 18, false, false);
+    this.animations.add('windup', ['KR32/Attack0001', 'KR32/Attack0002'], 16,  false, false);
+    this.animations.add('attack', ['KR32/Attack0003', 'KR32/Attack0004', 'KR32/Attack0005'], 18, false, false);
     this.animations.add('attack_stab', ['KR32/Stab0001', 'KR32/Stab0002', 'KR32/Stab0003', 'KR32/Stab0004'], 10, false, false);
     this.animations.add('hurt', ['KR32/Hurt0000', 'KR32/Hurt0001'], 8, true, false);
 
@@ -31,13 +31,19 @@ Enemy.prototype.types['KR32'] =  function() {
 			this.timers.SetTimer('mode_change', game.rnd.between(1000, 2000));
 		}
 
+		if(this.state === this.Slashing) {
+			this.body.drag.x = 2000;
+		} else {
+			this.body.drag.x = 200;
+		}
+
 	};
 
 	this.Act = function() {
 
         if(EnemyBehavior.Player.IsVisible(this)) {
 
- 			if(this.timers.TimerUp('dodge') && (
+ 			if(this.timers.TimerUp('dodge') && frauki.state !== frauki.Rolling && (
  				(EnemyBehavior.Player.IsDangerous(this) && EnemyBehavior.Player.MovingTowards(this)) || 
  				(EnemyBehavior.Player.IsDangerous(this) && EnemyBehavior.Player.IsNear(this, 100)) ||
  				(EnemyBehavior.Player.IsNear(this, 30))
@@ -156,12 +162,12 @@ Enemy.prototype.types['KR32'] =  function() {
 
 		if(this.timers.TimerUp('windup')) {
 			this.state = this.Slashing;
-			this.timers.SetTimer('attack_hold', 550);
+			this.timers.SetTimer('attack_hold', 800);
 
 			if(this.direction === 'left') {
-				this.body.velocity.x = -450;
+				this.body.velocity.x = -550;
 			} else {
-				this.body.velocity.x = 450;
+				this.body.velocity.x = 550;
 			}
 		}
 

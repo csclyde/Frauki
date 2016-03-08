@@ -63,4 +63,8 @@ var Speeches = {
 	'journal3': { text: 'Something is carved into the wall: I only eat the highest quality, most delectable, most subtle and transcendent greenergy. Nothing less will do.' },
 	'bad_knees': { text: 'I always wanted to see the world from the top of Frog Mountain. My knees have gotten pretty bad though.' },
 	'football': { text: 'Football is fun! I wonder if maybe I could score a goal' },
+
+	'demo_day': { text: 'Congradulations! You are the demo day champion. Comment with the word "Fraukster" to get a pat on the head' },
+	'demoday_hero': { text: 'Bravo! You are the ultimate hero that demo day needs' },
+
 };
