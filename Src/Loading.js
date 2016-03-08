@@ -42,7 +42,7 @@ Loading.preload = function() {
         game.load.audio(music.Name, music.File);
     });
 
-    game.load.bitmapFont('font', 'Design/Sprites/UI/pixelFont_0.png', 'Design/Sprites/UI/pixelFont.fnt');
+    game.load.bitmapFont('font', 'Data/Sprites/pixelFont_0.png', 'Data/Sprites/pixelFont.fnt');
 
     game.renderer.renderSession.roundPixels = true;
 };
