@@ -35,6 +35,7 @@ InputController = function() {
     this.binds.runLeft    = Phaser.Keyboard.LEFT;
     this.binds.runRight   = Phaser.Keyboard.RIGHT;
     this.binds.slash      = Phaser.Keyboard.Z;
+    this.binds.slash2     = Phaser.Keyboard.Y; //dem wacky germans
     this.binds.weapon     = Phaser.Keyboard.C;
     this.binds.roll       = Phaser.Keyboard.X;
     this.binds.shoulderR  = Phaser.Keyboard.Q;
@@ -72,6 +73,7 @@ InputController = function() {
             break;
 
             case inputController.binds.slash:
+            case inputController.binds.slash2:
                 inputController.OnSlash(true);
             break;
 
@@ -119,6 +121,7 @@ InputController = function() {
             break;
 
             case inputController.binds.slash:
+            case inputController.binds.slas2:
                 inputController.OnSlash(false);
             break;
 

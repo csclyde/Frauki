@@ -199,7 +199,7 @@ Player.prototype.ChangeState = function(newState) {
 
 Player.prototype.Grace = function() {
 
-    return !this.timers.TimerUp('frauki_grace');
+    return !this.timers.TimerUp('frauki_grace') || !this.timers.TimerUp('frauki_invincible');
 };
 
 Player.prototype.UpdateAttackGeometry = function() {
@@ -527,7 +527,6 @@ Player.prototype.Heal = function(params) {
             this.timers.SetTimer('heal_charge', 1100); 
 
             this.timers.SetTimer('frauki_invincible', 0);
-            this.timers.SetTimer('frauki_grace', 0);
         } else {
             events.publish('play_sound', {name: 'no_energy'});
         }
@@ -575,7 +574,6 @@ Player.prototype.Slash = function(params) {
 
     if(attackResult) {
         this.timers.SetTimer('frauki_invincible', 0);
-        this.timers.SetTimer('frauki_grace', 0);
 
         effectsController.EnergyStreak();
         effectsController.SpriteTrail(frauki, 150, 500, 300);
@@ -1061,7 +1059,7 @@ Player.prototype.Hurting = function() {
         }  
 
         this.timers.SetTimer('frauki_invincible', 2000);
-        this.timers.SetTimer('frauki_grace', 2000);
+        this.timers.SetTimer('frauki_grace', 1000);
     }
 };
 
