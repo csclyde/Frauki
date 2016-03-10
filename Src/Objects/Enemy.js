@@ -7,7 +7,7 @@ Enemy = function(game, x, y, name) {
     //enable its physics body
     game.physics.enable(this, Phaser.Physics.ARCADE);
     this.body.collideWorldBounds = true;
-    this.body.immovable = true;
+    //this.body.immovable = true;
 
     this.timers = new TimerUtil();
     

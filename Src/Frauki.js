@@ -843,7 +843,7 @@ Player.prototype.Running = function() {
 
     if((frauki.states.flowLeft || frauki.states.flowRight) && !inputController.dpad.left && !inputController.dpad.right) {
         this.PlayAnim('fall');
-    } else if((inputController.dpad.left && this.body.velocity.x > 0) || (inputController.dpad.right && this.body.velocity.x < 0)) {
+    } else if((this.body.acceleration.x < 0 && this.body.velocity.x > 0) || (this.body.acceleration.x > 0 && this.body.velocity.x < 0)) {
         this.PlayAnim('slide');
     } else {
         this.PlayAnim('run');

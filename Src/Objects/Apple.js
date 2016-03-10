@@ -46,21 +46,13 @@ function EatApple(f, a) {
     a.state = a.Eaten;
     Frogland.shardGroup.addChild(a);
 
-    a.fixedToCamera = true;
-    a.cameraOffset.x = a.x - game.camera.x;
-    a.cameraOffset.y = a.y - game.camera.y;
-
-    var xOffset = (20 * (energyController.GetApples() + 1)) - 3;
 
     events.publish('play_sound', {name: 'crystal_door'});
 
+    energyController.AddApple();
+    a.destroy();
 
-    a.zipTween = game.add.tween(a.cameraOffset).to({x: xOffset, y: 57}, 2000, Phaser.Easing.Exponential.InOut, true);
-
-    a.zipTween.onComplete.add(function() { 
-        a.destroy();
-        energyController.AddApple();
-    }, a);
+    
 
 };
 

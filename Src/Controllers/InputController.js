@@ -7,6 +7,8 @@ InputController = function() {
     this.dpad.left = false;
     this.dpad.right = false;
 
+    this.currentDir = 'still';
+
     this.buttons = {};
     this.buttons.rShoulder = false;
 
@@ -267,15 +269,8 @@ InputController = function() {
 
 InputController.prototype.Update = function() {
 
-	if (this.dpad.left) {
-        frauki.Run({dir:'left'});
-    }
-    else if (this.dpad.right) {
-        frauki.Run({dir:'right'});
-    }
-    else {
-    	frauki.Run({dir:'still'});
-    }
+    frauki.Run({dir:this.currentDir});
+
 };
 
 InputController.prototype.OnJump = function(pressed) {
@@ -316,16 +311,33 @@ InputController.prototype.OnHeal = function(pressed) {
 InputController.prototype.OnLeft = function(pressed) {
     if(pressed) {
         events.publish('player_run', {run:true, dir:'left'});
+
+        this.currentDir = 'left';
+
     } else {
         events.publish('player_run', {run:false, dir: 'left'});
+
+        if(this.dpad.right) {
+            this.currentDir = 'right';
+        } else {
+            this.currentDir = 'still';
+        }
     }
 };
 
 InputController.prototype.OnRight = function(pressed) {
     if(pressed) {
         events.publish('player_run', {run:true, dir:'right'});
+
+        this.currentDir = 'right';
     } else {
         events.publish('player_run', {run:false, dir: 'right'});
+
+        if(this.dpad.left) {
+            this.currentDir = 'left';
+        } else {
+            this.currentDir = 'still';
+        }
     }
 };
 

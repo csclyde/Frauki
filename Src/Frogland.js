@@ -172,7 +172,7 @@ Frogland.HandleCollisions = function() {
     game.physics.arcade.collideSpriteVsGroup(frauki, this.shardGroup, null, Collision.OverlapFraukiWithShard, null, true);
 
     //collide enemies with doors
-    game.physics.arcade.collide(objectController.enemyList, objectController.doorList);
+    game.physics.arcade.collide(objectController.enemyList, objectController.doorList, function(a, b) { console.log(a, b) }, function(a, b) { console.log(a, b) } );
 
     //overlap fraukis attack with objects and projectiles
     if(frauki.Attacking()) {
@@ -314,7 +314,7 @@ Frogland.ChangeLayer = function(newLayer) {
     if(this.currentLayer == newLayer || Frogland.changingLayer === true) return;
 
     Frogland.changingLayer = true;
-    game.time.events.add(350, function() { Frogland.changingLayer = false; });
+    game.time.events.add(800, function() { Frogland.changingLayer = false; });
 
     //get the current layer
     var currentForgroundLayer = this['foregroundLayer_' + this.currentLayer];
@@ -393,7 +393,7 @@ Frogland.DislodgeTile = function(tile) {
         events.publish('play_sound', {name: 'floor_crumble'});
 
 
-        game.time.events.add(game.rnd.between(50, 100), function() { 
+        game.time.events.add(game.rnd.between(50, 80), function() { 
             if(!!tile) {
                 Frogland.DislodgeTile(Frogland.map.getTile(tile.x - 1, tile.y, 'Collision_' + Frogland.currentLayer));
                 Frogland.DislodgeTile(Frogland.map.getTile(tile.x + 1, tile.y, 'Collision_' + Frogland.currentLayer));
