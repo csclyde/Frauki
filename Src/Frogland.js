@@ -112,7 +112,6 @@ Frogland.Create = function() {
     game.physics.arcade.sortDirection = game.physics.arcade.TOP_BOTTOM;
 
     console.log('Frogland creation finished')
-
 };
 
 Frogland.Update = function() {

@@ -120,7 +120,7 @@ Door.prototype.create = function() {
 Door.prototype.update = function() {
 
     if(this.state === this.Closed && this.owningLayer === Frogland.currentLayer && GameData.IsDoorOpen(this.id)) {
-        if(this.body.x > game.camera.x && this.body.y > game.camera.y && this.body.x < game.camera.x + game.camera.width && this.body.y < game.camera.y + game.camera.height) {
+        if(this.body.x + this.body.width > game.camera.x && this.body.y + this.body.height > game.camera.y && this.body.x < game.camera.x + game.camera.width && this.body.y < game.camera.y + game.camera.height) {
             PerformOpen(this, false, true);
         } 
     }

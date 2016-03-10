@@ -162,8 +162,7 @@ ObjectController.prototype.SpawnObject = function(o) {
     }
 };
 
-ObjectController.prototype.CreateBigNugg = function() {
-    
+ObjectController.prototype.CreateBigNugg = function() {  
 };
 
 ObjectController.prototype.CreateObjectsLayer = function(layer) {
