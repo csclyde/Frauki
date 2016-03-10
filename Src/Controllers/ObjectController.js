@@ -8,6 +8,7 @@ ObjectController = function() {
 
     this.doorList = [];
     this.enemyList = [];
+    this.checkpointList = [];
 };
 
 ObjectController.prototype.Create = function() {
@@ -209,6 +210,8 @@ ObjectController.prototype.CreateObjectsLayer = function(layer) {
             if(obj.id == GameData.GetCheckpoint()) {
                 obj.CheckpointHit();
             }
+
+            objectController.checkpointList.push(obj);
         } else if(obj.spriteType === 'enemy') {
             objectController.enemyList.push(obj);
         }

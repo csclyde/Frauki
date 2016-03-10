@@ -23,7 +23,7 @@ Player = function (game, x, y, name) {
         this.animations.add(anim.Name, anim.Frames, anim.Fps, anim.Loop, false);
     }, this);
 
-    this.ChangeState(this.Materializing);
+    this.ChangeState(this.Standing);
     this.PlayAnim('stand');
     
     this.tweens = {};
@@ -33,9 +33,10 @@ Player = function (game, x, y, name) {
     this.movement = {};
     this.upgrades = {};
 
-    this.Reset();
-
     this.timers = new TimerUtil();
+    
+    this.Reset();
+    this.alpha = 0;
 
     this.currentAttack = {};
     this.attackRect = game.add.sprite(0, 0, null);
@@ -160,7 +161,7 @@ Player.prototype.postStateUpdate = function() {
 
     if(!this.timers.TimerUp('frauki_invincible')) {
         frauki.alpha = (((Math.sin(game.time.now / 50) + 1) / 2) * 0.4) + 0.5;
-    } else if(this.state !== this.Hurting) {
+    } else if(this.state !== this.Hurting && this.alpha !== 0) {
         frauki.alpha = 1;
     }
 };
@@ -224,6 +225,7 @@ Player.prototype.UpdateAttackGeometry = function() {
     if(!!this.currentAttack) {
 
         if(this.states.direction === 'right') {
+            console.log(this.attackRect.body, this.currentAttack, this.body)
             this.attackRect.body.x = this.currentAttack.x + this.body.x; 
             this.attackRect.body.y = this.currentAttack.y + this.body.y; 
             this.attackRect.body.width = this.currentAttack.w; 
@@ -339,6 +341,7 @@ Player.prototype.Reset = function() {
     this.alpha = 1;
     this.state = this.Materializing;
     this.SetDirection('right');
+    this.timers.SetTimer('frauki_invincible', 0);
 
     this.states.crouching = false;
     this.states.hasFlipped = false;

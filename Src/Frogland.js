@@ -1,13 +1,14 @@
 var Frogland = {};
 
 Frogland.Create = function() {
+    console.log('Frogland creation starting')
 
     this.timers = new TimerUtil();
 
+    console.log('Backgrounds...')
     this.bg = game.add.tileSprite(0, 0, pixel.width * 1.5, pixel.height * 1.5, 'Background');
     this.bg.fixedToCamera = true;
     this.bg.autoScroll(-2, 0);
-
 
     this.clouds1 = game.add.tileSprite(0, 0, 1024, 512, 'clouds1');
     this.clouds1.fixedToCamera = true;
@@ -20,6 +21,7 @@ Frogland.Create = function() {
     this.plx1 = game.add.image(0, 0, 'parallax1');
     this.plx1.fixedToCamera = true;
 
+    console.log('Map Data...')
     this.map = game.add.tilemap('Frogland');
     this.map.addTilesetImage('FrogtownTiles');
     this.map.addTilesetImage('DepthsTiles');
@@ -41,8 +43,10 @@ Frogland.Create = function() {
 
     this.currentLayer = startLayer;
 
+    console.log('Backdrops...')
     backdropController.LoadBackgrounds();
     
+    console.log('Background Layers...')
     this.CreateBackgroundLayer(4, startLayer === 4);
     this.CreateBackgroundLayer(3, startLayer === 3);
     this.CreateBackgroundLayer(2, startLayer === 2);
@@ -50,18 +54,21 @@ Frogland.Create = function() {
     this.placedShards = game.add.group();
     this.effectsGroup = game.add.group();
     
+    console.log('Player...')
     frauki = new Player(game, fraukiStartX, fraukiStartY, 'Frauki');
     game.add.existing(frauki);
-    game.camera.focusOnXY(frauki.x, frauki.y);
 
+    console.log('Collision Layers...')
     this.CreateCollisionLayer(4);
     this.CreateCollisionLayer(3);
     this.CreateCollisionLayer(2);
 
+    console.log('Object Layers...')
     objectController.CreateObjectsLayer(4);
     objectController.CreateObjectsLayer(3);
     objectController.CreateObjectsLayer(2);
 
+    console.log('Foreground Layers...')
     this.CreateMidgroundLayer(4, startLayer === 4);
     this.CreateMidgroundLayer(3, startLayer === 3);
     this.CreateMidgroundLayer(2, startLayer === 2);
@@ -86,17 +93,12 @@ Frogland.Create = function() {
     this.PreprocessTiles(3);
     this.PreprocessTiles(2);
 
+    console.log('Trigger Layers...')
     triggerController.CreateTriggers(4);
     triggerController.CreateTriggers(3);
     triggerController.CreateTriggers(2);
 
-    // setInterval(function() {
-    //     Frogland.AnimateTiles();
-    // }, 100);
-
     this.SpawnFrauki();
-
-    //game.camera.bounds.inflate(120, 0);
 
     objectController.CompileObjectList();
 
@@ -107,7 +109,10 @@ Frogland.Create = function() {
         OpenDoorById(params.door_name);
     });
 
-    game.physics.arcade.sortDirection = game.physics.arcade.TOP_BOTTOM
+    game.physics.arcade.sortDirection = game.physics.arcade.TOP_BOTTOM;
+
+    console.log('Frogland creation finished')
+
 };
 
 Frogland.Update = function() {
@@ -193,29 +198,13 @@ Frogland.HandleCollisions = function() {
 Frogland.SpawnFrauki = function() {
     if(Frogland.map.properties.debug === 'false') {
 
-        Frogland.objectGroup_2.forEach(function(obj) {
+        objectController.checkpointList.forEach(function(obj) {
             if(obj.spriteType === 'checkpoint' && obj.id == GameData.GetCheckpoint()) {
                 frauki.x = obj.x;
-                frauki.y = obj.y + frauki.body.height;
+                frauki.y = obj.y + 90;
                 Frogland.ChangeLayer(obj.owningLayer);   
             } 
         });  
-
-        Frogland.objectGroup_3.forEach(function(obj) {
-            if(obj.spriteType === 'checkpoint' && obj.id == GameData.GetCheckpoint()) {
-                frauki.x = obj.x;
-                frauki.y = obj.y + frauki.body.height;
-                Frogland.ChangeLayer(obj.owningLayer);   
-            } 
-        }); 
-
-        Frogland.objectGroup_4.forEach(function(obj) {
-            if(obj.spriteType === 'checkpoint' && obj.id == GameData.GetCheckpoint()) {
-                frauki.x = obj.x;
-                frauki.y = obj.y + frauki.body.height;
-                Frogland.ChangeLayer(obj.owningLayer);   
-            } 
-        }); 
 
     } else {
         fraukiStartX = this.map.properties.startX * 16;

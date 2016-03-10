@@ -145,11 +145,9 @@ InputController = function() {
     game.input.gamepad.addCallbacks(this, {
         onConnect: function(){
             console.log('gamepad connected');
-            Main.gamepadIcon.visible = true;
         },
         onDisconnect: function(){
             console.log('gamepad disconnected');
-            Main.gamepadIcon.visible = false;
         },
         onDown: function(buttonCode, value){
 

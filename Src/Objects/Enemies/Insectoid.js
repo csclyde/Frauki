@@ -37,13 +37,9 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
             } else if(this.body.onFloor()) {
 
-                if(EnemyBehavior.Player.IsDangerous(this) || (EnemyBehavior.Player.MovingTowards(this) && EnemyBehavior.Player.IsNear(this, 100))) {
+                if(this.timers.TimerUp('dodge') && (EnemyBehavior.Player.IsDangerous(this) || EnemyBehavior.Player.IsNear(this, 50) || (EnemyBehavior.Player.MovingTowards(this)) && EnemyBehavior.Player.IsNear(this, 100))) {
                     this.Dodge();
                 }
-                else if(EnemyBehavior.Player.IsNear(this, 50)) {
-
-                    this.Dodge();
-                } 
                 else if(this.timers.TimerUp('attack_wait') && EnemyBehavior.Player.IsVulnerable(this)) {
                     if(!frauki.body.onFloor()) {
                         this.Hop();
@@ -181,7 +177,10 @@ Enemy.prototype.types['Insectoid'] =  function() {
     };
 
     this.PreScuttling = function() {
-        this.PlayAnim('idle');      
+        this.PlayAnim('idle');    
+
+        EnemyBehavior.FacePlayer(this);
+          
 
         if(this.timers.TimerUp('attack')) {
             this.timers.SetTimer('attack', 1000);
@@ -232,6 +231,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
         }
 
         if(this.timers.TimerUp('attack')) {
+            this.timers.SetTimer('dodge', 1000);
             return true;
         }
 

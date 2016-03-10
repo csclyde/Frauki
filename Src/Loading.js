@@ -346,4 +346,6 @@ Loading.create = function() {
             this.children[i].postUpdate();
         }
     };
+
+    console.log('Finished Loading state')
 };

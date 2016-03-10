@@ -19,7 +19,6 @@ Door = function(game, x, y, name) {
     this.visible = false;
     this.thresholdAttempts = 1;
     this.openAttempts = 0;
-
 };
 
 Door.prototype = Object.create(Phaser.Sprite.prototype);
@@ -222,7 +221,7 @@ function PerformOpen(d, save, silent) {
         events.publish('fade_music', { volume: 0.1, duration: 5000 });
     }
 
-    var openTween = game.add.tween(d.body).to({y: movementTarget}, openDuration, Phaser.Easing.Quintic.InOut, true);
+    this.openTween = game.add.tween(d.body).to({y: movementTarget}, openDuration, Phaser.Easing.Quintic.InOut, true);
 
     setTimeout(function() {
         effectsController.DoorDust({x: d.body.center.x, y: d.body.y + d.body.height - 20 });
@@ -253,5 +252,6 @@ Door.prototype.Opening = function() {
 };
 
 Door.prototype.Open = function() {
+
     this.PlayAnim('open');
 };

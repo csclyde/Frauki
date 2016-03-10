@@ -2,6 +2,8 @@ var Main = new Phaser.State();
 
 Main.create = function() {
 
+    console.log('Starting Main state load')
+
     cameraController = new CameraController();
     inputController = new InputController();
     energyController = new EnergyController();
@@ -25,10 +27,6 @@ Main.create = function() {
     energyController.Create();
     speechController.Create();
 
-    this.gamepadIcon = game.add.image(150, 150, 'UI', 'Gamepad0001');
-    this.gamepadIcon.fixedToCamera = true;
-    this.gamepadIcon.alpha = 0.5;
-
     if(game.input.gamepad.padsConnected === 0) {
         this.gamepadIcon.visible = false;
     }
@@ -36,10 +34,15 @@ Main.create = function() {
     this.physicsSlowMo = 1;
     this.currentAlpha = 1;
 
-    cameraController.camX = frauki.x;
-    cameraController.camY = frauki.y;
+    cameraController.camX = frauki.x + 41;
+    cameraController.camY = frauki.y + 111;
     
-    effectsController.Fade(false);
+    var fadeIn = effectsController.Fade(false);
+
+    fadeIn.onComplete.add(function() {
+        frauki.state = frauki.Materializing;
+        frauki.alpha = 1;
+    });
 
     this.UITextures = {};
     // this.UITextures.EnergyBar0000 = PIXI.TextureCache[game.cache.getFrameByName('UI', 'EnergyBar0000').uuid];
@@ -47,6 +50,8 @@ Main.create = function() {
     // this.UITextures.EnergyBar0002 = PIXI.TextureCache[game.cache.getFrameByName('UI', 'EnergyBar0002').uuid];
     // this.UITextures.EnergyBar0005 = PIXI.TextureCache[game.cache.getFrameByName('UI', 'EnergyBar0005').uuid];
     // this.UITextures.EnergyBar0006 = PIXI.TextureCache[game.cache.getFrameByName('UI', 'EnergyBar0006').uuid];
+
+    console.log('Finished Main State load')
 };
 
 Main.update = function() {
@@ -66,9 +71,6 @@ Main.update = function() {
     speechController.Update();
     triggerController.Update(Frogland.currentLayer);
     backdropController.Update();
-
-    this.gamepadIcon.cameraOffset.x = Math.round(pixel.width * 0.27 + cameraController.camX / pixel.scale);
-    this.gamepadIcon.cameraOffset.y = Math.round(pixel.height * 0.3 + cameraController.camY / pixel.scale) + 240;
 };
 
 Main.render = function() {
@@ -144,7 +146,9 @@ Main.Restart = function() {
         
         Frogland.SpawnFrauki();
 
-        frauki.Reset();
+        game.time.events.add(300, function() {
+            frauki.Reset(); 
+        });
 
         energyController.Reset();
         game.time.slowMotion = 1;
