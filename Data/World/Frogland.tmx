@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="400" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="1982">
  <properties>
-  <property name="debug" value="false"/>
+  <property name="debug" value="true"/>
   <property name="startLayer" value="3"/>
   <property name="startX" value="104"/>
   <property name="startY" value="217"/>
@@ -4295,7 +4295,6 @@
     <property name="once" value="false"/>
    </properties>
   </object>
-  <object id="1588" name="dripping" type="speech" x="1753.75" y="3706.67" width="65.75" height="52"/>
   <object id="1590" name="dizzy" type="trigger" x="1067.25" y="3824.17" width="79" height="63">
    <properties>
     <property name="once" value="false"/>

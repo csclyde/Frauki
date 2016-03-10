@@ -728,7 +728,7 @@ EffectsController.prototype.EnergyStreak = function() {
 EffectsController.prototype.ClashStreak = function(x, y, angle) {
     var clash = game.add.sprite(x, y, 'Misc');
     clash.anchor.setTo(0.5);
-    clash.animations.add('clash', ['Clash0001', 'Clash0002', 'Clash0003'], 8, false, false);
+    clash.animations.add('clash', ['Clash0000', 'Clash0001', 'Clash0002', 'Clash0003'], 12, false, false);
     clash.animations.play('clash');
     clash.animations.currentAnim.killOnComplete = true;
     clash.rotation = angle;

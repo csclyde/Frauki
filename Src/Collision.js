@@ -145,11 +145,11 @@ Collision.OverlapAttackWithEnemy = function(f, e) {
 };
 
 Collision.OverlapAttackWithEnemyAttack = function(e, f) {
-    if(!frauki.timers.TimerUp('frauki_grace')) {
+    e = e.owningEnemy;
+
+    if(!e.timers.TimerUp('grace')) {
         return;
     }
-
-    e = e.owningEnemy;
 
     //if both attacks are zero damage, do nothing
     if(e.GetCurrentDamage() <= 0 && frauki.GetCurrentDamage() <= 0)
@@ -175,15 +175,13 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
     e.LandHit();
     e.timers.SetTimer('attack', 0);
 
-    effectsController.SparkSplash(frauki.attackRect, e);
-
     var vel = new Phaser.Point(e.body.center.x - frauki.body.center.x, e.body.center.y - frauki.body.center.y);
     vel = vel.normalize();
 
-    vel.setMagnitude(400);
+    vel.setMagnitude(500);
 
     e.body.velocity.x = vel.x;
-    e.body.velocity.y = vel.y / 2;
+    //e.body.velocity.y = vel.y / 2;
     
     events.publish('stop_attack_sounds', {});
     events.publish('play_sound', {name: 'clang'});

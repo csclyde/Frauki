@@ -11,9 +11,14 @@ Enemy.prototype.types['KR32'] =  function() {
     this.animations.add('attack', ['KR32/Attack0003', 'KR32/Attack0004', 'KR32/Attack0005'], 18, false, false);
     this.animations.add('attack_stab', ['KR32/Stab0001', 'KR32/Stab0002', 'KR32/Stab0003', 'KR32/Stab0004'], 10, false, false);
     this.animations.add('hurt', ['KR32/Hurt0000', 'KR32/Hurt0001'], 8, true, false);
+    this.animations.add('block', ['KR32/Block0000', 'KR32/Block0001'], 20, true, false);
+    this.animations.add('jump', ['KR32/Jump0001'], 20, true, false);
+    this.animations.add('land', ['KR32/Jump0002'], 14, false, false);
 
     this.energy = 3;
     this.baseStunDuration = 400;
+
+    this.body.bounce.y = 0;
 
     this.mode = 'defensive';
 
@@ -32,7 +37,7 @@ Enemy.prototype.types['KR32'] =  function() {
 		}
 
 		if(this.state === this.Slashing) {
-			this.body.drag.x = 2000;
+			this.body.drag.x = 1200;
 		} else {
 			this.body.drag.x = 200;
 		}
@@ -43,21 +48,16 @@ Enemy.prototype.types['KR32'] =  function() {
 
         if(EnemyBehavior.Player.IsVisible(this)) {
 
- 			if(this.timers.TimerUp('dodge') && frauki.state !== frauki.Rolling && (
- 				(EnemyBehavior.Player.IsDangerous(this) && EnemyBehavior.Player.MovingTowards(this)) || 
- 				(EnemyBehavior.Player.IsDangerous(this) && EnemyBehavior.Player.IsNear(this, 100)) ||
- 				(EnemyBehavior.Player.IsNear(this, 30))
- 			  )) {
+ 			if(this.timers.TimerUp('dodge') && this.state === this.Slashing && EnemyBehavior.Player.IsNear(this, 120)) {
                 this.Recoil();
 
             } else if(EnemyBehavior.Player.IsNear(this, 100)) {
 
                 if(this.timers.TimerUp('attack_wait') && EnemyBehavior.Player.IsVulnerable(this) && !EnemyBehavior.Player.MovingTowards(this) && frauki.body.onFloor()) {
-                	if(EnemyBehavior.Player.IsNear(this, 70)) {
+                	if(EnemyBehavior.Player.IsNear(this, 60)) {
                 		this.AttackStab();
                 	}
 	                else {
-	                	console.log(frauki.animations.currentFrame.name)
 	                    this.Attack();
 	                }
                 } else {
@@ -73,7 +73,11 @@ Enemy.prototype.types['KR32'] =  function() {
         }
     };
 
-
+    this.LandHit = function() {
+    	if(this.state === this.Blocking) {
+    		this.timers.SetTimer('block_recoil', 200);
+    	}
+    };
 
 	///////////////////////////////ACTIONS////////////////////////////////////
     this.Attack = function() {
@@ -102,7 +106,7 @@ Enemy.prototype.types['KR32'] =  function() {
     	}
     	this.body.velocity.y = -150;
 
-    	this.timers.SetTimer('dodge', game.rnd.between(750, 1000));
+    	this.timers.SetTimer('dodge', game.rnd.between(2000, 4000));
     };
 
 	////////////////////////////////STATES////////////////////////////////////
@@ -114,14 +118,16 @@ Enemy.prototype.types['KR32'] =  function() {
 
 	this.Blocking = function() {
 
-		if(this.direction === 'left') {
+		if(!this.timers.TimerUp('block_recoil')) {
+			this.PlayAnim('block');
+
+		} else if(this.direction === 'left') {
 			if(this.mode === 'defensive') {
 				this.body.velocity.x = -25;
 				this.PlayAnim('walk_back');
 			} else {
 				this.body.velocity.x = 25;
 				this.PlayAnim('walk');
-				
 			}
 		} else {
 			if(this.mode === 'defensive') {
@@ -145,9 +151,15 @@ Enemy.prototype.types['KR32'] =  function() {
 	};
 
 	this.Recoiling = function() {
-		this.PlayAnim('walk_back');
 		
 		if(this.body.onFloor()) {
+			this.PlayAnim('land');
+			this.body.velocity.x = 0;
+		} else {
+			this.PlayAnim('jump');
+		}
+
+		if(this.animations.currentAnim.name === 'land' && this.animations.currentAnim.isFinished) {
 			this.timers.SetTimer('attack_wait', 0);
 
 			return true;
@@ -162,7 +174,7 @@ Enemy.prototype.types['KR32'] =  function() {
 
 		if(this.timers.TimerUp('windup')) {
 			this.state = this.Slashing;
-			this.timers.SetTimer('attack_hold', 800);
+			this.timers.SetTimer('attack_hold', 500);
 
 			if(this.direction === 'left') {
 				this.body.velocity.x = -550;
@@ -209,6 +221,22 @@ Enemy.prototype.types['KR32'] =  function() {
 
 	this.attackFrames = {
 
+		'KR32/Block0000': {
+			x: 18, y: -8, w: 10, h: 60,
+			damage: 0,
+			knockback: 0,
+			priority: 2,
+			juggle: 0
+		},
+
+		'KR32/Block0001': {
+			x: 18, y: -8, w: 10, h: 60,
+			damage: 0,
+			knockback: 0,
+			priority: 2,
+			juggle: 0
+		},
+
 		'KR32/Walk0000': {
 			x: 18, y: -8, w: 10, h: 60,
 			damage: 0,
@@ -254,22 +282,6 @@ Enemy.prototype.types['KR32'] =  function() {
 			damage: 0,
 			knockback: 0,
 			priority: 2,
-			juggle: 0
-		},
-
-		'KR32/Attack0001': {
-			x: 15, y: -3, w: 55, h: 50,
-			damage: 3,
-			knockback: 0.5,
-			priority: 1,
-			juggle: 0
-		},
-
-		'KR32/Attack0002': {
-			x: 15, y: -3, w: 55, h: 50,
-			damage: 3,
-			knockback: 0.3,
-			priority: 1,
 			juggle: 0
 		},
 

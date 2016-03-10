@@ -2,7 +2,7 @@ var fraukiDamageFrames = {
 	
 	//slash across in front of yourself
 	'Attack Front0002': {
-		x: 0, y: 10, w: 85, h: 34,
+		x: 0, y: 10, w: 65, h: 34,
 		damage: 1,
 		knockback: 1,
 		priority: 1,
@@ -303,7 +303,7 @@ var fraukiAnimations = [
 	{ Name: 'hang', Frames:  ['Hang0000', 'Hang0001', 'Hang0002', 'Hang0003', 'Hang0004', 'Hang0005'],  Fps: 12, Loop: false },
 	{ Name: 'heal', Frames:  ['Heal0000', 'Heal0001', 'Heal0002', 'Heal0003', 'Heal0004'], Fps: 12 , Loop: true },
 
-	{ Name: 'attack_front', Frames:  ['Attack Front0001', 'Attack Front0001', 'Attack Front0002', 'Attack Front0003', 'Attack Front0004', 'Attack Front0005', 'Attack Front0006', 'Attack Front0007', 'Attack Front0007', 'Attack Front0007', 'Attack Front0007', 'Attack Front0008', 'Attack Front0009'], Fps: 16, Loop: false },
+	{ Name: 'attack_front', Frames:  ['Attack Front0001', 'Attack Front0001', 'Attack Front0002', 'Attack Front0003', 'Attack Front0004', 'Attack Front0005', 'Attack Front0006', 'Attack Front0007', 'Attack Front0007', 'Attack Front0007', 'Attack Front0007', 'Attack Front0007', 'Attack Front0007', 'Attack Front0008', 'Attack Front0009'], Fps: 14, Loop: false },
 	{ Name: 'attack_lunge', Frames:  ['Attack Lunge0000', 'Attack Lunge0001', 'Attack Lunge0002', 'Attack Lunge0003', 'Attack Lunge0004', 'Attack Lunge0005', 'Attack Lunge0006', 'Attack Lunge0007'], Fps: 16, Loop: false },
 	{ Name: 'attack_fall', Frames:  ['Attack Fall0000', 'Attack Fall0001', 'Attack Fall0002', 'Attack Fall0003', 'Attack Fall0004', 'Attack Fall0005', 'Attack Fall0006', 'Attack Fall0007', 'Attack Fall0008', 'Attack Fall0008', 'Attack Fall0008', 'Attack Fall0008'], Fps: 16, Loop: false },
 	{ Name: 'attack_jump', Frames:  ['Attack Jump0000', 'Attack Jump0000', 'Attack Jump0001', 'Attack Jump0002', 'Attack Jump0003', 'Attack Jump0004', 'Attack Jump0005', 'Attack Jump0006'], Fps: 14, Loop: false },

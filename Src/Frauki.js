@@ -733,13 +733,10 @@ Player.prototype.LandHit = function(e, damage) {
 
     if(this.state !== this.AttackStab && this.state !== this.AttackDiveFall && this.state !== this.Rolling) {
         frauki.body.velocity.x = vel.x;
-        frauki.body.velocity.y = vel.y;
+        //frauki.body.velocity.y = vel.y;
     }
 
-    if(damage > 0) {
-        effectsController.ClashStreak(e.body.center.x, e.body.center.y, game.rnd.between(1, 2));
-        //events.publish('camera_shake', {magnitudeX: 15, magnitudeY: 10, duration: 400});
-    }
+    effectsController.ClashStreak(e.body.center.x, e.body.center.y, game.rnd.between(1, 2));
 
     if(damage > 0 && e.maxEnergy > 1) {
         effectsController.SlowHit(600);
@@ -750,9 +747,6 @@ Player.prototype.LandHit = function(e, damage) {
     this.states.hasFlipped = false;
 
     events.publish('stop_attack_sounds');
-
-    // frauki.animations.paused = true;
-    // setTimeout(function() { frauki.animations.paused = false; }, 150);
 };
 
 Player.prototype.Hit = function(e, damage, grace_duration) {
@@ -775,11 +769,7 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
         damage /= 2;
     }
 
-    //effectsController.SpawnEnergyNuggets(this.body, e.body, 'negative', damage);
-    effectsController.EnergySplash(frauki.body, 100, 'positive', 20, frauki.body.velocity);
-
     energyController.RemoveHealth(damage);
-    energyController.AddCharge(damage / 10);
 
     console.log('Frauki is taking ' + damage + ' damage');
 

@@ -204,12 +204,11 @@ Enemy.prototype.TakeHit = function(damage) {
     console.log('Enemy taking ' + damage + ', at ' + this.energy + '/' + this.maxEnergy);
 
     //knock the enemy back
-    this.body.velocity.x = (250 * frauki.GetCurrentKnockback()) + 200;
+    this.body.velocity.x = (200 * frauki.GetCurrentKnockback()) + 100;
     this.body.velocity.x *= EnemyBehavior.Player.DirMod(this);
-    this.body.velocity.y = (frauki.GetCurrentJuggle() * -200) - 200;
+    this.body.velocity.y = (frauki.GetCurrentJuggle() * -200) - 100;
 
     events.publish('play_sound', { name: 'attack_connect' });
-    effectsController.EnergySplash(this.body, 100, 'negative', 15, this.body.velocity);
 
     this.timers.SetTimer('hit', this.baseStunDuration + (250 * damage));
     this.timers.SetTimer('grace', this.baseStunDuration + (250 * damage));

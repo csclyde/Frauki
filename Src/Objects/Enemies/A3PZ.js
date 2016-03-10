@@ -36,10 +36,12 @@ Enemy.prototype.types['A3PZ'] =  function() {
             } else if(EnemyBehavior.Player.IsNear(this, 100)) {
                 EnemyBehavior.FacePlayer(this);
 
-                if(EnemyBehavior.Player.MovingTowards(this)) {
+                if(EnemyBehavior.Player.MovingTowards(this) || EnemyBehavior.Player.IsDangerous(this)) {
                     this.Block(300);
-                } else {
+                } else if(EnemyBehavior.Player.IsVulnerable(this)) {
                     this.Attack();
+                } else {
+                    this.Block(300);
                 }
             
             } else {
