@@ -27,10 +27,6 @@ Main.create = function() {
     energyController.Create();
     speechController.Create();
 
-    if(game.input.gamepad.padsConnected === 0) {
-        this.gamepadIcon.visible = false;
-    }
-
     this.physicsSlowMo = 1;
     this.currentAlpha = 1;
 
