@@ -314,7 +314,7 @@ Frogland.ChangeLayer = function(newLayer) {
     if(this.currentLayer == newLayer || Frogland.changingLayer === true) return;
 
     Frogland.changingLayer = true;
-    setTimeout(function() { Frogland.changingLayer = false; }, 350);
+    game.time.events.add(350, function() { Frogland.changingLayer = false; });
 
     //get the current layer
     var currentForgroundLayer = this['foregroundLayer_' + this.currentLayer];
@@ -393,14 +393,14 @@ Frogland.DislodgeTile = function(tile) {
         events.publish('play_sound', {name: 'floor_crumble'});
 
 
-        setTimeout(function() { 
+        game.time.events.add(game.rnd.between(50, 100), function() { 
             if(!!tile) {
                 Frogland.DislodgeTile(Frogland.map.getTile(tile.x - 1, tile.y, 'Collision_' + Frogland.currentLayer));
                 Frogland.DislodgeTile(Frogland.map.getTile(tile.x + 1, tile.y, 'Collision_' + Frogland.currentLayer));
                 Frogland.DislodgeTile(Frogland.map.getTile(tile.x, tile.y - 1, 'Collision_' + Frogland.currentLayer));
                 Frogland.DislodgeTile(Frogland.map.getTile(tile.x, tile.y + 1, 'Collision_' + Frogland.currentLayer));
             }
-        }, (Math.random() * 80));
+        });
     }
 };
 

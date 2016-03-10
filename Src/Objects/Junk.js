@@ -40,7 +40,7 @@ Junk.prototype.JunkHit = function(o) {
 
 	var probTable = [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 3];
 
-	setTimeout(function() {
+	game.time.events.add(100, function() {
 
 	    effectsController.SpawnEnergyNuggets(o.body, frauki.body, 'neutral', probTable[Math.round(Math.random() * (probTable.length - 1))]);
 	    //effectsController.SpawnEnergyNuggets(o.body, frauki.body, 'positive', probTable[Math.round(Math.random() * (probTable.length - 1))]);
@@ -50,5 +50,5 @@ Junk.prototype.JunkHit = function(o) {
 	    effectsController.DiceObject(o.objectName, o.body.center.x, o.body.center.y, o.body.velocity.x, o.body.velocity.y, o.owningLayer);
 	    events.publish('play_sound', {name: 'smash'});
 	    o.destroy();
-	}, 100);
+	});
 };

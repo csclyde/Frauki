@@ -250,10 +250,10 @@ Collision.OverlapLobWithEnemy = function(l, e) {
 
         effectsController.EnergySplash(l.body, 200, 'neutral', 30);
 
-        setTimeout(function() {
+        game.time.events.add(5, function() {
             l.destroy(); 
             l = null;
-        }, 5);
+        });
 
         return false;
     }
@@ -277,10 +277,10 @@ Collision.OverlapLobWithEnemy = function(l, e) {
 
     effectsController.EnergySplash(l.body, 200, 'neutral', 30);
 
-    setTimeout(function() {
+    game.time.events.add(5, function() {
         l.destroy(); 
         l = null;
-    }, 5);
+    });
 
     events.publish('play_sound', { name: 'attack_connect' });
 

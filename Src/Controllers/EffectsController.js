@@ -355,7 +355,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
             sparkles.minRotation = 0;
             sparkles.maxRotation = 0;
             sparkles.setScale();
-            setTimeout(function() { sparkles.start(false, 200, 100); }, game.rnd.between(0, 1000));
+            game.time.events.add(game.rnd.between(0, 1000), function() { sparkles.start(false, 200, 100); });
             sparkles.effectType = 'sparkles';
             sparkles.owningLayer = layer;
 
@@ -585,9 +585,9 @@ EffectsController.prototype.MakeHearts = function(amt) {
     }
 
     hearts.forEach(function(h) {
-        setTimeout(function() {
+        game.rnd.between(0, 1000)(game.rnd.between(700, 1000), function() {
             h.destroy();
-        }, 700 + Math.random() * 300);
+        });
     })
 };
 

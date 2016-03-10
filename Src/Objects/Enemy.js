@@ -192,6 +192,7 @@ Enemy.prototype.PlayAnim = function(name) {
 };
 
 Enemy.prototype.TakeHit = function(damage) {
+    var that = this;
 
     if(!this.timers.TimerUp('hit') || !this.timers.TimerUp('grace')) {
         return;
@@ -219,7 +220,7 @@ Enemy.prototype.TakeHit = function(damage) {
         this.timers.SetTimer('hit', 1000);
         this.timers.SetTimer('grace', 300);
 
-        setTimeout(DestroyEnemy, this.robotic ? 800 : game.rnd.between(250, 350), this);
+        game.time.events.add(this.robotic ? 800 : game.rnd.between(250, 350), function() { DestroyEnemy(that); });
 
         if(this.robotic) events.publish('play_sound', { name: 'robosplosion' });
     }
@@ -235,13 +236,13 @@ function DestroyEnemy(e) {
 
     if(e.robotic) {
         for(var i = 0, max = game.rnd.between(2, 4); i < max; i++) {
-            setTimeout(function() {
+            game.time.events.add(i * game.rnd.between(150, 200), function() {
                 var pt = enemBody.clone();
                 pt.x += game.rnd.between(-20, 20);
                 pt.y += game.rnd.between(-20, 20);
 
                 effectsController.Explosion(pt);
-            }, i * game.rnd.between(150, 200));
+            });
         };
     } else {
         effectsController.Explosion(e.body.center);

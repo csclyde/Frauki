@@ -22,7 +22,7 @@ ScriptRunner.executeCommand = function(cmd) {
 	var that = this;
 
 	if(cmd.name === 'wait') {
-		setTimeout(function() { that.executeCommand(cmd.nextCommand); }, cmd.props.amount );
+		gime.time.events.add(cmd.props.amount, function() { that.executeCommand(cmd.nextCommand); });
 	} else {
 		events.publish(cmd.name, cmd.props );
 

@@ -223,9 +223,9 @@ function PerformOpen(d, save, silent) {
 
     this.openTween = game.add.tween(d.body).to({y: movementTarget}, openDuration, Phaser.Easing.Quintic.InOut, true);
 
-    setTimeout(function() {
+    game.time.events.add(openDuration - (openDuration / 5), function() {
         effectsController.DoorDust({x: d.body.center.x, y: d.body.y + d.body.height - 20 });
-    }, openDuration - (openDuration / 5));
+    });
 
     if(save) {
         GameData.AddOpenDoor(d.id);

@@ -34,7 +34,7 @@ Player = function (game, x, y, name) {
     this.upgrades = {};
 
     this.timers = new TimerUtil();
-    
+
     this.Reset();
     this.alpha = 0;
 
@@ -225,7 +225,6 @@ Player.prototype.UpdateAttackGeometry = function() {
     if(!!this.currentAttack) {
 
         if(this.states.direction === 'right') {
-            console.log(this.attackRect.body, this.currentAttack, this.body)
             this.attackRect.body.x = this.currentAttack.x + this.body.x; 
             this.attackRect.body.y = this.currentAttack.y + this.body.y; 
             this.attackRect.body.width = this.currentAttack.w; 
@@ -791,10 +790,10 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
         effectsController.ScreenFlash();
         effectsController.SlowHit(400);
     } else {
-        setTimeout(function() {
+        game.time.events.add(2000, function() {
             frauki.alpha = 0;
             effectsController.EnergySplash(frauki.body, 200, 'positive', 50, frauki.body.velocity);
-        }, 2000);
+        });
     }
 
     //allow the enemy to steal the shard
