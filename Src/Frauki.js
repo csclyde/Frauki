@@ -375,7 +375,7 @@ Player.prototype.Reset = function() {
 ////////////////ACTIONS//////////////////
 Player.prototype.Run = function(params) {
 
-    if(!this.timers.TimerUp('frauki_hit') || 
+    if( this.state === this.Hurting || 
         (this.state === this.Rolling && this.movement.rollPop === false) || 
         this.state === this.AttackStab || 
         this.state === this.Stunned) 
@@ -423,7 +423,7 @@ Player.prototype.StartStopRun = function(params) {
 };
 
 Player.prototype.Jump = function(params) {
-    if(!this.timers.TimerUp('frauki_hit') || 
+    if( this.state === this.Hurting || 
         this.state === this.AttackDiveLand || 
         this.state === this.AttackFall ||
         this.state === this.Stunned) 
@@ -783,7 +783,7 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
 
     this.ChangeState(this.Hurting);
     this.timers.SetTimer('frauki_grace', grace_duration);
-    this.timers.SetTimer('frauki_hit', 500);
+    this.timers.SetTimer('frauki_hit', 800);
     effectsController.SpriteTrail(frauki, 200, 800, 300, 0xf20069);
 
     if(energyController.GetHealth() > 0) {
