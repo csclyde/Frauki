@@ -54,6 +54,15 @@ EffectsController = function() {
     this.neutralSpark.particleDrag.setTo(100);
     this.neutralSpark.setRotation(0, 0);
 
+    this.stars = game.add.emitter(0, 0, 30);
+    this.stars.makeParticles('Misc', ['Stars0000', 'Stars0001', 'Stars0002', 'Stars0003']); 
+    this.stars.gravity = -600;
+    this.stars.particleDrag.setTo(3000);
+    this.stars.setRotation(0, 0);
+    this.stars.minParticleSpeed.setTo(-600);
+    this.stars.maxParticleSpeed.setTo(600);
+    this.stars.alpha = 0.8;
+
     //unassigned particles will be set to move towards this destination
     this.activeDest = null;
     this.enemySource = null;
@@ -752,7 +761,6 @@ EffectsController.prototype.DripSplash = function(src, onWater) {
         ripple.animations.currentAnim.killOnComplete = true;
         ripple.alpha = 0.5;
     }
-
 };
 
 EffectsController.prototype.ScreenLight = function(show) {
@@ -930,3 +938,13 @@ EffectsController.prototype.ShatterShield = function() {
         effectsController['dicedPieces' + Frogland.currentLayer].addChild(p);
     });
 };
+
+EffectsController.prototype.StarBurst = function(src) {
+
+    this.stars.x = src.x - 5;
+    this.stars.y = src.y - 5;
+    this.stars.width = 10;
+    this.stars.height = 10;
+
+    this.stars.explode(450, 5);
+}

@@ -784,7 +784,9 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
     this.ChangeState(this.Hurting);
     this.timers.SetTimer('frauki_grace', grace_duration);
     this.timers.SetTimer('frauki_hit', 800);
+    
     effectsController.SpriteTrail(frauki, 200, 800, 300, 0xf20069);
+    effectsController.StarBurst(this.body.center);
 
     if(energyController.GetHealth() > 0) {
         effectsController.ScreenFlash();

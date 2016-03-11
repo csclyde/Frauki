@@ -376,7 +376,11 @@ Frogland.ChangeLayer = function(newLayer) {
 };
 
 Frogland.DislodgeTile = function(tile) {
-    if(tile && (tile.index === 5 || tile.index === 7) && tile.dislodged !== true) {
+    if(tile && tile.index === 8) {
+        //make the tile robust
+        tile.setCollision(true, true, true, true);
+    }
+    else if(tile && (tile.index === 5 || tile.index === 7) && tile.dislodged !== true) {
         
         //get the visible tile from the midground, and make it invisible
         var mgTile = Frogland.map.getTile(tile.x, tile.y, 'Midground_' + this.currentLayer);

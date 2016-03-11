@@ -215,6 +215,7 @@ Enemy.prototype.TakeHit = function(damage) {
     this.timers.SetTimer('hit', this.baseStunDuration + (250 * damage));
     this.timers.SetTimer('grace', this.baseStunDuration + (250 * damage));
 
+    effectsController.StarBurst(this.body.center);
 
     if(this.energy <= 0) {
         this.timers.SetTimer('hit', 1000);
@@ -224,6 +225,7 @@ Enemy.prototype.TakeHit = function(damage) {
 
         if(this.robotic) events.publish('play_sound', { name: 'robosplosion' });
     }
+
 };
 
 function DestroyEnemy(e) {
