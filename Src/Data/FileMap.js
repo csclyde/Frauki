@@ -79,6 +79,11 @@ FileMap.Music = [
 	// { Name: 'Gameover', File: 'Data/Music/Game Over (Dead Frauki).xm', Volume: 0.4, Loop: false },
 ];
 
+FileMap.Ambient = [
+	{ Name: 'surface_wind', File: 'Data/Sfx/surface_wind.ogg', Volume: 3, Loop: true },
+	{ Name: 'cave_wind', File: 'Data/Sfx/cave_wind.ogg', Volume: 3, Loop: true },
+];
+
 FileMap.Enemies = [
 	{ Name: 'Insectoid', Tile: 85 },
 	{ Name: 'Buzzar', Tile: 86 },

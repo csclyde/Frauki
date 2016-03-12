@@ -146,7 +146,7 @@
 },
 "Numbers0000":
 {
-	"frame": {"x":1134,"y":57,"w":9,"h":13},
+	"frame": {"x":1132,"y":57,"w":9,"h":13},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":15,"y":13,"w":9,"h":13},
@@ -155,7 +155,7 @@
 },
 "Numbers0001":
 {
-	"frame": {"x":1126,"y":57,"w":5,"h":13},
+	"frame": {"x":1176,"y":77,"w":5,"h":13},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":16,"y":13,"w":5,"h":13},
@@ -164,7 +164,7 @@
 },
 "Numbers0002":
 {
-	"frame": {"x":1134,"y":72,"w":9,"h":13},
+	"frame": {"x":1132,"y":72,"w":9,"h":13},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":14,"y":13,"w":9,"h":13},
@@ -173,7 +173,7 @@
 },
 "Numbers0003":
 {
-	"frame": {"x":1134,"y":87,"w":9,"h":13},
+	"frame": {"x":1132,"y":87,"w":9,"h":13},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":14,"y":13,"w":9,"h":13},
@@ -182,7 +182,7 @@
 },
 "Numbers0004":
 {
-	"frame": {"x":1145,"y":61,"w":9,"h":13},
+	"frame": {"x":1143,"y":77,"w":9,"h":13},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":14,"y":13,"w":9,"h":13},
@@ -191,7 +191,7 @@
 },
 "Numbers0005":
 {
-	"frame": {"x":1145,"y":76,"w":9,"h":13},
+	"frame": {"x":1143,"y":92,"w":9,"h":13},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":14,"y":13,"w":9,"h":13},
@@ -200,7 +200,7 @@
 },
 "Numbers0006":
 {
-	"frame": {"x":1145,"y":91,"w":9,"h":13},
+	"frame": {"x":1154,"y":77,"w":9,"h":13},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":14,"y":13,"w":9,"h":13},
@@ -209,7 +209,7 @@
 },
 "Numbers0007":
 {
-	"frame": {"x":1156,"y":61,"w":9,"h":13},
+	"frame": {"x":1154,"y":92,"w":9,"h":13},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":14,"y":13,"w":9,"h":13},
@@ -218,7 +218,7 @@
 },
 "Numbers0008":
 {
-	"frame": {"x":1167,"y":61,"w":9,"h":13},
+	"frame": {"x":1165,"y":77,"w":9,"h":13},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":14,"y":13,"w":9,"h":13},
@@ -227,7 +227,7 @@
 },
 "Numbers0009":
 {
-	"frame": {"x":1156,"y":76,"w":9,"h":13},
+	"frame": {"x":1165,"y":92,"w":9,"h":13},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":14,"y":13,"w":9,"h":13},
@@ -306,6 +306,24 @@
 	"sourceSize": {"w":54,"h":102},
 	"pivot": {"x":0.5,"y":0.460784}
 },
+"QuestionMark0000":
+{
+	"frame": {"x":1098,"y":85,"w":15,"h":17},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":43,"y":28,"w":15,"h":17},
+	"sourceSize": {"w":15,"h":17},
+	"pivot": {"x":0.466667,"y":1.29412}
+},
+"QuestionMark0001":
+{
+	"frame": {"x":1115,"y":85,"w":15,"h":17},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":43,"y":28,"w":15,"h":17},
+	"sourceSize": {"w":15,"h":17},
+	"pivot": {"x":0.466667,"y":1.29412}
+},
 "Speech0000":
 {
 	"frame": {"x":842,"y":2,"w":96,"h":94},
@@ -344,7 +362,7 @@
 },
 "UpgradeIconShield":
 {
-	"frame": {"x":1098,"y":85,"w":34,"h":14},
+	"frame": {"x":1143,"y":61,"w":34,"h":14},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":3,"y":15,"w":34,"h":14},
@@ -403,6 +421,6 @@
 	"format": "RGBA8888",
 	"size": {"w":1184,"h":108},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:edfea51c34bc95b8223b4a20036c8dd9:4bb25b30ec5b7efaa05de9713dfbc9bb:4b774b923918ecd961888279dba3ffad$"
+	"smartupdate": "$TexturePacker:SmartUpdate:1ead11190c1f5ae8f1ab878f070e74e9:d643522818c72de01116512a76c6b7cc:4b774b923918ecd961888279dba3ffad$"
 }
 }

@@ -5,7 +5,10 @@ AudioController = function() {
     events.subscribe('stop_sound', this.StopSound, this);
     events.subscribe('play_music', this.PlayMusic, this);
     events.subscribe('stop_music', this.StopMusic, this);
+    events.subscribe('play_ambient', this.PlayAmbient, this);
+    events.subscribe('stop_ambient', this.StopAmbient, this);
     events.subscribe('stop_all_music', this.StopAllMusic, this);
+    events.subscribe('stop_all_ambient', this.StopAllAmbient, this);
     events.subscribe('fade_music', this.FadeMusic, this);
 
     events.subscribe('stop_attack_sounds', function() {
@@ -18,8 +21,9 @@ AudioController = function() {
 
     this.sounds = {};
     this.music = {};
+    this.ambient = {};
 
-    this.currentSong = null;
+    this.currentMusic = null;
 
     //load audio
     FileMap.Audio.forEach(function(audio) {
@@ -51,6 +55,11 @@ AudioController = function() {
             }
         });
         
+    });
+
+    FileMap.Ambient.forEach(function(ambient) {
+        that.ambient[ambient.Name] = game.add.audio(ambient.Name, ambient.Volume, ambient.Loop);
+        that.ambient[ambient.Name].volumeStatic = ambient.Volume;
     });
 };
 
@@ -136,6 +145,33 @@ AudioController.prototype.FadeMusic = function( params) {
         audioController.currentMusic.fadeTo(500, audioController.currentMusic.volumeStatic);
     });
 };
+
+AudioController.prototype.PlayAmbient = function(params) {
+    if(!!params.name && !!this.ambient[params.name] && !!this.ambient[params.name].play) {
+
+        this.ambient[params.name].play(null, 0, 0);
+
+        this.ambient[params.name].fadeTo(500, this.ambient[params.name].volumeStatic);
+    }
+};
+
+AudioController.prototype.StopAmbient = function(params) {
+    if(!!params.name && !!this.ambient[params.name] && !!this.ambient[params.name].stop) {
+        this.ambient[params.name].pause();
+    }
+};
+
+AudioController.prototype.StopAllAmbient = function(params) {
+    for(var key in this.ambient) {
+        if(!this.ambient.hasOwnProperty(key)) continue;
+
+        if(!!this.ambient[key] && this.ambient[key].isPlaying) {
+
+            this.ambient[key].fadeTo(500, 0);
+        }
+    }
+};
+
 
 //NOTES
 //Each element of the sounds object could be either a clip or an array. If

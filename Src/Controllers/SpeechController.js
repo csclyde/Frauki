@@ -90,6 +90,13 @@ SpeechController.prototype.Create = function() {
 	this.text.fixedToCamera = true;
 	this.text.visible = false;
 
+	this.questionMark = game.add.sprite(0, 0, 'UI');
+    this.questionMark.animations.add('blink', ['QuestionMark0000', 'QuestionMark0001'], 18, true, false);
+    this.questionMark.animations.play('blink');
+    this.questionMark.alpha = 0.8;
+    this.questionMark.anchor.setTo(0.5);
+    this.questionMark.visible = false;
+
 	this.speechZones = [];
 
 	this.LoadSpeechZones(4);
@@ -162,6 +169,14 @@ SpeechController.prototype.Update = function() {
 
 	if(this.timers.TimerUp('auto_hide')) {
 		this.HideSpeech();
+	}
+
+	if(!this.text.visible && this.FraukiInSpeechZone()) {
+		this.questionMark.visible = true;
+		this.questionMark.x = frauki.x;
+		this.questionMark.y = frauki.y - 140 + Math.sin(game.time.now / 200) * 3;
+	} else {
+		this.questionMark.visible = false;
 	}
 
 };

@@ -2,8 +2,6 @@ var Main = new Phaser.State();
 
 Main.create = function() {
 
-    console.log('Starting Main state load')
-
     cameraController = new CameraController();
     inputController = new InputController();
     energyController = new EnergyController();
@@ -47,7 +45,8 @@ Main.create = function() {
     // this.UITextures.EnergyBar0005 = PIXI.TextureCache[game.cache.getFrameByName('UI', 'EnergyBar0005').uuid];
     // this.UITextures.EnergyBar0006 = PIXI.TextureCache[game.cache.getFrameByName('UI', 'EnergyBar0006').uuid];
 
-    console.log('Finished Main State load')
+    audioController.ambient['surface_wind'].play();
+
 };
 
 Main.update = function() {

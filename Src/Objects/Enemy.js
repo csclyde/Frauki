@@ -246,6 +246,9 @@ function DestroyEnemy(e) {
                 effectsController.Explosion(pt);
             });
         };
+
+        effectsController.SprocketBurst(e.body.center);
+        
     } else {
         effectsController.Explosion(e.body.center);
     }

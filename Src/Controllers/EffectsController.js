@@ -62,6 +62,20 @@ EffectsController = function() {
     this.stars.minParticleSpeed.setTo(-600);
     this.stars.maxParticleSpeed.setTo(600);
     this.stars.alpha = 0.8;
+    this.stars.maxParticleScale = 1;
+    this.stars.minParticleScale = 1;
+
+    this.sprockets = game.add.emitter(0, 0, 30);
+    this.sprockets.makeParticles('Misc', ['Sprockets0000', 'Sprockets0001', 'Sprockets0002', 'Sprockets0003', , 'Sprockets0004']); 
+    this.sprockets.gravity = -200;
+    this.sprockets.particleDrag.setTo(100);
+    this.sprockets.setRotation(0, 0);
+    this.sprockets.minParticleSpeed.setTo(-300);
+    this.sprockets.maxParticleSpeed.setTo(200, 0);
+    this.sprockets.alpha = 1;
+    this.sprockets.maxParticleScale = 1;
+    this.sprockets.minParticleScale = 1;
+    this.sprockets.setRotation(-500, 500);
 
     //unassigned particles will be set to move towards this destination
     this.activeDest = null;
@@ -947,4 +961,14 @@ EffectsController.prototype.StarBurst = function(src) {
     this.stars.height = 10;
 
     this.stars.explode(450, 5);
-}
+};
+
+EffectsController.prototype.SprocketBurst = function(src) {
+
+    this.sprockets.x = src.x - 5;
+    this.sprockets.y = src.y - 50;
+    this.sprockets.width = 10;
+    this.sprockets.height = 10;
+
+    this.sprockets.explode(2000, game.rnd.between(5, 10));
+};

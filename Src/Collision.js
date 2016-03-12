@@ -29,7 +29,7 @@ Collision.OverlapFraukiWithObject = function(f, o) {
             return false;
         } else {
 
-            if(frauki.body.y + frauki.body.height <= o.body.y || o.body.y + o.body.height <= frauki.body.y) {
+            if(frauki.body.y + frauki.body.height <= o.body.y + (frauki.body.height / 3) || o.body.y + o.body.height <= frauki.body.y + (o.body.height / 3)) {
                 return false;
             } else {
                 return true;
@@ -110,7 +110,7 @@ Collision.OverlapAttackWithObject = function(f, o) {
 
             } else if(!o.robotic) {
                 Collision.OverlapAttackWithEnemy(f, o);
-                
+
             }
             //they can be hit if theyre not attacking, or they are attacking
             //but facing away from the player
