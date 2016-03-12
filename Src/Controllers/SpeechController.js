@@ -147,6 +147,17 @@ SpeechController.prototype.Update = function() {
 		this.timers.SetTimer('display_progress', 1);
 	}
 
+	if(this.text.visible) {
+		if(this.currentSpeechZone.owningLayer !== Frogland.currentLayer || 
+			frauki.body.x + frauki.body.width < this.currentSpeechZone.x || 
+			frauki.body.x > this.currentSpeechZone.x + this.currentSpeechZone.width || 
+			frauki.body.y + frauki.body.height < this.currentSpeechZone.y || 
+			frauki.body.y > this.currentSpeechZone.y + this.currentSpeechZone.height) {
+
+			this.HideSpeech();
+		}
+	}
+
 	this.text.setText(this.currentText.slice(0, this.displayIndex));
 
 	if(this.timers.TimerUp('auto_hide')) {
@@ -183,6 +194,8 @@ SpeechController.prototype.ShowSpeech = function() {
 			this.speechVisible = true;
 
 			this.timers.SetTimer('auto_hide', 6000);
+
+			this.currentSpeechZone = zone;
 
 			return true;
 		}

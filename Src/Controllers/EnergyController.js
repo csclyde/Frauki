@@ -56,6 +56,7 @@ EnergyController.prototype.Update = function() {
 
 
 EnergyController.prototype.UseEnergy = function(amt) {
+	return true;
 	amt = Math.floor(amt);
 	//if they are below a threshold, they are in beast mode
 	if(this.energy >= amt) {

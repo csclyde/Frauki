@@ -71,7 +71,7 @@ function PickUpShard(f, a) {
     a.pickedUp = true;
 
     effectsController.ScreenFlash();
-    events.publish('play_sound', { name: 'fanfare_short' } );
+    events.publish('play_sound', { name: 'crystal_door' } );
     
 };
 

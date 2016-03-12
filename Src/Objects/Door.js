@@ -119,9 +119,13 @@ Door.prototype.create = function() {
 
 Door.prototype.update = function() {
 
-    if(this.state === this.Closed && this.owningLayer === Frogland.currentLayer && GameData.IsDoorOpen(this.id)) {
-        if(this.body.x + this.body.width > game.camera.x && this.body.y + this.body.height > game.camera.y && this.body.x < game.camera.x + game.camera.width && this.body.y < game.camera.y + game.camera.height) {
+    var padding = 100;
+
+    if((this.state === this.Closed || this.state == this.ReadyToOpen) && this.owningLayer === Frogland.currentLayer && GameData.IsDoorOpen(this.id)) {
+        if(this.body.x + this.body.width > game.camera.x + padding && this.body.y + this.body.height > game.camera.y + padding && this.body.x < game.camera.x + game.camera.width - padding && this.body.y < game.camera.y + game.camera.height - padding) {
             PerformOpen(this, false, true);
+        } else if(this.body.x + this.body.width > game.camera.x && this.body.y + this.body.height > game.camera.y && this.body.x < game.camera.x + game.camera.width && this.body.y < game.camera.y + game.camera.height) {
+            this.state = this.ReadyToOpen;
         } 
     }
 
@@ -188,7 +192,7 @@ function OpenDoorById(id) {
 };
 
 function PerformOpen(d, save, silent) {
-    if(d.state !== d.Closed || !d.body) return;
+    if(d.state === d.Open || !d.body) return;
 
     //check that the door has received enough attempts to actually open
     if(++d.openAttempts < d.thresholdAttempts) {
@@ -202,7 +206,7 @@ function PerformOpen(d, save, silent) {
         movementTarget = d.body.y + 64;
     }
 
-    d.state = d.Opening;
+    d.state = d.Open;
 
     var openDuration = 3000;
 
@@ -215,10 +219,10 @@ function PerformOpen(d, save, silent) {
         }
 
         openDuration = 5000;
-        events.publish('camera_shake', {magnitudeX: 0.4, magnitudeY: 0, duration: 5000 });
+        events.publish('camera_shake', {magnitudeX: 0.4, magnitudeY: 0, duration: openDuration });
 
         events.publish('play_sound', {name: 'door_rumble', restart: true });
-        events.publish('fade_music', { volume: 0.1, duration: 5000 });
+        events.publish('fade_music', { volume: 0.1, duration: openDuration });
     }
 
     this.openTween = game.add.tween(d.body).to({y: movementTarget}, openDuration, Phaser.Easing.Quintic.InOut, true);
@@ -245,10 +249,9 @@ Door.prototype.Closed = function() {
     }
 };
 
-Door.prototype.Opening = function() {
-    this.PlayAnim('open');
+Door.prototype.ReadyToOpen = function() {
 
-    this.state = this.Open;
+    this.PlayAnim('open');
 };
 
 Door.prototype.Open = function() {

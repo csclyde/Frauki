@@ -305,7 +305,6 @@ EnemyBehavior.JumpCurb = function(e) {
 EnemyBehavior.JumpToPoint = function(e, x, y) {
     var duration = EnemyBehavior.Player.Distance(e) / 400;
 
-    console.log(duration);
     e.body.velocity.x = (x - e.body.center.x) / duration;
     e.body.velocity.y = (y + -0.5 * game.physics.arcade.gravity.y * duration * duration - e.body.center.y) / duration;
 };

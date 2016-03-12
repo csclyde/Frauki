@@ -48,6 +48,10 @@ TriggerController.prototype.CreateTriggers = function(layer) {
         trigger.playerInside = false;
 
         if(!!this.triggers[trigger.name]) {
+            if(!!this.triggers[trigger.name].load) {
+                this.triggers[trigger.name].load(trigger);
+            }
+            
             trigger.enter = this.triggers[trigger.name].enter;
             trigger.stay = this.triggers[trigger.name].stay;
             trigger.exit = this.triggers[trigger.name].exit;

@@ -98,11 +98,24 @@ Collision.OverlapAttackWithObject = function(f, o) {
 
         if(frauki.GetCurrentDamage() > 0) {
 
+            
+            if(!o.Attacking()) {
+                Collision.OverlapAttackWithEnemy(f, o);
+
+            } else if(o.Attacking() && frauki.GetCurrentPriority() > o.GetCurrentPriority()) {
+                Collision.OverlapAttackWithEnemy(f, o);
+
+            } else if(!EnemyBehavior.FacingPlayer(o)) {
+                Collision.OverlapAttackWithEnemy(f, o);
+
+            } else if(!o.robotic) {
+                Collision.OverlapAttackWithEnemy(f, o);
+                
+            }
             //they can be hit if theyre not attacking, or they are attacking
             //but facing away from the player
-            if(!o.Attacking() || !EnemyBehavior.FacingPlayer(o) || !o.robotic) {
-                Collision.OverlapAttackWithEnemy(f, o);
-            }
+            // if(!o.Attacking() || !EnemyBehavior.FacingPlayer(o) || !o.robotic) {
+            // }
         }
 
     } else if(o.spriteType === 'junk') {
@@ -300,7 +313,6 @@ Collision.CollideFraukiWithProjectile = function(f, p) {
     if(p.projType === 'tar' || p.projType === 'spore') {
         if(p.owningEnemy.state !== p.owningEnemy.Dying) {
             if(frauki.Attacking() || frauki.states.shielded) {
-                console.log('o long johnson')
                 Collision.OverlapAttackWithEnemyAttack(p, f);
             } else {
                 frauki.Hit(p.owningEnemy, p.owningEnemy.damage);

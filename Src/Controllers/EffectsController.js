@@ -407,7 +407,7 @@ function UpdateParticle(p) {
             } else if(p.parent === effectsController.neutralBits) {
                 energyController.AddCharge(1);
                 effectsController.EnergySplash(p.body, 100, 'neutral');
-            }
+            } 
         }
         
         p.destBody = null;
@@ -816,7 +816,7 @@ EffectsController.prototype.SpriteTrail = function(sprite, freq, duration, dropo
         trailSprite.anchor.setTo(0);
         trailSprite.scale.x = sprite.scale.x;
         trailSprite.tint = tint;
-        trailSprite.alpha = 0.7;
+        trailSprite.alpha = 0.5;
 
         var fadeTween = game.add.tween(trailSprite).to({alpha: 0}, dropoff, Phaser.Easing.Linear.None, true);
         fadeTween.onComplete.add(function() {

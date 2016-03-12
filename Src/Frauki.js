@@ -58,7 +58,7 @@ Player = function (game, x, y, name) {
         }
 
         //this allows an inverted seaquence of inputs for the jump slash
-        if(this.state === this.AttackFront && this.body.onFloor() === false && !this.timers.TimerUp('updash_timer')) {
+        if(this.state === this.AttackFront && this.body.onFloor() === false && !this.timers.TimerUp('slash_start_window')) {
             this.JumpSlash();
         }
 
@@ -378,7 +378,8 @@ Player.prototype.Run = function(params) {
     if( this.state === this.Hurting || 
         (this.state === this.Rolling && this.movement.rollPop === false) || 
         this.state === this.AttackStab || 
-        this.state === this.Stunned) 
+        this.state === this.Stunned ||
+        this.state === this.Materializing) 
         return;
 
     if(params.dir === 'left') {
@@ -474,7 +475,7 @@ Player.prototype.Jump = function(params) {
             events.publish('stop_sound', {name: 'roll'});
         }
         //overhead into jump atack
-        else if(this.state === this.AttackOverhead || this.state === this.AttackFront) {
+        else if(!this.timers.TimerUp('slash_start_window') && (this.state === this.AttackOverhead || this.state === this.AttackFront)) {
             this.JumpSlash();
         }
         //double jump
@@ -517,7 +518,7 @@ Player.prototype.Crouch = function(params) {
 
     this.timers.SetTimer('frauki_dash', 200);
 
-    if(this.state === this.AttackFront && this.body.onFloor() === false && !this.timers.TimerUp('smash_timer')) {
+    if((this.state === this.AttackFall || this.state === this.AttackJump) && this.body.onFloor() === false && !this.timers.TimerUp('slash_start_window')) {
         this.DiveSlash();
     }
 };
@@ -547,11 +548,11 @@ Player.prototype.Slash = function(params) {
     var attackResult = false;
 
     //diving dash
-    if(!this.timers.TimerUp('frauki_dash') && this.states.crouching && (this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling || this.state === this.Flipping)) {
+    if(this.states.crouching && (this.state === this.Jumping || this.state === this.Peaking || this.state === this.Falling || this.state === this.Flipping)) {
         attackResult = this.DiveSlash();
     }
     //running dash
-    else if(this.state === this.Rolling || (this.state === this.Flipping && !this.states.upPressed && !this.states.crouching)) {
+    else if(this.state === this.Rolling || (this.state === this.Flipping && (inputController.dpad.left || inputController.dpad.right))) {
         attackResult = this.StabSlash();
     }
     //upwards dash attack
@@ -571,8 +572,7 @@ Player.prototype.Slash = function(params) {
         return;
     }
 
-    this.timers.SetTimer('smash_timer', 200);
-    this.timers.SetTimer('updash_timer', 200);
+    this.timers.SetTimer('slash_start_window', 200);
 
     if(attackResult) {
         this.timers.SetTimer('frauki_invincible', 0);

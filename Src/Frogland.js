@@ -172,7 +172,7 @@ Frogland.HandleCollisions = function() {
     game.physics.arcade.collideSpriteVsGroup(frauki, this.shardGroup, null, Collision.OverlapFraukiWithShard, null, true);
 
     //collide enemies with doors
-    game.physics.arcade.collide(objectController.enemyList, objectController.doorList, function(a, b) { console.log(a, b) }, function(a, b) { console.log(a, b) } );
+    game.physics.arcade.collide(objectController.enemyList, objectController.doorList);
 
     //overlap fraukis attack with objects and projectiles
     if(frauki.Attacking()) {

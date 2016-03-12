@@ -59,24 +59,19 @@ TriggerController.prototype.triggers['soccer_goal'] = {
 };
 
 TriggerController.prototype.triggers['heal_to_open_door'] = {
+	load: function(trigger) {
+		events.subscribe('energy_heal', function() {
+			if(this.playerInside) {
+				events.publish('open_door', { door_name: 'heal_trainer' });
+			 	events.publish('open_door', { door_name: 'tutorial_goodie' });
+			}
+		}, trigger);
+	},
+
 	enter: function(params) {
-		//if they have fewer than max apples, they already healed so just open up.
-		//or, if they are at full health and cant heal
-		//if(energyController.GetApples() < GameData.GetMaxApples() || energyController.GetHealth() === energyController.GetMaxHealth()) {
-		if(true) {
-			events.publish('open_door', { door_name: 'heal_trainer' });
-			events.publish('open_door', { door_name: 'tutorial_goodie' });
-			this.appleUsed = true;
-		}
 	},
 
 	stay: function(params) {
-		//keep checking for them to use an apple
-		// if(energyController.GetApples() < GameData.GetMaxApples() && !this.appleUsed) {
-		// 	events.publish('open_door', { door_name: 'tutorial_goodie' });
-		// 	events.publish('open_door', { door_name: 'heal_trainer' });
-		// 	this.appleUsed = true;
-		// }
 	},
 
 	exit: function(params) {
