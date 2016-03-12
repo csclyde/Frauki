@@ -81,7 +81,15 @@ var fraukiDamageFrames = {
 	},
 
 	'Attack Jump0003': {
-		x: -5, y: -50, w: 18, h: 40,
+		x: -50, y: -50, w: 80, h: 54,
+		damage: 1.2,
+		knockback: 0.1,
+		priority: 1,
+		juggle: 0.8
+	},
+
+	'Attack Jump0004': {
+		x: -50, y: 20, w: 35, h: 10,
 		damage: 1.2,
 		knockback: 0.1,
 		priority: 1,
@@ -119,7 +127,7 @@ var fraukiDamageFrames = {
 	
 	'Attack Overhead0002': {
 		x: -15, y: 15, w: 15, h: 15,
-		damage: 1,
+		damage: 2,
 		knockback: 0,
 		priority: 2,
 		juggle: 0
@@ -128,7 +136,7 @@ var fraukiDamageFrames = {
 	//overhead swing
 	'Attack Overhead0003': {
 		x: -15, y: 15, w: 25, h: 30,
-		damage: 1,
+		damage: 2,
 		knockback: 0.1,
 		priority: 2,
 		juggle: 0.1
@@ -137,7 +145,7 @@ var fraukiDamageFrames = {
 	//overhead swing
 	'Attack Overhead0004': {
 		x: 15, y: 10, w: 15, h: 15,
-		damage: 1,
+		damage: 2,
 		knockback: 0.1,
 		priority: 2,
 		juggle: 0.2
@@ -146,7 +154,7 @@ var fraukiDamageFrames = {
 	//overhead swing
 	'Attack Overhead0005': {
 		x: -30, y: -30, w: 85, h: 75,
-		damage: 2.5,
+		damage: 2,
 		knockback: 0.1,
 		priority: 2,
 		juggle: 0.5
@@ -155,7 +163,7 @@ var fraukiDamageFrames = {
 	//overhead swing
 	'Attack Overhead0006': {
 		x: -30, y: -28, w: 75, h: 60,
-		damage: 2.5,
+		damage: 2,
 		knockback: 0,
 		priority: 2,
 		juggle: 1
@@ -175,36 +183,36 @@ var fraukiDamageFrames = {
 	//stab, big short initial shape
 	'Attack Stab0004': {
 		x: -25, y: 0, w: 50, h: 40,
-		damage: 3,
+		damage: 2,
 		knockback: 1.4,
-		priority: 2,
+		priority: 2.5,
 		juggle: 0
 	},
 
 	//stab, long followthrough
 	'Attack Stab0005': {
 		x: 0, y: 15, w: 83, h: 10,
-		damage: 3,
+		damage: 2,
 		knockback: 1,
-		priority: 2,
+		priority: 2.5,
 		juggle: 0
 	},
 	
 	//stab, long followthrough
 	'Attack Stab0006': {
 		x: 0, y: 15, w: 83, h: 12,
-		damage: 3,
+		damage: 2,
 		knockback: 0.8,
-		priority: 2,
+		priority: 2.5,
 		juggle: 0
 	},
 
 	//stab, long followthrough
 	'Attack Stab0007': {
 		x: 0, y: 15, w: 83, h: 12,
-		damage: 3,
+		damage: 2,
 		knockback: 0.8,
-		priority: 2,
+		priority: 2.5,
 		juggle: 0
 	},
 
@@ -214,7 +222,7 @@ var fraukiDamageFrames = {
 		x: -10, y: -5, w: 28, h: 45,
 		damage: 4,
 		knockback: 2,
-		priority: 3,
+		priority: 4,
 		juggle: -1
 	},
 
@@ -276,7 +284,7 @@ var fraukiDamageFrames = {
 
 	'Attack Dive0018': {
 		x: -30, y: -8, w: 70, h: 55,
-		damage: 3,
+		damage: 2,
 		knockback: 1.75,
 		priority: 2,
 		juggle: -1
@@ -303,14 +311,14 @@ var fraukiAnimations = [
 	{ Name: 'hang', Frames:  ['Hang0000', 'Hang0001', 'Hang0002', 'Hang0003', 'Hang0004', 'Hang0005'],  Fps: 12, Loop: false },
 	{ Name: 'heal', Frames:  ['Heal0000', 'Heal0001', 'Heal0002', 'Heal0003', 'Heal0004'], Fps: 12 , Loop: true },
 
-	{ Name: 'attack_front', Frames:  ['Attack Front0001', 'Attack Front0001', 'Attack Front0002', 'Attack Front0003', 'Attack Front0004', 'Attack Front0005', 'Attack Front0006', 'Attack Front0007', 'Attack Front0007', 'Attack Front0007', 'Attack Front0007', 'Attack Front0007', 'Attack Front0007', 'Attack Front0008', 'Attack Front0009'], Fps: 14, Loop: false },
+	{ Name: 'attack_front', Frames:  ['Attack Front0001', 'Attack Front0001', 'Attack Front0002', 'Attack Front0003', 'Attack Front0004', 'Attack Front0005', 'Attack Front0006', 'Attack Front0007'], Fps: 14, Loop: false },
 	{ Name: 'attack_lunge', Frames:  ['Attack Lunge0000', 'Attack Lunge0001', 'Attack Lunge0002', 'Attack Lunge0003', 'Attack Lunge0004', 'Attack Lunge0005', 'Attack Lunge0006', 'Attack Lunge0007'], Fps: 16, Loop: false },
-	{ Name: 'attack_fall', Frames:  ['Attack Fall0000', 'Attack Fall0001', 'Attack Fall0002', 'Attack Fall0003', 'Attack Fall0004', 'Attack Fall0005', 'Attack Fall0006', 'Attack Fall0007', 'Attack Fall0008', 'Attack Fall0008', 'Attack Fall0008', 'Attack Fall0008'], Fps: 16, Loop: false },
+	{ Name: 'attack_fall', Frames:  ['Attack Fall0000', 'Attack Fall0001', 'Attack Fall0002', 'Attack Fall0003', 'Attack Fall0004', 'Attack Fall0005', 'Attack Fall0006', 'Attack Fall0007', 'Attack Fall0008'], Fps: 16, Loop: false },
 	{ Name: 'attack_jump', Frames:  ['Attack Jump0000', 'Attack Jump0000', 'Attack Jump0001', 'Attack Jump0002', 'Attack Jump0003', 'Attack Jump0004', 'Attack Jump0005', 'Attack Jump0006'], Fps: 14, Loop: false },
 	{ Name: 'attack_overhead', Frames:  ['Attack Overhead0000', 'Attack Overhead0001', 'Attack Overhead0002', 'Attack Overhead0003', 'Attack Overhead0004', 'Attack Overhead0005', 'Attack Overhead0006', 'Attack Overhead0007', 'Attack Overhead0008', 'Attack Overhead0009', 'Attack Overhead0009', 'Attack Overhead0009', 'Attack Overhead0009', 'Attack Overhead0010', 'Attack Overhead0011', 'Attack Overhead0011' , 'Attack Overhead0012'], Fps: 16, Loop: false },
-	{ Name: 'attack_stab', Frames:  ['Attack Stab0000', 'Attack Stab0000', 'Attack Stab0001', 'Attack Stab0001', 'Attack Stab0002', 'Attack Stab0003', 'Attack Stab0004', 'Attack Stab0005', 'Attack Stab0006', 'Attack Stab0007', 'Attack Stab0008', 'Attack Stab0009', 'Attack Stab0010', 'Attack Stab0011', 'Attack Stab0012', 'Attack Stab0012', 'Attack Stab0013', 'Attack Stab001', 'Attack Stab0014', 'Attack Stab0014', 'Attack Stab0014', 'Attack Stab0014', 'Attack Stab0015',  'Attack Stab0016', 'Attack Stab0017'], Fps: 16 , Loop: false },
+	{ Name: 'attack_stab', Frames:  ['Attack Stab0000', 'Attack Stab0000', 'Attack Stab0001', 'Attack Stab0001', 'Attack Stab0002', 'Attack Stab0003', 'Attack Stab0004', 'Attack Stab0005', 'Attack Stab0006', 'Attack Stab0007', 'Attack Stab0008', 'Attack Stab0009', 'Attack Stab0010', 'Attack Stab0011', 'Attack Stab0012', 'Attack Stab0013', 'Attack Stab0014'], Fps: 16 , Loop: false },
 	{ Name: 'attack_dive_charge', Frames:  ['Attack Dive0000', 'Attack Dive0001', 'Attack Dive0002', 'Attack Dive0003', 'Attack Dive0004', 'Attack Dive0005', 'Attack Dive0009', 'Attack Dive0010', 'Attack Dive0011'], Fps: 16 , Loop: false },
 	{ Name: 'attack_dive_fall', Frames:  ['Attack Dive0012', 'Attack Dive0013', 'Attack Dive0014', 'Attack Dive0015', 'Attack Dive0016', 'Attack Dive0017'], Fps: 16 , Loop: true },
-	{ Name: 'attack_dive_land', Frames:  ['Attack Dive0018', 'Attack Dive0019', 'Attack Dive0020', 'Attack Dive0021', 'Attack Dive0022', 'Attack Dive0023', 'Attack Dive0024', 'Attack Dive0025', 'Attack Dive0026', 'Attack Dive0026', 'Attack Dive0026', 'Attack Dive0026', 'Attack Dive0026', 'Attack Dive0027', 'Attack Dive0028'], Fps: 16 , Loop: false },
+	{ Name: 'attack_dive_land', Frames:  ['Attack Dive0018', 'Attack Dive0019', 'Attack Dive0020', 'Attack Dive0021', 'Attack Dive0022'], Fps: 16 , Loop: false },
 	{ Name: 'attack_whiff', Frames:  ['Attack Whiff0001', 'Attack Whiff0002', 'Attack Whiff0003', 'Attack Whiff0004', 'Attack Whiff0005', 'Attack Whiff0006', 'Attack Whiff0007', 'Attack Whiff0008'], Fps: 16, Loop: false },
 ];

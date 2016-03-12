@@ -39,7 +39,7 @@ Collision.OverlapFraukiWithObject = function(f, o) {
     } else if(o.spriteType === 'door') {
         OpenDoor(f, o);
 
-        if((o.state === o.Open || o.state === o.Opening) && frauki.state === frauki.Rolling) {
+        if((o.state === o.Open || o.state === o.Opening) && frauki.state === frauki.Rolling && o.canRollUnder === true) {
             return false;
         } else {
             return true;
@@ -98,19 +98,19 @@ Collision.OverlapAttackWithObject = function(f, o) {
 
         if(frauki.GetCurrentDamage() > 0) {
 
-            
             if(!o.Attacking()) {
-                Collision.OverlapAttackWithEnemy(f, o);
-
-            } else if(o.Attacking() && frauki.GetCurrentPriority() > o.GetCurrentPriority()) {
-                Collision.OverlapAttackWithEnemy(f, o);
-
-            } else if(!EnemyBehavior.FacingPlayer(o)) {
                 Collision.OverlapAttackWithEnemy(f, o);
 
             } else if(!o.robotic) {
                 Collision.OverlapAttackWithEnemy(f, o);
 
+            } else if(!EnemyBehavior.FacingPlayer(o)) {
+                Collision.OverlapAttackWithEnemy(f, o);
+
+            } else if(o.Attacking() && frauki.GetCurrentPriority() > o.GetCurrentPriority()) {
+                o.timers.SetTimer('grace', 0);
+                events.publish('play_sound', {name: 'clang'});
+                Collision.OverlapAttackWithEnemy(f, o);
             }
             //they can be hit if theyre not attacking, or they are attacking
             //but facing away from the player
@@ -200,7 +200,8 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
     events.publish('play_sound', {name: 'clang'});
 
     e.timers.SetTimer('grace', 400);
-    frauki.timers.SetTimer('frauki_grace', 400);
+    frauki.timers.SetTimer('attack_stun', 1000);
+    //frauki.timers.SetTimer('frauki_grace', 400);
 };
 
 Collision.OverlapEnemyAttackWithFrauki = function(e, f) {

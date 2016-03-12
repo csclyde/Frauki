@@ -214,6 +214,8 @@ Enemy.prototype.TakeHit = function(damage) {
 
     this.timers.SetTimer('hit', this.baseStunDuration + (250 * damage));
     this.timers.SetTimer('grace', this.baseStunDuration + (250 * damage));
+    this.timers.SetTimer('attack_wait', this.baseStunDuration + (250 * damage) + game.rnd.between(1000, 2000));
+
 
     effectsController.StarBurst(this.body.center);
 
@@ -248,7 +250,7 @@ function DestroyEnemy(e) {
         };
 
         effectsController.SprocketBurst(e.body.center);
-        
+
     } else {
         effectsController.Explosion(e.body.center);
     }

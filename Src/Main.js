@@ -14,7 +14,7 @@ Main.create = function() {
 
     triggerController.Create(map);
 
-    this.restarting = false;
+    this.restarting = true;
 
     Frogland.Create();
     
@@ -36,6 +36,17 @@ Main.create = function() {
     fadeIn.onComplete.add(function() {
         frauki.state = frauki.Materializing;
         frauki.alpha = 1;
+        Main.restarting = false;
+
+        console.log(inputController.binds.runLeft)
+
+        if(game.input.keyboard.isDown(inputController.binds.runLeft) || game.input.gamepad.isDown(14)) {
+            inputController.OnLeft(true);
+        }
+
+        if(game.input.keyboard.isDown(inputController.binds.runRight) || game.input.gamepad.isDown(15)) {
+            inputController.OnRight(true);
+        }
     });
 
     this.UITextures = {};
@@ -70,7 +81,7 @@ Main.update = function() {
 
 Main.render = function() {
     // game.debug.body(frauki);
-    //  game.debug.body(frauki.attackRect);
+    //game.debug.body(frauki.attackRect);
 
     // Frogland.objectGroup_3.forEach(function(o) {
     //     game.debug.body(o);
@@ -327,10 +338,12 @@ Main.DrawUI = function() {
                 diff = diff.normalize();
 
                 //diff.setMagnitude(90);
-                if(dist > 875) {
+                if(dist > 900) {
                     diff.setMagnitude(90);
+                } else if(dist < 150) {
+                    diff.setMagnitude(15);
                 } else {
-                    diff.setMagnitude(25 + (dist / 10));
+                    diff.setMagnitude(dist / 10);
                 }
 
                 var opacity = 1;

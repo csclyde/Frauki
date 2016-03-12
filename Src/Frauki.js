@@ -447,6 +447,7 @@ Player.prototype.Jump = function(params) {
         //normal jump
         if(this.state === this.Standing || this.state === this.Running || this.state === this.Landing || this.state === this.Crouching) {
             this.body.velocity.y = PLAYER_JUMP_VEL();
+            this.ChangeState(this.Jumping);
             events.publish('play_sound', {name: 'jump'});
         }
         //roll jump
@@ -593,6 +594,7 @@ Player.prototype.FrontSlash = function() {
         }
 
         events.publish('play_sound', {name: 'attack_slash', restart: true });  
+        this.timers.SetTimer('attack_wait', 0);
 
         return true; 
     }
@@ -617,7 +619,7 @@ Player.prototype.FallSlash = function() {
         this.ChangeState(this.AttackFall);
 
         events.publish('play_sound', {name: 'attack_slash', restart: true });
-        this.timers.SetTimer('fall_attack_wait', 800);
+        this.timers.SetTimer('attack_wait', 800);
 
         return true;
     }
@@ -651,6 +653,7 @@ Player.prototype.JumpSlash = function() {
         this.states.hasFlipped = true;
 
         events.publish('play_sound', {name: 'attack_slash', restart: true });
+        this.timers.SetTimer('attack_wait', 0);
 
         return true;
     }
@@ -675,6 +678,7 @@ Player.prototype.StabSlash = function() {
         this.movement.stabFrames = 0;
 
         events.publish('play_sound', {name: 'attack_stab', restart: true });
+        this.timers.SetTimer('attack_wait', 1250);
         
         return true;
     }
@@ -1128,7 +1132,7 @@ Player.prototype.AttackFront = function() {
         this.body.velocity.x /= 10;
     }
 
-    if(this.animations.currentAnim.isFinished) {
+    if(this.animations.currentAnim.isFinished && this.timers.TimerUp('attack_wait') && this.timers.TimerUp('attack_stun')) {
         if(inputController.dpad.down && !inputController.dpad.left && !inputController.dpad.right && this.body.onFloor()) {
             this.ChangeState(this.Crouching);
             this.PlayAnim('crouch');
@@ -1171,7 +1175,7 @@ Player.prototype.AttackLunge = function() {
         this.body.velocity.x /= 1.2;
     }
 
-    if(this.animations.currentAnim.isFinished) {
+    if(this.animations.currentAnim.isFinished && this.timers.TimerUp('attack_wait') && this.timers.TimerUp('attack_stun')) {
         if(inputController.dpad.down && !inputController.dpad.left && !inputController.dpad.right && this.body.onFloor()) {
             this.ChangeState(this.Crouching);
             this.PlayAnim('crouch');
@@ -1201,7 +1205,7 @@ Player.prototype.AttackFall = function() {
         this.states.attackFallLanded = true;
     }
 
-    if(this.animations.currentAnim.isFinished && this.timers.TimerUp('fall_attack_wait')) {
+    if(this.animations.currentAnim.isFinished && this.timers.TimerUp('attack_wait') && this.timers.TimerUp('attack_stun')) {
         if(this.body.onFloor()) {
         
             if(this.body.velocity.x === 0) {
@@ -1233,7 +1237,7 @@ Player.prototype.AttackOverhead = function() {
         this.body.velocity.x /= 2;
     }
     
-    if(this.animations.currentAnim.isFinished) {
+    if(this.animations.currentAnim.isFinished && this.timers.TimerUp('attack_wait') && this.timers.TimerUp('attack_stun')) {
         this.ChangeState(this.Standing);
 
         if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true, override: true });
@@ -1254,14 +1258,14 @@ Player.prototype.AttackStab = function() {
 
         this.body.velocity.x = 0;
 
-        if(this.movement.stabFrames >= 10) {
+        if(this.movement.stabFrames >= 14) {
             this.movement.rollStage = 1;
             this.movement.stabFrames = 0;
         }
 
     //pickup stage
     } else if(this.movement.rollStage === 1 && this.movement.stabFrames <= 15) {
-        this.body.acceleration.x = this.movement.rollDirection * 6000 * (game.math.catmullRomInterpolation([0, 0.1, 0.2, 0.4, 0.8, 1], this.movement.stabFrames / 15) || 1);
+        this.body.acceleration.x = this.movement.rollDirection * 5500 * (game.math.catmullRomInterpolation([0, 0.1, 0.2, 0.4, 0.8, 1], this.movement.stabFrames / 15) || 1);
 
     //ready to switch to release
     } else if(this.movement.rollStage === 1) {
@@ -1281,9 +1285,9 @@ Player.prototype.AttackStab = function() {
 
     this.movement.stabFrames += 1;
 
-    if(this.animations.currentAnim.isFinished) {
+    if(this.animations.currentAnim.isFinished && this.timers.TimerUp('attack_wait') && this.timers.TimerUp('attack_stun')) {
         
-        if(this.body.velocity.y > 150) {
+        if(this.body.velocity.y > 20) {
             this.ChangeState(this.Falling);
         } else if((inputController.dpad.left || inputController.dpad.right) && this.body.onFloor()) {
             this.ChangeState(this.Running);
@@ -1332,6 +1336,8 @@ Player.prototype.AttackDiveFall = function() {
         events.publish('stop_sound', {name: 'attack_dive_fall'});
         events.publish('play_sound', {name: 'attack_dive_land'});
 
+        this.timers.SetTimer('attack_wait', 800);
+
         this.ChangeState(this.AttackDiveLand);
 
         effectsController.EnergyStreak();
@@ -1345,7 +1351,7 @@ Player.prototype.AttackDiveLand = function() {
     
     this.body.maxVelocity.x = 1;
 
-    if(this.animations.currentAnim.isFinished) {
+    if(this.animations.currentAnim.isFinished && this.timers.TimerUp('attack_wait') && this.timers.TimerUp('attack_stun')) {
         if(this.body.velocity.x === 0) {
             if(this.states.crouching)
                 this.ChangeState(this.Crouching);
@@ -1363,7 +1369,7 @@ Player.prototype.AttackDiveLand = function() {
 Player.prototype.AttackJump = function() {
     this.PlayAnim('attack_jump');
 
-    if(this.animations.currentAnim.isFinished) {
+    if(this.animations.currentAnim.isFinished && this.timers.TimerUp('attack_wait') && this.timers.TimerUp('attack_stun')) {
         this.ChangeState(this.Jumping);
         if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true, override: true });
     }

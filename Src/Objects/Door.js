@@ -231,6 +231,11 @@ function PerformOpen(d, save, silent) {
         effectsController.DoorDust({x: d.body.center.x, y: d.body.y + d.body.height - 20 });
     });
 
+    //note when the door is ready to roll through
+    game.time.events.add(openDuration / 2, function() {
+        this.canRollUnder = true;
+    }, d);
+
     if(save) {
         GameData.AddOpenDoor(d.id);
     }

@@ -92,7 +92,7 @@ InputController = function() {
             break;
 
         }
-    }
+    };
 
     game.input.keyboard.onUpCallback = function(e) {
 
@@ -140,7 +140,7 @@ InputController = function() {
             break;
 
         }
-    }
+    };
 
     game.input.gamepad.start();
 
@@ -270,7 +270,6 @@ InputController = function() {
 InputController.prototype.Update = function() {
 
     frauki.Run({dir:this.currentDir});
-
 };
 
 InputController.prototype.OnJump = function(pressed) {

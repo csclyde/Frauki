@@ -3869,22 +3869,6 @@
                 {
                  "gid":106,
                  "height":16,
-                 "id":1150,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":3077,
-                 "y":3123
-                }, 
-                {
-                 "gid":106,
-                 "height":16,
                  "id":1153,
                  "name":"",
                  "properties":
@@ -6110,7 +6094,7 @@
              "id":"sewer_to_collapse"
             },
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "width":0,
          "x":0,
          "y":0
@@ -6506,8 +6490,8 @@
                  "rotation":0,
                  "type":"speech",
                  "visible":true,
-                 "width":26.6667,
-                 "x":2020,
+                 "width":59.5,
+                 "x":2005,
                  "y":3300
                 }, 
                 {
@@ -6891,14 +6875,14 @@
                  "name":"music_left_right",
                  "properties":
                     {
-                     "right":"Surface"
+
                     },
                  "rotation":0,
                  "type":"trigger",
                  "visible":true,
                  "width":64,
-                 "x":3062.67,
-                 "y":3288.67
+                 "x":2384.67,
+                 "y":3092.17
                 }, 
                 {
                  "height":44,
@@ -6943,8 +6927,8 @@
                  "type":"trigger",
                  "visible":true,
                  "width":76.6667,
-                 "x":2971.84,
-                 "y":3166.66
+                 "x":2967.34,
+                 "y":3162.16
                 }, 
                 {
                  "height":44,
