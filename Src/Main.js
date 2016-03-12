@@ -138,8 +138,8 @@ Main.Restart = function() {
     game.time.slowMotion = 5;
     var fadeOutTween = effectsController.Fade(true);
 
-    events.publish('player_run', {run:false, dir: 'left'});
-    events.publish('player_run', {run:false, dir: 'right'});
+    inputController.OnLeft(false);
+    inputController.OnRight(false);
 
     cameraController.shakeMagnitudeX = 0;
     cameraController.shakeMagnitudeY = 0;
