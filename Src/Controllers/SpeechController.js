@@ -31,15 +31,32 @@ SpeechController = function() {
 
 SpeechController.prototype.Create = function() {
 
+	var speechOffsetX = 91;
+	var speechOffsetY = 240;
+
 	this.portraitBox = game.add.image(80, 70, 'UI', 'Speech0000');
+	this.portraitBox.animations.add('flicker', ['Speech0000', 'Speech0001'], 18, true, false);
+	this.portraitBox.animations.play('flicker');
 	this.portraitBox.fixedToCamera = true;
 	this.portraitBox.alpha = 0.7;
 	this.portraitBox.visible = false;
+	this.portraitBox.cameraOffset.x = 0 + speechOffsetX;
+	this.portraitBox.cameraOffset.y = 10 + speechOffsetY; 
 
-	this.dialogBox = game.add.image(7, 7, 'UI', 'Speech0001');
+	this.dialogBox = game.add.image(7, 7, 'UI', 'Speech0002');
 	this.dialogBox.fixedToCamera = true;
+	this.dialogBox.animations.add('flicker', ['Speech0002', 'Speech0003'], 18, true, false);
+	this.dialogBox.animations.play('flicker');
 	this.dialogBox.alpha = 0.7;
 	this.dialogBox.visible = false;
+	this.dialogBox.cameraOffset.x = 70 + speechOffsetX; 
+	this.dialogBox.cameraOffset.y = 10 + speechOffsetY; 
+
+	this.text = game.add.bitmapText(0, 0, 'font', this.currentText, 18);
+	this.text.fixedToCamera = true;
+	this.text.visible = false;
+	this.text.cameraOffset.x = 110 + speechOffsetX; 
+	this.text.cameraOffset.y = 20 + speechOffsetY;
 
 	this.portraits = {};
 
@@ -75,9 +92,10 @@ SpeechController.prototype.Create = function() {
 	this.portraits['Silly'].fixedToCamera = true;
 	this.portraits['Silly'].visible = false;
 
-	this.portraits['Irena'] = game.add.image(80, 70, 'UI', 'PortraitsIrena');
-	this.portraits['Irena'].fixedToCamera = true;
-	this.portraits['Irena'].visible = false;
+	for(var key in this.portraits) {
+		this.portraits[key].cameraOffset.x = 10 + speechOffsetX;
+		this.portraits[key].cameraOffset.y = 0 + speechOffsetY; 
+	}
 
 	this.speechVisible = false;
 
@@ -85,10 +103,6 @@ SpeechController.prototype.Create = function() {
 	this.currentPortrait = 'Neutral';
 
 	this.SetText('');
-
-	this.text = game.add.bitmapText(0, 0, 'font', this.currentText, 18);
-	this.text.fixedToCamera = true;
-	this.text.visible = false;
 
 	this.questionMark = game.add.sprite(0, 0, 'UI');
     this.questionMark.animations.add('blink', ['QuestionMark0000', 'QuestionMark0001'], 18, true, false);
@@ -135,19 +149,9 @@ SpeechController.prototype.LoadSpeechZones = function(layer) {
 
 SpeechController.prototype.Update = function() {
 
-	this.portraitBox.cameraOffset.x = 140;
-	this.portraitBox.cameraOffset.y = 230; 
+	
 
-	for(var key in this.portraits) {
-		this.portraits[key].cameraOffset.x = 150;
-		this.portraits[key].cameraOffset.y = 220; 
-	}
-
-	this.dialogBox.cameraOffset.x = 215; 
-	this.dialogBox.cameraOffset.y = 230; 
-
-	this.text.cameraOffset.x = 250; 
-	this.text.cameraOffset.y = 240;
+	
 
 	if(this.text.visible && this.displayIndex < this.currentText.length && this.timers.TimerUp('display_progress')) {
 		this.displayIndex += 1;

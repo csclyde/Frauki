@@ -38,8 +38,6 @@ Main.create = function() {
         frauki.alpha = 1;
         Main.restarting = false;
 
-        console.log(inputController.binds.runLeft)
-
         if(game.input.keyboard.isDown(inputController.binds.runLeft) || game.input.gamepad.isDown(14)) {
             inputController.OnLeft(true);
         }
@@ -57,7 +55,6 @@ Main.create = function() {
     // this.UITextures.EnergyBar0006 = PIXI.TextureCache[game.cache.getFrameByName('UI', 'EnergyBar0006').uuid];
 
     audioController.ambient['surface_wind'].play();
-
 };
 
 Main.update = function() {
@@ -214,33 +211,29 @@ Main.DrawUI = function() {
     for(var i = 0, len = energyController.GetHealth(); i < len; i++) {
         var pipFrame = '';
 
-        if(i < 3) {
-            pipFrame = 'HealthPips0000';
-        } else if(i < 6) {
-            pipFrame = 'HealthPips0001';
-        } else if(i < 9) {
-            pipFrame = 'HealthPips0002';
+        if(energyController.GetHealth() > 4) {
+            if(i < 3) {
+                pipFrame = 'EnergyPips0000';
+            } else if(i < 6) {
+                pipFrame = 'EnergyPips0001';
+            } else if(i < 9) {
+                pipFrame = 'EnergyPips0002';
+            } else {
+                pipFrame = 'EnergyPips0003';
+            } 
         } else {
-            pipFrame = 'HealthPips0003';
+            if(i < 3) {
+                pipFrame = 'HealthPips0000';
+            } else if(i < 6) {
+                pipFrame = 'HealthPips0001';
+            } else if(i < 9) {
+                pipFrame = 'HealthPips0002';
+            } else {
+                pipFrame = 'HealthPips0003';
+            }
         }
 
         this.RenderTextureFromAtlas('UI', pipFrame, 14 + (7 * i), 13);
-    }
-
-    for(var i = 0, len = energyController.GetEnergy(); i < len; i++) {
-        var pipFrame = '';
-
-        if(i < 3) {
-            pipFrame = 'EnergyPips0000';
-        } else if(i < 6) {
-            pipFrame = 'EnergyPips0001';
-        } else if(i < 9) {
-            pipFrame = 'EnergyPips0002';
-        } else {
-            pipFrame = 'EnergyPips0003';
-        }
-
-        this.RenderTextureFromAtlas('UI', pipFrame, 14 + (7 * i), 24);
     }
 
     for(var i = 0, len = energyController.GetCharge(); i < len; i++) {
@@ -256,7 +249,7 @@ Main.DrawUI = function() {
             pipFrame = 'ChargePips0003';
         }
 
-        this.RenderTextureFromAtlas('UI', pipFrame, 15 + (5 * i), 35);
+        this.RenderTextureFromAtlas('UI', pipFrame, 15 + (5 * i), 24);
     }
 
     //finally, the frame on top of everything else
@@ -280,15 +273,14 @@ Main.DrawUI = function() {
         
         //otherwise, just draw the full apple
         } else {
-            this.RenderTextureFromAtlas('Misc','Apple0000', 10 + (20 * i), 45); 
+            this.RenderTextureFromAtlas('Misc','Apple0000', 10 + (20 * i), 35); 
             
-        }
-        
+        }    
     }
 
     for(var i = 0; i < weaponController.weaponList.length; i++) {
         pixel.context.globalAlpha = weaponController.currentWeapon === weaponController.weaponList[i] ? 1 : 0.3;
-        this.RenderTextureFromAtlas('UI', weaponController.weaponList[i].FrameName, (100 + 25 * i), 10);
+        this.RenderTextureFromAtlas('UI', weaponController.weaponList[i].FrameName, (102 + 25 * i), 10);
     }
 
     this.RenderTextureFromAtlas('Misc', 'EnergyBitPos0000', 565, 10);
@@ -304,27 +296,8 @@ Main.DrawUI = function() {
     }
 
 
-    // pixel.context.globalAlpha = weaponController.currentWeapon === weaponController.weaponList[1] ? 1 : 0.3;
-
-    // this.RenderTextureFromAtlas('UI', 'UpgradeIconLob', 125, 10);
-
-    // pixel.context.globalAlpha = weaponController.currentWeapon === weaponController.weaponList[2] ? 1 : 0.3;
-
-    // this.RenderTextureFromAtlas('UI', 'UpgradeIconShield', 150, 10);
-
     pixel.context.globalAlpha = this.currentAlpha;
 
-
-    if(speechController.speechVisible) {
-
-        // pixel.context.globalAlpha = 0.7;
-        // this.RenderTextureFromAtlas('UI', 'Speech0000', 20, 520);
-        // this.RenderTextureFromAtlas('UI', 'Speech0001', 240, 520);
-        // pixel.context.globalAlpha = 1;
-
-        // this.RenderTextureFromAtlas('UI', 'PortraitsFraukiNeutral', 50, 495);
-        
-    }
 
     //draw an arrow pointing towards the shard
     if(GetCurrentShardType() === 'None') {
