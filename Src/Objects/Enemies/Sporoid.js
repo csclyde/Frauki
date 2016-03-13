@@ -1,9 +1,9 @@
 Enemy.prototype.types['Sporoid'] =  function() {
 
-	this.body.setSize(22, 17, 10, -3);
+	this.body.setSize(20, 16, 7, 0);
 	this.anchor.setTo(0.5, 0.5);
 
-    this.animations.add('idle', ['Sporoid/Sporoid0000'], 10, true, false);
+    this.animations.add('idle', ['Sporoid/Sporoid0000', 'Sporoid/Sporoid0001', 'Sporoid/Sporoid0002', 'Sporoid/Sporoid0003', 'Sporoid/Sporoid0004', 'Sporoid/Sporoid0005'], 10, true, false);
     this.animations.add('shit', ['Sporoid/Sporoid0000'], 10, true, false);
 
     this.body.allowGravity = false;
@@ -15,15 +15,16 @@ Enemy.prototype.types['Sporoid'] =  function() {
     this.shootTimer = 0;
     this.energy = 0.5;
     
-    this.damage = 1.5;
+    this.damage = 1;
 
 	this.updateFunction = function() {
 
-		//get the alignment right
-		if(this.direction === 'left') {
-			this.body.offset.x = -10;
-		} else if(this.direction === 'right') {
-			this.body.offset.x = 10;
+		if(!this.body.onWall()) {
+			if(this.body.velocity.x < 0) {
+				this.SetDirection('left');
+			} else {
+				this.SetDirection('right');
+			}
 		}
 		
 	};
@@ -76,36 +77,39 @@ Enemy.prototype.types['Sporoid'] =  function() {
 		this.PlayAnim('idle');
 		
 		this.body.velocity.y = Math.sin(game.time.now / 300) * 50 + (Math.random() * 40 - 20);
-		this.body.velocity.x = Math.sin(game.time.now / 1000) * 20;
+		this.body.velocity.x = Math.sin(game.time.now / 1000) * 5;
 
-		// if(EnemyBehavior.Player.IsVisible(this) && this.timers.TimerUp('shoot')) {
-		// 	this.Shoot();
-		// }
-
-
-		switch(this.wanderDirection) {
-			case 'left': this.body.velocity.x -= 30; break;
-			case 'up':   this.body.velocity.y -= 30; break;
-			case 'right': this.body.velocity.x += 30; break;
-			case 'down': this.body.velocity.y += 30; break;
-		}
-
-		if(EnemyBehavior.Player.IsNear(this, 80)) {
+		if(EnemyBehavior.Player.IsNear(this, 100)) {
 			this.Dash();
 			return;
 		}
 
-		if(EnemyBehavior.Player.IsNear(this, 300)) {
-			if(frauki.body.center.x < this.body.center.x)
-				this.body.velocity.x += 30;
-			else
-				this.body.velocity.x += -30;
+		var vel = new Phaser.Point(this.body.center.x - frauki.body.center.x, this.body.center.y - frauki.body.center.y);
+	    vel = vel.normalize();
 
-			if(frauki.body.center.y < this.body.center.y)
-				this.body.velocity.y += 30;
-			else
-				this.body.velocity.y += -30;
-		}
+	    vel.setMagnitude(30);
+
+	    this.body.velocity.x += vel.x;
+	    this.body.velocity.y += vel.y;
+
+		// if(EnemyBehavior.Player.IsNear(this, 300)) {
+		// 	if(frauki.body.center.x < this.body.center.x)
+		// 		this.body.velocity.x += 30;
+		// 	else
+		// 		this.body.velocity.x += -30;
+
+		// 	if(frauki.body.center.y < this.body.center.y)
+		// 		this.body.velocity.y += 30;
+		// 	else
+		// 		this.body.velocity.y += -30;
+		// } else {
+		// 	switch(this.wanderDirection) {
+		// 		case 'left': this.body.velocity.x -= 30; break;
+		// 		case 'up':   this.body.velocity.y -= 30; break;
+		// 		case 'right': this.body.velocity.x += 30; break;
+		// 		case 'down': this.body.velocity.y += 30; break;
+		// 	}
+		// }
 	};
 
 	this.PreDashing = function() {

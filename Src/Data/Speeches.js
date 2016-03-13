@@ -54,7 +54,7 @@ var Speeches = {
 	'pouring_joy': { text: 'Something is carved into the wall: I can barely withstand the joy pouring into me! Goodbye!' },
 	'another_sky': { text: 'Something is carved into the wall: So, we will find another sky. So it goes.' },
 	'behold_goddess': { text: 'Something is carved into the wall: The Goddess has appeared, and we are forgiven' },
-	'mountain_view': { text: 'I can see the mountain from out of those windows. What a lovely day.', portrait: 'Silly' },
+	'mountain_view': { text: 'Today\'s going to be a good day.', portrait: 'Silly' },
 	'strike_down': { text: 'Frauki?? The Goddess is ailing, please return this crystal to her... And don\'t let any jerks take it!', portrait: 'Irena' },
 	'way_blocked': { text: 'Hmm... the way is blocked. Maybe I can find a way around.' },
 
@@ -64,7 +64,7 @@ var Speeches = {
 	'bad_knees': { text: 'I always wanted to see the world from the top of Frog Mountain. My knees have gotten pretty bad though.' },
 	'football': { text: 'Football is fun! I wonder if maybe I could score a goal' },
 
-	'demo_day': { text: 'Congradulations! You are the demo day champion. Comment with the word "Fraukster" to get a pat on the head' },
+	'demo_thanks': { text: 'Thanks for trying the demo! Hope you had fun hopping, bopping, slashing, and smashing.' },
 	'demoday_hero': { text: 'Bravo! You are the ultimate hero that demo day needs' },
 
 };
