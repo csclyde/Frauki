@@ -12,9 +12,10 @@ GameData.data = {
     upgrades: ["Shield"],
     doors: [],
     shards: {},
-    nuggets: 0,
-    bignugg: null
+    nugg_bank: 0
 };
+
+GameData.nuggetCount = 0;
 
 GameData.LoadDataFromStorage = function() {
     var save_data = localStorage.getItem('save_data');
@@ -100,12 +101,12 @@ GameData.GetShardPosition = function(name) {
 };
 
 GameData.GetNuggCount = function() {
-    return this.data.nuggets;
+    return this.nuggetCount;
 };
 
 GameData.AddNugg = function() {
-    this.data.nuggets++;
-    this.SaveDataToStorage();
+    this.nuggetCount++;
+    //this.SaveDataToStorage();
 
     //save every 10th nugget
     // if(this.data.nuggets % 10 === 0) {
@@ -114,21 +115,18 @@ GameData.AddNugg = function() {
 };
 
 GameData.ResetNuggCount = function() {
-    this.data.nuggets = 0;
+    this.nuggetCount = 0;
+    //this.SaveDataToStorage();
+};
+
+GameData.SaveNuggsToBank = function() {
+    this.data.nugg_bank += this.nuggetCount;
+    this.nuggetCount = 0;
     this.SaveDataToStorage();
+
 };
 
-GameData.UpdateBigNugg = function(x, y, count, layer) {
-    this.data.bignugg = { 
-        x: x,
-        y: y,
-        count: count,
-        layer: layer
-    };
-
-    this.SaveDataToStorage();
-};
-
-GameData.GetBigNugg = function() {
-    return this.data.bignugg;
-};
+GameData.GetNuggBankCount = function() {
+    
+    return this.data.nugg_bank;
+}

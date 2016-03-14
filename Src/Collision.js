@@ -14,12 +14,6 @@ Collision.OverlapFraukiWithObject = function(f, o) {
         return false;
 
 
-    } else if(o.spriteType === 'BigNugg') {
-        EatBigNugg(f, o);
-        return false;
-    
-
-
     } else if(o.spriteType === 'enemy') {
         if(o.CanCauseDamage() || 
             frauki.state === frauki.Rolling ||
@@ -83,9 +77,8 @@ Collision.OverlapFraukiWithObject = function(f, o) {
     } else if(o.spriteType === 'checkpoint') {
         return false;
 
-    } else if(o.spriteType === 'bigNugg') {
-        effectsController.SpawnEnergyNuggets(a.body, frauki.body, 'positive', o.energyAmount);
-        o.destroy();
+    } else if(o.spriteType === 'AltarBank') {
+        
         return false;
     } 
 
@@ -143,6 +136,8 @@ Collision.OverlapAttackWithObject = function(f, o) {
         OpenDoor(frauki, o);
     } else if(o.spriteType === 'orb') {
         SmashOrb(frauki, o);
+    } else if(o.spriteType === 'AltarBank') {
+        HitAltarBank(frauki, o);
     }
 };
 

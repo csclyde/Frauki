@@ -52,7 +52,11 @@ SpeechController.prototype.Create = function() {
 	this.dialogBox.cameraOffset.x = 70 + speechOffsetX; 
 	this.dialogBox.cameraOffset.y = 10 + speechOffsetY; 
 
-	this.text = game.add.bitmapText(0, 0, 'font', this.currentText, 18);
+	this.font = game.add.retroFont('font', 9, 13, 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890?,.!#\' ', 13);
+	this.font.autoUpperCase = false;
+	this.font.multiLine = true;
+
+	this.text = game.add.image(0, 0, this.font);
 	this.text.fixedToCamera = true;
 	this.text.visible = false;
 	this.text.cameraOffset.x = 110 + speechOffsetX; 
@@ -149,10 +153,6 @@ SpeechController.prototype.LoadSpeechZones = function(layer) {
 
 SpeechController.prototype.Update = function() {
 
-	
-
-	
-
 	if(this.text.visible && this.displayIndex < this.currentText.length && this.timers.TimerUp('display_progress')) {
 		this.displayIndex += 1;
 		this.timers.SetTimer('display_progress', 1);
@@ -169,7 +169,7 @@ SpeechController.prototype.Update = function() {
 		}
 	}
 
-	this.text.setText(this.currentText.slice(0, this.displayIndex));
+	this.font.text = this.currentText.slice(0, this.displayIndex);
 
 	if(this.timers.TimerUp('auto_hide')) {
 		this.HideSpeech();
@@ -197,7 +197,7 @@ SpeechController.prototype.ShowSpeech = function() {
 	}
 
 	this.displayIndex = 0;
-	this.text.setText('');
+	this.SetText('');
 
 	for(var i = 0; i < this.speechZones.length; i++) {
 		var zone = this.speechZones[i];
@@ -247,7 +247,7 @@ SpeechController.prototype.HideSpeech = function() {
 
 SpeechController.prototype.SetText = function(text) {
 	if(!text) {
-		this.currentText = 'undefined';
+		this.currentText = '';
 		this.displayIndex = 0;
 		return;
 	}

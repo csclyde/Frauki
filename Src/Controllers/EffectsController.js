@@ -66,11 +66,11 @@ EffectsController = function() {
     this.stars.minParticleScale = 1;
 
     this.sprockets = game.add.emitter(0, 0, 30);
-    this.sprockets.makeParticles('Misc', ['Sprockets0000', 'Sprockets0001', 'Sprockets0002', 'Sprockets0003', , 'Sprockets0004']); 
+    this.sprockets.makeParticles('Misc', ['Sprockets0000', 'Sprockets0001', 'Sprockets0002', 'Sprockets0003', 'Sprockets0004']); 
     this.sprockets.gravity = -200;
     this.sprockets.particleDrag.setTo(100);
     this.sprockets.setRotation(0, 0);
-    this.sprockets.minParticleSpeed.setTo(-300);
+    this.sprockets.minParticleSpeed.setTo(-200);
     this.sprockets.maxParticleSpeed.setTo(200, 0);
     this.sprockets.alpha = 1;
     this.sprockets.maxParticleScale = 1;
@@ -98,6 +98,17 @@ EffectsController = function() {
     this.energyStreak.maxParticleScale = 1;
     this.energyStreak.minParticleScale = 1;
     this.energyStreak.setRotation(0, 0);
+
+    this.nuggDropper = game.add.emitter(0, 0, 50);
+    this.nuggDropper.makeParticles('Misc', ['EnergyBitPos0000', 'EnergyBitPos0001', 'EnergyBitPos0002', 'EnergyBitPos0003', 'EnergyBitPos0004', 'EnergyBitPos0005']);
+    this.nuggDropper.gravity = -300;
+    this.nuggDropper.particleDrag.setTo(50);
+    this.nuggDropper.setRotation(0, 0);
+    this.nuggDropper.minParticleSpeed.setTo(-200);
+    this.nuggDropper.maxParticleSpeed.setTo(200);
+    this.nuggDropper.alpha = 1;
+    this.nuggDropper.maxParticleScale = 1;
+    this.nuggDropper.minParticleScale = 1;
 
     this.loadedEffects = [];
     this.loadedEffectsCollide = [];
@@ -172,6 +183,11 @@ EffectsController.prototype.Update = function() {
     this.negativeBits.y = frauki.body.y;
     this.negativeBits.width = frauki.body.width;
     this.negativeBits.height = frauki.body.height;
+
+    this.nuggDropper.x = frauki.body.x;
+    this.nuggDropper.y = frauki.body.y;
+    this.nuggDropper.width = frauki.body.width;
+    this.nuggDropper.height = frauki.body.height;
 
     if(!!this.enemySource) {
         this.positiveBits.x = this.enemySource.x;
@@ -970,5 +986,13 @@ EffectsController.prototype.SprocketBurst = function(src) {
     this.sprockets.width = 10;
     this.sprockets.height = 10;
 
-    this.sprockets.explode(2000, game.rnd.between(5, 10));
+    this.sprockets.explode(2000, game.rnd.between(8, 12));
+};
+
+EffectsController.prototype.DropNuggets = function(amt) {
+
+    if(amt > 30) amt = 30;
+    console.log(amt);
+
+    this.nuggDropper.flow(800, 10, 1, amt);
 };

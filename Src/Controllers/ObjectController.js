@@ -180,6 +180,8 @@ ObjectController.prototype.CreateObjectsLayer = function(layer) {
 
     //create the doors
     Frogland.map.createFromObjects('Objects_' + layer, 67, 'Misc', 'Door0000', true, true, currLayer, Door, false);
+
+    Frogland.map.createFromObjects('Objects_' + layer, 75, 'Misc', 'AltarBank0000', true, true, currLayer, AltarBank, false);
     
 
     if(layer == 3) {

@@ -12,6 +12,8 @@ FileMap.Images = [
 	{ Name: 'clouds1', File: 'Data/World/Clouds1.png' },
 	{ Name: 'clouds2', File: 'Data/World/Clouds2.png' },
 
+	{ Name: 'font', File: 'Data/Sprites/font.png' },
+
 	{ Name: 'cave', File: 'Data/World/Cave.png' },
 	{ Name: 'stone', File: 'Data/World/Stone.png' },
 ];

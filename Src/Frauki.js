@@ -519,7 +519,7 @@ Player.prototype.Crouch = function(params) {
 
     this.timers.SetTimer('frauki_dash', 200);
 
-    if((this.state === this.AttackFall || this.state === this.AttackJump) && this.body.onFloor() === false && !this.timers.TimerUp('slash_start_window')) {
+    if((this.state === this.AttackFall || this.state === this.AttackJump || this.state === this.AttackFront) && this.body.onFloor() === false && !this.timers.TimerUp('slash_start_window')) {
         this.DiveSlash();
     }
 };
@@ -796,10 +796,7 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
         effectsController.ScreenFlash();
         effectsController.SlowHit(400);
     } else {
-        game.time.events.add(2000, function() {
-            frauki.alpha = 0;
-            effectsController.EnergySplash(frauki.body, 200, 'positive', 50, frauki.body.velocity);
-        });
+        effectsController.DropNuggets(GameData.GetNuggCount());
     }
 
     //allow the enemy to steal the shard

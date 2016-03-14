@@ -203,7 +203,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
     this.attackFrames = {
         'A3PZ/Attack0003': {
             x: 10, y: 15, w: 129, h: 30,
-            damage: 2,
+            damage: 3,
             knockback: 0,
             priority: 1,
             juggle: 0
@@ -211,7 +211,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
         'A3PZ/Attack0004': {
             x: 100, y: 10, w: 40, h: 15,
-            damage: 2,
+            damage: 3,
             knockback: 0,
             priority: 1,
             juggle: 0
@@ -219,7 +219,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
         'A3PZ/Attack20003': {
             x: 50, y: 0, w: 70, h: 80,
-            damage: 2,
+            damage: 3,
             knockback: 0,
             priority: 1,
             juggle: 0
@@ -227,7 +227,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
         'A3PZ/Attack20004': {
             x: 100, y: 73, w: 35, h: 10,
-            damage: 2,
+            damage: 3,
             knockback: 0,
             priority: 1,
             juggle: 0

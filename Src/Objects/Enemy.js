@@ -227,7 +227,6 @@ Enemy.prototype.TakeHit = function(damage) {
 
         if(this.robotic) events.publish('play_sound', { name: 'robosplosion' });
     }
-
 };
 
 function DestroyEnemy(e) {
