@@ -129,4 +129,12 @@ GameData.SaveNuggsToBank = function() {
 GameData.GetNuggBankCount = function() {
     
     return this.data.nugg_bank;
+};
+
+GameData.DepositNugg = function() {
+    if(this.nuggetCount > 0) {
+        this.nuggetCount--;
+        this.data.nugg_bank++;
+        this.SaveDataToStorage();
+    }
 }

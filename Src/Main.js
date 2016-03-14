@@ -2,28 +2,8 @@ var Main = new Phaser.State();
 
 Main.create = function() {
 
-    cameraController = new CameraController();
-    inputController = new InputController();
-    energyController = new EnergyController();
-    audioController = new AudioController();
-    triggerController = new TriggerController();
-    scriptRunner = new ScriptRunner();
-    timerUtil = new TimerUtil();
-    objectController = new ObjectController();
-    backdropController = new BackdropController();
-
-    triggerController.Create(map);
 
     this.restarting = true;
-
-    Frogland.Create();
-    
-    effectsController = new EffectsController();
-    weaponController = new WeaponController();
-    projectileController = new ProjectileController();
-    speechController = new SpeechController();
-    energyController.Create();
-    speechController.Create();
 
     this.physicsSlowMo = 1;
     this.currentAlpha = 1;
@@ -32,6 +12,7 @@ Main.create = function() {
     cameraController.camY = frauki.y + 111;
     
     var fadeIn = effectsController.Fade(false);
+    Frogland.SpawnFrauki();
 
     fadeIn.onComplete.add(function() {
         frauki.state = frauki.Materializing;
@@ -146,12 +127,12 @@ Main.Restart = function() {
     fadeOutTween.onComplete.add(function() {
         PrepareShardsForDeath();
         GameData.SaveShardPositions();
-        
-        Frogland.SpawnFrauki();
 
         game.time.events.add(300, function() {
             frauki.Reset(); 
         });
+        Frogland.SpawnFrauki();
+
 
         energyController.Reset();
         game.time.slowMotion = 1;
@@ -199,6 +180,8 @@ Main.Restart = function() {
         Frogland.ResetFallenTiles();
 
         //var cameraMoveTween = game.add.tween(game.camera)
+
+        //game.state.start('Upgrading', false, false);
 
     });
 };

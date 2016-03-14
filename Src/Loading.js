@@ -60,7 +60,25 @@ Loading.create = function() {
 
     game.time.desiredFps = 60;
 
-    game.state.start('Main');
+    cameraController = new CameraController();
+    inputController = new InputController();
+    energyController = new EnergyController();
+    audioController = new AudioController();
+    triggerController = new TriggerController();
+    scriptRunner = new ScriptRunner();
+    timerUtil = new TimerUtil();
+    objectController = new ObjectController();
+    backdropController = new BackdropController();
+
+    Frogland.Create();
+    
+    effectsController = new EffectsController();
+    weaponController = new WeaponController();
+    projectileController = new ProjectileController();
+    speechController = new SpeechController();
+    speechController.Create();
+
+    game.state.start('Main', false, false);
 
 
     Phaser.Physics.Arcade.Body.prototype.preUpdate = function () {
@@ -348,6 +366,4 @@ Loading.create = function() {
             this.children[i].postUpdate();
         }
     };
-
-    console.log('Finished Loading state')
 };

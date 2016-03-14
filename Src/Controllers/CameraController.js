@@ -32,6 +32,10 @@ CameraController.prototype.Update = function() {
 
 	yOffset += (frauki.states.crouching ? 25 : 0);
 
+	if(frauki.state === frauki.Rolling) {
+		yOffset += 5;
+	}
+
 	if(frauki.states.upPressed) {
 		if(!inputController.inDoorway && !speechController.FraukiInSpeechZone()) {
 			yOffset -= 25;
@@ -41,7 +45,7 @@ CameraController.prototype.Update = function() {
 	var idealX = xOffset + frauki.body.center.x;
 	var idealY = yOffset + frauki.body.center.y;
 
-	this.camX += (idealX - this.camX) * 0.15;
+	this.camX += (idealX - this.camX) * 0.12;
 	this.camY += (idealY - this.camY) * 0.1;
 
 	game.camera.focusOnXY(this.camX, this.camY);

@@ -28,6 +28,7 @@ InputController = function() {
     this.testButton2.onDown.add(function() { 
         energyController.AddHealth(2);
         energyController.AddCharge(4);
+        GameData.AddNugget();
     });
 
     this.binds = {};
@@ -273,121 +274,159 @@ InputController.prototype.Update = function() {
 };
 
 InputController.prototype.OnJump = function(pressed) {
-    if(pressed) {
-        events.publish('player_jump', {jump: true});
-    } else {
-        events.publish('player_jump', {jump: false});
+    if(game.state.getCurrentState() === Main) {
+        if(pressed) {
+            events.publish('player_jump', {jump: true});
+        } else {
+            events.publish('player_jump', {jump: false});
+        }
+    } else if(game.state.getCurrentState() === Upgrading) {
+
     }
 };
 
 InputController.prototype.OnSlash = function(pressed) {
-    if(pressed) {
-        events.publish('player_slash', {});
-    } else {
+    if(game.state.getCurrentState() === Main) {
+        if(pressed) {
+            events.publish('player_slash', {});
+        } else {
 
+        }
+    } else if(game.state.getCurrentState() === Upgrading) {
+        
     }
 };
 
 InputController.prototype.OnRoll = function(pressed) {
-    if(pressed) {
-        events.publish('player_roll', {});
-    } else {
+    if(game.state.getCurrentState() === Main) {
+        if(pressed) {
+            events.publish('player_roll', {});
+        } else {
 
+        }
+    } else if(game.state.getCurrentState() === Upgrading) {
+        events.publish('exit_upgrades', {});
     }
 };
 
 InputController.prototype.OnHeal = function(pressed) {
-    if(pressed) {
-        this.chargingApple = true;
-        this.timers.SetTimer('apple_charge', 1000);
+    if(game.state.getCurrentState() === Main) {
+        if(pressed) {
+            this.chargingApple = true;
+            this.timers.SetTimer('apple_charge', 1000);
 
-        events.publish('player_heal', { charging: true });
-    } else {
-        events.publish('player_heal', { charging: false });
+            events.publish('player_heal', { charging: true });
+        } else {
+            events.publish('player_heal', { charging: false });
+        }
+    } else if(game.state.getCurrentState() === Upgrading) {
+        
     }
 };
 
 InputController.prototype.OnLeft = function(pressed) {
-    if(pressed) {
-        events.publish('player_run', {run:true, dir:'left'});
+    if(game.state.getCurrentState() === Main) {
 
-        this.currentDir = 'left';
+        if(pressed) {
+            events.publish('player_run', {run:true, dir:'left'});
 
-    } else {
-        events.publish('player_run', {run:false, dir: 'left'});
+            this.currentDir = 'left';
 
-        if(this.dpad.right) {
-            this.currentDir = 'right';
         } else {
-            this.currentDir = 'still';
+            events.publish('player_run', {run:false, dir: 'left'});
+
+            if(this.dpad.right) {
+                this.currentDir = 'right';
+            } else {
+                this.currentDir = 'still';
+            }
         }
+    } else if(game.state.getCurrentState() === Upgrading) {
+        
     }
 };
 
 InputController.prototype.OnRight = function(pressed) {
-    if(pressed) {
-        events.publish('player_run', {run:true, dir:'right'});
+    if(game.state.getCurrentState() === Main) {
 
-        this.currentDir = 'right';
-    } else {
-        events.publish('player_run', {run:false, dir: 'right'});
+        if(pressed) {
+            events.publish('player_run', {run:true, dir:'right'});
 
-        if(this.dpad.left) {
-            this.currentDir = 'left';
+            this.currentDir = 'right';
         } else {
-            this.currentDir = 'still';
+            events.publish('player_run', {run:false, dir: 'right'});
+
+            if(this.dpad.left) {
+                this.currentDir = 'left';
+            } else {
+                this.currentDir = 'still';
+            }
         }
+    } else if(game.state.getCurrentState() === Upgrading) {
+        
     }
 };
 
 InputController.prototype.OnUp = function(pressed) {
-    if(pressed) {
-        events.publish('control_up', {pressed: true});
+    if(game.state.getCurrentState() === Main) {
+        if(pressed) {
+            events.publish('control_up', {pressed: true});
 
-        events.publish('activate_speech', {});
+            events.publish('activate_speech', {});
 
-        if(frauki.body.onFloor() && frauki.body.velocity.x < PLAYER_SPEED()) {
-            //switch between layers if they are in a doorway
-            if(game.physics.arcade.overlap(frauki, Frogland.door1Group)) {
-                if(Frogland.currentLayer === 3) Frogland.ChangeLayer(2);
-                else if(Frogland.currentLayer === 2) Frogland.ChangeLayer(3);
+            if(frauki.body.onFloor() && frauki.body.velocity.x < PLAYER_SPEED()) {
+                //switch between layers if they are in a doorway
+                if(game.physics.arcade.overlap(frauki, Frogland.door1Group)) {
+                    if(Frogland.currentLayer === 3) Frogland.ChangeLayer(2);
+                    else if(Frogland.currentLayer === 2) Frogland.ChangeLayer(3);
 
-                this.inDoorway = true;
-            } else if(game.physics.arcade.overlap(frauki, Frogland.door2Group)) {
-                if(Frogland.currentLayer === 3) Frogland.ChangeLayer(4);
-                else if(Frogland.currentLayer === 4) Frogland.ChangeLayer(3);
+                    this.inDoorway = true;
+                } else if(game.physics.arcade.overlap(frauki, Frogland.door2Group)) {
+                    if(Frogland.currentLayer === 3) Frogland.ChangeLayer(4);
+                    else if(Frogland.currentLayer === 4) Frogland.ChangeLayer(3);
 
-                this.inDoorway = true;
-            } else if(game.physics.arcade.overlap(frauki, Frogland.door3Group)) {
-                if(Frogland.currentLayer === 2) Frogland.ChangeLayer(4);
-                else if(Frogland.currentLayer === 4) Frogland.ChangeLayer(2);
+                    this.inDoorway = true;
+                } else if(game.physics.arcade.overlap(frauki, Frogland.door3Group)) {
+                    if(Frogland.currentLayer === 2) Frogland.ChangeLayer(4);
+                    else if(Frogland.currentLayer === 4) Frogland.ChangeLayer(2);
 
-                this.inDoorway = true;
-            } else {
-                this.inDoorway = false;
+                    this.inDoorway = true;
+                } else {
+                    this.inDoorway = false;
+                }
             }
-        }
-        
+            
 
-    } else {
-        events.publish('control_up', {pressed: false});
+        } else {
+            events.publish('control_up', {pressed: false});
+        }
+    } else if(game.state.getCurrentState() === Upgrading) {
+        
     }
 };
 
 InputController.prototype.OnDown = function(pressed) {
-    if(pressed) {
-        events.publish('player_crouch', {crouch: true});
-    } else {
-        events.publish('player_crouch', {crouch: false});
+    if(game.state.getCurrentState() === Main) {
+        if(pressed) {
+            events.publish('player_crouch', {crouch: true});
+        } else {
+            events.publish('player_crouch', {crouch: false});
+        }
+    } else if(game.state.getCurrentState() === Upgrading) {
+        
     }
 };
 
 InputController.prototype.OnRShoulder = function(pressed) {
-    if(pressed) {
-        events.publish('activate_weapon', { activate: true });
-        this.buttons.rShoulder = true;
-    } else {
-        events.publish('activate_weapon', { activate: false });
-        this.buttons.rShoulder = false;
+    if(game.state.getCurrentState() === Main) {
+        if(pressed) {
+            events.publish('activate_weapon', { activate: true });
+            this.buttons.rShoulder = true;
+        } else {
+            events.publish('activate_weapon', { activate: false });
+            this.buttons.rShoulder = false;
+        }
+    } else if(game.state.getCurrentState() === Upgrading) {
+        
     }
 };

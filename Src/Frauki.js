@@ -164,6 +164,10 @@ Player.prototype.postStateUpdate = function() {
     } else if(this.state !== this.Hurting && this.alpha !== 0) {
         frauki.alpha = 1;
     }
+
+    if(this.body.onFloor()) {
+        this.timers.SetTimer('on_ground', 200);
+    }
 };
 
 Player.prototype.update = function() {
@@ -439,13 +443,18 @@ Player.prototype.Jump = function(params) {
             if(frauki.states.inWater) dropTime *= 2;
 
             game.time.events.add(dropTime, function() { frauki.states.droppingThroughCloud = false; } );
-            this.timers.SetTimer('frauki_dash', 200);
+            this.timers.SetTimer('frauki_dash', 250);
 
             return;
         }
         
         //normal jump
-        if(this.state === this.Standing || this.state === this.Running || this.state === this.Landing || this.state === this.Crouching) {
+        if( this.state === this.Standing || 
+            this.state === this.Running || 
+            this.state === this.Landing || 
+            this.state === this.Crouching || 
+            ((this.state === this.Falling || this.state === this.Peaking) && !this.timers.TimerUp('on_ground'))) {
+
             this.body.velocity.y = PLAYER_JUMP_VEL();
             this.ChangeState(this.Jumping);
             events.publish('play_sound', {name: 'jump'});

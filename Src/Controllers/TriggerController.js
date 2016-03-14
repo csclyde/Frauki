@@ -9,7 +9,7 @@ TriggerController = function() {
 
 TriggerController.prototype.triggers = {};
 
-TriggerController.prototype.Create = function(map) {
+TriggerController.prototype.Create = function() {
 };
 
 TriggerController.prototype.CreateTriggers = function(layer) {

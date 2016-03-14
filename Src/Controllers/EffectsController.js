@@ -110,6 +110,11 @@ EffectsController = function() {
     this.nuggDropper.maxParticleScale = 1;
     this.nuggDropper.minParticleScale = 1;
 
+    this.nuggDepositer = game.add.emitter(0, 0, 15);
+    this.nuggDepositer.makeParticles('Misc', ['EnergyBitPos0000', 'EnergyBitPos0001', 'EnergyBitPos0002', 'EnergyBitPos0003', 'EnergyBitPos0004', 'EnergyBitPos0005']);
+    this.nuggDepositer.gravity = -600;
+    this.nuggDepositer.setRotation(0, 0);
+
     this.loadedEffects = [];
     this.loadedEffectsCollide = [];
 
@@ -178,6 +183,9 @@ EffectsController.prototype.Update = function() {
 
     this.activeDest = this.enemyDest;
     this.negativeBits.forEachAlive(UpdateParticle, this);
+
+    this.activeDest = this.activeAltar;
+    this.nuggDepositer.forEachAlive(UpdateParticle, this);
 
     this.negativeBits.x = frauki.body.x;
     this.negativeBits.y = frauki.body.y;
@@ -393,8 +401,9 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
             sparkles.minParticleSpeed.setTo(0);
             sparkles.minRotation = 0;
             sparkles.maxRotation = 0;
-            sparkles.setScale();
-            game.time.events.add(game.rnd.between(0, 1000), function() { sparkles.start(false, 200, 100); });
+            sparkles.setScale(1);
+
+            sparkles.start(false, 200, 100);
             sparkles.effectType = 'sparkles';
             sparkles.owningLayer = layer;
 
@@ -992,7 +1001,8 @@ EffectsController.prototype.SprocketBurst = function(src) {
 EffectsController.prototype.DropNuggets = function(amt) {
 
     if(amt > 30) amt = 30;
-    console.log(amt);
+    
+    if(amt <= 0) return;
 
     this.nuggDropper.flow(800, 10, 1, amt);
 };

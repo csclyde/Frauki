@@ -35,6 +35,8 @@ AltarBank = function(game, x, y, name) {
     this.text = game.add.image(0, 0, this.font);
     this.text.visible = false;
 
+    this.depositing = false;
+
 
 };
 
@@ -64,9 +66,18 @@ AltarBank.prototype.update = function() {
         this.text.y = this.counterBox.y - 10;
         this.font.text = GameData.GetNuggBankCount() + '';
 
+        if(GameData.GetNuggCount() > 0 && this.depositing === false) {
+            //launch nuggets
+            this.depositing = true;
+        }
+
     } else {
         this.counterBox.visible = false;
         this.text.visible = false;
+
+        if(GameData.GetNuggCount() === 0) {
+            this.depositing = false;
+        }
     }
 };
 

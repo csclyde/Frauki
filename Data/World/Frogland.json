@@ -3001,7 +3001,7 @@
          "name":"Background_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -3012,7 +3012,7 @@
          "name":"Midground_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -3023,7 +3023,7 @@
          "name":"Foreground_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -4598,8 +4598,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":2166.58,
-                 "y":3117.42
+                 "x":2162.08,
+                 "y":3097.92
                 }, 
                 {
                  "gid":68,
@@ -6093,7 +6093,7 @@
              "id":"sewer_to_collapse"
             },
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "width":0,
          "x":0,
          "y":0
@@ -6991,7 +6991,7 @@
          "name":"Background_4",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -7002,7 +7002,7 @@
          "name":"Midground_4",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -7013,7 +7013,7 @@
          "name":"Foreground_4",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -10253,7 +10253,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "width":0,
          "x":0,
          "y":0

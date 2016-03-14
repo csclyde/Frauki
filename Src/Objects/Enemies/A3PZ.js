@@ -60,11 +60,12 @@ Enemy.prototype.types['A3PZ'] =  function() {
             return;
         }
 
-        this.timers.SetTimer('slash_hold', 700);
 
         if(this.firstAttack) {
+            this.timers.SetTimer('slash_hold', 700);
             this.state = this.Windup1;
         } else {
+            this.timers.SetTimer('slash_hold', 450);
             this.state = this.Windup2;
         }
 
