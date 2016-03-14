@@ -2,6 +2,7 @@ var Main = new Phaser.State();
 
 Main.create = function() {
 
+    Frogland.SpawnFrauki();
 
     this.restarting = true;
 
@@ -131,8 +132,6 @@ Main.Restart = function() {
         game.time.events.add(300, function() {
             frauki.Reset(); 
         });
-        Frogland.SpawnFrauki();
-
 
         energyController.Reset();
         game.time.slowMotion = 1;
@@ -181,7 +180,7 @@ Main.Restart = function() {
 
         //var cameraMoveTween = game.add.tween(game.camera)
 
-        //game.state.start('Upgrading', false, false);
+        game.state.start('Upgrading', false, false);
 
     });
 };

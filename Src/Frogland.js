@@ -100,6 +100,7 @@ Frogland.Create = function() {
     });
 
     game.physics.arcade.sortDirection = game.physics.arcade.TOP_BOTTOM;
+
 };
 
 Frogland.Update = function() {
@@ -190,6 +191,7 @@ Frogland.SpawnFrauki = function() {
                 frauki.x = obj.x;
                 frauki.y = obj.y + 90;
                 Frogland.ChangeLayer(obj.owningLayer);   
+                frauki.timers.SetTimer('frauki_invincible', 0);
             } 
         });  
 
@@ -299,7 +301,11 @@ Frogland.GetCurrentCollisionLayer = function() {
 
 Frogland.ChangeLayer = function(newLayer) {
 
+    console.log('trying to change layer ' + newLayer)
+
     if(this.currentLayer == newLayer || Frogland.changingLayer === true) return;
+
+    console.log('changed layer ' + newLayer)
 
     Frogland.changingLayer = true;
     game.time.events.add(800, function() { Frogland.changingLayer = false; });
@@ -364,7 +370,7 @@ Frogland.ChangeLayer = function(newLayer) {
 };
 
 Frogland.DislodgeTile = function(tile) {
-    if(tile && tile.index === 8) {
+    if(tile && tile.index === 1) {
         //make the tile robust
         tile.setCollision(true, true, true, true);
     }

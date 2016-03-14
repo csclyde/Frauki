@@ -66,9 +66,16 @@ AltarBank.prototype.update = function() {
         this.text.y = this.counterBox.y - 10;
         this.font.text = GameData.GetNuggBankCount() + '';
 
-        if(GameData.GetNuggCount() > 0 && this.depositing === false) {
+        if(GameData.GetNuggCount() > 0 && this.timers.TimerUp('deposit_nugg')) {
             //launch nuggets
-            this.depositing = true;
+            GameData.DepositNugg();
+
+            var depositFreq = 100;
+            if(GameData.GetNuggCount() <= 10) depositFreq = 100;
+            else if(GameData.GetNuggCount() <= 100) despositFreq = 50;
+            else if(GameData.GetNuggCount() > 100) depositFreq = 10;
+
+            this.timers.SetTimer('deposit_nugg', depositFreq);
         }
 
     } else {
@@ -88,6 +95,8 @@ function HitAltarBank(f, o) {
         events.publish('play_sound', {name: 'attack_connect'});
         o.timers.SetTimer('hit', 1000);
         GameData.SaveNuggsToBank();
+
+        Main.Restart();
     }
 
 };

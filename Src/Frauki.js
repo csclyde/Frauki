@@ -503,7 +503,11 @@ Player.prototype.Jump = function(params) {
 Player.prototype.DoubleJump = function() {
     if(this.states.hasFlipped === false && this.state !== this.Rolling && this.state !== this.AttackStab && this.state !== this.AttackOverhead && this.state !== this.AttackFall && energyController.UseEnergy(1)) {
 
-        var jumpVel = this.state === this.Hanging ? PLAYER_JUMP_VEL() : PLAYER_DOUBLE_JUMP_VEL();
+        var jumpVel = PLAYER_DOUBLE_JUMP_VEL();
+
+        if(!this.timers.TimerUp('after_hang') || this.state === this.Hanging) {
+            jumpVel = PLAYER_JUMP_VEL();
+        }
 
         if(this.body.velocity.y > jumpVel) {
             this.body.velocity.y = jumpVel;
@@ -1085,6 +1089,7 @@ Player.prototype.Hanging = function() {
 
     if(!this.body.onWall()) {
         this.ChangeState(this.Falling);
+        this.timers.SetTimer('after_hang', 200);
     } 
 
     if(this.body.onFloor()) {
