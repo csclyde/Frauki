@@ -113,6 +113,8 @@ Main.Restart = function() {
     events.publish('stop_all_music'); 
     events.publish('play_music', { name: 'Gameover' } ); 
 
+    speechController.HideSpeech();
+
     this.restarting = true;
     game.time.slowMotion = 5;
     var fadeOutTween = effectsController.Fade(true);
@@ -193,28 +195,16 @@ Main.DrawUI = function() {
     for(var i = 0, len = energyController.GetHealth(); i < len; i++) {
         var pipFrame = '';
 
-        if(energyController.GetHealth() > 4) {
-            if(i < 3) {
-                pipFrame = 'EnergyPips0000';
-            } else if(i < 6) {
-                pipFrame = 'EnergyPips0001';
-            } else if(i < 9) {
-                pipFrame = 'EnergyPips0002';
-            } else {
-                pipFrame = 'EnergyPips0003';
-            } 
+        if(i < 3) {
+            pipFrame = 'EnergyPips0000';
+        } else if(i < 6) {
+            pipFrame = 'EnergyPips0001';
+        } else if(i < 9) {
+            pipFrame = 'EnergyPips0002';
         } else {
-            if(i < 3) {
-                pipFrame = 'HealthPips0000';
-            } else if(i < 6) {
-                pipFrame = 'HealthPips0001';
-            } else if(i < 9) {
-                pipFrame = 'HealthPips0002';
-            } else {
-                pipFrame = 'HealthPips0003';
-            }
-        }
-
+            pipFrame = 'EnergyPips0003';
+        } 
+        
         this.RenderTextureFromAtlas('UI', pipFrame, 14 + (7 * i), 13);
     }
 

@@ -833,7 +833,7 @@ EffectsController.prototype.Fade = function(show) {
     if(show) {
         this.screenDark.alpha = 0;
         this.screenDark.visible = true;
-        return game.add.tween(this.screenDark).to( { alpha: 1 }, 1000, Phaser.Easing.Linear.None, true);
+        return game.add.tween(this.screenDark).to( { alpha: 1 }, 300, Phaser.Easing.Linear.None, true);
     } else {
         return game.add.tween(this.screenDark).to( { alpha: 0 }, 200, Phaser.Easing.Linear.None, true);
     }
@@ -995,7 +995,7 @@ EffectsController.prototype.SprocketBurst = function(src) {
     this.sprockets.width = 10;
     this.sprockets.height = 10;
 
-    this.sprockets.explode(2000, game.rnd.between(8, 12));
+    this.sprockets.explode(2000, game.rnd.between(5, 10));
 };
 
 EffectsController.prototype.DropNuggets = function(amt) {

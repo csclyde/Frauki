@@ -158,7 +158,7 @@ SpeechController.prototype.Update = function() {
 		this.timers.SetTimer('display_progress', 1);
 	}
 
-	if(this.text.visible) {
+	if(this.text.visible && !!this.currentSpeechZone) {
 		if(this.currentSpeechZone.owningLayer !== Frogland.currentLayer || 
 			frauki.body.x + frauki.body.width < this.currentSpeechZone.x || 
 			frauki.body.x > this.currentSpeechZone.x + this.currentSpeechZone.width || 
@@ -171,9 +171,7 @@ SpeechController.prototype.Update = function() {
 
 	this.font.text = this.currentText.slice(0, this.displayIndex);
 
-	if(this.timers.TimerUp('auto_hide')) {
-		this.HideSpeech();
-	}
+	
 
 	if(!this.text.visible && this.FraukiInSpeechZone()) {
 		this.questionMark.visible = true;
@@ -202,17 +200,7 @@ SpeechController.prototype.ShowSpeech = function() {
 	for(var i = 0; i < this.speechZones.length; i++) {
 		var zone = this.speechZones[i];
 		if(zone.owningLayer === Frogland.currentLayer && frauki.body.x + frauki.body.width > zone.x && frauki.body.x < zone.x + zone.width && frauki.body.y + frauki.body.height > zone.y && frauki.body.y < zone.y + zone.height) {
-			this.SetText(Speeches[zone.speechName].text);
-
-			this.currentPortrait = Speeches[zone.speechName].portrait || 'Neutral';
-			this.portraitBox.visible = true;
-			this.portraits[this.currentPortrait].visible = true;
-			this.dialogBox.visible = true;
-			this.text.visible = true;
-
-			this.speechVisible = true;
-
-			this.timers.SetTimer('auto_hide', 6000);
+			this.Activate(Speeches[zone.speechName].text, Speeches[zone.speechName].portrait);
 
 			this.currentSpeechZone = zone;
 
@@ -221,6 +209,22 @@ SpeechController.prototype.ShowSpeech = function() {
 	}
 
 	return false;
+};
+
+SpeechController.prototype.Activate = function(text, portrait) {
+	this.SetText(text);
+
+	this.currentPortrait = portrait || 'Neutral';
+	this.portraitBox.visible = true;
+	this.portraits[this.currentPortrait].visible = true;
+	this.dialogBox.visible = true;
+	this.text.visible = true;
+
+	this.speechVisible = true;
+
+	this.timers.SetTimer('auto_hide', 6000);
+
+	return true;
 };
 
 SpeechController.prototype.FraukiInSpeechZone = function() {

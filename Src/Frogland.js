@@ -301,11 +301,7 @@ Frogland.GetCurrentCollisionLayer = function() {
 
 Frogland.ChangeLayer = function(newLayer) {
 
-    console.log('trying to change layer ' + newLayer)
-
     if(this.currentLayer == newLayer || Frogland.changingLayer === true) return;
-
-    console.log('changed layer ' + newLayer)
 
     Frogland.changingLayer = true;
     game.time.events.add(800, function() { Frogland.changingLayer = false; });

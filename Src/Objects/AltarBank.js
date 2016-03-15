@@ -109,16 +109,3 @@ AltarBank.prototype.PlayAnim = function(name) {
 AltarBank.prototype.Active = function() {
     this.PlayAnim('active');
 };
-
-/*
-need a general case for multiple events triggering one event. kill multiple enemies, and
-one door opens. Or smash multiple AltarBanks, one door opens. or whatever. Each object needs to be
-somehow denoted as part of a group. they can have the group name as one of the message.
-
-The event router could somehow handle group messages. or, for doors specifically there needs
-to be code at the end of the open door event that checks if the thing is part of a group.
-
-On the open door by id function, there is an optional second paramtere, the group name. if the
-group name is specified, then then entire group needs to be accounted for before the door will
-open. How is the threshold specified? 
-*/

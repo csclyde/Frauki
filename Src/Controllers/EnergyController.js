@@ -3,7 +3,7 @@ EnergyController = function() {
 	var that  = this;
 
 	this.energy = 12;
-	this.health = 12;
+	this.health = this.GetMaxHealth();
 	this.charge = 12;
 
 	this.latentHealth = 0;
@@ -122,7 +122,7 @@ EnergyController.prototype.GetHealth = function() {
 
 EnergyController.prototype.GetMaxHealth = function() {
 
-	return 12;
+	return 4;
 };
 
 
@@ -170,7 +170,7 @@ EnergyController.prototype.GetMaxCharge = function() {
 
 EnergyController.prototype.Reset = function() {
 
-	this.health = 12;
+	this.health = this.GetMaxHealth();
 	this.energy = 12;
 	this.charge = 12;
 	this.latentHealth = 0;
