@@ -5,38 +5,22 @@ Enemy.prototype.types['R2BTU'] =  function() {
 
     this.animations.add('idle', ['R2BTU/Stand0000'], 10, true, false);
     this.animations.add('float', ['R2BTU/Float0000'], 6, true, false);
-    this.animations.add('attack', ['R2BTU/Attack0000', 'R2BTU/Attack0001'], 18, true, false);
+    //this.animations.add('attack', ['R2BTU/Attack0000', 'R2BTU/Attack0001'], 18, true, false);
 
-    this.energy = 5;
+    this.energy = 3;
     this.baseStunDuration = 500;
 
     this.robotic = true;
+
+    this.state = this.Idling;
     
     this.updateFunction = function() {
-
+        console.log(this.animations.currentFrame.name, this.animations.currentAnim.name)
     };
 
     this.Act = function() {
 
-        if(EnemyBehavior.Player.IsVisible(this)) {
-            if(this.hasHit) {
-                this.Dodge();
-                this.hasHit = false;
-            }
-            else if(EnemyBehavior.Player.IsDangerous(this)) {
-                this.Dodge();
-
-            } else if(EnemyBehavior.Player.IsNear(this, 100)) {
-                EnemyBehavior.FacePlayer(this);
-                this.Attack();
-            
-            } else {
-                this.state = this.Idling;
-            }
-        } else {
-            this.state = this.Idling;
-            this.body.velocity.x = 0;
-        }
+        this.state = this.Idling;
     };
 
     ///////////////////////////////ACTIONS////////////////////////////////////
@@ -45,7 +29,7 @@ Enemy.prototype.types['R2BTU'] =  function() {
             return;
         }
 
-        this.timers.SetTimer('slash_hold', 700);
+        this.timers.SetTimer('slash_hold', game.rnd.between(500, 800));
         this.state = this.Windup;
 
     };
@@ -58,12 +42,12 @@ Enemy.prototype.types['R2BTU'] =  function() {
         EnemyBehavior.FacePlayer(this);
 
         if(this.direction === 'left') {
-            this.body.velocity.x = 300;
+            this.body.velocity.x = 0;
         } else {
-            this.body.velocity.x = -300;
+            this.body.velocity.x = -0;
         }
 
-        this.body.velocity.y = -100;
+        this.body.velocity.y = 0;
 
         this.state = this.Dodging;
 
@@ -87,10 +71,9 @@ Enemy.prototype.types['R2BTU'] =  function() {
     this.Windup = function() {
         this.PlayAnim('attack');
 
-        if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
+        if(this.timers.TimerUp('slash_hold')) {
             this.state = this.Attacking;
-            this.timers.SetTimer('slash_hold', game.rnd.between(550, 700));
-            events.publish('camera_shake', {magnitudeX: 3, magnitudeY: 0, duration: 200});
+            this.timers.SetTimer('slash_hold', game.rnd.between(500, 800));
         }
 
         return false;
@@ -100,13 +83,12 @@ Enemy.prototype.types['R2BTU'] =  function() {
         this.PlayAnim('attack');
 
         if(this.direction === 'left') {
-            this.body.velocity.x = -250;
+            this.body.velocity.x = 0;
         } else {
-            this.body.velocity.x = 250;
+            this.body.velocity.x = 0;
         }
 
-        if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
-            this.state = this.Windup2;
+        if(this.timers.TimerUp('slash_hold')) {
             return true;
         }
 
@@ -116,7 +98,7 @@ Enemy.prototype.types['R2BTU'] =  function() {
     this.Dodging = function() {
         this.PlayAnim('float');
 
-        if(this.timers.TimerUp('dodge_hold') && !EnemyBehavior.Player.IsDangerous(this)) {
+        if(this.timers.TimerUp('dodge_hold')) {
             return true;
         }
 
@@ -124,7 +106,7 @@ Enemy.prototype.types['R2BTU'] =  function() {
     }
 
     this.Hurting = function() {
-        this.PlayAnim('stand');
+        this.PlayAnim('idle');
 
         if(this.timers.TimerUp('hit') && this.body.onFloor()) {
             return true;
@@ -134,53 +116,7 @@ Enemy.prototype.types['R2BTU'] =  function() {
     };
 
     this.attackFrames = {
-        'R2BTU/Attack0003': {
-            x: 10, y: 15, w: 129, h: 30,
-            damage: 3,
-            knockback: 0,
-            priority: 1,
-            juggle: 0
-        },
-
-        'R2BTU/Attack0004': {
-            x: 100, y: 10, w: 40, h: 15,
-            damage: 3,
-            knockback: 0,
-            priority: 1,
-            juggle: 0
-        },
-
-        'R2BTU/Attack20003': {
-            x: 50, y: 0, w: 70, h: 80,
-            damage: 3,
-            knockback: 0,
-            priority: 1,
-            juggle: 0
-        },
-
-        'R2BTU/Attack20004': {
-            x: 100, y: 73, w: 35, h: 10,
-            damage: 3,
-            knockback: 0,
-            priority: 1,
-            juggle: 0
-        },
-
-        'R2BTU/Block0000': {
-            x: 20, y: -8, w: 45, h: 80,
-            damage: 0,
-            knockback: 0,
-            priority: 2,
-            juggle: 0
-        },
-
-        'R2BTU/Block0001': {
-            x: 20, y: -8, w: 45, h: 80,
-            damage: 0,
-            knockback: 0,
-            priority: 2,
-            juggle: 0
-        },
+        
     };
 
 };

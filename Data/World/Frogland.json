@@ -6086,6 +6086,22 @@
                  "width":16,
                  "x":2569.33,
                  "y":3960.67
+                }, 
+                {
+                 "gid":88,
+                 "height":16,
+                 "id":2016,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":2458,
+                 "y":3137
                 }],
          "opacity":1,
          "properties":
@@ -11033,7 +11049,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":2016,
+ "nextobjectid":2017,
  "orientation":"orthogonal",
  "properties":
     {

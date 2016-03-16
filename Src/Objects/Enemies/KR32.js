@@ -15,7 +15,7 @@ Enemy.prototype.types['KR32'] =  function() {
     this.animations.add('jump', ['KR32/Jump0001'], 20, true, false);
     this.animations.add('land', ['KR32/Jump0002'], 14, false, false);
 
-    this.energy = 3;
+    this.energy = 4;
     this.baseStunDuration = 400;
 
     this.body.bounce.y = 0;
