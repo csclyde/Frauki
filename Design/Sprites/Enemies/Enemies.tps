@@ -201,6 +201,7 @@
             <filename>A3PZ</filename>
             <filename>HWK9</filename>
             <filename>Butterfly</filename>
+            <filename>R2BTU</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

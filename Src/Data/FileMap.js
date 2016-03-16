@@ -90,7 +90,7 @@ FileMap.Enemies = [
 	{ Name: 'Insectoid', Tile: 85 },
 	{ Name: 'Buzzar', Tile: 86 },
 	{ Name: 'Sporoid', Tile: 87 },
-	{ Name: 'Madman', Tile: 88 },
+	{ Name: 'R2BTU', Tile: 88 },
 	{ Name: 'CreeperThistle', Tile: 89 },
 	{ Name: 'Incarnate', Tile: 90 },
 	{ Name: 'Haystax', Tile: 91 },
