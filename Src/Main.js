@@ -121,6 +121,8 @@ Main.Restart = function() {
 
     inputController.OnLeft(false);
     inputController.OnRight(false);
+    inputController.OnUp(false);
+    inputController.OnDown(false);
 
     cameraController.shakeMagnitudeX = 0;
     cameraController.shakeMagnitudeY = 0;
@@ -189,7 +191,16 @@ Main.Restart = function() {
 
 Main.DrawUI = function() {
     
-    this.RenderTextureFromAtlas('UI', 'HudFrame0001', 14, 13);
+
+    this.RenderTextureFromAtlas('UI', 'HudFrame0000', 10, 10);
+
+    for(var i = 0, len = energyController.GetMaxHealth(); i < len; i++) {
+        this.RenderTextureFromAtlas('UI', 'HudFrame0003', 14 + (i * 7), 13);
+        this.RenderTextureFromAtlas('UI', 'HudFrame0001', 14 + (i * 7), 10);
+
+    }
+
+    this.RenderTextureFromAtlas('UI', 'HudFrame0002', 14 + (energyController.GetMaxHealth() * 7), 10);
 
     //health pips
     for(var i = 0, len = energyController.GetHealth(); i < len; i++) {
@@ -208,24 +219,22 @@ Main.DrawUI = function() {
         this.RenderTextureFromAtlas('UI', pipFrame, 14 + (7 * i), 13);
     }
 
-    for(var i = 0, len = energyController.GetCharge(); i < len; i++) {
-        var pipFrame = '';
+    // for(var i = 0, len = energyController.GetCharge(); i < len; i++) {
+    //     var pipFrame = '';
 
-        if(i < 3) {
-            pipFrame = 'ChargePips0000';
-        } else if(i < 6) {
-            pipFrame = 'ChargePips0001';
-        } else if(i < 9) {
-            pipFrame = 'ChargePips0002';
-        } else {
-            pipFrame = 'ChargePips0003';
-        }
+    //     if(i < 3) {
+    //         pipFrame = 'ChargePips0000';
+    //     } else if(i < 6) {
+    //         pipFrame = 'ChargePips0001';
+    //     } else if(i < 9) {
+    //         pipFrame = 'ChargePips0002';
+    //     } else {
+    //         pipFrame = 'ChargePips0003';
+    //     }
 
-        this.RenderTextureFromAtlas('UI', pipFrame, 15 + (5 * i), 24);
-    }
-
-    //finally, the frame on top of everything else
-    this.RenderTextureFromAtlas('UI', 'HudFrame0000', 10, 10);
+    //     this.RenderTextureFromAtlas('UI', pipFrame, 15 + (5 * i), 24);
+    // }
+   
 
     for(var i = 0; i < energyController.GetApples(); i++) {
         //if this is the last apple in the stable and they are healing
@@ -250,10 +259,10 @@ Main.DrawUI = function() {
         }    
     }
 
-    for(var i = 0; i < weaponController.weaponList.length; i++) {
-        pixel.context.globalAlpha = weaponController.currentWeapon === weaponController.weaponList[i] ? 1 : 0.3;
-        this.RenderTextureFromAtlas('UI', weaponController.weaponList[i].FrameName, (102 + 25 * i), 10);
-    }
+    // for(var i = 0; i < weaponController.weaponList.length; i++) {
+    //     pixel.context.globalAlpha = weaponController.currentWeapon === weaponController.weaponList[i] ? 1 : 0.3;
+    //     this.RenderTextureFromAtlas('UI', weaponController.weaponList[i].FrameName, (102 + 25 * i), 10);
+    // }
 
     this.RenderTextureFromAtlas('Misc', 'EnergyBitPos0000', 565, 10);
 

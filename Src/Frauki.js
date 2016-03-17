@@ -492,7 +492,7 @@ Player.prototype.Jump = function(params) {
         else if(!this.InAttackAnim()) {
             this.DoubleJump();
         }
-    } else if(this.body.velocity.y < 0 && this.state !== this.Flipping) {
+    } else if(this.body.velocity.y < 0) {
         if(this.body.velocity.y < 0) {
             this.body.velocity.y /= 2;
         }
@@ -570,7 +570,7 @@ Player.prototype.Slash = function(params) {
         attackResult = this.StabSlash();
     }
     //upwards dash attack
-    else if((this.state === this.Jumping || (this.state === this.Peaking && inputController.dpad.up) || (this.state === this.Falling && inputController.dpad.up)) && this.states.hasFlipped === false) {
+    else if(this.state === this.Jumping || (inputController.dpad.up && (this.state === this.Peaking || this.state === this.Falling || this.state === this.Flipping) ) ) {
         attackResult = this.JumpSlash();
     }
     //falling slash
@@ -657,13 +657,15 @@ Player.prototype.JumpSlash = function() {
     if(energyController.UseEnergy(4)) {
         this.ChangeState(this.AttackJump);
         
-        if(this.body.velocity.y > PLAYER_DOUBLE_JUMP_VEL()) {
-            this.body.velocity.y = PLAYER_DOUBLE_JUMP_VEL();
-        } else {
-            this.body.velocity.y += PLAYER_DOUBLE_JUMP_VEL();
-        }
+        if(this.states.hasFlipped === false) {
+            if(this.body.velocity.y > PLAYER_DOUBLE_JUMP_VEL()) {
+                this.body.velocity.y = PLAYER_DOUBLE_JUMP_VEL();
+            } else {
+                this.body.velocity.y += PLAYER_DOUBLE_JUMP_VEL();
+            }
 
-        this.states.hasFlipped = true;
+            this.states.hasFlipped = true;
+        }
 
         events.publish('play_sound', {name: 'attack_slash', restart: true });
         this.timers.SetTimer('attack_wait', 0);

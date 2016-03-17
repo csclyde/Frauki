@@ -15,7 +15,6 @@ Enemy.prototype.types['R2BTU'] =  function() {
     this.state = this.Idling;
     
     this.updateFunction = function() {
-        console.log(this.animations.currentFrame.name, this.animations.currentAnim.name)
     };
 
     this.Act = function() {
