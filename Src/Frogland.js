@@ -220,7 +220,7 @@ Frogland.CreateForegroundLayer = function(layer, visible) {
 
 Frogland.CreateCollisionLayer = function(layer) {
     this['collisionLayer_' + layer] = this.map.createLayer('Collision_' + layer);
-    this.map.setCollision([1, 3, 4, 5, 7, 8, 9], true, 'Collision_' + layer);
+    this.map.setCollision([1, 3, 4, 5, 7, 8, 9, 17, 18], true, 'Collision_' + layer);
     this['collisionLayer_' + layer].visible = false;
 };
 

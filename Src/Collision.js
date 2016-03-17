@@ -396,9 +396,37 @@ Collision.CollideFraukiWithEnvironment = function(f, tile) {
     } else if(tile.index === 17) {
         frauki.states.onLeftSlope = true;
 
+        if(frauki.body.y + frauki.body.height > (tile.y * 16) + 1 && frauki.body.y + frauki.body.height <= tile.bottom * 16) {
+
+            if(frauki.body.velocity.y > 0) {
+                var offset = (tile.right - frauki.body.center.x);
+                if(offset > 16) offset = 16;
+                if(offset < 0) offset = 0;
+
+                frauki.body.y = (tile.y * 16) - frauki.body.height + offset;
+                frauki.body.blocked.down = true;
+                frauki.body.velocity.y = 0;
+                //frauki.body.velocity.x /= 1.25;
+            }
+        }
+
     //right slope
     } else if(tile.index === 18) {
         frauki.states.onRightSlope = true;
+
+        if(frauki.body.y + frauki.body.height > (tile.y * 16) + 1 && frauki.body.y + frauki.body.height <= tile.bottom * 16) {
+
+            if(frauki.body.velocity.y > 0) {
+                var offset = 16 - (tile.right - frauki.body.center.x);
+                if(offset > 16) offset = 16;
+                if(offset < 0) offset = 0;
+
+                frauki.body.y = (tile.y * 16) - frauki.body.height + offset;
+                frauki.body.blocked.down = true;
+                frauki.body.velocity.y = 0;
+                //frauki.body.velocity.x /= 1.25;
+            }
+        }
     }
 };
 
