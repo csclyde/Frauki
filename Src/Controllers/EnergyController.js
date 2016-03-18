@@ -4,7 +4,7 @@ EnergyController = function() {
 
 	this.energy = 12;
 	this.health = this.GetMaxHealth();
-	this.charge = 12;
+	this.charge = 0;
 
 	this.latentHealth = 0;
 
@@ -45,6 +45,15 @@ EnergyController.prototype.Update = function() {
 			this.health++;
 			this.latentHealth--;
 		}
+	}
+
+	if(this.timers.TimerUp('charge_tick')) {
+
+		if(this.charge > 0) {
+			this.charge--;
+		}
+		
+		this.timers.SetTimer('charge_tick', this.GetChargeDuration());
 	}
 
 	if(this.charge < 0) {
@@ -123,7 +132,7 @@ EnergyController.prototype.GetHealth = function() {
 
 EnergyController.prototype.GetMaxHealth = function() {
 
-	return 4;
+	return 6;
 };
 
 
@@ -140,11 +149,19 @@ EnergyController.prototype.AddCharge = function(amt) {
 	} else {
 		this.charge = this.GetMaxCharge();
 	}
+
+	this.timers.SetTimer('charge_tick', this.GetChargeDuration());
 };
 
-EnergyController.prototype.RemoveCharge = function(amt) {
+EnergyController.prototype.RemoveCharge = function() {
 
-	this.charge -= Math.floor(amt);
+	this.charge--;
+
+	this.timers.SetTimer('charge_tick', this.GetChargeDuration());
+
+	if(this.charge < 0) {
+		this.charge = 0;
+	}
 };
 
 EnergyController.prototype.UseCharge = function(amt) {
@@ -160,12 +177,31 @@ EnergyController.prototype.UseCharge = function(amt) {
 
 EnergyController.prototype.MaxCharge = function() {
 
-	this.charge = 12;
+	this.charge = this.GetMaxCharge();
 };
 
 EnergyController.prototype.GetMaxCharge = function() {
 
-	return 12;
+	return 4;
+};
+
+EnergyController.prototype.ResetCharge = function() {
+
+	this.charge = 0;
+};
+
+EnergyController.prototype.GetChargeDuration = function() {
+	if(this.charge === 4) {
+		return 4000;
+	} else if(this.charge === 3) {
+		return 6000;
+	} else if(this.charge === 2) {
+		return 8000;
+	} else if(this.charge === 1) {
+		return 10000;
+	} else {
+		return 10000;
+	}
 };
 
 
@@ -173,7 +209,7 @@ EnergyController.prototype.Reset = function() {
 
 	this.health = this.GetMaxHealth();
 	this.energy = 12;
-	this.charge = 12;
+	this.charge = 0;
 	this.latentHealth = 0;
 	this.remainingApples = 0;
 };

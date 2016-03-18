@@ -765,6 +765,8 @@ Player.prototype.LandHit = function(e, damage) {
         effectsController.SlowHit(300);
     }
 
+    energyController.AddCharge(1);
+
     this.states.hasFlipped = false;
 
     events.publish('stop_attack_sounds');
@@ -791,6 +793,7 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
     }
 
     energyController.RemoveHealth(damage);
+    energyController.ResetCharge();
 
     console.log('Frauki is taking ' + damage + ' damage');
 

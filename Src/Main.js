@@ -219,21 +219,21 @@ Main.DrawUI = function() {
         this.RenderTextureFromAtlas('UI', pipFrame, 14 + (7 * i), 13);
     }
 
-    // for(var i = 0, len = energyController.GetCharge(); i < len; i++) {
-    //     var pipFrame = '';
+    for(var i = 0, len = energyController.GetCharge(); i < len; i++) {
+        var pipFrame = '';
 
-    //     if(i < 3) {
-    //         pipFrame = 'ChargePips0000';
-    //     } else if(i < 6) {
-    //         pipFrame = 'ChargePips0001';
-    //     } else if(i < 9) {
-    //         pipFrame = 'ChargePips0002';
-    //     } else {
-    //         pipFrame = 'ChargePips0003';
-    //     }
+        if(i < 3) {
+            pipFrame = 'ChargePips0000';
+        } else if(i < 6) {
+            pipFrame = 'ChargePips0001';
+        } else if(i < 9) {
+            pipFrame = 'ChargePips0002';
+        } else {
+            pipFrame = 'ChargePips0003';
+        }
 
-    //     this.RenderTextureFromAtlas('UI', pipFrame, 15 + (5 * i), 24);
-    // }
+        this.RenderTextureFromAtlas('UI', pipFrame, 15 + (5 * i), 24);
+    }
    
 
     for(var i = 0; i < energyController.GetApples(); i++) {

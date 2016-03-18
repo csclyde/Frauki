@@ -103,7 +103,7 @@ Collision.OverlapAttackWithObject = function(f, o) {
             } else if(o.Attacking() && frauki.GetCurrentPriority() > o.GetCurrentPriority()) {
                 o.timers.SetTimer('grace', 0);
                 events.publish('play_sound', {name: 'clang'});
-                Collision.OverlapAttackWithEnemy(f, o);
+                Collision.OverlapAttackWithEnemy(f, o, true);
             }
             //they can be hit if theyre not attacking, or they are attacking
             //but facing away from the player
@@ -141,12 +141,16 @@ Collision.OverlapAttackWithObject = function(f, o) {
     }
 };
 
-Collision.OverlapAttackWithEnemy = function(f, e) {
+Collision.OverlapAttackWithEnemy = function(f, e, halfDmg) {
 
     if(e.spriteType !== 'enemy' || !e.timers.TimerUp('grace') || !e.Vulnerable() || e.state === e.Dying || e.state === e.Hurting)
         return;
 
     var damage = frauki.GetCurrentDamage();
+
+    if(halfDmg) damage /= 2;
+
+    damage += energyController.GetCharge() * (damage / 2);
 
     e.TakeHit(damage);
     frauki.LandHit(e, damage);
@@ -197,6 +201,8 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
     e.timers.SetTimer('grace', 400);
     frauki.timers.SetTimer('attack_stun', 1000);
     //frauki.timers.SetTimer('frauki_grace', 400);
+
+    energyController.RemoveCharge();
 };
 
 Collision.OverlapEnemyAttackWithFrauki = function(e, f) {
