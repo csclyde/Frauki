@@ -191,19 +191,44 @@ Main.Restart = function() {
 
 Main.DrawUI = function() {
     
-
     this.RenderTextureFromAtlas('UI', 'HudFrame0000', 10, 10);
 
     for(var i = 0, len = energyController.GetMaxHealth(); i < len; i++) {
         this.RenderTextureFromAtlas('UI', 'HudFrame0003', 14 + (i * 7), 13);
         this.RenderTextureFromAtlas('UI', 'HudFrame0001', 14 + (i * 7), 10);
-
     }
 
     this.RenderTextureFromAtlas('UI', 'HudFrame0002', 14 + (energyController.GetMaxHealth() * 7), 10);
 
+
+    this.RenderTextureFromAtlas('UI', 'HudFrame0000', 10, 21);
+
+    for(var i = 0, len = energyController.GetMaxCharge(); i < len; i++) {
+        this.RenderTextureFromAtlas('UI', 'HudFrame0003', 14 + (i * 7), 24);
+        this.RenderTextureFromAtlas('UI', 'HudFrame0001', 14 + (i * 7), 21);
+    }
+
+
+    this.RenderTextureFromAtlas('UI', 'HudFrame0002', 14 + (energyController.GetMaxCharge() * 7), 21);
+
     //health pips
     for(var i = 0, len = energyController.GetHealth(); i < len; i++) {
+        var pipFrame = '';
+
+        if(i < 3) {
+            pipFrame = 'HealthPips0000';
+        } else if(i < 6) {
+            pipFrame = 'HealthPips0001';
+        } else if(i < 9) {
+            pipFrame = 'HealthPips0002';
+        } else {
+            pipFrame = 'HealthPips0003';
+        } 
+        
+        this.RenderTextureFromAtlas('UI', pipFrame, 14 + (7 * i), 13);
+    }
+
+    for(var i = 0, len = energyController.GetCharge(); i < len; i++) {
         var pipFrame = '';
 
         if(i < 3) {
@@ -216,24 +241,24 @@ Main.DrawUI = function() {
             pipFrame = 'EnergyPips0003';
         } 
         
-        this.RenderTextureFromAtlas('UI', pipFrame, 14 + (7 * i), 13);
+        this.RenderTextureFromAtlas('UI', pipFrame, 14 + (7 * i), 24);
     }
 
-    for(var i = 0, len = energyController.GetCharge(); i < len; i++) {
-        var pipFrame = '';
+    // for(var i = 0, len = energyController.GetCharge(); i < len; i++) {
+    //     var pipFrame = '';
 
-        if(i < 3) {
-            pipFrame = 'ChargePips0000';
-        } else if(i < 6) {
-            pipFrame = 'ChargePips0001';
-        } else if(i < 9) {
-            pipFrame = 'ChargePips0002';
-        } else {
-            pipFrame = 'ChargePips0003';
-        }
+    //     if(i < 3) {
+    //         pipFrame = 'ChargePips0000';
+    //     } else if(i < 6) {
+    //         pipFrame = 'ChargePips0001';
+    //     } else if(i < 9) {
+    //         pipFrame = 'ChargePips0002';
+    //     } else {
+    //         pipFrame = 'ChargePips0003';
+    //     }
 
-        this.RenderTextureFromAtlas('UI', pipFrame, 15 + (5 * i), 24);
-    }
+    //     this.RenderTextureFromAtlas('UI', pipFrame, 15 + (5 * i), 24);
+    // }
    
 
     for(var i = 0; i < energyController.GetApples(); i++) {

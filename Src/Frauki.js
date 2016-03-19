@@ -1,7 +1,7 @@
-PLAYER_SPEED = function() { return 190 + 15 * energyController.GetCharge(); }
+PLAYER_SPEED = function() { return 190 + 5 * energyController.GetCharge(); }
 PLAYER_ROLL_SPEED = function() { return 460; }
 PLAYER_RUN_SLASH_SPEED = function() { return  550; }
-PLAYER_JUMP_VEL = function() { return -350 - 20 * energyController.GetCharge(); }
+PLAYER_JUMP_VEL = function() { return -350 - 6 * energyController.GetCharge(); }
 PLAYER_DOUBLE_JUMP_VEL = function() { return frauki.states.shielded ? -200 : -275; }
 
 Player = function (game, x, y, name) {
@@ -162,7 +162,7 @@ Player.prototype.postStateUpdate = function() {
     
     if(!this.timers.TimerUp('frauki_invincible') && game.time.now % 100 < 50) {
         frauki.tint = 0xFF6D92;
-    } else if(energyController.GetCharge() > 3 && game.time.now % 20 < 10) {
+    } else if(energyController.GetCharge() > 9 && game.time.now % 20 < 10) {
         frauki.tint = 0x51FFB2;
     } else {
         frauki.tint = 0xFFFFFF;
@@ -173,7 +173,7 @@ Player.prototype.postStateUpdate = function() {
     }
 
 
-    if(energyController.GetCharge() > 2) {
+    if(energyController.GetCharge() > 6) {
         effectsController.ShowEnergyStreakBody(true);
     } else {
         effectsController.ShowEnergyStreakBody(false);
@@ -536,7 +536,7 @@ Player.prototype.DoubleJump = function() {
             effectsController.EnergyStreak();
         }
 
-        if(energyController.GetCharge() > 1) {
+        if(energyController.GetCharge() > 3) {
             effectsController.SpriteTrail(frauki, 150, 400, 300);
         }
     }
@@ -610,7 +610,7 @@ Player.prototype.Slash = function(params) {
             effectsController.EnergyStreak();
         }
 
-        if(energyController.GetCharge() > 1) {
+        if(energyController.GetCharge() > 3) {
             effectsController.SpriteTrail(frauki, 150, 500, 300);
         }
 
@@ -755,7 +755,7 @@ Player.prototype.Roll = function(params) {
             effectsController.EnergyStreak();
         }
 
-        if(energyController.GetCharge() > 1) {
+        if(energyController.GetCharge() > 3) {
             effectsController.SpriteTrail(frauki, 100, 400, 300);
         }
 
@@ -819,7 +819,7 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
     }
 
     energyController.RemoveHealth(damage);
-    energyController.ResetCharge();
+    energyController.RemoveCharge(damage);
 
     console.log('Frauki is taking ' + damage + ' damage');
 

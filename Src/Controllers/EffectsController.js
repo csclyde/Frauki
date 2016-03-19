@@ -1035,8 +1035,8 @@ EffectsController.prototype.DropNuggets = function(amt) {
 EffectsController.prototype.ShowCharge = function(level) {
     this.charge1.visible = false;
 
-    if(!!this['charge' + level]) {
-        this['charge' + level].visible = true;
+    if(level > 0) {
+        this.charge1.visible = true;
     }
 };
 

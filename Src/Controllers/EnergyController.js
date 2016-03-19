@@ -134,7 +134,7 @@ EnergyController.prototype.GetHealth = function() {
 
 EnergyController.prototype.GetMaxHealth = function() {
 
-	return 6;
+	return 4;
 };
 
 
@@ -155,15 +155,15 @@ EnergyController.prototype.AddCharge = function(amt) {
 	this.timers.SetTimer('charge_tick', this.GetChargeDuration());
 };
 
-EnergyController.prototype.RemoveCharge = function() {
+EnergyController.prototype.RemoveCharge = function(amt) {
 
-	this.charge--;
-
-	this.timers.SetTimer('charge_tick', this.GetChargeDuration());
+	this.charge -= amt;
 
 	if(this.charge < 0) {
 		this.charge = 0;
 	}
+
+	this.timers.SetTimer('charge_tick', this.GetChargeDuration());
 };
 
 EnergyController.prototype.UseCharge = function(amt) {
@@ -193,16 +193,16 @@ EnergyController.prototype.ResetCharge = function() {
 };
 
 EnergyController.prototype.GetChargeDuration = function() {
-	if(this.charge === 4) {
+	if(this.charge > 9) {
+		return 2500;
+	} else if(this.charge > 6) {
+		return 3000;
+	} else if(this.charge > 3) {
+		return 3500;
+	} else if(this.charge > 0) {
 		return 4000;
-	} else if(this.charge === 3) {
-		return 6000;
-	} else if(this.charge === 2) {
-		return 8000;
-	} else if(this.charge === 1) {
-		return 10000;
 	} else {
-		return 10000;
+		return 4000;
 	}
 };
 

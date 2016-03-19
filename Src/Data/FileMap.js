@@ -82,8 +82,8 @@ FileMap.Music = [
 ];
 
 FileMap.Ambient = [
-	{ Name: 'surface_wind', File: 'Data/Sfx/surface_wind.ogg', Volume: 3, Loop: true },
-	{ Name: 'cave_wind', File: 'Data/Sfx/cave_wind.ogg', Volume: 3, Loop: true },
+	{ Name: 'surface_wind', File: 'Data/Sfx/surface_wind.ogg', Volume: 1, Loop: true },
+	{ Name: 'cave_wind', File: 'Data/Sfx/cave_wind.ogg', Volume: 1, Loop: true },
 ];
 
 FileMap.Enemies = [

@@ -202,7 +202,7 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
     frauki.timers.SetTimer('attack_stun', 1000);
     //frauki.timers.SetTimer('frauki_grace', 400);
 
-    energyController.RemoveCharge();
+    energyController.RemoveCharge(1);
 };
 
 Collision.OverlapEnemyAttackWithFrauki = function(e, f) {
