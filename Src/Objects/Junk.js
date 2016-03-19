@@ -38,7 +38,7 @@ Junk.prototype.JunkHit = function(o) {
 
     this.body.velocity = vel;
 
-	var probTable = [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 3];
+	var probTable = [0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3];
 
 	game.time.events.add(100, function() {
 

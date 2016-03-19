@@ -172,6 +172,10 @@ Player.prototype.postStateUpdate = function() {
         this.timers.SetTimer('on_ground', 200);
     }
 
+    if(frauki.body.velocity.y > 350) {
+        frauki.body.velocity.y = 350;
+    }
+
 
     if(energyController.GetCharge() > 6) {
         effectsController.ShowEnergyStreakBody(true);

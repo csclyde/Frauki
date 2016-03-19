@@ -11,7 +11,7 @@ EnergyNugg = function(game, x, y, name) {
     this.body.bounce.y = 0.5;
     this.rando = Math.floor(Math.random() * 300);
 
-    var frames = ['EnergyBitPos0000', 'EnergyBitPos0001', 'EnergyBitPos0002', 'EnergyBitPos0003', 'EnergyBitPos0004', 'EnergyBitPos0005'];
+    var frames = ['EnergyBitNeutral0000', 'EnergyBitNeutral0001', 'EnergyBitNeutral0002', 'EnergyBitNeutral0003', 'EnergyBitNeutral0004', 'EnergyBitNeutral0005'];
     var i = Math.floor(Math.random() * 5);
     while(i--) {
         frames.push(frames.shift());
@@ -24,7 +24,7 @@ EnergyNugg = function(game, x, y, name) {
 
     this.body.allowGravity = false;
 
-    this.animations.add('idle', ['EnergyBitPos0000', 'EnergyBitPos0001', 'EnergyBitPos0002', 'EnergyBitPos0003', 'EnergyBitPos0004', 'EnergyBitPos0005'], 20, true, false);
+    this.animations.add('idle', frames, 20, true, false);
     this.animations.add('eaten', ['EnergyNugg0001'], 10, false, false);
 
 };
@@ -46,7 +46,7 @@ EnergyNugg.prototype.update = function() {
 
 function EatEnergyNugg(f, a) {
     
-    effectsController.SpawnEnergyNuggets(a.body, frauki.body, 'positive', 1);
+    effectsController.SpawnEnergyNuggets(a.body, frauki.body, 'neutral', 1);
 
     a.destroy();
 };

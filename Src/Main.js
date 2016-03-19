@@ -289,7 +289,7 @@ Main.DrawUI = function() {
     //     this.RenderTextureFromAtlas('UI', weaponController.weaponList[i].FrameName, (102 + 25 * i), 10);
     // }
 
-    this.RenderTextureFromAtlas('Misc', 'EnergyBitPos0000', 565, 10);
+    this.RenderTextureFromAtlas('Misc', 'EnergyBitNeutral0000', 565, 10);
 
     //render the nugg amount, character by character
     var nuggCountString = GameData.GetNuggCount().toString();

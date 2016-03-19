@@ -114,7 +114,7 @@ EffectsController = function() {
     this.energyStreakBody.flow(500, 5, 1);
 
     this.nuggDropper = game.add.emitter(0, 0, 50);
-    this.nuggDropper.makeParticles('Misc', ['EnergyBitPos0000', 'EnergyBitPos0001', 'EnergyBitPos0002', 'EnergyBitPos0003', 'EnergyBitPos0004', 'EnergyBitPos0005']);
+    this.nuggDropper.makeParticles('Misc', ['EnergyBitNeutral0000', 'EnergyBitNeutral0001', 'EnergyBitNeutral0002', 'EnergyBitNeutral0003', 'EnergyBitNeutral0004', 'EnergyBitNeutral0005']);
     this.nuggDropper.gravity = -300;
     this.nuggDropper.particleDrag.setTo(50);
     this.nuggDropper.setRotation(0, 0);
@@ -125,7 +125,7 @@ EffectsController = function() {
     this.nuggDropper.minParticleScale = 1;
 
     this.nuggDepositer = game.add.emitter(0, 0, 15);
-    this.nuggDepositer.makeParticles('Misc', ['EnergyBitPos0000', 'EnergyBitPos0001', 'EnergyBitPos0002', 'EnergyBitPos0003', 'EnergyBitPos0004', 'EnergyBitPos0005']);
+    this.nuggDepositer.makeParticles('Misc', ['EnergyBitNeutral0000', 'EnergyBitNeutral0001', 'EnergyBitNeutral0002', 'EnergyBitNeutral0003', 'EnergyBitNeutral0004', 'EnergyBitNeutral0005']);
     this.nuggDepositer.gravity = -600;
     this.nuggDepositer.setRotation(0, 0);
 
@@ -467,10 +467,11 @@ function UpdateParticle(p) {
             if(p.parent === effectsController.positiveBits) {
                 //energyController.AddHealth(0.5);
                 //energyController.AddEnergy(1);
-                GameData.AddNugg();
+                
                 effectsController.EnergySplash(p.body, 100, 'positive');
             } else if(p.parent === effectsController.neutralBits) {
                 effectsController.EnergySplash(p.body, 100, 'neutral');
+                GameData.AddNugg();
             } 
         }
         
