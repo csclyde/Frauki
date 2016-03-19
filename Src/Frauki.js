@@ -795,7 +795,7 @@ Player.prototype.LandHit = function(e, damage) {
         effectsController.SlowHit(300);
     }
 
-    energyController.AddCharge(1);
+    energyController.AddCharge(Math.ceil(damage));
 
     this.states.hasFlipped = false;
 
