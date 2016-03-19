@@ -1,7 +1,7 @@
-PLAYER_SPEED = function() { return frauki.states.shielded ? 130 : 190; }
+PLAYER_SPEED = function() { return 190 + 15 * energyController.GetCharge(); }
 PLAYER_ROLL_SPEED = function() { return 460; }
 PLAYER_RUN_SLASH_SPEED = function() { return  550; }
-PLAYER_JUMP_VEL = function() { return frauki.states.shielded ? -250 : -350; }
+PLAYER_JUMP_VEL = function() { return -350 - 20 * energyController.GetCharge(); }
 PLAYER_DOUBLE_JUMP_VEL = function() { return frauki.states.shielded ? -200 : -275; }
 
 Player = function (game, x, y, name) {
@@ -82,7 +82,7 @@ Player.prototype.preStateUpdate = function() {
     }
 
     this.body.maxVelocity.x = PLAYER_SPEED() + this.movement.rollBoost;
-    this.body.maxVelocity.y = 350;
+    this.body.maxVelocity.y = 450;
 
     //maintain the roll boost when they jump without a key down
     if(this.movement.rollBoost > 0) {
@@ -159,14 +159,24 @@ Player.prototype.postStateUpdate = function() {
         this.movement.rollBoost = 0;
     }
 
-    if(!this.timers.TimerUp('frauki_invincible')) {
-        frauki.alpha = (((Math.sin(game.time.now / 50) + 1) / 2) * 0.4) + 0.5;
-    } else if(this.state !== this.Hurting && this.alpha !== 0) {
-        frauki.alpha = 1;
+    
+    if(!this.timers.TimerUp('frauki_invincible') && game.time.now % 100 < 50) {
+        frauki.tint = 0xFF6D92;
+    } else if(energyController.GetCharge() > 3 && game.time.now % 20 < 10) {
+        frauki.tint = 0x51FFB2;
+    } else {
+        frauki.tint = 0xFFFFFF;
     }
 
     if(this.body.onFloor()) {
         this.timers.SetTimer('on_ground', 200);
+    }
+
+
+    if(energyController.GetCharge() > 2) {
+        effectsController.ShowEnergyStreakBody(true);
+    } else {
+        effectsController.ShowEnergyStreakBody(false);
     }
 };
 
@@ -522,8 +532,13 @@ Player.prototype.DoubleJump = function() {
         events.publish('play_sound', {name: 'airhike'});
         events.publish('stop_sound', {name: 'attack_dive_fall'});
 
-        effectsController.EnergyStreak();
-        effectsController.SpriteTrail(frauki, 150, 400, 300);
+        if(energyController.GetCharge() > 0) {
+            effectsController.EnergyStreak();
+        }
+
+        if(energyController.GetCharge() > 1) {
+            effectsController.SpriteTrail(frauki, 150, 400, 300);
+        }
     }
 };
 
@@ -591,8 +606,14 @@ Player.prototype.Slash = function(params) {
     if(attackResult) {
         this.timers.SetTimer('frauki_invincible', 0);
 
-        effectsController.EnergyStreak();
-        effectsController.SpriteTrail(frauki, 150, 500, 300);
+        if(energyController.GetCharge() > 0) {
+            effectsController.EnergyStreak();
+        }
+
+        if(energyController.GetCharge() > 1) {
+            effectsController.SpriteTrail(frauki, 150, 500, 300);
+        }
+
     } else {
         this.WhiffSlash();
     }
@@ -730,8 +751,13 @@ Player.prototype.Roll = function(params) {
         this.movement.rollPrevVel = 0;
         this.movement.rollFrames = 0;
 
-        effectsController.EnergyStreak();
-        effectsController.SpriteTrail(frauki, 100, 400, 300);
+        if(energyController.GetCharge() > 0) {
+            effectsController.EnergyStreak();
+        }
+
+        if(energyController.GetCharge() > 1) {
+            effectsController.SpriteTrail(frauki, 100, 400, 300);
+        }
 
         events.publish('play_sound', {name: 'roll'});
 

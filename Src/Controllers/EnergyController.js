@@ -52,9 +52,11 @@ EnergyController.prototype.Update = function() {
 		if(this.charge > 0) {
 			this.charge--;
 		}
-		
+
 		this.timers.SetTimer('charge_tick', this.GetChargeDuration());
 	}
+
+	effectsController.ShowCharge(this.charge);
 
 	if(this.charge < 0) {
 		this.charge = 0;

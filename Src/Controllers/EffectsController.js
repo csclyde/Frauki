@@ -99,6 +99,20 @@ EffectsController = function() {
     this.energyStreak.minParticleScale = 1;
     this.energyStreak.setRotation(0, 0);
 
+    this.energyStreakBody = game.add.emitter(0, 0, 50);
+    this.energyStreakBody.makeParticles('Misc', ['Sparks0000', 'Sparks0001', 'Sparks0002', 'Sparks0003', 'Sparks0004']); 
+    this.energyStreakBody.gravity = -580;
+    this.energyStreakBody.particleDrag.setTo(100);
+    this.energyStreakBody.minParticleSpeed.setTo(-80);
+    this.energyStreakBody.maxParticleSpeed.setTo(80);
+    this.energyStreakBody.maxParticleScale = 1;
+    this.energyStreakBody.minParticleScale = 1;
+    this.energyStreakBody.setRotation(0, 0);
+    this.energyStreakBody.width = frauki.body.width;
+    this.energyStreakBody.height = frauki.body.height;
+    this.energyStreakBody.visible = false;
+    this.energyStreakBody.flow(500, 5, 1);
+
     this.nuggDropper = game.add.emitter(0, 0, 50);
     this.nuggDropper.makeParticles('Misc', ['EnergyBitPos0000', 'EnergyBitPos0001', 'EnergyBitPos0002', 'EnergyBitPos0003', 'EnergyBitPos0004', 'EnergyBitPos0005']);
     this.nuggDropper.gravity = -300;
@@ -150,6 +164,12 @@ EffectsController = function() {
     this.materializingApple.animations.play('mat');
     this.materializingApple.visible = false;
     this.materializingApple.anchor.setTo(0.5);
+
+    this.charge1 = game.add.image(0, 0, 'Misc', 'Charge10000');
+    this.charge1.animations.add('flicker', ['Charge10000', 'Charge10001', 'Charge10002', 'Charge10003'], 18, true, false);
+    this.charge1.animations.play('flicker');
+    this.charge1.visible = false;
+    this.charge1.anchor.setTo(0.5);
 };
 
 EffectsController.prototype.Update = function() {
@@ -216,6 +236,12 @@ EffectsController.prototype.Update = function() {
         this.energyStreak.width = frauki.attackRect.body.width;
         this.energyStreak.height = frauki.attackRect.body.height;
     }
+
+    this.charge1.x = frauki.body.center.x;
+    this.charge1.y = frauki.body.center.y;
+
+    this.energyStreakBody.x = frauki.body.x;
+    this.energyStreakBody.y = frauki.body.y;
 
     game.physics.arcade.collideGroupVsTilemapLayer(this['dicedPieces' + Frogland.currentLayer], Frogland.GetCurrentCollisionLayer(), null, null, null, false);
     //game.physics.arcade.collide(this.dicedPieces3, Frogland.GetCurrentCollisionLayer());
@@ -832,7 +858,7 @@ EffectsController.prototype.Fade = function(show) {
     if(show) {
         this.screenDark.alpha = 0;
         this.screenDark.visible = true;
-        return game.add.tween(this.screenDark).to( { alpha: 1 }, 300, Phaser.Easing.Linear.None, true);
+        return game.add.tween(this.screenDark).to( { alpha: 1 }, 600, Phaser.Easing.Linear.None, true);
     } else {
         return game.add.tween(this.screenDark).to( { alpha: 0 }, 200, Phaser.Easing.Linear.None, true);
     }
@@ -854,7 +880,7 @@ EffectsController.prototype.SpriteTrail = function(sprite, freq, duration, dropo
         trailSprite.anchor.setTo(0);
         trailSprite.scale.x = sprite.scale.x;
         trailSprite.tint = tint;
-        trailSprite.alpha = 0.5;
+        trailSprite.alpha = 0.7;
 
         var fadeTween = game.add.tween(trailSprite).to({alpha: 0}, dropoff, Phaser.Easing.Linear.None, true);
         fadeTween.onComplete.add(function() {
@@ -1005,3 +1031,19 @@ EffectsController.prototype.DropNuggets = function(amt) {
 
     this.nuggDropper.flow(800, 10, 1, amt);
 };
+
+EffectsController.prototype.ShowCharge = function(level) {
+    this.charge1.visible = false;
+
+    if(!!this['charge' + level]) {
+        this['charge' + level].visible = true;
+    }
+};
+
+EffectsController.prototype.ShowEnergyStreakBody = function(show) {
+    if(show) {
+        this.energyStreakBody.visible = true;
+    } else {
+        this.energyStreakBody.visible = false;
+    }
+}
