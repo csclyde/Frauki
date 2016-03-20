@@ -4238,7 +4238,7 @@
    </properties>
   </object>
   <object id="2016" gid="88" x="2458" y="3137" width="16" height="16"/>
-  <object id="2019" gid="87" x="2056.67" y="3282" width="16" height="16"/>
+  <object id="2019" gid="87" x="2156.67" y="3274.67" width="16" height="16"/>
   <object id="2020" gid="89" x="1988" y="3728.67" width="16" height="16"/>
   <object id="2021" gid="87" x="2265.33" y="3658.67" width="16" height="16"/>
  </objectgroup>

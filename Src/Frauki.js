@@ -12,7 +12,7 @@ Player = function (game, x, y, name) {
 
     this.body.collideWorldBounds = true;
     this.body.setSize(11, 50, 0, -75);
-    this.body.maxVelocity.y = 10;
+    //this.body.maxVelocity.y = 10;
     this.body.drag.x = 2000;
 
     this.initialX = x;
@@ -194,15 +194,15 @@ Player.prototype.postStateUpdate = function() {
         this.timers.SetTimer('on_ground', 200);
     }
 
-    if(frauki.body.velocity.y > 350) {
-        frauki.body.velocity.y = 350;
-    }
-
 
     if(energyController.GetCharge() > 2) {
         effectsController.ShowEnergyStreakBody(true);
     } else {
         effectsController.ShowEnergyStreakBody(false);
+    }
+
+    if(this.state === this.AttackDiveFall) {
+        console.log(this.body.velocity.y)
     }
 };
 
@@ -690,7 +690,7 @@ Player.prototype.FallSlash = function() {
 Player.prototype.DiveSlash = function() {
     if(energyController.UseEnergy(6)) {
         this.ChangeState(this.AttackDiveCharge);
-        this.movement.diveVelocity = 950;
+        this.movement.diveVelocity = 550;
 
         events.publish('play_sound', {name: 'attack_dive_charge', restart: true });
 
@@ -1385,11 +1385,14 @@ Player.prototype.AttackDiveCharge = function() {
 };
 
 Player.prototype.AttackDiveFall = function() {
+    console.log(this.body.velocity.y, this.movement.diveVelocity)
     this.PlayAnim('attack_dive_fall');
     this.body.maxVelocity.y = this.movement.diveVelocity;
+    this.body.velocity.y = this.movement.diveVelocity;
     //this.body.acceleration.y = 20000;//this.movement.diveVelocity / (frauki.states.inUpdraft ? 3 : 1);
     
     this.body.maxVelocity.x = 100;
+
 
     if(this.body.velocity.y < 0) {
         this.ChangeState(this.Jumping);
