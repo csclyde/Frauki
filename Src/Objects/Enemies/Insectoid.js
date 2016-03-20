@@ -9,7 +9,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
     this.attackTimer = 0;
     this.damage = 1;
-    this.energy = 2;
+    this.energy = 3;
 
     this.body.maxVelocity.y = 500;
 
