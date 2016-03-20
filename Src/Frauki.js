@@ -1,4 +1,4 @@
-PLAYER_SPEED = function() { return 190 + 15 * energyController.GetCharge(); }
+PLAYER_SPEED = function() { return 170 + 15 * energyController.GetCharge(); }
 PLAYER_ROLL_SPEED = function() { return 460; }
 PLAYER_RUN_SLASH_SPEED = function() { return  550; }
 PLAYER_JUMP_VEL = function() { return -350 - 18 * energyController.GetCharge(); }
@@ -161,11 +161,30 @@ Player.prototype.postStateUpdate = function() {
 
     if(!this.timers.TimerUp('frauki_invincible') && this.timers.TimerUp('hurt_flicker')) {
         frauki.tint = 0xFF6D92;
-        game.time.events.add(100, function() { frauki.timers.SetTimer('hurt_flicker', 100); });
+        game.time.events.add(50, function() { frauki.timers.SetTimer('hurt_flicker', 50); });
 
-    } else if(energyController.GetCharge() > 3 && this.timers.TimerUp('charge_flicker')) {
-        frauki.tint = 0x51FFB2;
-        game.time.events.add(50, function() { frauki.timers.SetTimer('charge_flicker', 50); });
+    } else if(this.timers.TimerUp('charge_flicker') && energyController.GetCharge() > 0) {
+        var freq = 50;
+
+        if(energyController.GetCharge() > 3) {
+            frauki.tint = 0x00C86F;
+            freq = 20;
+
+        } else if(energyController.GetCharge() > 2) {
+            frauki.tint = 0x01FF8F;
+            freq = 40;
+
+        } else if(energyController.GetCharge() > 1) {
+            frauki.tint = 0x47FFAE;
+            freq = 60;
+
+        } else if(energyController.GetCharge() > 0) {
+            frauki.tint = 0x95FFD0;
+            freq = 80;
+
+        }
+
+        game.time.events.add(freq, function() { frauki.timers.SetTimer('charge_flicker', freq); });
 
     } else {
         frauki.tint = 0xFFFFFF;
@@ -826,7 +845,7 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
     }
 
     energyController.RemoveHealth(damage);
-    energyController.RemoveCharge(damage);
+    energyController.RemoveCharge(damage * 2);
 
     console.log('Frauki is taking ' + damage + ' damage');
 
