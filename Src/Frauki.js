@@ -1,8 +1,8 @@
 PLAYER_SPEED = function() { return 170 + 15 * energyController.GetCharge(); }
 PLAYER_ROLL_SPEED = function() { return 460; }
 PLAYER_RUN_SLASH_SPEED = function() { return  550; }
-PLAYER_JUMP_VEL = function() { return -350 - 18 * energyController.GetCharge(); }
-PLAYER_DOUBLE_JUMP_VEL = function() { return frauki.states.shielded ? -200 : -275; }
+PLAYER_JUMP_VEL = function() { return -350 - 15 * energyController.GetCharge(); }
+PLAYER_DOUBLE_JUMP_VEL = function() { return -275; }
 
 Player = function (game, x, y, name) {
 

@@ -4124,7 +4124,6 @@
     <property name="type" value="orb"/>
    </properties>
   </object>
-  <object id="1883" gid="85" x="2038" y="3833.5" width="16" height="16"/>
   <object id="1884" gid="68" x="1440" y="3296" width="16" height="16"/>
   <object id="1887" gid="67" x="1439.33" y="4552" width="16" height="16">
    <properties>
@@ -4238,7 +4237,6 @@
     <property name="type" value="orb"/>
    </properties>
   </object>
-  <object id="2019" gid="87" x="2156.67" y="3274.67" width="16" height="16"/>
   <object id="2020" gid="89" x="1988" y="3728.67" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Triggers_3" visible="0">
@@ -6184,7 +6182,7 @@
     <property name="type" value="stone_seal"/>
    </properties>
   </object>
-  <object id="1849" gid="67" x="2840.34" y="3143.33" width="16" height="16">
+  <object id="1849" gid="67" x="2821.34" y="3144.33" width="16" height="16">
    <properties>
     <property name="id" value="first_enem"/>
     <property name="type" value="enemy"/>

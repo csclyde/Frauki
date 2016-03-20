@@ -64,7 +64,7 @@
          "name":"Background_2",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -75,7 +75,7 @@
          "name":"Midground_2",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -86,7 +86,7 @@
          "name":"Foreground_2",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -2557,7 +2557,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "width":0,
          "x":0,
          "y":0
@@ -2925,7 +2925,7 @@
          "name":"Background_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -2936,7 +2936,7 @@
          "name":"Midground_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -2947,7 +2947,7 @@
          "name":"Foreground_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -5294,22 +5294,6 @@
                  "y":3496.67
                 }, 
                 {
-                 "gid":85,
-                 "height":16,
-                 "id":1883,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":2038,
-                 "y":3833.5
-                }, 
-                {
                  "gid":68,
                  "height":16,
                  "id":1884,
@@ -6012,22 +5996,6 @@
                  "y":3960.67
                 }, 
                 {
-                 "gid":87,
-                 "height":16,
-                 "id":2019,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":2156.66666666667,
-                 "y":3274.66666666667
-                }, 
-                {
                  "gid":89,
                  "height":16,
                  "id":2020,
@@ -6042,22 +6010,6 @@
                  "width":16,
                  "x":1988,
                  "y":3728.66666666667
-                }, 
-                {
-                 "gid":87,
-                 "height":16,
-                 "id":2021,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":2265.33333333333,
-                 "y":3658.66666666667
                 }],
          "opacity":1,
          "properties":
@@ -6065,7 +6017,7 @@
              "id":"sewer_to_collapse"
             },
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "width":0,
          "x":0,
          "y":0
@@ -9897,8 +9849,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":2840.34,
-                 "y":3143.33
+                 "x":2821.34,
+                 "y":3144.33
                 }, 
                 {
                  "gid":67,

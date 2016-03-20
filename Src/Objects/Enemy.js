@@ -54,6 +54,7 @@ Enemy.prototype.Deactivate = function() {};
 Enemy.prototype.LandHit = function() {};
 
 Enemy.prototype.update = function() {
+    var that = this;
 
     if(!this.body.enable) {
         return;
@@ -81,6 +82,14 @@ Enemy.prototype.update = function() {
 
         game.physics.arcade.overlap(this.attackRect, frauki, Collision.OverlapEnemyAttackWithFrauki);
     } 
+
+    if(!this.timers.TimerUp('grace') && this.timers.TimerUp('hurt_flicker')) {
+        this.tint = 0xFF6D92;
+        game.time.events.add(50, function() { that.timers.SetTimer('hurt_flicker', 50); });
+
+    } else {
+        this.tint = 0xFFFFFF;
+    }
 };
 
 Enemy.prototype.UpdateAttackGeometry = function() {
@@ -198,8 +207,6 @@ Enemy.prototype.TakeHit = function(damage) {
         return;
     }
 
-    this.timers.SetTimer('hit', 800);
-
     this.state = this.Hurting;
     this.energy -= damage;
 
@@ -212,9 +219,11 @@ Enemy.prototype.TakeHit = function(damage) {
 
     events.publish('play_sound', { name: 'attack_connect' });
 
-    this.timers.SetTimer('hit', this.baseStunDuration + (250 * damage));
-    this.timers.SetTimer('grace', this.baseStunDuration + (250 * damage));
-    this.timers.SetTimer('attack_wait', this.baseStunDuration + (250 * damage) + game.rnd.between(1000, 2000));
+    var hurtTime = this.baseStunDuration + (250 * damage);
+
+    this.timers.SetTimer('hit', hurtTime);
+    this.timers.SetTimer('grace', hurtTime + 1000);
+    this.timers.SetTimer('attack_wait', hurtTime + game.rnd.between(1000, 2000));
 
 
     effectsController.StarBurst(this.body.center);

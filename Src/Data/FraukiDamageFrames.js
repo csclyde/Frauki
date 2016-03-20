@@ -8,30 +8,12 @@ var fraukiDamageFrames = {
 		priority: 1,
 		juggle: 0
 	},
-	
-	//followthrough of the front slash, is behind you
-	'Attack Front0003': {
-		x: -35, y: 0, w: 35, h: 15,
-		damage: 1,
-		knockback: 0.1,
-		priority: 1,
-		juggle: 0
-	},
 
 	//slash across in front of yourself return
 	'Attack Front0004': {
 		x: 40, y: 10, w: 35, h: 35,
 		damage: 1,
 		knockback: 0.3,
-		priority: 1,
-		juggle: 0
-	},
-
-	//return to the followthrough, smaller and weaker
-	'Attack Front0005': {
-		x: -30, y: 0, w: 25, h: 15,
-		damage: 1,
-		knockback: 0.1,
 		priority: 1,
 		juggle: 0
 	},
