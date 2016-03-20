@@ -176,11 +176,11 @@ Enemy.prototype.GetCurrentPriority = function() {
 };
 
 Enemy.prototype.SetDirection = function(dir) {
-    if(dir === 'left' && this.direction !== 'left') {
+    if(dir === 'left') {
         this.direction = 'left';
         this.scale.x = -1;
     }
-    else if(dir === 'right' && this.direction !== 'right') {
+    else if(dir === 'right') {
         this.direction = 'right';
         this.scale.x = 1;
     }

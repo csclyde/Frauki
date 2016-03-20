@@ -9,7 +9,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
     this.attackTimer = 0;
     this.damage = 1;
-    this.energy = 4;
+    this.energy = 2;
 
     this.body.maxVelocity.y = 500;
 
@@ -21,7 +21,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
             this.angle = 0;
 
         if(this.state === this.Hopping && !this.body.onFloor()) {
-            this.body.drag.x = 200;
+            this.body.drag.x = 50;
         } else {
             this.body.drag.x = 600;
         }
@@ -40,7 +40,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
                 if(this.timers.TimerUp('dodge') && (EnemyBehavior.Player.IsDangerous(this) || EnemyBehavior.Player.IsNear(this, 50) || (EnemyBehavior.Player.MovingTowards(this)) && EnemyBehavior.Player.IsNear(this, 100))) {
                     this.Dodge();
                 }
-                else if(this.timers.TimerUp('attack_wait') && EnemyBehavior.Player.IsVulnerable(this)) {
+                else if(this.timers.TimerUp('attack_wait') && EnemyBehavior.Player.IsVulnerable(this) && !EnemyBehavior.Player.IsNear(this, 50)) {
                     if(!frauki.body.onFloor()) {
                         this.Hop();
                     } 
@@ -140,12 +140,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
             this.state = this.Hopping;
 
             EnemyBehavior.FacePlayer(this);
-
-            if(EnemyBehavior.RollDice(2, 1) && frauki.body.onFloor()) {
-                EnemyBehavior.JumpToPoint(this, frauki.body.center.x, frauki.body.y - 50); 
-            } else {
-                EnemyBehavior.JumpToPoint(this, frauki.body.center.x, frauki.body.center.y); 
-            }
+            EnemyBehavior.JumpToPoint(this, frauki.body.center.x, frauki.body.y); 
 
             if(this.body.velocity.y < -400) {
                 this.body.velocity.y = -400;
@@ -162,10 +157,6 @@ Enemy.prototype.types['Insectoid'] =  function() {
             this.PlayAnim('hop');
         } else {
             this.PlayAnim('idle');
-        }
-
-        if(EnemyBehavior.Player.IsBelow(this)) {
-            this.Dive();
         }
 
         if(this.body.onFloor()) {
