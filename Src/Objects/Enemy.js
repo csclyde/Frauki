@@ -83,13 +83,13 @@ Enemy.prototype.update = function() {
         game.physics.arcade.overlap(this.attackRect, frauki, Collision.OverlapEnemyAttackWithFrauki);
     } 
 
-    if(!this.timers.TimerUp('grace') && this.timers.TimerUp('hurt_flicker')) {
-        this.tint = 0xFF6D92;
-        game.time.events.add(50, function() { that.timers.SetTimer('hurt_flicker', 50); });
+    // if(!this.timers.TimerUp('grace') && this.timers.TimerUp('hurt_flicker')) {
+    //     this.alpha = 0;
+    //     game.time.events.add(10, function() { that.timers.SetTimer('hurt_flicker', 10); });
 
-    } else {
-        this.tint = 0xFFFFFF;
-    }
+    // } else {
+    //     this.alpha = 1;
+    // }
 };
 
 Enemy.prototype.UpdateAttackGeometry = function() {
@@ -222,7 +222,7 @@ Enemy.prototype.TakeHit = function(damage) {
     var hurtTime = this.baseStunDuration + (250 * damage);
 
     this.timers.SetTimer('hit', hurtTime);
-    this.timers.SetTimer('grace', hurtTime + 1000);
+    this.timers.SetTimer('grace', hurtTime +  + game.rnd.between(500, 1000));
     this.timers.SetTimer('attack_wait', hurtTime + game.rnd.between(1000, 2000));
 
 

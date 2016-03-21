@@ -82,7 +82,7 @@ Player.prototype.preStateUpdate = function() {
     }
 
     this.body.maxVelocity.x = PLAYER_SPEED() + this.movement.rollBoost;
-    this.body.maxVelocity.y = 450;
+    this.body.maxVelocity.y = 350;
 
     //maintain the roll boost when they jump without a key down
     if(this.movement.rollBoost > 0) {
@@ -160,10 +160,13 @@ Player.prototype.postStateUpdate = function() {
     }
 
     if(!this.timers.TimerUp('frauki_invincible') && this.timers.TimerUp('hurt_flicker')) {
-        frauki.tint = 0xFF6D92;
-        game.time.events.add(50, function() { frauki.timers.SetTimer('hurt_flicker', 50); });
+        this.alpha = 0;
+        game.time.events.add(10, function() { frauki.timers.SetTimer('hurt_flicker', 10); });
+    } else {
+        this.alpha = 1;
+    }
 
-    } else if(this.timers.TimerUp('charge_flicker') && energyController.GetCharge() > 0) {
+    if(this.timers.TimerUp('charge_flicker') && energyController.GetCharge() > 0) {
         var freq = 50;
 
         if(energyController.GetCharge() > 3) {

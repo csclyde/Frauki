@@ -62,7 +62,7 @@ Main.render = function() {
     // game.debug.body(frauki);
     // game.debug.body(frauki.attackRect);
 
-    // Frogland.objectGroup_3.forEach(function(o) {
+    // Frogland.objectGroup_4.forEach(function(o) {
     //     game.debug.body(o);
     //     if(!!o.attackRect) game.debug.body(o.attackRect);
     // });
