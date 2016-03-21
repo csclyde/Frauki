@@ -6,7 +6,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
     this.animations.add('idle', ['Insectoid/Hop0000'], 10, true, false);
     this.animations.add('spin', ['Insectoid/Spin0000'], 10, true, false);
     this.animations.add('hop', ['Insectoid/Hop0000', 'Insectoid/Hop0001', 'Insectoid/Hop0002'], 10, false, false);
-    this.animations.add('die', ['Insectoid/Die0000', 'Insectoid/Die0001', 'Insectoid/Die0002', 'Insectoid/Die0003'], 10, false, false);
+    this.animations.add('die', ['Insectoid/Die0000'], 10, false, false);
 
     this.attackTimer = 0;
     this.damage = 1;
@@ -247,7 +247,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
             this.PlayAnim('idle');
         }
 
-        if(this.timers.TimerUp('attack')) {
+        if(this.timers.TimerUp('attack') || this.body.velocity.y > 0) {
             this.timers.SetTimer('dodge', 1000);
             this.timers.SetTimer('attack_wait', 0);
             return true;
