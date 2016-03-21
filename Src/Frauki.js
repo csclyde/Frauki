@@ -848,7 +848,7 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
     }
 
     energyController.RemoveHealth(damage);
-    energyController.RemoveCharge(damage * 2);
+    energyController.ResetCharge();
 
     console.log('Frauki is taking ' + damage + ' damage');
 

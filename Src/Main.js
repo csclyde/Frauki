@@ -214,12 +214,13 @@ Main.DrawUI = function() {
     //health pips
     for(var i = 0, len = energyController.GetHealth(); i < len; i++) {
         var pipFrame = '';
+        var quarter = energyController.GetMaxHealth() / 4;
 
-        if(i < 3) {
+        if(i < quarter) {
             pipFrame = 'HealthPips0000';
-        } else if(i < 6) {
+        } else if(i < quarter * 2) {
             pipFrame = 'HealthPips0001';
-        } else if(i < 9) {
+        } else if(i < quarter * 3) {
             pipFrame = 'HealthPips0002';
         } else {
             pipFrame = 'HealthPips0003';
@@ -231,11 +232,11 @@ Main.DrawUI = function() {
     for(var i = 0, len = energyController.GetCharge(); i < len; i++) {
         var pipFrame = '';
 
-        if(i < 3) {
+        if(i < 1) {
             pipFrame = 'EnergyPips0000';
-        } else if(i < 6) {
+        } else if(i < 2) {
             pipFrame = 'EnergyPips0001';
-        } else if(i < 9) {
+        } else if(i < 3) {
             pipFrame = 'EnergyPips0002';
         } else {
             pipFrame = 'EnergyPips0003';

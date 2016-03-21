@@ -62,10 +62,10 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
 
         if(this.firstAttack) {
-            this.timers.SetTimer('slash_hold', 700);
+            this.timers.SetTimer('slash_hold', 600);
             this.state = this.Windup1;
         } else {
-            this.timers.SetTimer('slash_hold', 450);
+            this.timers.SetTimer('slash_hold', 350);
             this.state = this.Windup2;
         }
 
@@ -129,7 +129,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
             this.state = this.Slashing1;
-            this.timers.SetTimer('slash_hold', game.rnd.between(550, 700));
+            this.timers.SetTimer('slash_hold', game.rnd.between(300, 500));
             events.publish('camera_shake', {magnitudeX: 3, magnitudeY: 0, duration: 200});
         }
 
