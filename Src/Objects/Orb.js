@@ -7,7 +7,7 @@ Orb = function(game, x, y, name) {
     //enable its physics body
     game.physics.enable(this, Phaser.Physics.ARCADE);
     
-    this.body.setSize(32, 32, 0, 0);
+    this.body.setSize(50, 50, 0, 0);
     this.anchor.setTo(0.5);
     this.body.bounce.y = 0.5;
     //this.body.gravity.y = game.physics.arcade.gravity.y * 2;

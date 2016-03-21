@@ -1011,17 +1011,22 @@ EffectsController.prototype.StarBurst = function(src) {
     this.stars.width = 10;
     this.stars.height = 10;
 
-    this.stars.explode(450, 5);
+    this.stars.explode(450, game.rnd.between(4, 6));
 };
 
-EffectsController.prototype.SprocketBurst = function(src) {
+EffectsController.prototype.SprocketBurst = function(src, amt) {
 
     this.sprockets.x = src.x - 5;
     this.sprockets.y = src.y - 50;
     this.sprockets.width = 10;
     this.sprockets.height = 10;
 
-    this.sprockets.explode(2000, game.rnd.between(5, 10));
+    this.sprockets.explode(2000, amt || game.rnd.between(5, 10));
+
+    this.sprockets.minParticleSpeed.setTo(-200);
+    this.sprockets.maxParticleSpeed.setTo(200, 0);
+    this.sprockets.particleDrag.setTo(100);
+
 };
 
 EffectsController.prototype.DropNuggets = function(amt) {
