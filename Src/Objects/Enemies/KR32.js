@@ -8,11 +8,12 @@ Enemy.prototype.types['KR32'] =  function() {
     this.animations.add('walk_back', ['KR32/Walk0005', 'KR32/Walk0004', 'KR32/Walk0003', 'KR32/Walk0002', 'KR32/Walk0001', 'KR32/Walk0000'], 8, true, false);
 
     this.animations.add('windup', ['KR32/Attack0001', 'KR32/Attack0002'], 16,  false, false);
-    this.animations.add('attack', ['KR32/Attack0003', 'KR32/Attack0004', 'KR32/Attack0005'], 18, false, false);
+    this.animations.add('attack', ['KR32/Attack0003', 'KR32/Attack0004', 'KR32/Attack0005'], 15, false, false);
     this.animations.add('attack_stab', ['KR32/Stab0001', 'KR32/Stab0002', 'KR32/Stab0003', 'KR32/Stab0004'], 10, false, false);
     this.animations.add('hurt', ['KR32/Hurt0000', 'KR32/Hurt0001'], 8, true, false);
     this.animations.add('block', ['KR32/Block0000', 'KR32/Block0001'], 20, true, false);
-    this.animations.add('jump', ['KR32/Jump0001'], 20, true, false);
+    this.animations.add('jump_back', ['KR32/Jump0001'], 20, true, false);
+    this.animations.add('jump_forward', ['KR32/JumpForward0000'], 20, true, false);
     this.animations.add('land', ['KR32/Jump0002'], 14, false, false);
 
     this.energy = 4;
@@ -51,9 +52,12 @@ Enemy.prototype.types['KR32'] =  function() {
  			if(this.timers.TimerUp('dodge') && this.state === this.Slashing && EnemyBehavior.Player.IsNear(this, 120)) {
                 this.Recoil();
 
+            } else if(this.timers.TimerUp('dodge') && frauki.state === frauki.AttackStab) {
+            	this.JumpOver();
+
             } else if(EnemyBehavior.Player.IsNear(this, 100)) {
 
-                if(this.timers.TimerUp('attack_wait') && EnemyBehavior.Player.IsVulnerable(this) && !EnemyBehavior.Player.MovingTowards(this) && frauki.body.onFloor()) {
+            	if(this.timers.TimerUp('attack_wait') && EnemyBehavior.Player.IsVulnerable(this) && !EnemyBehavior.Player.MovingTowards(this) && frauki.body.onFloor()) {
                 	if(EnemyBehavior.Player.IsNear(this, 60)) {
                 		this.AttackStab();
                 	}
@@ -109,6 +113,22 @@ Enemy.prototype.types['KR32'] =  function() {
     	this.timers.SetTimer('dodge', game.rnd.between(2000, 4000));
     };
 
+    this.JumpOver = function() {
+    	this.state = this.Recoiling;
+
+    	EnemyBehavior.FacePlayer(this);
+
+    	if(this.direction === 'left') {
+    		this.body.velocity.x = -100;
+    	} else {
+    		this.body.velocity.x = 100;
+    	}
+    	this.body.velocity.y = -250;
+
+    	this.timers.SetTimer('dodge', game.rnd.between(2000, 4000));
+    	this.timers.SetTimer('attack_wait', 0);
+    };	
+
 	////////////////////////////////STATES////////////////////////////////////
 	this.Idling = function() {
 		this.PlayAnim('idle');
@@ -156,7 +176,16 @@ Enemy.prototype.types['KR32'] =  function() {
 			this.PlayAnim('land');
 			this.body.velocity.x = 0;
 		} else {
-			this.PlayAnim('jump');
+			EnemyBehavior.FacePlayer(this);
+
+			//if they are moving the direction they are facing
+			if((this.direction === 'left' && this.body.velocity.x < 0) || (this.direction === 'right' && this.body.velocity.x > 0)) {
+				this.PlayAnim('jump_forward');
+			} else {
+				this.PlayAnim('jump_back');
+			}
+
+			//this.PlayAnim('jump');
 		}
 
 		if(this.animations.currentAnim.name === 'land' && this.animations.currentAnim.isFinished) {
@@ -289,7 +318,7 @@ Enemy.prototype.types['KR32'] =  function() {
 			x: 15, y: -3, w: 55, h: 50,
 			damage: 3,
 			knockback: 0.3,
-			priority: 1,
+			priority: 4,
 			juggle: 0
 		},
 
@@ -297,7 +326,7 @@ Enemy.prototype.types['KR32'] =  function() {
 			x: 15, y: -3, w: 55, h: 50,
 			damage: 3,
 			knockback: 0.3,
-			priority: 1,
+			priority: 4,
 			juggle: 0
 		},
 

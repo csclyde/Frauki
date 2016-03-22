@@ -27,14 +27,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
     this.Act = function() {
 
         if(EnemyBehavior.Player.IsVisible(this)) {
-            if(this.hasHit) {
-                this.Dodge();
-                this.hasHit = false;
-            }
-            else if(EnemyBehavior.Player.IsDangerous(this)) {
-                this.Dodge();
-
-            } else if(EnemyBehavior.Player.IsNear(this, 100)) {
+            if(EnemyBehavior.Player.IsNear(this, 100)) {
                 EnemyBehavior.FacePlayer(this);
 
                 if(EnemyBehavior.Player.MovingTowards(this) || EnemyBehavior.Player.IsDangerous(this)) {
@@ -205,33 +198,33 @@ Enemy.prototype.types['A3PZ'] =  function() {
     this.attackFrames = {
         'A3PZ/Attack0003': {
             x: 10, y: 15, w: 129, h: 30,
-            damage: 3,
+            damage: 2,
             knockback: 0,
-            priority: 1,
+            priority: 2,
             juggle: 0
         },
 
         'A3PZ/Attack0004': {
             x: 100, y: 10, w: 40, h: 15,
-            damage: 3,
+            damage: 2,
             knockback: 0,
-            priority: 1,
+            priority: 2,
             juggle: 0
         },
 
         'A3PZ/Attack20003': {
             x: 50, y: 0, w: 70, h: 80,
-            damage: 3,
+            damage: 2,
             knockback: 0,
-            priority: 1,
+            priority: 2,
             juggle: 0
         },
 
         'A3PZ/Attack20004': {
             x: 100, y: 73, w: 35, h: 10,
-            damage: 3,
+            damage: 2,
             knockback: 0,
-            priority: 1,
+            priority: 2,
             juggle: 0
         },
 
@@ -239,7 +232,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
             x: 20, y: -8, w: 45, h: 80,
             damage: 0,
             knockback: 0,
-            priority: 2,
+            priority: 3,
             juggle: 0
         },
 
@@ -247,7 +240,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
             x: 20, y: -8, w: 45, h: 80,
             damage: 0,
             knockback: 0,
-            priority: 2,
+            priority: 3,
             juggle: 0
         },
     };

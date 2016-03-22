@@ -743,7 +743,7 @@ Player.prototype.StabSlash = function() {
         this.movement.stabFrames = 0;
 
         events.publish('play_sound', {name: 'attack_stab', restart: true });
-        this.timers.SetTimer('attack_wait', 1250);
+        this.timers.SetTimer('attack_wait', 1500);
         
         return true;
     }

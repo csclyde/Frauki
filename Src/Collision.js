@@ -190,7 +190,7 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
     var vel = new Phaser.Point(e.body.center.x - frauki.body.center.x, e.body.center.y - frauki.body.center.y);
     vel = vel.normalize();
 
-    vel.setMagnitude(500);
+    vel.setMagnitude(200);
 
     e.body.velocity.x = vel.x;
     //e.body.velocity.y = vel.y / 2;
@@ -199,10 +199,10 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
     events.publish('play_sound', {name: 'clang'});
 
     e.timers.SetTimer('grace', 400);
+    e.timers.SetTimer('attack_wait', 0);
     frauki.timers.SetTimer('attack_stun', 1000);
     //frauki.timers.SetTimer('frauki_grace', 400);
 
-    energyController.RemoveCharge(1);
 };
 
 Collision.OverlapEnemyAttackWithFrauki = function(e, f) {

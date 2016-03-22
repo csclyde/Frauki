@@ -32,8 +32,6 @@ Enemy.prototype.types['Insectoid'] =  function() {
         } else {
             this.angle = 0;
         }
-
-        console.log(this.state)
     };
 
     this.Act = function() {
