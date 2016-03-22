@@ -809,7 +809,8 @@ Player.prototype.LandHit = function(e, damage) {
 
     if(this.state !== this.AttackStab && this.state !== this.AttackDiveFall && this.state !== this.Rolling) {
         frauki.body.velocity.x = vel.x;
-        //frauki.body.velocity.y = vel.y;
+        frauki.body.velocity.y = vel.y / 2;
+        game.time.events.add(500, function() { frauki.states.knockedback = false; });
     }
 
     effectsController.ClashStreak(e.body.center.x, e.body.center.y, game.rnd.between(1, 2));
