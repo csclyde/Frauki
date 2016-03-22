@@ -1213,7 +1213,6 @@ Player.prototype.AttackFront = function() {
             this.ChangeState(this.Standing);
         }
 
-        if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true, override: true });
     }
 };
 
@@ -1228,8 +1227,6 @@ Player.prototype.AttackWhiff = function() {
         } else { 
             this.ChangeState(this.Standing);
         }
-
-        if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true, override: true });
     }
 };
 
@@ -1255,8 +1252,6 @@ Player.prototype.AttackLunge = function() {
         } else { 
             this.ChangeState(this.Standing);
         }
-
-        if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true, override: true });
     }
 };
 
@@ -1297,8 +1292,6 @@ Player.prototype.AttackFall = function() {
         }
 
         this.states.attackFallLanded = false;
-
-        if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true, override: true });
     }
 };
 
@@ -1311,8 +1304,6 @@ Player.prototype.AttackOverhead = function() {
     
     if(this.animations.currentAnim.isFinished && this.timers.TimerUp('attack_wait') && this.timers.TimerUp('attack_stun')) {
         this.ChangeState(this.Standing);
-
-        if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true, override: true });
     }
 };
 
@@ -1366,8 +1357,6 @@ Player.prototype.AttackStab = function() {
         } else {
             this.ChangeState(this.Standing);
         }
-
-        if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true, override: true });
     }
 };
 
@@ -1436,8 +1425,6 @@ Player.prototype.AttackDiveLand = function() {
         else {
             this.ChangeState(this.Running);
         }
-
-        if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true, override: true });
     }
 };
 
@@ -1446,6 +1433,5 @@ Player.prototype.AttackJump = function() {
 
     if(this.animations.currentAnim.isFinished && this.timers.TimerUp('attack_wait') && this.timers.TimerUp('attack_stun')) {
         this.ChangeState(this.Jumping);
-        if(inputController.buttons.rShoulder) events.publish('activate_weapon', { activate: true, override: true });
     }
 };

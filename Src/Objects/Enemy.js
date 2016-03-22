@@ -238,6 +238,18 @@ Enemy.prototype.TakeHit = function(damage) {
     }
 };
 
+Enemy.prototype.Stun = function() {
+    this.state = this.Stunned;
+};
+
+Enemy.prototype.Stunned = function() {
+    this.PlayAnim('stun');
+
+    if(this.timers.TimerUp('stun')) {
+        return true;
+    }
+};
+
 function DestroyEnemy(e) {
     e.Die();
     e.state = e.Dying;

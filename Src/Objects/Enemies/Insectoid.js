@@ -32,6 +32,8 @@ Enemy.prototype.types['Insectoid'] =  function() {
         } else {
             this.angle = 0;
         }
+
+        console.log(this.state)
     };
 
     this.Act = function() {
@@ -83,14 +85,6 @@ Enemy.prototype.types['Insectoid'] =  function() {
             return true;
         } else {
             return false;
-        }
-    };
-
-    this.Vulnerable = function() {
-        if(this.state === this.Scuttling || this.state === this.Diving) {
-            return false;
-        } else {
-            return true;
         }
     };
 
@@ -192,7 +186,6 @@ Enemy.prototype.types['Insectoid'] =  function() {
         }
 
         if(this.body.onFloor()) {
-            this.timers.SetTimer('attack_wait', game.rnd.between(500, 800));
             return true;
         }
 
@@ -254,7 +247,11 @@ Enemy.prototype.types['Insectoid'] =  function() {
             this.PlayAnim('idle');
         }
 
-        if(this.timers.TimerUp('attack') || this.body.velocity.y > 0) {
+        if(EnemyBehavior.Player.IsBelow(this)) {
+            this.Dive();
+        }
+
+        if(this.timers.TimerUp('attack') || this.body.velocity.y > 0 || this.body.onFloor()) {
             this.timers.SetTimer('dodge', 1000);
             this.timers.SetTimer('attack_wait', 0);
             return true;

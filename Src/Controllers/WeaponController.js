@@ -4,7 +4,7 @@ WeaponController = function() {
 
     this.timers = new TimerUtil();
 
-    events.subscribe('activate_weapon', this.ToggleWeapon, this);
+    //events.subscribe('activate_weapon', this.ToggleWeapon, this);
 
     this.Shield.Init();
     this.Lob.Init();
