@@ -152,7 +152,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
             this.state = this.Slashing2;
-            this.timers.SetTimer('slash_hold', game.rnd.between(500, 600));
+            this.timers.SetTimer('slash_hold', game.rnd.between(400, 500));
             events.publish('camera_shake', {magnitudeX: 3, magnitudeY: 0, duration: 200});
         }
 
@@ -197,7 +197,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
     this.attackFrames = {
         'A3PZ/Attack0003': {
-            x: 10, y: 15, w: 129, h: 30,
+            x: 10, y: 15, w: 149, h: 30,
             damage: 2,
             knockback: 0,
             priority: 2,
@@ -205,7 +205,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
         },
 
         'A3PZ/Attack0004': {
-            x: 100, y: 10, w: 40, h: 15,
+            x: 110, y: 10, w: 60, h: 15,
             damage: 2,
             knockback: 0,
             priority: 2,
@@ -213,7 +213,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
         },
 
         'A3PZ/Attack20003': {
-            x: 50, y: 0, w: 70, h: 80,
+            x: 70, y: 0, w: 70, h: 80,
             damage: 2,
             knockback: 0,
             priority: 2,
@@ -221,7 +221,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
         },
 
         'A3PZ/Attack20004': {
-            x: 100, y: 73, w: 35, h: 10,
+            x: 110, y: 73, w: 35, h: 10,
             damage: 2,
             knockback: 0,
             priority: 2,
