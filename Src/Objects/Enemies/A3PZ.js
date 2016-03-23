@@ -123,8 +123,14 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
             this.state = this.Slashing1;
-            this.timers.SetTimer('slash_hold', game.rnd.between(400, 500));
+            this.timers.SetTimer('slash_hold', game.rnd.between(600, 800));
             events.publish('camera_shake', {magnitudeX: 3, magnitudeY: 0, duration: 200});
+
+            if(this.direction === 'left') {
+                this.body.velocity.x = -450;
+            } else {
+                this.body.velocity.x = 450;
+            }
         }
 
         return false;
@@ -133,11 +139,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
     this.Slashing1 = function() {
         this.PlayAnim('attack1');
 
-        if(this.direction === 'left') {
-            this.body.velocity.x = -250;
-        } else {
-            this.body.velocity.x = 250;
-        }
+        
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
             this.state = this.Windup2;
@@ -152,8 +154,14 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
             this.state = this.Slashing2;
-            this.timers.SetTimer('slash_hold', game.rnd.between(400, 500));
+            this.timers.SetTimer('slash_hold', game.rnd.between(600, 800));
             events.publish('camera_shake', {magnitudeX: 3, magnitudeY: 0, duration: 200});
+
+            if(this.direction === 'left') {
+                this.body.velocity.x = -450;
+            } else {
+                this.body.velocity.x = 450;
+            }
         }
 
         return false;
@@ -162,11 +170,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
     this.Slashing2 = function() {
         this.PlayAnim('attack2');
 
-        if(this.direction === 'left') {
-            this.body.velocity.x = -200;
-        } else {
-            this.body.velocity.x = 200;
-        }
+        
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
             return true;

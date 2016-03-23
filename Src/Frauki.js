@@ -1,4 +1,4 @@
-PLAYER_SPEED = function() { return 170 + 15 * energyController.GetCharge(); }
+PLAYER_SPEED = function() { return 170 + 10 * energyController.GetCharge(); }
 PLAYER_ROLL_SPEED = function() { return 460 + 10 * energyController.GetCharge(); }
 PLAYER_RUN_SLASH_SPEED = function() { return  550; }
 PLAYER_JUMP_VEL = function() { return -350 - 15 * energyController.GetCharge(); }
