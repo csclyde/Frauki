@@ -99,20 +99,6 @@ EffectsController = function() {
     this.energyStreak.minParticleScale = 1;
     this.energyStreak.setRotation(0, 0);
 
-    this.energyStreakBody = game.add.emitter(0, 0, 50);
-    this.energyStreakBody.makeParticles('Misc', ['Sparks0000', 'Sparks0001', 'Sparks0002', 'Sparks0003', 'Sparks0004']); 
-    this.energyStreakBody.gravity = -580;
-    this.energyStreakBody.particleDrag.setTo(100);
-    this.energyStreakBody.minParticleSpeed.setTo(-80);
-    this.energyStreakBody.maxParticleSpeed.setTo(80);
-    this.energyStreakBody.maxParticleScale = 1;
-    this.energyStreakBody.minParticleScale = 1;
-    this.energyStreakBody.setRotation(0, 0);
-    this.energyStreakBody.width = frauki.body.width;
-    this.energyStreakBody.height = frauki.body.height;
-    this.energyStreakBody.visible = false;
-    this.energyStreakBody.flow(500, 5, 1);
-
     this.nuggDropper = game.add.emitter(0, 0, 50);
     this.nuggDropper.makeParticles('Misc', ['EnergyBitNeutral0000', 'EnergyBitNeutral0001', 'EnergyBitNeutral0002', 'EnergyBitNeutral0003', 'EnergyBitNeutral0004', 'EnergyBitNeutral0005']);
     this.nuggDropper.gravity = -300;
@@ -239,9 +225,6 @@ EffectsController.prototype.Update = function() {
 
     this.charge1.x = frauki.body.center.x;
     this.charge1.y = frauki.body.center.y;
-
-    this.energyStreakBody.x = frauki.body.x;
-    this.energyStreakBody.y = frauki.body.y;
 
     game.physics.arcade.collideGroupVsTilemapLayer(this['dicedPieces' + Frogland.currentLayer], Frogland.GetCurrentCollisionLayer(), null, null, null, false);
     //game.physics.arcade.collide(this.dicedPieces3, Frogland.GetCurrentCollisionLayer());
@@ -621,7 +604,7 @@ EffectsController.prototype.DiceObject = function(name, x, y, xv, yv, layer) {
 
         //randomly set the velocity, rotation, and lifespan
         p.body.velocity.x = game.rnd.between(-150, 150) + xv * 0.5;
-        p.body.velocity.y = game.rnd.between(-100, -400) + yv * 0.5;
+        p.body.velocity.y = game.rnd.between(-200, -400) + yv * 0.5;
         p.body.angularVelocity = game.rnd.between(500, 1000);
 
         game.time.events.add(4000, function() { if(!!p && !!p.body) p.body.enable = false; } );
@@ -1045,11 +1028,3 @@ EffectsController.prototype.ShowCharge = function(level) {
         this.charge1.visible = true;
     }
 };
-
-EffectsController.prototype.ShowEnergyStreakBody = function(show) {
-    if(show) {
-        this.energyStreakBody.visible = true;
-    } else {
-        this.energyStreakBody.visible = false;
-    }
-}

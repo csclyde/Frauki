@@ -57,7 +57,7 @@ Player = function (game, x, y, name) {
             return;
         }
 
-        //this allows an inverted seaquence of inputs for the jump slash
+        //this allows an inverted sequence of inputs for the jump slash
         if(this.state === this.AttackFront && this.body.onFloor() === false && !this.timers.TimerUp('slash_start_window')) {
             this.JumpSlash();
         }
@@ -195,13 +195,6 @@ Player.prototype.postStateUpdate = function() {
 
     if(this.body.onFloor()) {
         this.timers.SetTimer('on_ground', 200);
-    }
-
-
-    if(energyController.GetCharge() > 2) {
-        effectsController.ShowEnergyStreakBody(true);
-    } else {
-        effectsController.ShowEnergyStreakBody(false);
     }
 
     if(this.state === this.AttackDiveFall) {

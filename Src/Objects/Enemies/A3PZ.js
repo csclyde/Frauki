@@ -59,7 +59,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
             this.timers.SetTimer('slash_hold', 600);
             this.state = this.Windup1;
         } else {
-            this.timers.SetTimer('slash_hold', 400);
+            this.timers.SetTimer('slash_hold', 500);
             this.state = this.Windup2;
         }
 
@@ -123,13 +123,13 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
             this.state = this.Slashing1;
-            this.timers.SetTimer('slash_hold', game.rnd.between(600, 800));
+            this.timers.SetTimer('slash_hold', game.rnd.between(700, 1000));
             events.publish('camera_shake', {magnitudeX: 3, magnitudeY: 0, duration: 200});
 
             if(this.direction === 'left') {
-                this.body.velocity.x = -450;
+                this.body.velocity.x = -375;
             } else {
-                this.body.velocity.x = 450;
+                this.body.velocity.x = 375;
             }
         }
 
@@ -154,13 +154,13 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
             this.state = this.Slashing2;
-            this.timers.SetTimer('slash_hold', game.rnd.between(600, 800));
+            this.timers.SetTimer('slash_hold', game.rnd.between(700, 1000));
             events.publish('camera_shake', {magnitudeX: 3, magnitudeY: 0, duration: 200});
 
             if(this.direction === 'left') {
-                this.body.velocity.x = -450;
+                this.body.velocity.x = -375;
             } else {
-                this.body.velocity.x = 450;
+                this.body.velocity.x = 375;
             }
         }
 
