@@ -46,6 +46,7 @@ Player = function (game, x, y, name) {
     events.subscribe('player_jump', this.Jump, this);
     events.subscribe('player_crouch', this.Crouch, this);
     events.subscribe('player_slash', this.Slash, this);
+    events.subscribe('player_release_slash', this.ReleaseSlash, this);
     events.subscribe('player_roll', this.Roll, this);
     events.subscribe('player_run', this.StartStopRun, this);
     events.subscribe('player_heal', this.Heal, this);
@@ -196,10 +197,6 @@ Player.prototype.postStateUpdate = function() {
     if(this.body.onFloor()) {
         this.timers.SetTimer('on_ground', 200);
     }
-
-    if(this.state === this.AttackDiveFall) {
-        console.log(this.body.velocity.y)
-    }
 };
 
 Player.prototype.update = function() {
@@ -282,7 +279,7 @@ Player.prototype.UpdateAttackGeometry = function() {
 
 Player.prototype.GetCurrentDamage = function() {
 
-    return this.currentAttack.damage * (GetCurrentShardType() === 'Power' ? 2 : 1);
+    return this.currentAttack.damage;
 };
 
 Player.prototype.GetCurrentKnockback = function() {
@@ -390,6 +387,7 @@ Player.prototype.Reset = function() {
     this.states.onRightSlope = false;
     this.states.attackFallLanded = false;
     this.states.shielded = false;
+    this.states.charging = false;
 
     this.movement.diveVelocity = 0;
     this.movement.jumpSlashVelocity = 0;
@@ -593,9 +591,6 @@ Player.prototype.Heal = function(params) {
 
 Player.prototype.Slash = function(params) {
 
-    //stop the current weapon
-    events.publish('activate_weapon', { activate: false });
-
     var attackResult = false;
 
     //diving dash
@@ -618,12 +613,16 @@ Player.prototype.Slash = function(params) {
     else if(this.state === this.Standing || this.state === this.Landing || this.state === this.Running || this.state === this.Jumping || this.state === this.Flipping || this.state === this.Crouching) {
         attackResult = this.FrontSlash();
     } 
+    else if(!this.timers.TimerUp('slash_start_window')) {
+        attackResult = true;
+    }
     else {
         console.log('An attack was attempted in an unresolved state ', this.state);
         return;
     }
 
     this.timers.SetTimer('slash_start_window', 200);
+    this.states.charging = true;
 
     if(attackResult) {
         this.timers.SetTimer('frauki_invincible', 0);
@@ -639,6 +638,11 @@ Player.prototype.Slash = function(params) {
     } else {
         this.WhiffSlash();
     }
+};
+
+Player.prototype.ReleaseSlash = function(params) {
+    //if they have any charge sucked up, release it with an attack
+    this.states.charging = false;
 };
 
 Player.prototype.FrontSlash = function() {
@@ -814,7 +818,10 @@ Player.prototype.LandHit = function(e, damage) {
         effectsController.SlowHit(300);
     }
 
-    energyController.AddCharge(1);
+    if(damage > 0) {
+        energyController.AddCharge(1);
+        
+    }
 
     this.states.hasFlipped = false;
 
@@ -1371,7 +1378,6 @@ Player.prototype.AttackDiveCharge = function() {
 };
 
 Player.prototype.AttackDiveFall = function() {
-    console.log(this.body.velocity.y, this.movement.diveVelocity)
     this.PlayAnim('attack_dive_fall');
     this.body.maxVelocity.y = this.movement.diveVelocity;
     this.body.velocity.y = this.movement.diveVelocity;

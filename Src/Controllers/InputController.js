@@ -290,6 +290,7 @@ InputController.prototype.OnSlash = function(pressed) {
         if(pressed) {
             events.publish('player_slash', {});
         } else {
+            events.publish('player_release_slash', {});
 
         }
     } else if(game.state.getCurrentState() === Upgrading) {

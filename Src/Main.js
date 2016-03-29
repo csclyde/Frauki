@@ -290,6 +290,8 @@ Main.DrawUI = function() {
     //     this.RenderTextureFromAtlas('UI', weaponController.weaponList[i].FrameName, (102 + 25 * i), 10);
     // }
 
+    this.RenderTextureFromAtlas('UI', 'NuggCounterBack0000', 562, 7, 1, 1, 0.8);
+
     this.RenderTextureFromAtlas('Misc', 'EnergyBitNeutral0000', 565, 10);
 
     //render the nugg amount, character by character

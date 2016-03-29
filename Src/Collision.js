@@ -43,6 +43,11 @@ Collision.OverlapFraukiWithObject = function(f, o) {
         return false;
 
     } else if(o.spriteType === 'junk') {
+
+        if(frauki.state === frauki.Rolling) {
+            o.JunkHit(o);
+        }
+        
         return false;
 
 
@@ -150,8 +155,6 @@ Collision.OverlapAttackWithEnemy = function(f, e, halfDmg) {
 
     if(halfDmg) damage /= 2;
 
-    damage += energyController.GetCharge() * (damage / 2);
-
     e.TakeHit(damage);
     frauki.LandHit(e, damage);
 };
@@ -202,7 +205,6 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
     e.timers.SetTimer('attack_wait', 0);
     frauki.timers.SetTimer('attack_stun', 1000);
     //frauki.timers.SetTimer('frauki_grace', 400);
-
 };
 
 Collision.OverlapEnemyAttackWithFrauki = function(e, f) {
