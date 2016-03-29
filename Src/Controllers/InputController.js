@@ -81,7 +81,8 @@ InputController = function() {
             break;
 
             case inputController.binds.weapon:
-                inputController.OnHeal(true);
+                //inputController.OnHeal(true);
+                inputController.OnThrow(true);
             break;
 
             case inputController.binds.roll:
@@ -129,7 +130,8 @@ InputController = function() {
             break;
 
             case inputController.binds.weapon:
-                inputController.OnHeal(false);
+                //inputController.OnHeal(false);
+                inputController.OnThrow(false);
             break;
 
             case inputController.binds.roll:
@@ -172,7 +174,8 @@ InputController = function() {
                 break;
 
                 case 3:
-                    this.OnHeal(true);
+                    //this.OnHeal(true);
+                    this.OnThrow(true);
                 break;
 
                 case 8: //select
@@ -226,7 +229,8 @@ InputController = function() {
                 break;
 
                 case 3:
-                    this.OnHeal(false);
+                    //this.OnHeal(false);
+                    this.OnThrow(false);
                 break;
 
                 case 8: //select
@@ -291,6 +295,18 @@ InputController.prototype.OnSlash = function(pressed) {
             events.publish('player_slash', {});
         } else {
             events.publish('player_release_slash', {});
+
+        }
+    } else if(game.state.getCurrentState() === Upgrading) {
+        
+    }
+};
+
+InputController.prototype.OnThrow = function(pressed) {
+    if(game.state.getCurrentState() === Main) {
+        if(pressed) {
+            events.publish('player_throw', {});
+        } else {
 
         }
     } else if(game.state.getCurrentState() === Upgrading) {

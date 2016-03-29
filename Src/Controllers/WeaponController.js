@@ -27,10 +27,35 @@ WeaponController = function() {
     this.currentWeapon = this.weaponList[0] || null;
 
     this.runes = [];
+
+    this.baton = game.add.sprite(frauki.body.center.x + (frauki.states.direction === 'right' ? 20 : -20), frauki.body.center.y, 'Frauki');
+    this.baton.anchor.setTo(0.5);
+    game.physics.enable(this.baton, Phaser.Physics.ARCADE);
+    this.baton.body.gravity.y = -600;
+    this.baton.body.setSize(10, 10, 0, 0);
+    this.baton.animations.add('activate', ['Baton10000', 'Baton10001', 'Baton10002'], 20, true, false);
+    this.baton.animations.add('shit', ['baton0000'], 14, false, false);
+    this.baton.animations.play('activate');
+    this.baton.visible = false;
 };
 
 WeaponController.prototype.create = function() {
   
+};
+
+WeaponController.prototype.ThrowBaton = function() {
+    this.baton.x = frauki.body.center.x + (frauki.states.direction === 'right' ? 20 : -20);
+    this.baton.y = frauki.body.center.y;
+
+    if(frauki.states.direction === 'left') {
+        this.baton.body.velocity.x = -800;
+    } else {
+        this.baton.body.velocity.x = 800;
+    }
+
+    this.baton.body.velocity.y = -80;
+
+    this.baton.visible = true;
 };
 
 WeaponController.prototype.Next = function() {
@@ -75,6 +100,39 @@ WeaponController.prototype.Update = function() {
     this.Shield.UpdateOverride();
     this.Lob.UpdateOverride();
     this.Saw.UpdateOverride();
+
+    if(this.baton.visible) {
+        var vel = 1000;
+        var maxVelocity = 700;
+
+        if(this.baton.body.x > frauki.body.x && this.baton.body.x < frauki.body.x + frauki.body.width && this.baton.body.y > frauki.body.y && this.baton.body.y < frauki.body.y + frauki.body.height) {
+            events.publish('play_sound', {name: 'energy_bit', restart: true });
+            this.baton.visible = false;
+            this.baton.body.velocity.setTo(0);
+            this.baton.body.acceleration.setTo(0);
+            //this.baton.kill();
+
+            return;
+        }
+
+        var xDist = this.baton.body.center.x - frauki.body.center.x;
+        var yDist = this.baton.body.center.y - frauki.body.center.y;
+
+        var angle = Math.atan2(yDist, xDist); 
+        this.baton.body.acceleration.x = Math.cos(angle) * -vel;// - (xDist * 5);    
+        this.baton.body.acceleration.y = Math.sin(angle) * -vel;// - (yDist * 5);
+
+        if((frauki.body.center.x < this.baton.body.center.x && this.baton.body.velocity.x > 0) || (frauki.body.center.x > this.baton.body.center.x && this.baton.body.velocity.x < 0))
+            this.baton.body.acceleration.x *= 3;
+
+        if((frauki.body.center.y < this.baton.body.center.y && this.baton.body.velocity.y > 0) || (frauki.body.center.y > this.baton.body.center.y && this.baton.body.velocity.y < 0))
+            this.baton.body.acceleration.y *= 3;
+
+
+        if (this.baton.body.velocity.getMagnitude() > maxVelocity) {
+            this.baton.body.velocity.setMagnitude(maxVelocity);
+        }
+    }
 };
 
 WeaponController.prototype.ToggleWeapon = function(params) {

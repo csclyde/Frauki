@@ -292,8 +292,7 @@ var fraukiAnimations = [
 	{ Name: 'materialize', Frames:  ['Materialize0000', 'Materialize0001', 'Materialize0002', 'Materialize0003', 'Materialize0004', 'Materialize0005', 'Materialize0006', 'Materialize0007', 'Materialize0008', 'Materialize0009', 'Materialize0010'],  Fps: 18 , Loop: false },
 	{ Name: 'hang', Frames:  ['Hang0000', 'Hang0001', 'Hang0002', 'Hang0003', 'Hang0004', 'Hang0005'],  Fps: 12, Loop: false },
 	{ Name: 'heal', Frames:  ['Heal0000', 'Heal0001', 'Heal0002', 'Heal0003', 'Heal0004'], Fps: 12 , Loop: true },
-
-	{ Name: 'attack_block', Frames:  ['Block0000', 'Block0001'], Fps: 18, Loop: true },
+	{ Name: 'throw', Frames:  ['Throw0001', 'Throw0001', 'Throw0002', 'Throw0003', 'Throw0004', 'Throw0005', 'Throw0006', 'Throw0007'], Fps: 14, Loop: false },
 
 	{ Name: 'attack_front', Frames:  ['Attack Front0001', 'Attack Front0001', 'Attack Front0002', 'Attack Front0003', 'Attack Front0004', 'Attack Front0005', 'Attack Front0006', 'Attack Front0007'], Fps: 14, Loop: false },
 	{ Name: 'attack_lunge', Frames:  ['Attack Lunge0000', 'Attack Lunge0001', 'Attack Lunge0002', 'Attack Lunge0003', 'Attack Lunge0004', 'Attack Lunge0005', 'Attack Lunge0006', 'Attack Lunge0007'], Fps: 16, Loop: false },
@@ -304,5 +303,4 @@ var fraukiAnimations = [
 	{ Name: 'attack_dive_charge', Frames:  ['Attack Dive0000', 'Attack Dive0001', 'Attack Dive0002', 'Attack Dive0003', 'Attack Dive0004', 'Attack Dive0005', 'Attack Dive0009', 'Attack Dive0010', 'Attack Dive0011'], Fps: 16 , Loop: false },
 	{ Name: 'attack_dive_fall', Frames:  ['Attack Dive0012', 'Attack Dive0013', 'Attack Dive0014', 'Attack Dive0015', 'Attack Dive0016', 'Attack Dive0017'], Fps: 16 , Loop: true },
 	{ Name: 'attack_dive_land', Frames:  ['Attack Dive0018', 'Attack Dive0019', 'Attack Dive0020', 'Attack Dive0021', 'Attack Dive0022'], Fps: 16 , Loop: false },
-	{ Name: 'attack_whiff', Frames:  ['Attack Whiff0001', 'Attack Whiff0002', 'Attack Whiff0003', 'Attack Whiff0004', 'Attack Whiff0005', 'Attack Whiff0006', 'Attack Whiff0007', 'Attack Whiff0008'], Fps: 16, Loop: false },
 ];

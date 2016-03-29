@@ -50,6 +50,7 @@ Player = function (game, x, y, name) {
     events.subscribe('player_roll', this.Roll, this);
     events.subscribe('player_run', this.StartStopRun, this);
     events.subscribe('player_heal', this.Heal, this);
+    events.subscribe('player_throw', this.Throw, this);
     events.subscribe('control_up', function(params) { 
 
         this.states.upPressed = params.pressed;
@@ -387,7 +388,7 @@ Player.prototype.Reset = function() {
     this.states.onRightSlope = false;
     this.states.attackFallLanded = false;
     this.states.shielded = false;
-    this.states.charging = false;
+    this.states.throwing = false;
 
     this.movement.diveVelocity = 0;
     this.movement.jumpSlashVelocity = 0;
@@ -589,6 +590,14 @@ Player.prototype.Heal = function(params) {
     }
 };
 
+Player.prototype.Throw = function(params) {
+    if(!this.InAttackAnim()) {
+        this.state = this.Throwing;
+        this.states.throwing = true;
+        weaponController.ThrowBaton();
+    }
+};
+
 Player.prototype.Slash = function(params) {
 
     var attackResult = false;
@@ -623,9 +632,6 @@ Player.prototype.Slash = function(params) {
 
     this.timers.SetTimer('slash_start_window', 200);
 
-    this.states.charging = true;
-    this.timers.SetTimer('charge_begin', 500);
-
     if(attackResult) {
         this.timers.SetTimer('frauki_invincible', 0);
 
@@ -643,12 +649,7 @@ Player.prototype.Slash = function(params) {
 };
 
 Player.prototype.ReleaseSlash = function(params) {
-    //if they have any charge sucked up, release it with an attack
-    this.states.charging = false;
 
-    if(this.timers.TimerUp('charge_begin')) {
-        //this.Slash();
-    }
 };
 
 Player.prototype.FrontSlash = function() {
@@ -1178,6 +1179,23 @@ Player.prototype.Healing = function() {
         this.ChangeState(this.Standing);
         events.publish('play_sound', {name: 'apple'});
         events.publish('play_sound', {name: 'healing'});
+
+    }
+};
+
+Player.prototype.Throwing = function() {
+    this.PlayAnim('throw');
+
+    this.body.velocity.x /= 10;
+
+    if(this.animations.currentAnim.isFinished) {
+        if(inputController.dpad.down && !inputController.dpad.left && !inputController.dpad.right && this.body.onFloor()) {
+            this.ChangeState(this.Crouching);
+            this.PlayAnim('crouch');
+            this.animations.currentAnim.setFrame('Crouch0008');
+        } else { 
+            this.ChangeState(this.Standing);
+        }
 
     }
 };
