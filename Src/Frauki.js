@@ -622,7 +622,9 @@ Player.prototype.Slash = function(params) {
     }
 
     this.timers.SetTimer('slash_start_window', 200);
+
     this.states.charging = true;
+    this.timers.SetTimer('charge_begin', 500);
 
     if(attackResult) {
         this.timers.SetTimer('frauki_invincible', 0);
@@ -643,6 +645,10 @@ Player.prototype.Slash = function(params) {
 Player.prototype.ReleaseSlash = function(params) {
     //if they have any charge sucked up, release it with an attack
     this.states.charging = false;
+
+    if(this.timers.TimerUp('charge_begin')) {
+        //this.Slash();
+    }
 };
 
 Player.prototype.FrontSlash = function() {
