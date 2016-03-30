@@ -30,6 +30,14 @@ EnemyBehavior.FacingPlayer = function(e) {
     return false;
 };
 
+EnemyBehavior.FacingAttack = function(e) {
+    if((e.direction === 'left' && frauki.attackRect.body.center.x < e.body.center.x + 20) ||
+       (e.direction === 'right' && frauki.attackRect.body.center.x > e.body.center.x - 20) )
+        return true;
+
+    return false;
+};
+
 EnemyBehavior.PathBlocked = function(e) {
     if(e.body.onWall()) {
         return true;
@@ -260,6 +268,14 @@ EnemyBehavior.Player.MovingTowards = function(e) {
         return false;
     }
 };
+
+EnemyBehavior.Player.ThrowIncoming = function(e) {
+    if(frauki.states.throwing) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 
 

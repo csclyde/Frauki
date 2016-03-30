@@ -27,7 +27,10 @@ Enemy.prototype.types['A3PZ'] =  function() {
     this.Act = function() {
 
         if(EnemyBehavior.Player.IsVisible(this)) {
-            if(EnemyBehavior.Player.IsNear(this, 100)) {
+            if(EnemyBehavior.Player.ThrowIncoming(this)) {
+                this.Block(300);
+            }
+            else if(EnemyBehavior.Player.IsNear(this, 100)) {
                 EnemyBehavior.FacePlayer(this);
 
                 if(EnemyBehavior.Player.MovingTowards(this) || EnemyBehavior.Player.IsDangerous(this)) {

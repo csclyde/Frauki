@@ -49,7 +49,10 @@ Enemy.prototype.types['KR32'] =  function() {
 
         if(EnemyBehavior.Player.IsVisible(this)) {
 
- 			if(this.timers.TimerUp('dodge') && this.state === this.Slashing && EnemyBehavior.Player.IsNear(this, 120)) {
+        	if(EnemyBehavior.Player.ThrowIncoming(this)) {
+        		this.state = this.Blocking;
+        		
+        	} else if(this.timers.TimerUp('dodge') && this.state === this.Slashing && EnemyBehavior.Player.IsNear(this, 120)) {
                 this.Recoil();
 
             } else if(this.timers.TimerUp('dodge') && frauki.state === frauki.AttackStab) {

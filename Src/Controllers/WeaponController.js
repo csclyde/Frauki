@@ -32,7 +32,7 @@ WeaponController = function() {
     this.baton.anchor.setTo(0.5);
     game.physics.enable(this.baton, Phaser.Physics.ARCADE);
     this.baton.body.gravity.y = -600;
-    this.baton.body.setSize(30, 30, 0, 0);
+    this.baton.body.setSize(20, 20, 0, 0);
     this.baton.animations.add('activate', ['Baton10000', 'Baton10001', 'Baton10002'], 20, true, false);
     this.baton.animations.add('shit', ['baton0000'], 14, false, false);
     this.baton.animations.play('activate');
@@ -60,6 +60,9 @@ WeaponController.prototype.ThrowBaton = function() {
 
     this.baton.visible = true;
     frauki.states.throwing = true;
+
+    this.baton.chargeLevel = energyController.GetCharge();
+    energyController.ResetCharge();
 };
 
 WeaponController.prototype.Next = function() {
@@ -106,8 +109,8 @@ WeaponController.prototype.Update = function() {
     //this.Saw.UpdateOverride();
 
     if(this.baton.visible) {
-        var vel = 900;
-        var maxVelocity = 700;
+        var vel = 800;
+        var maxVelocity = 800;
 
         if(this.baton.body.x > frauki.body.x && this.baton.body.x < frauki.body.x + frauki.body.width && this.baton.body.y > frauki.body.y && this.baton.body.y < frauki.body.y + frauki.body.height) {
             events.publish('play_sound', {name: 'energy_bit', restart: true });
@@ -128,10 +131,10 @@ WeaponController.prototype.Update = function() {
         this.baton.body.acceleration.y = Math.sin(angle) * -vel;// - (yDist * 5);
 
         if((frauki.body.center.x < this.baton.body.center.x && this.baton.body.velocity.x > 0) || (frauki.body.center.x > this.baton.body.center.x && this.baton.body.velocity.x < 0))
-            this.baton.body.acceleration.x *= 4;
+            this.baton.body.acceleration.x *= 5;
 
         if((frauki.body.center.y < this.baton.body.center.y && this.baton.body.velocity.y > 0) || (frauki.body.center.y > this.baton.body.center.y && this.baton.body.velocity.y < 0))
-            this.baton.body.acceleration.y *= 4;
+            this.baton.body.acceleration.y *= 5;
 
 
         if (this.baton.body.velocity.getMagnitude() > maxVelocity) {

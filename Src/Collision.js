@@ -47,7 +47,7 @@ Collision.OverlapFraukiWithObject = function(f, o) {
         if(frauki.state === frauki.Rolling) {
             o.JunkHit(o);
         }
-        
+
         return false;
 
 
@@ -93,7 +93,6 @@ Collision.OverlapFraukiWithObject = function(f, o) {
 Collision.OverlapAttackWithObject = function(f, o) {
     if(o.spriteType === 'enemy') {
 
-
         if(frauki.GetCurrentDamage() > 0) {
 
             if(!o.Attacking()) {
@@ -102,7 +101,7 @@ Collision.OverlapAttackWithObject = function(f, o) {
             } else if(!o.robotic) {
                 Collision.OverlapAttackWithEnemy(f, o);
 
-            } else if(!EnemyBehavior.FacingPlayer(o)) {
+            } else if(!EnemyBehavior.FacingAttack(o)) {
                 Collision.OverlapAttackWithEnemy(f, o);
 
             } else if(o.Attacking() && frauki.GetCurrentPriority() > o.GetCurrentPriority()) {

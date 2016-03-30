@@ -26,9 +26,8 @@ InputController = function() {
     this.testButton.onDown.add(function() { events.publish('stop_all_music'); });
 
     this.testButton2.onDown.add(function() { 
-        energyController.AddHealth(2);
-        energyController.AddCharge(4);
-        GameData.AddNugget();
+        
+        console.log('tet')
     });
 
     this.binds = {};
@@ -54,6 +53,11 @@ InputController = function() {
         }
 
         switch(e.keyCode) {
+
+            case Phaser.Keyboard.P:
+                energyController.AddHealth(2);
+                energyController.AddCharge(2);
+            break;
 
             case inputController.binds.jump:
                 inputController.OnJump(true);

@@ -254,10 +254,10 @@ Player.prototype.UpdateAttackGeometry = function() {
 
     if(this.states.throwing) {
         this.currentAttack = {
-            damage: 1,
-            knockback: 1,
-            priority: 1,
-            juggle: 1
+            damage: 0.5 + weaponController.baton.chargeLevel * 1.5,
+            knockback: weaponController.baton.chargeLevel / 4,
+            priority: weaponController.baton.chargeLevel,
+            juggle: weaponController.baton.chargeLevel / 4
         }
 
         this.attackRect.body.x = weaponController.baton.body.x; 
@@ -825,12 +825,21 @@ Player.prototype.Roll = function(params) {
 
 Player.prototype.LandHit = function(e, damage) {
 
-    var vel = new Phaser.Point(frauki.body.center.x - e.body.center.x, frauki.body.center.y - e.body.center.y);
-    vel = vel.normalize();
+    if(frauki.states.throwing && this.GetCurrentPriority() <= e.GetCurrentPriority() && damage === 0) {
+        var vel = new Phaser.Point(weaponController.baton.body.center.x - e.body.center.x, weaponController.baton.body.center.y - e.body.center.y);
+        vel = vel.normalize();
 
-    vel = vel.setMagnitude(300);
+        vel = vel.setMagnitude(300);
 
-    if(this.state !== this.AttackStab && this.state !== this.AttackDiveFall && this.state !== this.Rolling) {
+        weaponController.baton.body.velocity.x = vel.x / 2;
+        weaponController.baton.body.velocity.y = vel.y * 10;
+
+    } else if(this.state !== this.AttackStab && this.state !== this.AttackDiveFall && this.state !== this.Rolling) {
+        var vel = new Phaser.Point(frauki.body.center.x - e.body.center.x, frauki.body.center.y - e.body.center.y);
+        vel = vel.normalize();
+
+        vel = vel.setMagnitude(300);
+
         frauki.body.velocity.x = vel.x;
         frauki.body.velocity.y = vel.y / 2;
         game.time.events.add(500, function() { frauki.states.knockedback = false; });
@@ -1204,8 +1213,6 @@ Player.prototype.Healing = function() {
 
 Player.prototype.Throwing = function() {
     this.PlayAnim('throw');
-
-    this.body.velocity.x /= 10;
 
     if(this.animations.currentAnim.isFinished) {
         if(inputController.dpad.down && !inputController.dpad.left && !inputController.dpad.right && this.body.onFloor()) {
