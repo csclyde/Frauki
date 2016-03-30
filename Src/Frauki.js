@@ -252,6 +252,22 @@ Player.prototype.UpdateAttackGeometry = function() {
         return;
     }
 
+    if(this.states.throwing) {
+        this.currentAttack = {
+            damage: 1,
+            knockback: 1,
+            priority: 1,
+            juggle: 1
+        }
+
+        this.attackRect.body.x = weaponController.baton.body.x; 
+        this.attackRect.body.y = weaponController.baton.body.y; 
+        this.attackRect.body.width = weaponController.baton.body.width; 
+        this.attackRect.body.height = weaponController.baton.body.height;
+
+        return;
+    }
+
     if(this.animations.currentFrame) {
         this.currentAttack = fraukiDamageFrames[this.animations.currentFrame.name];
     } 
@@ -591,14 +607,18 @@ Player.prototype.Heal = function(params) {
 };
 
 Player.prototype.Throw = function(params) {
-    if(!this.InAttackAnim()) {
+    if(!this.InAttackAnim() && !this.states.throwing) {
         this.state = this.Throwing;
-        this.states.throwing = true;
-        weaponController.ThrowBaton();
+
+        game.time.events.add(200, function() { weaponController.ThrowBaton() });
     }
 };
 
 Player.prototype.Slash = function(params) {
+
+    if(this.states.throwing) {
+        return;
+    }
 
     var attackResult = false;
 
@@ -649,7 +669,6 @@ Player.prototype.Slash = function(params) {
 };
 
 Player.prototype.ReleaseSlash = function(params) {
-
 };
 
 Player.prototype.FrontSlash = function() {
@@ -825,7 +844,7 @@ Player.prototype.LandHit = function(e, damage) {
         effectsController.SlowHit(300);
     }
 
-    if(damage > 0) {
+    if(damage > 0 && !this.states.throwing) {
         energyController.AddCharge(1);
         
     }
