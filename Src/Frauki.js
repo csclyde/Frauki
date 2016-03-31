@@ -609,6 +609,7 @@ Player.prototype.Heal = function(params) {
 Player.prototype.Throw = function(params) {
     if(!this.InAttackAnim() && !this.states.throwing) {
         this.state = this.Throwing;
+        this.states.throwing = true;
 
         game.time.events.add(200, function() { weaponController.ThrowBaton() });
     }

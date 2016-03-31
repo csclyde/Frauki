@@ -33,9 +33,10 @@ WeaponController = function() {
     game.physics.enable(this.baton, Phaser.Physics.ARCADE);
     this.baton.body.gravity.y = -600;
     this.baton.body.setSize(20, 20, 0, 0);
-    this.baton.animations.add('activate', ['Baton10000', 'Baton10001', 'Baton10002'], 20, true, false);
+    this.baton.animations.add('baton0', ['Baton00000', 'Baton00001', 'Baton00002'], 30, true, false);
+    this.baton.animations.add('baton1', ['Baton10000', 'Baton10001', 'Baton10002'], 30, true, false);
     this.baton.animations.add('shit', ['baton0000'], 14, false, false);
-    this.baton.animations.play('activate');
+    this.baton.animations.play('baton0');
     this.baton.visible = false;
 };
 
@@ -44,25 +45,50 @@ WeaponController.prototype.create = function() {
 };
 
 WeaponController.prototype.ThrowBaton = function() {
+
+    this.baton.chargeLevel = energyController.GetCharge();
+    energyController.ResetCharge();
+    
+    if(this.baton.chargeLevel === 0) {
+        this.baton.animations.play('baton0');
+    } else if(this.baton.chargeLevel === 1) {
+        this.baton.animations.play('baton1');
+    } else if(this.baton.chargeLevel === 2) {
+        this.baton.animations.play('baton1');
+    } else if(this.baton.chargeLevel === 3) {
+        this.baton.animations.play('baton1');
+    } else if(this.baton.chargeLevel === 4) {
+        this.baton.animations.play('baton1');
+    }  else {
+        this.baton.animations.play('baton0');
+    }
+
     this.baton.x = frauki.body.center.x + (frauki.states.direction === 'right' ? 20 : -20);
     this.baton.y = frauki.body.center.y - 20;
 
     if(frauki.states.direction === 'left') {
-        this.baton.body.velocity.x = -800;
+        this.baton.body.velocity.x = -1200;
     } else {
-        this.baton.body.velocity.x = 800;
+        this.baton.body.velocity.x = 1200;
     }
 
-    this.baton.body.velocity.y = -80;
+    this.baton.body.velocity.y = -60;
+
+    if(inputController.dpad.up) {
+        this.baton.body.velocity.y -= 500;
+    }
+
+    if(inputController.dpad.down) {
+        this.baton.body.velocity.y += 500;
+    }
 
     this.baton.body.velocity.x += frauki.body.velocity.x;
     this.baton.body.velocity.y += frauki.body.velocity.y;
 
     this.baton.visible = true;
-    frauki.states.throwing = true;
 
-    this.baton.chargeLevel = energyController.GetCharge();
-    energyController.ResetCharge();
+
+    this.timers.SetTimer('min_throw_time', 200);
 };
 
 WeaponController.prototype.Next = function() {
@@ -110,16 +136,11 @@ WeaponController.prototype.Update = function() {
 
     if(this.baton.visible) {
         var vel = 800;
-        var maxVelocity = 800;
+        var maxVelocity = 800 + this.baton.chargeLevel * 100;
 
-        if(this.baton.body.x > frauki.body.x && this.baton.body.x < frauki.body.x + frauki.body.width && this.baton.body.y > frauki.body.y && this.baton.body.y < frauki.body.y + frauki.body.height) {
+        if(this.timers.TimerUp('min_throw_time') && this.baton.body.x > frauki.body.x && this.baton.body.x < frauki.body.x + frauki.body.width && this.baton.body.y > frauki.body.y && this.baton.body.y < frauki.body.y + frauki.body.height) {
+            this.ResetBaton();
             events.publish('play_sound', {name: 'energy_bit', restart: true });
-            this.baton.visible = false;
-            this.baton.body.velocity.setTo(0);
-            this.baton.body.acceleration.setTo(0);
-            frauki.states.throwing = false;
-            //this.baton.kill();
-
             return;
         }
 
@@ -141,6 +162,13 @@ WeaponController.prototype.Update = function() {
             this.baton.body.velocity.setMagnitude(maxVelocity);
         }
     }
+};
+
+WeaponController.prototype.ResetBaton = function() {
+    this.baton.visible = false;
+    this.baton.body.velocity.setTo(0);
+    this.baton.body.acceleration.setTo(0);
+    frauki.states.throwing = false;
 };
 
 WeaponController.prototype.ToggleWeapon = function(params) {

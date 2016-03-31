@@ -7,18 +7,16 @@ InputController = function() {
     this.dpad.left = false;
     this.dpad.right = false;
 
+    this.tetrad = {};
+    this.tetrad.top = false;
+    this.tetrad.bottom = false;
+    this.tetrad.left = false;
+    this.tetrad.right = false;
+
     this.currentDir = 'still';
 
     this.buttons = {};
     this.buttons.rShoulder = false;
-
-    events.subscribe('player_run', function(params) { 
-        if(params.dir === 'left') { inputController.dpad.left = params.run; }
-        if(params.dir === 'right') { inputController.dpad.right = params.run; }
-    });
-
-    events.subscribe('control_up', function(params) { inputController.dpad.up = params.pressed; } );
-    events.subscribe('player_crouch', function(params) { inputController.dpad.down = params.crouch; } );
 
 	this.testButton = game.input.keyboard.addKey(Phaser.Keyboard.P);
     this.testButton2 = game.input.keyboard.addKey(Phaser.Keyboard.O);
@@ -282,6 +280,8 @@ InputController.prototype.Update = function() {
 };
 
 InputController.prototype.OnJump = function(pressed) {
+    this.tetrad.bottom = pressed;
+
     if(game.state.getCurrentState() === Main) {
         if(pressed) {
             events.publish('player_jump', {jump: true});
@@ -294,6 +294,8 @@ InputController.prototype.OnJump = function(pressed) {
 };
 
 InputController.prototype.OnSlash = function(pressed) {
+    this.tetrad.left = pressed;
+
     if(game.state.getCurrentState() === Main) {
         if(pressed) {
             events.publish('player_slash', {});
@@ -307,6 +309,8 @@ InputController.prototype.OnSlash = function(pressed) {
 };
 
 InputController.prototype.OnThrow = function(pressed) {
+    this.tetrad.top = pressed;
+
     if(game.state.getCurrentState() === Main) {
         if(pressed) {
             events.publish('player_throw', {});
@@ -319,6 +323,8 @@ InputController.prototype.OnThrow = function(pressed) {
 };
 
 InputController.prototype.OnRoll = function(pressed) {
+    this.tetrad.right = pressed;
+
     if(game.state.getCurrentState() === Main) {
         if(pressed) {
             events.publish('player_roll', {});
@@ -346,6 +352,8 @@ InputController.prototype.OnHeal = function(pressed) {
 };
 
 InputController.prototype.OnLeft = function(pressed) {
+    this.dpad.left = pressed;
+
     if(game.state.getCurrentState() === Main) {
 
         if(pressed) {
@@ -368,6 +376,8 @@ InputController.prototype.OnLeft = function(pressed) {
 };
 
 InputController.prototype.OnRight = function(pressed) {
+    this.dpad.right = pressed;
+
     if(game.state.getCurrentState() === Main) {
 
         if(pressed) {
@@ -389,6 +399,8 @@ InputController.prototype.OnRight = function(pressed) {
 };
 
 InputController.prototype.OnUp = function(pressed) {
+    this.dpad.up = pressed;
+
     if(game.state.getCurrentState() === Main) {
         if(pressed) {
             events.publish('control_up', {pressed: true});
@@ -427,6 +439,8 @@ InputController.prototype.OnUp = function(pressed) {
 };
 
 InputController.prototype.OnDown = function(pressed) {
+    this.dpad.down = pressed;
+
     if(game.state.getCurrentState() === Main) {
         if(pressed) {
             events.publish('player_crouch', {crouch: true});

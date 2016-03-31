@@ -194,15 +194,15 @@ EnergyController.prototype.ResetCharge = function() {
 
 EnergyController.prototype.GetChargeDuration = function() {
 	if(this.charge > 3) {
-		return 5000;
-	} else if(this.charge > 2) {
-		return 6000;
-	} else if(this.charge > 1) {
-		return 7000;
-	} else if(this.charge > 0) {
 		return 8000;
+	} else if(this.charge > 2) {
+		return 10000;
+	} else if(this.charge > 1) {
+		return 12000;
+	} else if(this.charge > 0) {
+		return 14000;
 	} else {
-		return 10500;
+		return 10000;
 	}
 };
 
