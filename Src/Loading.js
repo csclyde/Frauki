@@ -56,7 +56,7 @@ Loading.create = function() {
     GameData.LoadDataFromStorage();
 
     game.physics.startSystem(Phaser.Physics.ARCADE);
-    game.physics.arcade.gravity.y = 600;
+    game.physics.arcade.gravity.y = 700;
 
     game.time.desiredFps = 60;
 

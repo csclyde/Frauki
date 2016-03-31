@@ -92,7 +92,7 @@ InputController = function() {
             break;
 
             case inputController.binds.shoulderR:
-                inputController.OnRShoulder(true);
+                inputController.OnHeal(true);
             break;
 
         }
@@ -141,7 +141,7 @@ InputController = function() {
             break;
 
             case inputController.binds.shoulderR:
-                inputController.OnRShoulder(false);
+                inputController.OnHeal(false);
             break;
 
         }
@@ -186,7 +186,7 @@ InputController = function() {
 
                 //case 5: //right shoulder
                 case 7: //right shoulder
-                    this.OnRShoulder(true);
+                    this.OnHeal(true);
                 break;
 
                 //case 4: //left shoulder
@@ -241,7 +241,7 @@ InputController = function() {
 
                 //case 5: //right shoulder
                 case 7: //right shoulder
-                    this.OnRShoulder(false);
+                    this.OnHeal(false);
                 break;
 
                 //case 4: //left shoulder
@@ -343,6 +343,8 @@ InputController.prototype.OnHeal = function(pressed) {
             this.timers.SetTimer('apple_charge', 1000);
 
             events.publish('player_heal', { charging: true });
+
+            console.log('fjkslf')
         } else {
             events.publish('player_heal', { charging: false });
         }
@@ -405,8 +407,6 @@ InputController.prototype.OnUp = function(pressed) {
         if(pressed) {
             events.publish('control_up', {pressed: true});
 
-            events.publish('activate_speech', {});
-
             if(frauki.body.onFloor() && frauki.body.velocity.x < PLAYER_SPEED()) {
                 //switch between layers if they are in a doorway
                 if(game.physics.arcade.overlap(frauki, Frogland.door1Group)) {
@@ -453,13 +453,15 @@ InputController.prototype.OnDown = function(pressed) {
 };
 
 InputController.prototype.OnRShoulder = function(pressed) {
+    this.buttons.rShoulder = pressed;
+
+    this.OnHeal(pressed);
+
     if(game.state.getCurrentState() === Main) {
         if(pressed) {
-            events.publish('activate_weapon', { activate: true });
-            this.buttons.rShoulder = true;
+            
         } else {
-            events.publish('activate_weapon', { activate: false });
-            this.buttons.rShoulder = false;
+            
         }
     } else if(game.state.getCurrentState() === Upgrading) {
         

@@ -11,13 +11,13 @@ EffectsController = function() {
 
     this.positiveBits = game.add.emitter(0, 0, 15);
     this.positiveBits.makeParticles('Misc', ['EnergyBitPos0000', 'EnergyBitPos0001', 'EnergyBitPos0002', 'EnergyBitPos0003', 'EnergyBitPos0004', 'EnergyBitPos0005']); //array of strings here for multiple sprites
-    this.positiveBits.gravity = -600;
+    this.positiveBits.gravity = -700;
     this.positiveBits.setRotation(0, 0);
     //Frogland.effectsGroup.addChild(this.positveBits);
 
     this.neutralBits = game.add.emitter(0, 0, 15);
     this.neutralBits.makeParticles('Misc', ['EnergyBitNeutral0000', 'EnergyBitNeutral0001', 'EnergyBitNeutral0002', 'EnergyBitNeutral0003', 'EnergyBitNeutral0004', 'EnergyBitNeutral0005']); //array of strings here for multiple sprites
-    this.neutralBits.gravity = -600;
+    this.neutralBits.gravity = -700;
     this.neutralBits.setRotation(0, 0);
     //Frogland.effectsGroup.addChild(this.neutralBits);
 
@@ -56,7 +56,7 @@ EffectsController = function() {
 
     this.stars = game.add.emitter(0, 0, 30);
     this.stars.makeParticles('Misc', ['Stars0000', 'Stars0001', 'Stars0002', 'Stars0003']); 
-    this.stars.gravity = -600;
+    this.stars.gravity = -700;
     this.stars.particleDrag.setTo(3000);
     this.stars.setRotation(0, 0);
     this.stars.minParticleSpeed.setTo(-600);
@@ -112,7 +112,7 @@ EffectsController = function() {
 
     this.nuggDepositer = game.add.emitter(0, 0, 15);
     this.nuggDepositer.makeParticles('Misc', ['EnergyBitNeutral0000', 'EnergyBitNeutral0001', 'EnergyBitNeutral0002', 'EnergyBitNeutral0003', 'EnergyBitNeutral0004', 'EnergyBitNeutral0005']);
-    this.nuggDepositer.gravity = -600;
+    this.nuggDepositer.gravity = -700;
     this.nuggDepositer.setRotation(0, 0);
 
     this.loadedEffects = [];
@@ -313,7 +313,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 bubbler.width = o.width;
                 bubbler.height = o.height;
                 bubbler.makeParticles('Misc', ['Bubbles0000', 'Bubbles0001', 'Bubbles0002', 'Bubbles0003'], 5);
-                bubbler.gravity = -600;
+                bubbler.gravity = -700;
                 bubbler.maxParticleSpeed.setTo(0);
                 bubbler.minParticleSpeed.setTo(0);
                 bubbler.minParticleSpeed.y = -25;
@@ -350,7 +350,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 leaves.width = o.width;
                 leaves.height = o.height;
                 leaves.makeParticles('Misc', ['Leaves0000', 'Leaves0001', 'Leaves0002'], 5);
-                leaves.gravity = -600;
+                leaves.gravity = -700;
                 leaves.maxParticleSpeed.y = 45;
                 leaves.minParticleSpeed.y = 15;
                 leaves.maxParticleSpeed.x = 40;
@@ -368,7 +368,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 leaves.width = o.width;
                 leaves.height = o.height;
                 leaves.makeParticles('Misc', ['Leaves0003', 'Leaves0004', 'Leaves0005'], 5);
-                leaves.gravity = -600;
+                leaves.gravity = -700;
                 leaves.maxParticleSpeed.y = 45;
                 leaves.minParticleSpeed.y = 15;
                 leaves.maxParticleSpeed.x = 40;
@@ -385,7 +385,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 spirits.width = o.width;
                 spirits.height = o.height;
                 spirits.makeParticles('Misc', ['Spirit0000', 'Spirit0001', 'Spirit0002', 'Spirit0003'], 10);
-                spirits.gravity = -600;
+                spirits.gravity = -700;
                 spirits.alpha = 0.15;
                 spirits.particleDrag.setTo(0);
                 spirits.maxParticleSpeed.setTo(15);
@@ -405,7 +405,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
             sparkles.width = o.width;
             sparkles.height = o.height;
             sparkles.makeParticles('Misc', ['Sparkles0000', 'Sparkles0001', 'Sparkles0002', 'Sparkles0003', 'Sparkles0004'], 25);
-            sparkles.gravity = -600;
+            sparkles.gravity = -700;
             sparkles.maxParticleSpeed.setTo(0);
             sparkles.minParticleSpeed.setTo(0);
             sparkles.minRotation = 0;

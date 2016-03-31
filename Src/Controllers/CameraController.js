@@ -46,7 +46,7 @@ CameraController.prototype.Update = function() {
 	var idealY = yOffset + frauki.body.center.y;
 
 	this.camX += (idealX - this.camX) * 0.08;
-	this.camY += (idealY - this.camY) * 0.06;
+	this.camY += (idealY - this.camY) * 0.04;
 
 	game.camera.focusOnXY(this.camX, this.camY);
 

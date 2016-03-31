@@ -7,7 +7,7 @@ Enemy.prototype.types['R2BTU'] =  function() {
     this.animations.add('float', ['R2BTU/Float0000', 'R2BTU/Float0001'], 14, true, false);
     this.animations.add('attack', ['R2BTU/Attack0000', 'R2BTU/Attack0001', 'R2BTU/Attack0002', 'R2BTU/Attack0003'], 16, true, false);
 
-    this.energy = 3;
+    this.energy = 1;
     this.baseStunDuration = 500;
 
     this.robotic = true;

@@ -54,9 +54,10 @@ var Speeches = {
 	'pouring_joy': { text: 'Something is carved into the wall: I can barely withstand the joy pouring into me! Goodbye!' },
 	'another_sky': { text: 'Something is carved into the wall: So, we will find another sky. So it goes.' },
 	'behold_goddess': { text: 'Something is carved into the wall: The Goddess has appeared, and we are forgiven' },
-	'mountain_view': { text: 'Today\'s going to be a good day.', portrait: 'Silly' },
-	'strike_down': { text: 'Frauki?? The Goddess is ailing, please return this crystal to her... And don\'t let any jerks take it!', portrait: 'Irena' },
+	'mountain_view': { text: 'Looks like I can\'t open the door from this side. Maybe I can open it from the other side.' },
 	'way_blocked': { text: 'Hmm... the way is blocked. Maybe I can find a way around.' },
+	'apple_tutorial': { text: 'Apples are tasty. If I find one, I can eat it with the right shoulder button to feel better.' },
+	'whoa_prism': { text: 'A prism shard! I should return this...' },
 
 	'journal1': { text: 'Something is carved into the wall: I take a greenergy suppository every morning, there\'s really no better way to start the day.', portrait: 'Displeased' },
 	'journal2': { text: 'Something is carved into the wall: Greenergy on the rocks, greenergy tendies, greenergy muffins... yes please!' },

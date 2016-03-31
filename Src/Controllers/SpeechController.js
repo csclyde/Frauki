@@ -8,22 +8,9 @@ SpeechController = function() {
 	events.subscribe('player_slash', function(params) {
 		if(this.displayIndex !== this.currentText.length) {
 			this.displayIndex = this.currentText.length;
-		} else {
-			this.HideSpeech();
 		}
 	}, this);
 
-	events.subscribe('player_roll', function(params) {
-		this.HideSpeech();
-	}, this);
-
-	events.subscribe('player_jump', function(params) {
-		this.HideSpeech();
-	}, this);
-
-	events.subscribe('player_heal', function(params) {
-		this.HideSpeech();
-	}, this);
 
 	this.timers = new TimerUtil();
 
@@ -174,9 +161,10 @@ SpeechController.prototype.Update = function() {
 	
 
 	if(!this.text.visible && this.FraukiInSpeechZone()) {
-		this.questionMark.visible = true;
-		this.questionMark.x = frauki.x;
-		this.questionMark.y = frauki.y - 140 + Math.sin(game.time.now / 200) * 3;
+		// this.questionMark.visible = true;
+		// this.questionMark.x = frauki.x;
+		// this.questionMark.y = frauki.y - 140 + Math.sin(game.time.now / 200) * 3;
+		this.ShowSpeech();
 	} else {
 		this.questionMark.visible = false;
 	}

@@ -184,9 +184,9 @@ Main.Restart = function() {
 
         Frogland.ResetFallenTiles();
 
-        //var cameraMoveTween = game.add.tween(game.camera)
+        Frogland.SpawnFrauki();
 
-        game.state.start('Upgrading', false, false);
+        //game.state.start('Upgrading', false, false);
 
     });
 };

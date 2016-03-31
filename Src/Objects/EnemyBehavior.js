@@ -31,9 +31,13 @@ EnemyBehavior.FacingPlayer = function(e) {
 };
 
 EnemyBehavior.FacingAttack = function(e) {
-    if((e.direction === 'left' && frauki.attackRect.body.center.x < e.body.center.x + 20) ||
-       (e.direction === 'right' && frauki.attackRect.body.center.x > e.body.center.x - 20) )
-        return true;
+    if(frauki.states.throwing) {
+        if((e.direction === 'left' && frauki.attackRect.body.center.x < e.body.center.x + 20) ||
+           (e.direction === 'right' && frauki.attackRect.body.center.x > e.body.center.x - 20) )
+            return true;
+    } else {
+        return this.FacingPlayer(e);
+    }
 
     return false;
 };
