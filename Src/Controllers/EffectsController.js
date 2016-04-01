@@ -37,7 +37,7 @@ EffectsController = function() {
 
     this.posSpark = game.add.emitter(0, 0, 50);
     this.posSpark.makeParticles('Misc', ['Sparks0000', 'Sparks0001', 'Sparks0002', 'Sparks0003', 'Sparks0004', 'Sparks0005']); 
-    this.posSpark.gravity = -400;
+    this.posSpark.gravity = -500;
     this.posSpark.particleDrag.setTo(100);
     this.posSpark.setRotation(0, 0);
     //Frogland.effectsGroup.addChild(this.posSpark);

@@ -835,6 +835,9 @@ Player.prototype.LandHit = function(e, damage) {
         weaponController.baton.body.velocity.x = vel.x / 2;
         weaponController.baton.body.velocity.y = vel.y * 10;
 
+    } else if(frauki.states.throwing && damage > 0) {
+        weaponController.UpgradeThrow();
+
     } else if(this.state !== this.AttackStab && this.state !== this.AttackDiveFall && this.state !== this.Rolling) {
         var vel = new Phaser.Point(frauki.body.center.x - e.body.center.x, frauki.body.center.y - e.body.center.y);
         vel = vel.normalize();
@@ -885,7 +888,6 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
     }
 
     energyController.RemoveHealth(damage);
-    energyController.ResetCharge();
 
     console.log('Frauki is taking ' + damage + ' damage');
 
@@ -905,6 +907,9 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
     if(energyController.GetHealth() > 0) {
         effectsController.ScreenFlash();
         effectsController.SlowHit(400);
+        var nuggAmt = damage * 3;
+        if(nuggAmt > GameData.GetNuggCount()) nuggAmt = GameData.GetNuggCount();
+        effectsController.DropNuggets(nuggAmt);
     } else {
         effectsController.DropNuggets(GameData.GetNuggCount());
     }

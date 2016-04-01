@@ -96,6 +96,11 @@ WeaponController.prototype.ThrowBaton = function() {
     this.timers.SetTimer('min_throw_time', 200);
 };
 
+WeaponController.prototype.UpgradeThrow = function() {
+    this.baton.chargeLevel += 1;
+    this.baton.animations.play('baton' + this.baton.chargeLevel);
+};
+
 WeaponController.prototype.Next = function() {
     var index = this.weaponList.indexOf(this.currentWeapon);
     if(index === this.weaponList.length - 1) {
@@ -144,8 +149,11 @@ WeaponController.prototype.Update = function() {
         var maxVelocity = 800 + this.baton.chargeLevel * 100;
 
         if(this.timers.TimerUp('min_throw_time') && this.baton.body.x > frauki.body.x && this.baton.body.x < frauki.body.x + frauki.body.width && this.baton.body.y > frauki.body.y && this.baton.body.y < frauki.body.y + frauki.body.height) {
-            this.ResetBaton();
             events.publish('play_sound', {name: 'energy_bit', restart: true });
+            effectsController.EnergySplash(frauki.body, 150, 'positive', 5 + 5 * this.baton.chargeLevel);
+
+            this.ResetBaton();
+
             return;
         }
 
