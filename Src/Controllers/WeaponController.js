@@ -33,8 +33,11 @@ WeaponController = function() {
     game.physics.enable(this.baton, Phaser.Physics.ARCADE);
     this.baton.body.gravity.y = -600;
     this.baton.body.setSize(20, 20, 0, 0);
-    this.baton.animations.add('baton0', ['Baton00000', 'Baton00001', 'Baton00002'], 30, true, false);
+    this.baton.animations.add('baton0', ['Baton00000', 'Baton00001', 'Baton00002', 'Baton00003', 'Baton00004', 'Baton00005'], 30, true, false);
     this.baton.animations.add('baton1', ['Baton10000', 'Baton10001', 'Baton10002'], 30, true, false);
+    this.baton.animations.add('baton2', ['Baton20000', 'Baton20001', 'Baton20002'], 30, true, false);
+    this.baton.animations.add('baton3', ['Baton30000', 'Baton30001', 'Baton30002'], 30, true, false);
+    this.baton.animations.add('baton4', ['Baton40000', 'Baton40001', 'Baton40002', 'Baton40003', 'Baton40004', 'Baton40005'], 30, true, false);
     this.baton.animations.add('shit', ['baton0000'], 14, false, false);
     this.baton.animations.play('baton0');
     this.baton.visible = false;
@@ -54,17 +57,19 @@ WeaponController.prototype.ThrowBaton = function() {
     } else if(this.baton.chargeLevel === 1) {
         this.baton.animations.play('baton1');
     } else if(this.baton.chargeLevel === 2) {
-        this.baton.animations.play('baton1');
+        this.baton.animations.play('baton2');
     } else if(this.baton.chargeLevel === 3) {
-        this.baton.animations.play('baton1');
+        this.baton.animations.play('baton3');
     } else if(this.baton.chargeLevel === 4) {
-        this.baton.animations.play('baton1');
+        this.baton.animations.play('baton4');
     }  else {
         this.baton.animations.play('baton0');
     }
 
     this.baton.x = frauki.body.center.x + (frauki.states.direction === 'right' ? 20 : -20);
     this.baton.y = frauki.body.center.y - 20;
+
+    this.baton.scale.x = frauki.scale.x;
 
     if(frauki.states.direction === 'left') {
         this.baton.body.velocity.x = -1200;

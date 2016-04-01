@@ -2961,6 +2961,21 @@
                  "width":106.646,
                  "x":699.854,
                  "y":3737.17
+                }, 
+                {
+                 "height":111,
+                 "id":2039,
+                 "name":"throw_sword",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":67.5,
+                 "x":2963.5,
+                 "y":3263.5
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -10987,7 +11002,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":2038,
+ "nextobjectid":2040,
  "orientation":"orthogonal",
  "properties":
     {

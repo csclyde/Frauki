@@ -58,6 +58,7 @@ var Speeches = {
 	'way_blocked': { text: 'Hmm... the way is blocked. Maybe I can find a way around.' },
 	'apple_tutorial': { text: 'Apples are tasty. If I find one, I can eat it with the right shoulder button to feel better.' },
 	'whoa_prism': { text: 'A prism shard! I should return this...' },
+	'throw_sword': { text: 'I bet I could throw my energy wtih the X button to hit that orb and open the door.' },
 
 	'journal1': { text: 'Something is carved into the wall: I take a greenergy suppository every morning, there\'s really no better way to start the day.', portrait: 'Displeased' },
 	'journal2': { text: 'Something is carved into the wall: Greenergy on the rocks, greenergy tendies, greenergy muffins... yes please!' },

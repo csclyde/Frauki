@@ -111,7 +111,7 @@ Enemy.prototype.types['KR32'] =  function() {
     	} else {
     		this.body.velocity.x = -300;
     	}
-    	this.body.velocity.y = -150;
+    	this.body.velocity.y = -200;
 
     	this.timers.SetTimer('dodge', game.rnd.between(2000, 4000));
     };
@@ -126,7 +126,7 @@ Enemy.prototype.types['KR32'] =  function() {
     	} else {
     		this.body.velocity.x = 100;
     	}
-    	this.body.velocity.y = -250;
+    	this.body.velocity.y = -300;
 
     	this.timers.SetTimer('dodge', game.rnd.between(2000, 4000));
     	this.timers.SetTimer('attack_wait', 0);

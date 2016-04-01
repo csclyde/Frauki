@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="400" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="2038">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="400" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="2040">
  <properties>
   <property name="debug" value="false"/>
   <property name="startLayer" value="3"/>
@@ -2274,6 +2274,7 @@
   <object id="1724" name="leaves_green" type="effect" x="333.854" y="3737.17" width="102.646" height="20.6666"/>
   <object id="1725" name="leaves_green" type="effect" x="529.854" y="3737.67" width="76.1459" height="16.8333"/>
   <object id="1726" name="leaves_green" type="effect" x="699.854" y="3737.17" width="106.646" height="20.3333"/>
+  <object id="2039" name="throw_sword" type="speech" x="2963.5" y="3263.5" width="67.5" height="111"/>
  </objectgroup>
  <layer name="Background_3" width="200" height="400" visible="0">
   <data encoding="csv">
