@@ -13,7 +13,7 @@ Enemy.prototype.types['Sporoid'] =  function() {
     this.dashTimer = 0;
     this.dashWaitTimer = 0;
     this.shootTimer = 0;
-    this.energy = 0.5;
+    this.energy = 1;
     
     this.damage = 1;
 

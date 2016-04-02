@@ -7,7 +7,6 @@ Enemy = function(game, x, y, name) {
     //enable its physics body
     game.physics.enable(this, Phaser.Physics.ARCADE);
     this.body.collideWorldBounds = true;
-    //this.body.immovable = true;
 
     this.timers = new TimerUtil();
     
@@ -25,14 +24,23 @@ Enemy = function(game, x, y, name) {
 
     //capture any initial values that were set in the specific enemy set up
     this.maxEnergy = this.energy;
-    this.initialX = this.body.x;
-    this.initialY = this.body.y;
 
     //set up an attackRect that will be used as the enemies attack
     this.attackRect = game.add.sprite(0, 0, null);
     game.physics.enable(this.attackRect, Phaser.Physics.ARCADE);
     this.attackRect.body.setSize(0, 0, 0, 0);
     this.attackRect.owningEnemy = this;  
+
+    this.UI = {};
+    this.UI.frame = game.add.image(0, 0, 'UI', 'EnemyHealth000' + (this.maxEnergy - 1), Frogland['objectGroup_' + this.owningLayer]);
+    this.UI.pips = [];
+
+    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0005'));
+    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0005'));
+    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0005'));
+    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0005'));
+    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0005'));
+    
 };
 
 Enemy.prototype = Object.create(Phaser.Sprite.prototype);
@@ -54,7 +62,6 @@ Enemy.prototype.Deactivate = function() {};
 Enemy.prototype.LandHit = function() {};
 
 Enemy.prototype.update = function() {
-    var that = this;
 
     if(!this.body.enable) {
         return;
@@ -83,13 +90,9 @@ Enemy.prototype.update = function() {
         game.physics.arcade.overlap(this.attackRect, frauki, Collision.OverlapEnemyAttackWithFrauki);
     } 
 
-    // if(!this.timers.TimerUp('grace') && this.timers.TimerUp('hurt_flicker')) {
-    //     this.alpha = 0;
-    //     game.time.events.add(10, function() { that.timers.SetTimer('hurt_flicker', 10); });
-
-    // } else {
-    //     this.alpha = 1;
-    // }
+    if(this.maxEnergy > 1 && this.owningLayer === Frogland.currentLayer) {
+        this.DrawHealth();
+    }
 };
 
 Enemy.prototype.UpdateAttackGeometry = function() {
@@ -146,19 +149,6 @@ Enemy.prototype.SetDefaultValues = function() {
     this.energy = 5;
     this.damage = 3;
     this.baseStunDuration = 600;
-};
-
-Enemy.prototype.Respawn = function() {
-
-    this.alive = true;
-    this.exists = true;
-    this.visible = true;
-    this.body.velocity.x = 0;
-    this.body.velocity.y = 0;
-    this.x = this.initialX;
-    this.y = this.initialY;
-    this.energy = this.maxEnergy;
-    this.state = this.Idling;
 };
 
 Enemy.prototype.Attacking = function() {
@@ -238,16 +228,33 @@ Enemy.prototype.TakeHit = function(damage) {
     }
 };
 
-Enemy.prototype.Stun = function() {
-    this.state = this.Stunned;
+Enemy.prototype.DrawHealth = function() {
+    this.UI.frame.x = this.body.x;
+    this.UI.frame.y = this.body.y - 20;
+
+    for(var i = 0; i < this.maxEnergy; i++) {
+        //if the count is less than the energy, represent it
+        if(i < this.energy) {
+            this.UI.pips[i].visible = true;
+            this.UI.pips[i].x = this.body.x + 3 + i * 5;
+            this.UI.pips[i].y = this.body.y - 18;
+        } else {
+            this.UI.pips[i].visible = false;
+        }
+    }
 };
 
-Enemy.prototype.Stunned = function() {
-    this.PlayAnim('stun');
+Enemy.prototype.HideHealth = function() {
+    this.UI.frame.visible = false;
 
-    if(this.timers.TimerUp('stun')) {
-        return true;
+    for(var i = 0; i < this.maxEnergy; i++) {
+        this.UI.pips[i].visible = false;
     }
+};
+
+Enemy.prototype.ChangeLayerAway = function() {
+    
+    this.HideHealth();
 };
 
 function DestroyEnemy(e) {
@@ -283,6 +290,13 @@ function DestroyEnemy(e) {
 
     events.publish('camera_shake', {magnitudeX: 8, magnitudeY: 2, duration: 350 });
     //effectsController.MakeHearts(e.maxEnergy / 4);
+
+    e.UI.frame.destroy();
+    e.UI.pips[0].destroy();
+    e.UI.pips[1].destroy();
+    e.UI.pips[2].destroy();
+    e.UI.pips[3].destroy();
+    e.UI.pips[4].destroy();
 
     e.destroy();
     e = null;

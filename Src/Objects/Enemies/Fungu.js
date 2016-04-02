@@ -8,7 +8,7 @@ Enemy.prototype.types['Fungu'] =  function() {
     this.animations.add('shoot', ['Fungu/Fungu0001'], 10, true, false);
     this.animations.add('shit', ['Hop0000'], 10, true, false);
 
-    this.energy = 0.5;
+    this.energy = 1;
 
     this.damage = 1;
     this.shotCount = 0;

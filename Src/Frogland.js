@@ -319,6 +319,7 @@ Frogland.ChangeLayer = function(newLayer) {
     currentObjectLayer.forEach(function(obj) {
         game.add.tween(obj).to({alpha: 0}, 200, Phaser.Easing.Linear.None, true);
         if(!!obj.body) obj.body.enable = false;
+        if(!!obj.ChangeLayerAway) obj.ChangeLayerAway();
     });
 
     //force a trigger the player is standing in to exit out

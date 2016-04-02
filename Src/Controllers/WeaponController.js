@@ -38,7 +38,6 @@ WeaponController = function() {
     this.baton.animations.add('baton2', ['Baton20000', 'Baton20001', 'Baton20002'], 30, true, false);
     this.baton.animations.add('baton3', ['Baton30000', 'Baton30001', 'Baton30002'], 30, true, false);
     this.baton.animations.add('baton4', ['Baton40000', 'Baton40001', 'Baton40002', 'Baton40003', 'Baton40004', 'Baton40005'], 30, true, false);
-    this.baton.animations.add('shit', ['baton0000'], 14, false, false);
     this.baton.animations.play('baton0');
     this.baton.visible = false;
 };
