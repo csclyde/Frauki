@@ -156,6 +156,9 @@ Collision.OverlapAttackWithEnemy = function(f, e, halfDmg) {
 
     e.TakeHit(damage);
     frauki.LandHit(e, damage);
+
+    e.timers.SetTimer('health_view', 4000);
+
 };
 
 Collision.OverlapAttackWithEnemyAttack = function(e, f) {

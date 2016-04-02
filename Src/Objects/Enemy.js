@@ -80,6 +80,14 @@ Enemy.prototype.update = function() {
 
     this.UpdateAttackGeometry();
 
+    if(this.timers.TimerUp('health_view')) {
+        if(EnemyBehavior.Player.IsVisible(this)) {
+            this.timers.SetTimer('health_view', 4000);
+        } else {
+            this.HideHealth();
+        }
+    }
+
     //check for landed hits
     if(this.Attacking()) {
 
@@ -90,7 +98,7 @@ Enemy.prototype.update = function() {
         game.physics.arcade.overlap(this.attackRect, frauki, Collision.OverlapEnemyAttackWithFrauki);
     } 
 
-    if(this.maxEnergy > 1 && this.owningLayer === Frogland.currentLayer) {
+    if(this.maxEnergy > 1 && this.owningLayer === Frogland.currentLayer && !this.timers.TimerUp('health_view')) {
         this.DrawHealth();
     }
 };
@@ -231,6 +239,7 @@ Enemy.prototype.TakeHit = function(damage) {
 Enemy.prototype.DrawHealth = function() {
     this.UI.frame.x = this.body.x;
     this.UI.frame.y = this.body.y - 20;
+    this.UI.frame.visible = true;
 
     for(var i = 0; i < this.maxEnergy; i++) {
         //if the count is less than the energy, represent it
@@ -247,13 +256,13 @@ Enemy.prototype.DrawHealth = function() {
 Enemy.prototype.HideHealth = function() {
     this.UI.frame.visible = false;
 
-    for(var i = 0; i < this.maxEnergy; i++) {
+    for(var i = 0; i < this.UI.pips.length; i++) {
         this.UI.pips[i].visible = false;
     }
 };
 
 Enemy.prototype.ChangeLayerAway = function() {
-    
+
     this.HideHealth();
 };
 
