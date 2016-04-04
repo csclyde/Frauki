@@ -203,15 +203,15 @@ Main.DrawUI = function() {
     this.RenderTextureFromAtlas('UI', 'HudFrame0002', 14 + (energyController.GetMaxHealth() * 7), 10);
 
 
-    this.RenderTextureFromAtlas('UI', 'HudFrame0000', 10, 21);
+    this.RenderTextureFromAtlas('UI', 'HudFrame0000', 10, 22);
 
     for(var i = 0, len = energyController.GetMaxCharge(); i < len; i++) {
-        this.RenderTextureFromAtlas('UI', 'HudFrame0003', 14 + (i * 7), 24);
-        this.RenderTextureFromAtlas('UI', 'HudFrame0001', 14 + (i * 7), 21);
+        this.RenderTextureFromAtlas('UI', 'HudFrame0003', 14 + (i * 7), 25);
+        this.RenderTextureFromAtlas('UI', 'HudFrame0001', 14 + (i * 7), 22);
     }
 
 
-    this.RenderTextureFromAtlas('UI', 'HudFrame0002', 14 + (energyController.GetMaxCharge() * 7), 21);
+    this.RenderTextureFromAtlas('UI', 'HudFrame0002', 14 + (energyController.GetMaxCharge() * 7), 22);
 
     //health pips
     for(var i = 0, len = energyController.GetHealth(); i < len; i++) {
@@ -244,7 +244,7 @@ Main.DrawUI = function() {
             pipFrame = 'EnergyPips0003';
         } 
         
-        this.RenderTextureFromAtlas('UI', pipFrame, 14 + (7 * i), 24);
+        this.RenderTextureFromAtlas('UI', pipFrame, 14 + (7 * i), 25);
     }
 
     // for(var i = 0, len = energyController.GetCharge(); i < len; i++) {
