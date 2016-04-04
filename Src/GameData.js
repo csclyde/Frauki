@@ -12,7 +12,8 @@ GameData.data = {
     upgrades: ["Shield"],
     doors: [],
     shards: {},
-    nugg_bank: 0
+    nugg_bank: 0,
+    flash_copy: null
 };
 
 GameData.nuggetCount = 0;
@@ -137,4 +138,19 @@ GameData.DepositNugg = function() {
         this.data.nugg_bank++;
         this.SaveDataToStorage();
     }
-}
+};
+
+GameData.GetFlashCopy = function() {
+    return this.data.flash_copy;
+};
+
+GameData.SetFlashCopy = function() {
+    this.data.flash_copy = {};
+
+    this.data.flash_copy.x = frauki.x;
+    this.data.flash_copy.y = frauki.y;
+    this.data.flash_copy.layer = Frogland.currentLayer;
+
+    this.SaveDataToStorage();
+
+};

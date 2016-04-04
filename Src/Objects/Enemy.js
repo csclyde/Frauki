@@ -40,6 +40,15 @@ Enemy = function(game, x, y, name) {
     this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0005'));
     this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0005'));
     this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0005'));
+
+    this.events.onDestroy.add(function(e) {
+        e.UI.frame.destroy();
+        e.UI.pips[0].destroy();
+        e.UI.pips[1].destroy();
+        e.UI.pips[2].destroy();
+        e.UI.pips[3].destroy();
+        e.UI.pips[4].destroy();
+    });
     
 };
 

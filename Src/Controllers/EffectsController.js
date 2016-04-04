@@ -230,6 +230,12 @@ EffectsController.prototype.Update = function() {
     //game.physics.arcade.collide(this.dicedPieces3, Frogland.GetCurrentCollisionLayer());
     //game.physics.arcade.collide(this.dicedPieces2, Frogland.GetCurrentCollisionLayer());
     game.physics.arcade.collide(this.loadedEffectsCollide, Frogland.GetCurrentCollisionLayer(), Collision.CollideEffectWithWorld, Collision.OverlapEffectWithWorld);
+
+    if(frauki.state === frauki.Healing) {
+        effectsController.MaterializeApple(frauki.body.center.x, frauki.body.y - 5, true);
+    } else if(effectsController.materializingApple.visible) {
+        effectsController.MaterializeApple(0, 0, false);
+    }
 };
 
 EffectsController.prototype.LoadMapEffects = function(layer) {
@@ -297,7 +303,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 fluffer.width = o.width;
                 fluffer.height = o.height;
                 fluffer.makeParticles('Misc', ['Fluff0000', 'Fluff0001', 'Fluff0002', 'Fluff0003'], 100);
-                fluffer.gravity = -595;
+                fluffer.gravity = -695;
                 fluffer.maxParticleSpeed.setTo(10);
                 fluffer.minParticleSpeed.setTo(-10);
                 fluffer.setRotation(0, 0);
@@ -335,7 +341,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 sprayer.width = o.width;
                 sprayer.height = o.height;
                 sprayer.makeParticles('Misc', ['Sparks0000', 'Sparks0001', 'Sparks0002', 'Sparks0003', 'Sparks0004', 'Sparks0005'], 20);
-                sprayer.gravity = -595;
+                sprayer.gravity = -695;
                 sprayer.maxParticleSpeed.setTo(10, 100);
                 sprayer.minParticleSpeed.setTo(-400, -100);
                 sprayer.setRotation(0, 0);

@@ -15,20 +15,13 @@ Collision.OverlapFraukiWithObject = function(f, o) {
 
 
     } else if(o.spriteType === 'enemy') {
-        if(o.CanCauseDamage() || 
-            frauki.state === frauki.Rolling ||
-            frauki.state === frauki.Falling ||
-            frauki.state === frauki.Flipping ||
-            (frauki.Attacking() && frauki.GetCurrentDamage() > 0)) {
+
+        if(frauki.body.y + frauki.body.height <= o.body.y + (frauki.body.height / 3) || o.body.y + o.body.height <= frauki.body.y + (o.body.height / 3)) {
             return false;
         } else {
-
-            if(frauki.body.y + frauki.body.height <= o.body.y + (frauki.body.height / 3) || o.body.y + o.body.height <= frauki.body.y + (o.body.height / 3)) {
-                return false;
-            } else {
-                return true;
-            }
+            return true;
         }
+        
 
     } else if(o.spriteType === 'door') {
         OpenDoor(f, o);

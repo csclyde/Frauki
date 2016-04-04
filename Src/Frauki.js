@@ -117,11 +117,6 @@ Player.prototype.preStateUpdate = function() {
         this.runDust.visible = false;
     }
 
-    if(this.state === this.Healing) {
-        effectsController.MaterializeApple(frauki.body.center.x, frauki.body.y - 5, true);
-    } else if(effectsController.materializingApple.visible) {
-        effectsController.MaterializeApple(0, 0, false);
-    }
 };
 
 Player.prototype.postStateUpdate = function() {

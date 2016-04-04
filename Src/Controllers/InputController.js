@@ -157,7 +157,6 @@ InputController = function() {
             console.log('gamepad disconnected');
         },
         onDown: function(buttonCode, value){
-
             if(Main.restarting) {
                 return;
             }
@@ -180,10 +179,6 @@ InputController = function() {
                     this.OnThrow(true);
                 break;
 
-                case 8: //select
-                case 9: //start
-                break;
-
                 //case 5: //right shoulder
                 case 7: //right shoulder
                     this.OnHeal(true);
@@ -191,6 +186,11 @@ InputController = function() {
 
                 //case 4: //left shoulder
                 case 6: //left shoulder
+                break;
+
+                case 9: //start
+                console.log('fjdfsdfsdfs')
+                    this.OnStart(true);
                 break;
 
                 case 12:
@@ -235,8 +235,8 @@ InputController = function() {
                     this.OnThrow(false);
                 break;
 
-                case 8: //select
                 case 9: //start
+                    this.OnStart(false);
                 break;
 
                 //case 5: //right shoulder
@@ -460,6 +460,20 @@ InputController.prototype.OnRShoulder = function(pressed) {
     if(game.state.getCurrentState() === Main) {
         if(pressed) {
             
+        } else {
+            
+        }
+    } else if(game.state.getCurrentState() === Upgrading) {
+        
+    }
+};
+
+InputController.prototype.OnStart = function(pressed) {
+
+    if(game.state.getCurrentState() === Main) {
+        if(pressed) {
+            console.log('fjdd')
+            GameData.SetFlashCopy();
         } else {
             
         }

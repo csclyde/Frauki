@@ -185,14 +185,24 @@ Frogland.HandleCollisions = function() {
 Frogland.SpawnFrauki = function() {
     if(Frogland.map.properties.debug === 'false') {
 
-        objectController.checkpointList.forEach(function(obj) {
-            if(obj.spriteType === 'checkpoint' && obj.id == GameData.GetCheckpoint()) {
-                frauki.x = obj.x;
-                frauki.y = obj.y + 90;
-                Frogland.ChangeLayer(obj.owningLayer);   
-                frauki.timers.SetTimer('frauki_invincible', 0);
-            } 
-        });  
+        if(GameData.GetFlashCopy()) {
+            var fc = GameData.GetFlashCopy();
+
+            frauki.x = fc.x;
+            frauki.y = fc.y;
+            Frogland.ChangeLayer(fc.layer, true);   
+            frauki.timers.SetTimer('frauki_invincible', 0);
+        }
+        else {
+            objectController.checkpointList.forEach(function(obj) {
+                if(obj.spriteType === 'checkpoint' && obj.id == GameData.GetCheckpoint()) {
+                    frauki.x = obj.x;
+                    frauki.y = obj.y + 90;
+                    Frogland.ChangeLayer(obj.owningLayer);   
+                    frauki.timers.SetTimer('frauki_invincible', 0);
+                } 
+            });  
+        }
 
     } else {
         fraukiStartX = this.map.properties.startX * 16;
@@ -298,12 +308,14 @@ Frogland.GetCurrentCollisionLayer = function() {
     return this['collisionLayer_' + this.currentLayer];
 };
 
-Frogland.ChangeLayer = function(newLayer) {
+Frogland.ChangeLayer = function(newLayer, immediate) {
 
     if(this.currentLayer == newLayer || Frogland.changingLayer === true) return;
 
-    Frogland.changingLayer = true;
-    game.time.events.add(800, function() { Frogland.changingLayer = false; });
+    if(!immediate) {
+        Frogland.changingLayer = true;
+        game.time.events.add(800, function() { Frogland.changingLayer = false; });
+    }
 
     //get the current layer
     var currentForgroundLayer = this['foregroundLayer_' + this.currentLayer];
@@ -311,13 +323,28 @@ Frogland.ChangeLayer = function(newLayer) {
     var currentBackgroundLayer = this['backgroundLayer_' + this.currentLayer];
     var currentObjectLayer = this.GetCurrentObjectGroup();
 
-    //fade out current layers
-    game.add.tween(currentForgroundLayer).to({alpha: 0}, 300, Phaser.Easing.Linear.None, true).onComplete.add(function() { currentForgroundLayer.visible = false; });
-    game.add.tween(currentMidgroundLayer).to({alpha: 0}, 300, Phaser.Easing.Linear.None, true).onComplete.add(function() { currentMidgroundLayer.visible = false; });
-    game.add.tween(currentBackgroundLayer).to({alpha: 0}, 300, Phaser.Easing.Linear.None, true).onComplete.add(function() { currentBackgroundLayer.visible = false; });
+    if(immediate) {
+        currentForgroundLayer.visible = false;
+        currentMidgroundLayer.visible = false;
+        currentBackgroundLayer.visible = false;
+
+        currentForgroundLayer.alpha = 0;
+        currentMidgroundLayer.alpha = 0;
+        currentBackgroundLayer.alpha = 0;
+    } else {
+        //fade out current layers
+        game.add.tween(currentForgroundLayer).to({alpha: 0}, 300, Phaser.Easing.Linear.None, true).onComplete.add(function() { currentForgroundLayer.visible = false; });
+        game.add.tween(currentMidgroundLayer).to({alpha: 0}, 300, Phaser.Easing.Linear.None, true).onComplete.add(function() { currentMidgroundLayer.visible = false; });
+        game.add.tween(currentBackgroundLayer).to({alpha: 0}, 300, Phaser.Easing.Linear.None, true).onComplete.add(function() { currentBackgroundLayer.visible = false; });   
+    }
 
     currentObjectLayer.forEach(function(obj) {
-        game.add.tween(obj).to({alpha: 0}, 200, Phaser.Easing.Linear.None, true);
+        if(immediate) {
+            obj.alpha = 0;
+        } else {
+            game.add.tween(obj).to({alpha: 0}, 200, Phaser.Easing.Linear.None, true);
+        }
+
         if(!!obj.body) obj.body.enable = false;
         if(!!obj.ChangeLayerAway) obj.ChangeLayerAway();
     });
@@ -341,9 +368,15 @@ Frogland.ChangeLayer = function(newLayer) {
     newBackgroundLayer.visible = true;
     newBackgroundLayer.alpha = 0;
 
-    game.add.tween(newForgroundLayer).to({alpha: 1}, 200, Phaser.Easing.Linear.None, true);
-    game.add.tween(newMidgroundLayer).to({alpha: 1}, 200, Phaser.Easing.Linear.None, true);
-    game.add.tween(newBackgroundLayer).to({alpha: 1}, 200, Phaser.Easing.Linear.None, true);
+    if(immediate) {
+        newForgroundLayer.alpha = 1;
+        newMidgroundLayer.alpha = 1;
+        newBackgroundLayer.alpha = 1;
+    } else {
+        game.add.tween(newForgroundLayer).to({alpha: 1}, 200, Phaser.Easing.Linear.None, true);
+        game.add.tween(newMidgroundLayer).to({alpha: 1}, 200, Phaser.Easing.Linear.None, true);
+        game.add.tween(newBackgroundLayer).to({alpha: 1}, 200, Phaser.Easing.Linear.None, true);
+    }
 
     newObjectLayer.forEach(function(obj) {
         if(obj.spriteType === 'checkpoint') {
@@ -351,7 +384,12 @@ Frogland.ChangeLayer = function(newLayer) {
         }
         
         obj.alpha = 0;
-        game.add.tween(obj).to({alpha: 1}, 200, Phaser.Easing.Linear.None, true);
+
+        if(immediate) {
+            obj.alpha = 1;
+        } else {
+            game.add.tween(obj).to({alpha: 1}, 200, Phaser.Easing.Linear.None, true);
+        }
         if(!!obj.body) obj.body.enable = true;
     });
 
@@ -361,8 +399,8 @@ Frogland.ChangeLayer = function(newLayer) {
     }
 
     SetShardVisibility();
-    effectsController.ClearDicedPieces();
-    projectileController.DestroyAllProjectiles();
+    if(!!effectsController) effectsController.ClearDicedPieces();
+    if(!!projectileController) projectileController.DestroyAllProjectiles();
 };
 
 Frogland.DislodgeTile = function(tile) {
