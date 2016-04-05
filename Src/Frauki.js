@@ -777,13 +777,12 @@ Player.prototype.WhiffSlash = function() {
 
 Player.prototype.Roll = function(params) {
 
-    if(!this.timers.TimerUp('frauki_roll') || this.state === this.Hurting || this.InAttackAnim())
+    if(this.state === this.Rolling || this.state === this.Hurting || this.InAttackAnim())
         return false;
 
     if(this.body.onFloor()) {
-        
-        if(!energyController.UseEnergy(1))
-            return false;
+
+        events.publish('play_sound', {name: 'roll', restart: true});
 
         this.ChangeState(this.Rolling);
 
@@ -807,7 +806,6 @@ Player.prototype.Roll = function(params) {
             effectsController.SpriteTrail(frauki, 100, 400, 300);
         }
 
-        events.publish('play_sound', {name: 'roll', restart: true});
 
     } else {
         this.DoubleJump();
