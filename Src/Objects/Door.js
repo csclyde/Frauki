@@ -212,23 +212,48 @@ function PerformOpen(d, save, silent) {
 
     //play a sound if one is specified
     if(!silent) {
-        if(!!d.open_sound) {
-            events.publish('play_sound', {name: d.open_sound, restart: true });
-        } else if(!!d.facing) {
-            events.publish('play_sound', {name: 'door_break', restart: true });
-        }
+        switch(d.type) {
+
+            case 'stone_seal':
+                events.publish('play_sound', {name: 'door_break', restart: true });
+            break;
+
+            case 'metal_seal':
+                events.publish('play_sound', {name: 'door_break', restart: true });
+            break;
+
+            case 'shard':
+                events.publish('play_sound', {name: 'crystal_door', restart: true });
+            break;
+
+            case 'enemy':
+                events.publish('play_sound', {name: 'skull_door', restart: true });
+            break;
+
+            case 'mystery':
+            break;
+
+            case 'heal':
+            break;
+
+            case 'orb':
+            break;
+        }    
 
         openDuration = 5000;
         events.publish('camera_shake', {magnitudeX: 0.4, magnitudeY: 0, duration: openDuration });
 
-        events.publish('play_sound', {name: 'door_rumble', restart: true });
         events.publish('fade_music', { volume: 0.1, duration: openDuration });
     }
 
+    events.publish('play_sound', {name: 'door_rumble', restart: true });
+    
     this.openTween = game.add.tween(d.body).to({y: movementTarget}, openDuration, Phaser.Easing.Quintic.InOut, true);
 
     game.time.events.add(openDuration - (openDuration / 5), function() {
         effectsController.DoorDust({x: d.body.center.x, y: d.body.y + d.body.height - 20 });
+        events.publish('play_sound', {name: 'door_slam', restart: true });
+        events.publish('stop_sound', {name: 'door_rumble', restart: true });
     });
 
     //note when the door is ready to roll through
