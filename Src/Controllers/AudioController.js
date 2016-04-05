@@ -95,16 +95,21 @@ AudioController.prototype.StopSound = function(params) {
     if(!!params.name && !!this.sounds[params.name]) {
         this.sounds[params.name].stop();
     }
-}
+};
 
 AudioController.prototype.PlayMusic = function(params) {
     if(!!params.name && !!this.music[params.name] && !!this.music[params.name].play) {
 
         //this.music[params.name].stop();
-        if(this.music[params.name].isPlaying) {
+        if(this.music[params.name].isPlaying || game.time.now < this.music[params.name].quietTimestamp + 10000) {
             if(!!this.music[params.name].fadeTween) this.music[params.name].fadeTween.stop();
 
-            this.music[params.name].fadeTo(500, this.music[params.name].volumeStatic);
+            if(this.music[params.name].volume === 0) {
+                this.music[params.name].fadeTo(500, this.music[params.name].volumeStatic);
+
+            } else {
+                this.music[params.name].fadeTo(500, this.music[params.name].volumeStatic);
+            }
         } else {
             this.music[params.name].play('intro', 0, this.music[params.name].volumeStatic, false);
         }
@@ -130,6 +135,7 @@ AudioController.prototype.StopAllMusic = function(params) {
             }
 
             this.music[key].fadeOut(params.fadeOut || 500);
+            this.music[key].quietTimestamp = game.time.now + (params.fadeOut || 500);
         }
     }
 };

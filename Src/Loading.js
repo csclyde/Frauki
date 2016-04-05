@@ -227,6 +227,12 @@ Loading.create = function() {
         this.prev.y = this.position.y;
     };
 
+    Phaser.Sound.prototype.fadeComplete = function () {
+
+        this.onFadeComplete.dispatch(this, this.volume);
+
+    };
+
     game.physics.arcade.computeVelocity = function (axis, body, velocity, acceleration, drag, max) {
 
             if (max === undefined) { max = 10000; }
