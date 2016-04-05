@@ -167,9 +167,13 @@ AudioController.prototype.FadeMusic = function( params) {
 
     if(!this.currentMusic) return;
 
+    if(!!this.currentMusic.fadeTween) this.currentMusic.fadeTween.stop();
+
     this.currentMusic.fadeTo(500, params.volume || 0);
 
     game.time.events.add(params.duration || 0, function() {
+        if(!!this.currentMusic.fadeTween) this.currentMusic.fadeTween.stop();
+
         audioController.currentMusic.fadeTo(500, audioController.currentMusic.volumeStatic);
     });
 };
