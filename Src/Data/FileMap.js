@@ -93,8 +93,8 @@ FileMap.Music = [
 
 	{ Name: 'Choir', File: 'Data/Music/Choir.ogg', Volume: 0.15, Loop: true,
 		Sections: [
-			{ name: 'intro', start: 0, end: 10, loop: false },
-			{ name: 'body', start: 10, end: 43, loop: true }
+			{ name: 'intro', start: 0, end: 8.565, loop: false },
+			{ name: 'body', start: 8.565, end: 44.35, loop: true }
 		]
 	},
 
