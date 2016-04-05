@@ -42,6 +42,8 @@ EnergyController.prototype.Update = function() {
 		this.timers.SetTimer('health_tick', 200);
 
 		if(this.health < this.GetMaxHealth()) {
+            events.publish('play_sound', {name: 'heal_' + this.health, restart: true });
+
 			this.health++;
 			this.latentHealth--;
 		}

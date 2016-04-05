@@ -46,7 +46,6 @@ FileMap.Audio = [
 	{ Name: 'clang', File: 'Data/Sfx/clang.wav', Volume: 0.3, Loop: false },
 	{ Name: 'smash', File: 'Data/Sfx/smash.wav', Volume: 0.7, Loop: false },
 	{ Name: 'robosplosion', File: 'Data/Sfx/robosplosion.wav', Volume: 0.9, Loop: false },
-	{ Name: 'healing', File: 'Data/Sfx/healing.wav', Volume: 0.5, Loop: false },
 	{ Name: 'apple', File: 'Data/Sfx/apple.wav', Volume: 1.0, Loop: false },
 	{ Name: 'low_health', File: 'Data/Sfx/low_health.wav', Volume: 0.6, Loop: true },
 
@@ -59,6 +58,19 @@ FileMap.Audio = [
 	{ Name: 'fanfare_short', File: 'Data/Sfx/fanfare_short.ogg', Volume: 0.4, Loop: false },
 
 	{ Name: 'floor_crumble', File: 'Data/Sfx/crumble.wav', Volume: 5.0, Loop: false },
+
+	{ Name: 'heal_1', File: 'Data/Sfx/healing_1.wav', Volume: 5.0, Loop: false },
+	{ Name: 'heal_2', File: 'Data/Sfx/healing_2.wav', Volume: 5.0, Loop: false },
+	{ Name: 'heal_3', File: 'Data/Sfx/healing_3.wav', Volume: 5.0, Loop: false },
+	{ Name: 'heal_4', File: 'Data/Sfx/healing_4.wav', Volume: 5.0, Loop: false },
+	{ Name: 'heal_5', File: 'Data/Sfx/healing_5.wav', Volume: 5.0, Loop: false },
+	{ Name: 'heal_6', File: 'Data/Sfx/healing_6.wav', Volume: 5.0, Loop: false },
+	{ Name: 'heal_7', File: 'Data/Sfx/healing_7.wav', Volume: 5.0, Loop: false },
+	{ Name: 'heal_8', File: 'Data/Sfx/healing_8.wav', Volume: 5.0, Loop: false },
+	{ Name: 'heal_9', File: 'Data/Sfx/healing_9.wav', Volume: 5.0, Loop: false },
+	{ Name: 'heal_10', File: 'Data/Sfx/healing_10.wav', Volume: 5.0, Loop: false },
+	{ Name: 'heal_11', File: 'Data/Sfx/healing_11.wav', Volume: 5.0, Loop: false },
+
 ];
 
 FileMap.Music = [

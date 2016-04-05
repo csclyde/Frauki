@@ -1207,7 +1207,6 @@ Player.prototype.Healing = function() {
         events.publish('energy_heal', {});
         this.ChangeState(this.Standing);
         events.publish('play_sound', {name: 'apple'});
-        events.publish('play_sound', {name: 'healing'});
 
     }
 };
