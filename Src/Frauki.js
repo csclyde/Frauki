@@ -116,7 +116,6 @@ Player.prototype.preStateUpdate = function() {
     } else {
         this.runDust.visible = false;
     }
-
 };
 
 Player.prototype.postStateUpdate = function() {
@@ -623,11 +622,11 @@ Player.prototype.Slash = function(params) {
         attackResult = this.DiveSlash();
     }
     //running dash
-    else if(this.state === this.Rolling || (this.state === this.Flipping && (inputController.dpad.left || inputController.dpad.right))) {
+    else if(this.state === this.Rolling) {
         attackResult = this.StabSlash();
     }
     //upwards dash attack
-    else if(this.state === this.Jumping || (inputController.dpad.up && (this.state === this.Peaking || this.state === this.Falling || this.state === this.Flipping) ) ) {
+    else if(this.state === this.Jumping || this.state === this.Flipping || (inputController.dpad.up && (this.state === this.Peaking || this.state === this.Falling) ) ) {
         attackResult = this.JumpSlash();
     }
     //falling slash
@@ -635,7 +634,7 @@ Player.prototype.Slash = function(params) {
         attackResult = this.FallSlash();
     }
     //normal slashes while standing or running
-    else if(this.state === this.Standing || this.state === this.Landing || this.state === this.Running || this.state === this.Jumping || this.state === this.Flipping || this.state === this.Crouching) {
+    else if(this.state === this.Standing || this.state === this.Landing || this.state === this.Running || this.state === this.Jumping || this.state === this.Crouching) {
         attackResult = this.FrontSlash();
     } 
     else if(!this.timers.TimerUp('slash_start_window')) {
