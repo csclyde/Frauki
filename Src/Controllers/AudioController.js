@@ -1,6 +1,8 @@
 AudioController = function() {
     var that = this;
 
+    this.timers = new TimerUtil();
+
     events.subscribe('play_sound', this.PlaySound, this);
     events.subscribe('stop_sound', this.StopSound, this);
     events.subscribe('play_music', this.PlayMusic, this);
@@ -101,20 +103,34 @@ AudioController.prototype.PlayMusic = function(params) {
     if(!!params.name && !!this.music[params.name] && !!this.music[params.name].play) {
 
         //this.music[params.name].stop();
-        if(this.music[params.name].isPlaying || game.time.now < this.music[params.name].quietTimestamp + 10000) {
-            if(!!this.music[params.name].fadeTween) this.music[params.name].fadeTween.stop();
+        // if(this.music[params.name].isPlaying || game.time.now < this.music[params.name].quietTimestamp + 10000) {
+        //     if(!!this.music[params.name].fadeTween) this.music[params.name].fadeTween.stop();
 
-            if(this.music[params.name].volume === 0) {
-                this.music[params.name].fadeTo(500, this.music[params.name].volumeStatic);
+        //     if(this.music[params.name].volume === 0) {
+        //         this.music[params.name].fadeTo(500, this.music[params.name].volumeStatic);
 
-            } else {
-                this.music[params.name].fadeTo(500, this.music[params.name].volumeStatic);
-            }
-        } else {
-            this.music[params.name].play('intro', 0, this.music[params.name].volumeStatic, false);
+        //     } else {
+        //         this.music[params.name].fadeTo(500, this.music[params.name].volumeStatic);
+        //     }
+        // } else {
+        //     this.music[params.name].play('intro', 0, this.music[params.name].volumeStatic, false);
+        // }
+
+        //if the current song is the one to play
+        if(this.currentMusic === this.music[params.name] && !this.timers.TimerUp('music_reset')) {
+            if(!!this.currentMusic.fadeTween) this.currentMusic.fadeTween.stop();
+
+            this.currentMusic.fadeTo(500, this.currentMusic.volumeStatic);
+        }
+        //otherwise, stop the other song
+        else {
+            if(!!this.currentMusic) this.currentMusic.stop();
+
+            //set the new song as the current music.
+            this.currentMusic = this.music[params.name];
+            this.currentMusic.play('intro', 0, this.currentMusic.volumeStatic, false);
         }
 
-        this.currentMusic = this.music[params.name];
     }
 };
 
@@ -125,19 +141,25 @@ AudioController.prototype.StopMusic = function(params) {
 };
 
 AudioController.prototype.StopAllMusic = function(params) {
-    for(var key in this.music) {
-        if(!this.music.hasOwnProperty(key)) continue;
+    if(!!this.currentMusic) {
+        if(!!this.currentMusic.fadeTween) this.currentMusic.fadeTween.stop();
 
-        if(!!this.music[key] && this.music[key].isPlaying) {
-
-            if(!!this.music[key].fadeTween && this.music[key].fadeTween.isRunning) {
-                this.music[key].fadeTween.stop();
-            }
-
-            this.music[key].fadeOut(params.fadeOut || 500);
-            this.music[key].quietTimestamp = game.time.now + (params.fadeOut || 500);
-        }
+        this.currentMusic.fadeOut(params.fadeOut || 500);
+        this.timers.SetTimer('music_reset', (params.fadeOut || 500) + 10000);
     }
+    // for(var key in this.music) {
+    //     if(!this.music.hasOwnProperty(key)) continue;
+
+    //     if(!!this.music[key] && this.music[key].isPlaying) {
+
+    //         if(!!this.music[key].fadeTween && this.music[key].fadeTween.isRunning) {
+    //             this.music[key].fadeTween.stop();
+    //         }
+
+    //         this.music[key].fadeOut(params.fadeOut || 500);
+    //         this.music[key].quietTimestamp = game.time.now + (params.fadeOut || 500);
+    //     }
+    // }
 };
 
 AudioController.prototype.FadeMusic = function( params) {

@@ -343,8 +343,6 @@ InputController.prototype.OnHeal = function(pressed) {
             this.timers.SetTimer('apple_charge', 1000);
 
             events.publish('player_heal', { charging: true });
-
-            console.log('fjkslf')
         } else {
             events.publish('player_heal', { charging: false });
         }
@@ -472,8 +470,7 @@ InputController.prototype.OnStart = function(pressed) {
 
     if(game.state.getCurrentState() === Main) {
         if(pressed) {
-            console.log('fjdd')
-            GameData.SetFlashCopy();
+            //GameData.SetFlashCopy();
         } else {
             
         }

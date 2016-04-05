@@ -807,7 +807,7 @@ Player.prototype.Roll = function(params) {
             effectsController.SpriteTrail(frauki, 100, 400, 300);
         }
 
-        events.publish('play_sound', {name: 'roll'});
+        events.publish('play_sound', {name: 'roll', restart: true});
 
     } else {
         this.DoubleJump();
