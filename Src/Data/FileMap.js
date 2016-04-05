@@ -59,17 +59,17 @@ FileMap.Audio = [
 
 	{ Name: 'floor_crumble', File: 'Data/Sfx/crumble.wav', Volume: 5.0, Loop: false },
 
-	{ Name: 'heal_1', File: 'Data/Sfx/healing_1.wav', Volume: 5.0, Loop: false },
-	{ Name: 'heal_2', File: 'Data/Sfx/healing_2.wav', Volume: 5.0, Loop: false },
-	{ Name: 'heal_3', File: 'Data/Sfx/healing_3.wav', Volume: 5.0, Loop: false },
-	{ Name: 'heal_4', File: 'Data/Sfx/healing_4.wav', Volume: 5.0, Loop: false },
-	{ Name: 'heal_5', File: 'Data/Sfx/healing_5.wav', Volume: 5.0, Loop: false },
-	{ Name: 'heal_6', File: 'Data/Sfx/healing_6.wav', Volume: 5.0, Loop: false },
-	{ Name: 'heal_7', File: 'Data/Sfx/healing_7.wav', Volume: 5.0, Loop: false },
-	{ Name: 'heal_8', File: 'Data/Sfx/healing_8.wav', Volume: 5.0, Loop: false },
-	{ Name: 'heal_9', File: 'Data/Sfx/healing_9.wav', Volume: 5.0, Loop: false },
-	{ Name: 'heal_10', File: 'Data/Sfx/healing_10.wav', Volume: 5.0, Loop: false },
-	{ Name: 'heal_11', File: 'Data/Sfx/healing_11.wav', Volume: 5.0, Loop: false },
+	{ Name: 'heal_1', File: 'Data/Sfx/healing_1.wav', Volume: 0.8, Loop: false },
+	{ Name: 'heal_2', File: 'Data/Sfx/healing_2.wav', Volume: 0.8, Loop: false },
+	{ Name: 'heal_3', File: 'Data/Sfx/healing_3.wav', Volume: 0.8, Loop: false },
+	{ Name: 'heal_4', File: 'Data/Sfx/healing_4.wav', Volume: 0.8, Loop: false },
+	{ Name: 'heal_5', File: 'Data/Sfx/healing_5.wav', Volume: 0.8, Loop: false },
+	{ Name: 'heal_6', File: 'Data/Sfx/healing_6.wav', Volume: 0.8, Loop: false },
+	{ Name: 'heal_7', File: 'Data/Sfx/healing_7.wav', Volume: 0.8, Loop: false },
+	{ Name: 'heal_8', File: 'Data/Sfx/healing_8.wav', Volume: 0.8, Loop: false },
+	{ Name: 'heal_9', File: 'Data/Sfx/healing_9.wav', Volume: 0.8, Loop: false },
+	{ Name: 'heal_10', File: 'Data/Sfx/healing_10.wav', Volume: 0.8, Loop: false },
+	{ Name: 'heal_11', File: 'Data/Sfx/healing_11.wav', Volume: 0.8, Loop: false },
 
 ];
 
@@ -95,7 +95,7 @@ FileMap.Music = [
 ];
 
 FileMap.Ambient = [
-	{ Name: 'surface_wind', File: 'Data/Sfx/surface_wind.ogg', Volume: 2, Loop: true },
+	{ Name: 'surface_wind', File: 'Data/Sfx/surface_wind.ogg', Volume: 0.50, Loop: true },
 	{ Name: 'cave_wind', File: 'Data/Sfx/cave_wind.ogg', Volume: 2, Loop: true },
 ];
 
