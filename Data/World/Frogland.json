@@ -6860,10 +6860,58 @@
                  "width":50,
                  "x":1673.5,
                  "y":2848.5
+                }, 
+                {
+                 "height":84.3333,
+                 "id":2040,
+                 "name":"music_left_right",
+                 "properties":
+                    {
+                     "fadeOut":"2000",
+                     "right":"Choir"
+                    },
+                 "rotation":0,
+                 "type":"trigger",
+                 "visible":true,
+                 "width":43.3333,
+                 "x":1590.33335,
+                 "y":2958.83335
+                }, 
+                {
+                 "height":84.3333,
+                 "id":2041,
+                 "name":"music_left_right",
+                 "properties":
+                    {
+                     "fadeOut":"2000",
+                     "right":"Choir"
+                    },
+                 "rotation":0,
+                 "type":"trigger",
+                 "visible":true,
+                 "width":19.6666499999999,
+                 "x":1811.33335,
+                 "y":2760.83335
+                }, 
+                {
+                 "height":84.3333,
+                 "id":2042,
+                 "name":"music_left_right",
+                 "properties":
+                    {
+                     "fadeOut":"2000",
+                     "left":"Choir"
+                    },
+                 "rotation":0,
+                 "type":"trigger",
+                 "visible":true,
+                 "width":19.6666,
+                 "x":2057.1667,
+                 "y":2882.83335
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "width":0,
          "x":0,
          "y":0
@@ -11002,7 +11050,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":2040,
+ "nextobjectid":2043,
  "orientation":"orthogonal",
  "properties":
     {
@@ -11015,6 +11063,7 @@
  "tileheight":16,
  "tilesets":[
         {
+         "columns":8,
          "firstgid":1,
          "image":"..\/CollisionKey.png",
          "imageheight":128,
@@ -11031,6 +11080,7 @@
          "tilewidth":16
         }, 
         {
+         "columns":20,
          "firstgid":65,
          "image":"..\/SpawnKey.png",
          "imageheight":192,
@@ -11047,6 +11097,7 @@
          "tilewidth":16
         }, 
         {
+         "columns":32,
          "firstgid":305,
          "image":"FrogtownTiles.png",
          "imageheight":512,
@@ -11346,6 +11397,7 @@
          "tilewidth":16
         }, 
         {
+         "columns":32,
          "firstgid":1329,
          "image":"DepthsTiles.png",
          "imageheight":512,
@@ -11362,6 +11414,7 @@
          "tilewidth":16
         }, 
         {
+         "columns":20,
          "firstgid":2353,
          "image":"TerraceTiles.png",
          "imageheight":240,
@@ -11378,6 +11431,7 @@
          "tilewidth":16
         }, 
         {
+         "columns":40,
          "firstgid":2653,
          "image":"Doodads.png",
          "imageheight":640,

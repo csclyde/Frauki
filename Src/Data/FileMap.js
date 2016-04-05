@@ -91,6 +91,13 @@ FileMap.Music = [
 		]
 	},
 
+	{ Name: 'Choir', File: 'Data/Music/Choir.ogg', Volume: 0.3, Loop: true,
+		Sections: [
+			{ name: 'intro', start: 0, end: 0, loop: false },
+			{ name: 'body', start: 0, end: 43, loop: true }
+		]
+	},
+
 	// { Name: 'Ruins', File: 'Data/Music/Ruins.ogg', Volume: 0.5, Loop: true },
 	// { Name: 'Underwater', File: 'Data/Music/Underwater.xm', Volume: 0.5, Loop: true },
 	// { Name: 'Landfill', File: 'Data/Music/Landfill.xm', Volume: 0.5, Loop: true },
