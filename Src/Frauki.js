@@ -671,11 +671,12 @@ Player.prototype.FrontSlash = function() {
     if(energyController.UseEnergy(3)) {
         if(this.upgrades.attackOverhead && this.states.upPressed) {
             this.ChangeState(this.AttackOverhead);
+            events.publish('play_sound', {name: 'attack_overhead', restart: true });  
         } else {
             this.ChangeState(this.AttackFront);
+            events.publish('play_sound', {name: 'attack_slash', restart: true });  
         }
 
-        events.publish('play_sound', {name: 'attack_slash', restart: true });  
         this.timers.SetTimer('attack_wait', 0);
 
         return true; 
@@ -700,7 +701,7 @@ Player.prototype.FallSlash = function() {
     if(energyController.UseEnergy(4)) {
         this.ChangeState(this.AttackFall);
 
-        events.publish('play_sound', {name: 'attack_slash', restart: true });
+        events.publish('play_sound', {name: 'attack_fall', restart: true });
         this.timers.SetTimer('attack_wait', 800);
 
         return true;
@@ -736,7 +737,7 @@ Player.prototype.JumpSlash = function() {
             this.states.hasFlipped = true;
         }
 
-        events.publish('play_sound', {name: 'attack_slash', restart: true });
+        events.publish('play_sound', {name: 'attack_jump', restart: true });
         this.timers.SetTimer('attack_wait', 0);
 
         return true;
