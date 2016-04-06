@@ -159,15 +159,6 @@ WeaponController.prototype.Update = function() {
 
             this.ResetBaton();
 
-            events.publish('stop_sound', {name: 'baton_throw_1'});
-            events.publish('stop_sound', {name: 'baton_spin_1'});
-            events.publish('stop_sound', {name: 'baton_throw_2'});
-            events.publish('stop_sound', {name: 'baton_spin_2'});
-            events.publish('stop_sound', {name: 'baton_throw_3'});
-            events.publish('stop_sound', {name: 'baton_spin_3'});
-            events.publish('stop_sound', {name: 'baton_throw_4'});
-            events.publish('stop_sound', {name: 'baton_spin_4'});
-
             return;
         }
 
@@ -196,6 +187,15 @@ WeaponController.prototype.ResetBaton = function() {
     this.baton.body.velocity.setTo(0);
     this.baton.body.acceleration.setTo(0);
     frauki.states.throwing = false;
+
+    events.publish('stop_sound', {name: 'baton_throw_1'});
+    events.publish('stop_sound', {name: 'baton_spin_1'});
+    events.publish('stop_sound', {name: 'baton_throw_2'});
+    events.publish('stop_sound', {name: 'baton_spin_2'});
+    events.publish('stop_sound', {name: 'baton_throw_3'});
+    events.publish('stop_sound', {name: 'baton_spin_3'});
+    events.publish('stop_sound', {name: 'baton_throw_4'});
+    events.publish('stop_sound', {name: 'baton_spin_4'});
 };
 
 WeaponController.prototype.ToggleWeapon = function(params) {

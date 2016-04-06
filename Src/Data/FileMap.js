@@ -85,7 +85,16 @@ FileMap.Audio = [
 	{ Name: 'baton_spin_2', File: 'Data/Sfx/baton_spin_2.wav', Volume: 0.8, Loop: true },
 	{ Name: 'baton_spin_3', File: 'Data/Sfx/baton_spin_3.wav', Volume: 0.8, Loop: true },
 	{ Name: 'baton_spin_4', File: 'Data/Sfx/baton_spin_4.wav', Volume: 0.8, Loop: true },
+	
+	{ Name: 'gain_energy_1', File: 'Data/Sfx/gain_energy_1.wav', Volume: 0.8, Loop: false },
+	{ Name: 'gain_energy_2', File: 'Data/Sfx/gain_energy_2.wav', Volume: 0.8, Loop: false },
+	{ Name: 'gain_energy_3', File: 'Data/Sfx/gain_energy_3.wav', Volume: 0.8, Loop: false },
+	{ Name: 'gain_energy_4', File: 'Data/Sfx/gain_energy_4.wav', Volume: 0.8, Loop: false },
 
+	{ Name: 'lose_energy_1', File: 'Data/Sfx/lose_energy_1.wav', Volume: 0.8, Loop: false },
+	{ Name: 'lose_energy_2', File: 'Data/Sfx/lose_energy_2.wav', Volume: 0.8, Loop: false },
+	{ Name: 'lose_energy_3', File: 'Data/Sfx/lose_energy_3.wav', Volume: 0.8, Loop: false },
+	{ Name: 'lose_energy_4', File: 'Data/Sfx/lose_energy_4.wav', Volume: 0.8, Loop: false },
 
 ];
 

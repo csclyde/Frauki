@@ -52,7 +52,9 @@ EnergyController.prototype.Update = function() {
 	if(this.timers.TimerUp('charge_tick')) {
 
 		if(this.charge > 0) {
+			events.publish('play_sound', { name: 'lose_energy_' + this.charge });
 			this.charge--;
+
 		}
 
 		this.timers.SetTimer('charge_tick', this.GetChargeDuration());
@@ -150,8 +152,11 @@ EnergyController.prototype.AddCharge = function(amt) {
 
 	if(this.charge + amt < this.GetMaxCharge()) {
 		this.charge += amt;
-	} else {
+		events.publish('play_sound', { name: 'gain_energy_' + this.charge });
+
+	} else if(this.charge < this.GetMaxCharge()){
 		this.charge = this.GetMaxCharge();
+		events.publish('play_sound', { name: 'gain_energy_' + this.charge });
 	}
 
 	this.timers.SetTimer('charge_tick', this.GetChargeDuration());
