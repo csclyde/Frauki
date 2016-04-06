@@ -115,6 +115,14 @@ GameData.AddNugg = function() {
     // }
 };
 
+GameData.RemoveNuggs = function(amt) {
+    amt = amt || 1;
+
+    this.nuggetCount -= amt;
+
+    if(this.nuggetCount < 0) this.nuggetCount = 0;
+}
+
 GameData.ResetNuggCount = function() {
     this.nuggetCount = 0;
     //this.SaveDataToStorage();

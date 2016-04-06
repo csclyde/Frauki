@@ -905,18 +905,22 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
         effectsController.SlowHit(400);
 
         var nuggAmt = damage * 3;
-        if(nuggAmt > GameData.GetNuggCount())  nuggAmt = GameData.GetNuggCount();
+        if(nuggAmt > GameData.GetNuggCount()) nuggAmt = GameData.GetNuggCount();
+
+        effectsController.DropNuggets(nuggAmt);
+        GameData.RemoveNuggs(nuggAmt);
 
         if(nuggAmt > 0) {
             events.publish('play_sound', {name: 'lose_energy_bits'});
-            effectsController.DropNuggets(nuggAmt);
         }
 
     } else {
         effectsController.DropNuggets(GameData.GetNuggCount());
+        GameData.ResetNuggCount();
 
         if(GameData.GetNuggCount() > 0) {
-            events.publish('play_sound', {name: 'lose_energy_bits'});  
+            events.publish('play_sound', {name: 'lose_energy_bits'}); 
+
         }      
     }
 
