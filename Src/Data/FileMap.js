@@ -76,15 +76,15 @@ FileMap.Audio = [
 	{ Name: 'heal_10', File: 'Data/Sfx/healing_10.wav', Volume: 0.8, Loop: false },
 	{ Name: 'heal_11', File: 'Data/Sfx/healing_11.wav', Volume: 0.8, Loop: false },
 
-	{ Name: 'baton_throw_1', File: 'Data/Sfx/baton_throw_1.wav', Volume: 0.8, Loop: false },
-	{ Name: 'baton_throw_2', File: 'Data/Sfx/baton_throw_2.wav', Volume: 0.8, Loop: false },
-	{ Name: 'baton_throw_3', File: 'Data/Sfx/baton_throw_3.wav', Volume: 0.8, Loop: false },
-	{ Name: 'baton_throw_4', File: 'Data/Sfx/baton_throw_4.wav', Volume: 0.8, Loop: false },
+	{ Name: 'baton_throw_1', File: 'Data/Sfx/baton_throw_1.wav', Volume: 1.2, Loop: false },
+	{ Name: 'baton_throw_2', File: 'Data/Sfx/baton_throw_2.wav', Volume: 1.2, Loop: false },
+	{ Name: 'baton_throw_3', File: 'Data/Sfx/baton_throw_3.wav', Volume: 1.2, Loop: false },
+	{ Name: 'baton_throw_4', File: 'Data/Sfx/baton_throw_4.wav', Volume: 1.2, Loop: false },
 
-	{ Name: 'baton_spin_1', File: 'Data/Sfx/baton_spin_1.wav', Volume: 0.8, Loop: true },
-	{ Name: 'baton_spin_2', File: 'Data/Sfx/baton_spin_2.wav', Volume: 0.8, Loop: true },
-	{ Name: 'baton_spin_3', File: 'Data/Sfx/baton_spin_3.wav', Volume: 0.8, Loop: true },
-	{ Name: 'baton_spin_4', File: 'Data/Sfx/baton_spin_4.wav', Volume: 0.8, Loop: true },
+	{ Name: 'baton_spin_1', File: 'Data/Sfx/baton_spin_1.wav', Volume: 1.2, Loop: true },
+	{ Name: 'baton_spin_2', File: 'Data/Sfx/baton_spin_2.wav', Volume: 1.2, Loop: true },
+	{ Name: 'baton_spin_3', File: 'Data/Sfx/baton_spin_3.wav', Volume: 1.2, Loop: true },
+	{ Name: 'baton_spin_4', File: 'Data/Sfx/baton_spin_4.wav', Volume: 1.2, Loop: true },
 
 
 ];
