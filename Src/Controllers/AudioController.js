@@ -63,6 +63,22 @@ AudioController = function() {
         that.ambient[ambient.Name] = game.add.audio(ambient.Name, ambient.Volume, ambient.Loop);
         that.ambient[ambient.Name].volumeStatic = ambient.Volume;
     });
+
+    this.sounds['baton_throw_1'].onStop.add(function() {
+        if(frauki.states.throwing) audioController.sounds['baton_spin_1'].play();
+    });
+
+    this.sounds['baton_throw_2'].onStop.add(function() {
+        if(frauki.states.throwing) audioController.sounds['baton_spin_2'].play();
+    });
+
+    this.sounds['baton_throw_3'].onStop.add(function() {
+        if(frauki.states.throwing) audioController.sounds['baton_spin_3'].play();
+    });
+
+    this.sounds['baton_throw_4'].onStop.add(function() {
+        if(frauki.states.throwing) audioController.sounds['baton_spin_4'].play();
+    });
 };
 
 AudioController.prototype.Update = function() {
@@ -172,7 +188,9 @@ AudioController.prototype.FadeMusic = function( params) {
     this.currentMusic.fadeTo(500, params.volume || 0);
 
     game.time.events.add(params.duration || 0, function() {
-        if(!!this.currentMusic.fadeTween) this.currentMusic.fadeTween.stop();
+        if(!audioController.currentMusic) return;
+        
+        if(!!audioController.currentMusic.fadeTween) audioController.currentMusic.fadeTween.stop();
 
         audioController.currentMusic.fadeTo(500, audioController.currentMusic.volumeStatic);
     });

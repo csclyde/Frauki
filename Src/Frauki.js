@@ -605,7 +605,10 @@ Player.prototype.Throw = function(params) {
         this.state = this.Throwing;
         this.states.throwing = true;
 
-        game.time.events.add(200, function() { weaponController.ThrowBaton() });
+        game.time.events.add(200, function() { 
+            weaponController.ThrowBaton();
+
+        });
     }
 };
 
@@ -900,11 +903,21 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
     if(energyController.GetHealth() > 0) {
         effectsController.ScreenFlash();
         effectsController.SlowHit(400);
+
         var nuggAmt = damage * 3;
-        if(nuggAmt > GameData.GetNuggCount()) nuggAmt = GameData.GetNuggCount();
-        effectsController.DropNuggets(nuggAmt);
+        if(nuggAmt > GameData.GetNuggCount())  nuggAmt = GameData.GetNuggCount();
+
+        if(nuggAmt > 0) {
+            events.publish('play_sound', {name: 'lose_energy_bits'});
+            effectsController.DropNuggets(nuggAmt);
+        }
+
     } else {
         effectsController.DropNuggets(GameData.GetNuggCount());
+
+        if(GameData.GetNuggCount() > 0) {
+            events.publish('play_sound', {name: 'lose_energy_bits'});  
+        }      
     }
 
     //allow the enemy to steal the shard

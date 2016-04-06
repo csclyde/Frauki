@@ -53,16 +53,22 @@ WeaponController.prototype.ThrowBaton = function() {
     
     if(this.baton.chargeLevel === 0) {
         this.baton.animations.play('baton0');
+        events.publish('play_sound', {name: 'baton_throw_1'});
     } else if(this.baton.chargeLevel === 1) {
         this.baton.animations.play('baton1');
+        events.publish('play_sound', {name: 'baton_throw_2'});
     } else if(this.baton.chargeLevel === 2) {
         this.baton.animations.play('baton2');
+        events.publish('play_sound', {name: 'baton_throw_2'});
     } else if(this.baton.chargeLevel === 3) {
         this.baton.animations.play('baton3');
+        events.publish('play_sound', {name: 'baton_throw_3'});
     } else if(this.baton.chargeLevel === 4) {
         this.baton.animations.play('baton4');
+        events.publish('play_sound', {name: 'baton_throw_4'});
     }  else {
         this.baton.animations.play('baton0');
+        events.publish('play_sound', {name: 'baton_throw_1'});
     }
 
     this.baton.x = frauki.body.center.x + (frauki.states.direction === 'right' ? 20 : -20);
@@ -152,6 +158,15 @@ WeaponController.prototype.Update = function() {
             effectsController.EnergySplash(frauki.body, 150, 'positive', 5 + 5 * this.baton.chargeLevel);
 
             this.ResetBaton();
+
+            events.publish('stop_sound', {name: 'baton_throw_1'});
+            events.publish('stop_sound', {name: 'baton_spin_1'});
+            events.publish('stop_sound', {name: 'baton_throw_2'});
+            events.publish('stop_sound', {name: 'baton_spin_2'});
+            events.publish('stop_sound', {name: 'baton_throw_3'});
+            events.publish('stop_sound', {name: 'baton_spin_3'});
+            events.publish('stop_sound', {name: 'baton_throw_4'});
+            events.publish('stop_sound', {name: 'baton_spin_4'});
 
             return;
         }
