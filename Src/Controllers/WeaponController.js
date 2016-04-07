@@ -132,7 +132,7 @@ WeaponController.prototype.Update = function() {
         var maxVelocity = 800 + this.baton.chargeLevel * 100;
 
         if(this.timers.TimerUp('min_throw_time') && this.baton.body.x > frauki.body.x && this.baton.body.x < frauki.body.x + frauki.body.width && this.baton.body.y > frauki.body.y && this.baton.body.y < frauki.body.y + frauki.body.height) {
-            events.publish('play_sound', {name: 'energy_bit', restart: true });
+            events.publish('play_sound', {name: 'baton_catch', restart: true });
             effectsController.EnergySplash(frauki.body, 150, 'positive', 5 + 5 * this.baton.chargeLevel);
 
             this.ResetBaton();
