@@ -79,6 +79,10 @@ AudioController = function() {
     this.sounds['baton_throw_4'].onStop.add(function() {
         if(frauki.states.throwing) audioController.sounds['baton_spin_4'].play();
     });
+
+    this.sounds['baton_throw_5'].onStop.add(function() {
+        if(frauki.states.throwing) audioController.sounds['baton_spin_5'].play();
+    });
 };
 
 AudioController.prototype.Update = function() {
