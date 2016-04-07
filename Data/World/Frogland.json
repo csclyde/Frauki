@@ -64,7 +64,7 @@
          "name":"Background_2",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -75,7 +75,7 @@
          "name":"Midground_2",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -86,7 +86,7 @@
          "name":"Foreground_2",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -2989,12 +2989,12 @@
                  "type":"trigger",
                  "visible":true,
                  "width":92.6667,
-                 "x":2427.66665,
+                 "x":2427.67,
                  "y":3238
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "width":0,
          "x":0,
          "y":0
@@ -3005,7 +3005,7 @@
          "name":"Background_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -3016,7 +3016,7 @@
          "name":"Midground_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -3027,7 +3027,7 @@
          "name":"Foreground_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -6882,13 +6882,12 @@
                  "name":"music_left_right",
                  "properties":
                     {
-                     "fadeOut":"2000",
                      "right":"Choir"
                     },
                  "rotation":0,
                  "type":"trigger",
                  "visible":true,
-                 "width":8.67000000000007,
+                 "width":73.6700000000001,
                  "x":1567.33,
                  "y":2962.83
                 }, 
@@ -6938,7 +6937,7 @@
                  "visible":true,
                  "width":61.5,
                  "x":2306.25,
-                 "y":3049.625
+                 "y":3049.62
                 }, 
                 {
                  "height":32.375,
@@ -6954,11 +6953,11 @@
                  "visible":true,
                  "width":109,
                  "x":2848,
-                 "y":3152.625
+                 "y":3152.62
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "width":0,
          "x":0,
          "y":0

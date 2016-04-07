@@ -81,7 +81,7 @@ AudioController = function() {
     });
 
     this.sounds['baton_throw_4'].onStop.add(function() {
-        if(frauki.states.throwing) audioController.sounds['baton_spin_5'].play();
+        if(frauki.states.throwing) audioController.sounds['baton_spin_4'].play();
     });
 };
 

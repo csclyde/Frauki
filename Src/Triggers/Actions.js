@@ -23,7 +23,7 @@ TriggerController.prototype.triggers['return_shard'] = {
 			//122 179
 			var slowTween = game.add.tween(shard.body.velocity).to({x: 0, y: 0}, 500, Phaser.Easing.Exponential.Out, true);
 
-        	events.publish('fade_music', { volume: 0, duration: 9500, fadeDuration: 4000 });
+        	events.publish('fade_music', { volume: 0, duration: 9500, fadeDuration: 2000 });
 
 
 			slowTween.onComplete.add(function() {
