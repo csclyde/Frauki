@@ -98,7 +98,7 @@ FileMap.Audio = [
 	{ Name: 'baton_spin_3', File: 'Data/Sfx/baton_spin_4.wav', Volume: 1.2, Loop: true },
 	{ Name: 'baton_spin_4', File: 'Data/Sfx/baton_spin_5.wav', Volume: 1.2, Loop: true },
 	
-	{ Name: 'baton_catch', File: 'Data/Sfx/baton_catch.wav', Volume: 1.2, Loop: true },
+	{ Name: 'baton_catch', File: 'Data/Sfx/baton_catch.wav', Volume: 1.2, Loop: false },
 
 
 ];
