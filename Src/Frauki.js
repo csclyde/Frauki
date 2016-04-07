@@ -472,7 +472,8 @@ Player.prototype.Jump = function(params) {
     if( this.state === this.Hurting || 
         this.state === this.AttackDiveLand || 
         this.state === this.AttackFall ||
-        this.state === this.Stunned) 
+        this.state === this.Stunned ||
+        this.state === this.Throwing) 
         return;
 
     if(params.jump) {
