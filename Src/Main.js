@@ -366,6 +366,7 @@ Main.RenderTextureFromAtlas = function(atlas, frame, x, y, scaleX, scaleY, alpha
     var texture;
 
     if(!this.UITextures[frame]) {
+        console.log(atlas, frame)
         texture = PIXI.TextureCache[game.cache.getFrameByName(atlas, frame).uuid];
     } else {
         texture = this.UITextures[frame];

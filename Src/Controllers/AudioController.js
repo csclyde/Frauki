@@ -178,21 +178,21 @@ AudioController.prototype.StopAllMusic = function(params) {
     // }
 };
 
-AudioController.prototype.FadeMusic = function( params) {
+AudioController.prototype.FadeMusic = function(params) {
     //volume, duration
 
     if(!this.currentMusic) return;
 
-    if(!!this.currentMusic.fadeTween) this.currentMusic.fadeTween.stop();
 
-    this.currentMusic.fadeTo(500, params.volume || 0);
+
+    this.currentMusic.fadeTo(params.fadeDuration || 500, params.volume || 0);
+
+    var fadeMusic = this.currentMusic;
 
     game.time.events.add(params.duration || 0, function() {
-        if(!audioController.currentMusic) return;
-        
-        if(!!audioController.currentMusic.fadeTween) audioController.currentMusic.fadeTween.stop();
+        if(!fadeMusic) return;
 
-        audioController.currentMusic.fadeTo(500, audioController.currentMusic.volumeStatic);
+        fadeMusic.fadeTo(params.fadeDuration || 500, fadeMusic.volumeStatic);
     });
 };
 
