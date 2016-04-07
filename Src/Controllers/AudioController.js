@@ -64,6 +64,10 @@ AudioController = function() {
         that.ambient[ambient.Name].volumeStatic = ambient.Volume;
     });
 
+    this.sounds['baton_throw_0'].onStop.add(function() {
+        if(frauki.states.throwing) audioController.sounds['baton_spin_0'].play();
+    });
+
     this.sounds['baton_throw_1'].onStop.add(function() {
         if(frauki.states.throwing) audioController.sounds['baton_spin_1'].play();
     });
@@ -74,10 +78,6 @@ AudioController = function() {
 
     this.sounds['baton_throw_3'].onStop.add(function() {
         if(frauki.states.throwing) audioController.sounds['baton_spin_3'].play();
-    });
-
-    this.sounds['baton_throw_4'].onStop.add(function() {
-        if(frauki.states.throwing) audioController.sounds['baton_spin_4'].play();
     });
 
     this.sounds['baton_throw_5'].onStop.add(function() {
