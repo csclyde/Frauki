@@ -111,7 +111,9 @@ Main.Restart = function() {
     }
 
     events.publish('stop_all_music'); 
-    events.publish('play_music', { name: 'Gameover' } ); 
+    events.publish('stop_all_ambient'); 
+    events.publish('play_music', { name: 'Gameover' } );
+    audioController.timers.SetTimer('music_reset', 0); 
 
     speechController.HideSpeech();
 
