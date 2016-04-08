@@ -64,7 +64,7 @@
          "name":"Background_2",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -75,7 +75,7 @@
          "name":"Midground_2",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -86,7 +86,7 @@
          "name":"Foreground_2",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -2078,22 +2078,6 @@
                  "y":4856
                 }, 
                 {
-                 "gid":106,
-                 "height":16,
-                 "id":1037,
-                 "name":"",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":1766,
-                 "y":3733
-                }, 
-                {
                  "gid":85,
                  "height":16,
                  "id":1531,
@@ -2604,6 +2588,70 @@
                  "width":16,
                  "x":2836.12,
                  "y":3350.83
+                }, 
+                {
+                 "gid":68,
+                 "height":16,
+                 "id":2050,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":1712,
+                 "y":3760
+                }, 
+                {
+                 "gid":68,
+                 "height":16,
+                 "id":2051,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":1712,
+                 "y":3792
+                }, 
+                {
+                 "gid":68,
+                 "height":16,
+                 "id":2052,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":1712,
+                 "y":3824
+                }, 
+                {
+                 "gid":68,
+                 "height":16,
+                 "id":2053,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":1712,
+                 "y":3856
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -3005,7 +3053,7 @@
          "name":"Background_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -3016,7 +3064,7 @@
          "name":"Midground_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -3027,7 +3075,7 @@
          "name":"Foreground_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -6091,6 +6139,22 @@
                  "width":16,
                  "x":2726.67,
                  "y":3929.33
+                }, 
+                {
+                 "gid":85,
+                 "height":16,
+                 "id":2049,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":2157.5,
+                 "y":3839.5
                 }],
          "opacity":1,
          "properties":
@@ -6887,7 +6951,7 @@
                  "rotation":0,
                  "type":"trigger",
                  "visible":true,
-                 "width":73.6700000000001,
+                 "width":73.67,
                  "x":1567.33,
                  "y":2962.83
                 }, 
@@ -6956,8 +7020,8 @@
                  "y":3152.62
                 }, 
                 {
-                 "height":31,
-                 "id":2047,
+                 "height":32,
+                 "id":2048,
                  "name":"welcome_frogtown",
                  "properties":
                     {
@@ -6967,12 +7031,12 @@
                  "type":"speech",
                  "visible":true,
                  "width":30,
-                 "x":2818,
-                 "y":3084
+                 "x":2817,
+                 "y":3083.5
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "width":0,
          "x":0,
          "y":0
@@ -10444,7 +10508,7 @@
                 {
                  "height":80.6667,
                  "id":1784,
-                 "name":"mountain_view",
+                 "name":"door_tutorial",
                  "properties":
                     {
 
@@ -10620,6 +10684,21 @@
                  "width":109.333,
                  "x":2675.33,
                  "y":3314.33
+                }, 
+                {
+                 "height":76,
+                 "id":2047,
+                 "name":"lovely_day",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":69,
+                 "x":1592.5,
+                 "y":3011
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -11111,7 +11190,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":2048,
+ "nextobjectid":2054,
  "orientation":"orthogonal",
  "properties":
     {
@@ -11124,7 +11203,6 @@
  "tileheight":16,
  "tilesets":[
         {
-         "columns":8,
          "firstgid":1,
          "image":"..\/CollisionKey.png",
          "imageheight":128,
@@ -11141,7 +11219,6 @@
          "tilewidth":16
         }, 
         {
-         "columns":20,
          "firstgid":65,
          "image":"..\/SpawnKey.png",
          "imageheight":192,
@@ -11158,7 +11235,6 @@
          "tilewidth":16
         }, 
         {
-         "columns":32,
          "firstgid":305,
          "image":"FrogtownTiles.png",
          "imageheight":512,
@@ -11458,7 +11534,6 @@
          "tilewidth":16
         }, 
         {
-         "columns":32,
          "firstgid":1329,
          "image":"DepthsTiles.png",
          "imageheight":512,
@@ -11475,7 +11550,6 @@
          "tilewidth":16
         }, 
         {
-         "columns":20,
          "firstgid":2353,
          "image":"TerraceTiles.png",
          "imageheight":240,
@@ -11492,7 +11566,6 @@
          "tilewidth":16
         }, 
         {
-         "columns":40,
          "firstgid":2653,
          "image":"Doodads.png",
          "imageheight":640,
