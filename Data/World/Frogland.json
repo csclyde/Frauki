@@ -6954,6 +6954,21 @@
                  "width":109,
                  "x":2848,
                  "y":3152.62
+                }, 
+                {
+                 "height":31,
+                 "id":2047,
+                 "name":"welcome_frogtown",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"speech",
+                 "visible":true,
+                 "width":30,
+                 "x":2818,
+                 "y":3084
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -11096,7 +11111,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":2047,
+ "nextobjectid":2048,
  "orientation":"orthogonal",
  "properties":
     {

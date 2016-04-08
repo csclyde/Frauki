@@ -1,4 +1,15 @@
 var Speeches = {
+	'mountain_view': { text: 'Looks like I can\'t open the door from this side. Maybe I can open it from the other side.' },
+	'way_blocked': { text: 'Hmm... the way is blocked. Maybe I can find a way around.' },
+	'apple_tutorial': { text: 'Apples are tasty. If I find one, I can eat it with the right shoulder button to feel better.' },
+	'whoa_prism': { text: 'A prism shard! I should return this...' },
+	'throw_sword': { text: 'I bet I could throw my energy wtih the X button to hit that orb and open the door.' },
+	'welcome_frogtown': { text: 'The sign says, \'Welcome to Frogtown!\'... but where is everyone?', portrait: 'Displeased' },
+	'spaceship_question': { text: 'It looks like this thing crashed into the ground. Hrm, I can\'t get the door open from this side.' },
+	'anyone_home': { text: 'Looks like no one is home...' },
+
+
+
 	'hole_sign': { text: 'The sign says: Watch out for danger! This hole is not safe to jump into. Leave what\'s down there alone.' },
 	'phone': { text: 'There’s still a noise when I pick it up. Hello?' },
 	'tomatoes': { text: 'Mmm, what juicy little apples. Oh wait... they\'re just space tomatoes' },
@@ -37,7 +48,7 @@ var Speeches = {
 	'nibble': { text: 'Just a little nibble couldn\'t hurt... could it?', portrait: 'Mischeif' },
 	'cold': { text: 'This water is so cold, it\'s making my knees shake', portrait: 'Displeased' },
 	'ellipses': { text: '...', portrait: 'Peaceful' },
-	'anyone_home': { text: 'Looks like no one is home.' },
+	
 	'sorry_plant': { text: 'Sorry plant' },
 	'maybe_if': { text: 'Maybe if I just...' },
 	'hidden_goodies': { text: 'He he, hidden goodies!', portrait: 'Silly'},
@@ -50,23 +61,11 @@ var Speeches = {
 	'garden': { text: 'Something is carved into the wall: To those who come after, this world is a garden.' },
 	'sweetnasty': { text: 'Something is carved into the wall: Good bye you sweet world!!!' },
 	'maint': { text: 'Something is engraved into the wall: Maintenence access. Beware pipe currents.' },
-	'spaceship_question': { text: 'It looks like this thing crashed into the ground. Hrm, I can\'t get the door open from this side.' },
 	'pouring_joy': { text: 'Something is carved into the wall: I can barely withstand the joy pouring into me! Goodbye!' },
 	'another_sky': { text: 'Something is carved into the wall: So, we will find another sky. So it goes.' },
 	'behold_goddess': { text: 'Something is carved into the wall: The Goddess has appeared, and we are forgiven' },
-	'mountain_view': { text: 'Looks like I can\'t open the door from this side. Maybe I can open it from the other side.' },
-	'way_blocked': { text: 'Hmm... the way is blocked. Maybe I can find a way around.' },
-	'apple_tutorial': { text: 'Apples are tasty. If I find one, I can eat it with the right shoulder button to feel better.' },
-	'whoa_prism': { text: 'A prism shard! I should return this...' },
-	'throw_sword': { text: 'I bet I could throw my energy wtih the X button to hit that orb and open the door.' },
-
-	'journal1': { text: 'Something is carved into the wall: I take a greenergy suppository every morning, there\'s really no better way to start the day.', portrait: 'Displeased' },
-	'journal2': { text: 'Something is carved into the wall: Greenergy on the rocks, greenergy tendies, greenergy muffins... yes please!' },
-	'journal3': { text: 'Something is carved into the wall: I only eat the highest quality, most delectable, most subtle and transcendent greenergy. Nothing less will do.' },
-	'bad_knees': { text: 'I always wanted to see the world from the top of Frog Mountain. My knees have gotten pretty bad though.' },
-	'football': { text: 'Football is fun! I wonder if maybe I could score a goal' },
+	
 
 	'demo_thanks': { text: 'Thanks for trying the demo! Hope you had fun hopping, bopping, slashing, and smashing.' },
-	'demoday_hero': { text: 'Bravo! You are the ultimate hero that demo day needs' },
 
 };

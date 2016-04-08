@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="400" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="2047">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="400" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="2048">
  <properties>
   <property name="debug" value="false"/>
   <property name="startLayer" value="3"/>
@@ -4399,6 +4399,7 @@
     <property name="up" value="surface_wind"/>
    </properties>
   </object>
+  <object id="2047" name="welcome_frogtown" type="speech" x="2818" y="3084" width="30" height="31"/>
  </objectgroup>
  <layer name="Background_4" width="200" height="400" visible="0">
   <data encoding="csv">
