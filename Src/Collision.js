@@ -203,7 +203,7 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
     events.publish('play_sound', {name: 'clang'});
 
     e.timers.SetTimer('grace', 400);
-    e.timers.SetTimer('attack_wait', 0);
+    e.timers.SetTimer('attack_wait', 200);
     frauki.timers.SetTimer('attack_stun', 800);
     //frauki.timers.SetTimer('frauki_grace', 400);
 };

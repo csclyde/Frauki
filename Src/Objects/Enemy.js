@@ -244,7 +244,6 @@ Enemy.prototype.TakeHit = function(damage) {
     var graceTime = hurtTime + game.rnd.between(500, 1000);
 
     this.timers.SetTimer('grace', graceTime);
-    this.timers.SetTimer('after_damage_flicker', graceTime);
     this.timers.SetTimer('attack_wait', hurtTime + game.rnd.between(1000, 2000));
 
 
@@ -257,6 +256,8 @@ Enemy.prototype.TakeHit = function(damage) {
         game.time.events.add(this.robotic ? 800 : game.rnd.between(250, 350), function() { DestroyEnemy(that); });
 
         if(this.robotic) events.publish('play_sound', { name: 'robosplosion' });
+    } else {
+        this.timers.SetTimer('after_damage_flicker', graceTime);
     }
 };
 
