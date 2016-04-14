@@ -251,6 +251,8 @@ function PerformOpen(d, save, silent) {
     this.openTween = game.add.tween(d.body).to({y: movementTarget}, openDuration, Phaser.Easing.Quintic.InOut, true);
 
     game.time.events.add(openDuration - (openDuration / 5), function() {
+        if(!d || !d.body) return;
+        
         effectsController.DoorDust({x: d.body.center.x, y: d.body.y + d.body.height - 20 });
         events.publish('play_sound', {name: 'door_slam', restart: true });
         events.publish('stop_sound', {name: 'door_rumble', restart: true });

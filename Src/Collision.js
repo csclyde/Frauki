@@ -19,6 +19,7 @@ Collision.OverlapFraukiWithObject = function(f, o) {
         if(frauki.body.y + frauki.body.height <= o.body.y + (frauki.body.height / 3) || o.body.y + o.body.height <= frauki.body.y + (o.body.height / 3)) {
             return false;
         } else {
+            frauki.body.velocity.x /= 2;
             return true;
         }
         
@@ -150,8 +151,13 @@ Collision.OverlapAttackWithEnemy = function(f, e, halfDmg) {
     e.TakeHit(damage);
     frauki.LandHit(e, damage);
 
-    e.timers.SetTimer('health_view', 4000);
+    frauki.animations.paused = true;
 
+    game.time.events.add(200, function() {
+        frauki.animations.paused = false;
+    });
+
+    e.timers.SetTimer('health_view', 4000);
 };
 
 Collision.OverlapAttackWithEnemyAttack = function(e, f) {
@@ -188,7 +194,7 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
     var vel = new Phaser.Point(e.body.center.x - frauki.body.center.x, e.body.center.y - frauki.body.center.y);
     vel = vel.normalize();
 
-    vel.setMagnitude(200);
+    vel.setMagnitude(300);
 
     e.body.velocity.x = vel.x;
     //e.body.velocity.y = vel.y / 2;
@@ -198,13 +204,20 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
 
     e.timers.SetTimer('grace', 400);
     e.timers.SetTimer('attack_wait', 0);
-    frauki.timers.SetTimer('attack_stun', 1000);
+    frauki.timers.SetTimer('attack_stun', 800);
     //frauki.timers.SetTimer('frauki_grace', 400);
 };
 
 Collision.OverlapEnemyAttackWithFrauki = function(e, f) {
     if(frauki.states.shielded) {
         Collision.OverlapAttackWithEnemyAttack(e, f);
+        return;
+    }
+
+    //if frauki is stunned and the player opened the roll window
+    if(!frauki.timers.TimerUp('attack_stun') && !frauki.timers.TimerUp('stun_dodge')) {
+        console.log('avoiding shit')
+        frauki.Roll({override: true});
         return;
     }
 

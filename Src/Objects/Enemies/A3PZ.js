@@ -15,6 +15,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
     this.energy = 5;
     this.baseStunDuration = 500;
+    this.stunThreshold = 1.5;
 
     this.robotic = true;
 
@@ -220,7 +221,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
         },
 
         'A3PZ/Attack20003': {
-            x: 70, y: 0, w: 70, h: 80,
+            x: 30, y: 0, w: 110, h: 80,
             damage: 2,
             knockback: 0,
             priority: 2,

@@ -268,9 +268,9 @@ EnemyBehavior.Player.IsDangerous = function(e) {
 };
 
 EnemyBehavior.Player.MovingTowards = function(e) {
-    if(frauki.body.center.x < e.body.x && frauki.body.velocity.x > 0) {
+    if(frauki.body.center.x < e.body.x && frauki.body.velocity.x > 50) {
         return true;
-    } else if(frauki.body.center.x > e.body.x && frauki.body.velocity.x < 0) {
+    } else if(frauki.body.center.x > e.body.x && frauki.body.velocity.x < -50) {
         return true;
     } else {
         return false;

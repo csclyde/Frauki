@@ -49,7 +49,6 @@ Enemy = function(game, x, y, name) {
         e.UI.pips[3].destroy();
         e.UI.pips[4].destroy();
     });
-    
 };
 
 Enemy.prototype = Object.create(Phaser.Sprite.prototype);
@@ -71,6 +70,7 @@ Enemy.prototype.Deactivate = function() {};
 Enemy.prototype.LandHit = function() {};
 
 Enemy.prototype.update = function() {
+    var that = this;
 
     if(!this.body.enable) {
         return;
@@ -109,6 +109,13 @@ Enemy.prototype.update = function() {
 
     if(this.maxEnergy > 1 && this.owningLayer === Frogland.currentLayer && !this.timers.TimerUp('health_view')) {
         this.DrawHealth();
+    }
+
+     if(!this.timers.TimerUp('after_damage_flicker') && this.timers.TimerUp('hurt_flicker')) {
+        this.alpha = 0;
+        game.time.events.add(15, function() { that.timers.SetTimer('hurt_flicker', 30); });
+    } else {
+        this.alpha = 1;
     }
 };
 
@@ -166,6 +173,7 @@ Enemy.prototype.SetDefaultValues = function() {
     this.energy = 5;
     this.damage = 3;
     this.baseStunDuration = 600;
+    this.stunThreshold = 1;
 };
 
 Enemy.prototype.Attacking = function() {
@@ -214,22 +222,29 @@ Enemy.prototype.TakeHit = function(damage) {
         return;
     }
 
-    this.state = this.Hurting;
-    this.energy -= damage;
-
     console.log('Enemy taking ' + damage + ', at ' + this.energy + '/' + this.maxEnergy);
-
-    //knock the enemy back
-    this.body.velocity.x = (200 * frauki.GetCurrentKnockback()) + 100;
-    this.body.velocity.x *= EnemyBehavior.Player.DirMod(this);
-    this.body.velocity.y = (frauki.GetCurrentJuggle() * -200) - 100;
-
+    this.energy -= damage;
     events.publish('play_sound', { name: 'attack_connect' });
 
     var hurtTime = this.baseStunDuration + (250 * damage);
 
-    this.timers.SetTimer('hit', hurtTime);
-    this.timers.SetTimer('grace', hurtTime +  + game.rnd.between(500, 1000));
+    if(damage >= this.stunThreshold || this.energy <= 0) {
+        this.state = this.Hurting;
+        this.timers.SetTimer('hit', hurtTime);
+
+        //knock the enemy back
+        this.body.velocity.x = (200 * frauki.GetCurrentKnockback()) + 100;
+        this.body.velocity.x *= EnemyBehavior.Player.DirMod(this);
+        this.body.velocity.y = (frauki.GetCurrentJuggle() * -200) - 100;   
+    } else {
+        this.body.velocity.x = (150 * frauki.GetCurrentKnockback()) + 50;
+        this.body.velocity.x *= EnemyBehavior.Player.DirMod(this);
+    }
+
+    var graceTime = hurtTime + game.rnd.between(500, 1000);
+
+    this.timers.SetTimer('grace', graceTime);
+    this.timers.SetTimer('after_damage_flicker', graceTime);
     this.timers.SetTimer('attack_wait', hurtTime + game.rnd.between(1000, 2000));
 
 
