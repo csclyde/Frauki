@@ -64,7 +64,7 @@
          "name":"Background_2",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -75,7 +75,7 @@
          "name":"Midground_2",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -86,7 +86,7 @@
          "name":"Foreground_2",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -3053,7 +3053,7 @@
          "name":"Background_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -3064,7 +3064,7 @@
          "name":"Midground_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -3075,7 +3075,7 @@
          "name":"Foreground_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -6653,21 +6653,6 @@
                  "y":3557.67
                 }, 
                 {
-                 "height":20.6666,
-                 "id":1723,
-                 "name":"leaves_green",
-                 "properties":
-                    {
-
-                    },
-                 "rotation":0,
-                 "type":"effect",
-                 "visible":true,
-                 "width":84.81,
-                 "x":1443.19,
-                 "y":3071.67
-                }, 
-                {
                  "height":10.5,
                  "id":1763,
                  "name":"drip",
@@ -7033,10 +7018,25 @@
                  "width":30,
                  "x":2817,
                  "y":3083.5
+                }, 
+                {
+                 "height":97.6666500000001,
+                 "id":2054,
+                 "name":"music_left_right",
+                 "properties":
+                    {
+                     "left":"Ruins"
+                    },
+                 "rotation":0,
+                 "type":"trigger",
+                 "visible":true,
+                 "width":73.67,
+                 "x":1313.165,
+                 "y":3017.83335
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "width":0,
          "x":0,
          "y":0
@@ -11190,7 +11190,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":2054,
+ "nextobjectid":2055,
  "orientation":"orthogonal",
  "properties":
     {

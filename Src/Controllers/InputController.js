@@ -53,8 +53,10 @@ InputController = function() {
         switch(e.keyCode) {
 
             case Phaser.Keyboard.P:
-                energyController.AddHealth(2);
-                energyController.AddCharge(2);
+                // energyController.AddHealth(2);
+                // energyController.AddCharge(2);
+
+                localStorage.setItem('save_data', '');
             break;
 
             case inputController.binds.jump:

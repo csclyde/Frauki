@@ -179,22 +179,22 @@ WeaponController.prototype.ResetBaton = function() {
 };
 
 WeaponController.prototype.UpgradeThrow = function() {
-    events.publish('stop_sound', {name: 'baton_throw_0'});
-    events.publish('stop_sound', {name: 'baton_spin_0'});
-    events.publish('stop_sound', {name: 'baton_throw_1'});
-    events.publish('stop_sound', {name: 'baton_spin_1'});
-    events.publish('stop_sound', {name: 'baton_throw_2'});
-    events.publish('stop_sound', {name: 'baton_spin_2'});
-    events.publish('stop_sound', {name: 'baton_throw_3'});
-    events.publish('stop_sound', {name: 'baton_spin_3'});
-    events.publish('stop_sound', {name: 'baton_throw_4'});
-    events.publish('stop_sound', {name: 'baton_spin_4'});
+    // events.publish('stop_sound', {name: 'baton_throw_0'});
+    // events.publish('stop_sound', {name: 'baton_spin_0'});
+    // events.publish('stop_sound', {name: 'baton_throw_1'});
+    // events.publish('stop_sound', {name: 'baton_spin_1'});
+    // events.publish('stop_sound', {name: 'baton_throw_2'});
+    // events.publish('stop_sound', {name: 'baton_spin_2'});
+    // events.publish('stop_sound', {name: 'baton_throw_3'});
+    // events.publish('stop_sound', {name: 'baton_spin_3'});
+    // events.publish('stop_sound', {name: 'baton_throw_4'});
+    // events.publish('stop_sound', {name: 'baton_spin_4'});
 
     this.baton.chargeLevel += 1;
     this.baton.animations.play('baton' + this.baton.chargeLevel);
 
-    events.publish('play_sound', {name: 'baton_spin_' + this.baton.chargeLevel });
-    events.publish('play_sound', { name: 'gain_energy_' + this.baton.chargeLevel });
+    // events.publish('play_sound', {name: 'baton_spin_' + this.baton.chargeLevel });
+    // events.publish('play_sound', { name: 'gain_energy_' + this.baton.chargeLevel });
 };
 
 WeaponController.prototype.ToggleWeapon = function(params) {

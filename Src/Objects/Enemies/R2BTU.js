@@ -62,9 +62,9 @@ Enemy.prototype.types['R2BTU'] =  function() {
         EnemyBehavior.FacePlayer(this);
 
         if(this.direction === 'left') {
-            this.body.velocity.x = 500;
+            this.body.velocity.x = 400;
         } else {
-            this.body.velocity.x = -500;
+            this.body.velocity.x = -400;
         }
 
         this.body.velocity.y = -250;
