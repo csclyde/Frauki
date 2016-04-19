@@ -228,17 +228,16 @@ Enemy.prototype.TakeHit = function(damage) {
 
     var hurtTime = this.baseStunDuration + (250 * damage);
 
+    //knock the enemy back
+    this.body.velocity.x = (200 * frauki.GetCurrentKnockback()) + 100;
+    this.body.velocity.x *= EnemyBehavior.Player.DirMod(this);
+    
+    //if they took damage over their threshold, they get interrupted
     if(damage >= this.stunThreshold || this.energy <= 0) {
         this.state = this.Hurting;
         this.timers.SetTimer('hit', hurtTime);
 
-        //knock the enemy back
-        this.body.velocity.x = (200 * frauki.GetCurrentKnockback()) + 100;
-        this.body.velocity.x *= EnemyBehavior.Player.DirMod(this);
         this.body.velocity.y = (frauki.GetCurrentJuggle() * -200) - 100;   
-    } else {
-        this.body.velocity.x = (150 * frauki.GetCurrentKnockback()) + 50;
-        this.body.velocity.x *= EnemyBehavior.Player.DirMod(this);
     }
 
     var graceTime = hurtTime + game.rnd.between(500, 1000);

@@ -105,6 +105,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
     this.LandHit = function() {
         //this.Dodge(1200, true);
         this.hasHit = true;
+        this.timers.SetTimer('slash_hold', 400);
     };
 
     ////////////////////////////////STATES////////////////////////////////////

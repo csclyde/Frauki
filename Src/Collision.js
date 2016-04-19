@@ -16,10 +16,18 @@ Collision.OverlapFraukiWithObject = function(f, o) {
 
     } else if(o.spriteType === 'enemy') {
 
-        if(frauki.body.y + frauki.body.height <= o.body.y + (frauki.body.height / 3) || o.body.y + o.body.height <= frauki.body.y + (o.body.height / 3)) {
+        if(frauki.body.y + frauki.body.height <= o.body.y + (frauki.body.height / 4) || o.body.y + o.body.height <= frauki.body.y + (o.body.height / 4)) {
             return false;
         } else {
-            frauki.body.velocity.x /= 2;
+
+            if((frauki.states.direction === 'left' && o.body.center.x < frauki.body.center.x) || (frauki.states.direction === 'right' && o.body.center.x > frauki.body.center.x))
+                frauki.body.velocity.x /= 2;
+
+            if(frauki.state === frauki.Rolling) {
+                o.body.velocity.x = 150;
+                o.body.velocity.x *= EnemyBehavior.Player.DirMod(o);
+            }
+
             return true;
         }
         
