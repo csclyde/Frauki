@@ -135,7 +135,7 @@ Main.Restart = function() {
         PrepareShardsForDeath();
         GameData.SaveShardPositions();
 
-        weaponController.ResetBaton();
+        weaponController.Baton.ResetBaton();
 
         game.time.events.add(300, function() {
             frauki.Reset(); 

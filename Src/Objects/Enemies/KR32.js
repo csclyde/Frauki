@@ -3,7 +3,7 @@ Enemy.prototype.types['KR32'] =  function() {
 	this.body.setSize(15, 56, 0, 0);
 	this.anchor.setTo(.5);
 
-    this.animations.add('idle', ['KR32/Stand0000'], 10, true, false);
+    this.animations.add('idle', ['KR32/Stand0000', 'KR32/Stand0001', 'KR32/Stand0002'], 4, true, false);
     this.animations.add('walk', ['KR32/WalkFront0000', 'KR32/WalkFront0001', 'KR32/WalkFront0002', 'KR32/WalkFront0003'], 8, true, false);
     this.animations.add('walk_back', ['KR32/WalkBack0000', 'KR32/WalkBack0001', 'KR32/WalkBack0002', 'KR32/WalkBack0003'], 8, true, false);
 
@@ -11,7 +11,7 @@ Enemy.prototype.types['KR32'] =  function() {
     this.animations.add('attack', ['KR32/Attack0005', 'KR32/Attack0006', 'KR32/Attack0007', 'KR32/Attack0008'], 15, false, false);
     this.animations.add('attack_stab', ['KR32/Stab0000', 'KR32/Stab0001', 'KR32/Stab0002'], 10, false, false);
     this.animations.add('hurt', ['KR32/Hit0000'], 8, true, false);
-    this.animations.add('block', ['KR32/Block0005'], 20, true, false);
+    this.animations.add('block', ['KR32/Block0000', 'KR32/Block0001', 'KR32/Block0002', 'KR32/Block0003', 'KR32/Block0004', 'KR32/Block0005'], 14, false, false);
     this.animations.add('jump_back', ['KR32/Stand0000'], 20, true, false);
     this.animations.add('jump_forward', ['KR32/Stand0000'], 20, true, false);
     this.animations.add('land', ['KR32/Stand0000'], 14, false, false);
@@ -143,23 +143,29 @@ Enemy.prototype.types['KR32'] =  function() {
 
 		if(!this.timers.TimerUp('block_recoil')) {
 			this.PlayAnim('block');
-
-		} else if(this.direction === 'left') {
-			if(this.mode === 'defensive') {
-				this.body.velocity.x = -25;
-				this.PlayAnim('walk_back');
-			} else {
-				this.body.velocity.x = 25;
-				this.PlayAnim('walk');
+		} else if(this.animations.currentAnim.name === 'walk_back' ||
+				  this.animations.currentAnim.name === 'walk' ||
+				  (this.animations.currentAnim.name === 'block' && this.animations.currentAnim.isFinished)) {
+			
+			if(this.direction === 'left') {
+				if(this.mode === 'defensive') {
+					this.body.velocity.x = -25;
+					this.PlayAnim('walk_back');
+				} else {
+					this.body.velocity.x = 25;
+					this.PlayAnim('walk');
+				}
+			} else if(this.direction === 'right') {
+				if(this.mode === 'defensive') {
+					this.body.velocity.x = 25;
+					this.PlayAnim('walk_back');
+				} else {
+					this.body.velocity.x = -25;
+					this.PlayAnim('walk');
+				}
 			}
 		} else {
-			if(this.mode === 'defensive') {
-				this.body.velocity.x = 25;
-				this.PlayAnim('walk_back');
-			} else {
-				this.body.velocity.x = -25;
-				this.PlayAnim('walk');
-			}
+			this.PlayAnim('block');
 		}
 
 		if(this.body.onWall() && this.mode === 'defensive') {

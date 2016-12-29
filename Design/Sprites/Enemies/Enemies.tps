@@ -314,6 +314,8 @@
             <key type="filename">Insectoid/Die0000.png</key>
             <key type="filename">Insectoid/Spin0000.png</key>
             <key type="filename">KR32/Hit0000.png</key>
+            <key type="filename">KR32/Stand0001.png</key>
+            <key type="filename">KR32/Stand0002.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
