@@ -62,10 +62,10 @@ Main.render = function() {
     // game.debug.body(frauki);
     // game.debug.body(frauki.attackRect);
 
-    // Frogland.objectGroup_3.forEach(function(o) {
-    //     game.debug.body(o);
-    //     if(!!o.attackRect) game.debug.body(o.attackRect);
-    // });
+    Frogland.objectGroup_3.forEach(function(o) {
+        game.debug.body(o);
+        if(!!o.attackRect) game.debug.body(o.attackRect);
+    });
 
     // Frogland.door1Group.forEach(function(o) {
     //     game.debug.body(o);
@@ -135,7 +135,7 @@ Main.Restart = function() {
         PrepareShardsForDeath();
         GameData.SaveShardPositions();
 
-        weaponController.ResetBaton();
+        weaponController.Baton.ResetBaton();
 
         game.time.events.add(300, function() {
             frauki.Reset(); 
