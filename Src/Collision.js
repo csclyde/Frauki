@@ -97,7 +97,7 @@ Collision.OverlapAttackWithObject = function(f, o) {
 
         if(frauki.GetCurrentDamage() > 0) {
 
-            if(!o.Attacking()) {
+            if(!o.isAttacking()) {
                 Collision.OverlapAttackWithEnemy(f, o);
 
             } else if(!o.robotic) {
@@ -106,7 +106,7 @@ Collision.OverlapAttackWithObject = function(f, o) {
             } else if(!EnemyBehavior.FacingAttack(o)) {
                 Collision.OverlapAttackWithEnemy(f, o);
 
-            } else if(o.Attacking() && frauki.GetCurrentPriority() > o.GetCurrentPriority()) {
+            } else if(o.isAttacking() && frauki.GetCurrentPriority() > o.GetCurrentPriority()) {
                 o.timers.SetTimer('grace', 0);
                 events.publish('play_sound', {name: 'clang'});
                 Collision.OverlapAttackWithEnemy(f, o, true);

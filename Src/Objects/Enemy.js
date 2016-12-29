@@ -98,7 +98,7 @@ Enemy.prototype.update = function() {
     }
 
     //check for landed hits
-    if(this.Attacking()) {
+    if(this.isAttacking()) {
 
         if(this.robotic) {
             game.physics.arcade.overlap(this.attackRect, frauki.attackRect, Collision.OverlapAttackWithEnemyAttack);
@@ -176,7 +176,7 @@ Enemy.prototype.SetDefaultValues = function() {
     this.stunThreshold = 1;
 };
 
-Enemy.prototype.Attacking = function() {
+Enemy.prototype.isAttacking = function() {
     if(!!this.attackRect && this.attackRect.body.width !== 0)
         return true;
     else
