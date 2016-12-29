@@ -146,7 +146,6 @@ Enemy.prototype.types['KR32'] =  function() {
 		} else if(this.animations.currentAnim.name === 'walk_back' ||
 				  this.animations.currentAnim.name === 'walk' ||
 				  (this.animations.currentAnim.name === 'block' && this.animations.currentAnim.isFinished)) {
-
 			if(this.direction === 'left') {
 				if(this.mode === 'defensive') {
 					this.body.velocity.x = -25;
