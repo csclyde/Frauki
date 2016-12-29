@@ -117,7 +117,7 @@ SpeechController.prototype.LoadSpeechZones = function(layer) {
         if(o.type === 'speech') {
         	var zone = new Phaser.Rectangle(o.x, o.y, o.width, o.height);
         	zone.owningLayer = layer;
-            zone.text = o.properties.text;
+            zone.text = o.properties ? o.properties.text : 'Error';
             zone.speechName = o.name;
 
             that.speechZones.push(zone);
@@ -126,7 +126,7 @@ SpeechController.prototype.LoadSpeechZones = function(layer) {
     });
 
     Frogland.map.objects['Objects_' + layer].forEach(function(o) {
-    	if(!!o.properties.speech) {
+    	if(!!o.properties && !!o.properties.speech) {
     		var zone = new Phaser.Rectangle(o.x, o.y, o.width, o.height);
         	zone.owningLayer = layer;
             zone.speechName = o.properties.speech;

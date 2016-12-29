@@ -2,9 +2,9 @@
 <data version="1.0">
     <struct type="Settings">
         <key>fileFormatVersion</key>
-        <int>3</int>
+        <int>4</int>
         <key>texturePackerVersion</key>
-        <string>3.9.1</string>
+        <string>4.3.1</string>
         <key>fileName</key>
         <string>D:/gamedev/Frauki/Design/Sprites/Enemies/Enemies.tps</string>
         <key>autoSDSettings</key>
@@ -29,8 +29,6 @@
         </array>
         <key>allowRotation</key>
         <false/>
-        <key>premultiplyAlpha</key>
-        <false/>
         <key>shapeDebug</key>
         <false/>
         <key>dpi</key>
@@ -49,6 +47,8 @@
         <uint>32768</uint>
         <key>etc1CompressionQuality</key>
         <enum type="SettingsBase::Etc1CompressionQuality">ETC1_QUALITY_LOW_PERCEPTUAL</enum>
+        <key>etc2CompressionQuality</key>
+        <enum type="SettingsBase::Etc2CompressionQuality">ETC2_QUALITY_LOW_PERCEPTUAL</enum>
         <key>dxtCompressionMode</key>
         <enum type="SettingsBase::DxtCompressionMode">DXT_PERCEPTUAL</enum>
         <key>jxrColorFormat</key>
@@ -81,6 +81,8 @@
         <uint>101</uint>
         <key>textureSubPath</key>
         <string></string>
+        <key>atfFormats</key>
+        <string></string>
         <key>textureFormat</key>
         <enum type="SettingsBase::TextureFormat">png</enum>
         <key>borderPadding</key>
@@ -99,8 +101,6 @@
             <key>height</key>
             <int>-1</int>
         </QSize>
-        <key>reduceBorderArtifacts</key>
-        <false/>
         <key>algorithmSettings</key>
         <struct type="AlgorithmSettings">
             <key>algorithm</key>
@@ -110,8 +110,6 @@
             <key>sizeConstraints</key>
             <enum type="AlgorithmSettings::SizeConstraints">AnySize</enum>
             <key>forceSquared</key>
-            <false/>
-            <key>forceWordAligned</key>
             <false/>
             <key>maxRects</key>
             <struct type="AlgorithmMaxRectsSettings">
@@ -124,6 +122,11 @@
                 <enum type="AlgorithmBasicSettings::SortBy">Best</enum>
                 <key>order</key>
                 <enum type="AlgorithmBasicSettings::Order">Ascending</enum>
+            </struct>
+            <key>polygon</key>
+            <struct type="AlgorithmPolygonSettings">
+                <key>alignToGrid</key>
+                <uint>1</uint>
             </struct>
         </struct>
         <key>andEngine</key>
@@ -156,6 +159,8 @@
         <false/>
         <key>outputFormat</key>
         <enum type="SettingsBase::OutputFormat">RGBA8888</enum>
+        <key>alphaHandling</key>
+        <enum type="SettingsBase::AlphaHandling">ClearTransparentPixels</enum>
         <key>contentProtection</key>
         <struct type="ContentProtection">
             <key>key</key>
@@ -167,27 +172,275 @@
         <true/>
         <key>prependSmartFolderName</key>
         <true/>
-        <key>cleanTransparentPixels</key>
-        <true/>
         <key>globalSpriteSettings</key>
         <struct type="SpriteSettings">
             <key>scale</key>
             <double>1</double>
             <key>scaleMode</key>
             <enum type="ScaleMode">Smooth</enum>
-            <key>innerPadding</key>
-            <uint>0</uint>
             <key>extrude</key>
             <uint>0</uint>
             <key>trimThreshold</key>
             <uint>1</uint>
+            <key>trimMargin</key>
+            <uint>1</uint>
             <key>trimMode</key>
             <enum type="SpriteSettings::TrimMode">Trim</enum>
+            <key>tracerTolerance</key>
+            <int>200</int>
             <key>heuristicMask</key>
             <false/>
-            <key>pivotPoint</key>
-            <enum type="SpriteSettings::PivotPoint">Center</enum>
+            <key>defaultPivotPoint</key>
+            <point_f>0.5,0.5</point_f>
+            <key>writePivotPoints</key>
+            <false/>
         </struct>
+        <key>individualSpriteSettings</key>
+        <map type="IndividualSpriteSettingsMap">
+            <key type="filename">A3PZ/Attack0000.png</key>
+            <key type="filename">A3PZ/Attack0001.png</key>
+            <key type="filename">A3PZ/Attack0002.png</key>
+            <key type="filename">A3PZ/Attack0003.png</key>
+            <key type="filename">A3PZ/Attack0004.png</key>
+            <key type="filename">A3PZ/Attack0005.png</key>
+            <key type="filename">A3PZ/Attack20000.png</key>
+            <key type="filename">A3PZ/Attack20001.png</key>
+            <key type="filename">A3PZ/Attack20002.png</key>
+            <key type="filename">A3PZ/Attack20003.png</key>
+            <key type="filename">A3PZ/Attack20004.png</key>
+            <key type="filename">A3PZ/Attack20005.png</key>
+            <key type="filename">A3PZ/Block0000.png</key>
+            <key type="filename">A3PZ/Block0001.png</key>
+            <key type="filename">A3PZ/Hurt0000.png</key>
+            <key type="filename">A3PZ/Hurt0001.png</key>
+            <key type="filename">A3PZ/Stand0000.png</key>
+            <key type="filename">A3PZ/Walk0000.png</key>
+            <key type="filename">A3PZ/Walk0001.png</key>
+            <key type="filename">A3PZ/Walk0002.png</key>
+            <key type="filename">A3PZ/Walk0003.png</key>
+            <key type="filename">A3PZ/Walk0004.png</key>
+            <key type="filename">A3PZ/Walk0005.png</key>
+            <key type="filename">R2BTU/Attack0000.png</key>
+            <key type="filename">R2BTU/Attack0001.png</key>
+            <key type="filename">R2BTU/Attack0002.png</key>
+            <key type="filename">R2BTU/Attack0003.png</key>
+            <key type="filename">R2BTU/Float0000.png</key>
+            <key type="filename">R2BTU/Float0001.png</key>
+            <key type="filename">R2BTU/Stand0000.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>75,75,150,150</rect>
+                <key>scale9Paddings</key>
+                <rect>75,75,150,150</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">Butterfly/Idle0000.png</key>
+            <key type="filename">Butterfly/Idle0001.png</key>
+            <key type="filename">Buzzar/Attack0000.png</key>
+            <key type="filename">Buzzar/Attack0001.png</key>
+            <key type="filename">Buzzar/Enraged0000.png</key>
+            <key type="filename">Buzzar/Enraged0001.png</key>
+            <key type="filename">Buzzar/Enraged0002.png</key>
+            <key type="filename">Buzzar/Enraged0003.png</key>
+            <key type="filename">Buzzar/Enraged0004.png</key>
+            <key type="filename">Buzzar/Enraged0005.png</key>
+            <key type="filename">Buzzar/Enraged0006.png</key>
+            <key type="filename">Buzzar/Enraged0007.png</key>
+            <key type="filename">Buzzar/Enraged0008.png</key>
+            <key type="filename">Buzzar/Enraged0009.png</key>
+            <key type="filename">Buzzar/Hurt0000.png</key>
+            <key type="filename">Buzzar/Hurt0001.png</key>
+            <key type="filename">Buzzar/Idle0000.png</key>
+            <key type="filename">Buzzar/Idle0001.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>17,22,35,44</rect>
+                <key>scale9Paddings</key>
+                <rect>17,22,35,44</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">CreeperThistle/CreeperThistle0000.png</key>
+            <key type="filename">CreeperThistle/CreeperThistle0001.png</key>
+            <key type="filename">CreeperThistle/CreeperThistle0002.png</key>
+            <key type="filename">CreeperThistle/CreeperThistle0003.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>11,9,22,19</rect>
+                <key>scale9Paddings</key>
+                <rect>11,9,22,19</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">Fungu/Fungu0000.png</key>
+            <key type="filename">Fungu/Fungu0001.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>18,18,35,35</rect>
+                <key>scale9Paddings</key>
+                <rect>18,18,35,35</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">HWK9/AttackDash0000.png</key>
+            <key type="filename">HWK9/AttackDash0001.png</key>
+            <key type="filename">HWK9/AttackDash0002.png</key>
+            <key type="filename">HWK9/AttackDash0003.png</key>
+            <key type="filename">HWK9/Block0000.png</key>
+            <key type="filename">HWK9/Flip0000.png</key>
+            <key type="filename">HWK9/Flip0001.png</key>
+            <key type="filename">HWK9/Flip0002.png</key>
+            <key type="filename">HWK9/Flip0003.png</key>
+            <key type="filename">HWK9/Flip0004.png</key>
+            <key type="filename">HWK9/Flip0005.png</key>
+            <key type="filename">HWK9/Stand0000.png</key>
+            <key type="filename">Insectoid/Die0000.png</key>
+            <key type="filename">Insectoid/Spin0000.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>50,50,100,100</rect>
+                <key>scale9Paddings</key>
+                <rect>50,50,100,100</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">Haystax/Idle0000.png</key>
+            <key type="filename">Haystax/Idle0001.png</key>
+            <key type="filename">Insectoid/Hop0000.png</key>
+            <key type="filename">Insectoid/Hop0001.png</key>
+            <key type="filename">Insectoid/Hop0002.png</key>
+            <key type="filename">Sporoid/Sporoid0000.png</key>
+            <key type="filename">Sporoid/Sporoid0001.png</key>
+            <key type="filename">Sporoid/Sporoid0002.png</key>
+            <key type="filename">Sporoid/Sporoid0003.png</key>
+            <key type="filename">Sporoid/Sporoid0004.png</key>
+            <key type="filename">Sporoid/Sporoid0005.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>25,25,50,50</rect>
+                <key>scale9Paddings</key>
+                <rect>25,25,50,50</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">Haystax/Tarball0000.png</key>
+            <key type="filename">Haystax/Tarball0001.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>5,6,11,12</rect>
+                <key>scale9Paddings</key>
+                <rect>5,6,11,12</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">KR32/Attack0000.png</key>
+            <key type="filename">KR32/Attack0001.png</key>
+            <key type="filename">KR32/Attack0002.png</key>
+            <key type="filename">KR32/Attack0003.png</key>
+            <key type="filename">KR32/Attack0004.png</key>
+            <key type="filename">KR32/Attack0005.png</key>
+            <key type="filename">KR32/Attack0006.png</key>
+            <key type="filename">KR32/Attack0007.png</key>
+            <key type="filename">KR32/Attack0008.png</key>
+            <key type="filename">KR32/Stab0000.png</key>
+            <key type="filename">KR32/Stab0001.png</key>
+            <key type="filename">KR32/Stab0002.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>58,38,117,75</rect>
+                <key>scale9Paddings</key>
+                <rect>58,38,117,75</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">KR32/Block0000.png</key>
+            <key type="filename">KR32/Block0001.png</key>
+            <key type="filename">KR32/Block0002.png</key>
+            <key type="filename">KR32/Block0003.png</key>
+            <key type="filename">KR32/Block0004.png</key>
+            <key type="filename">KR32/Block0005.png</key>
+            <key type="filename">KR32/Stand0000.png</key>
+            <key type="filename">KR32/WalkBack0000.png</key>
+            <key type="filename">KR32/WalkBack0001.png</key>
+            <key type="filename">KR32/WalkBack0002.png</key>
+            <key type="filename">KR32/WalkBack0003.png</key>
+            <key type="filename">KR32/WalkFront0000.png</key>
+            <key type="filename">KR32/WalkFront0001.png</key>
+            <key type="filename">KR32/WalkFront0002.png</key>
+            <key type="filename">KR32/WalkFront0003.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>38,38,75,75</rect>
+                <key>scale9Paddings</key>
+                <rect>38,38,75,75</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">Mask/Mask0000.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>15,15,30,30</rect>
+                <key>scale9Paddings</key>
+                <rect>15,15,30,30</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">Sporoid/Spore0000.png</key>
+            <key type="filename">Sporoid/Spore0001.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>5,5,10,10</rect>
+                <key>scale9Paddings</key>
+                <rect>5,5,10,10</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+        </map>
         <key>fileList</key>
         <array>
             <filename>Buzzar</filename>
@@ -223,5 +476,7 @@
         <string></string>
         <key>normalMapSheetFileName</key>
         <filename></filename>
+        <key>exporterProperties</key>
+        <map type="ExporterProperties"/>
     </struct>
 </data>

@@ -4,17 +4,17 @@ Enemy.prototype.types['KR32'] =  function() {
 	this.anchor.setTo(.5);
 
     this.animations.add('idle', ['KR32/Stand0000'], 10, true, false);
-    this.animations.add('walk', ['KR32/Walk0000', 'KR32/Walk0001', 'KR32/Walk0002', 'KR32/Walk0003', 'KR32/Walk0004', 'KR32/Walk0005'], 8, true, false);
-    this.animations.add('walk_back', ['KR32/Walk0005', 'KR32/Walk0004', 'KR32/Walk0003', 'KR32/Walk0002', 'KR32/Walk0001', 'KR32/Walk0000'], 8, true, false);
+    this.animations.add('walk', ['KR32/WalkFront0000', 'KR32/WalkFront0001', 'KR32/WalkFront0002', 'KR32/WalkFront0003'], 8, true, false);
+    this.animations.add('walk_back', ['KR32/WalkBack0000', 'KR32/WalkBack0001', 'KR32/WalkBack0002', 'KR32/WalkBack0003'], 8, true, false);
 
-    this.animations.add('windup', ['KR32/Attack0001', 'KR32/Attack0002'], 16,  false, false);
-    this.animations.add('attack', ['KR32/Attack0003', 'KR32/Attack0004', 'KR32/Attack0005'], 15, false, false);
-    this.animations.add('attack_stab', ['KR32/Stab0001', 'KR32/Stab0002', 'KR32/Stab0003', 'KR32/Stab0004'], 10, false, false);
-    this.animations.add('hurt', ['KR32/Hurt0000', 'KR32/Hurt0001'], 8, true, false);
-    this.animations.add('block', ['KR32/Block0000', 'KR32/Block0001'], 20, true, false);
-    this.animations.add('jump_back', ['KR32/Jump0001'], 20, true, false);
-    this.animations.add('jump_forward', ['KR32/JumpForward0000'], 20, true, false);
-    this.animations.add('land', ['KR32/Jump0002'], 14, false, false);
+    this.animations.add('windup', ['KR32/Attack0000', 'KR32/Attack0001', 'KR32/Attack0002', 'KR32/Attack0003', 'KR32/Attack0004'], 16,  false, false);
+    this.animations.add('attack', ['KR32/Attack0005', 'KR32/Attack0006', 'KR32/Attack0007', 'KR32/Attack0008'], 15, false, false);
+    this.animations.add('attack_stab', ['KR32/Stab0000', 'KR32/Stab0001', 'KR32/Stab0002'], 10, false, false);
+    this.animations.add('hurt', ['KR32/Stand0000'], 8, true, false);
+    this.animations.add('block', ['KR32/Block0005'], 20, true, false);
+    this.animations.add('jump_back', ['KR32/Stand0000'], 20, true, false);
+    this.animations.add('jump_forward', ['KR32/Stand0000'], 20, true, false);
+    this.animations.add('land', ['KR32/Stand0000'], 14, false, false);
 
     this.energy = 4;
     this.baseStunDuration = 400;

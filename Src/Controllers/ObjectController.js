@@ -144,7 +144,7 @@ ObjectController.prototype.SpawnObject = function(o) {
         Frogland[currLayer].add(newObj);
         newObj.owningLayer = Frogland.currentLayer;
     	this.createdObjects.push(newObj);
-        newObj.properties = o.properties;
+        newObj.properties = o.properties || {};
 
         // //if the object has speech associated wtih it
         // if(!!o.properties.speech) {
