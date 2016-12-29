@@ -246,22 +246,6 @@ Player.prototype.UpdateAttackGeometry = function() {
         return;
     }
 
-    if(this.states.throwing) {
-        this.currentAttack = {
-            damage: 0.5 + weaponController.baton.chargeLevel * 1.5,
-            knockback: weaponController.baton.chargeLevel / 4,
-            priority: weaponController.baton.chargeLevel,
-            juggle: weaponController.baton.chargeLevel / 4
-        }
-
-        this.attackRect.body.x = weaponController.baton.body.x; 
-        this.attackRect.body.y = weaponController.baton.body.y; 
-        this.attackRect.body.width = weaponController.baton.body.width; 
-        this.attackRect.body.height = weaponController.baton.body.height;
-
-        return;
-    }
-
     if(this.animations.currentFrame) {
         this.currentAttack = fraukiDamageFrames[this.animations.currentFrame.name];
     } 
@@ -605,11 +589,6 @@ Player.prototype.Throw = function(params) {
     if(!this.InAttackAnim() && !this.states.throwing) {
         this.state = this.Throwing;
         this.states.throwing = true;
-
-        game.time.events.add(200, function() { 
-            weaponController.ThrowBaton();
-
-        });
     }
 };
 
@@ -833,7 +812,7 @@ Player.prototype.LandHit = function(e, damage) {
         weaponController.baton.body.velocity.y = vel.y * 10;
 
     } else if(frauki.states.throwing && damage > 0) {
-        weaponController.UpgradeThrow();
+        weaponController.Baton.UpgradeThrow();
 
     } else if(this.state !== this.AttackStab && this.state !== this.AttackDiveFall && this.state !== this.Rolling) {
         var vel = new Phaser.Point(frauki.body.center.x - e.body.center.x, frauki.body.center.y - e.body.center.y);

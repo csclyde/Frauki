@@ -315,8 +315,9 @@ InputController.prototype.OnThrow = function(pressed) {
 
     if(game.state.getCurrentState() === Main) {
         if(pressed) {
-            events.publish('player_throw', {});
+            events.publish('activate_weapon', { activate: true, override: false });
         } else {
+            events.publish('activate_weapon', { activate: false, override: false });
 
         }
     } else if(game.state.getCurrentState() === Upgrading) {

@@ -4,13 +4,16 @@ WeaponController = function() {
 
     this.timers = new TimerUtil();
 
-    //events.subscribe('activate_weapon', this.ToggleWeapon, this);
+    events.subscribe('activate_weapon', this.ToggleWeapon, this);
 
+    this.Baton.Init();
     this.Shield.Init();
     this.Lob.Init();
     this.Saw.Init();
 
     this.weaponList = [];
+
+    this.weaponList.push(this.Baton);
 
     if(GameData.HasUpgrade('Lob')) {
         this.weaponList.push(this.Lob);
@@ -27,61 +30,10 @@ WeaponController = function() {
     this.currentWeapon = this.weaponList[0] || null;
 
     this.runes = [];
-
-    this.baton = game.add.sprite(frauki.body.center.x + (frauki.states.direction === 'right' ? 20 : -20), frauki.body.center.y, 'Frauki');
-    this.baton.anchor.setTo(0.5);
-    game.physics.enable(this.baton, Phaser.Physics.ARCADE);
-    this.baton.body.gravity.y = -600;
-    this.baton.body.setSize(20, 20, 0, 0);
-    this.baton.animations.add('baton0', ['Baton00000', 'Baton00001', 'Baton00002', 'Baton00003', 'Baton00004', 'Baton00005'], 30, true, false);
-    this.baton.animations.add('baton1', ['Baton10000', 'Baton10001', 'Baton10002'], 30, true, false);
-    this.baton.animations.add('baton2', ['Baton20000', 'Baton20001', 'Baton20002'], 30, true, false);
-    this.baton.animations.add('baton3', ['Baton30000', 'Baton30001', 'Baton30002'], 30, true, false);
-    this.baton.animations.add('baton4', ['Baton40000', 'Baton40001', 'Baton40002', 'Baton40003', 'Baton40004', 'Baton40005'], 30, true, false);
-    this.baton.animations.play('baton0');
-    this.baton.visible = false;
 };
 
 WeaponController.prototype.create = function() {
   
-};
-
-WeaponController.prototype.ThrowBaton = function() {
-
-    this.baton.chargeLevel = energyController.GetCharge();
-    energyController.ResetCharge();
-
-    this.baton.animations.play('baton' + this.baton.chargeLevel);
-    events.publish('play_sound', {name: 'baton_throw_' + this.baton.chargeLevel });
-
-    this.baton.x = frauki.body.center.x + (frauki.states.direction === 'right' ? 20 : -20);
-    this.baton.y = frauki.body.center.y - 20;
-
-    this.baton.scale.x = frauki.scale.x;
-
-    if(frauki.states.direction === 'left') {
-        this.baton.body.velocity.x = -1200;
-    } else {
-        this.baton.body.velocity.x = 1200;
-    }
-
-    this.baton.body.velocity.y = -60;
-
-    if(inputController.dpad.up) {
-        this.baton.body.velocity.y -= 500;
-    }
-
-    if(inputController.dpad.down) {
-        this.baton.body.velocity.y += 500;
-    }
-
-    this.baton.body.velocity.x += frauki.body.velocity.x;
-    this.baton.body.velocity.y += frauki.body.velocity.y;
-
-    this.baton.visible = true;
-
-
-    this.timers.SetTimer('min_throw_time', 200);
 };
 
 WeaponController.prototype.Next = function() {
@@ -126,75 +78,6 @@ WeaponController.prototype.Update = function() {
     //this.Shield.UpdateOverride();
     //this.Lob.UpdateOverride();
     //this.Saw.UpdateOverride();
-
-    if(this.baton.visible) {
-        var vel = 800;
-        var maxVelocity = 800 + this.baton.chargeLevel * 100;
-
-        if(this.timers.TimerUp('min_throw_time') && this.baton.body.x > frauki.body.x && this.baton.body.x < frauki.body.x + frauki.body.width && this.baton.body.y > frauki.body.y && this.baton.body.y < frauki.body.y + frauki.body.height) {
-            events.publish('play_sound', {name: 'baton_catch', restart: true });
-            effectsController.EnergySplash(frauki.body, 150, 'positive', 5 + 5 * this.baton.chargeLevel);
-
-            this.ResetBaton();
-
-            return;
-        }
-
-        var xDist = this.baton.body.center.x - frauki.body.center.x;
-        var yDist = this.baton.body.center.y - frauki.body.center.y;
-
-        var angle = Math.atan2(yDist, xDist); 
-        this.baton.body.acceleration.x = Math.cos(angle) * -vel;// - (xDist * 5);    
-        this.baton.body.acceleration.y = Math.sin(angle) * -vel;// - (yDist * 5);
-
-        if((frauki.body.center.x < this.baton.body.center.x && this.baton.body.velocity.x > 0) || (frauki.body.center.x > this.baton.body.center.x && this.baton.body.velocity.x < 0))
-            this.baton.body.acceleration.x *= 5;
-
-        if((frauki.body.center.y < this.baton.body.center.y && this.baton.body.velocity.y > 0) || (frauki.body.center.y > this.baton.body.center.y && this.baton.body.velocity.y < 0))
-            this.baton.body.acceleration.y *= 5;
-
-
-        if (this.baton.body.velocity.getMagnitude() > maxVelocity) {
-            this.baton.body.velocity.setMagnitude(maxVelocity);
-        }
-    }
-};
-
-WeaponController.prototype.ResetBaton = function() {
-    this.baton.visible = false;
-    this.baton.body.velocity.setTo(0);
-    this.baton.body.acceleration.setTo(0);
-    frauki.states.throwing = false;
-
-    events.publish('stop_sound', {name: 'baton_throw_0'});
-    events.publish('stop_sound', {name: 'baton_spin_0'});
-    events.publish('stop_sound', {name: 'baton_throw_1'});
-    events.publish('stop_sound', {name: 'baton_spin_1'});
-    events.publish('stop_sound', {name: 'baton_throw_2'});
-    events.publish('stop_sound', {name: 'baton_spin_2'});
-    events.publish('stop_sound', {name: 'baton_throw_3'});
-    events.publish('stop_sound', {name: 'baton_spin_3'});
-    events.publish('stop_sound', {name: 'baton_throw_4'});
-    events.publish('stop_sound', {name: 'baton_spin_4'});
-};
-
-WeaponController.prototype.UpgradeThrow = function() {
-    // events.publish('stop_sound', {name: 'baton_throw_0'});
-    // events.publish('stop_sound', {name: 'baton_spin_0'});
-    // events.publish('stop_sound', {name: 'baton_throw_1'});
-    // events.publish('stop_sound', {name: 'baton_spin_1'});
-    // events.publish('stop_sound', {name: 'baton_throw_2'});
-    // events.publish('stop_sound', {name: 'baton_spin_2'});
-    // events.publish('stop_sound', {name: 'baton_throw_3'});
-    // events.publish('stop_sound', {name: 'baton_spin_3'});
-    // events.publish('stop_sound', {name: 'baton_throw_4'});
-    // events.publish('stop_sound', {name: 'baton_spin_4'});
-
-    this.baton.chargeLevel += 1;
-    this.baton.animations.play('baton' + this.baton.chargeLevel);
-
-    // events.publish('play_sound', {name: 'baton_spin_' + this.baton.chargeLevel });
-    // events.publish('play_sound', { name: 'gain_energy_' + this.baton.chargeLevel });
 };
 
 WeaponController.prototype.ToggleWeapon = function(params) {
@@ -221,6 +104,165 @@ WeaponController.prototype.GetAttackGeometry = function() {
     } 
 
     return null;
+};
+
+WeaponController.prototype.Baton = {
+    Init: function() {
+        this.baton = game.add.sprite(frauki.body.center.x + (frauki.states.direction === 'right' ? 20 : -20), frauki.body.center.y, 'Frauki');
+        this.baton.anchor.setTo(0.5);
+        game.physics.enable(this.baton, Phaser.Physics.ARCADE);
+        this.baton.body.gravity.y = -600;
+        this.baton.body.setSize(20, 20, 0, 0);
+        this.baton.animations.add('baton0', ['Baton00000', 'Baton00001', 'Baton00002', 'Baton00003', 'Baton00004', 'Baton00005'], 30, true, false);
+        this.baton.animations.add('baton1', ['Baton10000', 'Baton10001', 'Baton10002'], 30, true, false);
+        this.baton.animations.add('baton2', ['Baton20000', 'Baton20001', 'Baton20002'], 30, true, false);
+        this.baton.animations.add('baton3', ['Baton30000', 'Baton30001', 'Baton30002'], 30, true, false);
+        this.baton.animations.add('baton4', ['Baton40000', 'Baton40001', 'Baton40002', 'Baton40003', 'Baton40004', 'Baton40005'], 30, true, false);
+        this.baton.animations.play('baton0');
+        this.baton.visible = false;
+    },
+
+    Start: function() {
+        if(!frauki.states.throwing) {
+            //the initial activity when you press the button
+            game.time.events.add(200, this.ThrowBaton, this);
+
+            events.publish('player_throw', {});
+        }
+    },
+    
+    Update: function() {
+        if(this.baton && this.baton.visible) {
+            var vel = 800;
+            var maxVelocity = 800 + this.baton.chargeLevel * 100;
+
+            if(weaponController.timers.TimerUp('min_throw_time') && this.baton.body.x > frauki.body.x && this.baton.body.x < frauki.body.x + frauki.body.width && this.baton.body.y > frauki.body.y && this.baton.body.y < frauki.body.y + frauki.body.height) {
+                events.publish('play_sound', {name: 'baton_catch', restart: true });
+                effectsController.EnergySplash(frauki.body, 150, 'positive', 5 + 5 * this.baton.chargeLevel);
+
+                this.Baton.ResetBaton();
+
+                return;
+            }
+
+            var xDist = this.baton.body.center.x - frauki.body.center.x;
+            var yDist = this.baton.body.center.y - frauki.body.center.y;
+
+            var angle = Math.atan2(yDist, xDist); 
+            this.baton.body.acceleration.x = Math.cos(angle) * -vel;// - (xDist * 5);    
+            this.baton.body.acceleration.y = Math.sin(angle) * -vel;// - (yDist * 5);
+
+            if((frauki.body.center.x < this.baton.body.center.x && this.baton.body.velocity.x > 0) || (frauki.body.center.x > this.baton.body.center.x && this.baton.body.velocity.x < 0))
+                this.baton.body.acceleration.x *= 5;
+
+            if((frauki.body.center.y < this.baton.body.center.y && this.baton.body.velocity.y > 0) || (frauki.body.center.y > this.baton.body.center.y && this.baton.body.velocity.y < 0))
+                this.baton.body.acceleration.y *= 5;
+
+
+            if (this.baton.body.velocity.getMagnitude() > maxVelocity) {
+                this.baton.body.velocity.setMagnitude(maxVelocity);
+            }
+        }
+        
+    },
+    
+    Stop: function() {
+        //the final activity when they release the button
+        
+    },
+
+    GetDamageFrame: function() {
+        if(this.baton && this.baton.visible) {
+            var currentAttack = { 
+                damage: 0.5 + this.baton.chargeLevel * 1.5,
+                knockback: this.baton.chargeLevel / 4,
+                priority: this.baton.chargeLevel,
+                juggle: this.baton.chargeLevel / 4,
+
+                x: this.baton.body.x,
+                y: this.baton.body.y, 
+                w: this.baton.body.width,
+                h: this.baton.body.height
+            }
+        } else {
+            return null;
+        }
+    },
+
+    ThrowBaton: function() {
+
+        this.baton.chargeLevel = energyController.GetCharge();
+        energyController.ResetCharge();
+
+        this.baton.animations.play('baton' + this.baton.chargeLevel);
+        events.publish('play_sound', {name: 'baton_throw_' + this.baton.chargeLevel });
+
+        this.baton.x = frauki.body.center.x + (frauki.states.direction === 'right' ? 20 : -20);
+        this.baton.y = frauki.body.center.y - 20;
+
+        this.baton.scale.x = frauki.scale.x;
+
+        if(frauki.states.direction === 'left') {
+            this.baton.body.velocity.x = -1200;
+        } else {
+            this.baton.body.velocity.x = 1200;
+        }
+
+        this.baton.body.velocity.y = -60;
+
+        if(inputController.dpad.up) {
+            this.baton.body.velocity.y -= 500;
+        }
+
+        if(inputController.dpad.down) {
+            this.baton.body.velocity.y += 500;
+        }
+
+        this.baton.body.velocity.x += frauki.body.velocity.x;
+        this.baton.body.velocity.y += frauki.body.velocity.y;
+
+        this.baton.visible = true;
+
+
+        weaponController.timers.SetTimer('min_throw_time', 200);
+    },
+
+    ResetBaton: function() {
+        this.baton.visible = false;
+        this.baton.body.velocity.setTo(0);
+        this.baton.body.acceleration.setTo(0);
+        frauki.states.throwing = false;
+
+        events.publish('stop_sound', {name: 'baton_throw_0'});
+        events.publish('stop_sound', {name: 'baton_spin_0'});
+        events.publish('stop_sound', {name: 'baton_throw_1'});
+        events.publish('stop_sound', {name: 'baton_spin_1'});
+        events.publish('stop_sound', {name: 'baton_throw_2'});
+        events.publish('stop_sound', {name: 'baton_spin_2'});
+        events.publish('stop_sound', {name: 'baton_throw_3'});
+        events.publish('stop_sound', {name: 'baton_spin_3'});
+        events.publish('stop_sound', {name: 'baton_throw_4'});
+        events.publish('stop_sound', {name: 'baton_spin_4'});
+    },
+
+    UpgradeThrow: function() {
+        // events.publish('stop_sound', {name: 'baton_throw_0'});
+        // events.publish('stop_sound', {name: 'baton_spin_0'});
+        // events.publish('stop_sound', {name: 'baton_throw_1'});
+        // events.publish('stop_sound', {name: 'baton_spin_1'});
+        // events.publish('stop_sound', {name: 'baton_throw_2'});
+        // events.publish('stop_sound', {name: 'baton_spin_2'});
+        // events.publish('stop_sound', {name: 'baton_throw_3'});
+        // events.publish('stop_sound', {name: 'baton_spin_3'});
+        // events.publish('stop_sound', {name: 'baton_throw_4'});
+        // events.publish('stop_sound', {name: 'baton_spin_4'});
+
+        this.baton.chargeLevel += 1;
+        this.baton.animations.play('baton' + this.baton.chargeLevel);
+
+        // events.publish('play_sound', {name: 'baton_spin_' + this.baton.chargeLevel });
+        // events.publish('play_sound', { name: 'gain_energy_' + this.baton.chargeLevel });
+    }
 };
 
 WeaponController.prototype.Bomb = {
