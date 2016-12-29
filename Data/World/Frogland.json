@@ -2519,7 +2519,7 @@
          "name":"Background_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -2530,7 +2530,7 @@
          "name":"Midground_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -2541,7 +2541,7 @@
          "name":"Foreground_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -5182,6 +5182,18 @@
                  "width":16,
                  "x":2157.5,
                  "y":3839.5
+                }, 
+                {
+                 "gid":92,
+                 "height":16,
+                 "id":2055,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":2655.5,
+                 "y":3240.5
                 }],
          "opacity":1,
          "properties":
@@ -5193,7 +5205,7 @@
              "id":"string"
             },
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "width":0,
          "x":0,
          "y":0
@@ -5990,7 +6002,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "width":0,
          "x":0,
          "y":0
@@ -9245,11 +9257,11 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":2055,
+ "nextobjectid":2056,
  "orientation":"orthogonal",
  "properties":
     {
-     "debug":"true",
+     "debug":"false",
      "startLayer":"3",
      "startX":"107",
      "startY":"230"

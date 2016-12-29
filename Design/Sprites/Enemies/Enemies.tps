@@ -299,6 +299,18 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">GUBr/Attack0000.png</key>
+            <key type="filename">GUBr/Attack0001.png</key>
+            <key type="filename">GUBr/Attack0002.png</key>
+            <key type="filename">GUBr/Attack0003.png</key>
+            <key type="filename">GUBr/Attack0004.png</key>
+            <key type="filename">GUBr/Attack0005.png</key>
+            <key type="filename">GUBr/Hit0000.png</key>
+            <key type="filename">GUBr/Stand0000.png</key>
+            <key type="filename">GUBr/Walk0000.png</key>
+            <key type="filename">GUBr/Walk0001.png</key>
+            <key type="filename">GUBr/Walk0002.png</key>
+            <key type="filename">GUBr/Walk0003.png</key>
             <key type="filename">HWK9/AttackDash0000.png</key>
             <key type="filename">HWK9/AttackDash0001.png</key>
             <key type="filename">HWK9/AttackDash0002.png</key>
@@ -458,6 +470,7 @@
             <filename>HWK9</filename>
             <filename>Butterfly</filename>
             <filename>R2BTU</filename>
+            <filename>GUBr</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
