@@ -26,7 +26,7 @@ Enemy.prototype.types['GUBr'] =  function() {
             } else if(this.mode === 'cautious') {
             	this.state = this.Idling;
 
-            	if(EnemyBehavior.Player.IsDangerous(this)) {
+            	if(EnemyBehavior.Player.IsDangerous(this) || EnemyBehavior.Player.MovingTowards(this)) {
             		this.mode = 'scared';
             	} else if(EnemyBehavior.Player.IsVulnerable(this)) {
             		this.mode = 'brave';
@@ -63,7 +63,7 @@ Enemy.prototype.types['GUBr'] =  function() {
     		this.body.velocity.y = -150;
     	}
 
-    	this.timers.SetTimer('run_away', 2000);
+    	this.timers.SetTimer('run_away', 2500);
     	this.state = this.RunAway;
     }
 
@@ -88,6 +88,10 @@ Enemy.prototype.types['GUBr'] =  function() {
 		} else if(this.direction === 'right') {
 			this.body.velocity.x = 150;
 			
+		}
+
+		if(EnemyBehavior.Player.IsNear(this, 60) && this.timers.TimerUp('attack_wait')) {
+			this.Attack();
 		}
 
 		if(this.timers.TimerUp('run_away')) {
