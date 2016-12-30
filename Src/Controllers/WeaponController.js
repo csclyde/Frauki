@@ -70,14 +70,8 @@ WeaponController.prototype.EquipNewWeapon = function(name) {
 
 WeaponController.prototype.Update = function() {
     if(this.currentWeapon != null) {
-        if(this.weaponActive === true) {
-            this.currentWeapon.Update();
-        }
+        this.currentWeapon.Update();
     }
-
-    //this.Shield.UpdateOverride();
-    //this.Lob.UpdateOverride();
-    //this.Saw.UpdateOverride();
 };
 
 WeaponController.prototype.ToggleWeapon = function(params) {
@@ -140,7 +134,7 @@ WeaponController.prototype.Baton = {
                 events.publish('play_sound', {name: 'baton_catch', restart: true });
                 effectsController.EnergySplash(frauki.body, 150, 'positive', 5 + 5 * this.baton.chargeLevel);
 
-                this.Baton.ResetBaton();
+                this.ResetBaton();
 
                 return;
             }
@@ -184,6 +178,8 @@ WeaponController.prototype.Baton = {
                 w: this.baton.body.width,
                 h: this.baton.body.height
             }
+
+            return currentAttack;
         } else {
             return null;
         }
@@ -276,7 +272,7 @@ WeaponController.prototype.Bomb = {
     
     Update: function() {
         //what to do while updating (only called while active)
-        if(weaponController.timers.TimerUp('bomb')) {
+        if(weaponController.weaponActive && weaponController.timers.TimerUp('bomb')) {
             energyController.RemoveEnergy(0.2);
             weaponController.timers.SetTimer('bomb', 200);
             this.power += 0.1;
@@ -328,10 +324,6 @@ WeaponController.prototype.Lob = {
         this.lobbies.push(lob);
     },
     
-    Update: function() {
-        //what to do while updating (only called while active)
-    },
-    
     Stop: function() {
         //the final activity when they release the button
     },
@@ -340,7 +332,7 @@ WeaponController.prototype.Lob = {
         return null;
     },
 
-    UpdateOverride: function() {
+    Update: function() {
 
         this.lobbies = this.lobbies.filter(function(n) { return n !== null && n.body !== null });
 
@@ -391,6 +383,11 @@ WeaponController.prototype.Mace = {
     },
     
     Update: function() {
+
+        if(!weaponController.weaponActive) { 
+            return;
+        }
+
         //the distance multiplied by the stiffness is the force acting on the body
         var xDist = this.mace.body.center.x - frauki.body.center.x;
         var yDist = this.mace.body.center.y - frauki.body.center.y;
@@ -488,11 +485,10 @@ WeaponController.prototype.Shield = {
     },
 
     Update: function() {
-        if(this.forceField.animations.currentAnim.name === 'open' && this.forceField.animations.currentAnim.isFinished)
-        this.forceField.animations.play('active');
-    },
+        if(weaponController.weaponActive && this.forceField.animations.currentAnim.name === 'open' && this.forceField.animations.currentAnim.isFinished) {
+            this.forceField.animations.play('active');
+        }
 
-    UpdateOverride: function() {
         this.forceField.x = frauki.body.x - 43;
         this.forceField.y = frauki.body.y - 30;
 
@@ -582,9 +578,6 @@ WeaponController.prototype.Saw = {
     },
 
     Update: function() {
-    },
-
-    UpdateOverride: function() {
         this.saw.x = frauki.body.x + 5;
         this.saw.y = frauki.body.y - 15;
 

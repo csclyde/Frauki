@@ -238,8 +238,8 @@ Player.prototype.UpdateAttackGeometry = function() {
     if(weaponController.GetAttackGeometry()) {
         this.currentAttack = weaponController.GetAttackGeometry();
 
-        this.attackRect.body.x = this.currentAttack.x + this.body.x; 
-        this.attackRect.body.y = this.currentAttack.y + this.body.y; 
+        this.attackRect.body.x = this.currentAttack.x; 
+        this.attackRect.body.y = this.currentAttack.y; 
         this.attackRect.body.width = this.currentAttack.w; 
         this.attackRect.body.height = this.currentAttack.h;
 
@@ -803,13 +803,13 @@ Player.prototype.Roll = function(params) {
 Player.prototype.LandHit = function(e, damage) {
 
     if(frauki.states.throwing && this.GetCurrentPriority() <= e.GetCurrentPriority() && damage === 0) {
-        var vel = new Phaser.Point(weaponController.baton.body.center.x - e.body.center.x, weaponController.baton.body.center.y - e.body.center.y);
+        var vel = new Phaser.Point(weaponController.Baton.baton.body.center.x - e.body.center.x, weaponController.Baton.baton.body.center.y - e.body.center.y);
         vel = vel.normalize();
 
         vel = vel.setMagnitude(300);
 
-        weaponController.baton.body.velocity.x = vel.x / 2;
-        weaponController.baton.body.velocity.y = vel.y * 10;
+        weaponController.Baton.baton.body.velocity.x = vel.x / 2;
+        weaponController.Baton.baton.body.velocity.y = vel.y * 10;
 
     } else if(frauki.states.throwing && damage > 0) {
         weaponController.Baton.UpgradeThrow();
