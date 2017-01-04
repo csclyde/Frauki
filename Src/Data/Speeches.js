@@ -4,7 +4,7 @@ var Speeches = {
 	'apple_tutorial': { text: 'Apples are tasty. If I find one, I can eat it with the right shoulder button to feel better.' },
 	'whoa_prism': { text: 'A prism shard! I should grab it...' },
 	'throw_sword': { text: 'I bet I could throw my energy wtih the X button to hit that orb and open the door.' },
-	'welcome_frogtown': { text: 'The sign says, \'Welcome to Frogtown!\'... but where is everyone?', portrait: 'Displeased' },
+	'welcome_frogtown': { text: 'Caution! Do not jump into the well!', portrait: 'Displeased' },
 	'spaceship_question': { text: 'It looks like this thing crashed into the ground. Hrm, I can\'t get the door open from this side.' },
 	'anyone_home': { text: 'Looks like no one is home...' },
 	'lovely_day': { text: 'Another lovely day in Frogtown.' },
