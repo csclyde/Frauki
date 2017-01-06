@@ -34,6 +34,8 @@ Enemy.prototype.types['KR32'] =  function() {
 				this.mode = 'aggressive';
 			}
 
+			console.log(this.mode);
+
 			this.timers.SetTimer('mode_change', game.rnd.between(1000, 2000));
 		}
 
@@ -51,7 +53,10 @@ Enemy.prototype.types['KR32'] =  function() {
 
         	if(EnemyBehavior.Player.ThrowIncoming(this)) {
         		this.state = this.Blocking;
-        		
+
+        	} else if(EnemyBehavior.Player.IsDangerous(this)) {
+        		this.state = this.Blocking;
+
         	} else if(this.timers.TimerUp('dodge') && this.state === this.Slashing && EnemyBehavior.Player.IsNear(this, 120)) {
                 this.Recoil();
 
@@ -106,11 +111,20 @@ Enemy.prototype.types['KR32'] =  function() {
 
     	EnemyBehavior.FacePlayer(this);
 
-    	if(this.direction === 'left') {
-    		this.body.velocity.x = 300;
+    	if(this.body.onWall()) {
+    		if(this.body.touching.left) {
+    			this.body.velocity.x = 300;
+    		} else if(this.body.touching.right) {
+    			this.body.velocity.x = -300;
+    		}
     	} else {
-    		this.body.velocity.x = -300;
+	    	if(this.direction === 'left') {
+	    		this.body.velocity.x = 300;
+	    	} else {
+	    		this.body.velocity.x = -300;
+	    	}
     	}
+
     	this.body.velocity.y = -200;
 
     	this.timers.SetTimer('dodge', game.rnd.between(2000, 4000));
@@ -141,6 +155,15 @@ Enemy.prototype.types['KR32'] =  function() {
 
 	this.Blocking = function() {
 
+		var speed = 25;
+
+		if(EnemyBehavior.Player.IsDangerous(this)) {
+			this.mode = 'defensive';
+			speed = 100;
+
+			this.timers.SetTimer('mode_change', game.rnd.between(500, 1000));
+		}
+
 		if(!this.timers.TimerUp('block_recoil')) {
 			this.PlayAnim('block');
 		} else if(this.animations.currentAnim.name === 'walk_back' ||
@@ -148,18 +171,18 @@ Enemy.prototype.types['KR32'] =  function() {
 				  (this.animations.currentAnim.name === 'block' && this.animations.currentAnim.isFinished)) {
 			if(this.direction === 'left') {
 				if(this.mode === 'defensive') {
-					this.body.velocity.x = -25;
+					this.body.velocity.x = speed;
 					this.PlayAnim('walk_back');
 				} else {
-					this.body.velocity.x = 25;
+					this.body.velocity.x = -speed;
 					this.PlayAnim('walk');
 				}
 			} else if(this.direction === 'right') {
 				if(this.mode === 'defensive') {
-					this.body.velocity.x = 25;
+					this.body.velocity.x = -speed;
 					this.PlayAnim('walk_back');
 				} else {
-					this.body.velocity.x = -25;
+					this.body.velocity.x = speed;
 					this.PlayAnim('walk');
 				}
 			}
@@ -168,7 +191,7 @@ Enemy.prototype.types['KR32'] =  function() {
 		}
 
 		if(this.body.onWall() && this.mode === 'defensive') {
-			this.mode = 'defensive';
+			this.mode = 'offensive';
 			this.timers.SetTimer('mode_change', game.rnd.between(1000, 2000));
 		}
 		

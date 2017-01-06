@@ -84,7 +84,7 @@ Collision.OverlapFraukiWithObject = function(f, o) {
     } else if(o.spriteType === 'checkpoint') {
         return false;
 
-    } else if(o.spriteType === 'AltarBank') {
+    } else if(o.spriteType === 'Upgrade') {
         
         return false;
     } 
@@ -142,8 +142,8 @@ Collision.OverlapAttackWithObject = function(f, o) {
         OpenDoor(frauki, o);
     } else if(o.spriteType === 'orb') {
         SmashOrb(frauki, o);
-    } else if(o.spriteType === 'AltarBank') {
-        HitAltarBank(frauki, o);
+    } else if(o.spriteType === 'Upgrade') {
+        HitUpgrade(frauki, o);
     }
 };
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="400" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="2059">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="400" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="2060">
  <properties>
-  <property name="debug" value="false"/>
+  <property name="debug" value="true"/>
   <property name="startLayer" value="3"/>
   <property name="startX" value="107"/>
   <property name="startY" value="230"/>
@@ -4283,6 +4283,7 @@
   </object>
   <object id="2049" gid="85" x="2157.5" y="3839.5" width="16" height="16"/>
   <object id="2055" gid="92" x="2655.5" y="3240.5" width="16" height="16"/>
+  <object id="2059" gid="75" x="2254.25" y="3094.25" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Triggers_3">
   <object id="1568" name="light" type="trigger" x="1035.91" y="4347.5" width="113.333" height="226">
