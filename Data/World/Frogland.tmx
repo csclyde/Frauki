@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="400" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="2060">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="400" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="2061">
  <properties>
-  <property name="debug" value="true"/>
+  <property name="debug" value="false"/>
   <property name="startLayer" value="3"/>
   <property name="startX" value="107"/>
   <property name="startY" value="230"/>
@@ -3960,7 +3960,7 @@
   </object>
   <object id="1101" gid="87" x="1829.33" y="3854.67" width="16" height="16"/>
   <object id="1104" gid="96" x="902" y="4272" width="16" height="16"/>
-  <object id="1117" gid="99" x="2641" y="3488" width="16" height="16">
+  <object id="1117" gid="99" x="2579" y="3611.33" width="16" height="16">
    <properties>
     <property name="on_death" value="open_door,door_name:second_enem"/>
    </properties>

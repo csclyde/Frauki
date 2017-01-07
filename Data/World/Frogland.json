@@ -3007,8 +3007,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":2641,
-                 "y":3488
+                 "x":2579,
+                 "y":3611.33333333333
                 }, 
                 {
                  "gid":99,
@@ -9269,11 +9269,11 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":2060,
+ "nextobjectid":2061,
  "orientation":"orthogonal",
  "properties":
     {
-     "debug":"true",
+     "debug":"false",
      "startLayer":"3",
      "startX":"107",
      "startY":"230"

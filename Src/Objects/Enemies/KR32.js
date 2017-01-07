@@ -34,8 +34,6 @@ Enemy.prototype.types['KR32'] =  function() {
 				this.mode = 'aggressive';
 			}
 
-			console.log(this.mode);
-
 			this.timers.SetTimer('mode_change', game.rnd.between(1000, 2000));
 		}
 
@@ -394,7 +392,7 @@ Enemy.prototype.types['KR32'] =  function() {
 		},
 
 		'KR32/Stab0001': {
-			x: 0, y: 12, w: 80, h: 10,
+			x: 0, y: 12, w: 90, h: 10,
 			damage: 1,
 			knockback: 0.2,
 			priority: 3,

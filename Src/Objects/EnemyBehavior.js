@@ -159,6 +159,20 @@ EnemyBehavior.Player.IsAbove = function(e) {
     return false;
 };
 
+EnemyBehavior.Player.IsLeft = function(e) {
+    if(frauki.body.center.x < e.body.x)
+        return true;
+
+    return false;
+};
+
+EnemyBehavior.Player.IsRight = function(e) {
+    if(frauki.body.center.x > e.body.x)
+        return true;
+
+    return false;
+};
+
 EnemyBehavior.Player.IsStunned = function(e) {
     if(frauki.state === frauki.Stunned) {
         return true;
@@ -307,6 +321,14 @@ EnemyBehavior.FaceAwayFromPlayer = function(e) {
         e.SetDirection('right');
     }
 };
+
+EnemyBehavior.FaceForward = function(e) {
+    if(e.body.velocity.x < 0) {
+        e.SetDirection('left');
+    } else {
+        e.SetDirection('right');
+    }
+}
 
 EnemyBehavior.ChargeAtPlayer = function(e, speed) {
 

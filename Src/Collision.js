@@ -328,6 +328,14 @@ Collision.OverlapObjectsWithEnvironment = function(o, e) {
     return true;
 };
 
+Collision.CollideEnemiesWithDoors = function(e, d) {
+    if(d.body.x < e.body.x) {
+        e.body.blocked.left = true;
+    } else {
+        e.body.blocked.right = true;
+    }
+};
+
 Collision.CollideFraukiWithProjectile = function(f, p) {
 
     if(p.projType === 'tar' || p.projType === 'spore') {

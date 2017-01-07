@@ -12,7 +12,7 @@ Enemy.prototype.types['GUBr'] =  function() {
     this.baseStunDuration = 400;
     this.robotic = true;
 
-    this.mode = 'cautious';
+    this.flipDir = false;
     
 	this.updateFunction = function() {
 
@@ -21,24 +21,19 @@ Enemy.prototype.types['GUBr'] =  function() {
 	this.Act = function() {
         if(EnemyBehavior.Player.IsVisible(this)) {
 
-        	if(this.mode === 'scared') {
-            	this.GetScared();
-            } else if(this.mode === 'cautious') {
-            	this.state = this.Idling;
+        	if(EnemyBehavior.Player.IsDangerous(this) || EnemyBehavior.Player.MovingTowards(this)) {
+        		this.RunAway();
 
-            	if(EnemyBehavior.Player.IsDangerous(this) || EnemyBehavior.Player.MovingTowards(this)) {
-            		this.mode = 'scared';
-            	} else if(EnemyBehavior.Player.IsVulnerable(this)) {
-            		this.mode = 'brave';
-            	}
-        	} else if(this.mode === 'brave') {
-        		if(EnemyBehavior.Player.IsNear(this, 60) && this.timers.TimerUp('attack_wait') && EnemyBehavior.Player.IsVulnerable(this) && !EnemyBehavior.Player.MovingTowards(this) && frauki.body.onFloor()) {
-	            	this.Attack();
-        		} else {
-            		this.state = this.Charge;
-        		}
-        		
+        	} else if(EnemyBehavior.Player.IsNear(this, 60) && this.timers.TimerUp('attack_wait') && EnemyBehavior.Player.IsVulnerable(this) && !EnemyBehavior.Player.MovingTowards(this) && frauki.body.onFloor()) {
+	            this.Attack();
+
+        	} else if(EnemyBehavior.Player.IsVulnerable(this)) {
+        		this.Charge();
+
+        	} else {
+        		this.state = this.Idling;
         	}
+        	
         } else {
             this.state = this.Idling;
             this.body.velocity.x = 0;
@@ -58,51 +53,66 @@ Enemy.prototype.types['GUBr'] =  function() {
     	this.timers.SetTimer('attacking', game.rnd.between(450, 500));
     };
 
-    this.GetScared = function() {
-    	if(this.state !== this.RunAway) {
+    this.RunAway = function() {
+    	if(this.state !== this.Fleeing) {
     		this.body.velocity.y = -150;
     	}
 
     	this.timers.SetTimer('run_away', 2500);
-    	this.state = this.RunAway;
-    }
+    	this.state = this.Fleeing;
+    	this.flipDir = false;
+
+		EnemyBehavior.FaceAwayFromPlayer(this);
+
+    };
+
+    this.Charge = function() {
+    	this.state = this.Charging;
+    };
 
 	////////////////////////////////STATES////////////////////////////////////
 	this.Idling = function() {
 		this.PlayAnim('idle');
 
-		if(this.mode === 'cautious') {
-
-		}
-
 		return true;
 	};
 
-	this.RunAway = function() {
+	this.Fleeing = function() {
 		this.PlayAnim('walk');
 
-		EnemyBehavior.FaceAwayFromPlayer(this);
+		//EnemyBehavior.FaceAwayFromPlayer(this);
 
-		if(this.direction === 'left') {
-			this.body.velocity.x = -150;
-		} else if(this.direction === 'right') {
+		if(EnemyBehavior.Player.IsLeft(this)) {
 			this.body.velocity.x = 150;
-			
+		} else if(EnemyBehavior.Player.IsRight(this)) {
+			this.body.velocity.x = -150;
 		}
 
 		if(EnemyBehavior.Player.IsNear(this, 60) && this.timers.TimerUp('attack_wait')) {
 			this.Attack();
 		}
 
+		if(this.body.onWall() && this.timers.TimerUp('wall_timer')) {
+			this.flipDir = !this.flipDir;
+			this.timers.SetTimer('wall_timer', 500);
+
+			console.log('on walll');
+		}
+
+		if(this.flipDir) {
+			this.body.velocity.x *= -1;
+		}
+
+		EnemyBehavior.FaceForward(this);
+
 		if(this.timers.TimerUp('run_away')) {
-			this.mode = 'cautious';
 			return true;
 		} else {
 			return false;
 		}
 	};
 
-	this.Charge = function() {
+	this.Charging = function() {
 		this.PlayAnim('walk');
 
 		EnemyBehavior.FacePlayer(this);
@@ -111,7 +121,6 @@ Enemy.prototype.types['GUBr'] =  function() {
 			this.body.velocity.x = -150;
 		} else if(this.direction === 'right') {
 			this.body.velocity.x = 150;
-			
 		}
 
 		return true;
@@ -122,8 +131,7 @@ Enemy.prototype.types['GUBr'] =  function() {
 
 		if(this.timers.TimerUp('attacking')) {
     		this.timers.SetTimer('attack_wait', 800);
-    		this.mode = 'scared';
-			return true;
+    		this.RunAway();
 		} else {
 			return false;
 		}
@@ -135,7 +143,7 @@ Enemy.prototype.types['GUBr'] =  function() {
 		if(this.timers.TimerUp('hit')) {
 			this.state = this.Idling;
 
-			this.mode = 'scared';
+			this.RunAway();
 
 			return true;
 		}
