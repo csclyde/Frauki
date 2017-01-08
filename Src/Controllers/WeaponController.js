@@ -13,7 +13,9 @@ WeaponController = function() {
 
     this.weaponList = [];
 
-    this.weaponList.push(this.Baton);
+    if(GameData.HasUpgrade('Baton')) {
+        this.weaponList.push(this.Baton);
+    }
 
     if(GameData.HasUpgrade('Lob')) {
         this.weaponList.push(this.Lob);

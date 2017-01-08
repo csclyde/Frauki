@@ -695,6 +695,10 @@ Player.prototype.FallSlash = function() {
 };
 
 Player.prototype.DiveSlash = function() {
+    if(!GameData.HasUpgrade('Dive')) {
+        return this.FallSlash();
+    }
+    
     if(energyController.UseEnergy(6)) {
         this.ChangeState(this.AttackDiveCharge);
         this.movement.diveVelocity = 550;
@@ -732,8 +736,7 @@ Player.prototype.JumpSlash = function() {
 
 Player.prototype.StabSlash = function() {
     if(!GameData.HasUpgrade('Stab')) {
-        this.FrontSlash();
-        return;
+        return this.FrontSlash();
     }
 
     if(energyController.UseEnergy(5)) {

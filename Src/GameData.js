@@ -9,7 +9,7 @@ GameData.data = {
     dirty: true,
 
     checkpoint: '0',
-    upgrades: ["Dive", "Baton"],
+    upgrades: ["Stab", "Dive", "Baton"],
     doors: [],
     shards: {},
     nugg_bank: 0,
@@ -43,6 +43,7 @@ GameData.SetCheckpoint = function(c) {
 };
 
 GameData.HasUpgrade = function(name) {
+    console.log(this.data.upgrades)
     return (this.data.upgrades.indexOf(name) > -1);
 };
 
