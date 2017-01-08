@@ -384,6 +384,11 @@
             <key type="filename">Frames/Upgrade0001.png</key>
             <key type="filename">Frames/Upgrade0002.png</key>
             <key type="filename">Frames/Upgrade0003.png</key>
+            <key type="filename">Frames/Upgrade0004.png</key>
+            <key type="filename">Frames/Upgrade0005.png</key>
+            <key type="filename">Frames/Upgrade0006.png</key>
+            <key type="filename">Frames/Upgrade0007.png</key>
+            <key type="filename">Frames/Upgrade0008.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>

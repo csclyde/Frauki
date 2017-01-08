@@ -88,15 +88,10 @@ Enemy.prototype.types['GUBr'] =  function() {
 			this.body.velocity.x = -150;
 		}
 
-		if(EnemyBehavior.Player.IsNear(this, 60) && this.timers.TimerUp('attack_wait')) {
-			this.Attack();
-		}
 
 		if(this.body.onWall() && this.timers.TimerUp('wall_timer')) {
 			this.flipDir = !this.flipDir;
 			this.timers.SetTimer('wall_timer', 500);
-
-			console.log('on walll');
 		}
 
 		if(this.flipDir) {
@@ -104,6 +99,10 @@ Enemy.prototype.types['GUBr'] =  function() {
 		}
 
 		EnemyBehavior.FaceForward(this);
+
+		if(EnemyBehavior.Player.IsNear(this, 60) && this.timers.TimerUp('attack_wait')) {
+			this.Attack();
+		}
 
 		if(this.timers.TimerUp('run_away')) {
 			return true;

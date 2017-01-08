@@ -9,7 +9,7 @@ GameData.data = {
     dirty: true,
 
     checkpoint: '0',
-    upgrades: ["Shield"],
+    upgrades: ["Dive", "Baton"],
     doors: [],
     shards: {},
     nugg_bank: 0,

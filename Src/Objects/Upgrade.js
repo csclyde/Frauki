@@ -18,8 +18,13 @@ Upgrade = function(game, x, y, name) {
 
     this.body.allowGravity = false;
 
-    this.animations.add('active', ['Upgrade0000', 'Upgrade0001', 'Upgrade0002', 'Upgrade0003'], 10, true, false);
+    this.animations.add('active3', ['Upgrade0000', 'Upgrade0001', 'Upgrade0002'], 10, true, false);
+    this.animations.add('active2', ['Upgrade0003', 'Upgrade0004', 'Upgrade0005'], 10, true, false);
+    this.animations.add('active1', ['Upgrade0006', 'Upgrade0007', 'Upgrade0008'], 10, true, false);
+
     this.animations.add('eaten', ['Upgrade0000'], 10, false, false);
+
+    this.health = 3;
 
 };
 
@@ -37,7 +42,6 @@ Upgrade.prototype.update = function() {
     if(!!this.state)
         this.state();
 
-    var dist = new Phaser.Point(this.body.center.x - frauki.body.center.x, this.body.center.y - frauki.body.center.y);
 };
 
 function HitUpgrade(f, o) {
@@ -47,9 +51,22 @@ function HitUpgrade(f, o) {
         events.publish('play_sound', {name: 'crystal_door'});
         events.publish('play_sound', {name: 'attack_connect'});
         o.timers.SetTimer('hit', 500);
-        //GameData.SaveNuggsToBank();
 
-        //Main.Restart();
+        o.health--;
+
+        //if its dead break it, otherwise just shake it
+        if(o.health <= 0) {
+            effectsController.Dust(o.body.center.x, o.body.center.y);
+            effectsController.ScreenFlash();
+            effectsController.DiceObject(o.objectName, o.body.center.x, o.body.center.y, o.body.velocity.x, o.body.velocity.y, o.owningLayer);
+            
+            events.publish('stop_sound', {name: 'crystal_door'});
+            events.publish('play_sound', {name: 'door_break'});
+            
+            o.destroy();
+        } else {
+            
+        }
     }
 
 };
@@ -60,5 +77,5 @@ Upgrade.prototype.PlayAnim = function(name) {
 };
 
 Upgrade.prototype.Active = function() {
-    this.PlayAnim('active');
+    this.PlayAnim('active' + this.health);
 };

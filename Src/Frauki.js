@@ -215,6 +215,7 @@ Player.prototype.PlayAnim = function(name) {
 };
 
 Player.prototype.ChangeState = function(newState) {
+
     if(this.state !== this.Stunned) {
         this.state = newState;
     }
@@ -650,8 +651,9 @@ Player.prototype.ReleaseSlash = function(params) {
 };
 
 Player.prototype.FrontSlash = function() {
+    
     if(energyController.UseEnergy(3)) {
-        if(this.upgrades.attackOverhead && this.states.upPressed) {
+        if(this.states.upPressed) {
             this.ChangeState(this.AttackOverhead);
             events.publish('play_sound', {name: 'attack_overhead', restart: true });  
         } else {
@@ -729,6 +731,11 @@ Player.prototype.JumpSlash = function() {
 };
 
 Player.prototype.StabSlash = function() {
+    if(!GameData.HasUpgrade('Stab')) {
+        this.FrontSlash();
+        return;
+    }
+
     if(energyController.UseEnergy(5)) {
         this.ChangeState(this.AttackStab);
 
