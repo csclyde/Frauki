@@ -3960,7 +3960,7 @@
   </object>
   <object id="1101" gid="87" x="1829.33" y="3854.67" width="16" height="16"/>
   <object id="1104" gid="96" x="902" y="4272" width="16" height="16"/>
-  <object id="1117" gid="99" x="2579" y="3611.33" width="16" height="16">
+  <object id="1117" gid="99" x="2633.67" y="3475.33" width="16" height="16">
    <properties>
     <property name="on_death" value="open_door,door_name:second_enem"/>
    </properties>

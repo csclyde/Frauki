@@ -43,7 +43,6 @@ GameData.SetCheckpoint = function(c) {
 };
 
 GameData.HasUpgrade = function(name) {
-    console.log(this.data.upgrades)
     return (this.data.upgrades.indexOf(name) > -1);
 };
 
