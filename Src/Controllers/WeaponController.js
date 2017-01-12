@@ -11,25 +11,7 @@ WeaponController = function() {
     this.Lob.Init();
     this.Saw.Init();
 
-    this.weaponList = [];
-
-    if(GameData.HasUpgrade('Baton')) {
-        this.weaponList.push(this.Baton);
-    }
-
-    if(GameData.HasUpgrade('Lob')) {
-        this.weaponList.push(this.Lob);
-    }
-
-    if(GameData.HasUpgrade('Shield')) {
-        this.weaponList.push(this.Shield);
-    }
-
-    if(GameData.HasUpgrade('Saw')) {
-        this.weaponList.push(this.Saw);
-    }
-
-    this.currentWeapon = this.weaponList[0] || null;
+    this.RefactorWeaponList();
 
     this.runes = [];
 };
@@ -68,7 +50,29 @@ WeaponController.prototype.EquipNewWeapon = function(name) {
             this.runes[i].state = this.runes[i].Inactive;
         }
     }
-}
+};
+
+WeaponController.prototype.RefactorWeaponList = function() {
+    this.weaponList = [];
+
+    if(GameData.HasUpgrade('Baton')) {
+        this.weaponList.push(this.Baton);
+    }
+
+    if(GameData.HasUpgrade('Lob')) {
+        this.weaponList.push(this.Lob);
+    }
+
+    if(GameData.HasUpgrade('Shield')) {
+        this.weaponList.push(this.Shield);
+    }
+
+    if(GameData.HasUpgrade('Saw')) {
+        this.weaponList.push(this.Saw);
+    }
+
+    this.currentWeapon = this.weaponList[0] || null;
+};
 
 WeaponController.prototype.Update = function() {
     if(this.currentWeapon != null) {

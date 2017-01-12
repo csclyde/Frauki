@@ -9,7 +9,7 @@ GameData.data = {
     dirty: true,
 
     checkpoint: '0',
-    upgrades: ["Stab", "Dive", "Baton"],
+    upgrades: [],
     doors: [],
     shards: {},
     nugg_bank: 0,
@@ -50,6 +50,15 @@ GameData.SetUpgrade = function(name) {
     this.data.upgrades = [name];
     this.SaveDataToStorage();
 };
+
+GameData.AddUpgrade = function(name) {
+    
+    if(this.data.upgrades.indexOf(name) < 0) {
+        this.data.upgrades.push(name);
+        this.SaveDataToStorage();
+        weaponController.RefactorWeaponList();
+    }
+}
 
 GameData.GetOpenDoors = function() {
     return this.data.doors;

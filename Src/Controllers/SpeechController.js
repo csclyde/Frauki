@@ -3,13 +3,10 @@ SpeechController = function() {
 	var that  = this;
 
 	events.subscribe('activate_speech', this.ShowSpeech, this);
+	events.subscribe('control_up', this.Investigate, this);
 	//events.subscribe('deactivate_speech', this.HideSpeech, this);
 
-	events.subscribe('player_slash', function(params) {
-		if(this.displayIndex !== this.currentText.length) {
-			this.displayIndex = this.currentText.length;
-		}
-	}, this);
+	events.subscribe('player_slash', this.AdvanceText, this);
 
 
 	this.timers = new TimerUtil();
@@ -161,13 +158,15 @@ SpeechController.prototype.Update = function() {
 
 	this.font.text = this.currentText.slice(0, this.displayIndex);
 
-	
+	if(this.timers.TimerUp('auto_hide')) {
+		this.HideSpeech();
+	}
 
 	if(!this.text.visible && this.FraukiInSpeechZone()) {
-		// this.questionMark.visible = true;
-		// this.questionMark.x = frauki.x;
-		// this.questionMark.y = frauki.y - 140 + Math.sin(game.time.now / 200) * 3;
-		this.ShowSpeech();
+		this.questionMark.visible = true;
+		this.questionMark.x = frauki.x;
+		this.questionMark.y = frauki.y - 140 + Math.sin(game.time.now / 200) * 3;
+		//this.ShowSpeech();
 	} else {
 		this.questionMark.visible = false;
 	}
@@ -200,6 +199,22 @@ SpeechController.prototype.ShowSpeech = function() {
 	}
 
 	return false;
+};
+
+SpeechController.prototype.Investigate = function() {
+	if(!this.text.visible && this.FraukiInSpeechZone()) {
+		this.ShowSpeech();
+	}
+};
+
+SpeechController.prototype.AdvanceText = function() {
+	if(this.text.visible) {
+		if(this.displayIndex !== this.currentText.length) {
+			this.displayIndex = this.currentText.length;
+		} else {
+			this.HideSpeech();
+		}
+	}
 };
 
 SpeechController.prototype.Activate = function(text, portrait) {
@@ -238,6 +253,8 @@ SpeechController.prototype.HideSpeech = function() {
 	this.displayIndex = 0;
 
 	this.speechVisible = false;
+
+	this.currentSpeechZone = null;
 };
 
 SpeechController.prototype.SetText = function(text) {

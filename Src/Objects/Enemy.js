@@ -172,7 +172,7 @@ Enemy.prototype.SetDefaultValues = function() {
     this.SetDirection('left');
     this.energy = 5;
     this.damage = 3;
-    this.baseStunDuration = 600;
+    this.baseStunDuration = 400;
     this.stunThreshold = 1;
 };
 

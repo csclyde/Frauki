@@ -63,9 +63,12 @@ function HitUpgrade(f, o) {
             events.publish('stop_sound', {name: 'crystal_door'});
             events.publish('play_sound', {name: 'door_break'});
             
+            GameData.AddUpgrade(o.upgrade);
+
+            speechController.Activate('test!!!', 'Neutral');
             o.destroy();
         } else {
-            
+
         }
     }
 
