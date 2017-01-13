@@ -31,16 +31,16 @@ Upgrade = function(game, x, y, name) {
 Upgrade.prototype = Object.create(Phaser.Sprite.prototype);
 Upgrade.prototype.constructor = Upgrade;
 
-Upgrade.prototype.create = function() {
-
-};
-
 Upgrade.prototype.update = function() {
     if(!this.body.enable)
         return;
     
     if(!!this.state)
         this.state();
+
+    if(GameData.HasUpgrade(this.upgrade)) {
+        this.destroy();
+    }
 
 };
 

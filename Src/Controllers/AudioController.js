@@ -148,7 +148,7 @@ AudioController.prototype.PlayMusic = function(params) {
 
             //set the new song as the current music.
             this.currentMusic = this.music[params.name];
-            this.currentMusic.play('intro', 0, this.currentMusic.volumeStatic, false);
+            //this.currentMusic.play('intro', 0, this.currentMusic.volumeStatic, false);
         }
 
     }

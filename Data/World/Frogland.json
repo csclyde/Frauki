@@ -2050,26 +2050,6 @@
                  "y":3804
                 }, 
                 {
-                 "gid":88,
-                 "height":16,
-                 "id":2022,
-                 "name":"",
-                 "properties":
-                    {
-                     "on_death":"open_door,door_name:first_robo"
-                    },
-                 "propertytypes":
-                    {
-                     "on_death":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":2645.33,
-                 "y":3349.33
-                }, 
-                {
                  "gid":67,
                  "height":16,
                  "id":2023,
@@ -2102,50 +2082,6 @@
                  "width":16,
                  "x":2513.5,
                  "y":3969
-                }, 
-                {
-                 "gid":67,
-                 "height":16,
-                 "id":2033,
-                 "name":"",
-                 "properties":
-                    {
-                     "id":"first_orbo",
-                     "thresholdAttempts":"1",
-                     "type":"orb"
-                    },
-                 "propertytypes":
-                    {
-                     "id":"string",
-                     "thresholdAttempts":"string",
-                     "type":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":2936.54,
-                 "y":3349.84
-                }, 
-                {
-                 "gid":74,
-                 "height":16,
-                 "id":2034,
-                 "name":"",
-                 "properties":
-                    {
-                     "on_death":"open_door,door_name:first_orbo"
-                    },
-                 "propertytypes":
-                    {
-                     "on_death":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":2836.12,
-                 "y":3350.83
                 }, 
                 {
                  "gid":68,
@@ -2194,6 +2130,26 @@
                  "width":16,
                  "x":1712,
                  "y":3856
+                }, 
+                {
+                 "gid":92,
+                 "height":16,
+                 "id":2062,
+                 "name":"",
+                 "properties":
+                    {
+                     "on_death":"open_door,door_name:first_robo"
+                    },
+                 "propertytypes":
+                    {
+                     "on_death":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":2600,
+                 "y":3351
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -2552,7 +2508,7 @@
          "name":"Collision_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -4304,8 +4260,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":2416.37,
-                 "y":2881.5
+                 "x":2328.37,
+                 "y":3095
                 }, 
                 {
                  "gid":73,
@@ -5176,30 +5132,18 @@
                  "y":3240.5
                 }, 
                 {
-                 "gid":75,
-                 "height":16,
-                 "id":2059,
-                 "name":"",
-                 "properties":
-                    {
-                     "upgrade":"Dive"
-                    },
-                 "propertytypes":
-                    {
-                     "upgrade":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":2608.67,
-                 "y":3250.25
-                }, 
-                {
                  "gid":92,
                  "height":16,
                  "id":2061,
                  "name":"",
+                 "properties":
+                    {
+                     "on_death":"open_door,door_name:second_enem"
+                    },
+                 "propertytypes":
+                    {
+                     "on_death":"string"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -6014,7 +5958,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "width":0,
          "x":0,
          "y":0
@@ -9269,7 +9213,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":2062,
+ "nextobjectid":2063,
  "orientation":"orthogonal",
  "properties":
     {

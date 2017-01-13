@@ -58,6 +58,7 @@ InputController = function() {
         this.OnDown(false);
         this.OnRShoulder(false);
         this.OnStart(false);
+        
         this.allowInput = false;
     };
 

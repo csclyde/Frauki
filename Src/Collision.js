@@ -16,7 +16,9 @@ Collision.OverlapFraukiWithObject = function(f, o) {
 
     } else if(o.spriteType === 'enemy') {
 
-        if(frauki.body.y + frauki.body.height <= o.body.y + (frauki.body.height / 4) || o.body.y + o.body.height <= frauki.body.y + (o.body.height / 4)) {
+        if(o.isAttacking()) {
+            return false;
+        } else if(frauki.body.y + frauki.body.height <= o.body.y + (frauki.body.height / 4) || o.body.y + o.body.height <= frauki.body.y + (o.body.height / 4)) {
             return false;
         } else {
 
