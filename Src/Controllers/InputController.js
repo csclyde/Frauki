@@ -47,6 +47,17 @@ InputController = function() {
     this.bindList = [this.binds.jump, this.binds.up, this.binds.crouch, this.binds.runLeft, this.binds.runRight, this.binds.slash, this.binds.weapon, this.binds.roll, this.binds.shoulderR];
     
     this.disallowInput = function() {
+        this.OnJump(false);
+        this.OnSlash(false);
+        this.OnThrow(false);
+        this.OnRoll(false);
+        this.OnHeal(false);
+        this.OnLeft(false);
+        this.OnRight(false);
+        this.OnUp(false);
+        this.OnDown(false);
+        this.OnRShoulder(false);
+        this.OnStart(false);
         this.allowInput = false;
     };
 
