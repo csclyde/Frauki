@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="400" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="2061">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="400" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="2062">
  <properties>
   <property name="debug" value="false"/>
   <property name="startLayer" value="3"/>
@@ -3960,11 +3960,6 @@
   </object>
   <object id="1101" gid="87" x="1829.33" y="3854.67" width="16" height="16"/>
   <object id="1104" gid="96" x="902" y="4272" width="16" height="16"/>
-  <object id="1117" gid="99" x="2633.67" y="3475.33" width="16" height="16">
-   <properties>
-    <property name="on_death" value="open_door,door_name:second_enem"/>
-   </properties>
-  </object>
   <object id="1120" gid="99" x="1650.67" y="4598.67" width="16" height="16">
    <properties>
     <property name="on_death" value="open_door,door_name:bigroom_to_vent"/>
@@ -4117,7 +4112,7 @@
   <object id="1751" gid="68" x="2544" y="4608" width="16" height="16"/>
   <object id="1758" gid="98" x="2463.33" y="4722" width="16" height="16"/>
   <object id="1759" gid="86" x="2442.67" y="4590.67" width="16" height="16"/>
-  <object id="1779" gid="67" x="2327.04" y="3096.17" width="16" height="16">
+  <object id="1779" gid="67" x="2416.37" y="2881.5" width="16" height="16">
    <properties>
     <property name="facing" value="left"/>
     <property name="id" value="first_door"/>
@@ -4283,11 +4278,12 @@
   </object>
   <object id="2049" gid="85" x="2157.5" y="3839.5" width="16" height="16"/>
   <object id="2055" gid="92" x="2655.5" y="3240.5" width="16" height="16"/>
-  <object id="2059" gid="75" x="2254" y="3094.25" width="16" height="16">
+  <object id="2059" gid="75" x="2608.67" y="3250.25" width="16" height="16">
    <properties>
-    <property name="upgrade" value="Baton"/>
+    <property name="upgrade" value="Dive"/>
    </properties>
   </object>
+  <object id="2061" gid="92" x="2626.67" y="3473.33" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Triggers_3">
   <object id="1568" name="light" type="trigger" x="1035.91" y="4347.5" width="113.333" height="226">
@@ -4408,7 +4404,7 @@
     <property name="left" value="Choir"/>
    </properties>
   </object>
-  <object id="2044" name="ambient_left_right" type="trigger" x="2306.25" y="3049.62" width="61.5" height="68.75">
+  <object id="2044" name="ambient_left_right" type="trigger" x="2304.92" y="3052.95" width="61.5" height="68.75">
    <properties>
     <property name="left" value="surface_wind"/>
     <property name="right" value="cave_wind"/>

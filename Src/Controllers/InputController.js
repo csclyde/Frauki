@@ -1,4 +1,6 @@
 InputController = function() {
+    var that = this;
+
     this.timers = new TimerUtil();
 
     this.dpad = {};
@@ -43,12 +45,23 @@ InputController = function() {
     this.binds.shoulderR  = Phaser.Keyboard.Q;
 
     this.bindList = [this.binds.jump, this.binds.up, this.binds.crouch, this.binds.runLeft, this.binds.runRight, this.binds.slash, this.binds.weapon, this.binds.roll, this.binds.shoulderR];
+    
+    this.disallowInput = function() {
+        this.allowInput = false;
+    };
+
+    this.allowInput = function() {
+        this.allowInput = true;
+    };
+
+    events.subscribe('allow_input', this.allowInput, this);
+    events.subscribe('disallow_input', this.disallowInput, this);
 
     game.input.keyboard.onDownCallback = function(e) {
 
         if(e.repeat) return;
 
-        if(Main.restarting || !this.allowInput) {
+        if(Main.restarting || !that.allowInput) {
             return;
         }
 
@@ -104,7 +117,7 @@ InputController = function() {
 
     game.input.keyboard.onUpCallback = function(e) {
 
-        if(Main.restarting || !this.allowInput) {
+        if(Main.restarting || !that.allowInput) {
             return;
         }
 

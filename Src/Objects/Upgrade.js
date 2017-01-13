@@ -67,7 +67,7 @@ function HitUpgrade(f, o) {
 
             //speechController.Activate('test!!!', 'Neutral');
 
-            ScriptRunner.run('demo_baton');
+            ScriptRunner.run('demo_' + o.upgrade);
 
             o.destroy();
         } else {

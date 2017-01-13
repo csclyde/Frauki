@@ -2993,26 +2993,6 @@
                 {
                  "gid":99,
                  "height":16,
-                 "id":1117,
-                 "name":"",
-                 "properties":
-                    {
-                     "on_death":"open_door,door_name:second_enem"
-                    },
-                 "propertytypes":
-                    {
-                     "on_death":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":2633.66666666667,
-                 "y":3475.33333333333
-                }, 
-                {
-                 "gid":99,
-                 "height":16,
                  "id":1120,
                  "name":"",
                  "properties":
@@ -4324,8 +4304,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":2327.04,
-                 "y":3096.17
+                 "x":2416.37,
+                 "y":2881.5
                 }, 
                 {
                  "gid":73,
@@ -5202,7 +5182,7 @@
                  "name":"",
                  "properties":
                     {
-                     "upgrade":"Baton"
+                     "upgrade":"Dive"
                     },
                  "propertytypes":
                     {
@@ -5212,8 +5192,20 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":2254,
-                 "y":3094.25
+                 "x":2608.67,
+                 "y":3250.25
+                }, 
+                {
+                 "gid":92,
+                 "height":16,
+                 "id":2061,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":2626.67,
+                 "y":3473.33
                 }],
          "opacity":1,
          "properties":
@@ -5966,8 +5958,8 @@
                  "type":"trigger",
                  "visible":true,
                  "width":61.5,
-                 "x":2306.25,
-                 "y":3049.62
+                 "x":2304.92,
+                 "y":3052.95
                 }, 
                 {
                  "height":32.375,
@@ -9277,7 +9269,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":2061,
+ "nextobjectid":2062,
  "orientation":"orthogonal",
  "properties":
     {
