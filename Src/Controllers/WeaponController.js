@@ -82,6 +82,8 @@ WeaponController.prototype.Update = function() {
 
 WeaponController.prototype.ToggleWeapon = function(params) {
     this.weaponActive = params.activate;
+
+    console.log('throwing?', params)
     
     //if they have a weapon
     if(this.currentWeapon != null) {

@@ -12,6 +12,7 @@ ScriptRunner.run = function(name) {
 		}
 
 		//execute the first command in the chain. It will call the following commands
+		this.executeCommand(this.scripts[name][0]);
 
 	} else {
 		console.log('Script with name ' + name + ' was not found');
@@ -21,11 +22,36 @@ ScriptRunner.run = function(name) {
 ScriptRunner.executeCommand = function(cmd) {
 	var that = this;
 
+	if(!cmd) return;
+
+	console.log(cmd);
+
 	if(cmd.name === 'wait') {
-		gime.time.events.add(cmd.props.amount, function() { that.executeCommand(cmd.nextCommand); });
+		game.time.events.add(cmd.props.amount, function() { that.executeCommand(cmd.nextCommand); });
+	} else if(cmd.name === 'stop_control') {
+		inputController.allowInput = false;
+		this.executeCommand(cmd.nextCommand);
+
+	} else if(cmd.name === 'start_control') {
+		inputController.allowInput = true;
+		this.executeCommand(cmd.nextCommand);
+
 	} else {
 		events.publish(cmd.name, cmd.props );
 
 		this.executeCommand(cmd.nextCommand);
 	}
 };
+
+ScriptRunner.scripts = [];
+
+ScriptRunner.scripts['demo_baton'] = [
+	{ name: 'stop_control', props: {} },
+	{ name: 'show_text', props: { text: 'I can use X to now throw my energy', portrait: 'Neutral' } },
+	{ name: 'wait', props: { amount: 3000 } },
+	{ name: 'hide_text', props: {} },
+	{ name: 'wait', props: { amount: 500 } },
+	{ name: 'activate_weapon', props: { activate: true, override: true } },
+	{ name: 'wait', props: { amount: 2000 } },
+	{ name: 'start_control', props: {} }
+];

@@ -8,6 +8,12 @@ SpeechController = function() {
 
 	events.subscribe('player_slash', this.AdvanceText, this);
 
+	events.subscribe('show_text', function(props) {
+		this.Activate(props.text, props.portrait);
+	}, this);
+
+	events.subscribe('hide_text', this.AdvanceText, this);
+
 
 	this.timers = new TimerUtil();
 

@@ -65,7 +65,10 @@ function HitUpgrade(f, o) {
             
             GameData.AddUpgrade(o.upgrade);
 
-            speechController.Activate('test!!!', 'Neutral');
+            //speechController.Activate('test!!!', 'Neutral');
+
+            ScriptRunner.run('demo_baton');
+
             o.destroy();
         } else {
 
