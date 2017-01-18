@@ -1,4 +1,4 @@
-PLAYER_SPEED = function() { return 170 }
+PLAYER_SPEED = function() { return 200 }
 PLAYER_ROLL_SPEED = function() { return 460 }
 PLAYER_RUN_SLASH_SPEED = function() { return  550; }
 PLAYER_JUMP_VEL = function() { return -500 }
@@ -698,7 +698,7 @@ Player.prototype.DiveSlash = function() {
     if(!GameData.HasUpgrade('Dive')) {
         return this.FallSlash();
     }
-    
+
     if(energyController.UseEnergy(6)) {
         this.ChangeState(this.AttackDiveCharge);
         this.movement.diveVelocity = 550;

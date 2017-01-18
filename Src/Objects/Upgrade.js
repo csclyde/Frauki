@@ -65,13 +65,12 @@ function HitUpgrade(f, o) {
             
             GameData.AddUpgrade(o.upgrade);
 
-            //speechController.Activate('test!!!', 'Neutral');
-
             ScriptRunner.run('demo_' + o.upgrade);
 
             o.destroy();
         } else {
-
+            o.shakeMagnitudeX = 100;
+            game.add.tween(o).to({shakeMagnitudeX: 0 }, 500, Phaser.Easing.Linear.None, true);
         }
     }
 
@@ -84,4 +83,12 @@ Upgrade.prototype.PlayAnim = function(name) {
 
 Upgrade.prototype.Active = function() {
     this.PlayAnim('active' + this.health);
+
+    this.body.velocity.y = Math.sin(game.time.now / 150) * 30;
+
+    if(this.shakeMagnitudeX > 0) {
+        this.body.velocity.x = Math.sin(game.time.now * 150) * this.shakeMagnitudeX;
+    } else {
+        this.body.velocity.x = 0;
+    }
 };

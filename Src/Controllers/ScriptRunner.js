@@ -76,3 +76,9 @@ ScriptRunner.scripts['demo_Dive'] = [
 	{ name: 'player_crouch', props: { crouch: false } },
 	{ name: 'allow_input', props: {} }
 ];
+
+ScriptRunner.scripts['demo_Health'] = [
+	{ name: 'show_text', props: { text: 'Yay, more health!', portrait: 'Enticed' } },
+	{ name: 'wait', props: { amount: 3000 } },
+	{ name: 'hide_text', props: {} }
+];

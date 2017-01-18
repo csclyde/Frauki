@@ -204,17 +204,6 @@ Main.DrawUI = function() {
 
     this.RenderTextureFromAtlas('UI', 'HudFrame0002', 14 + (energyController.GetMaxHealth() * 7), 10);
 
-
-    this.RenderTextureFromAtlas('UI', 'HudFrame0000', 10, 22);
-
-    for(var i = 0, len = energyController.GetMaxCharge(); i < len; i++) {
-        this.RenderTextureFromAtlas('UI', 'HudFrame0003', 14 + (i * 7), 25);
-        this.RenderTextureFromAtlas('UI', 'HudFrame0001', 14 + (i * 7), 22);
-    }
-
-
-    this.RenderTextureFromAtlas('UI', 'HudFrame0002', 14 + (energyController.GetMaxCharge() * 7), 22);
-
     //health pips
     for(var i = 0, len = energyController.GetHealth(); i < len; i++) {
         var pipFrame = '';
@@ -233,20 +222,33 @@ Main.DrawUI = function() {
         this.RenderTextureFromAtlas('UI', pipFrame, 14 + (7 * i), 13);
     }
 
-    for(var i = 0, len = energyController.GetCharge(); i < len; i++) {
-        var pipFrame = '';
+    if(weaponController.GetNumWeapons() > 0) {
+        this.RenderTextureFromAtlas('UI', 'HudFrame0000', 10, 22);
 
-        if(i < 1) {
-            pipFrame = 'EnergyPips0000';
-        } else if(i < 2) {
-            pipFrame = 'EnergyPips0001';
-        } else if(i < 3) {
-            pipFrame = 'EnergyPips0002';
-        } else {
-            pipFrame = 'EnergyPips0003';
-        } 
+        for(var i = 0, len = energyController.GetMaxCharge(); i < len; i++) {
+            this.RenderTextureFromAtlas('UI', 'HudFrame0003', 14 + (i * 7), 25);
+            this.RenderTextureFromAtlas('UI', 'HudFrame0001', 14 + (i * 7), 22);
+        }
+
+
+        this.RenderTextureFromAtlas('UI', 'HudFrame0002', 14 + (energyController.GetMaxCharge() * 7), 22);
+
+        for(var i = 0, len = energyController.GetCharge(); i < len; i++) {
+            var pipFrame = '';
+
+            if(i < 1) {
+                pipFrame = 'EnergyPips0000';
+            } else if(i < 2) {
+                pipFrame = 'EnergyPips0001';
+            } else if(i < 3) {
+                pipFrame = 'EnergyPips0002';
+            } else {
+                pipFrame = 'EnergyPips0003';
+            } 
+            
+            this.RenderTextureFromAtlas('UI', pipFrame, 14 + (7 * i), 25);
+        }
         
-        this.RenderTextureFromAtlas('UI', pipFrame, 14 + (7 * i), 25);
     }
 
     // for(var i = 0, len = energyController.GetCharge(); i < len; i++) {
@@ -271,15 +273,15 @@ Main.DrawUI = function() {
         if(i === energyController.GetApples() - 1 && frauki.state === frauki.Healing) {
             //drain the graphic
             if(game.time.now - frauki.timers.Timestamp('heal_charge') < 200) {
-                this.RenderTextureFromAtlas('Misc','Apple0002', 10 + (20 * i), 45); 
+                this.RenderTextureFromAtlas('Misc','Apple0002', 10 + (20 * i), 35); 
             } else if(game.time.now - frauki.timers.Timestamp('heal_charge') < 400) {
-                this.RenderTextureFromAtlas('Misc','Apple0003', 10 + (20 * i), 45); 
+                this.RenderTextureFromAtlas('Misc','Apple0003', 10 + (20 * i), 35); 
             } else if(game.time.now - frauki.timers.Timestamp('heal_charge') < 600) {
-                this.RenderTextureFromAtlas('Misc','Apple0004', 10 + (20 * i), 45); 
+                this.RenderTextureFromAtlas('Misc','Apple0004', 10 + (20 * i), 35); 
             } else if(game.time.now - frauki.timers.Timestamp('heal_charge') < 800) {
-                this.RenderTextureFromAtlas('Misc','Apple0005', 10 + (20 * i), 45); 
+                this.RenderTextureFromAtlas('Misc','Apple0005', 10 + (20 * i), 35); 
             } else {
-                this.RenderTextureFromAtlas('Misc','Apple0006', 10 + (20 * i), 45); 
+                this.RenderTextureFromAtlas('Misc','Apple0006', 10 + (20 * i), 35); 
             }
         
         //otherwise, just draw the full apple

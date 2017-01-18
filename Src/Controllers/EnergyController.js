@@ -138,7 +138,7 @@ EnergyController.prototype.GetHealth = function() {
 
 EnergyController.prototype.GetMaxHealth = function() {
 
-	return 6;
+	return GameData.GetMaxHealth();
 };
 
 

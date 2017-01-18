@@ -13,7 +13,8 @@ GameData.data = {
     doors: [],
     shards: {},
     nugg_bank: 0,
-    flash_copy: null
+    flash_copy: null,
+    health: 2
 };
 
 GameData.nuggetCount = 0;
@@ -42,6 +43,10 @@ GameData.SetCheckpoint = function(c) {
     }
 };
 
+GameData.GetMaxHealth = function() {
+    return this.data.health;
+};
+
 GameData.HasUpgrade = function(name) {
     return (this.data.upgrades.indexOf(name) > -1);
 };
@@ -53,7 +58,11 @@ GameData.SetUpgrade = function(name) {
 
 GameData.AddUpgrade = function(name) {
     
-    if(this.data.upgrades.indexOf(name) < 0) {
+    if(name === 'Health') {
+        this.data.health++;
+        energyController.AddHealth(1);
+        this.SaveDataToStorage();
+    } else if(this.data.upgrades.indexOf(name) < 0) {
         this.data.upgrades.push(name);
         this.SaveDataToStorage();
         weaponController.RefactorWeaponList();

@@ -106,6 +106,10 @@ WeaponController.prototype.GetAttackGeometry = function() {
     return null;
 };
 
+WeaponController.prototype.GetNumWeapons = function() {
+    return this.weaponList.length;
+}
+
 WeaponController.prototype.Baton = {
     Init: function() {
         this.baton = game.add.sprite(frauki.body.center.x + (frauki.states.direction === 'right' ? 20 : -20), frauki.body.center.y, 'Frauki');
