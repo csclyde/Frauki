@@ -41,11 +41,32 @@ Shard.prototype.update = function() {
     if(!!this.state)
         this.state();
 
+    if(this.visible && !this.beingUsed && GameData.HasShard(this.name)) {
+        this.visible = false;
+    } else if(this.beingUsed) {
+        this.visible = true;
+    }
+
 };
 
 function PickUpShard(f, a) {
-    GameData.AddShard('Will');
-    a.destroy();
+    if(!GameData.HasShard(a.name)) {
+        GameData.AddShard(a.name);
+        a.beingUsed = true;
+        a.ReturnToUI();
+
+        ScriptRunner.run('demo_' + a.name);
+        
+    }
+};
+
+Shard.prototype.ReturnToUI = function() {
+    var that = this;
+
+    var shardTween = game.add.tween(this.body).to({x: game.camera.x, y: game.camera.y + game.camera.height}, 2000, Phaser.Easing.Exponential.Out, true);
+    shardTween.onComplete.add(function() {
+        that.beingUsed = false;
+    });
 };
 
 Shard.prototype.PlayAnim = function(name) {

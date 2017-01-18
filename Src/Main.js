@@ -132,8 +132,6 @@ Main.Restart = function() {
     if(cameraController.shakeYTween) cameraController.shakeYTween.stop();
 
     fadeOutTween.onComplete.add(function() {
-        PrepareShardsForDeath();
-        GameData.SaveShardPositions();
 
         weaponController.Baton.ResetBaton();
 
@@ -315,19 +313,19 @@ Main.DrawUI = function() {
 
     //draw an indicator for each obtained shard
     if(GameData.HasShard('Wit')) {
-        Main.RenderTextureFromAtlas('Misc', 'Shard0004', 20, 200);
+        Main.RenderTextureFromAtlas('Misc', 'Shard0004', 35, 330);
     }
 
     if(GameData.HasShard('Will')) {
-        Main.RenderTextureFromAtlas('Misc', 'Shard0005', 30, 200);
+        Main.RenderTextureFromAtlas('Misc', 'Shard0005', 20, 330);
     }
 
     if(GameData.HasShard('Luck')) {
-        Main.RenderTextureFromAtlas('Misc', 'Shard0006', 40, 200);
+        Main.RenderTextureFromAtlas('Misc', 'Shard0006', 50, 330);
     }
 
     if(GameData.HasShard('Power')) {
-        Main.RenderTextureFromAtlas('Misc', 'Shard0007', 50, 200);
+        Main.RenderTextureFromAtlas('Misc', 'Shard0007', 65, 330);
     }
 };
 

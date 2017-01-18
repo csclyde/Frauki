@@ -64,7 +64,7 @@ ScriptRunner.scripts['demo_Stab'] = [
 
 ScriptRunner.scripts['demo_Dive'] = [
 	{ name: 'disallow_input', props: {} },
-	{ name: 'show_text', props: { text: 'Whoa... Down attacking in the air now lets me smash these jokers...', portrait: 'Enticed' } },
+	{ name: 'show_text', props: { text: 'Whoa... Down attacking in the air now lets me do a power attack', portrait: 'Enticed' } },
 	{ name: 'wait', props: { amount: 3000 } },
 	{ name: 'hide_text', props: {} },
 	{ name: 'wait', props: { amount: 500 } },
@@ -78,19 +78,28 @@ ScriptRunner.scripts['demo_Dive'] = [
 ];
 
 ScriptRunner.scripts['demo_Health'] = [
+	{ name: 'disallow_input', props: {} },
 	{ name: 'show_text', props: { text: 'Yay, more health!', portrait: 'Enticed' } },
 	{ name: 'wait', props: { amount: 3000 } },
-	{ name: 'hide_text', props: {} }
+	{ name: 'hide_text', props: {} },
+	{ name: 'allow_input', props: {} }
 ];
 
 ScriptRunner.scripts['demo_Apple'] = [
 	{ name: 'disallow_input', props: {} },
-
 	{ name: 'show_text', props: { text: 'Apples are tasty. If I find one, I can eat it with the right shoulder button to feel better.', portrait: 'Enticed' } },
-	{ name: 'wait', props: { amount: 3000 } },
+	{ name: 'wait', props: { amount: 4000 } },
 	{ name: 'hide_text', props: {} },
 	{ name: 'wait', props: { amount: 500 } },
 	{ name: 'player_heal', props: { charging: true } },
 	{ name: 'wait', props: { amount: 1200 } },
+	{ name: 'allow_input', props: {} }
+];
+
+ScriptRunner.scripts['demo_Will'] = [
+	{ name: 'disallow_input', props: {} },
+	{ name: 'show_text', props: { text: 'The prism shard of will! This should allow me to open some sealed doors.', portrait: 'Neutral' } },
+	{ name: 'wait', props: { amount: 3000 } },
+	{ name: 'hide_text', props: {} },
 	{ name: 'allow_input', props: {} }
 ];

@@ -154,18 +154,30 @@ function OpenDoor(f, d, override) {
 
         d.waitingToOpen = true;
 
-        //get the prism frauki is carrying
-        var prism = frauki.carriedShard;
+        console.log(Frogland.shardGroup);
 
-        prism.openingDoor = true;
+        //get the prism for this door
+        var prism = null;
+
+        Frogland.shardGroup.forEach(function(s) {
+            if(s.name === d.prism) {
+                prism = s;
+            }
+        })
+
+        prism.beingUsed = true;
+        prism.body.x = game.camera.x;
+        prism.body.y = game.camera.y + game.camera.height;
+
+        prism.opacity = 0;
 
         //tween its position to the center of the door
-        var shardTween = game.add.tween(prism.body).to({x: d.body.x + 0, y: d.body.y + 24}, 1000, Phaser.Easing.Exponential.Out, true);
+        var shardTween = game.add.tween(prism.body).to({x: d.body.x + 0, y: d.body.y + 24}, 2000, Phaser.Easing.Exponential.Out, true);
         shardTween.onComplete.add(function() {
             //when the tween is done, perform the door opening
             effectsController.ScreenFlash();
             PerformOpen(d, true);
-            prism.openingDoor = false;
+            prism.ReturnToUI();
         });
 
         console.log('Opening door with prism shard:' + d.id);
