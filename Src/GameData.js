@@ -11,10 +11,11 @@ GameData.data = {
     checkpoint: '0',
     upgrades: [],
     doors: [],
-    shards: {},
+    shards: [],
     nugg_bank: 0,
     flash_copy: null,
-    health: 2
+    health: 2,
+    firstAppleEaten: false
 };
 
 GameData.nuggetCount = 0;
@@ -51,23 +52,19 @@ GameData.HasUpgrade = function(name) {
     return (this.data.upgrades.indexOf(name) > -1);
 };
 
-GameData.SetUpgrade = function(name) {
-    this.data.upgrades = [name];
-    this.SaveDataToStorage();
-};
-
 GameData.AddUpgrade = function(name) {
     
-    if(name === 'Health') {
+    if(name.indexOf('Health') >= 0) {
         this.data.health++;
         energyController.AddHealth(1);
+        this.data.upgrades.push(name);
         this.SaveDataToStorage();
     } else if(this.data.upgrades.indexOf(name) < 0) {
         this.data.upgrades.push(name);
         this.SaveDataToStorage();
         weaponController.RefactorWeaponList();
     }
-}
+};
 
 GameData.GetOpenDoors = function() {
     return this.data.doors;
@@ -88,35 +85,16 @@ GameData.GetMaxApples = function() {
     return 1;
 };
 
-GameData.SaveShardPositions = function() {
-    var shardSave = {};
+GameData.AddShard = function(name) {
+    if(GameData.data.shards.indexOf(name) < 0) {
+        GameData.data.shards.push(name);
+        this.SaveDataToStorage();
 
-    Frogland.shardGroup.forEach(function(s) {
-        shardSave[s.shardFrame] = {
-            x: Math.floor(s.x),
-            y: Math.floor(s.y),
-            layer: s.currentLayer,
-            dropped: (!s.returnedToChurch && s.pickedUp)
-        };
-    });
-
-    Frogland.placedShards.forEach(function(s) {
-        shardSave[s.shardFrame] = {
-            x: Math.floor(s.x),
-            y: Math.floor(s.y),
-            layer: s.currentLayer,
-            dropped: (!s.returnedToChurch && s.pickedUp)
-        };
-    });
-
-    this.data.shards = shardSave;
-    this.SaveDataToStorage();
+    }
 };
 
-GameData.GetShardPosition = function(name) {
-    if(!this.data.shards[name]) return null;
-
-    return this.data.shards[name];
+GameData.HasShard = function(name) {
+    return GameData.data.shards.indexOf(name) >= 0;
 };
 
 GameData.GetNuggCount = function() {
@@ -180,3 +158,13 @@ GameData.SetFlashCopy = function() {
     this.SaveDataToStorage();
 
 };
+
+GameData.SetFirstAppleEaten = function() {
+    this.data.firstAppleEaten = true;
+    this.SaveDataToStorage();
+
+};
+
+GameData.WasFirstAppleEaten = function() {
+    return this.data.firstAppleEaten;
+}

@@ -58,7 +58,7 @@ InputController = function() {
         this.OnDown(false);
         this.OnRShoulder(false);
         this.OnStart(false);
-        
+
         this.allowInput = false;
     };
 
@@ -369,9 +369,6 @@ InputController.prototype.OnRoll = function(pressed) {
 InputController.prototype.OnHeal = function(pressed) {
     if(game.state.getCurrentState() === Main) {
         if(pressed) {
-            this.chargingApple = true;
-            this.timers.SetTimer('apple_charge', 1000);
-
             events.publish('player_heal', { charging: true });
         } else {
             events.publish('player_heal', { charging: false });

@@ -74,8 +74,6 @@ Frogland.Create = function() {
     this.CreateShards(3);
     this.CreateShards(2);
 
-    SetShardVisibility();
-
     this.CreateDoorLayer(1);
     this.CreateDoorLayer(2);
     this.CreateDoorLayer(3);
@@ -398,7 +396,6 @@ Frogland.ChangeLayer = function(newLayer, immediate) {
         frauki.carriedShard.currentLayer = newLayer;
     }
 
-    SetShardVisibility();
     if(!!effectsController) effectsController.ClearDicedPieces();
     if(!!projectileController) projectileController.DestroyAllProjectiles();
 };

@@ -82,3 +82,15 @@ ScriptRunner.scripts['demo_Health'] = [
 	{ name: 'wait', props: { amount: 3000 } },
 	{ name: 'hide_text', props: {} }
 ];
+
+ScriptRunner.scripts['demo_Apple'] = [
+	{ name: 'disallow_input', props: {} },
+
+	{ name: 'show_text', props: { text: 'Apples are tasty. If I find one, I can eat it with the right shoulder button to feel better.', portrait: 'Enticed' } },
+	{ name: 'wait', props: { amount: 3000 } },
+	{ name: 'hide_text', props: {} },
+	{ name: 'wait', props: { amount: 500 } },
+	{ name: 'player_heal', props: { charging: true } },
+	{ name: 'wait', props: { amount: 1200 } },
+	{ name: 'allow_input', props: {} }
+];

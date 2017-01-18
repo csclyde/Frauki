@@ -313,44 +313,21 @@ Main.DrawUI = function() {
 
     pixel.context.globalAlpha = this.currentAlpha;
 
+    //draw an indicator for each obtained shard
+    if(GameData.HasShard('Wit')) {
+        Main.RenderTextureFromAtlas('Misc', 'Shard0004', 20, 200);
+    }
 
-    //draw an arrow pointing towards the shard
-    if(GetCurrentShardType() === 'None') {
+    if(GameData.HasShard('Will')) {
+        Main.RenderTextureFromAtlas('Misc', 'Shard0005', 30, 200);
+    }
 
-        Frogland.shardGroup.forEach(function(s) {
-            if(s.pickedUp && !s.returnedToChurch) {
-                var diff = new Phaser.Point(s.body.center.x - frauki.body.center.x, s.body.center.y - frauki.body.center.y);
+    if(GameData.HasShard('Luck')) {
+        Main.RenderTextureFromAtlas('Misc', 'Shard0006', 40, 200);
+    }
 
-                var dist = diff.getMagnitude();
-
-                diff = diff.normalize();
-
-                //diff.setMagnitude(90);
-                if(dist > 900) {
-                    diff.setMagnitude(90);
-                } else if(dist < 150) {
-                    diff.setMagnitude(15);
-                } else {
-                    diff.setMagnitude(dist / 10);
-                }
-
-                var opacity = 1;
-
-                if(s.currentLayer !== Frogland.currentLayer) {
-                    opacity = 0.5;
-                }
-
-                var shardIndicator = 'Shard0004';
-
-                if(s.shardFrame === 'Shard0000') shardIndicator = 'Shard0004';
-                if(s.shardFrame === 'Shard0001') shardIndicator = 'Shard0005';
-                if(s.shardFrame === 'Shard0002') shardIndicator = 'Shard0006';
-                if(s.shardFrame === 'Shard0003') shardIndicator = 'Shard0007';
-
-                Main.RenderTextureFromAtlas('Misc', shardIndicator, (game.camera.width / 2) + diff.x, (game.camera.height / 2) + diff.y, 1, 1, opacity);
-
-            }
-        });
+    if(GameData.HasShard('Power')) {
+        Main.RenderTextureFromAtlas('Misc', 'Shard0007', 50, 200);
     }
 };
 

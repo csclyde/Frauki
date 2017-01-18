@@ -49,6 +49,12 @@ function EatApple(f, a) {
 
     events.publish('play_sound', {name: 'crystal_door'});
 
+    if(!GameData.WasFirstAppleEaten()) {
+        ScriptRunner.run('demo_Apple');
+        GameData.SetFirstAppleEaten();
+    }
+
+
     energyController.AddApple();
     a.destroy();
 

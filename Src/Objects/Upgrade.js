@@ -65,7 +65,11 @@ function HitUpgrade(f, o) {
             
             GameData.AddUpgrade(o.upgrade);
 
-            ScriptRunner.run('demo_' + o.upgrade);
+            if(o.upgrade.indexOf('Health') >= 0) {
+                ScriptRunner.run('demo_Health');
+            } else {
+                ScriptRunner.run('demo_' + o.upgrade);
+            }
 
             o.destroy();
         } else {

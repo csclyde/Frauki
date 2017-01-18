@@ -150,7 +150,7 @@ function OpenDoor(f, d, override) {
     
 
     //or if its a shard door and they are holding the right shard
-    if(d.prism === GetCurrentShardType() && !d.waitingToOpen) {
+    if(GameData.HasShard(d.prism) && !d.waitingToOpen) {
 
         d.waitingToOpen = true;
 
