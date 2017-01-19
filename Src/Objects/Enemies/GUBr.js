@@ -14,6 +14,8 @@ Enemy.prototype.types['GUBr'] =  function() {
     this.robotic = true;
 
     this.flipDir = false;
+
+    this.body.drag.x = 80;
     
 	this.updateFunction = function() {
 
@@ -22,17 +24,17 @@ Enemy.prototype.types['GUBr'] =  function() {
 	this.Act = function() {
         if(EnemyBehavior.Player.IsVisible(this)) {
 
-        	if(EnemyBehavior.Player.IsDangerous(this) || EnemyBehavior.Player.MovingTowards(this)) {
+        	if(EnemyBehavior.Player.IsDangerous(this)) {
         		this.RunAway();
 
-        	} else if(EnemyBehavior.Player.IsNear(this, 60) && this.timers.TimerUp('attack_wait') && frauki.body.onFloor()) {
+        	} else if(EnemyBehavior.Player.IsNear(this, 180) && this.timers.TimerUp('attack_wait') && frauki.body.onFloor()) {
 	            this.Attack();
 
-        	} else if(EnemyBehavior.Player.IsVulnerable(this)) {
-        		this.Charge();
+	        } else if(this.state === this.Blocking && !EnemyBehavior.Player.IsNear(this, 180)) {
+	        	this.Charge();
 
         	} else {
-        		this.state = this.Idling;
+        		this.Block();
         	}
         	
         } else {
@@ -52,6 +54,12 @@ Enemy.prototype.types['GUBr'] =  function() {
     	EnemyBehavior.FacePlayer(this);
     	this.state = this.Attacking;
     	this.timers.SetTimer('attacking', game.rnd.between(450, 500));
+
+    	if(this.direction === 'left') {
+			this.body.velocity.x = -350;
+		} else {
+			this.body.velocity.x = 350;
+		}
     };
 
     this.RunAway = function() {
@@ -70,7 +78,7 @@ Enemy.prototype.types['GUBr'] =  function() {
     this.Block = function() {
     	this.state = this.Blocking;
 
-    	this.timers.SetTimer('blocking', 2000);
+    	this.timers.SetTimer('blocking', 800 + game.rnd.between(0, 400));
     };
 
     this.Charge = function() {
@@ -125,11 +133,7 @@ Enemy.prototype.types['GUBr'] =  function() {
 
 		EnemyBehavior.FacePlayer(this);
 
-		if(EnemyBehavior.Player.IsDangerous(this) || EnemyBehavior.Player.MovingTowards(this)) {
-			return false;
-		}
-
-		if(EnemyBehavior.Player.IsVulnerable(this) && EnemyBehavior.Player.IsNear(this, 60) && frauki.body.onFloor()) {
+		if(EnemyBehavior.Player.IsNear(this, 200) && frauki.InPreAttackAnim()) {
 			this.Attack();
 		}
 
@@ -151,7 +155,11 @@ Enemy.prototype.types['GUBr'] =  function() {
 			this.body.velocity.x = 200;
 		}
 
-		return true;
+		if(this.body.onWall() || EnemyBehavior.Player.IsNear(this, 180)) {
+			return true;
+		} else {
+			return false;
+		}
 	};
 
 	this.Attacking = function() {
@@ -181,6 +189,22 @@ Enemy.prototype.types['GUBr'] =  function() {
 
 	this.attackFrames = {
 
+		'GUBr/Attack0005': {
+			x: 26, y: 20, w: 50, h: 12,
+			damage: 1,
+			knockback: 0,
+			priority: 1,
+			juggle: 0
+		},
+
+		'GUBr/Attack0004': {
+			x: 26, y: 20, w: 50, h: 12,
+			damage: 1,
+			knockback: 0,
+			priority: 1,
+			juggle: 0
+		},
+
 		'GUBr/Attack0003': {
 			x: 26, y: 20, w: 50, h: 12,
 			damage: 1,
@@ -189,21 +213,21 @@ Enemy.prototype.types['GUBr'] =  function() {
 			juggle: 0
 		},
 
-		'GUBr/Block0000': {
+		'GUBr/Attack0002': {
 			x: 26, y: 20, w: 50, h: 12,
-			damage: 0,
+			damage: 1,
 			knockback: 0,
 			priority: 1,
 			juggle: 0
 		},
 
-		'GUBr/Block0001': {
+		'GUBr/Attack0001': {
 			x: 26, y: 20, w: 50, h: 12,
 			damage: 0,
 			knockback: 0,
 			priority: 1,
 			juggle: 0
-		},
+		}
 
 	};
 

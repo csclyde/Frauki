@@ -194,8 +194,7 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
             effectsController.ShatterShield();
             events.publish('play_sound', {name: 'crystal_door', restart: true });
         }
-
-    } 
+    }
 
     frauki.LandHit(e, 0);
     e.LandHit();
@@ -233,7 +232,7 @@ Collision.OverlapEnemyAttackWithFrauki = function(e, f) {
 
     e = e.owningEnemy;
 
-    if(e.GetCurrentDamage() > 0 && !frauki.Grace()) {
+    if(e.GetCurrentDamage() > 0 && !frauki.Grace() && !e.Grace()) {
         frauki.Hit(e, e.GetCurrentDamage(), 1000);
         e.LandHit();
     }

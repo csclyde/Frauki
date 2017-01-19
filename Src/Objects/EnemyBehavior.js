@@ -67,7 +67,6 @@ EnemyBehavior.RollDice = function(sides, thresh) {
         return false;
 };
 
-
 EnemyBehavior.Player = {};
 
 EnemyBehavior.Player.IsNear = function(e, radius) {

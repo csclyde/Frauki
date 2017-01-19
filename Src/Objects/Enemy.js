@@ -183,6 +183,10 @@ Enemy.prototype.isAttacking = function() {
         return false;
 };
 
+Enemy.prototype.Grace = function() {
+    return !this.timers.TimerUp('grace');
+};
+
 Enemy.prototype.GetCurrentDamage = function() {
     if(!!this.currentAttack) {
         return this.currentAttack.damage;
