@@ -16,7 +16,7 @@ Collision.OverlapFraukiWithObject = function(f, o) {
 
     } else if(o.spriteType === 'enemy') {
 
-        if(o.isAttacking()) {
+        if(o.isAttacking() && o.GetCurrentDamage() > 0) {
             return false;
         } else if(frauki.body.y + frauki.body.height <= o.body.y + (frauki.body.height / 4) || o.body.y + o.body.height <= frauki.body.y + (o.body.height / 4)) {
             return false;
@@ -155,8 +155,6 @@ Collision.OverlapAttackWithEnemy = function(f, e, halfDmg) {
         return;
 
     var damage = frauki.GetCurrentDamage();
-
-    console.log('hit da goobr')
 
     if(halfDmg) damage /= 2;
 
