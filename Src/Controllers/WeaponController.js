@@ -87,8 +87,12 @@ WeaponController.prototype.ToggleWeapon = function(params) {
     if(this.currentWeapon != null) {
         //and the toggle is to activate it
         if(params.activate && frauki.state !== frauki.Hurting && (!frauki.InAttackAnim() || params.override)) {
-            this.currentWeapon.Start();
-            this.weaponActive = true;
+            if(energyController.GetCharge() > 0) {
+                this.currentWeapon.Start();
+                this.weaponActive = true;
+            } else {
+                events.publish('play_sound', { name: 'no_energy', restart: true });
+            }
         //otherwise, if the toggle is to deactivate it
         } else {
             this.currentWeapon.Stop();
@@ -115,18 +119,21 @@ WeaponController.prototype.Baton = {
         this.baton = game.add.sprite(frauki.body.center.x + (frauki.states.direction === 'right' ? 20 : -20), frauki.body.center.y, 'Frauki');
         this.baton.anchor.setTo(0.5);
         game.physics.enable(this.baton, Phaser.Physics.ARCADE);
-        this.baton.body.gravity.y = -600;
-        this.baton.body.setSize(20, 20, 0, 0);
-        this.baton.animations.add('baton0', ['Baton00000', 'Baton00001', 'Baton00002', 'Baton00003', 'Baton00004', 'Baton00005'], 30, true, false);
-        this.baton.animations.add('baton1', ['Baton10000', 'Baton10001', 'Baton10002'], 30, true, false);
-        this.baton.animations.add('baton2', ['Baton20000', 'Baton20001', 'Baton20002'], 30, true, false);
-        this.baton.animations.add('baton3', ['Baton30000', 'Baton30001', 'Baton30002'], 30, true, false);
-        this.baton.animations.add('baton4', ['Baton40000', 'Baton40001', 'Baton40002', 'Baton40003', 'Baton40004', 'Baton40005'], 30, true, false);
-        this.baton.animations.play('baton0');
+        this.baton.body.gravity.y = -700;
+        this.baton.body.setSize(30, 30, 0, 0);
+        this.baton.animations.add('baton1', ['Baton00000', 'Baton00001', 'Baton00002', 'Baton00003', 'Baton00004', 'Baton00005'], 30, true, false);
+        this.baton.animations.add('baton2', ['Baton10000', 'Baton10001', 'Baton10002'], 30, true, false);
+        this.baton.animations.add('baton3', ['Baton20000', 'Baton20001', 'Baton20002'], 30, true, false);
+        this.baton.animations.add('baton4', ['Baton30000', 'Baton30001', 'Baton30002'], 30, true, false);
+        this.baton.animations.play('baton1');
         this.baton.visible = false;
     },
 
     Start: function() {
+        if(energyController.GetCharge() <= 0) {
+            return;
+        }
+
         if(!frauki.states.throwing) {
             //the initial activity when you press the button
             game.time.events.add(200, this.ThrowBaton, this);
@@ -138,7 +145,7 @@ WeaponController.prototype.Baton = {
     Update: function() {
         if(this.baton && this.baton.visible) {
             var vel = 800;
-            var maxVelocity = 800 + this.baton.chargeLevel * 100;
+            var maxVelocity = 900 + this.baton.chargeLevel * 100;
 
             if(weaponController.timers.TimerUp('min_throw_time') && this.baton.body.x > frauki.body.x && this.baton.body.x < frauki.body.x + frauki.body.width && this.baton.body.y > frauki.body.y && this.baton.body.y < frauki.body.y + frauki.body.height) {
                 events.publish('play_sound', {name: 'baton_catch', restart: true });
@@ -176,9 +183,19 @@ WeaponController.prototype.Baton = {
     },
 
     GetDamageFrame: function() {
+        var damage = 0;
+
+        if(this.baton.chargeLevel > 0) {
+            damage++;
+        }
+
+        if(this.baton.chargeLevel === 4) {
+            damage++;
+        }
+
         if(this.baton && this.baton.visible) {
             var currentAttack = { 
-                damage: 0.5 + this.baton.chargeLevel * 1.5,
+                damage: 0.1 + damage,
                 knockback: this.baton.chargeLevel / 4,
                 priority: this.baton.chargeLevel,
                 juggle: this.baton.chargeLevel / 4,

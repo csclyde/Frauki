@@ -1186,7 +1186,7 @@ Player.prototype.Hanging = function() {
 
     this.body.velocity.y = 0;
     this.body.acceleration.y = 0;
-    this.body.gravity.y = -600;
+    this.body.gravity.y = -700;
     this.states.hasFlipped = false;
 
     if(!this.body.onWall()) {
