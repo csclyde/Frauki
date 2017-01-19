@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>4.3.1</string>
+        <string>4.3.3</string>
         <key>fileName</key>
         <string>D:/gamedev/Frauki/Design/Sprites/Enemies/Enemies.tps</string>
         <key>autoSDSettings</key>
@@ -305,6 +305,8 @@
             <key type="filename">GUBr/Attack0003.png</key>
             <key type="filename">GUBr/Attack0004.png</key>
             <key type="filename">GUBr/Attack0005.png</key>
+            <key type="filename">GUBr/Block0000.png</key>
+            <key type="filename">GUBr/Block0001.png</key>
             <key type="filename">GUBr/Hit0000.png</key>
             <key type="filename">GUBr/Stand0000.png</key>
             <key type="filename">GUBr/Walk0000.png</key>

@@ -111,7 +111,7 @@ Collision.OverlapAttackWithObject = function(f, o) {
             } else if(o.isAttacking() && frauki.GetCurrentPriority() > o.GetCurrentPriority()) {
                 o.timers.SetTimer('grace', 0);
                 events.publish('play_sound', {name: 'clang'});
-                Collision.OverlapAttackWithEnemy(f, o, true);
+                Collision.OverlapAttackWithEnemy(f, o);
             }
             //they can be hit if theyre not attacking, or they are attacking
             //but facing away from the player
@@ -155,6 +155,8 @@ Collision.OverlapAttackWithEnemy = function(f, e, halfDmg) {
         return;
 
     var damage = frauki.GetCurrentDamage();
+
+    console.log('hit da goobr')
 
     if(halfDmg) damage /= 2;
 

@@ -7,6 +7,7 @@ Enemy.prototype.types['GUBr'] =  function() {
     this.animations.add('walk', ['GUBr/Walk0000', 'GUBr/Walk0001', 'GUBr/Walk0002', 'GUBr/Walk0003'], 10, true, false);
     this.animations.add('attack', ['GUBr/Attack0000', 'GUBr/Attack0001', 'GUBr/Attack0002', 'GUBr/Attack0003', 'GUBr/Attack0004', 'GUBr/Attack0005'], 10, false, false);
     this.animations.add('hit', ['GUBr/Hit0000'], 10, false, false);
+    this.animations.add('block', ['GUBr/Block0000', 'GUBr/Block0001'], 16, true, false);
 
     this.energy = 2;
     this.baseStunDuration = 400;
@@ -66,6 +67,12 @@ Enemy.prototype.types['GUBr'] =  function() {
 
     };
 
+    this.Block = function() {
+    	this.state = this.Blocking;
+
+    	this.timers.SetTimer('blocking', 2000);
+    };
+
     this.Charge = function() {
     	this.state = this.Charging;
     };
@@ -90,8 +97,10 @@ Enemy.prototype.types['GUBr'] =  function() {
 
 
 		if(this.body.onWall() && this.timers.TimerUp('wall_timer')) {
-			this.flipDir = !this.flipDir;
-			this.timers.SetTimer('wall_timer', 500);
+			// this.flipDir = !this.flipDir;
+			// this.timers.SetTimer('wall_timer', 500);
+
+			this.Block();
 		}
 
 		if(this.flipDir) {
@@ -105,6 +114,26 @@ Enemy.prototype.types['GUBr'] =  function() {
 		}
 
 		if(this.timers.TimerUp('run_away')) {
+			return true;
+		} else {
+			return false;
+		}
+	};
+
+	this.Blocking = function() {
+		this.PlayAnim('block');
+
+		EnemyBehavior.FacePlayer(this);
+
+		if(EnemyBehavior.Player.IsDangerous(this) || EnemyBehavior.Player.MovingTowards(this)) {
+			return false;
+		}
+
+		if(EnemyBehavior.Player.IsVulnerable(this) && EnemyBehavior.Player.IsNear(this, 60) && frauki.body.onFloor()) {
+			this.Attack();
+		}
+
+		if(this.timers.TimerUp('blocking')) {
 			return true;
 		} else {
 			return false;
@@ -155,6 +184,22 @@ Enemy.prototype.types['GUBr'] =  function() {
 		'GUBr/Attack0003': {
 			x: 26, y: 20, w: 50, h: 12,
 			damage: 1,
+			knockback: 0,
+			priority: 1,
+			juggle: 0
+		},
+
+		'GUBr/Block0000': {
+			x: 26, y: 20, w: 50, h: 12,
+			damage: 0,
+			knockback: 0,
+			priority: 1,
+			juggle: 0
+		},
+
+		'GUBr/Block0001': {
+			x: 26, y: 20, w: 50, h: 12,
+			damage: 0,
 			knockback: 0,
 			priority: 1,
 			juggle: 0
