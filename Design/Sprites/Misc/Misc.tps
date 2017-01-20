@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>4.3.1</string>
+        <string>4.3.3</string>
         <key>fileName</key>
         <string>D:/gamedev/Frauki/Design/Sprites/Misc/Misc.tps</string>
         <key>autoSDSettings</key>
@@ -533,19 +533,6 @@
                 <rect>3,3,5,5</rect>
                 <key>scale9Paddings</key>
                 <rect>3,3,5,5</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">Frames/Goddess0000.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>36,41,72,82</rect>
-                <key>scale9Paddings</key>
-                <rect>36,41,72,82</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

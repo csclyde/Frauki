@@ -196,7 +196,7 @@ Frogland.SpawnFrauki = function() {
                 if(obj.spriteType === 'checkpoint' && obj.id == GameData.GetCheckpoint()) {
                     frauki.x = obj.x;
                     frauki.y = obj.y + 90;
-                    Frogland.ChangeLayer(obj.owningLayer);   
+                    Frogland.ChangeLayer(obj.owningLayer, true);   
                     frauki.timers.SetTimer('frauki_invincible', 0);
                 } 
             });  
@@ -417,6 +417,7 @@ Frogland.DislodgeTile = function(tile) {
         Frogland['midgroundLayer_' + this.currentLayer].dirty = true;
 
         tile.dislodged = true;
+        tile.owningLayer = this.currentLayer;
 
         Frogland.fallenTiles.push(tile);
 
@@ -438,13 +439,14 @@ Frogland.DislodgeTile = function(tile) {
 
 Frogland.ResetFallenTiles = function() {
     var i = this.fallenTiles.length;
+
     while(i--) {
         var tile = this.fallenTiles[i];
         
         tile.dislodged = false;
         tile.waitingToFall = false;
 
-        var mgTile = this.map.getTile(tile.x, tile.y, 'Midground_' + this.currentLayer);
+        var mgTile = this.map.getTile(tile.x, tile.y, 'Midground_' + tile.owningLayer);
         if(!!mgTile) mgTile.alpha = 1;
     }
 };

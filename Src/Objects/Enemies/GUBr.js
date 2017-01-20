@@ -56,9 +56,9 @@ Enemy.prototype.types['GUBr'] =  function() {
     	this.timers.SetTimer('attacking', game.rnd.between(450, 500));
 
     	if(this.direction === 'left') {
-			this.body.velocity.x = -450;
+			this.body.velocity.x = -350;
 		} else {
-			this.body.velocity.x = 450;
+			this.body.velocity.x = 350;
 		}
     };
 

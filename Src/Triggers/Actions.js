@@ -80,3 +80,15 @@ TriggerController.prototype.triggers['heal_to_open_door'] = {
 	exit: function(params) {
 	}
 };
+
+TriggerController.prototype.triggers['update_checkpoint'] = {
+	enter: function(params) {
+		GameData.SetCheckpoint('0');
+	},
+
+	stay: function(params) {
+	},
+
+	exit: function(params) {
+	}
+};

@@ -342,6 +342,19 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">Goddess/Goddess0000.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>36,41,72,82</rect>
+                <key>scale9Paddings</key>
+                <rect>36,41,72,82</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">Haystax/Idle0000.png</key>
             <key type="filename">Haystax/Idle0001.png</key>
             <key type="filename">Insectoid/Hop0000.png</key>
@@ -473,6 +486,7 @@
             <filename>Butterfly</filename>
             <filename>R2BTU</filename>
             <filename>GUBr</filename>
+            <filename>Goddess</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
