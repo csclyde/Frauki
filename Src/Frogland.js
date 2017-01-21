@@ -255,9 +255,6 @@ Frogland.CreateShards = function(layer) {
     this.map.createFromObjects('Objects_' + layer, 71, 'Shard0001', 'Shard0001', true, true, Frogland.shardGroup, Shard, false);
     this.map.createFromObjects('Objects_' + layer, 72, 'Shard0002', 'Shard0002', true, true, Frogland.shardGroup, Shard, false);
     this.map.createFromObjects('Objects_' + layer, 73, 'Shard0003', 'Shard0003', true, true, Frogland.shardGroup, Shard, false);
-
-        console.log(Frogland.shardGroup);
-    
 };
 
 Frogland.PreprocessTiles = function(layer) {

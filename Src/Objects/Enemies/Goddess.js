@@ -1,4 +1,8 @@
+var goddess = null;
+
 Enemy.prototype.types['Goddess'] =  function() {
+
+	goddess = this;
 
 	this.body.setSize(25, 80, 0, 0);
 	this.anchor.setTo(.5);
@@ -22,7 +26,13 @@ Enemy.prototype.types['Goddess'] =  function() {
     };
 
 	///////////////////////////////ACTIONS////////////////////////////////////
-	
+	this.GetSpeech = function() {
+		return 'Test!';
+	};
+
+	this.GetPortrait = function() {
+		return 'Neutral';
+	};
 
 	////////////////////////////////STATES////////////////////////////////////
 	this.Idling = function() {
@@ -43,6 +53,8 @@ Enemy.prototype.types['Goddess'] =  function() {
 
 		return false;
 	};
+
+
 
 	this.attackFrames = {
 

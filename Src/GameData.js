@@ -15,7 +15,7 @@ GameData.data = {
     nugg_bank: 0,
     flash_copy: null,
     health: 2,
-    firstAppleEaten: false
+    flags: {}
 };
 
 GameData.nuggetCount = 0;
@@ -31,6 +31,15 @@ GameData.LoadDataFromStorage = function() {
 
 GameData.SaveDataToStorage = function() {
     localStorage.setItem('save_data', JSON.stringify(this.data));
+};
+
+GameData.SetFlag = function(name, val) {
+    GameData.data.flags[name] = !!val;
+    this.SaveDataToStorage();
+};
+
+GameData.GetFlag = function(name) {
+    return !!GameData.data.flags[name];
 };
 
 GameData.GetCheckpoint = function() {
@@ -158,13 +167,3 @@ GameData.SetFlashCopy = function() {
     this.SaveDataToStorage();
 
 };
-
-GameData.SetFirstAppleEaten = function() {
-    this.data.firstAppleEaten = true;
-    this.SaveDataToStorage();
-
-};
-
-GameData.WasFirstAppleEaten = function() {
-    return this.data.firstAppleEaten;
-}

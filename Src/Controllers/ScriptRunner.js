@@ -103,3 +103,46 @@ ScriptRunner.scripts['demo_Will'] = [
 	{ name: 'hide_text', props: {} },
 	{ name: 'allow_input', props: {} }
 ];
+
+ScriptRunner.scripts['goddess_intro'] = [
+	{ name: 'disallow_input', props: {} },
+	{ name: 'show_text', props: { text: 'Oh, hello there...', portrait: 'Displeased' } },
+	{ name: 'wait', props: { amount: 3000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'wait', props: { amount: 250 } },
+	{ name: 'show_text', props: { text: 'It\'s been a long time since I\'ve seen... anyone...', portrait: 'Neutral' } },
+	{ name: 'wait', props: { amount: 5000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'wait', props: { amount: 500 } },
+	{ name: 'show_text', props: { text: 'Would you mind helping me out of this place? All you need to do is bring the prism shard of Will.', portrait: 'Enticed' } },
+	{ name: 'wait', props: { amount: 5000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'wait', props: { amount: 750 } },
+	{ name: 'show_text', props: { text: 'Oh right... It looks like a big red jewel. You can\'t miss it.', portrait: 'Neutral' } },
+	{ name: 'wait', props: { amount: 5000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'wait', props: { amount: 750 } },
+	{ name: 'show_text', props: { text: 'Please hurry... I\'ve been in here a long time.', portrait: 'Dazed' } },
+	{ name: 'wait', props: { amount: 5000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'allow_input', props: {} }
+];
+
+ScriptRunner.scripts['goddess_shard'] = [
+	{ name: 'disallow_input', props: {} },
+	{ name: 'show_text', props: { text: 'You found it!! You beautiful little person-thing!!', portrait: 'Enticed' } },
+	{ name: 'wait', props: { amount: 5000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'wait', props: { amount: 250 } },
+	{ name: 'show_text', props: { text: 'Now just walk up to the door and it will open. Freedom... finally...', portrait: 'Enticed' } },
+	{ name: 'wait', props: { amount: 5000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'allow_input', props: {} }
+];

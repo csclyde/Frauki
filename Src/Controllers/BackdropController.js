@@ -29,8 +29,6 @@ BackdropController.prototype.LoadBackgrounds = function() {
     Frogland.map.objects['Backdrop'].forEach(function(o) {
 
         var b = game.add.tileSprite(o.x, o.y, o.width, o.height, o.name, null, Frogland.backdrops);
-
-        console.log(o);
         
         if(o.properties.scroll) {
             var scroll = o.properties.scroll.split(',');

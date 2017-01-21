@@ -2759,10 +2759,21 @@
                  "width":59.3333,
                  "x":2862.83335,
                  "y":3092.66665
+                }, 
+                {
+                 "height":57,
+                 "id":2102,
+                 "name":"goddess_intro",
+                 "rotation":0,
+                 "type":"trigger",
+                 "visible":true,
+                 "width":51.3333333333333,
+                 "x":2024.33333333333,
+                 "y":3059.66666666667
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "width":0,
          "x":0,
          "y":0
@@ -9455,7 +9466,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":2102,
+ "nextobjectid":2103,
  "orientation":"orthogonal",
  "properties":
     {

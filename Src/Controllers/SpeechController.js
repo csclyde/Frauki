@@ -193,6 +193,18 @@ SpeechController.prototype.ShowSpeech = function() {
 	this.displayIndex = 0;
 	this.SetText('');
 
+	if(game.physics.arcade.overlap(frauki, goddess)) {
+		this.Activate(goddess.GetSpeech(), goddess.GetPortrait());
+		this.currentSpeechZone = {
+			x: goddess.body.x,
+			y: goddess.body.y,
+			width: goddess.body.width,
+			height: goddess.body.height,
+			owningLayer: Frogland.currentLayer
+		};
+		return true;
+	}
+
 	for(var i = 0; i < this.speechZones.length; i++) {
 		var zone = this.speechZones[i];
 		if(zone.owningLayer === Frogland.currentLayer && frauki.body.x + frauki.body.width > zone.x && frauki.body.x < zone.x + zone.width && frauki.body.y + frauki.body.height > zone.y && frauki.body.y < zone.y + zone.height) {
@@ -240,6 +252,11 @@ SpeechController.prototype.Activate = function(text, portrait) {
 };
 
 SpeechController.prototype.FraukiInSpeechZone = function() {
+
+	if(game.physics.arcade.overlap(frauki, goddess)) {
+		return true;
+	}
+
 	for(var i = 0; i < this.speechZones.length; i++) {
 		var zone = this.speechZones[i];
 		if(zone.owningLayer === Frogland.currentLayer && frauki.body.x + frauki.body.width > zone.x && frauki.body.x < zone.x + zone.width && frauki.body.y + frauki.body.height > zone.y && frauki.body.y < zone.y + zone.height) {

@@ -92,3 +92,21 @@ TriggerController.prototype.triggers['update_checkpoint'] = {
 	exit: function(params) {
 	}
 };
+
+TriggerController.prototype.triggers['goddess_intro'] = {
+	enter: function(params) {
+		if(!GameData.GetFlag('goddess_intro')) {
+			GameData.SetFlag('goddess_intro', true);
+			ScriptRunner.run('goddess_intro');
+		} else if(!GameData.GetFlag('goddess_shard') && GameData.HasShard('Will')) {
+			GameData.SetFlag('goddess_shard', true);
+			ScriptRunner.run('goddess_shard');
+		}
+	},
+
+	stay: function(params) {
+	},
+
+	exit: function(params) {
+	}
+};

@@ -16,7 +16,9 @@ Collision.OverlapFraukiWithObject = function(f, o) {
 
     } else if(o.spriteType === 'enemy') {
 
-        if(o.isAttacking() && o.GetCurrentDamage() > 0) {
+        if(o.objectName === 'Goddess') {
+            return false;
+        } else if(o.isAttacking() && o.GetCurrentDamage() > 0) {
             return false;
         } else if(frauki.body.y + frauki.body.height <= o.body.y + (frauki.body.height / 4) || o.body.y + o.body.height <= frauki.body.y + (o.body.height / 4)) {
             return false;

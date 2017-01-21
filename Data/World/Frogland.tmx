@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="400" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="2102">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="400" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="2103">
  <properties>
   <property name="debug" value="false"/>
   <property name="startLayer" value="3"/>
@@ -2314,7 +2314,7 @@
   </object>
   <object id="2101" gid="93" x="1919.33" y="3077.67" width="16" height="16"/>
  </objectgroup>
- <objectgroup name="Triggers_2" visible="0">
+ <objectgroup name="Triggers_2">
   <object id="1039" name="stop_music" x="456.667" y="3231.33" width="169.333" height="109.333"/>
   <object id="1040" name="start_underwater_music" x="426.667" y="3478" width="118" height="61.3333"/>
   <object id="1630" name="fire" type="speech" x="637" y="3082.76" width="35.3333" height="34.3333"/>
@@ -2358,6 +2358,11 @@
    </properties>
   </object>
   <object id="2091" name="door_tutorial" type="speech" x="2862.83" y="3092.67" width="59.3333" height="80.6667"/>
+  <object id="2102" name="goddess_intro" type="trigger" x="2024.33" y="3059.67" width="51.3333" height="57">
+   <properties>
+    <property name="once" value="true"/>
+   </properties>
+  </object>
  </objectgroup>
  <layer name="Background_3" width="200" height="400" visible="0">
   <data encoding="csv">

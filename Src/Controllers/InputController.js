@@ -428,38 +428,34 @@ InputController.prototype.OnRight = function(pressed) {
 InputController.prototype.OnUp = function(pressed) {
     this.dpad.up = pressed;
 
-    if(game.state.getCurrentState() === Main) {
-        if(pressed) {
-            events.publish('control_up', {pressed: true});
+    if(pressed) {
+        events.publish('control_up', {pressed: true});
 
-            if(frauki.body.onFloor() && frauki.body.velocity.x < PLAYER_SPEED()) {
-                //switch between layers if they are in a doorway
-                if(game.physics.arcade.overlap(frauki, Frogland.door1Group)) {
-                    if(Frogland.currentLayer === 3) Frogland.ChangeLayer(2);
-                    else if(Frogland.currentLayer === 2) Frogland.ChangeLayer(3);
+        if(frauki.body.onFloor() && frauki.body.velocity.x < PLAYER_SPEED()) {
+            //switch between layers if they are in a doorway
+            if(game.physics.arcade.overlap(frauki, Frogland.door1Group)) {
+                if(Frogland.currentLayer === 3) Frogland.ChangeLayer(2);
+                else if(Frogland.currentLayer === 2) Frogland.ChangeLayer(3);
 
-                    this.inDoorway = true;
-                } else if(game.physics.arcade.overlap(frauki, Frogland.door2Group)) {
-                    if(Frogland.currentLayer === 3) Frogland.ChangeLayer(4);
-                    else if(Frogland.currentLayer === 4) Frogland.ChangeLayer(3);
+                this.inDoorway = true;
+            } else if(game.physics.arcade.overlap(frauki, Frogland.door2Group)) {
+                if(Frogland.currentLayer === 3) Frogland.ChangeLayer(4);
+                else if(Frogland.currentLayer === 4) Frogland.ChangeLayer(3);
 
-                    this.inDoorway = true;
-                } else if(game.physics.arcade.overlap(frauki, Frogland.door3Group)) {
-                    if(Frogland.currentLayer === 2) Frogland.ChangeLayer(4);
-                    else if(Frogland.currentLayer === 4) Frogland.ChangeLayer(2);
+                this.inDoorway = true;
+            } else if(game.physics.arcade.overlap(frauki, Frogland.door3Group)) {
+                if(Frogland.currentLayer === 2) Frogland.ChangeLayer(4);
+                else if(Frogland.currentLayer === 4) Frogland.ChangeLayer(2);
 
-                    this.inDoorway = true;
-                } else {
-                    this.inDoorway = false;
-                }
+                this.inDoorway = true;
+            } else {
+                this.inDoorway = false;
             }
-            
-
-        } else {
-            events.publish('control_up', {pressed: false});
         }
-    } else if(game.state.getCurrentState() === Upgrading) {
         
+
+    } else {
+        events.publish('control_up', {pressed: false});
     }
 };
 

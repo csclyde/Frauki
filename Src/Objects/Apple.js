@@ -49,9 +49,9 @@ function EatApple(f, a) {
 
     events.publish('play_sound', {name: 'crystal_door'});
 
-    if(!GameData.WasFirstAppleEaten()) {
+    if(!GameData.GetFlag('first_apple_eaten')) {
         ScriptRunner.run('demo_Apple');
-        GameData.SetFirstAppleEaten();
+        GameData.SetFlag('first_apple_eaten', true);
     }
 
 
