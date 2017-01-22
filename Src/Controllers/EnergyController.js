@@ -19,6 +19,11 @@ EnergyController = function() {
 		}
 	}, this);
 
+	events.subscribe('full_heal', function(params) {
+		var healthAmt = this.GetMaxHealth() - this.GetHealth();
+		this.AddHealth(healthAmt);
+	}, this);
+
 	this.remainingApples = 0;
 };
 

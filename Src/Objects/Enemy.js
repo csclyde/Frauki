@@ -68,6 +68,7 @@ Enemy.prototype.CanCauseDamage = function() { return false; }
 Enemy.prototype.Activate = function() {};
 Enemy.prototype.Deactivate = function() {};
 Enemy.prototype.LandHit = function() {};
+Enemy.prototype.OnHit = function() {};
 
 Enemy.prototype.update = function() {
     var that = this;
@@ -249,6 +250,8 @@ Enemy.prototype.TakeHit = function(damage) {
 
 
     effectsController.StarBurst(this.body.center);
+
+    this.OnHit();
 
     if(this.energy <= 0) {
         this.timers.SetTimer('hit', 1000);

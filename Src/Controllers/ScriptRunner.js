@@ -98,8 +98,8 @@ ScriptRunner.scripts['demo_Apple'] = [
 
 ScriptRunner.scripts['demo_Will'] = [
 	{ name: 'disallow_input', props: {} },
-	{ name: 'show_text', props: { text: 'The prism shard of will! This should allow me to open some sealed doors.', portrait: 'Neutral' } },
-	{ name: 'wait', props: { amount: 3000 } },
+	{ name: 'show_text', props: { text: 'This must be the prism thing of... whatever... guess I should take it back to that lady.', portrait: 'Neutral' } },
+	{ name: 'wait', props: { amount: 5000 } },
 	{ name: 'hide_text', props: {} },
 	{ name: 'allow_input', props: {} }
 ];
@@ -135,13 +135,22 @@ ScriptRunner.scripts['goddess_intro'] = [
 
 ScriptRunner.scripts['goddess_shard'] = [
 	{ name: 'disallow_input', props: {} },
-	{ name: 'show_text', props: { text: 'You found it!! You beautiful little person-thing!!', portrait: 'Enticed' } },
+	{ name: 'show_text', props: { text: 'You found it!! You beautiful little person thing!!', portrait: 'Enticed' } },
 	{ name: 'wait', props: { amount: 5000 } },
 	{ name: 'hide_text', props: {} },
 
 	{ name: 'wait', props: { amount: 250 } },
 	{ name: 'show_text', props: { text: 'Now just walk up to the door and it will open. Freedom... finally...', portrait: 'Enticed' } },
 	{ name: 'wait', props: { amount: 5000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'allow_input', props: {} }
+];
+
+ScriptRunner.scripts['goddess_hurt'] = [
+	{ name: 'disallow_input', props: {} },
+	{ name: 'show_text', props: { text: "OUCH! What's your problem!? Don't do that again.", portrait: 'Displeased' } },
+	{ name: 'wait', props: { amount: 4000 } },
 	{ name: 'hide_text', props: {} },
 
 	{ name: 'allow_input', props: {} }

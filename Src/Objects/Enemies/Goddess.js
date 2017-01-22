@@ -25,9 +25,20 @@ Enemy.prototype.types['Goddess'] =  function() {
         this.body.velocity.x = 0;
     };
 
+    this.OnHit = function() {
+    	if(this.energy > 0) {
+    		ScriptRunner.run('goddess_hurt');
+    	}
+    };
+
 	///////////////////////////////ACTIONS////////////////////////////////////
 	this.GetSpeech = function() {
-		return 'Test!';
+		if(energyController.GetHealth() < energyController.GetMaxHealth()) {
+        	events.publish('full_heal', {});
+			return "Oh my, you're not looking so good. Let me fix you up...";
+		} else {
+			return 'Test!';
+		}
 	};
 
 	this.GetPortrait = function() {
