@@ -54,42 +54,13 @@ SpeechController.prototype.Create = function() {
 
 	this.portraits = {};
 
-	this.portraits['Neutral'] = game.add.image(80, 70, 'UI', 'PortraitsFraukiNeutral');
-	this.portraits['Neutral'].fixedToCamera = true;
-	this.portraits['Neutral'].visible = false;
-
-	this.portraits['Mad'] = game.add.image(80, 70, 'UI', 'PortraitsFraukiMad');
-	this.portraits['Mad'].fixedToCamera = true;
-	this.portraits['Mad'].visible = false;
-
-	this.portraits['Dazed'] = game.add.image(80, 70, 'UI', 'PortraitsFraukiDazed');
-	this.portraits['Dazed'].fixedToCamera = true;
-	this.portraits['Dazed'].visible = false;
-
-	this.portraits['Peaceful'] = game.add.image(80, 70, 'UI', 'PortraitsFraukiPeaceful');
-	this.portraits['Peaceful'].fixedToCamera = true;
-	this.portraits['Peaceful'].visible = false;
-
-	this.portraits['Enticed'] = game.add.image(80, 70, 'UI', 'PortraitsFraukiEnticed');
-	this.portraits['Enticed'].fixedToCamera = true;
-	this.portraits['Enticed'].visible = false;
-
-	this.portraits['Displeased'] = game.add.image(80, 70, 'UI', 'PortraitsFraukiDispleased');
-	this.portraits['Displeased'].fixedToCamera = true;
-	this.portraits['Displeased'].visible = false;
-
-	this.portraits['Mischeif'] = game.add.image(80, 70, 'UI', 'PortraitsFraukiMischeif');
-	this.portraits['Mischeif'].fixedToCamera = true;
-	this.portraits['Mischeif'].visible = false;
-
-	this.portraits['Silly'] = game.add.image(80, 70, 'UI', 'PortraitsFraukiSilly');
-	this.portraits['Silly'].fixedToCamera = true;
-	this.portraits['Silly'].visible = false;
-
-	for(var key in this.portraits) {
-		this.portraits[key].cameraOffset.x = 10 + speechOffsetX;
-		this.portraits[key].cameraOffset.y = 0 + speechOffsetY; 
-	}
+	FileMap.Portraits.forEach(function(portrait) {
+		this.portraits[portrait.Name] = game.add.image(80, 70, 'UI', portrait.Frame);
+		this.portraits[portrait.Name].fixedToCamera = true;
+		this.portraits[portrait.Name].visible = false;
+		this.portraits[portrait.Name].cameraOffset.x = 10 + speechOffsetX;
+		this.portraits[portrait.Name].cameraOffset.y = 0 + speechOffsetY; 
+	}, this);
 
 	this.speechVisible = false;
 

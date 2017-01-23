@@ -169,3 +169,15 @@ FileMap.Runes = [
 	{ Name: 'Shield', Tile: 126 },
 	{ Name: 'Saw', Tile: 127 }
 ];
+
+FileMap.Portraits = [
+	{ Name: 'Neutral', Frame: 'PortraitsFraukiNeutral' },
+	{ Name: 'Mad', Frame: 'PortraitsFraukiMad' },
+	{ Name: 'Dazed', Frame: 'PortraitsFraukiDazed' },
+	{ Name: 'Peaceful', Frame: 'PortraitsFraukiPeaceful' },
+	{ Name: 'Enticed', Frame: 'PortraitsFraukiEnticed' },
+	{ Name: 'Displeased', Frame: 'PortraitsFraukiDispleased' },
+	{ Name: 'Mischeif', Frame: 'PortraitsFraukiMischeif' },
+	{ Name: 'Silly', Frame: 'PortraitsFraukiSilly' },
+	{ Name: 'Goddess_Neutral', Frame: 'PortraitsGoddess_Neutral' }
+];

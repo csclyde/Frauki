@@ -105,6 +105,11 @@ TriggerController.prototype.triggers['goddess_intro'] = {
 			ScriptRunner.run('goddess_shard');
 		} else if(GameData.GetFlag('goddess_asked_for_open') && GameData.GetCheckpoint() !== '0') {
 			ScriptRunner.run('goddess_shard_2');
+			GameData.SetFlag('goddess_asked_for_open', false);
+			GameData.SetFlag('goddess_asked_for_open_2', true);
+		} else if(GameData.GetFlag('goddess_asked_for_open_2') && GameData.GetCheckpoint() !== '0') {
+			ScriptRunner.run('goddess_shard_3');
+			
 		}
 	},
 

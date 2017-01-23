@@ -28,6 +28,7 @@ Enemy.prototype.types['Goddess'] =  function() {
     this.OnHit = function() {
     	if(this.energy > 0) {
     		ScriptRunner.run('goddess_hurt_' + this.energy);
+			GameData.SetFlag('goddess_smacked', true);
     	} else {
     		GameData.SetFlag('goddess_killed', true);
     	}
@@ -37,16 +38,29 @@ Enemy.prototype.types['Goddess'] =  function() {
 	this.GetSpeech = function() {
 		if(GameData.GetFlag('goddess_angry')) {
 			return "I'm still mad at you for killing me. Hrmph.";
+
+		} else if(GameData.GetFlag('goddess_smacked')) {
+			GameData.SetFlag('goddess_smacked', false);
+			return "Why have you been smacking me? Cut it out.";
+
+		} else if(this.energy === 1) {
+			return "Just get away from me...";
+
+		} else if(this.energy <= 3) {
+			return "You're just a bully... leave me alone.";
+
 		} else if(energyController.GetHealth() < energyController.GetMaxHealth()) {
         	events.publish('full_heal', {});
 			return "Oh my, you're not looking so good. Let me fix you up...";
+
 		} else {
 			return 'Test!';
+
 		}
 	};
 
 	this.GetPortrait = function() {
-		return 'Neutral';
+		return 'Goddess_Neutral';
 	};
 
 	////////////////////////////////STATES////////////////////////////////////

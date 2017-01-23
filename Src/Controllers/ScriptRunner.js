@@ -106,27 +106,27 @@ ScriptRunner.scripts['demo_Will'] = [
 
 ScriptRunner.scripts['goddess_intro'] = [
 	{ name: 'disallow_input', props: {} },
-	{ name: 'show_text', props: { text: 'Oh, hello there...', portrait: 'Displeased' } },
+	{ name: 'show_text', props: { text: 'Oh, hello there...', portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 3000 } },
 	{ name: 'hide_text', props: {} },
 
 	{ name: 'wait', props: { amount: 250 } },
-	{ name: 'show_text', props: { text: 'It\'s been a long time since I\'ve seen... anyone...', portrait: 'Neutral' } },
+	{ name: 'show_text', props: { text: 'It\'s been a long time since I\'ve seen... anyone...', portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 5000 } },
 	{ name: 'hide_text', props: {} },
 
 	{ name: 'wait', props: { amount: 500 } },
-	{ name: 'show_text', props: { text: 'Would you mind helping me out of this place? All you need to do is bring the prism shard of Will.', portrait: 'Enticed' } },
+	{ name: 'show_text', props: { text: 'Would you mind helping me out of this prison? All you need to do is bring the prism shard of Will.', portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 5000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'wait', props: { amount: 1000 } },
+	{ name: 'show_text', props: { text: 'Oh right... It looks like a big red jewel. You can\'t miss it.', portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 5000 } },
 	{ name: 'hide_text', props: {} },
 
 	{ name: 'wait', props: { amount: 750 } },
-	{ name: 'show_text', props: { text: 'Oh right... It looks like a big red jewel. You can\'t miss it.', portrait: 'Neutral' } },
-	{ name: 'wait', props: { amount: 5000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'wait', props: { amount: 750 } },
-	{ name: 'show_text', props: { text: 'Please hurry... I\'ve been in here a long time.', portrait: 'Dazed' } },
+	{ name: 'show_text', props: { text: 'Please hurry... I\'ve been trapped in here a long time.', portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 5000 } },
 	{ name: 'hide_text', props: {} },
 
@@ -135,12 +135,12 @@ ScriptRunner.scripts['goddess_intro'] = [
 
 ScriptRunner.scripts['goddess_shard'] = [
 	{ name: 'disallow_input', props: {} },
-	{ name: 'show_text', props: { text: 'You found it!! You beautiful little person thing!!', portrait: 'Enticed' } },
+	{ name: 'show_text', props: { text: 'You found it!! You beautiful little person thing!!', portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 5000 } },
 	{ name: 'hide_text', props: {} },
 
 	{ name: 'wait', props: { amount: 250 } },
-	{ name: 'show_text', props: { text: 'Now just walk up to the door and it will open. Freedom... finally...', portrait: 'Enticed' } },
+	{ name: 'show_text', props: { text: 'Now just walk up to the door and it will open. Freedom... finally...', portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 5000 } },
 	{ name: 'hide_text', props: {} },
 
@@ -149,7 +149,15 @@ ScriptRunner.scripts['goddess_shard'] = [
 
 ScriptRunner.scripts['goddess_shard_2'] = [
 	{ name: 'disallow_input', props: {} },
-	{ name: 'show_text', props: { text: 'Yep... just come right on up to the door there and I\'ll be free...', portrait: 'Enticed' } },
+	{ name: 'show_text', props: { text: 'Yep... just come right on up to the door there and I\'ll be free...', portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 3000 } },
+
+	{ name: 'allow_input', props: {} }
+];
+
+ScriptRunner.scripts['goddess_shard_3'] = [
+	{ name: 'disallow_input', props: {} },
+	{ name: 'show_text', props: { text: 'Please... just walk up to the door and let me out... Enough teasing.', portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 3000 } },
 
 	{ name: 'allow_input', props: {} }
@@ -157,34 +165,34 @@ ScriptRunner.scripts['goddess_shard_2'] = [
 
 ScriptRunner.scripts['goddess_hurt_4'] = [
 	{ name: 'disallow_input', props: {} },
-	{ name: 'show_text', props: { text: "OUCH! What's your problem!? Don't do that again.", portrait: 'Displeased' } },
+	{ name: 'show_text', props: { text: "OUCH! What's your problem!? Don't do that again.", portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 2000 } },
 	{ name: 'allow_input', props: {} }
 ];
 
 ScriptRunner.scripts['goddess_hurt_3'] = [
 	{ name: 'disallow_input', props: {} },
-	{ name: 'show_text', props: { text: "Frauki why are you doing this?? I demand you stop!", portrait: 'Displeased' } },
+	{ name: 'show_text', props: { text: "Frauki why are you doing this?? I demand you stop!", portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 2000 } },
 	{ name: 'allow_input', props: {} }
 ];
 
 ScriptRunner.scripts['goddess_hurt_2'] = [
 	{ name: 'disallow_input', props: {} },
-	{ name: 'show_text', props: { text: "It hurts so bad... stop it you evil creature...", portrait: 'Displeased' } },
+	{ name: 'show_text', props: { text: "It hurts so bad... stop it you evil creature...", portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 2000 } },
 	{ name: 'allow_input', props: {} }
 ];
 
 ScriptRunner.scripts['goddess_hurt_1'] = [
 	{ name: 'disallow_input', props: {} },
-	{ name: 'show_text', props: { text: "Please... I'm beggin you... stop... I'm dying... please...", portrait: 'Displeased' } },
+	{ name: 'show_text', props: { text: "Please... I'm beggin you... stop... I'm dying... please...", portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 2000 } },
 	{ name: 'allow_input', props: {} }
 ];
 
 ScriptRunner.scripts['goddess_rez'] = [
-	{ name: 'show_text', props: { text: "My, my... you need to be more careful! Well, brush it off and try again. On your way now.", portrait: 'Displeased' } },
+	{ name: 'show_text', props: { text: "My, my... you need to be more careful! Well, brush it off and try again. On your way now.", portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 4000 } },
 	{ name: 'hide_text', props: {} }
 ];
@@ -192,27 +200,27 @@ ScriptRunner.scripts['goddess_rez'] = [
 ScriptRunner.scripts['goddess_rez_angry'] = [
 	{ name: 'disallow_input', props: {} },
 
-	{ name: 'show_text', props: { text: "I really don't appreciate being killed...", portrait: 'Enticed' } },
+	{ name: 'show_text', props: { text: "I really don't appreciate being killed...", portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 3000 } },
 	{ name: 'hide_text', props: {} },
 
 	{ name: 'wait', props: { amount: 100 } },
-	{ name: 'show_text', props: { text: 'Don\'t.', portrait: 'Displeased' } },
+	{ name: 'show_text', props: { text: 'Don\'t.', portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 1000 } },
 	{ name: 'hide_text', props: {} },
 
 	{ name: 'wait', props: { amount: 100 } },
-	{ name: 'show_text', props: { text: 'Do.', portrait: 'Displeased' } },
+	{ name: 'show_text', props: { text: 'Do.', portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 1000 } },
 	{ name: 'hide_text', props: {} },
 
 	{ name: 'wait', props: { amount: 100 } },
-	{ name: 'show_text', props: { text: 'It.', portrait: 'Displeased' } },
+	{ name: 'show_text', props: { text: 'It.', portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 1000 } },
 	{ name: 'hide_text', props: {} },
 
 	{ name: 'wait', props: { amount: 100 } },
-	{ name: 'show_text', props: { text: 'Again!!!!!!', portrait: 'Displeased' } },
+	{ name: 'show_text', props: { text: 'Again!!!!!!', portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 1500 } },
 	{ name: 'hide_text', props: {} },
 

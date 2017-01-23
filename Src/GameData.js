@@ -42,6 +42,17 @@ GameData.GetFlag = function(name) {
     return !!GameData.data.flags[name];
 };
 
+//meant for one-time flags. If the flag hasnt been set, it returns true and sets the flag.
+//If the flag has been set, it returns false and doesnt go through
+GameData.GetSetFlag = function(name) {
+    if(!GameData.data.flags[name]) {
+        GameData.data.flags[name] = true;
+        return true;
+    } else {
+        return false;
+    }
+};
+
 GameData.GetCheckpoint = function() {
     return this.data.checkpoint;
 };

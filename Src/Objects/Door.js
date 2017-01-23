@@ -271,7 +271,7 @@ function PerformOpen(d, save, silent) {
     });
 
     //note when the door is ready to roll through
-    game.time.events.add(openDuration / 2, function() {
+    game.time.events.add(openDuration / 3, function() {
         this.canRollUnder = true;
     }, d);
 
