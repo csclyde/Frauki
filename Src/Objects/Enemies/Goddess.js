@@ -27,13 +27,17 @@ Enemy.prototype.types['Goddess'] =  function() {
 
     this.OnHit = function() {
     	if(this.energy > 0) {
-    		ScriptRunner.run('goddess_hurt');
+    		ScriptRunner.run('goddess_hurt_' + this.energy);
+    	} else {
+    		GameData.SetFlag('goddess_killed', true);
     	}
     };
 
 	///////////////////////////////ACTIONS////////////////////////////////////
 	this.GetSpeech = function() {
-		if(energyController.GetHealth() < energyController.GetMaxHealth()) {
+		if(GameData.GetFlag('goddess_angry')) {
+			return "I'm still mad at you for killing me. Hrmph.";
+		} else if(energyController.GetHealth() < energyController.GetMaxHealth()) {
         	events.publish('full_heal', {});
 			return "Oh my, you're not looking so good. Let me fix you up...";
 		} else {

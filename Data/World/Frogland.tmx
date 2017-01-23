@@ -2272,7 +2272,7 @@
     <property name="id" value="1"/>
    </properties>
   </object>
-  <object id="2084" gid="69" x="1910.67" y="3097.33" width="16" height="16">
+  <object id="2084" gid="69" x="1855.67" y="3092.58" width="16" height="16">
    <properties>
     <property name="id" value="0"/>
    </properties>
@@ -2352,17 +2352,13 @@
     <property name="down" value="Surface"/>
    </properties>
   </object>
-  <object id="2085" name="update_checkpoint" type="trigger" x="1664.33" y="2613.83" width="182" height="176">
+  <object id="2085" name="update_checkpoint" type="trigger" x="1843.08" y="3000.58" width="149" height="114">
    <properties>
     <property name="once" value="true"/>
    </properties>
   </object>
   <object id="2091" name="door_tutorial" type="speech" x="2862.83" y="3092.67" width="59.3333" height="80.6667"/>
-  <object id="2102" name="goddess_intro" type="trigger" x="2024.33" y="3059.67" width="51.3333" height="57">
-   <properties>
-    <property name="once" value="true"/>
-   </properties>
-  </object>
+  <object id="2102" name="goddess_intro" type="trigger" x="2024.33" y="3044.17" width="58.5833" height="72.5"/>
  </objectgroup>
  <layer name="Background_3" width="200" height="400" visible="0">
   <data encoding="csv">

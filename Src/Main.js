@@ -137,6 +137,22 @@ Main.Restart = function() {
 
         game.time.events.add(300, function() {
             frauki.Reset(); 
+
+            //if the goddess is angry from being killed, reset that
+            GameData.SetFlag('goddess_angry', false);
+
+            if(GameData.GetCheckpoint() === '0') {
+
+                //if they killed the goddess, give the player a lecture then make her angry
+                if(GameData.GetFlag('goddess_killed')) {
+                    ScriptRunner.run('goddess_rez_angry');
+                    GameData.SetFlag('goddess_killed', false);
+                    GameData.SetFlag('goddess_angry', true);
+                } else {
+                    ScriptRunner.run('goddess_rez');
+
+                }
+            }
         });
 
         energyController.Reset();

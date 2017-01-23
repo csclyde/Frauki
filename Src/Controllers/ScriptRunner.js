@@ -2,7 +2,7 @@ ScriptRunner = function() {
 
 };
 
-ScriptRunner.run = function(name) {
+ScriptRunner.run = function(name, params) {
 	//find the script, and then execute each item sequentially
 	if(!!this.scripts[name]) {
 
@@ -98,7 +98,7 @@ ScriptRunner.scripts['demo_Apple'] = [
 
 ScriptRunner.scripts['demo_Will'] = [
 	{ name: 'disallow_input', props: {} },
-	{ name: 'show_text', props: { text: 'This must be the prism thing of... whatever... guess I should take it back to that lady.', portrait: 'Neutral' } },
+	{ name: 'show_text', props: { text: 'Hooray! This must be the prism thing of... whatever... I should take it back to that lady.', portrait: 'Neutral' } },
 	{ name: 'wait', props: { amount: 5000 } },
 	{ name: 'hide_text', props: {} },
 	{ name: 'allow_input', props: {} }
@@ -147,11 +147,75 @@ ScriptRunner.scripts['goddess_shard'] = [
 	{ name: 'allow_input', props: {} }
 ];
 
-ScriptRunner.scripts['goddess_hurt'] = [
+ScriptRunner.scripts['goddess_shard_2'] = [
+	{ name: 'disallow_input', props: {} },
+	{ name: 'show_text', props: { text: 'Yep... just come right on up to the door there and I\'ll be free...', portrait: 'Enticed' } },
+	{ name: 'wait', props: { amount: 3000 } },
+
+	{ name: 'allow_input', props: {} }
+];
+
+ScriptRunner.scripts['goddess_hurt_4'] = [
 	{ name: 'disallow_input', props: {} },
 	{ name: 'show_text', props: { text: "OUCH! What's your problem!? Don't do that again.", portrait: 'Displeased' } },
+	{ name: 'wait', props: { amount: 2000 } },
+	{ name: 'allow_input', props: {} }
+];
+
+ScriptRunner.scripts['goddess_hurt_3'] = [
+	{ name: 'disallow_input', props: {} },
+	{ name: 'show_text', props: { text: "Frauki why are you doing this?? I demand you stop!", portrait: 'Displeased' } },
+	{ name: 'wait', props: { amount: 2000 } },
+	{ name: 'allow_input', props: {} }
+];
+
+ScriptRunner.scripts['goddess_hurt_2'] = [
+	{ name: 'disallow_input', props: {} },
+	{ name: 'show_text', props: { text: "It hurts so bad... stop it you evil creature...", portrait: 'Displeased' } },
+	{ name: 'wait', props: { amount: 2000 } },
+	{ name: 'allow_input', props: {} }
+];
+
+ScriptRunner.scripts['goddess_hurt_1'] = [
+	{ name: 'disallow_input', props: {} },
+	{ name: 'show_text', props: { text: "Please... I'm beggin you... stop... I'm dying... please...", portrait: 'Displeased' } },
+	{ name: 'wait', props: { amount: 2000 } },
+	{ name: 'allow_input', props: {} }
+];
+
+ScriptRunner.scripts['goddess_rez'] = [
+	{ name: 'show_text', props: { text: "My, my... you need to be more careful! Well, brush it off and try again. On your way now.", portrait: 'Displeased' } },
 	{ name: 'wait', props: { amount: 4000 } },
+	{ name: 'hide_text', props: {} }
+];
+
+ScriptRunner.scripts['goddess_rez_angry'] = [
+	{ name: 'disallow_input', props: {} },
+
+	{ name: 'show_text', props: { text: "I really don't appreciate being killed...", portrait: 'Enticed' } },
+	{ name: 'wait', props: { amount: 3000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'wait', props: { amount: 100 } },
+	{ name: 'show_text', props: { text: 'Don\'t.', portrait: 'Displeased' } },
+	{ name: 'wait', props: { amount: 1000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'wait', props: { amount: 100 } },
+	{ name: 'show_text', props: { text: 'Do.', portrait: 'Displeased' } },
+	{ name: 'wait', props: { amount: 1000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'wait', props: { amount: 100 } },
+	{ name: 'show_text', props: { text: 'It.', portrait: 'Displeased' } },
+	{ name: 'wait', props: { amount: 1000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'wait', props: { amount: 100 } },
+	{ name: 'show_text', props: { text: 'Again!!!!!!', portrait: 'Displeased' } },
+	{ name: 'wait', props: { amount: 1500 } },
 	{ name: 'hide_text', props: {} },
 
 	{ name: 'allow_input', props: {} }
+
 ];
