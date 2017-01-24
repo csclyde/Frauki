@@ -1,5 +1,3 @@
-var goddess = null;
-
 Enemy.prototype.types['Goddess'] =  function() {
 
 	goddess = this;
@@ -15,6 +13,13 @@ Enemy.prototype.types['Goddess'] =  function() {
 
 
     this.body.drag.x = 500;
+
+    events.subscribe('door_open_start', function(params) {
+    	if(params.id === 'final_second' && !GameData.GetFlag('seal_hall_intro')) {
+			ScriptRunner.run('seal_hall_intro');
+			GameData.SetFlag('seal_hall_intro', true);
+    	}
+    });
     
 	this.updateFunction = function() {
 

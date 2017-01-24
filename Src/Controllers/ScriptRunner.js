@@ -106,6 +106,7 @@ ScriptRunner.scripts['demo_Will'] = [
 
 ScriptRunner.scripts['goddess_intro'] = [
 	{ name: 'disallow_input', props: {} },
+
 	{ name: 'show_text', props: { text: 'Oh, hello there...', portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 3000 } },
 	{ name: 'hide_text', props: {} },
@@ -226,4 +227,11 @@ ScriptRunner.scripts['goddess_rez_angry'] = [
 
 	{ name: 'allow_input', props: {} }
 
+];
+
+ScriptRunner.scripts['seal_hall_intro'] = [
+	{ name: 'disallow_input', props: {} },
+	{ name: 'show_text', props: { text: "Nice work, you've opened the first of four seals. Keep it up, I'm sure the other prism shards can't be far.", portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 3000 } },
+	{ name: 'allow_input', props: {} }
 ];

@@ -259,6 +259,8 @@ function PerformOpen(d, save, silent) {
     }
 
     events.publish('play_sound', {name: 'door_rumble', restart: true });
+
+    events.publish('door_open_start', { id: d.id} );
     
     this.openTween = game.add.tween(d.body).to({y: movementTarget}, openDuration, Phaser.Easing.Quintic.InOut, true);
 
@@ -268,6 +270,8 @@ function PerformOpen(d, save, silent) {
         effectsController.DoorDust({x: d.body.center.x, y: d.body.y + d.body.height - 20 });
         events.publish('play_sound', {name: 'door_slam', restart: true });
         events.publish('stop_sound', {name: 'door_rumble', restart: true });
+        events.publish('door_open_finish', { id: d.id } );
+
     });
 
     //note when the door is ready to roll through

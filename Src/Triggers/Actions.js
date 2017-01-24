@@ -119,3 +119,15 @@ TriggerController.prototype.triggers['goddess_intro'] = {
 	exit: function(params) {
 	}
 };
+
+TriggerController.prototype.triggers['seal_hall'] = {
+	enter: function(params) {
+
+	},
+
+	stay: function(params) {
+	},
+
+	exit: function(params) {
+	}
+};

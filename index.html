@@ -4,6 +4,23 @@
     <head>
         <meta charset="UTF-8" />
         <title>Frauki's Adventure!</title>
+
+        <script>
+            var cameraController;
+            var inputController;
+            var effectsController;
+            var energyController;
+            var audioController;
+            var projectileController;
+            var triggerController;
+            var speechController;
+            var objectController;
+
+            var map;
+            var frauki;
+            var goddess;
+        </script>
+
         <script type="text/javascript" src="Src/Plugins/phaser.min.js"></script>
         <script src="Src/Plugins/phaser-debug.js"></script>
         <script src="Src/Plugins/Core.js"></script>
@@ -133,19 +150,6 @@
 
             var game = new Phaser.Game(pixel.width, pixel.height, Phaser.AUTO, "game", Loading, false, false);
             var events = new EventRouter();
-
-            var cameraController;
-            var inputController;
-            var effectsController;
-            var energyController;
-            var audioController;
-            var projectileController;
-            var triggerController;
-            var speechController;
-            var objectController;
-
-            var map;
-            var frauki;
 
             game.state.add('Loading', Loading, true);
             game.state.add('Main', Main, false);

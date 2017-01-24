@@ -22,6 +22,13 @@ CameraController = function() {
 
 	this.panning = false;
 
+	this.target = frauki;
+
+	events.subscribe('focus_on', function(params) {
+		console.log(this.target);
+		this.target = params.target;
+	}, this);
+
 };
 
 //camera is controlled in player centric space
@@ -42,8 +49,10 @@ CameraController.prototype.Update = function() {
 		}
 	}
 
-	var idealX = xOffset + frauki.body.center.x;
-	var idealY = yOffset + frauki.body.center.y;
+	this.target = this.target || frauki;
+
+	var idealX = xOffset + this.target.body.center.x;
+	var idealY = yOffset + this.target.body.center.y;
 
 	this.camX += (idealX - this.camX) * 0.08;
 	this.camY += (idealY - this.camY) * 0.04;
