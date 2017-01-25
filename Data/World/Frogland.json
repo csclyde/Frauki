@@ -2759,6 +2759,17 @@
                  "width":71.6667,
                  "x":1826.49998333333,
                  "y":2895.83335
+                }, 
+                {
+                 "height":4.5,
+                 "id":2126,
+                 "name":"drip",
+                 "rotation":0,
+                 "type":"effect",
+                 "visible":true,
+                 "width":127.5,
+                 "x":1861.5,
+                 "y":2991.5
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -9551,7 +9562,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":2126,
+ "nextobjectid":2127,
  "orientation":"orthogonal",
  "properties":
     {

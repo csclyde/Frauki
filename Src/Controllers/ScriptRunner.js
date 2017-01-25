@@ -1,5 +1,4 @@
 ScriptRunner = function() {
-
 };
 
 ScriptRunner.run = function(name, params) {
@@ -24,13 +23,11 @@ ScriptRunner.executeCommand = function(cmd) {
 
 	if(!cmd) return;
 
-	console.log(cmd);
-
 	if(cmd.name === 'wait') {
 		game.time.events.add(cmd.props.amount, function() { that.executeCommand(cmd.nextCommand); });
 
 	} else {
-		events.publish(cmd.name, cmd.props );
+		events.publish(cmd.name, cmd.props);
 
 		this.executeCommand(cmd.nextCommand);
 	}
@@ -234,4 +231,54 @@ ScriptRunner.scripts['seal_hall_intro'] = [
 	{ name: 'show_text', props: { text: "Nice work, you've opened the first of four seals. Keep it up, I'm sure the other prism shards can't be far.", portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 3000 } },
 	{ name: 'allow_input', props: {} }
+];
+
+ScriptRunner.scripts['goddess_restate'] = [
+	{ name: 'show_text', props: { text: "Yep, go find the prism shard of Will and free me. It looks like a big red jewel. Hurry along now.", portrait: 'Goddess_Neutral' } }
+];
+
+ScriptRunner.scripts['goddess_freedom'] = [
+	{ name: 'disallow_input', props: {} },
+
+	{ name: 'show_text', props: { text: "Freedom!! No more musty cell...", portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 4000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'wait', props: { amount: 500 } },
+	{ name: 'show_text', props: { text: 'No more dank dripping ceiling...', portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 4000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'wait', props: { amount: 500 } },
+	{ name: 'show_text', props: { text: 'Just the sweet, juicy nectar of freedom...', portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 4000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'wait', props: { amount: 500 } },
+	{ name: 'show_text', props: { text: '...', portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 3000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'wait', props: { amount: 500 } },
+	{ name: 'show_text', props: { text: 'Now Frauki, I know I\'ve already asked a lot of you. But there is more to do. That prism shard you hold is a powerful artifact.', portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 7500 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'wait', props: { amount: 500 } },
+	{ name: 'show_text', props: { text: 'In fact, it\'s one of four powerful artifacts. Together they make up the Mother Prism, an object of great and mysterious power.', portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 7500 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'wait', props: { amount: 500 } },
+	{ name: 'show_text', props: { text: 'If you could find the remaining three prism shards that have been carelessly tossed around the world... well...', portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 7500 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'wait', props: { amount: 500 } },
+	{ name: 'show_text', props: { text: 'Just trust me. It will be pretty cool. I know you can do it... I\'m counting on you...', portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 7500 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'allow_input', props: {} }
+
 ];

@@ -99,15 +99,21 @@ TriggerController.prototype.triggers['goddess_intro'] = {
 		if(!GameData.GetFlag('goddess_intro')) {
 			GameData.SetFlag('goddess_intro', true);
 			ScriptRunner.run('goddess_intro');
+
+		} else if(GameData.GetFlag('goddess_intro') && !GameData.HasShard('Will')) {
+			ScriptRunner.run('goddess_restate');
+
 		} else if(!GameData.GetFlag('goddess_shard') && GameData.HasShard('Will')) {
 			GameData.SetFlag('goddess_shard', true);
 			GameData.SetFlag('goddess_asked_for_open', true);
 			ScriptRunner.run('goddess_shard');
-		} else if(GameData.GetFlag('goddess_asked_for_open') && GameData.GetCheckpoint() !== '0') {
+
+		} else if(GameData.GetFlag('goddess_asked_for_open') && !GameData.GetFlag('goddess_released')) {
 			ScriptRunner.run('goddess_shard_2');
 			GameData.SetFlag('goddess_asked_for_open', false);
 			GameData.SetFlag('goddess_asked_for_open_2', true);
-		} else if(GameData.GetFlag('goddess_asked_for_open_2') && GameData.GetCheckpoint() !== '0') {
+
+		} else if(GameData.GetFlag('goddess_asked_for_open_2') && !GameData.GetFlag('goddess_released')) {
 			ScriptRunner.run('goddess_shard_3');
 			
 		}

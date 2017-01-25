@@ -18,6 +18,15 @@ Enemy.prototype.types['Goddess'] =  function() {
     	if(params.id === 'final_second' && !GameData.GetFlag('seal_hall_intro')) {
 			ScriptRunner.run('seal_hall_intro');
 			GameData.SetFlag('seal_hall_intro', true);
+    	} else if(params.id === 'prison_door') {
+    		GameData.SetFlag('goddess_released', true);
+    	}
+    });
+
+    events.subscribe('door_open_finish', function(params) {
+    	if(params.id === 'prison_door' && !GameData.GetFlag('prison_door_intro')) {
+			ScriptRunner.run('goddess_freedom');
+			GameData.SetFlag('prison_door_intro', true);
     	}
     });
     
@@ -44,7 +53,7 @@ Enemy.prototype.types['Goddess'] =  function() {
 		if(GameData.GetFlag('goddess_angry')) {
 			return "I'm still mad at you for killing me. Hrmph.";
 
-		} else if(GameData.GetFlag('goddess_smacked')) {
+		} else if(GameData.GetFlag('goddess_smacked') && this.energy > 3) {
 			GameData.SetFlag('goddess_smacked', false);
 			return "Why have you been smacking me? Cut it out.";
 

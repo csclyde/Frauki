@@ -6,7 +6,7 @@ SpeechController = function() {
 	events.subscribe('control_up', this.Investigate, this);
 	//events.subscribe('deactivate_speech', this.HideSpeech, this);
 
-	events.subscribe('player_slash', this.AdvanceText, this);
+	events.subscribe('advance_text', this.AdvanceText, this);
 
 	events.subscribe('show_text', function(props) {
 		this.Activate(props.text, props.portrait);
@@ -205,6 +205,10 @@ SpeechController.prototype.AdvanceText = function() {
 		}
 	}
 };
+
+SpeechController.prototype.CurrentTextIsAllPrinted = function() {
+	return this.displayIndex === this.currentText.length;
+}
 
 SpeechController.prototype.Activate = function(text, portrait) {
 	this.SetText(text);

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="400" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="2126">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="400" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="2127">
  <properties>
   <property name="debug" value="false"/>
   <property name="startLayer" value="3"/>
@@ -2354,6 +2354,7 @@
   <object id="2102" name="goddess_intro" type="trigger" x="2024.33" y="3044.17" width="58.5833" height="72.5"/>
   <object id="2103" name="drip" type="effect" x="2959.67" y="2879.33" width="34" height="6"/>
   <object id="2125" name="seal_hall" type="trigger" x="1826.5" y="2895.83" width="71.6667" height="64.3333"/>
+  <object id="2126" name="drip" type="effect" x="1861.5" y="2991.5" width="127.5" height="4.5"/>
  </objectgroup>
  <layer name="Background_3" width="200" height="400" visible="0">
   <data encoding="csv">

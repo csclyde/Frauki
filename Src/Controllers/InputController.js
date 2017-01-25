@@ -63,6 +63,11 @@ InputController = function() {
     };
 
     this.allowInput = function() {
+        // if(this.dpad.left) this.OnLeft(true);
+        // if(this.dpad.right) this.OnRight(true);
+        // if(this.dpad.up) this.OnUp(true);
+        // if(this.dpad.down) this.OnDown(true);
+
         this.allowInput = true;
     };
 
@@ -73,7 +78,7 @@ InputController = function() {
 
         if(e.repeat) return;
 
-        if(Main.restarting || !that.allowInput) {
+        if(Main.restarting) {
             return;
         }
 
@@ -129,7 +134,7 @@ InputController = function() {
 
     game.input.keyboard.onUpCallback = function(e) {
 
-        if(Main.restarting || !that.allowInput) {
+        if(Main.restarting) {
             return;
         }
 
@@ -186,7 +191,7 @@ InputController = function() {
             console.log('gamepad disconnected');
         },
         onDown: function(buttonCode, value){
-            if(Main.restarting || !this.allowInput) {
+            if(Main.restarting) {
                 return;
             }
 
@@ -311,51 +316,47 @@ InputController.prototype.Update = function() {
 InputController.prototype.OnJump = function(pressed) {
     this.tetrad.bottom = pressed;
 
-    if(game.state.getCurrentState() === Main) {
+    if(this.allowInput) {
         if(pressed) {
             events.publish('player_jump', {jump: true});
         } else {
             events.publish('player_jump', {jump: false});
         }
-    } else if(game.state.getCurrentState() === Upgrading) {
-
-    }
+    } 
 };
 
 InputController.prototype.OnSlash = function(pressed) {
     this.tetrad.left = pressed;
 
-    if(game.state.getCurrentState() === Main) {
+    if(pressed) events.publish('advance_text', {});
+
+    if(this.allowInput) {
         if(pressed) {
             events.publish('player_slash', {});
         } else {
             events.publish('player_release_slash', {});
 
         }
-    } else if(game.state.getCurrentState() === Upgrading) {
-        
     }
 };
 
 InputController.prototype.OnThrow = function(pressed) {
     this.tetrad.top = pressed;
 
-    if(game.state.getCurrentState() === Main) {
+    if(this.allowInput) {
         if(pressed) {
             events.publish('activate_weapon', { activate: true, override: false });
         } else {
             events.publish('activate_weapon', { activate: false, override: false });
 
         }
-    } else if(game.state.getCurrentState() === Upgrading) {
-        
     }
 };
 
 InputController.prototype.OnRoll = function(pressed) {
     this.tetrad.right = pressed;
 
-    if(game.state.getCurrentState() === Main) {
+    if(this.allowInput) {
         if(pressed) {
             events.publish('player_roll', {});
         } else {
@@ -367,21 +368,19 @@ InputController.prototype.OnRoll = function(pressed) {
 };
 
 InputController.prototype.OnHeal = function(pressed) {
-    if(game.state.getCurrentState() === Main) {
+    if(this.allowInput) {
         if(pressed) {
             events.publish('player_heal', { charging: true });
         } else {
             events.publish('player_heal', { charging: false });
         }
-    } else if(game.state.getCurrentState() === Upgrading) {
-        
     }
 };
 
 InputController.prototype.OnLeft = function(pressed) {
     this.dpad.left = pressed;
 
-    if(game.state.getCurrentState() === Main) {
+    if(this.allowInput) {
 
         if(pressed) {
             events.publish('player_run', {run:true, dir:'left'});
@@ -397,15 +396,13 @@ InputController.prototype.OnLeft = function(pressed) {
                 this.currentDir = 'still';
             }
         }
-    } else if(game.state.getCurrentState() === Upgrading) {
-        
     }
 };
 
 InputController.prototype.OnRight = function(pressed) {
     this.dpad.right = pressed;
 
-    if(game.state.getCurrentState() === Main) {
+    if(this.allowInput) {
 
         if(pressed) {
             events.publish('player_run', {run:true, dir:'right'});
@@ -420,84 +417,78 @@ InputController.prototype.OnRight = function(pressed) {
                 this.currentDir = 'still';
             }
         }
-    } else if(game.state.getCurrentState() === Upgrading) {
-        
     }
 };
 
 InputController.prototype.OnUp = function(pressed) {
     this.dpad.up = pressed;
 
-    if(pressed) {
-        events.publish('control_up', {pressed: true});
+    if(this.allowInput) {
+        if(pressed) {
+            events.publish('control_up', {pressed: true});
 
-        if(frauki.body.onFloor() && frauki.body.velocity.x < PLAYER_SPEED()) {
-            //switch between layers if they are in a doorway
-            if(game.physics.arcade.overlap(frauki, Frogland.door1Group)) {
-                if(Frogland.currentLayer === 3) Frogland.ChangeLayer(2);
-                else if(Frogland.currentLayer === 2) Frogland.ChangeLayer(3);
+            if(frauki.body.onFloor() && frauki.body.velocity.x < PLAYER_SPEED()) {
+                //switch between layers if they are in a doorway
+                if(game.physics.arcade.overlap(frauki, Frogland.door1Group)) {
+                    if(Frogland.currentLayer === 3) Frogland.ChangeLayer(2);
+                    else if(Frogland.currentLayer === 2) Frogland.ChangeLayer(3);
 
-                this.inDoorway = true;
-            } else if(game.physics.arcade.overlap(frauki, Frogland.door2Group)) {
-                if(Frogland.currentLayer === 3) Frogland.ChangeLayer(4);
-                else if(Frogland.currentLayer === 4) Frogland.ChangeLayer(3);
+                    this.inDoorway = true;
+                } else if(game.physics.arcade.overlap(frauki, Frogland.door2Group)) {
+                    if(Frogland.currentLayer === 3) Frogland.ChangeLayer(4);
+                    else if(Frogland.currentLayer === 4) Frogland.ChangeLayer(3);
 
-                this.inDoorway = true;
-            } else if(game.physics.arcade.overlap(frauki, Frogland.door3Group)) {
-                if(Frogland.currentLayer === 2) Frogland.ChangeLayer(4);
-                else if(Frogland.currentLayer === 4) Frogland.ChangeLayer(2);
+                    this.inDoorway = true;
+                } else if(game.physics.arcade.overlap(frauki, Frogland.door3Group)) {
+                    if(Frogland.currentLayer === 2) Frogland.ChangeLayer(4);
+                    else if(Frogland.currentLayer === 4) Frogland.ChangeLayer(2);
 
-                this.inDoorway = true;
-            } else {
-                this.inDoorway = false;
+                    this.inDoorway = true;
+                } else {
+                    this.inDoorway = false;
+                }
             }
+            
+        } else {
+            events.publish('control_up', {pressed: false});
         }
-        
-
-    } else {
-        events.publish('control_up', {pressed: false});
     }
 };
 
 InputController.prototype.OnDown = function(pressed) {
     this.dpad.down = pressed;
 
-    if(game.state.getCurrentState() === Main) {
+    if(this.allowInput) {
         if(pressed) {
             events.publish('player_crouch', {crouch: true});
         } else {
             events.publish('player_crouch', {crouch: false});
         }
-    } else if(game.state.getCurrentState() === Upgrading) {
-        
     }
 };
 
 InputController.prototype.OnRShoulder = function(pressed) {
     this.buttons.rShoulder = pressed;
 
-    this.OnHeal(pressed);
 
-    if(game.state.getCurrentState() === Main) {
+    if(this.allowInput) {
+        this.OnHeal(pressed);
+
         if(pressed) {
             
         } else {
             
         }
-    } else if(game.state.getCurrentState() === Upgrading) {
-        
     }
 };
 
 InputController.prototype.OnStart = function(pressed) {
 
-    if(game.state.getCurrentState() === Main) {
+    if(this.allowInput) {
         if(pressed) {
             //GameData.SetFlashCopy();
         } else {
             
         }
-    } else if(game.state.getCurrentState() === Upgrading) {
-        
     }
 };
