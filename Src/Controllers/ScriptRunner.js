@@ -54,7 +54,7 @@ ScriptRunner.scripts = [];
 ScriptRunner.scripts['demo_Baton'] = [
 	{ name: 'disallow_input', props: {} },
 	{ name: 'show_text', props: { text: 'Oh neat! This weapon let\'s me throw my energy out like a boomerang. The more energy I have, the strong it will be!', portrait: 'Enticed' } },
-	{ name: 'wait', props: { amount: 3000 } },
+	{ name: 'wait', props: { amount: 6000 } },
 	{ name: 'hide_text', props: {} },
 	{ name: 'wait', props: { amount: 500 } },
 	{ name: 'activate_weapon', props: { activate: true, override: true } },
@@ -65,7 +65,7 @@ ScriptRunner.scripts['demo_Baton'] = [
 ScriptRunner.scripts['demo_Stab'] = [
 	{ name: 'disallow_input', props: {} },
 	{ name: 'show_text', props: { text: 'Whee! Now if I attack while rolling, I can shish-kebab some baddies.', portrait: 'Enticed' } },
-	{ name: 'wait', props: { amount: 3000 } },
+	{ name: 'wait', props: { amount: 6000 } },
 	{ name: 'hide_text', props: {} },
 	{ name: 'wait', props: { amount: 500 } },
 	{ name: 'player_roll', props: {} },
@@ -78,7 +78,7 @@ ScriptRunner.scripts['demo_Stab'] = [
 ScriptRunner.scripts['demo_Dive'] = [
 	{ name: 'disallow_input', props: {} },
 	{ name: 'show_text', props: { text: 'Whoa... Down attacking in the air now lets me do a power attack', portrait: 'Enticed' } },
-	{ name: 'wait', props: { amount: 3000 } },
+	{ name: 'wait', props: { amount: 5000 } },
 	{ name: 'hide_text', props: {} },
 	{ name: 'wait', props: { amount: 500 } },
 	{ name: 'player_jump', props: { jump: true } },
@@ -101,7 +101,7 @@ ScriptRunner.scripts['demo_Health'] = [
 ScriptRunner.scripts['demo_Apple'] = [
 	{ name: 'disallow_input', props: {} },
 	{ name: 'show_text', props: { text: 'Apples are tasty. If I find one, I can eat it with the right shoulder button to feel better.', portrait: 'Enticed' } },
-	{ name: 'wait', props: { amount: 4000 } },
+	{ name: 'wait', props: { amount: 8000 } },
 	{ name: 'hide_text', props: {} },
 	{ name: 'wait', props: { amount: 500 } },
 	{ name: 'player_heal', props: { charging: true } },
@@ -112,7 +112,7 @@ ScriptRunner.scripts['demo_Apple'] = [
 ScriptRunner.scripts['demo_Will'] = [
 	{ name: 'disallow_input', props: {} },
 	{ name: 'show_text', props: { text: 'Hooray! This must be the prism thing of... whatever... I should take it back to that lady.', portrait: 'Neutral' } },
-	{ name: 'wait', props: { amount: 5000 } },
+	{ name: 'wait', props: { amount: 6000 } },
 	{ name: 'hide_text', props: {} },
 	{ name: 'allow_input', props: {} }
 ];
@@ -120,7 +120,7 @@ ScriptRunner.scripts['demo_Will'] = [
 ScriptRunner.scripts['demo_Will_no_intro'] = [
 	{ name: 'disallow_input', props: {} },
 	{ name: 'show_text', props: { text: 'Hooray! I found some big... jewel thing...', portrait: 'Neutral' } },
-	{ name: 'wait', props: { amount: 5000 } },
+	{ name: 'wait', props: { amount: 6000 } },
 	{ name: 'hide_text', props: {} },
 	{ name: 'allow_input', props: {} }
 ];
@@ -129,27 +129,27 @@ ScriptRunner.scripts['goddess_intro'] = [
 	{ name: 'disallow_input', props: {} },
 
 	{ name: 'show_text', props: { text: 'Oh, hello there...', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 3000 } },
+	{ name: 'wait', props: { amount: 5000 } },
 	{ name: 'hide_text', props: {} },
 
 	{ name: 'wait', props: { amount: 250 } },
 	{ name: 'show_text', props: { text: 'It\'s been a long time since I\'ve seen... anyone...', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 5000 } },
+	{ name: 'wait', props: { amount: 7000 } },
 	{ name: 'hide_text', props: {} },
 
 	{ name: 'wait', props: { amount: 500 } },
 	{ name: 'show_text', props: { text: 'Would you mind helping me out of this prison? All you need to do is bring the prism shard of Will.', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 5000 } },
+	{ name: 'wait', props: { amount: 7000 } },
 	{ name: 'hide_text', props: {} },
 
 	{ name: 'wait', props: { amount: 1000 } },
 	{ name: 'show_text', props: { text: 'Oh right... It looks like a big red jewel. You can\'t miss it.', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 5000 } },
+	{ name: 'wait', props: { amount: 7000 } },
 	{ name: 'hide_text', props: {} },
 
 	{ name: 'wait', props: { amount: 750 } },
 	{ name: 'show_text', props: { text: 'Please hurry... I\'ve been trapped in here a long time.', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 5000 } },
+	{ name: 'wait', props: { amount: 7000 } },
 	{ name: 'hide_text', props: {} },
 
 	{ name: 'allow_input', props: {} }
@@ -158,12 +158,12 @@ ScriptRunner.scripts['goddess_intro'] = [
 ScriptRunner.scripts['goddess_shard'] = [
 	{ name: 'disallow_input', props: {} },
 	{ name: 'show_text', props: { text: 'You found it!! You beautiful little person thing!!', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 5000 } },
+	{ name: 'wait', props: { amount: 7000 } },
 	{ name: 'hide_text', props: {} },
 
 	{ name: 'wait', props: { amount: 250 } },
 	{ name: 'show_text', props: { text: 'Now just walk up to the door and it will open. Freedom... finally...', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 5000 } },
+	{ name: 'wait', props: { amount: 7000 } },
 	{ name: 'hide_text', props: {} },
 
 	{ name: 'allow_input', props: {} }
@@ -172,7 +172,7 @@ ScriptRunner.scripts['goddess_shard'] = [
 ScriptRunner.scripts['goddess_shard_2'] = [
 	{ name: 'disallow_input', props: {} },
 	{ name: 'show_text', props: { text: 'Yep... just come right on up to the door there and I\'ll be free...', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 3000 } },
+	{ name: 'wait', props: { amount: 5000 } },
 
 	{ name: 'allow_input', props: {} }
 ];
@@ -180,7 +180,7 @@ ScriptRunner.scripts['goddess_shard_2'] = [
 ScriptRunner.scripts['goddess_shard_3'] = [
 	{ name: 'disallow_input', props: {} },
 	{ name: 'show_text', props: { text: 'Please... just walk up to the door and let me out... Enough teasing.', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 3000 } },
+	{ name: 'wait', props: { amount: 5000 } },
 
 	{ name: 'allow_input', props: {} }
 ];
@@ -243,7 +243,7 @@ ScriptRunner.scripts['goddess_rez_angry'] = [
 
 	{ name: 'wait', props: { amount: 100 } },
 	{ name: 'show_text', props: { text: 'Again!!!!!!', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 1500 } },
+	{ name: 'wait', props: { amount: 2000 } },
 	{ name: 'hide_text', props: {} },
 
 	{ name: 'allow_input', props: {} }
@@ -253,7 +253,7 @@ ScriptRunner.scripts['goddess_rez_angry'] = [
 ScriptRunner.scripts['seal_hall_intro'] = [
 	{ name: 'disallow_input', props: {} },
 	{ name: 'show_text', props: { text: "Nice work, you've opened the first of four seals. Keep it up, I'm sure the other prism shards can't be far.", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 3000 } },
+	{ name: 'wait', props: { amount: 4000 } },
 	{ name: 'allow_input', props: {} }
 ];
 
@@ -285,22 +285,22 @@ ScriptRunner.scripts['goddess_freedom'] = [
 
 	{ name: 'wait', props: { amount: 500 } },
 	{ name: 'show_text', props: { text: 'Now Frauki, I know I\'ve already asked a lot of you. But there is more to do. That prism shard you hold is a powerful artifact.', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 7500 } },
+	{ name: 'wait', props: { amount: 9000 } },
 	{ name: 'hide_text', props: {} },
 
 	{ name: 'wait', props: { amount: 500 } },
 	{ name: 'show_text', props: { text: 'In fact, it\'s one of four powerful artifacts. Together they make up the Mother Prism, an object of great and mysterious power.', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 7500 } },
+	{ name: 'wait', props: { amount: 9000 } },
 	{ name: 'hide_text', props: {} },
 
 	{ name: 'wait', props: { amount: 500 } },
 	{ name: 'show_text', props: { text: 'If you could find the remaining three prism shards that have been carelessly tossed around the world... well...', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 7500 } },
+	{ name: 'wait', props: { amount: 9000 } },
 	{ name: 'hide_text', props: {} },
 
 	{ name: 'wait', props: { amount: 500 } },
 	{ name: 'show_text', props: { text: 'Just trust me. It will be pretty cool. I know you can do it... I\'m counting on you...', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 7500 } },
+	{ name: 'wait', props: { amount: 9000 } },
 	{ name: 'hide_text', props: {} },
 
 	{ name: 'allow_input', props: {} }
@@ -317,17 +317,17 @@ ScriptRunner.scripts['goddess_meet_with_shard'] = [
 
 	{ name: 'wait', props: { amount: 500 } },
 	{ name: 'show_text', props: { text: 'It looks like you\'ve found the prism shard of Will! Yes, that big red jewel.', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 4000 } },
+	{ name: 'wait', props: { amount: 7000 } },
 	{ name: 'hide_text', props: {} },
 
 	{ name: 'wait', props: { amount: 500 } },
 	{ name: 'show_text', props: { text: 'That\'s very good news, because I happen to need that shard to escape this horrible prison.', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 4000 } },
+	{ name: 'wait', props: { amount: 7000 } },
 	{ name: 'hide_text', props: {} },
 
 	{ name: 'wait', props: { amount: 500 } },
 	{ name: 'show_text', props: { text: "I've been in here so long... would you mind just walking up and opening this door for me?", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 4000 } },
+	{ name: 'wait', props: { amount: 7000 } },
 	{ name: 'hide_text', props: {} },
 
 	{ name: 'allow_input', props: {} }
