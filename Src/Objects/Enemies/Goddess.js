@@ -14,6 +14,8 @@ Enemy.prototype.types['Goddess'] =  function() {
 
     this.body.drag.x = 500;
 
+    this.messageQueue = GameData.GetVal('goddess_message_queue');
+
     events.subscribe('door_open_start', function(params) {
     	if(params.id === 'final_second' && !GameData.GetFlag('seal_hall_intro')) {
 			ScriptRunner.run('seal_hall_intro');
@@ -66,7 +68,8 @@ Enemy.prototype.types['Goddess'] =  function() {
 		} else if(energyController.GetHealth() < energyController.GetMaxHealth()) {
         	events.publish('full_heal', {});
 			return "Oh my, you're not looking so good. Let me fix you up...";
-
+		} else if(this.messageQueue.length > 0) {
+			return this.GetMessage();
 		} else {
 			return 'Test!';
 
@@ -75,6 +78,27 @@ Enemy.prototype.types['Goddess'] =  function() {
 
 	this.GetPortrait = function() {
 		return 'Goddess_Neutral';
+	};
+
+	this.AddMessage = function(msg) {
+		if(this.messageQueue.length === 5) {
+			this.messageQueue.shift();
+		}
+
+		this.messageQueue.push(msg);
+
+		GameData.SetVal('goddess_message_queue', this.messageQueue);
+	};
+
+	this.GetMessage = function() {
+		if(this.messageQueue.length > 0) {
+			var msg = this.messageQueue.shift();
+			GameData.SetVal('goddess_message_queue', this.messageQueue);
+			return msg;
+		}
+
+		return 'No message';
+
 	};
 
 	////////////////////////////////STATES////////////////////////////////////

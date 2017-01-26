@@ -55,7 +55,12 @@ function PickUpShard(f, a) {
         a.beingUsed = true;
         a.ReturnToUI();
 
-        ScriptRunner.run('demo_' + a.name);
+        if(GameData.GetFlag('goddess_intro')) {
+            ScriptRunner.run('demo_' + a.name);
+        } else {
+            ScriptRunner.run('demo_' + a.name + '_no_intro');
+            
+        }
         
     }
 };

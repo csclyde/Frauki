@@ -101,6 +101,14 @@ ScriptRunner.scripts['demo_Will'] = [
 	{ name: 'allow_input', props: {} }
 ];
 
+ScriptRunner.scripts['demo_Will_no_intro'] = [
+	{ name: 'disallow_input', props: {} },
+	{ name: 'show_text', props: { text: 'Hooray! I found some big... jewel thing...', portrait: 'Neutral' } },
+	{ name: 'wait', props: { amount: 5000 } },
+	{ name: 'hide_text', props: {} },
+	{ name: 'allow_input', props: {} }
+];
+
 ScriptRunner.scripts['goddess_intro'] = [
 	{ name: 'disallow_input', props: {} },
 
@@ -184,7 +192,7 @@ ScriptRunner.scripts['goddess_hurt_2'] = [
 
 ScriptRunner.scripts['goddess_hurt_1'] = [
 	{ name: 'disallow_input', props: {} },
-	{ name: 'show_text', props: { text: "Please... I'm beggin you... stop... I'm dying... please...", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "I'm warning you... if you do that again you're not going to like what happens...", portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 2000 } },
 	{ name: 'allow_input', props: {} }
 ];
@@ -277,6 +285,33 @@ ScriptRunner.scripts['goddess_freedom'] = [
 	{ name: 'wait', props: { amount: 500 } },
 	{ name: 'show_text', props: { text: 'Just trust me. It will be pretty cool. I know you can do it... I\'m counting on you...', portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 7500 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'allow_input', props: {} }
+
+];
+
+ScriptRunner.scripts['goddess_meet_with_shard'] = [
+	{ name: 'disallow_input', props: {} },
+
+	{ name: 'wait', props: { amount: 500 } },
+	{ name: 'show_text', props: { text: 'Oh, hello there...', portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 4000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'wait', props: { amount: 500 } },
+	{ name: 'show_text', props: { text: 'It looks like you\'ve found the prism shard of Will! Yes, that big red jewel.', portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 4000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'wait', props: { amount: 500 } },
+	{ name: 'show_text', props: { text: 'That\'s very good news, because I happen to need that shard to escape this horrible prison.', portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 4000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'wait', props: { amount: 500 } },
+	{ name: 'show_text', props: { text: "I've been in here so long... would you mind just walking up and opening this door for me?", portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 4000 } },
 	{ name: 'hide_text', props: {} },
 
 	{ name: 'allow_input', props: {} }

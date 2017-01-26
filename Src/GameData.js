@@ -15,7 +15,14 @@ GameData.data = {
     nugg_bank: 0,
     flash_copy: null,
     health: 2,
-    flags: {}
+    flags: {},
+    vals: {
+        goddess_message_queue: [
+            "Ahhh... feels good to see the sky again.", 
+            "That was pretty cool when you came up holding the prism shard. Good job.", 
+            "Everything looks pretty run down..."
+        ]
+    }
 };
 
 GameData.nuggetCount = 0;
@@ -41,6 +48,15 @@ GameData.SetFlag = function(name, val) {
 GameData.GetFlag = function(name) {
     return !!GameData.data.flags[name];
 };
+
+GameData.SetVal = function(name, val) {
+    GameData.data.vals[name] = val;
+    this.SaveDataToStorage();
+};
+
+GameData.GetVal = function(name) {
+    return GameData.data.vals[name];
+}
 
 //meant for one-time flags. If the flag hasnt been set, it returns true and sets the flag.
 //If the flag has been set, it returns false and doesnt go through
