@@ -135,7 +135,7 @@ SpeechController.prototype.Update = function() {
 
 	this.font.text = this.currentText.slice(0, this.displayIndex);
 
-	if(this.timers.TimerUp('auto_hide')) {
+	if(this.timers.TimerUp('auto_hide') && this.text.visible) {
 		this.HideSpeech();
 	}
 
@@ -253,6 +253,8 @@ SpeechController.prototype.HideSpeech = function() {
 	this.speechVisible = false;
 
 	this.currentSpeechZone = null;
+
+	events.publish('text_hidden', {});
 };
 
 SpeechController.prototype.SetText = function(text) {

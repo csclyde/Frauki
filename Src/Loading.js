@@ -65,7 +65,6 @@ Loading.create = function() {
     energyController = new EnergyController();
     audioController = new AudioController();
     triggerController = new TriggerController();
-    scriptRunner = new ScriptRunner();
     timerUtil = new TimerUtil();
     objectController = new ObjectController();
     backdropController = new BackdropController();
@@ -77,6 +76,8 @@ Loading.create = function() {
     projectileController = new ProjectileController();
     speechController = new SpeechController();
     speechController.Create();
+
+    ScriptRunner.create();
 
     game.state.start('Main', false, false);
 

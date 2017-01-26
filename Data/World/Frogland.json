@@ -2784,7 +2784,7 @@
          "name":"Background_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -2795,7 +2795,7 @@
          "name":"Midground_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -2806,7 +2806,7 @@
          "name":"Foreground_3",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":200,
          "x":0,
          "y":0
@@ -5458,7 +5458,7 @@
              "id":"string"
             },
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "width":0,
          "x":0,
          "y":0
@@ -6244,7 +6244,7 @@
          "name":"Background_4",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -6255,7 +6255,7 @@
          "name":"Midground_4",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -6266,7 +6266,7 @@
          "name":"Foreground_4",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":200,
          "x":0,
          "y":0
@@ -8714,8 +8714,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":1672,
-                 "y":3072.5
+                 "x":1707.66666666667,
+                 "y":3080.16666666667
                 }, 
                 {
                  "gid":68,
@@ -8726,8 +8726,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":1591.5,
-                 "y":3055
+                 "x":1693.16666666667,
+                 "y":3009.66666666667
                 }, 
                 {
                  "gid":68,
@@ -8738,8 +8738,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":1510,
-                 "y":3054.5
+                 "x":1734,
+                 "y":2940.83333333333
                 }, 
                 {
                  "gid":75,
@@ -8775,7 +8775,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "width":0,
          "x":0,
          "y":0

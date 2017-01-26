@@ -28,8 +28,6 @@ InputController = function() {
     this.testButton.onDown.add(function() { events.publish('stop_all_music'); });
 
     this.testButton2.onDown.add(function() { 
-        
-        console.log('tet')
     });
 
     this.binds = {};
@@ -58,17 +56,21 @@ InputController = function() {
         this.OnDown(false);
         this.OnRShoulder(false);
         this.OnStart(false);
+        this.currentDir = 'still';
+
 
         this.allowInput = false;
+
     };
 
     this.allowInput = function() {
-        // if(this.dpad.left) this.OnLeft(true);
-        // if(this.dpad.right) this.OnRight(true);
-        // if(this.dpad.up) this.OnUp(true);
-        // if(this.dpad.down) this.OnDown(true);
-
         this.allowInput = true;
+
+        if(this.dpad.left) this.OnLeft(true);
+        if(this.dpad.right) this.OnRight(true);
+        if(this.dpad.up) this.OnUp(true);
+        if(this.dpad.down) this.OnDown(true);
+
     };
 
     events.subscribe('allow_input', this.allowInput, this);
@@ -247,7 +249,7 @@ InputController = function() {
         },
         onUp: function(buttonCode, value){
 
-            if(Main.restarting || !this.allowInput) {
+            if(Main.restarting) {
                 return;
             }
             

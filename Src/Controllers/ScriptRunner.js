@@ -1,4 +1,19 @@
-ScriptRunner = function() {
+ScriptRunner = {};
+
+ScriptRunner.create = function() {
+	this.waitEvent = null;
+	this.currentCommand = null;
+
+	events.subscribe('text_hidden', function(params) {
+		if(!!this.waitEvent) {
+			game.time.events.remove(this.waitEvent);
+			this.waitEvent = null;
+
+			if(!!this.currentCommand && !!this.currentCommand.nextCommand) {
+				this.executeCommand(this.currentCommand.nextCommand);
+			}
+		}
+	}, this);
 };
 
 ScriptRunner.run = function(name, params) {
@@ -21,11 +36,12 @@ ScriptRunner.run = function(name, params) {
 ScriptRunner.executeCommand = function(cmd) {
 	var that = this;
 
+	this.currentCommand = cmd;
+
 	if(!cmd) return;
 
 	if(cmd.name === 'wait') {
-		game.time.events.add(cmd.props.amount, function() { that.executeCommand(cmd.nextCommand); });
-
+		this.waitEvent = game.time.events.add(cmd.props.amount, function() { that.executeCommand(cmd.nextCommand); });
 	} else {
 		events.publish(cmd.name, cmd.props);
 
