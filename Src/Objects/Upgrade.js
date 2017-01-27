@@ -18,13 +18,20 @@ Upgrade = function(game, x, y, name) {
 
     this.body.allowGravity = false;
 
-    this.animations.add('active3', ['Upgrade0000', 'Upgrade0001', 'Upgrade0002'], 10, true, false);
-    this.animations.add('active2', ['Upgrade0003', 'Upgrade0004', 'Upgrade0005'], 10, true, false);
-    this.animations.add('active1', ['Upgrade0006', 'Upgrade0007', 'Upgrade0008'], 10, true, false);
+    this.animations.add('active3', ['Upgrade0000'], 10, true, false);
+    this.animations.add('active2', ['Upgrade0001'], 10, true, false);
+    this.animations.add('active1', ['Upgrade0002'], 10, true, false);
 
     this.animations.add('eaten', ['Upgrade0000'], 10, false, false);
 
     this.health = 3;
+
+    this.icon = game.add.image(20, 20, 'Misc', 'Upgrade0003');
+    this.icon.animations.add('thing', ['Upgrade0003'], 18, false, false);
+    this.icon.animations.play('thing');
+    this.icon.x = this.x;
+    this.icon.y = this.y;
+    this.icon.visible = false;
 
 };
 
@@ -42,6 +49,12 @@ Upgrade.prototype.update = function() {
         this.destroy();
     }
 
+    this.icon.visible = this.visible;
+
+};
+
+Upgrade.prototype.ChangeLayerAway = function() {
+    this.icon.visible = false;
 };
 
 function HitUpgrade(f, o) {
@@ -71,6 +84,7 @@ function HitUpgrade(f, o) {
                 ScriptRunner.run('demo_' + o.upgrade);
             }
 
+            o.icon.destroy();
             o.destroy();
         } else {
             o.shakeMagnitudeX = 100;
@@ -88,11 +102,14 @@ Upgrade.prototype.PlayAnim = function(name) {
 Upgrade.prototype.Active = function() {
     this.PlayAnim('active' + this.health);
 
-    this.body.velocity.y = Math.sin(game.time.now / 150) * 30;
+    this.body.velocity.y = Math.sin(game.time.now / 400) * 30;
 
     if(this.shakeMagnitudeX > 0) {
         this.body.velocity.x = Math.sin(game.time.now * 150) * this.shakeMagnitudeX;
     } else {
         this.body.velocity.x = 0;
     }
+
+    this.icon.x = this.x - 25;
+    this.icon.y = this.y - 25;
 };

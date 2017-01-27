@@ -318,6 +318,8 @@ InputController.prototype.Update = function() {
 InputController.prototype.OnJump = function(pressed) {
     this.tetrad.bottom = pressed;
 
+    if(pressed) events.publish('advance_text', {});
+
     if(this.allowInput) {
         if(pressed) {
             events.publish('player_jump', {jump: true});
@@ -345,6 +347,8 @@ InputController.prototype.OnSlash = function(pressed) {
 InputController.prototype.OnThrow = function(pressed) {
     this.tetrad.top = pressed;
 
+    if(pressed) events.publish('advance_text', {});
+
     if(this.allowInput) {
         if(pressed) {
             events.publish('activate_weapon', { activate: true, override: false });
@@ -357,6 +361,8 @@ InputController.prototype.OnThrow = function(pressed) {
 
 InputController.prototype.OnRoll = function(pressed) {
     this.tetrad.right = pressed;
+
+    if(pressed) events.publish('advance_text', {});
 
     if(this.allowInput) {
         if(pressed) {

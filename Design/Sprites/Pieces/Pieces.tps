@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>4.3.1</string>
+        <string>4.3.3</string>
         <key>fileName</key>
         <string>D:/gamedev/Frauki/Design/Sprites/Pieces/Pieces.tps</string>
         <key>autoSDSettings</key>
@@ -364,6 +364,9 @@
             <key type="filename">Frames/Upgrade0002.png</key>
             <key type="filename">Frames/Upgrade0003.png</key>
             <key type="filename">Frames/Upgrade0004.png</key>
+            <key type="filename">Frames/Upgrade0005.png</key>
+            <key type="filename">Frames/Upgrade0006.png</key>
+            <key type="filename">Frames/Upgrade0007.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
