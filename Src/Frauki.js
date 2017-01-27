@@ -1189,10 +1189,23 @@ Player.prototype.Hanging = function() {
     this.body.gravity.y = -700;
     this.states.hasFlipped = false;
 
-    if(!this.body.onWall()) {
+    // if(!this.body.onWall()) {
+    //     this.ChangeState(this.Falling);
+    //     this.timers.SetTimer('after_hang', 200);
+    // } 
+
+    if(inputController.dpad.up) {
+        this.DoubleJump();
+        this.timers.SetTimer('after_hang', 200);
+
+    } else if(inputController.dpad.down) {
         this.ChangeState(this.Falling);
         this.timers.SetTimer('after_hang', 200);
-    } 
+
+    } else if((inputController.dpad.left || inputController.dpad.right) && !this.body.onWall()) {
+        this.ChangeState(this.Falling);
+        this.timers.SetTimer('after_hang', 200);
+    }
 
     if(this.body.onFloor()) {
         this.ChangeState(this.Standing);
