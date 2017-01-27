@@ -215,8 +215,7 @@ ScriptRunner.scripts['goddess_hurt_1'] = [
 
 ScriptRunner.scripts['goddess_rez'] = [
 	{ name: 'show_text', props: { text: "My, my... you need to be more careful! Well, brush it off and try again. On your way now.", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 4000 } },
-	{ name: 'hide_text', props: {} }
+	{ name: 'wait', props: { amount: 4000 } }
 ];
 
 ScriptRunner.scripts['goddess_rez_angry'] = [
