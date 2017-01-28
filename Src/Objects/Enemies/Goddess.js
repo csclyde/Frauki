@@ -71,7 +71,7 @@ Enemy.prototype.types['Goddess'] =  function() {
 		} else if(this.messageQueue.length > 0) {
 			return this.GetMessage();
 		} else {
-			return 'Test!';
+			return ['Test!', 'blabla', 'googoo', 'suuup'];
 
 		}
 	};

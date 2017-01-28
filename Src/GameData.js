@@ -102,6 +102,16 @@ GameData.AddUpgrade = function(name) {
     }
 };
 
+GameData.HasAnyUpgrades = function() {
+    for(var i = 0; i < this.data.upgrades.length; i++) {
+        if(this.data.upgrades[i].indexOf('Health') < 0) {
+            return true;
+        }
+    }
+
+    return false;
+};
+
 GameData.GetOpenDoors = function() {
     return this.data.doors;
 };

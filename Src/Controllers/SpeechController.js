@@ -211,6 +211,11 @@ SpeechController.prototype.CurrentTextIsAllPrinted = function() {
 }
 
 SpeechController.prototype.Activate = function(text, portrait) {
+	//if there is an array, pull a random one from it
+	if(Array.isArray(text)) {
+		text = text[Math.floor(Math.random()*text.length)];
+	}
+
 	this.SetText(text);
 
 	this.currentPortrait = portrait || 'Neutral';

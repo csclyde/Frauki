@@ -284,7 +284,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 dripper.width = o.width;
                 dripper.height = o.height;
                 dripper.makeParticles('Misc', ['Drip0000', 'Drip0001'], 2);
-                dripper.gravity = -350;
+                dripper.gravity = -200;
                 dripper.maxParticleSpeed.setTo(0);
                 dripper.minParticleSpeed.setTo(0);
                 dripper.setRotation(0, 0);

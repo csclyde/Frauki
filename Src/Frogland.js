@@ -391,10 +391,13 @@ Frogland.ChangeLayer = function(newLayer, immediate) {
         if(!!obj.body) obj.body.enable = true;
     });
 
-    //update fraukis shard current layer
-    if(!!frauki.carriedShard) {
-        frauki.carriedShard.currentLayer = newLayer;
-    }
+    this.shardGroup.forEach(function(shard) {
+        if(this.currentLayer === shard.currentLayer) {
+            shard.visible = true;
+        } else {
+            shard.visible = false;
+        }
+    }, this);
 
     if(!!effectsController) effectsController.ClearDicedPieces();
     if(!!projectileController) projectileController.DestroyAllProjectiles();

@@ -155,6 +155,10 @@ EnergyController.prototype.GetCharge = function() {
 EnergyController.prototype.AddCharge = function(amt) {
 	amt = Math.floor(amt);
 
+	if(!GameData.HasAnyUpgrades()) {
+		return;
+	}
+
 	if(this.charge + amt < this.GetMaxCharge()) {
 		this.charge += amt;
 		events.publish('play_sound', { name: 'gain_energy_' + this.charge });

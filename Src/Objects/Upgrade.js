@@ -27,8 +27,10 @@ Upgrade = function(game, x, y, name) {
     this.health = 3;
 
     this.icon = game.add.image(20, 20, 'Misc', 'Upgrade0003');
-    this.icon.animations.add('thing', ['Upgrade0003'], 18, false, false);
-    this.icon.animations.play('thing');
+    this.icon.animations.add('Health', ['Upgrade0003'], 18, true, false);
+    this.icon.animations.add('Shield', ['Upgrade0004'], 18, true, false);
+    this.icon.animations.add('Baton', ['Upgrade0005'], 18, true, false);
+    this.icon.iconSet = false;
     this.icon.x = this.x;
     this.icon.y = this.y;
     this.icon.visible = false;
@@ -50,6 +52,16 @@ Upgrade.prototype.update = function() {
     }
 
     this.icon.visible = this.visible;
+
+    if(!this.icon.iconSet) {
+        if(this.upgrade.indexOf('Health') > 0) {
+            this.icon.animations.play('Health');
+        } else if(this.upgrade === 'Shield') {
+            this.icon.animations.play('Shield');
+        } else if(this.upgrade === 'Baton') {
+            this.icon.animations.play('Baton');
+        }
+    }
 
 };
 
@@ -102,7 +114,7 @@ Upgrade.prototype.PlayAnim = function(name) {
 Upgrade.prototype.Active = function() {
     this.PlayAnim('active' + this.health);
 
-    this.body.velocity.y = Math.sin(game.time.now / 400) * 30;
+    this.body.velocity.y = Math.sin(game.time.now / 400) * 15;
 
     if(this.shakeMagnitudeX > 0) {
         this.body.velocity.x = Math.sin(game.time.now * 150) * this.shakeMagnitudeX;
