@@ -275,7 +275,11 @@ Player.prototype.UpdateAttackGeometry = function() {
 
 Player.prototype.GetCurrentDamage = function() {
 
-    return this.currentAttack.damage;
+    if(!!this.currentAttack) {
+        return this.currentAttack.damage;
+    } else {
+        return 0;
+    }
 };
 
 Player.prototype.GetCurrentKnockback = function() {

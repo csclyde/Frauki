@@ -286,15 +286,6 @@
             <key type="filename">Frames/Dust0003.png</key>
             <key type="filename">Frames/Dust0004.png</key>
             <key type="filename">Frames/Dust0005.png</key>
-            <key type="filename">Frames/ForceField0000.png</key>
-            <key type="filename">Frames/ForceField0001.png</key>
-            <key type="filename">Frames/ForceField0002.png</key>
-            <key type="filename">Frames/ForceField0003.png</key>
-            <key type="filename">Frames/ForceField0004.png</key>
-            <key type="filename">Frames/ForceField0005.png</key>
-            <key type="filename">Frames/ForceField0006.png</key>
-            <key type="filename">Frames/ForceField0007.png</key>
-            <key type="filename">Frames/ForceField0008.png</key>
             <key type="filename">Frames/Heart0000.png</key>
             <key type="filename">Frames/Heart0001.png</key>
             <key type="filename">Frames/JumpDust0000.png</key>

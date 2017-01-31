@@ -112,7 +112,7 @@ WeaponController.prototype.GetAttackGeometry = function() {
 
 WeaponController.prototype.GetNumWeapons = function() {
     return this.weaponList.length;
-}
+};
 
 WeaponController.prototype.Baton = {
     Init: function() {
@@ -481,17 +481,16 @@ WeaponController.prototype.Shield = {
     FrameName: 'UpgradeIconShield',
 
     Init: function() {
-        this.forceField = game.add.sprite(0, 0, 'Misc');
-        this.forceField.animations.add('open', ['ForceField0000'], 18, false, false);
-        this.forceField.animations.add('active', ['ForceField0001', 'ForceField0002'], 20, true, false);
-        this.forceField.animations.add('close', ['ForceField0003', 'ForceField0004', 'ForceField0005', 'ForceField0006', 'ForceField0007', 'ForceField0008'], 18, false, false);
+        this.forceField = game.add.sprite(0, 0, 'Frauki');
+        this.forceField.animations.add('activate', ['Shield0000', 'Shield0001', 'Shield0002', 'Shield0003', 'Shield0004', 'Shield0005', 'Shield0006', 'Shield0007'], 22, false, false);
         this.forceField.visible = false;
         this.forceField.alpha = 0.5;
     },
 
     GetDamageFrame: function() {
-        if(this.forceField.visible) {
-            return this.DamageFrames[this.forceField.animations.currentFrame.name];
+        var frameName = this.forceField.animations.currentFrame.name;
+        if(this.forceField.visible && !!this.DamageFrames[frameName]) {
+            return this.DamageFrames[frameName];
         } else {
             return null;
         }
@@ -502,8 +501,8 @@ WeaponController.prototype.Shield = {
             return;
         }
 
-        if(this.forceField.visible === false && energyController.GetEnergy() > 0) {
-            this.forceField.animations.play('open');
+        if(this.forceField.visible === false) {
+            this.forceField.animations.play('activate');
             this.forceField.visible = true;
 
             frauki.states.shielded = true;
@@ -512,35 +511,23 @@ WeaponController.prototype.Shield = {
     },
 
     Update: function() {
-        if(weaponController.weaponActive && this.forceField.animations.currentAnim.name === 'open' && this.forceField.animations.currentAnim.isFinished) {
-            this.forceField.animations.play('active');
-        }
-
         this.forceField.x = frauki.body.x - 43;
         this.forceField.y = frauki.body.y - 30;
 
-        if(this.forceField.visible && this.forceField.animations.currentAnim.name === 'close' && this.forceField.animations.currentAnim.isFinished) {
+        if(this.forceField.visible && this.forceField.animations.currentAnim.isFinished) {
+            frauki.states.shielded = false;
+            energyController.timers.SetTimer('energy_grace', 1000);
             this.forceField.visible = false;
         }
     },
 
     Stop: function() {
-        this.forceField.animations.play('close');
-        frauki.states.shielded = false;
-        energyController.timers.SetTimer('energy_grace', 1000);
 
     },
 
     DamageFrames: {
-        'ForceField0000': {
-            x: 0, y: 15, w: 10, h: 10,
-            damage: 0,
-            knockback: 1,
-            priority: 3,
-            juggle: 1
-        },
 
-        'ForceField0001': {
+        'Shield0001': {
             x: -14, y: -2, w: 40, h: 54,
             damage: 0,
             knockback: 1,
@@ -548,16 +535,8 @@ WeaponController.prototype.Shield = {
             juggle: 1
         },
 
-        'ForceField0002': {
+        'Shield0002': {
             x: -14, y: -2, w: 40, h: 54,
-            damage: 0,
-            knockback: 1,
-            priority: 3,
-            juggle: 1
-        },
-
-        'ForceField0003': {
-            x: -17, y: -3, w: 45, h: 45,
             damage: 0,
             knockback: 1,
             priority: 3,
