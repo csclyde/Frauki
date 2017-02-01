@@ -15,6 +15,7 @@ Enemy.prototype.types['Goddess'] =  function() {
     this.body.drag.x = 500;
 
     this.messageQueue = GameData.GetVal('goddess_message_queue');
+    this.deathMessage = GameData.GetVal('goddess_death_message');
 
     events.subscribe('door_open_start', function(params) {
     	if(params.id === 'final_second' && !GameData.GetFlag('seal_hall_intro')) {
@@ -50,6 +51,34 @@ Enemy.prototype.types['Goddess'] =  function() {
     	}
     };
 
+    this.Reset = function() {
+    	//if the goddess is angry from being killed, reset that
+        GameData.SetFlag('goddess_angry', false);
+
+        if(GameData.GetCheckpoint() === '0') {
+
+            //if they killed the goddess, give the player a lecture then make her angry
+            if(GameData.GetFlag('goddess_killed')) {
+                ScriptRunner.run('goddess_rez_angry');
+                GameData.SetFlag('goddess_killed', false);
+                GameData.SetFlag('goddess_angry', true);
+            } else if(this.deathMessage) {
+            	events.publish('show_text', { text: this.deathMessage, portrait: 'Goddess_Neutral' });
+
+            	GameData.SetVal('goddess_death_message', null);
+     
+            } else {
+                events.publish('show_text', { text: [
+					"My, my... you need to be more careful! Well, brush it off and try again. On your way now.",
+					"Are you ok? That looked really painful... Well, I fixed you up. Go give it another shot!",
+					"Sorry that happened Frauki... But don't get discouraged. You can do it!"
+					], portrait: 'Goddess_Neutral' 
+				});
+
+            }
+        }
+    };
+
 	///////////////////////////////ACTIONS////////////////////////////////////
 	this.GetSpeech = function() {
 		if(GameData.GetFlag('goddess_angry')) {
@@ -71,7 +100,7 @@ Enemy.prototype.types['Goddess'] =  function() {
 		} else if(this.messageQueue.length > 0) {
 			return this.GetMessage();
 		} else {
-			return ['Test!', 'blabla', 'googoo', 'suuup'];
+			return ['Do you need something Frauki?', 'Oh, hello.', 'Things just aren\'t the same.', 'Yes?'];
 
 		}
 	};

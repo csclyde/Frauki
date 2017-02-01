@@ -84,7 +84,7 @@ Enemy.prototype.update = function() {
     //each state function for enemies will return true or false. true means that
     //the enemy is ready to perform a new action. The action will be determined
     //in the act function, unique to each enemy type
-    if(this.state()) {
+    if(this.state() && this.timers.TimerUp('attack_stun')) {
         this.Act();
     }
 

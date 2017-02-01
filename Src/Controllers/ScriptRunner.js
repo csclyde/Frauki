@@ -213,15 +213,6 @@ ScriptRunner.scripts['goddess_hurt_1'] = [
 	{ name: 'allow_input', props: {} }
 ];
 
-ScriptRunner.scripts['goddess_rez'] = [
-	{ name: 'show_text', props: { text: [
-		"My, my... you need to be more careful! Well, brush it off and try again. On your way now.",
-		"Are you ok? That looked really painful... Well, I fixed you up. Go give it another shot!",
-		"Sorry that happened Frauki... But don't get discouraged. You can do it!"
-		], portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 4000 } }
-];
-
 ScriptRunner.scripts['goddess_rez_angry'] = [
 	{ name: 'disallow_input', props: {} },
 

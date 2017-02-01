@@ -109,12 +109,12 @@ Collision.OverlapAttackWithObject = function(f, o) {
 
             } else if(!EnemyBehavior.FacingAttack(o)) {
                 Collision.OverlapAttackWithEnemy(f, o);
-
-            } else if(o.isAttacking() && frauki.GetCurrentPriority() > o.GetCurrentPriority()) {
-                o.timers.SetTimer('grace', 0);
-                events.publish('play_sound', {name: 'clang'});
-                Collision.OverlapAttackWithEnemy(f, o);
             }
+            // } else if(o.isAttacking() && frauki.GetCurrentPriority() > o.GetCurrentPriority()) {
+            //     o.timers.SetTimer('grace', 0);
+            //     events.publish('play_sound', {name: 'clang'});
+            //     Collision.OverlapAttackWithEnemy(f, o);
+            // }
             //they can be hit if theyre not attacking, or they are attacking
             //but facing away from the player
             // if(!o.Attacking() || !EnemyBehavior.FacingPlayer(o) || !o.robotic) {
@@ -175,7 +175,7 @@ Collision.OverlapAttackWithEnemy = function(f, e, halfDmg) {
 Collision.OverlapAttackWithEnemyAttack = function(e, f) {
     e = e.owningEnemy;
 
-    if(!e.timers.TimerUp('grace')) {
+    if(!frauki.timers.TimerUp('clash_wait')) {
         return;
     }
 
@@ -183,24 +183,8 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
     if(e.GetCurrentDamage() <= 0 && frauki.GetCurrentDamage() <= 0)
         return;
 
-    //if theyre blocking with a shield then remove energy
-    if(frauki.states.shielded) {
-        energyController.RemoveCharge(1);
-        energyController.RemoveEnergy(e.GetCurrentDamage() * 2);
-
-        if(energyController.GetEnergy() <= 0) {
-            events.publish('activate_weapon', { activate: false });
-            //play stun sound
-            frauki.Stun(e);
-
-            effectsController.ShatterShield();
-            events.publish('play_sound', {name: 'crystal_door', restart: true });
-        }
-    }
-
     frauki.LandHit(e, 0);
     e.LandHit();
-    e.timers.SetTimer('attack', 0);
 
     var vel = new Phaser.Point(e.body.center.x - frauki.body.center.x, e.body.center.y - frauki.body.center.y);
     vel = vel.normalize();
@@ -213,10 +197,24 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
     events.publish('stop_attack_sounds', {});
     events.publish('play_sound', {name: 'clang'});
 
-    e.timers.SetTimer('grace', 400);
-    e.timers.SetTimer('attack_wait', 200);
-    frauki.timers.SetTimer('attack_stun', 800);
-    //frauki.timers.SetTimer('frauki_grace', 400);
+    //if frauki has higher priority, the enemy will be stunned
+    //otherwise, frauki gets stunned
+    if(frauki.GetCurrentPriority() > e.GetCurrentPriority()) {
+        e.timers.SetTimer('grace', 0);
+        e.timers.SetTimer('attack_stun', 800);
+        frauki.timers.SetTimer('clash_wait', 800);
+        frauki.timers.SetTimer('grace', 400);
+    } else {
+        e.timers.SetTimer('attack', 0);
+        e.timers.SetTimer('grace', 400);
+        e.timers.SetTimer('attack_wait', 0);
+        frauki.timers.SetTimer('attack_stun', 800);
+        frauki.timers.SetTimer('clash_wait', 800);
+    }
+
+    console.log('Weapon clash occured: Enemy with ' + e.GetCurrentPriority() + ' priority and Frauki with ' + frauki.GetCurrentPriority());
+
+    //frauki.timers.SetTimer('grace', 400);
 };
 
 Collision.OverlapEnemyAttackWithFrauki = function(e, f) {

@@ -229,7 +229,7 @@ Player.prototype.ChangeState = function(newState) {
 
 Player.prototype.Grace = function() {
 
-    return !this.timers.TimerUp('frauki_grace') || !this.timers.TimerUp('frauki_invincible');
+    return !this.timers.TimerUp('grace') || !this.timers.TimerUp('frauki_invincible');
 };
 
 Player.prototype.UpdateAttackGeometry = function() {
@@ -548,7 +548,7 @@ Player.prototype.DoubleJump = function() {
 
         this.ChangeState(this.Flipping);
         this.states.hasFlipped = true;
-        //this.timers.SetTimer('frauki_grace', 300);
+        //this.timers.SetTimer('grace', 300);
 
         events.publish('play_sound', {name: 'airhike'});
         events.publish('stop_sound', {name: 'attack_dive_fall'});
@@ -809,7 +809,7 @@ Player.prototype.Roll = function(params) {
     }
 
     this.timers.SetTimer('frauki_roll', 250);
-    this.timers.SetTimer('frauki_grace', 300);
+    this.timers.SetTimer('grace', 450);
 
     return true;
 };
@@ -888,7 +888,7 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
     } 
 
     this.ChangeState(this.Hurting);
-    this.timers.SetTimer('frauki_grace', grace_duration);
+    this.timers.SetTimer('grace', grace_duration);
     this.timers.SetTimer('frauki_hit', 600);
 
     effectsController.SpriteTrail(frauki, 200, 800, 300, 0xf20069);
@@ -914,14 +914,14 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
 
         if(GameData.GetNuggCount() > 0) {
             events.publish('play_sound', {name: 'lose_energy_bits'}); 
+        }     
 
-        }      
+        if(e.robotic && !GameData.GetFlag('goddess_robo_speech')) {
+            GameData.SetVal('goddess_death_message', "I see you've met those terrible robots. They're the ones who locked me up in that nasty prison. They're intruders, and they do not belong here.");
+
+            GameData.SetFlag('goddess_robo_speech', true);
+        }
     }
-
-    //allow the enemy to steal the shard
-    // if(!!this.carriedShard) {
-    //     PickUpShard(e, this.carriedShard); 
-    // }
 };
 
 Player.prototype.Interrupt = function() {
@@ -1173,7 +1173,7 @@ Player.prototype.Hurting = function() {
         }  
 
         this.timers.SetTimer('frauki_invincible', 2000);
-        this.timers.SetTimer('frauki_grace', 1000);
+        this.timers.SetTimer('grace', 1000);
     }
 };
 

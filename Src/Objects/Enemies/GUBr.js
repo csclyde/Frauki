@@ -24,10 +24,10 @@ Enemy.prototype.types['GUBr'] =  function() {
 	this.Act = function() {
         if(EnemyBehavior.Player.IsVisible(this)) {
 
-        	if(EnemyBehavior.Player.IsDangerous(this)) {
+        	if(EnemyBehavior.Player.IsDangerous(this) || !this.timers.TimerUp('attack_wait')) {
         		this.RunAway();
 
-        	} else if(EnemyBehavior.Player.IsNear(this, 180) && this.timers.TimerUp('attack_wait') && frauki.body.onFloor()) {
+        	} else if(EnemyBehavior.Player.IsVulnerable(this) && EnemyBehavior.Player.IsNear(this, 180) && this.timers.TimerUp('attack_wait') && frauki.body.onFloor()) {
 	            this.Attack();
 
 	        } else if(this.state === this.Blocking && !EnemyBehavior.Player.IsNear(this, 180)) {
@@ -56,9 +56,9 @@ Enemy.prototype.types['GUBr'] =  function() {
     	this.timers.SetTimer('attacking', game.rnd.between(450, 500));
 
     	if(this.direction === 'left') {
-			this.body.velocity.x = -350;
+			this.body.velocity.x = -275;
 		} else {
-			this.body.velocity.x = 350;
+			this.body.velocity.x = 275;
 		}
     };
 
@@ -167,7 +167,7 @@ Enemy.prototype.types['GUBr'] =  function() {
 
 		if(this.timers.TimerUp('attacking')) {
     		this.timers.SetTimer('attack_wait', 800);
-    		this.RunAway();
+    		return true;
 		} else {
 			return false;
 		}
@@ -189,19 +189,11 @@ Enemy.prototype.types['GUBr'] =  function() {
 
 	this.attackFrames = {
 
-		'GUBr/Attack0005': {
-			x: 26, y: 20, w: 50, h: 12,
-			damage: 1,
-			knockback: 0,
-			priority: 1,
-			juggle: 0
-		},
-
 		'GUBr/Attack0004': {
 			x: 26, y: 20, w: 50, h: 12,
 			damage: 1,
 			knockback: 0,
-			priority: 1,
+			priority: 0,
 			juggle: 0
 		},
 
@@ -209,7 +201,7 @@ Enemy.prototype.types['GUBr'] =  function() {
 			x: 26, y: 20, w: 50, h: 12,
 			damage: 1,
 			knockback: 0,
-			priority: 1,
+			priority: 0,
 			juggle: 0
 		},
 
@@ -217,7 +209,7 @@ Enemy.prototype.types['GUBr'] =  function() {
 			x: 26, y: 20, w: 50, h: 12,
 			damage: 1,
 			knockback: 0,
-			priority: 1,
+			priority: 0,
 			juggle: 0
 		},
 
@@ -225,7 +217,7 @@ Enemy.prototype.types['GUBr'] =  function() {
 			x: 26, y: 20, w: 50, h: 12,
 			damage: 0,
 			knockback: 0,
-			priority: 1,
+			priority: 0,
 			juggle: 0
 		}
 

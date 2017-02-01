@@ -226,7 +226,7 @@ SpeechController.prototype.Activate = function(text, portrait) {
 
 	this.speechVisible = true;
 
-	this.timers.SetTimer('auto_hide', 6000);
+	this.timers.SetTimer('auto_hide', 10000);
 
 	return true;
 };
