@@ -28,6 +28,7 @@ InputController = function() {
     this.testButton.onDown.add(function() { events.publish('stop_all_music'); });
 
     this.testButton2.onDown.add(function() { 
+        console.log('test')
     });
 
     this.binds = {};
@@ -91,6 +92,11 @@ InputController = function() {
                 // energyController.AddCharge(2);
 
                 localStorage.setItem('save_data', '');
+            break;
+
+            case Phaser.Keyboard.O:
+                energyController.AddCharge(2);
+
             break;
 
             case inputController.binds.jump:

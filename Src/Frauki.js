@@ -168,19 +168,19 @@ Player.prototype.postStateUpdate = function() {
 
         if(energyController.GetCharge() > 3) {
             frauki.tint = 0x00C86F;
-            freq = 20;
+            freq = 25;
 
         } else if(energyController.GetCharge() > 2) {
             frauki.tint = 0x01FF8F;
-            freq = 40;
+            freq = 50;
 
         } else if(energyController.GetCharge() > 1) {
             frauki.tint = 0x47FFAE;
-            freq = 60;
+            freq = 100;
 
         } else if(energyController.GetCharge() > 0) {
             frauki.tint = 0x95FFD0;
-            freq = 80;
+            freq = 200;
 
         }
 
@@ -562,7 +562,7 @@ Player.prototype.DoubleJump = function() {
             effectsController.EnergyStreak();
         }
 
-        if(energyController.GetCharge() > 1) {
+        if(energyController.GetCharge() > 2) {
             effectsController.SpriteTrail(frauki, 150, 400, 300);
         }
     }
@@ -603,10 +603,8 @@ Player.prototype.Throw = function(params) {
 };
 
 Player.prototype.Block = function(params) {
-        this.state = this.Blocking;
-    if(!this.states.shielded) {
-        //this.states.shielded = true;
-    }
+
+    this.state = this.Blocking;
 };
 
 Player.prototype.Slash = function(params) {
@@ -654,7 +652,7 @@ Player.prototype.Slash = function(params) {
             effectsController.EnergyStreak();
         }
 
-        if(energyController.GetCharge() > 1) {
+        if(energyController.GetCharge() > 2) {
             effectsController.SpriteTrail(frauki, 150, 500, 300);
         }
 
@@ -811,7 +809,7 @@ Player.prototype.Roll = function(params) {
             effectsController.EnergyStreak();
         }
 
-        if(energyController.GetCharge() > 1) {
+        if(energyController.GetCharge() > 2) {
             effectsController.SpriteTrail(frauki, 100, 400, 300);
         }
 

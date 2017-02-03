@@ -186,7 +186,7 @@ EnemyBehavior.Player.IsVulnerable = function(e) {
         return true;
     }
 
-    if(!frauki.timers.TimerUp('frauki_invincible') || !frauki.timers.TimerUp('frauki_grace')) {
+    if(!frauki.timers.TimerUp('frauki_invincible') || !frauki.timers.TimerUp('grace')) {
         return false;
     }
 
