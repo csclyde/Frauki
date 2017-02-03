@@ -294,7 +294,11 @@ Player.prototype.GetCurrentJuggle = function() {
 
 Player.prototype.GetCurrentPriority = function() {
 
-    return this.currentAttack.priority;
+    if(!!this.currentAttack) {
+        return this.currentAttack.priority;
+    } else {
+        return 0;
+    }
 };
 
 Player.prototype.Attacking = function() {
