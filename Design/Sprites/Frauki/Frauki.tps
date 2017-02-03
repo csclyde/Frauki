@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>4.3.1</string>
+        <string>4.3.3</string>
         <key>fileName</key>
         <string>D:/gamedev/Frauki/Design/Sprites/Frauki/Frauki.tps</string>
         <key>autoSDSettings</key>
@@ -307,6 +307,10 @@
             <key type="filename">Frames/Baton40003.png</key>
             <key type="filename">Frames/Baton40004.png</key>
             <key type="filename">Frames/Baton40005.png</key>
+            <key type="filename">Frames/Block0000.png</key>
+            <key type="filename">Frames/Block0001.png</key>
+            <key type="filename">Frames/Block0002.png</key>
+            <key type="filename">Frames/Block0003.png</key>
             <key type="filename">Frames/Crouch0000.png</key>
             <key type="filename">Frames/Crouch0001.png</key>
             <key type="filename">Frames/Crouch0002.png</key>
@@ -409,6 +413,27 @@
                 <rect>50,50,100,100</rect>
                 <key>scale9Paddings</key>
                 <rect>50,50,100,100</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">Frames/Shield0000.png</key>
+            <key type="filename">Frames/Shield0001.png</key>
+            <key type="filename">Frames/Shield0002.png</key>
+            <key type="filename">Frames/Shield0003.png</key>
+            <key type="filename">Frames/Shield0004.png</key>
+            <key type="filename">Frames/Shield0005.png</key>
+            <key type="filename">Frames/Shield0006.png</key>
+            <key type="filename">Frames/Shield0007.png</key>
+            <key type="filename">Frames/Shield0008.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0,0</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>25,25,50,50</rect>
+                <key>scale9Paddings</key>
+                <rect>25,25,50,50</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

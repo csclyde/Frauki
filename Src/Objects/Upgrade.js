@@ -48,6 +48,7 @@ Upgrade.prototype.update = function() {
         this.state();
 
     if(GameData.HasUpgrade(this.upgrade)) {
+        this.icon.destroy();
         this.destroy();
     }
 
@@ -62,7 +63,6 @@ Upgrade.prototype.update = function() {
             this.icon.animations.play('Baton');
         }
     }
-
 };
 
 Upgrade.prototype.ChangeLayerAway = function() {

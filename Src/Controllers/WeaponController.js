@@ -506,6 +506,7 @@ WeaponController.prototype.Shield = {
             this.forceField.visible = true;
 
             frauki.states.shielded = true;
+            events.publish('player_block', {});
         }
 
     },

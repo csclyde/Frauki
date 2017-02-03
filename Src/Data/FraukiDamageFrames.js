@@ -293,6 +293,7 @@ var fraukiAnimations = [
 	{ Name: 'hang', Frames:  ['Hang0000', 'Hang0001', 'Hang0002', 'Hang0003', 'Hang0004', 'Hang0005'],  Fps: 12, Loop: false },
 	{ Name: 'heal', Frames:  ['Heal0000', 'Heal0001', 'Heal0002', 'Heal0003', 'Heal0004'], Fps: 12 , Loop: true },
 	{ Name: 'throw', Frames:  ['Throw0001', 'Throw0001', 'Throw0002', 'Throw0003', 'Throw0004', 'Throw0005', 'Throw0006', 'Throw0007'], Fps: 14, Loop: false },
+	{ Name: 'block', Frames:  ['Block0000', 'Block0001', 'Block0002', 'Block0003'], Fps: 18, Loop: false },
 
 	{ Name: 'attack_front', Frames:  ['Attack Front0001', 'Attack Front0001', 'Attack Front0002', 'Attack Front0003', 'Attack Front0004', 'Attack Front0005', 'Attack Front0006', 'Attack Front0007'], Fps: 14, Loop: false },
 	{ Name: 'attack_lunge', Frames:  ['Attack Lunge0000', 'Attack Lunge0001', 'Attack Lunge0002', 'Attack Lunge0003', 'Attack Lunge0004', 'Attack Lunge0005', 'Attack Lunge0006', 'Attack Lunge0007'], Fps: 16, Loop: false },

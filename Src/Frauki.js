@@ -51,6 +51,7 @@ Player = function (game, x, y, name) {
     events.subscribe('player_run', this.StartStopRun, this);
     events.subscribe('player_heal', this.Heal, this);
     events.subscribe('player_throw', this.Throw, this);
+    events.subscribe('player_block', this.Block, this);
     events.subscribe('control_up', function(params) { 
 
         this.states.upPressed = params.pressed;
@@ -598,6 +599,13 @@ Player.prototype.Throw = function(params) {
     if(!this.InAttackAnim() && !this.states.throwing) {
         this.state = this.Throwing;
         this.states.throwing = true;
+    }
+};
+
+Player.prototype.Block = function(params) {
+        this.state = this.Blocking;
+    if(!this.states.shielded) {
+        //this.states.shielded = true;
     }
 };
 
@@ -1241,6 +1249,21 @@ Player.prototype.Throwing = function() {
     this.PlayAnim('throw');
 
     if(this.animations.currentAnim.isFinished) {
+        if(inputController.dpad.down && !inputController.dpad.left && !inputController.dpad.right && this.body.onFloor()) {
+            this.ChangeState(this.Crouching);
+            this.PlayAnim('crouch');
+            this.animations.currentAnim.setFrame('Crouch0008');
+        } else { 
+            this.ChangeState(this.Standing);
+        }
+
+    }
+};
+
+Player.prototype.Blocking = function() {
+    this.PlayAnim('block');
+
+    if(!this.states.shielded) {
         if(inputController.dpad.down && !inputController.dpad.left && !inputController.dpad.right && this.body.onFloor()) {
             this.ChangeState(this.Crouching);
             this.PlayAnim('crouch');
