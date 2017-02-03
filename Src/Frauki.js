@@ -131,7 +131,7 @@ Player.prototype.postStateUpdate = function() {
     }
 
     if(this.states.inUpdraft) {
-        this.body.acceleration.y = -720;
+        this.body.acceleration.y = -800;
         this.body.maxVelocity.y = 500;
     } else {
         this.body.acceleration.y = 0;
