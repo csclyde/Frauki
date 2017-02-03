@@ -4598,19 +4598,21 @@
                  "properties":
                     {
                      "id":"mine_chamber",
+                     "open_direction":"down",
                      "type":"enemy"
                     },
                  "propertytypes":
                     {
                      "id":"string",
+                     "open_direction":"string",
                      "type":"string"
                     },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":1104.33,
-                 "y":3350.67
+                 "x":1096.66333333333,
+                 "y":3210.33666666667
                 }, 
                 {
                  "gid":67,

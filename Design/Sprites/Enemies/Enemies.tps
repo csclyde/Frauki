@@ -328,6 +328,14 @@
             <key type="filename">Insectoid/Die0000.png</key>
             <key type="filename">Insectoid/Spin0000.png</key>
             <key type="filename">KR32/Hit0000.png</key>
+            <key type="filename">KR32/Jump0000.png</key>
+            <key type="filename">KR32/Jump0001.png</key>
+            <key type="filename">KR32/Jump0002.png</key>
+            <key type="filename">KR32/Jump0003.png</key>
+            <key type="filename">KR32/Jump0004.png</key>
+            <key type="filename">KR32/Jump0005.png</key>
+            <key type="filename">KR32/Jump0006.png</key>
+            <key type="filename">KR32/Jump0007.png</key>
             <key type="filename">KR32/Stand0001.png</key>
             <key type="filename">KR32/Stand0002.png</key>
             <struct type="IndividualSpriteSettings">

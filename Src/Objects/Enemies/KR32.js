@@ -12,8 +12,8 @@ Enemy.prototype.types['KR32'] =  function() {
     this.animations.add('attack_stab', ['KR32/Stab0000', 'KR32/Stab0001', 'KR32/Stab0002'], 10, false, false);
     this.animations.add('hurt', ['KR32/Hit0000'], 8, true, false);
     this.animations.add('block', ['KR32/Block0000', 'KR32/Block0001', 'KR32/Block0002', 'KR32/Block0003', 'KR32/Block0004', 'KR32/Block0005'], 14, false, false);
-    this.animations.add('jump_back', ['KR32/Stand0000'], 20, true, false);
-    this.animations.add('jump_forward', ['KR32/Stand0000'], 20, true, false);
+    this.animations.add('jump_back', ['KR32/Jump0004', 'KR32/Jump0005', 'KR32/Jump0006'], 16, false, false);
+    this.animations.add('jump_forward', ['KR32/Jump0000', 'KR32/Jump0001', 'KR32/Jump0002'], 16, false, false);
     this.animations.add('land', ['KR32/Stand0000'], 14, false, false);
 
     this.energy = 4;
