@@ -138,7 +138,7 @@ ScriptRunner.scripts['goddess_intro'] = [
 	{ name: 'hide_text', props: {} },
 
 	{ name: 'wait', props: { amount: 500 } },
-	{ name: 'show_text', props: { text: 'Would you mind helping me out of this prison? All you need to do is bring the prism shard of Will.', portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: 'Would you mind helping me out of this prison? All you need to do is bring the red Prism Shard.', portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 7000 } },
 	{ name: 'hide_text', props: {} },
 
@@ -252,7 +252,7 @@ ScriptRunner.scripts['seal_hall_intro'] = [
 ];
 
 ScriptRunner.scripts['goddess_restate'] = [
-	{ name: 'show_text', props: { text: "Yep, go find the prism shard of Will and free me. It looks like a big red jewel. Hurry along now.", portrait: 'Goddess_Neutral' } }
+	{ name: 'show_text', props: { text: "Yep, go find the red Prism Shard and free me. It looks like a big red jewel. Hurry along now.", portrait: 'Goddess_Neutral' } }
 ];
 
 ScriptRunner.scripts['goddess_freedom'] = [
@@ -310,7 +310,7 @@ ScriptRunner.scripts['goddess_meet_with_shard'] = [
 	{ name: 'hide_text', props: {} },
 
 	{ name: 'wait', props: { amount: 500 } },
-	{ name: 'show_text', props: { text: 'It looks like you\'ve found the prism shard of Will! Yes, that big red jewel.', portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: 'It looks like you\'ve found the red Prism Shard! Yes, that big red jewel.', portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 7000 } },
 	{ name: 'hide_text', props: {} },
 
@@ -323,6 +323,21 @@ ScriptRunner.scripts['goddess_meet_with_shard'] = [
 	{ name: 'show_text', props: { text: "I've been in here so long... would you mind just walking up and opening this door for me?", portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 7000 } },
 	{ name: 'hide_text', props: {} },
+
+	{ name: 'allow_input', props: {} }
+
+];
+
+ScriptRunner.scripts['door_victory'] = [
+	{ name: 'disallow_input', props: {} },
+
+	{ name: 'wait', props: { amount: 350 } },
+
+	{ name: 'play_sound', props: { name: 'fanfare_short'} },
+
+	{ name: 'wait', props: { amount: 1000 } },
+	{ name: 'show_text', props: { text: 'Yes, a shortcut!! I can use this to get around much easier now.', portrait: 'Enticed' } },
+	{ name: 'wait', props: { amount: 1000 } },
 
 	{ name: 'allow_input', props: {} }
 

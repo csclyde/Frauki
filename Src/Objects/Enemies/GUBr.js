@@ -201,7 +201,7 @@ Enemy.prototype.types['GUBr'] =  function() {
 			x: 26, y: 20, w: 50, h: 12,
 			damage: 1,
 			knockback: 0,
-			priority: 0,
+			priority: 1,
 			juggle: 0
 		},
 
@@ -209,7 +209,7 @@ Enemy.prototype.types['GUBr'] =  function() {
 			x: 26, y: 20, w: 50, h: 12,
 			damage: 1,
 			knockback: 0,
-			priority: 0,
+			priority: 1,
 			juggle: 0
 		},
 

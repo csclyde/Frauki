@@ -144,3 +144,18 @@ TriggerController.prototype.triggers['seal_hall'] = {
 	exit: function(params) {
 	}
 };
+
+TriggerController.prototype.triggers['goddess_spaceship'] = {
+	enter: function(params) {
+		if(!GameData.GetFlag('goddess_spaceship')) {
+			GameData.SetFlag('goddess_spaceship', true);
+			GameData.SetVal('goddess_death_message', 'That big, ugly, metal eyesore is the robots space ship. They crashed that pile of junk into my planet many years ago and they haven\'t left since.')
+		}
+	},
+
+	stay: function(params) {
+	},
+
+	exit: function(params) {
+	}
+};

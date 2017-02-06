@@ -144,6 +144,8 @@ function OpenDoor(f, d, override) {
 
             effectsController.ExplodeDoorSeal(d);
             effectsController.ScreenFlash();
+
+            ScriptRunner.run('door_victory');
             
         }
     }

@@ -71,7 +71,6 @@ InputController = function() {
         if(this.dpad.right) this.OnRight(true);
         if(this.dpad.up) this.OnUp(true);
         if(this.dpad.down) this.OnDown(true);
-
     };
 
     events.subscribe('allow_input', this.allowInput, this);

@@ -8,6 +8,7 @@ var Speeches = {
 	'spaceship_question': { text: 'It looks like this thing crashed into the ground. Hrm, I can\'t get the door open from this side.' },
 	'anyone_home': { text: 'Looks like no one is home...' },
 	'lovely_day': { text: 'Another lovely day in Frogtown.' },
+	'spaceship_first_look': { text: 'Whoa... what\'s this big metal thing? Looks like it crashed into the ground here.' },
 
 
 
@@ -64,9 +65,5 @@ var Speeches = {
 	'maint': { text: 'Something is engraved into the wall: Maintenence access. Beware pipe currents.' },
 	'pouring_joy': { text: 'Something is carved into the wall: I can barely withstand the joy pouring into me! Goodbye!' },
 	'another_sky': { text: 'Something is carved into the wall: So, we will find another sky. So it goes.' },
-	'behold_goddess': { text: 'Something is carved into the wall: The Goddess has appeared, and we are forgiven' },
-	
-
-	'demo_thanks': { text: 'Thanks for trying the demo! Hope you had fun hopping, bopping, slashing, and smashing.' },
-
+	'behold_goddess': { text: 'Something is carved into the wall: The Goddess has appeared, and we are forgiven' }
 };

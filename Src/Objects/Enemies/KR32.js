@@ -4,8 +4,8 @@ Enemy.prototype.types['KR32'] =  function() {
 	this.anchor.setTo(.5);
 
     this.animations.add('idle', ['KR32/Stand0000', 'KR32/Stand0001', 'KR32/Stand0002'], 4, true, false);
-    this.animations.add('walk', ['KR32/WalkFront0000', 'KR32/WalkFront0001', 'KR32/WalkFront0002', 'KR32/WalkFront0003'], 8, true, false);
-    this.animations.add('walk_back', ['KR32/WalkBack0000', 'KR32/WalkBack0001', 'KR32/WalkBack0002', 'KR32/WalkBack0003'], 8, true, false);
+    this.animations.add('walk', ['KR32/WalkFront0000', 'KR32/WalkFront0001', 'KR32/WalkFront0002', 'KR32/WalkFront0003'], 6, true, false);
+    this.animations.add('walk_back', ['KR32/WalkBack0000', 'KR32/WalkBack0001', 'KR32/WalkBack0002', 'KR32/WalkBack0003'], 6, true, false);
 
     this.animations.add('windup', ['KR32/Attack0000', 'KR32/Attack0001', 'KR32/Attack0002', 'KR32/Attack0003', 'KR32/Attack0004'], 16,  false, false);
     this.animations.add('attack', ['KR32/Attack0005', 'KR32/Attack0006', 'KR32/Attack0007', 'KR32/Attack0008'], 15, false, false);
