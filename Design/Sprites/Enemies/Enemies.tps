@@ -305,8 +305,10 @@
             <key type="filename">GUBr/Attack0003.png</key>
             <key type="filename">GUBr/Attack0004.png</key>
             <key type="filename">GUBr/Attack0005.png</key>
-            <key type="filename">GUBr/Block0000.png</key>
-            <key type="filename">GUBr/Block0001.png</key>
+            <key type="filename">GUBr/Cower0000.png</key>
+            <key type="filename">GUBr/Cower0001.png</key>
+            <key type="filename">GUBr/Cower0002.png</key>
+            <key type="filename">GUBr/Cower0003.png</key>
             <key type="filename">GUBr/Hit0000.png</key>
             <key type="filename">GUBr/Stand0000.png</key>
             <key type="filename">GUBr/Walk0000.png</key>
