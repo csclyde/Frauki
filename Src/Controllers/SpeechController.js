@@ -144,8 +144,12 @@ SpeechController.prototype.Update = function() {
 		this.questionMark.x = frauki.x;
 		this.questionMark.y = frauki.y - 140 + Math.sin(game.time.now / 200) * 3;
 		//this.ShowSpeech();
+        events.publish('play_sound', {name: 'speech'});
+
 	} else {
 		this.questionMark.visible = false;
+        events.publish('stop_sound', {name: 'speech'});
+
 	}
 
 };

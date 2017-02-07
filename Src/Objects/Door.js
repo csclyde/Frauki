@@ -19,6 +19,7 @@ Door = function(game, x, y, name) {
     this.visible = false;
     this.thresholdAttempts = 1;
     this.openAttempts = 0;
+    this.canRollUnder = false;
 };
 
 Door.prototype = Object.create(Phaser.Sprite.prototype);
@@ -273,11 +274,12 @@ function PerformOpen(d, save, silent) {
         events.publish('play_sound', {name: 'door_slam', restart: true });
         events.publish('stop_sound', {name: 'door_rumble', restart: true });
         events.publish('door_open_finish', { id: d.id } );
+        d.canRollUnder = false;
 
     });
 
     //note when the door is ready to roll through
-    game.time.events.add(openDuration / 3, function() {
+    game.time.events.add(openDuration / 2.5, function() {
         this.canRollUnder = true;
     }, d);
 

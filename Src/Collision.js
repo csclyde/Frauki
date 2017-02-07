@@ -39,7 +39,7 @@ Collision.OverlapFraukiWithObject = function(f, o) {
     } else if(o.spriteType === 'door') {
         OpenDoor(f, o);
 
-        if((o.state === o.Open || o.state === o.Opening) && frauki.state === frauki.Rolling && o.canRollUnder === true) {
+        if(frauki.state === frauki.Rolling && o.canRollUnder === true) {
             return false;
         } else {
             return true;

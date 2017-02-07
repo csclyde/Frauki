@@ -101,12 +101,9 @@ ScriptRunner.scripts['demo_Health'] = [
 
 ScriptRunner.scripts['demo_Apple'] = [
 	{ name: 'disallow_input', props: {} },
-	{ name: 'show_text', props: { text: 'Apples are tasty. If I find one, I can eat it with the right shoulder button to feel better.', portrait: 'Enticed' } },
+	{ name: 'show_text', props: { text: 'Apples are tasty. If I find one, I can eat it with the right shoulder button to regain health.', portrait: 'Enticed' } },
 	{ name: 'wait', props: { amount: 8000 } },
 	{ name: 'hide_text', props: {} },
-	{ name: 'wait', props: { amount: 500 } },
-	{ name: 'player_heal', props: { charging: true } },
-	{ name: 'wait', props: { amount: 1200 } },
 	{ name: 'allow_input', props: {} }
 ];
 
@@ -337,7 +334,7 @@ ScriptRunner.scripts['door_victory'] = [
 	{ name: 'play_sound', props: { name: 'fanfare_short'} },
 
 	{ name: 'wait', props: { amount: 1000 } },
-	{ name: 'show_text', props: { text: 'Yes, a shortcut!! I can use this to get around much easier now.', portrait: 'Enticed' } },
+	{ name: 'show_text', props: { text: 'Yay, a shortcut!! I can use this to get around much easier now.', portrait: 'Enticed' } },
 	{ name: 'wait', props: { amount: 1000 } },
 
 	{ name: 'allow_input', props: {} }

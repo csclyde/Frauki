@@ -176,12 +176,10 @@ Enemy.prototype.SetDefaultValues = function() {
 };
 
 Enemy.prototype.Activate = function() {
-    console.log('activate')
     this.timers.SetTimer('attack_wait', 3000);
 };
 
 Enemy.prototype.Deactivate = function() {
-    console.log('deactivate')
     this.timers.SetTimer('attack_wait', 3000);
     this.HideHealth();
 };

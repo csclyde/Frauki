@@ -9,6 +9,7 @@ var Speeches = {
 	'anyone_home': { text: 'Looks like no one is home...' },
 	'lovely_day': { text: 'Another lovely day in Frogtown.' },
 	'spaceship_first_look': { text: 'Whoa... what\'s this big metal thing? Looks like it crashed into the ground here.' },
+	'apple_door': { text: 'Hmm, looks like an apple carved into this door. And I can eat an apple with right trigger...' },
 
 
 

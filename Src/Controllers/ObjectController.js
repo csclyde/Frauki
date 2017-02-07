@@ -29,10 +29,12 @@ ObjectController.prototype.Update = function() {
             if(o.body.x > game.camera.x - padding && o.body.y > game.camera.y - padding && o.body.x < game.camera.x + game.camera.width + padding && o.body.y < game.camera.y + game.camera.height + padding) {
                 if(o.body.enable === false && !!o.Activate) o.Activate();
                 o.body.enable = true;
+                o.visible = true;
 
             } else {
                 if(o.body.enable === true && !!o.Deactivate) o.Deactivate();
                 o.body.enable = false;
+                o.visible = false;
             }
         }
     }

@@ -51,7 +51,8 @@ FileMap.Audio = [
 	{ Name: 'robosplosion', File: 'Data/Sfx/robosplosion.wav', Volume: 0.9, Loop: false },
 	{ Name: 'apple', File: 'Data/Sfx/apple.wav', Volume: 1.0, Loop: false },
 	{ Name: 'low_health', File: 'Data/Sfx/low_health.wav', Volume: 0.6, Loop: true },
-	{ Name: 'drip', File: 'Data/Sfx/water.wav', Volume: 0.05, Loop: false },
+	{ Name: 'drip', File: 'Data/Sfx/water.wav', Volume: 0.02, Loop: false },
+	{ Name: 'speech', File: 'Data/Sfx/speech.ogg', Volume: 0.2, Loop: true },
 
 	{ Name: 'door_break', File: 'Data/Sfx/door_break.wav', Volume: 5.0, Loop: false },
 	{ Name: 'crystal_door', File: 'Data/Sfx/crystal_door.wav', Volume: 0.5, Loop: false },
