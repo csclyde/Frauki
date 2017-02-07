@@ -301,7 +301,6 @@
             <key type="filename">Frames/PortraitsFraukiMad.png</key>
             <key type="filename">Frames/PortraitsFraukiMischeif.png</key>
             <key type="filename">Frames/PortraitsFraukiNeutral.png</key>
-            <key type="filename">Frames/PortraitsFraukiPeaceful.png</key>
             <key type="filename">Frames/PortraitsFraukiSilly.png</key>
             <key type="filename">Frames/PortraitsFrogman.png</key>
             <key type="filename">Frames/PortraitsGoddess_Neutral.png</key>

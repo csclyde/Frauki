@@ -109,7 +109,7 @@ ScriptRunner.scripts['demo_Apple'] = [
 
 ScriptRunner.scripts['demo_Will'] = [
 	{ name: 'disallow_input', props: {} },
-	{ name: 'show_text', props: { text: 'Hooray! This must be the prism thing of... whatever... I should take it back to that lady.', portrait: 'Neutral' } },
+	{ name: 'show_text', props: { text: 'Hooray! This must be the prism thing of... whatever... I should take it back to that lady.', portrait: 'Silly' } },
 	{ name: 'wait', props: { amount: 6000 } },
 	{ name: 'hide_text', props: {} },
 	{ name: 'allow_input', props: {} }
@@ -117,7 +117,7 @@ ScriptRunner.scripts['demo_Will'] = [
 
 ScriptRunner.scripts['demo_Will_no_intro'] = [
 	{ name: 'disallow_input', props: {} },
-	{ name: 'show_text', props: { text: 'Hooray! I found some big... jewel thing...', portrait: 'Neutral' } },
+	{ name: 'show_text', props: { text: 'Hooray! I found some big... jewel thing...', portrait: 'Silly' } },
 	{ name: 'wait', props: { amount: 6000 } },
 	{ name: 'hide_text', props: {} },
 	{ name: 'allow_input', props: {} }
@@ -308,7 +308,7 @@ ScriptRunner.scripts['goddess_meet_with_shard'] = [
 	{ name: 'hide_text', props: {} },
 
 	{ name: 'wait', props: { amount: 500 } },
-	{ name: 'show_text', props: { text: 'It looks like you\'ve found the red Prism Shard! Yes, that big red jewel.', portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: 'It looks like you\'ve found a Prism Shard! Yes, that big red jewel.', portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 7000 } },
 	{ name: 'hide_text', props: {} },
 

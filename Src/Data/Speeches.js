@@ -1,5 +1,5 @@
 var Speeches = {
-	'door_tutorial': { text: 'Looks like I can\'t open the door from this side. Maybe I can open it from the other side.' },
+	'door_tutorial': { text: 'Looks like I can\'t open the door from this side. Maybe I can open it from the other side.', portrait: 'Displeased' },
 	'way_blocked': { text: 'Hmm... the way is blocked. Maybe I can find a way around.' },
 	'apple_tutorial': { text: 'Apples are tasty. If I find one, I can eat it with the right shoulder button to feel better.' },
 	'whoa_prism': { text: 'A prism shard! I should grab it...' },
@@ -9,7 +9,7 @@ var Speeches = {
 	'anyone_home': { text: 'Looks like no one is home...' },
 	'lovely_day': { text: 'Another lovely day in Frogtown.' },
 	'spaceship_first_look': { text: 'Whoa... what\'s this big metal thing? Looks like it crashed into the ground here.' },
-	'apple_door': { text: 'Hmm, looks like an apple carved into this door. And I can eat an apple with right trigger...' },
+	'apple_door': { text: 'Hmm, looks like an apple carved into this door. And I can eat an apple with right trigger...', portrait: 'Displeased' },
 
 
 
@@ -24,14 +24,14 @@ var Speeches = {
 	'dew': { text: 'These flowers are covered in dew' },
 	'draft': { text: 'I can’t see anything out the window, but I can feel a breeze coming through' },
 	'dripping': { text: 'Eee, the water is dripping on me', portrait: 'Mischeif' },
-	'fresh': { text: 'The air smells fresh in this room', portrait: 'Peaceful' },
+	'fresh': { text: 'The air smells fresh in this room', portrait: 'Silly' },
 	'extract': { text: 'It looks like they were extracting something here.' },
 	'spores': { text: 'These spores are making me dizzy', portrait: 'Dazed' },
 	'delicate_flower': { text: 'This flower looks delicate... I wonder how long it’s been growing' },
 	'door_info': { text: 'It won\'t open from this side.' },
 	'strange_wall': { text: 'This wall looks strange...' },
 	'weak_floor': { text: 'The floor looks pretty messed up.', portrait: 'Displeased' },
-	'more_flowers': { text: 'More of these flowers. The scent is wonderful.', portrait: 'Peaceful' },
+	'more_flowers': { text: 'More of these flowers. The scent is wonderful.', portrait: 'Silly' },
 	'how_standing': { text: 'How is this thing even standing?' },
 	'down_there': { text: 'Hmm I wonder what\'s down there.' },
 	'jump_in': { text: 'Should I jump in? It looks pretty scary, I might get blown around' },
@@ -50,7 +50,7 @@ var Speeches = {
 	'dont_eat': { text: 'No matter how tasty it looks, don\'t eat that mushroom...', portrait: 'Enticed' },
 	'nibble': { text: 'Just a little nibble couldn\'t hurt... could it?', portrait: 'Mischeif' },
 	'cold': { text: 'This water is so cold, it\'s making my knees shake', portrait: 'Displeased' },
-	'ellipses': { text: '...', portrait: 'Peaceful' },
+	'ellipses': { text: '...', portrait: 'Silly' },
 	
 	'sorry_plant': { text: 'Sorry plant' },
 	'maybe_if': { text: 'Maybe if I just...' },

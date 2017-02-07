@@ -176,7 +176,6 @@ FileMap.Portraits = [
 	{ Name: 'Neutral', Frame: 'PortraitsFraukiNeutral' },
 	{ Name: 'Mad', Frame: 'PortraitsFraukiMad' },
 	{ Name: 'Dazed', Frame: 'PortraitsFraukiDazed' },
-	{ Name: 'Peaceful', Frame: 'PortraitsFraukiPeaceful' },
 	{ Name: 'Enticed', Frame: 'PortraitsFraukiEnticed' },
 	{ Name: 'Displeased', Frame: 'PortraitsFraukiDispleased' },
 	{ Name: 'Mischeif', Frame: 'PortraitsFraukiMischeif' },
