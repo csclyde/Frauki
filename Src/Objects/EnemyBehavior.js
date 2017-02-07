@@ -11,7 +11,11 @@ EnemyBehavior.GetProp = function(e, key) {
 };
 
 EnemyBehavior.WithinCameraRange = function(e) {
-    var padding = 150;
+    if(e.owningLayer !== Frogland.currentLayer) {
+        return false;
+    }
+
+    var padding = -60;
 
     if(e.body.x > game.camera.x - padding &&
        e.body.y > game.camera.y - padding &&
@@ -89,13 +93,14 @@ EnemyBehavior.Player.Distance = function(e) {
 EnemyBehavior.Player.Visibility = {};
 EnemyBehavior.Player.IsVisible = function(e) {
 
-    if(!EnemyBehavior.WithinCameraRange(e)) {
-        return false;
-    }
-
     //if the enemy is not cached, create an object for it
     if(!this.Visibility[e.z]) {
         this.Visibility[e.z] = { obj: e, timestamp: 0, result: false };
+    }
+
+    if(!EnemyBehavior.WithinCameraRange(e)) {
+        this.Visibility[e.z].result = false;
+        return false;
     }
 
     //determine how often the check should be redone

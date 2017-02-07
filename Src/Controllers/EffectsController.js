@@ -768,6 +768,10 @@ EffectsController.prototype.JumpDust = function(src) {
 };
 
 EffectsController.prototype.DoorDust = function(src) {
+    if(src.owningLayer !== Frogland.currentLayer) {
+        return;
+    }
+
     var dust = game.add.sprite(src.x - 50, src.y - 30, 'Misc', null, Frogland.effectsGroup);
     dust.animations.add('dust', ['DoorDust0000', 'DoorDust0001', 'DoorDust0002', 'DoorDust0003', 'DoorDust0004'], 10, false, false);
     dust.animations.play('dust');
@@ -805,6 +809,8 @@ EffectsController.prototype.DripSplash = function(src, onWater) {
     dripSplash.animations.play('splish');
     dripSplash.animations.currentAnim.killOnComplete = true;
     dripSplash.alpha = 0.5;
+
+    events.publish('play_sound', {name: 'drip', restart: true });
 
     //if it hit water, then make a ripple
     if(onWater) {

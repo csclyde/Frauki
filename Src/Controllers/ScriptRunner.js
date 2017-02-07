@@ -37,6 +37,7 @@ ScriptRunner.executeCommand = function(cmd) {
 	var that = this;
 
 	this.currentCommand = cmd;
+	this.waitEvent = null;
 
 	if(!cmd) return;
 
@@ -53,7 +54,7 @@ ScriptRunner.scripts = [];
 
 ScriptRunner.scripts['demo_Baton'] = [
 	{ name: 'disallow_input', props: {} },
-	{ name: 'show_text', props: { text: 'Oh neat! This weapon let\'s me throw my energy out like a boomerang. The more energy I have, the strong it will be!', portrait: 'Enticed' } },
+	{ name: 'show_text', props: { text: 'Oh neat! This weapon let\'s me throw my energy out like a boomerang. The more energy I have, the stronger it will be!', portrait: 'Enticed' } },
 	{ name: 'wait', props: { amount: 6000 } },
 	{ name: 'hide_text', props: {} },
 	{ name: 'wait', props: { amount: 500 } },

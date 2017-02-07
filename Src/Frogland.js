@@ -113,20 +113,6 @@ Frogland.Update = function() {
     frauki.states.flowUp = false;
     frauki.states.flowLeft = false;
 
-    for(var i = 0, max = this.GetCurrentObjectGroup().children.length; i < max; i++) {
-        var padding = 300;
-        var o = this.GetCurrentObjectGroup().children[i];
-
-        
-        if(o.spriteType !== 'door' && !!o.body && o.spriteType !== 'ball') {
-            if(o.body.x > game.camera.x - padding && o.body.y > game.camera.y - padding && o.body.x < game.camera.x + game.camera.width + padding && o.body.y < game.camera.y + game.camera.height + padding) {
-                o.body.enable = true;
-            } else {
-                o.body.enable = false;
-            }
-        }
-    }
-
     this.HandleCollisions();
 
     this.clouds1.cameraOffset.x = -(game.camera.x * 0.10) + 0;
@@ -344,7 +330,7 @@ Frogland.ChangeLayer = function(newLayer, immediate) {
         }
 
         if(!!obj.body) obj.body.enable = false;
-        if(!!obj.ChangeLayerAway) obj.ChangeLayerAway();
+        if(!!obj.Deactivate) obj.Deactivate();
     });
 
     //force a trigger the player is standing in to exit out
@@ -388,7 +374,9 @@ Frogland.ChangeLayer = function(newLayer, immediate) {
         } else {
             game.add.tween(obj).to({alpha: 1}, 200, Phaser.Easing.Linear.None, true);
         }
+        
         if(!!obj.body) obj.body.enable = true;
+        if(!!obj.Activate) obj.Activate();
     });
 
     this.shardGroup.forEach(function(shard) {

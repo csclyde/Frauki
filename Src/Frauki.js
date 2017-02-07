@@ -879,6 +879,8 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
     grace_duration = grace_duration || 1000;
 
     events.publish('play_sound', {name: 'ouch'});
+    events.publish('play_sound', {name: 'lose_energy_bits'});
+
 
     this.body.velocity.y = -150;
 
@@ -914,17 +916,9 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
         effectsController.DropNuggets(nuggAmt);
         GameData.RemoveNuggs(nuggAmt);
 
-        if(nuggAmt > 0) {
-            events.publish('play_sound', {name: 'lose_energy_bits'});
-        }
-
     } else {
         effectsController.DropNuggets(GameData.GetNuggCount());
-        GameData.ResetNuggCount();
-
-        if(GameData.GetNuggCount() > 0) {
-            events.publish('play_sound', {name: 'lose_energy_bits'}); 
-        }     
+        GameData.ResetNuggCount();     
 
         if(e.robotic && !GameData.GetFlag('goddess_robo_speech')) {
             GameData.SetVal('goddess_death_message', "I see you've met those terrible robots. They're the ones who locked me up in that nasty prison. They're intruders, and they do not belong here.");

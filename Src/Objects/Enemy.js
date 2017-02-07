@@ -65,8 +65,6 @@ Enemy.prototype.Dying = function() {};
 Enemy.prototype.Die = function() {};
 Enemy.prototype.Vulnerable = function() { return true; }
 Enemy.prototype.CanCauseDamage = function() { return false; }
-Enemy.prototype.Activate = function() {};
-Enemy.prototype.Deactivate = function() {};
 Enemy.prototype.LandHit = function() {};
 Enemy.prototype.OnHit = function() {};
 
@@ -118,7 +116,7 @@ Enemy.prototype.update = function() {
     } else {
         this.alpha = 1;
     }
-};
+}
 
 Enemy.prototype.UpdateAttackGeometry = function() {
     //check for and apply any existing attack frame
@@ -175,6 +173,17 @@ Enemy.prototype.SetDefaultValues = function() {
     this.damage = 3;
     this.baseStunDuration = 400;
     this.stunThreshold = 1;
+};
+
+Enemy.prototype.Activate = function() {
+    console.log('activate')
+    this.timers.SetTimer('attack_wait', 3000);
+};
+
+Enemy.prototype.Deactivate = function() {
+    console.log('deactivate')
+    this.timers.SetTimer('attack_wait', 3000);
+    this.HideHealth();
 };
 
 Enemy.prototype.isAttacking = function() {
@@ -288,11 +297,6 @@ Enemy.prototype.HideHealth = function() {
     for(var i = 0; i < this.UI.pips.length; i++) {
         this.UI.pips[i].visible = false;
     }
-};
-
-Enemy.prototype.ChangeLayerAway = function() {
-
-    this.HideHealth();
 };
 
 function DestroyEnemy(e) {

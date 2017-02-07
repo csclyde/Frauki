@@ -19,6 +19,23 @@ ObjectController.prototype.Update = function() {
 		this.SpawnNearbyObjects();
 		//this.DestroyFarawayObjects();
 	}
+
+    for(var i = 0, max = Frogland.GetCurrentObjectGroup().children.length; i < max; i++) {
+        var padding = 300;
+        var o = Frogland.GetCurrentObjectGroup().children[i];
+
+        
+        if(o.spriteType !== 'door' && !!o.body && o.spriteType !== 'ball') {
+            if(o.body.x > game.camera.x - padding && o.body.y > game.camera.y - padding && o.body.x < game.camera.x + game.camera.width + padding && o.body.y < game.camera.y + game.camera.height + padding) {
+                if(o.body.enable === false && !!o.Activate) o.Activate();
+                o.body.enable = true;
+
+            } else {
+                if(o.body.enable === true && !!o.Deactivate) o.Deactivate();
+                o.body.enable = false;
+            }
+        }
+    }
 };
 
 ObjectController.prototype.CompileObjectList = function() {

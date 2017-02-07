@@ -218,6 +218,7 @@ SpeechController.prototype.Activate = function(text, portrait) {
 
 	this.SetText(text);
 
+	this.portraits[this.currentPortrait].visible = false;
 	this.currentPortrait = portrait || 'Neutral';
 	this.portraitBox.visible = true;
 	this.portraits[this.currentPortrait].visible = true;

@@ -269,7 +269,7 @@ function PerformOpen(d, save, silent) {
     game.time.events.add(openDuration - (openDuration / 5), function() {
         if(!d || !d.body) return;
         
-        effectsController.DoorDust({x: d.body.center.x, y: d.body.y + d.body.height - 20 });
+        effectsController.DoorDust({x: d.body.center.x, y: d.body.y + d.body.height - 20, owningLayer: d.owningLayer });
         events.publish('play_sound', {name: 'door_slam', restart: true });
         events.publish('stop_sound', {name: 'door_rumble', restart: true });
         events.publish('door_open_finish', { id: d.id } );

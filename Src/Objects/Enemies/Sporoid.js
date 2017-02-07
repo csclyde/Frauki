@@ -37,14 +37,6 @@ Enemy.prototype.types['Sporoid'] =  function() {
 		}
 	};
 
-	this.Activate = function() {
-		
-	};
-
-	this.Deactivate = function() {
-		
-	};
-
 	///////////////////////////////ACTIONS////////////////////////////////////
 	this.Dash = function() {
 		if(!this.timers.TimerUp('dash_wait'))
