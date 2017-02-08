@@ -94,7 +94,7 @@ InputController = function() {
             break;
 
             case Phaser.Keyboard.O:
-                energyController.AddCharge(2);
+                energyController.invincible = true;
 
             break;
 

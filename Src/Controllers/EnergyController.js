@@ -10,6 +10,8 @@ EnergyController = function() {
 
 	this.timers = new TimerUtil();
 
+	this.invincible = false;
+
 	events.subscribe('energy_heal', function(params) {
 		if(this.remainingApples > 0) {
 			var healthAmt = Math.ceil((this.GetMaxHealth() / 3) * 2);
@@ -132,7 +134,8 @@ EnergyController.prototype.AddHealth = function(amt) {
 };
 
 EnergyController.prototype.RemoveHealth = function(amt) {
-
+	if(this.invincible) return;
+	
 	this.health -= Math.floor(amt);
 };
 
