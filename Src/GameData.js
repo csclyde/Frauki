@@ -8,7 +8,7 @@ GameData.data = {
     version: '0.1',
     dirty: true,
 
-    checkpoint: '1',
+    checkpoint: '0',
     upgrades: [],
     doors: [],
     shards: [],
