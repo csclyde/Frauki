@@ -120,7 +120,6 @@ EffectsController = function() {
 
     this.LoadMapEffects(4);
     this.LoadMapEffects(3);
-    this.LoadMapEffects(2);
     
     var screenLightBmd = game.add.bitmapData(game.width, game.height);
     screenLightBmd.ctx.fillStyle = 'white';

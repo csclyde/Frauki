@@ -44,7 +44,6 @@ Frogland.Create = function() {
     
     this.CreateBackgroundLayer(4, startLayer === 4);
     this.CreateBackgroundLayer(3, startLayer === 3);
-    this.CreateBackgroundLayer(2, startLayer === 2);
 
     this.placedShards = game.add.group();
     this.effectsGroup = game.add.group();
@@ -54,25 +53,20 @@ Frogland.Create = function() {
 
     this.CreateCollisionLayer(4);
     this.CreateCollisionLayer(3);
-    this.CreateCollisionLayer(2);
 
     objectController.CreateObjectsLayer(4);
     objectController.CreateObjectsLayer(3);
-    objectController.CreateObjectsLayer(2);
 
     this.CreateMidgroundLayer(4, startLayer === 4);
     this.CreateMidgroundLayer(3, startLayer === 3);
-    this.CreateMidgroundLayer(2, startLayer === 2);
 
     this.CreateForegroundLayer(4, startLayer === 4);
     this.CreateForegroundLayer(3, startLayer === 3);
-    this.CreateForegroundLayer(2, startLayer === 2);
 
     this.shardGroup = game.add.group();
 
     this.CreateShards(4);
     this.CreateShards(3);
-    this.CreateShards(2);
 
     this.CreateDoorLayer(1);
     this.CreateDoorLayer(2);
@@ -80,11 +74,9 @@ Frogland.Create = function() {
 
     this.PreprocessTiles(4);
     this.PreprocessTiles(3);
-    this.PreprocessTiles(2);
 
     triggerController.CreateTriggers(4);
     triggerController.CreateTriggers(3);
-    triggerController.CreateTriggers(2);
 
     this.SpawnFrauki();
 
@@ -374,7 +366,7 @@ Frogland.ChangeLayer = function(newLayer, immediate) {
         } else {
             game.add.tween(obj).to({alpha: 1}, 200, Phaser.Easing.Linear.None, true);
         }
-        
+
         if(!!obj.body) obj.body.enable = true;
         if(!!obj.Activate) obj.Activate();
     });

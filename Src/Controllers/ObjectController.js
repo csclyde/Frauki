@@ -48,11 +48,6 @@ ObjectController.prototype.CompileObjectList = function() {
         Objects_4: []
     };
 
-
-    Frogland.map.objects['Objects_2'].forEach(function(o) {
-        that.latentObjects.Objects_2.push({ id: o.gid, x: o.x, y: o.y, u: that.latentObjects.Objects_2.length, properties: o.properties });
-    });
-
     Frogland.map.objects['Objects_3'].forEach(function(o) {
         that.latentObjects.Objects_3.push({ id: o.gid, x: o.x, y: o.y, u: that.latentObjects.Objects_3.length, properties: o.properties });
     });

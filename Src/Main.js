@@ -149,11 +149,9 @@ Main.Restart = function() {
         
         Frogland.objectGroup_4.removeAll(true);
         Frogland.objectGroup_3.removeAll(true);
-        Frogland.objectGroup_2.removeAll(true);
 
         objectController.CreateObjectsLayer(4);
         objectController.CreateObjectsLayer(3);
-        objectController.CreateObjectsLayer(2);
 
         effectsController.dicedPieces4 = game.add.group(Frogland.objectGroup_4);
         effectsController.dicedPieces3 = game.add.group(Frogland.objectGroup_3);
@@ -162,12 +160,6 @@ Main.Restart = function() {
         GameData.ResetNuggCount();
 
         triggerController.triggerLayers['Triggers_4'].forEach(function(trig) {
-            trig.enterFired = false;
-            trig.stayFired = false;
-            trig.exitFired = false;
-        });
-
-        triggerController.triggerLayers['Triggers_3'].forEach(function(trig) {
             trig.enterFired = false;
             trig.stayFired = false;
             trig.exitFired = false;
