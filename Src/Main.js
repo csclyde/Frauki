@@ -155,7 +155,6 @@ Main.Restart = function() {
 
         effectsController.dicedPieces4 = game.add.group(Frogland.objectGroup_4);
         effectsController.dicedPieces3 = game.add.group(Frogland.objectGroup_3);
-        effectsController.dicedPieces2 = game.add.group(Frogland.objectGroup_2);
 
         GameData.ResetNuggCount();
 

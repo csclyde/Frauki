@@ -139,15 +139,15 @@ Player.prototype.postStateUpdate = function() {
     }
 
     if(frauki.states.flowDown) {
-        this.body.acceleration.y = 500;
+        this.body.acceleration.y = 700;
     } else if(frauki.states.flowUp) {
-        this.body.acceleration.y = -500;
+        this.body.acceleration.y = -700;
     }
 
     if(frauki.states.flowLeft) {
-        this.body.acceleration.x = -600;
+        this.body.acceleration.x = -700;
     } else if(frauki.states.flowRight) {
-        this.body.acceleration.x = 600;
+        this.body.acceleration.x = 700;
     }
 
     //reset the double jump flag
