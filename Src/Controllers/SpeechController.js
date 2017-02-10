@@ -17,6 +17,10 @@ SpeechController = function() {
 
 	this.timers = new TimerUtil();
 
+	this.speechVariables = {
+		goober: 'booper'
+	};
+
 };
 
 SpeechController.prototype.Create = function() {
@@ -42,7 +46,7 @@ SpeechController.prototype.Create = function() {
 	this.dialogBox.cameraOffset.x = 70 + speechOffsetX; 
 	this.dialogBox.cameraOffset.y = 10 + speechOffsetY; 
 
-	this.font = game.add.retroFont('font', 9, 13, 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890?,.!#\' ', 13);
+	this.font = game.add.retroFont('font', 9, 15, 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890?,.!:#\' ', 13);
 	this.font.autoUpperCase = false;
 	this.font.multiLine = true;
 
@@ -78,6 +82,8 @@ SpeechController.prototype.Create = function() {
 
 	this.speechZones = [];
 
+	GameData.SetFlag('test_flag', true);
+
 	this.LoadSpeechZones(4);
 	this.LoadSpeechZones(3);
 
@@ -92,26 +98,28 @@ SpeechController.prototype.LoadSpeechZones = function(layer) {
         	zone.owningLayer = layer;
             zone.text = o.properties ? o.properties.text : 'Error';
             zone.speechName = o.name;
+            zone.active = true;
+
+            if(!!o.properties && !!o.properties.show_flag) {
+            	zone.showFlag = o.properties.show_flag;
+            } else {
+            	zone.showFlag = null;
+            }
 
             that.speechZones.push(zone);
              
         }
     });
-
-    Frogland.map.objects['Objects_' + layer].forEach(function(o) {
-    	if(!!o.properties && !!o.properties.speech) {
-    		var zone = new Phaser.Rectangle(o.x, o.y, o.width, o.height);
-        	zone.owningLayer = layer;
-            zone.speechName = o.properties.speech;
-
-            that.speechZones.push(zone);
-    	}
-
-    });
-
 };
 
 SpeechController.prototype.Update = function() {
+
+	for(var i = 0; i < this.speechZones.length; i++) {
+		var zone = this.speechZones[i];
+		if(zone.showFlag && (GameData.GetFlag(zone.showFlag) || GameData.IsDoorOpen(zone.showFlag))) {
+			zone.active = false;
+		}
+	}
 
 	if(this.text.visible && this.displayIndex < this.currentText.length && this.timers.TimerUp('display_progress')) {
 		this.displayIndex += 1;
@@ -243,7 +251,7 @@ SpeechController.prototype.FraukiInSpeechZone = function() {
 
 	for(var i = 0; i < this.speechZones.length; i++) {
 		var zone = this.speechZones[i];
-		if(zone.owningLayer === Frogland.currentLayer && frauki.body.x + frauki.body.width > zone.x && frauki.body.x < zone.x + zone.width && frauki.body.y + frauki.body.height > zone.y && frauki.body.y < zone.y + zone.height) {
+		if(zone.active && zone.owningLayer === Frogland.currentLayer && frauki.body.x + frauki.body.width > zone.x && frauki.body.x < zone.x + zone.width && frauki.body.y + frauki.body.height > zone.y && frauki.body.y < zone.y + zone.height) {
 			return true;
 		}
 	}
@@ -273,7 +281,9 @@ SpeechController.prototype.SetText = function(text) {
 		return;
 	}
 
-	var words = text.split(' ');
+	var parsedText = this.ParseTextVariables(text);
+
+	var words = parsedText.split(' ');
 
 	this.processedText = [];
 
@@ -297,4 +307,19 @@ SpeechController.prototype.SetText = function(text) {
 
 	this.currentText = this.processedText.join('\n');
 	this.displayIndex = 0;
+};
+
+SpeechController.prototype.ParseTextVariables = function(text) {
+	var that = this;
+
+	text = text.replace(/\{.*\}/g, function(match) {
+		match = match.slice(1, -1);
+		if(!!that.speechVariables[match]) {
+			return that.speechVariables[match];
+		} else {
+			return 'X';
+		}
+	});
+
+	return text;
 };

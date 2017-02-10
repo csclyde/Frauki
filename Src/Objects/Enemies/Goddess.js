@@ -16,6 +16,8 @@ Enemy.prototype.types['Goddess'] =  function() {
 
     this.messageQueue = GameData.GetVal('goddess_message_queue');
     this.deathMessage = GameData.GetVal('goddess_death_message');
+	this.currentPortrait = 'Goddess_Neutral';
+
 
     events.subscribe('door_open_start', function(params) {
     	if(params.id === 'final_second' && !GameData.GetFlag('seal_hall_intro')) {
@@ -82,31 +84,37 @@ Enemy.prototype.types['Goddess'] =  function() {
 	///////////////////////////////ACTIONS////////////////////////////////////
 	this.GetSpeech = function() {
 		if(GameData.GetFlag('goddess_angry')) {
+			this.currentPortrait = 'Goddess_Neutral';
 			return "I'm still mad at you for killing me. Hrmph.";
 
 		} else if(GameData.GetFlag('goddess_smacked') && this.energy > 3) {
 			GameData.SetFlag('goddess_smacked', false);
+			this.currentPortrait = 'Goddess_Neutral';
 			return "Why have you been smacking me? Cut it out.";
 
 		} else if(this.energy === 1) {
+			this.currentPortrait = 'Goddess_Neutral';
 			return "Just get away from me...";
 
 		} else if(this.energy <= 3) {
+			this.currentPortrait = 'Goddess_Neutral';
 			return "You're just a bully... leave me alone.";
 
 		} else if(energyController.GetHealth() < energyController.GetMaxHealth()) {
         	events.publish('full_heal', {});
+			this.currentPortrait = 'Goddess_Neutral';
 			return "Oh my, you're not looking so good. Let me fix you up...";
 		} else if(this.messageQueue.length > 0) {
 			return this.GetMessage();
 		} else {
+			this.currentPortrait = 'Goddess_Neutral';
 			return ['Do you need something Frauki?', 'Oh, hello.', 'Things just aren\'t the same.', 'Yes?'];
 
 		}
 	};
 
 	this.GetPortrait = function() {
-		return 'Goddess_Neutral';
+		return this.currentPortrait;
 	};
 
 	this.AddMessage = function(msg) {

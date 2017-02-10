@@ -223,7 +223,7 @@ function PerformOpen(d, save, silent) {
 
     d.state = d.Open;
 
-    var openDuration = 3000;
+    var openDuration = 2500;
 
     //play a sound if one is specified
     if(!silent) {
@@ -255,7 +255,7 @@ function PerformOpen(d, save, silent) {
             break;
         }    
 
-        openDuration = 5000;
+        openDuration = 2500;
         events.publish('camera_shake', {magnitudeX: 0.4, magnitudeY: 0, duration: openDuration });
 
         events.publish('fade_music', { volume: 0.1, duration: openDuration });

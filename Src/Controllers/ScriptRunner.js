@@ -177,7 +177,7 @@ ScriptRunner.scripts['goddess_shard_2'] = [
 
 ScriptRunner.scripts['goddess_shard_3'] = [
 	{ name: 'disallow_input', props: {} },
-	{ name: 'show_text', props: { text: 'Please... just walk up to the door and let me out... Enough teasing.', portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: 'Please... just walk up to the door and let me out... Enough {goober} teasing.', portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 5000 } },
 
 	{ name: 'allow_input', props: {} }
