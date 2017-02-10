@@ -137,7 +137,7 @@ Main.Restart = function() {
 
         game.time.events.add(300, function() {
             frauki.Reset(); 
-            goddess.Reset();
+            if(!!goddess) goddess.Reset();
         });
 
         energyController.Reset();

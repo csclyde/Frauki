@@ -83,7 +83,7 @@ TriggerController.prototype.triggers['heal_to_open_door'] = {
 
 TriggerController.prototype.triggers['update_checkpoint'] = {
 	enter: function(params) {
-		GameData.SetCheckpoint('0');
+		GameData.SetCheckpoint(params.id);
 	},
 
 	stay: function(params) {
