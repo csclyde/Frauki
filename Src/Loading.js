@@ -1,9 +1,6 @@
 var Loading = new Phaser.State();
 
 Loading.preload = function() {
-    console.log(Phaser.Tilemap)
-
-
     game.canvas.style['display'] = 'none';
     pixel.canvas = Phaser.Canvas.create(pixel.width * pixel.scale, pixel.height * pixel.scale);
     pixel.canvas.width = pixel.width * pixel.scale;
@@ -48,7 +45,7 @@ Loading.preload = function() {
         game.load.audio(music.Name, music.File);
     });
 
-    game.renderer.renderSession.roundPixels = true;
+    game.renderer.renderSession.roundPixels = false;
 };
 
 Loading.create = function() {
@@ -67,6 +64,37 @@ Loading.create = function() {
         this._results.forEach(callback, context);
 
         //this.paste(x, y, this._results, layer);
+
+    };
+
+    Phaser.Tilemap.prototype.getTile = function (x, y, layer, nonNull) {
+
+        if (nonNull === undefined) { nonNull = false; }
+
+        layer = this.getLayer(layer);
+
+        if (x >= 0 && x < this.layers[layer].width && y >= 0 && y < this.layers[layer].height)
+        {
+            if (!!this.layers[layer].data[y][x] && this.layers[layer].data[y][x].index === -1)
+            {
+                if (nonNull)
+                {
+                    return this.layers[layer].data[y][x];
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                return this.layers[layer].data[y][x];
+            }
+        }
+        else
+        {
+            return null;
+        }
 
     };
 
@@ -154,12 +182,12 @@ Loading.create = function() {
 
             this.newVelocity.set(this.velocity.x * this.game.time.physicsElapsed, this.velocity.y * this.game.time.physicsElapsed);
 
-            this.position.x += this.newVelocity.x;
-            this.position.y += this.newVelocity.y;
+            this.position.x += this.newVelocity.x * Main.physicsSlowMo;
+            this.position.y += this.newVelocity.y * Main.physicsSlowMo;
 
             if (this.position.x !== this.prev.x || this.position.y !== this.prev.y)
             {
-                this.angle = Math.atan2(this.velocity.y, this.velocity.x);
+                this.angle = Math.atan2(this.velocity.y, this.velocity.x) * Main.physicsSlowMo;
             }
 
             this.speed = Math.sqrt(this.velocity.x * this.velocity.x + this.velocity.y * this.velocity.y);
@@ -265,20 +293,20 @@ Loading.create = function() {
         if (max === undefined) { max = 10000; }
 
         if (axis === 1 && body.allowGravity) {
-            velocity += (this.gravity.x + body.gravity.x) * this.game.time.physicsElapsed;
+            velocity += (this.gravity.x + body.gravity.x) * this.game.time.physicsElapsed * Main.physicsSlowMo;
         } else if (axis === 2 && body.allowGravity) {
-            velocity += (this.gravity.y + body.gravity.y) * this.game.time.physicsElapsed;
+            velocity += (this.gravity.y + body.gravity.y) * this.game.time.physicsElapsed * Main.physicsSlowMo;
         }
 
         if (acceleration) {
-            velocity += acceleration * this.game.time.physicsElapsed;
+            velocity += acceleration * this.game.time.physicsElapsed * Main.physicsSlowMo;
         } else if (drag) {
             drag *= this.game.time.physicsElapsed;
 
             if (velocity - drag > 0)  {
-                velocity -= drag;
+                velocity -= drag * Main.physicsSlowMo;
             } else if (velocity + drag < 0) {
-                velocity += drag;
+                velocity += drag * Main.physicsSlowMo;
             } else {
                 velocity = 0;
             }
