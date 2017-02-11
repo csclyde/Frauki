@@ -129,10 +129,10 @@ Frogland.Update = function() {
 Frogland.HandleCollisions = function() {
     //moving objects collided with the world geometry
     game.physics.arcade.collideSpriteVsTilemapLayer(frauki, this.GetCurrentCollisionLayer(), null, Collision.CollideFraukiWithEnvironment, null, false);
-    game.physics.arcade.collideGroupVsTilemapLayer(this.GetCurrentObjectGroup(), this.GetCurrentCollisionLayer(), null, Collision.OverlapObjectsWithEnvironment, null, false);
+    game.physics.arcade.collideGroupVsTilemapLayer(objectController.GetCurrentObjectGroup(), this.GetCurrentCollisionLayer(), null, Collision.OverlapObjectsWithEnvironment, null, false);
 
     //frauki is collided with other moving objects
-    game.physics.arcade.collideHandler(frauki, this.GetCurrentObjectGroup(), null, Collision.OverlapFraukiWithObject, null, false);
+    game.physics.arcade.collideHandler(frauki, objectController.GetCurrentObjectGroup(), null, Collision.OverlapFraukiWithObject, null, false);
     game.physics.arcade.collideSpriteVsGroup(frauki, this.shardGroup, null, Collision.OverlapFraukiWithShard, null, true);
 
     //collide enemies with doors
@@ -140,15 +140,15 @@ Frogland.HandleCollisions = function() {
 
     //overlap fraukis attack with objects and projectiles
     if(frauki.Attacking()) {
-        game.physics.arcade.overlap(frauki.attackRect, Frogland.GetCurrentObjectGroup(), Collision.OverlapAttackWithObject);
+        game.physics.arcade.overlap(frauki.attackRect, objectController.GetCurrentObjectGroup(), Collision.OverlapAttackWithObject);
     }
 
     //objects are collided with themselves
-    //game.physics.arcade.collide(this.GetCurrentObjectGroup(), undefined, null, Collision.OverlapObjectsWithSelf);
+    //game.physics.arcade.collide(objectController.GetCurrentObjectGroup(), undefined, null, Collision.OverlapObjectsWithSelf);
 
     //shards are checked against doors
     if(!!frauki.carriedShard && this.timers.TimerUp('shard_object_check')) {
-        game.physics.arcade.overlap(this.shardGroup, this.GetCurrentObjectGroup(), null, Collision.OverlapShardWithObject);
+        game.physics.arcade.overlap(this.shardGroup, objectController.GetCurrentObjectGroup(), null, Collision.OverlapShardWithObject);
         this.timers.SetTimer('shard_object_check', 500);
     }
 
@@ -274,11 +274,6 @@ Frogland.PreprocessTiles = function(layer) {
     }, this, 0, 0, 5, 20, 'Foreground_4');
 };
 
-Frogland.GetCurrentObjectGroup = function() {
-
-    return this['objectGroup_' + this.currentLayer];
-};
-
 Frogland.GetCurrentCollisionLayer = function() {
 
     return this['collisionLayer_' + this.currentLayer];
@@ -297,7 +292,7 @@ Frogland.ChangeLayer = function(newLayer, immediate) {
     var currentForgroundLayer = this['foregroundLayer_' + this.currentLayer];
     var currentMidgroundLayer = this['midgroundLayer_' + this.currentLayer];
     var currentBackgroundLayer = this['backgroundLayer_' + this.currentLayer];
-    var currentObjectLayer = this.GetCurrentObjectGroup();
+    var currentObjectLayer = objectController.GetCurrentObjectGroup();
 
     if(immediate) {
         currentForgroundLayer.visible = false;
@@ -334,7 +329,7 @@ Frogland.ChangeLayer = function(newLayer, immediate) {
     var newForgroundLayer = this['foregroundLayer_' + this.currentLayer];
     var newMidgroundLayer = this['midgroundLayer_' + this.currentLayer];
     var newBackgroundLayer = this['backgroundLayer_' + this.currentLayer];
-    var newObjectLayer = this.GetCurrentObjectGroup();
+    var newObjectLayer = objectController.GetCurrentObjectGroup();
 
     //bring in the new layers
     newForgroundLayer.visible = true;

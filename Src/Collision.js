@@ -211,9 +211,7 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
         frauki.timers.SetTimer('attack_stun', 800);
         frauki.timers.SetTimer('clash_wait', 800);
     }
-
-    console.log('Weapon clash occured: Enemy with ' + e.GetCurrentPriority() + ' priority and Frauki with ' + frauki.GetCurrentPriority());
-
+    
     //frauki.timers.SetTimer('grace', 400);
 };
 

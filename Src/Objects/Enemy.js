@@ -234,7 +234,6 @@ Enemy.prototype.TakeHit = function(damage) {
         return;
     }
 
-    console.log('Enemy taking ' + damage + ', at ' + this.energy + '/' + this.maxEnergy);
     this.energy -= damage;
     events.publish('play_sound', { name: 'attack_connect' });
 

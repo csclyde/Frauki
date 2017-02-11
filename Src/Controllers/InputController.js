@@ -42,6 +42,7 @@ InputController = function() {
     this.binds.weapon     = Phaser.Keyboard.C;
     this.binds.roll       = Phaser.Keyboard.X;
     this.binds.shoulderR  = Phaser.Keyboard.Q;
+    this.binds.shoulderR2  = Phaser.Keyboard.V;
 
     this.bindList = [this.binds.jump, this.binds.up, this.binds.crouch, this.binds.runLeft, this.binds.runRight, this.binds.slash, this.binds.weapon, this.binds.roll, this.binds.shoulderR];
     
@@ -133,6 +134,7 @@ InputController = function() {
             break;
 
             case inputController.binds.shoulderR:
+            case inputController.binds.shoulderR2:
                 inputController.OnHeal(true);
             break;
 
@@ -182,6 +184,7 @@ InputController = function() {
             break;
 
             case inputController.binds.shoulderR:
+            case inputController.binds.shoulderR2:
                 inputController.OnHeal(false);
             break;
 

@@ -200,7 +200,6 @@ function OpenDoorById(id) {
 
     if(!!door) {
         PerformOpen(door, false);
-        console.log('Opening door by id: ' + id);
     } else {
         console.log('Cant find door with id: ' + id);
     }

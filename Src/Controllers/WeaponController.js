@@ -370,7 +370,7 @@ WeaponController.prototype.Lob = {
             effectsController.EnergySplash(l.body, 200, 'neutral', 30, l.body.velocity);
         });
 
-        game.physics.arcade.overlap(this.lobbies, Frogland.GetCurrentObjectGroup(), null, Collision.OverlapLobWithEnemy);
+        game.physics.arcade.overlap(this.lobbies, objectController.GetCurrentObjectGroup(), null, Collision.OverlapLobWithEnemy);
 
         var i = toDestroy.length;
         while(i--) {

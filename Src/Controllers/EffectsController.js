@@ -135,15 +135,6 @@ EffectsController = function() {
     this.screenDark = game.add.sprite(0, 0, screenDarkBmd);
     this.screenDark.fixedToCamera = true;
 
-    this.goddess = game.add.image(0, 0, 'Misc', 'Goddess0000');
-    this.goddess.fixedToCamera = true;
-    this.goddess.alpha = 0;
-    this.goddess.visible = false;
-    this.goddess.anchor.setTo(0.5);
-    this.goddess.cameraOffset.x = 320;
-    this.goddess.cameraOffset.y = 200;
-    game.add.tween(this.goddess.cameraOffset).to({y: 160}, 200, Phaser.Easing.Sinusoidal.InOut, true, 0, -1, true);
-
     this.materializingApple = game.add.image(0, 0, 'Misc', 'Apple0000');
     this.materializingApple.animations.add('mat', ['Apple0007', 'Apple0008', 'Apple0009', 'Apple0010', 'Apple0011', 'Apple0012'], 12, true, false);
     this.materializingApple.animations.play('mat');
@@ -885,16 +876,6 @@ EffectsController.prototype.SpriteTrail = function(sprite, freq, duration, dropo
         fadeTween.onComplete.add(function() {
             trailSprite.destroy();
         });
-    }
-};
-
-EffectsController.prototype.Goddess = function(show) {
-    if(show) {
-        this.goddess.alpha = 0;
-        this.goddess.visible = true;
-        game.add.tween(this.goddess).to( { alpha: 0.8 }, 1500, Phaser.Easing.Cubic.In, true);
-    } else {
-        game.add.tween(this.goddess).to( { alpha: 0 }, 500, Phaser.Easing.Linear.None, true);
     }
 };
 
