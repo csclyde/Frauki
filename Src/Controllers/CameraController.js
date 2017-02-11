@@ -57,7 +57,7 @@ CameraController.prototype.Update = function() {
 	this.camX += (idealX - this.camX) * 0.08;
 	this.camY += (idealY - this.camY) * 0.04;
 
-	game.camera.focusOnXY(this.camX, this.camY);
+	game.camera.focusOnXY(Math.floor(this.camX), Math.floor(this.camY));
 
 	if(this.shakeMagnitudeX > 0) {
 		this.shakeX = Math.sin(game.time.now * 60) * this.shakeMagnitudeX;

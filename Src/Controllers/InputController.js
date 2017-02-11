@@ -385,7 +385,7 @@ InputController.prototype.OnHeal = function(pressed) {
         if(pressed) {
             events.publish('player_heal', { charging: true });
         } else {
-            events.publish('player_heal', { charging: false });
+            //events.publish('player_heal', { charging: false });
         }
     }
 };
