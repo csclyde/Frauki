@@ -20,6 +20,7 @@ Loading.preload = function() {
 
     pixel.context.drawImage(game.canvas, 0, 0, game.width, game.height, 0, 0, pixel.width * pixel.scale, pixel.height * pixel.scale);
 
+    //Phaser.TilemapParser.INSERT_NULL = true;
     game.load.tilemap('Frogland', 'Data/World/Frogland.json', null, Phaser.Tilemap.TILED_JSON);
 
     //load images
@@ -113,8 +114,12 @@ Loading.create = function() {
 
         this.updateBounds();
 
-        this.position.x = (this.sprite.world.x - (this.sprite.anchor.x * this.width)) + this.offset.x;
-        this.position.y = (this.sprite.world.y - (this.sprite.anchor.y * this.height)) + this.offset.y;
+        this.position.x = (this.sprite.world.x - (this.sprite.anchor.x * this.width)) + this.sprite.scale.x * this.offset.x;
+        //this.position.x -= this.sprite.scale.x < 0 ? this.width : 0;
+
+        this.position.y = (this.sprite.world.y - (this.sprite.anchor.y * this.height)) + this.sprite.scale.y * this.offset.y;
+        //this.position.y -= this.sprite.scale.y < 0 ? this.height : 0;
+
         this.rotation = this.sprite.angle;
 
         this.preRotation = this.rotation;
@@ -136,16 +141,20 @@ Loading.create = function() {
 
             if (this.position.x !== this.prev.x || this.position.y !== this.prev.y)
             {
-                this.speed = Math.sqrt(this.velocity.x * this.velocity.x + this.velocity.y * this.velocity.y);
-                this.angle = Math.atan2(this.velocity.y, this.velocity.x);
+                this.angle = Math.atan2(this.velocity.y, this.velocity.x) * Main.physicsSlowMo;
             }
+
+            this.speed = Math.sqrt(this.velocity.x * this.velocity.x + this.velocity.y * this.velocity.y);
 
             //  Now the State update will throw collision checks at the Body
             //  And finally we'll integrate the new position back to the Sprite in postUpdate
 
             if (this.collideWorldBounds)
             {
-                this.checkWorldBounds();
+                if (this.checkWorldBounds() && this.onWorldBounds)
+                {
+                    this.onWorldBounds.dispatch(this.sprite, this.blocked.up, this.blocked.down, this.blocked.left, this.blocked.right);
+                }
             }
         }
 
@@ -155,222 +164,221 @@ Loading.create = function() {
         this._reset = false;
     };
 
-    Phaser.Physics.Arcade.Body.prototype.postUpdate = function () {
+    // Phaser.Physics.Arcade.Body.prototype.postUpdate = function () {
 
-        //  Only allow postUpdate to be called once per frame
-        if (!this.dirty || !this.enable)
-        {
-            return;
-        }
+    //     //  Only allow postUpdate to be called once per frame
+    //     if (!this.dirty || !this.enable)
+    //     {
+    //         return;
+    //     }
 
-        this.dirty = false;
+    //     this.dirty = false;
 
-        // if (this.deltaX() < 0)
-        // {
-        //     this.facing = Phaser.LEFT;
-        // }
-        // else if (this.deltaX() > 0)
-        // {
-        //     this.facing = Phaser.RIGHT;
-        // }
+    //     // if (this.deltaX() < 0)
+    //     // {
+    //     //     this.facing = Phaser.LEFT;
+    //     // }
+    //     // else if (this.deltaX() > 0)
+    //     // {
+    //     //     this.facing = Phaser.RIGHT;
+    //     // }
 
-        // if (this.deltaY() < 0)
-        // {
-        //     this.facing = Phaser.UP;
-        // }
-        // else if (this.deltaY() > 0)
-        // {
-        //     this.facing = Phaser.DOWN;
-        // }
+    //     // if (this.deltaY() < 0)
+    //     // {
+    //     //     this.facing = Phaser.UP;
+    //     // }
+    //     // else if (this.deltaY() > 0)
+    //     // {
+    //     //     this.facing = Phaser.DOWN;
+    //     // }
 
-        if (this.moves)
-        {
-            this._dx = this.deltaX();
-            this._dy = this.deltaY();
+    //     if (this.moves)
+    //     {
+    //         this._dx = this.deltaX();
+    //         this._dy = this.deltaY();
 
-            if (this.deltaMax.x !== 0 && this._dx !== 0)
-            {
-                if (this._dx < 0 && this._dx < -this.deltaMax.x)
-                {
-                    this._dx = -this.deltaMax.x;
-                }
-                else if (this._dx > 0 && this._dx > this.deltaMax.x)
-                {
-                    this._dx = this.deltaMax.x;
-                }
-            }
+    //         if (this.deltaMax.x !== 0 && this._dx !== 0)
+    //         {
+    //             if (this._dx < 0 && this._dx < -this.deltaMax.x)
+    //             {
+    //                 this._dx = -this.deltaMax.x;
+    //             }
+    //             else if (this._dx > 0 && this._dx > this.deltaMax.x)
+    //             {
+    //                 this._dx = this.deltaMax.x;
+    //             }
+    //         }
 
-            if (this.deltaMax.y !== 0 && this._dy !== 0)
-            {
-                if (this._dy < 0 && this._dy < -this.deltaMax.y)
-                {
-                    this._dy = -this.deltaMax.y;
-                }
-                else if (this._dy > 0 && this._dy > this.deltaMax.y)
-                {
-                    this._dy = this.deltaMax.y;
-                }
-            }
+    //         if (this.deltaMax.y !== 0 && this._dy !== 0)
+    //         {
+    //             if (this._dy < 0 && this._dy < -this.deltaMax.y)
+    //             {
+    //                 this._dy = -this.deltaMax.y;
+    //             }
+    //             else if (this._dy > 0 && this._dy > this.deltaMax.y)
+    //             {
+    //                 this._dy = this.deltaMax.y;
+    //             }
+    //         }
 
-            this.sprite.position.x += this._dx;
-            this.sprite.position.y += this._dy;
-            this._reset = true;
-        }
+    //         this.sprite.position.x += this._dx;
+    //         this.sprite.position.y += this._dy;
+    //         this._reset = true;
+    //     }
 
-        this.center.setTo(this.position.x + this.halfWidth, this.position.y + this.halfHeight);
+    //     this.center.setTo(this.position.x + this.halfWidth, this.position.y + this.halfHeight);
 
-        if (this.allowRotation)
-        {
-            this.sprite.angle += this.deltaZ();
-        }
+    //     if (this.allowRotation)
+    //     {
+    //         this.sprite.angle += this.deltaZ();
+    //     }
 
-        this.prev.x = this.position.x;
-        this.prev.y = this.position.y;
-    };
+    //     this.prev.x = this.position.x;
+    //     this.prev.y = this.position.y;
+    // };
 
-    Phaser.Sound.prototype.fadeComplete = function () {
+    // Phaser.Sound.prototype.fadeComplete = function () {
 
-        this.onFadeComplete.dispatch(this, this.volume);
+    //     this.onFadeComplete.dispatch(this, this.volume);
 
-    };
+    // };
 
     game.physics.arcade.computeVelocity = function (axis, body, velocity, acceleration, drag, max) {
+        if (max === undefined) { max = 10000; }
 
-            if (max === undefined) { max = 10000; }
+        if (axis === 1 && body.allowGravity) {
+            velocity += (this.gravity.x + body.gravity.x) * this.game.time.physicsElapsed * Main.physicsSlowMo;
+        } else if (axis === 2 && body.allowGravity) {
+            velocity += (this.gravity.y + body.gravity.y) * this.game.time.physicsElapsed * Main.physicsSlowMo;
+        }
 
-            if (axis === 1 && body.allowGravity) {
-                velocity += (this.gravity.x + body.gravity.x) * this.game.time.physicsElapsed * Main.physicsSlowMo;
-            } else if (axis === 2 && body.allowGravity) {
-                velocity += (this.gravity.y + body.gravity.y) * this.game.time.physicsElapsed * Main.physicsSlowMo;
+        if (acceleration) {
+            velocity += acceleration * this.game.time.physicsElapsed * Main.physicsSlowMo;
+        } else if (drag) {
+            drag *= this.game.time.physicsElapsed;
+
+            if (velocity - drag > 0)  {
+                velocity -= drag * Main.physicsSlowMo;
+            } else if (velocity + drag < 0) {
+                velocity += drag * Main.physicsSlowMo;
+            } else {
+                velocity = 0;
             }
+        }
 
-            if (acceleration) {
-                velocity += acceleration * this.game.time.physicsElapsed * Main.physicsSlowMo;
-            } else if (drag) {
-                drag *= this.game.time.physicsElapsed;
+        if (velocity > max) {
+            velocity = max;
+        } else if (velocity < -max) {
+            velocity = -max;
+        }
 
-                if (velocity - drag > 0) {
-                    velocity -= drag * Main.physicsSlowMo;
-                } else if (velocity + drag < 0) {
-                    velocity += drag * Main.physicsSlowMo;
-                } else {
-                    velocity = 0;
-                }
-            }
-
-            if (velocity > max){
-                velocity = max;
-            } else if (velocity < -max) {
-                velocity = -max;
-            }
-
-            return velocity;
+        return velocity;
     };
 
-    Phaser.Sprite.prototype.preUpdate = function() {
+    // Phaser.Sprite.prototype.preUpdate = function() {
 
-        if (!this.preUpdateInWorld())
-        {
-            return false;
-        }
+    //     if (!this.preUpdateInWorld())
+    //     {
+    //         return false;
+    //     }
 
-        if (!this.preUpdateLifeSpan())
-        {
-            return false;
-        }
+    //     if (!this.preUpdateLifeSpan())
+    //     {
+    //         return false;
+    //     }
 
-        if (!this.preUpdatePhysics())
-        {
-            return false;
-        }
+    //     if (!this.preUpdatePhysics())
+    //     {
+    //         return false;
+    //     }
 
-        return this.preUpdateCore();
-    };
+    //     return this.preUpdateCore();
+    // };
 
-    Phaser.Component.PhysicsBody.preUpdate = function () {
+    // Phaser.Component.PhysicsBody.preUpdate = function () {
 
-        if(this.body.enable) {
-            if (this.fresh && this.exists) {
+    //     if(this.body.enable) {
+    //         if (this.fresh && this.exists) {
 
-                // this.world.setTo(this.parent.position.x + this.position.x, this.parent.position.y + this.position.y);
-                // this.worldTransform.tx = this.world.x;
-                // this.worldTransform.ty = this.world.y;
+    //             // this.world.setTo(this.parent.position.x + this.position.x, this.parent.position.y + this.position.y);
+    //             // this.worldTransform.tx = this.world.x;
+    //             // this.worldTransform.ty = this.world.y;
 
-                // this.previousPosition.set(this.world.x, this.world.y);
-                // this.previousRotation = this.rotation;
+    //             // this.previousPosition.set(this.world.x, this.world.y);
+    //             // this.previousRotation = this.rotation;
 
-                if (this.body)
-                {
-                    this.body.preUpdate();
-                }
+    //             if (this.body)
+    //             {
+    //                 this.body.preUpdate();
+    //             }
 
-                this.fresh = false;
+    //             this.fresh = false;
 
-                return false;
-            }
+    //             return false;
+    //         }
 
-            // this.previousPosition.set(this.world.x, this.world.y);
-            // this.previousRotation = this.rotation;
-        }
+    //         // this.previousPosition.set(this.world.x, this.world.y);
+    //         // this.previousRotation = this.rotation;
+    //     }
 
-        if (!this._exists || !this.parent.exists)
-        {
-            this.renderOrderID = -1;
-            return false;
-        }
+    //     if (!this._exists || !this.parent.exists)
+    //     {
+    //         this.renderOrderID = -1;
+    //         return false;
+    //     }
 
-        return true;
-    };
+    //     return true;
+    // };
 
-    PIXI.DisplayObjectContainer.prototype.updateTransform = function() {
-        if (!this.visible)
-        {
-            return;
-        }
+    // PIXI.DisplayObjectContainer.prototype.updateTransform = function() {
+    //     if (!this.visible)
+    //     {
+    //         return;
+    //     }
 
-        this.displayObjectUpdateTransform();
+    //     this.displayObjectUpdateTransform();
 
-        if (this._cacheAsBitmap)
-        {
-            return;
-        }
+    //     if (this._cacheAsBitmap)
+    //     {
+    //         return;
+    //     }
 
-        for (var i = 0, len = this.children.length; i < len; i++)
-        {
-            this.children[i].updateTransform();
-        }
-    };
+    //     for (var i = 0, len = this.children.length; i < len; i++)
+    //     {
+    //         this.children[i].updateTransform();
+    //     }
+    // };
 
-    Phaser.TilemapLayer.prototype.postUpdate = function () {
+    // Phaser.TilemapLayer.prototype.postUpdate = function () {
 
-        Phaser.Component.FixedToCamera.postUpdate.call(this);
+    //     Phaser.Component.FixedToCamera.postUpdate.call(this);
 
-        this.scrollX = this.game.camera.x;
-        this.scrollY = this.game.camera.y;
+    //     this.scrollX = this.game.camera.x;
+    //     this.scrollY = this.game.camera.y;
 
-        this.render();
-    };
+    //     this.render();
+    // };
 
-    Phaser.Component.Core.postUpdate = function() {
+    // Phaser.Component.Core.postUpdate = function() {
 
-        // if (this.key instanceof Phaser.BitmapData)
-        // {
-        //     this.key.render();
-        // }
+    //     // if (this.key instanceof Phaser.BitmapData)
+    //     // {
+    //     //     this.key.render();
+    //     // }
 
-        if (this.components.PhysicsBody)
-        {
-            Phaser.Component.PhysicsBody.postUpdate.call(this);
-        }
+    //     if (this.components.PhysicsBody)
+    //     {
+    //         Phaser.Component.PhysicsBody.postUpdate.call(this);
+    //     }
 
-        if (this.components.FixedToCamera)
-        {
-            Phaser.Component.FixedToCamera.postUpdate.call(this);
-        }
+    //     if (this.components.FixedToCamera)
+    //     {
+    //         Phaser.Component.FixedToCamera.postUpdate.call(this);
+    //     }
 
-        for (var i = 0, len = this.children.length; i < len; i++)
-        {
-            this.children[i].postUpdate();
-        }
-    };
+    //     for (var i = 0, len = this.children.length; i < len; i++)
+    //     {
+    //         this.children[i].postUpdate();
+    //     }
+    // };
 };

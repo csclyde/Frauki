@@ -102,7 +102,7 @@ Main.render = function() {
         game.height * pixel.scale
     );
 
-    this.DrawUI();
+    //this.DrawUI();
 };
 
 Main.Restart = function() {
