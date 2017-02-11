@@ -154,12 +154,12 @@ Loading.create = function() {
 
             this.newVelocity.set(this.velocity.x * this.game.time.physicsElapsed, this.velocity.y * this.game.time.physicsElapsed);
 
-            this.position.x += this.newVelocity.x * Main.physicsSlowMo;
-            this.position.y += this.newVelocity.y * Main.physicsSlowMo;
+            this.position.x += this.newVelocity.x;
+            this.position.y += this.newVelocity.y;
 
             if (this.position.x !== this.prev.x || this.position.y !== this.prev.y)
             {
-                this.angle = Math.atan2(this.velocity.y, this.velocity.x) * Main.physicsSlowMo;
+                this.angle = Math.atan2(this.velocity.y, this.velocity.x);
             }
 
             this.speed = Math.sqrt(this.velocity.x * this.velocity.x + this.velocity.y * this.velocity.y);
@@ -265,20 +265,20 @@ Loading.create = function() {
         if (max === undefined) { max = 10000; }
 
         if (axis === 1 && body.allowGravity) {
-            velocity += (this.gravity.x + body.gravity.x) * this.game.time.physicsElapsed * Main.physicsSlowMo;
+            velocity += (this.gravity.x + body.gravity.x) * this.game.time.physicsElapsed;
         } else if (axis === 2 && body.allowGravity) {
-            velocity += (this.gravity.y + body.gravity.y) * this.game.time.physicsElapsed * Main.physicsSlowMo;
+            velocity += (this.gravity.y + body.gravity.y) * this.game.time.physicsElapsed;
         }
 
         if (acceleration) {
-            velocity += acceleration * this.game.time.physicsElapsed * Main.physicsSlowMo;
+            velocity += acceleration * this.game.time.physicsElapsed;
         } else if (drag) {
             drag *= this.game.time.physicsElapsed;
 
             if (velocity - drag > 0)  {
-                velocity -= drag * Main.physicsSlowMo;
+                velocity -= drag;
             } else if (velocity + drag < 0) {
-                velocity += drag * Main.physicsSlowMo;
+                velocity += drag;
             } else {
                 velocity = 0;
             }
