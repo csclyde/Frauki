@@ -5,7 +5,7 @@ var GameData = {};
 //So the only interaction with local storage is when the game loads, and when you
 //save something to it. It doesn't constantly read out of local storage
 GameData.data = {
-    version: '0.1',
+    version: 0.2,
     dirty: true,
 
     checkpoint: '0',
@@ -28,10 +28,14 @@ GameData.data = {
 GameData.nuggetCount = 0;
 
 GameData.LoadDataFromStorage = function() {
-    var save_data = localStorage.getItem('save_data');
+    var save_data = JSON.parse(localStorage.getItem('save_data'));
 
+    if(save_data.version !== 0.2) {
+        save_data = null;
+        localStorage.setItem('save_data', '');
+    }
     if(save_data) {
-        this.data = JSON.parse(save_data);
+        this.data = save_data;
         console.log('LOADING DATA', JSON.stringify(this.data));
     }
 };
