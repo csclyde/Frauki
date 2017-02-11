@@ -1,6 +1,7 @@
 var Loading = new Phaser.State();
 
 Loading.preload = function() {
+    console.log(Phaser.Tilemap)
 
 
     game.canvas.style['display'] = 'none';
@@ -20,7 +21,7 @@ Loading.preload = function() {
 
     pixel.context.drawImage(game.canvas, 0, 0, game.width, game.height, 0, 0, pixel.width * pixel.scale, pixel.height * pixel.scale);
 
-    //Phaser.TilemapParser.INSERT_NULL = true;
+    Phaser.TilemapParser.INSERT_NULL = true;
     game.load.tilemap('Frogland', 'Data/World/Frogland.json', null, Phaser.Tilemap.TILED_JSON);
 
     //load images
@@ -51,6 +52,23 @@ Loading.preload = function() {
 };
 
 Loading.create = function() {
+
+    Phaser.Tilemap.prototype.forEach = function (callback, context, x, y, width, height, layer) {
+
+        layer = this.getLayer(layer);
+
+        this.copy(x, y, width, height, layer);
+
+        if (this._results.length < 2)
+        {
+            return;
+        }
+
+        this._results.forEach(callback, context);
+
+        //this.paste(x, y, this._results, layer);
+
+    };
 
     game.add.plugin(Phaser.Plugin.Debug);
 
