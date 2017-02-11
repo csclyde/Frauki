@@ -37,6 +37,8 @@ Main.create = function() {
     // this.UITextures.EnergyBar0006 = PIXI.TextureCache[game.cache.getFrameByName('UI', 'EnergyBar0006').uuid];
 
     audioController.ambient['surface_wind'].play();
+
+    this.CreateUI();
 };
 
 Main.update = function() {
@@ -56,6 +58,8 @@ Main.update = function() {
     speechController.Update();
     triggerController.Update(Frogland.currentLayer);
     backdropController.Update();
+
+    this.UpdateUI();
 };
 
 Main.render = function() {
@@ -183,9 +187,59 @@ Main.Restart = function() {
     });
 };
 
+Main.CreateUI = function() {
+    this.UI = game.add.group();
+
+    this.healthFrameStart = game.add.image(10, 10, 'UI', 'HudFrame0000', this.UI);
+    this.healthFrameStart.fixedToCamera = true;
+
+    for(var i = 0, len = 10; i < len; i++) {
+        this['healthFrameBack' + i] = game.add.image(14 + (i * 7), 13, 'UI', 'HudFrame0003', this.UI);
+        this['healthFrameFront' + i] = game.add.image(14 + (i * 7), 10, 'UI', 'HudFrame0001', this.UI);
+
+        this['healthFrameBack' + i].fixedToCamera = true;
+        this['healthFrameFront' + i].fixedToCamera = true;
+
+        if(i >= energyController.GetMaxHealth()) {
+            this['healthFrameBack' + i].visible = false;
+            this['healthFrameFront' + i].visible = false;
+        }
+    }
+
+    this.healthFrameEnd = game.add.image(14 + (energyController.GetMaxHealth() * 7), 10, 'UI', 'HudFrame0002', this.UI);
+    this.healthFrameEnd.fixedToCamera = true;
+
+    //health pips
+    for(var i = 0, len = 10; i < len; i++) {
+        this['healthPip' + i] = game.add.image(14 + (7 * i), 13, 'UI', 'HealthPips0001', this.UI);
+        this['healthPip' + i].fixedToCamera = true;
+        
+        if(i >= energyController.GetHealth()) {
+            this['healthPip' + i].visible = false;
+        }
+    }
+};
+
+Main.UpdateUI = function() {
+    for(var i = 0, len = 10; i < len; i++) {
+        if(i >= energyController.GetMaxHealth()) {
+            this['healthFrameBack' + i].visible = false;
+            this['healthFrameFront' + i].visible = false;
+        }
+    }
+
+    //health pips
+    for(var i = 0, len = 10; i < len; i++) {
+        if(i >= energyController.GetHealth()) {
+            this['healthPip' + i].visible = false;
+        }
+    }
+};
+
 Main.DrawUI = function() {
     
     this.RenderTextureFromAtlas('UI', 'HudFrame0000', 10, 10);
+    
 
     for(var i = 0, len = energyController.GetMaxHealth(); i < len; i++) {
         this.RenderTextureFromAtlas('UI', 'HudFrame0003', 14 + (i * 7), 13);
