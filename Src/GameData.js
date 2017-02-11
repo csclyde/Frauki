@@ -30,7 +30,7 @@ GameData.nuggetCount = 0;
 GameData.LoadDataFromStorage = function() {
     var save_data = JSON.parse(localStorage.getItem('save_data'));
 
-    if(save_data.version !== 0.2) {
+    if(!!save_data && save_data.version !== 0.2) {
         save_data = null;
         localStorage.setItem('save_data', '');
     }
