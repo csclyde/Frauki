@@ -151,11 +151,12 @@ Main.Restart = function() {
         Main.restarting = false;
 
         
-        Frogland.objectGroup_4.removeAll(true);
-        Frogland.objectGroup_3.removeAll(true);
+        // Frogland.objectGroup_4.removeAll(true);
+        // Frogland.objectGroup_3.removeAll(true);
 
-        objectController.CreateObjectsLayer(4);
-        objectController.CreateObjectsLayer(3);
+        // objectController.CreateObjectsLayer(4);
+        // objectController.CreateObjectsLayer(3);
+        objectController.Reset();
 
         effectsController.dicedPieces4 = game.add.group(Frogland.objectGroup_4);
         effectsController.dicedPieces3 = game.add.group(Frogland.objectGroup_3);

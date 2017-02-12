@@ -91,10 +91,171 @@ Collision.OverlapFraukiWithObject = function(f, o) {
     } else if(o.spriteType === 'Upgrade') {
         
         return false;
-    } 
+    } else if(o.spriteType === 'shard') {
+        PickUpShard(f, o);
+
+        return false;
+    }
 
     return true;
 };
+
+Collision.CollideFraukiWithEnvironment = function(f, tile) {
+    //13 - 16
+
+    //solid tile
+    if(tile.index === 1 || tile.index === 8 || tile.index === 9) { 
+        return true;
+
+    //water
+    } else if(tile.index === 2 || tile.index === 10 || tile.index === 13 || tile.index === 14 || tile.index === 15 || tile.index === 16) { 
+        frauki.states.inWater = true;
+
+        if(tile.index === 10) effectsController.Splash(tile);
+
+        if(tile.index === 13) frauki.states.flowDown = true;
+        if(tile.index === 14) frauki.states.flowRight = true;
+        if(tile.index === 15) frauki.states.flowUp = true;
+        if(tile.index === 16) frauki.states.flowLeft = true;
+
+        
+        return false;
+
+    //trick wall
+    } else if(tile.index === 3) {
+        if(frauki.state === frauki.Rolling) {
+            return false;
+        } else {
+            return true;
+        }
+
+    //cloud tile
+    } else if(tile.index === 4) { 
+        frauki.states.onCloud = true;
+
+        if(frauki.states.droppingThroughCloud) {
+            return false;
+        } else {
+            return true;
+        }
+
+    //falling tiles and attackable tiles
+    } else if(tile.index === 5) { 
+
+
+        if(tile.dislodged === true) {
+            return false;
+        }
+        
+        if(tile.waitingToFall !== true && frauki.body.center.y < tile.worldY) {
+            Frogland.DislodgeTile(tile); 
+            tile.waitingToFall = true;
+        }
+
+        if(frauki.state === frauki.AttackDiveFall) {
+            return false;
+        } else {
+            return true;
+        }
+
+    } else if(tile.index === 7) {
+
+        if(tile.dislodged === true) {
+            return false;
+        }
+
+        return true;
+
+    //updraft
+    } else if(tile.index === 11) {
+        frauki.states.inUpdraft = true;
+
+    //spikes
+    } else if(tile.index === 12) {
+
+    //left slope
+    } else if(tile.index === 17) {
+        frauki.states.onLeftSlope = true;
+
+        if(frauki.body.y + frauki.body.height > (tile.y * 16) + 1 && frauki.body.y + frauki.body.height <= tile.bottom * 16) {
+
+            if(frauki.body.velocity.y > 0) {
+                var offset = (tile.right - frauki.body.center.x);
+                if(offset > 16) offset = 16;
+                if(offset < 0) offset = 0;
+
+                frauki.body.y = (tile.y * 16) - frauki.body.height + offset;
+                frauki.body.blocked.down = true;
+                frauki.body.velocity.y = 0;
+                //frauki.body.velocity.x /= 1.25;
+            }
+        }
+
+    //right slope
+    } else if(tile.index === 18) {
+        frauki.states.onRightSlope = true;
+
+        if(frauki.body.y + frauki.body.height > (tile.y * 16) + 1 && frauki.body.y + frauki.body.height <= tile.bottom * 16) {
+
+            if(frauki.body.velocity.y > 0) {
+                var offset = 16 - (tile.right - frauki.body.center.x);
+                if(offset > 16) offset = 16;
+                if(offset < 0) offset = 0;
+
+                frauki.body.y = (tile.y * 16) - frauki.body.height + offset;
+                frauki.body.blocked.down = true;
+                frauki.body.velocity.y = 0;
+                //frauki.body.velocity.x /= 1.25;
+            }
+        }
+    }
+};
+
+Collision.CollideFraukiWithProjectile = function(f, p) {
+
+    if(p.projType === 'tar' || p.projType === 'spore') {
+        if(p.owningEnemy.state !== p.owningEnemy.Dying) {
+            if(frauki.Attacking() || frauki.states.shielded) {
+                Collision.OverlapAttackWithEnemyAttack(p, f);
+            } else {
+                frauki.Hit(p.owningEnemy, p.owningEnemy.damage);
+            }
+        }
+        
+        p.destroy();
+    }
+};
+
+
+Collision.CollideEnemiesWithDoors = function(e, d) {
+    if(d.body.x < e.body.x) {
+        e.body.blocked.left = true;
+    } else {
+        e.body.blocked.right = true;
+    }
+};
+
+Collision.OverlapEnemyAttackWithFrauki = function(e, f) {
+    if(frauki.states.shielded) {
+        Collision.OverlapAttackWithEnemyAttack(e, f);
+        return;
+    }
+
+    //if frauki is stunned and the player opened the roll window
+    if(!frauki.timers.TimerUp('attack_stun') && !frauki.timers.TimerUp('stun_dodge')) {
+        console.log('avoiding shit')
+        frauki.Roll({override: true});
+        return;
+    }
+
+    e = e.owningEnemy;
+
+    if(e.GetCurrentDamage() > 0 && !frauki.Grace() && !e.Grace()) {
+        frauki.Hit(e, e.GetCurrentDamage(), 1000);
+        e.LandHit();
+    }
+};
+
 
 Collision.OverlapAttackWithObject = function(f, o) {
     if(o.spriteType === 'enemy') {
@@ -211,30 +372,10 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
         frauki.timers.SetTimer('attack_stun', 800);
         frauki.timers.SetTimer('clash_wait', 800);
     }
-    
+
     //frauki.timers.SetTimer('grace', 400);
 };
 
-Collision.OverlapEnemyAttackWithFrauki = function(e, f) {
-    if(frauki.states.shielded) {
-        Collision.OverlapAttackWithEnemyAttack(e, f);
-        return;
-    }
-
-    //if frauki is stunned and the player opened the roll window
-    if(!frauki.timers.TimerUp('attack_stun') && !frauki.timers.TimerUp('stun_dodge')) {
-        console.log('avoiding shit')
-        frauki.Roll({override: true});
-        return;
-    }
-
-    e = e.owningEnemy;
-
-    if(e.GetCurrentDamage() > 0 && !frauki.Grace() && !e.Grace()) {
-        frauki.Hit(e, e.GetCurrentDamage(), 1000);
-        e.LandHit();
-    }
-};
 
 Collision.OverlapObjectsWithSelf = function(o1, o2) {
     if(o1.spriteType === 'enemy' && o2.spriteType === 'enemy' && o1.robotic === o2.robotic) {
@@ -327,139 +468,6 @@ Collision.OverlapObjectsWithEnvironment = function(o, e) {
     return true;
 };
 
-Collision.CollideEnemiesWithDoors = function(e, d) {
-    if(d.body.x < e.body.x) {
-        e.body.blocked.left = true;
-    } else {
-        e.body.blocked.right = true;
-    }
-};
-
-Collision.CollideFraukiWithProjectile = function(f, p) {
-
-    if(p.projType === 'tar' || p.projType === 'spore') {
-        if(p.owningEnemy.state !== p.owningEnemy.Dying) {
-            if(frauki.Attacking() || frauki.states.shielded) {
-                Collision.OverlapAttackWithEnemyAttack(p, f);
-            } else {
-                frauki.Hit(p.owningEnemy, p.owningEnemy.damage);
-            }
-        }
-        
-        p.destroy();
-    }
-};
-
-Collision.CollideFraukiWithEnvironment = function(f, tile) {
-    //13 - 16
-
-    //solid tile
-    if(tile.index === 1 || tile.index === 8 || tile.index === 9) { 
-        return true;
-
-    //water
-    } else if(tile.index === 2 || tile.index === 10 || tile.index === 13 || tile.index === 14 || tile.index === 15 || tile.index === 16) { 
-        frauki.states.inWater = true;
-
-        if(tile.index === 10) effectsController.Splash(tile);
-
-        if(tile.index === 13) frauki.states.flowDown = true;
-        if(tile.index === 14) frauki.states.flowRight = true;
-        if(tile.index === 15) frauki.states.flowUp = true;
-        if(tile.index === 16) frauki.states.flowLeft = true;
-
-        
-        return false;
-
-    //trick wall
-    } else if(tile.index === 3) {
-        if(frauki.state === frauki.Rolling) {
-            return false;
-        } else {
-            return true;
-        }
-
-    //cloud tile
-    } else if(tile.index === 4) { 
-        frauki.states.onCloud = true;
-
-        if(frauki.states.droppingThroughCloud) {
-            return false;
-        } else {
-            return true;
-        }
-
-    //falling tiles and attackable tiles
-    } else if(tile.index === 5) { 
-
-
-        if(tile.dislodged === true) {
-            return false;
-        }
-        
-        if(tile.waitingToFall !== true && frauki.body.center.y < tile.worldY) {
-            Frogland.DislodgeTile(tile); 
-            tile.waitingToFall = true;
-        }
-
-        if(frauki.state === frauki.AttackDiveFall) {
-            return false;
-        } else {
-            return true;
-        }
-
-    } else if(tile.index === 7) {
-
-        if(tile.dislodged === true) {
-            return false;
-        }
-
-        return true;
-
-    //updraft
-    } else if(tile.index === 11) {
-        frauki.states.inUpdraft = true;
-
-    //spikes
-    } else if(tile.index === 12) {
-
-    //left slope
-    } else if(tile.index === 17) {
-        frauki.states.onLeftSlope = true;
-
-        if(frauki.body.y + frauki.body.height > (tile.y * 16) + 1 && frauki.body.y + frauki.body.height <= tile.bottom * 16) {
-
-            if(frauki.body.velocity.y > 0) {
-                var offset = (tile.right - frauki.body.center.x);
-                if(offset > 16) offset = 16;
-                if(offset < 0) offset = 0;
-
-                frauki.body.y = (tile.y * 16) - frauki.body.height + offset;
-                frauki.body.blocked.down = true;
-                frauki.body.velocity.y = 0;
-                //frauki.body.velocity.x /= 1.25;
-            }
-        }
-
-    //right slope
-    } else if(tile.index === 18) {
-        frauki.states.onRightSlope = true;
-
-        if(frauki.body.y + frauki.body.height > (tile.y * 16) + 1 && frauki.body.y + frauki.body.height <= tile.bottom * 16) {
-
-            if(frauki.body.velocity.y > 0) {
-                var offset = 16 - (tile.right - frauki.body.center.x);
-                if(offset > 16) offset = 16;
-                if(offset < 0) offset = 0;
-
-                frauki.body.y = (tile.y * 16) - frauki.body.height + offset;
-                frauki.body.blocked.down = true;
-                frauki.body.velocity.y = 0;
-                //frauki.body.velocity.x /= 1.25;
-            }
-        }
-    }
-};
 
 Collision.CollideEffectWithWorld = function(e, w) {
 
@@ -483,18 +491,4 @@ Collision.OverlapEffectWithWorld = function(e, w) {
     
 
     return true;
-};
-
-Collision.OverlapFraukiWithShard = function(f, s) {
-    if(!s.owner) {
-        PickUpShard(f, s);
-    }
-    
-    return false;
-};
-
-Collision.OverlapShardWithObject = function(s, o) {
-    if(o.spriteType === 'door') {
-        OpenDoor(frauki, o);
-    }
 };

@@ -44,8 +44,6 @@ function EatApple(f, a) {
         return;
     
     a.state = a.Eaten;
-    Frogland.shardGroup.addChild(a);
-
 
     events.publish('play_sound', {name: 'crystal_door'});
 

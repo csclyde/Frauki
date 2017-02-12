@@ -884,8 +884,6 @@ EffectsController.prototype.ExplodeDoorSeal = function(door) {
     //create all the little broken pieces
     var pieces = [];
 
-    console.log(door);
-
     var i = 0;
     while(game.cache.getFrameData('Pieces').getFrameByName('DoorSeal000' + i)) {
         pieces.push(game.add.sprite(door.x + game.rnd.between(-20, 20), door.y + game.rnd.between(-20, 20), 'Pieces', 'DoorSeal000' + i));

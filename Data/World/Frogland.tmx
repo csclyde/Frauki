@@ -6031,18 +6031,6 @@
 </data>
  </layer>
  <objectgroup name="Objects_4">
-  <object id="1405" gid="100" x="2815.17" y="3330.17" width="16" height="16">
-   <properties>
-    <property name="on_death" value="open_door,door_name:double_hawk"/>
-   </properties>
-  </object>
-  <object id="1783" gid="67" x="2569" y="3048" width="16" height="16">
-   <properties>
-    <property name="facing" value="right"/>
-    <property name="id" value="tutorial_to_bigdome"/>
-    <property name="type" value="stone_seal"/>
-   </properties>
-  </object>
   <object id="1789" gid="68" x="3656.5" y="3135.5" width="16" height="16"/>
   <object id="1798" gid="106" x="2704.5" y="2988" width="16" height="16"/>
   <object id="1799" gid="105" x="3439.5" y="3264" width="16" height="16"/>
@@ -6073,18 +6061,6 @@
   <object id="2008" gid="68" x="2947.67" y="2900.67" width="16" height="16"/>
   <object id="2009" gid="68" x="2964.5" y="2866.83" width="16" height="16"/>
   <object id="2123" gid="86" x="3824.25" y="2982.75" width="16" height="16"/>
-  <object id="2135" gid="100" x="2546.5" y="3447" width="16" height="16">
-   <properties>
-    <property name="on_death" value="open_door,door_name:double_hawk"/>
-   </properties>
-  </object>
-  <object id="2136" gid="67" x="2921" y="3224" width="16" height="16">
-   <properties>
-    <property name="id" value="double_hawk"/>
-    <property name="thresholdAttempts" value="2"/>
-    <property name="type" value="enemy"/>
-   </properties>
-  </object>
   <object id="2534" gid="87" x="3282.63" y="3689.69" width="16" height="16"/>
   <object id="2535" gid="89" x="3462.63" y="3583.02" width="16" height="16"/>
   <object id="2536" gid="99" x="3234.63" y="3760.35" width="16" height="16"/>

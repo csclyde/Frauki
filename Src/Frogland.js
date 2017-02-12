@@ -63,11 +63,6 @@ Frogland.Create = function() {
     this.CreateForegroundLayer(4, startLayer === 4);
     this.CreateForegroundLayer(3, startLayer === 3);
 
-    this.shardGroup = game.add.group();
-
-    this.CreateShards(4);
-    this.CreateShards(3);
-
     this.CreateDoorLayer(1);
     this.CreateDoorLayer(2);
     this.CreateDoorLayer(3);
@@ -128,33 +123,52 @@ Frogland.Update = function() {
 
 Frogland.HandleCollisions = function() {
     //moving objects collided with the world geometry
-    game.physics.arcade.collideSpriteVsTilemapLayer(frauki, this.GetCurrentCollisionLayer(), null, Collision.CollideFraukiWithEnvironment, null, false);
-    game.physics.arcade.collideGroupVsTilemapLayer(objectController.GetCurrentObjectGroup(), this.GetCurrentCollisionLayer(), null, Collision.OverlapObjectsWithEnvironment, null, false);
+    game.physics.arcade.collideSpriteVsTilemapLayer(
+        frauki, 
+        this.GetCurrentCollisionLayer(), 
+        null, 
+        Collision.CollideFraukiWithEnvironment, 
+        null, false);
+
+    game.physics.arcade.collideGroupVsTilemapLayer(
+        objectController.GetCurrentObjectGroup(),
+        this.GetCurrentCollisionLayer(), 
+        null, 
+        Collision.OverlapObjectsWithEnvironment, 
+        null, false);
 
     //frauki is collided with other moving objects
-    game.physics.arcade.collideHandler(frauki, objectController.GetCurrentObjectGroup(), null, Collision.OverlapFraukiWithObject, null, false);
-    game.physics.arcade.collideSpriteVsGroup(frauki, this.shardGroup, null, Collision.OverlapFraukiWithShard, null, true);
+    game.physics.arcade.collideHandler(
+        frauki, 
+        objectController.GetCurrentObjectGroup(), 
+        null, 
+        Collision.OverlapFraukiWithObject, 
+        null, false);
 
     //collide enemies with doors
-    game.physics.arcade.collide(objectController.enemyList, objectController.doorList, null, Collision.CollideEnemiesWithDoors);
+    game.physics.arcade.collide(
+        objectController.enemyList, 
+        objectController.doorList, 
+        null, 
+        Collision.CollideEnemiesWithDoors);
 
     //overlap fraukis attack with objects and projectiles
     if(frauki.Attacking()) {
-        game.physics.arcade.overlap(frauki.attackRect, objectController.GetCurrentObjectGroup(), Collision.OverlapAttackWithObject);
+        game.physics.arcade.overlap(
+            frauki.attackRect, 
+            objectController.GetCurrentObjectGroup(), 
+            Collision.OverlapAttackWithObject);
     }
 
     //objects are collided with themselves
     //game.physics.arcade.collide(objectController.GetCurrentObjectGroup(), undefined, null, Collision.OverlapObjectsWithSelf);
 
-    //shards are checked against doors
-    if(!!frauki.carriedShard && this.timers.TimerUp('shard_object_check')) {
-        game.physics.arcade.overlap(this.shardGroup, objectController.GetCurrentObjectGroup(), null, Collision.OverlapShardWithObject);
-        this.timers.SetTimer('shard_object_check', 500);
-    }
-
     //frauki is checked against projectiles
     if(projectileController.projectiles.countLiving() > 0) {
-        game.physics.arcade.overlap(frauki, projectileController.projectiles, Collision.CollideFraukiWithProjectile);
+        game.physics.arcade.overlap(
+            frauki, 
+            projectileController.projectiles, 
+            Collision.CollideFraukiWithProjectile);
     }
 };
 
@@ -224,15 +238,6 @@ Frogland.CreateDoorLayer = function(layer) {
     });
 
     //this['door' + layer + 'Group'].forEach(function(d) { d.alpha = 0; });
-};
-
-Frogland.CreateShards = function(layer) {
-
-    this.shardLayer = layer;
-    this.map.createFromObjects('Objects_' + layer, 70, 'Shard0000', 'Shard0000', true, true, Frogland.shardGroup, Shard, false);
-    this.map.createFromObjects('Objects_' + layer, 71, 'Shard0001', 'Shard0001', true, true, Frogland.shardGroup, Shard, false);
-    this.map.createFromObjects('Objects_' + layer, 72, 'Shard0002', 'Shard0002', true, true, Frogland.shardGroup, Shard, false);
-    this.map.createFromObjects('Objects_' + layer, 73, 'Shard0003', 'Shard0003', true, true, Frogland.shardGroup, Shard, false);
 };
 
 Frogland.PreprocessTiles = function(layer) {
@@ -365,14 +370,6 @@ Frogland.ChangeLayer = function(newLayer, immediate) {
         if(!!obj.body) obj.body.enable = true;
         if(!!obj.Activate) obj.Activate();
     });
-
-    this.shardGroup.forEach(function(shard) {
-        if(this.currentLayer === shard.currentLayer) {
-            shard.visible = true;
-        } else {
-            shard.visible = false;
-        }
-    }, this);
 
     if(!!effectsController) effectsController.ClearDicedPieces();
     if(!!projectileController) projectileController.DestroyAllProjectiles();

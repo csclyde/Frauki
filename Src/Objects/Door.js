@@ -141,7 +141,6 @@ function OpenDoor(f, d, override) {
     if(frauki.Attacking() && frauki.GetCurrentDamage() > 0) {
         if((d.facing === 'left' && f.body.center.x > d.body.center.x) || (d.facing === 'right' && f.body.center.x < d.body.center.x) || !!override) {
             PerformOpen(d, true);
-            console.log('Opening door with attack:' + d.id);
 
             effectsController.ExplodeDoorSeal(d);
             effectsController.ScreenFlash();
@@ -157,12 +156,10 @@ function OpenDoor(f, d, override) {
 
         d.waitingToOpen = true;
 
-        console.log(Frogland.shardGroup);
-
         //get the prism for this door
         var prism = null;
 
-        Frogland.shardGroup.forEach(function(s) {
+        objectController.shardList.forEach(function(s) {
             if(s.name === d.prism) {
                 prism = s;
             }
