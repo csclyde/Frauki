@@ -115,10 +115,10 @@ Loading.create = function() {
     timerUtil = new TimerUtil();
     objectController = new ObjectController();
     backdropController = new BackdropController();
+    effectsController = new EffectsController();
 
     Frogland.Create();
     
-    effectsController = new EffectsController();
     weaponController = new WeaponController();
     projectileController = new ProjectileController();
     speechController = new SpeechController();

@@ -179,8 +179,6 @@ function OpenDoor(f, d, override) {
             PerformOpen(d, true);
             prism.ReturnToUI();
         });
-
-        console.log('Opening door with prism shard:' + d.id);
     }  
 };
 

@@ -7,19 +7,16 @@ EffectsController = function() {
     this.negativeBits.makeParticles('Misc', ['EnergyBitNeg0000', 'EnergyBitNeg0001', 'EnergyBitNeg0002', 'EnergyBitNeg0003', 'EnergyBitNeg0004', 'EnergyBitNeg0005']);
     this.negativeBits.gravity = -150;
     this.negativeBits.setRotation(0, 0);
-    //Frogland.effectsGroup.addChild(this.negativeBits);
 
     this.positiveBits = game.add.emitter(0, 0, 15);
     this.positiveBits.makeParticles('Misc', ['EnergyBitPos0000', 'EnergyBitPos0001', 'EnergyBitPos0002', 'EnergyBitPos0003', 'EnergyBitPos0004', 'EnergyBitPos0005']); //array of strings here for multiple sprites
     this.positiveBits.gravity = -700;
     this.positiveBits.setRotation(0, 0);
-    //Frogland.effectsGroup.addChild(this.positveBits);
 
     this.neutralBits = game.add.emitter(0, 0, 15);
     this.neutralBits.makeParticles('Misc', ['EnergyBitNeutral0000', 'EnergyBitNeutral0001', 'EnergyBitNeutral0002', 'EnergyBitNeutral0003', 'EnergyBitNeutral0004', 'EnergyBitNeutral0005']); //array of strings here for multiple sprites
     this.neutralBits.gravity = -700;
     this.neutralBits.setRotation(0, 0);
-    //Frogland.effectsGroup.addChild(this.neutralBits);
 
     this.splashRight = game.add.emitter(0, 0, 10);
     this.splashRight.makeParticles('Misc', ['Splash0000', 'Splash0001']); 
@@ -40,7 +37,6 @@ EffectsController = function() {
     this.posSpark.gravity = -500;
     this.posSpark.particleDrag.setTo(100);
     this.posSpark.setRotation(0, 0);
-    //Frogland.effectsGroup.addChild(this.posSpark);
 
     this.negSpark = game.add.emitter(0, 0, 50);
     this.negSpark.makeParticles('Misc', ['Sparks0006', 'Sparks0007', 'Sparks0008', 'Sparks0009', 'Sparks0010', 'Sparks0011']); 
@@ -84,11 +80,6 @@ EffectsController = function() {
 
     this.particleType = 'pos';
 
-    this.pieces = [];
-    this.dicedPieces4 = game.add.group(Frogland.objectGroup_4);
-    this.dicedPieces3 = game.add.group(Frogland.objectGroup_3);
-    this.dicedPieces2 = game.add.group(Frogland.objectGroup_2);
-
     this.energyStreak = game.add.emitter(0, 0, 50);
     this.energyStreak.makeParticles('Misc', ['Sparks0000', 'Sparks0001', 'Sparks0002', 'Sparks0003', 'Sparks0004']); 
     this.energyStreak.gravity = -580;
@@ -117,9 +108,6 @@ EffectsController = function() {
 
     this.loadedEffects = [];
     this.loadedEffectsCollide = [];
-
-    this.LoadMapEffects(4);
-    this.LoadMapEffects(3);
     
     var screenLightBmd = game.add.bitmapData(game.width, game.height);
     screenLightBmd.ctx.fillStyle = 'white';
@@ -146,6 +134,31 @@ EffectsController = function() {
     this.charge1.animations.play('flicker');
     this.charge1.visible = false;
     this.charge1.anchor.setTo(0.5);
+};
+
+EffectsController.prototype.CreateEffectsLayer = function() {
+    this.dicedPieces4 = game.add.group();
+    this.dicedPieces3 = game.add.group();
+    this.effectsGroup = game.add.group();
+
+    this.effectsGroup.add(this.negativeBits);
+    this.effectsGroup.add(this.positiveBits);
+    this.effectsGroup.add(this.neutralBits);
+    this.effectsGroup.add(this.splashRight);
+    this.effectsGroup.add(this.splashLeft);
+    this.effectsGroup.add(this.posSpark);
+    this.effectsGroup.add(this.negSpark);
+    this.effectsGroup.add(this.neutralSpark);
+    this.effectsGroup.add(this.stars);
+    this.effectsGroup.add(this.sprockets);
+    this.effectsGroup.add(this.energyStreak);
+    this.effectsGroup.add(this.nuggDropper);
+    this.effectsGroup.add(this.nuggDepositer);
+    this.effectsGroup.add(this.materializingApple);
+    this.effectsGroup.add(this.charge1);
+
+    this.LoadMapEffects(4);
+    this.LoadMapEffects(3);
 };
 
 EffectsController.prototype.Update = function() {
@@ -612,7 +625,6 @@ EffectsController.prototype.DiceObject = function(name, x, y, xv, yv, layer) {
 EffectsController.prototype.ClearDicedPieces = function() {
     this.dicedPieces4.removeAll(true);
     this.dicedPieces3.removeAll(true);
-    this.dicedPieces2.removeAll(true);
 };
 
 EffectsController.prototype.MakeHearts = function(amt) {
@@ -750,7 +762,7 @@ EffectsController.prototype.Explosion = function(src) {
 };
 
 EffectsController.prototype.JumpDust = function(src) {
-    var dust = game.add.sprite(src.x - 50, src.y - 30, 'Misc', null, Frogland.effectsGroup);
+    var dust = game.add.sprite(src.x - 50, src.y - 30, 'Misc', null, this.effectsGroup);
     dust.animations.add('dust', ['JumpDust0000', 'JumpDust0001', 'JumpDust0002', 'JumpDust0003', 'JumpDust0004', 'JumpDust0005', 'JumpDust0006'], 10, false, false);
     dust.animations.play('dust');
     dust.alpha = 0.5;
@@ -762,7 +774,7 @@ EffectsController.prototype.DoorDust = function(src) {
         return;
     }
 
-    var dust = game.add.sprite(src.x - 50, src.y - 30, 'Misc', null, Frogland.effectsGroup);
+    var dust = game.add.sprite(src.x - 50, src.y - 30, 'Misc', null, this.effectsGroup);
     dust.animations.add('dust', ['DoorDust0000', 'DoorDust0001', 'DoorDust0002', 'DoorDust0003', 'DoorDust0004'], 10, false, false);
     dust.animations.play('dust');
     dust.alpha = 0.5;
@@ -770,7 +782,7 @@ EffectsController.prototype.DoorDust = function(src) {
 };
 
 EffectsController.prototype.Dust = function(x, y) {
-    var dust = game.add.sprite(x - 50, y - 50, 'Misc', null, Frogland.effectsGroup);
+    var dust = game.add.sprite(x - 50, y - 50, 'Misc', null, this.effectsGroup);
     dust.animations.add('dust', ['Dust0000', 'Dust0001', 'Dust0002', 'Dust0003', 'Dust0004', 'Dust0005'], 10, false, false);
     dust.animations.play('dust');
     dust.alpha = 0.8;
@@ -865,7 +877,7 @@ EffectsController.prototype.SpriteTrail = function(sprite, freq, duration, dropo
             sprite.body.center.y - 80,// - 100 - (sprite.animations.currentFrame.height / 2), 
             sprite.key, 
             sprite.animations.currentFrame.name, 
-            Frogland.effectsGroup);
+            this.effectsGroup);
         
         trailSprite.anchor.setTo(0);
         trailSprite.scale.x = sprite.scale.x;
@@ -914,7 +926,7 @@ EffectsController.prototype.ExplodeDoorSeal = function(door) {
 
 EffectsController.prototype.SpawnAppleCore = function(x, y) {
 
-    var appleCore = game.add.sprite(x, y, 'Misc', 'Apple0001');
+    var appleCore = game.add.sprite(x, y, 'Misc', 'Apple0001', this.effectsGroup);
     game.physics.enable(appleCore, Phaser.Physics.ARCADE);
     appleCore.body.setSize(16, 16, 0, 2);
     appleCore.body.bounce.setTo(0.5);
@@ -957,7 +969,7 @@ EffectsController.prototype.ShatterShield = function() {
 
     var i = 0;
     while(game.cache.getFrameData('Pieces').getFrameByName('Shield000' + i)) {
-        pieces.push(game.add.sprite(frauki.body.center.x + game.rnd.between(-20, 20), frauki.body.center.y + game.rnd.between(-20, 20), 'Pieces', 'Shield000' + i));
+        pieces.push(game.add.sprite(frauki.body.center.x + game.rnd.between(-20, 20), frauki.body.center.y + game.rnd.between(-20, 20), 'Pieces', 'Shield000' + i, this.effectsGroup));
         i++;
     }
 
@@ -1003,7 +1015,6 @@ EffectsController.prototype.SprocketBurst = function(src, amt) {
     this.sprockets.minParticleSpeed.setTo(-200);
     this.sprockets.maxParticleSpeed.setTo(200, 0);
     this.sprockets.particleDrag.setTo(100);
-
 };
 
 EffectsController.prototype.DropNuggets = function(amt) {

@@ -4,21 +4,6 @@ Frogland.Create = function() {
 
     this.timers = new TimerUtil();
 
-    this.bg = game.add.tileSprite(0, 0, pixel.width * 1.5, pixel.height * 1.5, 'Background');
-    this.bg.fixedToCamera = true;
-    this.bg.autoScroll(-2, 0);
-
-    this.clouds1 = game.add.tileSprite(0, 0, 1024, 512, 'clouds1');
-    this.clouds1.fixedToCamera = true;
-    this.clouds1.autoScroll(-2, 0);
-
-    this.clouds2 = game.add.tileSprite(0, 0, 1024, 512, 'clouds2');
-    this.clouds2.fixedToCamera = true;
-    this.clouds2.autoScroll(-3, 0);
-
-    this.plx1 = game.add.image(0, 0, 'parallax1');
-    this.plx1.fixedToCamera = true;
-
     this.map = game.add.tilemap('Frogland');
     this.map.addTilesetImage('FrogtownTiles');
     this.map.addTilesetImage('DepthsTiles');
@@ -26,29 +11,17 @@ Frogland.Create = function() {
     this.map.addTilesetImage('Doodads');
     this.map.addTilesetImage('Collision');
 
-    var fraukiStartX, fraukiStartY, startLayer;
+    this.currentLayer = 3;
 
-    if(this.map.properties.debug === 'false') {
-        fraukiStartX = 2025;
-        fraukiStartY = 1050;
-        startLayer = 3;
-    } else {
-        fraukiStartX = this.map.properties.startX * 16;
-        fraukiStartY = this.map.properties.startY * 16;
-        startLayer = +this.map.properties.startLayer;
-    }
-
-    this.currentLayer = startLayer;
-
+    backdropController.CreateParallax();
     backdropController.LoadBackgrounds();
     
-    this.CreateBackgroundLayer(4, startLayer === 4);
-    this.CreateBackgroundLayer(3, startLayer === 3);
+    this.CreateBackgroundLayer(4, false);
+    this.CreateBackgroundLayer(3, true);
 
-    this.placedShards = game.add.group();
-    this.effectsGroup = game.add.group();
+    effectsController.CreateEffectsLayer();
     
-    frauki = new Player(game, fraukiStartX, fraukiStartY, 'Frauki');
+    frauki = new Player(game, 0, 0, 'Frauki');
     game.add.existing(frauki);
 
     this.CreateCollisionLayer(4);
@@ -57,15 +30,13 @@ Frogland.Create = function() {
     objectController.CreateObjectsLayer(4);
     objectController.CreateObjectsLayer(3);
 
-    this.CreateMidgroundLayer(4, startLayer === 4);
-    this.CreateMidgroundLayer(3, startLayer === 3);
+    this.CreateMidgroundLayer(4, false);
+    this.CreateMidgroundLayer(3, true);
 
-    this.CreateForegroundLayer(4, startLayer === 4);
-    this.CreateForegroundLayer(3, startLayer === 3);
+    this.CreateForegroundLayer(4, false);
+    this.CreateForegroundLayer(3, true);
 
-    this.CreateDoorLayer(1);
     this.CreateDoorLayer(2);
-    this.CreateDoorLayer(3);
 
     this.PreprocessTiles(4);
     this.PreprocessTiles(3);
@@ -101,24 +72,6 @@ Frogland.Update = function() {
     frauki.states.flowLeft = false;
 
     this.HandleCollisions();
-
-    this.clouds1.cameraOffset.x = -(game.camera.x * 0.10) + 0;
-    this.clouds1.cameraOffset.y = -(game.camera.y * 0.05) + 0;
-
-    // if(game.camera.y > 80 * 16) this.clouds1.visible = false;
-    // else this.clouds1.visible = true;
-
-    this.clouds2.cameraOffset.x = -(game.camera.x * 0.15) + 0;
-    this.clouds2.cameraOffset.y = -(game.camera.y * 0.06) + 20;
-
-    // if(game.camera.y > 80 * 16) this.clouds2.visible = false;
-    // else this.clouds2.visible = true;
-
-    this.plx1.cameraOffset.x = -(game.camera.x * 0.20) + 0;
-    this.plx1.cameraOffset.y = -(game.camera.y * 0.08) + 220;
-
-    // if(game.camera.y > 80 * 16) this.plx1.visible = false;
-    // else this.plx1.visible = true;
 };
 
 Frogland.HandleCollisions = function() {
@@ -174,30 +127,18 @@ Frogland.HandleCollisions = function() {
 
 Frogland.SpawnFrauki = function() {
     if(Frogland.map.properties.debug === 'false') {
-
-        if(GameData.GetFlashCopy()) {
-            var fc = GameData.GetFlashCopy();
-
-            frauki.x = fc.x;
-            frauki.y = fc.y;
-            Frogland.ChangeLayer(fc.layer, true);   
-            frauki.timers.SetTimer('frauki_invincible', 0);
-        }
-        else {
-            objectController.checkpointList.forEach(function(obj) {
-                if(obj.spriteType === 'checkpoint' && obj.id == GameData.GetCheckpoint()) {
-                    frauki.x = obj.x;
-                    frauki.y = obj.y + 90;
-                    Frogland.ChangeLayer(obj.owningLayer, true);   
-                    frauki.timers.SetTimer('frauki_invincible', 0);
-                } 
-            });  
-        }
-
+        objectController.checkpointList.forEach(function(obj) {
+            if(obj.spriteType === 'checkpoint' && obj.id == GameData.GetCheckpoint()) {
+                frauki.x = obj.x;
+                frauki.y = obj.y + 90;
+                Frogland.ChangeLayer(obj.owningLayer, true);   
+                frauki.timers.SetTimer('frauki_invincible', 0);
+            } 
+        });  
     } else {
         fraukiStartX = this.map.properties.startX * 16;
         fraukiStartY = this.map.properties.startY * 16;
-        startLayer = +this.map.properties.startLayer;
+        Frogland.ChangeLayer(+this.map.properties.startLayer, true); 
     }
 };
 
@@ -268,6 +209,7 @@ Frogland.PreprocessTiles = function(layer) {
     }, this, 0, 0, this.map.width, this.map.height, 'Foreground_' + layer);
 
     this.animatedTiles = [];
+    
     //get animations
     this.map.forEach(function(tile) {
         if(!!tile) {
