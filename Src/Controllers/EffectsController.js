@@ -1,77 +1,9 @@
 MAX_FLUFF_SPEED = 20;
 
 EffectsController = function() {
+    var that = this;
+
     this.timers = new TimerUtil();
-
-    this.negativeBits = game.add.emitter(0, 0, 15);
-    this.negativeBits.makeParticles('Misc', ['EnergyBitNeg0000', 'EnergyBitNeg0001', 'EnergyBitNeg0002', 'EnergyBitNeg0003', 'EnergyBitNeg0004', 'EnergyBitNeg0005']);
-    this.negativeBits.gravity = -150;
-    this.negativeBits.setRotation(0, 0);
-
-    this.positiveBits = game.add.emitter(0, 0, 15);
-    this.positiveBits.makeParticles('Misc', ['EnergyBitPos0000', 'EnergyBitPos0001', 'EnergyBitPos0002', 'EnergyBitPos0003', 'EnergyBitPos0004', 'EnergyBitPos0005']); //array of strings here for multiple sprites
-    this.positiveBits.gravity = -700;
-    this.positiveBits.setRotation(0, 0);
-
-    this.neutralBits = game.add.emitter(0, 0, 15);
-    this.neutralBits.makeParticles('Misc', ['EnergyBitNeutral0000', 'EnergyBitNeutral0001', 'EnergyBitNeutral0002', 'EnergyBitNeutral0003', 'EnergyBitNeutral0004', 'EnergyBitNeutral0005']); //array of strings here for multiple sprites
-    this.neutralBits.gravity = -700;
-    this.neutralBits.setRotation(0, 0);
-
-    this.splashRight = game.add.emitter(0, 0, 10);
-    this.splashRight.makeParticles('Misc', ['Splash0000', 'Splash0001']); 
-    this.splashRight.gravity = 300;
-    this.splashRight.maxParticleScale = 1;
-    this.splashRight.minParticleScale = 1;
-    this.splashRight.setRotation(0, 0);
-
-    this.splashLeft = game.add.emitter(0, 0, 10);
-    this.splashLeft.makeParticles('Misc', ['Splash0002', 'Splash0003']); 
-    this.splashLeft.gravity = 300;
-    this.splashLeft.maxParticleScale = 1;
-    this.splashLeft.minParticleScale = 1;
-    this.splashLeft.setRotation(0, 0);
-
-    this.posSpark = game.add.emitter(0, 0, 50);
-    this.posSpark.makeParticles('Misc', ['Sparks0000', 'Sparks0001', 'Sparks0002', 'Sparks0003', 'Sparks0004', 'Sparks0005']); 
-    this.posSpark.gravity = -500;
-    this.posSpark.particleDrag.setTo(100);
-    this.posSpark.setRotation(0, 0);
-
-    this.negSpark = game.add.emitter(0, 0, 50);
-    this.negSpark.makeParticles('Misc', ['Sparks0006', 'Sparks0007', 'Sparks0008', 'Sparks0009', 'Sparks0010', 'Sparks0011']); 
-    this.negSpark.gravity = -400;
-    this.negSpark.particleDrag.setTo(100);
-    this.negSpark.setRotation(0, 0);
-
-    this.neutralSpark = game.add.emitter(0, 0, 50);
-    this.neutralSpark.makeParticles('Misc', ['Sparks0012', 'Sparks0013', 'Sparks0014', 'Sparks0015', 'Sparks0016']); 
-    this.neutralSpark.gravity = -400;
-    this.neutralSpark.particleDrag.setTo(100);
-    this.neutralSpark.setRotation(0, 0);
-
-    this.stars = game.add.emitter(0, 0, 30);
-    this.stars.makeParticles('Misc', ['Stars0000', 'Stars0001', 'Stars0002', 'Stars0003']); 
-    this.stars.gravity = -700;
-    this.stars.particleDrag.setTo(3000);
-    this.stars.setRotation(0, 0);
-    this.stars.minParticleSpeed.setTo(-600);
-    this.stars.maxParticleSpeed.setTo(600);
-    this.stars.alpha = 0.8;
-    this.stars.maxParticleScale = 1;
-    this.stars.minParticleScale = 1;
-
-    this.sprockets = game.add.emitter(0, 0, 30);
-    this.sprockets.makeParticles('Misc', ['Sprockets0000', 'Sprockets0001', 'Sprockets0002', 'Sprockets0003', 'Sprockets0004']); 
-    this.sprockets.gravity = -200;
-    this.sprockets.particleDrag.setTo(100);
-    this.sprockets.setRotation(0, 0);
-    this.sprockets.minParticleSpeed.setTo(-200);
-    this.sprockets.maxParticleSpeed.setTo(200, 0);
-    this.sprockets.alpha = 1;
-    this.sprockets.maxParticleScale = 1;
-    this.sprockets.minParticleScale = 1;
-    this.sprockets.setRotation(-500, 500);
 
     //unassigned particles will be set to move towards this destination
     this.activeDest = null;
@@ -80,35 +12,65 @@ EffectsController = function() {
 
     this.particleType = 'pos';
 
-    this.energyStreak = game.add.emitter(0, 0, 50);
-    this.energyStreak.makeParticles('Misc', ['Sparks0000', 'Sparks0001', 'Sparks0002', 'Sparks0003', 'Sparks0004']); 
-    this.energyStreak.gravity = -580;
-    this.energyStreak.particleDrag.setTo(100);
-    this.energyStreak.minParticleSpeed.setTo(-80);
-    this.energyStreak.maxParticleSpeed.setTo(80);
-    this.energyStreak.maxParticleScale = 1;
-    this.energyStreak.minParticleScale = 1;
-    this.energyStreak.setRotation(0, 0);
-
-    this.nuggDropper = game.add.emitter(0, 0, 50);
-    this.nuggDropper.makeParticles('Misc', ['EnergyBitNeutral0000', 'EnergyBitNeutral0001', 'EnergyBitNeutral0002', 'EnergyBitNeutral0003', 'EnergyBitNeutral0004', 'EnergyBitNeutral0005']);
-    this.nuggDropper.gravity = -300;
-    this.nuggDropper.particleDrag.setTo(50);
-    this.nuggDropper.setRotation(0, 0);
-    this.nuggDropper.minParticleSpeed.setTo(-200);
-    this.nuggDropper.maxParticleSpeed.setTo(200);
-    this.nuggDropper.alpha = 1;
-    this.nuggDropper.maxParticleScale = 1;
-    this.nuggDropper.minParticleScale = 1;
-
-    this.nuggDepositer = game.add.emitter(0, 0, 15);
-    this.nuggDepositer.makeParticles('Misc', ['EnergyBitNeutral0000', 'EnergyBitNeutral0001', 'EnergyBitNeutral0002', 'EnergyBitNeutral0003', 'EnergyBitNeutral0004', 'EnergyBitNeutral0005']);
-    this.nuggDepositer.gravity = -700;
-    this.nuggDepositer.setRotation(0, 0);
-
     this.loadedEffects = [];
     this.loadedEffectsCollide = [];
-    
+
+};
+
+EffectsController.prototype.Reset = function() {
+    this.dicedPieces3.removeAll(true);
+    this.dicedPieces4.removeAll(true);
+};
+
+EffectsController.prototype.CreateEffect = function(e, x, y, w, h) {
+    var effect = game.add.emitter(x || 0, y || 0, e.Count);
+    effect.width = w || 0;
+    effect.height = h || 0;
+    effect.makeParticles('Misc', e.Frames); 
+    effect.gravity = e.Gravity || -700;
+    effect.particleDrag.setTo(e.Drag || 0);
+    effect.setRotation(e.MinRot || 0, e.MaxRot || 0);
+    effect.minParticleSpeed.setTo(e.MinSpeedX || 0, e.MinSpeedY || 0);
+    effect.maxParticleSpeed.setTo(e.MaxSpeedX || 0, e.MaxSpeedY || 0);
+    effect.alpha = e.Alpha || 1;
+    effect.minParticleScale = e.MinScale || 1;
+    effect.maxParticleScale = e.MaxScale || 1;
+
+    return effect;
+};
+
+EffectsController.prototype.CreateEffectsLayer = function() {
+    var that = this;
+
+    this.dicedPieces4 = game.add.group();
+    this.dicedPieces3 = game.add.group();
+    this.effectsGroup = game.add.group();
+
+    Effects.Emitters.forEach(function(e) {
+        that[e.Name] = that.CreateEffect(e);
+        that.effectsGroup.add(that[e.Name]);
+    });
+
+    this.materializingApple = game.add.image(0, 0, 'Misc', 'Apple0000');
+    this.materializingApple.animations.add('mat', ['Apple0007', 'Apple0008', 'Apple0009', 'Apple0010', 'Apple0011', 'Apple0012'], 12, true, false);
+    this.materializingApple.animations.play('mat');
+    this.materializingApple.visible = false;
+    this.materializingApple.anchor.setTo(0.5);
+
+    this.charge1 = game.add.image(0, 0, 'Misc', 'Charge10000');
+    this.charge1.animations.add('flicker', ['Charge10000', 'Charge10001', 'Charge10002', 'Charge10003'], 18, true, false);
+    this.charge1.animations.play('flicker');
+    this.charge1.visible = false;
+    this.charge1.anchor.setTo(0.5);
+
+    this.effectsGroup.add(this.materializingApple);
+    this.effectsGroup.add(this.charge1);
+
+    this.LoadMapEffects(4);
+    this.LoadMapEffects(3);
+};
+
+EffectsController.prototype.CreateForegroundEffectsLayer = function() {
     var screenLightBmd = game.add.bitmapData(game.width, game.height);
     screenLightBmd.ctx.fillStyle = 'white';
     screenLightBmd.ctx.fillRect(0,0, game.width, game.height);
@@ -122,43 +84,6 @@ EffectsController = function() {
     screenDarkBmd.ctx.fillRect(0,0, game.width, game.height);
     this.screenDark = game.add.sprite(0, 0, screenDarkBmd);
     this.screenDark.fixedToCamera = true;
-
-    this.materializingApple = game.add.image(0, 0, 'Misc', 'Apple0000');
-    this.materializingApple.animations.add('mat', ['Apple0007', 'Apple0008', 'Apple0009', 'Apple0010', 'Apple0011', 'Apple0012'], 12, true, false);
-    this.materializingApple.animations.play('mat');
-    this.materializingApple.visible = false;
-    this.materializingApple.anchor.setTo(0.5);
-
-    this.charge1 = game.add.image(0, 0, 'Misc', 'Charge10000');
-    this.charge1.animations.add('flicker', ['Charge10000', 'Charge10001', 'Charge10002', 'Charge10003'], 18, true, false);
-    this.charge1.animations.play('flicker');
-    this.charge1.visible = false;
-    this.charge1.anchor.setTo(0.5);
-};
-
-EffectsController.prototype.CreateEffectsLayer = function() {
-    this.dicedPieces4 = game.add.group();
-    this.dicedPieces3 = game.add.group();
-    this.effectsGroup = game.add.group();
-
-    this.effectsGroup.add(this.negativeBits);
-    this.effectsGroup.add(this.positiveBits);
-    this.effectsGroup.add(this.neutralBits);
-    this.effectsGroup.add(this.splashRight);
-    this.effectsGroup.add(this.splashLeft);
-    this.effectsGroup.add(this.posSpark);
-    this.effectsGroup.add(this.negSpark);
-    this.effectsGroup.add(this.neutralSpark);
-    this.effectsGroup.add(this.stars);
-    this.effectsGroup.add(this.sprockets);
-    this.effectsGroup.add(this.energyStreak);
-    this.effectsGroup.add(this.nuggDropper);
-    this.effectsGroup.add(this.nuggDepositer);
-    this.effectsGroup.add(this.materializingApple);
-    this.effectsGroup.add(this.charge1);
-
-    this.LoadMapEffects(4);
-    this.LoadMapEffects(3);
 };
 
 EffectsController.prototype.Update = function() {
@@ -243,8 +168,6 @@ EffectsController.prototype.Update = function() {
 
 EffectsController.prototype.LoadMapEffects = function(layer) {
     var that = this;
-
-    //console.log(Frogland.map.objects['Objects_' + layer]);
 
     Frogland.map.objects['Triggers_' + layer].forEach(function(o) {
         if(o.type === 'effect') {
@@ -856,9 +779,9 @@ EffectsController.prototype.Fade = function(show) {
     if(show) {
         this.screenDark.alpha = 0;
         this.screenDark.visible = true;
-        return game.add.tween(this.screenDark).to( { alpha: 1 }, 600, Phaser.Easing.Linear.None, true);
+        return game.add.tween(this.screenDark).to( { alpha: 1 }, 4000, Phaser.Easing.Linear.None, true);
     } else {
-        return game.add.tween(this.screenDark).to( { alpha: 0 }, 200, Phaser.Easing.Linear.None, true);
+        return game.add.tween(this.screenDark).to( { alpha: 0 }, 1000, Phaser.Easing.Linear.None, true);
     }
 };
 

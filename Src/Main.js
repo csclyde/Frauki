@@ -60,6 +60,8 @@ Main.update = function() {
     backdropController.Update();
 
     this.UpdateUI();
+    pixel.context.globalAlpha = this.currentAlpha;
+
 };
 
 Main.render = function() {
@@ -122,7 +124,9 @@ Main.Restart = function() {
     speechController.HideSpeech();
 
     this.restarting = true;
-    game.time.slowMotion = 5;
+    this.physicsSlowMo = 0.2;
+    this.currentAlpha = 1;
+    pixel.context.globalAlpha = 1;
     var fadeOutTween = effectsController.Fade(true);
 
     inputController.OnLeft(false);
@@ -145,21 +149,13 @@ Main.Restart = function() {
         });
 
         energyController.Reset();
-        game.time.slowMotion = 1;
+        Main.physicsSlowMo = 1.0;
         effectsController.Fade(false);
 
         Main.restarting = false;
 
-        
-        // Frogland.objectGroup_4.removeAll(true);
-        // Frogland.objectGroup_3.removeAll(true);
-
-        // objectController.CreateObjectsLayer(4);
-        // objectController.CreateObjectsLayer(3);
         objectController.Reset();
-
-        effectsController.dicedPieces4 = game.add.group(Frogland.objectGroup_4);
-        effectsController.dicedPieces3 = game.add.group(Frogland.objectGroup_3);
+        effectsController.Reset();
 
         GameData.ResetNuggCount();
 

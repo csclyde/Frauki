@@ -31,9 +31,10 @@ Upgrade = function(game, x, y, name) {
     this.icon.animations.add('Shield', ['Upgrade0004'], 18, true, false);
     this.icon.animations.add('Baton', ['Upgrade0005'], 18, true, false);
     this.icon.iconSet = false;
-    this.icon.x = this.x;
-    this.icon.y = this.y;
-    this.icon.visible = false;
+    this.icon.x = -25;
+    this.icon.y = -25;
+
+    this.addChild(this.icon);
 
 };
 
@@ -48,11 +49,8 @@ Upgrade.prototype.update = function() {
         this.state();
 
     if(GameData.HasUpgrade(this.upgrade)) {
-        this.icon.destroy();
         this.destroy();
     }
-
-    this.icon.visible = this.visible;
 
     if(!this.icon.iconSet) {
         if(this.upgrade.indexOf('Health') > 0) {
@@ -62,11 +60,12 @@ Upgrade.prototype.update = function() {
         } else if(this.upgrade === 'Baton') {
             this.icon.animations.play('Baton');
         }
+
+        this.icon.iconSet = true;
     }
 };
 
 Upgrade.prototype.ChangeLayerAway = function() {
-    this.icon.visible = false;
 };
 
 function HitUpgrade(f, o) {
@@ -96,7 +95,6 @@ function HitUpgrade(f, o) {
                 ScriptRunner.run('demo_' + o.upgrade);
             }
 
-            o.icon.destroy();
             o.destroy();
         } else {
             o.shakeMagnitudeX = 100;
@@ -121,7 +119,4 @@ Upgrade.prototype.Active = function() {
     } else {
         this.body.velocity.x = 0;
     }
-
-    this.icon.x = this.x - 25;
-    this.icon.y = this.y - 25;
 };

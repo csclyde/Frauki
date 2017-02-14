@@ -891,8 +891,6 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
 
     energyController.RemoveHealth(damage);
 
-    console.log('Frauki is taking ' + damage + ' damage');
-
     if(this.body.center.x < e.body.center.x) {
         this.body.velocity.x = -500;
     } else {
@@ -1028,8 +1026,6 @@ Player.prototype.Falling = function() {
         var bottomTile = Frogland.map.getTileWorldXY(xLoc, this.body.y, 16, 16, Frogland.GetCurrentCollisionLayer());
         var topTile = Frogland.map.getTileWorldXY(xLoc, this.body.y - 3, 16, 16, Frogland.GetCurrentCollisionLayer());
         var topTile2 = Frogland.map.getTileWorldXY(xLoc, this.body.y - 6, 16, 16, Frogland.GetCurrentCollisionLayer());
-
-        //console.log(topTile, bottomTile);
 
         if((topTile === null || topTile2 === null) && bottomTile !== null) {
             this.ChangeState(this.Hanging);

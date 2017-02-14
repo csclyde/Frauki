@@ -36,6 +36,8 @@ Frogland.Create = function() {
     this.CreateForegroundLayer(4, false);
     this.CreateForegroundLayer(3, true);
 
+    effectsController.CreateForegroundEffectsLayer();
+
     this.CreateDoorLayer(2);
 
     this.PreprocessTiles(4);
