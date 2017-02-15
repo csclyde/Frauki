@@ -27,7 +27,7 @@ BackdropController.prototype.Update = function() {
     // if(game.camera.y > 80 * 16) this.clouds1.visible = false;
     // else this.clouds1.visible = true;
 
-    this.clouds2.cameraOffset.x = -(game.camera.x * 0.15) + 0;
+    this.clouds2.cameraOffset.x = -(game.camera.x * 0.15) + 200;
     this.clouds2.cameraOffset.y = -(game.camera.y * 0.06) + 20;
 
     // if(game.camera.y > 80 * 16) this.clouds2.visible = false;

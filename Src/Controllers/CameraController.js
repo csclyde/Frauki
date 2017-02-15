@@ -59,10 +59,19 @@ CameraController.prototype.Update = function() {
 	this.camVelX = (idealX - this.camX) * 0.08;
 	this.camVelY = (idealY - this.camY) * 0.08;
 
-	//console.log(this.camVelY)
+	var camXIncrement = this.camVelX * Phaser.Math.smoothstep(Math.abs(this.camVelX), -0.01, 3.33);
+	var camYIncrement = this.camVelY * Phaser.Math.smoothstep(Math.abs(this.camVelY), -0.01, 8.0);
 
-	this.camX += this.camVelX * Phaser.Math.smoothstep(Math.abs(this.camVelX), -0.01, 3.33);
-	this.camY += this.camVelY * Phaser.Math.smoothstep(Math.abs(this.camVelY), -0.01, 8.0);
+	if(Math.abs(camXIncrement) < 0.1) {
+		camXIncrement = 0;
+	}
+
+	if(Math.abs(camYIncrement) < 0.1) {
+		camYIncrement = 0;
+	}
+
+	this.camX += camXIncrement;
+	this.camY += camYIncrement;
 
 	game.camera.focusOnXY(Math.floor(this.camX), Math.floor(this.camY));
 
