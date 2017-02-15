@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="273" height="600" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="2748">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="273" height="600" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="2749">
  <properties>
   <property name="debug" value="false"/>
   <property name="startLayer" value="3"/>
-  <property name="startX" value="107"/>
-  <property name="startY" value="230"/>
+  <property name="startX" value="117"/>
+  <property name="startY" value="386"/>
  </properties>
  <tileset firstgid="1" name="Collision" tilewidth="16" tileheight="16" tilecount="64" columns="8">
   <image source="../CollisionKey.png" width="128" height="128"/>
@@ -3109,7 +3109,7 @@
     <property name="type" value="shard"/>
    </properties>
   </object>
-  <object id="2185" gid="67" x="3152" y="2856" width="16" height="16">
+  <object id="2185" gid="67" x="3152" y="2860" width="16" height="16">
    <properties>
     <property name="facing" value="left"/>
     <property name="id" value="start_shortcut"/>
@@ -6035,7 +6035,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="Objects_4">
+ <objectgroup name="Objects_4" visible="0">
   <object id="1789" gid="68" x="3656.5" y="3135.5" width="16" height="16"/>
   <object id="1798" gid="106" x="2704.5" y="2988" width="16" height="16"/>
   <object id="1799" gid="105" x="3439.5" y="3264" width="16" height="16"/>

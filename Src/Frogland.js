@@ -128,6 +128,7 @@ Frogland.HandleCollisions = function() {
 };
 
 Frogland.SpawnFrauki = function() {
+    console.log(Frogland.map.properties)
     if(Frogland.map.properties.debug === 'false') {
         objectController.checkpointList.forEach(function(obj) {
             if(obj.spriteType === 'checkpoint' && obj.id == GameData.GetCheckpoint()) {
@@ -138,8 +139,8 @@ Frogland.SpawnFrauki = function() {
             } 
         });  
     } else {
-        fraukiStartX = this.map.properties.startX * 16;
-        fraukiStartY = this.map.properties.startY * 16;
+        frauki.x = this.map.properties.startX * 16;
+        frauki.y = this.map.properties.startY * 16 + 90;
         Frogland.ChangeLayer(+this.map.properties.startLayer, true); 
     }
 };

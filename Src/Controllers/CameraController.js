@@ -4,7 +4,9 @@ Y_VEL_DIV = 10;
 CameraController = function() {
 
 	this.camX = 0;
+	this.camVelX = 0;
 	this.camY = 0;
+	this.camVelY = 0;
 
 	this.shakeX = 0;
 	this.shakeY = 0;
@@ -37,7 +39,7 @@ CameraController.prototype.Update = function() {
 	var xOffset = frauki.states.direction === 'left' ? -10 : 10;
 	var yOffset = 0;//frauki.body.velocity.y > 0 ? 20 : -20;
 
-	yOffset += (frauki.states.crouching ? 25 : 0);
+	yOffset += (frauki.states.crouching ? 50 : 0);
 
 	if(frauki.state === frauki.Rolling) {
 		yOffset += 5;
@@ -45,7 +47,7 @@ CameraController.prototype.Update = function() {
 
 	if(frauki.states.upPressed) {
 		if(!inputController.inDoorway && !speechController.FraukiInSpeechZone()) {
-			yOffset -= 25;
+			yOffset -= 50;
 		}
 	}
 
@@ -54,10 +56,14 @@ CameraController.prototype.Update = function() {
 	var idealX = xOffset + this.target.body.center.x;
 	var idealY = yOffset + this.target.body.center.y;
 
-	this.camX += (idealX - this.camX) * 0.08;
-	this.camY += (idealY - this.camY) * 0.04;
+	this.camVelX = (idealX - this.camX) * 0.08;
+	this.camVelY = (idealY - this.camY) * 0.08;
 
-	//game.camera.focusOnXY(Math.floor(this.camX), Math.floor(this.camY));
+	//console.log(this.camVelY)
+
+	this.camX += this.camVelX * Phaser.Math.smoothstep(Math.abs(this.camVelX), -0.01, 3.33);
+	this.camY += this.camVelY * Phaser.Math.smoothstep(Math.abs(this.camVelY), -0.01, 8.0);
+
 	game.camera.focusOnXY(Math.floor(this.camX), Math.floor(this.camY));
 
 	if(this.shakeMagnitudeX > 0) {

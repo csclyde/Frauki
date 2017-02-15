@@ -8,6 +8,7 @@ Main.create = function() {
 
     this.physicsSlowMo = 1;
     this.currentAlpha = 1;
+    frauki.alpha = 0;
 
     cameraController.camX = frauki.x + 41;
     cameraController.camY = frauki.y + 111;
@@ -39,6 +40,8 @@ Main.create = function() {
     audioController.ambient['surface_wind'].play();
 
     this.CreateUI();
+
+    events.subscribe('update_ui', this.UpdateUI, this);
 };
 
 Main.update = function() {
@@ -59,7 +62,7 @@ Main.update = function() {
     triggerController.Update(Frogland.currentLayer);
     backdropController.Update();
 
-    this.UpdateUI();
+    //this.UpdateUI();
     pixel.context.globalAlpha = this.currentAlpha;
 
 };
@@ -215,6 +218,37 @@ Main.CreateUI = function() {
             this['healthPip' + i].visible = false;
         }
     }
+
+
+
+    this.energyFrameStart = game.add.image(10, 22, 'UI', 'HudFrame0000', this.UI);
+    this.energyFrameStart.fixedToCamera = true;
+
+    for(var i = 0, len = 4; i < len; i++) {
+        this['energyFrameBack' + i] = game.add.image(14 + (i * 7), 25, 'UI', 'HudFrame0003', this.UI);
+        this['energyFrameFront' + i] = game.add.image(14 + (i * 7), 22, 'UI', 'HudFrame0001', this.UI);
+
+        this['energyFrameBack' + i].fixedToCamera = true;
+        this['energyFrameFront' + i].fixedToCamera = true;
+
+        if(i >= energyController.GetMaxCharge()) {
+            this['energyFrameBack' + i].visible = false;
+            this['energyFrameFront' + i].visible = false;
+        }
+    }
+
+    this.energyFrameEnd = game.add.image(14 + (energyController.GetMaxCharge() * 7), 22, 'UI', 'HudFrame0002', this.UI);
+    this.energyFrameEnd.fixedToCamera = true;
+
+    //energy pips
+    for(var i = 0, len = 4; i < len; i++) {
+        this['energyPip' + i] = game.add.image(14 + (7 * i), 25, 'UI', 'EnergyPips0001', this.UI);
+        this['energyPip' + i].fixedToCamera = true;
+        
+        if(i >= energyController.GetCharge()) {
+            this['energyPip' + i].visible = false;
+        }
+    }
 };
 
 Main.UpdateUI = function() {
@@ -222,14 +256,45 @@ Main.UpdateUI = function() {
         if(i >= energyController.GetMaxHealth()) {
             this['healthFrameBack' + i].visible = false;
             this['healthFrameFront' + i].visible = false;
+        } else {
+            this['healthFrameBack' + i].visible = true;
+            this['healthFrameFront' + i].visible = true;
+        }
+
+        if(i >= energyController.GetHealth()) {
+            this['healthPip' + i].visible = false;
+        } else {
+            this['healthPip' + i].visible = true;
         }
     }
 
-    //health pips
-    for(var i = 0, len = 10; i < len; i++) {
-        if(i >= energyController.GetHealth()) {
-            this['healthPip' + i].visible = false;
+    this.healthFrameEnd.cameraOffset.x = 14 + (energyController.GetMaxHealth() * 7);
+
+    //energy
+    for(var i = 0, len = 4; i < len; i++) {
+        if(i >= energyController.GetCharge()) {
+            this['energyPip' + i].visible = false;
+        } else {
+            this['energyPip' + i].visible = true;
         }
+
+        if(weaponController.GetNumWeapons() === 0) {
+            this['energyFrameBack' + i].visible = false;
+            this['energyFrameFront' + i].visible = false;
+            this['energyPip' + i].visible = false;
+        } else {
+            this['energyFrameBack' + i].visible = true;
+            this['energyFrameFront' + i].visible = true;
+        }
+
+    }
+
+    if(weaponController.GetNumWeapons() === 0) {
+        this.energyFrameStart.visible = false;
+        this.energyFrameEnd.visible = false;
+    } else {
+        this.energyFrameStart.visible = true;
+        this.energyFrameEnd.visible = true;
     }
 };
 

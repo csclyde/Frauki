@@ -105,7 +105,13 @@ Loading.create = function() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
     game.physics.arcade.gravity.y = 700;
 
+    game.time.advancedTiming = true;
     game.time.desiredFps = 60;
+
+    game.fpsProblemNotifier.add(function() {
+        this.time.desiredFps = this.time.suggestedFps;
+        console.log('Switching FPS to: ' + this.time.suggestedFps);
+    }, game);
 
     cameraController = new CameraController();
     inputController = new InputController();
