@@ -133,9 +133,10 @@ TriggerController.prototype.triggers['goddess_intro'] = {
 	}
 };
 
-TriggerController.prototype.triggers['seal_hall'] = {
+TriggerController.prototype.triggers['vertical_loop'] = {
 	enter: function(params) {
-
+		frauki.y = 400;
+		cameraController.camY = -570;
 	},
 
 	stay: function(params) {
