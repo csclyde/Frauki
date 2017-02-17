@@ -155,7 +155,7 @@ SpeechController.prototype.Update = function() {
 
 	} else {
 		this.questionMark.visible = false;
-        events.publish('stop_sound', {name: 'speech'});
+        events.publish('stop_sound', {name: 'speech', fade: 600});
 
 	}
 

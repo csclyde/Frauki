@@ -193,6 +193,12 @@ Player.prototype.postStateUpdate = function() {
     if(this.body.onFloor()) {
         this.timers.SetTimer('on_ground', 200);
     }
+
+    if(this.animations.currentAnim.name === 'run' && !this.states.inWater) {
+        events.publish('play_sound', {name: 'running', restart: false });
+    } else {
+        events.publish('stop_sound', {name: 'running'});
+    }
 };
 
 Player.prototype.update = function() {
@@ -219,12 +225,6 @@ Player.prototype.ChangeState = function(newState) {
 
     if(this.state !== this.Stunned) {
         this.state = newState;
-    }
-
-    if(newState === this.Running) {
-        events.publish('play_sound', {name: 'running'});
-    } else {
-        events.publish('stop_sound', {name: 'running'});
     }
 };
 
@@ -1161,7 +1161,7 @@ Player.prototype.Rolling = function() {
 Player.prototype.Hurting = function() {
     this.PlayAnim('hit');
 
-    this.body.drag.x = 300;
+    if(!Main.restarting) this.body.drag.x = 300;
 
     if(this.timers.TimerUp('frauki_hit') && !Main.restarting) {
         if(this.body.velocity.y > 0) {

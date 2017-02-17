@@ -30,6 +30,8 @@ Main.create = function() {
         }
     });
 
+    this.tweens = {};
+
     this.UITextures = {};
     // this.UITextures.EnergyBar0000 = PIXI.TextureCache[game.cache.getFrameByName('UI', 'EnergyBar0000').uuid];
     // this.UITextures.EnergyBar0001 = PIXI.TextureCache[game.cache.getFrameByName('UI', 'EnergyBar0001').uuid];
@@ -125,6 +127,9 @@ Main.Restart = function() {
     audioController.timers.SetTimer('music_reset', 0); 
 
     speechController.HideSpeech();
+
+    if(this.tweens.dizzies) this.tweens.dizzies.stop();
+    if(this.tweens.slowMo) this.tweens.slowMo.stop();
 
     this.restarting = true;
     this.physicsSlowMo = 0.2;

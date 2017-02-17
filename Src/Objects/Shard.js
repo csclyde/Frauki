@@ -48,7 +48,7 @@ Shard.prototype.update = function() {
 
     if(this.visible && !this.beingUsed && GameData.HasShard(this.name)) {
         this.visible = false;
-    } else if(this.beingUsed) {
+    } else if(this.beingUsed || !GameData.HasShard(this.name)) {
         this.visible = true;
     }
 
