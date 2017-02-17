@@ -45,7 +45,6 @@ BackdropController.prototype.Update = function() {
         this.plx1.cameraOffset.y += 800;
     }
 
-    console.log(frauki.y, game.camera.y)
 };
 
 BackdropController.prototype.CreateParallax = function() {

@@ -106,31 +106,12 @@ FileMap.Audio = [
 ];
 
 FileMap.Music = [
-	{ Name: 'Surface', File: 'Data/Music/Surface.ogg', Volume: 0.3, Loop: true,
-		Sections: [
-			{ name: 'intro', start: 0, end: 15.059, loop: false },
-			{ name: 'body', start: 15.06, end: 94.1, loop: true }
-		]
-	},
-
-	{ Name: 'Ruins', File: 'Data/Music/Ruins.ogg', Volume: 0.3, Loop: true,
-		Sections: [
-			{ name: 'intro', start: 0, end: 0, loop: false },
-			{ name: 'body', start: 0, end: 107, loop: true }
-		]
-	},
-
-	{ Name: 'Choir', File: 'Data/Music/Choir.ogg', Volume: 0.15, Loop: true,
-		Sections: [
-			{ name: 'intro', start: 0, end: 8.565, loop: false },
-			{ name: 'body', start: 8.565, end: 44.35, loop: true }
-		]
-	},
-
-	// { Name: 'Ruins', File: 'Data/Music/Ruins.ogg', Volume: 0.5, Loop: true },
-	// { Name: 'Underwater', File: 'Data/Music/Underwater.xm', Volume: 0.5, Loop: true },
-	// { Name: 'Landfill', File: 'Data/Music/Landfill.xm', Volume: 0.5, Loop: true },
-	// { Name: 'Gameover', File: 'Data/Music/Game Over (Dead Frauki).xm', Volume: 0.4, Loop: false },
+	{ Name: 'Surface', File: 'Data/Music/Surface.xm', Volume: 0.3, Loop: true },
+	{ Name: 'Ruins', File: 'Data/Music/Ruins.xm', Volume: 0.3, Loop: true },
+	//{ Name: 'Choir', File: 'Data/Music/Choir.xm', Volume: 0.15, Loop: true },
+	{ Name: 'Underwater', File: 'Data/Music/Underwater.xm', Volume: 0.15, Loop: true },
+	{ Name: 'Landfill', File: 'Data/Music/Landfill.xm', Volume: 0.15, Loop: true },
+	{ Name: 'Gameover', File: 'Data/Music/Game Over (Dead Frauki).xm', Volume: 0.4, Loop: false }
 ];
 
 FileMap.Ambient = [
