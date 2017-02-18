@@ -97,7 +97,7 @@ function HitUpgrade(f, o) {
 
             o.destroy();
         } else {
-            o.shakeMagnitudeX = 100;
+            o.shakeMagnitudeX = 300;
             game.add.tween(o).to({shakeMagnitudeX: 0 }, 500, Phaser.Easing.Linear.None, true);
         }
     }
@@ -115,7 +115,7 @@ Upgrade.prototype.Active = function() {
     this.body.velocity.y = Math.sin(game.time.now / 400) * 15;
 
     if(this.shakeMagnitudeX > 0) {
-        this.body.velocity.x = Math.sin(game.time.now * 150) * this.shakeMagnitudeX;
+        this.body.velocity.x = Math.sin(game.time.now * 300) * this.shakeMagnitudeX;
     } else {
         this.body.velocity.x = 0;
     }

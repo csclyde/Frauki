@@ -209,8 +209,8 @@ Fasttracker.prototype.initialize = function()
     this.channel[i].finalvolume=0;
 
     this.channel[i].semitone=12;
-    this.channel[i].vibratospeed=0
-    this.channel[i].vibratodepth=0
+    this.channel[i].vibratospeed=0;
+    this.channel[i].vibratodepth=0;
     this.channel[i].vibratopos=0;
     this.channel[i].vibratowave=0;
 
@@ -245,6 +245,7 @@ Fasttracker.prototype.parse = function(buffer)
 
   // check xm signature, type and tracker version
   for(i=0;i<17;i++) this.signature+=String.fromCharCode(buffer[i]);
+
   if (this.signature != "Extended Module: ") return false;
   if (buffer[37] != 0x1a) return false;
   this.signature="X.M.";
@@ -1136,12 +1137,12 @@ Fasttracker.prototype.effect_t0_z=function(mod, ch) { // z
 Fasttracker.prototype.effect_t0_e0=function(mod, ch) { // e0 filter on/off
 }
 Fasttracker.prototype.effect_t0_e1=function(mod, ch) { // e1 fine slide up
-  mod.channel[ch].period-=mod.channel[ch].data&0x0f;
-  if (mod.channel[ch].period < 113) mod.channel[ch].period=113;
+  mod.channel[ch].voiceperiod-=mod.channel[ch].data&0x0f;
+  if (mod.channel[ch].voiceperiod < 113) mod.channel[ch].voiceperiod=113;
 }
 Fasttracker.prototype.effect_t0_e2=function(mod, ch) { // e2 fine slide down
-  mod.channel[ch].period+=mod.channel[ch].data&0x0f;
-  if (mod.channel[ch].period > 856) mod.channel[ch].period=856;
+  mod.channel[ch].voiceperiod+=mod.channel[ch].data&0x0f;
+  if (mod.channel[ch].voiceperiod > 856) mod.channel[ch].voiceperiod=856;
   mod.channel[ch].flags|=1;
 }
 Fasttracker.prototype.effect_t0_e3=function(mod, ch) { // e3 set glissando
@@ -1335,6 +1336,8 @@ Fasttracker.prototype.effect_t1_z=function(mod, ch) { // z
 Fasttracker.prototype.effect_t1_e0=function(mod, ch) { // e0
 }
 Fasttracker.prototype.effect_t1_e1=function(mod, ch) { // e1
+  mod.channel[ch].voiceperiod-=mod.channel[ch].data&0x0f;
+  if (mod.channel[ch].voiceperiod < 113) mod.channel[ch].voiceperiod=113;
 }
 Fasttracker.prototype.effect_t1_e2=function(mod, ch) { // e2
 }

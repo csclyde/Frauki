@@ -923,7 +923,7 @@ EffectsController.prototype.StarBurst = function(src) {
     this.stars.width = 10;
     this.stars.height = 10;
 
-    this.stars.explode(450, game.rnd.between(4, 6));
+    this.stars.explode(500, game.rnd.between(4, 6));
 };
 
 EffectsController.prototype.SprocketBurst = function(src, amt) {

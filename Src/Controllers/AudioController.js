@@ -27,16 +27,19 @@ AudioController = function() {
 
     this.currentMusic = null;
 
-    this.XMPlayer = new Modplayer();
-    this.XMPlayer.autostart = true;
+    this.XMMusicPlayer = new Modplayer();
+    this.XMMusicPlayer.autostart = true;
 
     game.onPause.add(function() {
-        this.XMPlayer.pause();
+        this.XMMusicPlayer.pause();
     }, this);
 
     game.onResume.add(function() {
-        this.XMPlayer.pause();
+        this.XMMusicPlayer.pause();
     }, this);
+
+    this.musicVolume = 1;
+    this.musicVolumeTween = null;
 
     //load audio
     FileMap.Audio.forEach(function(audio) {
@@ -85,17 +88,13 @@ AudioController.prototype.Update = function() {
 
     //if the section ends and the thing does not loop, advance the section index
     //and play the next section
-    
-};
 
-AudioController.prototype.PlayXM = function(name) {
-    this.XMPlayer.loadFromBuffer(game.cache.getBinary(name));
+    if(this.XMMusicPlayer.context) this.XMMusicPlayer.setVolume(this.musicVolume); 
 
-    console.log(this.XMPlayer);
-};
-
-AudioController.prototype.StopXM = function() {
-    this.XMPlayer.stop();
+    if(this.musicVolume === 0 && this.XMMusicPlayer.playing) {
+        this.XMMusicPlayer.stop();
+        this.currentMusic = null;
+    } 
 };
 
 AudioController.prototype.PlaySound = function(params) {
@@ -132,8 +131,26 @@ AudioController.prototype.StopSound = function(params) {
 
 AudioController.prototype.PlayMusic = function(params) {
 
-    this.StopXM();
-    this.PlayXM(params.name);
+    //they either want to just stop the song, play a new one, or they are trying to play the same song
+    if(!params.name) {
+        this.FadeMusic({volume: 0, fadeDuration: 3000});
+
+    } else if(!!params.name && params.name !== this.currentMusic) {
+        this.XMMusicPlayer.stop();
+        if(this.musicVolumeTween) this.musicVolumeTween.stop();
+        this.musicVolume = 1;
+        this.XMMusicPlayer.player.clearsong();
+        this.XMMusicPlayer.player.initialize();
+        this.XMMusicPlayer.loadFromBuffer(game.cache.getBinary(params.name));
+        this.currentMusic = params.name;
+
+    } else if(!!params.name && params.name === this.currentMusic) {
+        this.FadeMusic({volume: 1});
+    }
+
+    
+
+
 
     // //if the specified song is undefined 
     // if(!!this.currentMusic && !params.name) {
@@ -182,19 +199,19 @@ AudioController.prototype.PlayMusic = function(params) {
     */
 };
 
-// AudioController.prototype.StopMusic = function(params) {
-//     if(!!params.name && !!this.music[params.name] && !!this.music[params.name].stop) {
-//         this.music[params.name].pause();
-//     }
-// };
+AudioController.prototype.StopMusic = function(params) {
+    this.XMMusicPlayer.stop();
+};
 
 AudioController.prototype.StopAllMusic = function(params) {
-    if(!!this.currentMusic) {
-        if(!!this.currentMusic.fadeTween) this.currentMusic.fadeTween.stop();
+    this.XMMusicPlayer.stop();
 
-        this.currentMusic.fadeOut(params.fadeOut || 500);
-        this.timers.SetTimer('music_reset', (params.fadeOut || 500) + 10000);
-    }
+    // if(!!this.currentMusic) {
+    //     if(!!this.currentMusic.fadeTween) this.currentMusic.fadeTween.stop();
+
+    //     this.currentMusic.fadeOut(params.fadeOut || 500);
+    //     this.timers.SetTimer('music_reset', (params.fadeOut || 500) + 10000);
+    // }
     // for(var key in this.music) {
     //     if(!this.music.hasOwnProperty(key)) continue;
 
@@ -211,21 +228,24 @@ AudioController.prototype.StopAllMusic = function(params) {
 };
 
 AudioController.prototype.FadeMusic = function(params) {
+    var that = this;
+
     //volume, duration
 
     if(!this.currentMusic) return;
 
 
 
-    this.currentMusic.fadeTo(params.fadeDuration || 500, params.volume || 0);
+    //this.currentMusic.fadeTo(params.fadeDuration || 500, params.volume || 0);
+    if(this.musicVolumeTween) this.musicVolumeTween.stop();
+    this.musicVolumeTween = game.add.tween(this).to({ musicVolume: params.volume }, params.fadeDuration || 500, Phaser.Easing.Linear.None, true);
 
-    var fadeMusic = this.currentMusic;
-
-    game.time.events.add(params.duration || 0, function() {
-        if(!fadeMusic) return;
-
-        fadeMusic.fadeTo(params.fadeDuration || 500, fadeMusic.initialVolume);
-    });
+    
+    if(params.duration) {
+        game.time.events.add(params.duration, function() {
+            that.FadeMusic({volume: 1});
+        }); 
+    }
 };
 
 AudioController.prototype.PlayAmbient = function(params) {
