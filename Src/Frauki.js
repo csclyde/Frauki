@@ -35,7 +35,7 @@ Player = function (game, x, y, name) {
 
     this.timers = new TimerUtil();
 
-    this.Reset();
+    //this.Reset();
     this.alpha = 0;
 
     this.currentAttack = {};
@@ -159,7 +159,7 @@ Player.prototype.postStateUpdate = function() {
     if(!this.timers.TimerUp('frauki_invincible') && this.timers.TimerUp('hurt_flicker')) {
         this.alpha = 0;
         game.time.events.add(10, function() { frauki.timers.SetTimer('hurt_flicker', 10); });
-    } else {
+    } else if(!Main.restarting) {
         this.alpha = 1;
     }
 
@@ -375,7 +375,7 @@ Player.prototype.GetDirectionMultiplier = function() {
 };
 
 Player.prototype.Reset = function() {
-    this.alpha = 1;
+    game.time.events.add(0, function() { frauki.alpha = 1; });
     this.state = this.Materializing;
     this.SetDirection('right');
     this.timers.SetTimer('frauki_invincible', 0);

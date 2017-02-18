@@ -3,6 +3,7 @@ var Main = new Phaser.State();
 Main.create = function() {
 
     Frogland.SpawnFrauki();
+    inputController.DisallowInput();
 
     this.restarting = true;
 
@@ -10,24 +11,25 @@ Main.create = function() {
     this.currentAlpha = 1;
     frauki.alpha = 0;
 
-    cameraController.camX = frauki.x + 41;
-    cameraController.camY = frauki.y + 111;
+    console.log('creating main')
     
     var fadeIn = effectsController.Fade(false);
     Frogland.SpawnFrauki();
 
     fadeIn.onComplete.add(function() {
-        frauki.state = frauki.Materializing;
-        frauki.alpha = 1;
+        frauki.Reset();
         Main.restarting = false;
 
-        if(game.input.keyboard.isDown(inputController.binds.runLeft) || game.input.gamepad.isDown(14)) {
-            inputController.OnLeft(true);
-        }
+        console.log(inputController)
+        inputController.AllowInput();
 
-        if(game.input.keyboard.isDown(inputController.binds.runRight) || game.input.gamepad.isDown(15)) {
-            inputController.OnRight(true);
-        }
+        // if(game.input.keyboard.isDown(inputController.binds.runLeft) || game.input.gamepad.isDown(14)) {
+        //     inputController.OnLeft(true);
+        // }
+
+        // if(game.input.keyboard.isDown(inputController.binds.runRight) || game.input.gamepad.isDown(15)) {
+        //     inputController.OnRight(true);
+        // }
     });
 
     this.tweens = {};
@@ -47,7 +49,6 @@ Main.create = function() {
 };
 
 Main.update = function() {
-
     frauki.UpdateAttackGeometry();
     objectController.Update();
     
@@ -66,6 +67,9 @@ Main.update = function() {
 
     //this.UpdateUI();
     pixel.context.globalAlpha = this.currentAlpha;
+
+    frauki.alpha = 0;
+
 
 };
 

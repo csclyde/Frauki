@@ -685,6 +685,8 @@ EffectsController.prototype.Explosion = function(src) {
 };
 
 EffectsController.prototype.JumpDust = function(src) {
+    if(Main.restarting) return;
+    
     var dust = game.add.sprite(src.x - 50, src.y - 30, 'Misc', null, this.effectsGroup);
     dust.animations.add('dust', ['JumpDust0000', 'JumpDust0001', 'JumpDust0002', 'JumpDust0003', 'JumpDust0004', 'JumpDust0005', 'JumpDust0006'], 10, false, false);
     dust.animations.play('dust');
