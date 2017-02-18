@@ -46,8 +46,8 @@ InputController = function() {
 
     this.bindList = [this.binds.jump, this.binds.up, this.binds.crouch, this.binds.runLeft, this.binds.runRight, this.binds.slash, this.binds.weapon, this.binds.roll, this.binds.shoulderR];
     
-    events.subscribe('allow_input', this.allowInput, this);
-    events.subscribe('disallow_input', this.disallowInput, this);
+    events.subscribe('allow_input', this.AllowInput, this);
+    events.subscribe('disallow_input', this.DisallowInput, this);
 
     game.input.keyboard.onDownCallback = function(e) {
 
