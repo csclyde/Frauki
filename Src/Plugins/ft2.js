@@ -78,6 +78,11 @@ function Fasttracker()
     }
   }
 
+  this.vibratotable[0] = [0,24,49,74,97,120,141,161,
+                     180,197,212,224,235,244,250,253,
+                     255,253,250,244,235,224,212,197,
+                       180,161,141,120,97,74,49,24];
+
   // volume column effect jumptable for 0x50..0xef
   this.voleffects_t0 = new Array(
     this.effect_vol_t0_f0,
@@ -705,6 +710,10 @@ Fasttracker.prototype.process_tick = function(mod) {
   // advance global player state by a tick  
   mod.advance(mod);
 
+  for (var inst in mod.instrument) {
+    mod.instrument[inst].vibProgressedThisTick = false;
+  }
+
   // advance all channels by a tick  
   for(var ch=0;ch<mod.channels;ch++) {
   
@@ -730,6 +739,10 @@ Fasttracker.prototype.process_tick = function(mod) {
       mod.channel[ch].noteon=0;
     }
 
+    if (mod.instrument[i].vibratodepth) {
+      mod.channel[ch].command = 4;
+    }
+
     // effects
     var v=mod.pattern[p][pp+2];
     if (v>=0x50 && v<0xf0) {
@@ -744,6 +757,7 @@ Fasttracker.prototype.process_tick = function(mod) {
         mod.effects_t1[mod.channel[ch].command](mod, ch);
       }
     }
+    //mod.effects_t1[4](mod, ch);
 
     // recalc sample speed if voiceperiod has changed
     if ((mod.channel[ch].flags&1 || mod.flags&2) && mod.channel[ch].voiceperiod)
@@ -756,10 +770,6 @@ Fasttracker.prototype.process_tick = function(mod) {
       }
       mod.channel[ch].samplespeed=f/mod.samplerate;
     }
-
-    // advance vibrato on each new tick
-    mod.channel[ch].vibratopos+=mod.channel[ch].vibratospeed;
-    mod.channel[ch].vibratopos&=0x3f;
 
     // advance volume envelope, if enabled (also fadeout)
     if (mod.instrument[i].voltype&1) {
@@ -803,6 +813,67 @@ Fasttracker.prototype.process_tick = function(mod) {
         mod.channel[ch].panenvpos=mod.instrument[i].panenvlen;
 
       if (mod.channel[ch].panenvpos>324) mod.channel[ch].panenvpos=324;
+    }
+
+
+    //this.instrument[i].vibratotype=buffer[offset+235];
+    //this.instrument[i].vibratosweep=buffer[offset+236];
+    //this.instrument[i].vibratodepth=buffer[offset+237];
+    //this.instrument[i].vibratorate=buffer[offset+238];
+
+    //this.channel[i].vibratospeed=24;
+    //this.channel[i].vibratodepth=5;
+    //this.channel[i].vibratopos=0;
+    //this.channel[i].vibratowave=0;
+
+    // advance vibrato on each new tick
+    //mod.channel[ch].vibratopos+=mod.channel[ch].vibratospeed;
+    //mod.channel[ch].vibratopos&=0x3f;
+
+    // advance vibrato envelope, if enabled
+    if (mod.instrument[i].vibratodepth) {
+      //mod.channel[ch].vibratopos++;
+
+
+      if (mod.channel[ch].noteon) {
+        var didInitVib = false;
+        if (typeof mod.instrument[i].vibratopos === 'undefined') {
+          mod.instrument[i].vibratopos = 0;
+          didInitVib = true;
+        }
+
+        mod.channel[ch].command = 4;
+        mod.channel[ch].vibratospeed=mod.instrument[i].vibratorate;
+        mod.channel[ch].vibratodepth= 1; //mod.instrument[i].vibratodepth;
+        mod.channel[ch].vibratodepth= mod.instrument[i].vibratodepth / 4.3;
+        mod.channel[ch].vibratowave=mod.instrument[i].vibratotype;
+        var rate = Math.round(mod.instrument[i].vibratorate * 0.28);
+        //var rate = 10; // mod.instrument[i].vibratorate;
+
+        var target = (mod.instrument[i].vibratopos + rate);// & 0x3f;
+        if (
+          !mod.instrument[i].vibProgressedThisTick
+          //true ||
+          //didInitVib ||
+          //(target !== ((mod.channel[ch].vibratopos + rate)))// & 0x3f))
+        ) {
+          mod.channel[ch].vibratopos = target;
+          mod.instrument[i].vibratopos = target;
+        }
+
+        mod.instrument[i].vibProgressedThisTick = true;
+        //mod.channel[ch].vibratopos+=1;//mod.channel[ch].vibratospeed;
+        //mod.channel[ch].vibratopos&=0x3f;
+      }
+
+      //if (mod.instrument[i].pantype&4 &&
+      //    mod.channel[ch].panenvpos >= mod.instrument[i].panloopend)
+      //  mod.channel[ch].panenvpos=mod.instrument[i].panloopstart;
+//
+      //if (mod.channel[ch].panenvpos >= mod.instrument[i].panenvlen)
+      //  mod.channel[ch].panenvpos=mod.instrument[i].panenvlen;
+//
+      //if (mod.channel[ch].panenvpos>324) mod.channel[ch].panenvpos=324;
     }
     
     // calc final volume for channel
@@ -1234,9 +1305,15 @@ Fasttracker.prototype.effect_t1_3=function(mod, ch) { // 3 slide to note
   mod.channel[ch].flags|=3; // recalc speed
 }
 Fasttracker.prototype.effect_t1_4=function(mod, ch) { // 4 vibrato
-  var waveform=mod.vibratotable[mod.channel[ch].vibratowave&3][mod.channel[ch].vibratopos]/63.0;
-  var a=mod.channel[ch].vibratodepth*waveform;
-  mod.channel[ch].voiceperiod+=a;
+  if (!mod.channel[ch].vibratodepth) return;
+  var i = mod.channel[ch].instrument;
+  //var waveform=mod.vibratotable[mod.channel[ch].vibratowave&3][mod.channel[ch].vibratopos&31]; ///63.0;
+  var waveform=mod.vibratotable[mod.channel[ch].vibratowave&3][mod.instrument[i].vibratopos&31]; ///63.0;
+  //var a=mod.channel[ch].vibratodepth*waveform;
+  var a=(mod.channel[ch].vibratodepth*waveform)>>(7-2);
+  if ((mod.instrument[i].vibratopos&63)>31) a = a * -1;
+  //mod.channel[ch].voiceperiod+=a;
+  mod.channel[ch].voiceperiod = mod.channel[ch].period + a;
   mod.channel[ch].flags|=1;
 }
 Fasttracker.prototype.effect_t1_5=function(mod, ch) { // 5 volslide + slide to note
