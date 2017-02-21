@@ -111,7 +111,8 @@ FileMap.Music = [
 	//{ Name: 'Choir', File: 'Data/Music/Choir.xm', Volume: 0.15, Loop: true },
 	{ Name: 'Underwater', File: 'Data/Music/Underwater.xm', Volume: 0.15, Loop: true },
 	{ Name: 'Landfill', File: 'Data/Music/Landfill.xm', Volume: 0.15, Loop: true },
-	{ Name: 'Gameover', File: 'Data/Music/Game Over (Dead Frauki).xm', Volume: 0.4, Loop: false }
+	{ Name: 'Gameover', File: 'Data/Music/Game Over (Dead Frauki).xm', Volume: 0.4, Loop: false },
+	{ Name: 'Tenements', File: 'Data/Music/Kowloon.xm', Volume: 0.4, Loop: true }
 ];
 
 FileMap.Ambient = [
