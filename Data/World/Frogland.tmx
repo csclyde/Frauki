@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="300" height="650" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="2823">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="300" height="650" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="2828">
  <properties>
-  <property name="debug" value="true"/>
+  <property name="debug" value="false"/>
   <property name="startLayer" value="3"/>
   <property name="startX" value="108"/>
   <property name="startY" value="314"/>
@@ -3307,13 +3307,9 @@
   <object id="1987" gid="86" x="2810.67" y="4192.83" width="16" height="16"/>
   <object id="2027" gid="67" x="3945" y="4760" width="16" height="16">
    <properties>
+    <property name="attemptsThreshold" value="3"/>
     <property name="id" value="flower_room_exit"/>
     <property name="type" value="enemy"/>
-   </properties>
-  </object>
-  <object id="2030" gid="100" x="4102.67" y="4729.33" width="16" height="16">
-   <properties>
-    <property name="on_death" value="open_door,door_name:flower_room_exit"/>
    </properties>
   </object>
   <object id="2049" gid="85" x="3533.5" y="4639.5" width="16" height="16"/>
@@ -3774,6 +3770,21 @@
   <object id="2820" gid="68" x="1533.33" y="4296" width="16" height="16"/>
   <object id="2821" gid="66" x="808" y="4860.5" width="16" height="16"/>
   <object id="2822" gid="66" x="1374" y="4116.67" width="16" height="16"/>
+  <object id="2824" gid="92" x="4060.67" y="4748.67" width="16" height="16">
+   <properties>
+    <property name="on_death" value="open_door,door_name:flower_room_exit"/>
+   </properties>
+  </object>
+  <object id="2825" gid="86" x="4083.33" y="4647.33" width="16" height="16">
+   <properties>
+    <property name="on_death" value="open_door,door_name:flower_room_exit"/>
+   </properties>
+  </object>
+  <object id="2826" gid="86" x="4372.67" y="4645.33" width="16" height="16">
+   <properties>
+    <property name="on_death" value="open_door,door_name:flower_room_exit"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="Triggers_3" visible="0">
   <object id="1568" name="light" type="trigger" x="2411.91" y="5147.5" width="113.333" height="226">
