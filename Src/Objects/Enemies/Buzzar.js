@@ -14,7 +14,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
 
     this.hoverOffset = Math.random() * 300;
     
-    this.energy = 1;
+    this.energy = 2;
     this.damage = 1;
 
     this.baseStunDuration = 800;

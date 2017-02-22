@@ -482,7 +482,7 @@ WeaponController.prototype.Shield = {
 
     Init: function() {
         this.forceField = game.add.sprite(0, 0, 'Frauki');
-        this.forceField.animations.add('activate', ['Shield0000', 'Shield0001', 'Shield0002', 'Shield0003', 'Shield0004', 'Shield0005', 'Shield0006', 'Shield0007'], 22, false, false);
+        this.forceField.animations.add('activate', ['Shield0000', 'Shield0001', 'Shield0002', 'Shield0003', 'Shield0004', 'Shield0005', 'Shield0006', 'Shield0007'], 16, false, false);
         this.forceField.visible = false;
         this.forceField.alpha = 0.5;
     },
