@@ -270,6 +270,8 @@ Enemy.prototype.TakeHit = function(damage) {
         game.time.events.add(this.robotic ? 800 : game.rnd.between(250, 350), function() { DestroyEnemy(that); });
 
         if(this.robotic) events.publish('play_sound', { name: 'robosplosion' });
+
+        events.publish('enemy_killed', { name: this.objectName, owningLayer: this.owningLayer, x: this.body.center.x, y: this.body.center.y });
     } else {
         this.timers.SetTimer('after_damage_flicker', graceTime);
     }

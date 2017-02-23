@@ -57,6 +57,9 @@ Frogland.Create = function() {
         OpenDoorById(params.door_name);
     });
 
+    events.subscribe('enemy_killed', this.Ragnarok, this);
+    this.ragnarokCounter = 1;
+
     game.physics.arcade.sortDirection = game.physics.arcade.TOP_BOTTOM;
 };
 
@@ -415,4 +418,37 @@ Frogland.AnimateTiles = function() {
     }, this, viewLeft, viewTop, viewRight, viewBottom, 'Foreground_' + Frogland.currentLayer); 
 
     Frogland['foregroundLayer_' + Frogland.currentLayer].dirty = true;
+};
+
+Frogland.Ragnarok = function(e) {
+    console.log(e);
+
+    if(e.owningLayer !== 4 || e.x < 2140 || e.x > 2860 || e.y < 4180 || e.y > 4500) {
+        return;
+    }
+
+    var enemyConfigs = [85, 86, 87, 92, 95, 98, 99, 100];
+
+
+    this.ragnarokCounter -= 1;
+
+    if(this.ragnarokCounter <= 0) {
+        game.time.events.add(2000, function() {
+            var numEnemies = game.rnd.between(1, 3);
+
+            for(var i = 0; i < numEnemies; i++) {
+                var enemySpawn = enemyConfigs[game.rnd.between(0, enemyConfigs.length - 1)];
+
+
+                objectController.SpawnObject({ 
+                    id: enemySpawn, 
+                    x: game.rnd.between(2400, 2800), 
+                    y: game.rnd.between(4300, 4450)
+                });
+                
+                this.ragnarokCounter += 1;
+            }
+        }, this);
+        
+    }
 };

@@ -10,8 +10,6 @@ Main.create = function() {
     this.physicsSlowMo = 1;
     this.currentAlpha = 1;
     frauki.alpha = 0;
-
-    console.log('creating main')
     
     var fadeIn = effectsController.Fade(false);
     Frogland.SpawnFrauki();
@@ -19,8 +17,7 @@ Main.create = function() {
     fadeIn.onComplete.add(function() {
         frauki.Reset();
         Main.restarting = false;
-
-        console.log(inputController)
+        
         inputController.AllowInput();
 
         // if(game.input.keyboard.isDown(inputController.binds.runLeft) || game.input.gamepad.isDown(14)) {

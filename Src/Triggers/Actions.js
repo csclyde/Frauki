@@ -151,3 +151,15 @@ TriggerController.prototype.triggers['goddess_spaceship'] = {
 	exit: function(params) {
 	}
 };
+
+TriggerController.prototype.triggers['ragnarok'] = {
+	enter: function(params) {
+		
+	},
+
+	stay: function(params) {
+	},
+
+	exit: function(params) {
+	}
+};
