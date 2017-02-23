@@ -103,7 +103,6 @@ TriggerController.prototype.triggers['goddess_intro'] = {
 		} else if(!GameData.GetFlag('goddess_intro') && GameData.HasShard('Will')) {
 			GameData.SetFlag('goddess_intro', true);
 			GameData.SetFlag('goddess_shard', true);
-			GameData.SetFlag('goddess_asked_for_open', true);
 			
 			ScriptRunner.run('goddess_meet_with_shard');
 
@@ -112,18 +111,9 @@ TriggerController.prototype.triggers['goddess_intro'] = {
 
 		} else if(!GameData.GetFlag('goddess_shard') && GameData.HasShard('Will')) {
 			GameData.SetFlag('goddess_shard', true);
-			GameData.SetFlag('goddess_asked_for_open', true);
 			ScriptRunner.run('goddess_shard');
 
-		} else if(GameData.GetFlag('goddess_asked_for_open') && !GameData.GetFlag('goddess_released')) {
-			ScriptRunner.run('goddess_shard_2');
-			GameData.SetFlag('goddess_asked_for_open', false);
-			GameData.SetFlag('goddess_asked_for_open_2', true);
-
-		} else if(GameData.GetFlag('goddess_asked_for_open_2') && !GameData.GetFlag('goddess_released')) {
-			ScriptRunner.run('goddess_shard_3');
-			
-		}
+		} 
 	},
 
 	stay: function(params) {

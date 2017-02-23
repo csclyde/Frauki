@@ -78,7 +78,7 @@ ScriptRunner.scripts['demo_Stab'] = [
 
 ScriptRunner.scripts['demo_Dive'] = [
 	{ name: 'disallow_input', props: {} },
-	{ name: 'show_text', props: { text: 'Whoa... Down attacking in the air now lets me do a power attack', portrait: 'Enticed' } },
+	{ name: 'show_text', props: { text: 'Whoa... Down attacking in the air now lets me do a power attack!', portrait: 'Enticed' } },
 	{ name: 'wait', props: { amount: 5000 } },
 	{ name: 'hide_text', props: {} },
 	{ name: 'wait', props: { amount: 500 } },
@@ -136,17 +136,17 @@ ScriptRunner.scripts['goddess_intro'] = [
 	{ name: 'hide_text', props: {} },
 
 	{ name: 'wait', props: { amount: 500 } },
-	{ name: 'show_text', props: { text: 'Would you mind helping me out of this prison? All you need to do is bring the red Prism Shard.', portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: 'Would you mind helping me out of this prison? All you need to do is find the four prism shards.', portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 7000 } },
 	{ name: 'hide_text', props: {} },
 
 	{ name: 'wait', props: { amount: 1000 } },
-	{ name: 'show_text', props: { text: 'Oh right... It looks like a big red jewel. You can\'t miss it.', portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: 'The first one looks like... hmm... a big red floating jewel thing. You can\'t miss it.', portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 7000 } },
 	{ name: 'hide_text', props: {} },
 
 	{ name: 'wait', props: { amount: 750 } },
-	{ name: 'show_text', props: { text: 'Please hurry... I\'ve been trapped in here a long time.', portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: 'Please hurry... I\'ve been trapped in here a very long time.', portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 7000 } },
 	{ name: 'hide_text', props: {} },
 
@@ -160,25 +160,14 @@ ScriptRunner.scripts['goddess_shard'] = [
 	{ name: 'hide_text', props: {} },
 
 	{ name: 'wait', props: { amount: 250 } },
-	{ name: 'show_text', props: { text: 'Now just walk up to the door and it will open. Freedom... finally...', portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: 'Great work. Now if you walk up to the door, it will open the first of four seals.', portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 7000 } },
 	{ name: 'hide_text', props: {} },
 
-	{ name: 'allow_input', props: {} }
-];
-
-ScriptRunner.scripts['goddess_shard_2'] = [
-	{ name: 'disallow_input', props: {} },
-	{ name: 'show_text', props: { text: 'Yep... just come right on up to the door there and I\'ll be free...', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 5000 } },
-
-	{ name: 'allow_input', props: {} }
-];
-
-ScriptRunner.scripts['goddess_shard_3'] = [
-	{ name: 'disallow_input', props: {} },
-	{ name: 'show_text', props: { text: 'Please... just walk up to the door and let me out... Enough {goober} teasing.', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 5000 } },
+	{ name: 'wait', props: { amount: 250 } },
+	{ name: 'show_text', props: { text: 'Find the other three and I will finally be free...', portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 7000 } },
+	{ name: 'hide_text', props: {} },
 
 	{ name: 'allow_input', props: {} }
 ];
@@ -244,8 +233,16 @@ ScriptRunner.scripts['goddess_rez_angry'] = [
 
 ScriptRunner.scripts['seal_hall_intro'] = [
 	{ name: 'disallow_input', props: {} },
-	{ name: 'show_text', props: { text: "Nice work, you've opened the first of four seals. Keep it up, I'm sure the other prism shards can't be far.", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 4000 } },
+
+	{ name: 'show_text', props: { text: "Nice work, you've opened the first of four seals.", portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 7000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'wait', props: { amount: 250 } },
+	{ name: 'show_text', props: { text: "Keep it up, I'm sure the other prism shards can't be far.", portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 7000 } },
+	{ name: 'hide_text', props: {} },
+
 	{ name: 'allow_input', props: {} }
 ];
 
