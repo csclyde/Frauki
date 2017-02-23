@@ -463,6 +463,9 @@ Collision.OverlapLobWithEnemy = function(l, e) {
 Collision.OverlapObjectsWithEnvironment = function(o, e) {
     if(o.spriteType === 'shard') {
         //return false;
+    } 
+    else if(o.spriteType === 'enemy' && e.index === 3) {
+        return false;
     }
 
     return true;
