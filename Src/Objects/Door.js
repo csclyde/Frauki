@@ -120,7 +120,7 @@ Door.prototype.create = function() {
 
 Door.prototype.update = function() {
 
-    var padding = 100;
+    var padding = 50;
 
     if((this.state === this.Closed || this.state == this.ReadyToOpen) && this.owningLayer === Frogland.currentLayer && GameData.IsDoorOpen(this.id)) {
         if(this.body.x + this.body.width > game.camera.x + padding && this.body.y + this.body.height > game.camera.y + padding && this.body.x < game.camera.x + game.camera.width - padding && this.body.y < game.camera.y + game.camera.height - padding) {
@@ -246,6 +246,7 @@ function PerformOpen(d, save, silent) {
             break;
 
             case 'orb':
+                events.publish('play_sound', {name: 'fanfare_short', restart: true });
             break;
         }    
 

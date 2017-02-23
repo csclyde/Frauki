@@ -49,6 +49,11 @@ Upgrade.prototype.update = function() {
         this.state();
 
     if(GameData.HasUpgrade(this.upgrade)) {
+        //if this is a health upgrade, leave an apple
+        if(this.upgrade.indexOf('Health') >= 0) {
+            objectController.SpawnObject({id: 66, x: this.x, y: this.y, name: 'apple'});
+        }
+        
         this.destroy();
     }
 

@@ -247,12 +247,6 @@
             <key type="filename">Buzzar/Enraged0001.png</key>
             <key type="filename">Buzzar/Enraged0002.png</key>
             <key type="filename">Buzzar/Enraged0003.png</key>
-            <key type="filename">Buzzar/Enraged0004.png</key>
-            <key type="filename">Buzzar/Enraged0005.png</key>
-            <key type="filename">Buzzar/Enraged0006.png</key>
-            <key type="filename">Buzzar/Enraged0007.png</key>
-            <key type="filename">Buzzar/Enraged0008.png</key>
-            <key type="filename">Buzzar/Enraged0009.png</key>
             <key type="filename">Buzzar/Hurt0000.png</key>
             <key type="filename">Buzzar/Hurt0001.png</key>
             <key type="filename">Buzzar/Idle0000.png</key>

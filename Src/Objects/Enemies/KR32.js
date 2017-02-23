@@ -93,13 +93,13 @@ Enemy.prototype.types['KR32'] =  function() {
     this.Attack = function() {
     	EnemyBehavior.FacePlayer(this);
     	this.state = this.Windup;
-    	this.timers.SetTimer('windup', game.rnd.between(450, 500));
+    	this.timers.SetTimer('windup', game.rnd.between(500, 550));
     };
 
     this.AttackStab = function() {
     	EnemyBehavior.FacePlayer(this);
     	this.state = this.Stabbing;
-		this.timers.SetTimer('attack_hold', 550);
+		this.timers.SetTimer('attack_hold', 650);
 
     };
 
@@ -232,7 +232,7 @@ Enemy.prototype.types['KR32'] =  function() {
 
 		if(this.timers.TimerUp('windup')) {
 			this.state = this.Slashing;
-			this.timers.SetTimer('attack_hold', 500);
+			this.timers.SetTimer('attack_hold', 700);
 
 			if(this.direction === 'left') {
 				this.body.velocity.x = -550;

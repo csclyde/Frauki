@@ -4,7 +4,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
     this.anchor.setTo(0.5);
 
     this.animations.add('idle', ['Buzzar/Idle0000', 'Buzzar/Idle0001'], 20, true, false);
-    this.animations.add('enraged', ['Buzzar/Enraged0000', 'Buzzar/Enraged0001', 'Buzzar/Enraged0002', 'Buzzar/Enraged0003', 'Buzzar/Enraged0004', 'Buzzar/Enraged0005', 'Buzzar/Enraged0006', 'Buzzar/Enraged0007', 'Buzzar/Enraged0008', 'Buzzar/Enraged0009'], 20, true, false);
+    this.animations.add('enraged', ['Buzzar/Enraged0000', 'Buzzar/Enraged0001', 'Buzzar/Enraged0002', 'Buzzar/Enraged0003'], 20, true, false);
     this.animations.add('sting', ['Buzzar/Attack0000', 'Buzzar/Attack0001'], 20, false, false);
     this.animations.add('hurt', ['Buzzar/Hurt0000', 'Buzzar/Hurt0001'], 20, true, false);
 
@@ -136,7 +136,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
         if(this.timers.TimerUp('attack')) {
             this.timers.SetTimer('attack', 800);
             this.state = this.Stinging;
-            game.physics.arcade.moveToXY(this, frauki.body.center.x, frauki.body.center.y, 500);
+            game.physics.arcade.moveToXY(this, frauki.body.center.x, frauki.body.center.y, 400);
             EnemyBehavior.FacePlayer(this);
         }
     };
@@ -197,17 +197,17 @@ Enemy.prototype.types['Buzzar'] =  function() {
         else
             this.body.velocity.y -= 10;
 
-        if(this.body.velocity.x > 450)
-            this.body.velocity.x = 450;
+        if(this.body.velocity.x > 200)
+            this.body.velocity.x = 200;
 
-        if(this.body.velocity.x < -450)
-            this.body.velocity.x = -450;
+        if(this.body.velocity.x < -200)
+            this.body.velocity.x = -200;
 
-        if(this.body.velocity.y > 450)
-            this.body.velocity.y = 450;
+        if(this.body.velocity.y > 200)
+            this.body.velocity.y = 200;
 
-        if(this.body.velocity.y < -450)
-            this.body.velocity.y = -450;
+        if(this.body.velocity.y < -200)
+            this.body.velocity.y = -200;
 
         if(this.timers.TimerUp('enraged')) {
             return true;

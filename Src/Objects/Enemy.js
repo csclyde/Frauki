@@ -116,6 +116,10 @@ Enemy.prototype.update = function() {
     } else {
         this.alpha = 1;
     }
+
+    if(this.isAttacking()) {
+        this.timers.SetTimer('grace', 0);
+    }
 }
 
 Enemy.prototype.UpdateAttackGeometry = function() {
