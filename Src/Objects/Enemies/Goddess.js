@@ -57,7 +57,7 @@ Enemy.prototype.types['Goddess'] =  function() {
     	//if the goddess is angry from being killed, reset that
         GameData.SetFlag('goddess_angry', false);
 
-        if(GameData.GetCheckpoint() === '0') {
+        if(GameData.GetCheckpoint() === '0' && false) {
 
             //if they killed the goddess, give the player a lecture then make her angry
             if(GameData.GetFlag('goddess_killed')) {
@@ -123,6 +123,8 @@ Enemy.prototype.types['Goddess'] =  function() {
 		}
 
 		this.messageQueue.push(msg);
+
+		console.log(this.messageQueue);
 
 		GameData.SetVal('goddess_message_queue', this.messageQueue);
 	};

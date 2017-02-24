@@ -199,6 +199,8 @@
         <map type="IndividualSpriteSettingsMap">
             <key type="filename">Frames/BankCounter0000.png</key>
             <key type="filename">Frames/BankCounter0001.png</key>
+            <key type="filename">Frames/ExclamationMark0000.png</key>
+            <key type="filename">Frames/ExclamationMark0001.png</key>
             <key type="filename">Frames/NuggCounterBack0000.png</key>
             <key type="filename">Frames/NuggCounterBack0001.png</key>
             <key type="filename">Frames/QuestionMark0000.png</key>

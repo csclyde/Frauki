@@ -80,6 +80,13 @@ SpeechController.prototype.Create = function() {
     this.questionMark.anchor.setTo(0.5);
     this.questionMark.visible = false;
 
+    this.exclamationMark = game.add.sprite(0, 0, 'UI');
+    this.exclamationMark.animations.add('blink', ['ExclamationMark0000', 'ExclamationMark0001'], 18, true, false);
+    this.exclamationMark.animations.play('blink');
+    this.exclamationMark.alpha = 0.8;
+    this.exclamationMark.anchor.setTo(0.5);
+    this.exclamationMark.visible = false;
+
 	this.speechZones = [];
 
 	GameData.SetFlag('test_flag', true);
@@ -159,6 +166,18 @@ SpeechController.prototype.Update = function() {
 
 	}
 
+
+	if(!!goddess && goddess.messageQueue.length > 0) {
+		this.exclamationMark.visible = true;
+		this.exclamationMark.x = goddess.x;
+		this.exclamationMark.y = goddess.y - 80 + Math.sin(game.time.now / 200) * 3;
+		//this.ShowSpeech();
+
+	} else {
+		this.exclamationMark.visible = false;
+
+	}
+
 };
 
 SpeechController.prototype.ShowSpeech = function() {
@@ -175,22 +194,15 @@ SpeechController.prototype.ShowSpeech = function() {
 	this.displayIndex = 0;
 	this.SetText('');
 
-	if(game.physics.arcade.overlap(frauki, goddess)) {
-		this.Activate(goddess.GetSpeech(), goddess.GetPortrait());
-		this.currentSpeechZone = {
-			x: goddess.body.x,
-			y: goddess.body.y,
-			width: goddess.body.width,
-			height: goddess.body.height,
-			owningLayer: Frogland.currentLayer
-		};
-		return true;
-	}
-
 	for(var i = 0; i < this.speechZones.length; i++) {
 		var zone = this.speechZones[i];
 		if(zone.owningLayer === Frogland.currentLayer && frauki.body.x + frauki.body.width > zone.x && frauki.body.x < zone.x + zone.width && frauki.body.y + frauki.body.height > zone.y && frauki.body.y < zone.y + zone.height) {
-			this.Activate(Speeches[zone.speechName].text, Speeches[zone.speechName].portrait);
+			if(zone.speechName === 'goddess') {
+				this.Activate(goddess.GetSpeech(), goddess.GetPortrait());
+
+			} else {
+				this.Activate(Speeches[zone.speechName].text, Speeches[zone.speechName].portrait);
+			}
 
 			this.currentSpeechZone = zone;
 
@@ -244,10 +256,6 @@ SpeechController.prototype.Activate = function(text, portrait) {
 };
 
 SpeechController.prototype.FraukiInSpeechZone = function() {
-
-	if(game.physics.arcade.overlap(frauki, goddess)) {
-		return true;
-	}
 
 	for(var i = 0; i < this.speechZones.length; i++) {
 		var zone = this.speechZones[i];

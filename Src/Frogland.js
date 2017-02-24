@@ -59,6 +59,7 @@ Frogland.Create = function() {
 
     events.subscribe('enemy_killed', this.Ragnarok, this);
     this.ragnarokCounter = 1;
+    this.ragnarokLevel = 0;
 
     game.physics.arcade.sortDirection = game.physics.arcade.TOP_BOTTOM;
 };
@@ -421,7 +422,6 @@ Frogland.AnimateTiles = function() {
 };
 
 Frogland.Ragnarok = function(e) {
-    console.log(e);
 
     if(e.owningLayer !== 4 || e.x < 2140 || e.x > 2860 || e.y < 4180 || e.y > 4500) {
         return;
@@ -433,7 +433,14 @@ Frogland.Ragnarok = function(e) {
     this.ragnarokCounter -= 1;
 
     if(this.ragnarokCounter <= 0) {
-        game.time.events.add(2000, function() {
+        var waitDuration = 2000;
+
+        if(this.ragnarokLevel % 4 === 0) {
+            waitDuration = 6000;
+            objectController.SpawnObject({id: 66, x: 2500, y: 4300, name: 'apple'});
+        }
+
+        game.time.events.add(waitDuration, function() {
             var numEnemies = game.rnd.between(1, 3);
 
             for(var i = 0; i < numEnemies; i++) {
@@ -448,6 +455,8 @@ Frogland.Ragnarok = function(e) {
                 
                 this.ragnarokCounter += 1;
             }
+
+            this.ragnarokLevel += 1;
         }, this);
         
     }

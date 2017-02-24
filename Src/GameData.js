@@ -17,11 +17,7 @@ GameData.data = {
     health: 2,
     flags: {},
     vals: {
-        goddess_message_queue: [
-            "Ahhh... feels good to see the sky again.", 
-            "That was pretty cool when you came up holding the prism shard. Good job.", 
-            "Everything looks pretty run down..."
-        ]
+        goddess_message_queue: []
     }
 };
 

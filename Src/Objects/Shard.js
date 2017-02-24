@@ -55,7 +55,6 @@ Shard.prototype.update = function() {
 };
 
 function PickUpShard(f, a) {
-    console.log(a);
     
     if(!GameData.HasShard(a.name)) {
         GameData.AddShard(a.name);
