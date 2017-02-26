@@ -474,7 +474,6 @@ EffectsController.prototype.SpawnEnergyNuggets = function(source, dest, color, a
 };
 
 EffectsController.prototype.Splash = function(tile) {
-    return;
     if(this.timers.TimerUp('splash_timer')) {
 
         if(frauki.states.direction === 'left') {
