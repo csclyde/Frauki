@@ -141,7 +141,7 @@ AudioController.prototype.PlayMusic = function(params) {
         this.musicVolume = 1;
         this.XMMusicPlayer.player.clearsong();
         this.XMMusicPlayer.player.initialize();
-        //this.XMMusicPlayer.loadFromBuffer(game.cache.getBinary(params.name));
+        this.XMMusicPlayer.loadFromBuffer(game.cache.getBinary(params.name));
         this.currentMusic = params.name;
 
     } else if(!!params.name && params.name === this.currentMusic) {

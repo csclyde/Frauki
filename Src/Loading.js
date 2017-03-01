@@ -99,7 +99,7 @@ Loading.create = function() {
 
     };
 
-    game.add.plugin(Phaser.Plugin.Debug);
+    //game.add.plugin(Phaser.Plugin.Debug);
 
     GameData.LoadDataFromStorage();
 

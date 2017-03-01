@@ -24,37 +24,43 @@ CameraController = function() {
 
 	this.panning = false;
 
-	this.target = frauki;
-
 	events.subscribe('focus_on', function(params) {
 		console.log(this.target);
 		this.target = params.target;
 	}, this);
+
+    this.target = { x: 198 * 16, y: 180 * 16 };
+
 
 };
 
 //camera is controlled in player centric space
 CameraController.prototype.Update = function() {
 	
-	var xOffset = frauki.states.direction === 'left' ? -10 : 10;
-	var yOffset = 0;//frauki.body.velocity.y > 0 ? 20 : -20;
+	var xOffset = 0, yOffset = 0;
 
-	yOffset += (frauki.states.crouching ? 50 : 0);
+	this.target = this.target || frauki.body.center;
 
-	if(frauki.state === frauki.Rolling) {
-		yOffset += 5;
-	}
+	if(this.target === frauki) {
+		xOffset = frauki.states.direction === 'left' ? -10 : 10;
+		yOffset = 0; //frauki.body.velocity.y > 0 ? 20 : -20;
 
-	if(frauki.states.upPressed) {
-		if(!inputController.inDoorway && !speechController.FraukiInSpeechZone()) {
-			yOffset -= 50;
+		yOffset += (frauki.states.crouching ? 50 : 0);
+
+		if(frauki.state === frauki.Rolling) {
+			yOffset += 5;
+		}
+
+		if(frauki.states.upPressed) {
+			if(!inputController.inDoorway && !speechController.FraukiInSpeechZone()) {
+				yOffset -= 50;
+			}
 		}
 	}
 
-	this.target = this.target || frauki;
 
-	var idealX = xOffset + this.target.body.center.x;
-	var idealY = yOffset + this.target.body.center.y;
+	var idealX = xOffset + this.target.x;
+	var idealY = yOffset + this.target.y;
 
 	this.camVelX = (idealX - this.camX) * 0.08;
 	this.camVelY = (idealY - this.camY) * 0.08;

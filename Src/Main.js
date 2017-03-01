@@ -18,7 +18,9 @@ Main.create = function() {
         frauki.Reset();
         Main.restarting = false;
         
-        inputController.AllowInput();
+        //inputController.AllowInput();
+
+        events.publish('play_music', { name: 'Intro' } );
 
         // if(game.input.keyboard.isDown(inputController.binds.runLeft) || game.input.gamepad.isDown(14)) {
         //     inputController.OnLeft(true);
@@ -43,6 +45,8 @@ Main.create = function() {
     this.CreateUI();
 
     events.subscribe('update_ui', this.UpdateUI, this);
+
+    this.inMenu = true;
 };
 
 Main.update = function() {

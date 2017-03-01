@@ -15,7 +15,7 @@ InputController = function() {
     this.tetrad.left = false;
     this.tetrad.right = false;
 
-    this.allowInput = true;
+    this.allowInput = false;
 
     this.currentDir = 'still';
 
@@ -326,6 +326,12 @@ InputController.prototype.AllowInput = function() {
 
 InputController.prototype.OnJump = function(pressed) {
     this.tetrad.bottom = pressed;
+
+    if(pressed && cameraController.target !== frauki.body.center) {
+        cameraController.target = frauki.body.center;
+        inputController.AllowInput();
+        return;
+    }
 
     if(pressed) events.publish('advance_text', {});
 
