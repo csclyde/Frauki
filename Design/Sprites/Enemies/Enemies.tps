@@ -203,17 +203,9 @@
             <key type="filename">A3PZ/Attack0003.png</key>
             <key type="filename">A3PZ/Attack0004.png</key>
             <key type="filename">A3PZ/Attack0005.png</key>
-            <key type="filename">A3PZ/Attack20000.png</key>
-            <key type="filename">A3PZ/Attack20001.png</key>
-            <key type="filename">A3PZ/Attack20002.png</key>
-            <key type="filename">A3PZ/Attack20003.png</key>
-            <key type="filename">A3PZ/Attack20004.png</key>
-            <key type="filename">A3PZ/Attack20005.png</key>
-            <key type="filename">A3PZ/Block0000.png</key>
-            <key type="filename">A3PZ/Block0001.png</key>
-            <key type="filename">A3PZ/Hurt0000.png</key>
-            <key type="filename">A3PZ/Hurt0001.png</key>
-            <key type="filename">A3PZ/Stand0000.png</key>
+            <key type="filename">A3PZ/Attack0006.png</key>
+            <key type="filename">A3PZ/Attack0007.png</key>
+            <key type="filename">A3PZ/Attack0008.png</key>
             <key type="filename">A3PZ/Walk0000.png</key>
             <key type="filename">A3PZ/Walk0001.png</key>
             <key type="filename">A3PZ/Walk0002.png</key>
@@ -236,6 +228,72 @@
                 <rect>75,75,150,150</rect>
                 <key>scale9Paddings</key>
                 <rect>75,75,150,150</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">A3PZ/Hit0000.png</key>
+            <key type="filename">A3PZ/Hit0001.png</key>
+            <key type="filename">A3PZ/Hit0002.png</key>
+            <key type="filename">A3PZ/Idle0000.png</key>
+            <key type="filename">A3PZ/Idle0001.png</key>
+            <key type="filename">A3PZ/Idle0002.png</key>
+            <key type="filename">A3PZ/Idle0003.png</key>
+            <key type="filename">A3PZ/Idle0004.png</key>
+            <key type="filename">A3PZ/Walk0006.png</key>
+            <key type="filename">A3PZ/Walk0007.png</key>
+            <key type="filename">A3PZ/Walk0008.png</key>
+            <key type="filename">A3PZ/Walk0009.png</key>
+            <key type="filename">A3PZ/Walk0010.png</key>
+            <key type="filename">GUBr/Attack0000.png</key>
+            <key type="filename">GUBr/Attack0001.png</key>
+            <key type="filename">GUBr/Attack0002.png</key>
+            <key type="filename">GUBr/Attack0003.png</key>
+            <key type="filename">GUBr/Attack0004.png</key>
+            <key type="filename">GUBr/Attack0005.png</key>
+            <key type="filename">GUBr/Cower0000.png</key>
+            <key type="filename">GUBr/Cower0001.png</key>
+            <key type="filename">GUBr/Cower0002.png</key>
+            <key type="filename">GUBr/Cower0003.png</key>
+            <key type="filename">GUBr/Hit0000.png</key>
+            <key type="filename">GUBr/Stand0000.png</key>
+            <key type="filename">GUBr/Walk0000.png</key>
+            <key type="filename">GUBr/Walk0001.png</key>
+            <key type="filename">GUBr/Walk0002.png</key>
+            <key type="filename">GUBr/Walk0003.png</key>
+            <key type="filename">HWK9/AttackDash0000.png</key>
+            <key type="filename">HWK9/AttackDash0001.png</key>
+            <key type="filename">HWK9/AttackDash0002.png</key>
+            <key type="filename">HWK9/AttackDash0003.png</key>
+            <key type="filename">HWK9/Block0000.png</key>
+            <key type="filename">HWK9/Flip0000.png</key>
+            <key type="filename">HWK9/Flip0001.png</key>
+            <key type="filename">HWK9/Flip0002.png</key>
+            <key type="filename">HWK9/Flip0003.png</key>
+            <key type="filename">HWK9/Flip0004.png</key>
+            <key type="filename">HWK9/Flip0005.png</key>
+            <key type="filename">HWK9/Stand0000.png</key>
+            <key type="filename">Insectoid/Die0000.png</key>
+            <key type="filename">Insectoid/Spin0000.png</key>
+            <key type="filename">KR32/Hit0000.png</key>
+            <key type="filename">KR32/Jump0000.png</key>
+            <key type="filename">KR32/Jump0001.png</key>
+            <key type="filename">KR32/Jump0002.png</key>
+            <key type="filename">KR32/Jump0003.png</key>
+            <key type="filename">KR32/Jump0004.png</key>
+            <key type="filename">KR32/Jump0005.png</key>
+            <key type="filename">KR32/Jump0006.png</key>
+            <key type="filename">KR32/Jump0007.png</key>
+            <key type="filename">KR32/Stand0001.png</key>
+            <key type="filename">KR32/Stand0002.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>50,50,100,100</rect>
+                <key>scale9Paddings</key>
+                <rect>50,50,100,100</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -290,59 +348,6 @@
                 <rect>18,18,35,35</rect>
                 <key>scale9Paddings</key>
                 <rect>18,18,35,35</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">GUBr/Attack0000.png</key>
-            <key type="filename">GUBr/Attack0001.png</key>
-            <key type="filename">GUBr/Attack0002.png</key>
-            <key type="filename">GUBr/Attack0003.png</key>
-            <key type="filename">GUBr/Attack0004.png</key>
-            <key type="filename">GUBr/Attack0005.png</key>
-            <key type="filename">GUBr/Cower0000.png</key>
-            <key type="filename">GUBr/Cower0001.png</key>
-            <key type="filename">GUBr/Cower0002.png</key>
-            <key type="filename">GUBr/Cower0003.png</key>
-            <key type="filename">GUBr/Hit0000.png</key>
-            <key type="filename">GUBr/Stand0000.png</key>
-            <key type="filename">GUBr/Walk0000.png</key>
-            <key type="filename">GUBr/Walk0001.png</key>
-            <key type="filename">GUBr/Walk0002.png</key>
-            <key type="filename">GUBr/Walk0003.png</key>
-            <key type="filename">HWK9/AttackDash0000.png</key>
-            <key type="filename">HWK9/AttackDash0001.png</key>
-            <key type="filename">HWK9/AttackDash0002.png</key>
-            <key type="filename">HWK9/AttackDash0003.png</key>
-            <key type="filename">HWK9/Block0000.png</key>
-            <key type="filename">HWK9/Flip0000.png</key>
-            <key type="filename">HWK9/Flip0001.png</key>
-            <key type="filename">HWK9/Flip0002.png</key>
-            <key type="filename">HWK9/Flip0003.png</key>
-            <key type="filename">HWK9/Flip0004.png</key>
-            <key type="filename">HWK9/Flip0005.png</key>
-            <key type="filename">HWK9/Stand0000.png</key>
-            <key type="filename">Insectoid/Die0000.png</key>
-            <key type="filename">Insectoid/Spin0000.png</key>
-            <key type="filename">KR32/Hit0000.png</key>
-            <key type="filename">KR32/Jump0000.png</key>
-            <key type="filename">KR32/Jump0001.png</key>
-            <key type="filename">KR32/Jump0002.png</key>
-            <key type="filename">KR32/Jump0003.png</key>
-            <key type="filename">KR32/Jump0004.png</key>
-            <key type="filename">KR32/Jump0005.png</key>
-            <key type="filename">KR32/Jump0006.png</key>
-            <key type="filename">KR32/Jump0007.png</key>
-            <key type="filename">KR32/Stand0001.png</key>
-            <key type="filename">KR32/Stand0002.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>50,50,100,100</rect>
-                <key>scale9Paddings</key>
-                <rect>50,50,100,100</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

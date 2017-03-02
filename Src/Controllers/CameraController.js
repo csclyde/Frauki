@@ -41,7 +41,7 @@ CameraController.prototype.Update = function() {
 
 	this.target = this.target || frauki.body.center;
 
-	if(this.target === frauki) {
+	if(this.target === frauki.body.center) {
 		xOffset = frauki.states.direction === 'left' ? -10 : 10;
 		yOffset = 0; //frauki.body.velocity.y > 0 ? 20 : -20;
 
@@ -79,22 +79,23 @@ CameraController.prototype.Update = function() {
 	this.camX += camXIncrement;
 	this.camY += camYIncrement;
 
-	game.camera.focusOnXY(Math.floor(this.camX), Math.floor(this.camY));
 
 	if(this.shakeMagnitudeX > 0) {
-		this.shakeX = Math.sin(game.time.now * 60) * this.shakeMagnitudeX;
+		this.shakeX = Math.sin(game.time.now * 80) * this.shakeMagnitudeX;
 	} else {
 		this.shakeX = 0;
 	}
 
 	if(this.shakeMagnitudeY > 0) {
-		this.shakeY = Math.sin(game.time.now * 60) * this.shakeMagnitudeY;
+		this.shakeY = Math.sin(game.time.now * 80) * this.shakeMagnitudeY;
 	} else {
 		this.shakeY = 0;
 	}
 
 	this.camX += this.shakeX;
 	this.camY += this.shakeY;
+
+	game.camera.focusOnXY(Math.floor(this.camX), Math.floor(this.camY));
 };
 
 CameraController.prototype.CrouchCamera = function(params) {

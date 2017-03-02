@@ -319,6 +319,8 @@
             <key type="filename">Frames/Crouch0006.png</key>
             <key type="filename">Frames/Crouch0007.png</key>
             <key type="filename">Frames/Crouch0008.png</key>
+            <key type="filename">Frames/Dead0000.png</key>
+            <key type="filename">Frames/Dead0001.png</key>
             <key type="filename">Frames/Fall0000.png</key>
             <key type="filename">Frames/Fall0001.png</key>
             <key type="filename">Frames/Fall0002.png</key>

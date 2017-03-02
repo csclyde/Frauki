@@ -151,9 +151,9 @@ Enemy.prototype.UpdateAttackGeometry = function() {
 
         this.currentAttack = {
             damage: this.damage,
-            knockback: 0.1,
-            priority: 0,
-            juggle: 0
+            knockback: this.knockback || 0.5,
+            priority: this.priority || 0,
+            juggle: this.juggle || 0
         };
     } 
     else {
@@ -212,6 +212,14 @@ Enemy.prototype.GetCurrentPriority = function() {
         return this.currentAttack.priority;
     } else {
         return 0;
+    }
+};
+
+Enemy.prototype.GetCurrentKnockback = function() {
+    if(!!this.currentAttack) {
+        return this.currentAttack.knockback || 1;
+    } else {
+        return 1;
     }
 };
 

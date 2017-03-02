@@ -780,9 +780,9 @@ EffectsController.prototype.Fade = function(show) {
     if(show) {
         this.screenDark.alpha = 0;
         this.screenDark.visible = true;
-        return game.add.tween(this.screenDark).to( { alpha: 1 }, 4000, Phaser.Easing.Linear.None, true);
+        return game.add.tween(this.screenDark).to( { alpha: 1 }, 5000, Phaser.Easing.Quintic.In, true);
     } else {
-        return game.add.tween(this.screenDark).to( { alpha: 0 }, 1000, Phaser.Easing.Linear.None, true);
+        return game.add.tween(this.screenDark).to( { alpha: 0 }, 1000, Phaser.Easing.Quintic.In, true);
     }
 };
 

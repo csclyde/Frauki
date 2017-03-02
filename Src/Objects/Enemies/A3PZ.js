@@ -3,15 +3,15 @@ Enemy.prototype.types['A3PZ'] =  function() {
     this.body.setSize(35, 75, 0, 0);
     this.anchor.setTo(0.5, 0.5);
 
-    this.animations.add('idle', ['A3PZ/Stand0000'], 10, true, false);
-    this.animations.add('walk', ['A3PZ/Walk0000', 'A3PZ/Walk0001', 'A3PZ/Walk0002', 'A3PZ/Walk0003', 'A3PZ/Walk0004', 'A3PZ/Walk0005'], 6, true, false);
-    this.animations.add('block', ['A3PZ/Block0000', 'A3PZ/Block0001'], 18, true, false);
-    this.animations.add('windup1', ['A3PZ/Attack0001', 'A3PZ/Attack0002'], 10, false, false);
-    this.animations.add('attack1', ['A3PZ/Attack0003', 'A3PZ/Attack0004', 'A3PZ/Attack0005'], 18, false, false);
-    this.animations.add('windup2', ['A3PZ/Attack20001', 'A3PZ/Attack20002'], 10, false, false);
-    this.animations.add('attack2', ['A3PZ/Attack20003', 'A3PZ/Attack20004', 'A3PZ/Attack20005'], 18, false, false);
-    this.animations.add('hurt', ['A3PZ/Hurt0000', 'A3PZ/Hurt0001'], 12, true, false);
-    this.animations.add('stun', ['A3PZ/Hurt0000', 'A3PZ/Hurt0001'], 12, true, false);
+    this.animations.add('idle', ['A3PZ/Idle0000', 'A3PZ/Idle0001', 'A3PZ/Idle0002', 'A3PZ/Idle0003', 'A3PZ/Idle0004'], 10, true, false);
+    this.animations.add('walk', ['A3PZ/Walk0000', 'A3PZ/Walk0001', 'A3PZ/Walk0002', 'A3PZ/Walk0003', 'A3PZ/Walk0004', 'A3PZ/Walk0005', 'A3PZ/Walk0006', 'A3PZ/Walk0007', 'A3PZ/Walk0008', 'A3PZ/Walk0009', 'A3PZ/Walk0010'], 8, true, false);
+    this.animations.add('block', ['A3PZ/Idle0000'], 18, true, false);
+    this.animations.add('windup1', ['A3PZ/Attack0001', 'A3PZ/Attack0002', 'A3PZ/Attack0003'], 10, false, false);
+    this.animations.add('attack1', ['A3PZ/Attack0004', 'A3PZ/Attack0005', 'A3PZ/Attack0006', 'A3PZ/Attack0007', 'A3PZ/Attack0008'], 16, false, false);
+    this.animations.add('windup2', ['A3PZ/Attack0001', 'A3PZ/Attack0002', 'A3PZ/Attack0003'], 10, false, false);
+    this.animations.add('attack2', ['A3PZ/Attack0004', 'A3PZ/Attack0005', 'A3PZ/Attack0006', 'A3PZ/Attack0007', 'A3PZ/Attack0008'], 16, false, false);
+    this.animations.add('hurt', ['A3PZ/Hit0001'], 12, true, false);
+    this.animations.add('stun', ['A3PZ/Hit0001'], 12, true, false);
 
     this.energy = 5;
     this.baseStunDuration = 500;
@@ -22,29 +22,41 @@ Enemy.prototype.types['A3PZ'] =  function() {
     this.firstAttack = true;
     
     this.updateFunction = function() {
-
+        if(this.state === this.Slashing1 || this.state === this.Slashing2) {
+            this.body.drag.x = 1200;
+        } else {
+            this.body.drag.x = 200;
+        }
     };
 
     this.Act = function() {
 
         if(EnemyBehavior.Player.IsVisible(this)) {
-            if(EnemyBehavior.Player.ThrowIncoming(this)) {
-                this.Block(300);
-            }
-            else if(EnemyBehavior.Player.IsNear(this, 100)) {
+            if(EnemyBehavior.Player.IsNear(this, 120) && EnemyBehavior.Player.IsVulnerable(this)) {
                 EnemyBehavior.FacePlayer(this);
+                this.Attack();
 
-                if(EnemyBehavior.Player.MovingTowards(this) || EnemyBehavior.Player.IsDangerous(this)) {
-                    this.Block(300);
-                } else if(EnemyBehavior.Player.IsVulnerable(this)) {
-                    this.Attack();
-                } else {
-                    this.Block(300);
-                }
+                // if(EnemyBehavior.Player.MovingTowards(this) || EnemyBehavior.Player.IsDangerous(this)) {
+                //     this.Block(300);
+                // } else if(EnemyBehavior.Player.IsVulnerable(this)) {
+                // } else {
+                //     this.Block(300);
+                // }
             
             } else {
                 this.state = this.Idling;
-                EnemyBehavior.WalkToPlayer(this, 75);
+
+                if(this.animations.currentFrame.name === 'A3PZ/Walk0001' || this.animations.currentFrame.name === 'A3PZ/Walk0007') {
+                    if(this.needsShake) {
+                        events.publish('camera_shake', {magnitudeX: 0, magnitudeY: 3, duration: 200});
+                        events.publish('play_sound', {name: 'door_slam', restart: true});
+                        this.needsShake = false;
+                    }
+                } else {
+                    EnemyBehavior.WalkToPlayer(this, 60);
+                    this.needsShake = true;
+                }
+                
             }
         } else {
             this.state = this.Idling;
@@ -60,10 +72,10 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
 
         if(this.firstAttack) {
-            this.timers.SetTimer('slash_hold', 600);
+            this.timers.SetTimer('slash_hold', 400);
             this.state = this.Windup1;
         } else {
-            this.timers.SetTimer('slash_hold', 500);
+            this.timers.SetTimer('slash_hold', 300);
             this.state = this.Windup2;
         }
 
@@ -115,8 +127,8 @@ Enemy.prototype.types['A3PZ'] =  function() {
         } else {
             this.PlayAnim('walk');
 
-            if(this.animations.currentFrame.name === 'A3PZ/Walk0001' || this.animations.currentFrame.name === 'A3PZ/Walk0004') {
-                events.publish('camera_shake', {magnitudeX: 0.5, magnitudeY: 0, duration: 50});
+            if(this.walkShake && (this.animations.currentFrame.name === 'A3PZ/Walk0001' || this.animations.currentFrame.name === 'A3PZ/Walk0007')) {
+                events.publish('camera_shake', {magnitudeX: 500, magnitudeY: 0, duration: 800});
             }
         }
 
@@ -129,12 +141,12 @@ Enemy.prototype.types['A3PZ'] =  function() {
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
             this.state = this.Slashing1;
             this.timers.SetTimer('slash_hold', game.rnd.between(1000, 1200));
-            events.publish('camera_shake', {magnitudeX: 3, magnitudeY: 0, duration: 200});
+            events.publish('camera_shake', {magnitudeX: 5, magnitudeY: 0, duration: 600});
 
             if(this.direction === 'left') {
-                this.body.velocity.x = -375;
+                this.body.velocity.x = -500;
             } else {
-                this.body.velocity.x = 375;
+                this.body.velocity.x = 500;
             }
         }
 
@@ -160,12 +172,12 @@ Enemy.prototype.types['A3PZ'] =  function() {
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
             this.state = this.Slashing2;
             this.timers.SetTimer('slash_hold', game.rnd.between(1000, 1200));
-            events.publish('camera_shake', {magnitudeX: 3, magnitudeY: 0, duration: 200});
+            events.publish('camera_shake', {magnitudeX: 5, magnitudeY: 0, duration: 600});
 
             if(this.direction === 'left') {
-                this.body.velocity.x = -375;
+                this.body.velocity.x = -500;
             } else {
-                this.body.velocity.x = 375;
+                this.body.velocity.x = 500;
             }
         }
 
@@ -205,53 +217,77 @@ Enemy.prototype.types['A3PZ'] =  function() {
     };
 
     this.attackFrames = {
-        'A3PZ/Attack0003': {
-            x: 10, y: 15, w: 149, h: 30,
-            damage: 2,
-            knockback: 0,
-            priority: 2,
-            juggle: 0
-        },
-
         'A3PZ/Attack0004': {
-            x: 110, y: 10, w: 60, h: 15,
+            x: 50, y: 25, w: 40, h: 30,
             damage: 2,
-            knockback: 0,
-            priority: 2,
-            juggle: 0
-        },
-
-        'A3PZ/Attack20003': {
-            x: 30, y: 0, w: 110, h: 80,
-            damage: 2,
-            knockback: 0,
-            priority: 2,
-            juggle: 0
-        },
-
-        'A3PZ/Attack20004': {
-            x: 110, y: 73, w: 35, h: 10,
-            damage: 2,
-            knockback: 0,
-            priority: 2,
-            juggle: 0
-        },
-
-        'A3PZ/Block0000': {
-            x: 20, y: -8, w: 45, h: 80,
-            damage: 0,
-            knockback: 0,
+            knockback: 3,
             priority: 3,
             juggle: 0
         },
 
-        'A3PZ/Block0001': {
-            x: 20, y: -8, w: 45, h: 80,
-            damage: 0,
-            knockback: 0,
+        'A3PZ/Attack0005': {
+            x: 40, y: 25, w: 40, h: 30,
+            damage: 2,
+            knockback: 3,
             priority: 3,
             juggle: 0
         },
+
+        'A3PZ/Attack0006': {
+            x: 30, y: 25, w: 40, h: 30,
+            damage: 2,
+            knockback: 3,
+            priority: 3,
+            juggle: 0
+        },
+
+        'A3PZ/Attack0007': {
+            x: 30, y: 25, w: 40, h: 30,
+            damage: 2,
+            knockback: 3,
+            priority: 3,
+            juggle: 0
+        },
+
+        // 'A3PZ/Attack0004': {
+        //     x: 110, y: 10, w: 60, h: 15,
+        //     damage: 2,
+        //     knockback: 0,
+        //     priority: 2,
+        //     juggle: 0
+        // },
+
+        // 'A3PZ/Attack20003': {
+        //     x: 30, y: 0, w: 110, h: 80,
+        //     damage: 2,
+        //     knockback: 0,
+        //     priority: 2,
+        //     juggle: 0
+        // },
+
+        // 'A3PZ/Attack20004': {
+        //     x: 110, y: 73, w: 35, h: 10,
+        //     damage: 2,
+        //     knockback: 0,
+        //     priority: 2,
+        //     juggle: 0
+        // },
+
+        // 'A3PZ/Block0000': {
+        //     x: 20, y: -8, w: 45, h: 80,
+        //     damage: 0,
+        //     knockback: 0,
+        //     priority: 3,
+        //     juggle: 0
+        // },
+
+        // 'A3PZ/Block0001': {
+        //     x: 20, y: -8, w: 45, h: 80,
+        //     damage: 0,
+        //     knockback: 0,
+        //     priority: 3,
+        //     juggle: 0
+        // },
     };
 
 };

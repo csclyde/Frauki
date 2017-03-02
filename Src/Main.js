@@ -78,7 +78,7 @@ Main.render = function() {
     // game.debug.body(frauki);
     // game.debug.body(frauki.attackRect);
 
-    // Frogland.objectGroup_3.forEach(function(o) {
+    // objectController.activeLayer3.forEach(function(o) {
     //     game.debug.body(o);
     //     if(!!o.attackRect) game.debug.body(o.attackRect);
     // });
@@ -137,7 +137,7 @@ Main.Restart = function() {
     if(this.tweens.slowMo) this.tweens.slowMo.stop();
 
     this.restarting = true;
-    this.physicsSlowMo = 0.2;
+    this.physicsSlowMo = 0.1;
     this.currentAlpha = 1;
     pixel.context.globalAlpha = 1;
     var fadeOutTween = effectsController.Fade(true);

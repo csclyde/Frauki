@@ -159,7 +159,7 @@ Player.prototype.postStateUpdate = function() {
     if(!this.timers.TimerUp('frauki_invincible') && this.timers.TimerUp('hurt_flicker')) {
         this.alpha = 0;
         game.time.events.add(10, function() { frauki.timers.SetTimer('hurt_flicker', 10); });
-    } else if(!Main.restarting) {
+    } else {
         this.alpha = 1;
     }
 
@@ -892,9 +892,9 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
     energyController.RemoveHealth(damage);
 
     if(this.body.center.x < e.body.center.x) {
-        this.body.velocity.x = -500;
+        this.body.velocity.x = -500 * e.GetCurrentKnockback();
     } else {
-        this.body.velocity.x = 500;
+        this.body.velocity.x = 500 * e.GetCurrentKnockback();
     } 
 
     this.ChangeState(this.Hurting);
@@ -915,6 +915,8 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
         GameData.RemoveNuggs(nuggAmt);
 
     } else {
+        this.body.velocity.y *= 2;
+
         effectsController.DropNuggets(GameData.GetNuggCount());
         GameData.ResetNuggCount();     
 
@@ -1159,9 +1161,20 @@ Player.prototype.Rolling = function() {
 };
 
 Player.prototype.Hurting = function() {
-    this.PlayAnim('hit');
+    if(energyController.GetHealth() > 0) {
+        this.PlayAnim('hit');
+    } else {
+        this.PlayAnim('dead');
+    }
 
-    if(!Main.restarting) this.body.drag.x = 300;
+    this.body.drag.x = 10;
+
+    if(this.body.velocity.x < 0) {
+        this.SetDirection('right');
+    } else if(this.body.velocity.x > 0) {
+        this.SetDirection('left');
+
+    }
 
     if(this.timers.TimerUp('frauki_hit') && !Main.restarting) {
         if(this.body.velocity.y > 0) {

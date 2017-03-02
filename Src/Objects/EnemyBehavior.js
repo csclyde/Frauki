@@ -199,6 +199,10 @@ EnemyBehavior.Player.IsVulnerable = function(e) {
         return false;
     }
 
+    if(frauki.state === frauki.Hurting) {
+        return false;
+    }
+
     var vulnerableFrames = [
         'Attack Fall0005',
         'Attack Fall0006',
@@ -342,10 +346,6 @@ EnemyBehavior.ChargeAtPlayer = function(e, speed) {
 EnemyBehavior.WalkToPlayer = function(e, speed) {
     e.body.velocity.x = speed * EnemyBehavior.Player.DirMod(e) * -1;
     EnemyBehavior.FacePlayer(e);
-
-    if(EnemyBehavior.PathBlocked(e)) {
-        EnemyBehavior.JumpCurb(e);
-    }
 
     return true;
 };
