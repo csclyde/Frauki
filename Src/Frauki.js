@@ -1168,6 +1168,7 @@ Player.prototype.Hurting = function() {
     }
 
     this.body.drag.x = 10;
+    this.body.acceleration.x = 0;
 
     if(this.body.velocity.x < 0) {
         this.SetDirection('right');

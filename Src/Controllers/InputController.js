@@ -205,7 +205,6 @@ InputController = function() {
                 break;
 
                 case 9: //start
-                console.log('fjdfsdfsdfs')
                     this.OnStart(true);
                 break;
 

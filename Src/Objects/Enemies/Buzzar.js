@@ -27,6 +27,8 @@ Enemy.prototype.types['Buzzar'] =  function() {
         this.body.allowGravity = false;
         this.body.gravity.y = 0;
 
+        EnemyBehavior.FaceForward(this);
+
     };
 
     this.Act = function() {
@@ -114,16 +116,6 @@ Enemy.prototype.types['Buzzar'] =  function() {
         
         this.body.velocity.y = Math.sin((this.hoverOffset + game.time.now) / 250) * 100;
 
-        if(this.wanderDirection === 'left') {
-            this.body.velocity.x = 100;
-        } else if(this.wanderDirection === 'right') {
-            this.body.velocity.x = -100;
-        }
-
-        if(this.body.onWall()) {
-            this.ChangeDirection();
-        }
-
         return true;
     };
 
@@ -176,7 +168,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
         locus.x = frauki.body.center.x + (Math.sin(game.time.now / 150) * 30);
         locus.y = frauki.body.center.y - 150 + (Math.sin(game.time.now / 50) * 100 + (Math.random() * 40 - 20));
 
-        EnemyBehavior.FacePlayer(this);
+        //EnemyBehavior.FacePlayer(this);
         game.physics.arcade.moveToXY(this, locus.x, locus.y, 40);
 
         return true;

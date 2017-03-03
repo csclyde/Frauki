@@ -43,7 +43,6 @@ Enemy.prototype.types['Insectoid'] =  function() {
                 this.Hop();
 
             } else if(this.body.onFloor()) {
-
                 if(this.timers.TimerUp('dodge') && EnemyBehavior.Player.IsDangerous(this)) {
                     this.Dodge();
                 }
@@ -97,7 +96,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
         EnemyBehavior.FacePlayer(this);
 
-        this.timers.SetTimer('attack', 500);
+        this.timers.SetTimer('attack', 300);
         this.state = this.PreHopping;
     };
 
@@ -105,7 +104,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
         EnemyBehavior.FacePlayer(this);      
 
-        this.timers.SetTimer('attack', 600);
+        this.timers.SetTimer('attack', 300);
         this.state = this.PreScuttling;   
     };
 
@@ -117,13 +116,22 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
         this.state = this.Dodging;
 
-        this.body.velocity.y = -300;
+        if(frauki.body.onFloor()) {
+            this.body.velocity.y = -300;
 
-        if(frauki.body.center.x < this.body.center.x) {
-            this.body.velocity.x = 300;
+            if(frauki.body.center.x < this.body.center.x) {
+                this.body.velocity.x = 300;
+            } else {
+                this.body.velocity.x = -300;
+            }   
         } else {
-            this.body.velocity.x = -300;
-        }   
+            if(frauki.body.center.x < this.body.center.x) {
+                this.body.velocity.x = -500;
+            } else {
+                this.body.velocity.x = 500;
+            }   
+        }
+
     };
 
     this.ScuttleAway = function() {
@@ -191,7 +199,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
     };
 
     this.PreScuttling = function() {
-        this.PlayAnim('idle');    
+        this.PlayAnim('spin');    
 
         EnemyBehavior.FacePlayer(this);
           

@@ -85,6 +85,12 @@ EnemyBehavior.Player.Distance = function(e) {
     var distX = frauki.body.center.x - e.body.center.x;
     var distY = frauki.body.center.y - e.body.center.y;
 
+    if(frauki.body.center.x < e.body.center.x) {
+        distX = e.body.x - frauki.body.center.x;
+    } else {
+        distX = frauki.body.center.x - (e.body.x + e.body.width);
+    }
+
     var dist = Math.sqrt(distX * distX + distY * distY);
 
     return dist;
