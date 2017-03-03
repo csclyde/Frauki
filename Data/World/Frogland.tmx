@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="300" height="650" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="2909">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="300" height="650" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="2910">
  <properties>
   <property name="debug" value="false"/>
   <property name="startLayer" value="3"/>
@@ -3373,11 +3373,6 @@
     <property name="type" value="enemy"/>
    </properties>
   </object>
-  <object id="2187" gid="85" x="3199.33" y="3552.33" width="16" height="16">
-   <properties>
-    <property name="on_death" value="open_door,door_name:start_enemy"/>
-   </properties>
-  </object>
   <object id="2371" gid="105" x="384.301" y="5551.92" width="16" height="16"/>
   <object id="2372" gid="85" x="582.971" y="5425.25" width="16" height="16"/>
   <object id="2373" gid="67" x="1353" y="4312" width="16" height="16">
@@ -3815,6 +3810,7 @@
     <property name="on_death" value="open_door,door_name:spaceship_first"/>
    </properties>
   </object>
+  <object id="2909" gid="98" x="3179" y="3609.5" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Triggers_3">
   <object id="1568" name="light" type="trigger" x="2411.91" y="5147.5" width="113.333" height="226">
