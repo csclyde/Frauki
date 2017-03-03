@@ -49,7 +49,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
                 if(this.animations.currentFrame.name === 'A3PZ/Walk0001' || this.animations.currentFrame.name === 'A3PZ/Walk0007') {
                     if(this.needsShake) {
                         events.publish('camera_shake', {magnitudeX: 0, magnitudeY: 3, duration: 200});
-                        events.publish('play_sound', {name: 'door_slam', restart: true});
+                        events.publish('play_sound', {name: 'AZP3_step', restart: true});
                         this.needsShake = false;
                     }
                 } else {
@@ -80,6 +80,9 @@ Enemy.prototype.types['A3PZ'] =  function() {
         }
 
         this.firstAttack = !this.firstAttack;
+
+        events.publish('play_sound', {name: 'attack_windup', restart: true});
+
 
     };
 
@@ -143,6 +146,10 @@ Enemy.prototype.types['A3PZ'] =  function() {
             this.timers.SetTimer('slash_hold', game.rnd.between(1000, 1200));
             events.publish('camera_shake', {magnitudeX: 5, magnitudeY: 0, duration: 600});
 
+        	events.publish('stop_sound', {name: 'attack_windup', restart: true});
+        	events.publish('play_sound', {name: 'AZP3_punch', restart: true});
+
+
             if(this.direction === 'left') {
                 this.body.velocity.x = -500;
             } else {
@@ -173,6 +180,9 @@ Enemy.prototype.types['A3PZ'] =  function() {
             this.state = this.Slashing2;
             this.timers.SetTimer('slash_hold', game.rnd.between(1000, 1200));
             events.publish('camera_shake', {magnitudeX: 5, magnitudeY: 0, duration: 600});
+
+            events.publish('stop_sound', {name: 'attack_windup', restart: true});
+        	events.publish('play_sound', {name: 'AZP3_punch', restart: true});
 
             if(this.direction === 'left') {
                 this.body.velocity.x = -500;

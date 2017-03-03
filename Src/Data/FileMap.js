@@ -102,6 +102,9 @@ FileMap.Audio = [
 	
 	{ Name: 'baton_catch', File: 'Data/Sfx/baton_catch.wav', Volume: 1.2, Loop: false },
 
+	{ Name: 'attack_windup', File: 'Data/Sfx/attack_windup.wav', Volume: 0.5, Loop: false },
+	{ Name: 'AZP3_step', File: 'Data/Sfx/AZP3_step.wav', Volume: 1.0, Loop: false },
+	{ Name: 'AZP3_punch', File: 'Data/Sfx/AZP3_punch.wav', Volume: 1.0, Loop: false },
 
 ];
 
