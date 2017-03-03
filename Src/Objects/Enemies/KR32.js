@@ -94,12 +94,16 @@ Enemy.prototype.types['KR32'] =  function() {
     	EnemyBehavior.FacePlayer(this);
     	this.state = this.Windup;
     	this.timers.SetTimer('windup', game.rnd.between(500, 550));
+        events.publish('play_sound', {name: 'attack_windup', restart: true});
+
     };
 
     this.AttackStab = function() {
     	EnemyBehavior.FacePlayer(this);
     	this.state = this.Stabbing;
 		this.timers.SetTimer('attack_hold', 650);
+
+		events.publish('play_sound', {name: 'KR32_stab', restart: true});
 
     };
 
@@ -234,6 +238,9 @@ Enemy.prototype.types['KR32'] =  function() {
 			this.state = this.Slashing;
 			this.timers.SetTimer('attack_hold', 700);
 
+			events.publish('stop_sound', {name: 'attack_windup', restart: true});
+        	events.publish('play_sound', {name: 'KR32_attack', restart: true});
+
 			if(this.direction === 'left') {
 				this.body.velocity.x = -550;
 			} else {
@@ -260,6 +267,7 @@ Enemy.prototype.types['KR32'] =  function() {
 
 		if(this.animations.currentAnim.isFinished && this.timers.TimerUp('attack_hold')) {
 			this.timers.SetTimer('attack_wait', game.rnd.between(600, 1000));
+
 			return true;
 		}
 
