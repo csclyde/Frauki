@@ -243,6 +243,10 @@ ObjectController.prototype.CreateObjectsLayer = function(layer) {
 
     Frogland.map.createFromObjects('Objects_' + layer, 75, 'Misc', 'Upgrade0000', true, true, currLayer, Upgrade, false);
     
+    Frogland.map.createFromObjects('Objects_' + layer, 70, 'Shard0000', 'Shard0000', true, true, currLayer, Shard, false);
+    Frogland.map.createFromObjects('Objects_' + layer, 71, 'Shard0001', 'Shard0001', true, true, currLayer, Shard, false);
+    Frogland.map.createFromObjects('Objects_' + layer, 72, 'Shard0002', 'Shard0002', true, true, currLayer, Shard, false);
+    Frogland.map.createFromObjects('Objects_' + layer, 73, 'Shard0003', 'Shard0003', true, true, currLayer, Shard, false);
 
     // if(layer == 3) {
     //     Frogland.ball = game.add.sprite(177 * 16, 270 * 16, 'Misc', 'Ball0000', currLayer);
@@ -273,8 +277,12 @@ ObjectController.prototype.CreateObjectsLayer = function(layer) {
             }
 
             objectController.checkpointList.push(obj);
+
         } else if(obj.spriteType === 'enemy') {
             objectController.enemyList.push(obj);
+
+        } else if(obj.spriteType === 'shard') {
+            objectController.shardList.push(obj);
         }
 
         if(Frogland.currentLayer !== layer) {
