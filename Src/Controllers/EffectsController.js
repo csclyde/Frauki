@@ -27,7 +27,7 @@ EffectsController.prototype.CreateEffect = function(e, x, y, w, h) {
     effect.width = w || 0;
     effect.height = h || 0;
     effect.makeParticles('Misc', e.Frames); 
-    effect.gravity = e.Gravity || -700;
+    effect.gravity.setTo(0, e.Gravity || -700);
     effect.particleDrag.setTo(e.Drag || 0);
     effect.setRotation(e.MinRot || 0, e.MaxRot || 0);
     effect.minParticleSpeed.setTo(e.MinSpeedX || 0, e.MinSpeedY || 0);
@@ -176,7 +176,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 splasherLeft.width = o.width / 2;
                 splasherLeft.height = o.height;
                 splasherLeft.makeParticles('Misc', ['Splash0002', 'Splash0003'], 10); 
-                splasherLeft.gravity = 300;
+                splasherLeft.gravity.setTo(0, 300);
                 splasherLeft.maxParticleScale = 1;
                 splasherLeft.minParticleScale = 1;
                 splasherLeft.minParticleSpeed.x = -50;
@@ -191,7 +191,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 splasherRight.width = o.width / 2;
                 splasherRight.height = o.height;
                 splasherRight.makeParticles('Misc', ['Splash0000', 'Splash0001'], 10); 
-                splasherRight.gravity = 300;
+                splasherRight.gravity.setTo(0, 300);
                 splasherRight.maxParticleScale = 1;
                 splasherRight.minParticleScale = 1;
                 splasherRight.minParticleSpeed.x = -10;
@@ -210,7 +210,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 dripper.width = o.width;
                 dripper.height = o.height;
                 dripper.makeParticles('Misc', ['Drip0000', 'Drip0001'], 2);
-                dripper.gravity = -200;
+                dripper.gravity.setTo(0, -200);
                 dripper.maxParticleSpeed.setTo(0);
                 dripper.minParticleSpeed.setTo(0);
                 dripper.setRotation(0, 0);
@@ -229,7 +229,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 fluffer.width = o.width;
                 fluffer.height = o.height;
                 fluffer.makeParticles('Misc', ['Fluff0000', 'Fluff0001', 'Fluff0002', 'Fluff0003'], 100);
-                fluffer.gravity = -695;
+                fluffer.gravity.setTo(0, -695);
                 fluffer.maxParticleSpeed.setTo(10);
                 fluffer.minParticleSpeed.setTo(-10);
                 fluffer.setRotation(0, 0);
@@ -245,7 +245,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 bubbler.width = o.width;
                 bubbler.height = o.height;
                 bubbler.makeParticles('Misc', ['Bubbles0000', 'Bubbles0001', 'Bubbles0002', 'Bubbles0003'], 5);
-                bubbler.gravity = -700;
+                bubbler.gravity.setTo(0, -700);
                 bubbler.maxParticleSpeed.setTo(0);
                 bubbler.minParticleSpeed.setTo(0);
                 bubbler.minParticleSpeed.y = -25;
@@ -267,7 +267,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 sprayer.width = o.width;
                 sprayer.height = o.height;
                 sprayer.makeParticles('Misc', ['Sparks0000', 'Sparks0001', 'Sparks0002', 'Sparks0003', 'Sparks0004', 'Sparks0005'], 20);
-                sprayer.gravity = -695;
+                sprayer.gravity.setTo(0, -695);
                 sprayer.maxParticleSpeed.setTo(10, 100);
                 sprayer.minParticleSpeed.setTo(-400, -100);
                 sprayer.setRotation(0, 0);
@@ -282,7 +282,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 leaves.width = o.width;
                 leaves.height = o.height;
                 leaves.makeParticles('Misc', ['Leaves0000', 'Leaves0001', 'Leaves0002'], 5);
-                leaves.gravity = -700;
+                leaves.gravity.setTo(0, -700);
                 leaves.maxParticleSpeed.y = 45;
                 leaves.minParticleSpeed.y = 15;
                 leaves.maxParticleSpeed.x = 40;
@@ -300,7 +300,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 leaves.width = o.width;
                 leaves.height = o.height;
                 leaves.makeParticles('Misc', ['Leaves0003', 'Leaves0004', 'Leaves0005'], 5);
-                leaves.gravity = -700;
+                leaves.gravity.setTo(0, -700);
                 leaves.maxParticleSpeed.y = 45;
                 leaves.minParticleSpeed.y = 15;
                 leaves.maxParticleSpeed.x = 40;
@@ -317,7 +317,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 spirits.width = o.width;
                 spirits.height = o.height;
                 spirits.makeParticles('Misc', ['Spirit0000', 'Spirit0001', 'Spirit0002', 'Spirit0003'], 10);
-                spirits.gravity = -700;
+                spirits.gravity.setTo(0, -700);
                 spirits.alpha = 0.15;
                 spirits.particleDrag.setTo(0);
                 spirits.maxParticleSpeed.setTo(15);
@@ -337,7 +337,7 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
             sparkles.width = o.width;
             sparkles.height = o.height;
             sparkles.makeParticles('Misc', ['Sparkles0000', 'Sparkles0001', 'Sparkles0002', 'Sparkles0003', 'Sparkles0004'], 25);
-            sparkles.gravity = -700;
+            sparkles.gravity.setTo(0, -700);
             sparkles.maxParticleSpeed.setTo(0);
             sparkles.minParticleSpeed.setTo(0);
             sparkles.minRotation = 0;

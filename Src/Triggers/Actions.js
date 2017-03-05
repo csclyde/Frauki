@@ -137,6 +137,20 @@ TriggerController.prototype.triggers['vertical_loop'] = {
 	}
 };
 
+TriggerController.prototype.triggers['vertical_loop_up'] = {
+	enter: function(params) {
+		frauki.y = 10000;
+		game.camera.y = 10000;
+		cameraController.camY = 9000;
+	},
+
+	stay: function(params) {
+	},
+
+	exit: function(params) {
+	}
+};
+
 TriggerController.prototype.triggers['goddess_spaceship'] = {
 	enter: function(params) {
 		if(!GameData.GetFlag('goddess_spaceship')) {
