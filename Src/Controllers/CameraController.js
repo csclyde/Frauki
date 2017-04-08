@@ -29,7 +29,7 @@ CameraController = function() {
 		this.target = params.target;
 	}, this);
 
-    this.target = { x: 198 * 16, y: 180 * 16 };
+    //this.target = { x: 198 * 16, y: 180 * 16 };
 
 
 };

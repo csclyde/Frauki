@@ -14,7 +14,7 @@ GameData.data = {
     shards: [],
     nugg_bank: 0,
     flash_copy: null,
-    health: 2,
+    health: 3,
     flags: {},
     vals: {
         goddess_message_queue: []

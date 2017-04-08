@@ -3,7 +3,7 @@ var Main = new Phaser.State();
 Main.create = function() {
 
     Frogland.SpawnFrauki();
-    inputController.DisallowInput();
+    //inputController.DisallowInput();
 
     this.restarting = true;
 
@@ -47,6 +47,11 @@ Main.create = function() {
     events.subscribe('update_ui', this.UpdateUI, this);
 
     this.inMenu = true;
+
+    // this.titleLogo = game.add.image(0, 0, 'UI', 'Logo0000');
+    // this.titleLogo.fixedToCamera = true;
+    // this.titleLogo.cameraOffset.x = 133;
+    // this.titleLogo.cameraOffset.y = 30;
 };
 
 Main.update = function() {
