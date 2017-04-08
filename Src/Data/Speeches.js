@@ -67,4 +67,7 @@ var Speeches = {
 	'pouring_joy': { text: 'Something is carved into the wall: I can barely withstand the joy pouring into me! Goodbye!' },
 	'another_sky': { text: 'Something is carved into the wall: So, we will find another sky. So it goes.' },
 	'behold_goddess': { text: 'Something is carved into the wall: The Goddess has appeared, and we are forgiven' }
+	
+
+	'demo_thanks': { text: 'Nice work! Thanks for trying out the game, hope you had fun. Don\'t forget to sign up for the mailing list!' }
 };
