@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="300" height="650" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="2912">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="300" height="650" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="2914">
  <properties>
   <property name="debug" value="false"/>
   <property name="startLayer" value="3"/>
@@ -3099,7 +3099,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="Objects_3">
+ <objectgroup name="Objects_3" visible="0">
   <properties>
    <property name="id" value="sewer_transverse"/>
   </properties>
@@ -3997,6 +3997,7 @@
   <object id="2906" name="music_left_right" type="trigger" x="4351" y="3834" width="20" height="98.6667"/>
   <object id="2910" name="vertical_loop_up" type="trigger" x="-94.425" y="100.728" width="4972.85" height="118.545"/>
   <object id="2911" name="demo_thanks" type="speech" x="3073" y="4045" width="31.6667" height="35.3333"/>
+  <object id="2913" name="names_engraved" type="speech" x="3778" y="3340.67" width="61" height="67"/>
  </objectgroup>
  <layer name="Background_4" width="300" height="650" visible="0">
   <data encoding="csv">
@@ -6742,13 +6743,19 @@
   <object id="1830" name="leaves_brown" type="effect" x="4107.19" y="3824.5" width="45.6252" height="17"/>
   <object id="1838" name="drip" type="effect" x="3186.94" y="3790.92" width="80.8125" height="4.66667"/>
   <object id="2864" name="ragnarok" type="trigger" x="2394.67" y="4197.33" width="446.667" height="276"/>
+  <object id="2912" name="music_left_right" type="trigger" x="3219.37" y="3784.17" width="19.9167" height="79">
+   <properties>
+    <property name="fadeOut" value="2000"/>
+    <property name="left" value="Intro"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="Doors_1" visible="0">
   <properties>
    <property name="Desc" value="Connects layers 2 and 3"/>
   </properties>
  </objectgroup>
- <objectgroup name="Doors_2">
+ <objectgroup name="Doors_2" visible="0">
   <properties>
    <property name="Desc" value="Connects layers 3 and 4"/>
   </properties>

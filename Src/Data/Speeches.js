@@ -51,6 +51,7 @@ var Speeches = {
 	'nibble': { text: 'Just a little nibble couldn\'t hurt... could it?', portrait: 'Mischeif' },
 	'cold': { text: 'This water is so cold, it\'s making my knees shake', portrait: 'Displeased' },
 	'ellipses': { text: '...', portrait: 'Silly' },
+	'names_engraved': { text: 'Looks like each stone has a name engraved in it.', portrait: 'Neutral' },
 	
 	'sorry_plant': { text: 'Sorry plant' },
 	'maybe_if': { text: 'Maybe if I just...' },
@@ -66,7 +67,7 @@ var Speeches = {
 	'maint': { text: 'Something is engraved into the wall: Maintenence access. Beware pipe currents.' },
 	'pouring_joy': { text: 'Something is carved into the wall: I can barely withstand the joy pouring into me! Goodbye!' },
 	'another_sky': { text: 'Something is carved into the wall: So, we will find another sky. So it goes.' },
-	'behold_goddess': { text: 'Something is carved into the wall: The Goddess has appeared, and we are forgiven' }
+	'behold_goddess': { text: 'Something is carved into the wall: The Goddess has appeared, and we are forgiven' },
 	
 
 	'demo_thanks': { text: 'Nice work! Thanks for trying out the game, hope you had fun. Don\'t forget to sign up for the mailing list!' }

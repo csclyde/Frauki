@@ -11,7 +11,7 @@ Player = function (game, x, y, name) {
     this.anchor.setTo(0.5, 1);
 
     this.body.collideWorldBounds = true;
-    this.body.setSize(11, 50, 0, -75);
+    this.body.setSize(11, 50, 0, -74);
     //this.body.maxVelocity.y = 10;
     this.body.drag.x = 2000;
 

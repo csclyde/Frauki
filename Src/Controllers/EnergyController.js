@@ -163,6 +163,8 @@ EnergyController.prototype.GetCharge = function() {
 };
 
 EnergyController.prototype.AddCharge = function(amt) {
+	return;
+	
 	amt = Math.floor(amt);
 
 	if(!GameData.HasAnyUpgrades()) {

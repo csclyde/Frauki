@@ -231,6 +231,22 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">A3PZ/Attack2Frame1.png</key>
+            <key type="filename">A3PZ/Attack2Frame10.png</key>
+            <key type="filename">A3PZ/Attack2Frame11.png</key>
+            <key type="filename">A3PZ/Attack2Frame12.png</key>
+            <key type="filename">A3PZ/Attack2Frame13.png</key>
+            <key type="filename">A3PZ/Attack2Frame14.png</key>
+            <key type="filename">A3PZ/Attack2Frame15.png</key>
+            <key type="filename">A3PZ/Attack2Frame16.png</key>
+            <key type="filename">A3PZ/Attack2Frame2.png</key>
+            <key type="filename">A3PZ/Attack2Frame3.png</key>
+            <key type="filename">A3PZ/Attack2Frame4.png</key>
+            <key type="filename">A3PZ/Attack2Frame5.png</key>
+            <key type="filename">A3PZ/Attack2Frame6.png</key>
+            <key type="filename">A3PZ/Attack2Frame7.png</key>
+            <key type="filename">A3PZ/Attack2Frame8.png</key>
+            <key type="filename">A3PZ/Attack2Frame9.png</key>
             <key type="filename">A3PZ/Hit0000.png</key>
             <key type="filename">A3PZ/Hit0001.png</key>
             <key type="filename">A3PZ/Hit0002.png</key>
@@ -239,6 +255,15 @@
             <key type="filename">A3PZ/Idle0002.png</key>
             <key type="filename">A3PZ/Idle0003.png</key>
             <key type="filename">A3PZ/Idle0004.png</key>
+            <key type="filename">A3PZ/ShoveFrame10.png</key>
+            <key type="filename">A3PZ/ShoveFrame11.png</key>
+            <key type="filename">A3PZ/ShoveFrame2.png</key>
+            <key type="filename">A3PZ/ShoveFrame3.png</key>
+            <key type="filename">A3PZ/ShoveFrame4.png</key>
+            <key type="filename">A3PZ/ShoveFrame6.png</key>
+            <key type="filename">A3PZ/ShoveFrame7.png</key>
+            <key type="filename">A3PZ/ShoveFrame8.png</key>
+            <key type="filename">A3PZ/ShoveFrame9.png</key>
             <key type="filename">A3PZ/Walk0006.png</key>
             <key type="filename">A3PZ/Walk0007.png</key>
             <key type="filename">A3PZ/Walk0008.png</key>
