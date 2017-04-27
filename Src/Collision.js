@@ -177,8 +177,10 @@ Collision.CollideFraukiWithEnvironment = function(f, tile) {
     } else if(tile.index === 17) {
         frauki.states.onLeftSlope = true;
 
+        //if fraukis bottom edge is between the top and bottom edges of the tile
         if(frauki.body.y + frauki.body.height > (tile.y * 16) + 1 && frauki.body.y + frauki.body.height <= tile.bottom * 16) {
 
+            //if she is falling, i.e. not on the ground
             if(frauki.body.velocity.y > 0) {
                 var offset = (tile.right - frauki.body.center.x);
                 if(offset > 16) offset = 16;

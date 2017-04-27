@@ -979,7 +979,7 @@ Player.prototype.Running = function() {
         this.ChangeState(this.Standing);
     } else if(this.body.velocity.y < 0) {
         this.ChangeState(this.Jumping);
-    } else if(this.body.velocity.y > 20) {
+    } else if(this.body.velocity.y > 25 && !frauki.states.onLeftSlope && !frauki.states.onRightSlope) {
         this.ChangeState(this.Peaking);
     }
 };
