@@ -6,23 +6,23 @@ Enemy.prototype.types['A3PZ'] =  function() {
     this.animations.add('idle', ['A3PZ/Idle0000', 'A3PZ/Idle0001', 'A3PZ/Idle0002', 'A3PZ/Idle0003', 'A3PZ/Idle0004'], 10, true, false);
     this.animations.add('walk', ['A3PZ/Walk0000', 'A3PZ/Walk0001', 'A3PZ/Walk0002', 'A3PZ/Walk0003', 'A3PZ/Walk0004', 'A3PZ/Walk0005', 'A3PZ/Walk0006', 'A3PZ/Walk0007', 'A3PZ/Walk0008', 'A3PZ/Walk0009', 'A3PZ/Walk0010'], 8, true, false);
     this.animations.add('block', ['A3PZ/Idle0000'], 18, true, false);
-    this.animations.add('windup1', ['A3PZ/Attack0001', 'A3PZ/Attack0002', 'A3PZ/Attack0003'], 10, false, false);
-    this.animations.add('attack1', ['A3PZ/Attack0004', 'A3PZ/Attack0005', 'A3PZ/Attack0006', 'A3PZ/Attack0007', 'A3PZ/Attack0008'], 16, false, false);
-    this.animations.add('windup2', ['A3PZ/Attack0001', 'A3PZ/Attack0002', 'A3PZ/Attack0003'], 10, false, false);
-    this.animations.add('attack2', ['A3PZ/Attack0004', 'A3PZ/Attack0005', 'A3PZ/Attack0006', 'A3PZ/Attack0007', 'A3PZ/Attack0008'], 16, false, false);
+    this.animations.add('punch_windup', ['A3PZ/Punch0001', 'A3PZ/Punch0002', 'A3PZ/Punch0003'], 10, false, false);
+    this.animations.add('punch', ['A3PZ/Punch0004', 'A3PZ/Punch0005', 'A3PZ/Punch0006', 'A3PZ/Punch0007', 'A3PZ/Punch0008'], 16, false, false);
+    this.animations.add('hammer_windup', ['A3PZ/Hammer0001', 'A3PZ/Hammer0002', 'A3PZ/Hammer0003', 'A3PZ/Hammer0004', 'A3PZ/Hammer0005', 'A3PZ/Hammer0006', 'A3PZ/Hammer0007'], 10, false, false);
+    this.animations.add('hammer_jump', ['A3PZ/Hammer0009'], 16, false, false);
+    this.animations.add('hammer', ['A3PZ/Hammer0010', 'A3PZ/Hammer0011', 'A3PZ/Hammer0012', 'A3PZ/Hammer0013', 'A3PZ/Hammer0014', 'A3PZ/Hammer0015'], 12, false, false);
     this.animations.add('hurt', ['A3PZ/Hit0001'], 12, true, false);
     this.animations.add('stun', ['A3PZ/Hit0001'], 12, true, false);
 
     this.energy = 5;
     this.baseStunDuration = 500;
     this.stunThreshold = 1.5;
+    this.body.bounce.y = 0;
 
     this.robotic = true;
-
-    this.firstAttack = true;
     
     this.updateFunction = function() {
-        if(this.state === this.Slashing1 || this.state === this.Slashing2) {
+        if(this.state === this.Punching || this.state === this.Hammering) {
             this.body.drag.x = 1200;
         } else {
             this.body.drag.x = 200;
@@ -34,7 +34,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
         if(EnemyBehavior.Player.IsVisible(this)) {
             if(EnemyBehavior.Player.IsNear(this, 120) && EnemyBehavior.Player.IsVulnerable(this)) {
                 EnemyBehavior.FacePlayer(this);
-                this.Attack();
+                this.Punch();
 
                 // if(EnemyBehavior.Player.MovingTowards(this) || EnemyBehavior.Player.IsDangerous(this)) {
                 //     this.Block(300);
@@ -42,7 +42,10 @@ Enemy.prototype.types['A3PZ'] =  function() {
                 // } else {
                 //     this.Block(300);
                 // }
-            
+            } else if(EnemyBehavior.Player.IsNear(this, 220)) {
+                EnemyBehavior.FacePlayer(this);
+                this.Hammer();
+
             } else {
                 this.state = this.Idling;
 
@@ -65,25 +68,26 @@ Enemy.prototype.types['A3PZ'] =  function() {
     };
 
     ///////////////////////////////ACTIONS////////////////////////////////////
-    this.Attack = function() {
+    this.Punch = function() {
         if(!this.timers.TimerUp('attack')) {
             return;
         }
 
-
-        if(this.firstAttack) {
-            this.timers.SetTimer('slash_hold', 400);
-            this.state = this.Windup1;
-        } else {
-            this.timers.SetTimer('slash_hold', 300);
-            this.state = this.Windup2;
-        }
-
-        this.firstAttack = !this.firstAttack;
+        this.timers.SetTimer('slash_hold', 400);
+        this.state = this.PunchWindup;
 
         events.publish('play_sound', {name: 'attack_windup', restart: true});
+    };
 
+    this.Hammer = function() {
+         if(!this.timers.TimerUp('attack')) {
+            return;
+        }
 
+        this.timers.SetTimer('slash_hold', 500);
+        this.state = this.HammerWindup;
+
+        events.publish('play_sound', {name: 'attack_windup', restart: true});
     };
 
     this.Dodge = function(duration, override) {
@@ -138,11 +142,11 @@ Enemy.prototype.types['A3PZ'] =  function() {
         return true;
     };
 
-    this.Windup1 = function() {
-        this.PlayAnim('windup1');
+    this.PunchWindup = function() {
+        this.PlayAnim('punch_windup');
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
-            this.state = this.Slashing1;
+            this.state = this.Punching;
             this.timers.SetTimer('slash_hold', game.rnd.between(1000, 1200));
             events.publish('camera_shake', {magnitudeX: 5, magnitudeY: 0, duration: 600});
 
@@ -160,44 +164,63 @@ Enemy.prototype.types['A3PZ'] =  function() {
         return false;
     };
 
-    this.Slashing1 = function() {
-        this.PlayAnim('attack1');
+    this.Punching = function() {
+        this.PlayAnim('punch');
 
         
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
-            this.state = this.Windup2;
             return true;
         }
 
         return false;
     };
 
-    this.Windup2 = function() {
-        this.PlayAnim('windup2');
+    this.HammerWindup = function() {
+        this.PlayAnim('hammer_windup');
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
-            this.state = this.Slashing2;
-            this.timers.SetTimer('slash_hold', game.rnd.between(1000, 1200));
-            events.publish('camera_shake', {magnitudeX: 5, magnitudeY: 0, duration: 600});
+            this.state = this.HammerJumping;
+            this.timers.SetTimer('slash_hold', 600);
+            // events.publish('camera_shake', {magnitudeX: 5, magnitudeY: 0, duration: 600});
 
-            events.publish('stop_sound', {name: 'attack_windup', restart: true});
-        	events.publish('play_sound', {name: 'AZP3_punch', restart: true});
+            // events.publish('stop_sound', {name: 'attack_windup', restart: true});
+        	// events.publish('play_sound', {name: 'AZP3_punch', restart: true});
 
-            if(this.direction === 'left') {
-                this.body.velocity.x = -500;
-            } else {
-                this.body.velocity.x = 500;
-            }
+            // if(this.direction === 'left') {
+            //     this.body.velocity.x = -500;
+            // } else {
+            //     this.body.velocity.x = 500;
+            // }
+
+            EnemyBehavior.JumpToPoint(this, frauki.body.center.x, frauki.body.y - 50);
         }
 
         return false;
     };
 
-    this.Slashing2 = function() {
-        this.PlayAnim('attack2');
+    this.HammerJumping = function() {
+        this.PlayAnim('hammer_jump');
 
-        
+        if(this.timers.TimerUp('slash_hold')) {
+            this.state = this.Hammering;
+            this.body.velocity.y = 500;
+
+            this.touchedDown = false;
+        }
+    };
+
+    this.Hammering = function() {
+        this.PlayAnim('hammer');
+
+        if(this.body.onFloor() && !this.touchedDown) {
+            this.touchedDown = true;
+
+            events.publish('stop_sound', {name: 'attack_windup', restart: true});
+            events.publish('play_sound', {name: 'AZP3_punch', restart: true});
+
+            events.publish('camera_shake', {magnitudeX: 7, magnitudeY: 0, duration: 600});
+        }
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
             return true;

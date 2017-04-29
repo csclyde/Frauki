@@ -363,8 +363,8 @@ EnemyBehavior.JumpCurb = function(e) {
     }
 };
 
-EnemyBehavior.JumpToPoint = function(e, x, y) {
-    var duration = 0.65;
+EnemyBehavior.JumpToPoint = function(e, x, y, dur) {
+    var duration = dur || 0.65;
 
     e.body.velocity.x = (x - e.body.center.x) / duration;
     e.body.velocity.y = (y + -0.5 * game.physics.arcade.gravity.y * duration * duration - e.body.center.y) / duration;

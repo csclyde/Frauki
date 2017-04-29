@@ -197,56 +197,22 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">A3PZ/Attack0000.png</key>
-            <key type="filename">A3PZ/Attack0001.png</key>
-            <key type="filename">A3PZ/Attack0002.png</key>
-            <key type="filename">A3PZ/Attack0003.png</key>
-            <key type="filename">A3PZ/Attack0004.png</key>
-            <key type="filename">A3PZ/Attack0005.png</key>
-            <key type="filename">A3PZ/Attack0006.png</key>
-            <key type="filename">A3PZ/Attack0007.png</key>
-            <key type="filename">A3PZ/Attack0008.png</key>
-            <key type="filename">A3PZ/Walk0000.png</key>
-            <key type="filename">A3PZ/Walk0001.png</key>
-            <key type="filename">A3PZ/Walk0002.png</key>
-            <key type="filename">A3PZ/Walk0003.png</key>
-            <key type="filename">A3PZ/Walk0004.png</key>
-            <key type="filename">A3PZ/Walk0005.png</key>
-            <key type="filename">R2BTU/Attack0000.png</key>
-            <key type="filename">R2BTU/Attack0001.png</key>
-            <key type="filename">R2BTU/Attack0002.png</key>
-            <key type="filename">R2BTU/Attack0003.png</key>
-            <key type="filename">R2BTU/Float0000.png</key>
-            <key type="filename">R2BTU/Float0001.png</key>
-            <key type="filename">R2BTU/Stand0000.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>75,75,150,150</rect>
-                <key>scale9Paddings</key>
-                <rect>75,75,150,150</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">A3PZ/Attack2Frame1.png</key>
-            <key type="filename">A3PZ/Attack2Frame10.png</key>
-            <key type="filename">A3PZ/Attack2Frame11.png</key>
-            <key type="filename">A3PZ/Attack2Frame12.png</key>
-            <key type="filename">A3PZ/Attack2Frame13.png</key>
-            <key type="filename">A3PZ/Attack2Frame14.png</key>
-            <key type="filename">A3PZ/Attack2Frame15.png</key>
-            <key type="filename">A3PZ/Attack2Frame16.png</key>
-            <key type="filename">A3PZ/Attack2Frame2.png</key>
-            <key type="filename">A3PZ/Attack2Frame3.png</key>
-            <key type="filename">A3PZ/Attack2Frame4.png</key>
-            <key type="filename">A3PZ/Attack2Frame5.png</key>
-            <key type="filename">A3PZ/Attack2Frame6.png</key>
-            <key type="filename">A3PZ/Attack2Frame7.png</key>
-            <key type="filename">A3PZ/Attack2Frame8.png</key>
-            <key type="filename">A3PZ/Attack2Frame9.png</key>
+            <key type="filename">A3PZ/Hammer0000.png</key>
+            <key type="filename">A3PZ/Hammer0001.png</key>
+            <key type="filename">A3PZ/Hammer0002.png</key>
+            <key type="filename">A3PZ/Hammer0003.png</key>
+            <key type="filename">A3PZ/Hammer0004.png</key>
+            <key type="filename">A3PZ/Hammer0005.png</key>
+            <key type="filename">A3PZ/Hammer0006.png</key>
+            <key type="filename">A3PZ/Hammer0007.png</key>
+            <key type="filename">A3PZ/Hammer0008.png</key>
+            <key type="filename">A3PZ/Hammer0009.png</key>
+            <key type="filename">A3PZ/Hammer0010.png</key>
+            <key type="filename">A3PZ/Hammer0011.png</key>
+            <key type="filename">A3PZ/Hammer0012.png</key>
+            <key type="filename">A3PZ/Hammer0013.png</key>
+            <key type="filename">A3PZ/Hammer0014.png</key>
+            <key type="filename">A3PZ/Hammer0015.png</key>
             <key type="filename">A3PZ/Hit0000.png</key>
             <key type="filename">A3PZ/Hit0001.png</key>
             <key type="filename">A3PZ/Hit0002.png</key>
@@ -319,6 +285,40 @@
                 <rect>50,50,100,100</rect>
                 <key>scale9Paddings</key>
                 <rect>50,50,100,100</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">A3PZ/Punch0000.png</key>
+            <key type="filename">A3PZ/Punch0001.png</key>
+            <key type="filename">A3PZ/Punch0002.png</key>
+            <key type="filename">A3PZ/Punch0003.png</key>
+            <key type="filename">A3PZ/Punch0004.png</key>
+            <key type="filename">A3PZ/Punch0005.png</key>
+            <key type="filename">A3PZ/Punch0006.png</key>
+            <key type="filename">A3PZ/Punch0007.png</key>
+            <key type="filename">A3PZ/Punch0008.png</key>
+            <key type="filename">A3PZ/Walk0000.png</key>
+            <key type="filename">A3PZ/Walk0001.png</key>
+            <key type="filename">A3PZ/Walk0002.png</key>
+            <key type="filename">A3PZ/Walk0003.png</key>
+            <key type="filename">A3PZ/Walk0004.png</key>
+            <key type="filename">A3PZ/Walk0005.png</key>
+            <key type="filename">R2BTU/Attack0000.png</key>
+            <key type="filename">R2BTU/Attack0001.png</key>
+            <key type="filename">R2BTU/Attack0002.png</key>
+            <key type="filename">R2BTU/Attack0003.png</key>
+            <key type="filename">R2BTU/Float0000.png</key>
+            <key type="filename">R2BTU/Float0001.png</key>
+            <key type="filename">R2BTU/Stand0000.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>75,75,150,150</rect>
+                <key>scale9Paddings</key>
+                <rect>75,75,150,150</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
