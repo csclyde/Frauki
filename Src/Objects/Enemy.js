@@ -153,7 +153,8 @@ Enemy.prototype.UpdateAttackGeometry = function() {
             damage: this.damage,
             knockback: this.knockback || 0.5,
             priority: this.priority || 0,
-            juggle: this.juggle || 0
+            juggle: this.juggle || 0,
+            stun: this.stun || false
         };
     } 
     else {
@@ -220,6 +221,14 @@ Enemy.prototype.GetCurrentKnockback = function() {
         return this.currentAttack.knockback || 1;
     } else {
         return 1;
+    }
+};
+
+Enemy.prototype.GetCurrentStun = function() {
+    if(!!this.currentAttack) {
+        return this.currentAttack.stun;
+    } else {
+        return false;
     }
 };
 

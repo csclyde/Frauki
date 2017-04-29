@@ -223,8 +223,8 @@ Player.prototype.PlayAnim = function(name) {
 
 Player.prototype.ChangeState = function(newState) {
 
+    this.state = newState;
     if(this.state !== this.Stunned) {
-        this.state = newState;
     }
 };
 
@@ -934,11 +934,14 @@ Player.prototype.Interrupt = function() {
 };
 
 Player.prototype.Stun = function(e) {
+    if(this.state === this.Stunned) {
+        return;
+    }
 
     this.ChangeState(this.Stunned);
-    this.timers.SetTimer('stunned', 2000);
+    this.timers.SetTimer('stunned', 1200);
 
-    this.body.velocity.y = -200;
+    //this.body.velocity.y = -200;
 
     this.body.acceleration.x = 0;
     this.body.acceleration.y = 0;
