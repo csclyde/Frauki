@@ -36,25 +36,20 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
     this.Act = function() {
 
-        if(EnemyBehavior.Player.IsVisible(this)) {
-            if(EnemyBehavior.Player.IsNear(this, 80) && EnemyBehavior.Player.IsVulnerable(this)) {
-                EnemyBehavior.FacePlayer(this);
-                this.Punch();
+        if(EnemyBehavior.Player.IsVisible(this) && this.timers.TimerUp('attack_wait')) {
+            if(EnemyBehavior.Player.IsVulnerable(this)) {
+                if(EnemyBehavior.Player.IsNear(this, 80)) {
+                    EnemyBehavior.FacePlayer(this);
+                    this.Punch();
 
-                // if(EnemyBehavior.Player.MovingTowards(this) || EnemyBehavior.Player.IsDangerous(this)) {
-                //     this.Block(300);
-                // } else if(EnemyBehavior.Player.IsVulnerable(this)) {
-                // } else {
-                //     this.Block(300);
-                // }
-            } else if(EnemyBehavior.Player.IsNear(this, 160)) {
-                EnemyBehavior.FacePlayer(this);
-                this.Hammer();
+                } else if(EnemyBehavior.Player.IsNear(this, 160)) {
+                    EnemyBehavior.FacePlayer(this);
+                    this.Hammer();
 
-            } else if(EnemyBehavior.Player.IsNear(this, 300)) {
-                EnemyBehavior.FacePlayer(this);
-                this.Charge();
-
+                } else if(EnemyBehavior.Player.IsNear(this, 300) && this.timers.TimerUp('charge_wait')) {
+                    EnemyBehavior.FacePlayer(this);
+                    this.Charge();
+                }
 
             } else {
                 this.state = this.Idling;
@@ -150,7 +145,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
     ////////////////////////////////STATES////////////////////////////////////
     this.Idling = function() {
-        if(this.body.velocity.x === 0) {
+        if(this.body.velocity.x === 0 || this.body.onWall()) {
             this.PlayAnim('idle');
         } else {
             this.PlayAnim('walk');
@@ -191,6 +186,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
         
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
+            this.timers.SetTimer('attack_wait', 800);
             return true;
         }
 
@@ -229,6 +225,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
         }
 
         if(this.body.onWall() || this.timers.TimerUp('slash_hold')) {
+            this.timers.SetTimer('charge_wait', 800);
             return true;
         }
 
@@ -252,7 +249,15 @@ Enemy.prototype.types['A3PZ'] =  function() {
             //     this.body.velocity.x = 500;
             // }
 
-            EnemyBehavior.JumpToPoint(this, frauki.body.center.x, frauki.body.y - 50);
+            var xTar = frauki.body.center.x;
+
+            if(EnemyBehavior.Player.IsLeft(this)) {
+                xTar += 30;
+            } else {
+                xTar -= 30;
+            }
+
+            EnemyBehavior.JumpToPoint(this, xTar, frauki.body.y - 50);
         }
 
         return false;
@@ -282,6 +287,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
         }
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
+            this.timers.SetTimer('attack_wait', 800);
             return true;
         }
 
@@ -343,7 +349,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
 
         'A3PZ/Charge0003': {
-            x: 50, y: 25, w: 40, h: 30,
+            x: 55, y: -11, w: 10, h: 82,
             damage: 0,
             knockback: 3,
             priority: 3,
@@ -352,7 +358,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
         },
 
         'A3PZ/Charge0004': {
-            x: 40, y: 25, w: 40, h: 30,
+            x: 55, y: -11, w: 10, h: 82,
             damage: 0,
             knockback: 3,
             priority: 3,
@@ -361,7 +367,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
         },
 
         'A3PZ/Charge0005': {
-            x: 30, y: 25, w: 40, h: 30,
+            x: 55, y: -11, w: 10, h: 82,
             damage: 0,
             knockback: 3,
             priority: 3,
@@ -370,7 +376,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
         },
 
         'A3PZ/Charge0006': {
-            x: 30, y: 25, w: 40, h: 30,
+            x: 55, y: -11, w: 10, h: 82,
             damage: 0,
             knockback: 3,
             priority: 3,
@@ -378,45 +384,14 @@ Enemy.prototype.types['A3PZ'] =  function() {
             stun: true
         },
 
-        // 'A3PZ/Attack0004': {
-        //     x: 110, y: 10, w: 60, h: 15,
-        //     damage: 2,
-        //     knockback: 0,
-        //     priority: 2,
-        //     juggle: 0
-        // },
+        'A3PZ/Hammer0011': {
+            x: 72, y: -6, w: 55, h: 70,
+            damage: 3,
+            knockback: 3,
+            priority: 3,
+            juggle: 0
+        },
 
-        // 'A3PZ/Attack20003': {
-        //     x: 30, y: 0, w: 110, h: 80,
-        //     damage: 2,
-        //     knockback: 0,
-        //     priority: 2,
-        //     juggle: 0
-        // },
-
-        // 'A3PZ/Attack20004': {
-        //     x: 110, y: 73, w: 35, h: 10,
-        //     damage: 2,
-        //     knockback: 0,
-        //     priority: 2,
-        //     juggle: 0
-        // },
-
-        // 'A3PZ/Block0000': {
-        //     x: 20, y: -8, w: 45, h: 80,
-        //     damage: 0,
-        //     knockback: 0,
-        //     priority: 3,
-        //     juggle: 0
-        // },
-
-        // 'A3PZ/Block0001': {
-        //     x: 20, y: -8, w: 45, h: 80,
-        //     damage: 0,
-        //     knockback: 0,
-        //     priority: 3,
-        //     juggle: 0
-        // },
     };
 
 };
