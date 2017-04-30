@@ -22,7 +22,7 @@ ObjectController.prototype.Update = function() {
 
     //weed out inactives
     for(var i = 0, max = this.GetCurrentObjectGroup().children.length; i < max; i++) {
-        var padding = 300;
+        var padding = 200;
         var o = this.GetCurrentObjectGroup().children[i];
 
         if(!o) continue;

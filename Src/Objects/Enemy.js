@@ -260,20 +260,24 @@ Enemy.prototype.TakeHit = function(damage) {
 
     var hurtTime = this.baseStunDuration + (250 * damage);
 
-    //knock the enemy back
-    this.body.velocity.x = (200 * frauki.GetCurrentKnockback()) + 100;
-    this.body.velocity.x *= EnemyBehavior.Player.DirMod(this);
-    
-    this.state = this.Hurting;
-    this.timers.SetTimer('hit', hurtTime);
+    if(damage >= this.stunThreshold || this.energy <= 0) {
+        
+        this.body.velocity.x = (200 * frauki.GetCurrentKnockback()) + 100;
+        this.body.velocity.x *= EnemyBehavior.Player.DirMod(this);
+        
+        this.state = this.Hurting;
+        this.timers.SetTimer('hit', hurtTime);
 
-    this.body.velocity.y = (frauki.GetCurrentJuggle() * -200) - 100;   
+        this.body.velocity.y = (frauki.GetCurrentJuggle() * -200) - 100;   
+        this.timers.SetTimer('attack_wait', hurtTime + game.rnd.between(1000, 2000));
+    }
+
+    //knock the enemy back
     
 
     var graceTime = hurtTime + game.rnd.between(500, 1000);
 
     this.timers.SetTimer('grace', graceTime);
-    this.timers.SetTimer('attack_wait', hurtTime + game.rnd.between(1000, 2000));
 
 
     effectsController.StarBurst(this.body.center);

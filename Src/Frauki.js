@@ -784,7 +784,7 @@ Player.prototype.WhiffSlash = function() {
 
 Player.prototype.Roll = function(params) {
 
-    if(this.state === this.Rolling || this.state === this.Hurting || this.InAttackAnim())
+    if(this.state === this.Stunned || this.state === this.Rolling || this.state === this.Hurting || this.InAttackAnim())
         return false;
 
     if(this.body.onFloor()) {
@@ -868,10 +868,6 @@ Player.prototype.LandHit = function(e, damage) {
 };
 
 Player.prototype.Hit = function(e, damage, grace_duration) {
-
-    if(this.state === this.Stunned) {
-        damage *= 1.5;
-    }
 
     if(this.state === this.Hurting || e.state === e.Hurting || frauki.Grace())
         return;

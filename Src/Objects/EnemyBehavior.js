@@ -305,6 +305,16 @@ EnemyBehavior.Player.MovingTowards = function(e) {
     }
 };
 
+EnemyBehavior.Player.MovingAway = function(e) {
+    if(frauki.body.center.x > e.body.x && frauki.body.velocity.x > 50) {
+        return true;
+    } else if(frauki.body.center.x < e.body.x && frauki.body.velocity.x < -50) {
+        return true;
+    } else {
+        return false;
+    }
+};
+
 EnemyBehavior.Player.ThrowIncoming = function(e) {
     if(frauki.states.throwing) {
         if(e.direction === 'left' && frauki.attackRect.body.center.x < e.body.center.x && weaponController.Baton.baton.body.velocity.x > 0) {
