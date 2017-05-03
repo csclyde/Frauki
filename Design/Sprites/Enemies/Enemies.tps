@@ -285,6 +285,20 @@
             <key type="filename">GUBr/Walk0001.png</key>
             <key type="filename">GUBr/Walk0002.png</key>
             <key type="filename">GUBr/Walk0003.png</key>
+            <key type="filename">H0P8/Attack0000.png</key>
+            <key type="filename">H0P8/Attack0001.png</key>
+            <key type="filename">H0P8/Attack0002.png</key>
+            <key type="filename">H0P8/Attack0003.png</key>
+            <key type="filename">H0P8/Attack0004.png</key>
+            <key type="filename">H0P8/Attack0005.png</key>
+            <key type="filename">H0P8/Hurt0000.png</key>
+            <key type="filename">H0P8/Hurt0001.png</key>
+            <key type="filename">H0P8/Hurt0002.png</key>
+            <key type="filename">H0P8/Hurt0003.png</key>
+            <key type="filename">H0P8/Idle0000.png</key>
+            <key type="filename">H0P8/Idle0001.png</key>
+            <key type="filename">H0P8/Idle0002.png</key>
+            <key type="filename">H0P8/Idle0003.png</key>
             <key type="filename">HWK9/AttackDash0000.png</key>
             <key type="filename">HWK9/AttackDash0001.png</key>
             <key type="filename">HWK9/AttackDash0002.png</key>
@@ -521,6 +535,7 @@
             <filename>R2BTU</filename>
             <filename>GUBr</filename>
             <filename>Goddess</filename>
+            <filename>H0P8</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
