@@ -6,7 +6,7 @@ Enemy.prototype.types['H0P8'] =  function() {
     this.animations.add('idle', ['H0P8/Idle0000', 'H0P8/Idle0001', 'H0P8/Idle0002', 'H0P8/Idle0003'], 6, true, false);
     this.animations.add('pre_hop', ['H0P8/Attack0001'], 10, false, false);
     this.animations.add('hop', ['H0P8/Attack0002'], 10, false, false);
-    this.animations.add('attack', ['H0P8/Attack0003', 'H0P8/Attack0004', 'H0P8/Attack0005'], 14, false, false);
+    this.animations.add('attack', ['H0P8/Attack0003', 'H0P8/Attack0004', 'H0P8/Attack0005', 'H0P8/Attack0006'], 10, false, false);
     this.animations.add('hurt', ['H0P8/Hurt0001'], 10, false, false);
 
     this.energy = 4;
@@ -68,7 +68,7 @@ Enemy.prototype.types['H0P8'] =  function() {
 
         EnemyBehavior.FacePlayer(this);
 
-        this.timers.SetTimer('attack', 300);
+        this.timers.SetTimer('attack', 600);
         this.state = this.PreHopping;
     };
 
@@ -106,6 +106,8 @@ Enemy.prototype.types['H0P8'] =  function() {
     ////////////////////////////////STATES////////////////////////////////////
     this.Idling = function() {
         this.PlayAnim('idle');
+        EnemyBehavior.FacePlayer(this);
+
 
         return true;
     };
@@ -116,8 +118,18 @@ Enemy.prototype.types['H0P8'] =  function() {
         if(this.timers.TimerUp('attack')) {
             this.state = this.Hopping;
 
+            var ptX = frauki.body.center.x;
+            var ptY = frauki.body.y - 20;
+            var overDist = game.rnd.between(100, 300);
+
+            if(EnemyBehavior.Player.IsLeft(this)) {
+                ptX -= overDist;
+            } else {
+                ptX += overDist;
+            }
+
             EnemyBehavior.FacePlayer(this);
-            EnemyBehavior.JumpToPoint(this, frauki.body.center.x, frauki.body.y - 50); 
+            EnemyBehavior.JumpToPoint(this, ptX, ptY); 
 
             if(this.body.velocity.y < -400) {
                 this.body.velocity.y = -400;
@@ -135,11 +147,13 @@ Enemy.prototype.types['H0P8'] =  function() {
             this.PlayAnim('hop');
         }
 
-        if(EnemyBehavior.Player.IsBelow(this)) {
+        if(EnemyBehavior.Player.IsNear(this, 100)) {
             this.Slash();
         }
 
         if(this.body.onFloor()) {
+            this.timers.SetTimer('attack_wait', 800);
+
             return true;
         }
 
@@ -150,7 +164,7 @@ Enemy.prototype.types['H0P8'] =  function() {
         this.PlayAnim('attack');
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
-            this.timers.SetTimer('attack_wait', 300);
+            this.timers.SetTimer('attack_wait', 800);
             return true;
         }
 
