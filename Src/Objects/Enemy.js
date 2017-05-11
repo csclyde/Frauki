@@ -295,7 +295,7 @@ Enemy.prototype.TakeHit = function(damage) {
         events.publish('enemy_killed', { name: this.objectName, owningLayer: this.owningLayer, x: this.body.center.x, y: this.body.center.y });
         
         if(this.robotic && !GameData.GetFlag('goddess_robo_speech')) {
-            goddess.AddMessage("I see you've met those terrible robots. They're the ones who locked me up in this nasty prison. They're intruders, and they do not belong here.");
+            //goddess.AddMessage("I see you've met those terrible robots. They're the ones who locked me up in this nasty prison. They're intruders, and they do not belong here.");
 
             GameData.SetFlag('goddess_robo_speech', true);
         }

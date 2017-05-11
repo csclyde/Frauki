@@ -291,6 +291,12 @@
             <key type="filename">H0P8/Attack0003.png</key>
             <key type="filename">H0P8/Attack0004.png</key>
             <key type="filename">H0P8/Attack0005.png</key>
+            <key type="filename">H0P8/AttackFrame1.png</key>
+            <key type="filename">H0P8/AttackFrame2.png</key>
+            <key type="filename">H0P8/AttackFrame3.png</key>
+            <key type="filename">H0P8/AttackFrame4.png</key>
+            <key type="filename">H0P8/AttackFrame5.png</key>
+            <key type="filename">H0P8/AttackFrame6.png</key>
             <key type="filename">H0P8/Hurt0000.png</key>
             <key type="filename">H0P8/Hurt0001.png</key>
             <key type="filename">H0P8/Hurt0002.png</key>

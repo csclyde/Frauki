@@ -38,7 +38,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
         if(EnemyBehavior.Player.IsVisible(this) && this.timers.TimerUp('attack_wait')) {
             if(EnemyBehavior.Player.IsVulnerable(this)) {
-                if(EnemyBehavior.Player.IsNear(this, 160) && EnemyBehavior.Player.MovingAway(this) && this.timers.TimerUp('charge_wait')) {
+                if(EnemyBehavior.Player.IsNear(this, 100) && EnemyBehavior.Player.MovingAway(this) && this.timers.TimerUp('charge_wait')) {
                     EnemyBehavior.FacePlayer(this);
                     this.Charge();
 
@@ -50,24 +50,17 @@ Enemy.prototype.types['A3PZ'] =  function() {
                     EnemyBehavior.FacePlayer(this);
                     this.Hammer();
 
-                } else if(EnemyBehavior.Player.IsNear(this, 300) && this.timers.TimerUp('charge_wait')) {
+                } else if(EnemyBehavior.Player.IsNear(this, 200) && this.timers.TimerUp('charge_wait')) {
                     EnemyBehavior.FacePlayer(this);
                     this.Charge();
+                } else {
+                    this.state = this.Idling;
+                    EnemyBehavior.WalkToPlayer(this, 60);
                 }
 
             } else {
                 this.state = this.Idling;
-
-                if(this.animations.currentFrame.name === 'A3PZ/Walk0001' || this.animations.currentFrame.name === 'A3PZ/Walk0007') {
-                    if(this.needsShake) {
-                        events.publish('camera_shake', {magnitudeX: 0, magnitudeY: 3, duration: 200});
-                        events.publish('play_sound', {name: 'AZP3_step', restart: true});
-                        this.needsShake = false;
-                    }
-                } else {
-                    EnemyBehavior.WalkToPlayer(this, 60);
-                    this.needsShake = true;
-                }
+                EnemyBehavior.WalkToPlayer(this, 60);
                 
             }
         } else {
@@ -154,8 +147,14 @@ Enemy.prototype.types['A3PZ'] =  function() {
         } else {
             this.PlayAnim('walk');
 
-            if(this.walkShake && (this.animations.currentFrame.name === 'A3PZ/Walk0001' || this.animations.currentFrame.name === 'A3PZ/Walk0007')) {
-                events.publish('camera_shake', {magnitudeX: 500, magnitudeY: 0, duration: 800});
+            if(this.animations.currentFrame.name === 'A3PZ/Walk0001' || this.animations.currentFrame.name === 'A3PZ/Walk0007') {
+                if(this.needsShake) {
+                    events.publish('camera_shake', {magnitudeX: 0, magnitudeY: 3, duration: 200});
+                    events.publish('play_sound', {name: 'AZP3_step', restart: true});
+                    this.needsShake = false;
+                }
+            } else {
+                this.needsShake = true;
             }
         }
 
@@ -202,7 +201,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
             this.state = this.Charging;
-            this.timers.SetTimer('slash_hold', game.rnd.between(1000, 1200));
+            this.timers.SetTimer('slash_hold', game.rnd.between(700, 900));
             
             //events.publish('camera_shake', {magnitudeX: 5, magnitudeY: 0, duration: 600});
             //events.publish('stop_sound', {name: 'attack_windup', restart: true});
@@ -229,7 +228,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
         }
 
         if(this.body.onWall() || this.timers.TimerUp('slash_hold')) {
-            this.timers.SetTimer('charge_wait', 800);
+            this.timers.SetTimer('charge_wait', 4000);
             return true;
         }
 
@@ -278,7 +277,9 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
         EnemyBehavior.FacePlayer(this);
 
-        if(this.timers.TimerUp('slash_hold')) {
+        var xDist = Math.abs(this.body.center.x - frauki.body.center.x);
+
+        if(this.timers.TimerUp('slash_hold') || (xDist > 50 && xDist < 90)) {
             this.state = this.Hammering;
             this.body.velocity.y = 500;
 

@@ -15,7 +15,7 @@ EnemyBehavior.WithinCameraRange = function(e) {
         return false;
     }
 
-    var padding = -60;
+    var padding = -30;
 
     if(e.body.x > game.camera.x - padding &&
        e.body.y > game.camera.y - padding &&
@@ -113,7 +113,7 @@ EnemyBehavior.Player.IsVisible = function(e) {
     var refreshTime = 2000;
 
     if(this.Visibility[e.z].result === true) {
-        refreshTime = 3000;
+        refreshTime = 5000;
     } else {
         var dist = EnemyBehavior.Player.Distance(e);
 
@@ -167,6 +167,14 @@ EnemyBehavior.Player.IsAbove = function(e) {
         return true;
 
     return false;
+};
+
+EnemyBehavior.Player.IsFront = function(e) {
+
+};
+
+EnemyBehavior.Player.IsBehind = function(e) {
+
 };
 
 EnemyBehavior.Player.IsLeft = function(e) {
