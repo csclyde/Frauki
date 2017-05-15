@@ -221,13 +221,6 @@
             <key type="filename">A3PZ/Walk0003.png</key>
             <key type="filename">A3PZ/Walk0004.png</key>
             <key type="filename">A3PZ/Walk0005.png</key>
-            <key type="filename">R2BTU/Attack0000.png</key>
-            <key type="filename">R2BTU/Attack0001.png</key>
-            <key type="filename">R2BTU/Attack0002.png</key>
-            <key type="filename">R2BTU/Attack0003.png</key>
-            <key type="filename">R2BTU/Float0000.png</key>
-            <key type="filename">R2BTU/Float0001.png</key>
-            <key type="filename">R2BTU/Stand0000.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -337,8 +330,6 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">Butterfly/Idle0000.png</key>
-            <key type="filename">Butterfly/Idle0001.png</key>
             <key type="filename">Buzzar/Attack0000.png</key>
             <key type="filename">Buzzar/Attack0001.png</key>
             <key type="filename">Buzzar/Enraged0000.png</key>
@@ -404,8 +395,6 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">Haystax/Idle0000.png</key>
-            <key type="filename">Haystax/Idle0001.png</key>
             <key type="filename">Insectoid/Hop0000.png</key>
             <key type="filename">Insectoid/Hop0001.png</key>
             <key type="filename">Insectoid/Hop0002.png</key>
@@ -427,20 +416,6 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">Haystax/Tarball0000.png</key>
-            <key type="filename">Haystax/Tarball0001.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>5,6,11,12</rect>
-                <key>scale9Paddings</key>
-                <rect>5,6,11,12</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">KR32/Attack0000.png</key>
             <key type="filename">KR32/Attack0001.png</key>
             <key type="filename">KR32/Attack0002.png</key>
@@ -453,6 +428,15 @@
             <key type="filename">KR32/Stab0000.png</key>
             <key type="filename">KR32/Stab0001.png</key>
             <key type="filename">KR32/Stab0002.png</key>
+            <key type="filename">QL0k/Hurt0000.png</key>
+            <key type="filename">QL0k/Hurt0001.png</key>
+            <key type="filename">QL0k/Hurt0002.png</key>
+            <key type="filename">QL0k/Shoot0000.png</key>
+            <key type="filename">QL0k/Shoot0001.png</key>
+            <key type="filename">QL0k/Shoot0002.png</key>
+            <key type="filename">QL0k/Shoot0003.png</key>
+            <key type="filename">QL0k/Shoot0004.png</key>
+            <key type="filename">QL0k/Shoot0005.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -480,6 +464,23 @@
             <key type="filename">KR32/WalkFront0001.png</key>
             <key type="filename">KR32/WalkFront0002.png</key>
             <key type="filename">KR32/WalkFront0003.png</key>
+            <key type="filename">RKN1d/Bite0000.png</key>
+            <key type="filename">RKN1d/Bite0001.png</key>
+            <key type="filename">RKN1d/Bite0002.png</key>
+            <key type="filename">RKN1d/Bite0003.png</key>
+            <key type="filename">RKN1d/Bite0004.png</key>
+            <key type="filename">RKN1d/Bite0005.png</key>
+            <key type="filename">RKN1d/Hurt0000.png</key>
+            <key type="filename">RKN1d/Idle0000.png</key>
+            <key type="filename">RKN1d/Idle0001.png</key>
+            <key type="filename">RKN1d/Idle0002.png</key>
+            <key type="filename">RKN1d/Idle0003.png</key>
+            <key type="filename">RKN1d/Jump0000.png</key>
+            <key type="filename">RKN1d/Jump0001.png</key>
+            <key type="filename">RKN1d/Jump0002.png</key>
+            <key type="filename">RKN1d/Jump0003.png</key>
+            <key type="filename">RKN1d/Jump0004.png</key>
+            <key type="filename">RKN1d/Jump0005.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -526,17 +527,16 @@
             <filename>CreeperThistle</filename>
             <filename>Insectoid</filename>
             <filename>Sporoid</filename>
-            <filename>Haystax</filename>
             <filename>Mask</filename>
             <filename>Fungu</filename>
             <filename>KR32</filename>
             <filename>A3PZ</filename>
             <filename>HWK9</filename>
-            <filename>Butterfly</filename>
-            <filename>R2BTU</filename>
             <filename>GUBr</filename>
             <filename>Goddess</filename>
             <filename>H0P8</filename>
+            <filename>RKN1d</filename>
+            <filename>QL0k</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

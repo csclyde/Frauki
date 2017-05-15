@@ -120,7 +120,7 @@ Enemy.prototype.types['H0P8'] =  function() {
 
             var ptX = frauki.body.center.x;
             var ptY = frauki.body.y - 20;
-            var overDist = game.rnd.between(100, 300);
+            var overDist = game.rnd.between(100, 200);
 
             if(EnemyBehavior.Player.IsLeft(this)) {
                 ptX -= overDist;
