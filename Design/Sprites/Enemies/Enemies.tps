@@ -437,6 +437,7 @@
             <key type="filename">QL0k/Shoot0003.png</key>
             <key type="filename">QL0k/Shoot0004.png</key>
             <key type="filename">QL0k/Shoot0005.png</key>
+            <key type="filename">QL0k/Shoot0006.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
