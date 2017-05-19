@@ -1,6 +1,6 @@
 Enemy.prototype.types['QL0k'] =  function() {
 
-	this.body.setSize(25, 50, 0, 0);
+	this.body.setSize(40, 45, 0, 0);
 	this.body.moves = false;
 	this.anchor.setTo(0.5, 0.75);
 
@@ -13,16 +13,23 @@ Enemy.prototype.types['QL0k'] =  function() {
     this.shotCount = 0;
 
     this.robotic = true;
+
+    this.base = game.add.image(0, 0, 'EnemySprites', 'QL0k/Shoot0000');
+    this.base.anchor.setTo(0.5, 0.5);
+    this.base.x = this.x;
+    this.base.y = this.y - 37;
+
+    //this.addChild(this.base);
     
 	this.updateFunction = function() {
 		if(EnemyBehavior.Player.IsLeft(this)) {
 			this.scale.y = -1;
 			this.scale.x = 1;
-			this.rotation = Math.atan2(frauki.body.center.y - this.body.center.y, frauki.body.center.x - this.body.center.x);
+			this.rotation = Math.atan2(frauki.body.y + 10 - this.body.center.y, frauki.body.center.x - this.body.center.x);
 		} else {
 			this.scale.y = 1;
 			this.scale.x = 1;
-			this.rotation = Math.atan2(frauki.body.center.y - this.body.center.y, frauki.body.center.x - this.body.center.x);
+			this.rotation = Math.atan2(frauki.body.y + 10 - this.body.center.y, frauki.body.center.x - this.body.center.x);
 		}
 
 		//console.log(this.rotation)
@@ -62,8 +69,6 @@ Enemy.prototype.types['QL0k'] =  function() {
 
 	this.Shooting = function() {
 		this.PlayAnim('shoot');
-
-		EnemyBehavior.FacePlayer(this);
 
 		if(this.animations.currentAnim.isFinished) {
 
