@@ -151,9 +151,12 @@ EnemyBehavior.Player.IsVisible = function(e) {
 };
 
 EnemyBehavior.Player.IsBelow = function(e) {
+    var margin = e.body.width / 2;
+    margin += 5;
+
     if(e.body.center.y < frauki.body.y && 
-       e.body.center.x > frauki.body.center.x - 20 && 
-       e.body.center.x < frauki.body.center.x + 20 && 
+       e.body.center.x > frauki.body.center.x - margin && 
+       e.body.center.x < frauki.body.center.x + margin && 
        !e.body.onFloor())
         return true;
 
@@ -161,9 +164,12 @@ EnemyBehavior.Player.IsBelow = function(e) {
 };
 
 EnemyBehavior.Player.IsAbove = function(e) {
+    var margin = e.body.width / 2;
+    margin += 5;
+
     if(e.body.center.y > frauki.body.y && 
-       e.body.center.x > frauki.body.center.x - 20 && 
-       e.body.center.x < frauki.body.center.x + 20)
+       e.body.center.x > frauki.body.center.x - margin && 
+       e.body.center.x < frauki.body.center.x + margin)
         return true;
 
     return false;

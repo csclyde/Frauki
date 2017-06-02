@@ -51,6 +51,29 @@ ProjectileController.prototype.Spore = function(e) {
 	this.projectiles.add(spore);
 };
 
+ProjectileController.prototype.LaserBolt = function(e, rot) {
+	var bolt = game.add.sprite(e.body.center.x, e.body.center.y, 'EnemySprites');
+	game.physics.enable(bolt, Phaser.Physics.ARCADE);
+
+	bolt.body.setSize(18, 20);
+	bolt.body.allowGravity = false;
+	bolt.animations.add('idle', ['QL0k/Bolt0000', 'QL0k/Bolt0001'], 14, true, false);
+	bolt.play('idle');
+	bolt.rotation = rot;
+
+	bolt.body.velocity = game.physics.arcade.velocityFromRotation(rot, 500);
+
+	//game.physics.arcade.moveToXY(bolt, frauki.body.center.x, frauki.body.center.y, 500);
+
+	bolt.projType = 'bolt';
+	bolt.owningEnemy = e;
+	bolt.spawnTime = game.time.now;
+	bolt.lifeTime = 5000;
+	bolt.solid = true;
+
+	this.projectiles.add(bolt);
+};
+
 ProjectileController.prototype.FallingTile = function(sourceTile) {
 
 	var tileName = Math.random() * 3;
@@ -91,7 +114,7 @@ ProjectileController.prototype.Update = function() {
 			p.destroy();
 			childrenToRemove.push(p);
 		} else if(p.solid) {
-			game.physics.arcade.collide(p, Frogland.GetCurrentCollisionLayer(), this.CollideProjectileWithWorld, this.CollideProjectileWithWorld);
+			game.physics.arcade.collide(p, Frogland.GetCurrentCollisionLayer(), Collision.CollideProjectileWithWorld);
 		}
 
 	});
@@ -99,14 +122,6 @@ ProjectileController.prototype.Update = function() {
 	childrenToRemove.forEach(function(e) {
 		e.destroy();
 	});
-};
-
-ProjectileController.prototype.CollideProjectileWithWorld = function(p, t) {
-	if(t.index === 1) {
-		return false;
-	} else {
-		return false;
-	}
 };
 
 ProjectileController.prototype.DestroyAllProjectiles = function() {

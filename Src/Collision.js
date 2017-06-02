@@ -20,6 +20,12 @@ Collision.OverlapFraukiWithObject = function(f, o) {
             return false;
         } else if(o.isAttacking() && o.GetCurrentDamage() > 0) {
             return false;
+        } else if(o.isSolid) {
+            frauki.body.blocked.down = true;
+            //console.log(frauki.body.velocity.y)
+
+            if(frauki.body.velocity.y > 0) frauki.body.velocity.y = 0;
+            return true;
         } else if(frauki.body.y + frauki.body.height <= o.body.y + (frauki.body.height / 4) || o.body.y + o.body.height <= frauki.body.y + (o.body.height / 4)) {
             return false;
         } else {
@@ -500,4 +506,19 @@ Collision.OverlapEffectWithWorld = function(e, w) {
     
 
     return true;
+};
+
+Collision.CollideProjectileWithWorld = function(p, t) {
+    console.log('gg')
+    if(p.projType === 'bolt') {
+        p.pendingDestroy = true;
+        effectsController.Explosion(p);
+    }
+
+    if(t.index === 1) {
+        return false;
+    } else {
+        return false;
+    }
+
 };

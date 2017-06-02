@@ -1413,6 +1413,24 @@
 	"sourceSize": {"w":60,"h":60},
 	"pivot": {"x":0.5,"y":0.5}
 },
+"QL0k/Bolt0000":
+{
+	"frame": {"x":1770,"y":101,"w":20,"h":5},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":7,"w":20,"h":5},
+	"sourceSize": {"w":20,"h":20},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"QL0k/Bolt0001":
+{
+	"frame": {"x":472,"y":441,"w":20,"h":7},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":6,"w":20,"h":7},
+	"sourceSize": {"w":20,"h":20},
+	"pivot": {"x":0.5,"y":0.5}
+},
 "QL0k/Hurt0000":
 {
 	"frame": {"x":894,"y":142,"w":90,"h":46},
@@ -1735,6 +1753,6 @@
 	"format": "RGBA8888",
 	"size": {"w":1818,"h":511},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:24760722d2ba57dcfad0ddaaf21e5766:7d693d4e1c653dfdf57c86969fc1eb75:b1585ba32d60cf5440f3fdffe8c37c76$"
+	"smartupdate": "$TexturePacker:SmartUpdate:686f5932b7242b913e5254bff4c38fd4:1b144d049dcd920a65c54c814797bdde:b1585ba32d60cf5440f3fdffe8c37c76$"
 }
 }

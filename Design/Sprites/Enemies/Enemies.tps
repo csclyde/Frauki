@@ -507,6 +507,8 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">QL0k/Bolt0000.png</key>
+            <key type="filename">QL0k/Bolt0001.png</key>
             <key type="filename">Sporoid/Spore0000.png</key>
             <key type="filename">Sporoid/Spore0001.png</key>
             <struct type="IndividualSpriteSettings">
