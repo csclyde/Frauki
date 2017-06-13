@@ -13,6 +13,7 @@ Enemy.prototype.types['QL0k'] =  function() {
 
     this.robotic = true;
     this.isSolid = true;
+    this.hasShot = false;
 
     this.base = game.add.image(0, 0, 'EnemySprites', 'QL0k/Shoot0000');
     this.base.anchor.setTo(0.5, 0.5);
@@ -53,12 +54,19 @@ Enemy.prototype.types['QL0k'] =  function() {
 		if(this.timers.TimerUp('rotation_wait') && this.state !== this.PreShooting && this.state !== this.Shooting) {
 			if(Math.abs(this.rotation - idealRotation) < 0.05) {
 				this.roation = idealRotation;
-			} else if(Math.abs(this.roation - idealRotation) > 3) {
+				this.facingPlayer = true;
+
+			} else if(Math.abs(this.rotation - idealRotation) > 3) {
 				this.rotation = idealRotation;
+				this.facingPlayer = true;
+
 			} else if(this.rotation < idealRotation) {
 				this.rotation += rotFactor;
+				this.facingPlayer = false;
+
 			} else if(this.rotation > idealRotation) {
 				this.rotation -= rotFactor;
+				this.facingPlayer = false;
 			}
 		}
 
@@ -67,7 +75,7 @@ Enemy.prototype.types['QL0k'] =  function() {
 
 	this.Act = function() {
 
-        if(this.CanSeePlayer() && this.timers.TimerUp('shoot')) {
+        if(this.CanSeePlayer() && this.timers.TimerUp('shoot') && this.facingPlayer) {
 
             this.Shoot();
 
@@ -79,6 +87,10 @@ Enemy.prototype.types['QL0k'] =  function() {
     this.CanSeePlayer = function() {
     	return EnemyBehavior.Player.IsVisible(this) && !EnemyBehavior.Player.IsAbove(this);
     };
+
+    this.FacingPlayer = function() {
+
+    }
 
 	this.CanCauseDamage = function() { return false; }
 
@@ -104,15 +116,16 @@ Enemy.prototype.types['QL0k'] =  function() {
 	this.Shooting = function() {
 		this.PlayAnim('shoot');
 
+		if(EnemyBehavior.Player.IsVisible(this) && this.animations.currentFrame.name === 'QL0k/Shoot0004' && this.hasShot == false) {
+			projectileController.LaserBolt(this, this.rotation, this.scale.y);
+			this.hasShot = true;
+		}
+
 		if(this.animations.currentAnim.isFinished) {
 
-			
-			if(EnemyBehavior.Player.IsVisible(this)) {
-				projectileController.LaserBolt(this, this.rotation);
-			}
-
-			this.timers.SetTimer('shoot', 600);
+			this.timers.SetTimer('shoot', 1000);
 			this.timers.SetTimer('rotation_wait', 200);
+			this.hasShot = false;
 
 			return true;
 		}

@@ -51,17 +51,27 @@ ProjectileController.prototype.Spore = function(e) {
 	this.projectiles.add(spore);
 };
 
-ProjectileController.prototype.LaserBolt = function(e, rot) {
-	var bolt = game.add.sprite(e.body.center.x + 30, e.body.center.y - 10, 'EnemySprites');
+ProjectileController.prototype.LaserBolt = function(e, rot, flip) {
+
+	var finalX = Math.cos(rot) * 50;
+	var finalY = Math.sin(rot) * 50;
+
+	if(flip === 1) {
+		finalY -= 10;
+	} else {
+		finalY += 7;
+	}
+
+	var bolt = game.add.sprite(e.body.center.x + finalX, e.body.center.y + finalY, 'EnemySprites');
 	game.physics.enable(bolt, Phaser.Physics.ARCADE);
 
-	bolt.body.setSize(18, 20);
+	bolt.body.setSize(5, 5);
 	bolt.body.allowGravity = false;
 	bolt.animations.add('idle', ['QL0k/Bolt0000', 'QL0k/Bolt0001'], 14, true, false);
 	bolt.play('idle');
 	bolt.rotation = rot;
 
-	bolt.body.velocity = game.physics.arcade.velocityFromRotation(rot, 500);
+	bolt.body.velocity = game.physics.arcade.velocityFromRotation(rot, 300);
 
 	//game.physics.arcade.moveToXY(bolt, frauki.body.center.x, frauki.body.center.y, 500);
 
