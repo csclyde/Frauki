@@ -509,7 +509,6 @@ Collision.OverlapEffectWithWorld = function(e, w) {
 };
 
 Collision.CollideProjectileWithWorld = function(p, t) {
-    console.log('gg')
     if(p.projType === 'bolt') {
         p.pendingDestroy = true;
         effectsController.Explosion(p);

@@ -52,7 +52,7 @@ ProjectileController.prototype.Spore = function(e) {
 };
 
 ProjectileController.prototype.LaserBolt = function(e, rot) {
-	var bolt = game.add.sprite(e.body.center.x, e.body.center.y, 'EnemySprites');
+	var bolt = game.add.sprite(e.body.center.x + 30, e.body.center.y - 10, 'EnemySprites');
 	game.physics.enable(bolt, Phaser.Physics.ARCADE);
 
 	bolt.body.setSize(18, 20);

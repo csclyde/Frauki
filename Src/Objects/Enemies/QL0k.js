@@ -22,28 +22,31 @@ Enemy.prototype.types['QL0k'] =  function() {
     //this.addChild(this.base);
     
 	this.updateFunction = function() {
-		var idealRotation;
+		var idealRotation = Math.atan2(frauki.body.center.y - this.body.center.y, frauki.body.center.x - this.body.center.x);
 
 		if(!this.CanSeePlayer()) {
 			if(this.scale.y === 1) {
 				idealRotation = 0;
 			} else {
-				idealRotation = 3.14;
+				idealRotation = Math.PI;
 			}
 
-		} else if(EnemyBehavior.Player.IsLeft(this)) {
+		} else if((this.rotation < (Math.PI * -0.5) && this.rotation > (Math.PI * -1))
+				|| (this.rotation <= Math.PI && this.rotation > Math.PI * 0.5)) {
 			this.scale.y = -1;
 			this.scale.x = 1;
-			idealRotation = Math.atan2(frauki.body.y + 10 - this.body.center.y, frauki.body.center.x - this.body.center.x);
-			
-			if(idealRotation > -2.2 && idealRotation < 0) idealRotation = -2.2;
+
+			// if(idealRotation > -2.2) idealRotation = -2.2;
+			// if(idealRotation < 0) idealRotation = 0;
+
 		} else {
 			this.scale.y = 1;
 			this.scale.x = 1;
-			idealRotation = Math.atan2(frauki.body.y + 10 - this.body.center.y, frauki.body.center.x - this.body.center.x);
 
-			if(idealRotation < -1) idealRotation = -1;
+			// if(idealRotation < -1) idealRotation = -1;
 		}
+
+		//console.log(this.rotation)
 
 		var rotFactor = 0.1;
 
@@ -85,8 +88,7 @@ Enemy.prototype.types['QL0k'] =  function() {
 
 	///////////////////////////////ACTIONS////////////////////////////////////
 	this.Shoot = function() {
-		this.state = this.PreShooting;
-		this.timers.SetTimer('rotation_wait', 200);
+		this.state = this.Shooting;
 	};
 
 	////////////////////////////////STATES////////////////////////////////////
@@ -97,12 +99,6 @@ Enemy.prototype.types['QL0k'] =  function() {
 		this.body.velocity.y = 0;
 
 		return true;
-	};
-
-	this.PreShooting = function() {
-		if(this.timers.TimerUp('rotation_wait')) {
-			this.state = this.Shooting;
-		}
 	};
 
 	this.Shooting = function() {
