@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="300" height="650" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="2916">
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="300" height="650" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="2918">
  <properties>
   <property name="debug" value="false"/>
   <property name="startLayer" value="3"/>
@@ -3810,7 +3810,7 @@
    </properties>
   </object>
   <object id="2905" gid="68" x="3288.5" y="3289.5" width="16" height="16"/>
-  <object id="2915" gid="97" x="2475" y="3667.5" width="16" height="16"/>
+  <object id="2917" gid="101" x="2460" y="3656.36" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Triggers_3">
   <object id="1568" name="light" type="trigger" x="2411.91" y="5147.5" width="113.333" height="226">

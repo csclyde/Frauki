@@ -1,9 +1,12 @@
 Enemy.prototype.types['RKN1d'] =  function() {
 
-    this.body.setSize(50, 25, 0, 10);
+    this.body.setSize(40, 45, 0, 0);
     this.anchor.setTo(0.5, 0.5);
 
     this.animations.add('idle', ['RKN1d/Idle0000', 'RKN1d/Idle0001', 'RKN1d/Idle0002', 'RKN1d/Idle0003'], 10, true, false);
+    this.animations.add('pre_jump', ['RKN1d/Jump0000', 'RKN1d/Jump0001', 'RKN1d/Jump0002'], 12, false, false);
+    this.animations.add('jump', ['RKN1d/Jump0003', 'RKN1d/Jump0004', 'RKN1d/Jump0005'], 12, false, false);
+    this.animations.add('attack', ['RKN1d/Bite0001', 'RKN1d/Bite0002', 'RKN1d/Bite0003', 'RKN1d/Bite0004', 'RKN1d/Bite0005'], 12, false, false);
 
     this.damage = 1;
     this.energy = 2;
@@ -42,33 +45,19 @@ Enemy.prototype.types['RKN1d'] =  function() {
                 this.Hop();
 
             } else if(this.body.onFloor()) {
-                if(this.timers.TimerUp('dodge') && EnemyBehavior.Player.IsDangerous(this)) {
-                    this.Dodge();
-                }
-                else if(EnemyBehavior.Player.IsNear(this, 20)) {
-                    this.Dodge();
-                }
-                else if(this.timers.TimerUp('attack_wait') && EnemyBehavior.Player.IsVulnerable(this) && !EnemyBehavior.Player.IsNear(this, 50)) {
-                    if(!frauki.body.onFloor()) {
-                        this.Hop();
-                    } 
-                    else {
-                        if(EnemyBehavior.RollDice(2, 1) || EnemyBehavior.Player.IsNear(this, 40)) {
-                            this.Scuttle();
-                        } else {
-                            this.Hop();
-                        }
-                    }
+
+                if(EnemyBehavior.Player.IsNear(this, 50) && this.timers.TimerUp('bite_wait')) {
+                    this.Bite();
+
+                } else if(this.timers.TimerUp('attack_wait') && EnemyBehavior.Player.IsVulnerable(this)) {
+                    this.Hop();
+
                 } else {
                     this.state = this.Idling;
                 }
 
             } else {
-                if(this.timers.TimerUp('attack_wait') && EnemyBehavior.Player.IsBelow(this) && frauki.state !== frauki.Rolling) {
-                    this.Dive();
-                } else {
-                    this.state = this.Idling;
-                }
+                this.state = this.Idling;
             }
 
         } else {
@@ -95,16 +84,14 @@ Enemy.prototype.types['RKN1d'] =  function() {
 
         EnemyBehavior.FacePlayer(this);
 
-        this.timers.SetTimer('attack', 300);
+        this.timers.SetTimer('attack', 400);
         this.state = this.PreHopping;
     };
 
-    this.Scuttle = function() {
+    this.Bite = function() {
+        EnemyBehavior.FacePlayer(this);
 
-        EnemyBehavior.FacePlayer(this);      
-
-        this.timers.SetTimer('attack', 300);
-        this.state = this.PreScuttling;   
+        this.state = this.Biting;
     };
 
     this.Dodge = function() {
@@ -133,27 +120,6 @@ Enemy.prototype.types['RKN1d'] =  function() {
 
     };
 
-    this.ScuttleAway = function() {
-
-        EnemyBehavior.FacePlayer(this);
-
-        this.timers.SetTimer('attack', 500);
-
-        this.state = this.ScuttlingAway;        
-    }
-
-    this.Dive = function() {
-
-        this.state = this.Diving;
-        this.body.velocity.y = 300;
-        this.body.velocity.x = 0;
-        //this.body.setSize(35, 55, 0, 0);
-        this.scale.x = 1;
-        //game.add.tween(this).to({angle: 270}, 800, Phaser.Easing.Exponential.Out, true);
-        //this.angle = 90;  
-
-    };
-
     ////////////////////////////////STATES////////////////////////////////////
     this.Idling = function() {
         this.PlayAnim('idle');
@@ -162,7 +128,7 @@ Enemy.prototype.types['RKN1d'] =  function() {
     };
 
     this.PreHopping = function() {
-        this.PlayAnim('idle');
+        this.PlayAnim('pre_jump');
 
         if(this.timers.TimerUp('attack')) {
             this.state = this.Hopping;
@@ -183,14 +149,22 @@ Enemy.prototype.types['RKN1d'] =  function() {
         if(this.body.onFloor()) {
             this.PlayAnim('idle');
         } else {
-            this.PlayAnim('hop');
-        }
-
-        if(EnemyBehavior.Player.IsBelow(this)) {
-            this.Dive();
+            this.PlayAnim('jump');
         }
 
         if(this.body.onFloor()) {
+            return true;
+        }
+
+        return false;
+    };
+
+    this.Biting = function() {
+        this.PlayAnim('attack');
+
+        if(this.animations.currentAnim.isFinished) {
+            this.timers.SetTimer('bite_wait', 1000);
+
             return true;
         }
 
@@ -250,10 +224,6 @@ Enemy.prototype.types['RKN1d'] =  function() {
             this.PlayAnim('hop');
         } else {
             this.PlayAnim('idle');
-        }
-
-        if(EnemyBehavior.Player.IsBelow(this)) {
-            this.Dive();
         }
 
         if(this.timers.TimerUp('attack') || this.body.velocity.y > 0 || this.body.onFloor()) {
