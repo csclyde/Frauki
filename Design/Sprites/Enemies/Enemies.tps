@@ -473,6 +473,11 @@
             <key type="filename">RKN1d/Bite0003.png</key>
             <key type="filename">RKN1d/Bite0004.png</key>
             <key type="filename">RKN1d/Bite0005.png</key>
+            <key type="filename">RKN1d/FlipUp0000.png</key>
+            <key type="filename">RKN1d/FlipUp0001.png</key>
+            <key type="filename">RKN1d/FlipUp0002.png</key>
+            <key type="filename">RKN1d/FlipUp0003.png</key>
+            <key type="filename">RKN1d/FlipUp0004.png</key>
             <key type="filename">RKN1d/Hurt0000.png</key>
             <key type="filename">RKN1d/Idle0000.png</key>
             <key type="filename">RKN1d/Idle0001.png</key>

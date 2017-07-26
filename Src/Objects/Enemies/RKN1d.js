@@ -7,6 +7,7 @@ Enemy.prototype.types['RKN1d'] =  function() {
     this.animations.add('pre_jump', ['RKN1d/Jump0000', 'RKN1d/Jump0001', 'RKN1d/Jump0002'], 12, false, false);
     this.animations.add('jump', ['RKN1d/Jump0003', 'RKN1d/Jump0004', 'RKN1d/Jump0005'], 12, false, false);
     this.animations.add('attack', ['RKN1d/Bite0001', 'RKN1d/Bite0002', 'RKN1d/Bite0003', 'RKN1d/Bite0004', 'RKN1d/Bite0005'], 12, false, false);
+    this.animations.add('flip_up', ['RKN1d/FlipUp0001', 'RKN1d/FlipUp0002', 'RKN1d/FlipUp0003', 'RKN1d/FlipUp0004'], 28, false, false);
 
     this.damage = 1;
     this.energy = 2;
@@ -25,15 +26,6 @@ Enemy.prototype.types['RKN1d'] =  function() {
             this.body.drag.x = 600;
         }
 
-        if(this.animations.currentAnim.name === 'spin') {
-            if(this.direction === 'left') {
-                this.angle -= 20;
-            } else {
-                this.angle += 20;
-            }
-        } else {
-            this.angle = 0;
-        }
     };
 
     this.Act = function() {
@@ -50,7 +42,7 @@ Enemy.prototype.types['RKN1d'] =  function() {
                     this.Bite();
 
                 } else if(this.timers.TimerUp('attack_wait') && EnemyBehavior.Player.IsVulnerable(this)) {
-                    this.Hop();
+                    this.Escape();
 
                 } else {
                     this.state = this.Idling;
@@ -79,6 +71,17 @@ Enemy.prototype.types['RKN1d'] =  function() {
         }
     };
 
+    this.OnHit = function() {
+        this.DropOff();
+    }
+
+    this.DropOff = function() {
+        this.body.gravity.y = 0;
+        if(this.rotation !== 0) {
+            game.add.tween(this).to({rotation: 0}, 300, Phaser.Easing.Linear.None, true);
+        }
+    }
+
     ///////////////////////////////ACTIONS////////////////////////////////////
     this.Hop = function() {
 
@@ -86,12 +89,22 @@ Enemy.prototype.types['RKN1d'] =  function() {
 
         this.timers.SetTimer('attack', 400);
         this.state = this.PreHopping;
+
+        this.DropOff();
+
     };
 
     this.Bite = function() {
         EnemyBehavior.FacePlayer(this);
 
         this.state = this.Biting;
+    };
+
+    this.Escape = function() {
+        this.state = this.PreEscaping;
+
+        this.timers.SetTimer('escape', 400);
+
     };
 
     this.Dodge = function() {
@@ -126,6 +139,53 @@ Enemy.prototype.types['RKN1d'] =  function() {
 
         return true;
     };
+
+    this.PreEscaping = function() {
+        this.PlayAnim('pre_jump');
+
+        if(this.timers.TimerUp('escape')) {
+            this.timers.SetTimer('escape', game.rnd.between(1200, 2400));
+
+            this.body.velocity.x = game.rnd.between(-600, 600);
+            this.body.velocity.y = game.rnd.between(-600, -400);
+
+            this.state = this.Escaping;
+        }
+
+        return false;
+    }
+
+    this.Escaping = function() {
+        if(this.body.gravity.y === 0) {
+            this.PlayAnim('jump');
+        } else {
+            this.PlayAnim('flip_up');
+        }
+
+        if(this.body.onWall() || this.body.blocked.up) {
+            this.body.gravity.y = -700;
+            this.body.velocity.setTo(0);
+
+            var targetAngle = 0;
+
+            if(this.body.blocked.left) {
+                targetAngle = 90;
+            } else if(this.body.blocked.right) {
+                targetAngle = -90;
+            } else if(this.body.blocked.up) {
+                targetAngle = 180;
+            }
+
+            //game.add.tween(this).to({ angle: targetAngle }, 75, Phaser.Easing.Linear.None, true);
+        }
+
+        if(this.timers.TimerUp('escape')) {
+            this.DropOff();
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     this.PreHopping = function() {
         this.PlayAnim('pre_jump');
