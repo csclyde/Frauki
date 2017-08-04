@@ -86,7 +86,7 @@ Enemy.prototype.types['RKN1d'] =  function() {
     this.DropOff = function() {
         this.body.gravity.y = 0;
         this.clingDir = 'none';
-        this.rotation = 0;
+        this.angle = 0;
     }
 
     ///////////////////////////////ACTIONS////////////////////////////////////
@@ -112,32 +112,6 @@ Enemy.prototype.types['RKN1d'] =  function() {
 
     };
 
-    this.Dodge = function() {
-
-        EnemyBehavior.FacePlayer(this);
-        
-        this.timers.SetTimer('attack', 500);
-
-        this.state = this.Dodging;
-
-        if(frauki.body.onFloor()) {
-            this.body.velocity.y = -300;
-
-            if(frauki.body.center.x < this.body.center.x) {
-                this.body.velocity.x = 300;
-            } else {
-                this.body.velocity.x = -300;
-            }   
-        } else {
-            if(frauki.body.center.x < this.body.center.x) {
-                this.body.velocity.x = -500;
-            } else {
-                this.body.velocity.x = 500;
-            }   
-        }
-
-    };
-
     ////////////////////////////////STATES////////////////////////////////////
     this.Idling = function() {
         this.PlayAnim('idle');
@@ -145,9 +119,11 @@ Enemy.prototype.types['RKN1d'] =  function() {
         if(this.clingDir === 'up') {
             this.angle = 180;
         } else if(this.clingDir === 'left') {
-            this.angle = 90;
-        } else if(this.clingDir === 'right') {
             this.angle = -90;
+            this.scale.x = 1;
+        } else if(this.clingDir === 'right') {
+            this.angle = 90;
+            this.scale.x = 1;
         } else {
             this.angle = 0;
         }
@@ -185,10 +161,12 @@ Enemy.prototype.types['RKN1d'] =  function() {
 
             if(this.body.blocked.left) {
                 this.clingDir = 'left';
-                targetAngle = 90;
+                targetAngle = -90;
+                this.scale.x = 1;
             } else if(this.body.blocked.right) {
                 this.clingDir = 'right';
-                targetAngle = -90;
+                targetAngle = 90;
+                this.scale.x = 1;
             }
 
             game.add.tween(this).to({ angle: targetAngle }, 75, Phaser.Easing.Linear.None, true);
@@ -214,9 +192,11 @@ Enemy.prototype.types['RKN1d'] =  function() {
         if(this.clingDir === 'up') {
             this.angle = 180;
         } else if(this.clingDir === 'left') {
-            this.angle = 90;
-        } else if(this.clingDir === 'right') {
             this.angle = -90;
+            this.scale.x = 1;
+        } else if(this.clingDir === 'right') {
+            this.angle = 90;
+            this.scale.x = 1;
         } else {
             this.angle = 0;
         }
@@ -259,70 +239,6 @@ Enemy.prototype.types['RKN1d'] =  function() {
         if(this.animations.currentAnim.isFinished) {
             this.timers.SetTimer('attack_wait', 1000);
 
-            return true;
-        }
-
-        return false;
-    };
-
-    this.PreScuttling = function() {
-        this.PlayAnim('spin');    
-
-        EnemyBehavior.FacePlayer(this);
-          
-
-        if(this.timers.TimerUp('attack')) {
-            this.timers.SetTimer('attack', 1000);
-            this.state = this.Scuttling;
-            this.scale.x = EnemyBehavior.GetDirMod(this);  
-        }
-
-        return false;
-    };
-
-    this.Scuttling = function() {
-        this.PlayAnim('spin');
-
-        if(EnemyBehavior.Player.IsDangerous(this)) {
-            this.Dodge();
-        }
-
-        if(this.direction === 'left') {
-            this.body.velocity.x = -400;
-        } else {
-            this.body.velocity.x = 400;
-        } 
-
-        if(this.timers.TimerUp('attack') || this.body.onWall()) {
-            this.timers.SetTimer('attack_wait', game.rnd.between(500, 800));
-            return true;
-        }
-
-        return false;
-    };
-
-    this.Diving = function() {
-        this.PlayAnim('spin');
-        
-        if(this.body.onFloor()) {
-            this.timers.SetTimer('attack_wait', game.rnd.between(500, 800));
-            return true;
-        }
-
-        return false;
-    };
-
-    this.Dodging = function() {
-
-        if(!this.body.onFloor()) {
-            this.PlayAnim('hop');
-        } else {
-            this.PlayAnim('idle');
-        }
-
-        if(this.timers.TimerUp('attack') || this.body.velocity.y > 0 || this.body.onFloor()) {
-            this.timers.SetTimer('dodge', 1000);
-            this.timers.SetTimer('attack_wait', 0);
             return true;
         }
 
