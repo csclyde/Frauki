@@ -4,9 +4,9 @@ Enemy.prototype.types['RKN1d'] =  function() {
     this.anchor.setTo(0.5, 0.5);
 
     this.animations.add('idle', ['RKN1d/Idle0000', 'RKN1d/Idle0001', 'RKN1d/Idle0002', 'RKN1d/Idle0003'], 10, true, false);
-    this.animations.add('pre_jump', ['RKN1d/Jump0000', 'RKN1d/Jump0001', 'RKN1d/Jump0002'], 12, false, false);
+    this.animations.add('pre_jump', ['RKN1d/Jump0000', 'RKN1d/Jump0001', 'RKN1d/Jump0002'], 16, false, false);
     this.animations.add('jump', ['RKN1d/Jump0003', 'RKN1d/Jump0004', 'RKN1d/Jump0005'], 12, false, false);
-    this.animations.add('attack', ['RKN1d/Bite0001', 'RKN1d/Bite0002', 'RKN1d/Bite0003', 'RKN1d/Bite0004', 'RKN1d/Bite0005'], 12, false, false);
+    this.animations.add('attack', ['RKN1d/Bite0001', 'RKN1d/Bite0002', 'RKN1d/Bite0003', 'RKN1d/Bite0004', 'RKN1d/Bite0005'], 16, false, false);
     this.animations.add('flip_up', ['RKN1d/FlipUp0001', 'RKN1d/FlipUp0002', 'RKN1d/FlipUp0003', 'RKN1d/FlipUp0004'], 28, false, false);
 
     this.damage = 1;
@@ -42,10 +42,10 @@ Enemy.prototype.types['RKN1d'] =  function() {
 
             } else if(this.body.onFloor() || this.clingDir === 'up' || this.clingDir === 'left' || this.clingDir === 'right') {
 
-                if(EnemyBehavior.Player.IsNear(this, 50) && this.timers.TimerUp('attack_wait')) {
+                if(EnemyBehavior.Player.IsNear(this, 50) && this.timers.TimerUp('attack_wait') && this.clingDir === 'none') {
                     this.Bite();
 
-                } else if(EnemyBehavior.Player.IsNear(this, 250) && this.clingDir !== 'up') {
+                } else if(EnemyBehavior.Player.IsNear(this, 250) && this.body.onFloor()) {
                     this.Escape();
 
                 } else if(this.timers.TimerUp('attack_wait')) {
@@ -74,9 +74,6 @@ Enemy.prototype.types['RKN1d'] =  function() {
     };
 
     this.LandHit = function() {
-        if(this.state !== this.Diving) {
-            this.Dodge();
-        }
     };
 
     this.OnHit = function() {
@@ -94,7 +91,7 @@ Enemy.prototype.types['RKN1d'] =  function() {
 
         EnemyBehavior.FacePlayer(this);
 
-        this.timers.SetTimer('attack', 400);
+        this.timers.SetTimer('attack', 300);
         this.state = this.PreHopping;
 
     };
@@ -108,7 +105,7 @@ Enemy.prototype.types['RKN1d'] =  function() {
     this.Escape = function() {
         this.state = this.PreEscaping;
 
-        this.timers.SetTimer('escape', 400);
+        this.timers.SetTimer('escape', 300);
 
     };
 
@@ -153,6 +150,10 @@ Enemy.prototype.types['RKN1d'] =  function() {
             this.PlayAnim('flip_up');
         }
 
+        if(this.body.onFloor()) {
+            return true;
+        }
+
         if(this.body.onWall()) {
             this.body.gravity.y = -700;
             this.body.velocity.setTo(0);
@@ -192,10 +193,10 @@ Enemy.prototype.types['RKN1d'] =  function() {
         if(this.clingDir === 'up') {
             this.angle = 180;
         } else if(this.clingDir === 'left') {
-            this.angle = -90;
+            this.angle = 90;
             this.scale.x = 1;
         } else if(this.clingDir === 'right') {
-            this.angle = 90;
+            this.angle = -90;
             this.scale.x = 1;
         } else {
             this.angle = 0;
@@ -208,8 +209,8 @@ Enemy.prototype.types['RKN1d'] =  function() {
             EnemyBehavior.FacePlayer(this);
             EnemyBehavior.JumpToPoint(this, frauki.body.center.x, frauki.body.y - 50); 
             
+            this.body.velocity.x += frauki.body.velocity.x;
 
-            console.log(this.body.velocity)
             // if(this.body.velocity.y < -400) {
             //     this.body.velocity.y = -400;
             // }
@@ -253,6 +254,18 @@ Enemy.prototype.types['RKN1d'] =  function() {
         }
 
         return false;
+    };
+
+    this.attackFrames = {
+
+        'RKN1d/Bite0003': {
+            x: 20, y: 20, w: 55, h: 35,
+            damage: 1,
+            knockback: 0,
+            priority: 1,
+            juggle: 0
+        }
+
     };
 
 };
