@@ -517,6 +517,8 @@ Collision.CollideProjectileWithWorld = function(p, t) {
         //effectsController.Explosion(p);
         p.body.velocity.setTo(0);
         p.play('explode');
+        events.publish('camera_shake', {magnitudeX: 3, magnitudeY: 1, duration: 200});
+
     }
 
     if(t.index === 1) {

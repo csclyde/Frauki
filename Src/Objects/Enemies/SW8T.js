@@ -1,6 +1,6 @@
 Enemy.prototype.types['SW8T'] =  function() {
 
-	this.body.setSize(22, 65, 0, -4);
+	this.body.setSize(22, 64, 0, -4);
 	this.anchor.setTo(.5);
 
     this.animations.add('idle', ['SW8T/Idle0000', 'SW8T/Idle0001', 'SW8T/Idle0002', 'SW8T/Idle0003'], 8, true, false);
@@ -8,8 +8,8 @@ Enemy.prototype.types['SW8T'] =  function() {
     this.animations.add('hurt', ['SW8T/Hurt0001', 'SW8T/Hurt0002'], 10, true, false);
     this.animations.add('shoot_start', ['SW8T/Shoot0001', 'SW8T/Shoot0002'], 10, false, false);
     this.animations.add('shoot', ['SW8T/Shoot0003', 'SW8T/Shoot0004', 'SW8T/Shoot0005', 'SW8T/Shoot0006', 'SW8T/Shoot0007', 'SW8T/Shoot0008'], 14, false, false);
-    this.animations.add('block_start', ['SW8T/Block0001', 'SW8T/Block0002', 'SW8T/Block0003'], 10, false, false);
-    this.animations.add('block', ['SW8T/Block0004', 'SW8T/Block0005'], 10, true, false);
+    this.animations.add('block_start', ['SW8T/Block0001', 'SW8T/Block0002', 'SW8T/Block0003'], 16, false, false);
+    this.animations.add('block', ['SW8T/Block0004', 'SW8T/Block0005'], 12, true, false);
     this.animations.add('swipe', ['SW8T/Swipe0001', 'SW8T/Swipe0002', 'SW8T/Swipe0003'], 10, false, false);
     
     this.animations.add('jump_start_in', ['SW8T/JumpIn0001'], 10, false, false);
@@ -41,10 +41,22 @@ Enemy.prototype.types['SW8T'] =  function() {
         if(EnemyBehavior.Player.IsVisible(this)) {
         	//this.Swipe();
 
-        	if(this.timers.TimerUp('attack_wait')) {
+        	if(EnemyBehavior.Player.IsNear(this, 100)) {
+        		if(this.timers.TimerUp('attack_wait')) {
+        			this.Swipe();
+        		} else {
+        			this.JumpAway();
+        		}
+        	} else if(EnemyBehavior.Player.MovingTowards(this) && !EnemyBehavior.Player.IsNear(this, 150)) {
+        		this.Block();
+        	} else if(frauki.InPreAttackAnim()) {
+        		this.Block();
+        	} else if(EnemyBehavior.Player.IsAbove(this) && frauki.state === frauki.AttackDiveCharge) {
+        		this.JumpAway();
+        	} else if(!EnemyBehavior.Player.IsNear(this, 200) && EnemyBehavior.Player.IsVulnerable(this) && this.timers.TimerUp('attack_wait')) {
         		this.Shoot();
-        	} else {
-        		this.state = this.Walking;
+        	} else { 
+        		this.state = this.Idling;
         	}
         	
         } else {
@@ -65,28 +77,44 @@ Enemy.prototype.types['SW8T'] =  function() {
    	};
 
    	this.Block = function() {
-   		this.state = this.BlockingStart;
+   		if(this.state !== this.Blocking) {
+   			this.state = this.BlockingStart;
+   		}
+
    		EnemyBehavior.FacePlayer(this);
    	};
 
-   	this.Jump = function() {
+   	this.JumpIn = function() {
    		this.state = this.Jumping;
    		EnemyBehavior.FacePlayer(this);
 
    		EnemyBehavior.JumpToPoint(this, frauki.body.center.x, frauki.body.center.y, 0.5);
    	};
 
+   	this.JumpAway = function() {
+   		this.state = this.Jumping;
+   		EnemyBehavior.FacePlayer(this);
+
+   		this.body.velocity.y = -150;
+   		this.body.velocity.x = 400 * EnemyBehavior.Player.DirMod(this);
+   	};
+
    	this.Swipe = function() {
    		this.state = this.Swiping;
    		EnemyBehavior.FacePlayer(this);
 
-   		this.timers.SetTimer('swipe_wait', 1000);
+   		this.timers.SetTimer('swipe_wait', 200);
+
+   		if(this.direction === 'left') {
+			this.body.velocity.x = -250;
+		} else {
+			this.body.velocity.x = 250;
+		}
    	}
 
 	////////////////////////////////STATES////////////////////////////////////
 	this.Idling = function() {
 		this.PlayAnim('idle');
-
 		return true;
 	};
 
@@ -127,7 +155,12 @@ Enemy.prototype.types['SW8T'] =  function() {
 			this.timers.SetTimer('shoot_wait', this.SHOOTING_SPEED);
 			this.animations.currentAnim.restart();
 			this.hasShot = false;
-			return false;
+
+			if(EnemyBehavior.Player.IsNear(this, 100)) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 
 		return false;
@@ -138,7 +171,7 @@ Enemy.prototype.types['SW8T'] =  function() {
 
 		if(this.animations.currentAnim.isFinished) {
 			this.state = this.Blocking;
-			this.timers.SetTimer('blocking', 3000);
+			this.timers.SetTimer('blocking', 1000);
 		}
 	}
 
@@ -186,6 +219,7 @@ Enemy.prototype.types['SW8T'] =  function() {
 		this.PlayAnim('swipe');
 
 		if(this.timers.TimerUp('swipe_wait') && this.animations.currentAnim.isFinished) {
+			this.timers.SetTimer('attack_wait', 1500);
 			return true;
 		}
 
