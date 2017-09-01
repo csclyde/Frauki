@@ -440,6 +440,40 @@
             <key type="filename">QL0k/Shoot0004.png</key>
             <key type="filename">QL0k/Shoot0005.png</key>
             <key type="filename">QL0k/Shoot0006.png</key>
+            <key type="filename">SW8T/Hurt0000.png</key>
+            <key type="filename">SW8T/Hurt0001.png</key>
+            <key type="filename">SW8T/Hurt0002.png</key>
+            <key type="filename">SW8T/Idle0000.png</key>
+            <key type="filename">SW8T/Idle0001.png</key>
+            <key type="filename">SW8T/Idle0002.png</key>
+            <key type="filename">SW8T/Idle0003.png</key>
+            <key type="filename">SW8T/JumpIn0000.png</key>
+            <key type="filename">SW8T/JumpIn0001.png</key>
+            <key type="filename">SW8T/JumpIn0002.png</key>
+            <key type="filename">SW8T/JumpIn0003.png</key>
+            <key type="filename">SW8T/JumpIn0004.png</key>
+            <key type="filename">SW8T/JumpIn0005.png</key>
+            <key type="filename">SW8T/JumpOut0000.png</key>
+            <key type="filename">SW8T/JumpOut0001.png</key>
+            <key type="filename">SW8T/JumpOut0002.png</key>
+            <key type="filename">SW8T/JumpOut0003.png</key>
+            <key type="filename">SW8T/JumpOut0004.png</key>
+            <key type="filename">SW8T/JumpOut0005.png</key>
+            <key type="filename">SW8T/Run0000.png</key>
+            <key type="filename">SW8T/Run0001.png</key>
+            <key type="filename">SW8T/Run0002.png</key>
+            <key type="filename">SW8T/Run0003.png</key>
+            <key type="filename">SW8T/Run0004.png</key>
+            <key type="filename">SW8T/Run0005.png</key>
+            <key type="filename">SW8T/Run0006.png</key>
+            <key type="filename">SW8T/Shoot0000.png</key>
+            <key type="filename">SW8T/Shoot0001.png</key>
+            <key type="filename">SW8T/Shoot0002.png</key>
+            <key type="filename">SW8T/Shoot0003.png</key>
+            <key type="filename">SW8T/Shoot0004.png</key>
+            <key type="filename">SW8T/Shoot0005.png</key>
+            <key type="filename">SW8T/Shoot0006.png</key>
+            <key type="filename">SW8T/Shoot0007.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -547,6 +581,7 @@
             <filename>H0P8</filename>
             <filename>RKN1d</filename>
             <filename>QL0k</filename>
+            <filename>SW8T</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

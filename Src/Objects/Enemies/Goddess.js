@@ -2,8 +2,8 @@ Enemy.prototype.types['Goddess'] =  function() {
 
 	goddess = this;
 
-	this.body.setSize(25, 80, 0, 0);
-	this.anchor.setTo(.5);
+	this.body.setSize(40, 145, 0, 0);
+	this.anchor.setTo(0.5);
 
     this.animations.add('idle', ['Goddess/Goddess0000'], 10, false, false);
     this.animations.add('stuff', ['Goddess/Stand0000'], 10, false, false);

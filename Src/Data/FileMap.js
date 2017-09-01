@@ -137,7 +137,7 @@ FileMap.Enemies = [
 	{ Name: 'Haystax', Tile: 91 },
 	{ Name: 'GUBr', Tile: 92 },
 	{ Name: 'Goddess', Tile: 93 },
-	{ Name: 'Pincer', Tile: 94 },
+	{ Name: 'SW8T', Tile: 94 },
 	{ Name: 'Mask', Tile: 95 },
 	{ Name: 'Fungu', Tile: 96 },
 	{ Name: 'QL0k', Tile: 97 },
