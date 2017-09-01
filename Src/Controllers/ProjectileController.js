@@ -2,6 +2,44 @@ ProjectileController = function() {
 	this.projectiles = game.add.group();
 };
 
+ProjectileController.prototype.Mortar = function(e) {
+	var xPos = e.body.center.x;
+	var yPos = e.body.center.y - 20;
+
+	if(e.direction === 'left') {
+		xPos -= 50;
+	} else {
+		xPos += 50;
+	}
+
+	var mortar = game.add.sprite(xPos, yPos, 'EnemySprites');
+	game.physics.enable(mortar, Phaser.Physics.ARCADE);
+
+	mortar.body.setSize(18, 20);
+	mortar.anchor.setTo(0.5);
+
+	mortar.animations.add('idle', ['SW8T/Mortar0000', 'SW8T/Mortar0001', 'SW8T/Mortar0002', 'SW8T/Mortar0003'], 14, true, false);
+	var explode = mortar.animations.add('explode', ['SW8T/Mortar0004', 'SW8T/Mortar0005', 'SW8T/Mortar0006', 'SW8T/Mortar0007'], 16, false, false);
+	explode.killOnComplete = true;
+
+	mortar.play('idle');
+
+	//parabolic arc
+	var duration = 1.0;
+	mortar.body.velocity.x = (frauki.body.center.x - mortar.body.center.x) / duration;
+	mortar.body.velocity.y = (frauki.body.center.y + -0.5 * game.physics.arcade.gravity.y * duration * duration - mortar.body.center.y) / duration;
+
+	mortar.body.bounce.set(0.0);
+
+	mortar.projType = 'mortar';
+	mortar.owningEnemy = e;
+	mortar.spawnTime = game.time.now;
+	mortar.lifeTime = 5000;
+	mortar.solid = true;
+
+	this.projectiles.add(mortar);
+};
+
 ProjectileController.prototype.Tarball = function(e) {
 	var tar = game.add.sprite(e.body.center.x, e.body.center.y, 'EnemySprites');
 	game.physics.enable(tar, Phaser.Physics.ARCADE);

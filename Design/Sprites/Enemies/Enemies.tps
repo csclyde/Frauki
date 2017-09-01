@@ -400,6 +400,10 @@
             <key type="filename">Insectoid/Hop0000.png</key>
             <key type="filename">Insectoid/Hop0001.png</key>
             <key type="filename">Insectoid/Hop0002.png</key>
+            <key type="filename">SW8T/Mortar0004.png</key>
+            <key type="filename">SW8T/Mortar0005.png</key>
+            <key type="filename">SW8T/Mortar0006.png</key>
+            <key type="filename">SW8T/Mortar0007.png</key>
             <key type="filename">Sporoid/Sporoid0000.png</key>
             <key type="filename">Sporoid/Sporoid0001.png</key>
             <key type="filename">Sporoid/Sporoid0002.png</key>
@@ -584,6 +588,22 @@
                 <rect>58,50,117,100</rect>
                 <key>scale9Paddings</key>
                 <rect>58,50,117,100</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">SW8T/Mortar0000.png</key>
+            <key type="filename">SW8T/Mortar0001.png</key>
+            <key type="filename">SW8T/Mortar0002.png</key>
+            <key type="filename">SW8T/Mortar0003.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>13,13,25,25</rect>
+                <key>scale9Paddings</key>
+                <rect>13,13,25,25</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

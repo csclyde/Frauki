@@ -30,6 +30,7 @@ Enemy.prototype.types['SW8T'] =  function() {
     this.robotic = true;
 
     this.SHOOTING_SPEED = 500;
+    this.hasShot = false;
     
 	this.updateFunction = function() {
 
@@ -92,7 +93,7 @@ Enemy.prototype.types['SW8T'] =  function() {
 	this.Walking = function() {
 		this.PlayAnim('walk');
 
-		EnemyBehavior.FacePlayer(this);
+		EnemyBehavior.WalkToPlayer(this, 100);
 
 		return true;
 	};
@@ -110,6 +111,13 @@ Enemy.prototype.types['SW8T'] =  function() {
 	this.Shooting = function() {
 		this.PlayAnim('shoot');
 
+		EnemyBehavior.FacePlayer(this);
+
+		if(this.numShots > 0 && this.animations.currentFrame.name === 'SW8T/Shoot0005' && !this.hasShot) {
+			projectileController.Mortar(this);
+			this.hasShot = true;
+		}
+
 		if(this.numShots === 0) {
 			this.timers.SetTimer('attack_wait', 2000);
 			return true;
@@ -118,9 +126,7 @@ Enemy.prototype.types['SW8T'] =  function() {
 			this.numShots--;
 			this.timers.SetTimer('shoot_wait', this.SHOOTING_SPEED);
 			this.animations.currentAnim.restart();
-
-			//create projectile
-
+			this.hasShot = false;
 			return false;
 		}
 

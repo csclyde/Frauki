@@ -92,9 +92,9 @@ Main.render = function() {
     //     game.debug.body(o);
     // });
 
-    /*projectileController.projectiles.forEach(function(o) {
-        game.debug.body(o);
-    });*/
+    // projectileController.projectiles.forEach(function(o) {
+    //     game.debug.body(o);
+    // });
 
     // var rekt = triggerController.triggerLayers['Triggers_3'][0];
     // game.debug.geom(new Phaser.Rectangle(rekt.x, rekt.y, rekt.width, rekt.height));
