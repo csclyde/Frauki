@@ -564,6 +564,25 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">SW8T/Block0000.png</key>
+            <key type="filename">SW8T/Block0001.png</key>
+            <key type="filename">SW8T/Block0002.png</key>
+            <key type="filename">SW8T/Block0003.png</key>
+            <key type="filename">SW8T/Block0004.png</key>
+            <key type="filename">SW8T/Block0005.png</key>
+            <key type="filename">SW8T/Shoot0008.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>58,50,117,100</rect>
+                <key>scale9Paddings</key>
+                <rect>58,50,117,100</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
         </map>
         <key>fileList</key>
         <array>
