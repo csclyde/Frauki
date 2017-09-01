@@ -7,9 +7,10 @@ Enemy.prototype.types['SW8T'] =  function() {
     this.animations.add('walk', ['SW8T/Run0000', 'SW8T/Run0001', 'SW8T/Run0002', 'SW8T/Run0003', 'SW8T/Run0004', 'SW8T/Run0005', 'SW8T/Run0006'], 10, true, false);
     this.animations.add('hurt', ['SW8T/Hurt0001', 'SW8T/Hurt0002'], 10, true, false);
     this.animations.add('shoot_start', ['SW8T/Shoot0001', 'SW8T/Shoot0002'], 10, false, false);
-    this.animations.add('shoot', ['SW8T/Shoot0003', 'SW8T/Shoot0004', 'SW8T/Shoot0005', 'SW8T/Shoot0006', 'SW8T/Shoot0007', 'SW8T/Shoot0008', 'SW8T/Shoot0008', 'SW8T/Shoot0008', 'SW8T/Shoot0008'], 14, true, false);
+    this.animations.add('shoot', ['SW8T/Shoot0003', 'SW8T/Shoot0004', 'SW8T/Shoot0005', 'SW8T/Shoot0006', 'SW8T/Shoot0007', 'SW8T/Shoot0008'], 14, false, false);
     this.animations.add('block_start', ['SW8T/Block0001', 'SW8T/Block0002', 'SW8T/Block0003'], 10, false, false);
     this.animations.add('block', ['SW8T/Block0004', 'SW8T/Block0005'], 10, true, false);
+    this.animations.add('swipe', ['SW8T/Swipe0001', 'SW8T/Swipe0002', 'SW8T/Swipe0003'], 10, false, false);
     
     this.animations.add('jump_start_in', ['SW8T/JumpIn0001'], 10, false, false);
     this.animations.add('jump_rise_in', ['SW8T/JumpIn0002'], 10, false, false);
@@ -27,6 +28,8 @@ Enemy.prototype.types['SW8T'] =  function() {
     this.body.bounce.y = 0;
 
     this.robotic = true;
+
+    this.SHOOTING_SPEED = 500;
     
 	this.updateFunction = function() {
 
@@ -35,10 +38,10 @@ Enemy.prototype.types['SW8T'] =  function() {
 	this.Act = function() {
 
         if(EnemyBehavior.Player.IsVisible(this)) {
-        	//this.Jump();
+        	//this.Swipe();
 
-        	if(this.timers.TimerUp('block_wait')) {
-        		this.Block();
+        	if(this.timers.TimerUp('attack_wait')) {
+        		this.Shoot();
         	} else {
         		this.state = this.Walking;
         	}
@@ -70,6 +73,13 @@ Enemy.prototype.types['SW8T'] =  function() {
    		EnemyBehavior.FacePlayer(this);
 
    		EnemyBehavior.JumpToPoint(this, frauki.body.center.x, frauki.body.center.y, 0.5);
+   	};
+
+   	this.Swipe = function() {
+   		this.state = this.Swiping;
+   		EnemyBehavior.FacePlayer(this);
+
+   		this.timers.SetTimer('swipe_wait', 1000);
    	}
 
 	////////////////////////////////STATES////////////////////////////////////
@@ -92,17 +102,26 @@ Enemy.prototype.types['SW8T'] =  function() {
 
 		if(this.animations.currentAnim.isFinished) {
 			this.state = this.Shooting;
-			this.timers.SetTimer('shooting', 3000);
+			this.timers.SetTimer('shoot_wait', this.SHOOTING_SPEED);
+			this.numShots = 5;
 		}
 	};
 
 	this.Shooting = function() {
 		this.PlayAnim('shoot');
 
-		if(this.timers.TimerUp('shooting')) {
-			this.timers.SetTimer('attack_wait', game.rnd.between(600, 1000));
-
+		if(this.numShots === 0) {
+			this.timers.SetTimer('attack_wait', 2000);
 			return true;
+
+		} else if(this.animations.currentAnim.isFinished && this.timers.TimerUp('shoot_wait')) {
+			this.numShots--;
+			this.timers.SetTimer('shoot_wait', this.SHOOTING_SPEED);
+			this.animations.currentAnim.restart();
+
+			//create projectile
+
+			return false;
 		}
 
 		return false;
@@ -152,9 +171,19 @@ Enemy.prototype.types['SW8T'] =  function() {
 
 		if(this.body.onFloor() && this.animations.currentAnim.isFinished) {
 			return true;
-		} else {
-			return false;
+		} 
+
+		return false;
+	};
+
+	this.Swiping = function() {
+		this.PlayAnim('swipe');
+
+		if(this.timers.TimerUp('swipe_wait') && this.animations.currentAnim.isFinished) {
+			return true;
 		}
+
+		return false;
 	};
 
 	this.Hurting = function() {

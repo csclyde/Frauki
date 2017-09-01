@@ -571,6 +571,10 @@
             <key type="filename">SW8T/Block0004.png</key>
             <key type="filename">SW8T/Block0005.png</key>
             <key type="filename">SW8T/Shoot0008.png</key>
+            <key type="filename">SW8T/Swipe0000.png</key>
+            <key type="filename">SW8T/Swipe0001.png</key>
+            <key type="filename">SW8T/Swipe0002.png</key>
+            <key type="filename">SW8T/Swipe0003.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
