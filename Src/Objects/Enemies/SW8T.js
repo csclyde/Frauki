@@ -8,7 +8,7 @@ Enemy.prototype.types['SW8T'] =  function() {
     this.animations.add('hurt', ['SW8T/Hurt0001', 'SW8T/Hurt0002'], 10, true, false);
     this.animations.add('shoot_start', ['SW8T/Shoot0001', 'SW8T/Shoot0002'], 10, false, false);
     this.animations.add('shoot', ['SW8T/Shoot0003', 'SW8T/Shoot0004', 'SW8T/Shoot0005', 'SW8T/Shoot0006', 'SW8T/Shoot0007', 'SW8T/Shoot0008'], 14, false, false);
-    this.animations.add('block_start', ['SW8T/Block0001', 'SW8T/Block0002', 'SW8T/Block0003'], 16, false, false);
+    this.animations.add('block_start', ['SW8T/Block0001', 'SW8T/Block0002', 'SW8T/Block0003'], 22, false, false);
     this.animations.add('block', ['SW8T/Block0004', 'SW8T/Block0005'], 12, true, false);
     this.animations.add('swipe', ['SW8T/Swipe0001', 'SW8T/Swipe0002', 'SW8T/Swipe0003'], 10, false, false);
     
@@ -41,22 +41,27 @@ Enemy.prototype.types['SW8T'] =  function() {
         if(EnemyBehavior.Player.IsVisible(this)) {
         	//this.Swipe();
 
-        	if(EnemyBehavior.Player.IsNear(this, 100)) {
-        		if(this.timers.TimerUp('attack_wait')) {
-        			this.Swipe();
-        		} else {
-        			this.JumpAway();
-        		}
-        	} else if(EnemyBehavior.Player.MovingTowards(this) && !EnemyBehavior.Player.IsNear(this, 150)) {
+        	//if the player is too close, swipe them
+        	if(EnemyBehavior.Player.IsNear(this, 80) && frauki.body.onFloor() && this.timers.TimerUp('attack_wait')) {
+        		this.Swipe();
+
+        	} else if(EnemyBehavior.Player.IsNear(this, 120) && EnemyBehavior.Player.MovingTowards(this) && frauki.body.onFloor()) {
         		this.Block();
-        	} else if(frauki.InPreAttackAnim()) {
-        		this.Block();
-        	} else if(EnemyBehavior.Player.IsAbove(this) && frauki.state === frauki.AttackDiveCharge) {
+
+        	//if the player is trying to down slam, get out
+        	} else if(EnemyBehavior.Player.IsAbove(this) && (frauki.state === frauki.AttackDiveCharge || frauki.state === frauki.AttackFall)) {
         		this.JumpAway();
+
+        	//if the player is dangerous on the ground, block
+        	} else if(EnemyBehavior.Player.IsDangerous(this) && frauki.body.onFloor()) {
+        		this.Block();
+     
+     		//if the player is far away and vulnerable, mortar them
         	} else if(!EnemyBehavior.Player.IsNear(this, 200) && EnemyBehavior.Player.IsVulnerable(this) && this.timers.TimerUp('attack_wait')) {
         		this.Shoot();
+
         	} else { 
-        		this.state = this.Idling;
+        		this.state = this.Walking;
         	}
         	
         } else {
@@ -95,8 +100,8 @@ Enemy.prototype.types['SW8T'] =  function() {
    		this.state = this.Jumping;
    		EnemyBehavior.FacePlayer(this);
 
-   		this.body.velocity.y = -150;
-   		this.body.velocity.x = 400 * EnemyBehavior.Player.DirMod(this);
+   		this.body.velocity.y = -200;
+   		this.body.velocity.x = game.rnd.between(350, 500) * EnemyBehavior.Player.DirMod(this);
    	};
 
    	this.Swipe = function() {
@@ -180,8 +185,11 @@ Enemy.prototype.types['SW8T'] =  function() {
 
 		EnemyBehavior.FacePlayer(this);
 
+		if(EnemyBehavior.Player.IsAbove(this)) {
+			return true;
+		}
+
 		if(this.timers.TimerUp('blocking')) {
-			this.timers.SetTimer('block_wait', game.rnd.between(600, 1000));
 
 			return true;
 		}
@@ -219,7 +227,7 @@ Enemy.prototype.types['SW8T'] =  function() {
 		this.PlayAnim('swipe');
 
 		if(this.timers.TimerUp('swipe_wait') && this.animations.currentAnim.isFinished) {
-			this.timers.SetTimer('attack_wait', 1500);
+			this.timers.SetTimer('attack_wait', 600);
 			return true;
 		}
 
@@ -240,9 +248,17 @@ Enemy.prototype.types['SW8T'] =  function() {
 
 	this.attackFrames = {
 
-		'KR32/Stab0001': {
-			x: 0, y: 12, w: 90, h: 10,
-			damage: 1,
+		'SW8T/Block0004': {
+			x: 28, y: -7, w: 20, h: 72,
+			damage: 0,
+			knockback: 0.2,
+			priority: 3,
+			juggle: 0
+		},
+
+		'SW8T/Block0005': {
+			x: 28, y: -7, w: 20, h: 72,
+			damage: 0,
 			knockback: 0.2,
 			priority: 3,
 			juggle: 0
