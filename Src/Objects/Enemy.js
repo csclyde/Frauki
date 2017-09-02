@@ -103,7 +103,7 @@ Enemy.prototype.update = function() {
             game.physics.arcade.overlap(this.attackRect, frauki.attackRect, Collision.OverlapAttackWithEnemyAttack);
         }
 
-        game.physics.arcade.overlap(this.attackRect, frauki, Collision.OverlapEnemyAttackWithFrauki);
+        game.physics.arcade.collide(this.attackRect, frauki, null, Collision.OverlapEnemyAttackWithFrauki);
     } 
 
     if(this.maxEnergy > 1 && this.owningLayer === Frogland.currentLayer && !this.timers.TimerUp('health_view')) {
@@ -227,6 +227,14 @@ Enemy.prototype.GetCurrentKnockback = function() {
 Enemy.prototype.GetCurrentStun = function() {
     if(!!this.currentAttack) {
         return this.currentAttack.stun;
+    } else {
+        return false;
+    }
+};
+
+Enemy.prototype.GetCurrentAttackSolid = function() {
+    if(!!this.currentAttack) {
+        return this.currentAttack.solid || false;
     } else {
         return false;
     }

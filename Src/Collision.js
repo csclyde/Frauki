@@ -266,6 +266,8 @@ Collision.OverlapEnemyAttackWithFrauki = function(e, f) {
         frauki.Hit(e, e.GetCurrentDamage(), 1000);
         e.LandHit();
     }
+
+    return e.GetCurrentAttackSolid();
 };
 
 

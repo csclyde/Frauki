@@ -169,7 +169,8 @@ EnemyBehavior.Player.IsAbove = function(e) {
 
     if(e.body.center.y > frauki.body.y && 
        e.body.center.x > frauki.body.center.x - margin && 
-       e.body.center.x < frauki.body.center.x + margin)
+       e.body.center.x < frauki.body.center.x + margin &&
+       !frauki.body.onFloor())
         return true;
 
     return false;
@@ -223,6 +224,19 @@ EnemyBehavior.Player.IsVulnerable = function(e) {
         return false;
     }
 
+    if(EnemyBehavior.Player.IsInVulnerableFrame(e)) {
+        return true;
+    }
+
+    if(frauki.state === frauki.Falling && frauki.states.hasFlipped) {
+        return true;
+    }
+
+    //if none of this determined a vulnerable/invulnerable state, then just attack
+    return true;
+};
+
+EnemyBehavior.Player.IsInVulnerableFrame = function(e) {
     var vulnerableFrames = [
         'Attack Fall0005',
         'Attack Fall0006',
@@ -276,12 +290,7 @@ EnemyBehavior.Player.IsVulnerable = function(e) {
         return true;
     }
 
-    if(frauki.state === frauki.Falling && frauki.states.hasFlipped) {
-        return true;
-    }
-
-    //if none of this determined a vulnerable/invulnerable state, then just attack
-    return true;
+    return false;
 };
 
 EnemyBehavior.Player.DirMod = function(e) {
@@ -376,6 +385,13 @@ EnemyBehavior.ChargeAtPlayer = function(e, speed) {
 EnemyBehavior.WalkToPlayer = function(e, speed) {
     e.body.velocity.x = speed * EnemyBehavior.Player.DirMod(e) * -1;
     EnemyBehavior.FacePlayer(e);
+
+    return true;
+};
+
+EnemyBehavior.WalkAwayFromPlayer = function(e, speed) {
+    e.body.velocity.x = speed * EnemyBehavior.Player.DirMod(e);
+    EnemyBehavior.FaceAwayFromPlayer(e);
 
     return true;
 };

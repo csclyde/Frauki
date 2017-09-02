@@ -25,8 +25,8 @@ ProjectileController.prototype.Mortar = function(e) {
 	mortar.play('idle');
 
 	//parabolic arc
-	var duration = 0.8;
-	var xTarget = frauki.body.center.x + game.rnd.between(-20, 20);
+	var duration = 0.6;
+	var xTarget = frauki.body.center.x + game.rnd.between(-5, 5);
 	var yTarget = frauki.body.center.y;
 
 	mortar.body.velocity.x = (xTarget - mortar.body.center.x) / duration;
