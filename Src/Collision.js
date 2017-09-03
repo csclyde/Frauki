@@ -527,8 +527,8 @@ Collision.CollideProjectileWithWorld = function(p, t) {
         p.play('explode');
         events.publish('camera_shake', {magnitudeX: 3, magnitudeY: 1, duration: 200});
 
-    } else if(p.projType === 'bolas') {
-        //p.pendingDestroy = true;
+    } else if(p.projType === 'bolas' && !p.attached) {
+        p.pendingDestroy = true;
     }
 
     if(t.index === 1) {

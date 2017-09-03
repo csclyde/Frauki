@@ -164,7 +164,7 @@ EnemyBehavior.Player.IsBelow = function(e) {
 };
 
 EnemyBehavior.Player.IsAbove = function(e) {
-    var margin = e.body.width / 2;
+    var margin = e.body.width / 1;
     margin += 5;
 
     if(e.body.center.y > frauki.body.y && 

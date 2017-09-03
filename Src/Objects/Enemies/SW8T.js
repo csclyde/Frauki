@@ -44,9 +44,13 @@ Enemy.prototype.types['SW8T'] =  function() {
         	//this.Swipe();
 
         	//if the player is too close, swipe them
-        	if(EnemyBehavior.Player.IsNear(this, 120) && frauki.body.onFloor()) {
+        	if(EnemyBehavior.Player.IsNear(this, 100) && frauki.body.onFloor()) {
         		if(this.timers.TimerUp('attack_wait') && EnemyBehavior.Player.IsVulnerable(this)) {
         			this.Swipe();
+
+        		} else if(EnemyBehavior.Player.MovingAway(this)) {
+        			this.JumpAway();
+
         		} else {
         			this.Block();
         		}
@@ -55,22 +59,28 @@ Enemy.prototype.types['SW8T'] =  function() {
         	} else if(EnemyBehavior.Player.IsAbove(this) && frauki.state === frauki.AttackDiveCharge) {
         		this.JumpAway();
 
-        	//if the player is dangerous on the ground, block
-        	} else if(EnemyBehavior.Player.IsDangerous(this) && frauki.body.onFloor()) {
+        	} else if(!frauki.body.onFloor() && EnemyBehavior.Player.IsNear(this, 100)) {
         		this.Block();
-     
+
+        	//if the player is dangerous on the ground, block
+        	} else if(EnemyBehavior.Player.IsDangerous(this)) {
+        		this.Block();
+
+        	} else if(!EnemyBehavior.Player.IsNear(this, 160) && this.timers.TimerUp('bolas_wait') && EnemyBehavior.Player.IsVulnerable(this) && !EnemyBehavior.Player.MovingTowards(this)) {
+     			this.Bolas();
+
      		//if the player is far away and vulnerable, mortar them
-        	} else if(!EnemyBehavior.Player.IsNear(this, 200) && EnemyBehavior.Player.IsVulnerable(this) && this.timers.TimerUp('attack_wait')) {
+        	} else if(!EnemyBehavior.Player.IsNear(this, 160) && EnemyBehavior.Player.IsVulnerable(this) && this.timers.TimerUp('attack_wait')) {
         		if(frauki.states.entangled) {
         			this.Shoot();
-        		} else if(EnemyBehavior.Player.IsInVulnerableFrame(this)) {
+        		} else {
         			this.JumpIn();
-        		} else if(this.timers.TimerUp('bolas_wait')) {
-        			this.Bolas();
-        		}
+        		} 
 
         	} else if(!EnemyBehavior.Player.IsNear(this, 80)) { 
         		this.state = this.Walking;
+
+        	// } else if() {
 
         	} else {
         		this.state = this.Idling;
@@ -135,9 +145,9 @@ Enemy.prototype.types['SW8T'] =  function() {
    		this.timers.SetTimer('swipe_wait', 200);
 
    		if(this.direction === 'left') {
-			this.body.velocity.x = -250;
+			this.body.velocity.x = -350;
 		} else {
-			this.body.velocity.x = 250;
+			this.body.velocity.x = 350;
 		}
    	};
 
