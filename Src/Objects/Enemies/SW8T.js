@@ -43,11 +43,12 @@ Enemy.prototype.types['SW8T'] =  function() {
         	//this.Swipe();
 
         	//if the player is too close, swipe them
-        	if(EnemyBehavior.Player.IsNear(this, 80) && frauki.body.onFloor() && this.timers.TimerUp('attack_wait') && EnemyBehavior.Player.IsVulnerable(this)) {
-        		this.Swipe();
-
-        	} else if(EnemyBehavior.Player.IsNear(this, 120) && EnemyBehavior.Player.MovingTowards(this) && frauki.body.onFloor()) {
-        		this.Block();
+        	if(EnemyBehavior.Player.IsNear(this, 120) && frauki.body.onFloor()) {
+        		if(this.timers.TimerUp('attack_wait') && EnemyBehavior.Player.IsVulnerable(this)) {
+        			this.Swipe();
+        		} else {
+        			this.Block();
+        		}
 
         	//if the player is trying to down slam, get out
         	} else if(EnemyBehavior.Player.IsAbove(this) && frauki.state === frauki.AttackDiveCharge) {
@@ -210,7 +211,7 @@ Enemy.prototype.types['SW8T'] =  function() {
 			if(this.timers.TimerUp('bolas_wait')) {
 				projectileController.Bolas(this);
 			}
-			
+
 			this.timers.SetTimer('bolas_wait', 5000);
 
 			return true;
@@ -224,7 +225,7 @@ Enemy.prototype.types['SW8T'] =  function() {
 
 		if(this.animations.currentAnim.isFinished) {
 			this.state = this.Blocking;
-			this.timers.SetTimer('blocking', 1000);
+			this.timers.SetTimer('blocking', 500);
 		}
 	}
 

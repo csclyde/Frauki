@@ -67,6 +67,7 @@ Enemy.prototype.Vulnerable = function() { return true; }
 Enemy.prototype.CanCauseDamage = function() { return false; }
 Enemy.prototype.LandHit = function() {};
 Enemy.prototype.OnHit = function() {};
+Enemy.prototype.OnBlock = function() {};
 
 Enemy.prototype.update = function() {
     var that = this;

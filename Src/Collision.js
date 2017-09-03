@@ -363,6 +363,10 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
     frauki.LandHit(e, 0);
     e.LandHit();
 
+    if(e.GetCurrentDamage() === 0 && frauki.GetCurrentDamage() > 0) {
+        e.OnBlock();
+    }
+
     var vel = new Phaser.Point(e.body.center.x - frauki.body.center.x, e.body.center.y - frauki.body.center.y);
     vel = vel.normalize();
 
