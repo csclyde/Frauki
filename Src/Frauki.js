@@ -1,8 +1,8 @@
-PLAYER_SPEED = function() { return 200 }
-PLAYER_ROLL_SPEED = function() { return 460 }
-PLAYER_RUN_SLASH_SPEED = function() { return  550; }
-PLAYER_JUMP_VEL = function() { return -500 }
-PLAYER_DOUBLE_JUMP_VEL = function() { return -300; }
+PLAYER_SPEED = function() { return 200 * frauki.movement.globalMoveMod; }
+PLAYER_ROLL_SPEED = function() { return 460 * frauki.movement.globalMoveMod; }
+PLAYER_RUN_SLASH_SPEED = function() { return  550 * frauki.movement.globalMoveMod; }
+PLAYER_JUMP_VEL = function() { return -500 * frauki.movement.globalMoveMod; }
+PLAYER_DOUBLE_JUMP_VEL = function() { return -300 * frauki.movement.globalMoveMod; }
 
 Player = function (game, x, y, name) {
 
@@ -116,6 +116,12 @@ Player.prototype.preStateUpdate = function() {
         }
     } else {
         this.runDust.visible = false;
+    }
+
+    if(this.states.entangled) {
+        this.movement.globalMoveMod = 0.5;
+    } else {
+        this.movement.globalMoveMod = 1.0;
     }
 };
 
@@ -393,6 +399,7 @@ Player.prototype.Reset = function() {
     this.states.attackFallLanded = false;
     this.states.shielded = false;
     this.states.throwing = false;
+    this.states.entangled = false;
 
     this.movement.diveVelocity = 0;
     this.movement.jumpSlashVelocity = 0;
@@ -401,6 +408,7 @@ Player.prototype.Reset = function() {
     this.movement.rollPop = false;
     this.movement.rollPrevVel = 0;
     this.movement.rollDirection = 1;
+    this.movement.globalMoveMod = 1.0;
 
     this.upgrades.roll = true;
     this.upgrades.hike = true;

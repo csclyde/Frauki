@@ -400,6 +400,13 @@
             <key type="filename">Insectoid/Hop0000.png</key>
             <key type="filename">Insectoid/Hop0001.png</key>
             <key type="filename">Insectoid/Hop0002.png</key>
+            <key type="filename">SW8T/BolasShot0000.png</key>
+            <key type="filename">SW8T/BolasShot0001.png</key>
+            <key type="filename">SW8T/BolasShot0002.png</key>
+            <key type="filename">SW8T/BolasShot0003.png</key>
+            <key type="filename">SW8T/BolasShot0004.png</key>
+            <key type="filename">SW8T/BolasShot0005.png</key>
+            <key type="filename">SW8T/BolasShot0006.png</key>
             <key type="filename">SW8T/Mortar0004.png</key>
             <key type="filename">SW8T/Mortar0005.png</key>
             <key type="filename">SW8T/Mortar0006.png</key>
@@ -574,6 +581,12 @@
             <key type="filename">SW8T/Block0003.png</key>
             <key type="filename">SW8T/Block0004.png</key>
             <key type="filename">SW8T/Block0005.png</key>
+            <key type="filename">SW8T/Bolas0000.png</key>
+            <key type="filename">SW8T/Bolas0001.png</key>
+            <key type="filename">SW8T/Bolas0002.png</key>
+            <key type="filename">SW8T/Bolas0003.png</key>
+            <key type="filename">SW8T/Bolas0004.png</key>
+            <key type="filename">SW8T/Bolas0005.png</key>
             <key type="filename">SW8T/Shoot0008.png</key>
             <key type="filename">SW8T/Swipe0000.png</key>
             <key type="filename">SW8T/Swipe0001.png</key>

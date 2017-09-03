@@ -8,6 +8,7 @@ Enemy.prototype.types['SW8T'] =  function() {
     this.animations.add('hurt', ['SW8T/Hurt0001', 'SW8T/Hurt0002'], 10, true, false);
     this.animations.add('shoot_start', ['SW8T/Shoot0001', 'SW8T/Shoot0002'], 10, false, false);
     this.animations.add('shoot', ['SW8T/Shoot0003', 'SW8T/Shoot0004', 'SW8T/Shoot0005', 'SW8T/Shoot0006', 'SW8T/Shoot0007', 'SW8T/Shoot0008'], 14, false, false);
+    this.animations.add('shoot_bolas', ['SW8T/Bolas0003', 'SW8T/Bolas0004', 'SW8T/Bolas0005'], 14, false, false);
     this.animations.add('block_start', ['SW8T/Block0001', 'SW8T/Block0002', 'SW8T/Block0003'], 22, false, false);
     this.animations.add('block', ['SW8T/Block0004', 'SW8T/Block0005'], 12, true, false);
     this.animations.add('swipe', ['SW8T/Swipe0001', 'SW8T/Swipe0002', 'SW8T/Swipe0003'], 10, false, false);
@@ -58,10 +59,12 @@ Enemy.prototype.types['SW8T'] =  function() {
      
      		//if the player is far away and vulnerable, mortar them
         	} else if(!EnemyBehavior.Player.IsNear(this, 200) && EnemyBehavior.Player.IsVulnerable(this) && this.timers.TimerUp('attack_wait')) {
-        		if(EnemyBehavior.Player.IsInVulnerableFrame(this)) {
-        			this.JumpIn();
-        		} else {
+        		if(frauki.states.entangled) {
         			this.Shoot();
+        		} else if(EnemyBehavior.Player.IsInVulnerableFrame(this)) {
+        			this.JumpIn();
+        		} else if(this.timers.TimerUp('bolas_wait')) {
+        			this.Bolas();
         		}
 
         	} else if(!EnemyBehavior.Player.IsNear(this, 80)) { 
@@ -86,6 +89,10 @@ Enemy.prototype.types['SW8T'] =  function() {
 	///////////////////////////////ACTIONS////////////////////////////////////
    	this.Shoot = function() {
    		this.state = this.ShootingStart;
+   	};
+
+   	this.Bolas = function() {
+   		this.state = this.Bolasing;
    	};
 
    	this.Walk = function() {
@@ -130,7 +137,7 @@ Enemy.prototype.types['SW8T'] =  function() {
 		} else {
 			this.body.velocity.x = 250;
 		}
-   	}
+   	};
 
 	////////////////////////////////STATES////////////////////////////////////
 	this.Idling = function() {
@@ -190,6 +197,23 @@ Enemy.prototype.types['SW8T'] =  function() {
 			this.hasShot = false;
 
 			return false;
+		}
+
+		return false;
+	};
+
+	this.Bolasing = function() {
+		this.PlayAnim('shoot_bolas');
+
+		if(this.animations.currentAnim.isFinished) {
+
+			if(this.timers.TimerUp('bolas_wait')) {
+				projectileController.Bolas(this);
+			}
+			
+			this.timers.SetTimer('bolas_wait', 5000);
+
+			return true;
 		}
 
 		return false;

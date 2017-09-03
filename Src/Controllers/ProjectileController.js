@@ -45,6 +45,40 @@ ProjectileController.prototype.Mortar = function(e) {
 	this.projectiles.add(mortar);
 };
 
+ProjectileController.prototype.Bolas = function(e) {
+	var xPos = e.body.center.x;
+	var yPos = e.body.center.y;
+
+	if(e.direction === 'left') {
+		xPos -= 50;
+	} else {
+		xPos += 50;
+	}
+
+	var bolas = game.add.sprite(xPos, yPos, 'EnemySprites');
+	game.physics.enable(bolas, Phaser.Physics.ARCADE);
+
+	bolas.body.setSize(20, 10);
+	bolas.anchor.setTo(0.5);
+
+	bolas.animations.add('idle', ['SW8T/BolasShot0000', 'SW8T/BolasShot0001', 'SW8T/BolasShot0002', 'SW8T/BolasShot0003', 'SW8T/BolasShot0004', 'SW8T/BolasShot0005', 'SW8T/BolasShot0006'], 20, true, false);
+	bolas.play('idle');
+
+	game.physics.arcade.moveToXY(bolas, frauki.body.center.x, frauki.body.center.y, 500);
+	
+	bolas.body.bounce.set(0.0);
+	bolas.body.allowGravity = false;
+
+	bolas.projType = 'bolas';
+	bolas.owningEnemy = e;
+	bolas.spawnTime = game.time.now;
+	bolas.lifeTime = 3000;
+	bolas.solid = true;
+	bolas.attached = false;
+
+	this.projectiles.add(bolas);
+};
+
 ProjectileController.prototype.Tarball = function(e) {
 	var tar = game.add.sprite(e.body.center.x, e.body.center.y, 'EnemySprites');
 	game.physics.enable(tar, Phaser.Physics.ARCADE);
@@ -161,6 +195,8 @@ ProjectileController.prototype.Update = function() {
 
 	var childrenToRemove = [];
 
+	frauki.states.entangled = false;
+
 	this.projectiles.forEach(function(p) {
 
 		if(game.time.now - p.spawnTime > p.lifeTime && p.lifeTime !== 0) {
@@ -168,6 +204,12 @@ ProjectileController.prototype.Update = function() {
 			childrenToRemove.push(p);
 		} else if(p.solid) {
 			game.physics.arcade.collide(p, Frogland.GetCurrentCollisionLayer(), Collision.CollideProjectileWithWorld);
+		}
+
+		if(p.projType === 'bolas' && p.attached === true) {
+			p.x = frauki.body.center.x;
+			p.y = frauki.body.center.y;
+			frauki.states.entangled = true;
 		}
 
 	});
