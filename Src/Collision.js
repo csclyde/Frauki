@@ -221,7 +221,7 @@ Collision.CollideFraukiWithEnvironment = function(f, tile) {
 
 Collision.CollideFraukiWithProjectile = function(f, p) {
 
-    if(p.projType === 'tar' || p.projType === 'spore' || p.projType === 'bolt') {
+    if(p.projType === 'tar' || p.projType === 'spore' || p.projType === 'bolt' || p.projType === 'mortar') {
         if(p.owningEnemy.state !== p.owningEnemy.Dying) {
             if(frauki.Attacking() || frauki.states.shielded) {
                 Collision.OverlapAttackWithEnemyAttack(p, f);
