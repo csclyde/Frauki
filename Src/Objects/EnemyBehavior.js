@@ -10,12 +10,12 @@ EnemyBehavior.GetProp = function(e, key) {
     return e.EBProps[key];
 };
 
-EnemyBehavior.WithinCameraRange = function(e) {
+EnemyBehavior.WithinCameraRange = function(e, pad) {
     if(e.owningLayer !== Frogland.currentLayer) {
         return false;
     }
 
-    var padding = -30;
+    var padding = pad || -30;
 
     if(e.body.x > game.camera.x - padding &&
        e.body.y > game.camera.y - padding &&
@@ -104,7 +104,7 @@ EnemyBehavior.Player.IsVisible = function(e) {
         this.Visibility[e.z] = { obj: e, timestamp: 0, result: false };
     }
 
-    if(!EnemyBehavior.WithinCameraRange(e)) {
+    if(!EnemyBehavior.WithinCameraRange(e, 100)) {
         this.Visibility[e.z].result = false;
         return false;
     }
@@ -164,8 +164,8 @@ EnemyBehavior.Player.IsBelow = function(e) {
 };
 
 EnemyBehavior.Player.IsAbove = function(e) {
-    var margin = e.body.width / 1;
-    margin += 5;
+    var margin = e.body.width;
+    margin += 15;
 
     if(e.body.center.y > frauki.body.y && 
        e.body.center.x > frauki.body.center.x - margin && 

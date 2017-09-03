@@ -32,7 +32,7 @@ ProjectileController.prototype.Mortar = function(e) {
 	mortar.body.velocity.x = (xTarget - mortar.body.center.x) / duration;
 	mortar.body.velocity.y = (yTarget + -0.5 * game.physics.arcade.gravity.y * duration * duration - mortar.body.center.y) / duration;
 
-	mortar.body.velocity.x += frauki.body.velocity.x / 5;
+	mortar.body.velocity.x += frauki.body.velocity.x;
 
 	mortar.body.bounce.set(0.0);
 
@@ -208,7 +208,7 @@ ProjectileController.prototype.Update = function() {
 
 		if(p.projType === 'bolas' && p.attached === true) {
 			p.x = frauki.body.center.x;
-			p.y = frauki.body.center.y;
+			p.y = frauki.body.center.y + (Math.sin(game.time.now / 50) * 24) + 12;
 			frauki.states.entangled = true;
 		}
 

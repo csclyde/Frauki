@@ -44,43 +44,35 @@ Enemy.prototype.types['SW8T'] =  function() {
         	//this.Swipe();
 
         	//if the player is too close, swipe them
-        	if(EnemyBehavior.Player.IsNear(this, 100) && frauki.body.onFloor()) {
-        		if(this.timers.TimerUp('attack_wait') && EnemyBehavior.Player.IsVulnerable(this)) {
+        	if(EnemyBehavior.Player.IsNear(this, 160) && frauki.body.onFloor()) {
+        		if(!EnemyBehavior.Player.IsNear(this, 80) && this.timers.TimerUp('bolas_wait') && (EnemyBehavior.Player.IsVulnerable(this) || EnemyBehavior.Player.MovingAway(this))) {
+        			this.Bolas();
+
+        		} else if(EnemyBehavior.Player.IsNear(this, 80) && this.timers.TimerUp('attack_wait') && EnemyBehavior.Player.IsVulnerable(this)) {
         			this.Swipe();
 
-        		} else if(EnemyBehavior.Player.MovingAway(this)) {
+        		} else if(frauki.states.entangled && EnemyBehavior.Player.IsNear(this, 160)) {
         			this.JumpAway();
-
+        		
         		} else {
         			this.Block();
         		}
+
+        	} else if(EnemyBehavior.Player.IsNear(this, 160) && frauki.body.onFloor() && EnemyBehavior.Player.MovingAway(this) && this.timers.TimerUp('bolas_wait')) {
+        		this.Bolas();
 
         	//if the player is trying to down slam, get out
         	} else if(EnemyBehavior.Player.IsAbove(this) && frauki.state === frauki.AttackDiveCharge) {
         		this.JumpAway();
 
-        	} else if(!frauki.body.onFloor() && EnemyBehavior.Player.IsNear(this, 100)) {
+     		} else if(frauki.states.entangled && !EnemyBehavior.Player.IsNear(this, 120)  && this.timers.TimerUp('attack_wait')) {
+     			this.Shoot();
+
+        	} else if(EnemyBehavior.Player.IsNear(this, 160) || EnemyBehavior.Player.IsDangerous(this)) {
         		this.Block();
 
-        	//if the player is dangerous on the ground, block
-        	} else if(EnemyBehavior.Player.IsDangerous(this)) {
-        		this.Block();
-
-        	} else if(!EnemyBehavior.Player.IsNear(this, 160) && this.timers.TimerUp('bolas_wait') && EnemyBehavior.Player.IsVulnerable(this) && !EnemyBehavior.Player.MovingTowards(this)) {
-     			this.Bolas();
-
-     		//if the player is far away and vulnerable, mortar them
-        	} else if(!EnemyBehavior.Player.IsNear(this, 160) && EnemyBehavior.Player.IsVulnerable(this) && this.timers.TimerUp('attack_wait')) {
-        		if(frauki.states.entangled) {
-        			this.Shoot();
-        		} else {
-        			this.JumpIn();
-        		} 
-
-        	} else if(!EnemyBehavior.Player.IsNear(this, 80)) { 
+        	} else if(!EnemyBehavior.Player.IsNear(this, 160)) { 
         		this.state = this.Walking;
-
-        	// } else if() {
 
         	} else {
         		this.state = this.Idling;
@@ -94,7 +86,7 @@ Enemy.prototype.types['SW8T'] =  function() {
 
     this.LandHit = function() {
     	if(this.state === this.Blocking) {
-    		this.timers.SetTimer('block_recoil', 200);
+    		this.timers.SetTimer('blocking', 500);
     	}
     };
 
@@ -245,7 +237,7 @@ Enemy.prototype.types['SW8T'] =  function() {
 
 		EnemyBehavior.FacePlayer(this);
 
-		if(EnemyBehavior.Player.IsAbove(this)) {
+		if(EnemyBehavior.Player.IsAbove(this) || frauki.states.entangled) {
 			return true;
 		}
 
@@ -312,7 +304,7 @@ Enemy.prototype.types['SW8T'] =  function() {
 			x: 28, y: -7, w: 20, h: 72,
 			damage: 0,
 			knockback: 0.2,
-			priority: 3,
+			priority: 4,
 			juggle: 0,
 			solid: false
 		},
@@ -321,7 +313,7 @@ Enemy.prototype.types['SW8T'] =  function() {
 			x: 28, y: -7, w: 20, h: 72,
 			damage: 0,
 			knockback: 0.2,
-			priority: 3,
+			priority: 4,
 			juggle: 0,
 			solid: false
 		},

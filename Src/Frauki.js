@@ -23,8 +23,6 @@ Player = function (game, x, y, name) {
         this.animations.add(anim.Name, anim.Frames, anim.Fps, anim.Loop, false);
     }, this);
 
-    this.ChangeState(this.Standing);
-    this.PlayAnim('stand');
     
     this.tweens = {};
     this.tweens.roll = null;
@@ -33,6 +31,9 @@ Player = function (game, x, y, name) {
     this.movement = {};
     this.upgrades = {};
 
+    this.ChangeState(this.Standing);
+    this.PlayAnim('stand');
+    
     this.timers = new TimerUtil();
 
     //this.Reset();
@@ -230,6 +231,8 @@ Player.prototype.PlayAnim = function(name) {
 Player.prototype.ChangeState = function(newState) {
 
     this.state = newState;
+    this.states.damageRefactory = false;
+
     if(this.state !== this.Stunned) {
     }
 };
@@ -282,7 +285,7 @@ Player.prototype.UpdateAttackGeometry = function() {
 
 Player.prototype.GetCurrentDamage = function() {
 
-    if(!!this.currentAttack) {
+    if(!!this.currentAttack && this.states.damageRefactory === false) {
         return this.currentAttack.damage;
     } else {
         return 0;
@@ -400,6 +403,7 @@ Player.prototype.Reset = function() {
     this.states.shielded = false;
     this.states.throwing = false;
     this.states.entangled = false;
+    this.states.damageRefactory = false;
 
     this.movement.diveVelocity = 0;
     this.movement.jumpSlashVelocity = 0;
@@ -871,6 +875,7 @@ Player.prototype.LandHit = function(e, damage) {
     }
 
     this.states.hasFlipped = false;
+    this.states.damageRefactory = true;
 
     events.publish('stop_attack_sounds');
 };

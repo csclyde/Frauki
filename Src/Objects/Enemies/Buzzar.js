@@ -41,31 +41,6 @@ Enemy.prototype.types['Buzzar'] =  function() {
                 this.Creep();
             }
 
-        //     if(this.body.onFloor()) {
-
-        //         if(EnemyBehavior.Player.IsDangerous(this) || EnemyBehavior.Player.IsNear(this, 20)) {
-        //             this.Dodge();
-        //         }
-        //         else if(EnemyBehavior.Player.IsNear(this, 50)) {
-        //             this.Dodge();
-        //         } 
-        //         else if(!frauki.body.onFloor()) {
-        //             this.Hop();
-        //         } 
-        //         else {
-        //             if(EnemyBehavior.RollDice(2, 1)) {
-        //                 this.Scuttle();
-        //             } else {
-        //                 this.Hop();
-        //             }
-        //         }
-
-        //     } else {
-        //         if(EnemyBehavior.Player.IsBelow(this)) {
-        //             this.Dive();
-        //         }
-        //     }
-
         } else {
             this.state = this.Idling;
         }
