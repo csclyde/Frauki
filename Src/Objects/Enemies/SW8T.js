@@ -88,6 +88,8 @@ Enemy.prototype.types['SW8T'] =  function() {
     	if(this.state === this.Blocking) {
     		this.timers.SetTimer('blocking', 500);
     	}
+
+    	this.numShots = 0;
     };
 
 	///////////////////////////////ACTIONS////////////////////////////////////
@@ -171,7 +173,8 @@ Enemy.prototype.types['SW8T'] =  function() {
 		if(this.animations.currentAnim.isFinished) {
 			this.state = this.Shooting;
 			this.timers.SetTimer('shoot_wait', this.SHOOTING_SPEED);
-			this.numShots = game.rnd.between(3, 5);
+			this.numShots = game.rnd.between(7, 7);
+			this.hasShot = false;
 		}
 	};
 

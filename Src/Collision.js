@@ -221,16 +221,19 @@ Collision.CollideFraukiWithEnvironment = function(f, tile) {
 
 Collision.CollideFraukiWithProjectile = function(f, p) {
 
-    if(p.projType === 'tar' || p.projType === 'spore' || p.projType === 'bolt' || p.projType === 'mortar') {
+    if(p.projType === 'tar' || p.projType === 'spore' || p.projType === 'bolt' || p.projType === 'mortarExplosion') {
         if(p.owningEnemy.state !== p.owningEnemy.Dying) {
             if(frauki.Attacking() || frauki.states.shielded) {
                 Collision.OverlapAttackWithEnemyAttack(p, f);
             } else {
                 frauki.Hit(p.owningEnemy, p.owningEnemy.damage);
+                p.owningEnemy.LandHit();
             }
         }
         
-        p.destroy();
+        if(!p.preserveAfterHit) {
+            p.destroy();
+        }
     } else if(p.projType === 'bolas') {
         p.attached = true;
     }
@@ -521,11 +524,12 @@ Collision.CollideProjectileWithWorld = function(p, t) {
         p.pendingDestroy = true;
         effectsController.Explosion(p);
     } else if(p.projType === 'mortar' && p.body.onFloor()) {
-        //p.pendingDestroy = true;
+        p.pendingDestroy = true;
         //effectsController.Explosion(p);
-        p.body.velocity.setTo(0);
-        p.play('explode');
+        //p.body.velocity.setTo(0);
+        //p.play('explode');
         events.publish('camera_shake', {magnitudeX: 3, magnitudeY: 1, duration: 200});
+        projectileController.MortarExplosion(p.owningEnemy, p.x, p.y);
 
     } else if(p.projType === 'bolas' && !p.attached) {
         p.pendingDestroy = true;
@@ -536,5 +540,4 @@ Collision.CollideProjectileWithWorld = function(p, t) {
     } else {
         return false;
     }
-
 };

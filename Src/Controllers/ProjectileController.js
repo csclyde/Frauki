@@ -4,7 +4,7 @@ ProjectileController = function() {
 
 ProjectileController.prototype.Mortar = function(e) {
 	var xPos = e.body.center.x;
-	var yPos = e.body.center.y - 20;
+	var yPos = e.body.center.y - 25;
 
 	if(e.direction === 'left') {
 		xPos -= 50;
@@ -19,15 +19,13 @@ ProjectileController.prototype.Mortar = function(e) {
 	mortar.anchor.setTo(0.5);
 
 	mortar.animations.add('idle', ['SW8T/Mortar0000', 'SW8T/Mortar0001', 'SW8T/Mortar0002', 'SW8T/Mortar0003'], 14, true, false);
-	var explode = mortar.animations.add('explode', ['SW8T/Mortar0004', 'SW8T/Mortar0005', 'SW8T/Mortar0006', 'SW8T/Mortar0007'], 12, false, false);
-	explode.killOnComplete = true;
 
 	mortar.play('idle');
 
 	//parabolic arc
-	var duration = 0.6;
+	var duration = 0.8;
 	var xTarget = frauki.body.center.x + game.rnd.between(-5, 5);
-	var yTarget = frauki.body.center.y;
+	var yTarget = frauki.body.y + frauki.body.height;
 
 	mortar.body.velocity.x = (xTarget - mortar.body.center.x) / duration;
 	mortar.body.velocity.y = (yTarget + -0.5 * game.physics.arcade.gravity.y * duration * duration - mortar.body.center.y) / duration;
@@ -43,6 +41,33 @@ ProjectileController.prototype.Mortar = function(e) {
 	mortar.solid = true;
 
 	this.projectiles.add(mortar);
+};
+
+ProjectileController.prototype.MortarExplosion = function(e, x, y) {
+	var xPos = x;
+	var yPos = y;
+
+	var explosion = game.add.sprite(xPos, yPos, 'EnemySprites');
+	game.physics.enable(explosion, Phaser.Physics.ARCADE);
+
+	explosion.body.setSize(40, 40);
+	explosion.anchor.setTo(0.5);
+
+	var explode = explosion.animations.add('explode', ['SW8T/Mortar0004', 'SW8T/Mortar0005', 'SW8T/Mortar0006', 'SW8T/Mortar0007'], 14, false, false);
+	explode.killOnComplete = true;
+
+	explosion.play('explode');
+
+	explosion.body.bounce.set(0.0);
+
+	explosion.projType = 'mortarExplosion';
+	explosion.owningEnemy = e;
+	explosion.spawnTime = game.time.now;
+	explosion.lifeTime = 5000;
+	explosion.solid = true;
+	explosion.preserveAfterHit = true;
+
+	this.projectiles.add(explosion);
 };
 
 ProjectileController.prototype.Bolas = function(e) {
