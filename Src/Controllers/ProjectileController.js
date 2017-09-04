@@ -210,6 +210,9 @@ ProjectileController.prototype.Update = function() {
 			p.x = frauki.body.center.x;
 			p.y = frauki.body.center.y + (Math.sin(game.time.now / 50) * 24) + 12;
 			frauki.states.entangled = true;
+
+		} else if(p.projType === 'mortar' && !!p.body) {
+			p.rotation = Math.atan2(p.body.velocity.y, p.body.velocity.x);
 		}
 
 	});
