@@ -189,7 +189,7 @@ ObjectController.prototype.SpawnObject = function(o) {
         newObj.latent = o;
 
     } 
-    else if(o.id >= 85 && o.id <= 104) {
+    else if((o.id >= 85 && o.id <= 104) || (o.id >= 145 && o.id <= 164)) {
 	    FileMap.Enemies.forEach(function(enemy) {
 	        if(o.id === enemy.Tile) {
 	            newObj = new Enemy(game, o.x, o.y, enemy.Name, enemy.Name);

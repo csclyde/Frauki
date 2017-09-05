@@ -3,7 +3,7 @@ Enemy.prototype.types['CreeperThistle'] =  function() {
     this.body.setSize(30, 25, 0, 0);
     this.anchor.setTo(.5);
 
-    var frames = ["CreeperThistle/CreeperThistle0000", "CreeperThistle/CreeperThistle0001", "CreeperThistle/CreeperThistle0002", "CreeperThistle/CreeperThistle0003"];
+    var frames = ["Misc/CreeperThistle0000", "CreeperThistle/CreeperThistle0001", "CreeperThistle/CreeperThistle0002", "CreeperThistle/CreeperThistle0003"];
     var i = Math.floor(Math.random() * 4);
     while(i--) {
         frames.push(frames.shift());
