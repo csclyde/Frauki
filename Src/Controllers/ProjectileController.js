@@ -233,7 +233,7 @@ ProjectileController.prototype.Update = function() {
 
 		if(p.projType === 'bolas' && p.attached === true) {
 			p.x = frauki.body.center.x;
-			p.y = frauki.body.center.y + (Math.sin(game.time.now / 50) * 24) + 12;
+			p.y = frauki.body.center.y + (Math.sin(game.time.now / 50) * 24) + 0;
 			frauki.states.entangled = true;
 
 		} else if(p.projType === 'mortar' && !!p.body) {

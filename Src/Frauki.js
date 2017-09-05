@@ -33,7 +33,7 @@ Player = function (game, x, y, name) {
 
     this.ChangeState(this.Standing);
     this.PlayAnim('stand');
-    
+
     this.timers = new TimerUtil();
 
     //this.Reset();
@@ -170,32 +170,41 @@ Player.prototype.postStateUpdate = function() {
         this.alpha = 1;
     }
 
-    if(this.timers.TimerUp('charge_flicker') && energyController.GetCharge() > 0) {
-        var freq = 50;
-
-        if(energyController.GetCharge() > 3) {
-            frauki.tint = 0x00C86F;
-            freq = 25;
-
-        } else if(energyController.GetCharge() > 2) {
-            frauki.tint = 0x01FF8F;
-            freq = 50;
-
-        } else if(energyController.GetCharge() > 1) {
-            frauki.tint = 0x47FFAE;
-            freq = 100;
-
-        } else if(energyController.GetCharge() > 0) {
-            frauki.tint = 0x95FFD0;
-            freq = 200;
-
-        }
-
-        game.time.events.add(freq, function() { frauki.timers.SetTimer('charge_flicker', freq); });
-
+    if(frauki.states.entangled && this.timers.TimerUp('entangled_flicker')) {
+        frauki.tint = 0xFF197C;
+        game.time.events.add(50, function() { frauki.timers.SetTimer('entangled_flicker', 50); });
+    } else if(frauki.states.entangled) {
+        frauki.tint = 0xFF8CBD;
     } else {
         frauki.tint = 0xFFFFFF;
     }
+
+    // if(this.timers.TimerUp('charge_flicker') && energyController.GetCharge() > 0) {
+    //     var freq = 50;
+
+    //     if(energyController.GetCharge() > 3) {
+    //         frauki.tint = 0x00C86F;
+    //         freq = 25;
+
+    //     } else if(energyController.GetCharge() > 2) {
+    //         frauki.tint = 0x01FF8F;
+    //         freq = 50;
+
+    //     } else if(energyController.GetCharge() > 1) {
+    //         frauki.tint = 0x47FFAE;
+    //         freq = 100;
+
+    //     } else if(energyController.GetCharge() > 0) {
+    //         frauki.tint = 0x95FFD0;
+    //         freq = 200;
+
+    //     }
+
+    //     game.time.events.add(freq, function() { frauki.timers.SetTimer('charge_flicker', freq); });
+
+    // } else {
+    //     frauki.tint = 0xFFFFFF;
+    // }
 
     if(this.body.onFloor()) {
         this.timers.SetTimer('on_ground', 200);

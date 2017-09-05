@@ -173,7 +173,7 @@ Enemy.prototype.types['SW8T'] =  function() {
 		if(this.animations.currentAnim.isFinished) {
 			this.state = this.Shooting;
 			this.timers.SetTimer('shoot_wait', this.SHOOTING_SPEED);
-			this.numShots = game.rnd.between(7, 7);
+			this.numShots = game.rnd.between(3, 5);
 			this.hasShot = false;
 		}
 	};
