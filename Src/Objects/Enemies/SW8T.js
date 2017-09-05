@@ -141,7 +141,7 @@ Enemy.prototype.types['SW8T'] =  function() {
    		this.state = this.Swiping;
    		EnemyBehavior.FacePlayer(this);
 
-   		this.timers.SetTimer('swipe_wait', 800);
+   		this.timers.SetTimer('swipe_wait', 1000);
 
    		if(this.direction === 'left') {
 			this.body.velocity.x = -350;
@@ -193,10 +193,10 @@ Enemy.prototype.types['SW8T'] =  function() {
 			this.hasShot = true;
 		}
 
-		// if(EnemyBehavior.Player.IsNear(this, 120)) {
-		// 	this.numShots = 0;
-		// 	return true;
-		// }
+		if(EnemyBehavior.Player.IsNear(this, 80) && this.timers.TimerUp('shoot_wait')) {
+			this.numShots = 0;
+			return true;
+		}
 
 		if(this.numShots === 0) {
 			this.timers.SetTimer('attack_wait', 2000);

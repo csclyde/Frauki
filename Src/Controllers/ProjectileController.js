@@ -23,10 +23,10 @@ ProjectileController.prototype.Mortar = function(e) {
 	mortar.play('idle');
 
 	//parabolic arc
-	var duration = 0.6;
+	var duration = 0.7;
 
 	if(frauki.states.entangled) {
-		duration = 0.8;
+		duration = 1.0;
 	}
 
 	var xTarget = frauki.body.center.x + game.rnd.between(-0, 0);
@@ -36,7 +36,13 @@ ProjectileController.prototype.Mortar = function(e) {
 	mortar.body.velocity.y = (yTarget + -0.5 * game.physics.arcade.gravity.y * duration * duration - mortar.body.center.y) / duration;
 
 	mortar.body.velocity.x += frauki.body.velocity.x;
-	if(frauki.body.onFloor()) {
+	
+	if(e.direction === 'left') {
+		if(mortar.body.velocity.x < -500) mortar.body.velocity.x = -500;
+		if(mortar.body.velocity.x > -20) mortar.body.velocity.x = -20;
+	} else {
+		if(mortar.body.velocity.x > 500) mortar.body.velocity.x = 500;
+		if(mortar.body.velocity.x < 20) mortar.body.velocity.x = 20;
 	}
 
 	mortar.body.bounce.set(0.0);
@@ -46,6 +52,7 @@ ProjectileController.prototype.Mortar = function(e) {
 	mortar.spawnTime = game.time.now;
 	mortar.lifeTime = 5000;
 	mortar.solid = true;
+	mortar.preserveAfterHit = true;
 
 	this.projectiles.add(mortar);
 };
@@ -96,8 +103,13 @@ ProjectileController.prototype.Bolas = function(e) {
 	bolas.animations.add('idle', ['SW8T/BolasShot0000', 'SW8T/BolasShot0001', 'SW8T/BolasShot0002', 'SW8T/BolasShot0003', 'SW8T/BolasShot0004', 'SW8T/BolasShot0005', 'SW8T/BolasShot0006'], 20, true, false);
 	bolas.play('idle');
 
-	game.physics.arcade.moveToXY(bolas, frauki.body.center.x, frauki.body.center.y, 500);
-	
+	//game.physics.arcade.moveToXY(bolas, frauki.body.center.x, frauki.body.center.y, 500);
+	if(EnemyBehavior.Player.IsLeft(e)) {
+		bolas.body.velocity.x = -500;
+	} else {
+		bolas.body.velocity.x = 500;
+	}
+
 	bolas.body.bounce.set(0.0);
 	bolas.body.allowGravity = false;
 

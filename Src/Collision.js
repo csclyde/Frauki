@@ -221,7 +221,11 @@ Collision.CollideFraukiWithEnvironment = function(f, tile) {
 
 Collision.CollideFraukiWithProjectile = function(f, p) {
 
-    if(p.projType === 'tar' || p.projType === 'spore' || p.projType === 'bolt' || (p.projType === 'mortarExplosion' && p.animations.currentFrame.name === 'SW8T/Mortar0004')) {
+    if(frauki.state === frauki.Rolling || frauki.state === frauki.Flipping) {
+        return;
+    }
+    
+    if(p.projType === 'tar' || p.projType === 'spore' || p.projType === 'bolt' || p.projType === 'mortar' || (p.projType === 'mortarExplosion' && p.animations.currentFrame.name === 'SW8T/Mortar0004')) {
         if(p.owningEnemy.state !== p.owningEnemy.Dying) {
             if(frauki.Attacking() || frauki.states.shielded) {
                 Collision.OverlapAttackWithEnemyAttack(p, f);
