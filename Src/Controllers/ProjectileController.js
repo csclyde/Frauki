@@ -23,14 +23,21 @@ ProjectileController.prototype.Mortar = function(e) {
 	mortar.play('idle');
 
 	//parabolic arc
-	var duration = 0.8;
-	var xTarget = frauki.body.center.x + game.rnd.between(-5, 5);
+	var duration = 0.6;
+
+	if(frauki.states.entangled) {
+		duration = 0.8;
+	}
+
+	var xTarget = frauki.body.center.x + game.rnd.between(-0, 0);
 	var yTarget = frauki.body.y + frauki.body.height;
 
 	mortar.body.velocity.x = (xTarget - mortar.body.center.x) / duration;
 	mortar.body.velocity.y = (yTarget + -0.5 * game.physics.arcade.gravity.y * duration * duration - mortar.body.center.y) / duration;
 
 	mortar.body.velocity.x += frauki.body.velocity.x;
+	if(frauki.body.onFloor()) {
+	}
 
 	mortar.body.bounce.set(0.0);
 
@@ -50,7 +57,7 @@ ProjectileController.prototype.MortarExplosion = function(e, x, y) {
 	var explosion = game.add.sprite(xPos, yPos, 'EnemySprites');
 	game.physics.enable(explosion, Phaser.Physics.ARCADE);
 
-	explosion.body.setSize(40, 40);
+	explosion.body.setSize(50, 40);
 	explosion.anchor.setTo(0.5);
 
 	var explode = explosion.animations.add('explode', ['SW8T/Mortar0004', 'SW8T/Mortar0005', 'SW8T/Mortar0006', 'SW8T/Mortar0007'], 14, false, false);

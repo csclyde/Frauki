@@ -3373,7 +3373,7 @@
     <property name="type" value="enemy"/>
    </properties>
   </object>
-  <object id="2187" gid="85" x="3193.83" y="3634.83" width="16" height="16">
+  <object id="2187" gid="85" x="3429.83" y="3638.83" width="16" height="16">
    <properties>
     <property name="on_death" value="open_door,door_name:start_enemy"/>
    </properties>

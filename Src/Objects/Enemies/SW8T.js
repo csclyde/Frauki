@@ -31,7 +31,7 @@ Enemy.prototype.types['SW8T'] =  function() {
 
     this.robotic = true;
 
-    this.SHOOTING_SPEED = 600;
+    this.SHOOTING_SPEED = 400;
     this.hasShot = false;
     this.waitingForBolas = false;
     
@@ -59,7 +59,7 @@ Enemy.prototype.types['SW8T'] =  function() {
         			this.Block();
         		}
 
-        	} else if(EnemyBehavior.Player.IsNear(this, 160) && frauki.body.onFloor() && EnemyBehavior.Player.MovingAway(this) && this.timers.TimerUp('bolas_wait')) {
+        	} else if(EnemyBehavior.Player.IsNear(this, 160) && !EnemyBehavior.Player.IsNear(this, 80) && frauki.body.onFloor() && EnemyBehavior.Player.MovingAway(this) && this.timers.TimerUp('bolas_wait')) {
         		this.Bolas();
 
         	//if the player is trying to down slam, get out
@@ -71,6 +71,9 @@ Enemy.prototype.types['SW8T'] =  function() {
 
         	} else if(EnemyBehavior.Player.IsNear(this, 160) || EnemyBehavior.Player.IsDangerous(this)) {
         		this.Block();
+
+        	} else if(!EnemyBehavior.Player.IsNear(this, 160) && this.timers.TimerUp('attack_wait')) { 
+        		this.Shoot();
 
         	} else if(!EnemyBehavior.Player.IsNear(this, 160)) { 
         		this.state = this.Walking;
@@ -100,6 +103,7 @@ Enemy.prototype.types['SW8T'] =  function() {
 
    	this.Bolas = function() {
    		this.state = this.Bolasing;
+   		EnemyBehavior.FacePlayer(this);
    	};
 
    	this.Walk = function() {
