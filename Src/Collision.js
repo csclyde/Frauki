@@ -234,8 +234,9 @@ Collision.CollideFraukiWithProjectile = function(f, p) {
         if(!p.preserveAfterHit) {
             p.destroy();
         }
-    } else if(p.projType === 'bolas') {
+    } else if(p.projType === 'bolas' && frauki.state !== frauki.Rolling) {
         p.attached = true;
+        p.owningEnemy.waitingForBolas = false;
     }
 };
 
@@ -533,6 +534,7 @@ Collision.CollideProjectileWithWorld = function(p, t) {
 
     } else if(p.projType === 'bolas' && !p.attached) {
         p.pendingDestroy = true;
+        p.owningEnemy.waitingForBolas = false;
     }
 
     if(t.index === 1) {

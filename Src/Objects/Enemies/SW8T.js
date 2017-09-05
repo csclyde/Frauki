@@ -8,7 +8,7 @@ Enemy.prototype.types['SW8T'] =  function() {
     this.animations.add('hurt', ['SW8T/Hurt0001', 'SW8T/Hurt0002'], 10, true, false);
     this.animations.add('shoot_start', ['SW8T/Shoot0001', 'SW8T/Shoot0002'], 10, false, false);
     this.animations.add('shoot', ['SW8T/Shoot0003', 'SW8T/Shoot0004', 'SW8T/Shoot0005', 'SW8T/Shoot0006', 'SW8T/Shoot0007', 'SW8T/Shoot0008'], 14, false, false);
-    this.animations.add('shoot_bolas', ['SW8T/Bolas0003', 'SW8T/Bolas0004', 'SW8T/Bolas0005'], 14, false, false);
+    this.animations.add('shoot_bolas', ['SW8T/Bolas0000', 'SW8T/Bolas0001', 'SW8T/Bolas0002', 'SW8T/Bolas0003', 'SW8T/Bolas0004', 'SW8T/Bolas0005'], 14, false, false);
     this.animations.add('block_start', ['SW8T/Block0001', 'SW8T/Block0002', 'SW8T/Block0003'], 22, false, false);
     this.animations.add('block', ['SW8T/Block0004', 'SW8T/Block0005'], 12, true, false);
     this.animations.add('swipe', ['SW8T/Swipe0001', 'SW8T/Swipe0002', 'SW8T/Swipe0003'], 10, false, false);
@@ -31,8 +31,9 @@ Enemy.prototype.types['SW8T'] =  function() {
 
     this.robotic = true;
 
-    this.SHOOTING_SPEED = 500;
+    this.SHOOTING_SPEED = 600;
     this.hasShot = false;
+    this.waitingForBolas = false;
     
 	this.updateFunction = function() {
 
@@ -136,7 +137,7 @@ Enemy.prototype.types['SW8T'] =  function() {
    		this.state = this.Swiping;
    		EnemyBehavior.FacePlayer(this);
 
-   		this.timers.SetTimer('swipe_wait', 200);
+   		this.timers.SetTimer('swipe_wait', 800);
 
    		if(this.direction === 'left') {
 			this.body.velocity.x = -350;
@@ -188,10 +189,10 @@ Enemy.prototype.types['SW8T'] =  function() {
 			this.hasShot = true;
 		}
 
-		if(EnemyBehavior.Player.IsNear(this, 120)) {
-			this.numShots = 0;
-			return true;
-		}
+		// if(EnemyBehavior.Player.IsNear(this, 120)) {
+		// 	this.numShots = 0;
+		// 	return true;
+		// }
 
 		if(this.numShots === 0) {
 			this.timers.SetTimer('attack_wait', 2000);
@@ -220,7 +221,11 @@ Enemy.prototype.types['SW8T'] =  function() {
 
 			this.timers.SetTimer('bolas_wait', 5000);
 
-			return true;
+			if(this.waitingForBolas) {
+				return false;
+			} else {
+				return true;
+			}
 		}
 
 		return false;

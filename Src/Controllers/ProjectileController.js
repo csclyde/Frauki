@@ -100,6 +100,7 @@ ProjectileController.prototype.Bolas = function(e) {
 	bolas.lifeTime = 3000;
 	bolas.solid = true;
 	bolas.attached = false;
+	e.waitingForBolas = true;
 
 	this.projectiles.add(bolas);
 };
