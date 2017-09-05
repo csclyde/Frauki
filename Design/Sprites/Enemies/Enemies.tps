@@ -354,36 +354,6 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">CreeperThistle/CreeperThistle0000.png</key>
-            <key type="filename">CreeperThistle/CreeperThistle0001.png</key>
-            <key type="filename">CreeperThistle/CreeperThistle0002.png</key>
-            <key type="filename">CreeperThistle/CreeperThistle0003.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>11,9,22,19</rect>
-                <key>scale9Paddings</key>
-                <rect>11,9,22,19</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">Fungu/Fungu0000.png</key>
-            <key type="filename">Fungu/Fungu0001.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>18,18,35,35</rect>
-                <key>scale9Paddings</key>
-                <rect>18,18,35,35</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">Goddess/Goddess0000.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -400,6 +370,15 @@
             <key type="filename">Insectoid/Hop0000.png</key>
             <key type="filename">Insectoid/Hop0001.png</key>
             <key type="filename">Insectoid/Hop0002.png</key>
+            <key type="filename">Misc/Hopper0000.png</key>
+            <key type="filename">Misc/Hopper0001.png</key>
+            <key type="filename">Misc/Hopper0002.png</key>
+            <key type="filename">Misc/Sporoid0000.png</key>
+            <key type="filename">Misc/Sporoid0001.png</key>
+            <key type="filename">Misc/Sporoid0002.png</key>
+            <key type="filename">Misc/Sporoid0003.png</key>
+            <key type="filename">Misc/Sporoid0004.png</key>
+            <key type="filename">Misc/Sporoid0005.png</key>
             <key type="filename">SW8T/BolasShot0000.png</key>
             <key type="filename">SW8T/BolasShot0001.png</key>
             <key type="filename">SW8T/BolasShot0002.png</key>
@@ -411,12 +390,6 @@
             <key type="filename">SW8T/Mortar0005.png</key>
             <key type="filename">SW8T/Mortar0006.png</key>
             <key type="filename">SW8T/Mortar0007.png</key>
-            <key type="filename">Sporoid/Sporoid0000.png</key>
-            <key type="filename">Sporoid/Sporoid0001.png</key>
-            <key type="filename">Sporoid/Sporoid0002.png</key>
-            <key type="filename">Sporoid/Sporoid0003.png</key>
-            <key type="filename">Sporoid/Sporoid0004.png</key>
-            <key type="filename">Sporoid/Sporoid0005.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -546,23 +519,10 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">Mask/Mask0000.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>15,15,30,30</rect>
-                <key>scale9Paddings</key>
-                <rect>15,15,30,30</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
+            <key type="filename">Misc/Spore0000.png</key>
+            <key type="filename">Misc/Spore0001.png</key>
             <key type="filename">QL0k/Bolt0000.png</key>
             <key type="filename">QL0k/Bolt0001.png</key>
-            <key type="filename">Sporoid/Spore0000.png</key>
-            <key type="filename">Sporoid/Spore0001.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -624,11 +584,7 @@
         <key>fileList</key>
         <array>
             <filename>Buzzar</filename>
-            <filename>CreeperThistle</filename>
             <filename>Insectoid</filename>
-            <filename>Sporoid</filename>
-            <filename>Mask</filename>
-            <filename>Fungu</filename>
             <filename>KR32</filename>
             <filename>A3PZ</filename>
             <filename>HWK9</filename>
@@ -638,6 +594,7 @@
             <filename>RKN1d</filename>
             <filename>QL0k</filename>
             <filename>SW8T</filename>
+            <filename>Misc</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
