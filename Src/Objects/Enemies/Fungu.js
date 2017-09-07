@@ -4,8 +4,8 @@ Enemy.prototype.types['Fungu'] =  function() {
 	this.body.moves = false;
 	this.anchor.setTo(0.5, 0.75);
 
-    this.animations.add('idle', ['Fungu/Fungu0000'], 10, true, false);
-    this.animations.add('shoot', ['Fungu/Fungu0001'], 10, true, false);
+    this.animations.add('idle', ['Misc/Fungu0000'], 10, true, false);
+    this.animations.add('shoot', ['Misc/Fungu0001'], 10, true, false);
     this.animations.add('shit', ['Hop0000'], 10, true, false);
 
     this.energy = 1;

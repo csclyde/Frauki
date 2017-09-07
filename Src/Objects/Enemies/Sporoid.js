@@ -3,8 +3,8 @@ Enemy.prototype.types['Sporoid'] =  function() {
 	this.body.setSize(20, 16, 7, 0);
 	this.anchor.setTo(0.5, 0.5);
 
-    this.animations.add('idle', ['Sporoid/Sporoid0000', 'Sporoid/Sporoid0001', 'Sporoid/Sporoid0002', 'Sporoid/Sporoid0003', 'Sporoid/Sporoid0004', 'Sporoid/Sporoid0005'], 10, true, false);
-    this.animations.add('shit', ['Sporoid/Sporoid0000'], 10, true, false);
+    this.animations.add('idle', ['Misc/Sporoid0000', 'Misc/Sporoid0001', 'Misc/Sporoid0002', 'Misc/Sporoid0003', 'Misc/Sporoid0004', 'Misc/Sporoid0005'], 10, true, false);
+    this.animations.add('shit', ['Misc/Sporoid0000'], 10, true, false);
 
     this.body.allowGravity = false;
     this.body.bounce.set(0.3);

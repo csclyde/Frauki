@@ -154,7 +154,7 @@ ProjectileController.prototype.Spore = function(e) {
 
 	spore.body.setSize(18, 20);
 	spore.body.allowGravity = false;
-	spore.animations.add('idle', ['Sporoid/Spore0000', 'Sporoid/Spore0001'], 14, true, false);
+	spore.animations.add('idle', ['Misc/Spore0000', 'Misc/Spore0001'], 14, true, false);
 	spore.play('idle');
 
 	game.physics.arcade.moveToXY(spore, frauki.body.center.x, frauki.body.center.y, 200);

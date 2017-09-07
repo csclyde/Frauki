@@ -78,7 +78,7 @@ Enemy.prototype.types['GUBr'] =  function() {
     this.Block = function() {
     	this.state = this.Blocking;
 
-    	this.timers.SetTimer('blocking', 800 + game.rnd.between(0, 400));
+    	this.timers.SetTimer('blocking', game.rnd.between(800, 1200));
     };
 
     this.Charge = function() {
@@ -132,10 +132,6 @@ Enemy.prototype.types['GUBr'] =  function() {
 		this.PlayAnim('cower');
 
 		EnemyBehavior.FacePlayer(this);
-
-		if(EnemyBehavior.Player.IsNear(this, 200) && frauki.InPreAttackAnim()) {
-			this.Attack();
-		}
 
 		if(this.timers.TimerUp('blocking')) {
 			return true;
