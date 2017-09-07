@@ -240,6 +240,8 @@ Collision.CollideFraukiWithProjectile = function(f, p) {
         }
     } else if(p.projType === 'bolas' && frauki.state !== frauki.Rolling) {
         p.attached = true;
+        frauki.body.velocity.x /= 2;
+        frauki.body.velocity.y /= 2;
         p.owningEnemy.waitingForBolas = false;
     }
 };

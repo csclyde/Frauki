@@ -145,6 +145,28 @@ EnemyBehavior.Player.IsVisible = function(e) {
                 break;
             }
         }
+
+        //if there are no tiles in the ray, check for doors
+        if(this.Visibility[e.z].result === true) {
+            i = objectController.doorList.length;
+
+            var doorLine = null;
+            var door = null;
+            while(i--) {
+
+                
+                door = objectController.doorList[i];
+                if(!door.body) continue;
+                doorLine = new Phaser.Line(door.body.x + door.body.width / 2, door.body.y - 50, door.body.x + door.body.width / 2, door.body.y + door.body.height + 50);
+
+                if(Phaser.Line.intersects(ray, doorLine)) {
+                console.log('Door found', door);
+
+                    this.Visibility[e.z].result = false;
+                    break;
+                }
+            }
+        }
     }
 
     return this.Visibility[e.z].result;
