@@ -157,6 +157,10 @@ Player.prototype.postStateUpdate = function() {
         this.body.acceleration.x = 700;
     }
 
+    if(frauki.states.cantMove) {
+        this.body.velocity.setTo(0);
+    }
+
     //reset the double jump flag
     if(this.body.onFloor()) {
         this.states.hasFlipped = false;
@@ -546,7 +550,7 @@ Player.prototype.Jump = function(params) {
             this.JumpSlash();
         }
         //double jump
-        else if(!this.InAttackAnim()) {
+        else if(!this.InAttackAnim() || this.state === this.AttackJump) {
             this.DoubleJump();
         }
     } else if(this.body.velocity.y < 0) {
@@ -750,15 +754,15 @@ Player.prototype.JumpSlash = function() {
     if(energyController.UseEnergy(4)) {
         this.ChangeState(this.AttackJump);
         
-        if(this.states.hasFlipped === false) {
-            if(this.body.velocity.y > PLAYER_DOUBLE_JUMP_VEL()) {
-                this.body.velocity.y = PLAYER_DOUBLE_JUMP_VEL();
-            } else {
-                this.body.velocity.y += PLAYER_DOUBLE_JUMP_VEL();
-            }
+        // if(this.states.hasFlipped === false) {
+        //     if(this.body.velocity.y > PLAYER_DOUBLE_JUMP_VEL()) {
+        //         this.body.velocity.y = PLAYER_DOUBLE_JUMP_VEL();
+        //     } else {
+        //         this.body.velocity.y += PLAYER_DOUBLE_JUMP_VEL();
+        //     }
 
-            this.states.hasFlipped = true;
-        }
+        //     this.states.hasFlipped = true;
+        // }
 
         events.publish('play_sound', {name: 'attack_jump', restart: true });
         this.timers.SetTimer('attack_wait', 0);
@@ -865,9 +869,18 @@ Player.prototype.LandHit = function(e, damage) {
 
         vel = vel.setMagnitude(300);
 
-        frauki.body.velocity.x = vel.x;
-        frauki.body.velocity.y = vel.y / 2;
-        game.time.events.add(500, function() { frauki.states.knockedback = false; });
+        frauki.movement.prevX = frauki.body.velocity.x;
+        frauki.movement.prevY = frauki.body.velocity.y;
+
+        frauki.body.velocity.x = 0;//vel.x;
+        frauki.body.velocity.y = 0;//vel.y / 2;
+        frauki.states.cantMove = true;
+
+        game.time.events.add(200, function() { 
+            frauki.states.cantMove = false; 
+            frauki.body.velocity.x = frauki.movement.prevX;
+            frauki.body.velocity.y = frauki.movement.prevY;
+        });
     }
 
     effectsController.ClashStreak(e.body.center.x, e.body.center.y, game.rnd.between(1, 2));

@@ -485,6 +485,10 @@
             <key type="filename">KR32/WalkFront0001.png</key>
             <key type="filename">KR32/WalkFront0002.png</key>
             <key type="filename">KR32/WalkFront0003.png</key>
+            <key type="filename">Misc/SpikeDropper0000.png</key>
+            <key type="filename">Misc/SpikeDropper0001.png</key>
+            <key type="filename">Misc/SpikeDropper0002.png</key>
+            <key type="filename">Misc/SpikeDropper0003.png</key>
             <key type="filename">RKN1d/Bite0000.png</key>
             <key type="filename">RKN1d/Bite0001.png</key>
             <key type="filename">RKN1d/Bite0002.png</key>
