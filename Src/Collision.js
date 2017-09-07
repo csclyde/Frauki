@@ -268,6 +268,10 @@ Collision.OverlapEnemyAttackWithFrauki = function(e, f) {
         return;
     }
 
+    if(EnemyBehavior.Player.IsDoorBetween(e)) {
+        return;
+    }
+
     e = e.owningEnemy;
 
     if(e.GetCurrentStun() === true) {
@@ -342,6 +346,10 @@ Collision.OverlapAttackWithEnemy = function(f, e, halfDmg) {
 
     if(e.spriteType !== 'enemy' || !e.timers.TimerUp('grace') || !e.Vulnerable() || e.state === e.Dying || e.state === e.Hurting)
         return;
+
+    if(EnemyBehavior.Player.IsDoorBetween(e)) {
+        return;
+    }
 
     var damage = frauki.GetCurrentDamage();
 
