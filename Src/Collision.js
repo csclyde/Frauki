@@ -258,18 +258,18 @@ Collision.CollideEnemiesWithDoors = function(e, d) {
 Collision.OverlapEnemyAttackWithFrauki = function(e, f) {
     if(frauki.states.shielded) {
         Collision.OverlapAttackWithEnemyAttack(e, f);
-        return;
+        return false;
     }
 
     //if frauki is stunned and the player opened the roll window
     if(!frauki.timers.TimerUp('attack_stun') && !frauki.timers.TimerUp('stun_dodge')) {
         console.log('avoiding shit')
         frauki.Roll({override: true});
-        return;
+        return false;
     }
 
     if(EnemyBehavior.Player.IsDoorBetween(e)) {
-        return;
+        return false;
     }
 
     e = e.owningEnemy;
@@ -347,6 +347,10 @@ Collision.OverlapAttackWithEnemy = function(f, e, halfDmg) {
     if(e.spriteType !== 'enemy' || !e.timers.TimerUp('grace') || !e.Vulnerable() || e.state === e.Dying || e.state === e.Hurting)
         return;
 
+    if(e.damageRefactory) {
+        return false;
+    }
+
     if(EnemyBehavior.Player.IsDoorBetween(e)) {
         return;
     }
@@ -389,6 +393,11 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
     vel = vel.normalize();
 
     vel.setMagnitude(300);
+
+    e.damageRefactory = true;
+    game.time.events.add(200, function() {
+        e.damageRefactory = false;
+    });
 
     e.body.velocity.x = vel.x;
     //e.body.velocity.y = vel.y / 2;

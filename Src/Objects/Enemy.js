@@ -49,6 +49,8 @@ Enemy = function(game, x, y, name) {
         e.UI.pips[3].destroy();
         e.UI.pips[4].destroy();
     });
+
+    this.damageRefactory = false;
 };
 
 Enemy.prototype = Object.create(Phaser.Sprite.prototype);
