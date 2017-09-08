@@ -3,6 +3,7 @@ ScriptRunner = {};
 ScriptRunner.create = function() {
 	this.waitEvent = null;
 	this.currentCommand = null;
+	this.waitTime = 200;
 
 	events.subscribe('text_hidden', function(params) {
 		if(!!this.waitEvent) {
@@ -57,7 +58,7 @@ ScriptRunner.scripts['demo_Baton'] = [
 	{ name: 'show_text', props: { text: 'Oh neat! This weapon let\'s me throw my energy out like a boomerang. The more energy I have, the stronger it will be!', portrait: 'Enticed' } },
 	{ name: 'wait', props: { amount: 6000 } },
 	{ name: 'hide_text', props: {} },
-	{ name: 'wait', props: { amount: 500 } },
+	{ name: 'wait', props: { amount: ScriptRunner.waitTime } },
 	{ name: 'activate_weapon', props: { activate: true, override: true } },
 	{ name: 'wait', props: { amount: 1500 } },
 	{ name: 'allow_input', props: {} }
@@ -68,7 +69,7 @@ ScriptRunner.scripts['demo_Stab'] = [
 	{ name: 'show_text', props: { text: 'Whee! Now if I attack while rolling, I can shish-kebab some baddies.', portrait: 'Enticed' } },
 	{ name: 'wait', props: { amount: 6000 } },
 	{ name: 'hide_text', props: {} },
-	{ name: 'wait', props: { amount: 500 } },
+	{ name: 'wait', props: { amount: ScriptRunner.waitTime } },
 	{ name: 'player_roll', props: {} },
 	{ name: 'wait', props: { amount: 200 } },
 	{ name: 'player_slash', props: {} },
@@ -81,7 +82,7 @@ ScriptRunner.scripts['demo_Dive'] = [
 	{ name: 'show_text', props: { text: 'Whoa... Down attacking in the air now lets me do a power attack!', portrait: 'Enticed' } },
 	{ name: 'wait', props: { amount: 5000 } },
 	{ name: 'hide_text', props: {} },
-	{ name: 'wait', props: { amount: 500 } },
+	{ name: 'wait', props: { amount: ScriptRunner.waitTime } },
 	{ name: 'player_jump', props: { jump: true } },
 	{ name: 'wait', props: { amount: 200 } },
 	{ name: 'player_crouch', props: { crouch: true } },
@@ -135,7 +136,7 @@ ScriptRunner.scripts['goddess_intro'] = [
 	{ name: 'wait', props: { amount: 7000 } },
 	{ name: 'hide_text', props: {} },
 
-	{ name: 'wait', props: { amount: 500 } },
+	{ name: 'wait', props: { amount: ScriptRunner.waitTime } },
 	{ name: 'show_text', props: { text: 'Would you mind helping me out of this prison? All you need to do is find the four prism shards.', portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 7000 } },
 	{ name: 'hide_text', props: {} },
@@ -257,37 +258,37 @@ ScriptRunner.scripts['goddess_freedom'] = [
 	{ name: 'wait', props: { amount: 4000 } },
 	{ name: 'hide_text', props: {} },
 
-	{ name: 'wait', props: { amount: 500 } },
+	{ name: 'wait', props: { amount: ScriptRunner.waitTime } },
 	{ name: 'show_text', props: { text: 'No more dank dripping ceiling...', portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 4000 } },
 	{ name: 'hide_text', props: {} },
 
-	{ name: 'wait', props: { amount: 500 } },
+	{ name: 'wait', props: { amount: ScriptRunner.waitTime } },
 	{ name: 'show_text', props: { text: 'Just the sweet, juicy nectar of freedom...', portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 4000 } },
 	{ name: 'hide_text', props: {} },
 
-	{ name: 'wait', props: { amount: 500 } },
+	{ name: 'wait', props: { amount: ScriptRunner.waitTime } },
 	{ name: 'show_text', props: { text: '...', portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 3000 } },
 	{ name: 'hide_text', props: {} },
 
-	{ name: 'wait', props: { amount: 500 } },
+	{ name: 'wait', props: { amount: ScriptRunner.waitTime } },
 	{ name: 'show_text', props: { text: 'Now Frauki, I know I\'ve already asked a lot of you. But there is more to do. That prism shard you hold is a powerful artifact.', portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 9000 } },
 	{ name: 'hide_text', props: {} },
 
-	{ name: 'wait', props: { amount: 500 } },
+	{ name: 'wait', props: { amount: ScriptRunner.waitTime } },
 	{ name: 'show_text', props: { text: 'In fact, it\'s one of four powerful artifacts. Together they make up the Mother Prism, an object of great and mysterious power.', portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 9000 } },
 	{ name: 'hide_text', props: {} },
 
-	{ name: 'wait', props: { amount: 500 } },
+	{ name: 'wait', props: { amount: ScriptRunner.waitTime } },
 	{ name: 'show_text', props: { text: 'If you could find the remaining three prism shards that have been carelessly tossed around the world... well...', portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 9000 } },
 	{ name: 'hide_text', props: {} },
 
-	{ name: 'wait', props: { amount: 500 } },
+	{ name: 'wait', props: { amount: ScriptRunner.waitTime } },
 	{ name: 'show_text', props: { text: 'Just trust me. It will be pretty cool. I know you can do it... I\'m counting on you...', portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 9000 } },
 	{ name: 'hide_text', props: {} },
@@ -299,22 +300,22 @@ ScriptRunner.scripts['goddess_freedom'] = [
 ScriptRunner.scripts['goddess_meet_with_shard'] = [
 	{ name: 'disallow_input', props: {} },
 
-	{ name: 'wait', props: { amount: 500 } },
+	{ name: 'wait', props: { amount: ScriptRunner.waitTime } },
 	{ name: 'show_text', props: { text: 'Oh, hello there...', portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 4000 } },
 	{ name: 'hide_text', props: {} },
 
-	{ name: 'wait', props: { amount: 500 } },
+	{ name: 'wait', props: { amount: ScriptRunner.waitTime } },
 	{ name: 'show_text', props: { text: 'It looks like you\'ve found a Prism Shard! Yes, that big red jewel.', portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 7000 } },
 	{ name: 'hide_text', props: {} },
 
-	{ name: 'wait', props: { amount: 500 } },
+	{ name: 'wait', props: { amount: ScriptRunner.waitTime } },
 	{ name: 'show_text', props: { text: 'That\'s very good news, because I happen to need that shard to escape this horrible prison.', portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 7000 } },
 	{ name: 'hide_text', props: {} },
 
-	{ name: 'wait', props: { amount: 500 } },
+	{ name: 'wait', props: { amount: ScriptRunner.waitTime } },
 	{ name: 'show_text', props: { text: "I've been in here so long... would you mind just walking up and opening this door for me?", portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 7000 } },
 	{ name: 'hide_text', props: {} },

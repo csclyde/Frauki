@@ -347,7 +347,7 @@ Collision.OverlapAttackWithEnemy = function(f, e, halfDmg) {
     if(e.spriteType !== 'enemy' || !e.timers.TimerUp('grace') || !e.Vulnerable() || e.state === e.Dying || e.state === e.Hurting)
         return;
 
-    if(e.damageRefactory) {
+    if(frauki.states.damageRefactory.indexOf(e) > -1) {
         return false;
     }
 
@@ -393,11 +393,6 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
     vel = vel.normalize();
 
     vel.setMagnitude(300);
-
-    e.damageRefactory = true;
-    game.time.events.add(200, function() {
-        e.damageRefactory = false;
-    });
 
     e.body.velocity.x = vel.x;
     //e.body.velocity.y = vel.y / 2;

@@ -37,6 +37,10 @@ Enemy.prototype.types['Sporoid'] =  function() {
 		}
 	};
 
+	this.LandHit = function() {
+		effectsController.Dizzy(10000);
+	}
+
 	///////////////////////////////ACTIONS////////////////////////////////////
 	this.Dash = function() {
 		if(!this.timers.TimerUp('dash_wait'))

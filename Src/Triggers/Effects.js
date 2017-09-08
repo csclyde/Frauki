@@ -1,11 +1,7 @@
 
 TriggerController.prototype.triggers['dizzy'] = {
 	enter: function(params) {
-		Main.tweens.dizzies = game.add.tween(Main).to( {currentAlpha: 0.2}, 1000, Phaser.Easing.Exponential.In, false).to( {currentAlpha: 1}, 15000, Phaser.Easing.Quintic.In, false);
-		Main.tweens.dizzies.start();
-
-		Main.tweens.slowMo = game.add.tween(Main).to( {physicsSlowMo: 0.6}, 1000, Phaser.Easing.Quintic.In, false).to( {physicsSlowMo: 1}, 15000, Phaser.Easing.Quintic.In, false);
-		Main.tweens.slowMo.start();
+		effectsController.Dizzy(15000);
 	},
 
 	stay: function(params) {

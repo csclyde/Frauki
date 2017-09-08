@@ -957,3 +957,11 @@ EffectsController.prototype.ShowCharge = function(level) {
         this.charge1.visible = true;
     }
 };
+
+EffectsController.prototype.Dizzy = function(duration) {
+    Main.tweens.dizzies = game.add.tween(Main).to( {currentAlpha: 0.2}, 1000, Phaser.Easing.Exponential.In, false).to( {currentAlpha: 1}, duration, Phaser.Easing.Quintic.In, false);
+    Main.tweens.dizzies.start();
+
+    Main.tweens.slowMo = game.add.tween(Main).to( {physicsSlowMo: 0.6}, 1000, Phaser.Easing.Quintic.In, false).to( {physicsSlowMo: 1}, duration, Phaser.Easing.Quintic.In, false);
+    Main.tweens.slowMo.start();
+};

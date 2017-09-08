@@ -80,13 +80,13 @@ Main.update = function() {
 };
 
 Main.render = function() {
-    game.debug.body(frauki);
+    // game.debug.body(frauki);
     // game.debug.body(frauki.attackRect);
 
-    objectController.activeLayer3.forEach(function(o) {
-        game.debug.body(o);
-        if(!!o.attackRect) game.debug.body(o.attackRect);
-    });
+    // objectController.activeLayer3.forEach(function(o) {
+    //     game.debug.body(o);
+    //     if(!!o.attackRect) game.debug.body(o.attackRect);
+    // });
 
     // Frogland.door1Group.forEach(function(o) {
     //     game.debug.body(o);

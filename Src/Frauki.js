@@ -244,7 +244,7 @@ Player.prototype.PlayAnim = function(name) {
 Player.prototype.ChangeState = function(newState) {
 
     this.state = newState;
-    this.states.damageRefactory = false;
+    this.states.damageRefactory = [];
 
     if(this.state !== this.Stunned) {
     }
@@ -298,7 +298,7 @@ Player.prototype.UpdateAttackGeometry = function() {
 
 Player.prototype.GetCurrentDamage = function() {
 
-    if(!!this.currentAttack && this.states.damageRefactory === false) {
+    if(!!this.currentAttack) {
         return this.currentAttack.damage;
     } else {
         return 0;
@@ -416,7 +416,7 @@ Player.prototype.Reset = function() {
     this.states.shielded = false;
     this.states.throwing = false;
     this.states.entangled = false;
-    this.states.damageRefactory = false;
+    this.states.damageRefactory = [];
 
     this.movement.diveVelocity = 0;
     this.movement.jumpSlashVelocity = 0;
@@ -897,7 +897,7 @@ Player.prototype.LandHit = function(e, damage) {
     }
 
     this.states.hasFlipped = false;
-    //this.states.damageRefactory = true;
+    this.states.damageRefactory.push(e);
 
     events.publish('stop_attack_sounds');
 };
@@ -1063,7 +1063,7 @@ Player.prototype.Falling = function() {
         var topTile = Frogland.map.getTileWorldXY(xLoc, this.body.y - 3, 16, 16, Frogland.GetCurrentCollisionLayer());
         var topTile2 = Frogland.map.getTileWorldXY(xLoc, this.body.y - 6, 16, 16, Frogland.GetCurrentCollisionLayer());
 
-        if((topTile === null || topTile2 === null) && bottomTile !== null) {
+        if((topTile === null || topTile2 === null) && bottomTile !== null && bottomTile.index === 1) {
             this.ChangeState(this.Hanging);
             frauki.body.y -= (frauki.body.y % 16) + 5;
         }
