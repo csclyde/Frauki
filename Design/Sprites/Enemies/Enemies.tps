@@ -370,6 +370,8 @@
             <key type="filename">Insectoid/Hop0000.png</key>
             <key type="filename">Insectoid/Hop0001.png</key>
             <key type="filename">Insectoid/Hop0002.png</key>
+            <key type="filename">Misc/Haystax0000.png</key>
+            <key type="filename">Misc/Haystax0001.png</key>
             <key type="filename">Misc/Hopper0000.png</key>
             <key type="filename">Misc/Hopper0001.png</key>
             <key type="filename">Misc/Hopper0002.png</key>
@@ -579,6 +581,20 @@
                 <rect>5,5,10,10</rect>
                 <key>scale9Paddings</key>
                 <rect>5,5,10,10</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">Misc/Tarball0000.png</key>
+            <key type="filename">Misc/Tarball0001.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>5,6,11,12</rect>
+                <key>scale9Paddings</key>
+                <rect>5,6,11,12</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

@@ -129,15 +129,17 @@ ProjectileController.prototype.Tarball = function(e) {
 	game.physics.enable(tar, Phaser.Physics.ARCADE);
 
 	tar.body.setSize(18, 20);
-	tar.animations.add('idle', ['Haystax/Tarball0000', 'Haystax/Tarball0001'], 14, true, false);
+	tar.animations.add('idle', ['Misc/Tarball0000', 'Misc/Tarball0001'], 14, true, false);
 	tar.play('idle');
 
 	//parabolic arc
-	var duration = 1.2;
-	tar.body.velocity.x = (frauki.body.center.x - tar.body.center.x) / duration;
-	tar.body.velocity.y = (frauki.body.center.y + -0.5 * game.physics.arcade.gravity.y * duration * duration - tar.body.center.y) / duration;
+	// var duration = 1.2;
+	// tar.body.velocity.x = (frauki.body.center.x - tar.body.center.x) / duration;
+	// tar.body.velocity.y = (frauki.body.center.y + -0.5 * game.physics.arcade.gravity.y * duration * duration - tar.body.center.y) / duration;
 
-	tar.body.bounce.set(0.75);
+	tar.body.velocity.y = game.rnd.between(-100, -150);
+	tar.body.velocity.x = EnemyBehavior.Player.IsLeft(e) ? game.rnd.between(-100, -150) : game.rnd.between(100, 150);
+	tar.body.bounce.set(0.8);
 
 	tar.projType = 'tar';
 	tar.owningEnemy = e;
