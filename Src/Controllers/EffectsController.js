@@ -521,7 +521,7 @@ EffectsController.prototype.DiceObject = function(name, x, y, xv, yv, layer) {
 
     var i = 0;
     while(game.cache.getFrameData('Pieces').getFrameByName(name + '000' + i)) {
-        pieces.push(game.add.sprite(x + game.rnd.between(-20, 20), y + game.rnd.between(-20, 20), 'Pieces', name + '000' + i));
+        pieces.push(game.add.sprite(x, y, 'Pieces', name + '000' + i));
         i++;
     }
 

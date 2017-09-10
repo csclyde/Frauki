@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>4.3.3</string>
+        <string>4.4.0</string>
         <key>fileName</key>
         <string>D:/gamedev/Frauki/Design/Sprites/Pieces/Pieces.tps</string>
         <key>autoSDSettings</key>
@@ -172,6 +172,8 @@
         <true/>
         <key>prependSmartFolderName</key>
         <false/>
+        <key>autodetectAnimations</key>
+        <true/>
         <key>globalSpriteSettings</key>
         <struct type="SpriteSettings">
             <key>scale</key>
@@ -203,8 +205,14 @@
             <key type="filename">Frames/A3PZ0003.png</key>
             <key type="filename">Frames/A3PZ0004.png</key>
             <key type="filename">Frames/A3PZ0005.png</key>
-            <key type="filename">Frames/A3PZ0006.png</key>
-            <key type="filename">Frames/A3PZ0007.png</key>
+            <key type="filename">Frames/GUBr0000.png</key>
+            <key type="filename">Frames/GUBr0001.png</key>
+            <key type="filename">Frames/GUBr0002.png</key>
+            <key type="filename">Frames/H0P80000.png</key>
+            <key type="filename">Frames/H0P80001.png</key>
+            <key type="filename">Frames/H0P80002.png</key>
+            <key type="filename">Frames/H0P80003.png</key>
+            <key type="filename">Frames/H0P80004.png</key>
             <key type="filename">Frames/HWK90000.png</key>
             <key type="filename">Frames/HWK90001.png</key>
             <key type="filename">Frames/HWK90002.png</key>
@@ -216,6 +224,14 @@
             <key type="filename">Frames/JunkBarrel0003.png</key>
             <key type="filename">Frames/JunkBarrel0004.png</key>
             <key type="filename">Frames/JunkBarrel0005.png</key>
+            <key type="filename">Frames/JunkEgg0000.png</key>
+            <key type="filename">Frames/JunkEgg0001.png</key>
+            <key type="filename">Frames/JunkEgg0002.png</key>
+            <key type="filename">Frames/JunkEgg0003.png</key>
+            <key type="filename">Frames/JunkEgg0004.png</key>
+            <key type="filename">Frames/JunkEgg0005.png</key>
+            <key type="filename">Frames/JunkEgg0006.png</key>
+            <key type="filename">Frames/JunkEgg0007.png</key>
             <key type="filename">Frames/JunkPlant0000.png</key>
             <key type="filename">Frames/JunkPlant0001.png</key>
             <key type="filename">Frames/JunkPlant0002.png</key>
@@ -231,13 +247,6 @@
             <key type="filename">Frames/JunkPot20001.png</key>
             <key type="filename">Frames/JunkPot20002.png</key>
             <key type="filename">Frames/JunkPot20003.png</key>
-            <key type="filename">Frames/KR320000.png</key>
-            <key type="filename">Frames/KR320001.png</key>
-            <key type="filename">Frames/KR320002.png</key>
-            <key type="filename">Frames/KR320003.png</key>
-            <key type="filename">Frames/KR320004.png</key>
-            <key type="filename">Frames/KR320005.png</key>
-            <key type="filename">Frames/KR320006.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -293,10 +302,8 @@
             <key type="filename">Frames/DoorSeal0003.png</key>
             <key type="filename">Frames/DoorSeal0004.png</key>
             <key type="filename">Frames/DoorSeal0005.png</key>
-            <key type="filename">Frames/Haystax0000.png</key>
-            <key type="filename">Frames/Haystax0001.png</key>
-            <key type="filename">Frames/Haystax0002.png</key>
-            <key type="filename">Frames/Haystax0003.png</key>
+            <key type="filename">Frames/Hopper0000.png</key>
+            <key type="filename">Frames/Hopper0001.png</key>
             <key type="filename">Frames/Insectoid0000.png</key>
             <key type="filename">Frames/Insectoid0001.png</key>
             <key type="filename">Frames/Insectoid0002.png</key>
@@ -333,6 +340,21 @@
                 <rect>18,18,35,35</rect>
                 <key>scale9Paddings</key>
                 <rect>18,18,35,35</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">Frames/KR320000.png</key>
+            <key type="filename">Frames/KR320001.png</key>
+            <key type="filename">Frames/KR320002.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>60,50,120,100</rect>
+                <key>scale9Paddings</key>
+                <rect>60,50,120,100</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -376,6 +398,54 @@
                 <rect>13,13,25,25</rect>
                 <key>scale9Paddings</key>
                 <rect>13,13,25,25</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">Frames/QL0k0000.png</key>
+            <key type="filename">Frames/QL0k0001.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>58,38,117,75</rect>
+                <key>scale9Paddings</key>
+                <rect>58,38,117,75</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">Frames/RKN1d0000.png</key>
+            <key type="filename">Frames/RKN1d0001.png</key>
+            <key type="filename">Frames/RKN1d0002.png</key>
+            <key type="filename">Frames/RKN1d0003.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>38,38,75,75</rect>
+                <key>scale9Paddings</key>
+                <rect>38,38,75,75</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">Frames/SW8T0000.png</key>
+            <key type="filename">Frames/SW8T0001.png</key>
+            <key type="filename">Frames/SW8T0002.png</key>
+            <key type="filename">Frames/SW8T0003.png</key>
+            <key type="filename">Frames/SW8T0004.png</key>
+            <key type="filename">Frames/SW8T0005.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>58,50,117,100</rect>
+                <key>scale9Paddings</key>
+                <rect>58,50,117,100</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
