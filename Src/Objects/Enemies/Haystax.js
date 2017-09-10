@@ -1,7 +1,7 @@
 Enemy.prototype.types['Haystax'] =  function() {
 
-	this.body.setSize(35, 70, 0, 0);
-	this.anchor.setTo(.5, 1);
+	this.body.setSize(35, 35, 0, -9);
+	this.anchor.setTo(0.5, 1);
 
     this.animations.add('idle', ['Misc/Haystax0000'], 10, true, false);
     this.animations.add('up', ['Misc/Haystax0001'], 10, true, false);
@@ -10,9 +10,9 @@ Enemy.prototype.types['Haystax'] =  function() {
     this.damage = 1;
     
 	this.updateFunction = function() {
-		this.body.velocity.x = 0;
-		this.body.velocity.y = 0;
-	};
+		};
+
+	this.body.immovable = true;
 
 	this.Vulnerable = function() { 
 		return true;

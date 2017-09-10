@@ -373,6 +373,9 @@
             <key type="filename">Frames/Tiles0000.png</key>
             <key type="filename">Frames/Tiles0001.png</key>
             <key type="filename">Frames/Tiles0002.png</key>
+            <key type="filename">Frames/Tiles0003.png</key>
+            <key type="filename">Frames/Tiles0004.png</key>
+            <key type="filename">Frames/Tiles0005.png</key>
             <key type="filename">Frames/Upgrade0000.png</key>
             <key type="filename">Frames/Upgrade0001.png</key>
             <key type="filename">Frames/Upgrade0002.png</key>

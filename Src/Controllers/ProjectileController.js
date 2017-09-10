@@ -208,27 +208,47 @@ ProjectileController.prototype.LaserBolt = function(e, rot, flip) {
 	this.projectiles.add(bolt);
 };
 
-ProjectileController.prototype.FallingTile = function(sourceTile) {
+ProjectileController.prototype.FallingTile = function(sourceTile, visibleTile) {
 
-	var tileName = Math.random() * 3;
+	console.log(visibleTile.index)
 
-	if(tileName < 1) {
+	var tileName = '';
+
+	if(visibleTile.index === 573) {
 		tileName = 'Tiles0000';
-	} else if(tileName < 2) {
+	} else if(visibleTile.index === 574) {
 		tileName = 'Tiles0001';
+	} else if(visibleTile.index === 575) {
+		tileName = 'Tiles0002'
+	} else if(visibleTile.index === 2137) {
+		tileName = 'Tiles0003'
+	} else if(visibleTile.index === 2138) {
+		tileName = 'Tiles0004'
+	} else if(visibleTile.index === 2139) {
+		tileName = 'Tiles0005'
 	} else {
-		tileName = 'Tiles0002';
+		console.log('Missing tile art for index ' + visibleTile.index);
+		return;
 	}
 
-	var tile = game.add.sprite(sourceTile.worldX, sourceTile.worldY, 'Misc', tileName);
+	// if(tileName < 1) {
+	// 	tileName = 'Tiles0000';
+	// } else if(tileName < 2) {
+	// 	tileName = 'Tiles0001';
+	// } else {
+	// 	tileName = 'Tiles0002';
+	// }
+
+	var tile = game.add.sprite(sourceTile.worldX - 16, sourceTile.worldY - 16, 'Misc', tileName);
 	game.physics.enable(tile, Phaser.Physics.ARCADE);
 
-	tile.body.setSize(16, 16);
+	tile.body.setSize(16, 16, 0.5, 0.5);
 
 	tile.body.bounce.set(0.2);
-	tile.rotation = (Math.random() * 1) - 0.5;
+	//tile.rotation = (Math.random() * 1) - 0.5;
 	tile.body.velocity.x = Math.random() * 50;
 	tile.body.drag.x = 200;
+	tile.body.angularVelocity = game.rnd.between(-100, 100);
 
 	tile.projType = 'tile';
 	tile.spawnTime = game.time.now;

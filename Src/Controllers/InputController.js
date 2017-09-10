@@ -25,12 +25,6 @@ InputController = function() {
 	this.testButton = game.input.keyboard.addKey(Phaser.Keyboard.P);
     this.testButton2 = game.input.keyboard.addKey(Phaser.Keyboard.O);
 
-    this.testButton.onDown.add(function() { events.publish('stop_all_music'); });
-
-    this.testButton2.onDown.add(function() { 
-        console.log('test')
-    });
-
     this.binds = {};
     this.binds.jump       = Phaser.Keyboard.SPACEBAR;
     this.binds.up         = Phaser.Keyboard.UP;
@@ -68,7 +62,15 @@ InputController = function() {
 
             case Phaser.Keyboard.O:
                 energyController.invincible = true;
+            break;
 
+            case Phaser.Keyboard.Q:
+                GameData.SetDebugPos(frauki.x, frauki.y);
+                console.log('set pos')
+            break;
+
+            case Phaser.Keyboard.W:
+                GameData.SetDebugPos(0, 0);
             break;
 
             case inputController.binds.jump:

@@ -33,7 +33,7 @@ Collision.OverlapFraukiWithObject = function(f, o) {
             if((frauki.states.direction === 'left' && o.body.center.x < frauki.body.center.x) || (frauki.states.direction === 'right' && o.body.center.x > frauki.body.center.x))
                 frauki.body.velocity.x /= 2;
 
-            if(frauki.state === frauki.Rolling) {
+            if(frauki.state === frauki.Rolling && o.body.immovable !== true) {
                 o.body.velocity.x = 150;
                 o.body.velocity.x *= EnemyBehavior.Player.DirMod(o);
             }

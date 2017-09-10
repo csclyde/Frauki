@@ -21,7 +21,7 @@ Enemy.prototype.types['SpikeDropper'] =  function() {
 
 
     this.updateFunction = function() {
-        if(this.body.allowGravity === false && EnemyBehavior.Player.IsBelow(this)) {
+        if(this.body.allowGravity === false && EnemyBehavior.Player.IsBelow(this) && EnemyBehavior.Player.IsVisible(this)) {
             this.Drop();
         }
     };

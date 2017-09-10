@@ -18,7 +18,8 @@ GameData.data = {
     flags: {},
     vals: {
         goddess_message_queue: []
-    }
+    },
+    debug_pos: { x: 0, y: 0 }
 };
 
 GameData.nuggetCount = 0;
@@ -43,6 +44,24 @@ GameData.LoadDataFromStorage = function() {
 GameData.SaveDataToStorage = function() {
     localStorage.setItem('save_data', JSON.stringify(this.data));
 };
+
+GameData.GetDebugPos = function() {
+    if(GameData.data.debug_pos.x !== 0 || GameData.data.debug_pos.y !== 0) {
+        return GameData.data.debug_pos;
+    } else {
+        return null;
+    }
+};
+
+GameData.SetDebugPos = function(x, y) {
+    x = x || 0;
+    y = y || 0;
+
+    GameData.data.debug_pos.x = x;
+    GameData.data.debug_pos.y = y;
+    this.SaveDataToStorage();
+
+}
 
 GameData.SetFlag = function(name, val) {
     GameData.data.flags[name] = !!val;

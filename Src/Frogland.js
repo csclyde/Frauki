@@ -132,7 +132,13 @@ Frogland.HandleCollisions = function() {
 };
 
 Frogland.SpawnFrauki = function() {
-    if(Frogland.map.properties.debug === 'false') {
+
+    if(GameData.GetDebugPos()) {
+        console.log('loading up')
+        var pos = GameData.GetDebugPos();
+        frauki.x = pos.x;
+        frauki.y = pos.y; 
+    } else if(Frogland.map.properties.debug === 'false') {
         objectController.checkpointList.forEach(function(obj) {
             if(obj.spriteType === 'checkpoint' && obj.id == GameData.GetCheckpoint()) {
                 frauki.x = obj.x;
@@ -140,7 +146,8 @@ Frogland.SpawnFrauki = function() {
                 Frogland.ChangeLayer(obj.owningLayer, true);   
                 frauki.timers.SetTimer('frauki_invincible', 0);
             } 
-        });  
+        }); 
+
     } else {
         frauki.x = this.map.properties.startX * 16;
         frauki.y = this.map.properties.startY * 16 + 90;
@@ -344,7 +351,7 @@ Frogland.DislodgeTile = function(tile) {
 
         Frogland.fallenTiles.push(tile);
 
-        projectileController.FallingTile(tile);
+        projectileController.FallingTile(tile, mgTile);
 
         events.publish('play_sound', {name: 'floor_crumble'});
 
