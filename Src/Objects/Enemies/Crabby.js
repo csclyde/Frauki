@@ -76,7 +76,7 @@ Enemy.prototype.types['Crabby'] =  function() {
             this.Walk();
         }
 
-        return false;;
+        return false;
     };
 
     this.Walking = function() {

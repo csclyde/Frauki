@@ -268,8 +268,8 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 sprayer.height = o.height;
                 sprayer.makeParticles('Misc', ['Sparks0000', 'Sparks0001', 'Sparks0002', 'Sparks0003', 'Sparks0004', 'Sparks0005'], 20);
                 sprayer.gravity.setTo(0, -695);
-                sprayer.maxParticleSpeed.setTo(10, 100);
-                sprayer.minParticleSpeed.setTo(-400, -100);
+                sprayer.maxParticleSpeed.setTo(-10, 100);
+                sprayer.minParticleSpeed.setTo(400, -100);
                 sprayer.setRotation(0, 0);
                 sprayer.start(false, 300, 10);
                 sprayer.effectType = 'energy_spray';

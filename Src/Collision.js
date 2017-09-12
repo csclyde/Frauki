@@ -166,11 +166,7 @@ Collision.CollideFraukiWithEnvironment = function(f, tile) {
 
     } else if(tile.index === 7) {
 
-        if(tile.dislodged === true) {
-            return false;
-        }
-
-        return true;
+        return false;
 
     //updraft
     } else if(tile.index === 11) {
@@ -508,6 +504,8 @@ Collision.OverlapObjectsWithEnvironment = function(o, e) {
     } 
     else if(o.spriteType === 'enemy' && e.index === 3) {
         return false;
+    } else if(o.spriteType === 'enemy' && e.index === 7) {
+        return true;
     }
 
     return true;
