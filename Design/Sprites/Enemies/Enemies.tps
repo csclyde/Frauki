@@ -370,6 +370,10 @@
             <key type="filename">Insectoid/Hop0000.png</key>
             <key type="filename">Insectoid/Hop0001.png</key>
             <key type="filename">Insectoid/Hop0002.png</key>
+            <key type="filename">Misc/Crabby0000.png</key>
+            <key type="filename">Misc/Crabby0001.png</key>
+            <key type="filename">Misc/Crabby0002.png</key>
+            <key type="filename">Misc/Crabby0003.png</key>
             <key type="filename">Misc/Haystax0000.png</key>
             <key type="filename">Misc/Haystax0001.png</key>
             <key type="filename">Misc/Hopper0000.png</key>

@@ -17,6 +17,14 @@ Enemy.prototype.types['Mask'] =  function() {
 
 	};
 
+	this.OnHit = function() {
+		if(this.direction === 'left') {
+			this.SetDirection('right');
+		} else if(this.direction === 'right') {
+			this.SetDirection('left');
+		}
+	};
+
 	this.CanCauseDamage = function() { return true; }
 
 	///////////////////////////////ACTIONS////////////////////////////////////

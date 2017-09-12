@@ -134,7 +134,6 @@ Frogland.HandleCollisions = function() {
 Frogland.SpawnFrauki = function() {
 
     if(GameData.GetDebugPos()) {
-        console.log('loading up')
         var pos = GameData.GetDebugPos();
         frauki.x = pos.x;
         frauki.y = pos.y; 
