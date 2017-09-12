@@ -62,6 +62,8 @@ Frogland.Create = function() {
     this.ragnarokLevel = 0;
 
     game.physics.arcade.sortDirection = game.physics.arcade.TOP_BOTTOM;
+
+    setInterval(this.AnimateTiles, 200);
 };
 
 Frogland.Update = function() {
@@ -234,6 +236,8 @@ Frogland.PreprocessTiles = function(layer) {
 
 
     }, this, 0, 0, 5, 20, 'Foreground_4');
+
+    console.log(this.animatedTiles)
 };
 
 Frogland.GetCurrentCollisionLayer = function() {
@@ -382,6 +386,7 @@ Frogland.ResetFallenTiles = function() {
 
 Frogland.AnimateTiles = function() {
     var viewLeft, viewRight, viewTop, viewBottom;
+    var changeHappend = false;
 
     viewLeft = Math.ceil((game.camera.x / 16));
     viewTop = Math.ceil((game.camera.y / 16));
@@ -393,27 +398,30 @@ Frogland.AnimateTiles = function() {
     if(viewTop < 0) viewTop = 0;
     if(viewTop + viewBottom > Math.ceil(game.world.height / 16)) viewTop = Math.ceil(game.world.height / 16) - viewBottom;
 
-    this.map.forEach(function(tile) {
+    Frogland.map.forEach(function(tile) {
 
         if(!!tile) {
-            for(var i = 0; i < this.animatedTiles.length; i++) {
+            for(var i = 0; i < Frogland.animatedTiles.length; i++) {
 
-                var animLength = this.animatedTiles[i].length;
+                var animLength = Frogland.animatedTiles[i].length;
 
-                if(!this.animatedTiles[i] || animLength <= 1) {
+                //if the animation doesnt exist or is only 1 tile long, bail
+                if(!Frogland.animatedTiles[i] || animLength <= 1) {
                     continue;
                 }
 
                 //loop the final tile back to the start
-                if(tile.index === this.animatedTiles[i][animLength - 1]) {
-                    tile.index = this.animatedTiles[i][0]; 
+                if(tile.index === Frogland.animatedTiles[i][animLength - 1]) {
+                    tile.index = Frogland.animatedTiles[i][0]; 
+                    changeHappened = true;
                     continue;
                 }
 
                 //increment the rest
                 for(var j = 0; j < animLength - 1; j++) {
-                    if(tile.index === this.animatedTiles[i][j]) {
-                        tile.index = this.animatedTiles[i][j + 1];
+                    if(tile.index === Frogland.animatedTiles[i][j]) {
+                        tile.index = Frogland.animatedTiles[i][j + 1];
+                        changeHappened = true;
                         break;
                     }
                 }
@@ -422,9 +430,11 @@ Frogland.AnimateTiles = function() {
         }
 
            
-    }, this, viewLeft, viewTop, viewRight, viewBottom, 'Foreground_' + Frogland.currentLayer); 
+    }, Frogland, viewLeft, viewTop, viewRight, viewBottom, 'Foreground_' + Frogland.currentLayer); 
 
-    Frogland['foregroundLayer_' + Frogland.currentLayer].dirty = true;
+    if(changeHappened) {
+        Frogland['foregroundLayer_' + Frogland.currentLayer].dirty = true;
+    }
 };
 
 Frogland.Ragnarok = function(e) {
