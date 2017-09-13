@@ -388,10 +388,10 @@ Frogland.AnimateTiles = function() {
     var viewLeft, viewRight, viewTop, viewBottom;
     var changeHappend = false;
 
-    viewLeft = Math.ceil((game.camera.x / 16));
-    viewTop = Math.ceil((game.camera.y / 16));
-    viewRight = Math.ceil((game.camera.width / 16));
-    viewBottom = Math.ceil((game.camera.height / 16));
+    viewLeft = Math.ceil((game.camera.x / 16)) - 2;
+    viewTop = Math.ceil((game.camera.y / 16)) - 2;
+    viewRight = Math.ceil((game.camera.width / 16)) + 2;
+    viewBottom = Math.ceil((game.camera.height / 16)) + 2;
 
     if(viewLeft < 0) viewLeft = 0;
     if(viewLeft + viewRight > Math.ceil(game.world.width / 16)) viewLeft = Math.ceil(game.world.width / 16) - viewRight;
