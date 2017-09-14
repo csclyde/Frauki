@@ -386,7 +386,7 @@ Frogland.ResetFallenTiles = function() {
 
 Frogland.AnimateTiles = function() {
     var viewLeft, viewRight, viewTop, viewBottom;
-    var changeHappend = false;
+    var changeHappened = false;
 
     viewLeft = Math.ceil((game.camera.x / 16)) - 2;
     viewTop = Math.ceil((game.camera.y / 16)) - 2;
