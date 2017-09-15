@@ -73,7 +73,11 @@ Enemy.prototype.types['Insectoid'] =  function() {
             }
 
         } else {
-            this.state = this.Idling;
+            if(this.timers.TimerUp('idle_hop_wait')) {
+                this.IdleHop();
+            } else {
+                this.state = this.Idling;
+            }
         }
     };
 
@@ -155,11 +159,36 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
     };
 
+    this.IdleHop = function() {
+        this.state = this.IdleHopping;
+        this.body.velocity.y = game.rnd.between(-150, -300);
+        this.body.velocity.x = game.rnd.between(250, 400);
+
+        if(game.rnd.between(1, 2) === 1) {
+            this.body.velocity.x *= -1;
+        }
+        
+        EnemyBehavior.FaceForward(this);
+
+        this.timers.SetTimer('idle_hop_wait', game.rnd.between(1000, 3000));
+    }
+
     ////////////////////////////////STATES////////////////////////////////////
     this.Idling = function() {
         this.PlayAnim('idle');
 
         return true;
+    };
+
+    this.IdleHopping = function() {
+        this.PlayAnim('hop');
+
+        if(this.body.onFloor()) {
+            return true;
+        }
+
+        return false;
+
     };
 
     this.PreHopping = function() {

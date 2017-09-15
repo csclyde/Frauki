@@ -236,8 +236,6 @@ Frogland.PreprocessTiles = function(layer) {
 
 
     }, this, 0, 0, 5, 20, 'Foreground_4');
-
-    console.log(this.animatedTiles)
 };
 
 Frogland.GetCurrentCollisionLayer = function() {
