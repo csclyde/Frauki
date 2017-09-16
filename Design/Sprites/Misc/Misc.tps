@@ -4,9 +4,9 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>4.4.0</string>
+        <string>4.5.0</string>
         <key>fileName</key>
-        <string>D:/gamedev/Frauki/Design/Sprites/Misc/Misc.tps</string>
+        <string>/home/casey/Documents/Frauki/Design/Sprites/Misc/Misc.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">

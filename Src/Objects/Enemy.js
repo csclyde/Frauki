@@ -121,7 +121,7 @@ Enemy.prototype.update = function() {
     if(this.isAttacking()) {
         this.timers.SetTimer('grace', 0);
     }
-}
+};
 
 Enemy.prototype.UpdateAttackGeometry = function() {
     //check for and apply any existing attack frame
@@ -281,7 +281,11 @@ Enemy.prototype.TakeHit = function(damage) {
         this.timers.SetTimer('attack_wait', hurtTime + game.rnd.between(1000, 2000));
     }
 
-    //knock the enemy back
+    var powerup = new PowerUp(game, this.x, this.y, 'Misc');
+    game.add.existing(powerup);
+    powerup.body.velocity.x = this.body.velocity.x * 2;
+    powerup.body.velocity.y = this.body.velocity.y * 2;
+    objectController.AddObject(powerup);
     
 
     var graceTime = hurtTime + game.rnd.between(500, 1000);
