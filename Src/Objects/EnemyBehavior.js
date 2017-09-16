@@ -99,10 +99,13 @@ EnemyBehavior.Player.Distance = function(e) {
 EnemyBehavior.Player.Visibility = {};
 EnemyBehavior.Player.IsVisible = function(e) {
 
+
     //if the enemy is not cached, create an object for it
     if(!this.Visibility[e.z]) {
         this.Visibility[e.z] = { obj: e, timestamp: 0, result: false };
     }
+
+    var initialState = this.Visibility[e.z].result;
 
     if(!EnemyBehavior.WithinCameraRange(e, 100)) {
         this.Visibility[e.z].result = false;
@@ -152,6 +155,11 @@ EnemyBehavior.Player.IsVisible = function(e) {
                 this.Visibility[e.z].result = false;
             }
         }
+    }
+
+    if(initialState !== true && this.Visibility[e.z].result === true) {
+        console.log(initialState)
+        speechController.ShowExclamationMark(e);
     }
 
     return this.Visibility[e.z].result;

@@ -21,6 +21,11 @@ SpeechController = function() {
 		goober: 'booper'
 	};
 
+	this.targetEnemy = null;
+
+	this.tweens = {};
+	this.tweens.surpriseMarkShake = 3;
+
 };
 
 SpeechController.prototype.Create = function() {
@@ -86,6 +91,10 @@ SpeechController.prototype.Create = function() {
     this.exclamationMark.alpha = 0.8;
     this.exclamationMark.anchor.setTo(0.5);
     this.exclamationMark.visible = false;
+
+    this.surpriseMark = game.add.sprite(0, 0, 'UI', 'SurpriseMark0000');
+    this.surpriseMark.anchor.setTo(0.5);
+    this.surpriseMark.visible = false;
 
 	this.speechZones = [];
 
@@ -176,6 +185,14 @@ SpeechController.prototype.Update = function() {
 	} else {
 		this.exclamationMark.visible = false;
 
+	}
+
+	if(!this.timers.TimerUp('enemy_surprised') && this.targetEnemy !== null) {
+		this.surpriseMark.visible = true;
+		this.surpriseMark.x = this.targetEnemy.body.center.x + Math.sin(game.time.now / 10) * this.tweens.surpriseMarkShake;
+		this.surpriseMark.y = this.targetEnemy.body.y - 20 + Math.sin(game.time.now / 200) * 3;	
+	} else {
+		this.surpriseMark.visible = false;
 	}
 
 };
@@ -330,4 +347,13 @@ SpeechController.prototype.ParseTextVariables = function(text) {
 	});
 
 	return text;
+};
+
+SpeechController.prototype.ShowExclamationMark = function(e) {
+	if(this.timers.TimerUp('enemy_surprised')) {
+		this.targetEnemy = e;
+		this.timers.SetTimer('enemy_surprised', 2000);
+		this.tweens.surpriseMarkShake = 5;
+		game.add.tween(this.tweens).to( { surpriseMarkShake: 0 }, 1000, Phaser.Easing.Linear.None, true);
+	}
 };
