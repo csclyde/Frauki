@@ -110,7 +110,7 @@ function SpawnPowerUp(e) {
     
         powerup.timers.SetTimer('lifespan', 6000);
     
-        powerup.body.velocity.x = -200;
+        powerup.body.velocity.x = -200 * EnemyBehavior.Player.DirMod(powerup) * -1;
         powerup.body.velocity.y = -300;
     
         objectController.AddObject(powerup);

@@ -131,7 +131,7 @@ ScriptRunner.scripts['goddess_intro'] = [
 	{ name: 'wait', props: { amount: 5000 } },
 	{ name: 'hide_text', props: {} },
 
-	{ name: 'wait', props: { amount: 250 } },
+	{ name: 'wait', props: { amount: 200 } },
 	{ name: 'show_text', props: { text: 'It\'s been a long time since I\'ve seen... anyone...', portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 7000 } },
 	{ name: 'hide_text', props: {} },
@@ -146,7 +146,7 @@ ScriptRunner.scripts['goddess_intro'] = [
 	{ name: 'wait', props: { amount: 7000 } },
 	{ name: 'hide_text', props: {} },
 
-	{ name: 'wait', props: { amount: 750 } },
+	{ name: 'wait', props: { amount: 200 } },
 	{ name: 'show_text', props: { text: 'Please hurry... I\'ve been trapped in here a very long time.', portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 7000 } },
 	{ name: 'hide_text', props: {} },
@@ -239,8 +239,13 @@ ScriptRunner.scripts['seal_hall_intro'] = [
 	{ name: 'wait', props: { amount: 7000 } },
 	{ name: 'hide_text', props: {} },
 
-	{ name: 'wait', props: { amount: 250 } },
+	{ name: 'wait', props: { amount: 200 } },
 	{ name: 'show_text', props: { text: "Keep it up, I'm sure the other prism shards can't be far.", portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 7000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'wait', props: { amount: 200 } },
+	{ name: 'show_text', props: { text: "There is a special gift for you in the room behind me. Use that red prism shard to get it!", portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 7000 } },
 	{ name: 'hide_text', props: {} },
 
