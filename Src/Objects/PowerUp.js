@@ -34,6 +34,11 @@ PowerUp.prototype.create = function() {
 
 };
 
+PowerUp.prototype.Deactivate = function() {
+
+    this.pendingDestroy = true;
+}
+
 PowerUp.prototype.update = function() {
     var that = this;
     if(!this.body.enable)
@@ -69,6 +74,10 @@ function UsePowerUp(f, p) {
     if(p.state === p.Used)
         return;
     
+    if(p.timers.TimeLeft('lifetime') > 5000) {
+        return;
+    }
+    
     p.state = p.Used;
 
     energyController.AddHealth(1);
@@ -95,16 +104,16 @@ function SpawnPowerUp(e) {
 
     if(roll <= 85) {
         return;
+    } else {
+        var powerup = new PowerUp(game, e.body.center.x, e.body.center.y, 'Misc');
+        game.add.existing(powerup);
+    
+        powerup.timers.SetTimer('lifespan', 6000);
+    
+        powerup.body.velocity.x = -200;
+        powerup.body.velocity.y = -300;
+    
+        objectController.AddObject(powerup);
     }
 
-
-    var powerup = new PowerUp(game, e.body.center.x, e.body.center.y, 'Misc');
-    game.add.existing(powerup);
-
-    powerup.timers.SetTimer('lifespan', 6000);
-
-    powerup.body.velocity.x = -200;
-    powerup.body.velocity.y = -300;
-
-    objectController.AddObject(powerup);
 };
