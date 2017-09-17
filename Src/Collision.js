@@ -101,6 +101,13 @@ Collision.OverlapFraukiWithObject = function(f, o) {
         PickUpShard(f, o);
 
         return false;
+    } else if(o.spriteType === 'powerup') {
+        if(energyController.GetHealth() < energyController.GetMaxHealth()) {
+            UsePowerUp(f, o);
+        }
+        
+
+        return false;
     }
 
     return true;

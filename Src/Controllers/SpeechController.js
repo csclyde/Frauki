@@ -187,7 +187,7 @@ SpeechController.prototype.Update = function() {
 
 	}
 
-	if(!this.timers.TimerUp('enemy_surprised') && this.targetEnemy) {
+	if(!this.timers.TimerUp('enemy_surprised') && !!this.targetEnemy && !!this.targetEnemy.body) {
 		this.surpriseMark.visible = true;
 		this.surpriseMark.x = this.targetEnemy.body.center.x + Math.sin(game.time.now / 10) * this.tweens.surpriseMarkShake;
 		this.surpriseMark.y = this.targetEnemy.body.y - 20 + Math.sin(game.time.now / 200) * 3;	

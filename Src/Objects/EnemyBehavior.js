@@ -158,7 +158,6 @@ EnemyBehavior.Player.IsVisible = function(e) {
     }
 
     if(initialState !== true && this.Visibility[e.z].result === true) {
-        console.log(initialState)
         speechController.ShowExclamationMark(e);
     }
 

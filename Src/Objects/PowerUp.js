@@ -7,9 +7,10 @@ PowerUp = function(game, x, y, name) {
     game.physics.enable(this, Phaser.Physics.ARCADE);
     
     this.body.setSize(16, 16, 0, 0);
-    this.anchor.setTo(0.5);
+    this.anchor.setTo(0);
     this.body.bounce.y = 0.5;
-    this.body.drag.setTo(500);
+    this.body.drag.setTo(100);
+    this.body.gravity.y = -300
     //this.body.gravity.y = game.physics.arcade.gravity.y * 2;
 
     this.state = this.Waiting;
@@ -21,7 +22,7 @@ PowerUp = function(game, x, y, name) {
     this.shakeMagnitudeX = 0;
 
     this.animations.add('waiting', ['Heart0000', 'Heart0001'], 4, true, false);
-    var used = this.animations.add('used', ['Stars0000', 'Stars0001','Stars0002','Stars0003'], 10, false, false);
+    var used = this.animations.add('used', ['Heart0001'], 10, false, false);
     used.killOnComplete = true;
 
 };
@@ -34,31 +35,43 @@ PowerUp.prototype.create = function() {
 };
 
 PowerUp.prototype.update = function() {
+    var that = this;
     if(!this.body.enable)
         return;
     
     if(!!this.state)
         this.state();
-};
 
-function UsePowerUp(f, a) {
-    if(a.state === a.Eaten)
-        return;
-    
-    a.state = a.Eaten;
-
-    events.publish('play_sound', {name: 'crystal_door'});
-
-    if(!GameData.GetFlag('first_apple_eaten')) {
-        ScriptRunner.run('demo_Apple');
-        GameData.SetFlag('first_apple_eaten', true);
+    if(this.body.onFloor()) {
+        this.body.velocity.y = game.rnd.between(-50, -75);
     }
 
+    var timeLeft = this.timers.TimeLeft('lifespan');
+    var flickerSpeed = timeLeft / 10;
 
-    energyController.AddApple();
-    a.destroy();
+    if(flickerSpeed < 20) {
+        flickerSpeed = 20;
+    }
 
+    if(timeLeft < 3000 && this.timers.TimerUp('flicker')) {
+        this.alpha = 0.3;
+        game.time.events.add(100, function() { that.timers.SetTimer('flicker', flickerSpeed); });
+    } else {
+        this.alpha = 1;
+    }
+
+    if(this.timers.TimerUp('lifespan')) {
+        this.state = this.Used;
+    }
+};
+
+function UsePowerUp(f, p) {
+    if(p.state === p.Used)
+        return;
     
+    p.state = p.Used;
+
+    energyController.AddHealth(1);
 
 };
 
@@ -74,4 +87,24 @@ PowerUp.prototype.Waiting = function() {
 PowerUp.prototype.Used = function() {
     this.PlayAnim('used');
 
+};
+
+function SpawnPowerUp(e) {
+
+    var roll = game.rnd.between(0, 100);
+
+    if(roll <= 85) {
+        return;
+    }
+
+
+    var powerup = new PowerUp(game, e.body.center.x, e.body.center.y, 'Misc');
+    game.add.existing(powerup);
+
+    powerup.timers.SetTimer('lifespan', 6000);
+
+    powerup.body.velocity.x = -200;
+    powerup.body.velocity.y = -300;
+
+    objectController.AddObject(powerup);
 };

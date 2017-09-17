@@ -18,6 +18,7 @@ TimerUtil.prototype.SetTimer = function(name, duration, callback, callbackContex
 	this.timers[name].status = 'waiting';
 	this.timers[name].eventTimer = game.time.events.add(duration, function() { this.timers[name].status = 'ready'; }, this);
 	this.timers[name].timestamp = game.time.now;
+	this.timers[name].duration = duration;
 }
 
 TimerUtil.prototype.TimerUp = function(name) {
@@ -27,6 +28,15 @@ TimerUtil.prototype.TimerUp = function(name) {
 		return true;
 	}
 
+};
+
+TimerUtil.prototype.TimeLeft = function(name) {
+	if(!!this.timers[name]) {
+		var diff = this.timers[name].timestamp + this.timers[name].duration - game.time.now;
+		return diff > 0 ? diff : 0;
+	} else {
+		return 0;
+	}
 };
 
 TimerUtil.prototype.Timestamp = function(name) {
