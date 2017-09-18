@@ -63,7 +63,7 @@ Enemy.prototype.types['KR32'] =  function() {
 
             } else if(EnemyBehavior.Player.IsNear(this, 100)) {
 
-            	if(this.timers.TimerUp('attack_wait') && EnemyBehavior.Player.IsVulnerable(this) && !EnemyBehavior.Player.MovingTowards(this) && frauki.body.onFloor()) {
+            	if(this.CanAttack() && EnemyBehavior.Player.IsVulnerable(this) && !EnemyBehavior.Player.MovingTowards(this) && frauki.body.onFloor()) {
                 	if(EnemyBehavior.Player.IsNear(this, 60)) {
                 		this.AttackStab();
                 	}

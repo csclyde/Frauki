@@ -29,7 +29,7 @@ Enemy.prototype.types['R2BTU'] =  function() {
 
             } else if(EnemyBehavior.Player.IsNear(this, 250)) {
 
-                if(this.timers.TimerUp('attack_wait') && frauki.body.onFloor()) {
+                if(this.CanAttack() && frauki.body.onFloor()) {
                     this.Attack();
                 } else {
                     this.state = this.Idling;

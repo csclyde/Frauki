@@ -42,13 +42,13 @@ Enemy.prototype.types['RKN1d'] =  function() {
 
             } else if(this.body.onFloor() || this.clingDir === 'up' || this.clingDir === 'left' || this.clingDir === 'right') {
 
-                if(EnemyBehavior.Player.IsNear(this, 50) && this.timers.TimerUp('attack_wait') && this.clingDir === 'none') {
+                if(EnemyBehavior.Player.IsNear(this, 50) && this.CanAttack() && this.clingDir === 'none') {
                     this.Bite();
 
                 } else if(EnemyBehavior.Player.IsNear(this, 250) && this.body.onFloor()) {
                     this.Escape();
 
-                } else if(this.timers.TimerUp('attack_wait')) {
+                } else if(this.CanAttack()) {
                     this.Hop();
 
 

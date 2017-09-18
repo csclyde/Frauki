@@ -4051,9 +4051,10 @@
     <property name="upgrade" value="Health0"/>
    </properties>
   </object>
-  <object id="3057" type="shard" gid="67" x="3560" y="3752" width="16" height="16">
+  <object id="3057" type="shard" gid="67" x="3560" y="3760" width="16" height="16">
    <properties>
     <property name="id" value="prism_upgrade_door"/>
+    <property name="open_direction" value="down"/>
     <property name="prism" value="Will"/>
     <property name="type" value="shard"/>
    </properties>

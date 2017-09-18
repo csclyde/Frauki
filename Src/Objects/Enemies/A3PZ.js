@@ -36,7 +36,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
     this.Act = function() {
 
-        if(EnemyBehavior.Player.IsVisible(this) && this.timers.TimerUp('attack_wait')) {
+        if(EnemyBehavior.Player.IsVisible(this) && this.CanAttack()) {
             if(EnemyBehavior.Player.IsVulnerable(this)) {
                 if(EnemyBehavior.Player.IsNear(this, 100) && EnemyBehavior.Player.MovingAway(this) && this.timers.TimerUp('charge_wait')) {
                     EnemyBehavior.FacePlayer(this);

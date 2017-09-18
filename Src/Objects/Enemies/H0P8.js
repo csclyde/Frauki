@@ -37,7 +37,7 @@ Enemy.prototype.types['H0P8'] =  function() {
                 else if(EnemyBehavior.Player.IsNear(this, 20)) {
                     this.Dodge();
                 }
-                else if(this.timers.TimerUp('attack_wait') && EnemyBehavior.Player.IsVulnerable(this) && !EnemyBehavior.Player.IsNear(this, 50)) {
+                else if(this.CanAttack() && EnemyBehavior.Player.IsVulnerable(this) && !EnemyBehavior.Player.IsNear(this, 50)) {
                     this.Hop();
                    
                 } else {

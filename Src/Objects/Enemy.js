@@ -182,7 +182,7 @@ Enemy.prototype.SetDefaultValues = function() {
 };
 
 Enemy.prototype.Activate = function() {
-    this.timers.SetTimer('attack_wait', 3000);
+    this.timers.SetTimer('attack_wait', 2000);
 };
 
 Enemy.prototype.Deactivate = function() {
@@ -196,6 +196,14 @@ Enemy.prototype.isAttacking = function() {
     else
         return false;
 };
+
+Enemy.prototype.CanAttack = function() {
+    if(this.timers.TimerUp('attack_wait') && Frogland.timers.TimerUp('global_attack_wait')) {
+        return true;
+    }
+
+    return false;
+}
 
 Enemy.prototype.Grace = function() {
     return !this.timers.TimerUp('grace');

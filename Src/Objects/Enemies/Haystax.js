@@ -33,7 +33,7 @@ Enemy.prototype.types['Haystax'] =  function() {
 	this.Idling = function() {
 		this.PlayAnim('idle');
 
-		if(!EnemyBehavior.Player.IsNear(this, 50) && EnemyBehavior.Player.IsVisible(this) && this.timers.TimerUp('spit_wait')) {
+		if(!EnemyBehavior.Player.IsNear(this, 50) && EnemyBehavior.Player.IsVisible(this) && this.CanAttack()) {
 			this.Spit();
 		}
 		
@@ -44,7 +44,7 @@ Enemy.prototype.types['Haystax'] =  function() {
 
 		if(this.timers.TimerUp('spit')) {
 			this.state = this.Idling;
-			this.timers.SetTimer('spit_wait', 1000 + (Math.random() * 3000));
+			this.timers.SetTimer('attack_wait', 1000 + (Math.random() * 3000));
 		}
 	};
 

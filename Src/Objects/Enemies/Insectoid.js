@@ -49,7 +49,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
                 else if(EnemyBehavior.Player.IsNear(this, 20)) {
                     this.Dodge();
                 }
-                else if(this.timers.TimerUp('attack_wait') && EnemyBehavior.Player.IsVulnerable(this) && !EnemyBehavior.Player.IsNear(this, 50)) {
+                else if(this.CanAttack() && EnemyBehavior.Player.IsVulnerable(this) && !EnemyBehavior.Player.IsNear(this, 50)) {
                     if(!frauki.body.onFloor()) {
                         this.Hop();
                     } 
@@ -65,7 +65,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
                 }
 
             } else {
-                if(this.timers.TimerUp('attack_wait') && EnemyBehavior.Player.IsBelow(this) && frauki.state !== frauki.Rolling) {
+                if(this.CanAttack() && EnemyBehavior.Player.IsBelow(this) && frauki.state !== frauki.Rolling) {
                     this.Dive();
                 } else {
                     this.state = this.Idling;

@@ -35,7 +35,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
 
         if(EnemyBehavior.Player.IsVisible(this)) {
 
-            if(EnemyBehavior.Player.IsVulnerable(this) && this.timers.TimerUp('attack_wait')) {
+            if(EnemyBehavior.Player.IsVulnerable(this) && this.CanAttack()) {
                 this.Sting();
             } else {
                 this.Creep();
