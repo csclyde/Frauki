@@ -920,7 +920,7 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
     this.ChangeState(this.Hurting);
     this.timers.SetTimer('grace', grace_duration);
     this.timers.SetTimer('frauki_hit', 600);
-    Frogland.timers.SetTimer('global_attack_wait', 1000);
+    Frogland.timers.SetTimer('global_attack_wait', 300);
 
     //effectsController.SpriteTrail(frauki, 200, 800, 300, 0xf20069);
     effectsController.StarBurst(this.body.center);
