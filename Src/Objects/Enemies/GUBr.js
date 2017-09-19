@@ -162,7 +162,7 @@ Enemy.prototype.types['GUBr'] =  function() {
 		this.PlayAnim('attack');
 
 		if(this.timers.TimerUp('attacking')) {
-    		this.timers.SetTimer('attack_wait', 800);
+    		this.SetAttackTimer(800);
     		return true;
 		} else {
 			return false;

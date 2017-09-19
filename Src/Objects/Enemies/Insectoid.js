@@ -256,7 +256,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
         } 
 
         if(this.timers.TimerUp('attack') || this.body.onWall()) {
-            this.timers.SetTimer('attack_wait', game.rnd.between(500, 800));
+            this.SetAttackTimer(game.rnd.between(500, 800));
             return true;
         }
 
@@ -267,7 +267,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
         this.PlayAnim('spin');
         
         if(this.body.onFloor()) {
-            this.timers.SetTimer('attack_wait', game.rnd.between(500, 800));
+            this.SetAttackTimer(game.rnd.between(500, 800));
             return true;
         }
 
@@ -288,7 +288,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
         if(this.timers.TimerUp('attack') || this.body.velocity.y > 0 || this.body.onFloor()) {
             this.timers.SetTimer('dodge', 1000);
-            this.timers.SetTimer('attack_wait', 0);
+            this.SetAttackTimer(0);
             return true;
         }
 

@@ -189,7 +189,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
         
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
-            this.timers.SetTimer('attack_wait', 300);
+            this.SetAttackTimer(300);
             return true;
         }
 
@@ -300,7 +300,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
         }
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
-            this.timers.SetTimer('attack_wait', 800);
+            this.SetAttackTimer(800);
             return true;
         }
 

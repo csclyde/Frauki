@@ -44,7 +44,7 @@ Enemy.prototype.types['Haystax'] =  function() {
 
 		if(this.timers.TimerUp('spit')) {
 			this.state = this.Idling;
-			this.timers.SetTimer('attack_wait', 1000 + (Math.random() * 3000));
+			this.SetAttackTimer(1000 + (Math.random() * 3000));
 		}
 	};
 

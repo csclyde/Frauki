@@ -116,7 +116,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
         // }, null, this);
 
         if(this.timers.TimerUp('attack') || this.body.onFloor() || this.body.onWall()) {
-            this.timers.SetTimer('attack_wait', 2000 + game.rnd.between(500, 1500));
+            this.SetAttackTimer(2000 + game.rnd.between(500, 1500));
             return true;
         }
 

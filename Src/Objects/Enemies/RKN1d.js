@@ -18,7 +18,7 @@ Enemy.prototype.types['RKN1d'] =  function() {
     this.clingDir = 'none';
 
 
-    this.timers.SetTimer('attack_wait', 0)
+    this.SetAttackTimer(0)
 
     this.updateFunction = function() {
         if(this.state === this.Hurting)
@@ -238,7 +238,7 @@ Enemy.prototype.types['RKN1d'] =  function() {
         this.PlayAnim('attack');
 
         if(this.animations.currentAnim.isFinished) {
-            this.timers.SetTimer('attack_wait', 1000);
+            this.SetAttackTimer(1000);
 
             return true;
         }

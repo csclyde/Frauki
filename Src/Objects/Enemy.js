@@ -203,7 +203,12 @@ Enemy.prototype.CanAttack = function() {
     }
 
     return false;
-}
+};
+
+Enemy.prototype.SetAttackTimer = function(amt) {
+    amt = amt || 0;
+    this.timers.SetTimer('attack_wait', amt);
+};
 
 Enemy.prototype.Grace = function() {
     return !this.timers.TimerUp('grace');

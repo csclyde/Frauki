@@ -89,7 +89,7 @@ Enemy.prototype.types['R2BTU'] =  function() {
         this.body.velocity.y = -250;
 
         this.timers.SetTimer('dodge', game.rnd.between(2000, 4000));
-        this.timers.SetTimer('attack_wait', 0);
+        this.SetAttackTimer(0);
     };  
 
     this.LandHit = function() {
@@ -114,7 +114,7 @@ Enemy.prototype.types['R2BTU'] =  function() {
         }
 
         if(this.timers.TimerUp('slash_hold')) {
-            this.timers.SetTimer('attack_wait', game.rnd.between(600, 1200));
+            this.SetAttackTimer(game.rnd.between(600, 1200));
             return true;
         }
 

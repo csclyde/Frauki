@@ -199,7 +199,7 @@ Enemy.prototype.types['SW8T'] =  function() {
 		}
 
 		if(this.numShots === 0) {
-			this.timers.SetTimer('attack_wait', 2000);
+			this.SetAttackTimer(2000);
 			return true;
 
 		} else if(this.animations.currentAnim.isFinished && this.timers.TimerUp('shoot_wait')) {
@@ -291,7 +291,7 @@ Enemy.prototype.types['SW8T'] =  function() {
 		this.PlayAnim('swipe');
 
 		if(this.timers.TimerUp('swipe_wait') && this.animations.currentAnim.isFinished) {
-			this.timers.SetTimer('attack_wait', 600);
+			this.SetAttackTimer(600);
 			return true;
 		}
 
