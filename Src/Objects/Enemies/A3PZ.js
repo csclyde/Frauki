@@ -402,7 +402,8 @@ Enemy.prototype.types['A3PZ'] =  function() {
             damage: 3,
             knockback: 3,
             priority: 3,
-            juggle: 0
+            juggle: 0,
+            friendlyFire: true
         },
 
     };

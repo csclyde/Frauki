@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="300" height="650" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="3058">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="300" height="650" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="3059">
  <properties>
   <property name="debug" value="false"/>
   <property name="startLayer" value="3"/>
@@ -4059,6 +4059,7 @@
     <property name="type" value="shard"/>
    </properties>
   </object>
+  <object id="3058" gid="92" x="2619.8" y="3655.4" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Triggers_3" visible="0">
   <object id="1568" name="light" type="trigger" x="2411.91" y="5147.5" width="113.333" height="226">

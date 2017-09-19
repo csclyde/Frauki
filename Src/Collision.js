@@ -289,6 +289,39 @@ Collision.OverlapEnemyAttackWithFrauki = function(e, f) {
     return e.GetCurrentAttackSolid();
 };
 
+Collision.OverlapEnemyAttackWithEnemies = function(e, f) {
+    // if(frauki.states.shielded) {
+    //     Collision.OverlapAttackWithEnemyAttack(e, f);
+    //     return false;
+    // }
+
+    // //if frauki is stunned and the player opened the roll window
+    // if(!frauki.timers.TimerUp('attack_stun') && !frauki.timers.TimerUp('stun_dodge')) {
+    //     console.log('avoiding shit')
+    //     frauki.Roll({override: true});
+    //     return false;
+    // }
+
+    // if(EnemyBehavior.Player.IsDoorBetween(e)) {
+    //     return false;
+    // }
+
+    // e = e.owningEnemy;
+
+    // if(e.GetCurrentStun() === true) {
+    //     frauki.Stun(e);
+    // }
+
+    // if(e.GetCurrentDamage() > 0 && !frauki.Grace() && !e.Grace()) {
+    //     frauki.Hit(e, e.GetCurrentDamage(), 1000);
+    //     e.LandHit();
+    // }
+
+    // return e.GetCurrentAttackSolid();
+    console.log('hit em')
+    return false;
+};
+
 
 Collision.OverlapAttackWithObject = function(f, o) {
     if(o.spriteType === 'enemy') {
