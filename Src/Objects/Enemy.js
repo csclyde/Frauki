@@ -300,9 +300,6 @@ Enemy.prototype.TakeHit = function(damage) {
         this.timers.SetTimer('attack_wait', hurtTime + game.rnd.between(1000, 2000));
     }
 
-    SpawnPowerUp(this);
-    
-
     var graceTime = hurtTime + game.rnd.between(500, 1000);
 
     this.timers.SetTimer('grace', graceTime);

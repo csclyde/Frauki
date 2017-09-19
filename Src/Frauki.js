@@ -306,13 +306,20 @@ Player.prototype.GetCurrentDamage = function() {
 };
 
 Player.prototype.GetCurrentKnockback = function() {
-
-    return this.currentAttack.knockback;
+    if(!!this.currentAttack) {
+        return this.currentAttack.knockback;
+    } else {
+        return 0;
+    }
+    
 };
 
 Player.prototype.GetCurrentJuggle = function() {
-
-    return this.currentAttack.juggle;
+    if(!!this.currentAttack) {
+        return this.currentAttack.juggle;
+    } else {
+        return 0;
+    }
 };
 
 Player.prototype.GetCurrentPriority = function() {
@@ -892,6 +899,8 @@ Player.prototype.LandHit = function(e, damage) {
 
     this.states.hasFlipped = false;
     this.states.damageRefactory.push(e);
+
+    SpawnPowerUp(this);
 
     events.publish('stop_attack_sounds');
 };
