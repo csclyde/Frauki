@@ -1062,7 +1062,9 @@ Player.prototype.Falling = function() {
         var topTile = Frogland.map.getTileWorldXY(xLoc, this.body.y - 3, 16, 16, Frogland.GetCurrentCollisionLayer());
         var topTile2 = Frogland.map.getTileWorldXY(xLoc, this.body.y - 6, 16, 16, Frogland.GetCurrentCollisionLayer());
 
-        if((topTile === null || topTile2 === null) && bottomTile !== null && bottomTile.index === 1) {
+        var topEmpty = (topTile === null || topTile2 === null) || (topTile.index === 2 || topTile2.index === 2) || (topTile.index === 10 || topTile2.index === 10);
+
+        if(topEmpty && bottomTile !== null && bottomTile.index === 1) {
             this.ChangeState(this.Hanging);
             frauki.body.y -= (frauki.body.y % 16) + 5;
         }
