@@ -18,7 +18,7 @@ Enemy.prototype.types['RKN1d'] =  function() {
     this.clingDir = 'none';
 
 
-    this.timers.SetTimer('attack_wait', 0)
+    this.SetAttackTimer(0)
 
     this.updateFunction = function() {
         if(this.state === this.Hurting)
@@ -42,13 +42,13 @@ Enemy.prototype.types['RKN1d'] =  function() {
 
             } else if(this.body.onFloor() || this.clingDir === 'up' || this.clingDir === 'left' || this.clingDir === 'right') {
 
-                if(EnemyBehavior.Player.IsNear(this, 50) && this.timers.TimerUp('attack_wait') && this.clingDir === 'none') {
+                if(EnemyBehavior.Player.IsNear(this, 50) && this.CanAttack() && this.clingDir === 'none') {
                     this.Bite();
 
                 } else if(EnemyBehavior.Player.IsNear(this, 250) && this.body.onFloor()) {
                     this.Escape();
 
-                } else if(this.timers.TimerUp('attack_wait')) {
+                } else if(this.CanAttack()) {
                     this.Hop();
 
 
@@ -238,7 +238,7 @@ Enemy.prototype.types['RKN1d'] =  function() {
         this.PlayAnim('attack');
 
         if(this.animations.currentAnim.isFinished) {
-            this.timers.SetTimer('attack_wait', 1000);
+            this.SetAttackTimer(1000);
 
             return true;
         }

@@ -49,7 +49,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
                 else if(EnemyBehavior.Player.IsNear(this, 20)) {
                     this.Dodge();
                 }
-                else if(this.timers.TimerUp('attack_wait') && EnemyBehavior.Player.IsVulnerable(this) && !EnemyBehavior.Player.IsNear(this, 50)) {
+                else if(this.CanAttack() && EnemyBehavior.Player.IsVulnerable(this) && !EnemyBehavior.Player.IsNear(this, 50)) {
                     if(!frauki.body.onFloor()) {
                         this.Hop();
                     } 
@@ -65,7 +65,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
                 }
 
             } else {
-                if(this.timers.TimerUp('attack_wait') && EnemyBehavior.Player.IsBelow(this) && frauki.state !== frauki.Rolling) {
+                if(this.CanAttack() && EnemyBehavior.Player.IsBelow(this) && frauki.state !== frauki.Rolling) {
                     this.Dive();
                 } else {
                     this.state = this.Idling;
@@ -73,7 +73,11 @@ Enemy.prototype.types['Insectoid'] =  function() {
             }
 
         } else {
-            this.state = this.Idling;
+            if(this.timers.TimerUp('idle_hop_wait')) {
+                this.IdleHop();
+            } else {
+                this.state = this.Idling;
+            }
         }
     };
 
@@ -155,11 +159,36 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
     };
 
+    this.IdleHop = function() {
+        this.state = this.IdleHopping;
+        this.body.velocity.y = game.rnd.between(-150, -300);
+        this.body.velocity.x = game.rnd.between(250, 400);
+
+        if(game.rnd.between(1, 2) === 1) {
+            this.body.velocity.x *= -1;
+        }
+        
+        EnemyBehavior.FaceForward(this);
+
+        this.timers.SetTimer('idle_hop_wait', game.rnd.between(1000, 3000));
+    }
+
     ////////////////////////////////STATES////////////////////////////////////
     this.Idling = function() {
         this.PlayAnim('idle');
 
         return true;
+    };
+
+    this.IdleHopping = function() {
+        this.PlayAnim('hop');
+
+        if(this.body.onFloor()) {
+            return true;
+        }
+
+        return false;
+
     };
 
     this.PreHopping = function() {
@@ -227,7 +256,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
         } 
 
         if(this.timers.TimerUp('attack') || this.body.onWall()) {
-            this.timers.SetTimer('attack_wait', game.rnd.between(500, 800));
+            this.SetAttackTimer(game.rnd.between(500, 800));
             return true;
         }
 
@@ -238,7 +267,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
         this.PlayAnim('spin');
         
         if(this.body.onFloor()) {
-            this.timers.SetTimer('attack_wait', game.rnd.between(500, 800));
+            this.SetAttackTimer(game.rnd.between(500, 800));
             return true;
         }
 
@@ -259,7 +288,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
         if(this.timers.TimerUp('attack') || this.body.velocity.y > 0 || this.body.onFloor()) {
             this.timers.SetTimer('dodge', 1000);
-            this.timers.SetTimer('attack_wait', 0);
+            this.SetAttackTimer(0);
             return true;
         }
 

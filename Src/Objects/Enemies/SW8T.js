@@ -49,7 +49,7 @@ Enemy.prototype.types['SW8T'] =  function() {
         		if(!EnemyBehavior.Player.IsNear(this, 80) && this.timers.TimerUp('bolas_wait') && (EnemyBehavior.Player.IsVulnerable(this) || EnemyBehavior.Player.MovingAway(this))) {
         			this.Bolas();
 
-        		} else if(EnemyBehavior.Player.IsNear(this, 80) && this.timers.TimerUp('attack_wait') && EnemyBehavior.Player.IsVulnerable(this)) {
+        		} else if(EnemyBehavior.Player.IsNear(this, 80) && this.CanAttack() && EnemyBehavior.Player.IsVulnerable(this)) {
         			this.Swipe();
 
         		} else if(frauki.states.entangled && EnemyBehavior.Player.IsNear(this, 160)) {
@@ -66,13 +66,13 @@ Enemy.prototype.types['SW8T'] =  function() {
         	} else if(EnemyBehavior.Player.IsAbove(this) && frauki.state === frauki.AttackDiveCharge) {
         		this.JumpAway();
 
-     		} else if(frauki.states.entangled && !EnemyBehavior.Player.IsNear(this, 120)  && this.timers.TimerUp('attack_wait')) {
+     		} else if(frauki.states.entangled && !EnemyBehavior.Player.IsNear(this, 120)  && this.CanAttack()) {
      			this.Shoot();
 
         	} else if(EnemyBehavior.Player.IsNear(this, 160) || EnemyBehavior.Player.IsDangerous(this)) {
         		this.Block();
 
-        	} else if(!EnemyBehavior.Player.IsNear(this, 160) && this.timers.TimerUp('attack_wait')) { 
+        	} else if(!EnemyBehavior.Player.IsNear(this, 160) && this.CanAttack()) { 
         		this.Shoot();
 
         	} else if(!EnemyBehavior.Player.IsNear(this, 160)) { 
@@ -199,7 +199,7 @@ Enemy.prototype.types['SW8T'] =  function() {
 		}
 
 		if(this.numShots === 0) {
-			this.timers.SetTimer('attack_wait', 2000);
+			this.SetAttackTimer(2000);
 			return true;
 
 		} else if(this.animations.currentAnim.isFinished && this.timers.TimerUp('shoot_wait')) {
@@ -291,7 +291,7 @@ Enemy.prototype.types['SW8T'] =  function() {
 		this.PlayAnim('swipe');
 
 		if(this.timers.TimerUp('swipe_wait') && this.animations.currentAnim.isFinished) {
-			this.timers.SetTimer('attack_wait', 600);
+			this.SetAttackTimer(600);
 			return true;
 		}
 

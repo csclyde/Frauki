@@ -37,7 +37,7 @@ Enemy.prototype.types['H0P8'] =  function() {
                 else if(EnemyBehavior.Player.IsNear(this, 20)) {
                     this.Dodge();
                 }
-                else if(this.timers.TimerUp('attack_wait') && EnemyBehavior.Player.IsVulnerable(this) && !EnemyBehavior.Player.IsNear(this, 50)) {
+                else if(this.CanAttack() && EnemyBehavior.Player.IsVulnerable(this) && !EnemyBehavior.Player.IsNear(this, 50)) {
                     this.Hop();
                    
                 } else {
@@ -153,7 +153,7 @@ Enemy.prototype.types['H0P8'] =  function() {
         }
 
         if(this.body.onFloor()) {
-            this.timers.SetTimer('attack_wait', 800);
+            this.SetAttackTimer(800);
 
             return true;
         }
@@ -165,7 +165,7 @@ Enemy.prototype.types['H0P8'] =  function() {
         this.PlayAnim('attack');
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
-            this.timers.SetTimer('attack_wait', 800);
+            this.SetAttackTimer(800);
             return true;
         }
 
@@ -182,7 +182,7 @@ Enemy.prototype.types['H0P8'] =  function() {
 
         if(this.timers.TimerUp('attack') || this.body.velocity.y > 0 || this.body.onFloor()) {
             this.timers.SetTimer('dodge', 700);
-            this.timers.SetTimer('attack_wait', 0);
+            this.SetAttackTimer(0);
             return true;
         }
 

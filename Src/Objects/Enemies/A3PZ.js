@@ -36,7 +36,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
     this.Act = function() {
 
-        if(EnemyBehavior.Player.IsVisible(this) && this.timers.TimerUp('attack_wait')) {
+        if(EnemyBehavior.Player.IsVisible(this) && this.CanAttack()) {
             if(EnemyBehavior.Player.IsVulnerable(this)) {
                 if(EnemyBehavior.Player.IsNear(this, 100) && EnemyBehavior.Player.MovingAway(this) && this.timers.TimerUp('charge_wait')) {
                     EnemyBehavior.FacePlayer(this);
@@ -189,7 +189,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
         
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
-            this.timers.SetTimer('attack_wait', 300);
+            this.SetAttackTimer(300);
             return true;
         }
 
@@ -300,7 +300,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
         }
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
-            this.timers.SetTimer('attack_wait', 800);
+            this.SetAttackTimer(800);
             return true;
         }
 
@@ -402,7 +402,8 @@ Enemy.prototype.types['A3PZ'] =  function() {
             damage: 3,
             knockback: 3,
             priority: 3,
-            juggle: 0
+            juggle: 0,
+            friendlyFire: true
         },
 
     };

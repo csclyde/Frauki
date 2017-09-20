@@ -306,13 +306,20 @@ Player.prototype.GetCurrentDamage = function() {
 };
 
 Player.prototype.GetCurrentKnockback = function() {
-
-    return this.currentAttack.knockback;
+    if(!!this.currentAttack) {
+        return this.currentAttack.knockback;
+    } else {
+        return 0;
+    }
+    
 };
 
 Player.prototype.GetCurrentJuggle = function() {
-
-    return this.currentAttack.juggle;
+    if(!!this.currentAttack) {
+        return this.currentAttack.juggle;
+    } else {
+        return 0;
+    }
 };
 
 Player.prototype.GetCurrentPriority = function() {
@@ -522,25 +529,21 @@ Player.prototype.Jump = function(params) {
         }
         //roll jump
         else if(this.state === this.Rolling) {
-            if(energyController.UseEnergy(1)) { 
-                this.ChangeState(this.Jumping);
-                this.PlayAnim('roll_jump');
-    
-                //roll boost is caluclated based on how close they were to the max roll speed
-                this.movement.rollBoost = Math.abs(this.body.velocity.x) - PLAYER_SPEED(); 
-                this.movement.rollBoost /= (PLAYER_ROLL_SPEED() - PLAYER_SPEED());
-                this.movement.rollBoost *= 150;
+            this.ChangeState(this.Jumping);
+            this.PlayAnim('roll_jump');
 
-                //if they are holding away from the roll, dont go crazy
-                if(this.movement.rollDirection !== this.GetDirectionMultiplier()) {
-                    this.movement.rollBoost = 0;
-                }
-    
-                //add a little boost to their jump
-                this.body.velocity.y = PLAYER_JUMP_VEL() - 50;
-            } else {
-                this.body.velocity.y = PLAYER_JUMP_VEL();
+            //roll boost is caluclated based on how close they were to the max roll speed
+            this.movement.rollBoost = Math.abs(this.body.velocity.x) - PLAYER_SPEED(); 
+            this.movement.rollBoost /= (PLAYER_ROLL_SPEED() - PLAYER_SPEED());
+            this.movement.rollBoost *= 150;
+
+            //if they are holding away from the roll, dont go crazy
+            if(this.movement.rollDirection !== this.GetDirectionMultiplier()) {
+                this.movement.rollBoost = 0;
             }
+
+            //add a little boost to their jump
+            this.body.velocity.y = PLAYER_JUMP_VEL() - 50;
             
             events.publish('play_sound', {name: 'jump'});
             events.publish('stop_sound', {name: 'roll'});
@@ -553,10 +556,8 @@ Player.prototype.Jump = function(params) {
         else if(!this.InAttackAnim() || this.state === this.AttackJump) {
             this.DoubleJump();
         }
-    } else if(this.body.velocity.y < 0) {
-        if(this.body.velocity.y < 0) {
-            this.body.velocity.y /= 2;
-        }
+    } else if(this.body.velocity.y < 0 && !this.states.inUpdraft) {
+        this.body.velocity.y /= 2;
 
     }
 };
@@ -899,6 +900,8 @@ Player.prototype.LandHit = function(e, damage) {
     this.states.hasFlipped = false;
     this.states.damageRefactory.push(e);
 
+    SpawnPowerUp(this);
+
     events.publish('stop_attack_sounds');
 };
 
@@ -915,11 +918,6 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
 
     this.body.velocity.y = -150;
 
-    //if they are crouching, half damage
-    if(frauki.state === this.Crouching) {
-        damage /= 2;
-    }
-
     energyController.RemoveHealth(damage);
 
     if(this.body.center.x < e.body.center.x) {
@@ -931,6 +929,7 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
     this.ChangeState(this.Hurting);
     this.timers.SetTimer('grace', grace_duration);
     this.timers.SetTimer('frauki_hit', 600);
+    Frogland.timers.SetTimer('global_attack_wait', 300);
 
     //effectsController.SpriteTrail(frauki, 200, 800, 300, 0xf20069);
     effectsController.StarBurst(this.body.center);
@@ -1063,7 +1062,9 @@ Player.prototype.Falling = function() {
         var topTile = Frogland.map.getTileWorldXY(xLoc, this.body.y - 3, 16, 16, Frogland.GetCurrentCollisionLayer());
         var topTile2 = Frogland.map.getTileWorldXY(xLoc, this.body.y - 6, 16, 16, Frogland.GetCurrentCollisionLayer());
 
-        if((topTile === null || topTile2 === null) && bottomTile !== null && bottomTile.index === 1) {
+        var topEmpty = (topTile === null || topTile2 === null) || (topTile.index === 2 || topTile2.index === 2) || (topTile.index === 10 || topTile2.index === 10);
+
+        if(topEmpty && bottomTile !== null && bottomTile.index === 1) {
             this.ChangeState(this.Hanging);
             frauki.body.y -= (frauki.body.y % 16) + 5;
         }

@@ -229,6 +229,14 @@ ObjectController.prototype.SpawnObject = function(o) {
     }
 };
 
+ObjectController.prototype.AddObject = function(newObj) {
+    var currLayer = this.GetCurrentObjectGroup();
+    if(!currLayer) currLayer = game.add.group();
+
+    currLayer.add(newObj);
+    newObj.owningLayer = Frogland.currentLayer;    
+};
+
 ObjectController.prototype.CreateObjectsLayer = function(layer) {
 
     if(!this['activeLayer' + layer]) this['activeLayer' + layer] = game.add.group();

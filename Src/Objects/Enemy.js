@@ -105,6 +105,11 @@ Enemy.prototype.update = function() {
         }
 
         game.physics.arcade.collide(this.attackRect, frauki, null, Collision.OverlapEnemyAttackWithFrauki);
+
+        if(!!this.currentAttack && this.currentAttack.friendlyFire) {
+            game.physics.arcade.collide(this.attackRect, objectController.enemyList, null, Collision.OverlapEnemyAttackWithEnemies);
+        
+        }
     } 
 
     if(this.maxEnergy > 1 && this.owningLayer === Frogland.currentLayer && !this.timers.TimerUp('health_view')) {
@@ -121,7 +126,7 @@ Enemy.prototype.update = function() {
     if(this.isAttacking()) {
         this.timers.SetTimer('grace', 0);
     }
-}
+};
 
 Enemy.prototype.UpdateAttackGeometry = function() {
     //check for and apply any existing attack frame
@@ -155,7 +160,8 @@ Enemy.prototype.UpdateAttackGeometry = function() {
             knockback: this.knockback || 0.5,
             priority: this.priority || 0,
             juggle: this.juggle || 0,
-            stun: this.stun || false
+            stun: this.stun || false,
+            friendlyFire: this.friendlyFire || false
         };
     } 
     else {
@@ -182,7 +188,7 @@ Enemy.prototype.SetDefaultValues = function() {
 };
 
 Enemy.prototype.Activate = function() {
-    this.timers.SetTimer('attack_wait', 3000);
+    this.timers.SetTimer('attack_wait', 2000);
 };
 
 Enemy.prototype.Deactivate = function() {
@@ -195,6 +201,19 @@ Enemy.prototype.isAttacking = function() {
         return true;
     else
         return false;
+};
+
+Enemy.prototype.CanAttack = function() {
+    if(this.timers.TimerUp('attack_wait') && Frogland.timers.TimerUp('global_attack_wait')) {
+        return true;
+    }
+
+    return false;
+};
+
+Enemy.prototype.SetAttackTimer = function(amt) {
+    amt = amt || 0;
+    this.timers.SetTimer('attack_wait', amt);
 };
 
 Enemy.prototype.Grace = function() {
@@ -280,9 +299,6 @@ Enemy.prototype.TakeHit = function(damage) {
         this.body.velocity.y = (frauki.GetCurrentJuggle() * -200) - 100;   
         this.timers.SetTimer('attack_wait', hurtTime + game.rnd.between(1000, 2000));
     }
-
-    //knock the enemy back
-    
 
     var graceTime = hurtTime + game.rnd.between(500, 1000);
 

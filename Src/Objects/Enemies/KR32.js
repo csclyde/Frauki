@@ -63,7 +63,7 @@ Enemy.prototype.types['KR32'] =  function() {
 
             } else if(EnemyBehavior.Player.IsNear(this, 100)) {
 
-            	if(this.timers.TimerUp('attack_wait') && EnemyBehavior.Player.IsVulnerable(this) && !EnemyBehavior.Player.MovingTowards(this) && frauki.body.onFloor()) {
+            	if(this.CanAttack() && EnemyBehavior.Player.IsVulnerable(this) && !EnemyBehavior.Player.MovingTowards(this) && frauki.body.onFloor()) {
                 	if(EnemyBehavior.Player.IsNear(this, 60)) {
                 		this.AttackStab();
                 	}
@@ -145,7 +145,7 @@ Enemy.prototype.types['KR32'] =  function() {
     	this.body.velocity.y = -300;
 
     	this.timers.SetTimer('dodge', game.rnd.between(2000, 4000));
-    	this.timers.SetTimer('attack_wait', 0);
+    	this.SetAttackTimer(0);
     };	
 
 	////////////////////////////////STATES////////////////////////////////////
@@ -222,7 +222,7 @@ Enemy.prototype.types['KR32'] =  function() {
 		}
 
 		if(this.animations.currentAnim.name === 'land' && this.animations.currentAnim.isFinished) {
-			this.timers.SetTimer('attack_wait', 0);
+			this.SetAttackTimer(0);
 
 			return true;
 		}
@@ -255,7 +255,7 @@ Enemy.prototype.types['KR32'] =  function() {
 		this.PlayAnim('attack');
 
 		if(this.animations.currentAnim.isFinished && this.timers.TimerUp('attack_hold')) {
-			this.timers.SetTimer('attack_wait', game.rnd.between(2000, 3000));
+			this.SetAttackTimer(game.rnd.between(2000, 3000));
 			return true;
 		}
 
@@ -266,7 +266,7 @@ Enemy.prototype.types['KR32'] =  function() {
 		this.PlayAnim('attack_stab');
 
 		if(this.animations.currentAnim.isFinished && this.timers.TimerUp('attack_hold')) {
-			this.timers.SetTimer('attack_wait', game.rnd.between(600, 1000));
+			this.SetAttackTimer(game.rnd.between(600, 1000));
 
 			return true;
 		}
