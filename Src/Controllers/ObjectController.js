@@ -27,7 +27,9 @@ ObjectController.prototype.Update = function() {
 
         if(!o) continue;
 
-        if(o.spriteType !== 'door' && !!o.body && o.spriteType !== 'ball') {
+        var preservedTypes = ['door', 'ball', 'powerup'];
+
+        if(preservedTypes.indexOf(o.spriteType) === -1 && !!o.body) {
             if(o.body.x < game.camera.x - padding || o.body.y < game.camera.y - padding || o.body.x > game.camera.x + game.camera.width + padding || o.body.y > game.camera.y + game.camera.height + padding) {
                 if(o.body.enable === true && !!o.Deactivate) o.Deactivate();
                 o.body.enable = false;

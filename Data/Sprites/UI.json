@@ -38,7 +38,7 @@
 },
 "ChargePips0002":
 {
-	"frame": {"x":483,"y":406,"w":8,"h":5},
+	"frame": {"x":466,"y":402,"w":8,"h":5},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":5,"y":7,"w":8,"h":5},
@@ -47,7 +47,7 @@
 },
 "ChargePips0003":
 {
-	"frame": {"x":483,"y":413,"w":8,"h":5},
+	"frame": {"x":476,"y":406,"w":8,"h":5},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":5,"y":7,"w":8,"h":5},
@@ -209,7 +209,7 @@
 },
 "HealthPips0001":
 {
-	"frame": {"x":466,"y":390,"w":15,"h":10},
+	"frame": {"x":466,"y":378,"w":15,"h":10},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":3,"y":5,"w":15,"h":10},
@@ -218,7 +218,7 @@
 },
 "HealthPips0002":
 {
-	"frame": {"x":466,"y":402,"w":15,"h":10},
+	"frame": {"x":466,"y":378,"w":15,"h":10},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":3,"y":5,"w":15,"h":10},
@@ -227,7 +227,7 @@
 },
 "HealthPips0003":
 {
-	"frame": {"x":466,"y":414,"w":15,"h":10},
+	"frame": {"x":466,"y":390,"w":15,"h":10},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":3,"y":5,"w":15,"h":10},
@@ -308,7 +308,7 @@
 },
 "Numbers0001":
 {
-	"frame": {"x":483,"y":420,"w":7,"h":13},
+	"frame": {"x":466,"y":409,"w":7,"h":13},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":16,"y":13,"w":7,"h":13},
@@ -610,6 +610,6 @@
 	"format": "RGBA8888",
 	"size": {"w":498,"h":531},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:f4902f09f4e1fd2246344392d719540a:312f80719995ab9077d1c8073928561c:4b774b923918ecd961888279dba3ffad$"
+	"smartupdate": "$TexturePacker:SmartUpdate:0d938fc090837115c5c03c69a9c8caa0:ed0e38e7e466b0e660e951b28318a792:4b774b923918ecd961888279dba3ffad$"
 }
 }

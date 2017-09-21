@@ -141,7 +141,7 @@ ScriptRunner.scripts['goddess_intro'] = [
 	{ name: 'wait', props: { amount: 7000 } },
 	{ name: 'hide_text', props: {} },
 
-	{ name: 'wait', props: { amount: 1000 } },
+	{ name: 'wait', props: { amount: 200 } },
 	{ name: 'show_text', props: { text: 'The first one looks like... hmm... a big red floating jewel thing. You can\'t miss it.', portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 7000 } },
 	{ name: 'hide_text', props: {} },

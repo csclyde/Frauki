@@ -39,7 +39,7 @@ BackdropController.prototype.Update = function() {
     // if(game.camera.y > 80 * 16) this.plx1.visible = false;
     // else this.plx1.visible = true;
 
-    if(game.camera.y > 5000) {
+    if(game.camera.y > 5200) {
         this.clouds1.cameraOffset.y += 500;
         this.clouds2.cameraOffset.y += 600;
         this.plx1.cameraOffset.y += 800;

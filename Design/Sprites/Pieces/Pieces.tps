@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>4.4.0</string>
+        <string>4.5.0</string>
         <key>fileName</key>
         <string>D:/gamedev/Frauki/Design/Sprites/Pieces/Pieces.tps</string>
         <key>autoSDSettings</key>
@@ -276,26 +276,10 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">Frames/CreeperThistle0000.png</key>
-            <key type="filename">Frames/CreeperThistle0001.png</key>
-            <key type="filename">Frames/CreeperThistle0002.png</key>
-            <key type="filename">Frames/Sporoid0000.png</key>
-            <key type="filename">Frames/Sporoid0001.png</key>
-            <key type="filename">Frames/Sporoid0002.png</key>
-            <key type="filename">Frames/Sporoid0003.png</key>
-            <key type="filename">Frames/Sporoid0004.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>11,9,22,19</rect>
-                <key>scale9Paddings</key>
-                <rect>11,9,22,19</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
+            <key type="filename">Frames/Crabby0000.png</key>
+            <key type="filename">Frames/Crabby0001.png</key>
+            <key type="filename">Frames/Crabby0002.png</key>
+            <key type="filename">Frames/Crabby0003.png</key>
             <key type="filename">Frames/DoorSeal0000.png</key>
             <key type="filename">Frames/DoorSeal0001.png</key>
             <key type="filename">Frames/DoorSeal0002.png</key>
@@ -326,6 +310,26 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">Frames/CreeperThistle0000.png</key>
+            <key type="filename">Frames/CreeperThistle0001.png</key>
+            <key type="filename">Frames/CreeperThistle0002.png</key>
+            <key type="filename">Frames/Sporoid0000.png</key>
+            <key type="filename">Frames/Sporoid0001.png</key>
+            <key type="filename">Frames/Sporoid0002.png</key>
+            <key type="filename">Frames/Sporoid0003.png</key>
+            <key type="filename">Frames/Sporoid0004.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>11,9,22,19</rect>
+                <key>scale9Paddings</key>
+                <rect>11,9,22,19</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">Frames/Fungu0000.png</key>
             <key type="filename">Frames/Fungu0001.png</key>
             <key type="filename">Frames/Fungu0002.png</key>
@@ -340,6 +344,27 @@
                 <rect>18,18,35,35</rect>
                 <key>scale9Paddings</key>
                 <rect>18,18,35,35</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">Frames/Haystax0000.png</key>
+            <key type="filename">Frames/Haystax0001.png</key>
+            <key type="filename">Frames/Haystax0002.png</key>
+            <key type="filename">Frames/Haystax0003.png</key>
+            <key type="filename">Frames/Haystax0004.png</key>
+            <key type="filename">Frames/RKN1d0000.png</key>
+            <key type="filename">Frames/RKN1d0001.png</key>
+            <key type="filename">Frames/RKN1d0002.png</key>
+            <key type="filename">Frames/RKN1d0003.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>38,38,75,75</rect>
+                <key>scale9Paddings</key>
+                <rect>38,38,75,75</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -412,22 +437,6 @@
                 <rect>58,38,117,75</rect>
                 <key>scale9Paddings</key>
                 <rect>58,38,117,75</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">Frames/RKN1d0000.png</key>
-            <key type="filename">Frames/RKN1d0001.png</key>
-            <key type="filename">Frames/RKN1d0002.png</key>
-            <key type="filename">Frames/RKN1d0003.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>38,38,75,75</rect>
-                <key>scale9Paddings</key>
-                <rect>38,38,75,75</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

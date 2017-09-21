@@ -736,7 +736,7 @@ EffectsController.prototype.DripSplash = function(src, onWater) {
     dripSplash.animations.currentAnim.killOnComplete = true;
     dripSplash.alpha = 0.5;
 
-    events.publish('play_sound', {name: 'drip', restart: true });
+    events.publish('play_sound', {name: 'drip', restart: false });
 
     //if it hit water, then make a ripple
     if(onWater) {

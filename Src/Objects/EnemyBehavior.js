@@ -157,7 +157,7 @@ EnemyBehavior.Player.IsVisible = function(e) {
         }
     }
 
-    if(initialState !== true && this.Visibility[e.z].result === true) {
+    if(initialState !== true && this.Visibility[e.z].result === true && e.maxEnergy > 1) {
         speechController.ShowExclamationMark(e);
     }
 
