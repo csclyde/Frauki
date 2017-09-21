@@ -135,7 +135,12 @@ Player.prototype.postStateUpdate = function() {
             this.body.maxVelocity.x *= 0.7;
         }
 
-        this.body.gravity.y = -200;
+        if(this.states.flowLeft || this.states.flowRight || this.states.flowDown || this.states.flowUp) {
+            this.body.gravity.y = -700;
+        } else {
+            this.body.gravity.y = -200;
+        }
+
     }
 
     if(this.states.inUpdraft) {
@@ -1000,7 +1005,7 @@ Player.prototype.Standing = function() {
 
 Player.prototype.Running = function() {
 
-    if((frauki.states.flowLeft || frauki.states.flowRight) && !inputController.dpad.left && !inputController.dpad.right) {
+    if(frauki.states.flowLeft || frauki.states.flowRight) {
         this.PlayAnim('fall');
     } else if((this.body.acceleration.x < 0 && this.body.velocity.x > 0) || (this.body.acceleration.x > 0 && this.body.velocity.x < 0)) {
         this.PlayAnim('slide');
@@ -1129,6 +1134,8 @@ Player.prototype.Flipping = function() {
             this.ChangeState(this.Running);
         } else if(this.body.velocity.x === 0 && this.body.onFloor()) {
             this.ChangeState(this.Landing);
+        } else {
+            this.ChangeState(this.Standing);
         }
     }
 };
