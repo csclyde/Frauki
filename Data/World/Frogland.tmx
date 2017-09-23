@@ -3,8 +3,8 @@
  <properties>
   <property name="debug" value="true"/>
   <property name="startLayer" value="3"/>
-  <property name="startX" value="71"/>
-  <property name="startY" value="244"/>
+  <property name="startX" value="114"/>
+  <property name="startY" value="258"/>
  </properties>
  <tileset firstgid="1" name="Collision" tilewidth="16" tileheight="16" tilecount="64" columns="8">
   <image source="../CollisionKey.png" width="128" height="128"/>

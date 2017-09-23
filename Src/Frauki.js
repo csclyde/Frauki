@@ -86,7 +86,10 @@ Player.prototype.preStateUpdate = function() {
     }
 
     this.body.maxVelocity.x = PLAYER_SPEED() + this.movement.rollBoost;
-    this.body.maxVelocity.y = 350;
+
+    if(this.body.velocity.y >= 0) {
+        this.body.maxVelocity.y = 350;
+    }
 
     //maintain the roll boost when they jump without a key down
     if(this.movement.rollBoost > 0) {
@@ -144,7 +147,7 @@ Player.prototype.postStateUpdate = function() {
     }
 
     if(this.states.inUpdraft) {
-        this.body.acceleration.y = -800;
+        this.body.acceleration.y = -850;
         this.body.maxVelocity.y = 500;
     } else {
         this.body.acceleration.y = 0;
@@ -1401,7 +1404,10 @@ Player.prototype.AttackLunge = function() {
 Player.prototype.AttackFall = function() {
     this.PlayAnim('attack_fall');
 
-    this.body.gravity.y = game.physics.arcade.gravity.y * 3;
+    if(!this.states.inUpdraft) {
+        this.body.gravity.y = game.physics.arcade.gravity.y * 3;
+    }
+    
     this.body.maxVelocity.y = 450;
 
     if(!this.Attacking() && this.body.onFloor()) {
@@ -1516,14 +1522,18 @@ Player.prototype.AttackDiveCharge = function() {
         events.publish('play_sound', {name: 'attack_dive_fall'});
 
         effectsController.EnergyStreak();
-        this.body.velocity.y = 20000;
+        this.body.velocity.y = 400;
     }
 };
 
 Player.prototype.AttackDiveFall = function() {
     this.PlayAnim('attack_dive_fall');
     this.body.maxVelocity.y = this.movement.diveVelocity;
-    this.body.velocity.y = this.movement.diveVelocity;
+
+    if(!this.states.inUpdraft) {
+        this.body.gravity.y = game.physics.arcade.gravity.y * 3;
+    }
+    
     //this.body.acceleration.y = 20000;//this.movement.diveVelocity / (frauki.states.inUpdraft ? 3 : 1);
     
     this.body.maxVelocity.x = 100;
