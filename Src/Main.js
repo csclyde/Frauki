@@ -80,7 +80,7 @@ Main.update = function() {
 };
 
 Main.render = function() {
-    // game.debug.body(frauki);
+    game.debug.body(frauki);
     // game.debug.body(frauki.attackRect);
 
     // objectController.activeLayer3.forEach(function(o) {

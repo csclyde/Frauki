@@ -571,12 +571,19 @@ Player.prototype.Jump = function(params) {
 };
 
 Player.prototype.DoubleJump = function() {
-    if(this.states.hasFlipped === false && this.state !== this.Rolling && this.state !== this.AttackStab && this.state !== this.AttackOverhead && this.state !== this.AttackFall && energyController.UseEnergy(1)) {
+    if(this.states.hasFlipped === false && this.state !== this.Rolling && this.state !== this.AttackStab && this.state !== this.AttackOverhead && this.state !== this.AttackFall) {
 
         var jumpVel = PLAYER_DOUBLE_JUMP_VEL();
 
         if(!this.timers.TimerUp('after_hang') || this.state === this.Hanging) {
             jumpVel = PLAYER_JUMP_VEL();
+
+            if(this.body.blocked.left) {
+                this.body.velocity.x = 50;
+            } else if(this.body.blocked.right) {
+                this.body.velocity.x = -50;
+            }
+            
         }
 
         if(this.body.velocity.y > jumpVel) {
