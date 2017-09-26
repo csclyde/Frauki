@@ -39,6 +39,9 @@ BackdropController.prototype.Update = function() {
     // if(game.camera.y > 80 * 16) this.plx1.visible = false;
     // else this.plx1.visible = true;
 
+    this.clouds3.cameraOffset.x = -(game.camera.x * 0.20) + 400;
+    this.clouds3.cameraOffset.y = -(game.camera.y * 0.07) + 90;
+
     if(game.camera.y > 5200) {
         this.clouds1.cameraOffset.y += 500;
         this.clouds2.cameraOffset.y += 600;
@@ -62,6 +65,10 @@ BackdropController.prototype.CreateParallax = function() {
 
     this.plx1 = game.add.image(0, 0, 'parallax1');
     this.plx1.fixedToCamera = true;
+
+    this.clouds3 = game.add.tileSprite(0, 0, 1024, 512, 'clouds3');
+    this.clouds3.fixedToCamera = true;
+    this.clouds3.autoScroll(-5, 0);
 };
 
 BackdropController.prototype.LoadBackgrounds = function() {

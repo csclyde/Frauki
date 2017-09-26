@@ -92,7 +92,9 @@ SpeechController.prototype.Create = function() {
     this.exclamationMark.anchor.setTo(0.5);
     this.exclamationMark.visible = false;
 
-    this.surpriseMark = game.add.sprite(0, 0, 'UI', 'SurpriseMark0000');
+	this.surpriseMark = game.add.sprite(0, 0, 'UI', 'SurpriseMark0000');
+	this.surpriseMark.animations.add('shake', ['SurpriseMark0000', 'SurpriseMark0001', 'SurpriseMark0002', 'SurpriseMark0003'], 50, true, false);
+    this.surpriseMark.animations.play('shake');
     this.surpriseMark.anchor.setTo(0.5);
     this.surpriseMark.visible = false;
 

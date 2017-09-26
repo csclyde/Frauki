@@ -208,6 +208,9 @@
             <key type="filename">Frames/QuestionMark0000.png</key>
             <key type="filename">Frames/QuestionMark0001.png</key>
             <key type="filename">Frames/SurpriseMark0000.png</key>
+            <key type="filename">Frames/SurpriseMark0001.png</key>
+            <key type="filename">Frames/SurpriseMark0002.png</key>
+            <key type="filename">Frames/SurpriseMark0003.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
