@@ -555,7 +555,7 @@ Collision.OverlapEffectWithWorld = function(e, w) {
 };
 
 Collision.CollideProjectileWithWorld = function(p, t) {
-    if(p.projType === 'bolt') {
+    if(p.projType === 'bolt' && t.index === 1) {
         p.pendingDestroy = true;
         effectsController.Explosion(p);
     } else if(p.projType === 'mortar' && p.body.onFloor()) {

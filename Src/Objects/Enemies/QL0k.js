@@ -5,7 +5,7 @@ Enemy.prototype.types['QL0k'] =  function() {
 	this.anchor.setTo(0.5, 0.75);
 
     this.animations.add('idle', ['QL0k/Shoot0001'], 10, false, false);
-    this.animations.add('shoot', ['QL0k/Shoot0001', 'QL0k/Shoot0002', 'QL0k/Shoot0003', 'QL0k/Shoot0004', 'QL0k/Shoot0005', 'QL0k/Shoot0006'], 18, false, false);
+    this.animations.add('shoot', ['QL0k/Shoot0001', 'QL0k/Shoot0002', 'QL0k/Shoot0003', 'QL0k/Shoot0004', 'QL0k/Shoot0005', 'QL0k/Shoot0006'], 22, false, false);
 
     this.energy = 1;
 
@@ -123,8 +123,8 @@ Enemy.prototype.types['QL0k'] =  function() {
 
 		if(this.animations.currentAnim.isFinished) {
 
-			this.timers.SetTimer('shoot', 1000);
-			this.timers.SetTimer('rotation_wait', 200);
+			this.timers.SetTimer('shoot', 800);
+			this.timers.SetTimer('rotation_wait', 150);
 			this.hasShot = false;
 
 			return true;

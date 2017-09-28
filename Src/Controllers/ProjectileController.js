@@ -195,7 +195,7 @@ ProjectileController.prototype.LaserBolt = function(e, rot, flip) {
 	bolt.play('idle');
 	bolt.rotation = rot;
 
-	bolt.body.velocity = game.physics.arcade.velocityFromRotation(rot, 300);
+	bolt.body.velocity = game.physics.arcade.velocityFromRotation(rot, 800);
 
 	//game.physics.arcade.moveToXY(bolt, frauki.body.center.x, frauki.body.center.y, 500);
 
@@ -270,7 +270,7 @@ ProjectileController.prototype.Update = function() {
 			p.destroy();
 			childrenToRemove.push(p);
 		} else if(p.solid) {
-			game.physics.arcade.collide(p, Frogland.GetCurrentCollisionLayer(), Collision.CollideProjectileWithWorld);
+			game.physics.arcade.collide(p, Frogland.GetCurrentCollisionLayer(), null, Collision.CollideProjectileWithWorld);
 		}
 
 		if(p.projType === 'bolas' && p.attached === true) {
