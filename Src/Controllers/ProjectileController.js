@@ -195,7 +195,7 @@ ProjectileController.prototype.LaserBolt = function(e, rot, flip) {
 	bolt.play('idle');
 	bolt.rotation = rot;
 
-	bolt.body.velocity = game.physics.arcade.velocityFromRotation(rot, 800);
+	bolt.body.velocity = game.physics.arcade.velocityFromRotation(rot, 700);
 
 	//game.physics.arcade.moveToXY(bolt, frauki.body.center.x, frauki.body.center.y, 500);
 

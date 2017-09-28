@@ -216,7 +216,7 @@ function PerformOpen(d, save, silent) {
     var movementTarget = d.body.y - 64;
 
     if(!!d.open_direction && d.open_direction === 'down') {
-        movementTarget = d.body.y + 64;
+        movementTarget = d.body.y + 80;
     }
 
     d.state = d.Open;
