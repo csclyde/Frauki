@@ -281,6 +281,11 @@ ObjectController.prototype.CreateObjectsLayer = function(layer) {
             obj.create();
             objectController.doorList.push(obj);
 
+            //force open doors that do not close
+            if(GameData.IsDoorOpen(obj.id) && !!obj.stay_open) {
+                ForceOpenDoor(obj);
+            }
+                
         } else if(obj.spriteType === 'checkpoint') {
             if(obj.id == GameData.GetCheckpoint()) {
                 obj.CheckpointHit();

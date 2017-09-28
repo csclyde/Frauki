@@ -108,14 +108,6 @@ Door.prototype.create = function() {
         break;
     }
 
-
-   
-    
-    // this.animations.add('orb_2_1', ['DoorOrb0003'], 10, true, false);
-    
-    
-    // this.animations.add('orb_3_1', ['DoorOrb0006'], 10, true, false);
-    // this.animations.add('orb_3_2', ['DoorOrb0007'], 10, true, false); 
 };
 
 Door.prototype.update = function() {
@@ -203,6 +195,16 @@ function OpenDoorById(id) {
         console.log('Cant find door with id: ' + id);
     }
 };
+
+function ForceOpenDoor(d) {
+    if(!!d.open_direction && d.open_direction === 'down') {
+        d.y += 80;
+    } else {
+        d.y -= 64;
+    }
+
+    d.state = d.Open;
+}
 
 function PerformOpen(d, save, silent) {
     if(d.state === d.Open || !d.body) return;
