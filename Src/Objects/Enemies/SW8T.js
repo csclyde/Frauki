@@ -332,7 +332,7 @@ Enemy.prototype.types['SW8T'] =  function() {
 
 		'SW8T/Swipe0002': {
 			x: 10, y: 20, w: 55, h: 35,
-			damage: 1,
+			damage: 2,
 			knockback: 0.2,
 			priority: 1,
 			juggle: 0

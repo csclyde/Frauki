@@ -6,7 +6,7 @@
         <key>texturePackerVersion</key>
         <string>4.5.0</string>
         <key>fileName</key>
-        <string>D:/gamedev/Frauki/Design/Sprites/UI/UI.tps</string>
+        <string>/home/casey/Documents/Frauki/Design/Sprites/UI/UI.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">

@@ -518,12 +518,13 @@ Collision.OverlapLobWithEnemy = function(l, e) {
 
 Collision.OverlapObjectsWithEnvironment = function(o, e) {
     if(o.spriteType === 'shard') {
-        //return false;
-    } 
-    else if(o.spriteType === 'enemy' && e.index === 3) {
+        return false;
+    } else if(o.spriteType === 'enemy' && e.index === 3) {
         return false;
     } else if(o.spriteType === 'enemy' && e.index === 7) {
         return true;
+    } else if(o.spriteType === 'upgrade') {
+        return false;
     }
 
     return true;

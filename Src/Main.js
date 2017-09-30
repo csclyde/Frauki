@@ -209,8 +209,8 @@ Main.CreateUI = function() {
     this.healthFrameStart.fixedToCamera = true;
 
     for(var i = 0, len = 10; i < len; i++) {
-        this['healthFrameBack' + i] = game.add.image(14 + (i * 7), 13, 'UI', 'HudFrame0003', this.UI);
-        this['healthFrameFront' + i] = game.add.image(14 + (i * 7), 10, 'UI', 'HudFrame0001', this.UI);
+        this['healthFrameBack' + i] = game.add.image(14 + (i * 5), 13, 'UI', 'HudFrame0003', this.UI);
+        this['healthFrameFront' + i] = game.add.image(14 + (i * 5), 10, 'UI', 'HudFrame0001', this.UI);
 
         this['healthFrameBack' + i].fixedToCamera = true;
         this['healthFrameFront' + i].fixedToCamera = true;
@@ -221,12 +221,12 @@ Main.CreateUI = function() {
         }
     }
 
-    this.healthFrameEnd = game.add.image(14 + (energyController.GetMaxHealth() * 7), 10, 'UI', 'HudFrame0002', this.UI);
+    this.healthFrameEnd = game.add.image(14 + (energyController.GetMaxHealth() * 5), 10, 'UI', 'HudFrame0002', this.UI);
     this.healthFrameEnd.fixedToCamera = true;
 
     //health pips
     for(var i = 0, len = 10; i < len; i++) {
-        this['healthPip' + i] = game.add.image(14 + (7 * i), 13, 'UI', 'HealthPips0001', this.UI);
+        this['healthPip' + i] = game.add.image(14 + (5 * i), 13, 'UI', 'HealthPips0000', this.UI);
         this['healthPip' + i].fixedToCamera = true;
         
         if(i >= energyController.GetHealth()) {
@@ -283,7 +283,7 @@ Main.UpdateUI = function() {
         }
     }
 
-    this.healthFrameEnd.cameraOffset.x = 14 + (energyController.GetMaxHealth() * 7);
+    this.healthFrameEnd.cameraOffset.x = 14 + (energyController.GetMaxHealth() * 5);
 
     //energy
     for(var i = 0, len = 4; i < len; i++) {

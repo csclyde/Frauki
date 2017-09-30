@@ -1,11 +1,13 @@
 var GameData = {};
 
+var currentVer = 0.3;
+
 //When game data is requested, it is pulled from the data structure in memory. When
 //it is saved, it is put into the data structure, and then put into local storage.
 //So the only interaction with local storage is when the game loads, and when you
 //save something to it. It doesn't constantly read out of local storage
 GameData.data = {
-    version: 0.2,
+    version: currentVer,
     dirty: true,
 
     checkpoint: '0',
@@ -14,7 +16,7 @@ GameData.data = {
     shards: [],
     nugg_bank: 0,
     flash_copy: null,
-    health: 2,
+    health: 4,
     flags: {},
     vals: {
         goddess_message_queue: []
@@ -31,7 +33,7 @@ GameData.LoadDataFromStorage = function() {
 
     var save_data = JSON.parse(save_string);
 
-    if(!!save_data && save_data.version !== 0.2) {
+    if(!!save_data && save_data.version !== currentVer) {
         save_data = null;
         localStorage.setItem('save_data', '');
     }

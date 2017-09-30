@@ -9,7 +9,7 @@ Enemy.prototype.types['QL0k'] =  function() {
 
     this.energy = 1;
 
-    this.damage = 1;
+    this.damage = 2;
 
     this.robotic = true;
     this.isSolid = true;

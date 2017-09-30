@@ -260,7 +260,7 @@ Enemy.prototype.types['RKN1d'] =  function() {
 
         'RKN1d/Bite0003': {
             x: 20, y: 20, w: 55, h: 35,
-            damage: 1,
+            damage: 2,
             knockback: 0,
             priority: 1,
             juggle: 0
