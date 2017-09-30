@@ -46,6 +46,8 @@ Loading.preload = function() {
         game.load.audio(music.Name, music.File);
     });
 
+    game.load.bitmapFont('diest64', 'Data/Sprites/diest64.png', 'Data/Sprites/diest64.fnt');
+
     game.renderer.renderSession.roundPixels = false;
 };
 

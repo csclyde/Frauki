@@ -12,7 +12,9 @@ FileMap.Images = [
 	{ Name: 'clouds2', File: 'Data/World/Clouds2.png' },
 	{ Name: 'clouds3', File: 'Data/World/Clouds3.png' },
 
-	{ Name: 'font', File: 'Data/Sprites/font.png' },
+	// { Name: 'font', File: 'Data/Sprites/font.png' },
+	// { Name: 'fontImage', File: 'Data/Sprites/diest64.png' },
+	// { Name: 'fontXml', File: 'Data/Sprites/diest64.xml' },
 
 	{ Name: 'cave', File: 'Data/World/Cave.png' },
 	{ Name: 'stone', File: 'Data/World/Stone.png' },

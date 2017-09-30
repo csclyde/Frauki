@@ -51,11 +51,9 @@ SpeechController.prototype.Create = function() {
 	this.dialogBox.cameraOffset.x = 70 + speechOffsetX; 
 	this.dialogBox.cameraOffset.y = 10 + speechOffsetY; 
 
-	this.font = game.add.retroFont('font', 9, 15, 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890?,.!:#\' ', 13);
-	this.font.autoUpperCase = false;
-	this.font.multiLine = true;
-
-	this.text = game.add.image(0, 0, this.font);
+	//this.font = game.add.retroFont('font', 9, 15, 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890?,.!:#\' ', 13);
+	this.text = game.add.bitmapText(0, 0, 'diest64','hwut',16);
+	//this.text = game.add.image(0, 0, this.font);
 	this.text.fixedToCamera = true;
 	this.text.visible = false;
 	this.text.cameraOffset.x = 110 + speechOffsetX; 
@@ -158,7 +156,7 @@ SpeechController.prototype.Update = function() {
 		}
 	}
 
-	this.font.text = this.currentText.slice(0, this.displayIndex);
+	this.text.setText(this.currentText.slice(0, this.displayIndex));
 
 	if(this.timers.TimerUp('auto_hide') && this.text.visible) {
 		this.HideSpeech();
