@@ -116,7 +116,7 @@ EnemyBehavior.Player.IsVisible = function(e) {
     var refreshTime = 2000;
 
     if(this.Visibility[e.z].result === true) {
-        refreshTime = 5000;
+        refreshTime = 10000;
     } else {
         var dist = EnemyBehavior.Player.Distance(e);
 
@@ -179,6 +179,25 @@ EnemyBehavior.Player.IsDoorBetween = function(e) {
 
         if(Phaser.Line.intersects(ray, doorLine)) {
 
+            return true;
+        }
+    }
+
+    return false;
+};
+
+EnemyBehavior.Player.IsWallBetween = function(e) {
+    var ray = new Phaser.Line(frauki.body.center.x, frauki.body.center.y, e.body.center.x, e.body.center.y);
+    var collideTiles = Frogland.GetCurrentCollisionLayer().getRayCastTiles(ray, 4, true);
+
+    var i = collideTiles.length;
+    var collideCount = 0;
+    while(i--) {
+        if(collideTiles[i].index === 1) { 
+            collideCount++;
+        }
+
+        if(collideCount >= 2) {
             return true;
         }
     }

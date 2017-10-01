@@ -365,7 +365,7 @@ Collision.OverlapAttackWithEnemy = function(f, e, halfDmg) {
         return false;
     }
 
-    if(EnemyBehavior.Player.IsDoorBetween(e)) {
+    if(EnemyBehavior.Player.IsDoorBetween(e) || EnemyBehavior.Player.IsWallBetween(e)) {
         return;
     }
 
