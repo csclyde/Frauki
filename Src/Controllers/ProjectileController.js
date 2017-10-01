@@ -210,8 +210,6 @@ ProjectileController.prototype.LaserBolt = function(e, rot, flip) {
 
 ProjectileController.prototype.FallingTile = function(sourceTile, visibleTile) {
 
-	console.log(visibleTile.index)
-
 	var tileName = '';
 
 	if(visibleTile.index === 573) {

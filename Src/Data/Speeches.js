@@ -10,6 +10,7 @@ var Speeches = {
 	'lovely_day': { text: 'Another lovely day in Frogtown.' },
 	'spaceship_first_look': { text: 'Whoa... what\'s this big metal thing? Looks like it crashed into the ground here.' },
 	'apple_door': { text: 'Hmm, looks like an apple carved into this door. And I can eat an apple with right trigger...', portrait: 'Displeased' },
+	'test_text': { text: 'Hmm this is really long text designed to test the handling of long strings of text in the speech system. Will it break?!?!? "Will it": Will it work? Find, out, next; week... on Frauki\'s Fantastic Adventure in Frogland. Blahblahbla this still needs to be longer because the spacing was reduced!!!??', portrait: 'Displeased' },
 
 
 

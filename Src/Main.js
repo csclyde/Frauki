@@ -240,8 +240,8 @@ Main.CreateUI = function() {
     this.energyFrameStart.fixedToCamera = true;
 
     for(var i = 0, len = 4; i < len; i++) {
-        this['energyFrameBack' + i] = game.add.image(14 + (i * 7), 25, 'UI', 'HudFrame0003', this.UI);
-        this['energyFrameFront' + i] = game.add.image(14 + (i * 7), 22, 'UI', 'HudFrame0001', this.UI);
+        this['energyFrameBack' + i] = game.add.image(14 + (i * 5), 25, 'UI', 'HudFrame0003', this.UI);
+        this['energyFrameFront' + i] = game.add.image(14 + (i * 5), 22, 'UI', 'HudFrame0001', this.UI);
 
         this['energyFrameBack' + i].fixedToCamera = true;
         this['energyFrameFront' + i].fixedToCamera = true;
@@ -252,12 +252,12 @@ Main.CreateUI = function() {
         }
     }
 
-    this.energyFrameEnd = game.add.image(14 + (energyController.GetMaxCharge() * 7), 22, 'UI', 'HudFrame0002', this.UI);
+    this.energyFrameEnd = game.add.image(14 + (energyController.GetMaxCharge() * 5), 22, 'UI', 'HudFrame0002', this.UI);
     this.energyFrameEnd.fixedToCamera = true;
 
     //energy pips
     for(var i = 0, len = 4; i < len; i++) {
-        this['energyPip' + i] = game.add.image(14 + (7 * i), 25, 'UI', 'EnergyPips0001', this.UI);
+        this['energyPip' + i] = game.add.image(14 + (5 * i), 25, 'UI', 'EnergyPips0001', this.UI);
         this['energyPip' + i].fixedToCamera = true;
         
         if(i >= energyController.GetCharge()) {

@@ -71,7 +71,7 @@ WeaponController.prototype.RefactorWeaponList = function() {
         this.weaponList.push(this.Saw);
     }
 
-    this.currentWeapon = this.weaponList[0] || null;
+    this.currentWeapon = this.Baton;//this.weaponList[0] || null;
 };
 
 WeaponController.prototype.Update = function() {
@@ -87,7 +87,7 @@ WeaponController.prototype.ToggleWeapon = function(params) {
     if(this.currentWeapon != null) {
         //and the toggle is to activate it
         if(params.activate && frauki.state !== frauki.Hurting && (!frauki.InAttackAnim() || params.override)) {
-            if(energyController.GetCharge() > 0) {
+            if(energyController.GetCharge() >= 0) {
                 this.currentWeapon.Start();
                 this.weaponActive = true;
             } else {
@@ -130,9 +130,9 @@ WeaponController.prototype.Baton = {
     },
 
     Start: function() {
-        if(energyController.GetCharge() <= 0) {
-            return;
-        }
+        // if(energyController.GetCharge() <= 0) {
+        //     return;
+        // }
 
         if(!frauki.states.throwing) {
             //the initial activity when you press the button
@@ -214,7 +214,7 @@ WeaponController.prototype.Baton = {
 
     ThrowBaton: function() {
 
-        this.baton.chargeLevel = energyController.GetCharge();
+        this.baton.chargeLevel = 3;//energyController.GetCharge();
         energyController.ResetCharge();
 
         this.baton.animations.play('baton' + this.baton.chargeLevel);

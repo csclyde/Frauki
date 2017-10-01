@@ -52,12 +52,12 @@ SpeechController.prototype.Create = function() {
 	this.dialogBox.cameraOffset.y = 10 + speechOffsetY; 
 
 	//this.font = game.add.retroFont('font', 9, 15, 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890?,.!:#\' ', 13);
-	this.text = game.add.bitmapText(0, 0, 'diest64','hwut',16);
+	this.text = game.add.bitmapText(0, 0, 'diest64','', 16);
 	//this.text = game.add.image(0, 0, this.font);
 	this.text.fixedToCamera = true;
 	this.text.visible = false;
 	this.text.cameraOffset.x = 110 + speechOffsetX; 
-	this.text.cameraOffset.y = 20 + speechOffsetY;
+	this.text.cameraOffset.y = 15 + speechOffsetY;
 
 	this.portraits = {};
 
@@ -315,12 +315,11 @@ SpeechController.prototype.SetText = function(text) {
 	//three lines of text
 	for(var i = 0; i < 6; i++) {
 		var line = '';
-		var charCount = 0;
 
 		//each one a max of 40 chars
 		while(words.length > 0) {
 			//pop words off the front of the word list
-			if(line.length + words[0].length + 1 > 36) {
+			if(line.length + words[0].length + 1 > 42) {
 				break;
 			}
 
