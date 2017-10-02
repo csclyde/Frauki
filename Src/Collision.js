@@ -519,12 +519,60 @@ Collision.OverlapLobWithEnemy = function(l, e) {
 Collision.OverlapObjectsWithEnvironment = function(o, e) {
     if(o.spriteType === 'shard') {
         return false;
-    } else if(o.spriteType === 'enemy' && e.index === 3) {
-        return false;
-    } else if(o.spriteType === 'enemy' && e.index === 7) {
-        return true;
+    } else if(o.spriteType === 'enemy') {
+        return Collision.CollideEnemyWithEnvironment(o, e);
     } else if(o.spriteType === 'upgrade') {
         return false;
+    }
+
+    return true;
+};
+
+Collision.CollideEnemyWithEnvironment = function(e, t) {
+    if(t.index === 3) {
+        return false;
+    } else if(t.index === 7) {
+        return true;
+    } else if(t.index === 17) {
+        e.onLeftSlope = true;
+
+        //if fraukis bottom edge is between the top and bottom edges of the tile
+        if(e.body.y + e.body.height > (t.y * 16) + 1 && e.body.y + e.body.height <= t.bottom * 16) {
+
+            //if she is falling, i.e. not on the ground
+            if(e.body.velocity.y > 0) {
+                var offset = (t.right - e.body.center.x);
+                if(offset > 16) offset = 16;
+                if(offset < 0) offset = 0;
+
+                e.body.y = (t.y * 16) - e.body.height + offset;
+                e.body.blocked.down = true;
+                e.body.velocity.y = 0;
+                //e.body.velocity.x /= 1.25;
+            }
+        }
+
+        return false;
+
+    //right slope
+    } else if(t.index === 18) {
+        e.onRightSlope = true;
+
+        if(e.body.y + e.body.height > (t.y * 16) + 1 && e.body.y + e.body.height <= t.bottom * 16) {
+
+            if(e.body.velocity.y > 0) {
+                var offset = 16 - (t.right - e.body.center.x);
+                if(offset > 16) offset = 16;
+                if(offset < 0) offset = 0;
+
+                e.body.y = (t.y * 16) - e.body.height + offset;
+                e.body.blocked.down = true;
+                e.body.velocity.y = 0;
+                //frauki.body.velocity.x /= 1.25;
+            }
+        }
+
+        return false;        
     }
 
     return true;
