@@ -227,6 +227,8 @@ Player.prototype.postStateUpdate = function() {
     } else {
         events.publish('stop_sound', {name: 'running'});
     }
+
+    if(this.states.onCloud === false) this.states.droppingThroughCloud = false;
 };
 
 Player.prototype.update = function() {
@@ -518,7 +520,7 @@ Player.prototype.Jump = function(params) {
             var dropTime = 200;
             if(frauki.states.inWater) dropTime *= 2;
 
-            game.time.events.add(dropTime, function() { frauki.states.droppingThroughCloud = false; } );
+            //game.time.events.add(dropTime, function() { frauki.states.droppingThroughCloud = false; } );
             this.timers.SetTimer('frauki_dash', 250);
 
             return;
@@ -594,6 +596,7 @@ Player.prototype.DoubleJump = function() {
 
         this.ChangeState(this.Flipping);
         this.states.hasFlipped = true;
+        this.states.droppingThroughCloud = false;
         //this.timers.SetTimer('grace', 300);
 
         events.publish('play_sound', {name: 'airhike'});
@@ -867,14 +870,16 @@ Player.prototype.Roll = function(params) {
 
 Player.prototype.LandHit = function(e, damage) {
 
-    if(frauki.states.throwing && this.GetCurrentPriority() <= e.GetCurrentPriority() && damage === 0) {
+    if(frauki.states.throwing && damage === 0) {
         var vel = new Phaser.Point(weaponController.Baton.baton.body.center.x - e.body.center.x, weaponController.Baton.baton.body.center.y - e.body.center.y);
         vel = vel.normalize();
 
-        vel = vel.setMagnitude(300);
+        vel = vel.setMagnitude(200);
 
-        weaponController.Baton.baton.body.velocity.x = vel.x / 2;
+        weaponController.Baton.baton.body.velocity.x = vel.x / 2 * -1;
         weaponController.Baton.baton.body.velocity.y = vel.y * 10;
+
+        // weaponController.Baton.baton.body.velocity.x *= -1;
 
     } else if(frauki.states.throwing && damage > 0) {
         weaponController.Baton.UpgradeThrow();
