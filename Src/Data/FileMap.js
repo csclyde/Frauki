@@ -17,6 +17,7 @@ FileMap.Images = [
 	// { Name: 'fontXml', File: 'Data/Sprites/diest64.xml' },
 
 	{ Name: 'cave', File: 'Data/World/Cave.png' },
+	{ Name: 'dark_cave', File: 'Data/World/DarkCave.png' },
 	{ Name: 'stone', File: 'Data/World/Stone.png' },
 	{ Name: 'metal', File: 'Data/World/Metal.png' },
 ];
