@@ -127,6 +127,8 @@ Player.prototype.preStateUpdate = function() {
     } else {
         this.movement.globalMoveMod = 1.0;
     }
+
+    this.body.allowGravity = true;
 };
 
 Player.prototype.postStateUpdate = function() {
@@ -1262,6 +1264,7 @@ Player.prototype.Hanging = function() {
     this.body.velocity.y = 0;
     this.body.acceleration.y = 0;
     this.body.gravity.y = -700;
+    this.body.allowGravity = false;
     this.states.hasFlipped = false;
 
     if(!this.body.onWall()) {
