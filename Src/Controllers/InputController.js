@@ -62,6 +62,7 @@ InputController = function() {
 
             case Phaser.Keyboard.O:
                 energyController.invincible = true;
+                Frogland.UpdateTutorialBlocks();
             break;
 
             case Phaser.Keyboard.Q:

@@ -435,6 +435,36 @@ Frogland.AnimateTiles = function() {
     }
 };
 
+Frogland.UpdateTutorialBlocks = function() {
+    Frogland.map.forEach(function(tile) {
+        
+        if(!!tile) {
+            if(tile.index === 1157) tile.index = 1221;
+            if(tile.index === 1158) tile.index = 1222;
+
+            if(tile.index === 1159) tile.index = 1223;
+            if(tile.index === 1160) tile.index = 1224;
+
+            if(tile.index === 1161) tile.index = 1287;
+            if(tile.index === 1162) tile.index = 1288;
+
+            if(tile.index === 1189) tile.index = 1253;
+            if(tile.index === 1190) tile.index = 1254;
+
+            if(tile.index === 1191) tile.index = 1255;
+            if(tile.index === 1192) tile.index = 1256;
+
+            if(tile.index === 1193) tile.index = 1319;
+            if(tile.index === 1194) tile.index = 1320;
+        }
+
+        Frogland['backgroundLayer_3'].dirty = true;
+        
+
+            
+    }, Frogland, 0, 0, Frogland.width, Frogland.height, 'Background_3'); 
+};
+
 Frogland.Ragnarok = function(e) {
 
     if(e.owningLayer !== 4 || e.x < 2140 || e.x > 2860 || e.y < 4180 || e.y > 4500) {
