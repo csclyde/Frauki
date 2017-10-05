@@ -13,8 +13,6 @@ Main.create = function() {
     
     var fadeIn = effectsController.Fade(false);
     Frogland.SpawnFrauki();
-    //set correct tutorial block tiles
-    //Frogland.UpdateTutorialBlocks();
 
     fadeIn.onComplete.add(function() {
         frauki.Reset();

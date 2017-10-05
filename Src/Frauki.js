@@ -909,9 +909,9 @@ Player.prototype.LandHit = function(e, damage) {
     effectsController.ClashStreak(e.body.center.x, e.body.center.y, game.rnd.between(1, 2));
 
     if(damage > 0 && e.maxEnergy > 1) {
-        effectsController.SlowHit(600);
+        effectsController.SlowHit(400);
     } else if(damage === 0) {
-        effectsController.SlowHit(300);
+        effectsController.SlowHit(200);
     }
 
     if(damage > 0 && !this.states.throwing) {
@@ -958,7 +958,7 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
 
     if(energyController.GetHealth() > 0) {
         effectsController.ScreenFlash();
-        effectsController.SlowHit(400);
+        effectsController.SlowHit(300);
 
         var nuggAmt = damage * 3;
         if(nuggAmt > GameData.GetNuggCount()) nuggAmt = GameData.GetNuggCount();
@@ -971,12 +971,6 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
 
         effectsController.DropNuggets(GameData.GetNuggCount());
         GameData.ResetNuggCount();     
-
-        if(this.robotic && !GameData.GetFlag('goddess_robo_speech')) {
-            goddess.AddMessage("I see you've met those terrible robots. They're the ones who locked me up in this nasty prison. They're intruders, and they do not belong here.");
-
-            GameData.SetFlag('goddess_robo_speech', true);
-        }
     }
 };
 
