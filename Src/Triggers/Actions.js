@@ -177,3 +177,20 @@ TriggerController.prototype.triggers['ragnarok'] = {
 	exit: function(params) {
 	}
 };
+
+TriggerController.prototype.triggers['region_text'] = {
+	enter: function(params, trigger) {
+	},
+
+	stay: function(params, trigger) {
+
+	},
+
+	exit: function(params, trigger) {
+		if(!!params.left && frauki.body.center.x < trigger.x) {
+			console.log(params.left);
+		} else if(!!params.right && frauki.body.center.x > trigger.x) {
+			console.log(params.right)
+		}
+	}
+}
