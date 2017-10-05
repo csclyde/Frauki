@@ -236,6 +236,7 @@ Frogland.PreprocessTiles = function(layer) {
 
 
     }, this, 0, 0, 5, 20, 'Foreground_4');
+    
 };
 
 Frogland.GetCurrentCollisionLayer = function() {
@@ -439,23 +440,47 @@ Frogland.UpdateTutorialBlocks = function() {
     Frogland.map.forEach(function(tile) {
         
         if(!!tile) {
-            if(tile.index === 1157) tile.index = 1221;
-            if(tile.index === 1158) tile.index = 1222;
-
-            if(tile.index === 1159) tile.index = 1223;
-            if(tile.index === 1160) tile.index = 1224;
-
-            if(tile.index === 1161) tile.index = 1287;
-            if(tile.index === 1162) tile.index = 1288;
-
-            if(tile.index === 1189) tile.index = 1253;
-            if(tile.index === 1190) tile.index = 1254;
-
-            if(tile.index === 1191) tile.index = 1255;
-            if(tile.index === 1192) tile.index = 1256;
-
-            if(tile.index === 1193) tile.index = 1319;
-            if(tile.index === 1194) tile.index = 1320;
+            if(game.input.gamepad.supported && game.input.gamepad.active) {
+                console.log('switching cause gamepad')
+                if(tile.index === 1221) tile.index = 1157;
+                if(tile.index === 1222) tile.index = 1158;
+    
+                if(tile.index === 1223) tile.index = 1159;
+                if(tile.index === 1224) tile.index = 1160;
+    
+                if(tile.index === 1287) tile.index = 1161;
+                if(tile.index === 1288) tile.index = 1162;
+    
+                if(tile.index === 1253) tile.index = 1189;
+                if(tile.index === 1254) tile.index = 1190;
+    
+                if(tile.index === 1255) tile.index = 1191;
+                if(tile.index === 1256) tile.index = 1192;
+    
+                if(tile.index === 1193) tile.index = 1193;
+                if(tile.index === 1194) tile.index = 1194;
+            } else {
+                console.log('switching cause no gamepad')
+                
+                if(tile.index === 1157) tile.index = 1221;
+                if(tile.index === 1158) tile.index = 1222;
+    
+                if(tile.index === 1159) tile.index = 1223;
+                if(tile.index === 1160) tile.index = 1224;
+    
+                if(tile.index === 1161) tile.index = 1287;
+                if(tile.index === 1162) tile.index = 1288;
+    
+                if(tile.index === 1189) tile.index = 1253;
+                if(tile.index === 1190) tile.index = 1254;
+    
+                if(tile.index === 1191) tile.index = 1255;
+                if(tile.index === 1192) tile.index = 1256;
+    
+                if(tile.index === 1193) tile.index = 1319;
+                if(tile.index === 1194) tile.index = 1320;
+            }
+            
         }
 
         Frogland['backgroundLayer_3'].dirty = true;
