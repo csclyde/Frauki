@@ -14,6 +14,18 @@ SpeechController = function() {
 
 	events.subscribe('hide_text', this.AdvanceText, this);
 
+	events.subscribe('display_region_text', function(params) {
+		if(!this.timers.TimerUp('region_text')) return;
+
+		game.add.tween(this.regionText).
+			to({alpha: 1}, 800, Phaser.Easing.Linear.None, true).
+			chain(game.add.tween(this.regionText).to({alpha: 0}, 800, Phaser.Easing.Linear.None, false, 2000));
+
+		this.regionText.setText(params.text);
+
+		this.timers.SetTimer('region_text', 4000);
+	}, this);
+
 
 	this.timers = new TimerUtil();
 
@@ -58,6 +70,15 @@ SpeechController.prototype.Create = function() {
 	this.text.visible = false;
 	this.text.cameraOffset.x = 110 + speechOffsetX; 
 	this.text.cameraOffset.y = 15 + speechOffsetY;
+
+	this.regionText = game.add.bitmapText(0, 0, 'diest64','tester', 48);
+	//this.regionText = game.add.image(0, 0, this.font);
+	this.regionText.fixedToCamera = true;
+	this.regionText.alpha = 0;
+	this.regionText.anchor.setTo(0.5);
+	this.regionText.cameraOffset.x = game.width / 2; 
+	this.regionText.cameraOffset.y = game.height / 3;
+	//this.regionText.x = this.game.width / 2 - this.regionText.textWidth / 2;
 
 	this.portraits = {};
 
