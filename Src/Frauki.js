@@ -179,7 +179,7 @@ Player.prototype.postStateUpdate = function() {
 
     if(!this.timers.TimerUp('frauki_invincible') && this.timers.TimerUp('hurt_flicker')) {
         this.alpha = 0;
-        game.time.events.add(10, function() { frauki.timers.SetTimer('hurt_flicker', 10); });
+        game.time.events.add(30, function() { frauki.timers.SetTimer('hurt_flicker', 30); });
     } else {
         this.alpha = 1;
     }

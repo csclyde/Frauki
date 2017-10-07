@@ -400,7 +400,7 @@ Enemy.prototype.types['KR32'] =  function() {
 		},
 
 		'KR32/Stab0001': {
-			x: 0, y: 12, w: 90, h: 10,
+			x: 0, y: 12, w: 90, h: 30,
 			damage: 1,
 			knockback: 0.2,
 			priority: 3,
