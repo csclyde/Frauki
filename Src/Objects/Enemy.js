@@ -35,11 +35,16 @@ Enemy = function(game, x, y, name) {
     this.UI.frame = game.add.image(0, 0, 'UI', 'EnemyHealth000' + (this.maxEnergy - 1), Frogland['objectGroup_' + this.owningLayer]);
     this.UI.pips = [];
 
-    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0005'));
-    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0005'));
-    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0005'));
-    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0005'));
-    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0005'));
+    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0008'));
+    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0008'));
+    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0008'));
+    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0008'));
+    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0008'));
+    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0008'));
+    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0008'));
+    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0008'));
+    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0008'));
+    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0008'));
 
     this.events.onDestroy.add(function(e) {
         e.UI.frame.destroy();

@@ -256,7 +256,6 @@
             <key type="filename">Frames/EnemyHealth0006.png</key>
             <key type="filename">Frames/EnemyHealth0007.png</key>
             <key type="filename">Frames/EnemyHealth0008.png</key>
-            <key type="filename">Frames/EnemyHealth0009.png</key>
             <key type="filename">Frames/HudFrame0000.png</key>
             <key type="filename">Frames/HudFrame0001.png</key>
             <key type="filename">Frames/HudFrame0002.png</key>
