@@ -231,6 +231,7 @@ Player.prototype.postStateUpdate = function() {
     }
 
     if(this.states.onCloud === false) this.states.droppingThroughCloud = false;
+
 };
 
 Player.prototype.update = function() {

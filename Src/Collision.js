@@ -186,16 +186,13 @@ Collision.CollideFraukiWithEnvironment = function(f, tile) {
     } else if(tile.index === 17) {
         frauki.states.onLeftSlope = true;
 
-        //if fraukis bottom edge is between the top and bottom edges of the tile
-        if(frauki.body.y + frauki.body.height > (tile.y * 16) + 1 && frauki.body.y + frauki.body.height <= tile.bottom * 16) {
-
-            //if she is falling, i.e. not on the ground
+        if(frauki.body.center.x <= tile.right + 2 && frauki.body.center.x >= tile.left - 2) {
             if(frauki.body.velocity.y > 0) {
-                var offset = (tile.right - frauki.body.center.x);
+                var offset = (tile.right - Math.round(frauki.body.center.x));
                 if(offset > 16) offset = 16;
                 if(offset < 0) offset = 0;
 
-                frauki.body.y = (tile.y * 16) - frauki.body.height + offset;
+                frauki.body.y = tile.worldY - frauki.body.height + offset;
                 frauki.body.blocked.down = true;
                 frauki.body.velocity.y = 0;
                 //frauki.body.velocity.x /= 1.25;
@@ -206,14 +203,13 @@ Collision.CollideFraukiWithEnvironment = function(f, tile) {
     } else if(tile.index === 18) {
         frauki.states.onRightSlope = true;
 
-        if(frauki.body.y + frauki.body.height > (tile.y * 16) + 1 && frauki.body.y + frauki.body.height <= tile.bottom * 16) {
-
+        if(frauki.body.center.x <= tile.right + 2 && frauki.body.center.x >= tile.left - 2) {
             if(frauki.body.velocity.y > 0) {
-                var offset = 16 - (tile.right - frauki.body.center.x);
+                var offset = 16 - (tile.right - Math.round(frauki.body.center.x));
                 if(offset > 16) offset = 16;
                 if(offset < 0) offset = 0;
 
-                frauki.body.y = (tile.y * 16) - frauki.body.height + offset;
+                frauki.body.y = tile.worldY - frauki.body.height + offset;
                 frauki.body.blocked.down = true;
                 frauki.body.velocity.y = 0;
                 //frauki.body.velocity.x /= 1.25;
@@ -536,16 +532,13 @@ Collision.CollideEnemyWithEnvironment = function(e, t) {
     } else if(t.index === 17) {
         e.onLeftSlope = true;
 
-        //if fraukis bottom edge is between the top and bottom edges of the tile
-        if(e.body.y + e.body.height > (t.y * 16) + 1 && e.body.y + e.body.height <= t.bottom * 16) {
-
-            //if she is falling, i.e. not on the ground
+        if(e.body.center.x <= t.right + 2 && e.body.center.x >= t.left - 2) {
             if(e.body.velocity.y > 0) {
-                var offset = (t.right - e.body.center.x);
+                var offset = (t.right - Math.round(e.body.center.x));
                 if(offset > 16) offset = 16;
                 if(offset < 0) offset = 0;
 
-                e.body.y = (t.y * 16) - e.body.height + offset;
+                e.body.y = t.worldY - e.body.height + offset;
                 e.body.blocked.down = true;
                 e.body.velocity.y = 0;
                 //e.body.velocity.x /= 1.25;
@@ -558,17 +551,16 @@ Collision.CollideEnemyWithEnvironment = function(e, t) {
     } else if(t.index === 18) {
         e.onRightSlope = true;
 
-        if(e.body.y + e.body.height > (t.y * 16) + 1 && e.body.y + e.body.height <= t.bottom * 16) {
-
+        if(e.body.center.x <= t.right + 2 && e.body.center.x >= t.left - 2) {
             if(e.body.velocity.y > 0) {
-                var offset = 16 - (t.right - e.body.center.x);
+                var offset = 16 - (t.right - Math.round(e.body.center.x));
                 if(offset > 16) offset = 16;
                 if(offset < 0) offset = 0;
 
-                e.body.y = (t.y * 16) - e.body.height + offset;
+                e.body.y = t.worldY - e.body.height + offset;
                 e.body.blocked.down = true;
                 e.body.velocity.y = 0;
-                //frauki.body.velocity.x /= 1.25;
+                //e.body.velocity.x /= 1.25;
             }
         }
 
