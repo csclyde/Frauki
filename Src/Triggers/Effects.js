@@ -28,7 +28,7 @@ TriggerController.prototype.triggers['light'] = {
 
 TriggerController.prototype.triggers['dark'] = {
 	enter: function(params) {
-		effectsController.ScreenDark(true);
+		effectsController.ScreenDark(true, params.amount);
 	},
 
 	stay: function(params) {

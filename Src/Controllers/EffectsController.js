@@ -766,11 +766,11 @@ EffectsController.prototype.ScreenFlash = function() {
     flash.start();
 };
 
-EffectsController.prototype.ScreenDark = function(show) {
+EffectsController.prototype.ScreenDark = function(show, amt) {
     if(show) {
         this.screenDark.alpha = 0;
         this.screenDark.visible = true;
-        game.add.tween(this.screenDark).to( { alpha: 0.3 }, 300, Phaser.Easing.Linear.None, true);
+        game.add.tween(this.screenDark).to( { alpha: amt || 0.3 }, 300, Phaser.Easing.Linear.None, true);
     } else {
         game.add.tween(this.screenDark).to( { alpha: 0 }, 300, Phaser.Easing.Linear.None, true);
     }
