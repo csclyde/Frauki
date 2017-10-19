@@ -125,9 +125,9 @@ TriggerController.prototype.triggers['goddess_intro'] = {
 
 TriggerController.prototype.triggers['vertical_loop'] = {
 	enter: function(params) {
-		frauki.y = 400;
-		game.camera.y = 45;
-		cameraController.camY = -642;
+		frauki.y = 20 * 16;
+		game.camera.y = 0;
+		cameraController.camY = 0;
 	},
 
 	stay: function(params) {
@@ -139,9 +139,9 @@ TriggerController.prototype.triggers['vertical_loop'] = {
 
 TriggerController.prototype.triggers['vertical_loop_up'] = {
 	enter: function(params) {
-		frauki.y = 10000;
-		game.camera.y = 10000;
-		cameraController.camY = 9000;
+		frauki.y = 641 * 16;
+		//game.camera.y = 10000;
+		//cameraController.camY = 9000;
 	},
 
 	stay: function(params) {

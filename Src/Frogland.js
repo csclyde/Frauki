@@ -57,7 +57,7 @@ Frogland.Create = function() {
         OpenDoorById(params.door_name);
     });
 
-    events.subscribe('enemy_killed', this.Ragnarok, this);
+    //events.subscribe('enemy_killed', this.Ragnarok, this);
     this.ragnarokCounter = 1;
     this.ragnarokLevel = 0;
 
@@ -213,6 +213,18 @@ Frogland.PreprocessTiles = function(layer) {
             //tiles with all faces colliding
             } else if(tile.index === 8) {
                 tile.setCollision(true, true, true, true);
+
+            } else if(tile.index === 17 || tile.index === 18) {
+                // //tile.setCollision(true, true, true, true);
+                var leftTile = this.map.getTile(tile.x - 1, tile.y, 'Collision_' + layer);
+                var rightTile = this.map.getTile(tile.x + 1, tile.y, 'Collision_' + layer);
+                var topTile = this.map.getTile(tile.x, tile.y - 1, 'Collision_' + layer);
+                var bottomTile = this.map.getTile(tile.x, tile.y + 1, 'Collision_' + layer);
+
+                // if(!!leftTile && leftTile.index === 1) leftTile.setCollision(true, true, true, true);
+                // if(!!rightTile && rightTile.index === 1) rightTile.setCollision(true, true, true, true);
+                // if(!!topTile && topTile.index === 1) topTile.setCollision(true, true, true, true);
+                // if(!!bottomTile && bottomTile.index === 1) bottomTile.setCollision(true, true, true, true);
             }
         }
            
@@ -235,7 +247,7 @@ Frogland.PreprocessTiles = function(layer) {
         }
 
 
-    }, this, 0, 0, 5, 20, 'Foreground_4');
+    }, this, 0, 0, 5, 30, 'Foreground_4');
     
 };
 

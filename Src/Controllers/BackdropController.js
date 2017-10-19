@@ -22,32 +22,32 @@ BackdropController.prototype.Update = function() {
     });
 
     this.clouds1.cameraOffset.x = -(game.camera.x * 0.10) + 0;
-    this.clouds1.cameraOffset.y = -(game.camera.y * 0.05) + 50;
+    this.clouds1.cameraOffset.y = -(game.camera.y * 0.05) + 150;
 
     // if(game.camera.y > 80 * 16) this.clouds1.visible = false;
     // else this.clouds1.visible = true;
 
     this.clouds2.cameraOffset.x = -(game.camera.x * 0.15) + 0;
-    this.clouds2.cameraOffset.y = -(game.camera.y * 0.06) + 70;
+    this.clouds2.cameraOffset.y = -(game.camera.y * 0.06) + 170;
 
     // if(game.camera.y > 80 * 16) this.clouds2.visible = false;
     // else this.clouds2.visible = true;
 
     this.plx1.cameraOffset.x = -(game.camera.x * 0.20) + 0;
-    this.plx1.cameraOffset.y = -(game.camera.y * 0.08) + 220;
+    this.plx1.cameraOffset.y = -(game.camera.y * 0.08) + 320;
 
     // if(game.camera.y > 80 * 16) this.plx1.visible = false;
     // else this.plx1.visible = true;
 
     this.clouds3.cameraOffset.x = -(game.camera.x * 0.20) + 0;
-    this.clouds3.cameraOffset.y = -(game.camera.y * 0.07) + 90;
+    this.clouds3.cameraOffset.y = -(game.camera.y * 0.07) + 190;
 
-    if(game.camera.y > 5200) {
-        this.clouds1.cameraOffset.y += 500;
-        this.clouds2.cameraOffset.y += 600;
-        this.clouds3.cameraOffset.y += 700;
-        this.plx1.cameraOffset.y += 800;
-    }
+    // if(game.camera.y > 5200) {
+    //     this.clouds1.cameraOffset.y += 500;
+    //     this.clouds2.cameraOffset.y += 600;
+    //     this.clouds3.cameraOffset.y += 700;
+    //     this.plx1.cameraOffset.y += 800;
+    // }
 
 };
 
