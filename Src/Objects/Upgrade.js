@@ -58,10 +58,8 @@ Upgrade.prototype.update = function() {
     }
 
     if(!this.icon.iconSet) {
-        console.log('settin icon', this.upgrade)
         if(this.upgrade.indexOf('Health') >= 0) {
             this.icon.animations.play('Health');
-            console.log('playin health')
         } else if(this.upgrade === 'Shield') {
             this.icon.animations.play('Shield');
         } else if(this.upgrade === 'Baton') {
