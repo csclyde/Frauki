@@ -910,7 +910,7 @@ Player.prototype.LandHit = function(e, damage) {
     effectsController.ClashStreak(e.body.center.x, e.body.center.y, game.rnd.between(1, 2));
 
     if(damage > 0 && e.maxEnergy > 1) {
-        effectsController.SlowHit(400);
+        effectsController.SlowHit(300);
     } else if(damage === 0) {
         effectsController.SlowHit(200);
     }

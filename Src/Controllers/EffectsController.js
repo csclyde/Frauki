@@ -579,7 +579,7 @@ EffectsController.prototype.MakeHearts = function(amt) {
 };
 
 EffectsController.prototype.SlowHit = function(duration) {
-    var t = game.add.tween(Main).to( { physicsSlowMo: 0.2 }, Math.round(duration * 0.2), Phaser.Easing.Exponential.Out, false).to( { physicsSlowMo: 1 }, Math.round(duration * 0.8), Phaser.Easing.Exponential.In, false);
+    var t = game.add.tween(Main).to( { physicsSlowMo: 0.05 }, Math.round(duration * 0.2), Phaser.Easing.Exponential.Out, false).to( { physicsSlowMo: 1 }, Math.round(duration * 0.8), Phaser.Easing.Exponential.In, false);
     t.start();
 
     //var currAnim = frauki.animations.currentAnim;
