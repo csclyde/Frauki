@@ -11,6 +11,11 @@ Frogland.Create = function() {
     this.map.addTilesetImage('Doodads');
     this.map.addTilesetImage('Collision');
 
+    this.map.props = {};
+    this.map.properties.forEach(function(prop) {
+        Frogland.map.props[prop.name] = prop.value;
+    });
+
     this.currentLayer = 3;
 
     backdropController.CreateParallax();
@@ -139,7 +144,7 @@ Frogland.SpawnFrauki = function() {
         var pos = GameData.GetDebugPos();
         frauki.x = pos.x;
         frauki.y = pos.y; 
-    } else if(Frogland.map.properties.debug === 'false') {
+    } else if(Frogland.map.props.debug === 'false') {
         objectController.checkpointList.forEach(function(obj) {
             if(obj.spriteType === 'checkpoint' && obj.id == GameData.GetCheckpoint()) {
                 frauki.x = obj.x;
@@ -150,9 +155,9 @@ Frogland.SpawnFrauki = function() {
         }); 
 
     } else {
-        frauki.x = this.map.properties.startX * 16;
-        frauki.y = this.map.properties.startY * 16 + 90;
-        Frogland.ChangeLayer(+this.map.properties.startLayer, true); 
+        frauki.x = this.map.props.startX * 16;
+        frauki.y = this.map.props.startY * 16 + 90;
+        Frogland.ChangeLayer(+this.map.props.startLayer, true); 
     }
 
     cameraController.camX = frauki.x + 300;
