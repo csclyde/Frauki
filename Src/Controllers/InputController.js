@@ -385,8 +385,6 @@ InputController.prototype.OnRoll = function(pressed) {
         } else {
 
         }
-    } else if(game.state.getCurrentState() === Upgrading) {
-        events.publish('exit_upgrades', {});
     }
 };
 

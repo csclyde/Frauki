@@ -197,8 +197,6 @@ Main.Restart = function() {
 
         Frogland.SpawnFrauki();
 
-        //game.state.start('Upgrading', false, false);
-
     });
 };
 

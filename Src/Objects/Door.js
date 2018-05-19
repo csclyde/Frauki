@@ -26,6 +26,7 @@ Door.prototype = Object.create(Phaser.Sprite.prototype);
 Door.prototype.constructor = Door;
 
 Door.prototype.create = function() {
+    console.log(this);
     switch(this.type) {
 
         case 'stone_seal':
