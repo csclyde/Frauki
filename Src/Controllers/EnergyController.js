@@ -74,7 +74,7 @@ EnergyController.prototype.Update = function() {
 	}
 
 	if(this.health <= 0)
-		Main.Restart();
+		GameState.Restart();
 
 	if(this.oldHealth !== this.health || this.oldCharge !== this.charge) {
 		events.publish('update_ui', {});

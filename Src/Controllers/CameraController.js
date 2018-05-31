@@ -108,7 +108,7 @@ CameraController.prototype.RaiseCamera = function(params) {
 
 CameraController.prototype.ScreenShake = function(params) {
 
-	if(Main.restarting === true) {
+	if(GameState.restarting === true) {
 		return;
 	}
 

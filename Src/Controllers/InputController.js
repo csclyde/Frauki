@@ -47,7 +47,7 @@ InputController = function() {
 
         if(e.repeat) return;
 
-        if(Main.restarting) {
+        if(GameState.restarting) {
             return;
         }
 
@@ -116,7 +116,7 @@ InputController = function() {
 
     game.input.keyboard.onUpCallback = function(e) {
 
-        if(Main.restarting) {
+        if(GameState.restarting) {
             return;
         }
 
@@ -174,7 +174,7 @@ InputController = function() {
             console.log('gamepad disconnected');
         },
         onDown: function(buttonCode, value){
-            if(Main.restarting) {
+            if(GameState.restarting) {
                 return;
             }
 
@@ -229,7 +229,7 @@ InputController = function() {
         },
         onUp: function(buttonCode, value){
 
-            if(Main.restarting) {
+            if(GameState.restarting) {
                 return;
             }
             

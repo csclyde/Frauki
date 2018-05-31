@@ -1,6 +1,6 @@
-var Main = new Phaser.State();
+var GameState = new Phaser.State();
 
-Main.create = function() {
+GameState.create = function() {
 
     Frogland.SpawnFrauki();
     //inputController.DisallowInput();
@@ -16,7 +16,7 @@ Main.create = function() {
 
     fadeIn.onComplete.add(function() {
         frauki.Reset();
-        Main.restarting = false;
+        GameState.restarting = false;
         
         //inputController.AllowInput();
 
@@ -54,7 +54,7 @@ Main.create = function() {
     // this.titleLogo.cameraOffset.y = 30;
 };
 
-Main.update = function() {
+GameState.update = function() {
     frauki.UpdateAttackGeometry();
     objectController.Update();
     
@@ -79,7 +79,7 @@ Main.update = function() {
 
 };
 
-Main.render = function() {
+GameState.render = function() {
     // game.debug.body(frauki);
     // game.debug.body(frauki.attackRect);
 
@@ -126,7 +126,7 @@ Main.render = function() {
     //this.DrawUI();
 };
 
-Main.Restart = function() {
+GameState.Restart = function() {
     if(this.restarting === true) {
         return;
     }
@@ -167,10 +167,10 @@ Main.Restart = function() {
         });
 
         energyController.Reset();
-        Main.physicsSlowMo = 1.0;
+        GameState.physicsSlowMo = 1.0;
         effectsController.Fade(false);
 
-        Main.restarting = false;
+        GameState.restarting = false;
 
         objectController.Reset();
         effectsController.Reset();
@@ -200,7 +200,7 @@ Main.Restart = function() {
     });
 };
 
-Main.CreateUI = function() {
+GameState.CreateUI = function() {
     this.UI = game.add.group();
 
     this.healthFrameStart = game.add.image(10, 10, 'UI', 'HudFrame0000', this.UI);
@@ -264,7 +264,7 @@ Main.CreateUI = function() {
     }
 };
 
-Main.UpdateUI = function() {
+GameState.UpdateUI = function() {
     for(var i = 0, len = 10; i < len; i++) {
         if(i >= energyController.GetMaxHealth()) {
             this['healthFrameBack' + i].visible = false;
@@ -311,7 +311,7 @@ Main.UpdateUI = function() {
     }
 };
 
-Main.DrawUI = function() {
+GameState.DrawUI = function() {
     
     this.RenderTextureFromAtlas('UI', 'HudFrame0000', 10, 10);
     
@@ -434,23 +434,23 @@ Main.DrawUI = function() {
 
     //draw an indicator for each obtained shard
     if(GameData.HasShard('Wit')) {
-        Main.RenderTextureFromAtlas('Misc', 'Shard0004', 35, 330);
+        GameState.RenderTextureFromAtlas('Misc', 'Shard0004', 35, 330);
     }
 
     if(GameData.HasShard('Will')) {
-        Main.RenderTextureFromAtlas('Misc', 'Shard0005', 20, 330);
+        GameState.RenderTextureFromAtlas('Misc', 'Shard0005', 20, 330);
     }
 
     if(GameData.HasShard('Luck')) {
-        Main.RenderTextureFromAtlas('Misc', 'Shard0006', 50, 330);
+        GameState.RenderTextureFromAtlas('Misc', 'Shard0006', 50, 330);
     }
 
     if(GameData.HasShard('Power')) {
-        Main.RenderTextureFromAtlas('Misc', 'Shard0007', 65, 330);
+        GameState.RenderTextureFromAtlas('Misc', 'Shard0007', 65, 330);
     }
 };
 
-Main.RenderTextureFromAtlas = function(atlas, frame, x, y, scaleX, scaleY, alpha) {
+GameState.RenderTextureFromAtlas = function(atlas, frame, x, y, scaleX, scaleY, alpha) {
     var oldAlpha = pixel.context.globalAlpha;
     pixel.context.globalAlpha = alpha || oldAlpha;
 

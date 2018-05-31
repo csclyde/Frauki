@@ -55,8 +55,8 @@
 
 
 
-        <script type="text/javascript" src="Src/Loading.js"></script>        
-        <script type="text/javascript" src="Src/Main.js"></script>
+        <script type="text/javascript" src="Src/LoadingState.js"></script>        
+        <script type="text/javascript" src="Src/GameState.js"></script>
 
         <script type="text/javascript" src="Src/Frogland.js"></script>
         <script type="text/javascript" src="Src/Collision.js"></script>
@@ -155,11 +155,11 @@
             }
             
 
-            var game = new Phaser.Game(pixel.width, pixel.height, Phaser.AUTO, "game", Loading, false, false);
+            var game = new Phaser.Game(pixel.width, pixel.height, Phaser.AUTO, "game", LoadingState, false, false);
             var events = new EventRouter();
 
-            game.state.add('Loading', Loading, true);
-            game.state.add('Main', Main, false);
+            game.state.add('LoadingState', LoadingState, true);
+            game.state.add('GameState', GameState, false);
 
 
         </script>

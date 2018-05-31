@@ -579,7 +579,7 @@ EffectsController.prototype.MakeHearts = function(amt) {
 };
 
 EffectsController.prototype.SlowHit = function(duration) {
-    var t = game.add.tween(Main).to( { physicsSlowMo: 0.05 }, Math.round(duration * 0.2), Phaser.Easing.Exponential.Out, false).to( { physicsSlowMo: 1 }, Math.round(duration * 0.8), Phaser.Easing.Exponential.In, false);
+    var t = game.add.tween(GameState).to( { physicsSlowMo: 0.05 }, Math.round(duration * 0.2), Phaser.Easing.Exponential.Out, false).to( { physicsSlowMo: 1 }, Math.round(duration * 0.8), Phaser.Easing.Exponential.In, false);
     t.start();
 
     //var currAnim = frauki.animations.currentAnim;
@@ -684,7 +684,7 @@ EffectsController.prototype.Explosion = function(src) {
 };
 
 EffectsController.prototype.JumpDust = function(src) {
-    if(Main.restarting) return;
+    if(GameState.restarting) return;
     
     var dust = game.add.sprite(src.x - 50, src.y - 30, 'Misc', null, this.effectsGroup);
     dust.animations.add('dust', ['JumpDust0000', 'JumpDust0001', 'JumpDust0002', 'JumpDust0003', 'JumpDust0004', 'JumpDust0005', 'JumpDust0006'], 10, false, false);
@@ -959,9 +959,9 @@ EffectsController.prototype.ShowCharge = function(level) {
 };
 
 EffectsController.prototype.Dizzy = function(duration) {
-    Main.tweens.dizzies = game.add.tween(Main).to( {currentAlpha: 0.2}, 1000, Phaser.Easing.Exponential.In, false).to( {currentAlpha: 1}, duration, Phaser.Easing.Quintic.In, false);
-    Main.tweens.dizzies.start();
+    GameState.tweens.dizzies = game.add.tween(GameState).to( {currentAlpha: 0.2}, 1000, Phaser.Easing.Exponential.In, false).to( {currentAlpha: 1}, duration, Phaser.Easing.Quintic.In, false);
+    GameState.tweens.dizzies.start();
 
-    Main.tweens.slowMo = game.add.tween(Main).to( {physicsSlowMo: 0.6}, 1000, Phaser.Easing.Quintic.In, false).to( {physicsSlowMo: 1}, duration, Phaser.Easing.Quintic.In, false);
-    Main.tweens.slowMo.start();
+    GameState.tweens.slowMo = game.add.tween(GameState).to( {physicsSlowMo: 0.6}, 1000, Phaser.Easing.Quintic.In, false).to( {physicsSlowMo: 1}, duration, Phaser.Easing.Quintic.In, false);
+    GameState.tweens.slowMo.start();
 };

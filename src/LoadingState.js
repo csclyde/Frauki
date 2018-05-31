@@ -1,6 +1,6 @@
-var Loading = new Phaser.State();
+var LoadingState = new Phaser.State();
 
-Loading.preload = function() {
+LoadingState.preload = function() {
     game.canvas.style['display'] = 'none';
     pixel.canvas = Phaser.Canvas.create(pixel.width * pixel.scale, pixel.height * pixel.scale);
     pixel.canvas.width = pixel.width * pixel.scale;
@@ -51,7 +51,7 @@ Loading.preload = function() {
     game.renderer.renderSession.roundPixels = false;
 };
 
-Loading.create = function() {
+LoadingState.create = function() {
 
     Phaser.Tilemap.prototype.forEach = function (callback, context, x, y, width, height, layer) {
 
@@ -214,7 +214,7 @@ Loading.create = function() {
 
     ScriptRunner.create();
 
-    game.state.start('Main', false, false);
+    game.state.start('GameState', false, false);
 
 
     Phaser.Physics.Arcade.Body.prototype.preUpdate = function () {
@@ -270,12 +270,12 @@ Loading.create = function() {
 
             this.newVelocity.set(this.velocity.x * this.game.time.physicsElapsed, this.velocity.y * this.game.time.physicsElapsed);
 
-            this.position.x += this.newVelocity.x * Main.physicsSlowMo;
-            this.position.y += this.newVelocity.y * Main.physicsSlowMo;
+            this.position.x += this.newVelocity.x * GameState.physicsSlowMo;
+            this.position.y += this.newVelocity.y * GameState.physicsSlowMo;
 
             if (this.position.x !== this.prev.x || this.position.y !== this.prev.y)
             {
-                this.angle = Math.atan2(this.velocity.y, this.velocity.x) * Main.physicsSlowMo;
+                this.angle = Math.atan2(this.velocity.y, this.velocity.x) * GameState.physicsSlowMo;
             }
 
             this.speed = Math.sqrt(this.velocity.x * this.velocity.x + this.velocity.y * this.velocity.y);
@@ -323,7 +323,7 @@ Loading.create = function() {
             }
 
             //  And what's left now?
-            this._timeNextFrame = this.game.time.time + ((this.delay * (1 / Main.physicsSlowMo)) - this._frameDiff);
+            this._timeNextFrame = this.game.time.time + ((this.delay * (1 / GameState.physicsSlowMo)) - this._frameDiff);
 
             if (this.isReversed)
             {
@@ -390,20 +390,20 @@ Loading.create = function() {
         if (max === undefined) { max = 10000; }
 
         if (axis === 1 && body.allowGravity) {
-            velocity += (this.gravity.x + body.gravity.x) * this.game.time.physicsElapsed * Main.physicsSlowMo;
+            velocity += (this.gravity.x + body.gravity.x) * this.game.time.physicsElapsed * GameState.physicsSlowMo;
         } else if (axis === 2 && body.allowGravity) {
-            velocity += (this.gravity.y + body.gravity.y) * this.game.time.physicsElapsed * Main.physicsSlowMo;
+            velocity += (this.gravity.y + body.gravity.y) * this.game.time.physicsElapsed * GameState.physicsSlowMo;
         }
 
         if (acceleration) {
-            velocity += acceleration * this.game.time.physicsElapsed * Main.physicsSlowMo;
+            velocity += acceleration * this.game.time.physicsElapsed * GameState.physicsSlowMo;
         } else if (drag) {
             drag *= this.game.time.physicsElapsed;
 
             if (velocity - drag > 0)  {
-                velocity -= drag * Main.physicsSlowMo;
+                velocity -= drag * GameState.physicsSlowMo;
             } else if (velocity + drag < 0) {
-                velocity += drag * Main.physicsSlowMo;
+                velocity += drag * GameState.physicsSlowMo;
             } else {
                 velocity = 0;
             }

@@ -65,7 +65,7 @@ var Speeches = {
 	'thats_me': { text: 'Is that... me?', portrait: 'Displeased' },
 	'garden': { text: 'Something is carved into the wall: To those who come after, this world is a garden.' },
 	'sweetnasty': { text: 'Something is carved into the wall: Good bye you sweet world!!!' },
-	'maint': { text: 'Something is engraved into the wall: Maintenence access. Beware pipe currents.' },
+	'maint': { text: 'Something is engraved into the wall: GameStatetenence access. Beware pipe currents.' },
 	'pouring_joy': { text: 'Something is carved into the wall: I can barely withstand the joy pouring into me! Goodbye!' },
 	'another_sky': { text: 'Something is carved into the wall: So, we will find another sky. So it goes.' },
 	'behold_goddess': { text: 'Something is carved into the wall: The Goddess has appeared, and we are forgiven' },

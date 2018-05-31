@@ -8,3 +8,4 @@ frauki.cfg
 *.cfg
 Working/
 .vscode
+node_modules/

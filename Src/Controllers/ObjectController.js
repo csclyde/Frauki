@@ -13,7 +13,7 @@ ObjectController.prototype.Create = function() {
 };
 
 ObjectController.prototype.Update = function() {
-	if(!Main.restarting) {
+	if(!GameState.restarting) {
 		this.SpawnNearbyObjects();
 		//this.DestroyFarawayObjects();
 	}

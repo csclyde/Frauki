@@ -1231,7 +1231,7 @@ Player.prototype.Hurting = function() {
 
     }
 
-    if(this.timers.TimerUp('frauki_hit') && !Main.restarting) {
+    if(this.timers.TimerUp('frauki_hit') && !GameState.restarting) {
         if(this.body.velocity.y > 0) {
             this.ChangeState(this.Falling);
         } else if(this.body.velocity.x === 0) {
