@@ -219,13 +219,14 @@ ObjectController.prototype.SpawnObject = function(o) {
         currLayer.add(newObj);
         newObj.owningLayer = Frogland.currentLayer;
     	this.createdObjects.push(newObj);
-        newObj.properties = o.properties || {};
+        newObj.properties = o.properties || [];
         newObj.name = o.name;
 
         //check for signals attached to the object
-        if(!!newObj.properties.on_death) {
+        console.log(newObj)
+        if(!!newObj.GetProp('on_death')) {
             newObj.events.onDestroy.add(function() {
-                ComposeAndEmitSignal(newObj.properties.on_death);
+                ComposeAndEmitSignal(newObj.GetProp('on_death'));
             });
         }
     }
@@ -249,7 +250,7 @@ ObjectController.prototype.CreateObjectsLayer = function(layer) {
     Frogland.map.createFromObjects('Objects_' + layer, 69, 'Misc', 'Checkpoint0000', true, true, currLayer, Checkpoint, false);
 
     //create the doors
-    Frogland.map.createFromObjects('Objects_' + layer, 67, 'Misc', 'Door0000', true, true, currLayer, Door, false);
+    Frogland.map.createFromObjects('Objects_' + layer, 67, 'Misc', 'DoorSeal0000', true, true, currLayer, Door, false);
 
     Frogland.map.createFromObjects('Objects_' + layer, 75, 'Misc', 'Upgrade0000', true, true, currLayer, Upgrade, false);
     
@@ -265,6 +266,7 @@ ObjectController.prototype.CreateObjectsLayer = function(layer) {
 
         if(obj.spriteType === 'door') {
             obj.create();
+            
             objectController.doorList.push(obj);
 
             //force open doors that do not close
@@ -307,5 +309,6 @@ function ComposeAndEmitSignal(data) {
         params[paramData[0]] = paramData[1];
     }
 
+    console.log(signalName, params)
     events.publish(signalName, params);
 };

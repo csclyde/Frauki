@@ -58,6 +58,19 @@ LoadingState.create = function() {
             this.animations.play(name);
     };
 
+    Phaser.Sprite.prototype.GetProp = function(name) {
+        if(!!this.properties.length > 0) {
+            var prop = this.properties.find(function(prop) {
+                console.log(prop.name, name)
+                return prop.name === name;
+            });
+            console.log(prop)
+            return (!!prop) ? prop.value : null;
+        }
+
+        return null;
+    }
+
     Phaser.Tilemap.prototype.forEach = function (callback, context, x, y, width, height, layer) {
 
         layer = this.getLayer(layer);

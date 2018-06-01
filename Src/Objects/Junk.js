@@ -57,6 +57,6 @@ Junk.prototype.JunkHit = function(o) {
         effectsController.Dust(this.body.center.x, this.body.center.y);
 	    effectsController.DiceObject(this.objectName, this.body.center.x, this.body.center.y, this.body.velocity.x, this.body.velocity.y, this.owningLayer);
 	    events.publish('play_sound', {name: 'smash'});
-	    o.destroy();
-	});
+	    this.destroy();
+	}, this);
 };

@@ -32,6 +32,9 @@ Door.prototype.create = function() {
         }
     }, this);
 
+    events.subscribe('enemy_killed', function(params) {
+    }, this);
+
     switch(this.type) {
 
         case 'stone_seal':
@@ -113,9 +116,6 @@ Door.prototype.create = function() {
             this.animations.add('open', ['DoorMystery0000'], 10, true, false);
         break;
     }
-
-    console.log(this.animations)
-
 };
 
 Door.prototype.update = function() {
@@ -270,7 +270,7 @@ Door.prototype.PerformOpen = function(save, silent) {
         events.publish('door_open_finish', { id: this.id } );
         this.canRollUnder = false;
 
-    });
+    }, this);
 
     //note when the door is ready to roll through
     game.time.events.add(openDuration / 2.5, function() {
