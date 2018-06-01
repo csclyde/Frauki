@@ -26,6 +26,12 @@ Door.prototype = Object.create(Phaser.Sprite.prototype);
 Door.prototype.constructor = Door;
 
 Door.prototype.create = function() {
+    events.subscribe('open_door', function(params) {
+        if(this.id === params.door_name) {
+            this.PerformOpen(false);
+        }
+    }, this);
+
     switch(this.type) {
 
         case 'stone_seal':
@@ -108,6 +114,8 @@ Door.prototype.create = function() {
         break;
     }
 
+    console.log(this.animations)
+
 };
 
 Door.prototype.update = function() {
@@ -116,7 +124,7 @@ Door.prototype.update = function() {
 
     if((this.state === this.Closed || this.state == this.ReadyToOpen) && this.owningLayer === Frogland.currentLayer && GameData.IsDoorOpen(this.id)) {
         if(this.body.x + this.body.width > game.camera.x + padding && this.body.y + this.body.height > game.camera.y + padding && this.body.x < game.camera.x + game.camera.width - padding && this.body.y < game.camera.y + game.camera.height - padding) {
-            PerformOpen(this, false, true);
+            this.PerformOpen(false, true);
         } else if(this.body.x + this.body.width > game.camera.x && this.body.y + this.body.height > game.camera.y && this.body.x < game.camera.x + game.camera.width && this.body.y < game.camera.y + game.camera.height) {
             this.state = this.ReadyToOpen;
         } 
@@ -138,7 +146,7 @@ Door.prototype.OpenDoor = function(f) {
     //if they attack the back side of the door
     if(frauki.Attacking() && frauki.GetCurrentDamage() > 0) {
         if((this.facing === 'left' && f.body.center.x > this.body.center.x) || (this.facing === 'right' && f.body.center.x < this.body.center.x)) {
-            PerformOpen(this, true);
+            this.PerformOpen(true);
 
             effectsController.ExplodeDoorSeal(this);
             effectsController.ScreenFlash();
@@ -175,62 +183,44 @@ Door.prototype.OpenDoor = function(f) {
         shardTween.onComplete.add(function() {
             //when the tween is done, perform the door opening
             effectsController.ScreenFlash();
-            PerformOpen(d, true);
+            d.PerformOpen(true);
             prism.ReturnToUI();
         });
     }  
 };
 
-function OpenDoorById(id) {
-
-    var door = null;
-
-    objectController.doorList.forEach(function(d) {
-        if(d.spriteType === 'door' && d.id === id) {
-            door = d;
-            return false;
-        }
-    });
-
-    if(!!door) {
-        PerformOpen(door, false);
+Door.prototype.ForceOpenDoor = function() {
+    if(!!this.open_direction && this.open_direction === 'down') {
+        this.y += 80;
     } else {
-        console.log('Cant find door with id: ' + id);
-    }
-};
-
-function ForceOpenDoor(d) {
-    if(!!d.open_direction && d.open_direction === 'down') {
-        d.y += 80;
-    } else {
-        d.y -= 64;
+        this.y -= 64;
     }
 
-    d.state = d.Open;
+    this.state = this.Open;
 }
 
-function PerformOpen(d, save, silent) {
-    if(d.state === d.Open || !d.body) return;
+Door.prototype.PerformOpen = function(save, silent) {
+    if(this.state === this.Open || !this.body) return;
 
     //check that the door has received enough attempts to actually open
-    if(++d.openAttempts < d.thresholdAttempts) {
-        console.log('Door open failed, attempt ' + d.openAttempts + ' / ' + d.thresholdAttempts);
+    if(++this.openAttempts < this.thresholdAttempts) {
+        console.log('Door open failed, attempt ' + this.openAttempts + ' / ' + this.thresholdAttempts);
         return;
     }
 
-    var movementTarget = d.body.y - 64;
+    var movementTarget = this.body.y - 64;
 
-    if(!!d.open_direction && d.open_direction === 'down') {
-        movementTarget = d.body.y + 80;
+    if(!!this.open_direction && this.open_direction === 'down') {
+        movementTarget = this.body.y + 80;
     }
 
-    d.state = d.Open;
+    this.state = this.Open;
 
     var openDuration = 2500;
 
     //play a sound if one is specified
     if(!silent) {
-        switch(d.type) {
+        switch(this.type) {
 
             case 'stone_seal':
                 events.publish('play_sound', {name: 'door_break', restart: true });
@@ -267,28 +257,28 @@ function PerformOpen(d, save, silent) {
 
     events.publish('play_sound', {name: 'door_rumble', restart: true });
 
-    events.publish('door_open_start', { id: d.id} );
+    events.publish('door_open_start', { id: this.id} );
     
-    this.openTween = game.add.tween(d.body).to({y: movementTarget}, openDuration, Phaser.Easing.Quintic.InOut, true);
+    this.openTween = game.add.tween(this.body).to({y: movementTarget}, openDuration, Phaser.Easing.Quintic.InOut, true);
 
     game.time.events.add(openDuration - (openDuration / 5), function() {
-        if(!d || !d.body) return;
+        if(!this || !this.body) return;
         
-        effectsController.DoorDust({x: d.body.center.x, y: d.body.y + d.body.height - 20, owningLayer: d.owningLayer });
+        effectsController.DoorDust({x: this.body.center.x, y: this.body.y + this.body.height - 20, owningLayer: this.owningLayer });
         events.publish('play_sound', {name: 'door_slam', restart: true });
         events.publish('stop_sound', {name: 'door_rumble', restart: true });
-        events.publish('door_open_finish', { id: d.id } );
-        d.canRollUnder = false;
+        events.publish('door_open_finish', { id: this.id } );
+        this.canRollUnder = false;
 
     });
 
     //note when the door is ready to roll through
     game.time.events.add(openDuration / 2.5, function() {
         this.canRollUnder = true;
-    }, d);
+    }, this);
 
     if(save) {
-        GameData.AddOpenDoor(d.id);
+        GameData.AddOpenDoor(this.id);
     }
 };
 

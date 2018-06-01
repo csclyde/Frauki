@@ -53,7 +53,7 @@ LoadingState.preload = function() {
 
 LoadingState.create = function() {
 
-    Phser.Sprite.prototype.PlayAnim = function(name) {
+    Phaser.Sprite.prototype.PlayAnim = function(name) {
         if(this.animations.currentAnim.name !== name)
             this.animations.play(name);
     };

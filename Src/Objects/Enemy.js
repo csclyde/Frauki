@@ -318,7 +318,7 @@ Enemy.prototype.TakeHit = function(damage) {
         this.timers.SetTimer('hit', 1000);
         this.timers.SetTimer('grace', 300);
 
-        game.time.events.add(this.robotic ? 800 : game.rnd.between(250, 350), function() { DestroyEnemy(that); });
+        game.time.events.add(this.robotic ? 800 : game.rnd.between(250, 350), function() { that.DestroyEnemy(); });
 
         if(this.robotic) events.publish('play_sound', { name: 'robosplosion' });
 
@@ -388,15 +388,15 @@ Enemy.prototype.collideWithPlayer = function(f) {
     }
 };
 
-function DestroyEnemy(e) {
-    e.Die();
-    e.state = e.Dying;
+Enemy.prototype.DestroyEnemy = function(e) {
+    this.Die();
+    this.state = this.Dying;
 
-    effectsController.EnergySplash(e.body, 200, 'negative', 20);
+    effectsController.EnergySplash(this.body, 200, 'negative', 20);
 
-    var enemBody = e.body.center.clone();
+    var enemBody = this.body.center.clone();
 
-    if(e.robotic) {
+    if(this.robotic) {
         for(var i = 0, max = game.rnd.between(2, 4); i < max; i++) {
             game.time.events.add(i * game.rnd.between(150, 200), function() {
                 var pt = enemBody.clone();
@@ -407,27 +407,27 @@ function DestroyEnemy(e) {
             });
         };
 
-        effectsController.SprocketBurst(e.body.center);
+        effectsController.SprocketBurst(this.body.center);
 
     } else {
-        effectsController.Explosion(e.body.center);
+        effectsController.Explosion(this.body.center);
     }
 
-    effectsController.DiceObject(e.objectName, e.body.center.x, e.body.center.y, e.body.velocity.x, e.body.velocity.y, e.owningLayer);
+    effectsController.DiceObject(this.objectName, this.body.center.x, this.body.center.y, this.body.velocity.x, this.body.velocity.y, this.owningLayer);
 
-    damage = e.maxEnergy;
+    damage = this.maxEnergy;
 
-    effectsController.SpawnEnergyNuggets(e.body, frauki.body, 'neutral', e.maxEnergy); 
+    effectsController.SpawnEnergyNuggets(this.body, frauki.body, 'neutral', this.maxEnergy); 
 
     events.publish('camera_shake', {magnitudeX: 8, magnitudeY: 2, duration: 350 });
 
-    e.UI.frame.destroy();
-    e.UI.pips[0].destroy();
-    e.UI.pips[1].destroy();
-    e.UI.pips[2].destroy();
-    e.UI.pips[3].destroy();
-    e.UI.pips[4].destroy();
+    this.UI.frame.destroy();
+    this.UI.pips[0].destroy();
+    this.UI.pips[1].destroy();
+    this.UI.pips[2].destroy();
+    this.UI.pips[3].destroy();
+    this.UI.pips[4].destroy();
 
-    e.destroy();
+    this.destroy();
     e = null;
 };

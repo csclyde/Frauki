@@ -216,7 +216,7 @@ Collision.OverlapAttackWithObject = function(f, o) {
     } else if(o.spriteType === 'junk') {
         o.JunkHit(o);
     } else if(o.spriteType === 'checkpoint') {
-        o.CheckpointHit();
+        o.Activate();
     } else if(o.spriteType === 'TechnoRune') {
         EatTechnoRune(f, o);
     } else if(o.spriteType === 'door') {

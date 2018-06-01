@@ -35,7 +35,7 @@ Checkpoint.prototype.update = function() {
     }
 };
 
-Checkpoint.prototype.CheckpointHit = function(o) {
+Checkpoint.prototype.Activate = function(o) {
 
     Frogland.checkpoints.forEach(function(check) {
         check.active = false;

@@ -58,10 +58,6 @@ Frogland.Create = function() {
     //this will store fallen tiles, so that when you die they can be reset
     this.fallenTiles = [];
 
-    events.subscribe('open_door', function(params) {
-        OpenDoorById(params.door_name);
-    });
-
     //events.subscribe('enemy_killed', this.Ragnarok, this);
     this.ragnarokCounter = 1;
     this.ragnarokLevel = 0;

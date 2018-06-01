@@ -248,12 +248,6 @@ Player.prototype.SetDirection = function(dir) {
     }
 };
 
-Player.prototype.PlayAnim = function(name) {
-    if(this.animations.currentAnim.name !== name) {
-        this.animations.play(name);
-    }
-};
-
 Player.prototype.ChangeState = function(newState) {
 
     this.state = newState;
