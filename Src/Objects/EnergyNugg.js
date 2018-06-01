@@ -44,11 +44,10 @@ EnergyNugg.prototype.update = function() {
         this.state();
 };
 
-function EatEnergyNugg(f, a) {
-    
-    effectsController.SpawnEnergyNuggets(a.body, frauki.body, 'neutral', 1);
-
-    a.destroy();
+EnergyNugg.prototype.collideWithPlayer = function(f) {
+    effectsController.SpawnEnergyNuggets(this.body, frauki.body, 'neutral', 1);
+    this.destroy();
+    return false;
 };
 
 EnergyNugg.prototype.PlayAnim = function(name) {

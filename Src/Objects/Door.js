@@ -26,7 +26,6 @@ Door.prototype = Object.create(Phaser.Sprite.prototype);
 Door.prototype.constructor = Door;
 
 Door.prototype.create = function() {
-    console.log(this);
     switch(this.type) {
 
         case 'stone_seal':
@@ -127,37 +126,40 @@ Door.prototype.update = function() {
         this.state();
 };
 
-function OpenDoor(f, d, override) {
-    if(d.state !== d.Closed) return;
+Door.prototype.collideWithPlayer = function(f) {
+    this.OpenDoor(f);
+
+    return (frauki.state === frauki.Rolling && this.canRollUnder === true);
+};
+
+Door.prototype.OpenDoor = function(f) {
+    if(this.state !== this.Closed) return;
 
     //if they attack the back side of the door
     if(frauki.Attacking() && frauki.GetCurrentDamage() > 0) {
-        if((d.facing === 'left' && f.body.center.x > d.body.center.x) || (d.facing === 'right' && f.body.center.x < d.body.center.x) || !!override) {
-            PerformOpen(d, true);
+        if((this.facing === 'left' && f.body.center.x > this.body.center.x) || (this.facing === 'right' && f.body.center.x < this.body.center.x)) {
+            PerformOpen(this, true);
 
-            effectsController.ExplodeDoorSeal(d);
+            effectsController.ExplodeDoorSeal(this);
             effectsController.ScreenFlash();
 
-            //ScriptRunner.run('door_victory');
-
-            if(!!d.script) {
-                ScriptRunner.run(d.script);
+            if(!!this.script) {
+                ScriptRunner.run(this.script);
             }
-            
         }
     }
     
 
     //or if its a shard door and they are holding the right shard
-    if(GameData.HasShard(d.prism) && !d.waitingToOpen) {
+    if(GameData.HasShard(this.prism) && !this.waitingToOpen) {
 
-        d.waitingToOpen = true;
+        this.waitingToOpen = true;
 
         //get the prism for this door
         var prism = null;
 
         objectController.shardList.forEach(function(s) {
-            if(s.name === d.prism) {
+            if(s.name === this.prism) {
                 prism = s;
             }
         })
@@ -169,7 +171,7 @@ function OpenDoor(f, d, override) {
         prism.opacity = 0;
 
         //tween its position to the center of the door
-        var shardTween = game.add.tween(prism.body).to({x: d.body.x + 0, y: d.body.y + 24}, 2000, Phaser.Easing.Exponential.Out, true);
+        var shardTween = game.add.tween(prism.body).to({x: this.body.x + 0, y: this.body.y + 24}, 2000, Phaser.Easing.Exponential.Out, true);
         shardTween.onComplete.add(function() {
             //when the tween is done, perform the door opening
             effectsController.ScreenFlash();

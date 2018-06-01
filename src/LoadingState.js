@@ -53,6 +53,11 @@ LoadingState.preload = function() {
 
 LoadingState.create = function() {
 
+    Phser.Sprite.prototype.PlayAnim = function(name) {
+        if(this.animations.currentAnim.name !== name)
+            this.animations.play(name);
+    };
+
     Phaser.Tilemap.prototype.forEach = function (callback, context, x, y, width, height, layer) {
 
         layer = this.getLayer(layer);

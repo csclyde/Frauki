@@ -1,116 +1,7 @@
 var Collision = {};
 
-Collision.OverlapFraukiWithObject = function(f, o) {
-
-    if(o.spriteType == 'apple') {
-
-        EatApple(f, o);
-        return false;
-
-
-    } else if(o.spriteType === 'energyNugg') {
-
-        EatEnergyNugg(f, o);
-        return false;
-
-
-    } else if(o.spriteType === 'enemy') {
-
-        if(o.objectName === 'Goddess') {
-            return false;
-        } else if(o.isAttacking() && o.GetCurrentDamage() > 0) {
-            return false;
-        } else if(o.isSolid) {
-            frauki.body.blocked.down = true;
-            //console.log(frauki.body.velocity.y)
-
-            if(frauki.body.velocity.y > 0) frauki.body.velocity.y = 0;
-            return true;
-        } else if(frauki.body.y + frauki.body.height <= o.body.y + (frauki.body.height / 4) || o.body.y + o.body.height <= frauki.body.y + (o.body.height / 4)) {
-            return false;
-        } else {
-
-            if((frauki.states.direction === 'left' && o.body.center.x < frauki.body.center.x) || (frauki.states.direction === 'right' && o.body.center.x > frauki.body.center.x))
-                frauki.body.velocity.x /= 2;
-
-            if(frauki.state === frauki.Rolling && o.body.immovable !== true) {
-                o.body.velocity.x = 150;
-                o.body.velocity.x *= EnemyBehavior.Player.DirMod(o);
-            }
-
-            return true;
-        }
-        
-
-    } else if(o.spriteType === 'door') {
-        OpenDoor(f, o);
-
-        if(frauki.state === frauki.Rolling && o.canRollUnder === true) {
-            return false;
-        } else {
-            return true;
-        }
-
-    } else if(o.spriteType === 'orb') {
-        return false;
-
-    } else if(o.spriteType === 'junk') {
-
-        if(frauki.state === frauki.Rolling) {
-            o.JunkHit(o);
-        }
-
-        return false;
-
-
-    } else if(o.spriteType === 'TechnoRune') {
-        return false;
-
-
-    } else if(o.spriteType === 'ball') {
-        if(frauki.state !== frauki.Rolling) {
-            if(frauki.body.velocity.y > 0 && frauki.body.y + frauki.body.height >= o.body.y - 1) {
-                //frauki.body.velocity.y = -frauki.body.velocity.y;
-
-                if(frauki.body.velocity.x !== 0) {
-                    o.body.velocity.x = frauki.body.velocity.x + game.rnd.between(-100, 100);
-                    o.body.angularVelocity = o.body.velocity.x;
-                }
-
-                frauki.body.blocked.down = true;
-
-            } else if(frauki.body.center.x > o.body.center.x) {
-                o.body.angularVelocity = -200;
-            } else {
-                o.body.angularVelocity = 200;
-            }
-
-            return true;
-        } else {
-            return false;
-        }
-
-
-    } else if(o.spriteType === 'checkpoint') {
-        return false;
-
-    } else if(o.spriteType === 'Upgrade') {
-        
-        return false;
-    } else if(o.spriteType === 'shard') {
-        PickUpShard(f, o);
-
-        return false;
-    } else if(o.spriteType === 'powerup') {
-        if(energyController.GetHealth() < energyController.GetMaxHealth()) {
-            UsePowerUp(f, o);
-        }
-        
-
-        return false;
-    }
-
-    return true;
+Collision.OverlapFraukiWithObject = function(f, o) {    
+    return (!!o.collideWithPlayer) ? o.collideWithPlayer(f) : true;
 };
 
 Collision.CollideFraukiWithEnvironment = function(f, tile) {
@@ -323,28 +214,13 @@ Collision.OverlapAttackWithObject = function(f, o) {
         }
 
     } else if(o.spriteType === 'junk') {
-
         o.JunkHit(o);
-    } else if(o.spriteType === 'ball') {
-        var vel = new Phaser.Point(o.body.center.x - frauki.body.center.x, o.body.center.y - frauki.body.center.y);
-        vel = vel.normalize();
-
-        vel.setMagnitude(800);
-
-        o.body.velocity.x = vel.x + frauki.body.velocity.x;
-        o.body.velocity.y = vel.y - 200 + frauki.body.velocity.y;
-
-        if(frauki.body.center.x > o.body.center.x) {
-            o.body.angularVelocity = -800;
-        } else {
-            o.body.angularVelocity = 800;
-        }
     } else if(o.spriteType === 'checkpoint') {
         o.CheckpointHit();
     } else if(o.spriteType === 'TechnoRune') {
         EatTechnoRune(f, o);
     } else if(o.spriteType === 'door') {
-        OpenDoor(frauki, o);
+        o.OpenDoor(frauki);
     } else if(o.spriteType === 'orb') {
         SmashOrb(frauki, o);
     } else if(o.spriteType === 'Upgrade') {
@@ -434,13 +310,6 @@ Collision.OverlapObjectsWithSelf = function(o1, o2) {
         return true;
     } else if(o1.spriteType === 'junk' && o2.spriteType === 'junk') {
         return false;
-    } else if(o1.spriteType === 'ball' && o2.spriteType === 'junk') {
-        if(o1.body.velocity.getMagnitude() > 200) {
-            o2.JunkHit(o2);
-            return true;
-        } else {
-            return false;
-        }
     } else if(o1.spriteType === 'enemy' && o2.spriteType === 'door') {
         return true;
     } else {

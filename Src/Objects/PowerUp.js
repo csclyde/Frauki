@@ -70,6 +70,14 @@ PowerUp.prototype.update = function() {
     }
 };
 
+PowerUp.prototype.collideWithPlayer = function(f) {
+    if(energyController.GetHealth() < energyController.GetMaxHealth()) {
+        UsePowerUp(f, this);
+    }
+
+    return false;
+};
+
 function UsePowerUp(f, p) {
     if(p.state === p.Used)
         return;

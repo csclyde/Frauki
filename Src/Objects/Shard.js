@@ -91,3 +91,8 @@ Shard.prototype.Floating = function() {
     this.body.velocity.y = Math.sin(game.time.now / 150) * 30;
     this.body.velocity.x = 0;
 };
+
+Shard.prototype.collideWithPlayer = function(f) {
+    PickUpShard(f, this);
+    return false;
+};

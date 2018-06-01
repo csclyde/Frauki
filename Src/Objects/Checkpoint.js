@@ -45,3 +45,7 @@ Checkpoint.prototype.CheckpointHit = function(o) {
 
 	this.active = true;
 };
+
+Checkpoint.prototype.collideWithPlayer = function(f) {
+    return false;
+};

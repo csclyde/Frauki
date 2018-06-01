@@ -39,11 +39,11 @@ Apple.prototype.update = function() {
         this.state();
 };
 
-function EatApple(f, a) {
-    if(a.state === a.Eaten)
+Apple.prototype.collideWithPlayer = function(f) {
+    if(this.state === this.Eaten)
         return;
     
-    a.state = a.Eaten;
+    this.state = this.Eaten;
 
     events.publish('play_sound', {name: 'crystal_door'});
 
@@ -52,17 +52,10 @@ function EatApple(f, a) {
         GameData.SetFlag('first_apple_eaten', true);
     }
 
-
     energyController.AddApple();
-    a.destroy();
+    this.destroy();
 
-    
-
-};
-
-Apple.prototype.PlayAnim = function(name) {
-    if(this.animations.currentAnim.name !== name)
-        this.animations.play(name);
+    return false;
 };
 
 Apple.prototype.Fresh = function() {

@@ -27,7 +27,7 @@ ObjectController.prototype.Update = function() {
 
         if(!o) continue;
 
-        var preservedTypes = ['door', 'ball', 'powerup'];
+        var preservedTypes = ['door', 'powerup'];
 
         if(preservedTypes.indexOf(o.spriteType) === -1 && !!o.body) {
             if(o.body.x < game.camera.x - padding || o.body.y < game.camera.y - padding || o.body.x > game.camera.x + game.camera.width + padding || o.body.y > game.camera.y + game.camera.height + padding) {
@@ -49,7 +49,7 @@ ObjectController.prototype.Update = function() {
 
         if(!o) continue;
 
-        if(o.spriteType !== 'door' && !!o.body && o.spriteType !== 'ball') {
+        if(o.spriteType !== 'door' && !!o.body) {
             if(o.body.x > game.camera.x - padding && o.body.y > game.camera.y - padding && o.body.x < game.camera.x + game.camera.width + padding && o.body.y < game.camera.y + game.camera.height + padding) {
                 if(o.body.enable === false && !!o.Activate) o.Activate();
                 o.body.enable = true;
@@ -257,20 +257,6 @@ ObjectController.prototype.CreateObjectsLayer = function(layer) {
     Frogland.map.createFromObjects('Objects_' + layer, 71, 'Shard0001', 'Shard0001', true, true, currLayer, Shard, false);
     Frogland.map.createFromObjects('Objects_' + layer, 72, 'Shard0002', 'Shard0002', true, true, currLayer, Shard, false);
     Frogland.map.createFromObjects('Objects_' + layer, 73, 'Shard0003', 'Shard0003', true, true, currLayer, Shard, false);
-
-    // if(layer == 3) {
-    //     Frogland.ball = game.add.sprite(177 * 16, 270 * 16, 'Misc', 'Ball0000', currLayer);
-    //     game.physics.enable(Frogland.ball, Phaser.Physics.ARCADE);
-    //     Frogland.ball.body.bounce.setTo(0.8);
-    //     Frogland.ball.body.drag.setTo(200);
-    //     Frogland.ball.anchor.setTo(0.5);
-    //     Frogland.ball.body.angularDrag = 500;
-    //     Frogland.ball.spriteType = 'ball';
-    //     Frogland.ball.body.collideWorldBounds = true;
-    //     Frogland.ball.body.maxVelocity.setTo(700);
-
-    //     triggerController.RegisterTarget('ball', Frogland.ball);
-    // }
 
     //inform each object of its own layer
     currLayer.forEach(function(obj) {

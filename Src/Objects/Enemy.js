@@ -363,6 +363,31 @@ Enemy.prototype.HideHealth = function() {
     }
 };
 
+Enemy.prototype.collideWithPlayer = function(f) {
+    if(this.objectName === 'Goddess') {
+        return false;
+    } else if(this.isAttacking() && this.GetCurrentDamage() > 0) {
+        return false;
+    } else if(this.isSolid) {
+        f.body.blocked.down = true;
+        if(f.body.velocity.y > 0) f.body.velocity.y = 0;
+        return true;
+    } else if(f.body.y + f.body.height <= this.body.y + (f.body.height / 4) || this.body.y + this.body.height <= f.body.y + (this.body.height / 4)) {
+        return false;
+    } else {
+
+        if((f.states.direction === 'left' && this.body.center.x < f.body.center.x) || (f.states.direction === 'right' && this.body.center.x > f.body.center.x))
+            f.body.velocity.x /= 2;
+
+        if(f.state === f.Rolling && this.body.immovable !== true) {
+            this.body.velocity.x = 150;
+            this.body.velocity.x *= EnemyBehavior.Player.DirMod(o);
+        }
+
+        return true;
+    }
+};
+
 function DestroyEnemy(e) {
     e.Die();
     e.state = e.Dying;

@@ -125,3 +125,7 @@ Upgrade.prototype.Active = function() {
         this.body.velocity.x = 0;
     }
 };
+
+Upgrade.prototype.collideWithPlayer = function(f) {
+    return false;
+};

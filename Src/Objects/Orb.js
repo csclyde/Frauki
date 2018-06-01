@@ -38,6 +38,10 @@ Orb.prototype.update = function() {
         this.state();
 };
 
+Orb.prototype.collideWithPlayer = function(f) {
+    return false;
+};
+
 function SmashOrb(f, o) {
     effectsController.ClashStreak(o.body.center.x, o.body.center.y, game.rnd.between(1, 2));
     effectsController.Dust(o.body.center.x, o.body.center.y);
