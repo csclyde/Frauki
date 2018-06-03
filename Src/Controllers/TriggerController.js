@@ -58,7 +58,7 @@ TriggerController.prototype.CreateTriggers = function(layer) {
             trigger.stay = this.triggers[trigger.name].stay;
             trigger.exit = this.triggers[trigger.name].exit;
         } else {
-            console.log('Trigger with name ' + trigger.name + ' was not found');
+            console.warn('Trigger with name ' + trigger.name + ' was not found');
         }
     }
 };

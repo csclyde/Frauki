@@ -124,8 +124,6 @@ Enemy.prototype.types['Goddess'] =  function() {
 
 		this.messageQueue.push(msg);
 
-		console.log(this.messageQueue);
-
 		GameData.SetVal('goddess_message_queue', this.messageQueue);
 	};
 

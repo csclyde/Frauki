@@ -204,7 +204,7 @@ Door.prototype.PerformOpen = function(save, silent) {
 
     //check that the door has received enough attempts to actually open
     if(++this.openAttempts < this.thresholdAttempts) {
-        console.log('Door open failed, attempt ' + this.openAttempts + ' / ' + this.thresholdAttempts);
+        console.warn('Door open failed, attempt ' + this.openAttempts + ' / ' + this.thresholdAttempts);
         return;
     }
 

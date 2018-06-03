@@ -17,7 +17,7 @@ Enemy = function(game, x, y, name) {
     if(!!this.types[name]) {
         this.types[name].apply(this);
     } else {
-        console.log('Enemy of type ' + name + ' was not found');
+        console.warn('Enemy of type ' + name + ' was not found');
     }
 
     this.state = this.Idling;

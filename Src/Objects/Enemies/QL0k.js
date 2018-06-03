@@ -47,8 +47,6 @@ Enemy.prototype.types['QL0k'] =  function() {
 			// if(idealRotation < -1) idealRotation = -1;
 		}
 
-		//console.log(this.rotation)
-
 		var rotFactor = 0.1;
 
 		if(this.timers.TimerUp('rotation_wait') && this.state !== this.PreShooting && this.state !== this.Shooting) {
@@ -69,8 +67,6 @@ Enemy.prototype.types['QL0k'] =  function() {
 				this.facingPlayer = false;
 			}
 		}
-
-		//console.log(this.rotation)
 	};
 
 	this.Act = function() {

@@ -225,7 +225,7 @@ ProjectileController.prototype.FallingTile = function(sourceTile, visibleTile) {
 	} else if(visibleTile.index === 2139) {
 		tileName = 'Tiles0005'
 	} else {
-		console.log('Missing tile art for index ' + visibleTile.index);
+		console.warn('Missing tile art for index ' + visibleTile.index);
 		return;
 	}
 

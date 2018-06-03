@@ -61,10 +61,8 @@ LoadingState.create = function() {
     Phaser.Sprite.prototype.GetProp = function(name) {
         if(!!this.properties.length > 0) {
             var prop = this.properties.find(function(prop) {
-                console.log(prop.name, name)
                 return prop.name === name;
             });
-            console.log(prop)
             return (!!prop) ? prop.value : null;
         }
 
@@ -130,8 +128,7 @@ LoadingState.create = function() {
 
         if (!this.objects[name])
         {
-            console.warn('Tilemap.createFromObjects: Invalid objectgroup name given: ' + name);
-            console.log('Objects: ', this.objects);
+            console.warn('Tilemap.createFromObjects: Invalid objectgroup name given: ' + name, this.objects);
             return;
         }
 
@@ -210,7 +207,6 @@ LoadingState.create = function() {
 
     game.fpsProblemNotifier.add(function() {
         this.time.desiredFps = this.time.suggestedFps;
-        console.log('Switching FPS to: ' + this.time.suggestedFps);
     }, game);
 
     cameraController = new CameraController();
@@ -316,7 +312,6 @@ LoadingState.create = function() {
         this._reset = false;
     };
 
-    //console.log(Phaser.Animation)
     Phaser.Animation.prototype.update = function () {
 
         if (this.isPaused)

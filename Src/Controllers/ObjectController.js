@@ -141,7 +141,6 @@ ObjectController.prototype.DestroyFarawayObjects = function() {
             //this.createdObjects.splice(this.createdObjects.indexOf(o), 1);
             o.destroy();
             o = null;
-            console.log('Destroying object', this.createdObjects.length);
         } 
 
         //splice out the destroyed objects
@@ -159,12 +158,10 @@ ObjectController.prototype.SpawnObject = function(o) {
     if(o.id === 66) {
         newObj = new Apple(game, o.x, o.y, 'Misc', 'Apple0000');
         newObj.latent = o;
-
     }
     else if(o.id === 68) {
         newObj = new EnergyNugg(game, o.x, o.y, 'Misc', 'EnergyBitPos0000');
         newObj.latent = o;
-
     } 
     else if(o.id === 70) {
         newObj = new Shard(game, o.x, o.y, 'Shard0000', 'Shard0000');
@@ -189,7 +186,6 @@ ObjectController.prototype.SpawnObject = function(o) {
     else if(o.id === 74) {
         newObj = new Orb(game, o.x, o.y, 'Misc', 'Orb0000');
         newObj.latent = o;
-
     } 
     else if((o.id >= 85 && o.id <= 104) || (o.id >= 145 && o.id <= 164)) {
 	    FileMap.Enemies.forEach(function(enemy) {
@@ -208,9 +204,8 @@ ObjectController.prototype.SpawnObject = function(o) {
 	            newObj.latent = o;
 	        }
 	    });
-    } else if(o.id !== 69) {
-        //ignore the spawn object
-    	console.log('Unknown object', o);
+    } else if(![69,67,75,70,71,72,73].includes(o.id)) {
+    	console.warn('Unknown object', o);
     }
 
 
@@ -223,7 +218,6 @@ ObjectController.prototype.SpawnObject = function(o) {
         newObj.name = o.name;
 
         //check for signals attached to the object
-        console.log(newObj)
         if(!!newObj.GetProp('on_death')) {
             newObj.events.onDestroy.add(function() {
                 ComposeAndEmitSignal(newObj.GetProp('on_death'));
@@ -309,6 +303,5 @@ function ComposeAndEmitSignal(data) {
         params[paramData[0]] = paramData[1];
     }
 
-    console.log(signalName, params)
     events.publish(signalName, params);
 };

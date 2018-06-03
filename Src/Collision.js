@@ -153,7 +153,6 @@ Collision.OverlapEnemyAttackWithFrauki = function(e, f) {
 
     //if frauki is stunned and the player opened the roll window
     if(!frauki.timers.TimerUp('attack_stun') && !frauki.timers.TimerUp('stun_dodge')) {
-        console.log('avoiding shit')
         frauki.Roll({override: true});
         return false;
     }

@@ -650,7 +650,7 @@ Player.prototype.Block = function(params) {
 
 Player.prototype.Slash = function(params) {
 
-    if(this.states.throwing) {
+    if(this.states.throwing || this.Attacking()) {
         return;
     }
 
@@ -680,7 +680,7 @@ Player.prototype.Slash = function(params) {
         attackResult = true;
     }
     else {
-        console.log('An attack was attempted in an unresolved state ', this.state);
+        console.warn('An attack was attempted in an unresolved state ', this.state);
         return;
     }
 

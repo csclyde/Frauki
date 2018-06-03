@@ -12,7 +12,7 @@ EventRouter.prototype.subscribe = function(eventName, callback, context) {
 
 EventRouter.prototype.publish = function(eventName, parameters) {
 	if(!this.events[eventName]) {
-		console.log('Event published with no lsiteners: ' + eventName);
+		console.warn('Event published with no lsiteners: ' + eventName);
 		return;
 	}
 

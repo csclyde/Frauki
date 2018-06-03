@@ -39,7 +39,6 @@ GameData.LoadDataFromStorage = function() {
     }
     if(save_data) {
         this.data = save_data;
-        console.log('LOADING DATA', JSON.stringify(this.data));
     }
 };
 

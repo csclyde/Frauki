@@ -30,7 +30,7 @@ ScriptRunner.run = function(name, params) {
 		this.executeCommand(this.scripts[name][0]);
 
 	} else {
-		console.log('Script with name ' + name + ' was not found');
+		console.warn('Script with name ' + name + ' was not found');
 	}
 };
 

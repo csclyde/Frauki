@@ -25,7 +25,6 @@ CameraController = function() {
 	this.panning = false;
 
 	events.subscribe('focus_on', function(params) {
-		console.log(this.target);
 		this.target = params.target;
 	}, this);
 

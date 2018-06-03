@@ -168,7 +168,6 @@ AudioController.prototype.PlayMusic = function(params) {
     // }
     // //otherwise, just fade the song in
     // else if(!!params.name) {
-    // console.log(this.currentMusic, params);
 
     //     //fade it back in from whatever it was at
     //     this.currentMusic = this.music[params.name];

@@ -454,7 +454,6 @@ Frogland.UpdateTutorialBlocks = function() {
         
         if(!!tile) {
             if(game.input.gamepad.supported && game.input.gamepad.active) {
-                console.log('switching cause gamepad')
                 if(tile.index === 1221) tile.index = 1157;
                 if(tile.index === 1222) tile.index = 1158;
     
@@ -473,7 +472,6 @@ Frogland.UpdateTutorialBlocks = function() {
                 if(tile.index === 1193) tile.index = 1193;
                 if(tile.index === 1194) tile.index = 1194;
             } else {
-                console.log('switching cause no gamepad')
                 
                 if(tile.index === 1157) tile.index = 1221;
                 if(tile.index === 1158) tile.index = 1222;
