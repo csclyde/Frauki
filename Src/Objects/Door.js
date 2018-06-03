@@ -12,8 +12,6 @@ Door = function(game, x, y, name) {
     this.x += 8;
     this.y += 8;
 
-    this.state = this.Closed;
-
     this.body.allowGravity = false;
     this.body.immovable = true;
     this.visible = false;
@@ -34,6 +32,12 @@ Door.prototype.create = function() {
 
     events.subscribe('enemy_killed', function(params) {
     }, this);
+
+    if(GameData.IsDoorOpen(this.id)) {
+        this.state = this.ReadyToOpen;
+    } else {
+        this.state = this.Closed;
+    }
 
     switch(this.type) {
 
@@ -120,14 +124,8 @@ Door.prototype.create = function() {
 
 Door.prototype.update = function() {
 
-    var padding = 50;
-
-    if((this.state === this.Closed || this.state == this.ReadyToOpen) && this.owningLayer === Frogland.currentLayer && GameData.IsDoorOpen(this.id)) {
-        if(this.body.x + this.body.width > game.camera.x + padding && this.body.y + this.body.height > game.camera.y + padding && this.body.x < game.camera.x + game.camera.width - padding && this.body.y < game.camera.y + game.camera.height - padding) {
-            this.PerformOpen(false, true);
-        } else if(this.body.x + this.body.width > game.camera.x && this.body.y + this.body.height > game.camera.y && this.body.x < game.camera.x + game.camera.width && this.body.y < game.camera.y + game.camera.height) {
-            this.state = this.ReadyToOpen;
-        } 
+    if(this.state === this.ReadyToOpen && cameraController.IsObjectOnScreen(this, 50) && this.owningLayer === Frogland.currentLayer) {
+        this.PerformOpen(false, true);
     }
 
     if(!!this.state)
@@ -164,13 +162,7 @@ Door.prototype.OpenDoor = function(f) {
         this.waitingToOpen = true;
 
         //get the prism for this door
-        var prism = null;
-
-        objectController.shardList.forEach(function(s) {
-            if(s.name === this.prism) {
-                prism = s;
-            }
-        })
+        var prism = objectController.shardList.find(function(s) { return s.name === this.prism; }, this);
 
         prism.beingUsed = true;
         prism.body.x = game.camera.x;
@@ -183,9 +175,9 @@ Door.prototype.OpenDoor = function(f) {
         shardTween.onComplete.add(function() {
             //when the tween is done, perform the door opening
             effectsController.ScreenFlash();
-            d.PerformOpen(true);
+            this.PerformOpen(true);
             prism.ReturnToUI();
-        });
+        }, this);
     }  
 };
 
@@ -296,7 +288,6 @@ Door.prototype.Closed = function() {
 };
 
 Door.prototype.ReadyToOpen = function() {
-
     this.PlayAnim('open');
 };
 

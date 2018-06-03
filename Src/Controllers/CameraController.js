@@ -118,4 +118,15 @@ CameraController.prototype.ScreenShake = function(params) {
 	this.shakeYTween = game.add.tween(this).to({shakeMagnitudeY: 0}, params.duration, Phaser.Easing.Linear.None, true);
 
 	//a sine function that is multiplied by the magnitude. The magnitude has a tween set to 0 based on the duration
-}
+};
+
+CameraController.prototype.IsObjectOnScreen = function(obj, padding) {
+	if(obj.body.right > game.camera.x + padding && 
+	   obj.body.bottom > game.camera.y + padding && 
+	   obj.body.x < game.camera.x + game.camera.width - padding && 
+	   obj.body.y < game.camera.y + game.camera.height - padding) {
+		   return true;
+	   } else {
+		   return false;
+	   }
+};
