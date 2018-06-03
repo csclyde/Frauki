@@ -137,7 +137,7 @@ Door.prototype.update = function() {
 Door.prototype.collideWithPlayer = function(f) {
     this.OpenDoor(f);
 
-    return (frauki.state === frauki.Rolling && this.canRollUnder === true);
+    return !(frauki.state === frauki.Rolling && this.canRollUnder === true);
 };
 
 Door.prototype.OpenDoor = function(f) {
