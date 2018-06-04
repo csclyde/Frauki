@@ -381,7 +381,7 @@ Enemy.prototype.collideWithPlayer = function(f) {
 
         if(f.state === f.Rolling && this.body.immovable !== true) {
             this.body.velocity.x = 150;
-            this.body.velocity.x *= EnemyBehavior.Player.DirMod(o);
+            this.body.velocity.x *= EnemyBehavior.Player.DirMod(this);
         }
 
         return true;

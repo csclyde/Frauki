@@ -58,17 +58,6 @@ LoadingState.create = function() {
             this.animations.play(name);
     };
 
-    Phaser.Sprite.prototype.GetProp = function(name) {
-        if(!!this.properties.length > 0) {
-            var prop = this.properties.find(function(prop) {
-                return prop.name === name;
-            });
-            return (!!prop) ? prop.value : null;
-        }
-
-        return null;
-    }
-
     Phaser.Tilemap.prototype.forEach = function (callback, context, x, y, width, height, layer) {
 
         layer = this.getLayer(layer);
@@ -113,84 +102,6 @@ LoadingState.create = function() {
         else
         {
             return null;
-        }
-
-    };
-
-    Phaser.Tilemap.prototype.createFromObjects = function (name, gid, key, frame, exists, autoCull, group, CustomClass, adjustY, adjustSize) {
-        
-        if (exists === undefined) { exists = true; }
-        if (autoCull === undefined) { autoCull = false; }
-        if (group === undefined) { group = this.game.world; }
-        if (CustomClass === undefined) { CustomClass = Phaser.Sprite; }
-        if (adjustY === undefined) { adjustY = true; }
-        if (adjustSize === undefined) { adjustSize = true; }
-
-        if (!this.objects[name])
-        {
-            console.warn('Tilemap.createFromObjects: Invalid objectgroup name given: ' + name, this.objects);
-            return;
-        }
-
-        for (var i = 0; i < this.objects[name].length; i++)
-        {
-            var found = false;
-            var obj = this.objects[name][i];
-
-            if (obj.gid !== undefined && typeof gid === 'number' && obj.gid === gid)
-            {
-                found = true;
-            }
-            else if (obj.id !== undefined && typeof gid === 'number' && obj.id === gid)
-            {
-                found = true;
-            }
-            else if (obj.name !== undefined && typeof gid === 'string' && obj.name === gid)
-            {
-                found = true;
-            }
-
-            if (found)
-            {
-                var sprite = new CustomClass(this.game, parseFloat(obj.x, 10), parseFloat(obj.y, 10), key, frame);
-
-                sprite.name = obj.name;
-                sprite.autoCull = autoCull;
-                sprite.exists = exists;
-                sprite.visible = obj.visible;
-
-                if (adjustSize)
-                {
-                    if (obj.width)
-                    {
-                        sprite.width = obj.width;
-                    }
-
-                    if (obj.height)
-                    {
-                        sprite.height = obj.height;
-                    }
-                }
-
-                if (obj.rotation)
-                {
-                    sprite.angle = obj.rotation;
-                }
-
-                if (adjustY)
-                {
-                    sprite.y -= sprite.height;
-                }
-
-                group.add(sprite);
-
-                if(!!obj.properties) {
-                    for(var k = 0; k < obj.properties.length; k++) {
-                        //sprite[obj.properties[k].name] = obj.properties[k].value;
-                        group.set(sprite, obj.properties[k].name, obj.properties[k].value, false, false, 0, true);
-                    }
-                }
-            }
         }
 
     };

@@ -5,11 +5,6 @@ EnemyBehavior.SetProp = function(e, key, val) {
     e.EBProps[key] = val;
 };
 
-EnemyBehavior.GetProp = function(e, key) {
-    if(!e.EBProps) e.EBProps = {};
-    return e.EBProps[key];
-};
-
 EnemyBehavior.WithinCameraRange = function(e, pad) {
     if(e.owningLayer !== Frogland.currentLayer) {
         return false;

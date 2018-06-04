@@ -164,6 +164,7 @@ Door.prototype.OpenDoor = function(f) {
         //get the prism for this door
         var prism = objectController.shardList.find(function(s) { return s.name === this.prism; }, this);
 
+        console.log(prism)
         prism.beingUsed = true;
         prism.body.x = game.camera.x;
         prism.body.y = game.camera.y + game.camera.height;

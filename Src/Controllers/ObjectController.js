@@ -214,13 +214,13 @@ ObjectController.prototype.SpawnObject = function(o) {
         currLayer.add(newObj);
         newObj.owningLayer = Frogland.currentLayer;
     	this.createdObjects.push(newObj);
-        newObj.properties = o.properties || [];
+        newObj.properties = o.properties || {};
         newObj.name = o.name;
 
         //check for signals attached to the object
-        if(!!newObj.GetProp('on_death')) {
+        if(!!newObj.properties.on_death) {
             newObj.events.onDestroy.add(function() {
-                ComposeAndEmitSignal(newObj.GetProp('on_death'));
+                ComposeAndEmitSignal(newObj.properties.on_death);
             });
         }
     }
