@@ -650,7 +650,7 @@ Player.prototype.Block = function(params) {
 
 Player.prototype.Slash = function(params) {
 
-    if(this.states.throwing || this.Attacking()) {
+    if(this.states.throwing || this.InAttackAnim()) {
         return;
     }
 
