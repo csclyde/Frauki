@@ -10,6 +10,8 @@ ObjectController = function() {
 };
 
 ObjectController.prototype.Create = function() {
+    this.activeGroup = game.add.group();
+    this.inactiveGroup = game.add.group();
 };
 
 ObjectController.prototype.Update = function() {
@@ -18,23 +20,23 @@ ObjectController.prototype.Update = function() {
 		//this.DestroyFarawayObjects();
 	}
 
-    var inactives = this['inactiveLayer' + Frogland.currentLayer];
+    var inactives = this.inactiveGroup;
 
     //weed out inactives
-    for(var i = 0, max = this.GetCurrentObjectGroup().children.length; i < max; i++) {
+    for(var i = 0, max = this.GetObjectGroup().children.length; i < max; i++) {
         var padding = 200;
-        var o = this.GetCurrentObjectGroup().children[i];
+        var o = this.GetObjectGroup().children[i];
 
         if(!o) continue;
 
         var preservedTypes = ['door', 'powerup'];
 
         if(preservedTypes.indexOf(o.spriteType) === -1 && !!o.body) {
-            if(o.body.x < game.camera.x - padding || o.body.y < game.camera.y - padding || o.body.x > game.camera.x + game.camera.width + padding || o.body.y > game.camera.y + game.camera.height + padding) {
+            if(!cameraController.IsObjectOnScreen(o, -200)) {
                 if(o.body.enable === true && !!o.Deactivate) o.Deactivate();
                 o.body.enable = false;
                 o.visible = false;
-                this.GetCurrentObjectGroup().remove(o);
+                this.GetObjectGroup().remove(o);
                 inactives.add(o);
 
                 //also splice the object out of the enemy list
@@ -56,7 +58,7 @@ ObjectController.prototype.Update = function() {
                 o.visible = true;
 
                 inactives.remove(o);
-                this.GetCurrentObjectGroup().add(o);
+                this.GetObjectGroup().add(o);
 
             }
         }
@@ -65,40 +67,30 @@ ObjectController.prototype.Update = function() {
 };
 
 ObjectController.prototype.Reset = function() {
-    this.activeLayer3.removeAll(true);
-    this.inactiveLayer3.removeAll(true);
-    this.activeLayer4.removeAll(true);
-    this.inactiveLayer4.removeAll(true);
+    this.activeGroup.removeAll(true);
+    this.inactiveGroup.removeAll(true);
 
-    this.CreateObjectsLayer(4);
-    this.CreateObjectsLayer(3);
+    this.CreateObjectsLayer();
 };
 
-ObjectController.prototype.GetCurrentObjectGroup = function() {
-    return this['activeLayer' + Frogland.currentLayer];
+ObjectController.prototype.GetObjectGroup = function() {
+    return this.activeGroup;
 };
 
 ObjectController.prototype.CompileObjectList = function() {
-    var that = this;
 
-    this.latentObjects = {
-        Objects_3: [],
-        Objects_4: []
-    };
+    this.latentObjects = [];
 
-    Frogland.map.objects['Objects_3'].forEach(function(o) {
-        that.latentObjects.Objects_3.push({ id: o.gid, name: o.name, x: o.x, y: o.y, u: that.latentObjects.Objects_3.length, properties: o.properties });
-    });
+    Frogland.map.objects['Objects'].forEach(function(o) {
+        this.latentObjects.push({ id: o.gid, name: o.name, x: o.x, y: o.y, u: this.latentObjects.length, properties: o.properties });
+    }, this);
 
-    Frogland.map.objects['Objects_4'].forEach(function(o) {
-        that.latentObjects.Objects_4.push({ id: o.gid, name: o.name, x: o.x, y: o.y, u: that.latentObjects.Objects_4.length, properties: o.properties });
-    });
 };
 
 ObjectController.prototype.SpawnNearbyObjects = function() {
 
     //get the latent objects
-    var objLayer = this.latentObjects['Objects_' + Frogland.currentLayer];
+    var objLayer = this.latentObjects;
 
     var spawnedObjs = [];
 
@@ -137,7 +129,7 @@ ObjectController.prototype.DestroyFarawayObjects = function() {
         var bottomBound = frauki.body.center.y + (game.camera.height / 2) + padding;
 
         if(o.x < leftBound || o.y < topBound || o.x > rightBound || o.y > bottomBound) {
-            this.latentObjects['Objects_' + Frogland.currentLayer].push(o.latent);
+            this.latentObjects.push(o.latent);
             //this.createdObjects.splice(this.createdObjects.indexOf(o), 1);
             o.destroy();
             o = null;
@@ -150,8 +142,8 @@ ObjectController.prototype.DestroyFarawayObjects = function() {
 
 ObjectController.prototype.SpawnObject = function(o) {
 
-    var currLayer = this.GetCurrentObjectGroup();
-    if(!currLayer) currLayer = game.add.group();
+    var objGroup = this.GetObjectGroup();
+    if(!objGroup) objGroup = game.add.group();
 
     var newObj = null;
 
@@ -208,11 +200,8 @@ ObjectController.prototype.SpawnObject = function(o) {
     	console.warn('Unknown object', o);
     }
 
-
- 
     if(newObj !== null) {
-        currLayer.add(newObj);
-        newObj.owningLayer = Frogland.currentLayer;
+        this.GetObjectGroup().add(newObj);
     	this.createdObjects.push(newObj);
         newObj.properties = o.properties || {};
         newObj.name = o.name;
@@ -227,36 +216,30 @@ ObjectController.prototype.SpawnObject = function(o) {
 };
 
 ObjectController.prototype.AddObject = function(newObj) {
-    var currLayer = this.GetCurrentObjectGroup();
-    if(!currLayer) currLayer = game.add.group();
-
-    currLayer.add(newObj);
-    newObj.owningLayer = Frogland.currentLayer;    
+    this.GetObjectGroup().add(newObj);   
 };
 
 ObjectController.prototype.CreateObjectsLayer = function(layer) {
 
-    if(!this['activeLayer' + layer]) this['activeLayer' + layer] = game.add.group();
-    if(!this['inactiveLayer' + layer]) this['inactiveLayer' + layer] = game.add.group();
+    if(!this.activeGroup) this.activeGroup = game.add.group();
+    if(!this.inactiveGroup) this.inactiveGroup = game.add.group();
 
-    var currLayer = this['activeLayer' + layer];
+    var currLayer = this.activeGroup;
 
-    Frogland.map.createFromObjects('Objects_' + layer, 69, 'Misc', 'Checkpoint0000', true, true, currLayer, Checkpoint, false);
+    Frogland.map.createFromObjects('Objects', 69, 'Misc', 'Checkpoint0000', true, true, currLayer, Checkpoint, false);
 
     //create the doors
-    Frogland.map.createFromObjects('Objects_' + layer, 67, 'Misc', 'DoorSeal0000', true, true, currLayer, Door, false);
+    Frogland.map.createFromObjects('Objects', 67, 'Misc', 'DoorSeal0000', true, true, currLayer, Door, false);
 
-    Frogland.map.createFromObjects('Objects_' + layer, 75, 'Misc', 'Upgrade0000', true, true, currLayer, Upgrade, false);
+    Frogland.map.createFromObjects('Objects', 75, 'Misc', 'Upgrade0000', true, true, currLayer, Upgrade, false);
     
-    Frogland.map.createFromObjects('Objects_' + layer, 70, 'Shard0000', 'Shard0000', true, true, currLayer, Shard, false);
-    Frogland.map.createFromObjects('Objects_' + layer, 71, 'Shard0001', 'Shard0001', true, true, currLayer, Shard, false);
-    Frogland.map.createFromObjects('Objects_' + layer, 72, 'Shard0002', 'Shard0002', true, true, currLayer, Shard, false);
-    Frogland.map.createFromObjects('Objects_' + layer, 73, 'Shard0003', 'Shard0003', true, true, currLayer, Shard, false);
+    Frogland.map.createFromObjects('Objects', 70, 'Shard0000', 'Shard0000', true, true, currLayer, Shard, false);
+    Frogland.map.createFromObjects('Objects', 71, 'Shard0001', 'Shard0001', true, true, currLayer, Shard, false);
+    Frogland.map.createFromObjects('Objects', 72, 'Shard0002', 'Shard0002', true, true, currLayer, Shard, false);
+    Frogland.map.createFromObjects('Objects', 73, 'Shard0003', 'Shard0003', true, true, currLayer, Shard, false);
 
     //inform each object of its own layer
     currLayer.forEach(function(obj) {
-        obj.owningLayer = layer;
-
 
         if(obj.spriteType === 'door') {
             obj.create();
@@ -282,10 +265,6 @@ ObjectController.prototype.CreateObjectsLayer = function(layer) {
             objectController.shardList.push(obj);
         }
 
-        if(Frogland.currentLayer !== layer) {
-            obj.alpha = 0;
-            obj.body.enable = false;
-        }
     });  
 };
 

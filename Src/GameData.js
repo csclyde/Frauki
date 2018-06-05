@@ -1,6 +1,6 @@
 var GameData = {};
 
-var currentVer = 0.3;
+var currentVer = 0.4;
 
 //When game data is requested, it is pulled from the data structure in memory. When
 //it is saved, it is put into the data structure, and then put into local storage.
@@ -14,8 +14,6 @@ GameData.data = {
     upgrades: ['Dive', 'Stab', 'Baton'],
     doors: [],
     shards: [],
-    nugg_bank: 0,
-    flash_copy: null,
     health: 4,
     flags: {},
     vals: {

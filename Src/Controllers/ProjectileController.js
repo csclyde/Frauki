@@ -268,7 +268,7 @@ ProjectileController.prototype.Update = function() {
 			p.destroy();
 			childrenToRemove.push(p);
 		} else if(p.solid) {
-			game.physics.arcade.collide(p, Frogland.GetCurrentCollisionLayer(), null, Collision.CollideProjectileWithWorld);
+			game.physics.arcade.collide(p, Frogland.GetCollisionLayer(), null, Collision.CollideProjectileWithWorld);
 		}
 
 		if(p.projType === 'bolas' && p.attached === true) {

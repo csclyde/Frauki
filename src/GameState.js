@@ -2,9 +2,6 @@ var GameState = new Phaser.State();
 
 GameState.create = function() {
 
-    Frogland.SpawnFrauki();
-    //inputController.DisallowInput();
-
     this.restarting = true;
 
     this.physicsSlowMo = 1;
@@ -34,19 +31,12 @@ GameState.create = function() {
     this.tweens = {};
 
     this.UITextures = {};
-    // this.UITextures.EnergyBar0000 = PIXI.TextureCache[game.cache.getFrameByName('UI', 'EnergyBar0000').uuid];
-    // this.UITextures.EnergyBar0001 = PIXI.TextureCache[game.cache.getFrameByName('UI', 'EnergyBar0001').uuid];
-    // this.UITextures.EnergyBar0002 = PIXI.TextureCache[game.cache.getFrameByName('UI', 'EnergyBar0002').uuid];
-    // this.UITextures.EnergyBar0005 = PIXI.TextureCache[game.cache.getFrameByName('UI', 'EnergyBar0005').uuid];
-    // this.UITextures.EnergyBar0006 = PIXI.TextureCache[game.cache.getFrameByName('UI', 'EnergyBar0006').uuid];
 
     audioController.ambient['surface_wind'].play();
 
     this.CreateUI();
 
     events.subscribe('update_ui', this.UpdateUI, this);
-
-    this.inMenu = true;
 
     // this.titleLogo = game.add.image(0, 0, 'UI', 'Logo0000');
     // this.titleLogo.fixedToCamera = true;
@@ -68,7 +58,7 @@ GameState.update = function() {
     projectileController.Update();
     weaponController.Update();
     speechController.Update();
-    triggerController.Update(Frogland.currentLayer);
+    triggerController.Update();
     backdropController.Update();
 
     //this.UpdateUI();
@@ -177,13 +167,7 @@ GameState.Restart = function() {
 
         GameData.ResetNuggCount();
 
-        triggerController.triggerLayers['Triggers_4'].forEach(function(trig) {
-            trig.enterFired = false;
-            trig.stayFired = false;
-            trig.exitFired = false;
-        });
-
-        triggerController.triggerLayers['Triggers_3'].forEach(function(trig) {
+        triggerController.triggerLayers['Triggers'].forEach(function(trig) {
             trig.enterFired = false;
             trig.stayFired = false;
             trig.exitFired = false;

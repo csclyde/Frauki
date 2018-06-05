@@ -365,12 +365,12 @@ WeaponController.prototype.Lob = {
 
         var toDestroy = [];
 
-        game.physics.arcade.collide(this.lobbies, Frogland.GetCurrentCollisionLayer(), function(l, t) {
+        game.physics.arcade.collide(this.lobbies, Frogland.GetCollisionLayer(), function(l, t) {
             toDestroy.push(l);
             effectsController.EnergySplash(l.body, 200, 'neutral', 30, l.body.velocity);
         });
 
-        game.physics.arcade.overlap(this.lobbies, objectController.GetCurrentObjectGroup(), null, Collision.OverlapLobWithEnemy);
+        game.physics.arcade.overlap(this.lobbies, objectController.GetObjectGroup(), null, Collision.OverlapLobWithEnemy);
 
         var i = toDestroy.length;
         while(i--) {

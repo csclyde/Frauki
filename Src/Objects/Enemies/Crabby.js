@@ -89,8 +89,8 @@ Enemy.prototype.types['Crabby'] =  function() {
         var xLoc = this.body.x;
         xLoc += (this.direction === 'left' ? this.body.width + 3 : -3);
 
-        var bottomTile = Frogland.map.getTileWorldXY(xLoc, this.body.y + this.body.height + 10, 16, 16, Frogland.GetCurrentCollisionLayer());
-        var topTile = Frogland.map.getTileWorldXY(xLoc, this.body.y - 10, 16, 16, Frogland.GetCurrentCollisionLayer());
+        var bottomTile = Frogland.map.getTileWorldXY(xLoc, this.body.y + this.body.height + 10, 16, 16, Frogland.GetCollisionLayer());
+        var topTile = Frogland.map.getTileWorldXY(xLoc, this.body.y - 10, 16, 16, Frogland.GetCollisionLayer());
 
         if(this.body.velocity.y < 0 && topTile === null) {
             this.body.velocity.y *= -1;

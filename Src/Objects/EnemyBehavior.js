@@ -130,7 +130,7 @@ EnemyBehavior.Player.IsVisible = function(e) {
     //if the timestamp has expired, check for visibility
     if(this.Visibility[e.z].timestamp + refreshTime < game.time.now) {
         var ray = new Phaser.Line(frauki.body.center.x, frauki.body.center.y, e.body.center.x, e.body.center.y);
-        var collideTiles = Frogland.GetCurrentCollisionLayer().getRayCastTiles(ray, 4, true);
+        var collideTiles = Frogland.GetCollisionLayer().getRayCastTiles(ray, 4, true);
 
         this.Visibility[e.z].timestamp = game.time.now;
 
@@ -183,7 +183,7 @@ EnemyBehavior.Player.IsDoorBetween = function(e) {
 
 EnemyBehavior.Player.IsWallBetween = function(e) {
     var ray = new Phaser.Line(frauki.body.center.x, frauki.body.center.y, e.body.center.x, e.body.center.y);
-    var collideTiles = Frogland.GetCurrentCollisionLayer().getRayCastTiles(ray, 4, true);
+    var collideTiles = Frogland.GetCollisionLayer().getRayCastTiles(ray, 4, true);
 
     var i = collideTiles.length;
     var collideCount = 0;

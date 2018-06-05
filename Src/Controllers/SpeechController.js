@@ -129,7 +129,7 @@ SpeechController.prototype.Create = function() {
 SpeechController.prototype.LoadSpeechZones = function(layer) {
 	var that = this;
 
-	Frogland.map.objects['Triggers_' + layer].forEach(function(o) {
+	Frogland.map.objects['Triggers'].forEach(function(o) {
         if(o.type === 'speech') {
         	var zone = new Phaser.Rectangle(o.x, o.y, o.width, o.height);
         	zone.owningLayer = layer;

@@ -18,8 +18,7 @@ EffectsController = function() {
 };
 
 EffectsController.prototype.Reset = function() {
-    this.dicedPieces3.removeAll(true);
-    this.dicedPieces4.removeAll(true);
+    this.dicedPieces.removeAll(true);
 };
 
 EffectsController.prototype.CreateEffect = function(e, x, y, w, h) {
@@ -42,8 +41,7 @@ EffectsController.prototype.CreateEffect = function(e, x, y, w, h) {
 EffectsController.prototype.CreateEffectsLayer = function() {
     var that = this;
 
-    this.dicedPieces4 = game.add.group();
-    this.dicedPieces3 = game.add.group();
+    this.dicedPieces = game.add.group();
     this.effectsGroup = game.add.group();
 
     Effects.Emitters.forEach(function(e) {
@@ -66,8 +64,7 @@ EffectsController.prototype.CreateEffectsLayer = function() {
     this.effectsGroup.add(this.materializingApple);
     this.effectsGroup.add(this.charge1);
 
-    this.LoadMapEffects(4);
-    this.LoadMapEffects(3);
+    this.LoadMapEffects();
 };
 
 EffectsController.prototype.CreateForegroundEffectsLayer = function() {
@@ -91,7 +88,7 @@ EffectsController.prototype.Update = function() {
     this.loadedEffects.forEach(function(o) {
         var padding = 100;
 
-        if(o.owningLayer === Frogland.currentLayer && o.x > game.camera.x - padding && o.y > game.camera.y - padding && o.x < game.camera.x + game.camera.width + padding && o.y < game.camera.y + game.camera.height + padding) {
+        if(o.x > game.camera.x - padding && o.y > game.camera.y - padding && o.x < game.camera.x + game.camera.width + padding && o.y < game.camera.y + game.camera.height + padding) {
             o.on = true;
         } else {
             o.on = false;
@@ -102,7 +99,7 @@ EffectsController.prototype.Update = function() {
     this.loadedEffectsCollide.forEach(function(o) {
         var padding = 100;
 
-        if(o.owningLayer === Frogland.currentLayer && o.x > game.camera.x - padding && o.y > game.camera.y - padding && o.x < game.camera.x + game.camera.width + padding && o.y < game.camera.y + game.camera.height + padding) {
+        if(o.x > game.camera.x - padding && o.y > game.camera.y - padding && o.x < game.camera.x + game.camera.width + padding && o.y < game.camera.y + game.camera.height + padding) {
             o.on = true;
         } else {
             o.on = false;
@@ -154,10 +151,10 @@ EffectsController.prototype.Update = function() {
     this.charge1.x = frauki.body.center.x;
     this.charge1.y = frauki.body.center.y;
 
-    game.physics.arcade.collideGroupVsTilemapLayer(this['dicedPieces' + Frogland.currentLayer], Frogland.GetCurrentCollisionLayer(), null, null, null, false);
-    //game.physics.arcade.collide(this.dicedPieces3, Frogland.GetCurrentCollisionLayer());
-    //game.physics.arcade.collide(this.dicedPieces2, Frogland.GetCurrentCollisionLayer());
-    game.physics.arcade.collide(this.loadedEffectsCollide, Frogland.GetCurrentCollisionLayer(), Collision.CollideEffectWithWorld, Collision.OverlapEffectWithWorld);
+    game.physics.arcade.collideGroupVsTilemapLayer(this['dicedPieces'], Frogland.GetCollisionLayer(), null, null, null, false);
+    //game.physics.arcade.collide(this.dicedPieces3, Frogland.GetCollisionLayer());
+    //game.physics.arcade.collide(this.dicedPieces2, Frogland.GetCollisionLayer());
+    game.physics.arcade.collide(this.loadedEffectsCollide, Frogland.GetCollisionLayer(), Collision.CollideEffectWithWorld, Collision.OverlapEffectWithWorld);
 
     if(frauki.state === frauki.Healing) {
         effectsController.MaterializeApple(frauki.body.center.x, frauki.body.y - 5, true);
@@ -166,10 +163,10 @@ EffectsController.prototype.Update = function() {
     }
 };
 
-EffectsController.prototype.LoadMapEffects = function(layer) {
+EffectsController.prototype.LoadMapEffects = function() {
     var that = this;
 
-    Frogland.map.objects['Triggers_' + layer].forEach(function(o) {
+    Frogland.map.objects['Triggers'].forEach(function(o) {
         if(o.type === 'effect') {
             if(o.name === 'splash') {
                 var splasherLeft = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
@@ -183,7 +180,6 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 splasherLeft.maxParticleSpeed.x = 10;
                 splasherLeft.minParticleSpeed.y = -80;
                 splasherLeft.maxParticleSpeed.y = -130;
-                splasherLeft.owningLayer = layer;
                 splasherLeft.setRotation(0, 0);
                 splasherLeft.start(false, 200, 5);
 
@@ -198,7 +194,6 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 splasherRight.maxParticleSpeed.x = 50;
                 splasherRight.minParticleSpeed.y = -80;
                 splasherRight.maxParticleSpeed.y = -130;
-                splasherRight.owningLayer = layer;
                 splasherRight.setRotation(0, 0);
                 splasherRight.start(false, 200, 5);
 
@@ -218,7 +213,6 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 dripper.start(false, 1500, game.rnd.between(1200, 2000));
                 dripper.effectType = 'drip';
                 dripper.alpha = 0.5;
-                dripper.owningLayer = layer;
 
                 that.loadedEffectsCollide.push(dripper);
             } else if(o.name === 'fluff') {
@@ -236,7 +230,6 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 fluffer.start(false, 3000, 700);
                 fluffer.effectType = 'fluff';
                 fluffer.alpha = 0.8;
-                fluffer.owningLayer = layer;
 
                 that.loadedEffects.push(fluffer);
             } else if(o.name === 'bubbles') {
@@ -255,7 +248,6 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 bubbler.start(false, 1200, game.rnd.between(1200, 1800));
                 bubbler.effectType = 'bubbles';
                 bubbler.alpha = 0.5;
-                bubbler.owningLayer = layer;
 
                 that.loadedEffects.push(bubbler);
                 
@@ -273,7 +265,6 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 sprayer.setRotation(0, 0);
                 sprayer.start(false, 300, 10);
                 sprayer.effectType = 'energy_spray';
-                sprayer.owningLayer = layer;
 
                 that.loadedEffects.push(sprayer);
             } else if(o.name === 'leaves_green') {
@@ -291,7 +282,6 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 leaves.start(false, 2000, 2500);
                 leaves.effectType = 'leaves';
                 //leaves.alpha = 0.5;
-                leaves.owningLayer = layer;
 
                 that.loadedEffects.push(leaves);
             } else if(o.name === 'leaves_brown') {
@@ -309,7 +299,6 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 leaves.start(false, 2000, 2500);
                 leaves.effectType = 'leaves';
                 //leaves.alpha = 0.5;
-                leaves.owningLayer = layer;
 
                 that.loadedEffects.push(leaves);
             } else if(o.name === 'spirits') {
@@ -327,7 +316,6 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
                 spirits.setScale();
                 spirits.start(false, 5000, 4000);
                 spirits.effectType = 'spirits';
-                spirits.owningLayer = layer;
 
                 that.loadedEffects.push(spirits);
             }
@@ -346,7 +334,6 @@ EffectsController.prototype.LoadMapEffects = function(layer) {
 
             sparkles.start(false, 200, 100);
             sparkles.effectType = 'sparkles';
-            sparkles.owningLayer = layer;
 
             that.loadedEffects.push(sparkles);
         }
@@ -380,9 +367,6 @@ function UpdateParticle(p) {
             events.publish('play_sound', {name: 'energy_bit', restart: true });
 
             if(p.parent === effectsController.positiveBits) {
-                //energyController.AddHealth(0.5);
-                //energyController.AddEnergy(1);
-                
                 effectsController.EnergySplash(p.body, 100, 'positive');
             } else if(p.parent === effectsController.neutralBits) {
                 effectsController.EnergySplash(p.body, 100, 'neutral');
@@ -515,7 +499,7 @@ EffectsController.prototype.Splash = function(tile) {
     }
 };
 
-EffectsController.prototype.DiceObject = function(name, x, y, xv, yv, layer) {
+EffectsController.prototype.DiceObject = function(name, x, y, xv, yv) {
 
     var pieces = [];
 
@@ -540,13 +524,12 @@ EffectsController.prototype.DiceObject = function(name, x, y, xv, yv, layer) {
 
         game.time.events.add(4000, function() { if(!!p && !!p.body) p.body.enable = false; } );
 
-        effectsController['dicedPieces' + layer].addChild(p);
+        effectsController['dicedPieces'].addChild(p);
     });
 };
 
 EffectsController.prototype.ClearDicedPieces = function() {
-    this.dicedPieces4.removeAll(true);
-    this.dicedPieces3.removeAll(true);
+    this.dicedPieces.removeAll(true);
 };
 
 EffectsController.prototype.MakeHearts = function(amt) {
@@ -841,7 +824,7 @@ EffectsController.prototype.ExplodeDoorSeal = function(door) {
 
         game.time.events.add(6000, function() { if(!!p && !!p.body) p.body.enable = false; } );
 
-        effectsController['dicedPieces' + Frogland.currentLayer].addChild(p);
+        effectsController.dicedPieces.addChild(p);
     });
 
     //make a particle spray
@@ -857,7 +840,7 @@ EffectsController.prototype.SpawnAppleCore = function(x, y) {
     appleCore.body.drag.setTo(20);
     //appleCore.body.angularDrag.setTo(100);
     appleCore.anchor.setTo(0.5);
-    effectsController['dicedPieces' + Frogland.currentLayer].addChild(appleCore);
+    effectsController.dicedPieces.addChild(appleCore);
 
 
     appleCore.body.velocity.y = -250;
@@ -913,7 +896,7 @@ EffectsController.prototype.ShatterShield = function() {
 
         game.time.events.add(1500, function() { p.destroy(); } );
 
-        effectsController['dicedPieces' + Frogland.currentLayer].addChild(p);
+        effectsController['dicedPieces'].addChild(p);
     });
 };
 

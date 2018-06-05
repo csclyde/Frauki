@@ -14,11 +14,11 @@ TriggerController.prototype.Create = function() {
 
 TriggerController.prototype.CreateTriggers = function(layer) {
 
-    this.triggerLayers['Triggers_' + layer] = Frogland.map.objects['Triggers_' + layer];
+    this.triggerLayers['Triggers'] = Frogland.map.objects['Triggers'];
 
-    for(var i = 0; i < this.triggerLayers['Triggers_' + layer].length; i++) {
+    for(var i = 0; i < this.triggerLayers['Triggers'].length; i++) {
 
-        var trigger = this.triggerLayers['Triggers_' + layer][i];
+        var trigger = this.triggerLayers['Triggers'][i];
 
         if(trigger.type !== 'trigger') {
             continue;
@@ -65,7 +65,7 @@ TriggerController.prototype.CreateTriggers = function(layer) {
 
 TriggerController.prototype.Update = function(currentLayer) {
 
-    currentLayer = this.triggerLayers['Triggers_' + currentLayer];
+    currentLayer = this.triggerLayers['Triggers'];
 
     //loop through all triggers on the current layer and see if any in
     //the active zone around or within the camera
@@ -125,7 +125,7 @@ TriggerController.prototype.Update = function(currentLayer) {
 };
 
 TriggerController.prototype.ForceExit = function(currentLayer) {
-    currentLayer = this.triggerLayers['Triggers_' + currentLayer];
+    currentLayer = this.triggerLayers['Triggers'];
 
     //loop through all triggers on the current layer and see if any in
     //the active zone around or within the camera

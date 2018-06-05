@@ -1069,9 +1069,9 @@ Player.prototype.Falling = function() {
         var xLoc = this.body.x;
         xLoc += (this.states.direction === 'right' ? frauki.body.width + 1 : -1);
 
-        var bottomTile = Frogland.map.getTileWorldXY(xLoc, this.body.y, 16, 16, Frogland.GetCurrentCollisionLayer());
-        var topTile = Frogland.map.getTileWorldXY(xLoc, this.body.y - 3, 16, 16, Frogland.GetCurrentCollisionLayer());
-        var topTile2 = Frogland.map.getTileWorldXY(xLoc, this.body.y - 6, 16, 16, Frogland.GetCurrentCollisionLayer());
+        var bottomTile = Frogland.map.getTileWorldXY(xLoc, this.body.y, 16, 16, Frogland.GetCollisionLayer());
+        var topTile = Frogland.map.getTileWorldXY(xLoc, this.body.y - 3, 16, 16, Frogland.GetCollisionLayer());
+        var topTile2 = Frogland.map.getTileWorldXY(xLoc, this.body.y - 6, 16, 16, Frogland.GetCollisionLayer());
 
         var topEmpty = (topTile === null || topTile2 === null) || (topTile.index === 2 || topTile2.index === 2) || (topTile.index === 10 || topTile2.index === 10);
 
