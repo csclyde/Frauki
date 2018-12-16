@@ -166,7 +166,7 @@ EffectsController.prototype.Update = function() {
 EffectsController.prototype.LoadMapEffects = function() {
     var that = this;
 
-    Frogland.map.objects['Triggers'].forEach(function(o) {
+    Frogland.map.objects['Effects'].forEach(function(o) {
         if(o.type === 'effect') {
             if(o.name === 'splash') {
                 var splasherLeft = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
