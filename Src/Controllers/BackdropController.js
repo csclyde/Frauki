@@ -75,7 +75,7 @@ BackdropController.prototype.CreateParallax = function() {
 BackdropController.prototype.LoadBackgrounds = function() {
     Frogland.backdrops = game.add.group();
     var that = this;
-
+    
     Frogland.map.objects['Backdrop'].forEach(function(o) {
 
         var b = game.add.tileSprite(o.x, o.y, o.width, o.height, o.name, null, Frogland.backdrops);

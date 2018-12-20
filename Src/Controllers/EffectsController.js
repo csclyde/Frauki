@@ -719,10 +719,11 @@ EffectsController.prototype.DripSplash = function(src, onWater) {
     dripSplash.animations.currentAnim.killOnComplete = true;
     dripSplash.alpha = 0.5;
 
-    events.publish('play_sound', {name: 'drip', restart: false });
-
+    
     //if it hit water, then make a ripple
     if(onWater) {
+        events.publish('play_sound', {name: 'drip', restart: false });
+        
         var ripple = game.add.sprite(src.x, yPos + 8, 'Misc');
         ripple.anchor.setTo(0.5);
         ripple.animations.add('ripple', ['Ripple0000', 'Ripple0001', 'Ripple0002', 'Ripple0003', 'Ripple0004', 'Ripple0005'], 12, false, false);

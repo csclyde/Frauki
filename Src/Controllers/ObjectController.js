@@ -85,17 +85,9 @@ ObjectController.prototype.CompileObjectList = function() {
     //     this.latentObjects.push({ id: o.gid, name: o.name, x: o.x, y: o.y, u: this.latentObjects.length, properties: o.properties });
     // }, this);
 
-    Frogland.map.objects['Enemies'].forEach(function(o) {
-        this.latentObjects.push({ id: o.gid, name: o.name, x: o.x, y: o.y, u: this.latentObjects.length, properties: o.properties });
-    }, this);
-
-    // Frogland.map.objects['Doors'].forEach(function(o) {
+    // Frogland.map.objects['Enemies'].forEach(function(o) {
     //     this.latentObjects.push({ id: o.gid, name: o.name, x: o.x, y: o.y, u: this.latentObjects.length, properties: o.properties });
     // }, this);
-
-    Frogland.map.objects['Collectables'].forEach(function(o) {
-        this.latentObjects.push({ id: o.gid, name: o.name, x: o.x, y: o.y, u: this.latentObjects.length, properties: o.properties });
-    }, this);
 
 };
 
@@ -241,7 +233,7 @@ ObjectController.prototype.CreateObjectsLayer = function(layer) {
     Frogland.map.createFromObjects('Objects', 69, 'Misc', 'Checkpoint0000', true, true, currLayer, Checkpoint, false);
 
     //create the doors
-    Frogland.map.createFromObjects('Doors', 67, 'Misc', 'DoorSeal0000', true, true, currLayer, Door, false);
+    //Frogland.map.createFromObjects('Doors', 67, 'Misc', 'DoorSeal0000', true, true, currLayer, Door, false);
 
     Frogland.map.createFromObjects('Objects', 75, 'Misc', 'Upgrade0000', true, true, currLayer, Upgrade, false);
     
