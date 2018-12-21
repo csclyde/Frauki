@@ -26,7 +26,7 @@ Junk.prototype.constructor = Junk;
 Junk.prototype.types = {};
 
 Junk.prototype.collideWithPlayer = function(f) {
-    if(f.state === f.Rolling) {
+    if(f.state === f.Rolling || f.state === f.Flipping) {
         this.JunkHit();
     }
 
