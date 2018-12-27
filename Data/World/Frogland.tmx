@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="360" height="600" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="3480">
  <properties>
-  <property name="debug" value="true"/>
+  <property name="debug" value="false"/>
   <property name="startLayer" value="3"/>
   <property name="startX" value="162"/>
   <property name="startY" value="243"/>
