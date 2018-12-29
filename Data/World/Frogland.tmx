@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="360" height="600" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="3482">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="360" height="600" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="3488">
  <properties>
   <property name="debug" value="true"/>
   <property name="startLayer" value="3"/>
-  <property name="startX" value="225"/>
-  <property name="startY" value="355"/>
+  <property name="startX" value="130"/>
+  <property name="startY" value="313"/>
  </properties>
  <tileset firstgid="1" name="Collision" tilewidth="16" tileheight="16" tilecount="64" columns="8">
   <image source="../CollisionKey.png" width="128" height="128"/>
@@ -564,152 +564,152 @@
   </tile>
   <tile id="570">
    <properties>
-    <property name="alpha" value="0.7"/>
+    <property name="alpha" value="0.8"/>
    </properties>
   </tile>
   <tile id="571">
    <properties>
-    <property name="alpha" value="0.7"/>
+    <property name="alpha" value="0.8"/>
    </properties>
   </tile>
   <tile id="572">
    <properties>
-    <property name="alpha" value="0.7"/>
+    <property name="alpha" value="0.8"/>
    </properties>
   </tile>
   <tile id="573">
    <properties>
-    <property name="alpha" value="0.7"/>
+    <property name="alpha" value="0.8"/>
    </properties>
   </tile>
   <tile id="574">
    <properties>
-    <property name="alpha" value="0.7"/>
+    <property name="alpha" value="0.8"/>
    </properties>
   </tile>
   <tile id="575">
    <properties>
-    <property name="alpha" value="0.7"/>
+    <property name="alpha" value="0.8"/>
    </properties>
   </tile>
   <tile id="602">
    <properties>
-    <property name="alpha" value="0.7"/>
+    <property name="alpha" value="0.8"/>
    </properties>
   </tile>
   <tile id="603">
    <properties>
-    <property name="alpha" value="0.7"/>
+    <property name="alpha" value="0.8"/>
    </properties>
   </tile>
   <tile id="604">
    <properties>
-    <property name="alpha" value="0.7"/>
+    <property name="alpha" value="0.8"/>
    </properties>
   </tile>
   <tile id="605">
    <properties>
-    <property name="alpha" value="0.7"/>
+    <property name="alpha" value="0.8"/>
    </properties>
   </tile>
   <tile id="606">
    <properties>
-    <property name="alpha" value="0.7"/>
+    <property name="alpha" value="0.8"/>
    </properties>
   </tile>
   <tile id="607">
    <properties>
-    <property name="alpha" value="0.7"/>
+    <property name="alpha" value="0.8"/>
    </properties>
   </tile>
   <tile id="634">
    <properties>
-    <property name="alpha" value="0.7"/>
+    <property name="alpha" value="0.8"/>
    </properties>
   </tile>
   <tile id="635">
    <properties>
-    <property name="alpha" value="0.7"/>
+    <property name="alpha" value="0.8"/>
    </properties>
   </tile>
   <tile id="636">
    <properties>
-    <property name="alpha" value="0.7"/>
+    <property name="alpha" value="0.8"/>
    </properties>
   </tile>
   <tile id="637">
    <properties>
-    <property name="alpha" value="0.7"/>
+    <property name="alpha" value="0.8"/>
    </properties>
   </tile>
   <tile id="638">
    <properties>
-    <property name="alpha" value="0.7"/>
+    <property name="alpha" value="0.8"/>
    </properties>
   </tile>
   <tile id="639">
    <properties>
-    <property name="alpha" value="0.7"/>
+    <property name="alpha" value="0.8"/>
    </properties>
   </tile>
   <tile id="666">
    <properties>
-    <property name="alpha" value="0.7"/>
+    <property name="alpha" value="0.8"/>
    </properties>
   </tile>
   <tile id="667">
    <properties>
-    <property name="alpha" value="0.7"/>
+    <property name="alpha" value="0.8"/>
    </properties>
   </tile>
   <tile id="668">
    <properties>
-    <property name="alpha" value="0.7"/>
+    <property name="alpha" value="0.8"/>
    </properties>
   </tile>
   <tile id="669">
    <properties>
-    <property name="alpha" value="0.7"/>
+    <property name="alpha" value="0.8"/>
    </properties>
   </tile>
   <tile id="670">
    <properties>
-    <property name="alpha" value="0.7"/>
+    <property name="alpha" value="0.8"/>
    </properties>
   </tile>
   <tile id="671">
    <properties>
-    <property name="alpha" value="0.7"/>
+    <property name="alpha" value="0.8"/>
    </properties>
   </tile>
   <tile id="698">
    <properties>
-    <property name="alpha" value="0.7"/>
+    <property name="alpha" value="0.8"/>
    </properties>
   </tile>
   <tile id="699">
    <properties>
-    <property name="alpha" value="0.7"/>
+    <property name="alpha" value="0.8"/>
    </properties>
   </tile>
   <tile id="700">
    <properties>
-    <property name="alpha" value="0.7"/>
+    <property name="alpha" value="0.8"/>
    </properties>
   </tile>
   <tile id="701">
    <properties>
-    <property name="alpha" value="0.7"/>
+    <property name="alpha" value="0.8"/>
    </properties>
   </tile>
   <tile id="702">
    <properties>
-    <property name="alpha" value="0.7"/>
+    <property name="alpha" value="0.8"/>
    </properties>
   </tile>
   <tile id="703">
    <properties>
-    <property name="alpha" value="0.7"/>
+    <property name="alpha" value="0.8"/>
    </properties>
   </tile>
  </tileset>
@@ -2951,7 +2951,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,0,0,0,3,3,0,0,0,0,1,1,0,0,0,0,11,11,11,11,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,0,0,0,3,3,0,0,0,0,1,1,0,0,0,0,11,11,11,11,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,1,19,19,19,19,19,19,19,19,19,19,19,19,1,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,11,11,11,11,0,0,0,0,0,0,0,0,1,4,4,4,4,4,4,4,4,4,1,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,0,0,0,1,1,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,11,11,11,11,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,1,1,10,10,10,10,10,10,1,0,0,0,1,1,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,11,11,11,11,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,1,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,11,11,11,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,11,11,11,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,11,11,11,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -3946,9 +3946,8 @@
   <object id="3322" name="fluff" type="effect" x="2781.3" y="3575" width="219" height="357"/>
   <object id="3323" name="drip" type="effect" x="2904.86" y="4542.03" width="36" height="5"/>
   <object id="3324" name="drip" type="effect" x="2763.36" y="4512.03" width="4.5" height="5.5"/>
-  <object id="3325" name="drip" type="effect" x="1965.48" y="5598.47" width="46.0004" height="6"/>
+  <object id="3325" name="dripDirty" type="effect" x="1965.48" y="5598.47" width="46.0004" height="6"/>
   <object id="3326" name="dripDirty" type="effect" x="2677.05" y="5729.31" width="6.5" height="5"/>
-  <object id="3327" name="drip" type="effect" x="2029.47" y="5576.14" width="100" height="4.66667"/>
   <object id="3328" name="drip" type="effect" x="3233.03" y="7428.67" width="127.5" height="4.5"/>
   <object id="3329" name="leaves_green" type="effect" x="1746.88" y="6988.84" width="76.1459" height="16.8333"/>
   <object id="3330" name="drip" type="effect" x="3361.53" y="7394.67" width="207" height="4.5"/>
@@ -4026,6 +4025,11 @@
   <object id="3442" name="leaves_brown" type="effect" x="4763.21" y="3255.75" width="51.396" height="3.4166"/>
   <object id="3480" name="dripDirty" type="effect" x="3055.25" y="5614.25" width="91.75" height="4.75"/>
   <object id="3481" name="dripDirty" type="effect" x="3537.5" y="5599" width="124.5" height="5.5"/>
+  <object id="3482" name="dripDirty" type="effect" x="4189.75" y="4239.58" width="98.1667" height="5.5"/>
+  <object id="3484" name="dripDirty" type="effect" x="3731.08" y="4349.58" width="231.5" height="5.5"/>
+  <object id="3485" name="dripDirty" type="effect" x="3491.25" y="5407.75" width="55" height="5.5"/>
+  <object id="3486" name="dripDirty" type="effect" x="1997.57" y="4960.16" width="61.0455" height="5.5"/>
+  <object id="3487" name="dripDirty" type="effect" x="2628.08" y="4705.92" width="124.5" height="5.5"/>
  </objectgroup>
  <objectgroup name="Triggers" visible="0">
   <object id="1592" name="mushrooms" type="speech" x="3845.75" y="3188.17" width="55.5" height="25.5"/>
