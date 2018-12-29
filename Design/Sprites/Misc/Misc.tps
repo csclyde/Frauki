@@ -199,69 +199,6 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">Frames/AltarBank0000.png</key>
-            <key type="filename">Frames/AltarBank0001.png</key>
-            <key type="filename">Frames/AltarBank0002.png</key>
-            <key type="filename">Frames/AltarBank0003.png</key>
-            <key type="filename">Frames/AltarBank0004.png</key>
-            <key type="filename">Frames/AltarBank0005.png</key>
-            <key type="filename">Frames/DoorApple0000.png</key>
-            <key type="filename">Frames/DoorEnemy0000.png</key>
-            <key type="filename">Frames/DoorEnemy0001.png</key>
-            <key type="filename">Frames/DoorMetal0000.png</key>
-            <key type="filename">Frames/DoorMetal0001.png</key>
-            <key type="filename">Frames/DoorMetal0002.png</key>
-            <key type="filename">Frames/DoorMetal0003.png</key>
-            <key type="filename">Frames/DoorMetal0004.png</key>
-            <key type="filename">Frames/DoorMetal0005.png</key>
-            <key type="filename">Frames/DoorMetal0006.png</key>
-            <key type="filename">Frames/DoorMetal0007.png</key>
-            <key type="filename">Frames/DoorMetal0008.png</key>
-            <key type="filename">Frames/DoorMetal0009.png</key>
-            <key type="filename">Frames/DoorMetal0010.png</key>
-            <key type="filename">Frames/DoorMetal0011.png</key>
-            <key type="filename">Frames/DoorMystery0000.png</key>
-            <key type="filename">Frames/DoorOrb0000.png</key>
-            <key type="filename">Frames/DoorOrb0001.png</key>
-            <key type="filename">Frames/DoorOrb0002.png</key>
-            <key type="filename">Frames/DoorOrb0003.png</key>
-            <key type="filename">Frames/DoorOrb0004.png</key>
-            <key type="filename">Frames/DoorOrb0005.png</key>
-            <key type="filename">Frames/DoorOrb0006.png</key>
-            <key type="filename">Frames/DoorOrb0007.png</key>
-            <key type="filename">Frames/DoorOrb0008.png</key>
-            <key type="filename">Frames/DoorPrism0000.png</key>
-            <key type="filename">Frames/DoorPrism0001.png</key>
-            <key type="filename">Frames/DoorPrism0002.png</key>
-            <key type="filename">Frames/DoorPrism0003.png</key>
-            <key type="filename">Frames/DoorPrism0004.png</key>
-            <key type="filename">Frames/DoorPrism0005.png</key>
-            <key type="filename">Frames/DoorPrism0006.png</key>
-            <key type="filename">Frames/DoorPrism0007.png</key>
-            <key type="filename">Frames/DoorSeal0000.png</key>
-            <key type="filename">Frames/DoorSeal0001.png</key>
-            <key type="filename">Frames/DoorSeal0002.png</key>
-            <key type="filename">Frames/DoorSeal0003.png</key>
-            <key type="filename">Frames/DoorSeal0004.png</key>
-            <key type="filename">Frames/DoorSeal0005.png</key>
-            <key type="filename">Frames/DoorSeal0006.png</key>
-            <key type="filename">Frames/DoorSeal0007.png</key>
-            <key type="filename">Frames/DoorSeal0008.png</key>
-            <key type="filename">Frames/DoorSeal0009.png</key>
-            <key type="filename">Frames/DoorSeal0010.png</key>
-            <key type="filename">Frames/DoorSeal0011.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>50,50,100,100</rect>
-                <key>scale9Paddings</key>
-                <rect>50,50,100,100</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">Frames/AngelKiss0000.png</key>
             <key type="filename">Frames/AngelKiss0001.png</key>
             <key type="filename">Frames/AngelKiss0002.png</key>
@@ -297,9 +234,6 @@
             <key type="filename">Frames/JumpDust0004.png</key>
             <key type="filename">Frames/JumpDust0005.png</key>
             <key type="filename">Frames/JumpDust0006.png</key>
-            <key type="filename">Frames/Saw0000.png</key>
-            <key type="filename">Frames/Saw0001.png</key>
-            <key type="filename">Frames/Saw0002.png</key>
             <key type="filename">Frames/Spirit0000.png</key>
             <key type="filename">Frames/Spirit0001.png</key>
             <key type="filename">Frames/Spirit0002.png</key>
@@ -358,6 +292,12 @@
             <key type="filename">Frames/Ripple0003.png</key>
             <key type="filename">Frames/Ripple0004.png</key>
             <key type="filename">Frames/Ripple0005.png</key>
+            <key type="filename">Frames/RippleDirty0000.png</key>
+            <key type="filename">Frames/RippleDirty0001.png</key>
+            <key type="filename">Frames/RippleDirty0002.png</key>
+            <key type="filename">Frames/RippleDirty0003.png</key>
+            <key type="filename">Frames/RippleDirty0004.png</key>
+            <key type="filename">Frames/RippleDirty0005.png</key>
             <key type="filename">Frames/Shard0000.png</key>
             <key type="filename">Frames/Shard0001.png</key>
             <key type="filename">Frames/Shard0002.png</key>
@@ -370,6 +310,10 @@
             <key type="filename">Frames/Splash0001.png</key>
             <key type="filename">Frames/Splash0002.png</key>
             <key type="filename">Frames/Splash0003.png</key>
+            <key type="filename">Frames/SplashDirty0000.png</key>
+            <key type="filename">Frames/SplashDirty0001.png</key>
+            <key type="filename">Frames/SplashDirty0002.png</key>
+            <key type="filename">Frames/SplashDirty0003.png</key>
             <key type="filename">Frames/Tiles0000.png</key>
             <key type="filename">Frames/Tiles0001.png</key>
             <key type="filename">Frames/Tiles0002.png</key>
@@ -428,8 +372,67 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">Frames/DoorApple0000.png</key>
+            <key type="filename">Frames/DoorEnemy0000.png</key>
+            <key type="filename">Frames/DoorEnemy0001.png</key>
+            <key type="filename">Frames/DoorMetal0000.png</key>
+            <key type="filename">Frames/DoorMetal0001.png</key>
+            <key type="filename">Frames/DoorMetal0002.png</key>
+            <key type="filename">Frames/DoorMetal0003.png</key>
+            <key type="filename">Frames/DoorMetal0004.png</key>
+            <key type="filename">Frames/DoorMetal0005.png</key>
+            <key type="filename">Frames/DoorMetal0006.png</key>
+            <key type="filename">Frames/DoorMetal0007.png</key>
+            <key type="filename">Frames/DoorMetal0008.png</key>
+            <key type="filename">Frames/DoorMetal0009.png</key>
+            <key type="filename">Frames/DoorMetal0010.png</key>
+            <key type="filename">Frames/DoorMetal0011.png</key>
+            <key type="filename">Frames/DoorMystery0000.png</key>
+            <key type="filename">Frames/DoorOrb0000.png</key>
+            <key type="filename">Frames/DoorOrb0001.png</key>
+            <key type="filename">Frames/DoorOrb0002.png</key>
+            <key type="filename">Frames/DoorOrb0003.png</key>
+            <key type="filename">Frames/DoorOrb0004.png</key>
+            <key type="filename">Frames/DoorOrb0005.png</key>
+            <key type="filename">Frames/DoorOrb0006.png</key>
+            <key type="filename">Frames/DoorOrb0007.png</key>
+            <key type="filename">Frames/DoorOrb0008.png</key>
+            <key type="filename">Frames/DoorPrism0000.png</key>
+            <key type="filename">Frames/DoorPrism0001.png</key>
+            <key type="filename">Frames/DoorPrism0002.png</key>
+            <key type="filename">Frames/DoorPrism0003.png</key>
+            <key type="filename">Frames/DoorPrism0004.png</key>
+            <key type="filename">Frames/DoorPrism0005.png</key>
+            <key type="filename">Frames/DoorPrism0006.png</key>
+            <key type="filename">Frames/DoorPrism0007.png</key>
+            <key type="filename">Frames/DoorSeal0000.png</key>
+            <key type="filename">Frames/DoorSeal0001.png</key>
+            <key type="filename">Frames/DoorSeal0002.png</key>
+            <key type="filename">Frames/DoorSeal0003.png</key>
+            <key type="filename">Frames/DoorSeal0004.png</key>
+            <key type="filename">Frames/DoorSeal0005.png</key>
+            <key type="filename">Frames/DoorSeal0006.png</key>
+            <key type="filename">Frames/DoorSeal0007.png</key>
+            <key type="filename">Frames/DoorSeal0008.png</key>
+            <key type="filename">Frames/DoorSeal0009.png</key>
+            <key type="filename">Frames/DoorSeal0010.png</key>
+            <key type="filename">Frames/DoorSeal0011.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>50,50,100,100</rect>
+                <key>scale9Paddings</key>
+                <rect>50,50,100,100</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">Frames/Drip0000.png</key>
             <key type="filename">Frames/Drip0001.png</key>
+            <key type="filename">Frames/DripDirty0000.png</key>
+            <key type="filename">Frames/DripDirty0001.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -442,6 +445,11 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">Frames/DripDirtySplash0000.png</key>
+            <key type="filename">Frames/DripDirtySplash0001.png</key>
+            <key type="filename">Frames/DripDirtySplash0002.png</key>
+            <key type="filename">Frames/DripDirtySplash0003.png</key>
+            <key type="filename">Frames/DripDirtySplash0004.png</key>
             <key type="filename">Frames/DripSplash0000.png</key>
             <key type="filename">Frames/DripSplash0001.png</key>
             <key type="filename">Frames/DripSplash0002.png</key>

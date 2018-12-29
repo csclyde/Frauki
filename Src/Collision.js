@@ -12,10 +12,11 @@ Collision.CollideFraukiWithEnvironment = function(f, tile) {
         return true;
 
     //water
-    } else if(tile.index === 2 || tile.index === 10 || tile.index === 13 || tile.index === 14 || tile.index === 15 || tile.index === 16) { 
+    } else if(tile.index === 2 || tile.index === 10 || tile.index === 13 || tile.index === 14 || tile.index === 15 || tile.index === 16 || tile.index === 19) { 
         frauki.states.inWater = true;
 
         if(tile.index === 10) effectsController.Splash(tile);
+        if(tile.index === 19) effectsController.SplashDirty(tile);
 
         if(tile.index === 13) frauki.states.flowDown = true;
         if(tile.index === 14) frauki.states.flowRight = true;
@@ -446,19 +447,27 @@ Collision.CollideEffectWithWorld = function(e, w) {
         e.kill();
         return true;
     }
+    else if(e.parent.effectType === 'dripDirty') {
+        effectsController.DripDirtySplash(e);
+        e.kill();
+        return true;
+    }
 
     return false;
 };
 
 Collision.OverlapEffectWithWorld = function(e, w) {
 
-    if(w.index === 10) {
+    if(w.index === 10 || w.index === 19) {
         if(e.parent.effectType === 'drip') {
             effectsController.DripSplash(e, true);
             e.kill();
         }
+        else if(e.parent.effectType === 'dripDirty') {
+            effectsController.DripDirtySplash(e, true);
+            e.kill();
+        }
     }
-    
 
     return true;
 };

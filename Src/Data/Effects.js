@@ -74,6 +74,22 @@ Effects.Emitters = [
 	},
 
 	{
+		Name: 'splashDirtyRight',
+		Count: 10,
+		Frames: ['SplashDirty0000', 'SplashDirty0001'],
+		Gravity: 300,
+		Alpha: 0.8
+	},
+
+	{
+		Name: 'splashDirtyLeft',
+		Count: 10,
+		Frames: ['SplashDirty0002', 'SplashDirty0003'],
+		Gravity: 300,
+		Alpha: 0.8
+	},
+
+	{
 		Name: 'sprockets',
 		Count: 30,
 		Frames: ['Sprockets0000', 'Sprockets0001', 'Sprockets0002', 'Sprockets0003', 'Sprockets0004'],

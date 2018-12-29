@@ -215,6 +215,22 @@ EffectsController.prototype.LoadMapEffects = function() {
                 dripper.alpha = 0.5;
 
                 that.loadedEffectsCollide.push(dripper);
+            } else if(o.name === 'dripDirty') {
+
+                var dripper = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
+                dripper.width = o.width;
+                dripper.height = o.height;
+                dripper.makeParticles('Misc', ['DripDirty0000', 'DripDirty0001'], 2);
+                dripper.gravity.setTo(0, -200);
+                dripper.maxParticleSpeed.setTo(0);
+                dripper.minParticleSpeed.setTo(0);
+                dripper.setRotation(0, 0);
+                dripper.bounce.setTo(0.5);
+                dripper.start(false, 1500, game.rnd.between(2000, 3000));
+                dripper.effectType = 'dripDirty';
+                dripper.alpha = 0.5;
+
+                that.loadedEffectsCollide.push(dripper);
             } else if(o.name === 'fluff') {
 
                 var fluffer = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
@@ -499,6 +515,48 @@ EffectsController.prototype.Splash = function(tile) {
     }
 };
 
+EffectsController.prototype.SplashDirty = function(tile) {
+    if(this.timers.TimerUp('splash_timer') && frauki.states.direction) {
+
+        if(frauki.states.direction === 'left') {
+            this.splash = this.splashDirtyRight;
+        } else if(frauki.states.direction === 'right') {
+            this.splash = this.splashDirtyLeft;
+        }
+
+        //the y should be based on the water tiles at the bottom of frauki.
+        this.splash.x = frauki.body.x;
+        this.splash.y = tile.y * 16;
+        this.splash.width = frauki.body.width;
+        this.splash.height = 0;
+        this.splash.minParticleSpeed.x = 10;
+        this.splash.maxParticleSpeed.x = 30;
+        this.splash.minParticleSpeed.y = -100;
+        this.splash.maxParticleSpeed.y = -200;
+
+        var speed = frauki.body.velocity.x * frauki.body.velocity.x + frauki.body.velocity.y * frauki.body.velocity.y;
+        speed = Math.sqrt(speed);
+
+        if(frauki.body.velocity.x > 0) {
+            this.splash.minParticleSpeed.x *= -1;
+            this.splash.maxParticleSpeed.x *= -1;
+        }
+
+        if(speed > 50) {
+            this.splash.explode(200, Math.ceil((Math.abs(frauki.body.velocity.x) / 50) + 1));
+        }
+
+        if(Math.abs(frauki.body.velocity.y) > 100) {
+            this.splash.minParticleSpeed.x *= -1;
+            this.splash.maxParticleSpeed.x *= -1;
+
+            this.splash.explode(200, Math.ceil((Math.abs(frauki.body.velocity.y) / 50) + 1));
+        }
+
+        this.timers.SetTimer('splash_timer', 100);
+    }
+};
+
 EffectsController.prototype.DiceObject = function(name, x, y, xv, yv) {
 
     var pieces = [];
@@ -727,6 +785,29 @@ EffectsController.prototype.DripSplash = function(src, onWater) {
         var ripple = game.add.sprite(src.x, yPos + 8, 'Misc');
         ripple.anchor.setTo(0.5);
         ripple.animations.add('ripple', ['Ripple0000', 'Ripple0001', 'Ripple0002', 'Ripple0003', 'Ripple0004', 'Ripple0005'], 12, false, false);
+        ripple.animations.play('ripple');
+        ripple.animations.currentAnim.killOnComplete = true;
+        ripple.alpha = 0.5;
+    }
+};
+
+EffectsController.prototype.DripDirtySplash = function(src, onWater) {
+    var yPos = src.y - (src.y % 16) + 2;
+
+    var dripSplash = game.add.sprite(src.x - 10, yPos, 'Misc');
+    dripSplash.animations.add('splish', ['DripDirtySplash0000', 'DripDirtySplash0001', 'DripDirtySplash0002', 'DripDirtySplash0003', 'DripDirtySplash0004'], 18, false, false);
+    dripSplash.animations.play('splish');
+    dripSplash.animations.currentAnim.killOnComplete = true;
+    dripSplash.alpha = 0.5;
+
+    
+    //if it hit water, then make a ripple
+    if(onWater) {
+        events.publish('play_sound', {name: 'drip', restart: false });
+        
+        var ripple = game.add.sprite(src.x, yPos + 8, 'Misc');
+        ripple.anchor.setTo(0.5);
+        ripple.animations.add('ripple', ['RippleDirty0000', 'RippleDirty0001', 'RippleDirty0002', 'RippleDirty0003', 'RippleDirty0004', 'RippleDirty0005'], 12, false, false);
         ripple.animations.play('ripple');
         ripple.animations.currentAnim.killOnComplete = true;
         ripple.alpha = 0.5;
