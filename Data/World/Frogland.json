@@ -4974,6 +4974,17 @@
                  "width":124.5,
                  "x":2628.08333333333,
                  "y":4705.91666666667
+                }, 
+                {
+                 "height":9.27272727272702,
+                 "id":3490,
+                 "name":"sparks",
+                 "rotation":0,
+                 "type":"effect",
+                 "visible":true,
+                 "width":7.81818181818198,
+                 "x":4118.36363636364,
+                 "y":5090.72727272727
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -5301,14 +5312,14 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":3488,
+ "nextobjectid":3491,
  "orientation":"orthogonal",
  "properties":
     {
      "debug":"true",
      "startLayer":"3",
-     "startX":"130",
-     "startY":"313"
+     "startX":"262",
+     "startY":"323"
     },
  "propertytypes":
     {

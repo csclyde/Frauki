@@ -283,6 +283,23 @@ EffectsController.prototype.LoadMapEffects = function() {
                 sprayer.effectType = 'energy_spray';
 
                 that.loadedEffects.push(sprayer);
+
+            } else if(o.name === 'sparks') {
+
+                var sprayer = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
+                // sprayer.x = o.x;
+                // sprayer.y = o.y;
+                sprayer.width = o.width;
+                sprayer.height = o.height;
+                sprayer.makeParticles('Misc', ['Sparks0012', 'Sparks0013', 'Sparks0014', 'Sparks0015', 'Sparks0015', 'Sparks0015'], 20);
+                sprayer.gravity.setTo(0, -695);
+                sprayer.maxParticleSpeed.setTo(-10, 200);
+                sprayer.minParticleSpeed.setTo(200, -100);
+                sprayer.setRotation(0, 0);
+                sprayer.start(false, 200, 150);
+                sprayer.effectType = 'sparks';
+
+                that.loadedEffects.push(sprayer);
             } else if(o.name === 'leaves_green') {
 
                 var leaves = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
