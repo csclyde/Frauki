@@ -65,12 +65,13 @@ BackdropController.prototype.CreateParallax = function() {
     this.clouds2 = game.add.tileSprite(0, 0, 640, 360, 'clouds2');
     this.clouds2.fixedToCamera = true;
     this.clouds2.autoScroll(-3, 0); 
+    this.clouds2.visible = false;            
 
     this.plx1 = game.add.image(0, 0, 'parallax1');
     this.plx1.fixedToCamera = true;
     this.plx1.visible = false;        
 
-    this.clouds3 = game.add.tileSprite(0, 0, 1920, 512, 'clouds3');
+    this.clouds3 = game.add.tileSprite(0, 0, 640, 360, 'clouds3');
     this.clouds3.fixedToCamera = true;
     this.clouds3.autoScroll(-5, 0);
     this.clouds3.visible = false;

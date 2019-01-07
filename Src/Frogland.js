@@ -209,7 +209,7 @@ Frogland.PreprocessTiles = function() {
         }
 
 
-    }, this, 0, 0, 5, 30, 'Foreground');
+    }, this, 0, 0, 5, 30, 'Collision');
     
 };
 
