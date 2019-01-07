@@ -93,6 +93,10 @@ ObjectController.prototype.CompileObjectList = function() {
         this.latentObjects.push({ id: o.gid, name: o.name, x: o.x, y: o.y, u: this.latentObjects.length, properties: o.properties });
     }, this);
 
+    Frogland.map.objects['Objects'].forEach(function(o) {
+        this.latentObjects.push({ id: o.gid, name: o.name, x: o.x, y: o.y, u: this.latentObjects.length, properties: o.properties });
+    }, this);
+
 };
 
 ObjectController.prototype.SpawnNearbyObjects = function() {
