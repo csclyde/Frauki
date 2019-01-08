@@ -4507,17 +4507,6 @@
                  "y":2700.67
                 }, 
                 {
-                 "height":33.3333,
-                 "id":3135,
-                 "name":"vertical_loop",
-                 "rotation":0,
-                 "type":"trigger",
-                 "visible":true,
-                 "width":1780.667,
-                 "x":-6.6733333333334,
-                 "y":10360.6333333333
-                }, 
-                {
                  "height":39.4545,
                  "id":3306,
                  "name":"flower_bloom",
@@ -4560,7 +4549,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }],
@@ -4568,7 +4557,7 @@
  "orientation":"orthogonal",
  "properties":
     {
-     "debug":"true",
+     "debug":"false",
      "startLayer":"3",
      "startX":"22",
      "startY":"550"

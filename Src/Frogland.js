@@ -64,6 +64,13 @@ Frogland.Update = function() {
     frauki.states.flowLeft = false;
 
     this.HandleCollisions();
+
+    if(frauki.y > 10800) {
+        //console.log(game.camera.y - frauki.body.y);
+        frauki.body.y -= 10000;
+        cameraController.camY = -250;
+        //console.log(game.camera.y - frauki.body.y);
+    }
 };
 
 Frogland.HandleCollisions = function() {

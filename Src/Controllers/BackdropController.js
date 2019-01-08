@@ -49,8 +49,19 @@ BackdropController.prototype.Update = function() {
     //     this.plx1.cameraOffset.y += 800;
     // }
 
-    this.clouds1.tilePosition.y = -game.camera.y / 20;
-    this.clouds2.tilePosition.y = -game.camera.y / 15;
+    this.clouds1.cameraOffset.x = -(game.camera.x * 0.10) + 200;
+    this.clouds1.cameraOffset.y = -(game.camera.y * 0.10) + 150;
+
+    this.clouds2.cameraOffset.x = -(game.camera.x * 0.12) + 200;
+    this.clouds2.cameraOffset.y = -(game.camera.y * 0.12) + 200;
+
+    this.plx1.cameraOffset.x = -(game.camera.x * 0.14) + 0;
+    this.plx1.cameraOffset.y = -(game.camera.y * 0.14) + 300;
+
+    this.clouds3.cameraOffset.x = -(game.camera.x * 0.16) + 400;
+    this.clouds3.cameraOffset.y = -(game.camera.y * 0.16) + 300;
+
+    //this.plx1.y = (-game.camera.y / 10) + 200;
 
 };
 
@@ -58,23 +69,21 @@ BackdropController.prototype.CreateParallax = function() {
     this.bg = game.add.image(0, 0, 'Background');
     this.bg.fixedToCamera = true;
 
-    this.clouds1 = game.add.tileSprite(0, 0, 640, 360, 'clouds1');
+    this.clouds1 = game.add.image(0, 0, 'clouds1');
     this.clouds1.fixedToCamera = true;
-    this.clouds1.autoScroll(-2, 0);
+    //this.clouds1.visible = false;            
+    
 
-    this.clouds2 = game.add.tileSprite(0, 0, 640, 360, 'clouds2');
+    this.clouds2 = game.add.image(0, 0, 'clouds2');
     this.clouds2.fixedToCamera = true;
-    this.clouds2.autoScroll(-3, 0); 
-    this.clouds2.visible = false;            
+    //this.clouds2.visible = false;            
 
     this.plx1 = game.add.image(0, 0, 'parallax1');
     this.plx1.fixedToCamera = true;
-    this.plx1.visible = false;        
+    //this.plx1.visible = false;        
 
-    this.clouds3 = game.add.tileSprite(0, 0, 640, 360, 'clouds3');
+    this.clouds3 = game.add.image(0, 0, 'clouds3');
     this.clouds3.fixedToCamera = true;
-    this.clouds3.autoScroll(-5, 0);
-    this.clouds3.visible = false;
 };
 
 BackdropController.prototype.LoadBackgrounds = function() {
