@@ -50,16 +50,16 @@ BackdropController.prototype.Update = function() {
     // }
 
     this.clouds1.cameraOffset.x = -(game.camera.x * 0.10) + 200;
-    this.clouds1.cameraOffset.y = -(game.camera.y * 0.10) + 150;
+    this.clouds1.cameraOffset.y = -(game.camera.y * 0.10) + 150 + (Math.sin(game.time.now / 2000) * 10);
 
     this.clouds2.cameraOffset.x = -(game.camera.x * 0.12) + 200;
-    this.clouds2.cameraOffset.y = -(game.camera.y * 0.12) + 200;
+    this.clouds2.cameraOffset.y = -(game.camera.y * 0.12) + 200 + (Math.sin(game.time.now / 1500) * 7);
 
     this.plx1.cameraOffset.x = -(game.camera.x * 0.14) + 0;
     this.plx1.cameraOffset.y = -(game.camera.y * 0.14) + 300;
 
     this.clouds3.cameraOffset.x = -(game.camera.x * 0.16) + 400;
-    this.clouds3.cameraOffset.y = -(game.camera.y * 0.16) + 300;
+    this.clouds3.cameraOffset.y = -(game.camera.y * 0.16) + 500 + (Math.sin(game.time.now / 1000) * 4);
 
     //this.plx1.y = (-game.camera.y / 10) + 200;
 

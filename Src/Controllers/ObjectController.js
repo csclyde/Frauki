@@ -63,7 +63,6 @@ ObjectController.prototype.Update = function() {
             }
         }
     }
-
 };
 
 ObjectController.prototype.Reset = function() {
@@ -81,19 +80,15 @@ ObjectController.prototype.CompileObjectList = function() {
 
     this.latentObjects = [];
 
-    // Frogland.map.objects['Objects'].forEach(function(o) {
-    //     this.latentObjects.push({ id: o.gid, name: o.name, x: o.x, y: o.y, u: this.latentObjects.length, properties: o.properties });
-    // }, this);
-
-    // Frogland.map.objects['Enemies'].forEach(function(o) {
-    //     this.latentObjects.push({ id: o.gid, name: o.name, x: o.x, y: o.y, u: this.latentObjects.length, properties: o.properties });
-    // }, this);
-
-    Frogland.map.objects['Doodads'].forEach(function(o) {
+    Frogland.map.objects['Objects'].forEach(function(o) {
         this.latentObjects.push({ id: o.gid, name: o.name, x: o.x, y: o.y, u: this.latentObjects.length, properties: o.properties });
     }, this);
 
-    Frogland.map.objects['Objects'].forEach(function(o) {
+    Frogland.map.objects['Enemies'].forEach(function(o) {
+        this.latentObjects.push({ id: o.gid, name: o.name, x: o.x, y: o.y, u: this.latentObjects.length, properties: o.properties });
+    }, this);
+
+    Frogland.map.objects['Doodads'].forEach(function(o) {
         this.latentObjects.push({ id: o.gid, name: o.name, x: o.x, y: o.y, u: this.latentObjects.length, properties: o.properties });
     }, this);
 
@@ -170,22 +165,18 @@ ObjectController.prototype.SpawnObject = function(o) {
     else if(o.id === 70) {
         newObj = new Shard(game, o.x, o.y, 'Shard0000', 'Shard0000');
         newObj.latent = o;
-        objectController.shardList.push(newObj);
     }
     else if(o.id === 71) {
         newObj = new Shard(game, o.x, o.y, 'Shard0001', 'Shard0001');
         newObj.latent = o;
-        objectController.shardList.push(newObj);
     }
     else if(o.id === 72) {
         newObj = new Shard(game, o.x, o.y, 'Shard0002', 'Shard0002');
         newObj.latent = o;
-        objectController.shardList.push(newObj);
     }
     else if(o.id === 73) {
         newObj = new Shard(game, o.x, o.y, 'Shard0003', 'Shard0003');
         newObj.latent = o;
-        objectController.shardList.push(newObj);
     }
     else if(o.id === 74) {
         newObj = new Orb(game, o.x, o.y, 'Misc', 'Orb0000');
@@ -241,14 +232,11 @@ ObjectController.prototype.CreateObjectsLayer = function(layer) {
     Frogland.map.createFromObjects('Objects', 69, 'Misc', 'Checkpoint0000', true, true, currLayer, Checkpoint, false);
 
     //create the doors
-    //Frogland.map.createFromObjects('Doors', 67, 'Misc', 'DoorSeal0000', true, true, currLayer, Door, false);
+    Frogland.map.createFromObjects('Doors', 67, 'Misc', 'DoorSeal0000', true, true, currLayer, Door, false);
 
     Frogland.map.createFromObjects('Objects', 75, 'Misc', 'Upgrade0000', true, true, currLayer, Upgrade, false);
     
     Frogland.map.createFromObjects('Objects', 70, 'Shard0000', 'Shard0000', true, true, currLayer, Shard, false);
-    Frogland.map.createFromObjects('Objects', 71, 'Shard0001', 'Shard0001', true, true, currLayer, Shard, false);
-    Frogland.map.createFromObjects('Objects', 72, 'Shard0002', 'Shard0002', true, true, currLayer, Shard, false);
-    Frogland.map.createFromObjects('Objects', 73, 'Shard0003', 'Shard0003', true, true, currLayer, Shard, false);
 
     //inform each object of its own layer
     currLayer.forEach(function(obj) {

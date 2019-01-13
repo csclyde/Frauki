@@ -24,7 +24,9 @@ Shard = function(game, x, y, name) {
 
     this.currentLayer = Frogland.shardLayer;
     this.shardFrame = name;
-
+    
+    objectController.shardList.push(this);
+    
     if(this.currentLayer === Frogland.currentLayer) {
         this.visible = true;
     } else {
@@ -36,7 +38,6 @@ Shard.prototype = Object.create(Phaser.Sprite.prototype);
 Shard.prototype.constructor = Shard;
 
 Shard.prototype.create = function() {
-
 };
 
 Shard.prototype.update = function() {
