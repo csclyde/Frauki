@@ -51,6 +51,16 @@ Door.prototype.create = function() {
             }
         break;
 
+        case 'dark_seal':
+            if(this.facing === 'left') {
+                this.animations.add('closed', ['DoorDark0000', 'DoorDark0001', 'DoorDark0002', 'DoorDark0003', 'DoorDark0004'], 10, true, false);
+                this.animations.add('open', ['DoorDark0010'], 10, true, false);
+            } else {
+                this.animations.add('closed', ['DoorDark0005', 'DoorDark0006', 'DoorDark0007', 'DoorDark0008', 'DoorDark0009'], 10, true, false);
+                this.animations.add('open', ['DoorDark0011'], 10, true, false);
+            }
+        break;
+
 
         case 'metal_seal':
             if(this.facing === 'left') {
@@ -59,6 +69,16 @@ Door.prototype.create = function() {
             } else {
                 this.animations.add('closed', ['DoorMetal0005', 'DoorMetal0006', 'DoorMetal0007', 'DoorMetal0008', 'DoorMetal0009'], 10, true, false);
                 this.animations.add('open', ['DoorMetal0011'], 10, true, false);
+            }
+        break;
+
+        case 'tenements_seal':
+            if(this.facing === 'left') {
+                this.animations.add('closed', ['DoorTenements0000', 'DoorTenements0001', 'DoorTenements0002', 'DoorTenements0003', 'DoorTenements0004'], 10, true, false);
+                this.animations.add('open', ['DoorTenements0010'], 10, true, false);
+            } else {
+                this.animations.add('closed', ['DoorTenements0005', 'DoorTenements0006', 'DoorTenements0007', 'DoorTenements0008', 'DoorTenements0009'], 10, true, false);
+                this.animations.add('open', ['DoorTenements0011'], 10, true, false);
             }
         break;
 

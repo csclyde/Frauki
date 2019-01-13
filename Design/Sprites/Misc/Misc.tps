@@ -373,6 +373,18 @@
                 <false/>
             </struct>
             <key type="filename">Frames/DoorApple0000.png</key>
+            <key type="filename">Frames/DoorDark0000.png</key>
+            <key type="filename">Frames/DoorDark0001.png</key>
+            <key type="filename">Frames/DoorDark0002.png</key>
+            <key type="filename">Frames/DoorDark0003.png</key>
+            <key type="filename">Frames/DoorDark0004.png</key>
+            <key type="filename">Frames/DoorDark0005.png</key>
+            <key type="filename">Frames/DoorDark0006.png</key>
+            <key type="filename">Frames/DoorDark0007.png</key>
+            <key type="filename">Frames/DoorDark0008.png</key>
+            <key type="filename">Frames/DoorDark0009.png</key>
+            <key type="filename">Frames/DoorDark0010.png</key>
+            <key type="filename">Frames/DoorDark0011.png</key>
             <key type="filename">Frames/DoorEnemy0000.png</key>
             <key type="filename">Frames/DoorEnemy0001.png</key>
             <key type="filename">Frames/DoorMetal0000.png</key>
@@ -417,6 +429,18 @@
             <key type="filename">Frames/DoorSeal0009.png</key>
             <key type="filename">Frames/DoorSeal0010.png</key>
             <key type="filename">Frames/DoorSeal0011.png</key>
+            <key type="filename">Frames/DoorTenements0000.png</key>
+            <key type="filename">Frames/DoorTenements0001.png</key>
+            <key type="filename">Frames/DoorTenements0002.png</key>
+            <key type="filename">Frames/DoorTenements0003.png</key>
+            <key type="filename">Frames/DoorTenements0004.png</key>
+            <key type="filename">Frames/DoorTenements0005.png</key>
+            <key type="filename">Frames/DoorTenements0006.png</key>
+            <key type="filename">Frames/DoorTenements0007.png</key>
+            <key type="filename">Frames/DoorTenements0008.png</key>
+            <key type="filename">Frames/DoorTenements0009.png</key>
+            <key type="filename">Frames/DoorTenements0010.png</key>
+            <key type="filename">Frames/DoorTenements0011.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
