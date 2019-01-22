@@ -240,7 +240,7 @@
          "name":"Collision",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":360,
          "x":0,
          "y":0
@@ -592,30 +592,6 @@
                 {
                  "gid":105,
                  "height":16,
-                 "id":2852,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":1775,
-                 "y":5356
-                }, 
-                {
-                 "gid":105,
-                 "height":16,
-                 "id":2853,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":1741,
-                 "y":5354
-                }, 
-                {
-                 "gid":105,
-                 "height":16,
                  "id":2854,
                  "name":"",
                  "rotation":0,
@@ -646,8 +622,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":1789,
-                 "y":5129
+                 "x":1811,
+                 "y":5128.66666666667
                 }, 
                 {
                  "gid":105,
@@ -658,8 +634,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":1749,
-                 "y":5132
+                 "x":1739.66666666667,
+                 "y":5129.33333333333
                 }, 
                 {
                  "gid":105,
@@ -4563,10 +4539,10 @@
  "orientation":"orthogonal",
  "properties":
     {
-     "debug":"false",
+     "debug":"true",
      "startLayer":"3",
-     "startX":"136",
-     "startY":"298"
+     "startX":"191",
+     "startY":"66"
     },
  "propertytypes":
     {

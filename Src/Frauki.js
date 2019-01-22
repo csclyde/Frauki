@@ -917,7 +917,7 @@ Player.prototype.LandHit = function(e, damage) {
     this.states.hasFlipped = false;
     this.states.damageRefactory.push(e);
 
-    SpawnPowerUp(this);
+    //SpawnPowerUp(this);
 
     events.publish('stop_attack_sounds');
 };

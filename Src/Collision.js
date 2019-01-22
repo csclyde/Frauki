@@ -288,18 +288,18 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
 
     //if frauki has higher priority, the enemy will be stunned
     //otherwise, frauki gets stunned
-    if(frauki.GetCurrentPriority() > e.GetCurrentPriority()) {
-        e.timers.SetTimer('grace', 0);
-        e.timers.SetTimer('attack_stun', 800);
-        frauki.timers.SetTimer('clash_wait', 800);
-        frauki.timers.SetTimer('grace', 400);
-    } else {
-        e.timers.SetTimer('attack', 0);
-        e.timers.SetTimer('grace', 200);
-        e.timers.SetTimer('attack_wait', 0);
-        frauki.timers.SetTimer('attack_stun', 800);
-        frauki.timers.SetTimer('clash_wait', 800);
-    }
+    // if(frauki.GetCurrentPriority() > e.GetCurrentPriority()) {
+    //     e.timers.SetTimer('grace', 0);
+    //     e.timers.SetTimer('attack_stun', 800);
+    //     frauki.timers.SetTimer('clash_wait', 800);
+    //     frauki.timers.SetTimer('grace', 400);
+    // } else {
+    //     e.timers.SetTimer('attack', 0);
+    //     e.timers.SetTimer('grace', 200);
+    //     e.timers.SetTimer('attack_wait', 0);
+    //     frauki.timers.SetTimer('attack_stun', 800);
+    //     frauki.timers.SetTimer('clash_wait', 800);
+    // }
 
     //frauki.timers.SetTimer('grace', 400);
 };

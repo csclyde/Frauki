@@ -19,12 +19,15 @@ Shard = function(game, x, y, name) {
 
     this.timers = new TimerUtil();
 
-    this.animations.add('floating', [name], 10, false, false);
-    this.animations.add('stuff', [name], 10, false, false);
-
     this.currentLayer = Frogland.shardLayer;
     this.shardFrame = name;
-    
+
+    this.animations.add('Wit', ['Shard0000'], 10, false, false);
+    this.animations.add('Will', ['Shard0001'], 10, false, false);
+    this.animations.add('Luck', ['Shard0002'], 10, false, false);
+    this.animations.add('Power', ['Shard0003'], 10, false, false);
+    this.animations.add('Derp', ['Shard0002'], 10, false, false);
+
     objectController.shardList.push(this);
     
     if(this.currentLayer === Frogland.currentLayer) {
@@ -87,7 +90,7 @@ Shard.prototype.PlayAnim = function(name) {
 };
 
 Shard.prototype.Floating = function() {
-    this.PlayAnim('floating');
+    this.PlayAnim(this.name);
 
     this.body.velocity.y = Math.sin(game.time.now / 150) * 30;
     this.body.velocity.x = 0;

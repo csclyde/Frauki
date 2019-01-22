@@ -158,26 +158,6 @@ ObjectController.prototype.SpawnObject = function(o) {
         newObj = new Apple(game, o.x, o.y, 'Misc', 'Apple0000');
         newObj.latent = o;
     }
-    else if(o.id === 68) {
-        newObj = new EnergyNugg(game, o.x, o.y, 'Misc', 'EnergyBitPos0000');
-        newObj.latent = o;
-    } 
-    else if(o.id === 70) {
-        newObj = new Shard(game, o.x, o.y, 'Shard0000', 'Shard0000');
-        newObj.latent = o;
-    }
-    else if(o.id === 71) {
-        newObj = new Shard(game, o.x, o.y, 'Shard0001', 'Shard0001');
-        newObj.latent = o;
-    }
-    else if(o.id === 72) {
-        newObj = new Shard(game, o.x, o.y, 'Shard0002', 'Shard0002');
-        newObj.latent = o;
-    }
-    else if(o.id === 73) {
-        newObj = new Shard(game, o.x, o.y, 'Shard0003', 'Shard0003');
-        newObj.latent = o;
-    }
     else if(o.id === 74) {
         newObj = new Orb(game, o.x, o.y, 'Misc', 'Orb0000');
         newObj.latent = o;
