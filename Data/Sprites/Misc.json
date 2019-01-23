@@ -2492,6 +2492,15 @@
 	"spriteSourceSize": {"x":16,"y":16,"w":12,"h":18},
 	"sourceSize": {"w":50,"h":50},
 	"pivot": {"x":0.5,"y":0.5}
+},
+"UpgradeShield0000":
+{
+	"frame": {"x":680,"y":188,"w":20,"h":25},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":12,"y":12,"w":20,"h":25},
+	"sourceSize": {"w":50,"h":50},
+	"pivot": {"x":0.5,"y":0.5}
 }},
 "meta": {
 	"app": "http://www.codeandweb.com/texturepacker",
@@ -2500,6 +2509,6 @@
 	"format": "RGBA8888",
 	"size": {"w":1065,"h":253},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:093ece14e7d21490f49d798f2f183a19:042ac27ab412badb91b308d7d9c44e74:65678b973d3ac8e1dd536acb732dd5ab$"
+	"smartupdate": "$TexturePacker:SmartUpdate:fb2b18846ea24a48c2e3afb89df115e1:2015f5c4e889da2e667aa7fc62e7365f:65678b973d3ac8e1dd536acb732dd5ab$"
 }
 }

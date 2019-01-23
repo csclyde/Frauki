@@ -122,6 +122,12 @@ GameData.AddUpgrade = function(name) {
         energyController.AddHealth(1);
         this.data.upgrades.push(name);
         this.SaveDataToStorage();
+    } else if(name.indexOf('Shield') >= 0) {
+        this.data.shield++;
+        energyController.shield++;
+        this.data.upgrades.push(name);
+        this.SaveDataToStorage();
+
     } else if(this.data.upgrades.indexOf(name) < 0) {
         this.data.upgrades.push(name);
         this.SaveDataToStorage();
