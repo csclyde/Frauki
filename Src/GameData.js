@@ -15,7 +15,7 @@ GameData.data = {
     doors: [],
     shards: [],
     health: 4,
-    shield: 2,
+    shield: 0,
     flags: {},
     vals: {
         goddess_message_queue: []

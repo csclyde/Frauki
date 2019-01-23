@@ -155,8 +155,6 @@ EnergyController.prototype.AddHealth = function(amt) {
 
 EnergyController.prototype.RemoveHealth = function(amt) {
 	if(this.invincible) return;
-
-	console.log("Before", this.health, this.shield);
 	
 	if(this.shield > 0) {
 		this.timers.SetTimer('shield_tick', this.shieldRechargeRate);
@@ -169,8 +167,6 @@ EnergyController.prototype.RemoveHealth = function(amt) {
 	} else {
 		this.health -= Math.floor(amt);
 	}
-
-	console.log("After", this.health, this.shield);
 };
 
 EnergyController.prototype.GetHealth = function() {
