@@ -190,14 +190,14 @@ GameState.CreateUI = function() {
     this.healthFrameStart = game.add.image(10, 10, 'UI', 'HudFrame0000', this.UI);
     this.healthFrameStart.fixedToCamera = true;
 
-    for(var i = 0, len = 10; i < len; i++) {
+    for(var i = 0, len = 14; i < len; i++) {
         this['healthFrameBack' + i] = game.add.image(14 + (i * 5), 13, 'UI', 'HudFrame0003', this.UI);
         this['healthFrameFront' + i] = game.add.image(14 + (i * 5), 10, 'UI', 'HudFrame0001', this.UI);
 
         this['healthFrameBack' + i].fixedToCamera = true;
         this['healthFrameFront' + i].fixedToCamera = true;
 
-        if(i >= energyController.GetMaxHealth()) {
+        if(i >= energyController.GetMaxHealthBar()) {
             this['healthFrameBack' + i].visible = false;
             this['healthFrameFront' + i].visible = false;
         }
@@ -207,16 +207,18 @@ GameState.CreateUI = function() {
     this.healthFrameEnd.fixedToCamera = true;
 
     //health pips
-    for(var i = 0, len = 10; i < len; i++) {
+    for(var i = 0, len = 14; i < len; i++) {
         this['healthPip' + i] = game.add.image(14 + (5 * i), 13, 'UI', 'HealthPips0000', this.UI);
         this['healthPip' + i].fixedToCamera = true;
         
         if(i >= energyController.GetHealth()) {
             this['healthPip' + i].visible = false;
         }
+
+        this['shieldPip' + i] = game.add.image(14 + (5 * i), 13, 'UI', 'EnergyPips0000', this.UI);
+        this['shieldPip' + i].fixedToCamera = true;
+        this['shieldPip' + i].visible = false;
     }
-
-
 
     this.energyFrameStart = game.add.image(10, 22, 'UI', 'HudFrame0000', this.UI);
     this.energyFrameStart.fixedToCamera = true;
@@ -249,8 +251,8 @@ GameState.CreateUI = function() {
 };
 
 GameState.UpdateUI = function() {
-    for(var i = 0, len = 10; i < len; i++) {
-        if(i >= energyController.GetMaxHealth()) {
+    for(var i = 0, len = 14; i < len; i++) {
+        if(i >= energyController.GetMaxHealthBar()) {
             this['healthFrameBack' + i].visible = false;
             this['healthFrameFront' + i].visible = false;
         } else {
@@ -260,12 +262,20 @@ GameState.UpdateUI = function() {
 
         if(i >= energyController.GetHealth()) {
             this['healthPip' + i].visible = false;
+
+            if(i < energyController.GetHealth() + energyController.GetShield()) {
+                this['shieldPip' + i].visible = true;
+            } else {
+                this['shieldPip' + i].visible = false;
+            }
         } else {
             this['healthPip' + i].visible = true;
+            this['shieldPip' + i].visible = false;
+            
         }
     }
 
-    this.healthFrameEnd.cameraOffset.x = 14 + (energyController.GetMaxHealth() * 5);
+    this.healthFrameEnd.cameraOffset.x = 14 + (energyController.GetMaxHealthBar() * 5);
 
     //energy
     for(var i = 0, len = 4; i < len; i++) {

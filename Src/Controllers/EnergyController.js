@@ -5,6 +5,8 @@ EnergyController = function() {
 	this.energy = 12;
 	this.health = this.GetMaxHealth();
 	this.charge = 0;
+	this.shield = this.GetMaxShield();
+	this.shieldRechargeRate = 3000;
 
 	this.latentHealth = 0;
 
@@ -67,6 +69,16 @@ EnergyController.prototype.Update = function() {
 		this.timers.SetTimer('charge_tick', this.GetChargeDuration());
 	}
 
+	if(this.timers.TimerUp('shield_tick')) {
+		this.timers.SetTimer('shield_tick', this.shieldRechargeRate);
+
+		if(this.shield < this.GetMaxShield()) {
+			this.shield++;
+
+			events.publish('play_sound', {name: 'heal_' + this.health + this.shield, restart: true });
+		}
+	}
+
 	effectsController.ShowCharge(this.charge);
 
 	if(this.charge < 0) {
@@ -76,12 +88,13 @@ EnergyController.prototype.Update = function() {
 	if(this.health <= 0)
 		GameState.Restart();
 
-	if(this.oldHealth !== this.health || this.oldCharge !== this.charge) {
+	if(this.oldHealth !== this.health || this.oldCharge !== this.charge || this.oldShield !== this.shield) {
 		events.publish('update_ui', {});
 	}
 
 	this.oldHealth = this.health;
 	this.oldCharge = this.charge;
+	this.oldShield = this.shield;
 };
 
 
@@ -142,20 +155,47 @@ EnergyController.prototype.AddHealth = function(amt) {
 
 EnergyController.prototype.RemoveHealth = function(amt) {
 	if(this.invincible) return;
+
+	console.log("Before", this.health, this.shield);
 	
-	this.health -= Math.floor(amt);
+	if(this.shield > 0) {
+		this.timers.SetTimer('shield_tick', this.shieldRechargeRate);
+		if(this.shield > amt) {
+			this.shield -= amt;
+		} else {
+			this.health -= (amt - this.shield);
+			this.shield = 0;
+		}
+	} else {
+		this.health -= Math.floor(amt);
+	}
+
+	console.log("After", this.health, this.shield);
 };
 
 EnergyController.prototype.GetHealth = function() {
-
 	return this.health;
 };
 
-EnergyController.prototype.GetMaxHealth = function() {
+EnergyController.prototype.GetShield = function() {
+	return this.shield;
+}
 
+EnergyController.prototype.GetCurrentHealthBar = function() {
+	return this.GetShield() + this.GetHealth();
+}
+
+EnergyController.prototype.GetMaxHealthBar = function() {
+	return this.GetMaxHealth() + this.GetMaxShield();
+}
+
+EnergyController.prototype.GetMaxHealth = function() {
 	return GameData.GetMaxHealth();
 };
 
+EnergyController.prototype.GetMaxShield = function() {
+	return GameData.GetMaxShield();
+};
 
 EnergyController.prototype.GetCharge = function() {
 

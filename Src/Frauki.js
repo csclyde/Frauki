@@ -278,7 +278,7 @@ Player.prototype.UpdateAttackGeometry = function() {
     }
 
     if(this.animations.currentFrame) {
-        this.currentAttack = fraukiDamageFrames[this.animations.currentFrame.name];
+        this.currentAttack = fraukiDamageFrames[this.GetCurrentFrameName()];
     } 
 
     if(!!this.currentAttack) {
@@ -303,10 +303,23 @@ Player.prototype.UpdateAttackGeometry = function() {
     }
 };
 
+Player.prototype.GetCurrentFrameName = function() {
+    var frameName = this.animations.currentFrame.name;
+    if(frameName[0] == '+') {
+        frameName = frameName.substring(1);
+    }
+
+    return frameName;
+}
+
 Player.prototype.GetCurrentDamage = function() {
 
     if(!!this.currentAttack) {
-        return this.currentAttack.damage;
+        if(GameData.HasUpgrade('dmg')) {
+            return this.currentAttack.damage + 1;
+        } else {
+            return this.currentAttack.damage;
+        }
     } else {
         return 0;
     }
@@ -356,7 +369,7 @@ Player.prototype.InAttackAnim = function() {
 };
 
 Player.prototype.InPreAttackAnim = function() {
-    var frameName = this.animations.currentFrame.name;
+    var frameName = this.GetCurrentFrameName();
 
     if(['Attack Stab0000', 
         'Attack Stab0000', 
@@ -1337,7 +1350,11 @@ Player.prototype.Stunned = function() {
 };
 
 Player.prototype.AttackFront = function() {
-    this.PlayAnim('attack_front');
+    if(GameData.HasUpgrade('dmg')) {
+        this.PlayAnim('+attack_front');
+    } else {
+        this.PlayAnim('attack_front');
+    }
 
     if(this.Attacking()) {
         this.body.maxVelocity.x = PLAYER_ROLL_SPEED() - 200;
@@ -1367,7 +1384,11 @@ Player.prototype.AttackFront = function() {
 };
 
 Player.prototype.AttackWhiff = function() {
-    this.PlayAnim('attack_whiff');
+    if(GameData.HasUpgrade('dmg')) {
+        this.PlayAnim('+attack_whiff');
+    } else {
+        this.PlayAnim('attack_whiff');
+    }
 
     if(this.animations.currentAnim.isFinished) {
         if(inputController.dpad.down && !inputController.dpad.left && !inputController.dpad.right && this.body.onFloor()) {
@@ -1381,7 +1402,11 @@ Player.prototype.AttackWhiff = function() {
 };
 
 Player.prototype.AttackLunge = function() {
-    this.PlayAnim('attack_lunge');
+    if(GameData.HasUpgrade('dmg')) {
+        this.PlayAnim('+attack_lunge');
+    } else {
+        this.PlayAnim('attack_lunge');
+    }
 
     if(this.Attacking()) {
         this.body.maxVelocity.x = PLAYER_ROLL_SPEED();
@@ -1406,7 +1431,11 @@ Player.prototype.AttackLunge = function() {
 };
 
 Player.prototype.AttackFall = function() {
-    this.PlayAnim('attack_fall');
+    if(GameData.HasUpgrade('dmg')) {
+        this.PlayAnim('+attack_fall');
+    } else {
+        this.PlayAnim('attack_fall');
+    }
 
     if(!this.states.inUpdraft) {
         this.body.gravity.y = game.physics.arcade.gravity.y * 3;
@@ -1449,7 +1478,11 @@ Player.prototype.AttackFall = function() {
 };
 
 Player.prototype.AttackOverhead = function() {
-    this.PlayAnim('attack_overhead');
+    if(GameData.HasUpgrade('dmg')) {
+        this.PlayAnim('+attack_overhead');
+    } else {
+        this.PlayAnim('attack_overhead');
+    }
 
     if(this.body.onFloor()) {
         this.body.velocity.x /= 2;
@@ -1461,7 +1494,11 @@ Player.prototype.AttackOverhead = function() {
 };
 
 Player.prototype.AttackStab = function() {
-    this.PlayAnim('attack_stab');
+    if(GameData.HasUpgrade('dmg')) {
+        this.PlayAnim('+attack_stab');
+    } else {
+        this.PlayAnim('attack_stab');
+    }
 
     //override the max velocity
     //this.body.maxVelocity.x = PLAYER_RUN_SLASH_SPEED();
@@ -1514,7 +1551,11 @@ Player.prototype.AttackStab = function() {
 };
 
 Player.prototype.AttackDiveCharge = function() {
-    this.PlayAnim('attack_dive_charge');
+    if(GameData.HasUpgrade('dmg')) {
+        this.PlayAnim('+attack_dive_charge');
+    } else {
+        this.PlayAnim('attack_dive_charge');
+    }
     this.body.velocity.y = 0;
     
     this.body.maxVelocity.x = 1;
@@ -1531,7 +1572,11 @@ Player.prototype.AttackDiveCharge = function() {
 };
 
 Player.prototype.AttackDiveFall = function() {
-    this.PlayAnim('attack_dive_fall');
+    if(GameData.HasUpgrade('dmg')) {
+        this.PlayAnim('+attack_dive_fall');
+    } else {
+        this.PlayAnim('attack_dive_fall');
+    }
     this.body.maxVelocity.y = this.movement.diveVelocity;
 
     if(!this.states.inUpdraft) {
@@ -1566,7 +1611,11 @@ Player.prototype.AttackDiveFall = function() {
 };
 
 Player.prototype.AttackDiveLand = function() {
-    this.PlayAnim('attack_dive_land');
+    if(GameData.HasUpgrade('dmg')) {
+        this.PlayAnim('+attack_dive_land');
+    } else {
+        this.PlayAnim('attack_dive_land');
+    }
     this.body.velocity.y = 0;
     
     this.body.maxVelocity.x = 1;
@@ -1585,7 +1634,11 @@ Player.prototype.AttackDiveLand = function() {
 };
 
 Player.prototype.AttackJump = function() {
-    this.PlayAnim('attack_jump');
+    if(GameData.HasUpgrade('dmg')) {
+        this.PlayAnim('+attack_jump');
+    } else {
+        this.PlayAnim('attack_jump');
+    }
 
     if(this.animations.currentAnim.isFinished && this.timers.TimerUp('attack_wait') && this.timers.TimerUp('attack_stun')) {
         this.ChangeState(this.Jumping);

@@ -1,6 +1,6 @@
 var GameData = {};
 
-var currentVer = 0.4;
+var currentVer = 0.5;
 
 //When game data is requested, it is pulled from the data structure in memory. When
 //it is saved, it is put into the data structure, and then put into local storage.
@@ -11,10 +11,11 @@ GameData.data = {
     dirty: true,
 
     checkpoint: '0',
-    upgrades: ['Dive', 'Stab', 'Baton'],
+    upgrades: ['Dive', 'Stab'],
     doors: [],
     shards: [],
     health: 4,
+    shield: 2,
     flags: {},
     vals: {
         goddess_message_queue: []
@@ -104,6 +105,10 @@ GameData.SetCheckpoint = function(c) {
 
 GameData.GetMaxHealth = function() {
     return this.data.health;
+};
+
+GameData.GetMaxShield = function() {
+    return this.data.shield;
 };
 
 GameData.HasUpgrade = function(name) {

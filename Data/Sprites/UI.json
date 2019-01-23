@@ -137,39 +137,39 @@
 },
 "EnergyPips0000":
 {
+	"frame": {"x":863,"y":100,"w":13,"h":10},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":3,"y":5,"w":13,"h":10},
+	"sourceSize": {"w":13,"h":10},
+	"pivot": {"x":0.538462,"y":0.5}
+},
+"EnergyPips0001":
+{
 	"frame": {"x":812,"y":100,"w":15,"h":10},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":2,"y":5,"w":15,"h":10},
+	"spriteSourceSize": {"x":3,"y":5,"w":15,"h":10},
 	"sourceSize": {"w":15,"h":10},
-	"pivot": {"x":0.533333,"y":0.5}
+	"pivot": {"x":0.466667,"y":0.5}
 },
-"EnergyPips0001":
+"EnergyPips0002":
 {
 	"frame": {"x":827,"y":112,"w":15,"h":10},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":2,"y":5,"w":15,"h":10},
+	"spriteSourceSize": {"x":3,"y":5,"w":15,"h":10},
 	"sourceSize": {"w":15,"h":10},
-	"pivot": {"x":0.533333,"y":0.5}
+	"pivot": {"x":0.466667,"y":0.5}
 },
-"EnergyPips0002":
+"EnergyPips0003":
 {
 	"frame": {"x":829,"y":100,"w":15,"h":10},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":2,"y":5,"w":15,"h":10},
+	"spriteSourceSize": {"x":3,"y":5,"w":15,"h":10},
 	"sourceSize": {"w":15,"h":10},
-	"pivot": {"x":0.533333,"y":0.5}
-},
-"EnergyPips0003":
-{
-	"frame": {"x":844,"y":112,"w":15,"h":10},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":2,"y":5,"w":15,"h":10},
-	"sourceSize": {"w":15,"h":10},
-	"pivot": {"x":0.533333,"y":0.5}
+	"pivot": {"x":0.466667,"y":0.5}
 },
 "ExclamationMark0000":
 {
@@ -191,7 +191,7 @@
 },
 "HealthPips0000":
 {
-	"frame": {"x":878,"y":112,"w":13,"h":10},
+	"frame": {"x":877,"y":112,"w":13,"h":10},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":3,"y":5,"w":13,"h":10},
@@ -200,7 +200,7 @@
 },
 "HealthPips0001":
 {
-	"frame": {"x":846,"y":100,"w":15,"h":10},
+	"frame": {"x":844,"y":112,"w":15,"h":10},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":3,"y":5,"w":15,"h":10},
@@ -209,7 +209,7 @@
 },
 "HealthPips0002":
 {
-	"frame": {"x":846,"y":100,"w":15,"h":10},
+	"frame": {"x":844,"y":112,"w":15,"h":10},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":3,"y":5,"w":15,"h":10},
@@ -218,7 +218,7 @@
 },
 "HealthPips0003":
 {
-	"frame": {"x":861,"y":112,"w":15,"h":10},
+	"frame": {"x":846,"y":100,"w":15,"h":10},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":3,"y":5,"w":15,"h":10},
@@ -254,7 +254,7 @@
 },
 "HudFrame0003":
 {
-	"frame": {"x":863,"y":100,"w":14,"h":10},
+	"frame": {"x":861,"y":112,"w":14,"h":10},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":8,"y":35,"w":14,"h":10},
@@ -637,6 +637,6 @@
 	"format": "RGBA8888",
 	"size": {"w":1696,"h":128},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:428b31e12592db13342f26ee5a99a7d5:6f7b7dc113d5f6b26a0d7d7393c99d0c:4b774b923918ecd961888279dba3ffad$"
+	"smartupdate": "$TexturePacker:SmartUpdate:7486e8546006e0aa682db0f4c907afcc:6e3af54e752e50b644310448e6dfdd60:4b774b923918ecd961888279dba3ffad$"
 }
 }
