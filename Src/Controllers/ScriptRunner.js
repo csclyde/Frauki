@@ -116,6 +116,30 @@ ScriptRunner.scripts['demo_Will'] = [
 	{ name: 'allow_input', props: {} }
 ];
 
+ScriptRunner.scripts['demo_Wit'] = [
+	{ name: 'disallow_input', props: {} },
+	{ name: 'show_text', props: { text: 'Yay, another prism shard! I\'ll be done in no time...', portrait: 'Silly' } },
+	{ name: 'wait', props: { amount: 6000 } },
+	{ name: 'hide_text', props: {} },
+	{ name: 'allow_input', props: {} }
+];
+
+ScriptRunner.scripts['demo_Luck'] = [
+	{ name: 'disallow_input', props: {} },
+	{ name: 'show_text', props: { text: 'Toss another prism on the pile. This is too easy!', portrait: 'Silly' } },
+	{ name: 'wait', props: { amount: 6000 } },
+	{ name: 'hide_text', props: {} },
+	{ name: 'allow_input', props: {} }
+];
+
+ScriptRunner.scripts['demo_Power'] = [
+	{ name: 'disallow_input', props: {} },
+	{ name: 'show_text', props: { text: 'This prism will make a fine addition to my collection.', portrait: 'Silly' } },
+	{ name: 'wait', props: { amount: 6000 } },
+	{ name: 'hide_text', props: {} },
+	{ name: 'allow_input', props: {} }
+];
+
 ScriptRunner.scripts['demo_Will_no_intro'] = [
 	{ name: 'disallow_input', props: {} },
 	{ name: 'show_text', props: { text: 'Hooray! I found some big... jewel thing...', portrait: 'Silly' } },

@@ -44,44 +44,44 @@ Shard.prototype.create = function() {
 };
 
 Shard.prototype.update = function() {
-    if(!this.body.enable)
-        return;
+    if(!this.body.enable) return;
     
-    if(!!this.state)
-        this.state();
-
-    if(this.visible && !this.beingUsed && GameData.HasShard(this.name)) {
+    if(!!this.state) this.state();
+    
+    if(this.visible && GameData.HasShard(this.name)) {
         this.visible = false;
-    } else if(this.beingUsed || !GameData.HasShard(this.name)) {
+    } else if(!GameData.HasShard(this.name)) {
         this.visible = true;
     }
 
 };
 
 function PickUpShard(f, a) {
-    
+
     if(!GameData.HasShard(a.name)) {
         GameData.AddShard(a.name);
-        a.beingUsed = true;
-        a.ReturnToUI();
-
-        if(GameData.GetFlag('goddess_intro')) {
-            ScriptRunner.run('demo_' + a.name);
-        } else {
-            ScriptRunner.run('demo_' + a.name + '_no_intro');
-            
+        
+        if(a.name == 'Will') {
+            if(GameData.GetFlag('goddess_intro')) {
+                ScriptRunner.run('demo_' + a.name);
+            } else {
+                ScriptRunner.run('demo_' + a.name + '_no_intro');
+            }
         }
+        else {
+            ScriptRunner.run('demo_' + a.name);
+        }
+
+        a.ReturnToUI();
         
     }
 };
 
 Shard.prototype.ReturnToUI = function() {
-    var that = this;
-
-    var shardTween = game.add.tween(this.body).to({x: game.camera.x, y: game.camera.y + game.camera.height}, 2000, Phaser.Easing.Exponential.Out, true);
-    shardTween.onComplete.add(function() {
-        that.beingUsed = false;
-    });
+    effectsController.ScreenFlash();
+    events.publish('play_sound', {name: 'crystal_door'});
+    events.publish('play_sound', {name: 'fanfare_short', restart: true });
+    this.destroy();
 };
 
 Shard.prototype.PlayAnim = function(name) {

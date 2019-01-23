@@ -156,7 +156,7 @@ Phaser.Animation.prototype.update = function () {
         }
 
         //  And what's left now?
-        this._timeNextFrame = this.game.time.time + ((this.delay * (1 / GameState.physicsSlowMo)) - this._frameDiff);
+        this._timeNextFrame = this.game.time.time + ((this.delay) - this._frameDiff);
 
         if (this.isReversed)
         {

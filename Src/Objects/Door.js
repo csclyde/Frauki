@@ -258,7 +258,8 @@ Door.prototype.PerformOpen = function(save, silent) {
             break;
 
             case 'orb':
-                events.publish('play_sound', {name: 'fanfare_short', restart: true });
+                events.publish('play_sound', {name: 'crystal_door', restart: true });
+                
             break;
         }    
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="360" height="700" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="3532">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="360" height="700" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="3533">
  <properties>
-  <property name="debug" value="true"/>
+  <property name="debug" value="false"/>
   <property name="startLayer" value="3"/>
   <property name="startX" value="191"/>
   <property name="startY" value="66"/>
@@ -3797,7 +3797,7 @@
    </properties>
   </object>
   <object id="3504" name="Wit" gid="70" x="1958.5" y="4805.5" width="16" height="16"/>
-  <object id="3507" name="Luck" gid="70" x="2942.33" y="1152" width="16" height="16"/>
+  <object id="3507" name="Luck" gid="70" x="2944" y="1152" width="16" height="16"/>
   <object id="3508" name="Will" gid="70" x="1956.75" y="3812.75" width="16" height="16"/>
   <object id="3510" name="Power" gid="70" x="2310.25" y="8800.5" width="16" height="16"/>
   <object id="3524" gid="74" x="2187.17" y="3941" width="16" height="16">
@@ -4046,7 +4046,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="Doodads" visible="0">
+ <objectgroup name="Doodads">
   <object id="3369" gid="105" x="4383.91" y="3663.92" width="16" height="16"/>
   <object id="3370" gid="109" x="4416.09" y="3664.08" width="16" height="16"/>
   <object id="3388" gid="105" x="3365.75" y="3242.5" width="16" height="16"/>
@@ -4088,6 +4088,7 @@
   <object id="3476" gid="106" x="2390.67" y="2828.67" width="16" height="16"/>
   <object id="3477" gid="107" x="1912" y="4619" width="16" height="16"/>
   <object id="3478" gid="109" x="2255" y="4619.5" width="16" height="16"/>
+  <object id="3532" gid="105" x="3424.5" y="2755" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Enemies">
   <object id="3244" gid="85" x="3652" y="2972" width="16" height="16">
