@@ -248,6 +248,12 @@ GameState.CreateUI = function() {
             this['energyPip' + i].visible = false;
         }
     }
+
+    for(var i = 0, len = 6; i < len; i++) {
+        this['apple' + i] = game.add.image(-10 + (20 * i), 15, 'Misc', 'Apple0000', this.UI);
+        this['apple' + i].fixedToCamera = true;
+        this['apple' + i].visible = false;
+    }
 };
 
 GameState.UpdateUI = function() {
@@ -293,7 +299,14 @@ GameState.UpdateUI = function() {
             this['energyFrameBack' + i].visible = true;
             this['energyFrameFront' + i].visible = true;
         }
+    }
 
+    for(var i = 0, len = 6; i < len; i++) {
+        if(i < energyController.GetApples()) {
+            this['apple' + i].visible = true;
+        } else {
+            this['apple' + i].visible = false;
+        }
     }
 
     if(weaponController.GetNumWeapons() === 0) {

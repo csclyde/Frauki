@@ -5,6 +5,7 @@ EnergyController = function() {
 	this.energy = 12;
 	this.health = this.GetMaxHealth();
 	this.charge = 0;
+	this.remainingApples = 0;
 	this.shield = this.GetMaxShield();
 	this.shieldRechargeRate = 3000;
 
@@ -28,7 +29,7 @@ EnergyController = function() {
 		this.AddHealth(healthAmt);
 	}, this);
 
-	this.remainingApples = 0;
+	
 };
 
 EnergyController.prototype.Create = function() {
@@ -88,13 +89,14 @@ EnergyController.prototype.Update = function() {
 	if(this.health <= 0)
 		GameState.Restart();
 
-	if(this.oldHealth !== this.health || this.oldCharge !== this.charge || this.oldShield !== this.shield) {
+	if(this.oldHealth !== this.health || this.oldApples !== this.remainingApples || this.oldShield !== this.shield) {
 		events.publish('update_ui', {});
 	}
 
 	this.oldHealth = this.health;
 	this.oldCharge = this.charge;
 	this.oldShield = this.shield;
+	this.oldApples = this.remainingApples;
 };
 
 
@@ -286,6 +288,5 @@ EnergyController.prototype.AddApple = function() {
 };
 
 EnergyController.prototype.GetApples = function() {
-
 	return this.remainingApples;
 };
