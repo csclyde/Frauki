@@ -28,8 +28,9 @@ Upgrade = function(game, x, y, name) {
 
     this.icon = game.add.image(20, 20, 'Misc', 'Upgrade0003');
     this.icon.animations.add('Health', ['UpgradeHeart0000', 'UpgradeHeart0001', 'UpgradeHeart0002', 'UpgradeHeart0001'], 6, true, false);
-    this.icon.animations.add('Shield', ['UpgradeShield0000'], 18, true, false);
+    this.icon.animations.add('Shield', ['UpgradeShield0000', 'UpgradeShield0001', 'UpgradeShield0002', 'UpgradeShield0003'], 4, true, false);
     this.icon.animations.add('Baton', ['Upgrade0005'], 18, true, false);
+    this.icon.animations.add('Damage', ['UpgradeDamage0000'], 18, true, false);
     this.icon.iconSet = false;
     this.icon.x = -25;
     this.icon.y = -25;
@@ -64,6 +65,8 @@ Upgrade.prototype.update = function() {
             this.icon.animations.play('Shield');
         } else if(this.upgrade === 'Baton') {
             this.icon.animations.play('Baton');
+        } else if(this.upgrade === 'Damage') {
+            this.icon.animations.play('Damage');
         }
 
         this.icon.iconSet = true;

@@ -326,10 +326,14 @@
             <key type="filename">Frames/Upgrade0003.png</key>
             <key type="filename">Frames/Upgrade0004.png</key>
             <key type="filename">Frames/Upgrade0005.png</key>
+            <key type="filename">Frames/UpgradeDamage0000.png</key>
             <key type="filename">Frames/UpgradeHeart0000.png</key>
             <key type="filename">Frames/UpgradeHeart0001.png</key>
             <key type="filename">Frames/UpgradeHeart0002.png</key>
             <key type="filename">Frames/UpgradeShield0000.png</key>
+            <key type="filename">Frames/UpgradeShield0001.png</key>
+            <key type="filename">Frames/UpgradeShield0002.png</key>
+            <key type="filename">Frames/UpgradeShield0003.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
