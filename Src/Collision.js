@@ -286,6 +286,8 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
     events.publish('stop_attack_sounds', {});
     events.publish('play_sound', {name: 'clang'});
 
+    frauki.timers.SetTimer('clash_wait', 800);
+
     //if frauki has higher priority, the enemy will be stunned
     //otherwise, frauki gets stunned
     // if(frauki.GetCurrentPriority() > e.GetCurrentPriority()) {

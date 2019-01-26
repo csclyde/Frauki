@@ -184,20 +184,21 @@ Door.prototype.OpenDoor = function(f) {
         //get the prism for this door
         var prism = objectController.shardList.find(function(s) { return s.name === this.prism; }, this);
 
-        console.log(prism)
         prism.beingUsed = true;
-        prism.body.x = game.camera.x;
-        prism.body.y = game.camera.y + game.camera.height;
+        prism.x = this.body.x + 9;
+        prism.y = this.body.y + 31;
 
-        prism.opacity = 0;
+        prism.scale.x = 0.1;
+        prism.scale.y = 0.1;
+
 
         //tween its position to the center of the door
-        var shardTween = game.add.tween(prism.body).to({x: this.body.x + 0, y: this.body.y + 24}, 2000, Phaser.Easing.Exponential.Out, true);
+        var shardTween = game.add.tween(prism.scale).to({x: 1, y: 1}, 2000, Phaser.Easing.Exponential.Out, true);
         shardTween.onComplete.add(function() {
             //when the tween is done, perform the door opening
             effectsController.ScreenFlash();
             this.PerformOpen(true);
-            prism.ReturnToUI();
+            prism.beingUsed = false;
         }, this);
     }  
 };

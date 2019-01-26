@@ -254,6 +254,15 @@ GameState.CreateUI = function() {
         this['apple' + i].fixedToCamera = true;
         this['apple' + i].visible = false;
     }
+
+    this['prismWill'] = game.add.image(-10, 320, 'Misc', 'Shard0005', this.UI);
+    this['prismWill'].fixedToCamera = true;
+    this['prismWit'] = game.add.image(2, 320, 'Misc', 'Shard0004', this.UI);
+    this['prismWit'].fixedToCamera = true;
+    this['prismLuck'] = game.add.image(14, 320, 'Misc', 'Shard0006', this.UI);
+    this['prismLuck'].fixedToCamera = true;
+    this['prismPower'] = game.add.image(26, 320, 'Misc', 'Shard0007', this.UI);
+    this['prismPower'].fixedToCamera = true;
 };
 
 GameState.UpdateUI = function() {
@@ -315,6 +324,30 @@ GameState.UpdateUI = function() {
     } else {
         this.energyFrameStart.visible = true;
         this.energyFrameEnd.visible = true;
+    }
+
+    if(GameData.HasShard('Wit')) {
+        this['prismWit'].visible = true;
+    } else {
+        this['prismWit'].visible = false;
+    }
+
+    if(GameData.HasShard('Will')) {
+        this['prismWill'].visible = true;
+    } else {
+        this['prismWill'].visible = false;
+    }
+
+    if(GameData.HasShard('Luck')) {
+        this['prismLuck'].visible = true;
+    } else {
+        this['prismLuck'].visible = false;
+    }
+
+    if(GameData.HasShard('Power')) {
+        this['prismPower'].visible = true;
+    } else {
+        this['prismPower'].visible = false;
     }
 };
 

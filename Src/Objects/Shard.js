@@ -47,8 +47,10 @@ Shard.prototype.update = function() {
     if(!this.body.enable) return;
     
     if(!!this.state) this.state();
-    
-    if(this.visible && GameData.HasShard(this.name)) {
+
+    if(this.beingUsed === true) {
+        this.visible = true;
+    } else if(this.visible && GameData.HasShard(this.name)) {
         this.visible = false;
     } else if(!GameData.HasShard(this.name)) {
         this.visible = true;
@@ -60,6 +62,8 @@ function PickUpShard(f, a) {
 
     if(!GameData.HasShard(a.name)) {
         GameData.AddShard(a.name);
+
+        events.publish('update_ui', {});
         
         if(a.name == 'Will') {
             if(GameData.GetFlag('goddess_intro')) {
@@ -81,7 +85,8 @@ Shard.prototype.ReturnToUI = function() {
     effectsController.ScreenFlash();
     events.publish('play_sound', {name: 'crystal_door'});
     events.publish('play_sound', {name: 'fanfare_short', restart: true });
-    this.destroy();
+    this.visible = false;
+    this.dead = true;
 };
 
 Shard.prototype.PlayAnim = function(name) {
@@ -91,6 +96,12 @@ Shard.prototype.PlayAnim = function(name) {
 
 Shard.prototype.Floating = function() {
     this.PlayAnim(this.name);
+
+    if(this.dead) {
+        this.body.velocity.x = 0;
+        this.body.velocity.y = 0;
+        return;
+    }
 
     this.body.velocity.y = Math.sin(game.time.now / 150) * 30;
     this.body.velocity.x = 0;
