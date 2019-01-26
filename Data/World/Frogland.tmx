@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="360" height="700" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="3538">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="360" height="700" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="3540">
  <properties>
-  <property name="debug" value="true"/>
+  <property name="debug" value="false"/>
   <property name="startLayer" value="3"/>
   <property name="startX" value="129"/>
   <property name="startY" value="238"/>
@@ -3824,6 +3824,16 @@
   <object id="3536" gid="75" x="1648" y="3648" width="16" height="16">
    <properties>
     <property name="upgrade" value="Damage"/>
+   </properties>
+  </object>
+  <object id="3538" gid="69" x="3210.5" y="4894" width="16" height="16">
+   <properties>
+    <property name="id" value="1"/>
+   </properties>
+  </object>
+  <object id="3539" gid="69" x="1751.5" y="7141.5" width="16" height="16">
+   <properties>
+    <property name="id" value="2"/>
    </properties>
   </object>
  </objectgroup>

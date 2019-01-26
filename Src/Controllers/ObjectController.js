@@ -53,7 +53,7 @@ ObjectController.prototype.Update = function() {
 
         if(o.spriteType !== 'door' && !!o.body) {
             if(o.body.x > game.camera.x - padding && o.body.y > game.camera.y - padding && o.body.x < game.camera.x + game.camera.width + padding && o.body.y < game.camera.y + game.camera.height + padding) {
-                if(o.body.enable === false && !!o.Activate) o.Activate();
+                if(o.body.enable === false && !!o.Activate && o.spriteType !== 'checkpoint') o.Activate();
                 o.body.enable = true;
                 o.visible = true;
 
@@ -234,6 +234,7 @@ ObjectController.prototype.CreateObjectsLayer = function(layer) {
         } else if(obj.spriteType === 'checkpoint') {
             if(obj.id == GameData.GetCheckpoint()) {
                 obj.Activate();
+                console.log('Activating check', obj);
             }
 
             objectController.checkpointList.push(obj);
