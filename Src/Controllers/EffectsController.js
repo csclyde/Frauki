@@ -447,7 +447,7 @@ function UpdateParticle(p) {
 };
 
 EffectsController.prototype.SpawnEnergyNuggets = function(source, dest, color, amt) {
-
+    return;
     if(amt === 0) return;
     
 	var effect = null;

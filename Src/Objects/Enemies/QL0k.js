@@ -18,7 +18,9 @@ Enemy.prototype.types['QL0k'] =  function() {
     this.base = game.add.image(0, 0, 'EnemySprites', 'QL0k/Shoot0000');
     this.base.anchor.setTo(0.5, 0.5);
     this.base.x = this.x;
-    this.base.y = this.y - 37;
+	this.base.y = this.y - 37;
+	
+	this.shotCount = 0;
 
     //this.addChild(this.base);
     
@@ -81,7 +83,7 @@ Enemy.prototype.types['QL0k'] =  function() {
     };
 
     this.CanSeePlayer = function() {
-    	return EnemyBehavior.Player.IsVisible(this) && !EnemyBehavior.Player.IsAbove(this);
+    	return EnemyBehavior.Player.IsVisible(this) && !EnemyBehavior.Player.IsAbove(this) && EnemyBehavior.Player.Distance(this) < 250;
     };
 
     this.FacingPlayer = function() {
@@ -119,7 +121,14 @@ Enemy.prototype.types['QL0k'] =  function() {
 
 		if(this.animations.currentAnim.isFinished) {
 
-			this.timers.SetTimer('shoot', 800);
+			this.shotCount++;
+
+			if(this.shotCount % 3 === 0) {
+				this.timers.SetTimer('shoot', 800);
+			} else {
+				this.timers.SetTimer('shoot', 100);
+			}
+
 			this.timers.SetTimer('rotation_wait', 150);
 			this.hasShot = false;
 
