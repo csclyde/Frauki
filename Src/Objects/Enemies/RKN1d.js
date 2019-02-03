@@ -12,64 +12,53 @@ Enemy.prototype.types['RKN1d'] =  function() {
     this.damage = 1;
     this.energy = 2;
 
-    this.body.maxVelocity.y = 500;
+    //this.body.maxVelocity.y = 500;
 
     this.robotic = true;
     this.clingDir = 'none';
 
 
-    this.SetAttackTimer(0)
+    this.SetAttackTimer(0);
 
     this.updateFunction = function() {
-        if(this.state === this.Hurting)
-            return;
-
-        if(this.state === this.Hopping && !this.body.onFloor()) {
-            this.body.drag.x = 50;
-        } else {
-            this.body.drag.x = 600;
+        if(this.clingDir === 'none') {
+            this.body.moves = true;
+        }
+        else {
+            this.body.moves = false;
         }
 
+        // if(this.clingDir === 'up') {
+        //     this.angle = 180;
+        // } else if(this.clingDir === 'left') {
+        //     this.angle = -90;
+        //     this.scale.x = 1;
+        // } else if(this.clingDir === 'right') {
+        //     this.angle = 90;
+        //     this.scale.x = 1;
+        // } else {
+        //     this.angle = 0;
+        // }
     };
 
     this.Act = function() {
 
         if(EnemyBehavior.Player.IsVisible(this)) {
             
-            //if theyre stunned, seize the opportunity
-            if(EnemyBehavior.Player.IsStunned(this)) {
-                this.Hop();
-
-            } else if(this.body.onFloor() || this.clingDir === 'up' || this.clingDir === 'left' || this.clingDir === 'right') {
-
-                if(EnemyBehavior.Player.IsNear(this, 50) && this.CanAttack() && this.clingDir === 'none') {
-                    this.Bite();
-
-                } else if(EnemyBehavior.Player.IsNear(this, 250) && this.body.onFloor()) {
+            //if the player is too close or being dangerous
+            if(EnemyBehavior.Player.IsDangerous(this) || (EnemyBehavior.Player.IsNear(this, 250) && EnemyBehavior.Player.MovingTowards(this))) {
+                if(this.timers.TimerUp('escape_wait')) {
                     this.Escape();
-
-                } else if(this.CanAttack()) {
-                    this.Hop();
-
-
                 } else {
                     this.state = this.Idling;
                 }
-
+            
             } else {
                 this.state = this.Idling;
             }
 
         } else {
             this.state = this.Idling;
-        }
-    };
-
-    this.CanCauseDamage = function() {
-        if(this.state === this.Scuttling || this.state === this.Diving) {
-            return true;
-        } else {
-            return false;
         }
     };
 
@@ -84,6 +73,14 @@ Enemy.prototype.types['RKN1d'] =  function() {
         this.body.gravity.y = 0;
         this.clingDir = 'none';
         this.angle = 0;
+    }
+
+    this.IsGrounded = function() {
+        return (this.body.onFloor() || this.clingDir === 'up' || this.clingDir === 'left' || this.clingDir === 'right');
+    }
+
+    this.Vulnerable = function() {
+        return false; //this.state !== this.Escaping;
     }
 
     ///////////////////////////////ACTIONS////////////////////////////////////
@@ -104,8 +101,9 @@ Enemy.prototype.types['RKN1d'] =  function() {
 
     this.Escape = function() {
         this.state = this.PreEscaping;
+        this.clingDir = 'none';
 
-        this.timers.SetTimer('escape', 300);
+        this.timers.SetTimer('escape', 100);
 
     };
 
@@ -113,17 +111,7 @@ Enemy.prototype.types['RKN1d'] =  function() {
     this.Idling = function() {
         this.PlayAnim('idle');
 
-        if(this.clingDir === 'up') {
-            this.angle = 180;
-        } else if(this.clingDir === 'left') {
-            this.angle = -90;
-            this.scale.x = 1;
-        } else if(this.clingDir === 'right') {
-            this.angle = 90;
-            this.scale.x = 1;
-        } else {
-            this.angle = 0;
-        }
+        
 
         return true;
     };
@@ -134,8 +122,24 @@ Enemy.prototype.types['RKN1d'] =  function() {
         if(this.timers.TimerUp('escape')) {
             this.timers.SetTimer('escape', game.rnd.between(1200, 2400));
 
-            this.body.velocity.x = game.rnd.between(-600, 600);
-            this.body.velocity.y = game.rnd.between(-600, -400);
+            if(this.body.onFloor()) {
+                this.body.velocity.x = game.rnd.between(-600, 600);
+                this.body.velocity.y = game.rnd.between(-600, -400);
+            }
+            else if(this.clingDir === 'left') {
+                this.body.velocity.x = game.rnd.between(400, 600);
+                this.body.velocity.y = game.rnd.between(600, -600);
+            }
+            else if(this.clingDir === 'right') {
+                this.body.velocity.x = game.rnd.between(-400, -600);
+                this.body.velocity.y = game.rnd.between(600, -600);
+            }
+            else if(this.clingDir === 'up') {
+                this.body.velocity.x = game.rnd.between(-600, 600);
+                this.body.velocity.y = game.rnd.between(400, 600);
+            }
+
+            this.body.velocity.setMagnitude(600);
 
             this.state = this.Escaping;
         }
@@ -144,43 +148,50 @@ Enemy.prototype.types['RKN1d'] =  function() {
     }
 
     this.Escaping = function() {
-        if(this.body.gravity.y === 0) {
-            this.PlayAnim('jump');
-        } else {
-            this.PlayAnim('flip_up');
-        }
+        this.PlayAnim('jump');
 
-        if(this.body.onFloor()) {
-            return true;
-        }
-
-        if(this.body.onWall()) {
-            this.body.gravity.y = -700;
-            this.body.velocity.setTo(0);
-
-            var targetAngle = 0;
-
-            if(this.body.blocked.left) {
-                this.clingDir = 'left';
-                targetAngle = -90;
-                this.scale.x = 1;
-            } else if(this.body.blocked.right) {
-                this.clingDir = 'right';
-                targetAngle = 90;
-                this.scale.x = 1;
-            }
-
-            game.add.tween(this).to({ angle: targetAngle }, 75, Phaser.Easing.Linear.None, true);
         
-        } else if(this.body.blocked.up) {
+        if(this.body.onFloor()) {
+            this.clingDir = 'none';
+        }
+        else if(this.body.blocked.up) {
             this.clingDir = 'up';
-
-            this.body.gravity.y = -700;
-            this.body.velocity.setTo(0);
-
+        }
+        else if(this.body.blocked.left) {
+            this.clingDir = 'left';
+        }
+        else if(this.body.blocked.right) {
+            this.clingDir = 'right';
+        }
+        else {
+            this.clingDir = 'none';
         }
 
-        if(this.timers.TimerUp('escape')) {
+        // if(this.body.onWall()) {
+        //     this.body.gravity.y = -700;
+        //     this.body.velocity.setTo(0);
+
+        //     var targetAngle = 0;
+
+        //     if(this.body.blocked.left) {
+        //         targetAngle = -90;
+        //         this.scale.x = 1;
+        //     } else if(this.body.blocked.right) {
+        //         targetAngle = 90;
+        //         this.scale.x = 1;
+        //     }
+
+        //     game.add.tween(this).to({ angle: targetAngle }, 75, Phaser.Easing.Linear.None, true);
+        
+        // } else if(this.body.blocked.up) {
+
+        //     this.body.gravity.y = -700;
+        //     this.body.velocity.setTo(0);
+
+        // }
+
+        if(this.timers.TimerUp('escape') || this.body.onFloor() || this.clingDir !== 'none') {
+            this.timers.SetTimer('escape_wait', 800);
             return true;
         } else {
             return false;
