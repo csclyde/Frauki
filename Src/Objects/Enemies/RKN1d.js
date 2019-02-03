@@ -28,17 +28,17 @@ Enemy.prototype.types['RKN1d'] =  function() {
             this.body.moves = false;
         }
 
-        // if(this.clingDir === 'up') {
-        //     this.angle = 180;
-        // } else if(this.clingDir === 'left') {
-        //     this.angle = -90;
-        //     this.scale.x = 1;
-        // } else if(this.clingDir === 'right') {
-        //     this.angle = 90;
-        //     this.scale.x = 1;
-        // } else {
-        //     this.angle = 0;
-        // }
+        if(this.clingDir === 'up') {
+            this.angle = 180;
+        } else if(this.clingDir === 'left') {
+            this.angle = 90;
+            this.scale.x = 1;
+        } else if(this.clingDir === 'right') {
+            this.angle = -90;
+            this.scale.x = 1;
+        } else {
+            this.angle = 0;
+        }
     };
 
     this.Act = function() {
@@ -46,12 +46,18 @@ Enemy.prototype.types['RKN1d'] =  function() {
         if(EnemyBehavior.Player.IsVisible(this)) {
             
             //if the player is too close or being dangerous
-            if(EnemyBehavior.Player.IsDangerous(this) || (EnemyBehavior.Player.IsNear(this, 250) && EnemyBehavior.Player.MovingTowards(this))) {
+            if(EnemyBehavior.Player.IsNear(this, 50) && !EnemyBehavior.Player.IsDangerous(this) && this.CanAttack()) {
+                this.Bite();
+            }
+            else if(EnemyBehavior.Player.IsDangerous(this) || (EnemyBehavior.Player.IsNear(this, 200) && EnemyBehavior.Player.MovingTowards(this))) {
                 if(this.timers.TimerUp('escape_wait')) {
                     this.Escape();
                 } else {
                     this.state = this.Idling;
                 }
+            
+            } else if(EnemyBehavior.Player.IsVulnerable(this) && this.timers.TimerUp('hop_wait')) {
+                this.Hop();
             
             } else {
                 this.state = this.Idling;
@@ -70,9 +76,7 @@ Enemy.prototype.types['RKN1d'] =  function() {
     }
 
     this.DropOff = function() {
-        this.body.gravity.y = 0;
         this.clingDir = 'none';
-        this.angle = 0;
     }
 
     this.IsGrounded = function() {
@@ -80,20 +84,18 @@ Enemy.prototype.types['RKN1d'] =  function() {
     }
 
     this.Vulnerable = function() {
-        return false; //this.state !== this.Escaping;
+        return this.state !== this.Escaping && this.state !== this.PreEscaping;
     }
 
     ///////////////////////////////ACTIONS////////////////////////////////////
     this.Hop = function() {
-
-        EnemyBehavior.FacePlayer(this);
-
-        this.timers.SetTimer('attack', 300);
+        this.timers.SetTimer('attack', 100);
+        this.timers.SetTimer('hop_wait', game.rnd.between(3000, 5000));
         this.state = this.PreHopping;
-
     };
 
     this.Bite = function() {
+        this.DropOff();
         EnemyBehavior.FacePlayer(this);
 
         this.state = this.Biting;
@@ -101,7 +103,6 @@ Enemy.prototype.types['RKN1d'] =  function() {
 
     this.Escape = function() {
         this.state = this.PreEscaping;
-        this.clingDir = 'none';
 
         this.timers.SetTimer('escape', 100);
 
@@ -111,8 +112,6 @@ Enemy.prototype.types['RKN1d'] =  function() {
     this.Idling = function() {
         this.PlayAnim('idle');
 
-        
-
         return true;
     };
 
@@ -120,27 +119,55 @@ Enemy.prototype.types['RKN1d'] =  function() {
         this.PlayAnim('pre_jump');
 
         if(this.timers.TimerUp('escape')) {
-            this.timers.SetTimer('escape', game.rnd.between(1200, 2400));
 
             if(this.body.onFloor()) {
-                this.body.velocity.x = game.rnd.between(-600, 600);
-                this.body.velocity.y = game.rnd.between(-600, -400);
-            }
-            else if(this.clingDir === 'left') {
-                this.body.velocity.x = game.rnd.between(400, 600);
-                this.body.velocity.y = game.rnd.between(600, -600);
-            }
-            else if(this.clingDir === 'right') {
-                this.body.velocity.x = game.rnd.between(-400, -600);
-                this.body.velocity.y = game.rnd.between(600, -600);
+                if(frauki.body.onFloor()) {
+                    this.body.velocity.set(game.rnd.between(-0.5, 0.5), -1);
+                }
+                else if(EnemyBehavior.Player.IsAbove(this)) {
+                    var dir = EnemyBehavior.RollDice(2, 1);
+
+                    if(dir) {
+                        this.body.velocity.set(-1, -0.5);
+                    } else {
+                        this.body.velocity.set(1, -0.5);
+                    }
+                }
+                else {
+                    this.body.velocity.set(frauki.body.velocity.x * -1, -1);
+                }
             }
             else if(this.clingDir === 'up') {
-                this.body.velocity.x = game.rnd.between(-600, 600);
-                this.body.velocity.y = game.rnd.between(400, 600);
+                if(EnemyBehavior.Player.IsBelow(this)) {
+                    var dir = EnemyBehavior.RollDice(2, 1);
+                    
+                    if(dir) {
+                        this.body.velocity.set(-1, game.rnd.between(0, 0.2));
+                    } else {
+                        this.body.velocity.set(1, game.rnd.between(0, 0.2));
+                    }
+                } else {
+                    this.body.velocity.set(frauki.body.velocity.x * -1, game.rnd.between(0, 0.2));
+                }
+            }
+            else if(this.clingDir === 'left') {
+                if(frauki.body.onFloor()) {
+                    this.body.velocity.set(1, -0.5);
+                }
+                else {
+                    this.body.velocity.set(1, game.rnd.between(-0.5, 0.5));
+                }
+            }
+            else if(this.clingDir === 'right') {
+                if(frauki.body.onFloor()) {
+                    this.body.velocity.set(-1, -0.5);
+                } else {
+                    this.body.velocity.set(-1, game.rnd.between(-0.5, 0.5));
+                }
             }
 
-            this.body.velocity.setMagnitude(600);
-
+            this.body.velocity.setMagnitude(800);
+            this.clingDir = 'none';
             this.state = this.Escaping;
         }
 
@@ -153,6 +180,7 @@ Enemy.prototype.types['RKN1d'] =  function() {
         
         if(this.body.onFloor()) {
             this.clingDir = 'none';
+            this.body.velocity.y = 0;
         }
         else if(this.body.blocked.up) {
             this.clingDir = 'up';
@@ -190,7 +218,7 @@ Enemy.prototype.types['RKN1d'] =  function() {
 
         // }
 
-        if(this.timers.TimerUp('escape') || this.body.onFloor() || this.clingDir !== 'none') {
+        if(this.body.onFloor() || this.clingDir !== 'none') {
             this.timers.SetTimer('escape_wait', 800);
             return true;
         } else {
@@ -201,31 +229,14 @@ Enemy.prototype.types['RKN1d'] =  function() {
     this.PreHopping = function() {
         this.PlayAnim('pre_jump');
 
-        if(this.clingDir === 'up') {
-            this.angle = 180;
-        } else if(this.clingDir === 'left') {
-            this.angle = 90;
-            this.scale.x = 1;
-        } else if(this.clingDir === 'right') {
-            this.angle = -90;
-            this.scale.x = 1;
-        } else {
-            this.angle = 0;
-        }
-
         if(this.timers.TimerUp('attack')) {
             this.DropOff();
             this.state = this.Hopping;
 
             EnemyBehavior.FacePlayer(this);
-            EnemyBehavior.JumpToPoint(this, frauki.body.center.x, frauki.body.y - 50); 
+            EnemyBehavior.ChargeAtPlayer(this, 600); 
             
             this.body.velocity.x += frauki.body.velocity.x;
-
-            // if(this.body.velocity.y < -400) {
-            //     this.body.velocity.y = -400;
-            // }
-
         }
 
         return false;
@@ -238,11 +249,7 @@ Enemy.prototype.types['RKN1d'] =  function() {
             this.PlayAnim('jump');
         }
 
-        if(this.body.onFloor()) {
-            return true;
-        }
-
-        return false;
+        return true;
     };
 
     this.Biting = function() {
