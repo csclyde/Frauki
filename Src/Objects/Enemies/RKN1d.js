@@ -56,7 +56,7 @@ Enemy.prototype.types['RKN1d'] =  function() {
                     this.state = this.Idling;
                 }
             
-            } else if(EnemyBehavior.Player.IsVulnerable(this) && this.timers.TimerUp('hop_wait')) {
+            } else if(EnemyBehavior.Player.IsInVulnerableFrame(this) && this.timers.TimerUp('hop_wait')) {
                 this.Hop();
             
             } else {
@@ -234,7 +234,7 @@ Enemy.prototype.types['RKN1d'] =  function() {
             this.state = this.Hopping;
 
             EnemyBehavior.FacePlayer(this);
-            EnemyBehavior.ChargeAtPlayer(this, 600); 
+            EnemyBehavior.ChargeAtPlayer(this, 400); 
             
             this.body.velocity.x += frauki.body.velocity.x;
         }
