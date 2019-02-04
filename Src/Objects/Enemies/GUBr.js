@@ -56,9 +56,9 @@ Enemy.prototype.types['GUBr'] =  function() {
     	this.timers.SetTimer('attacking', game.rnd.between(450, 500));
 
     	if(this.direction === 'left') {
-			this.body.velocity.x = -275;
+			this.body.velocity.x = -400;
 		} else {
-			this.body.velocity.x = 275;
+			this.body.velocity.x = 400;
 		}
     };
 
@@ -133,6 +133,10 @@ Enemy.prototype.types['GUBr'] =  function() {
 
 		EnemyBehavior.FacePlayer(this);
 
+		if(EnemyBehavior.Player.IsNear(this, 60) && this.CanAttack()) {
+			this.Attack();
+		}
+
 		if(this.timers.TimerUp('blocking')) {
 			return true;
 		} else {
@@ -151,7 +155,7 @@ Enemy.prototype.types['GUBr'] =  function() {
 			this.body.velocity.x = 200;
 		}
 
-		if(this.body.onWall() || EnemyBehavior.Player.IsNear(this, 180)) {
+		if(this.body.onWall() || EnemyBehavior.Player.IsNear(this, 160) || frauki.body.center.x - this.body.center.x < 10) {
 			return true;
 		} else {
 			return false;
