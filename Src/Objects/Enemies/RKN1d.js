@@ -39,6 +39,13 @@ Enemy.prototype.types['RKN1d'] =  function() {
         } else {
             this.angle = 0;
         }
+
+        if(this.body.onFloor()) {
+            this.body.drag.setTo(800);
+        }
+        else {
+            this.body.drag.setTo(0);
+        }
     };
 
     this.Act = function() {
@@ -166,7 +173,7 @@ Enemy.prototype.types['RKN1d'] =  function() {
                 }
             }
 
-            this.body.velocity.setMagnitude(800);
+            this.body.velocity.setMagnitude(600);
             this.clingDir = 'none';
             this.state = this.Escaping;
         }
@@ -258,7 +265,7 @@ Enemy.prototype.types['RKN1d'] =  function() {
         if(this.animations.currentAnim.isFinished) {
             this.SetAttackTimer(1000);
 
-            return true;
+            this.Escape();
         }
 
         return false;
