@@ -46,12 +46,12 @@ Enemy.prototype.types['Sporoid'] =  function() {
 		if(!this.timers.TimerUp('dash_wait'))
 			return;
 
-		game.physics.arcade.moveToXY(this, frauki.body.center.x, frauki.body.center.y, 400);
-		this.state = this.Dashing;
+		
+		this.state = this.PreDashing;
 		
 		//this.Spore.explode(3000, 20);
 
-		this.timers.SetTimer('dash', 1000);
+		this.timers.SetTimer('dash', 500);
 		this.timers.SetTimer('dash_wait', 3000);
 	};
 
@@ -87,33 +87,18 @@ Enemy.prototype.types['Sporoid'] =  function() {
 
 	    this.body.velocity.x += vel.x;
 	    this.body.velocity.y += vel.y;
-
-		// if(EnemyBehavior.Player.IsNear(this, 300)) {
-		// 	if(frauki.body.center.x < this.body.center.x)
-		// 		this.body.velocity.x += 30;
-		// 	else
-		// 		this.body.velocity.x += -30;
-
-		// 	if(frauki.body.center.y < this.body.center.y)
-		// 		this.body.velocity.y += 30;
-		// 	else
-		// 		this.body.velocity.y += -30;
-		// } else {
-		// 	switch(this.wanderDirection) {
-		// 		case 'left': this.body.velocity.x -= 30; break;
-		// 		case 'up':   this.body.velocity.y -= 30; break;
-		// 		case 'right': this.body.velocity.x += 30; break;
-		// 		case 'down': this.body.velocity.y += 30; break;
-		// 	}
-		// }
 	};
 
 	this.PreDashing = function() {
 		this.PlayAnim('idle');
 
+		this.body.velocity.y = Math.sin((game.time.now) / 30) * 200;
+		this.body.velocity.x = 0;
+
 		if(this.timers.TimerUp('dash')) {
 			this.state = this.Dashing;
 			this.timers.SetTimer('dash', 1000);
+			game.physics.arcade.moveToXY(this, frauki.body.center.x, frauki.body.center.y, 400);
 		}
 	};
 

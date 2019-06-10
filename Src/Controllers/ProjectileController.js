@@ -65,6 +65,7 @@ ProjectileController.prototype.MortarExplosion = function(e, x, y) {
 	game.physics.enable(explosion, Phaser.Physics.ARCADE);
 
 	explosion.body.setSize(50, 40);
+	explosion.body.moves = false;
 	explosion.anchor.setTo(0.5);
 
 	var explode = explosion.animations.add('explode', ['SW8T/Mortar0004', 'SW8T/Mortar0005', 'SW8T/Mortar0006', 'SW8T/Mortar0007'], 14, false, false);

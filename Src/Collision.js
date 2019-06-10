@@ -478,11 +478,8 @@ Collision.CollideProjectileWithWorld = function(p, t) {
     if(p.projType === 'bolt' && t.index === 1) {
         p.pendingDestroy = true;
         effectsController.Explosion(p);
-    } else if(p.projType === 'mortar' && p.body.onFloor()) {
+    } else if(p.projType === 'mortar') {
         p.pendingDestroy = true;
-        //effectsController.Explosion(p);
-        //p.body.velocity.setTo(0);
-        //p.play('explode');
         events.publish('camera_shake', {magnitudeX: 3, magnitudeY: 1, duration: 200});
         projectileController.MortarExplosion(p.owningEnemy, p.x, p.y);
 
