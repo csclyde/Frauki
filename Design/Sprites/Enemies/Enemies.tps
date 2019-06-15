@@ -354,7 +354,48 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">Gnome/gossip.png</key>
+            <key type="filename">Gnome/nisse_boat0000.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>13,8,25,16</rect>
+                <key>scale9Paddings</key>
+                <rect>13,8,25,16</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">Gnome/nisse_cool0000.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>5,10,11,20</rect>
+                <key>scale9Paddings</key>
+                <rect>5,10,11,20</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">Gnome/nisse_fishing0000.png</key>
+            <key type="filename">Gnome/nisse_sleepy0000.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>11,8,21,16</rect>
+                <key>scale9Paddings</key>
+                <rect>11,8,21,16</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">Gnome/nisse_gossip0000.png</key>
+            <key type="filename">Gnome/nisse_gossip_20000.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
