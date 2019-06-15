@@ -4418,7 +4418,11 @@
   <object id="3720" gid="146" x="3498.41" y="9081.92" width="16" height="16"/>
   <object id="3722" gid="146" x="3590.81" y="9081.92" width="16" height="16"/>
   <object id="3723" gid="146" x="3676.32" y="9083.99" width="16" height="16"/>
-  <object id="3726" gid="149" x="3649.5" y="2563" width="16" height="16"/>
+  <object id="3726" gid="149" x="3649.5" y="2563" width="16" height="16">
+   <properties>
+    <property name="name" value="fishing"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="Effects" visible="0">
   <object id="3284" name="fluff" type="effect" x="2928.46" y="3986" width="90.4167" height="57.3333"/>

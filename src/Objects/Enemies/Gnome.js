@@ -3,8 +3,12 @@ Enemy.prototype.types['Gnome'] =  function() {
 	this.body.setSize(13, 20, 0, 5);
 	this.anchor.setTo(0.5);
 
-    this.animations.add('idle', ['Gnome/gossip'], 10, false, false);
-    this.animations.add('stuff', ['Goddess/Stand0000'], 10, false, false);
+	//console.log(this.properties.name)
+    this.animations.add('idle_boat', ['Gnome/nisse_boat0000'], 10, false, false);
+    this.animations.add('idle_cool', ['Gnome/nisse_cool0000'], 10, false, false);
+    this.animations.add('idle_fishing', ['Gnome/nisse_fishing0000'], 10, false, false);
+    this.animations.add('idle_gossip', ['Gnome/nisse_gossip0000'], 10, false, false);
+    this.animations.add('idle_sleepy', ['Gnome/nisse_sleepy0000'], 10, false, false);
 
     this.energy = 1;
     this.baseStunDuration = 400;
@@ -12,6 +16,9 @@ Enemy.prototype.types['Gnome'] =  function() {
 	this.body.drag.x = 500;
 	
 	this.state = this.Idling;
+
+	this.create = function() {
+	};
 
 	this.updateFunction = function() {
 
@@ -32,7 +39,7 @@ Enemy.prototype.types['Gnome'] =  function() {
 	
 	////////////////////////////////STATES////////////////////////////////////
 	this.Idling = function() {
-		this.PlayAnim('idle');
+		this.PlayAnim('idle_' + this.properties.name);
 
 		this.SetDirection('right');
 		//EnemyBehavior.FacePlayer(this);

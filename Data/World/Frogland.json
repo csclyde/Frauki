@@ -4719,6 +4719,14 @@
                  "height":16,
                  "id":3726,
                  "name":"",
+                 "properties":
+                    {
+                     "name":"fishing"
+                    },
+                 "propertytypes":
+                    {
+                     "name":"string"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
