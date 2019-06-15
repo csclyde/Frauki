@@ -354,6 +354,19 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">Gnome/gossip.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>8,11,16,21</rect>
+                <key>scale9Paddings</key>
+                <rect>8,11,16,21</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">Goddess/Goddess0000.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -657,6 +670,7 @@
             <filename>QL0k</filename>
             <filename>SW8T</filename>
             <filename>Misc</filename>
+            <filename>Gnome</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
