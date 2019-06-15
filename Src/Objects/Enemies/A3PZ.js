@@ -266,7 +266,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
                 xTar += 60;
             }
 
-            EnemyBehavior.JumpToPoint(this, xTar, frauki.body.y - 50, 0.4);
+            EnemyBehavior.JumpToPoint(this, xTar, frauki.body.y - 50, 0.5);
         }
 
         return false;

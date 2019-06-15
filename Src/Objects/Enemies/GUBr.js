@@ -189,35 +189,12 @@ Enemy.prototype.types['GUBr'] =  function() {
 
 	this.attackFrames = {
 
-		'GUBr/Attack0004': {
-			x: 26, y: 20, w: 50, h: 12,
-			damage: 2,
-			knockback: 0,
-			priority: 0,
-			juggle: 0
-		},
 
 		'GUBr/Attack0003': {
 			x: 26, y: 20, w: 50, h: 12,
 			damage: 2,
 			knockback: 0,
 			priority: 1,
-			juggle: 0
-		},
-
-		'GUBr/Attack0002': {
-			x: 26, y: 20, w: 50, h: 12,
-			damage: 2,
-			knockback: 0,
-			priority: 1,
-			juggle: 0
-		},
-
-		'GUBr/Attack0001': {
-			x: 26, y: 20, w: 50, h: 12,
-			damage: 0,
-			knockback: 0,
-			priority: 0,
 			juggle: 0
 		}
 
