@@ -4877,18 +4877,6 @@
                 {
                  "gid":149,
                  "height":16,
-                 "id":3736,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":3136.58356693453,
-                 "y":6943.15230797982
-                }, 
-                {
-                 "gid":149,
-                 "height":16,
                  "id":3737,
                  "name":"",
                  "properties":
@@ -4977,6 +4965,26 @@
                  "width":16,
                  "x":1949.49741071771,
                  "y":2896.48824274042
+                }, 
+                {
+                 "gid":149,
+                 "height":16,
+                 "id":3743,
+                 "name":"",
+                 "properties":
+                    {
+                     "name":"scarf"
+                    },
+                 "propertytypes":
+                    {
+                     "name":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":2942.69627399323,
+                 "y":783.310500564546
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -6429,14 +6437,14 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":3742,
+ "nextobjectid":3744,
  "orientation":"orthogonal",
  "properties":
     {
      "debug":"true",
      "startLayer":"3",
-     "startX":"185",
-     "startY":"445"
+     "startX":"303",
+     "startY":"344"
     },
  "propertytypes":
     {
