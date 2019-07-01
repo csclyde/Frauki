@@ -7,7 +7,7 @@ EnergyController = function() {
 	this.charge = 0;
 	this.remainingApples = 0;
 	this.shield = this.GetMaxShield();
-	this.shieldRechargeRate = 3000;
+	this.shieldRechargeRate = 15000;
 
 	this.latentHealth = 0;
 
