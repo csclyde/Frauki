@@ -64,9 +64,10 @@ GameState.update = function() {
     //this.UpdateUI();
     pixel.context.globalAlpha = this.currentAlpha;
 
+    game.canvas.style.width = (pixel.width * pixel.scale) + "px";
+    game.canvas.style.height = (pixel.height * pixel.scale) + "px";
+
     frauki.alpha = 0;
-
-
 };
 
 GameState.render = function() {

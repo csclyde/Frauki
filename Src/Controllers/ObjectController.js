@@ -235,7 +235,6 @@ ObjectController.prototype.CreateObjectsLayer = function(layer) {
         } else if(obj.spriteType === 'checkpoint') {
             if(obj.id == GameData.GetCheckpoint()) {
                 obj.Activate();
-                console.log('Activating check', obj);
             }
 
             objectController.checkpointList.push(obj);

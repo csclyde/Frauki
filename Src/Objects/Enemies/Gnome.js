@@ -54,7 +54,6 @@ Enemy.prototype.types['Gnome'] =  function() {
 		this.SetDirection('right');
 
 		if(this.properties.name === 'boat') {
-			console.log(this.body)
 			this.body.gravity.y = -700;
 		}
 		//EnemyBehavior.FacePlayer(this);

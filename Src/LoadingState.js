@@ -1,31 +1,13 @@
 var LoadingState = new Phaser.State();
 
 LoadingState.preload = function() {
-    //game.canvas.style['display'] = 'none';
-    // pixel.canvas = Phaser.Canvas.create(pixel.width * pixel.scale, pixel.height * pixel.scale);
-    // pixel.canvas.width = pixel.width * pixel.scale;
-    // pixel.canvas.height = pixel.height *  pixel.scale;
-    // pixel.context = pixel.canvas.getContext('2d');
-    //Phaser.Canvas.addToDOM(pixel.canvas);
-    //Phaser.Canvas.setSmoothingEnabled(pixel.context, false);
-
-    // pixel.canvas.style['padding-left'] = 0;
-    // pixel.canvas.style['padding-right'] = 0;
-    // pixel.canvas.style['margin-left'] = 'auto';
-    // pixel.canvas.style['margin-right'] = 'auto';
-    // pixel.canvas.style['display'] = 'block';
-    // pixel.canvas.style['width'] = pixel.canvas.width;
-
-    // pixel.context.drawImage(game.canvas, 0, 0, game.width, game.height, 0, 0, pixel.width * pixel.scale, pixel.height * pixel.scale);
-
     Phaser.TilemapParser.INSERT_NULL = true;
     game.load.tilemap('Frogland', 'Data/World/Frogland.json', null, Phaser.Tilemap.TILED_JSON);
     
     game.canvas.id = 'game-canvas';
-    var ctx = game.canvas.getContext('2d');
-    pixel.context = ctx;
-    //ctx.scale(3, 3);
-    game.canvas.style = "width: " + (pixel.width * pixel.scale) + "px";
+    pixel.context = game.canvas.getContext('2d');
+    game.canvas.style.width = (pixel.width * pixel.scale) + "px";
+    game.canvas.style.height = (pixel.height * pixel.scale) + "px";
 
     //load images
     FileMap.Images.forEach(function(img) {
