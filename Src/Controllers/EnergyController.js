@@ -3,7 +3,7 @@ EnergyController = function() {
 	var that  = this;
 
 	this.energy = 12;
-	this.health = this.GetMaxHealth();
+	this.health = this.GetMaxHealth() - 1;
 	this.charge = 0;
 	this.remainingApples = 0;
 	this.shield = this.GetMaxShield();

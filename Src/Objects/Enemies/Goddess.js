@@ -23,6 +23,15 @@ Enemy.prototype.types['Goddess'] =  function() {
     	if(params.id === 'final_second' && !GameData.GetFlag('seal_hall_intro')) {
 			ScriptRunner.run('seal_hall_intro');
 			GameData.SetFlag('seal_hall_intro', true);
+		} else if(params.id === 'final_first' && !GameData.GetFlag('open_second_seal')) {
+			ScriptRunner.run('open_second_seal');
+			GameData.SetFlag('open_second_seal', true);
+		} else if(params.id === 'final_third' && !GameData.GetFlag('open_third_seal')) {
+			ScriptRunner.run('open_third_seal');
+			GameData.SetFlag('open_third_seal', true);
+		} else if(params.id === 'final_fourth' && !GameData.GetFlag('open_fourth_seal')) {
+			ScriptRunner.run('open_fourth_seal');
+			GameData.SetFlag('open_fourth_seal', true);
     	} else if(params.id === 'prison_door') {
     		GameData.SetFlag('goddess_released', true);
     	}

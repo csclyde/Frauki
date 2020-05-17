@@ -194,6 +194,11 @@ ScriptRunner.scripts['goddess_shard'] = [
 	{ name: 'wait', props: { amount: 7000 } },
 	{ name: 'hide_text', props: {} },
 
+	{ name: 'wait', props: { amount: 250 } },
+	{ name: 'show_text', props: { text: 'FREEEEEEEE!!!', portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 7000 } },
+	{ name: 'hide_text', props: {} },
+
 	{ name: 'allow_input', props: {} }
 ];
 
@@ -259,17 +264,124 @@ ScriptRunner.scripts['goddess_rez_angry'] = [
 ScriptRunner.scripts['seal_hall_intro'] = [
 	{ name: 'disallow_input', props: {} },
 
-	{ name: 'show_text', props: { text: "Nice work, you've opened the first of four seals.", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "Oh my! You've opened the first of four seals! I know you could do it. YOu really are a wonderful little creature.", portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 7000 } },
 	{ name: 'hide_text', props: {} },
 
 	{ name: 'wait', props: { amount: 200 } },
-	{ name: 'show_text', props: { text: "Keep it up, I'm sure the other prism shards can't be far.", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "Now keep it up, I'm sure the other prism shards can't be far. Don't get discouraged. YOu can do this.", portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 7000 } },
 	{ name: 'hide_text', props: {} },
 
 	{ name: 'wait', props: { amount: 200 } },
-	{ name: 'show_text', props: { text: "There is a special gift for you in the room behind me. Use that red prism shard to get it!", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "Oh yeah, there is a special gift for you in the room behind me. Use that red prism shard to get it!", portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 7000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'allow_input', props: {} }
+];
+
+ScriptRunner.scripts['open_second_seal'] = [
+	{ name: 'disallow_input', props: {} },
+
+	{ name: 'show_text', props: { text: "You opened the second seal! This is unbelievable...", portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 7000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'show_text', props: { text: "So close to freedom!! No more musty cell...", portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 4000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'wait', props: { amount: 200 } },
+	{ name: 'show_text', props: { text: 'No more dank dripping ceiling...', portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 4000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'wait', props: { amount: 200 } },
+	{ name: 'show_text', props: { text: 'Just the sweet, juicy nectar of freedom...', portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 4000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'wait', props: { amount: 200 } },
+	{ name: 'show_text', props: { text: '...', portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 3000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'wait', props: { amount: 200 } },
+	{ name: 'show_text', props: { text: 'Heh heh heh... just... please be careful. Don\'t give up.', portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 7000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'wait', props: { amount: 200 } },
+	{ name: 'show_text', props: { text: '...and thanks. Thanks for helping me.', portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 5000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'allow_input', props: {} }
+];
+
+ScriptRunner.scripts['open_third_seal'] = [
+	{ name: 'disallow_input', props: {} },
+
+	{ name: 'show_text', props: { text: "You opened another seal!! Frauki... the closer you get, the harder it is to wait.", portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 7000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'show_text', props: { text: "Before I met you, I gave up on being free.", portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 7000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'show_text', props: { text: "I gave up on existing at all.", portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 7000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'show_text', props: { text: "As the years and decades went by, my spirit faded into oblivion.", portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 7000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'show_text', props: { text: "I no longer felt real, and time passed for me like it does for a stone.", portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 7000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'show_text', props: { text: "But now that there is just one seal left, I feel real again. I'm so scared of how excited I am. This might be too good to be happening.", portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 7000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'show_text', props: { text: "Please open the last seal. I know I'm asking so much of you. But if I don't escape now, my spirit will be destroyed.", portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 7000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'show_text', props: { text: "I'm so scared...", portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 7000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'allow_input', props: {} }
+];
+
+ScriptRunner.scripts['open_fourth_seal'] = [
+	{ name: 'disallow_input', props: {} },
+
+	{ name: 'show_text', props: { text: "The last seal is open...", portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 7000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'show_text', props: { text: "I'm free...", portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 7000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'show_text', props: { text: "But I'm scared to leave...", portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 7000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'show_text', props: { text: "Nothing will be the same...", portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 7000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'show_text', props: { text: "But the universe is calling me. I'm leaving this plane of existence.", portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 7000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'show_text', props: { text: "The joy is covering me... Goodbye Frauki... I love you.", portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 7000 } },
 	{ name: 'hide_text', props: {} },
 

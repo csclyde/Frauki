@@ -84,7 +84,7 @@ function HitUpgrade(f, o) {
         events.publish('play_sound', {name: 'attack_connect'});
         o.timers.SetTimer('hit', 500);
 
-        o.health--;
+        o.health -= f.GetCurrentDamage();
 
         //if its dead break it, otherwise just shake it
         if(o.health <= 0) {
@@ -94,6 +94,7 @@ function HitUpgrade(f, o) {
             
             events.publish('stop_sound', {name: 'crystal_door'});
             events.publish('play_sound', {name: 'door_break'});
+            events.publish('full_heal', {});
             
             GameData.AddUpgrade(o.upgrade);
 

@@ -13,7 +13,7 @@ GameData.data = {
     checkpoint: '0',
     upgrades: ['Dive', 'Stab'],
     doors: [],
-    shards: [],
+    shards: ['Wit', 'Will', 'Luck', 'Power'],
     health: 4,
     shield: 0,
     flags: {},
