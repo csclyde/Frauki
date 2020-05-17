@@ -62,7 +62,7 @@ GameState.update = function() {
     backdropController.Update();
 
     //this.UpdateUI();
-    pixel.context.globalAlpha = this.currentAlpha;
+    // pixel.context.globalAlpha = this.currentAlpha;
 
     frauki.alpha = 0;
 
@@ -105,13 +105,13 @@ GameState.render = function() {
     //     game.debug.geom(new Phaser.Rectangle(weaponController.GetAttackGeometry().x, weaponController.GetAttackGeometry().y, weaponController.GetAttackGeometry().w, weaponController.GetAttackGeometry().h));
     // }
 
-    pixel.context.drawImage(
-        game.canvas, 0, 0, game.width, game.height, 
-        0,
-        0,
-        game.width * pixel.scale, 
-        game.height * pixel.scale
-    );
+    // pixel.context.drawImage(
+    //     game.canvas, 0, 0, game.width, game.height, 
+    //     0,
+    //     0,
+    //     game.width * pixel.scale, 
+    //     game.height * pixel.scale
+    // );
 
     //this.DrawUI();
 };

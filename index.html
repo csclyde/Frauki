@@ -155,7 +155,7 @@
             }
             
 
-            var game = new Phaser.Game(pixel.width, pixel.height, Phaser.AUTO, "game", LoadingState, false, false);
+            var game = new Phaser.Game(pixel.width, pixel.height, Phaser.CANVAS, "game", LoadingState, false, false);
             var events = new EventRouter();
 
             game.state.add('LoadingState', LoadingState, true);
