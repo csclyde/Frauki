@@ -23,7 +23,7 @@ LoadingState.preload = function() {
     
     game.canvas.id = 'game-canvas';
     var ctx = game.canvas.getContext('2d');
-    console.log(ctx);
+    pixel.context = ctx;
     //ctx.scale(3, 3);
     game.canvas.style = "width: " + (pixel.width * pixel.scale) + "px";
 

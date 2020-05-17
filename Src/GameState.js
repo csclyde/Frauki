@@ -62,7 +62,7 @@ GameState.update = function() {
     backdropController.Update();
 
     //this.UpdateUI();
-    // pixel.context.globalAlpha = this.currentAlpha;
+    pixel.context.globalAlpha = this.currentAlpha;
 
     frauki.alpha = 0;
 
