@@ -46,7 +46,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
                     EnemyBehavior.FacePlayer(this);
                     this.Punch();
 
-                } else if(EnemyBehavior.Player.IsNear(this, 160)) {
+                } else if(EnemyBehavior.Player.IsNear(this, 140)) {
                     EnemyBehavior.FacePlayer(this);
                     this.Hammer();
 
@@ -86,7 +86,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
             return;
         }
 
-        this.timers.SetTimer('slash_hold', 300);
+        this.timers.SetTimer('slash_hold', 700);
         this.state = this.HammerWindup;
 
         //events.publish('play_sound', {name: 'attack_windup', restart: true});
@@ -186,8 +186,6 @@ Enemy.prototype.types['A3PZ'] =  function() {
     this.Punching = function() {
         this.PlayAnim('punch');
 
-        
-
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
             this.SetAttackTimer(300);
             return true;
@@ -227,9 +225,17 @@ Enemy.prototype.types['A3PZ'] =  function() {
             this.body.velocity.x = 700;
         }
 
+        //if he hits a wall, or the timer expires, exit the charge
         if(this.body.onWall() || this.timers.TimerUp('slash_hold')) {
             this.timers.SetTimer('charge_wait', 4000);
-            return true;
+
+            if(frauki.state !== frauki.Stunned) {
+                this.timers.SetTimer('stun', 1000);
+                this.state = this.Stunned;
+            }
+            else {
+                return true;
+            }
         }
 
         return false;
@@ -281,6 +287,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
         if(this.timers.TimerUp('slash_hold') || (xDist > 50 && xDist < 90)) {
             this.state = this.Hammering;
+            this.timers.SetTimer('slash_hold', 1000);
             this.body.velocity.y = 500;
 
             this.touchedDown = false;
@@ -327,6 +334,16 @@ Enemy.prototype.types['A3PZ'] =  function() {
         return false;
     };
 
+    this.Stunned = function() {
+        this.PlayAnim('stun');
+
+        if(this.timers.TimerUp('stun') && this.body.onFloor()) {
+            return true;
+        }
+
+        return false;
+    };
+
     this.attackFrames = {
         'A3PZ/Punch0004': {
             x: 50, y: 25, w: 40, h: 30,
@@ -362,7 +379,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
 
         'A3PZ/Charge0003': {
-            x: 55, y: -11, w: 10, h: 82,
+            x: 75, y: -11, w: 10, h: 62,
             damage: 0,
             knockback: 3,
             priority: 3,
@@ -371,7 +388,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
         },
 
         'A3PZ/Charge0004': {
-            x: 55, y: -11, w: 10, h: 82,
+            x: 75, y: -11, w: 10, h: 62,
             damage: 0,
             knockback: 3,
             priority: 3,
@@ -380,7 +397,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
         },
 
         'A3PZ/Charge0005': {
-            x: 55, y: -11, w: 10, h: 82,
+            x: 75, y: -11, w: 10, h: 62,
             damage: 0,
             knockback: 3,
             priority: 3,
@@ -389,7 +406,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
         },
 
         'A3PZ/Charge0006': {
-            x: 55, y: -11, w: 10, h: 82,
+            x: 75, y: -11, w: 10, h: 62,
             damage: 0,
             knockback: 3,
             priority: 3,

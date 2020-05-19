@@ -5,9 +5,9 @@ Enemy.prototype.types['HWK9'] =  function() {
 
     this.animations.add('idle', ['HWK9/Stand0000'], 10, true, false);
     this.animations.add('flip', ['HWK9/Flip0000', 'HWK9/Flip0001', 'HWK9/Flip0002', 'HWK9/Flip0003', 'HWK9/Flip0004', 'HWK9/Flip0005'], 18, true, false);
-    this.animations.add('windup', ['HWK9/AttackDash0000'], 1, false, false);
-    this.animations.add('attack1', ['HWK9/AttackDash0001', 'HWK9/AttackDash0002', 'HWK9/AttackDash0003'], 1, false, false);
-    this.animations.add('after_slash', ['HWK9/AttackDash0003'], 1, false, false);
+    this.animations.add('windup', ['HWK9/AttackDash0000'], 12, false, false);
+    this.animations.add('attack1', ['HWK9/AttackDash0001', 'HWK9/AttackDash0002', 'HWK9/AttackDash0003'], 12, false, false);
+    this.animations.add('after_slash', ['HWK9/AttackDash0003'], 12, false, false);
     this.animations.add('block', ['HWK9/Block0000'], 18, true, false);
     this.animations.add('hurt', ['HWK9/Stand0000'], 8, true, false);
 

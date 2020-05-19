@@ -999,6 +999,7 @@ Player.prototype.Stun = function(e) {
 
     this.body.acceleration.x = 0;
     this.body.acceleration.y = 0;
+    this.body.velocity.y = -100;
 
     if(this.body.center.x < e.body.center.x) {
         this.body.velocity.x = -30;

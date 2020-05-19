@@ -15,7 +15,7 @@ ProjectileController.prototype.Mortar = function(e) {
 	var mortar = game.add.sprite(xPos, yPos, 'EnemySprites');
 	game.physics.enable(mortar, Phaser.Physics.ARCADE);
 
-	mortar.body.setSize(18, 20);
+	mortar.body.setSize(10, 10);
 	mortar.anchor.setTo(0.5);
 
 	mortar.animations.add('idle', ['SW8T/Mortar0000', 'SW8T/Mortar0001', 'SW8T/Mortar0002', 'SW8T/Mortar0003'], 14, true, false);

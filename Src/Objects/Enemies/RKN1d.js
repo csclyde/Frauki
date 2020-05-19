@@ -129,7 +129,7 @@ Enemy.prototype.types['RKN1d'] =  function() {
 
             if(this.body.onFloor()) {
                 if(frauki.body.onFloor()) {
-                    this.body.velocity.set(game.rnd.between(-0.5, 0.5), -1);
+                    this.body.velocity.set(game.rnd.between(-0.7, 0.7), -1);
                 }
                 else if(EnemyBehavior.Player.IsAbove(this)) {
                     var dir = EnemyBehavior.RollDice(2, 1);
@@ -149,12 +149,12 @@ Enemy.prototype.types['RKN1d'] =  function() {
                     var dir = EnemyBehavior.RollDice(2, 1);
                     
                     if(dir) {
-                        this.body.velocity.set(-1, game.rnd.between(0, 0.2));
+                        this.body.velocity.set(-1, game.rnd.between(0, 0.5));
                     } else {
-                        this.body.velocity.set(1, game.rnd.between(0, 0.2));
+                        this.body.velocity.set(1, game.rnd.between(0, 0.5));
                     }
                 } else {
-                    this.body.velocity.set(frauki.body.velocity.x * -1, game.rnd.between(0, 0.2));
+                    this.body.velocity.set(frauki.body.velocity.x * -1, game.rnd.between(0, 0.3));
                 }
             }
             else if(this.clingDir === 'left') {
@@ -162,14 +162,14 @@ Enemy.prototype.types['RKN1d'] =  function() {
                     this.body.velocity.set(1, -0.5);
                 }
                 else {
-                    this.body.velocity.set(1, game.rnd.between(-0.5, 0.5));
+                    this.body.velocity.set(1, game.rnd.between(-0.7, 0.7));
                 }
             }
             else if(this.clingDir === 'right') {
                 if(frauki.body.onFloor()) {
                     this.body.velocity.set(-1, -0.5);
                 } else {
-                    this.body.velocity.set(-1, game.rnd.between(-0.5, 0.5));
+                    this.body.velocity.set(-1, game.rnd.between(-0.7, 0.7));
                 }
             }
 

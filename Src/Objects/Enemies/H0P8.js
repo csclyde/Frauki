@@ -37,11 +37,15 @@ Enemy.prototype.types['H0P8'] =  function() {
                 else if(EnemyBehavior.Player.IsNear(this, 20)) {
                     this.Dodge();
                 }
-                else if(this.CanAttack() && EnemyBehavior.Player.IsVulnerable(this) && !EnemyBehavior.Player.IsNear(this, 50)) {
+                else if(this.CanAttack() && EnemyBehavior.Player.IsVulnerable(this) && !EnemyBehavior.Player.IsNear(this, 50) && EnemyBehavior.Player.IsNear(this, 250)) {
                     this.Hop();
-                   
-                } else {
-                    this.state = this.Idling;
+                } 
+                else {
+                    if(this.timers.TimerUp('idle_hop_wait')) {
+                        this.IdleHop();
+                    } else {
+                        this.state = this.Idling;
+                    }
                 }
 
             } else {
@@ -97,14 +101,36 @@ Enemy.prototype.types['H0P8'] =  function() {
         this.state = this.Slashing;
     };
 
+    this.IdleHop = function() {
+        this.state = this.IdleHopping;
+        this.body.velocity.y = game.rnd.between(-100, -200);
+        this.body.velocity.x = game.rnd.between(150, 250);
+
+        if(game.rnd.between(1, 2) === 1) {
+            this.body.velocity.x *= -1;
+        }
+        
+        EnemyBehavior.FaceForward(this);
+
+        this.timers.SetTimer('idle_hop_wait', game.rnd.between(500, 2000));
+    }
+
 
     ////////////////////////////////STATES////////////////////////////////////
     this.Idling = function() {
         this.PlayAnim('idle');
-        EnemyBehavior.FacePlayer(this);
-
-
         return true;
+    };
+
+    this.IdleHopping = function() {
+        this.PlayAnim('idle');
+
+        if(this.body.onFloor()) {
+            return true;
+        }
+
+        return false;
+
     };
 
     this.PreHopping = function() {
