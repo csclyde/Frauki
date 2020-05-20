@@ -157,6 +157,7 @@ Enemy.prototype.types['H0P8'] =  function() {
 
             EnemyBehavior.FacePlayer(this);
             EnemyBehavior.JumpToPoint(this, ptX, ptY); 
+            events.publish('play_sound', {name: 'enemy_jump', restart: true});
 
             if(this.body.velocity.y < -400) {
                 this.body.velocity.y = -400;

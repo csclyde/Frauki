@@ -100,7 +100,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
         this.timers.SetTimer('slash_hold', 600);
         this.state = this.ChargeWindup;
 
-        //events.publish('play_sound', {name: 'attack_windup', restart: true});
+        events.publish('play_sound', {name: 'AZP3_slide_windup', restart: true});
     };
 
     this.Dodge = function(duration, override) {
@@ -228,8 +228,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
         //if he hits a wall, or the timer expires, exit the charge
         if(this.body.onWall() || this.timers.TimerUp('slash_hold')) {
             this.timers.SetTimer('charge_wait', 4000);
-            events.publish('play_sound', {name: 'AZP3_punch', restart: true});
-
+            events.publish('play_sound', {name: 'AZP3_slide_impact', restart: true});
 
             if(frauki.state !== frauki.Stunned) {
                 this.timers.SetTimer('stun', 1000);
@@ -275,6 +274,8 @@ Enemy.prototype.types['A3PZ'] =  function() {
             }
 
             EnemyBehavior.JumpToPoint(this, xTar, frauki.body.y - 50, 0.5);
+            events.publish('play_sound', {name: 'enemy_jump', restart: true});
+
         }
 
         return false;

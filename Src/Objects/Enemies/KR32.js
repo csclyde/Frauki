@@ -129,7 +129,8 @@ Enemy.prototype.types['KR32'] =  function() {
 
     	this.body.velocity.y = -200;
 
-    	this.timers.SetTimer('dodge', game.rnd.between(2000, 4000));
+		this.timers.SetTimer('dodge', game.rnd.between(2000, 4000));
+		events.publish('play_sound', {name: 'enemy_jump', restart: true});
     };
 
     this.JumpOver = function() {

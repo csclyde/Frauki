@@ -174,6 +174,7 @@ Enemy.prototype.types['RKN1d'] =  function() {
             }
 
             this.body.velocity.setMagnitude(600);
+            events.publish('play_sound', {name: 'enemy_jump', restart: true});
             this.clingDir = 'none';
             this.state = this.Escaping;
         }
