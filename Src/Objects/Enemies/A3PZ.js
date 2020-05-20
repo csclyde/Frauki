@@ -88,7 +88,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
         this.timers.SetTimer('slash_hold', 700);
         this.state = this.HammerWindup;
 
-        //events.publish('play_sound', {name: 'attack_windup', restart: true});
+        events.publish('play_sound', {name: 'AZP3_hammer_windup', restart: true});
     };
 
     this.Charge = function() {

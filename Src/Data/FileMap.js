@@ -115,6 +115,7 @@ FileMap.Audio = [
 	{ Name: 'AZP3_slide_windup', File: 'Data/Sfx/AZP3_slide_windup.wav', Volume: 1.0, Loop: false },
 	{ Name: 'AZP3_slide', File: 'Data/Sfx/AZP3_slide.wav', Volume: 1.0, Loop: false },
 	{ Name: 'AZP3_slide_impact', File: 'Data/Sfx/AZP3_slide_impact.wav', Volume: 1.0, Loop: false },
+	{ Name: 'AZP3_hammer_windup', File: 'Data/Sfx/AZP3_hammer_windup.wav', Volume: 0.6, Loop: false },
 
 	{ Name: 'KR32_attack', File: 'Data/Sfx/KR32_attack.wav', Volume: 1.5, Loop: false },
 	{ Name: 'KR32_stab', File: 'Data/Sfx/KR32_stab.wav', Volume: 1.0, Loop: false },
