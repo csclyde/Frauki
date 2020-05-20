@@ -1,7 +1,7 @@
 Enemy.prototype.types['Haystax'] =  function() {
 
 	this.body.setSize(35, 35, 0, -9);
-	this.anchor.setTo(0.5, 1);
+	this.anchor.setTo(0.5, 0.8);
 
     this.animations.add('idle', ['Misc/Haystax0000'], 10, true, false);
     this.animations.add('up', ['Misc/Haystax0001'], 10, true, false);
@@ -15,7 +15,7 @@ Enemy.prototype.types['Haystax'] =  function() {
 	this.body.immovable = true;
 
 	this.Vulnerable = function() { 
-		return true;
+		return this.state === this.PoppedUp;
 	};
 
 	this.CanCauseDamage = function() { return false; }
@@ -25,6 +25,7 @@ Enemy.prototype.types['Haystax'] =  function() {
 	this.Spit = function() {
 		this.timers.SetTimer('spit', 500 + (Math.random() * 500));
 		this.state = this.PoppedUp;
+		EnemyBehavior.FaceAwayFromPlayer(this);
 
 		projectileController.Tarball(this);
 	};

@@ -113,6 +113,8 @@ FileMap.Audio = [
 	{ Name: 'KR32_attack', File: 'Data/Sfx/KR32_attack.wav', Volume: 1.5, Loop: false },
 	{ Name: 'KR32_stab', File: 'Data/Sfx/KR32_stab.wav', Volume: 1.0, Loop: false },
 
+	{ Name: 'fungu_shoot', File: 'Data/Sfx/fungu_shoot.wav', Volume: 1.0, Loop: false },
+
 ];
 
 FileMap.Music = [

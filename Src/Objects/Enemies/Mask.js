@@ -34,7 +34,7 @@ Enemy.prototype.types['Mask'] =  function() {
 		this.PlayAnim('idle');
 
 		if(EnemyBehavior.Player.IsVisible(this)) {
-			this.body.maxVelocity.x = 200;
+			this.body.maxVelocity.x = 400;
 		} else {
 			this.body.maxVelocity.x = 100;
 		}

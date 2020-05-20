@@ -116,7 +116,7 @@ Collision.CollideFraukiWithProjectile = function(f, p) {
         return;
     }
     
-    if(p.projType === 'tar' || p.projType === 'spore' || p.projType === 'bolt' || p.projType === 'mortar' || (p.projType === 'mortarExplosion' && p.animations.currentFrame.name === 'SW8T/Mortar0004')) {
+    if(p.projType === 'spore' || p.projType === 'bolt' || p.projType === 'mortar' || (p.projType === 'mortarExplosion' && p.animations.currentFrame.name === 'SW8T/Mortar0004')) {
         if(p.owningEnemy.state !== p.owningEnemy.Dying) {
             if(frauki.Attacking() || frauki.states.shielded) {
                 Collision.OverlapAttackWithEnemyAttack(p, f);
@@ -134,6 +134,12 @@ Collision.CollideFraukiWithProjectile = function(f, p) {
         frauki.body.velocity.x /= 2;
         frauki.body.velocity.y /= 2;
         p.owningEnemy.waitingForBolas = false;
+    } else if(p.projType === 'tar' && frauki.state !== frauki.Rolling) {
+        p.destroy();
+        frauki.body.velocity.x /= 3;
+        frauki.body.velocity.y /= 3;
+        frauki.states.tarred = true;
+        frauki.timers.SetTimer('tarred', 3000);
     }
 };
 
@@ -258,8 +264,10 @@ Collision.OverlapAttackWithEnemy = function(f, e, halfDmg) {
 };
 
 Collision.OverlapAttackWithEnemyAttack = function(e, f) {
-    e = e.owningEnemy;
+    if(e.projType !== undefined) return;
 
+    e = e.owningEnemy;
+    
     if(!frauki.timers.TimerUp('clash_wait')) {
         return;
     }
@@ -486,10 +494,13 @@ Collision.CollideProjectileWithWorld = function(p, t) {
     } else if(p.projType === 'bolas' && !p.attached) {
         p.pendingDestroy = true;
         p.owningEnemy.waitingForBolas = false;
+    } else if(p.projType === 'tar') {
+        p.pendingDestroy = true;
+        projectileController.MortarExplosion(p.owningEnemy, p.x, p.y);
     }
 
     if(t.index === 1) {
-        return false;
+        return true;
     } else {
         return false;
     }

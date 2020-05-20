@@ -2,7 +2,7 @@ Enemy.prototype.types['Fungu'] =  function() {
 
 	this.body.setSize(25, 50, 0, 0);
 	this.body.moves = false;
-	this.anchor.setTo(0.5, 0.75);
+	this.anchor.setTo(0.5, 0.6);
 
     this.animations.add('idle', ['Misc/Fungu0000'], 10, true, false);
     this.animations.add('shoot', ['Misc/Fungu0001'], 10, true, false);
@@ -42,17 +42,17 @@ Enemy.prototype.types['Fungu'] =  function() {
 		this.body.velocity.y = 0;
 
 		if(this.timers.TimerUp('shoot')) {
-
-			
 			if(EnemyBehavior.Player.IsVisible(this)) {
+				EnemyBehavior.FaceAwayFromPlayer(this);
 				projectileController.Spore(this);
 				this.timers.SetTimer('shoot_anim', 300);
+				events.publish('play_sound', {name: 'fungu_shoot'});
 			}
 
 			this.shotCount++;
 
 			if(this.shotCount % 3 === 0) {
-				this.timers.SetTimer('shoot', 1200);
+				this.timers.SetTimer('shoot', game.rnd.between(1200, 1800));
 			} else {
 				this.timers.SetTimer('shoot', 500);
 			}

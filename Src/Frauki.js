@@ -122,7 +122,13 @@ Player.prototype.preStateUpdate = function() {
         this.runDust.visible = false;
     }
 
-    if(this.states.entangled) {
+    if(this.timers.TimerUp('tarred')) {
+        this.states.tarred = false;
+    }
+
+    if(this.states.tarred) {
+        this.movement.globalMoveMod = 0.3;
+    } else if(this.states.entangled) {
         this.movement.globalMoveMod = 0.5;
     } else {
         this.movement.globalMoveMod = 1.0;
@@ -189,6 +195,8 @@ Player.prototype.postStateUpdate = function() {
         game.time.events.add(50, function() { frauki.timers.SetTimer('entangled_flicker', 50); });
     } else if(frauki.states.entangled) {
         frauki.tint = 0xFF8CBD;
+    } else if(frauki.states.tarred) {
+        frauki.tint = 0x222222;
     } else {
         frauki.tint = 0xFFFFFF;
     }

@@ -129,33 +129,35 @@ ProjectileController.prototype.Tarball = function(e) {
 	var tar = game.add.sprite(e.body.center.x, e.body.center.y, 'EnemySprites');
 	game.physics.enable(tar, Phaser.Physics.ARCADE);
 
-	tar.body.setSize(18, 20);
+	tar.body.setSize(12, 12);
+	tar.body.gravity.y = -200;
 	tar.animations.add('idle', ['Misc/Tarball0000', 'Misc/Tarball0001'], 14, true, false);
 	tar.play('idle');
 
 	//parabolic arc
-	// var duration = 1.2;
-	// tar.body.velocity.x = (frauki.body.center.x - tar.body.center.x) / duration;
-	// tar.body.velocity.y = (frauki.body.center.y + -0.5 * game.physics.arcade.gravity.y * duration * duration - tar.body.center.y) / duration;
+	var duration = 1.2;
+	tar.body.velocity.x = (frauki.body.center.x - tar.body.center.x) / duration;
+	tar.body.velocity.y = (frauki.body.center.y + -0.5 * (game.physics.arcade.gravity.y - 200) * duration * duration - tar.body.center.y) / duration;
 
-	tar.body.velocity.y = game.rnd.between(-100, -150);
-	tar.body.velocity.x = EnemyBehavior.Player.IsLeft(e) ? game.rnd.between(-100, -150) : game.rnd.between(100, 150);
-	tar.body.bounce.set(0.8);
+	// tar.body.velocity.y = game.rnd.between(-100, -150);
+	// tar.body.velocity.x = EnemyBehavior.Player.IsLeft(e) ? game.rnd.between(-100, -150) : game.rnd.between(100, 150);
+	tar.body.bounce.set(0.4);
 
 	tar.projType = 'tar';
 	tar.owningEnemy = e;
 	tar.spawnTime = game.time.now;
-	tar.lifeTime = 5000;
+	tar.lifeTime = 3000;
 	tar.solid = true;
 
 	this.projectiles.add(tar);
 };
 
 ProjectileController.prototype.Spore = function(e) {
-	var spore = game.add.sprite(e.body.center.x, e.body.center.y, 'EnemySprites');
+	var xOffset = e.direction === 'right' ? -15 : 0;
+	var spore = game.add.sprite(e.body.center.x + xOffset, e.body.center.y, 'EnemySprites');
 	game.physics.enable(spore, Phaser.Physics.ARCADE);
 
-	spore.body.setSize(18, 20);
+	spore.body.setSize(10, 10);
 	spore.body.allowGravity = false;
 	spore.animations.add('idle', ['Misc/Spore0000', 'Misc/Spore0001'], 14, true, false);
 	spore.play('idle');
@@ -290,10 +292,4 @@ ProjectileController.prototype.Update = function() {
 
 ProjectileController.prototype.DestroyAllProjectiles = function() {
 	this.projectiles.removeAll(true);
-};
-
-function ProjectileHit(f, p) {
-	if(p.projType === 'tar' || p.projType === 'spore') {
-		p.destroy();
-	}
 };
