@@ -1002,6 +1002,8 @@ Player.prototype.Stun = function(e) {
 
     this.ChangeState(this.Stunned);
     this.timers.SetTimer('stunned', 1200);
+    events.publish('play_sound', {name: 'stun', restart: true});
+
 
     //this.body.velocity.y = -200;
 
