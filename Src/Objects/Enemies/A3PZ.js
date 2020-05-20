@@ -276,7 +276,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
             }
 
             EnemyBehavior.JumpToPoint(this, xTar, frauki.body.y - 50, 0.5);
-            events.publish('play_sound', {name: 'enemy_jump', restart: true});
+            events.publish('play_sound', {name: 'robot_jump_med', restart: true});
 
         }
 
