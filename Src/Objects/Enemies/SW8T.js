@@ -126,13 +126,17 @@ Enemy.prototype.types['SW8T'] =  function() {
    		this.state = this.Jumping;
    		EnemyBehavior.FacePlayer(this);
 
-   		EnemyBehavior.JumpToPoint(this, frauki.body.center.x, frauki.body.center.y, 0.5);
+		EnemyBehavior.JumpToPoint(this, frauki.body.center.x, frauki.body.center.y, 0.5);
+		events.publish('play_sound', {name: 'enemy_jump', restart: true});
+		
    	};
 
    	this.JumpAway = function() {
    		this.state = this.Jumping;
    		EnemyBehavior.FacePlayer(this);
 
+		events.publish('play_sound', {name: 'enemy_jump', restart: true});
+		
    		this.body.velocity.y = -200;
    		this.body.velocity.x = game.rnd.between(400, 550) * EnemyBehavior.Player.DirMod(this);
    	};

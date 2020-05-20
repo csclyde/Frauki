@@ -64,7 +64,8 @@ Enemy.prototype.types['GUBr'] =  function() {
 
     this.RunAway = function() {
     	if(this.state !== this.Fleeing) {
-    		this.body.velocity.y = -150;
+			this.body.velocity.y = -150;
+            events.publish('play_sound', {name: 'enemy_jump', restart: true});
     	}
 
     	this.timers.SetTimer('run_away', 1500);

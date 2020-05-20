@@ -46,7 +46,7 @@ FileMap.Audio = [
 	{ Name: 'roll', File: 'Data/Sfx/roll.wav', Volume: 0.2, Loop: false },
 	{ Name: 'ouch', File: 'Data/Sfx/Ouch.wav', Volume: 0.7, Loop: false },
 	{ Name: 'running', File: 'Data/Sfx/run.wav', Volume: 0.2, Loop: true },
-	{ Name: 'stun', File: 'Data/Sfx/stun.wav', Volume: 0.5, Loop: false },
+	{ Name: 'stun', File: 'Data/Sfx/stun.wav', Volume: 0.8, Loop: false },
 	{ Name: 'slide', File: 'Data/Sfx/slide.wav', Volume: 0.3, Loop: false },
 	{ Name: 'no_energy', File: 'Data/Sfx/no_energy.wav', Volume: 0.7, Loop: false },
 	{ Name: 'airhike', File: 'Data/Sfx/airhike.wav', Volume: 0.2, Loop: false },
@@ -108,8 +108,11 @@ FileMap.Audio = [
 	{ Name: 'baton_catch', File: 'Data/Sfx/baton_catch.wav', Volume: 1.2, Loop: false },
 
 	{ Name: 'attack_windup', File: 'Data/Sfx/attack_windup.wav', Volume: 0.5, Loop: false },
+	{ Name: 'enemy_jump', File: 'Data/Sfx/enemy_jump.wav', Volume: 0.7, Loop: false },
 	{ Name: 'AZP3_step', File: 'Data/Sfx/AZP3_step.wav', Volume: 1.0, Loop: false },
 	{ Name: 'AZP3_punch', File: 'Data/Sfx/AZP3_punch.wav', Volume: 1.0, Loop: false },
+	{ Name: 'AZP3_slide_windup', File: 'Data/Sfx/AZP3_slide_windup.wav', Volume: 1.0, Loop: false },
+	{ Name: 'AZP3_slide_impact', File: 'Data/Sfx/AZP3_slide_impact.wav', Volume: 1.0, Loop: false },
 
 	{ Name: 'KR32_attack', File: 'Data/Sfx/KR32_attack.wav', Volume: 1.5, Loop: false },
 	{ Name: 'KR32_stab', File: 'Data/Sfx/KR32_stab.wav', Volume: 1.0, Loop: false },
