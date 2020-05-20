@@ -228,6 +228,8 @@ Enemy.prototype.types['A3PZ'] =  function() {
         //if he hits a wall, or the timer expires, exit the charge
         if(this.body.onWall() || this.timers.TimerUp('slash_hold')) {
             this.timers.SetTimer('charge_wait', 4000);
+            events.publish('play_sound', {name: 'AZP3_punch', restart: true});
+
 
             if(frauki.state !== frauki.Stunned) {
                 this.timers.SetTimer('stun', 1000);
