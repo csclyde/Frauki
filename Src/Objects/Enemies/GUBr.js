@@ -66,6 +66,7 @@ Enemy.prototype.types['GUBr'] =  function() {
     	if(this.state !== this.Fleeing) {
 			this.body.velocity.y = -150;
             events.publish('play_sound', {name: 'enemy_jump', restart: true});
+            events.publish('play_sound', {name: 'GUBr_laugh', restart: true});
     	}
 
     	this.timers.SetTimer('run_away', 1500);
@@ -77,9 +78,14 @@ Enemy.prototype.types['GUBr'] =  function() {
     };
 
     this.Block = function() {
-    	this.state = this.Blocking;
+		this.state = this.Blocking;
+		
+		if(this.timers.TimerUp('tremble_sound')) {
+			events.publish('play_sound', {name: 'GUBr_tremble', restart: true});
+			this.timers.SetTimer('tremble_sound', 5000);
+		}
 
-    	this.timers.SetTimer('blocking', game.rnd.between(800, 1200));
+    	this.timers.SetTimer('blocking', 3000);
     };
 
     this.Charge = function() {
@@ -138,7 +144,7 @@ Enemy.prototype.types['GUBr'] =  function() {
 			this.Attack();
 		}
 
-		if(this.timers.TimerUp('blocking')) {
+		if(this.timers.TimerUp('blocking') || EnemyBehavior.Player.IsDangerous(this)) {
 			return true;
 		} else {
 			return false;
