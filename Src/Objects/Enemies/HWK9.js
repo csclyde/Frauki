@@ -12,7 +12,8 @@ Enemy.prototype.types['HWK9'] =  function() {
     this.animations.add('hurt', ['HWK9/AttackDash0001'], 8, true, false);
 
     this.energy = 5;
-    this.baseStunDuration = 500;
+	this.baseStunDuration = 500;
+	this.onFloor = true;
 
     this.robotic = true;
 
@@ -25,7 +26,7 @@ Enemy.prototype.types['HWK9'] =  function() {
     this.body.bounce.y = 0;
     
 	this.updateFunction = function() {
-
+		console.log('updating')
 		if(this.state !== this.Slashing && !this.body.allowGravity) {
 			this.body.allowGravity = true;
 		}

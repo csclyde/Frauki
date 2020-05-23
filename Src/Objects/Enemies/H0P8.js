@@ -14,12 +14,18 @@ Enemy.prototype.types['H0P8'] =  function() {
     this.stunThreshold = 1;
     this.body.bounce.y = 0;
     this.body.drag.x = 600;
+    this.onFloor = false;
 
     this.robotic = true;
 
     this.updateFunction = function() {
-        if(this.state === this.Hurting)
-            return;
+        if(this.body.onFloor() && !this.onFloor) {
+			this.onFloor = true;
+			events.publish('play_sound', {name: 'HOP8_land', restart: false });
+
+		} else if(!this.body.onFloor()) {
+			this.onFloor = false;
+		}
     };
 
     this.Act = function() {
@@ -41,7 +47,7 @@ Enemy.prototype.types['H0P8'] =  function() {
                     this.Hop();
                 } 
                 else {
-                    if(this.timers.TimerUp('idle_hop_wait')) {
+                    if(this.timers.TimerUp('idle_hop_wait') && !EnemyBehavior.Player.IsNear(this, 100)) {
                         this.IdleHop();
                     } else {
                         this.state = this.Idling;
@@ -99,9 +105,12 @@ Enemy.prototype.types['H0P8'] =  function() {
 
     this.Slash = function() {
         this.state = this.Slashing;
+		events.publish('play_sound', {name: 'HOP8_attack', restart: false });
+
     };
 
     this.IdleHop = function() {
+        console.log('idle hopping')
         this.state = this.IdleHopping;
         this.body.velocity.y = game.rnd.between(-100, -200);
         this.body.velocity.x = game.rnd.between(150, 250);
@@ -112,7 +121,7 @@ Enemy.prototype.types['H0P8'] =  function() {
         
         EnemyBehavior.FaceForward(this);
 
-        this.timers.SetTimer('idle_hop_wait', game.rnd.between(500, 2000));
+        this.timers.SetTimer('idle_hop_wait', game.rnd.between(1500, 2500));
     }
 
 
@@ -157,7 +166,7 @@ Enemy.prototype.types['H0P8'] =  function() {
 
             EnemyBehavior.FacePlayer(this);
             EnemyBehavior.JumpToPoint(this, ptX, ptY); 
-            events.publish('play_sound', {name: 'enemy_jump', restart: true});
+            events.publish('play_sound', {name: 'HOP8_jump', restart: true});
 
             if(this.body.velocity.y < -400) {
                 this.body.velocity.y = -400;
@@ -193,6 +202,7 @@ Enemy.prototype.types['H0P8'] =  function() {
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
             this.SetAttackTimer(800);
+            this.timers.SetTimer('idle_hop_wait', 4000)
             return true;
         }
 
