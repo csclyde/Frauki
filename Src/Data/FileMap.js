@@ -119,8 +119,10 @@ FileMap.Audio = [
 	{ Name: 'AZP3_slide_impact', File: 'Data/Sfx/AZP3_slide_impact.wav', Volume: 1.0, Loop: false },
 	{ Name: 'AZP3_hammer_windup', File: 'Data/Sfx/AZP3_hammer_windup.wav', Volume: 0.6, Loop: false },
 
-	{ Name: 'GUBr_tremble', File: 'Data/Sfx/GUBr_tremble.wav', Volume: 0.6, Loop: false },
+	{ Name: 'GUBr_tremble', File: 'Data/Sfx/GUBr_tremble.wav', Volume: 0.2, Loop: false },
 	{ Name: 'GUBr_laugh', File: 'Data/Sfx/GUBr_laugh.wav', Volume: 0.6, Loop: false },
+	{ Name: 'GUBr_step', File: 'Data/Sfx/GUBr_step.wav', Volume: 0.4, Loop: true },
+	{ Name: 'GUBr_attack', File: 'Data/Sfx/GUBr_attack.wav', Volume: 0.4, Loop: false },
 
 	{ Name: 'KR32_attack', File: 'Data/Sfx/KR32_attack.wav', Volume: 1.5, Loop: false },
 	{ Name: 'KR32_stab', File: 'Data/Sfx/KR32_stab.wav', Volume: 1.0, Loop: false },
