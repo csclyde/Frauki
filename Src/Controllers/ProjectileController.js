@@ -54,6 +54,9 @@ ProjectileController.prototype.Mortar = function(e) {
 	mortar.solid = true;
 	mortar.preserveAfterHit = true;
 
+	events.publish('play_sound', {name: 'SW8T_mortar_fly', restart: false});
+
+
 	this.projectiles.add(mortar);
 };
 
@@ -81,6 +84,8 @@ ProjectileController.prototype.MortarExplosion = function(e, x, y) {
 	explosion.lifeTime = 5000;
 	explosion.solid = true;
 	explosion.preserveAfterHit = true;
+
+	events.publish('play_sound', {name: 'SW8T_mortar_explode', restart: true});
 
 	this.projectiles.add(explosion);
 };
@@ -121,6 +126,8 @@ ProjectileController.prototype.Bolas = function(e) {
 	bolas.solid = true;
 	bolas.attached = false;
 	e.waitingForBolas = true;
+
+	events.publish('play_sound', {name: 'SW8T_bolas_fly', restart: false});
 
 	this.projectiles.add(bolas);
 };
@@ -270,6 +277,10 @@ ProjectileController.prototype.Update = function() {
 		if(game.time.now - p.spawnTime > p.lifeTime && p.lifeTime !== 0) {
 			p.destroy();
 			childrenToRemove.push(p);
+
+			if(p.projType === 'bolas') {
+				events.publish('stop_sound', {name: 'SW8T_bolas_fly', restart: false});
+			}
 		} else if(p.solid) {
 			game.physics.arcade.collide(p, Frogland.GetCollisionLayer(), null, Collision.CollideProjectileWithWorld);
 		}

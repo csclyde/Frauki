@@ -4,7 +4,7 @@ Enemy.prototype.types['SW8T'] =  function() {
 	this.anchor.setTo(.5);
 
     this.animations.add('idle', ['SW8T/Idle0000', 'SW8T/Idle0001', 'SW8T/Idle0002', 'SW8T/Idle0003'], 8, true, false);
-    this.animations.add('walk', ['SW8T/Run0000', 'SW8T/Run0001', 'SW8T/Run0002', 'SW8T/Run0003', 'SW8T/Run0004', 'SW8T/Run0005', 'SW8T/Run0006'], 10, true, false);
+    this.animations.add('walk', ['SW8T/Run0000', 'SW8T/Run0001', 'SW8T/Run0002', 'SW8T/Run0003', 'SW8T/Run0004', 'SW8T/Run0005', 'SW8T/Run0006'], 6, true, false);
     this.animations.add('hurt', ['SW8T/Hurt0001', 'SW8T/Hurt0002'], 10, true, false);
     this.animations.add('shoot_start', ['SW8T/Shoot0001', 'SW8T/Shoot0002'], 10, false, false);
     this.animations.add('shoot', ['SW8T/Shoot0003', 'SW8T/Shoot0004', 'SW8T/Shoot0005', 'SW8T/Shoot0006', 'SW8T/Shoot0007', 'SW8T/Shoot0008'], 14, false, false);
@@ -31,12 +31,17 @@ Enemy.prototype.types['SW8T'] =  function() {
 
     this.robotic = true;
 
-    this.SHOOTING_SPEED = 400;
+    this.SHOOTING_SPEED = 600;
     this.hasShot = false;
     this.waitingForBolas = false;
     
 	this.updateFunction = function() {
 
+		if(this.state === this.Blocking) {
+			events.publish('play_sound', {name: 'SW8T_shield', restart: false});
+		} else {
+			events.publish('stop_sound', {name: 'SW8T_shield', restart: false});
+		}
 	};
 
 	this.Act = function() {
@@ -127,7 +132,7 @@ Enemy.prototype.types['SW8T'] =  function() {
    		EnemyBehavior.FacePlayer(this);
 
 		EnemyBehavior.JumpToPoint(this, frauki.body.center.x, frauki.body.center.y, 0.5);
-		events.publish('play_sound', {name: 'enemy_jump', restart: true});
+		events.publish('play_sound', {name: 'SW8T_jump', restart: true});
 		
    	};
 
@@ -135,7 +140,7 @@ Enemy.prototype.types['SW8T'] =  function() {
    		this.state = this.Jumping;
    		EnemyBehavior.FacePlayer(this);
 
-		events.publish('play_sound', {name: 'enemy_jump', restart: true});
+		events.publish('play_sound', {name: 'SW8T_jump', restart: true});
 		
    		this.body.velocity.y = -200;
    		this.body.velocity.x = game.rnd.between(400, 550) * EnemyBehavior.Player.DirMod(this);
@@ -145,7 +150,10 @@ Enemy.prototype.types['SW8T'] =  function() {
    		this.state = this.Swiping;
    		EnemyBehavior.FacePlayer(this);
 
-   		this.timers.SetTimer('swipe_wait', 1000);
+		   this.timers.SetTimer('swipe_wait', 1000);
+		   
+		events.publish('play_sound', {name: 'SW8T_baton_attack', restart: true});
+
 
    		if(this.direction === 'left') {
 			this.body.velocity.x = -350;
@@ -163,7 +171,11 @@ Enemy.prototype.types['SW8T'] =  function() {
 	this.Walking = function() {
 		this.PlayAnim('walk');
 
-		EnemyBehavior.WalkToPlayer(this, 100);
+		if(this.animations.currentFrame.name === 'SW8T/Run0001' || this.animations.currentFrame.name === 'SW8T/Run0005') {
+			events.publish('play_sound', {name: 'SW8T_step', restart: false});
+		}
+
+		EnemyBehavior.WalkToPlayer(this, 80);
 
 		return true;
 	};
@@ -194,6 +206,7 @@ Enemy.prototype.types['SW8T'] =  function() {
 
 		if(this.numShots > 0 && this.animations.currentFrame.name === 'SW8T/Shoot0005' && !this.hasShot) {
 			projectileController.Mortar(this);
+			events.publish('play_sound', {name: 'SW8T_mortar_shot', restart: false});
 			this.hasShot = true;
 		}
 
@@ -225,6 +238,8 @@ Enemy.prototype.types['SW8T'] =  function() {
 
 			if(this.timers.TimerUp('bolas_wait')) {
 				projectileController.Bolas(this);
+				events.publish('play_sound', {name: 'SW8T_bolas_shot', restart: false});
+
 			}
 
 			this.timers.SetTimer('bolas_wait', 5000);
@@ -282,6 +297,10 @@ Enemy.prototype.types['SW8T'] =  function() {
 			this.PlayAnim('jump_fall_' + dir);
 		} else if(this.body.onFloor()) {
 			this.PlayAnim('jump_land_' + dir);
+		}
+
+		if(this.body.onFloor()) {
+			events.publish('play_sound', {name: 'SW8T_land', restart: false});
 		}
 
 		if(this.body.onFloor() && this.animations.currentAnim.isFinished) {
