@@ -496,6 +496,8 @@ Collision.CollideProjectileWithWorld = function(p, t) {
     } else if(p.projType === 'bolas' && !p.attached) {
         p.pendingDestroy = true;
         p.owningEnemy.waitingForBolas = false;
+		events.publish('stop_sound', {name: 'SW8T_bolas_fly'});
+        
     } else if(p.projType === 'tar') {
         p.pendingDestroy = true;
         projectileController.MortarExplosion(p.owningEnemy, p.x, p.y);

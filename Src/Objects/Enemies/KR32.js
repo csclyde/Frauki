@@ -130,7 +130,7 @@ Enemy.prototype.types['KR32'] =  function() {
     	this.body.velocity.y = -200;
 
 		this.timers.SetTimer('dodge', game.rnd.between(2000, 4000));
-		events.publish('play_sound', {name: 'enemy_jump', restart: true});
+		events.publish('play_sound', {name: 'KR32_jump', restart: true});
     };
 
     this.JumpOver = function() {
@@ -197,6 +197,10 @@ Enemy.prototype.types['KR32'] =  function() {
 			this.mode = 'offensive';
 			this.timers.SetTimer('mode_change', game.rnd.between(1000, 2000));
 		}
+
+		if(this.animations.currentFrame.name === 'KR32/WalkBack0001' || this.animations.currentFrame.name === 'KR32/WalkFront0001') {
+			events.publish('play_sound', {name: 'KR32_step', restart: false});
+		}
 		
 		EnemyBehavior.FacePlayer(this);
 
@@ -209,6 +213,8 @@ Enemy.prototype.types['KR32'] =  function() {
 		if(this.body.onFloor()) {
 			this.PlayAnim('land');
 			this.body.velocity.x = 0;
+			events.publish('play_sound', {name: 'KR32_land', restart: false});
+
 		} else {
 			EnemyBehavior.FacePlayer(this);
 
