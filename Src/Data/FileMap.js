@@ -140,11 +140,9 @@ FileMap.Audio = [
 	{ Name: 'SW8T_land', File: 'Data/Sfx/SW8T_land.wav', Volume: 1.0, Loop: false },
 	{ Name: 'SW8T_step', File: 'Data/Sfx/SW8T_step.wav', Volume: 1.0, Loop: false },
 	{ Name: 'SW8T_shield', File: 'Data/Sfx/SW8T_shield.wav', Volume: 1.0, Loop: true },
-	{ Name: 'SW8T_bolo_fly', File: 'Data/Sfx/SW8T_bolo_fly.wav', Volume: 1.0, Loop: false },
-	{ Name: 'SW8T_bolo_shot', File: 'Data/Sfx/SW8T_bolo_shot.wav', Volume: 1.0, Loop: false },
+	{ Name: 'SW8T_bolas_fly', File: 'Data/Sfx/SW8T_bolas_fly.wav', Volume: 1.0, Loop: false },
 	{ Name: 'SW8T_baton_attack', File: 'Data/Sfx/SW8T_baton_attack.wav', Volume: 1.0, Loop: false },
 	{ Name: 'SW8T_mortar_shot', File: 'Data/Sfx/SW8T_mortar_shot.wav', Volume: 1.0, Loop: false },
-	{ Name: 'SW8T_mortar_fly', File: 'Data/Sfx/SW8T_mortar_fly.wav', Volume: 1.0, Loop: false },
 	{ Name: 'SW8T_mortar_explode', File: 'Data/Sfx/SW8T_mortar_explode.wav', Volume: 1.0, Loop: false },
 
 	{ Name: 'fungu_shoot', File: 'Data/Sfx/fungu_shoot.wav', Volume: 1.0, Loop: false },
