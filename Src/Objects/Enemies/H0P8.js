@@ -40,8 +40,14 @@ Enemy.prototype.types['H0P8'] =  function() {
                 if(this.timers.TimerUp('dodge') && (EnemyBehavior.Player.IsDangerous(this) || EnemyBehavior.Player.IsNear(this, 100))) {
                     this.Dodge();
                 }
-                else if(EnemyBehavior.Player.IsNear(this, 20)) {
-                    this.Dodge();
+                else if(EnemyBehavior.Player.IsNear(this, 50)) {
+                    if(this.timers.TimerUp('dodge')) {
+                        this.Dodge();
+                    } else if(this.timers.TimerUp('attack') && EnemyBehavior.Player.IsVulnerable(this)) {
+                        this.timers.SetTimer('attack', 600);
+                        EnemyBehavior.FacePlayer(this);
+                        this.Slash();
+                    }
                 }
                 else if(this.CanAttack() && EnemyBehavior.Player.IsVulnerable(this) && !EnemyBehavior.Player.IsNear(this, 50) && EnemyBehavior.Player.IsNear(this, 250)) {
                     this.Hop();
@@ -56,7 +62,6 @@ Enemy.prototype.types['H0P8'] =  function() {
 
             } else {
                 this.state = this.Idling;
-
             }
 
         } else {
@@ -105,12 +110,12 @@ Enemy.prototype.types['H0P8'] =  function() {
 
     this.Slash = function() {
         this.state = this.Slashing;
+        this.timers.SetTimer('attack', 600);
 		events.publish('play_sound', {name: 'HOP8_attack', restart: false });
 
     };
 
     this.IdleHop = function() {
-        console.log('idle hopping')
         this.state = this.IdleHopping;
         this.body.velocity.y = game.rnd.between(-100, -200);
         this.body.velocity.x = game.rnd.between(150, 250);
@@ -218,8 +223,9 @@ Enemy.prototype.types['H0P8'] =  function() {
         }
 
         if(this.timers.TimerUp('attack') || this.body.velocity.y > 0 || this.body.onFloor()) {
-            this.timers.SetTimer('dodge', 700);
+            this.timers.SetTimer('dodge', 1400);
             this.SetAttackTimer(0);
+            this.bouncedOffWall = false;
             return true;
         }
 
@@ -238,7 +244,7 @@ Enemy.prototype.types['H0P8'] =  function() {
 
     this.attackFrames = {
         'H0P8/Attack0004': {
-            x: 0, y: 0, w: 70, h: 70,
+            x: 10, y: 10, w: 80, h: 100,
             damage: 3,
             knockback: 1,
             priority: 1,
