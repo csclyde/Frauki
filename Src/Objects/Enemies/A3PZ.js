@@ -250,32 +250,31 @@ Enemy.prototype.types['A3PZ'] =  function() {
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
             this.state = this.HammerJumping;
             this.timers.SetTimer('slash_hold', 600);
-            // events.publish('camera_shake', {magnitudeX: 5, magnitudeY: 0, duration: 600});
 
-            // events.publish('stop_sound', {name: 'attack_windup', restart: true});
-        	// events.publish('play_sound', {name: 'AZP3_punch', restart: true});
+            if(this.direction === 'left') {
+                this.body.velocity.x = -500;
+            } else {
+                this.body.velocity.x = 500;
+            }
 
-            // if(this.direction === 'left') {
-            //     this.body.velocity.x = -500;
+            this.body.velocity.y = -200
+
+            // var xTarget = frauki.body.center.x;
+            // var yTarget = frauki.body.y - 50;
+
+            // if(EnemyBehavior.Player.IsLeft(this)) {
+            //     xTarget += 60;
             // } else {
-            //     this.body.velocity.x = 500;
+            //     xTarget -= 60;
             // }
 
-            var xTar = frauki.body.center.x;
+            // if(frauki.body.velocity.x < 0) {
+            //     xTarget -= 60;
+            // } else if(frauki.body.velocity.x > 0) {
+            //     xTarget += 60;
+            // }
 
-            if(EnemyBehavior.Player.IsLeft(this)) {
-                xTar += 60;
-            } else {
-                xTar -= 60;
-            }
-
-            if(frauki.body.velocity.x < 0) {
-                xTar -= 60;
-            } else if(frauki.body.velocity.x > 0) {
-                xTar += 60;
-            }
-
-            EnemyBehavior.JumpToPoint(this, xTar, frauki.body.y - 50, 0.5);
+            // EnemyBehavior.JumpToPoint(this, xTarget, yTarget, 0.5);
             events.publish('play_sound', {name: 'robot_jump_med', restart: true});
 
         }
@@ -285,8 +284,6 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
     this.HammerJumping = function() {
         this.PlayAnim('hammer_jump');
-
-        EnemyBehavior.FacePlayer(this);
 
         var xDist = Math.abs(this.body.center.x - frauki.body.center.x);
 
@@ -420,7 +417,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
         },
 
         'A3PZ/Hammer0011': {
-            x: 72, y: -6, w: 55, h: 70,
+            x: 42, y: -6, w: 95, h: 70,
             damage: 5,
             knockback: 3,
             priority: 3,

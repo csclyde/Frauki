@@ -127,7 +127,15 @@ FileMap.Audio = [
 	{ Name: 'KR32_attack', File: 'Data/Sfx/KR32_attack.wav', Volume: 1.5, Loop: false },
 	{ Name: 'KR32_stab', File: 'Data/Sfx/KR32_stab.wav', Volume: 1.0, Loop: false },
 
+	{ Name: 'HOP8_jump', File: 'Data/Sfx/HOP8_jump.wav', Volume: 0.4, Loop: false },
+	{ Name: 'HOP8_land', File: 'Data/Sfx/HOP8_land.wav', Volume: 1.0, Loop: false },
+	{ Name: 'HOP8_attack', File: 'Data/Sfx/HOP8_attack.wav', Volume: 1.0, Loop: false },
+
+	{ Name: 'QL0k_attack', File: 'Data/Sfx/QL0k_attack.wav', Volume: 1.0, Loop: false },
+
 	{ Name: 'fungu_shoot', File: 'Data/Sfx/fungu_shoot.wav', Volume: 1.0, Loop: false },
+
+	{ Name: 'explosion', File: 'Data/Sfx/explosion.wav', Volume: 1.0, Loop: false },
 
 ];
 

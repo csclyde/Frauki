@@ -14,12 +14,18 @@ Enemy.prototype.types['H0P8'] =  function() {
     this.stunThreshold = 1;
     this.body.bounce.y = 0;
     this.body.drag.x = 600;
+    this.onFloor = false;
 
     this.robotic = true;
 
     this.updateFunction = function() {
-        if(this.state === this.Hurting)
-            return;
+        if(this.body.onFloor() && !this.onFloor) {
+			this.onFloor = true;
+			events.publish('play_sound', {name: 'HOP8_land', restart: false });
+
+		} else if(!this.body.onFloor()) {
+			this.onFloor = false;
+		}
     };
 
     this.Act = function() {
@@ -34,14 +40,20 @@ Enemy.prototype.types['H0P8'] =  function() {
                 if(this.timers.TimerUp('dodge') && (EnemyBehavior.Player.IsDangerous(this) || EnemyBehavior.Player.IsNear(this, 100))) {
                     this.Dodge();
                 }
-                else if(EnemyBehavior.Player.IsNear(this, 20)) {
-                    this.Dodge();
+                else if(EnemyBehavior.Player.IsNear(this, 50)) {
+                    if(this.timers.TimerUp('dodge')) {
+                        this.Dodge();
+                    } else if(this.timers.TimerUp('attack') && EnemyBehavior.Player.IsVulnerable(this)) {
+                        this.timers.SetTimer('attack', 600);
+                        EnemyBehavior.FacePlayer(this);
+                        this.Slash();
+                    }
                 }
                 else if(this.CanAttack() && EnemyBehavior.Player.IsVulnerable(this) && !EnemyBehavior.Player.IsNear(this, 50) && EnemyBehavior.Player.IsNear(this, 250)) {
                     this.Hop();
                 } 
                 else {
-                    if(this.timers.TimerUp('idle_hop_wait')) {
+                    if(this.timers.TimerUp('idle_hop_wait') && !EnemyBehavior.Player.IsNear(this, 100)) {
                         this.IdleHop();
                     } else {
                         this.state = this.Idling;
@@ -50,7 +62,6 @@ Enemy.prototype.types['H0P8'] =  function() {
 
             } else {
                 this.state = this.Idling;
-
             }
 
         } else {
@@ -99,6 +110,9 @@ Enemy.prototype.types['H0P8'] =  function() {
 
     this.Slash = function() {
         this.state = this.Slashing;
+        this.timers.SetTimer('attack', 600);
+		events.publish('play_sound', {name: 'HOP8_attack', restart: false });
+
     };
 
     this.IdleHop = function() {
@@ -112,7 +126,7 @@ Enemy.prototype.types['H0P8'] =  function() {
         
         EnemyBehavior.FaceForward(this);
 
-        this.timers.SetTimer('idle_hop_wait', game.rnd.between(500, 2000));
+        this.timers.SetTimer('idle_hop_wait', game.rnd.between(1500, 2500));
     }
 
 
@@ -157,7 +171,7 @@ Enemy.prototype.types['H0P8'] =  function() {
 
             EnemyBehavior.FacePlayer(this);
             EnemyBehavior.JumpToPoint(this, ptX, ptY); 
-            events.publish('play_sound', {name: 'enemy_jump', restart: true});
+            events.publish('play_sound', {name: 'HOP8_jump', restart: true});
 
             if(this.body.velocity.y < -400) {
                 this.body.velocity.y = -400;
@@ -193,6 +207,7 @@ Enemy.prototype.types['H0P8'] =  function() {
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
             this.SetAttackTimer(800);
+            this.timers.SetTimer('idle_hop_wait', 4000)
             return true;
         }
 
@@ -208,8 +223,9 @@ Enemy.prototype.types['H0P8'] =  function() {
         }
 
         if(this.timers.TimerUp('attack') || this.body.velocity.y > 0 || this.body.onFloor()) {
-            this.timers.SetTimer('dodge', 700);
+            this.timers.SetTimer('dodge', 1400);
             this.SetAttackTimer(0);
+            this.bouncedOffWall = false;
             return true;
         }
 
@@ -228,7 +244,7 @@ Enemy.prototype.types['H0P8'] =  function() {
 
     this.attackFrames = {
         'H0P8/Attack0004': {
-            x: 0, y: 0, w: 70, h: 70,
+            x: 10, y: 10, w: 80, h: 100,
             damage: 3,
             knockback: 1,
             priority: 1,

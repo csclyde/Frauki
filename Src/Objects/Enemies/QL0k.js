@@ -116,6 +116,8 @@ Enemy.prototype.types['QL0k'] =  function() {
 
 		if(EnemyBehavior.Player.IsVisible(this) && this.animations.currentFrame.name === 'QL0k/Shoot0004' && this.hasShot == false) {
 			projectileController.LaserBolt(this, this.rotation, this.scale.y);
+			events.publish('play_sound', {name: 'QL0k_attack', restart: true});
+
 			this.hasShot = true;
 		}
 

@@ -486,6 +486,8 @@ Collision.CollideProjectileWithWorld = function(p, t) {
     if(p.projType === 'bolt' && t.index === 1) {
         p.pendingDestroy = true;
         effectsController.Explosion(p);
+		events.publish('play_sound', {name: 'explosion', restart: true});
+        
     } else if(p.projType === 'mortar') {
         p.pendingDestroy = true;
         events.publish('camera_shake', {magnitudeX: 3, magnitudeY: 1, duration: 200});
