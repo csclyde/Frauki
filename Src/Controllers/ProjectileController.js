@@ -71,7 +71,7 @@ ProjectileController.prototype.MortarExplosion = function(e, x, y) {
 	explosion.body.moves = false;
 	explosion.anchor.setTo(0.5);
 
-	var explode = explosion.animations.add('explode', ['SW8T/Mortar0004', 'SW8T/Mortar0005', 'SW8T/Mortar0006', 'SW8T/Mortar0007'], 14, false, false);
+	var explode = explosion.animations.add('explode', ['SW8T/Mortar0004', 'SW8T/Mortar0005', 'SW8T/Mortar0006', 'SW8T/Mortar0007', 'SW8T/Mortar0008'], 14, false, false);
 	explode.killOnComplete = true;
 
 	explosion.play('explode');

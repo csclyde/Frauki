@@ -16,8 +16,8 @@ Enemy.prototype.types['A3PZ'] =  function() {
     this.animations.add('hammer_jump', ['A3PZ/Hammer0009'], 16, false, false);
     this.animations.add('hammer', ['A3PZ/Hammer0010', 'A3PZ/Hammer0011', 'A3PZ/Hammer0012', 'A3PZ/Hammer0013', 'A3PZ/Hammer0014', 'A3PZ/Hammer0015'], 12, false, false);
     
-    this.animations.add('hurt', ['A3PZ/Hit0001'], 12, true, false);
-    this.animations.add('stun', ['A3PZ/Hit0001'], 12, true, false);
+    this.animations.add('hurt', ['A3PZ/Hit0000'], 12, true, false);
+    this.animations.add('stun', ['A3PZ/Hit0000'], 12, true, false);
 
     this.energy = 5;
     this.baseStunDuration = 500;
