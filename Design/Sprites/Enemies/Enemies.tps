@@ -4,9 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>4.5.0</string>
-        <key>fileName</key>
-        <string>D:/gamedev/Frauki/Design/Sprites/Enemies/Enemies.tps</string>
+        <string>5.3.0</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -129,22 +127,6 @@
                 <uint>1</uint>
             </struct>
         </struct>
-        <key>andEngine</key>
-        <struct type="AndEngine">
-            <key>minFilter</key>
-            <enum type="AndEngine::MinFilter">Linear</enum>
-            <key>packageName</key>
-            <string>Texture</string>
-            <key>wrap</key>
-            <struct type="AndEngineWrap">
-                <key>s</key>
-                <enum type="AndEngineWrap::Wrap">Clamp</enum>
-                <key>t</key>
-                <enum type="AndEngineWrap::Wrap">Clamp</enum>
-            </struct>
-            <key>magFilter</key>
-            <enum type="AndEngine::MagFilter">MagLinear</enum>
-        </struct>
         <key>dataFileNames</key>
         <map type="GFileNameMap">
             <key>data</key>
@@ -226,6 +208,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -253,7 +237,6 @@
             <key type="filename">A3PZ/Hammer0015.png</key>
             <key type="filename">A3PZ/Hit0000.png</key>
             <key type="filename">A3PZ/Hit0001.png</key>
-            <key type="filename">A3PZ/Hit0002.png</key>
             <key type="filename">A3PZ/Idle0000.png</key>
             <key type="filename">A3PZ/Idle0001.png</key>
             <key type="filename">A3PZ/Idle0002.png</key>
@@ -299,14 +282,33 @@
             <key type="filename">HWK9/AttackDash0001.png</key>
             <key type="filename">HWK9/AttackDash0002.png</key>
             <key type="filename">HWK9/AttackDash0003.png</key>
-            <key type="filename">HWK9/Block0000.png</key>
-            <key type="filename">HWK9/Flip0000.png</key>
-            <key type="filename">HWK9/Flip0001.png</key>
-            <key type="filename">HWK9/Flip0002.png</key>
-            <key type="filename">HWK9/Flip0003.png</key>
-            <key type="filename">HWK9/Flip0004.png</key>
-            <key type="filename">HWK9/Flip0005.png</key>
-            <key type="filename">HWK9/Stand0000.png</key>
+            <key type="filename">HWK9/AttackDash0004.png</key>
+            <key type="filename">HWK9/AttackWallHang0000.png</key>
+            <key type="filename">HWK9/AttackWallHang0001.png</key>
+            <key type="filename">HWK9/AttackWallHang0002.png</key>
+            <key type="filename">HWK9/AttackWallHang0003.png</key>
+            <key type="filename">HWK9/AttackWallHang0004.png</key>
+            <key type="filename">HWK9/AttackWallHang0005.png</key>
+            <key type="filename">HWK9/AttackWallHang0006.png</key>
+            <key type="filename">HWK9/EvadeJetPackSide0000.png</key>
+            <key type="filename">HWK9/EvadeJetPackSide0001.png</key>
+            <key type="filename">HWK9/EvadeJetPackSide0002.png</key>
+            <key type="filename">HWK9/EvadeJetPackSide0003.png</key>
+            <key type="filename">HWK9/EvadeJetPackSide0004.png</key>
+            <key type="filename">HWK9/EvadeJetPackSide0005.png</key>
+            <key type="filename">HWK9/EvadeJetPackSide0006.png</key>
+            <key type="filename">HWK9/EvadeJetPackSide0007.png</key>
+            <key type="filename">HWK9/EvadeJetPackSide0008.png</key>
+            <key type="filename">HWK9/EvadeJetPackUp0000.png</key>
+            <key type="filename">HWK9/EvadeJetPackUp0001.png</key>
+            <key type="filename">HWK9/EvadeJetPackUp0002.png</key>
+            <key type="filename">HWK9/IdleWallHang0000.png</key>
+            <key type="filename">HWK9/IdleWallHang0001.png</key>
+            <key type="filename">HWK9/IdleWallHang0002.png</key>
+            <key type="filename">HWK9/IdleWallHang0003.png</key>
+            <key type="filename">HWK9/IdleWallHang0004.png</key>
+            <key type="filename">HWK9/IdleWallHang0005.png</key>
+            <key type="filename">HWK9/IdleWallHang0006.png</key>
             <key type="filename">Insectoid/Die0000.png</key>
             <key type="filename">Insectoid/Spin0000.png</key>
             <key type="filename">KR32/Hit0000.png</key>
@@ -320,9 +322,12 @@
             <key type="filename">KR32/Jump0007.png</key>
             <key type="filename">KR32/Stand0001.png</key>
             <key type="filename">KR32/Stand0002.png</key>
+            <key type="filename">SW8T/Mortar0008.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -345,30 +350,14 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
                 <rect>17,22,35,44</rect>
                 <key>scale9Paddings</key>
                 <rect>17,22,35,44</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">Gnome/boat0000.png</key>
-            <key type="filename">Gnome/boat0001.png</key>
-            <key type="filename">Gnome/boat0002.png</key>
-            <key type="filename">Gnome/boat0003.png</key>
-            <key type="filename">Gnome/boat0004.png</key>
-            <key type="filename">Gnome/boat0005.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>15,8,30,16</rect>
-                <key>scale9Paddings</key>
-                <rect>15,8,30,16</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -385,6 +374,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -398,6 +389,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -419,6 +412,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -458,9 +453,6 @@
             <key type="filename">SW8T/BolasShot0001.png</key>
             <key type="filename">SW8T/BolasShot0002.png</key>
             <key type="filename">SW8T/BolasShot0003.png</key>
-            <key type="filename">SW8T/BolasShot0004.png</key>
-            <key type="filename">SW8T/BolasShot0005.png</key>
-            <key type="filename">SW8T/BolasShot0006.png</key>
             <key type="filename">SW8T/Mortar0004.png</key>
             <key type="filename">SW8T/Mortar0005.png</key>
             <key type="filename">SW8T/Mortar0006.png</key>
@@ -468,6 +460,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -488,6 +482,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -519,6 +515,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -537,6 +535,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -550,6 +550,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -618,6 +620,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -666,6 +670,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -682,6 +688,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -696,6 +704,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -709,6 +719,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -725,6 +737,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -739,6 +753,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -768,6 +784,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -784,6 +802,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>

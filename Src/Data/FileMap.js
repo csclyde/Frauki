@@ -130,9 +130,9 @@ FileMap.Audio = [
 	{ Name: 'KR32_land', File: 'Data/Sfx/KR32_land.wav', Volume: 1.0, Loop: false },
 	{ Name: 'KR32_step', File: 'Data/Sfx/KR32_step.wav', Volume: 0.4, Loop: false },
 
-	{ Name: 'HOP8_jump', File: 'Data/Sfx/HOP8_jump.wav', Volume: 0.4, Loop: false },
-	{ Name: 'HOP8_land', File: 'Data/Sfx/HOP8_land.wav', Volume: 1.0, Loop: false },
-	{ Name: 'HOP8_attack', File: 'Data/Sfx/HOP8_attack.wav', Volume: 1.0, Loop: false },
+	{ Name: 'H0P8_jump', File: 'Data/Sfx/H0P8_jump.wav', Volume: 0.4, Loop: false },
+	{ Name: 'H0P8_land', File: 'Data/Sfx/H0P8_land.wav', Volume: 1.0, Loop: false },
+	{ Name: 'H0P8_attack', File: 'Data/Sfx/H0P8_attack.wav', Volume: 1.0, Loop: false },
 
 	{ Name: 'QL0k_attack', File: 'Data/Sfx/QL0k_attack.wav', Volume: 1.0, Loop: false },
 
@@ -144,6 +144,10 @@ FileMap.Audio = [
 	{ Name: 'SW8T_baton_attack', File: 'Data/Sfx/SW8T_baton_attack.wav', Volume: 1.0, Loop: false },
 	{ Name: 'SW8T_mortar_shot', File: 'Data/Sfx/SW8T_mortar_shot.wav', Volume: 1.0, Loop: false },
 	{ Name: 'SW8T_mortar_explode', File: 'Data/Sfx/SW8T_mortar_explode.wav', Volume: 1.0, Loop: false },
+
+	{ Name: 'RKN1d_attack', File: 'Data/Sfx/RKN1d_attack.wav', Volume: 1.0, Loop: false },
+	{ Name: 'RKN1d_jump', File: 'Data/Sfx/H0P8_jump.wav', Volume: 1.0, Loop: false },
+	{ Name: 'RKN1d_land', File: 'Data/Sfx/RKN1d_land.wav', Volume: 1.0, Loop: false },
 
 	{ Name: 'fungu_shoot', File: 'Data/Sfx/fungu_shoot.wav', Volume: 1.0, Loop: false },
 

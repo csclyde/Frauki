@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="360" height="700" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="3802">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="360" height="700" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="3803">
  <properties>
   <property name="debug" value="true"/>
   <property name="startLayer" value="3"/>
@@ -4532,7 +4532,7 @@
     <property name="name" value="sleepy"/>
    </properties>
   </object>
-  <object id="3801" gid="94" x="5166.67" y="5537.33" width="16" height="16"/>
+  <object id="3802" gid="101" x="5190" y="5538.67" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Effects" visible="0">
   <object id="3284" name="fluff" type="effect" x="2928.46" y="3986" width="90.4167" height="57.3333"/>

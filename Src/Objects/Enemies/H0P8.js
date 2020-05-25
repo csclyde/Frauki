@@ -21,7 +21,7 @@ Enemy.prototype.types['H0P8'] =  function() {
     this.updateFunction = function() {
         if(this.body.onFloor() && !this.onFloor) {
 			this.onFloor = true;
-			events.publish('play_sound', {name: 'HOP8_land', restart: false });
+			events.publish('play_sound', {name: 'H0P8_land', restart: false });
 
 		} else if(!this.body.onFloor()) {
 			this.onFloor = false;
@@ -111,7 +111,7 @@ Enemy.prototype.types['H0P8'] =  function() {
     this.Slash = function() {
         this.state = this.Slashing;
         this.timers.SetTimer('attack', 600);
-		events.publish('play_sound', {name: 'HOP8_attack', restart: false });
+		events.publish('play_sound', {name: 'H0P8_attack', restart: false });
 
     };
 
@@ -171,7 +171,7 @@ Enemy.prototype.types['H0P8'] =  function() {
 
             EnemyBehavior.FacePlayer(this);
             EnemyBehavior.JumpToPoint(this, ptX, ptY); 
-            events.publish('play_sound', {name: 'HOP8_jump', restart: true});
+            events.publish('play_sound', {name: 'H0P8_jump', restart: true});
 
             if(this.body.velocity.y < -400) {
                 this.body.velocity.y = -400;
