@@ -215,11 +215,11 @@ EnemyBehavior.Player.IsBelow = function(e) {
 
 EnemyBehavior.Player.IsAbove = function(e) {
     var margin = e.body.width;
-    margin += 15;
+    margin += 20;
 
-    if(e.body.center.y > frauki.body.y && 
-       e.body.center.x > frauki.body.center.x - margin && 
-       e.body.center.x < frauki.body.center.x + margin &&
+    if(frauki.body.bottom < e.body.top && 
+       frauki.body.left < e.body.right && 
+       frauki.body.right > e.body.left &&
        !frauki.body.onFloor())
         return true;
 

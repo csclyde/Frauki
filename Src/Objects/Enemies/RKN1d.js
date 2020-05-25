@@ -52,7 +52,6 @@ Enemy.prototype.types['RKN1d'] =  function() {
 
         if(EnemyBehavior.Player.IsVisible(this)) {
             
-            //if the player is too close or being dangerous
             if(EnemyBehavior.Player.IsNear(this, 50) && !EnemyBehavior.Player.IsDangerous(this) && this.CanAttack()) {
                 this.Bite();
             }

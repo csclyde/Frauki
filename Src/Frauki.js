@@ -945,7 +945,9 @@ Player.prototype.LandHit = function(e, damage) {
 
 Player.prototype.Hit = function(e, damage, grace_duration) {
 
-    if(this.state === this.Hurting || e.state === e.Hurting || frauki.Grace())
+    console.log(this.state === this.Hurting, e.state === e.Hurting, frauki.Grace());
+
+    if(this.state === this.Hurting || e.state === e.Hurting || (frauki.Grace() && !e.GetCurrentPower()))
         return;
 
     grace_duration = grace_duration || 1000;
@@ -1003,9 +1005,6 @@ Player.prototype.Stun = function(e) {
     this.ChangeState(this.Stunned);
     this.timers.SetTimer('stunned', 1200);
     events.publish('play_sound', {name: 'stun', restart: true});
-
-
-    //this.body.velocity.y = -200;
 
     this.body.acceleration.x = 0;
     this.body.acceleration.y = 0;

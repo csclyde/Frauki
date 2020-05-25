@@ -104,9 +104,10 @@ ProjectileController.prototype.Bolas = function(e) {
 	game.physics.enable(bolas, Phaser.Physics.ARCADE);
 
 	bolas.body.setSize(20, 10);
-	bolas.anchor.setTo(0.5);
+	bolas.anchor.setTo(0.5, 0.5);
 
-	bolas.animations.add('idle', ['SW8T/BolasShot0000', 'SW8T/BolasShot0001', 'SW8T/BolasShot0002', 'SW8T/BolasShot0003', 'SW8T/BolasShot0004', 'SW8T/BolasShot0005', 'SW8T/BolasShot0006'], 20, true, false);
+	bolas.animations.add('idle', ['SW8T/BolasShot0000', 'SW8T/BolasShot0001', 'SW8T/BolasShot0002', 'SW8T/BolasShot0003'], 16, true, false);
+	bolas.animations.add('entangle', ['SW8T/BolasEntangle0000', 'SW8T/BolasEntangle0001', 'SW8T/BolasEntangle0002', 'SW8T/BolasEntangle0003', 'SW8T/BolasEntangle0004'], 16, true, false);
 	bolas.play('idle');
 
 	//game.physics.arcade.moveToXY(bolas, frauki.body.center.x, frauki.body.center.y, 500);
@@ -289,6 +290,8 @@ ProjectileController.prototype.Update = function() {
 			p.x = frauki.body.center.x;
 			p.y = frauki.body.center.y + (Math.sin(game.time.now / 50) * 24) + 0;
 			frauki.states.entangled = true;
+			p.play('entangle');
+
 
 		} else if(p.projType === 'mortar' && !!p.body) {
 			p.rotation = Math.atan2(p.body.velocity.y, p.body.velocity.x);

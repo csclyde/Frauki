@@ -449,6 +449,11 @@
             <key type="filename">Misc/Sporoid0003.png</key>
             <key type="filename">Misc/Sporoid0004.png</key>
             <key type="filename">Misc/Sporoid0005.png</key>
+            <key type="filename">SW8T/BolasEntangle0000.png</key>
+            <key type="filename">SW8T/BolasEntangle0001.png</key>
+            <key type="filename">SW8T/BolasEntangle0002.png</key>
+            <key type="filename">SW8T/BolasEntangle0003.png</key>
+            <key type="filename">SW8T/BolasEntangle0004.png</key>
             <key type="filename">SW8T/BolasShot0000.png</key>
             <key type="filename">SW8T/BolasShot0001.png</key>
             <key type="filename">SW8T/BolasShot0002.png</key>
