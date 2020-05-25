@@ -126,9 +126,7 @@ Player.prototype.preStateUpdate = function() {
         this.states.tarred = false;
     }
 
-    if(this.states.tarred) {
-        this.movement.globalMoveMod = 0.3;
-    } else if(this.states.entangled) {
+    if(this.states.entangled) {
         this.movement.globalMoveMod = 0.5;
     } else {
         this.movement.globalMoveMod = 1.0;

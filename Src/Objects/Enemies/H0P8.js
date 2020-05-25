@@ -1,6 +1,6 @@
 Enemy.prototype.types['H0P8'] =  function() {
 
-    this.body.setSize(40, 53, 0, -10);
+    this.body.setSize(40, 53, 0, 2);
     this.anchor.setTo(0.5, 0.5);
 
     this.animations.add('idle', ['H0P8/Idle0000', 'H0P8/Idle0001', 'H0P8/Idle0002', 'H0P8/Idle0003'], 6, true, false);
@@ -127,7 +127,7 @@ Enemy.prototype.types['H0P8'] =  function() {
         EnemyBehavior.FaceForward(this);
 
         this.timers.SetTimer('idle_hop_wait', game.rnd.between(1500, 2500));
-    }
+    };
 
 
     ////////////////////////////////STATES////////////////////////////////////
@@ -208,6 +208,7 @@ Enemy.prototype.types['H0P8'] =  function() {
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
             this.SetAttackTimer(800);
             this.timers.SetTimer('idle_hop_wait', 4000)
+            this.timers.SetTimer('dodge', 1000)
             return true;
         }
 

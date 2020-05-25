@@ -47,7 +47,6 @@ Collision.CollideFraukiWithEnvironment = function(f, tile) {
     //falling tiles and attackable tiles
     } else if(tile.index === 5) { 
 
-
         if(tile.dislodged === true) {
             return false;
         }
@@ -125,19 +124,25 @@ Collision.CollideFraukiWithProjectile = function(f, p) {
                 p.owningEnemy.LandHit();
             }
         }
+
+        if(p.projType === 'mortar') {
+            p.pendingDestroy = true;
+            events.publish('camera_shake', {magnitudeX: 3, magnitudeY: 1, duration: 200});
+            projectileController.MortarExplosion(p.owningEnemy, p.x, p.y);
+        }
         
         if(!p.preserveAfterHit) {
             p.destroy();
         }
-    } else if(p.projType === 'bolas' && frauki.state !== frauki.Rolling) {
+    } else if(p.projType === 'bolas' && !p.attached && frauki.state !== frauki.Rolling) {
         p.attached = true;
         frauki.body.velocity.x /= 2;
         frauki.body.velocity.y /= 2;
         p.owningEnemy.waitingForBolas = false;
     } else if(p.projType === 'tar' && frauki.state !== frauki.Rolling) {
         p.destroy();
-        frauki.body.velocity.x /= 3;
-        frauki.body.velocity.y /= 3;
+        frauki.body.velocity.x /= 2;
+        frauki.body.velocity.y /= 2;
         frauki.states.tarred = true;
         frauki.timers.SetTimer('tarred', 3000);
     }
