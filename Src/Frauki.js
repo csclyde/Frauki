@@ -945,8 +945,6 @@ Player.prototype.LandHit = function(e, damage) {
 
 Player.prototype.Hit = function(e, damage, grace_duration) {
 
-    console.log(this.state === this.Hurting, e.state === e.Hurting, frauki.Grace());
-
     if(this.state === this.Hurting || e.state === e.Hurting || (frauki.Grace() && !e.GetCurrentPower()))
         return;
 

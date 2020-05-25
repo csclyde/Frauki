@@ -37,9 +37,6 @@ Enemy.prototype.types['A3PZ'] =  function() {
     this.Act = function() {
 
         if(EnemyBehavior.Player.IsVisible(this) && this.CanAttack()) {
-            if(EnemyBehavior.Player.IsDangerous(this)) {
-                
-            }
             if(EnemyBehavior.Player.IsVulnerable(this)) {
                 if(EnemyBehavior.Player.MovingAway(this) && frauki.body.onFloor()) {
                     this.Hammer();

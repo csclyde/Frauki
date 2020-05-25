@@ -5115,14 +5115,14 @@
                 {
                  "gid":99,
                  "height":16,
-                 "id":3806,
+                 "id":3808,
                  "name":"",
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":5165.33333333333,
-                 "y":5540.66666666667
+                 "x":5156,
+                 "y":5535.33333333333
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -6564,7 +6564,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":3807,
+ "nextobjectid":3809,
  "orientation":"orthogonal",
  "properties":
     {
