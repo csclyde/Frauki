@@ -23,19 +23,19 @@ ProjectileController.prototype.Mortar = function(e) {
 	mortar.play('idle');
 
 	//parabolic arc
-	var duration = 0.7;
+	var duration = 0.8;
 
-	if(frauki.states.entangled) {
-		duration = 1.0;
-	}
+	// if(frauki.states.entangled) {
+	// 	duration = 1.0;
+	// }
 
-	var xTarget = frauki.body.center.x + game.rnd.between(-0, 0);
+	var xTarget = frauki.body.center.x;
 	var yTarget = frauki.body.y + frauki.body.height;
 
 	mortar.body.velocity.x = (xTarget - mortar.body.center.x) / duration;
 	mortar.body.velocity.y = (yTarget + -0.5 * game.physics.arcade.gravity.y * duration * duration - mortar.body.center.y) / duration;
 
-	mortar.body.velocity.x += frauki.body.velocity.x;
+	mortar.body.velocity.x += (frauki.body.velocity.x * frauki.movement.globalMoveMod);
 	
 	if(e.direction === 'left') {
 		if(mortar.body.velocity.x < -500) mortar.body.velocity.x = -500;
@@ -64,7 +64,7 @@ ProjectileController.prototype.MortarExplosion = function(e, x, y) {
 	var xPos = x;
 	var yPos = y;
 
-	var explosion = game.add.sprite(xPos, yPos, 'EnemySprites');
+	var explosion = game.add.sprite(xPos, yPos - 20, 'EnemySprites');
 	game.physics.enable(explosion, Phaser.Physics.ARCADE);
 
 	explosion.body.setSize(50, 40);
@@ -206,7 +206,7 @@ ProjectileController.prototype.LaserBolt = function(e, rot, flip) {
 	bolt.play('idle');
 	bolt.rotation = rot;
 
-	bolt.body.velocity = game.physics.arcade.velocityFromRotation(rot, 700);
+	bolt.body.velocity = game.physics.arcade.velocityFromRotation(rot, 500);
 
 	//game.physics.arcade.moveToXY(bolt, frauki.body.center.x, frauki.body.center.y, 500);
 
@@ -267,7 +267,6 @@ ProjectileController.prototype.FallingTile = function(sourceTile, visibleTile) {
 };
 
 ProjectileController.prototype.Update = function() {
-	var that = this;
 
 	var childrenToRemove = [];
 
@@ -288,10 +287,9 @@ ProjectileController.prototype.Update = function() {
 
 		if(p.projType === 'bolas' && p.attached === true) {
 			p.x = frauki.body.center.x;
-			p.y = frauki.body.center.y + (Math.sin(game.time.now / 50) * 24) + 0;
+			p.y = frauki.body.center.y + (Math.sin(game.time.now / 100) * 24) + 0;
 			frauki.states.entangled = true;
 			p.play('entangle');
-
 
 		} else if(p.projType === 'mortar' && !!p.body) {
 			p.rotation = Math.atan2(p.body.velocity.y, p.body.velocity.x);
