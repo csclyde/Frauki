@@ -302,6 +302,15 @@
             <key type="filename">HWK9/EvadeJetPackUp0000.png</key>
             <key type="filename">HWK9/EvadeJetPackUp0001.png</key>
             <key type="filename">HWK9/EvadeJetPackUp0002.png</key>
+            <key type="filename">HWK9/Hurt0000.png</key>
+            <key type="filename">HWK9/Hurt0001.png</key>
+            <key type="filename">HWK9/IdleFALL0000.png</key>
+            <key type="filename">HWK9/IdleFALL0001.png</key>
+            <key type="filename">HWK9/IdleFALL0002.png</key>
+            <key type="filename">HWK9/IdleHangStart0000.png</key>
+            <key type="filename">HWK9/IdleHangStart0001.png</key>
+            <key type="filename">HWK9/IdleHangStart0002.png</key>
+            <key type="filename">HWK9/IdleHangStart0003.png</key>
             <key type="filename">HWK9/IdleWallHang0000.png</key>
             <key type="filename">HWK9/IdleWallHang0001.png</key>
             <key type="filename">HWK9/IdleWallHang0002.png</key>
