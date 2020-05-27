@@ -133,6 +133,61 @@ ProjectileController.prototype.Bolas = function(e) {
 	this.projectiles.add(bolas);
 };
 
+ProjectileController.prototype.Detonator = function(e) {
+	var xPos = e.body.center.x;
+	var yPos = e.body.center.y - 25;
+
+	if(e.direction === 'left') {
+		xPos -= 50;
+	} else {
+		xPos += 50;
+	}
+
+	var detonator = game.add.sprite(xPos, yPos, 'EnemySprites');
+	game.physics.enable(detonator, Phaser.Physics.ARCADE);
+
+	detonator.body.setSize(10, 10);
+	detonator.anchor.setTo(0.5);
+
+	detonator.animations.add('idle', ['SW8T/Mortar0000', 'SW8T/Mortar0001', 'SW8T/Mortar0002', 'SW8T/Mortar0003'], 14, true, false);
+
+	detonator.play('idle');
+
+	//parabolic arc
+	var duration = 0.6;
+
+	// if(frauki.states.entangled) {
+	// 	duration = 1.0;
+	// }
+
+	var xTarget = frauki.body.center.x;
+	var yTarget = frauki.body.y + frauki.body.height;
+
+	detonator.body.velocity.x = (xTarget - detonator.body.center.x) / duration;
+	detonator.body.velocity.y = (yTarget + -0.5 * game.physics.arcade.gravity.y * duration * duration - detonator.body.center.y) / duration;
+
+	detonator.body.velocity.x += (frauki.body.velocity.x * frauki.movement.globalMoveMod);
+	
+	if(e.direction === 'left') {
+		if(detonator.body.velocity.x < -500) detonator.body.velocity.x = -500;
+		if(detonator.body.velocity.x > -20) detonator.body.velocity.x = -20;
+	} else {
+		if(detonator.body.velocity.x > 500) detonator.body.velocity.x = 500;
+		if(detonator.body.velocity.x < 20) detonator.body.velocity.x = 20;
+	}
+
+	detonator.body.bounce.set(0.0);
+
+	detonator.projType = 'detonator';
+	detonator.owningEnemy = e;
+	detonator.spawnTime = game.time.now;
+	detonator.lifeTime = 5000;
+	detonator.solid = true;
+	detonator.preserveAfterHit = true;
+
+	this.projectiles.add(detonator);
+};
+
 ProjectileController.prototype.Tarball = function(e) {
 	var tar = game.add.sprite(e.body.center.x, e.body.center.y, 'EnemySprites');
 	game.physics.enable(tar, Phaser.Physics.ARCADE);

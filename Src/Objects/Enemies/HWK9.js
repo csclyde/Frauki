@@ -1,6 +1,6 @@
 Enemy.prototype.types['HWK9'] =  function() {
 
-	this.body.setSize(15, 56, 0, 0);
+	this.body.setSize(25, 56, 0, 0);
 	this.anchor.setTo(0.5);
 
     this.animations.add('idle', ['HWK9/IdleWallHang0000', 'HWK9/IdleWallHang0001', 'HWK9/IdleWallHang0002', 'HWK9/IdleWallHang0003', 'HWK9/IdleWallHang0004', 'HWK9/IdleWallHang0005', 'HWK9/IdleWallHang0006'], 8, true, false);
@@ -19,6 +19,10 @@ Enemy.prototype.types['HWK9'] =  function() {
 	this.body.bounce.y = 0;
 	
 	this.state = this.Idling;
+
+	this.collideWithPlayer = function() {
+		return this.state !== this.Jetpacking && this.state !== this.Slashing;
+	};
     
 	this.updateFunction = function() {
 		if(this.state === this.Slashing) {
@@ -47,8 +51,8 @@ Enemy.prototype.types['HWK9'] =  function() {
                 this.Slash();
             }
             else if(EnemyBehavior.Player.IsDangerous(this) || (EnemyBehavior.Player.IsNear(this, 200) && EnemyBehavior.Player.MovingTowards(this))) {
-                if(this.timers.TimerUp('escape_wait')) {
-                    //this.Escape();
+                if(this.timers.TimerUp('evade_wait')) {
+                    this.Evade();
                 } else {
                     this.state = this.Idling;
                 }
@@ -67,16 +71,16 @@ Enemy.prototype.types['HWK9'] =  function() {
 
 	///////////////////////////////ACTIONS////////////////////////////////////
     this.Evade = function() {
-    	if(!this.timers.TimerUp('evade_timer')) {
+    	if(!this.timers.TimerUp('evade_wait')) {
     		return;
     	}
 
     	this.state = this.Evading;
 
-    	this.timers.SetTimer('evade_timer', 1000);
+    	this.timers.SetTimer('evade_wait', 1000);
     	this.timers.SetTimer('burst_up_timer', 250);
 
-    	this.body.acceleration.y = -800;
+    	this.body.velocity.y = 0;
 
     	if(this.direction === 'left') {
     		this.body.velocity.x = 200;
@@ -92,7 +96,8 @@ Enemy.prototype.types['HWK9'] =  function() {
 	this.ThrowBomb = function() {
 		this.state = this.ThrowingBomb;
 		this.timers.SetTimer('throw_wait', 1000);
-	}
+		this.numShots = game.rnd.between(1, 3);
+	};
 
     this.Slash = function() {
     	this.state = this.SlashWindup;
@@ -141,7 +146,7 @@ Enemy.prototype.types['HWK9'] =  function() {
 		this.PlayAnim('attack_slash');
 
 		if(EnemyBehavior.Player.IsNear(this, 30) || this.timers.TimerUp('attack_delay') || this.body.onFloor()) {
-			this.body.velocity.y = 0;
+			//this.body.velocity.y /= 10;
 			this.SetAttackTimer(1000);
 			this.Jetpack();
 		}
@@ -174,8 +179,23 @@ Enemy.prototype.types['HWK9'] =  function() {
 	};
 
 	this.Hovering = function() {
+		this.PlayAnim('evade');
 
-	}
+		EnemyBehavior.FaceForward(this);
+
+		if(!this.timers.TimerUp('burst_up_timer')) {
+			this.body.acceleration.y = -2500;
+		} else {
+			this.body.acceleration.y = 0;
+		}
+
+		if(this.timers.TimerUp('hover_burst')) {
+			this.timers.SetTimer('burst_up_timer', 200);
+			this.timers.SetTimer('hover_burst', game.rnd.between(600, 650));
+		}
+
+		return false;
+	};
 
 	this.ThrowingBomb = function() {
 		this.PlayAnim('attack_throw');
@@ -185,8 +205,28 @@ Enemy.prototype.types['HWK9'] =  function() {
 
 		EnemyBehavior.FacePlayer(this);
 
-		if(this.animations.currentAnim.isFinished && this.timers.TimerUp('throw_wait')) {
+		if(this.numShots > 0 && this.animations.currentFrame.name === 'HWK9/AttackWallHang0003' && !this.hasShot) {
+			projectileController.Detonator(this);
+			events.publish('play_sound', {name: 'SW8T_mortar_shot', restart: false});
+			this.hasShot = true;
+		}
+
+		if(EnemyBehavior.Player.IsNear(this, 80) && this.timers.TimerUp('shoot_wait')) {
+			this.numShots = 0;
 			return true;
+		}
+
+		if(this.numShots === 0) {
+			this.SetAttackTimer(2000);
+			return true;
+
+		} else if(this.animations.currentAnim.isFinished && this.timers.TimerUp('throw_wait')) {
+			this.numShots--;
+			this.timers.SetTimer('throw_wait', 1000);
+			this.animations.currentAnim.restart();
+			this.hasShot = false;
+
+			return false;
 		}
 
 		return false;
@@ -195,17 +235,15 @@ Enemy.prototype.types['HWK9'] =  function() {
 	this.Evading = function() {
 		this.PlayAnim('evade');
 
-		this.body.acceleration.y = -300;
-
 		if(!this.timers.TimerUp('burst_up_timer')) {
-			this.body.acceleration.y = -2500;
+			this.body.acceleration.y = -3000;
 		} else {
 			this.body.acceleration.y = 0;
 		}
 
 		EnemyBehavior.FaceForward(this);
 
-		if(this.timers.TimerUp('evade_timer')) {
+		if(this.timers.TimerUp('evade_wait')) {
 			return true;
 		}
 
@@ -216,7 +254,7 @@ Enemy.prototype.types['HWK9'] =  function() {
 		this.PlayAnim('hurt');
 
 		if(this.timers.TimerUp('hit')) {
-			if(this.timers.TimerUp('evade_timer')) {
+			if(this.timers.TimerUp('evade_wait')) {
 				this.Evade();
 			} else {
 				this.Block();
