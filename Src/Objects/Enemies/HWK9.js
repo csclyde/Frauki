@@ -5,7 +5,7 @@ Enemy.prototype.types['HWK9'] =  function() {
 
     this.animations.add('idle', ['HWK9/IdleWallHang0000', 'HWK9/IdleWallHang0001', 'HWK9/IdleWallHang0002', 'HWK9/IdleWallHang0003', 'HWK9/IdleWallHang0004', 'HWK9/IdleWallHang0005', 'HWK9/IdleWallHang0006'], 8, true, false);
     this.animations.add('attack_throw', ['HWK9/AttackWallHang0000', 'HWK9/AttackWallHang0001', 'HWK9/AttackWallHang0002', 'HWK9/AttackWallHang0003', 'HWK9/AttackWallHang0004'], 10, false, false);
-	this.animations.add('attack_windup', ['HWK9/AttackDash0000', 'HWK9/AttackDash0001'], 12, false, false);
+	this.animations.add('attack_windup', ['HWK9/AttackDash0000', 'HWK9/AttackDash0001'], 8, false, false);
     this.animations.add('attack_slash', ['HWK9/AttackDash0002', 'HWK9/AttackDash0003', 'HWK9/AttackDash0004'], 8, false, false);
     this.animations.add('jetpack', ['HWK9/EvadeJetPackSide0000', 'HWK9/EvadeJetPackSide0001', 'HWK9/EvadeJetPackSide0002', 'HWK9/EvadeJetPackSide0003', 'HWK9/EvadeJetPackSide0004', 'HWK9/EvadeJetPackSide0005', 'HWK9/EvadeJetPackSide0006', 'HWK9/EvadeJetPackSide0007', 'HWK9/EvadeJetPackSide0008'], 12, true, false);
     this.animations.add('evade', ['HWK9/EvadeJetPackUp0000', 'HWK9/EvadeJetPackUp0001', 'HWK9/EvadeJetPackUp0002'], 12, true, false);
@@ -101,9 +101,10 @@ Enemy.prototype.types['HWK9'] =  function() {
 
     this.Slash = function() {
     	this.state = this.SlashWindup;
-    	this.timers.SetTimer('attack_delay', 600);
+    	this.timers.SetTimer('attack_delay', 800);
 		this.body.velocity.x = 0;
 		this.body.velocity.y = -300;
+		this.body.acceleration.y = 0;
 
 		if(EnemyBehavior.Player.IsLeft(this)) {
 			this.body.velocity.x = -100;
@@ -118,6 +119,12 @@ Enemy.prototype.types['HWK9'] =  function() {
 
 		this.body.acceleration.x = 0;
 		this.body.acceleration.y = 0;
+
+		if(this.facing === 'left') {
+			this.body.velocity.x = 500;
+		} else {
+			this.body.velocity.x = -500;
+		}
 
 		return true;
 	};
@@ -145,7 +152,7 @@ Enemy.prototype.types['HWK9'] =  function() {
 	this.Slashing = function() {
 		this.PlayAnim('attack_slash');
 
-		if(EnemyBehavior.Player.IsNear(this, 30) || this.timers.TimerUp('attack_delay') || this.body.onFloor()) {
+		if(this.animations.currentAnim.isFinished && EnemyBehavior.Player.IsNear(this, 30) || this.timers.TimerUp('attack_delay') || this.body.onFloor()) {
 			//this.body.velocity.y /= 10;
 			this.SetAttackTimer(1000);
 			this.Jetpack();
@@ -243,6 +250,10 @@ Enemy.prototype.types['HWK9'] =  function() {
 
 		EnemyBehavior.FaceForward(this);
 
+		if(EnemyBehavior.Player.IsVulnerable() && this.CanAttack()) {
+			this.Slash();
+		}
+
 		if(this.timers.TimerUp('evade_wait')) {
 			return true;
 		}
@@ -253,11 +264,13 @@ Enemy.prototype.types['HWK9'] =  function() {
 	this.Hurting = function() {
 		this.PlayAnim('hurt');
 
+		this.body.acceleration.y = 0;
+
 		if(this.timers.TimerUp('hit')) {
 			if(this.timers.TimerUp('evade_wait')) {
 				this.Evade();
 			} else {
-				this.Block();
+				this.Jetpack();
 			}
 		}
 	};
@@ -279,13 +292,13 @@ Enemy.prototype.types['HWK9'] =  function() {
 		// 	juggle: 0
 		// },
 
-		// 'HWK9/AttackDash0002': {
-		// 	x: 32, y: -46, w: 40, h: 50,
-		// 	damage: 3,
-		// 	knockback: 0,
-		// 	priority: 2,
-		// 	juggle: 0
-		// },
+		'HWK9/AttackDash0002': {
+			x: 20, y: -36, w: 60, h: 120,
+			damage: 3,
+			knockback: 0,
+			priority: 2,
+			juggle: 0
+		},
 
 		// 'HWK9/AttackDash0003': {
 		// 	x: 25, y: -40, w: 40, h: 60,
