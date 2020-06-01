@@ -12,7 +12,7 @@ Enemy.prototype.types['HWK9'] =  function() {
 	
     this.animations.add('hurt', ['HWK9/Hurt0000', 'HWK9/Hurt0001'], 8, true, false);
 
-    this.energy = 5;
+    this.energy = 4;
 	this.baseStunDuration = 500;
     this.robotic = true;
 
@@ -58,7 +58,7 @@ Enemy.prototype.types['HWK9'] =  function() {
                 }
             
             } else if(EnemyBehavior.Player.IsInVulnerableFrame(this) && this.timers.TimerUp('hop_wait')) {
-                //this.Hop();
+                this.Slash();
             
             } else {
                 this.state = this.Idling;
@@ -139,7 +139,7 @@ Enemy.prototype.types['HWK9'] =  function() {
 			var attackVector = new Phaser.Point(frauki.body.x - this.body.x, (frauki.body.y - 30) - this.body.y);
 			attackVector = attackVector.normalize();
 
-			attackVector.setMagnitude(800);
+			attackVector.setMagnitude(700);
 
 			this.body.velocity = attackVector;
 
@@ -154,7 +154,7 @@ Enemy.prototype.types['HWK9'] =  function() {
 
 		if(this.animations.currentAnim.isFinished && EnemyBehavior.Player.IsNear(this, 30) || this.timers.TimerUp('attack_delay') || this.body.onFloor()) {
 			//this.body.velocity.y /= 10;
-			this.SetAttackTimer(1000);
+			this.SetAttackTimer(1500);
 			this.Jetpack();
 		}
 
@@ -167,12 +167,14 @@ Enemy.prototype.types['HWK9'] =  function() {
 		this.body.velocity.y = -200;
 
 		if(this.direction === 'left') {
-			this.body.velocity.x = -400;
+			this.body.velocity.x = -350;
 		} else {
-			this.body.velocity.x = 400;
+			this.body.velocity.x = 350;
 		}
 
 		if(this.body.onWall()) {
+			this.SetAttackTimer(700);
+
 			if(this.direction === 'left') {
 				this.SetDirection('right');
 			} else {
@@ -242,7 +244,7 @@ Enemy.prototype.types['HWK9'] =  function() {
 	this.Evading = function() {
 		this.PlayAnim('evade');
 
-		if(!this.timers.TimerUp('burst_up_timer')) {
+		if(!this.timers.TimerUp('burst_up_timer') && EnemyBehavior.Player.IsNear(this, 200)) {
 			this.body.acceleration.y = -3000;
 		} else {
 			this.body.acceleration.y = 0;
@@ -294,7 +296,7 @@ Enemy.prototype.types['HWK9'] =  function() {
 
 		'HWK9/AttackDash0002': {
 			x: 20, y: -36, w: 60, h: 120,
-			damage: 3,
+			damage: 2,
 			knockback: 0,
 			priority: 2,
 			juggle: 0
