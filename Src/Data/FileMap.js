@@ -150,6 +150,8 @@ FileMap.Audio = [
 	{ Name: 'RKN1d_land', File: 'Data/Sfx/RKN1d_land.wav', Volume: 1.0, Loop: false },
 
 	{ Name: 'fungu_shoot', File: 'Data/Sfx/fungu_shoot.wav', Volume: 1.0, Loop: false },
+	{ Name: 'Insectoid_attack', File: 'Data/Sfx/Insectoid_attack.wav', Volume: 0.8, Loop: true },
+	{ Name: 'Dropper_bounce', File: 'Data/Sfx/Dropper_bounce.wav', Volume: 0.8, Loop: false },
 
 	{ Name: 'explosion', File: 'Data/Sfx/explosion.wav', Volume: 1.0, Loop: false },
 

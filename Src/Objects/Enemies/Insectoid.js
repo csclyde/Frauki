@@ -24,12 +24,16 @@ Enemy.prototype.types['Insectoid'] =  function() {
         }
 
         if(this.animations.currentAnim.name === 'spin') {
+            events.publish('play_sound', {name: 'Insectoid_attack', restart: false});
+            
             if(this.direction === 'left') {
                 this.angle -= 20;
             } else {
                 this.angle += 20;
             }
         } else {
+            events.publish('stop_sound', {name: 'Insectoid_attack'});
+
             this.angle = 0;
         }
     };
@@ -120,6 +124,8 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
         this.state = this.Dodging;
 
+        events.publish('play_sound', {name: 'RKN1d_jump', restart: true});
+
         if(frauki.body.onFloor()) {
             this.body.velocity.y = -300;
 
@@ -199,6 +205,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
             EnemyBehavior.FacePlayer(this);
             EnemyBehavior.JumpToPoint(this, frauki.body.center.x, frauki.body.y - 50); 
+            events.publish('play_sound', {name: 'RKN1d_jump', restart: true});
 
             if(this.body.velocity.y < -400) {
                 this.body.velocity.y = -400;
@@ -221,6 +228,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
         }
 
         if(this.body.onFloor()) {
+            events.publish('play_sound', {name: 'GUBr_land', restart: true});
             return true;
         }
 
