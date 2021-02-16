@@ -23,19 +23,19 @@ ProjectileController.prototype.Mortar = function(e) {
 	mortar.play('idle');
 
 	//parabolic arc
-	var duration = 0.7;
+	var duration = 0.8;
 
-	if(frauki.states.entangled) {
-		duration = 1.0;
-	}
+	// if(frauki.states.entangled) {
+	// 	duration = 1.0;
+	// }
 
-	var xTarget = frauki.body.center.x + game.rnd.between(-0, 0);
+	var xTarget = frauki.body.center.x;
 	var yTarget = frauki.body.y + frauki.body.height;
 
 	mortar.body.velocity.x = (xTarget - mortar.body.center.x) / duration;
 	mortar.body.velocity.y = (yTarget + -0.5 * game.physics.arcade.gravity.y * duration * duration - mortar.body.center.y) / duration;
 
-	mortar.body.velocity.x += frauki.body.velocity.x;
+	mortar.body.velocity.x += (frauki.body.velocity.x * frauki.movement.globalMoveMod);
 	
 	if(e.direction === 'left') {
 		if(mortar.body.velocity.x < -500) mortar.body.velocity.x = -500;
@@ -64,7 +64,7 @@ ProjectileController.prototype.MortarExplosion = function(e, x, y) {
 	var xPos = x;
 	var yPos = y;
 
-	var explosion = game.add.sprite(xPos, yPos, 'EnemySprites');
+	var explosion = game.add.sprite(xPos, yPos - 20, 'EnemySprites');
 	game.physics.enable(explosion, Phaser.Physics.ARCADE);
 
 	explosion.body.setSize(50, 40);
@@ -104,9 +104,10 @@ ProjectileController.prototype.Bolas = function(e) {
 	game.physics.enable(bolas, Phaser.Physics.ARCADE);
 
 	bolas.body.setSize(20, 10);
-	bolas.anchor.setTo(0.5);
+	bolas.anchor.setTo(0.5, 0.5);
 
-	bolas.animations.add('idle', ['SW8T/BolasShot0000', 'SW8T/BolasShot0001', 'SW8T/BolasShot0002', 'SW8T/BolasShot0003', 'SW8T/BolasShot0004', 'SW8T/BolasShot0005', 'SW8T/BolasShot0006'], 20, true, false);
+	bolas.animations.add('idle', ['SW8T/BolasShot0000', 'SW8T/BolasShot0001', 'SW8T/BolasShot0002', 'SW8T/BolasShot0003'], 16, true, false);
+	bolas.animations.add('entangle', ['SW8T/BolasEntangle0000', 'SW8T/BolasEntangle0001', 'SW8T/BolasEntangle0002', 'SW8T/BolasEntangle0003', 'SW8T/BolasEntangle0004'], 16, true, false);
 	bolas.play('idle');
 
 	//game.physics.arcade.moveToXY(bolas, frauki.body.center.x, frauki.body.center.y, 500);
@@ -130,6 +131,61 @@ ProjectileController.prototype.Bolas = function(e) {
 	events.publish('play_sound', {name: 'SW8T_bolas_fly', restart: false});
 
 	this.projectiles.add(bolas);
+};
+
+ProjectileController.prototype.Detonator = function(e) {
+	var xPos = e.body.center.x;
+	var yPos = e.body.center.y - 25;
+
+	if(e.direction === 'left') {
+		xPos -= 50;
+	} else {
+		xPos += 50;
+	}
+
+	var detonator = game.add.sprite(xPos, yPos, 'EnemySprites');
+	game.physics.enable(detonator, Phaser.Physics.ARCADE);
+
+	detonator.body.setSize(10, 10);
+	detonator.anchor.setTo(0.5);
+
+	detonator.animations.add('idle', ['SW8T/Mortar0000', 'SW8T/Mortar0001', 'SW8T/Mortar0002', 'SW8T/Mortar0003'], 14, true, false);
+
+	detonator.play('idle');
+
+	//parabolic arc
+	var duration = 0.6;
+
+	// if(frauki.states.entangled) {
+	// 	duration = 1.0;
+	// }
+
+	var xTarget = frauki.body.center.x;
+	var yTarget = frauki.body.y + frauki.body.height;
+
+	detonator.body.velocity.x = (xTarget - detonator.body.center.x) / duration;
+	detonator.body.velocity.y = (yTarget + -0.5 * game.physics.arcade.gravity.y * duration * duration - detonator.body.center.y) / duration;
+
+	detonator.body.velocity.x += (frauki.body.velocity.x * frauki.movement.globalMoveMod);
+	
+	if(e.direction === 'left') {
+		if(detonator.body.velocity.x < -500) detonator.body.velocity.x = -500;
+		if(detonator.body.velocity.x > -20) detonator.body.velocity.x = -20;
+	} else {
+		if(detonator.body.velocity.x > 500) detonator.body.velocity.x = 500;
+		if(detonator.body.velocity.x < 20) detonator.body.velocity.x = 20;
+	}
+
+	detonator.body.bounce.set(0.0);
+
+	detonator.projType = 'detonator';
+	detonator.owningEnemy = e;
+	detonator.spawnTime = game.time.now;
+	detonator.lifeTime = 5000;
+	detonator.solid = true;
+	detonator.preserveAfterHit = true;
+
+	this.projectiles.add(detonator);
 };
 
 ProjectileController.prototype.Tarball = function(e) {
@@ -205,7 +261,7 @@ ProjectileController.prototype.LaserBolt = function(e, rot, flip) {
 	bolt.play('idle');
 	bolt.rotation = rot;
 
-	bolt.body.velocity = game.physics.arcade.velocityFromRotation(rot, 700);
+	bolt.body.velocity = game.physics.arcade.velocityFromRotation(rot, 500);
 
 	//game.physics.arcade.moveToXY(bolt, frauki.body.center.x, frauki.body.center.y, 500);
 
@@ -266,7 +322,6 @@ ProjectileController.prototype.FallingTile = function(sourceTile, visibleTile) {
 };
 
 ProjectileController.prototype.Update = function() {
-	var that = this;
 
 	var childrenToRemove = [];
 
@@ -287,8 +342,9 @@ ProjectileController.prototype.Update = function() {
 
 		if(p.projType === 'bolas' && p.attached === true) {
 			p.x = frauki.body.center.x;
-			p.y = frauki.body.center.y + (Math.sin(game.time.now / 50) * 24) + 0;
+			p.y = frauki.body.center.y + (Math.sin(game.time.now / 100) * 24) + 0;
 			frauki.states.entangled = true;
+			p.play('entangle');
 
 		} else if(p.projType === 'mortar' && !!p.body) {
 			p.rotation = Math.atan2(p.body.velocity.y, p.body.velocity.x);

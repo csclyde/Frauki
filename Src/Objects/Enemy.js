@@ -166,6 +166,7 @@ Enemy.prototype.UpdateAttackGeometry = function() {
             priority: this.priority || 0,
             juggle: this.juggle || 0,
             stun: this.stun || false,
+            power: this.power || false,
             friendlyFire: this.friendlyFire || false
         };
     } 
@@ -252,6 +253,14 @@ Enemy.prototype.GetCurrentKnockback = function() {
 Enemy.prototype.GetCurrentStun = function() {
     if(!!this.currentAttack) {
         return this.currentAttack.stun;
+    } else {
+        return false;
+    }
+};
+
+Enemy.prototype.GetCurrentPower = function() {
+    if(!!this.currentAttack) {
+        return this.currentAttack.power;
     } else {
         return false;
     }

@@ -5,7 +5,7 @@ Enemy.prototype.types['QL0k'] =  function() {
 	this.anchor.setTo(0.5, 0.75);
 
     this.animations.add('idle', ['QL0k/Shoot0001'], 10, false, false);
-    this.animations.add('shoot', ['QL0k/Shoot0001', 'QL0k/Shoot0002', 'QL0k/Shoot0003', 'QL0k/Shoot0004', 'QL0k/Shoot0005', 'QL0k/Shoot0006'], 22, false, false);
+    this.animations.add('shoot', ['QL0k/Shoot0001', 'QL0k/Shoot0002', 'QL0k/Shoot0003', 'QL0k/Shoot0004', 'QL0k/Shoot0005', 'QL0k/Shoot0006'], 16, false, false);
 
     this.energy = 1;
 
@@ -17,7 +17,7 @@ Enemy.prototype.types['QL0k'] =  function() {
 
     this.base = game.add.image(0, 0, 'EnemySprites', 'QL0k/Shoot0000');
     this.base.anchor.setTo(0.5, 0.5);
-    this.base.x = this.x;
+    this.base.x = this.x + 5;
 	this.base.y = this.y - 37;
 	
 	this.shotCount = 0;
@@ -86,10 +86,6 @@ Enemy.prototype.types['QL0k'] =  function() {
     	return EnemyBehavior.Player.IsVisible(this) && !EnemyBehavior.Player.IsAbove(this) && EnemyBehavior.Player.Distance(this) < 250;
     };
 
-    this.FacingPlayer = function() {
-
-    }
-
 	this.CanCauseDamage = function() { return false; }
 
 	this.GetCurrentDamage = function() {
@@ -114,7 +110,7 @@ Enemy.prototype.types['QL0k'] =  function() {
 	this.Shooting = function() {
 		this.PlayAnim('shoot');
 
-		if(EnemyBehavior.Player.IsVisible(this) && this.animations.currentFrame.name === 'QL0k/Shoot0004' && this.hasShot == false) {
+		if(EnemyBehavior.Player.IsVisible(this) && this.animations.currentFrame.name === 'QL0k/Shoot0005' && this.hasShot == false) {
 			projectileController.LaserBolt(this, this.rotation, this.scale.y);
 			events.publish('play_sound', {name: 'QL0k_attack', restart: true});
 
@@ -131,7 +127,7 @@ Enemy.prototype.types['QL0k'] =  function() {
 				this.timers.SetTimer('shoot', 100);
 			}
 
-			this.timers.SetTimer('rotation_wait', 150);
+			this.timers.SetTimer('rotation_wait', 100);
 			this.hasShot = false;
 
 			return true;

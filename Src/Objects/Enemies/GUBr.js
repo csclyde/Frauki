@@ -1,6 +1,6 @@
 Enemy.prototype.types['GUBr'] =  function() {
 
-	this.body.setSize(16, 50, 0, 0);
+	this.body.setSize(16, 50, 0, 3);
 	this.anchor.setTo(.5);
 
     this.animations.add('idle', ['GUBr/Stand0000'], 10, false, false);
@@ -54,6 +54,11 @@ Enemy.prototype.types['GUBr'] =  function() {
 
 	///////////////////////////////ACTIONS////////////////////////////////////
 	this.Attack = function() {
+		console.log(this.timers)
+		if(!this.CanAttack()) {
+			return;
+		}
+
     	EnemyBehavior.FacePlayer(this);
     	this.state = this.Attacking;
 		this.timers.SetTimer('attacking', game.rnd.between(450, 500));
@@ -175,7 +180,7 @@ Enemy.prototype.types['GUBr'] =  function() {
 		this.PlayAnim('attack');
 
 		if(this.timers.TimerUp('attacking')) {
-    		this.SetAttackTimer(800);
+    		this.SetAttackTimer(1600);
     		return true;
 		} else {
 			return false;

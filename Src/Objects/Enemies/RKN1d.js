@@ -6,7 +6,7 @@ Enemy.prototype.types['RKN1d'] =  function() {
     this.animations.add('idle', ['RKN1d/Idle0000', 'RKN1d/Idle0001', 'RKN1d/Idle0002', 'RKN1d/Idle0003'], 10, true, false);
     this.animations.add('pre_jump', ['RKN1d/Jump0000', 'RKN1d/Jump0001', 'RKN1d/Jump0002'], 16, false, false);
     this.animations.add('jump', ['RKN1d/Jump0003', 'RKN1d/Jump0004', 'RKN1d/Jump0005'], 12, false, false);
-    this.animations.add('attack', ['RKN1d/Bite0001', 'RKN1d/Bite0002', 'RKN1d/Bite0003', 'RKN1d/Bite0004', 'RKN1d/Bite0005'], 16, false, false);
+    this.animations.add('attack', ['RKN1d/Bite0001', 'RKN1d/Bite0002', 'RKN1d/Bite0003', 'RKN1d/Bite0004', 'RKN1d/Bite0005'], 12, false, false);
     this.animations.add('flip_up', ['RKN1d/FlipUp0001', 'RKN1d/FlipUp0002', 'RKN1d/FlipUp0003', 'RKN1d/FlipUp0004'], 28, false, false);
 
     this.damage = 1;
@@ -55,7 +55,6 @@ Enemy.prototype.types['RKN1d'] =  function() {
 
         if(EnemyBehavior.Player.IsVisible(this)) {
             
-            //if the player is too close or being dangerous
             if(EnemyBehavior.Player.IsNear(this, 50) && !EnemyBehavior.Player.IsDangerous(this) && this.CanAttack()) {
                 this.Bite();
             }
@@ -107,6 +106,8 @@ Enemy.prototype.types['RKN1d'] =  function() {
     this.Bite = function() {
         this.DropOff();
         EnemyBehavior.FacePlayer(this);
+
+        events.publish('play_sound', {name: 'RKN1d_attack', restart: true});
 
         this.state = this.Biting;
     };
@@ -178,7 +179,7 @@ Enemy.prototype.types['RKN1d'] =  function() {
             }
 
             this.body.velocity.setMagnitude(600);
-            events.publish('play_sound', {name: 'enemy_jump', restart: true});
+            events.publish('play_sound', {name: 'RKN1d_jump', restart: true});
             this.clingDir = 'none';
             this.state = this.Escaping;
         }
@@ -232,6 +233,8 @@ Enemy.prototype.types['RKN1d'] =  function() {
 
         if(this.body.onFloor() || this.clingDir !== 'none') {
             this.timers.SetTimer('escape_wait', 800);
+            events.publish('play_sound', {name: 'RKN1d_land', restart: true});
+
             return true;
         } else {
             return false;

@@ -38,22 +38,22 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
         if(EnemyBehavior.Player.IsVisible(this) && this.CanAttack()) {
             if(EnemyBehavior.Player.IsVulnerable(this)) {
-                if(EnemyBehavior.Player.IsNear(this, 100) && EnemyBehavior.Player.MovingAway(this) && this.timers.TimerUp('charge_wait')) {
-                    EnemyBehavior.FacePlayer(this);
-                    this.Charge();
-
-                } else if(EnemyBehavior.Player.IsNear(this, 80)) {
-                    EnemyBehavior.FacePlayer(this);
-                    this.Punch();
-
-                } else if(EnemyBehavior.Player.IsNear(this, 140)) {
-                    EnemyBehavior.FacePlayer(this);
+                if(EnemyBehavior.Player.MovingAway(this) && frauki.body.onFloor()) {
                     this.Hammer();
-
-                } else if(EnemyBehavior.Player.IsNear(this, 200) && this.timers.TimerUp('charge_wait')) {
-                    EnemyBehavior.FacePlayer(this);
+                }
+                else if(EnemyBehavior.Player.IsNear(this, 100) && EnemyBehavior.Player.MovingAway(this) && this.timers.TimerUp('charge_wait')) {
                     this.Charge();
-                } else {
+                } 
+                else if(EnemyBehavior.Player.IsNear(this, 80)) {
+                    this.Punch();
+                } 
+                else if(EnemyBehavior.Player.IsNear(this, 140)  && frauki.body.onFloor()) {
+                    this.Hammer();
+                } 
+                else if(EnemyBehavior.Player.IsNear(this, 200) && this.timers.TimerUp('charge_wait')) {
+                    this.Charge();
+                } 
+                else {
                     this.state = this.Idling;
                     EnemyBehavior.WalkToPlayer(this, 60);
                 }
@@ -75,6 +75,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
             return;
         }
 
+        EnemyBehavior.FacePlayer(this);
         this.timers.SetTimer('slash_hold', 300);
         this.state = this.PunchWindup;
         events.publish('play_sound', {name: 'AZP3_punch_windup', restart: true});
@@ -85,7 +86,8 @@ Enemy.prototype.types['A3PZ'] =  function() {
             return;
         }
 
-        this.timers.SetTimer('slash_hold', 700);
+        EnemyBehavior.FacePlayer(this);
+        this.timers.SetTimer('slash_hold', 500);
         this.state = this.HammerWindup;
 
         events.publish('play_sound', {name: 'AZP3_hammer_windup', restart: true});
@@ -96,6 +98,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
             return;
         }
 
+        EnemyBehavior.FacePlayer(this);
         this.timers.SetTimer('slash_hold', 600);
         this.state = this.ChargeWindup;
 
@@ -259,24 +262,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
             this.body.velocity.y = -200
 
-            // var xTarget = frauki.body.center.x;
-            // var yTarget = frauki.body.y - 50;
-
-            // if(EnemyBehavior.Player.IsLeft(this)) {
-            //     xTarget += 60;
-            // } else {
-            //     xTarget -= 60;
-            // }
-
-            // if(frauki.body.velocity.x < 0) {
-            //     xTarget -= 60;
-            // } else if(frauki.body.velocity.x > 0) {
-            //     xTarget += 60;
-            // }
-
-            // EnemyBehavior.JumpToPoint(this, xTarget, yTarget, 0.5);
             events.publish('play_sound', {name: 'robot_jump_med', restart: true});
-
         }
 
         return false;
@@ -417,11 +403,12 @@ Enemy.prototype.types['A3PZ'] =  function() {
         },
 
         'A3PZ/Hammer0011': {
-            x: 42, y: -6, w: 95, h: 70,
+            x: 42, y: -26, w: 95, h: 90,
             damage: 5,
             knockback: 3,
             priority: 3,
             juggle: 0,
+            power: true,
             friendlyFire: true
         },
 
