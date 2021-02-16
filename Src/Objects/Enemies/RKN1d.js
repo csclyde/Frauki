@@ -17,8 +17,11 @@ Enemy.prototype.types['RKN1d'] =  function() {
     this.robotic = true;
     this.clingDir = 'none';
 
-
     this.SetAttackTimer(0);
+
+    this.collideWithPlayer = function() {
+        return this.state !== this.Escaping;
+    };
 
     this.updateFunction = function() {
         if(this.clingDir === 'none') {
@@ -110,9 +113,7 @@ Enemy.prototype.types['RKN1d'] =  function() {
 
     this.Escape = function() {
         this.state = this.PreEscaping;
-
         this.timers.SetTimer('escape', 100);
-
     };
 
     ////////////////////////////////STATES////////////////////////////////////
@@ -126,7 +127,6 @@ Enemy.prototype.types['RKN1d'] =  function() {
         this.PlayAnim('pre_jump');
 
         if(this.timers.TimerUp('escape')) {
-
             if(this.body.onFloor()) {
                 if(frauki.body.onFloor()) {
                     this.body.velocity.set(game.rnd.between(-0.7, 0.7), -1);
@@ -146,6 +146,7 @@ Enemy.prototype.types['RKN1d'] =  function() {
             }
             else if(this.clingDir === 'up') {
                 if(EnemyBehavior.Player.IsBelow(this)) {
+                    
                     var dir = EnemyBehavior.RollDice(2, 1);
                     
                     if(dir) {
@@ -171,6 +172,9 @@ Enemy.prototype.types['RKN1d'] =  function() {
                 } else {
                     this.body.velocity.set(-1, game.rnd.between(-0.7, 0.7));
                 }
+            }
+            else {
+                this.body.velocity.set(frauki.body.velocity.x * -1, -1);
             }
 
             this.body.velocity.setMagnitude(600);
