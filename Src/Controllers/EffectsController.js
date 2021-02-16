@@ -1041,6 +1041,7 @@ EffectsController.prototype.ShowCharge = function(level) {
 };
 
 EffectsController.prototype.Dizzy = function(duration) {
+    return; 
     GameState.tweens.dizzies = game.add.tween(GameState).to( {currentAlpha: 0.2}, 1000, Phaser.Easing.Exponential.In, false).to( {currentAlpha: 1}, duration, Phaser.Easing.Quintic.In, false);
     GameState.tweens.dizzies.start();
 

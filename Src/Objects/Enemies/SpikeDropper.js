@@ -19,6 +19,10 @@ Enemy.prototype.types['SpikeDropper'] =  function() {
 
     this.isSolid = true;
 
+    this.LandHit = function() {
+        this.Drop();
+    };
+
 
     this.updateFunction = function() {
         if(this.body.allowGravity === false && EnemyBehavior.Player.IsBelow(this) && EnemyBehavior.Player.IsVisible(this)) {
@@ -32,10 +36,6 @@ Enemy.prototype.types['SpikeDropper'] =  function() {
 
     this.CanCauseDamage = function() {
         return true;
-    };
-
-    this.LandHit = function() {
-        
     };
 
     ///////////////////////////////ACTIONS////////////////////////////////////

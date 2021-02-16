@@ -15,7 +15,6 @@ Junk = function(game, x, y, name) {
 
     this.destroyed = false;
 
-
     this.initialX = this.body.x;
     this.initialY = this.body.y;
 

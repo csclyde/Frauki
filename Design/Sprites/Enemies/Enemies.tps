@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>5.3.0</string>
+        <string>5.5.0</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -263,6 +263,24 @@
             <key type="filename">GUBr/Walk0001.png</key>
             <key type="filename">GUBr/Walk0002.png</key>
             <key type="filename">GUBr/Walk0003.png</key>
+            <key type="filename">Gnome/boat0000.png</key>
+            <key type="filename">Gnome/boat0001.png</key>
+            <key type="filename">Gnome/boat0002.png</key>
+            <key type="filename">Gnome/boat0003.png</key>
+            <key type="filename">Gnome/boat0004.png</key>
+            <key type="filename">Gnome/boat0005.png</key>
+            <key type="filename">Gnome/garden0000.png</key>
+            <key type="filename">Gnome/garden0001.png</key>
+            <key type="filename">Gnome/garden0002.png</key>
+            <key type="filename">Gnome/garden0003.png</key>
+            <key type="filename">Gnome/garden0004.png</key>
+            <key type="filename">Gnome/garden0005.png</key>
+            <key type="filename">Gnome/garden0006.png</key>
+            <key type="filename">Gnome/garden0007.png</key>
+            <key type="filename">Gnome/garden0008.png</key>
+            <key type="filename">Gnome/garden0009.png</key>
+            <key type="filename">Gnome/garden0010.png</key>
+            <key type="filename">Gnome/garden0011.png</key>
             <key type="filename">H0P8/Attack0000.png</key>
             <key type="filename">H0P8/Attack0001.png</key>
             <key type="filename">H0P8/Attack0002.png</key>

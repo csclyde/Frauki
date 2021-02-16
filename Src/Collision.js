@@ -180,6 +180,8 @@ Collision.OverlapEnemyAttackWithFrauki = function(e, f) {
         frauki.Stun(e);
     }
 
+    
+    
     if(e.GetCurrentDamage() > 0 && (!frauki.Grace() || e.GetCurrentPower()) && !e.Grace()) {
         frauki.Hit(e, e.GetCurrentDamage(), 1000);
         e.LandHit();

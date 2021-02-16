@@ -1,57 +1,52 @@
-{"frames": {
+{"frames": [
 
-"Barrel0000":
 {
-	"frame": {"x":114,"y":1,"w":30,"h":37},
+	"filename": "Barrel0000",
+	"frame": {"x":41,"y":99,"w":32,"h":39},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":30,"h":37},
-	"sourceSize": {"w":30,"h":37},
-	"pivot": {"x":0.5,"y":0.5}
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":39},
+	"sourceSize": {"w":32,"h":39}
 },
-"Egg0000":
 {
-	"frame": {"x":1,"y":1,"w":64,"h":95},
+	"filename": "Egg0000",
+	"frame": {"x":1,"y":1,"w":66,"h":97},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":95},
-	"sourceSize": {"w":64,"h":95},
-	"pivot": {"x":0.5,"y":0.5}
+	"spriteSourceSize": {"x":0,"y":0,"w":66,"h":97},
+	"sourceSize": {"w":66,"h":97}
 },
-"Plant0000":
 {
-	"frame": {"x":66,"y":1,"w":47,"h":70},
+	"filename": "Plant0000",
+	"frame": {"x":68,"y":1,"w":49,"h":72},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":47,"h":70},
-	"sourceSize": {"w":47,"h":70},
-	"pivot": {"x":0.5,"y":0.5}
+	"spriteSourceSize": {"x":0,"y":0,"w":49,"h":72},
+	"sourceSize": {"w":49,"h":72}
 },
-"Pot0000":
 {
-	"frame": {"x":110,"y":72,"w":37,"h":38},
+	"filename": "Pot0000",
+	"frame": {"x":1,"y":99,"w":39,"h":40},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":37,"h":38},
-	"sourceSize": {"w":37,"h":38},
-	"pivot": {"x":0.5,"y":0.5}
+	"spriteSourceSize": {"x":0,"y":0,"w":39,"h":40},
+	"sourceSize": {"w":39,"h":40}
 },
-"Pot20000":
 {
-	"frame": {"x":66,"y":72,"w":43,"h":42},
+	"filename": "Pot20000",
+	"frame": {"x":74,"y":74,"w":45,"h":44},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":43,"h":42},
-	"sourceSize": {"w":43,"h":42},
-	"pivot": {"x":0.5,"y":0.5}
-}},
+	"spriteSourceSize": {"x":0,"y":0,"w":45,"h":44},
+	"sourceSize": {"w":45,"h":44}
+}],
 "meta": {
-	"app": "http://www.codeandweb.com/texturepacker",
+	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "Junk.png",
 	"format": "RGBA8888",
-	"size": {"w":148,"h":115},
+	"size": {"w":120,"h":140},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:7013618aebbbd6f2564e706d37df1fbf:493108e53fb0704eea0b111ca75b33f7:831845a21f0accda2f2aa80233051662$"
+	"smartupdate": "$TexturePacker:SmartUpdate:a2af3e106b5ee1a468e4e9de134c0a07:bdcdac32cce0188c01d641576157591f:831845a21f0accda2f2aa80233051662$"
 }
 }
