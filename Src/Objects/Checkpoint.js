@@ -19,7 +19,6 @@ Checkpoint = function(game, x, y, name) {
 
     if(!Frogland.checkpoints) Frogland.checkpoints = [];
     Frogland.checkpoints.push(this);
-
 };
 
 Checkpoint.prototype = Object.create(Phaser.Sprite.prototype);
@@ -27,6 +26,8 @@ Checkpoint.prototype.constructor = Checkpoint;
 Checkpoint.prototype.types = {};
 
 Checkpoint.prototype.update = function() {
+
+    this.active = GameData.IsCheckpointActive(this.id);
 
     if(this.active) {
         this.animations.play('active');
@@ -37,13 +38,18 @@ Checkpoint.prototype.update = function() {
 
 Checkpoint.prototype.Activate = function(o) {
 
-    Frogland.checkpoints.forEach(function(check) {
-        check.active = false;
-    });
-
     GameData.SetCheckpoint(this.id);
+    GameData.AddActiveCheckpoint(this.id);
 
-	this.active = true;
+    var nextId = GameData.GetNextActiveCheckpoint(this.id);
+    var nextCp = Frogland.checkpoints.find(function(c) { return c.id === nextId; });
+
+    if(nextCp) {
+        effectsController.ScreenFlash();
+        GameData.SetCheckpoint(nextCp.id);
+        frauki.x = nextCp.x;
+        frauki.y = nextCp.y + 90; 
+    }
 };
 
 Checkpoint.prototype.collideWithPlayer = function(f) {

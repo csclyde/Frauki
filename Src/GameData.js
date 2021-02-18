@@ -11,6 +11,7 @@ GameData.data = {
     dirty: true,
 
     checkpoint: '0',
+    activeCheckpoints: [],
     upgrades: ['Dive', 'Stab'],
     doors: [],
     shards: ['Wit', 'Will', 'Luck', 'Power'],
@@ -100,6 +101,35 @@ GameData.SetCheckpoint = function(c) {
     if(this.data.checkpoint !== c) {
         this.data.checkpoint = c;
         this.SaveDataToStorage();
+    }
+};
+
+GameData.AddActiveCheckpoint = function(c) {
+    if(!this.data.activeCheckpoints.includes(c)) {
+        this.data.activeCheckpoints.push(c);
+        this.SaveDataToStorage();
+    }
+};
+
+GameData.IsCheckpointActive = function(c) {
+    return this.data.activeCheckpoints.includes(c);
+}
+
+GameData.GetNextActiveCheckpoint = function(curr) {
+    if(this.data.activeCheckpoints.length <= 0) {
+        return null;
+    }
+
+    var currIndex = this.data.activeCheckpoints.indexOf(curr);
+
+    if(currIndex < 0) {
+        return this.data.activeCheckpoints[0];
+    }
+    else if(currIndex === this.data.activeCheckpoints.length - 1) {
+        return this.data.activeCheckpoints[0];
+    }
+    else {
+        return this.data.activeCheckpoints[currIndex + 1];
     }
 };
 

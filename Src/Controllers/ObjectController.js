@@ -233,10 +233,6 @@ ObjectController.prototype.CreateObjectsLayer = function(layer) {
             }
                 
         } else if(obj.spriteType === 'checkpoint') {
-            if(obj.id == GameData.GetCheckpoint()) {
-                obj.Activate();
-            }
-
             objectController.checkpointList.push(obj);
 
         } else if(obj.spriteType === 'enemy') {

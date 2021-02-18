@@ -6531,10 +6531,10 @@
  "orientation":"orthogonal",
  "properties":
     {
-     "debug":"true",
+     "debug":"false",
      "startLayer":"3",
-     "startX":"136",
-     "startY":"299"
+     "startX":"197",
+     "startY":"305"
     },
  "propertytypes":
     {
