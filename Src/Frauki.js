@@ -159,17 +159,20 @@ Player.prototype.postStateUpdate = function() {
         this.body.acceleration.y = 0;
     }
 
-    if(frauki.states.flowDown) {
-        this.body.acceleration.y = 700;
-    } else if(frauki.states.flowUp) {
-        this.body.acceleration.y = -700;
+    if(this.state !== this.Hanging) {
+        if(frauki.states.flowDown) {
+            this.body.acceleration.y = 700;
+        } else if(frauki.states.flowUp) {
+            this.body.acceleration.y = -700;
+        }
+    
+        if(frauki.states.flowLeft) {
+            this.body.acceleration.x = -700;
+        } else if(frauki.states.flowRight) {
+            this.body.acceleration.x = 700;
+        }
     }
 
-    if(frauki.states.flowLeft) {
-        this.body.acceleration.x = -700;
-    } else if(frauki.states.flowRight) {
-        this.body.acceleration.x = 700;
-    }
 
     if(frauki.states.cantMove) {
         this.body.velocity.setTo(0);

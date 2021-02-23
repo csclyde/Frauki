@@ -54,7 +54,6 @@ Enemy.prototype.types['GUBr'] =  function() {
 
 	///////////////////////////////ACTIONS////////////////////////////////////
 	this.Attack = function() {
-		console.log(this.timers)
 		if(!this.CanAttack()) {
 			return;
 		}

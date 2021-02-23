@@ -235,7 +235,7 @@ ProjectileController.prototype.Spore = function(e) {
 	spore.projType = 'spore';
 	spore.owningEnemy = e;
 	spore.spawnTime = game.time.now;
-	spore.lifeTime = 5000;
+	spore.lifeTime = 3000;
 	spore.solid = true;
 
 	this.projectiles.add(spore);
