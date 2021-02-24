@@ -131,13 +131,18 @@ Frogland.SpawnFrauki = function() {
         frauki.x = pos.x;
         frauki.y = pos.y; 
     } else if(Frogland.map.properties.debug === 'false') {
-        objectController.checkpointList.forEach(function(obj) {
-            if(obj.spriteType === 'checkpoint' && obj.id == GameData.GetCheckpoint()) {
-                frauki.x = obj.x;
-                frauki.y = obj.y + 90;  
-                frauki.timers.SetTimer('frauki_invincible', 0);
-            } 
-        }); 
+        // objectController.checkpointList.forEach(function(obj) {
+        //     if(obj.spriteType === 'checkpoint' && obj.id == GameData.GetCheckpoint()) {
+        //         frauki.x = obj.x;
+        //         frauki.y = obj.y + 90;  
+        //         frauki.timers.SetTimer('frauki_invincible', 0);
+        //     } 
+        // }); 
+
+        var startPoint = this.checkpoints[0];
+        frauki.x = startPoint.x;
+        frauki.y = startPoint.y + 90;  
+        frauki.timers.SetTimer('frauki_invincible', 0);
 
     } else {
         frauki.x = this.map.properties.startX * 16;
