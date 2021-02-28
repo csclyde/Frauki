@@ -31,7 +31,7 @@ Enemy.prototype.types['SW8T'] =  function() {
 
     this.robotic = true;
 
-    this.SHOOTING_SPEED = 600;
+    this.SHOOTING_SPEED = 800;
     this.hasShot = false;
     this.waitingForBolas = false;
     
@@ -57,7 +57,10 @@ Enemy.prototype.types['SW8T'] =  function() {
         		} else if(EnemyBehavior.Player.IsNear(this, 80) && this.CanAttack() && EnemyBehavior.Player.IsVulnerable(this)) {
         			this.Swipe();
 
-        		} else if(frauki.states.entangled && EnemyBehavior.Player.IsNear(this, 160)) {
+        		} else if(frauki.states.entangled && EnemyBehavior.Player.IsNear(this, 120)) {
+        			this.JumpIn();
+				
+				} else if(this.timers.TimerUp('dodge_wait') && frauki.states.entangled && EnemyBehavior.Player.IsNear(this, 160)) {
         			this.JumpAway();
         		
         		} else {
@@ -143,8 +146,20 @@ Enemy.prototype.types['SW8T'] =  function() {
 		events.publish('play_sound', {name: 'SW8T_jump', restart: true});
 		
    		this.body.velocity.y = -200;
-   		this.body.velocity.x = game.rnd.between(400, 550) * EnemyBehavior.Player.DirMod(this);
-   	};
+		this.body.velocity.x = game.rnd.between(400, 550) * EnemyBehavior.Player.DirMod(this);
+		
+		this.timers.SetTimer('dodge_wait', 1000);		
+	};
+	   
+	this.JumpIn = function() {
+		this.state = this.Jumping;
+		EnemyBehavior.FacePlayer(this);
+
+		events.publish('play_sound', {name: 'SW8T_jump', restart: true});
+	 
+		this.body.velocity.y = -200;
+		this.body.velocity.x = game.rnd.between(400, 550) * EnemyBehavior.Player.DirMod(this) * -1;
+	};   
 
    	this.Swipe = function() {
    		this.state = this.Swiping;

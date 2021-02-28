@@ -301,6 +301,7 @@
             <key type="filename">HWK9/AttackDash0002.png</key>
             <key type="filename">HWK9/AttackDash0003.png</key>
             <key type="filename">HWK9/AttackDash0004.png</key>
+            <key type="filename">HWK9/AttackDash0005.png</key>
             <key type="filename">HWK9/AttackWallHang0000.png</key>
             <key type="filename">HWK9/AttackWallHang0001.png</key>
             <key type="filename">HWK9/AttackWallHang0002.png</key>
