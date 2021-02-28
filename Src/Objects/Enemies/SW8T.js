@@ -57,7 +57,7 @@ Enemy.prototype.types['SW8T'] =  function() {
         		} else if(EnemyBehavior.Player.IsNear(this, 80) && this.CanAttack() && EnemyBehavior.Player.IsVulnerable(this)) {
         			this.Swipe();
 
-        		} else if(frauki.states.entangled && EnemyBehavior.Player.IsNear(this, 120)) {
+        		} else if(frauki.states.entangled && EnemyBehavior.Player.IsNear(this, 120) && !EnemyBehavior.Player.IsNear(this, 60)) {
         			this.JumpIn();
 				
 				} else if(this.timers.TimerUp('dodge_wait') && frauki.states.entangled && EnemyBehavior.Player.IsNear(this, 160)) {

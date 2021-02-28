@@ -4,9 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>4.5.0</string>
-        <key>fileName</key>
-        <string>D:/gamedev/Frauki/Design/Sprites/Misc/Misc.tps</string>
+        <string>5.5.0</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -129,22 +127,6 @@
                 <uint>1</uint>
             </struct>
         </struct>
-        <key>andEngine</key>
-        <struct type="AndEngine">
-            <key>minFilter</key>
-            <enum type="AndEngine::MinFilter">Linear</enum>
-            <key>packageName</key>
-            <string>Texture</string>
-            <key>wrap</key>
-            <struct type="AndEngineWrap">
-                <key>s</key>
-                <enum type="AndEngineWrap::Wrap">Clamp</enum>
-                <key>t</key>
-                <enum type="AndEngineWrap::Wrap">Clamp</enum>
-            </struct>
-            <key>magFilter</key>
-            <enum type="AndEngine::MagFilter">MagLinear</enum>
-        </struct>
         <key>dataFileNames</key>
         <map type="GFileNameMap">
             <key>data</key>
@@ -250,6 +232,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -337,6 +321,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -350,6 +336,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -368,6 +356,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -446,9 +436,21 @@
             <key type="filename">Frames/DoorTenements0009.png</key>
             <key type="filename">Frames/DoorTenements0010.png</key>
             <key type="filename">Frames/DoorTenements0011.png</key>
+            <key type="filename">Frames/ExplosionAir0000.png</key>
+            <key type="filename">Frames/ExplosionAir0001.png</key>
+            <key type="filename">Frames/ExplosionAir0002.png</key>
+            <key type="filename">Frames/ExplosionAir0003.png</key>
+            <key type="filename">Frames/ExplosionAir0004.png</key>
+            <key type="filename">Frames/ExplosionFloor0000.png</key>
+            <key type="filename">Frames/ExplosionFloor0001.png</key>
+            <key type="filename">Frames/ExplosionFloor0002.png</key>
+            <key type="filename">Frames/ExplosionFloor0003.png</key>
+            <key type="filename">Frames/ExplosionFloor0004.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -465,6 +467,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -488,6 +492,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -518,6 +524,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -534,10 +542,11 @@
             <key type="filename">Frames/Explosion0004.png</key>
             <key type="filename">Frames/Explosion0005.png</key>
             <key type="filename">Frames/Explosion0006.png</key>
-            <key type="filename">Frames/Explosion0007.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -560,6 +569,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -576,6 +587,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -594,6 +607,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -611,6 +626,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -640,6 +657,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>

@@ -115,7 +115,7 @@ Collision.CollideFraukiWithProjectile = function(f, p) {
         return;
     }
     
-    if(p.projType === 'spore' || p.projType === 'bolt' || p.projType === 'mortar' || (p.projType === 'mortarExplosion' && p.animations.currentFrame.name === 'SW8T/Mortar0004')) {
+    if(p.projType === 'spore' || p.projType === 'bolt' || p.projType === 'mortar' || p.projType === 'detonator' || (p.projType === 'mortarExplosion' && p.animations.currentFrame.name === 'SW8T/Mortar0004')) {
         if(p.owningEnemy.state !== p.owningEnemy.Dying) {
             if(frauki.Attacking() || frauki.states.shielded) {
                 Collision.OverlapAttackWithEnemyAttack(p, f);
@@ -125,10 +125,10 @@ Collision.CollideFraukiWithProjectile = function(f, p) {
             }
         }
 
-        if(p.projType === 'mortar') {
+        if(p.projType === 'mortar' || p.projType === 'detonator') {
             p.pendingDestroy = true;
             events.publish('camera_shake', {magnitudeX: 3, magnitudeY: 1, duration: 200});
-            projectileController.MortarExplosion(p.owningEnemy, p.x, p.y);
+            projectileController.MortarExplosion(p.owningEnemy, p.x, p.y, 'air');
         }
         
         if(!p.preserveAfterHit) {
@@ -496,10 +496,16 @@ Collision.CollideProjectileWithWorld = function(p, t) {
         effectsController.Explosion(p);
 		events.publish('play_sound', {name: 'explosion', restart: true});
         
-    } else if(p.projType === 'mortar') {
+    } else if(p.projType === 'mortar' || p.projType === 'detonator') {
         p.pendingDestroy = true;
         events.publish('camera_shake', {magnitudeX: 3, magnitudeY: 1, duration: 200});
-        projectileController.MortarExplosion(p.owningEnemy, p.x, p.y);
+
+        if(p.body.onFloor()) {
+            projectileController.MortarExplosion(p.owningEnemy, p.x, p.y, 'floor');
+        }
+        else {
+            projectileController.MortarExplosion(p.owningEnemy, p.x, p.y, 'air');
+        }
 
     } else if(p.projType === 'bolas' && !p.attached) {
         p.pendingDestroy = true;

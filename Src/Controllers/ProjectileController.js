@@ -60,21 +60,28 @@ ProjectileController.prototype.Mortar = function(e) {
 	this.projectiles.add(mortar);
 };
 
-ProjectileController.prototype.MortarExplosion = function(e, x, y) {
+ProjectileController.prototype.MortarExplosion = function(e, x, y, style) {
 	var xPos = x;
 	var yPos = y;
 
-	var explosion = game.add.sprite(xPos, yPos - 20, 'EnemySprites');
+	var explosion = game.add.sprite(xPos, yPos - 20, 'Misc');
 	game.physics.enable(explosion, Phaser.Physics.ARCADE);
 
 	explosion.body.setSize(50, 40);
 	explosion.body.moves = false;
 	explosion.anchor.setTo(0.5);
 
-	var explode = explosion.animations.add('explode', ['SW8T/Mortar0004', 'SW8T/Mortar0005', 'SW8T/Mortar0006', 'SW8T/Mortar0007', 'SW8T/Mortar0008'], 14, false, false);
-	explode.killOnComplete = true;
+	var explodeFloor = explosion.animations.add('explode_floor', ['ExplosionFloor0000', 'ExplosionFloor0001', 'ExplosionFloor0002', 'ExplosionFloor0003', 'ExplosionFloor0004'], 14, false, false);
+	var explodeAir = explosion.animations.add('explode_air', ['ExplosionAir0000', 'ExplosionAir0001', 'ExplosionAir0002', 'ExplosionAir0003', 'ExplosionAir0004'], 14, false, false);
+	explodeFloor.killOnComplete = true;
+	explodeAir.killOnComplete = true;
 
-	explosion.play('explode');
+	if(style === 'air') {
+		explosion.play('explode_air');
+	} 
+	else {
+		explosion.play('explode_floor');
+	}
 
 	explosion.body.bounce.set(0.0);
 
@@ -149,7 +156,7 @@ ProjectileController.prototype.Detonator = function(e) {
 	detonator.body.setSize(10, 10);
 	detonator.anchor.setTo(0.5);
 
-	detonator.animations.add('idle', ['SW8T/Mortar0000', 'SW8T/Mortar0001', 'SW8T/Mortar0002', 'SW8T/Mortar0003'], 14, true, false);
+	detonator.animations.add('idle', ['HWK9/Grenade0000', 'HWK9/Grenade0001', 'HWK9/Grenade0002', 'HWK9/Grenade0003'], 14, true, false);
 
 	detonator.play('idle');
 

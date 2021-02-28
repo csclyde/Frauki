@@ -734,8 +734,9 @@ EffectsController.prototype.EnergySplash = function(src, intensity, color, amt, 
 };
 
 EffectsController.prototype.Explosion = function(src) {
-    var boom = game.add.sprite(src.x + (src.width / 2) - 50, src.y + (src.height / 2) - 50, 'Misc');
-    boom.animations.add('boom', ['Explosion0000', 'Explosion0001', 'Explosion0002', 'Explosion0003', 'Explosion0004', 'Explosion0005', 'Explosion0006', 'Explosion0007'], 18, false, false);
+    var boom = game.add.sprite(src.x, src.y, 'Misc', null, this.effectsGroup);
+    boom.anchor.setTo(0.5);
+    boom.animations.add('boom', ['Explosion0000', 'Explosion0001', 'Explosion0002', 'Explosion0003', 'Explosion0004', 'Explosion0005', 'Explosion0006'], 18, false, false);
     boom.animations.play('boom');
     boom.animations.currentAnim.killOnComplete = true;
     events.publish('camera_shake', {magnitudeX: 5, magnitudeY: 2, duration: 200});

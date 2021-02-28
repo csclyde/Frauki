@@ -321,6 +321,10 @@
             <key type="filename">HWK9/EvadeJetPackUp0000.png</key>
             <key type="filename">HWK9/EvadeJetPackUp0001.png</key>
             <key type="filename">HWK9/EvadeJetPackUp0002.png</key>
+            <key type="filename">HWK9/Grenade0000.png</key>
+            <key type="filename">HWK9/Grenade0001.png</key>
+            <key type="filename">HWK9/Grenade0002.png</key>
+            <key type="filename">HWK9/Grenade0003.png</key>
             <key type="filename">HWK9/Hurt0000.png</key>
             <key type="filename">HWK9/Hurt0001.png</key>
             <key type="filename">HWK9/IdleFALL0000.png</key>
@@ -350,7 +354,6 @@
             <key type="filename">KR32/Jump0007.png</key>
             <key type="filename">KR32/Stand0001.png</key>
             <key type="filename">KR32/Stand0002.png</key>
-            <key type="filename">SW8T/Mortar0008.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -486,10 +489,6 @@
             <key type="filename">SW8T/BolasShot0001.png</key>
             <key type="filename">SW8T/BolasShot0002.png</key>
             <key type="filename">SW8T/BolasShot0003.png</key>
-            <key type="filename">SW8T/Mortar0004.png</key>
-            <key type="filename">SW8T/Mortar0005.png</key>
-            <key type="filename">SW8T/Mortar0006.png</key>
-            <key type="filename">SW8T/Mortar0007.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
