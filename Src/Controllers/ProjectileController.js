@@ -161,7 +161,7 @@ ProjectileController.prototype.Detonator = function(e) {
 	detonator.play('idle');
 
 	//parabolic arc
-	var duration = 0.6;
+	var duration = 0.75;
 
 	// if(frauki.states.entangled) {
 	// 	duration = 1.0;

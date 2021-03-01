@@ -4577,7 +4577,7 @@
     <property name="on_death" value="open_door,door_name:spaceship_third"/>
    </properties>
   </object>
-  <object id="3849" gid="100" x="5177.5" y="5499" width="16" height="16"/>
+  <object id="3849" gid="100" x="5234.83" y="5484.33" width="16" height="16"/>
   <object id="3851" gid="94" x="1178" y="7431" width="16" height="16">
    <properties>
     <property name="on_death" value="open_door,door_name:weapon_upgrade"/>
