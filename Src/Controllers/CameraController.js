@@ -35,6 +35,18 @@ CameraController = function() {
 
 //camera is controlled in player centric space
 CameraController.prototype.Update = function() {
+
+	if(GameState.inMainMenu) {
+		if(!GameState.menuSelectionMade) {
+			this.camX = 228 * 16;
+			this.camY = 140 * 16;
+			game.camera.focusOnXY(this.camX, this.camY);
+		}
+		else {
+			game.camera.focusOnXY(Math.floor(this.camX), Math.floor(this.camY));
+		}
+		return;	
+	}
 	
 	var xOffset = 0, yOffset = 0;
 

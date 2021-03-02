@@ -15,7 +15,7 @@ InputController = function() {
     this.tetrad.left = false;
     this.tetrad.right = false;
 
-    this.allowInput = true;
+    this.allowInput = false;
 
     this.currentDir = 'still';
 
@@ -116,6 +116,7 @@ InputController = function() {
 
     game.input.keyboard.onUpCallback = function(e) {
 
+        
         if(GameState.restarting) {
             return;
         }
@@ -347,6 +348,11 @@ InputController.prototype.OnJump = function(pressed) {
 InputController.prototype.OnSlash = function(pressed) {
     this.tetrad.left = pressed;
 
+    if(GameState.inMainMenu && !GameState.menuSelectionMade && pressed) {
+        events.publish('select_menu_option', {});
+        events.publish('play_sound', {name: 'crystal_door'});        
+    }
+
     if(pressed) events.publish('advance_text', {});
 
     if(this.allowInput) {
@@ -444,6 +450,16 @@ InputController.prototype.OnRight = function(pressed) {
 InputController.prototype.OnUp = function(pressed) {
     this.dpad.up = pressed;
 
+    if(GameState.inMainMenu && !GameState.menuSelectionMade && pressed) {
+        if(GameState.menuSelection === 'continue') {
+            GameState.menuSelection = 'new';
+        } else {
+            GameState.menuSelection = 'continue';
+        }
+        events.publish('update_ui', {});
+        events.publish('play_sound', {name: 'text_bloop'});        
+    }
+
     if(this.allowInput) {
         if(pressed) {
             events.publish('control_up', {pressed: true});
@@ -455,6 +471,16 @@ InputController.prototype.OnUp = function(pressed) {
 
 InputController.prototype.OnDown = function(pressed) {
     this.dpad.down = pressed;
+
+    if(GameState.inMainMenu && !GameState.menuSelectionMade && pressed) {
+        if(GameState.menuSelection === 'continue') {
+            GameState.menuSelection = 'new';
+        } else {
+            GameState.menuSelection = 'continue';
+        }
+        events.publish('update_ui', {});
+        events.publish('play_sound', {name: 'text_bloop'});        
+    }
 
     if(this.allowInput) {
         if(pressed) {

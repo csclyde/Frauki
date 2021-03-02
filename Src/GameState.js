@@ -2,14 +2,16 @@ var GameState = new Phaser.State();
 
 GameState.create = function() {
 
-    this.restarting = true;
+    this.restarting = false;
+    this.inMainMenu = true;
+    this.menuSelectionMade = false;
+    this.menuSelection = 'continue';    
 
     this.physicsSlowMo = 1;
     this.currentAlpha = 1;
     frauki.alpha = 0;
     
     var fadeIn = effectsController.Fade(false);
-    Frogland.SpawnFrauki();
 
     fadeIn.onComplete.add(function() {
         frauki.Reset();
@@ -37,6 +39,7 @@ GameState.create = function() {
     this.CreateUI();
 
     events.subscribe('update_ui', this.UpdateUI, this);
+    events.subscribe('select_menu_option', this.SelectMenu, this);
 
     // this.titleLogo = game.add.image(0, 0, 'UI', 'Logo0000');
     // this.titleLogo.fixedToCamera = true;
@@ -68,53 +71,6 @@ GameState.update = function() {
     game.canvas.style.height = (pixel.height * pixel.scale) + "px";
 
     frauki.alpha = 0;
-};
-
-GameState.render = function() {
-    // game.debug.body(frauki);
-    // game.debug.body(frauki.attackRect);
-
-    // objectController.activeGroup.forEach(function(o) {
-    //     game.debug.body(o);
-    //     if(!!o.attackRect) game.debug.body(o.attackRect);
-    // });
-
-    // Frogland.door1Group.forEach(function(o) {
-    //     game.debug.body(o);
-    // });
-
-    // projectileController.projectiles.forEach(function(o) {
-    //     game.debug.body(o);
-    // });
-
-    // var rekt = triggerController.triggerLayers['Triggers_3'][0];
-    // game.debug.geom(new Phaser.Rectangle(rekt.x, rekt.y, rekt.width, rekt.height));
-
-    // effectsController.loadedEffects.forEach(function(o) {
-    //     game.debug.geom(new Phaser.Rectangle(o.x, o.y, o.width, o.height));
-    // });
-
-    // if(!!weaponController.Lob.lobbies) {
-    //     weaponController.Lob.lobbies.forEach(function(o) {
-    //         if(!!o.body) {
-    //             game.debug.geom(new Phaser.Rectangle(o.body.x, o.body.y, o.body.width, o.body.height));
-    //         }
-    //     });  
-    // }
-
-    // if(!!weaponController.GetAttackGeometry()) {
-    //     game.debug.geom(new Phaser.Rectangle(weaponController.GetAttackGeometry().x, weaponController.GetAttackGeometry().y, weaponController.GetAttackGeometry().w, weaponController.GetAttackGeometry().h));
-    // }
-
-    // pixel.context.drawImage(
-    //     game.canvas, 0, 0, game.width, game.height, 
-    //     0,
-    //     0,
-    //     game.width * pixel.scale, 
-    //     game.height * pixel.scale
-    // );
-
-    //this.DrawUI();
 };
 
 GameState.Restart = function() {
@@ -180,13 +136,44 @@ GameState.Restart = function() {
 
         Frogland.ResetFallenTiles();
 
-        Frogland.SpawnFrauki();
+    });
+};
 
+GameState.SelectMenu = function() {
+    this.menuSelectionMade = true;
+
+    this.menuFadeTween = game.add.tween(this.Menu).to({alpha: 0}, 1500, Phaser.Easing.Cubic.Out, true);
+    this.uiFadeTween = game.add.tween(this.UI).to({alpha: 1}, 1500, Phaser.Easing.Cubic.In, true);
+    this.camTween = game.add.tween(cameraController).to({camX : frauki.body.center.x, camY: frauki.body.center.y}, 3000, Phaser.Easing.Cubic.Out, true);
+    frauki.visible = false;
+
+    this.camTween.onComplete.add(function() {
+        console.log('tween complete')
+        frauki.visible = true;
+        GameState.inMainMenu = false;
+        frauki.Reset();
     });
 };
 
 GameState.CreateUI = function() {
     this.UI = game.add.group();
+    this.Menu = game.add.group();
+
+    this.logo = game.add.image(pixel.width / 2, pixel.height / 3, 'UI', 'Logo0000', this.Menu);
+    this.logo.anchor.setTo(0.5);
+    this.logo.fixedToCamera = true;
+
+    this.continueGame = game.add.bitmapText(pixel.width / 2, 200, 'diest64','', 16, this.Menu);
+    this.continueGame.fixedToCamera = true;
+    this.continueGame.anchor.setTo(0.5);
+    this.continueGame.setText('- Continue Game -');
+    
+    this.newGame = game.add.bitmapText(pixel.width / 2, 220, 'diest64','', 16, this.Menu);
+    this.newGame.fixedToCamera = true;
+    this.newGame.anchor.setTo(0.5);
+    this.newGame.setText('New Game');
+    
+
 
     this.healthFrameStart = game.add.image(10, 10, 'UI', 'HudFrame0000', this.UI);
     this.healthFrameStart.fixedToCamera = true;
@@ -264,9 +251,27 @@ GameState.CreateUI = function() {
     this['prismPower'].fixedToCamera = true;
     this['prismLuck'] = game.add.image(26, 320, 'Misc', 'Shard0006', this.UI);
     this['prismLuck'].fixedToCamera = true;
+
+    if(this.inMainMenu) {
+        this.UI.alpha = 0;
+    }
 };
 
 GameState.UpdateUI = function() {
+
+    if(this.inMainMenu) {
+        if(this.menuSelection === 'continue') {
+            this.continueGame.setText('- Continue Game -');
+            this.newGame.setText('New Game');
+        }
+        else {
+            this.continueGame.setText('Continue Game');
+            this.newGame.setText('- New Game -');
+        }
+
+        return;
+    }
+
     for(var i = 0, len = 14; i < len; i++) {
         if(i >= energyController.GetMaxHealthBar()) {
             this['healthFrameBack' + i].visible = false;
@@ -411,23 +416,6 @@ GameState.DrawUI = function() {
         
     }
 
-    // for(var i = 0, len = energyController.GetCharge(); i < len; i++) {
-    //     var pipFrame = '';
-
-    //     if(i < 3) {
-    //         pipFrame = 'ChargePips0000';
-    //     } else if(i < 6) {
-    //         pipFrame = 'ChargePips0001';
-    //     } else if(i < 9) {
-    //         pipFrame = 'ChargePips0002';
-    //     } else {
-    //         pipFrame = 'ChargePips0003';
-    //     }
-
-    //     this.RenderTextureFromAtlas('UI', pipFrame, 15 + (5 * i), 24);
-    // }
-   
-
     for(var i = 0; i < energyController.GetApples(); i++) {
         //if this is the last apple in the stable and they are healing
         if(i === energyController.GetApples() - 1 && frauki.state === frauki.Healing) {
@@ -451,25 +439,9 @@ GameState.DrawUI = function() {
         }    
     }
 
-    // for(var i = 0; i < weaponController.weaponList.length; i++) {
-    //     pixel.context.globalAlpha = weaponController.currentWeapon === weaponController.weaponList[i] ? 1 : 0.3;
-    //     this.RenderTextureFromAtlas('UI', weaponController.weaponList[i].FrameName, (102 + 25 * i), 10);
-    // }
-
     this.RenderTextureFromAtlas('UI', 'NuggCounterBack0000', 562, 7, 1, 1, 0.8);
 
     this.RenderTextureFromAtlas('Misc', 'EnergyBitNeutral0000', 565, 10);
-
-    //render the nugg amount, character by character
-    var nuggCountString = GameData.GetNuggCount().toString();
-
-    for(var i = 0, len = nuggCountString.length; i < len; i++) {
-        var charNum = nuggCountString[i];
-
-        this.RenderTextureFromAtlas('UI', 'Numbers000' + nuggCountString[i], 580 + (i * 10), 10);
-
-    }
-
 
     pixel.context.globalAlpha = this.currentAlpha;
 

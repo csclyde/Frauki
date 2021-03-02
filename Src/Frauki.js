@@ -469,6 +469,20 @@ Player.prototype.Reset = function() {
     this.upgrades.attackOverhead = true;
     this.upgrades.attackStab = true;
     this.upgrades.attackDive = true;
+
+    frauki.timers.SetTimer('frauki_invincible', 0);
+    
+    if(GameData.GetDebugPos()) {
+        var pos = GameData.GetDebugPos();
+        frauki.x = pos.x;
+        frauki.y = pos.y; 
+    } else if(Frogland.map.properties.debug === 'false') {
+        frauki.x = 228 * 16;
+        frauki.y = 159 * 16;
+    } else {
+        frauki.x = this.map.properties.startX * 16;
+        frauki.y = this.map.properties.startY * 16 + 90;
+    }
 };
 
 
