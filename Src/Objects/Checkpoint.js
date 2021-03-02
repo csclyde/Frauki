@@ -38,18 +38,23 @@ Checkpoint.prototype.update = function() {
 
 Checkpoint.prototype.Activate = function(o) {
 
+    if(!GameData.IsCheckpointActive(this.id)) {
+        effectsController.ScreenFlash();
+        events.publish('play_sound', {name: 'crystal_door'});        
+    }
+
     GameData.SetCheckpoint(this.id);
     GameData.AddActiveCheckpoint(this.id);
 
     var nextId = GameData.GetNextActiveCheckpoint(this.id);
     var nextCp = Frogland.checkpoints.find(function(c) { return c.id === nextId; });
 
-    if(nextCp) {
-        effectsController.ScreenFlash();
+    if(nextCp && nextCp.id !== this.id) {
         GameData.SetCheckpoint(nextCp.id);
         frauki.x = nextCp.x;
-        frauki.y = nextCp.y + 90; 
+        frauki.y = nextCp.y + 120; 
     }
+
 };
 
 Checkpoint.prototype.collideWithPlayer = function(f) {

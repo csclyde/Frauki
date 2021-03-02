@@ -140,8 +140,8 @@ Frogland.SpawnFrauki = function() {
         // }); 
 
         var startPoint = this.checkpoints[0];
-        frauki.x = startPoint.x;
-        frauki.y = startPoint.y + 90;  
+        frauki.x = 228 * 16;//startPoint.x;
+        frauki.y = 159 * 16;//startPoint.y + 90;  
         frauki.timers.SetTimer('frauki_invincible', 0);
 
     } else {

@@ -418,8 +418,6 @@ Enemy.prototype.DestroyEnemy = function(e) {
 
         effectsController.SprocketBurst(this.body.center);
 
-    } else {
-        effectsController.Explosion(this.body.center);
     }
 
     effectsController.DiceObject(this.objectName, this.body.center.x, this.body.center.y, this.body.velocity.x, this.body.velocity.y, this.owningLayer);

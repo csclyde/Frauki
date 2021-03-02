@@ -270,7 +270,7 @@ Door.prototype.PerformOpen = function(save, silent) {
         events.publish('fade_music', { volume: 0.1, duration: openDuration });
     }
 
-    events.publish('play_sound', {name: 'door_rumble', restart: true });
+    events.publish('play_sound', {name: 'door_rumble', restart: false });
 
     events.publish('door_open_start', { id: this.id} );
     

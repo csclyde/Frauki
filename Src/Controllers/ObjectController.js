@@ -29,7 +29,7 @@ ObjectController.prototype.Update = function() {
 
         if(!o) continue;
 
-        var preservedTypes = ['door', 'powerup'];
+        var preservedTypes = ['door', 'powerup', 'shard'];
 
         if(preservedTypes.indexOf(o.spriteType) === -1 && !!o.body) {
             if(!cameraController.IsObjectOnScreen(o, -200)) {
