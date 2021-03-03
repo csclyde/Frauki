@@ -106,10 +106,8 @@ GameState.Restart = function() {
 
     fadeOutTween.onComplete.add(function() {
 
-        weaponController.Baton.ResetBaton();
-
         game.time.events.add(300, function() {
-            frauki.Reset(); 
+            //frauki.Reset(); 
             if(!!goddess) goddess.Reset();
         });
 
@@ -137,6 +135,8 @@ GameState.Restart = function() {
         Frogland.ResetFallenTiles();
 
     });
+
+    return fadeOutTween;
 };
 
 GameState.SelectMenu = function() {
@@ -144,19 +144,31 @@ GameState.SelectMenu = function() {
 
     if(this.menuSelection === 'new') {
         GameData.ResetData();
-    }
+        this.Restart().onComplete.add(function() {
+            GameState.inMainMenu = false;
+            events.publish('allow_input');             
+            GameState.uiFadeTween = game.add.tween(GameState.UI).to({alpha: 1}, 1500, Phaser.Easing.Cubic.Out, true);
 
+            game.time.events.add(800, function() {
+                //frauki.Reset(); 
+                frauki.state = frauki.Materializing;
+            });
+        });
+    } else {
+        this.camTween = game.add.tween(cameraController).to({camX : frauki.body.center.x, camY: frauki.body.center.y}, 2000, Phaser.Easing.Cubic.InOut, true);
+        
+        this.camTween.onComplete.add(function() {
+            GameState.inMainMenu = false;
+            events.publish('allow_input'); 
+            GameState.uiFadeTween = game.add.tween(GameState.UI).to({alpha: 1}, 1500, Phaser.Easing.Cubic.Out, true);
+            frauki.state = frauki.Materializing;
+        });
+    }
+    
     this.menuFadeTween = game.add.tween(this.Menu).to({alpha: 0}, 1500, Phaser.Easing.Cubic.Out, true);
-    this.uiFadeTween = game.add.tween(this.UI).to({alpha: 1}, 1500, Phaser.Easing.Cubic.In, true);
-    this.camTween = game.add.tween(cameraController).to({camX : frauki.body.center.x, camY: frauki.body.center.y}, 2000, Phaser.Easing.Cubic.InOut, true);
     frauki.Reset();
     frauki.state = frauki.PreMaterializing;
     
-    this.camTween.onComplete.add(function() {
-        GameState.inMainMenu = false;
-        frauki.state = frauki.Materializing;
-        events.publish('allow_input'); 
-    });
 };
 
 GameState.CreateUI = function() {
