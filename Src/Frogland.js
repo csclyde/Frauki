@@ -20,7 +20,6 @@ Frogland.Create = function() {
     
     frauki = new Player(game, 0, 0, 'Frauki');
     game.add.existing(frauki);
-    frauki.Reset();
 
     this.CreateCollisionLayer();
 
@@ -47,6 +46,8 @@ Frogland.Create = function() {
     game.physics.arcade.sortDirection = game.physics.arcade.TOP_BOTTOM;
 
     setInterval(this.AnimateTiles, 200);
+
+    frauki.Reset();
 };
 
 Frogland.Update = function() {

@@ -434,7 +434,7 @@ Player.prototype.GetDirectionMultiplier = function() {
 
 Player.prototype.Reset = function() {
     game.time.events.add(0, function() { frauki.alpha = 1; });
-    this.state = this.Materializing;
+    this.state = this.Standing;
     this.SetDirection('right');
     this.timers.SetTimer('frauki_invincible', 0);
 
@@ -477,8 +477,8 @@ Player.prototype.Reset = function() {
         frauki.x = pos.x;
         frauki.y = pos.y; 
     } else if(Frogland.map.properties.debug === 'false') {
-        frauki.x = 228 * 16;
-        frauki.y = 159 * 16;
+        frauki.x = 3655;
+        frauki.y = 2666;
     } else {
         frauki.x = this.map.properties.startX * 16;
         frauki.y = this.map.properties.startY * 16 + 90;
@@ -1275,10 +1275,18 @@ Player.prototype.Hurting = function() {
     }
 };
 
+Player.prototype.PreMaterializing = function() {
+    this.PlayAnim('pre_materialize');
+};
+
 Player.prototype.Materializing = function() {
     this.PlayAnim('materialize');
-
+    events.publish('play_sound', {name: 'baton_throw_3'});
+    
+    
     if(this.animations.currentAnim.isFinished) {
+        events.publish('stop_sound', {name: 'baton_throw_3'});
+        events.publish('play_sound', {name: 'gain_energy_4'});
         this.ChangeState(this.Standing);
     }
 };

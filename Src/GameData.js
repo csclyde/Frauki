@@ -2,11 +2,7 @@ var GameData = {};
 
 var currentVer = 0.5;
 
-//When game data is requested, it is pulled from the data structure in memory. When
-//it is saved, it is put into the data structure, and then put into local storage.
-//So the only interaction with local storage is when the game loads, and when you
-//save something to it. It doesn't constantly read out of local storage
-GameData.data = {
+var defaultData = {
     version: currentVer,
     dirty: true,
 
@@ -23,6 +19,12 @@ GameData.data = {
     },
     debug_pos: { x: 0, y: 0 }
 };
+
+//When game data is requested, it is pulled from the data structure in memory. When
+//it is saved, it is put into the data structure, and then put into local storage.
+//So the only interaction with local storage is when the game loads, and when you
+//save something to it. It doesn't constantly read out of local storage
+GameData.data = Object.assign({}, defaultData);
 
 GameData.nuggetCount = 0;
 
@@ -44,6 +46,12 @@ GameData.LoadDataFromStorage = function() {
 
 GameData.SaveDataToStorage = function() {
     localStorage.setItem('save_data', JSON.stringify(this.data));
+};
+
+GameData.ResetData = function() {
+    this.data = Object.assign({}, defaultData);
+    this.SaveDataToStorage();
+
 };
 
 GameData.GetDebugPos = function() {

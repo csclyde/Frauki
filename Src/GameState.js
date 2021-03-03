@@ -142,16 +142,20 @@ GameState.Restart = function() {
 GameState.SelectMenu = function() {
     this.menuSelectionMade = true;
 
+    if(this.menuSelection === 'new') {
+        GameData.ResetData();
+    }
+
     this.menuFadeTween = game.add.tween(this.Menu).to({alpha: 0}, 1500, Phaser.Easing.Cubic.Out, true);
     this.uiFadeTween = game.add.tween(this.UI).to({alpha: 1}, 1500, Phaser.Easing.Cubic.In, true);
-    this.camTween = game.add.tween(cameraController).to({camX : frauki.body.center.x, camY: frauki.body.center.y}, 3000, Phaser.Easing.Cubic.Out, true);
-    frauki.visible = false;
-
+    this.camTween = game.add.tween(cameraController).to({camX : frauki.body.center.x, camY: frauki.body.center.y}, 2000, Phaser.Easing.Cubic.InOut, true);
+    frauki.Reset();
+    frauki.state = frauki.PreMaterializing;
+    
     this.camTween.onComplete.add(function() {
-        console.log('tween complete')
-        frauki.visible = true;
         GameState.inMainMenu = false;
-        frauki.Reset();
+        frauki.state = frauki.Materializing;
+        events.publish('allow_input'); 
     });
 };
 
