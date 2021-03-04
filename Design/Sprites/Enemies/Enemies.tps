@@ -234,7 +234,6 @@
             <key type="filename">A3PZ/Hammer0012.png</key>
             <key type="filename">A3PZ/Hammer0013.png</key>
             <key type="filename">A3PZ/Hammer0014.png</key>
-            <key type="filename">A3PZ/Hammer0015.png</key>
             <key type="filename">A3PZ/Hit0000.png</key>
             <key type="filename">A3PZ/Hit0001.png</key>
             <key type="filename">A3PZ/Idle0000.png</key>
@@ -593,7 +592,6 @@
             <key type="filename">QL0k/Shoot0006.png</key>
             <key type="filename">SW8T/Hurt0000.png</key>
             <key type="filename">SW8T/Hurt0001.png</key>
-            <key type="filename">SW8T/Hurt0002.png</key>
             <key type="filename">SW8T/Idle0000.png</key>
             <key type="filename">SW8T/Idle0001.png</key>
             <key type="filename">SW8T/Idle0002.png</key>

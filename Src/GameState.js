@@ -45,6 +45,9 @@ GameState.create = function() {
     // this.titleLogo.fixedToCamera = true;
     // this.titleLogo.cameraOffset.x = 133;
     // this.titleLogo.cameraOffset.y = 30;
+
+    
+    effectsController.screenDark.bringToTop();
 };
 
 GameState.update = function() {
@@ -133,6 +136,8 @@ GameState.Restart = function() {
         projectileController.DestroyAllProjectiles();
 
         Frogland.ResetFallenTiles();
+
+        frauki.Reset();
 
     });
 
@@ -224,34 +229,34 @@ GameState.CreateUI = function() {
         this['shieldPip' + i].visible = false;
     }
 
-    this.energyFrameStart = game.add.image(10, 22, 'UI', 'HudFrame0000', this.UI);
-    this.energyFrameStart.fixedToCamera = true;
+    // this.energyFrameStart = game.add.image(10, 22, 'UI', 'HudFrame0000', this.UI);
+    // this.energyFrameStart.fixedToCamera = true;
 
-    for(var i = 0, len = 4; i < len; i++) {
-        this['energyFrameBack' + i] = game.add.image(14 + (i * 5), 25, 'UI', 'HudFrame0003', this.UI);
-        this['energyFrameFront' + i] = game.add.image(14 + (i * 5), 22, 'UI', 'HudFrame0001', this.UI);
+    // for(var i = 0, len = 4; i < len; i++) {
+    //     this['energyFrameBack' + i] = game.add.image(14 + (i * 5), 25, 'UI', 'HudFrame0003', this.UI);
+    //     this['energyFrameFront' + i] = game.add.image(14 + (i * 5), 22, 'UI', 'HudFrame0001', this.UI);
 
-        this['energyFrameBack' + i].fixedToCamera = true;
-        this['energyFrameFront' + i].fixedToCamera = true;
+    //     this['energyFrameBack' + i].fixedToCamera = true;
+    //     this['energyFrameFront' + i].fixedToCamera = true;
 
-        if(i >= energyController.GetMaxCharge()) {
-            this['energyFrameBack' + i].visible = false;
-            this['energyFrameFront' + i].visible = false;
-        }
-    }
+    //     if(i >= energyController.GetMaxCharge()) {
+    //         this['energyFrameBack' + i].visible = false;
+    //         this['energyFrameFront' + i].visible = false;
+    //     }
+    // }
 
-    this.energyFrameEnd = game.add.image(14 + (energyController.GetMaxCharge() * 5), 22, 'UI', 'HudFrame0002', this.UI);
-    this.energyFrameEnd.fixedToCamera = true;
+    // this.energyFrameEnd = game.add.image(14 + (energyController.GetMaxCharge() * 5), 22, 'UI', 'HudFrame0002', this.UI);
+    // this.energyFrameEnd.fixedToCamera = true;
 
     //energy pips
-    for(var i = 0, len = 4; i < len; i++) {
-        this['energyPip' + i] = game.add.image(14 + (5 * i), 25, 'UI', 'EnergyPips0001', this.UI);
-        this['energyPip' + i].fixedToCamera = true;
+    // for(var i = 0, len = 4; i < len; i++) {
+    //     this['energyPip' + i] = game.add.image(14 + (5 * i), 25, 'UI', 'EnergyPips0001', this.UI);
+    //     this['energyPip' + i].fixedToCamera = true;
         
-        if(i >= energyController.GetCharge()) {
-            this['energyPip' + i].visible = false;
-        }
-    }
+    //     if(i >= energyController.GetCharge()) {
+    //         this['energyPip' + i].visible = false;
+    //     }
+    // }
 
     for(var i = 0, len = 6; i < len; i++) {
         this['apple' + i] = game.add.image(-10 + (20 * i), 15, 'Misc', 'Apple0000', this.UI);
@@ -315,22 +320,22 @@ GameState.UpdateUI = function() {
     this.healthFrameEnd.cameraOffset.x = 14 + (energyController.GetMaxHealthBar() * 5);
 
     //energy
-    for(var i = 0, len = 4; i < len; i++) {
-        if(i >= energyController.GetCharge()) {
-            this['energyPip' + i].visible = false;
-        } else {
-            this['energyPip' + i].visible = true;
-        }
+    // for(var i = 0, len = 4; i < len; i++) {
+    //     if(i >= energyController.GetCharge()) {
+    //         this['energyPip' + i].visible = false;
+    //     } else {
+    //         this['energyPip' + i].visible = true;
+    //     }
 
-        if(weaponController.GetNumWeapons() === 0) {
-            this['energyFrameBack' + i].visible = false;
-            this['energyFrameFront' + i].visible = false;
-            this['energyPip' + i].visible = false;
-        } else {
-            this['energyFrameBack' + i].visible = true;
-            this['energyFrameFront' + i].visible = true;
-        }
-    }
+    //     if(weaponController.GetNumWeapons() === 0) {
+    //         this['energyFrameBack' + i].visible = false;
+    //         this['energyFrameFront' + i].visible = false;
+    //         this['energyPip' + i].visible = false;
+    //     } else {
+    //         this['energyFrameBack' + i].visible = true;
+    //         this['energyFrameFront' + i].visible = true;
+    //     }
+    // }
 
     for(var i = 0, len = 6; i < len; i++) {
         if(i < energyController.GetApples()) {
@@ -340,13 +345,13 @@ GameState.UpdateUI = function() {
         }
     }
 
-    if(weaponController.GetNumWeapons() === 0) {
-        this.energyFrameStart.visible = false;
-        this.energyFrameEnd.visible = false;
-    } else {
-        this.energyFrameStart.visible = true;
-        this.energyFrameEnd.visible = true;
-    }
+    // if(weaponController.GetNumWeapons() === 0) {
+    //     this.energyFrameStart.visible = false;
+    //     this.energyFrameEnd.visible = false;
+    // } else {
+    //     this.energyFrameStart.visible = true;
+    //     this.energyFrameEnd.visible = true;
+    // }
 
     if(GameData.HasShard('Wit')) {
         this['prismWit'].visible = true;

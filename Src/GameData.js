@@ -10,7 +10,7 @@ var defaultData = {
     activeCheckpoints: [],
     upgrades: ['Dive', 'Stab'],
     doors: [],
-    shards: ['Wit', 'Will', 'Luck', 'Power'],
+    shards: [],
     health: 4,
     shield: 0,
     flags: {},
