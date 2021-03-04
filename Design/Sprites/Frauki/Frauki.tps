@@ -410,9 +410,6 @@
             <key type="filename">Frames/Land0000.png</key>
             <key type="filename">Frames/Land0001.png</key>
             <key type="filename">Frames/Land0002.png</key>
-            <key type="filename">Frames/Lob0000.png</key>
-            <key type="filename">Frames/Lob0001.png</key>
-            <key type="filename">Frames/Lob0002.png</key>
             <key type="filename">Frames/Materialize0000.png</key>
             <key type="filename">Frames/Materialize0001.png</key>
             <key type="filename">Frames/Materialize0002.png</key>

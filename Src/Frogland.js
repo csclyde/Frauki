@@ -14,8 +14,8 @@ Frogland.Create = function() {
     backdropController.CreateParallax();
     backdropController.LoadBackgrounds();
     
-    this.CreateBackgroundLayer();
-
+    this['backgroundLayer'] = this.map.createLayer('Background');
+    
     effectsController.CreateEffectsLayer();
     
     frauki = new Player(game, 0, 0, 'Frauki');
@@ -25,8 +25,10 @@ Frogland.Create = function() {
 
     objectController.CreateObjectsLayer();
 
-    this.CreateMidgroundLayer();
-    this.CreateForegroundLayer();
+    this['midgroundLayer'] = this.map.createLayer('Midground');
+    this['midgroundLayer'].resizeWorld();
+
+    this['foregroundLayer'] = this.map.createLayer('Foreground');
 
     effectsController.CreateForegroundEffectsLayer();
 
@@ -38,10 +40,6 @@ Frogland.Create = function() {
 
     //this will store fallen tiles, so that when you die they can be reset
     this.fallenTiles = [];
-
-    //events.subscribe('enemy_killed', this.Ragnarok, this);
-    this.ragnarokCounter = 1;
-    this.ragnarokLevel = 0;
 
     game.physics.arcade.sortDirection = game.physics.arcade.TOP_BOTTOM;
 
@@ -66,10 +64,8 @@ Frogland.Update = function() {
     this.HandleCollisions();
 
     if(frauki.y > 10800) {
-        //console.log(game.camera.y - frauki.body.y);
         frauki.body.y -= 10000;
         cameraController.camY = -250;
-        //console.log(game.camera.y - frauki.body.y);
     }
 };
 
@@ -124,19 +120,6 @@ Frogland.HandleCollisions = function() {
     }
 };
 
-Frogland.CreateBackgroundLayer = function() {
-    this['backgroundLayer'] = this.map.createLayer('Background');
-};
-
-Frogland.CreateMidgroundLayer = function() {
-    this['midgroundLayer'] = this.map.createLayer('Midground');
-    this['midgroundLayer'].resizeWorld();
-};
-
-Frogland.CreateForegroundLayer = function() {
-    this['foregroundLayer'] = this.map.createLayer('Foreground');
-};
-
 Frogland.CreateCollisionLayer = function() {
     this['collisionLayer'] = this.map.createLayer('Collision');
     this.map.setCollision([1, 3, 4, 5, 7, 8, 9, 17, 18], true, 'Collision');
@@ -165,11 +148,6 @@ Frogland.PreprocessTiles = function() {
                 var rightTile = this.map.getTile(tile.x + 1, tile.y, 'Collision');
                 var topTile = this.map.getTile(tile.x, tile.y - 1, 'Collision');
                 var bottomTile = this.map.getTile(tile.x, tile.y + 1, 'Collision');
-
-                // if(!!leftTile && leftTile.index === 1) leftTile.setCollision(true, true, true, true);
-                // if(!!rightTile && rightTile.index === 1) rightTile.setCollision(true, true, true, true);
-                // if(!!topTile && topTile.index === 1) topTile.setCollision(true, true, true, true);
-                // if(!!bottomTile && bottomTile.index === 1) bottomTile.setCollision(true, true, true, true);
             }
         }
            
@@ -348,48 +326,5 @@ Frogland.UpdateTutorialBlocks = function() {
 
         Frogland['backgroundLayer'].dirty = true;
         
-
-            
     }, Frogland, 0, 0, Frogland.width, Frogland.height, 'Background'); 
-};
-
-Frogland.Ragnarok = function(e) {
-
-    if(e.owningLayer !== 4 || e.x < 2140 || e.x > 2860 || e.y < 4180 || e.y > 4500) {
-        return;
-    }
-
-    var enemyConfigs = [85, 86, 87, 92, 95, 98, 99, 100];
-
-
-    this.ragnarokCounter -= 1;
-
-    if(this.ragnarokCounter <= 0) {
-        var waitDuration = 2000;
-
-        if(this.ragnarokLevel % 4 === 0) {
-            waitDuration = 6000;
-            objectController.SpawnObject({id: 66, x: 2500, y: 4300, name: 'apple'});
-        }
-
-        game.time.events.add(waitDuration, function() {
-            var numEnemies = game.rnd.between(1, 3);
-
-            for(var i = 0; i < numEnemies; i++) {
-                var enemySpawn = enemyConfigs[game.rnd.between(0, enemyConfigs.length - 1)];
-
-
-                objectController.SpawnObject({ 
-                    id: enemySpawn, 
-                    x: game.rnd.between(2400, 2800), 
-                    y: game.rnd.between(4300, 4450)
-                });
-                
-                this.ragnarokCounter += 1;
-            }
-
-            this.ragnarokLevel += 1;
-        }, this);
-        
-    }
 };

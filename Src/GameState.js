@@ -16,18 +16,8 @@ GameState.create = function() {
     fadeIn.onComplete.add(function() {
         frauki.Reset();
         GameState.restarting = false;
-        
-        //inputController.AllowInput();
 
         events.publish('play_music', { name: 'Intro' } );
-
-        // if(game.input.keyboard.isDown(inputController.binds.runLeft) || game.input.gamepad.isDown(14)) {
-        //     inputController.OnLeft(true);
-        // }
-
-        // if(game.input.keyboard.isDown(inputController.binds.runRight) || game.input.gamepad.isDown(15)) {
-        //     inputController.OnRight(true);
-        // }
     });
 
     this.tweens = {};
@@ -40,12 +30,6 @@ GameState.create = function() {
 
     events.subscribe('update_ui', this.UpdateUI, this);
     events.subscribe('select_menu_option', this.SelectMenu, this);
-
-    // this.titleLogo = game.add.image(0, 0, 'UI', 'Logo0000');
-    // this.titleLogo.fixedToCamera = true;
-    // this.titleLogo.cameraOffset.x = 133;
-    // this.titleLogo.cameraOffset.y = 30;
-
     
     effectsController.screenDark.bringToTop();
 };
@@ -67,7 +51,6 @@ GameState.update = function() {
     triggerController.Update();
     backdropController.Update();
 
-    //this.UpdateUI();
     pixel.context.globalAlpha = this.currentAlpha;
 
     game.canvas.style.width = (pixel.width * pixel.scale) + "px";
@@ -109,9 +92,11 @@ GameState.Restart = function() {
 
     fadeOutTween.onComplete.add(function() {
 
-        game.time.events.add(300, function() {
-            //frauki.Reset(); 
-            if(!!goddess) goddess.Reset();
+        frauki.Reset(); 
+        if(!!goddess) goddess.Reset();
+
+        game.time.events.add(800, function() {
+            frauki.state = frauki.Materializing;
         });
 
         energyController.Reset();
@@ -137,8 +122,8 @@ GameState.Restart = function() {
 
         Frogland.ResetFallenTiles();
 
-        frauki.Reset();
-
+        //frauki.Reset();
+        frauki.state = frauki.PreMaterializing;    
     });
 
     return fadeOutTween;
@@ -153,6 +138,7 @@ GameState.SelectMenu = function() {
             GameState.inMainMenu = false;
             events.publish('allow_input');             
             GameState.uiFadeTween = game.add.tween(GameState.UI).to({alpha: 1}, 1500, Phaser.Easing.Cubic.Out, true);
+            GameState.Menu.alpha = 0;
 
             game.time.events.add(800, function() {
                 //frauki.Reset(); 
@@ -161,6 +147,7 @@ GameState.SelectMenu = function() {
         });
     } else {
         this.camTween = game.add.tween(cameraController).to({camX : frauki.body.center.x, camY: frauki.body.center.y}, 2000, Phaser.Easing.Cubic.InOut, true);
+        this.menuFadeTween = game.add.tween(this.Menu).to({alpha: 0}, 1500, Phaser.Easing.Cubic.Out, true);
         
         this.camTween.onComplete.add(function() {
             GameState.inMainMenu = false;
@@ -170,7 +157,6 @@ GameState.SelectMenu = function() {
         });
     }
     
-    this.menuFadeTween = game.add.tween(this.Menu).to({alpha: 0}, 1500, Phaser.Easing.Cubic.Out, true);
     frauki.Reset();
     frauki.state = frauki.PreMaterializing;
     
@@ -229,35 +215,6 @@ GameState.CreateUI = function() {
         this['shieldPip' + i].visible = false;
     }
 
-    // this.energyFrameStart = game.add.image(10, 22, 'UI', 'HudFrame0000', this.UI);
-    // this.energyFrameStart.fixedToCamera = true;
-
-    // for(var i = 0, len = 4; i < len; i++) {
-    //     this['energyFrameBack' + i] = game.add.image(14 + (i * 5), 25, 'UI', 'HudFrame0003', this.UI);
-    //     this['energyFrameFront' + i] = game.add.image(14 + (i * 5), 22, 'UI', 'HudFrame0001', this.UI);
-
-    //     this['energyFrameBack' + i].fixedToCamera = true;
-    //     this['energyFrameFront' + i].fixedToCamera = true;
-
-    //     if(i >= energyController.GetMaxCharge()) {
-    //         this['energyFrameBack' + i].visible = false;
-    //         this['energyFrameFront' + i].visible = false;
-    //     }
-    // }
-
-    // this.energyFrameEnd = game.add.image(14 + (energyController.GetMaxCharge() * 5), 22, 'UI', 'HudFrame0002', this.UI);
-    // this.energyFrameEnd.fixedToCamera = true;
-
-    //energy pips
-    // for(var i = 0, len = 4; i < len; i++) {
-    //     this['energyPip' + i] = game.add.image(14 + (5 * i), 25, 'UI', 'EnergyPips0001', this.UI);
-    //     this['energyPip' + i].fixedToCamera = true;
-        
-    //     if(i >= energyController.GetCharge()) {
-    //         this['energyPip' + i].visible = false;
-    //     }
-    // }
-
     for(var i = 0, len = 6; i < len; i++) {
         this['apple' + i] = game.add.image(-10 + (20 * i), 15, 'Misc', 'Apple0000', this.UI);
         this['apple' + i].fixedToCamera = true;
@@ -276,6 +233,8 @@ GameState.CreateUI = function() {
     if(this.inMainMenu) {
         this.UI.alpha = 0;
     }
+
+    effectsController.screenDark.bringToTop();    
 };
 
 GameState.UpdateUI = function() {
@@ -319,24 +278,6 @@ GameState.UpdateUI = function() {
 
     this.healthFrameEnd.cameraOffset.x = 14 + (energyController.GetMaxHealthBar() * 5);
 
-    //energy
-    // for(var i = 0, len = 4; i < len; i++) {
-    //     if(i >= energyController.GetCharge()) {
-    //         this['energyPip' + i].visible = false;
-    //     } else {
-    //         this['energyPip' + i].visible = true;
-    //     }
-
-    //     if(weaponController.GetNumWeapons() === 0) {
-    //         this['energyFrameBack' + i].visible = false;
-    //         this['energyFrameFront' + i].visible = false;
-    //         this['energyPip' + i].visible = false;
-    //     } else {
-    //         this['energyFrameBack' + i].visible = true;
-    //         this['energyFrameFront' + i].visible = true;
-    //     }
-    // }
-
     for(var i = 0, len = 6; i < len; i++) {
         if(i < energyController.GetApples()) {
             this['apple' + i].visible = true;
@@ -344,14 +285,6 @@ GameState.UpdateUI = function() {
             this['apple' + i].visible = false;
         }
     }
-
-    // if(weaponController.GetNumWeapons() === 0) {
-    //     this.energyFrameStart.visible = false;
-    //     this.energyFrameEnd.visible = false;
-    // } else {
-    //     this.energyFrameStart.visible = true;
-    //     this.energyFrameEnd.visible = true;
-    // }
 
     if(GameData.HasShard('Wit')) {
         this['prismWit'].visible = true;
@@ -376,6 +309,8 @@ GameState.UpdateUI = function() {
     } else {
         this['prismPower'].visible = false;
     }
+
+    effectsController.screenDark.bringToTop();    
 };
 
 GameState.DrawUI = function() {

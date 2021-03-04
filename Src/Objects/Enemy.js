@@ -48,11 +48,10 @@ Enemy = function(game, x, y, name) {
 
     this.events.onDestroy.add(function(e) {
         e.UI.frame.destroy();
-        e.UI.pips[0].destroy();
-        e.UI.pips[1].destroy();
-        e.UI.pips[2].destroy();
-        e.UI.pips[3].destroy();
-        e.UI.pips[4].destroy();
+
+        e.UI.pips.forEach(function(pip) {
+            pip.destroy();
+        });
     });
 };
 
@@ -429,11 +428,10 @@ Enemy.prototype.DestroyEnemy = function(e) {
     events.publish('camera_shake', {magnitudeX: 8, magnitudeY: 2, duration: 350 });
 
     this.UI.frame.destroy();
-    this.UI.pips[0].destroy();
-    this.UI.pips[1].destroy();
-    this.UI.pips[2].destroy();
-    this.UI.pips[3].destroy();
-    this.UI.pips[4].destroy();
+
+    this.UI.pips.forEach(function(pip) {
+        pip.destroy();
+    });
 
     this.destroy();
     e = null;
