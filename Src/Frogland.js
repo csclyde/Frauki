@@ -109,7 +109,7 @@ Frogland.HandleCollisions = function() {
     }
 
     //objects are collided with themselves
-    //game.physics.arcade.collide(objectController.GetObjectGroup(), undefined, null, Collision.OverlapObjectsWithSelf);
+    game.physics.arcade.collide(objectController.GetObjectGroup(), undefined, null, Collision.OverlapObjectsWithSelf);
 
     //frauki is checked against projectiles
     if(projectileController.projectiles.countLiving() > 0) {

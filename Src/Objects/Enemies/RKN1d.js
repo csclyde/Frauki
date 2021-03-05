@@ -7,15 +7,13 @@ Enemy.prototype.types['RKN1d'] =  function() {
     this.animations.add('pre_jump', ['RKN1d/Jump0000', 'RKN1d/Jump0001', 'RKN1d/Jump0002'], 16, false, false);
     this.animations.add('jump', ['RKN1d/Jump0003', 'RKN1d/Jump0004', 'RKN1d/Jump0005'], 12, false, false);
     this.animations.add('attack', ['RKN1d/Bite0001', 'RKN1d/Bite0002', 'RKN1d/Bite0003', 'RKN1d/Bite0004', 'RKN1d/Bite0005'], 12, false, false);
-    this.animations.add('flip_up', ['RKN1d/FlipUp0001', 'RKN1d/FlipUp0002', 'RKN1d/FlipUp0003', 'RKN1d/FlipUp0004'], 28, false, false);
 
     this.damage = 1;
     this.energy = 2;
 
-    //this.body.maxVelocity.y = 500;
-
     this.robotic = true;
-    this.clingDir = 'none';
+    this.clingDir = 'down';
+    this.body.drag.setTo(0);
 
     this.SetAttackTimer(0);
 
@@ -42,19 +40,11 @@ Enemy.prototype.types['RKN1d'] =  function() {
         } else {
             this.angle = 0;
         }
-
-        if(this.body.onFloor()) {
-            this.body.drag.setTo(800);
-        }
-        else {
-            this.body.drag.setTo(0);
-        }
     };
 
     this.Act = function() {
 
         if(EnemyBehavior.Player.IsVisible(this)) {
-            
             if(EnemyBehavior.Player.IsNear(this, 50) && !EnemyBehavior.Player.IsDangerous(this) && this.CanAttack()) {
                 this.Bite();
             }
@@ -65,7 +55,7 @@ Enemy.prototype.types['RKN1d'] =  function() {
                     this.state = this.Idling;
                 }
             
-            } else if(EnemyBehavior.Player.IsInVulnerableFrame(this) && this.timers.TimerUp('hop_wait')) {
+            } else if(EnemyBehavior.Player.IsVulnerable(this) && this.timers.TimerUp('hop_wait') && this.clingDir !== 'none') {
                 this.Hop();
             
             } else {
@@ -89,11 +79,11 @@ Enemy.prototype.types['RKN1d'] =  function() {
     }
 
     this.IsGrounded = function() {
-        return (this.body.onFloor() || this.clingDir === 'up' || this.clingDir === 'left' || this.clingDir === 'right');
+        return (this.clingDir === 'down' || this.clingDir === 'up' || this.clingDir === 'left' || this.clingDir === 'right');
     }
 
     this.Vulnerable = function() {
-        return this.state !== this.Escaping && this.state !== this.PreEscaping;
+        return true;
     }
 
     ///////////////////////////////ACTIONS////////////////////////////////////
@@ -113,6 +103,7 @@ Enemy.prototype.types['RKN1d'] =  function() {
     };
 
     this.Escape = function() {
+        
         this.state = this.PreEscaping;
         this.timers.SetTimer('escape', 100);
     };
@@ -128,9 +119,15 @@ Enemy.prototype.types['RKN1d'] =  function() {
         this.PlayAnim('pre_jump');
 
         if(this.timers.TimerUp('escape')) {
-            if(this.body.onFloor()) {
+            if(this.clingDir === 'down') {
                 if(frauki.body.onFloor()) {
-                    this.body.velocity.set(game.rnd.between(-0.7, 0.7), -1);
+                    var xVel = game.rnd.between(0.4, 0.8);
+
+                    if(frauki.body.velocity.x < 0) {
+                        xVel *= -1;
+                    }
+
+                    this.body.velocity.set(xVel, -1);
                 }
                 else if(EnemyBehavior.Player.IsAbove(this)) {
                     var dir = EnemyBehavior.RollDice(2, 1);
@@ -142,7 +139,11 @@ Enemy.prototype.types['RKN1d'] =  function() {
                     }
                 }
                 else {
-                    this.body.velocity.set(frauki.body.velocity.x * -1, -1);
+                    if(frauki.body.velocity.x < 0) {
+                        this.body.velocity.set(1, -0.4);
+                    } else {
+                        this.body.velocity.set(-1, -0.4);
+                    }
                 }
             }
             else if(this.clingDir === 'up') {
@@ -175,7 +176,11 @@ Enemy.prototype.types['RKN1d'] =  function() {
                 }
             }
             else {
-                this.body.velocity.set(frauki.body.velocity.x * -1, -1);
+                if(frauki.body.velocity.x < 0) {
+                    this.body.velocity.set(1, -0.4);
+                } else {
+                    this.body.velocity.set(-1, -0.4);
+                }
             }
 
             this.body.velocity.setMagnitude(600);
@@ -191,8 +196,8 @@ Enemy.prototype.types['RKN1d'] =  function() {
         this.PlayAnim('jump');
 
         
-        if(this.body.onFloor()) {
-            this.clingDir = 'none';
+        if(this.body.blocked.down) {
+            this.clingDir = 'down';
             this.body.velocity.y = 0;
         }
         else if(this.body.blocked.up) {
@@ -231,7 +236,7 @@ Enemy.prototype.types['RKN1d'] =  function() {
 
         // }
 
-        if(this.body.onFloor() || this.clingDir !== 'none') {
+        if(this.clingDir !== 'none') {
             this.timers.SetTimer('escape_wait', 800);
             events.publish('play_sound', {name: 'RKN1d_land', restart: true});
 
@@ -249,7 +254,7 @@ Enemy.prototype.types['RKN1d'] =  function() {
             this.state = this.Hopping;
 
             EnemyBehavior.FacePlayer(this);
-            EnemyBehavior.ChargeAtPlayer(this, 400); 
+            EnemyBehavior.JumpToPoint(this, frauki.body.center.x, frauki.body.center.y, 0.4); 
             
             this.body.velocity.x += frauki.body.velocity.x;
         }

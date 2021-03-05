@@ -219,6 +219,7 @@ Enemy.prototype.CanAttack = function() {
 Enemy.prototype.SetAttackTimer = function(amt) {
     amt = amt || 0;
     this.timers.SetTimer('attack_wait', amt);
+    Frogland.timers.SetTimer('global_attack_wait', 800);
 };
 
 Enemy.prototype.Grace = function() {
