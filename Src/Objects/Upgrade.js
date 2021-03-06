@@ -29,7 +29,7 @@ Upgrade = function(game, x, y, name) {
     this.icon.animations.add('Shield', ['UpgradeShield0000', 'UpgradeShield0001', 'UpgradeShield0002', 'UpgradeShield0003'], 4, true, false);
     this.icon.animations.add('Baton', ['Upgrade0005'], 18, true, false);
     this.icon.animations.add('Damage', ['UpgradeDamage0000'], 18, true, false);
-    this.icon.animations.add('Stab', ['UpgradeDamage0000'], 18, true, false);
+    this.icon.animations.add('Stab', ['UpgradeStab0000', 'UpgradeStab0001'], 10, true, false);
     this.icon.animations.add('Dive', ['UpgradeDamage0000'], 18, true, false);
     this.icon.iconSet = false;
     this.icon.x = -25;

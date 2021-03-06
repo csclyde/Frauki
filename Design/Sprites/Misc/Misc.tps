@@ -318,6 +318,8 @@
             <key type="filename">Frames/UpgradeShield0001.png</key>
             <key type="filename">Frames/UpgradeShield0002.png</key>
             <key type="filename">Frames/UpgradeShield0003.png</key>
+            <key type="filename">Frames/UpgradeStab0000.png</key>
+            <key type="filename">Frames/UpgradeStab0001.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>

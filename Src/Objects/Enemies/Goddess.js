@@ -151,7 +151,7 @@ Enemy.prototype.types['Goddess'] =  function() {
 	this.Idling = function() {
 		this.PlayAnim('idle');
 
-		this.SetDirection('right');
+		this.SetDirection('left');
 		//EnemyBehavior.FacePlayer(this);
 
 		return true;
