@@ -8,7 +8,7 @@ var defaultData = {
 
     checkpoint: '0',
     activeCheckpoints: [],
-    upgrades: ['Dive', 'Stab'],
+    upgrades: [],
     doors: [],
     shards: [],
     health: 4,

@@ -223,12 +223,16 @@ GameState.CreateUI = function() {
 
     this['prismWill'] = game.add.image(-10, 320, 'Misc', 'Shard0005', this.UI);
     this['prismWill'].fixedToCamera = true;
+    this['prismWill'].visible = false;
     this['prismWit'] = game.add.image(2, 320, 'Misc', 'Shard0004', this.UI);
     this['prismWit'].fixedToCamera = true;
+    this['prismWit'].visible = false;
     this['prismPower'] = game.add.image(14, 320, 'Misc', 'Shard0007', this.UI);
     this['prismPower'].fixedToCamera = true;
+    this['prismPower'].visible = false;
     this['prismLuck'] = game.add.image(26, 320, 'Misc', 'Shard0006', this.UI);
     this['prismLuck'].fixedToCamera = true;
+    this['prismLuck'].visible = false;
 
     if(this.inMainMenu) {
         this.UI.alpha = 0;

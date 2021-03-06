@@ -523,3 +523,9 @@ Collision.CollideProjectileWithWorld = function(p, t) {
         return false;
     }
 };
+
+Collision.CollideBatonWithWorld = function(b, t) {
+    if(t.index === 1) {
+        return true;
+    }
+};

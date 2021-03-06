@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="360" height="700" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="3879">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="360" height="700" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="3882">
  <properties>
   <property name="debug" value="true"/>
   <property name="startLayer" value="3"/>
-  <property name="startX" value="306"/>
-  <property name="startY" value="344"/>
+  <property name="startX" value="102"/>
+  <property name="startY" value="281"/>
  </properties>
  <tileset firstgid="1" name="Collision" tilewidth="16" tileheight="16" tilecount="64" columns="8">
   <image source="../Data/CollisionKey.png" width="128" height="128"/>
@@ -3644,7 +3644,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,13,13,13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="Objects" visible="0">
+ <objectgroup name="Objects">
   <properties>
    <property name="id" value="sewer_transverse"/>
   </properties>
@@ -3708,7 +3708,7 @@
   <object id="3115" gid="66" x="2575.33" y="8287.33" width="16" height="16"/>
   <object id="3174" gid="75" x="1322.13" y="4462.69" width="16" height="16">
    <properties>
-    <property name="upgrade" value="Health5"/>
+    <property name="upgrade" value="Dive"/>
    </properties>
   </object>
   <object id="3194" gid="74" x="2436.17" y="4608.17" width="16" height="16">
@@ -3838,6 +3838,11 @@
   <object id="3854" gid="75" x="1605.33" y="7302.67" width="16" height="16">
    <properties>
     <property name="upgrade" value="Damage"/>
+   </properties>
+  </object>
+  <object id="3879" gid="75" x="4126.5" y="4105" width="16" height="16">
+   <properties>
+    <property name="upgrade" value="Stab"/>
    </properties>
   </object>
  </objectgroup>

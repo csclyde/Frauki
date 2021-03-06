@@ -98,8 +98,8 @@ InputController = function() {
             break;
 
             case inputController.binds.weapon:
-                //inputController.OnHeal(true);
-                inputController.OnThrow(true);
+                inputController.OnHeal(true);
+                //inputController.OnThrow(true);
             break;
 
             case inputController.binds.roll:

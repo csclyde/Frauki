@@ -651,7 +651,7 @@
                  "name":"",
                  "properties":
                     {
-                     "upgrade":"Health5"
+                     "upgrade":"Dive"
                     },
                  "propertytypes":
                     {
@@ -1291,6 +1291,26 @@
                  "width":16,
                  "x":1605.33,
                  "y":7302.67
+                }, 
+                {
+                 "gid":75,
+                 "height":16,
+                 "id":3879,
+                 "name":"",
+                 "properties":
+                    {
+                     "upgrade":"Stab"
+                    },
+                 "propertytypes":
+                    {
+                     "upgrade":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":4126.5,
+                 "y":4105
                 }],
          "opacity":1,
          "properties":
@@ -1302,7 +1322,7 @@
              "id":"string"
             },
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -6888,14 +6908,14 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":3879,
+ "nextobjectid":3882,
  "orientation":"orthogonal",
  "properties":
     {
      "debug":"true",
      "startLayer":"3",
-     "startX":"306",
-     "startY":"344"
+     "startX":"102",
+     "startY":"281"
     },
  "propertytypes":
     {

@@ -30,7 +30,7 @@ Enemy.prototype.types['GUBr'] =  function() {
 			if(EnemyBehavior.Player.IsDangerous(this) || !this.CanAttack()) {
         		this.Flee();
 
-        	} else if(EnemyBehavior.Player.IsVulnerable(this) && EnemyBehavior.Player.IsNear(this, 180) && this.CanAttack() && frauki.body.onFloor()) {
+        	} else if(EnemyBehavior.Player.IsVulnerable(this) && EnemyBehavior.Player.IsNear(this, 160) && this.CanAttack() && frauki.body.onFloor()) {
 	            this.Attack();
 
 	        } else if(this.state === this.Cowering && !EnemyBehavior.Player.IsNear(this, 180)) {

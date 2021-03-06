@@ -121,6 +121,7 @@ WeaponController.prototype.Baton = {
         game.physics.enable(this.baton, Phaser.Physics.ARCADE);
         this.baton.body.gravity.y = -700;
         this.baton.body.setSize(30, 30, 0, 0);
+        this.baton.body.bounce.setTo(1);
         this.baton.animations.add('baton1', ['Baton00000', 'Baton00001', 'Baton00002', 'Baton00003', 'Baton00004', 'Baton00005'], 30, true, false);
         this.baton.animations.add('baton2', ['Baton10000', 'Baton10001', 'Baton10002'], 30, true, false);
         this.baton.animations.add('baton3', ['Baton20000', 'Baton20001', 'Baton20002'], 30, true, false);
@@ -144,6 +145,10 @@ WeaponController.prototype.Baton = {
     
     Update: function() {
         if(this.baton && this.baton.visible) {
+            // if(!weaponController.timers.TimerUp('max_throw_time')) {
+            //     game.physics.arcade.collide(this.baton, Frogland.GetCollisionLayer(), null, Collision.CollideBatonWithWorld);
+            // }
+            
             var vel = 800;
             var maxVelocity = 900 + this.baton.chargeLevel * 100;
 
@@ -248,6 +253,7 @@ WeaponController.prototype.Baton = {
 
 
         weaponController.timers.SetTimer('min_throw_time', 200);
+        weaponController.timers.SetTimer('max_throw_time', 3000);
     },
 
     ResetBaton: function() {
