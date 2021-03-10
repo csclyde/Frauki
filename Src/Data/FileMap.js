@@ -12,10 +12,6 @@ FileMap.Images = [
 	{ Name: 'clouds2', File: 'Data/World/Clouds2.png' },
 	{ Name: 'clouds3', File: 'Data/World/Clouds3.png' },
 
-	// { Name: 'font', File: 'Data/Sprites/font.png' },
-	// { Name: 'fontImage', File: 'Data/Sprites/diest64.png' },
-	// { Name: 'fontXml', File: 'Data/Sprites/diest64.xml' },
-
 	{ Name: 'cave', File: 'Data/World/Cave.png' },
 	{ Name: 'dark_cave', File: 'Data/World/DarkCave.png' },
 	{ Name: 'stone', File: 'Data/World/Stone.png' },
@@ -158,19 +154,12 @@ FileMap.Audio = [
 ];
 
 FileMap.Music = [
-	{ Name: 'Surface', File: 'Data/Music/Surface.xm', Volume: 0.3, Loop: true },
-	{ Name: 'Ruins', File: 'Data/Music/Ruins.xm', Volume: 0.3, Loop: true },
 	//{ Name: 'Choir', File: 'Data/Music/Choir.xm', Volume: 0.15, Loop: true },
-	{ Name: 'Underwater', File: 'Data/Music/Underwater.xm', Volume: 0.15, Loop: true },
-	{ Name: 'Landfill', File: 'Data/Music/Landfill.xm', Volume: 0.15, Loop: true },
-	{ Name: 'Gameover', File: 'Data/Music/Game Over (Dead Frauki).xm', Volume: 0.4, Loop: false },
-	{ Name: 'Tenements', File: 'Data/Music/Kowloon.xm', Volume: 0.4, Loop: true },
-	{ Name: 'Intro', File: 'Data/Music/Intro.xm', Volume: 0.4, Loop: true }
 ];
 
 FileMap.Ambient = [
-	{ Name: 'surface_wind', File: 'Data/Sfx/surface_wind.ogg', Volume: 0.50, Loop: true },
-	{ Name: 'cave_wind', File: 'Data/Sfx/cave_wind.ogg', Volume: 2, Loop: true },
+	{ Name: 'surface_wind', File: 'Data/Music/ambient_surface.ogg', Volume: 0.50, Loop: true },
+	{ Name: 'cave_wind', File: 'Data/Music/ambient_cave.ogg', Volume: 2, Loop: true },
 ];
 
 FileMap.Enemies = [
