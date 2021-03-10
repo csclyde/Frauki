@@ -389,7 +389,7 @@ ScriptRunner.scripts['open_fourth_seal'] = [
 ];
 
 ScriptRunner.scripts['goddess_restate'] = [
-	{ name: 'show_text', props: { text: "Yep, go find the red Prism Shard and free me. It looks like a big red jewel. Hurry along now.", portrait: 'Goddess_Neutral' } }
+	{ name: 'show_text', props: { text: "Before I met you, I gave up on being free...", portrait: 'Goddess_Neutral' } }
 ];
 
 ScriptRunner.scripts['goddess_freedom'] = [

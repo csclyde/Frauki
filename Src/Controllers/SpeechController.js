@@ -160,7 +160,7 @@ SpeechController.prototype.Update = function() {
 
 	if(this.text.visible && this.displayIndex < this.currentText.length && this.timers.TimerUp('display_progress')) {
 		this.displayIndex += 1;
-		this.timers.SetTimer('display_progress', 1);
+		this.timers.SetTimer('display_progress', 20);
            
         events.publish('play_sound', {name: 'text_bloop'});
 

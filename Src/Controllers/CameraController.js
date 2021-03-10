@@ -38,8 +38,8 @@ CameraController.prototype.Update = function() {
 
 	if(GameState.inMainMenu) {
 		if(!GameState.menuSelectionMade) {
-			this.camX = 228 * 16;
-			this.camY = 140 * 16;
+			this.camX = 280 * 16;
+			this.camY = 110 * 16;
 			game.camera.focusOnXY(this.camX, this.camY);
 		}
 		else {
