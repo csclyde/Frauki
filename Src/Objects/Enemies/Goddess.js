@@ -152,7 +152,7 @@ Enemy.prototype.types['Goddess'] =  function() {
 	this.Idling = function() {
 		this.PlayAnim('idle');
 
-		this.body.velocity.y = Math.sin((game.time.now) / 250) * 25;		
+		this.body.velocity.y = Math.sin((game.time.now) / 750) * 10;		
 
 		this.SetDirection('left');
 

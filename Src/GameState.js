@@ -12,12 +12,12 @@ GameState.create = function() {
     frauki.alpha = 0;
     
     var fadeIn = effectsController.Fade(false);
+    events.publish('play_music', { name: 'Intro' } );
 
     fadeIn.onComplete.add(function() {
         frauki.Reset();
         GameState.restarting = false;
 
-        events.publish('play_music', { name: 'Intro' } );
     });
 
     this.tweens = {};
@@ -32,6 +32,13 @@ GameState.create = function() {
     events.subscribe('select_menu_option', this.SelectMenu, this);
     
     effectsController.screenDark.bringToTop();
+
+    this.introImage = game.add.image(0, 0, 'intro');
+    this.introImage.fixedToCamera = true;
+    this.introImage.width = 640;
+    this.introImage.height = 360;
+    this.introImage.visible = false;
+    
 };
 
 GameState.update = function() {
@@ -134,20 +141,35 @@ GameState.SelectMenu = function() {
 
     if(this.menuSelection === 'new') {
         GameData.ResetData();
-        this.Restart().onComplete.add(function() {
-            GameState.inMainMenu = false;
-            events.publish('allow_input');             
-            GameState.uiFadeTween = game.add.tween(GameState.UI).to({alpha: 1}, 1500, Phaser.Easing.Cubic.Out, true);
-            GameState.Menu.alpha = 0;
+        GameState.introImage.visible = true;
+        GameState.introImage.alpha = 0;
+        GameState.introFadeTween = game.add.tween(GameState.introImage).to({alpha: 1}, 6000, Phaser.Easing.Cubic.InOut, true);
 
-            game.time.events.add(800, function() {
-                //frauki.Reset(); 
-                frauki.state = frauki.Materializing;
+        GameState.introFadeTween.onComplete.add(function() {
+            effectsController.screenDark.bringToTop();
+            events.publish('stop_music', { name: 'Intro', duration: 3500 } );
+        
+    
+            GameState.Restart().onComplete.add(function() {
+                GameState.inMainMenu = false;
+                GameState.introImage.visible = false;
+                events.publish('allow_input');             
+                GameState.uiFadeTween = game.add.tween(GameState.UI).to({alpha: 1}, 1500, Phaser.Easing.Cubic.Out, true);
+                GameState.Menu.alpha = 0;
+    
+                game.time.events.add(800, function() {
+                    //frauki.Reset(); 
+                    frauki.state = frauki.Materializing;
+                });
             });
         });
+        
+
     } else {
         this.camTween = game.add.tween(cameraController).to({camX : frauki.body.center.x, camY: frauki.body.center.y}, 2000, Phaser.Easing.Cubic.InOut, true);
         this.menuFadeTween = game.add.tween(this.Menu).to({alpha: 0}, 1500, Phaser.Easing.Cubic.Out, true);
+        events.publish('stop_music', { name: 'Intro', duration: 2500 } );
+    
         
         this.camTween.onComplete.add(function() {
             GameState.inMainMenu = false;

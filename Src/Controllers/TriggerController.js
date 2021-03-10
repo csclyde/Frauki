@@ -14,7 +14,7 @@ TriggerController.prototype.Create = function() {
 
 TriggerController.prototype.CreateTriggers = function(layer) {
 
-    this.triggerLayers['Triggers'] = Frogland.map.objects['Triggers'];
+    this.triggerLayers['Triggers'] = Frogland.map.objects['Triggers'].concat(Frogland.map.objects['Audio']);
 
     for(var i = 0; i < this.triggerLayers['Triggers'].length; i++) {
 

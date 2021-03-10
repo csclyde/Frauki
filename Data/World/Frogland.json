@@ -6584,6 +6584,49 @@
         }, 
         {
          "draworder":"topdown",
+         "name":"Audio",
+         "objects":[
+                {
+                 "height":1604,
+                 "id":3883,
+                 "name":"ambient_cave",
+                 "rotation":0,
+                 "type":"ambient",
+                 "visible":true,
+                 "width":4052,
+                 "x":1012,
+                 "y":3088
+                }, 
+                {
+                 "height":312,
+                 "id":3885,
+                 "name":"ambient_cave",
+                 "rotation":0,
+                 "type":"ambient",
+                 "visible":true,
+                 "width":1800,
+                 "x":3258,
+                 "y":2794
+                }, 
+                {
+                 "height":2056,
+                 "id":3886,
+                 "name":"ambient_ship",
+                 "rotation":0,
+                 "type":"ambient",
+                 "visible":true,
+                 "width":508,
+                 "x":2704,
+                 "y":1000
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "name":"Triggers",
          "objects":[
                 {
@@ -6872,7 +6915,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":3883,
+ "nextobjectid":3887,
  "orientation":"orthogonal",
  "properties":
     {

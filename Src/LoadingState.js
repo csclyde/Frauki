@@ -26,8 +26,8 @@ LoadingState.preload = function() {
 
     //load music
     FileMap.Music.forEach(function(music) {
-        //game.load.audio(music.Name, music.File);
-        game.load.binary(music.Name, music.File);
+        game.load.audio(music.Name, music.File);
+        //game.load.binary(music.Name, music.File);
     });
 
     FileMap.Ambient.forEach(function(music) {

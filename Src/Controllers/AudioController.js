@@ -46,16 +46,15 @@ AudioController = function() {
         that.sounds[audio.Name].initialVolume = audio.Volume;
     });
 
-    // FileMap.Music.forEach(function(music) {
+    FileMap.Music.forEach(function(music) {
+        that.music[music.Name] = game.add.audio(music.Name, music.Volume, music.Loop);
+        var musicAudio = that.music[music.Name];
 
-    //     that.music[music.Name] = game.add.audio(music.Name, music.Volume, music.Loop);
-    //     var musicAudio = that.music[music.Name];
-
-    //     musicAudio.initialVolume = music.Volume;
-    //     musicAudio.initialName = music.Name;
-    //     musicAudio.initialLoop = music.Loop;
+        musicAudio.initialVolume = music.Volume;
+        musicAudio.initialName = music.Name;
+        musicAudio.initialLoop = music.Loop;
         
-    // });
+    });
 
     FileMap.Ambient.forEach(function(ambient) {
         that.ambient[ambient.Name] = game.add.audio(ambient.Name, ambient.Volume, ambient.Loop);
@@ -124,24 +123,20 @@ AudioController.prototype.StopSound = function(params) {
 
 AudioController.prototype.PlayMusic = function(params) {
 
-    //they either want to just stop the song, play a new one, or they are trying to play the same song
-    if(!params.name) {
-        this.FadeMusic({volume: 0, fadeDuration: 3000});
-
-    } else if(!!params.name && params.name !== this.currentMusic) {
-        
-        if(this.musicVolumeTween) this.musicVolumeTween.stop();
-        this.musicVolume = 1;
-        
-        this.currentMusic = params.name;
-
-    } else if(!!params.name && params.name === this.currentMusic) {
-        this.FadeMusic({volume: 1});
+    if(!!params.name && !!this.music[params.name]) {
+        this.music[params.name].play(null, 0, this.music[params.name].initialVolume);
+        //this.music[params.name].fadeTo(500, this.music[params.name].initialVolume);
     }
 };
 
 AudioController.prototype.StopMusic = function(params) {
-    
+    if(!!params.name && !!this.music[params.name]) {
+        if(params.duration) {
+            this.music[params.name].fadeOut(params.duration);
+        } else {
+            this.music[params.name].pause();
+        }
+    }
 };
 
 AudioController.prototype.StopAllMusic = function(params) {

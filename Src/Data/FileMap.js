@@ -16,6 +16,8 @@ FileMap.Images = [
 	{ Name: 'dark_cave', File: 'Data/World/DarkCave.png' },
 	{ Name: 'stone', File: 'Data/World/Stone.png' },
 	{ Name: 'metal', File: 'Data/World/Metal.png' },
+
+	{ Name: 'intro', File: 'Data/World/Intro.png' },
 ];
 
 FileMap.Atlas = [
@@ -154,7 +156,8 @@ FileMap.Audio = [
 ];
 
 FileMap.Music = [
-	//{ Name: 'Choir', File: 'Data/Music/Choir.xm', Volume: 0.15, Loop: true },
+	{ Name: 'Intro', File: 'Data/Music/Intro.ogg', Volume: 0.15, Loop: true },
+	{ Name: 'Choir', File: 'Data/Music/Choir.ogg', Volume: 0.15, Loop: true },
 ];
 
 FileMap.Ambient = [
