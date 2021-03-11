@@ -43,8 +43,6 @@ TriggerController.prototype.triggers['ambient_left_right'] = {
 	},
 
 	exit: function(params, trigger) {
-		events.publish('stop_all_ambient', { fadeOut: 500 });
-		
 		if(frauki.body.center.x < trigger.x) {
 			events.publish('play_ambient', { name: params.left } );
 		} else {
@@ -62,8 +60,6 @@ TriggerController.prototype.triggers['ambient_up_down'] = {
 	},
 
 	exit: function(params, trigger) {
-		//events.publish('stop_all_ambient', { fadeOut: 500 });
-
 		if(frauki.body.center.y < trigger.y) {
 			events.publish('play_ambient', { name: params.up } );
 		} else {

@@ -192,11 +192,11 @@ AudioController.prototype.FadeMusic = function(params) {
 };
 
 AudioController.prototype.PlayAmbient = function(params) {
-    if(!!params.name && !!this.ambient[params.name] && this.currentAmbient !== params.name) {
-        this.StopAllAmbient();
+    if(!!params.name && !!this.ambient[params.name] && !this.ambient[params.name].isPlaying) {
+        this.StopAllAmbient(params.name);
         this.ambient[params.name].play(null, 0, 0);
         this.ambient[params.name].fadeTo(500, this.ambient[params.name].initialVolume);
-        this.currentAmbient = params.name;
+        console.log(this.ambient[params.name]);
     }
 };
 
@@ -211,7 +211,6 @@ AudioController.prototype.StopAllAmbient = function() {
         if(!this.ambient.hasOwnProperty(key)) continue;
 
         if(!!this.ambient[key] && this.ambient[key].isPlaying) {
-
             this.ambient[key].fadeTo(500, 0);
         }
     }
