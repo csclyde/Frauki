@@ -370,7 +370,7 @@ SpeechController.prototype.ParseTextVariables = function(text) {
 };
 
 SpeechController.prototype.ShowExclamationMark = function(e) {
-	if(this.timers.TimerUp('enemy_surprised')) {
+	if(this.timers.TimerUp('enemy_surprised') && e.objectName !== 'Goddess') {
 		this.targetEnemy = e;
 		this.timers.SetTimer('enemy_surprised', 2000);
 		this.tweens.surpriseMarkShake = 5;

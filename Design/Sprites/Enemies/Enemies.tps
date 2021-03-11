@@ -205,6 +205,7 @@
             <key type="filename">A3PZ/Walk0003.png</key>
             <key type="filename">A3PZ/Walk0004.png</key>
             <key type="filename">A3PZ/Walk0005.png</key>
+            <key type="filename">Goddess/Goddess0001.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>

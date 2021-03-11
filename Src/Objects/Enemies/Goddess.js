@@ -5,7 +5,7 @@ Enemy.prototype.types['Goddess'] =  function() {
 	this.body.setSize(40, 45, 0, 0);
 	this.anchor.setTo(0.5);
 
-    this.animations.add('idle', ['Goddess/Goddess0000'], 10, false, false);
+    this.animations.add('idle', ['Goddess/Goddess0000', 'Goddess/Goddess0001'], 2, true, false);
     this.animations.add('stuff', ['Goddess/Stand0000'], 10, false, false);
 
     this.energy = 5;
@@ -13,6 +13,9 @@ Enemy.prototype.types['Goddess'] =  function() {
 
 	this.body.drag.x = 500;
 	this.body.allowGravity = false;
+
+	this.Vulnerable = function() { return false; }
+	
 	
 
     this.messageQueue = GameData.GetVal('goddess_message_queue');
@@ -152,7 +155,7 @@ Enemy.prototype.types['Goddess'] =  function() {
 	this.Idling = function() {
 		this.PlayAnim('idle');
 
-		this.body.velocity.y = Math.sin((game.time.now) / 750) * 10;		
+		this.body.velocity.y = Math.sin((game.time.now) / 500) * 5;		
 
 		this.SetDirection('left');
 

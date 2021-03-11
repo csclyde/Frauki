@@ -346,7 +346,7 @@ Enemy.prototype.TakeHit = function(damage) {
 
 Enemy.prototype.DrawHealth = function() {
 
-    if(this.name === 'Goddess') return;
+    if(this.objectName === 'Goddess') return;
     
     this.UI.frame.x = this.body.x;
     this.UI.frame.y = this.body.y - 20;
