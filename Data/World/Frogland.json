@@ -7008,7 +7008,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -7257,11 +7257,11 @@
                  "id":2866,
                  "name":"goddess",
                  "rotation":0,
-                 "type":"speech",
+                 "type":"trigger",
                  "visible":true,
                  "width":77.3333,
-                 "x":4140.67,
-                 "y":3041.67
+                 "x":4504.67,
+                 "y":2701.67
                 }, 
                 {
                  "height":67,
@@ -7298,7 +7298,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }],

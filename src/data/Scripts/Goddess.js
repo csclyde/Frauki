@@ -1,3 +1,30 @@
+ScriptRunner.scripts['enter_goddess'] = [
+	{ name: 'disallow_input', props: {} },
+	{ name: 'pause_all_music', props: {} },
+	{ name: 'play_music', props: { name: 'Choir', fade: 1000 } },
+
+	{ func: function() {
+        events.publish('pan_camera', { to: goddess.body.center, duration: 1000 });
+	} },
+	
+	{ name: 'wait', props: { amount: 5000 } },
+
+	{ name: 'run_script', props: { name: 'exit_goddess' } },	
+];
+
+ScriptRunner.scripts['exit_goddess'] = [
+	{ func: function() {
+        events.publish('pan_camera', { to: frauki.body.center, duration: 1000 });
+	} },
+	{ name: 'stop_music', props: { name: 'Choir', fade: 1000 } },	
+
+	{ name: 'wait', props: { amount: 1000 } },
+
+	{ name: 'unpause_all_music', props: {} },	
+	{ name: 'allow_input', props: {} },
+
+];
+
 ScriptRunner.scripts['goddess_intro'] = [
 	{ name: 'disallow_input', props: {} },
 

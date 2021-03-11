@@ -15,6 +15,10 @@ ScriptRunner.create = function() {
 			}
 		}
 	}, this);
+
+	events.subscribe('run_script', function(params) {
+		ScriptRunner.run(params.name, params);
+	});
 };
 
 ScriptRunner.run = function(name, params) {

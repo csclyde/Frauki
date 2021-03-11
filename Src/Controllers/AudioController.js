@@ -10,6 +10,8 @@ AudioController = function() {
     events.subscribe('play_ambient', this.PlayAmbient, this);
     events.subscribe('stop_ambient', this.StopAmbient, this);
     events.subscribe('stop_all_music', this.StopAllMusic, this);
+    events.subscribe('pause_all_music', this.PauseAllMusic, this);
+    events.subscribe('unpause_all_music', this.UnpauseAllMusic, this);
     events.subscribe('stop_all_ambient', this.StopAllAmbient, this);
     events.subscribe('fade_music', this.FadeMusic, this);
 
@@ -124,8 +126,12 @@ AudioController.prototype.StopSound = function(params) {
 AudioController.prototype.PlayMusic = function(params) {
 
     if(!!params.name && !!this.music[params.name] && !this.music[params.name].isPlaying) {
-        this.music[params.name].play(null, 0, this.music[params.name].initialVolume);
-        //this.music[params.name].fadeTo(500, this.music[params.name].initialVolume);
+        if(params.fade) {
+            this.music[params.name].play(null, 0, 0);
+            this.music[params.name].fadeTo(params.fade, this.music[params.name].initialVolume);
+        } else {
+            this.music[params.name].play(null, 0, this.music[params.name].initialVolume);
+        }
 
         this.currentMusic = params.name;
     }
@@ -133,10 +139,10 @@ AudioController.prototype.PlayMusic = function(params) {
 
 AudioController.prototype.StopMusic = function(params) {
     if(!!params.name && !!this.music[params.name]) {
-        if(params.duration) {
-            this.music[params.name].fadeOut(params.duration);
+        if(params.fade) {
+            this.music[params.name].fadeOut(params.fade);
         } else {
-            this.music[params.name].pause();
+            this.music[params.name].stop();
         }
     }
 };
@@ -150,26 +156,31 @@ AudioController.prototype.StopAllMusic = function(params) {
             this.music[key].fadeTo(200, 0);
         }
     }
+};
 
-    // if(!!this.currentMusic) {
-    //     if(!!this.currentMusic.fadeTween) this.currentMusic.fadeTween.stop();
+AudioController.prototype.PauseAllMusic = function(params) {
+    for(var key in this.music) {
+        if(!this.music.hasOwnProperty(key)) continue;
 
-    //     this.currentMusic.fadeOut(params.fadeOut || 500);
-    //     this.timers.SetTimer('music_reset', (params.fadeOut || 500) + 10000);
-    // }
-    // for(var key in this.music) {
-    //     if(!this.music.hasOwnProperty(key)) continue;
+        if(!!this.music[key] && this.music[key].isPlaying) {
 
-    //     if(!!this.music[key] && this.music[key].isPlaying) {
+            this.music[key].fadeTo(params.duration || 200, 0);
+            this.music[key].onFadeComplete.add(function(music) {
+                music.pause();
+            });
+        }
+    }
+};
 
-    //         if(!!this.music[key].fadeTween && this.music[key].fadeTween.isRunning) {
-    //             this.music[key].fadeTween.stop();
-    //         }
+AudioController.prototype.UnpauseAllMusic = function(params) {
+    for(var key in this.music) {
+        if(!this.music.hasOwnProperty(key)) continue;
 
-    //         this.music[key].fadeOut(params.fadeOut || 500);
-    //         this.music[key].quietTimestamp = game.time.now + (params.fadeOut || 500);
-    //     }
-    // }
+        if(!!this.music[key] && this.music[key].isPaused) {
+            music.resume();
+            this.music[key].fadeTo(params.duration || 200, this.music[key].initialVolume);
+        }
+    }
 };
 
 AudioController.prototype.FadeMusic = function(params) {
@@ -196,7 +207,6 @@ AudioController.prototype.PlayAmbient = function(params) {
         this.StopAllAmbient(params.name);
         this.ambient[params.name].play(null, 0, 0);
         this.ambient[params.name].fadeTo(500, this.ambient[params.name].initialVolume);
-        console.log(this.ambient[params.name]);
     }
 };
 

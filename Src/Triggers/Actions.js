@@ -123,6 +123,18 @@ TriggerController.prototype.triggers['goddess_intro'] = {
 	}
 };
 
+TriggerController.prototype.triggers['goddess'] = {
+	enter: function(params) {
+		ScriptRunner.run('enter_goddess');
+	},
+
+	stay: function(params) {
+	},
+
+	exit: function(params) {
+	}
+};
+
 TriggerController.prototype.triggers['vertical_loop'] = {
 	enter: function(params) {
 		

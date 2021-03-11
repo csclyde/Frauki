@@ -4780,7 +4780,7 @@
   <object id="3819" name="splash" type="effect" x="879.625" y="2392.25" width="65.0833" height="9.5"/>
   <object id="3882" name="leaves_green" type="effect" x="3932.18" y="2704.17" width="136.979" height="7.6666"/>
  </objectgroup>
- <objectgroup name="Audio">
+ <objectgroup name="Audio" visible="0">
   <object id="3888" name="ambient_left_right" type="trigger" x="3216" y="2958.67" width="32" height="97.3333">
    <properties>
     <property name="left" value="ambient_ship"/>
@@ -4902,7 +4902,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="Triggers" visible="0">
+ <objectgroup name="Triggers">
   <object id="1592" name="mushrooms" type="speech" x="3845.75" y="3988.17" width="55.5" height="25.5"/>
   <object id="1607" name="extract" type="speech" x="2699.67" y="3322.83" width="34.5" height="60"/>
   <object id="1611" name="hidden_goodies" type="speech" x="3456.17" y="4064.67" width="250.497" height="79.6633"/>
@@ -4931,7 +4931,7 @@
   </object>
   <object id="2727" name="dont_eat" type="speech" x="1557.33" y="7261.01" width="72" height="66.6667"/>
   <object id="2730" name="cold" type="speech" x="2095.25" y="8143.91" width="291.5" height="96.8367"/>
-  <object id="2866" name="goddess" type="speech" x="4140.67" y="3041.67" width="77.3333" height="83"/>
+  <object id="2866" name="goddess" type="trigger" x="4504.67" y="2701.67" width="77.3333" height="83"/>
   <object id="2913" name="names_engraved" type="speech" x="4256" y="2356.67" width="61" height="67"/>
   <object id="3306" name="flower_bloom" type="speech" x="3374.5" y="4507.77" width="22" height="39.4545"/>
   <object id="3425" name="spores" type="speech" x="2920.38" y="3982.88" width="94.5" height="64.5"/>

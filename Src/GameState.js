@@ -19,6 +19,18 @@ GameState.create = function() {
 
     events.subscribe('update_ui', this.UpdateUI, this);
     events.subscribe('select_menu_option', this.SelectMenu, this);
+    events.subscribe('menu_change', function() {
+        if(this.inMainMenu && !this.menuSelectionMade) {
+            if(this.menuSelection === 'continue') {
+                this.menuSelection = 'new';
+            } else {
+                this.menuSelection = 'continue';
+            }
+    
+            events.publish('update_ui', {});
+            events.publish('play_sound', {name: 'text_bloop'});   
+        }
+    }, this);
     
     ScriptRunner.run('game_start');
 };
@@ -118,12 +130,14 @@ GameState.Restart = function() {
 };
 
 GameState.SelectMenu = function() {
-    this.menuSelectionMade = true;
-
-    if(this.menuSelection === 'new') {
-        ScriptRunner.run('new_game');
-    } else {
-        ScriptRunner.run('continue_game');
+    if(GameState.inMainMenu && !GameState.menuSelectionMade) {
+        this.menuSelectionMade = true;
+    
+        if(this.menuSelection === 'new') {
+            ScriptRunner.run('new_game');
+        } else {
+            ScriptRunner.run('continue_game');
+        }
     }
 };
 

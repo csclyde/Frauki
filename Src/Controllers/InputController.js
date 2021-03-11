@@ -334,7 +334,10 @@ InputController.prototype.OnJump = function(pressed) {
     //     return;
     // }
 
-    if(pressed) events.publish('advance_text', {});
+    if(pressed) {
+        events.publish('select_menu_option', {});
+        events.publish('advance_text', {});
+    }
 
     if(this.allowInput) {
         if(pressed) {
@@ -348,11 +351,10 @@ InputController.prototype.OnJump = function(pressed) {
 InputController.prototype.OnSlash = function(pressed) {
     this.tetrad.left = pressed;
 
-    if(GameState.inMainMenu && !GameState.menuSelectionMade && pressed) {
+    if(pressed) {
         events.publish('select_menu_option', {});
+        events.publish('advance_text', {});
     }
-
-    if(pressed) events.publish('advance_text', {});
 
     if(this.allowInput) {
         if(pressed) {
@@ -367,7 +369,10 @@ InputController.prototype.OnSlash = function(pressed) {
 InputController.prototype.OnThrow = function(pressed) {
     this.tetrad.top = pressed;
 
-    if(pressed) events.publish('advance_text', {});
+    if(pressed) {
+        events.publish('select_menu_option', {});
+        events.publish('advance_text', {});
+    }
 
     if(this.allowInput) {
         if(pressed) {
@@ -382,7 +387,10 @@ InputController.prototype.OnThrow = function(pressed) {
 InputController.prototype.OnRoll = function(pressed) {
     this.tetrad.right = pressed;
 
-    if(pressed) events.publish('advance_text', {});
+    if(pressed) {
+        events.publish('select_menu_option', {});
+        events.publish('advance_text', {});
+    }
 
     if(this.allowInput) {
         if(pressed) {
@@ -449,14 +457,8 @@ InputController.prototype.OnRight = function(pressed) {
 InputController.prototype.OnUp = function(pressed) {
     this.dpad.up = pressed;
 
-    if(GameState.inMainMenu && !GameState.menuSelectionMade && pressed) {
-        if(GameState.menuSelection === 'continue') {
-            GameState.menuSelection = 'new';
-        } else {
-            GameState.menuSelection = 'continue';
-        }
-        events.publish('update_ui', {});
-        events.publish('play_sound', {name: 'text_bloop'});        
+    if(pressed) {
+        events.publish('menu_change', { dir: 'up' });
     }
 
     if(this.allowInput) {
@@ -471,14 +473,8 @@ InputController.prototype.OnUp = function(pressed) {
 InputController.prototype.OnDown = function(pressed) {
     this.dpad.down = pressed;
 
-    if(GameState.inMainMenu && !GameState.menuSelectionMade && pressed) {
-        if(GameState.menuSelection === 'continue') {
-            GameState.menuSelection = 'new';
-        } else {
-            GameState.menuSelection = 'continue';
-        }
-        events.publish('update_ui', {});
-        events.publish('play_sound', {name: 'text_bloop'});        
+    if(pressed) {
+        events.publish('menu_change', { dir: 'down' });
     }
 
     if(this.allowInput) {
