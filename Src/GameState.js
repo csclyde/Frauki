@@ -10,16 +10,6 @@ GameState.create = function() {
     this.physicsSlowMo = 1;
     this.currentAlpha = 1;
     frauki.alpha = 0;
-    
-    var fadeIn = effectsController.Fade(false);
-    events.publish('play_music', { name: 'Intro' } );
-    events.publish('play_ambient', { name: 'ambient_surface' } );
-
-    fadeIn.onComplete.add(function() {
-        frauki.Reset();
-        GameState.restarting = false;
-
-    });
 
     this.tweens = {};
 
@@ -30,7 +20,7 @@ GameState.create = function() {
     events.subscribe('update_ui', this.UpdateUI, this);
     events.subscribe('select_menu_option', this.SelectMenu, this);
     
-    effectsController.screenDark.bringToTop();
+    ScriptRunner.run('game_start');
 };
 
 GameState.update = function() {
@@ -131,39 +121,10 @@ GameState.SelectMenu = function() {
     this.menuSelectionMade = true;
 
     if(this.menuSelection === 'new') {
-        GameData.ResetData();
-        effectsController.screenDark.bringToTop();
-        events.publish('stop_music', { name: 'Intro', duration: 3500 } );
-        
-        GameState.Restart().onComplete.add(function() {
-            GameState.inMainMenu = false;
-            events.publish('allow_input');
-            GameState.Menu.alpha = 0;
-
-            game.time.events.add(800, function() {
-                //frauki.Reset(); 
-                frauki.state = frauki.Materializing;
-            });
-        });
-        
-
+        ScriptRunner.run('new_game');
     } else {
-        this.camTween = game.add.tween(cameraController).to({camX : frauki.body.center.x, camY: frauki.body.center.y}, 2000, Phaser.Easing.Cubic.InOut, true);
-        this.menuFadeTween = game.add.tween(this.Menu).to({alpha: 0}, 1500, Phaser.Easing.Cubic.Out, true);
-        events.publish('stop_music', { name: 'Intro', duration: 2500 } );
-    
-        
-        this.camTween.onComplete.add(function() {
-            GameState.inMainMenu = false;
-            events.publish('allow_input'); 
-            GameState.uiFadeTween = game.add.tween(GameState.UI).to({alpha: 1}, 1500, Phaser.Easing.Cubic.Out, true);
-            frauki.state = frauki.Materializing;
-        });
+        ScriptRunner.run('continue_game');
     }
-    
-    frauki.Reset();
-    frauki.state = frauki.PreMaterializing;
-    
 };
 
 GameState.CreateUI = function() {

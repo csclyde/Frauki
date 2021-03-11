@@ -350,7 +350,6 @@ InputController.prototype.OnSlash = function(pressed) {
 
     if(GameState.inMainMenu && !GameState.menuSelectionMade && pressed) {
         events.publish('select_menu_option', {});
-        events.publish('play_sound', {name: 'crystal_door'});        
     }
 
     if(pressed) events.publish('advance_text', {});

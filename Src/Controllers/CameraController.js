@@ -3,9 +3,12 @@ Y_VEL_DIV = 10;
 
 CameraController = function() {
 
-	this.camX = 0;
+	this.menuTarget = { x: 280 * 16, y: 110 * 16 };
+	this.target = this.menuTarget;
+	
+	this.camX = this.menuTarget.x;
 	this.camVelX = 0;
-	this.camY = 0;
+	this.camY = this.menuTarget.y;
 	this.camVelY = 0;
 
 	this.shakeX = 0;
@@ -21,32 +24,16 @@ CameraController = function() {
 	events.subscribe('player_crouch', this.CrouchCamera, this);
 	events.subscribe('control_up', this.RaiseCamera, this);
 	events.subscribe('camera_shake', this.ScreenShake, this);
-
-	this.panning = false;
-
+	events.subscribe('pan_camera', this.PanCamera, this);
+	events.subscribe('set_camera', this.SetCamera, this);
 	events.subscribe('focus_on', function(params) {
 		this.target = params.target;
 	}, this);
-
-    //this.target = { x: 198 * 16, y: 180 * 16 };
-
 
 };
 
 //camera is controlled in player centric space
 CameraController.prototype.Update = function() {
-
-	if(GameState.inMainMenu) {
-		if(!GameState.menuSelectionMade) {
-			this.camX = 280 * 16;
-			this.camY = 110 * 16;
-			game.camera.focusOnXY(this.camX, this.camY);
-		}
-		else {
-			game.camera.focusOnXY(Math.floor(this.camX), Math.floor(this.camY));
-		}
-		return;	
-	}
 	
 	var xOffset = 0, yOffset = 0;
 
@@ -130,6 +117,22 @@ CameraController.prototype.ScreenShake = function(params) {
 	this.shakeYTween = game.add.tween(this).to({shakeMagnitudeY: 0}, params.duration, Phaser.Easing.Linear.None, true);
 
 	//a sine function that is multiplied by the magnitude. The magnitude has a tween set to 0 based on the duration
+};
+
+CameraController.prototype.PanCamera = function(params) {
+	var transitionTarget = { x: this.target.x, y: this.target.y };
+	this.target = transitionTarget;
+
+	var panTween = game.add.tween(transitionTarget).to({x: params.to.x, y: params.to.y}, params.duration, Phaser.Easing.Cubic.InOut, true);
+	panTween.onComplete.add(function() {
+		cameraController.target = params.to;
+	});
+};
+
+CameraController.prototype.SetCamera = function(params) {
+	cameraController.target = params.to;
+	this.camX = params.to.x;
+	this.camY = params.to.y;
 };
 
 CameraController.prototype.IsObjectOnScreen = function(obj, padding) {
