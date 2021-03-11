@@ -11,7 +11,7 @@ var defaultData = {
     upgrades: [],
     doors: [],
     shards: [],
-    health: 4,
+    health: 3,
     shield: 0,
     flags: {},
     vals: {

@@ -31,13 +31,6 @@ GameState.create = function() {
     events.subscribe('select_menu_option', this.SelectMenu, this);
     
     effectsController.screenDark.bringToTop();
-
-    this.introImage = game.add.image(0, 0, 'intro');
-    this.introImage.fixedToCamera = true;
-    this.introImage.width = 640;
-    this.introImage.height = 360;
-    this.introImage.visible = false;
-    
 };
 
 GameState.update = function() {
@@ -72,8 +65,7 @@ GameState.Restart = function() {
 
     events.publish('stop_all_music'); 
     events.publish('stop_all_ambient'); 
-    events.publish('play_music', { name: 'Gameover' } );
-    audioController.timers.SetTimer('music_reset', 0); 
+    audioController.timers.SetTimer('music_reset', 0);
 
     speechController.HideSpeech();
 
@@ -84,7 +76,7 @@ GameState.Restart = function() {
     this.physicsSlowMo = 0.1;
     this.currentAlpha = 1;
     pixel.context.globalAlpha = 1;
-    var fadeOutTween = effectsController.Fade(true);
+    var fadeOutTween = effectsController.Fade(true, 4000);
 
     inputController.OnLeft(false);
     inputController.OnRight(false);
@@ -140,26 +132,17 @@ GameState.SelectMenu = function() {
 
     if(this.menuSelection === 'new') {
         GameData.ResetData();
-        GameState.introImage.visible = true;
-        GameState.introImage.alpha = 0;
-        GameState.introFadeTween = game.add.tween(GameState.introImage).to({alpha: 1}, 6000, Phaser.Easing.Cubic.InOut, true);
-
-        GameState.introFadeTween.onComplete.add(function() {
-            effectsController.screenDark.bringToTop();
-            events.publish('stop_music', { name: 'Intro', duration: 3500 } );
+        effectsController.screenDark.bringToTop();
+        events.publish('stop_music', { name: 'Intro', duration: 3500 } );
         
-    
-            GameState.Restart().onComplete.add(function() {
-                GameState.inMainMenu = false;
-                GameState.introImage.visible = false;
-                events.publish('allow_input');             
-                GameState.uiFadeTween = game.add.tween(GameState.UI).to({alpha: 1}, 1500, Phaser.Easing.Cubic.Out, true);
-                GameState.Menu.alpha = 0;
-    
-                game.time.events.add(800, function() {
-                    //frauki.Reset(); 
-                    frauki.state = frauki.Materializing;
-                });
+        GameState.Restart().onComplete.add(function() {
+            GameState.inMainMenu = false;
+            events.publish('allow_input');
+            GameState.Menu.alpha = 0;
+
+            game.time.events.add(800, function() {
+                //frauki.Reset(); 
+                frauki.state = frauki.Materializing;
             });
         });
         

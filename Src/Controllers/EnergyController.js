@@ -86,8 +86,12 @@ EnergyController.prototype.Update = function() {
 		this.charge = 0;
 	}
 
-	if(this.health <= 0)
+	if(this.health <= 0 && !GameState.restarting) {
 		GameState.Restart();
+		game.time.events.add(800, function() {
+			events.publish('play_music', { name: 'Gameover' } );		
+		});
+	}
 
 	if(this.oldHealth !== this.health || this.oldApples !== this.remainingApples || this.oldShield !== this.shield) {
 		events.publish('update_ui', {});

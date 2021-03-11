@@ -859,13 +859,13 @@ EffectsController.prototype.ScreenDark = function(show, amt) {
     }
 };
 
-EffectsController.prototype.Fade = function(show) {
+EffectsController.prototype.Fade = function(show, dur) {
     if(show) {
         this.screenDark.alpha = 0;
         this.screenDark.visible = true;
-        return game.add.tween(this.screenDark).to( { alpha: 1 }, 2500, Phaser.Easing.Linear.In, true);
+        return game.add.tween(this.screenDark).to( { alpha: 1 }, dur || 2500, Phaser.Easing.Linear.In, true);
     } else {
-        return game.add.tween(this.screenDark).to( { alpha: 0 }, 1000, Phaser.Easing.Quintic.In, true);
+        return game.add.tween(this.screenDark).to( { alpha: 0 }, dur || 1000, Phaser.Easing.Quintic.In, true);
     }
 };
 

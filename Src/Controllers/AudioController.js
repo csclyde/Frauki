@@ -123,9 +123,11 @@ AudioController.prototype.StopSound = function(params) {
 
 AudioController.prototype.PlayMusic = function(params) {
 
-    if(!!params.name && !!this.music[params.name]) {
+    if(!!params.name && !!this.music[params.name] && !this.music[params.name].isPlaying) {
         this.music[params.name].play(null, 0, this.music[params.name].initialVolume);
         //this.music[params.name].fadeTo(500, this.music[params.name].initialVolume);
+
+        this.currentMusic = params.name;
     }
 };
 
@@ -140,7 +142,14 @@ AudioController.prototype.StopMusic = function(params) {
 };
 
 AudioController.prototype.StopAllMusic = function(params) {
-   
+    for(var key in this.music) {
+        if(!this.music.hasOwnProperty(key)) continue;
+
+        if(!!this.music[key] && this.music[key].isPlaying) {
+
+            this.music[key].fadeTo(200, 0);
+        }
+    }
 
     // if(!!this.currentMusic) {
     //     if(!!this.currentMusic.fadeTween) this.currentMusic.fadeTween.stop();
