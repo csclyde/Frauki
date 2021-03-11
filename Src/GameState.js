@@ -13,6 +13,7 @@ GameState.create = function() {
     
     var fadeIn = effectsController.Fade(false);
     events.publish('play_music', { name: 'Intro' } );
+    events.publish('play_ambient', { name: 'ambient_surface' } );
 
     fadeIn.onComplete.add(function() {
         frauki.Reset();
@@ -23,8 +24,6 @@ GameState.create = function() {
     this.tweens = {};
 
     this.UITextures = {};
-
-    audioController.ambient['surface_wind'].play();
 
     this.CreateUI();
 

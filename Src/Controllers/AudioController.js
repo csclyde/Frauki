@@ -183,11 +183,11 @@ AudioController.prototype.FadeMusic = function(params) {
 };
 
 AudioController.prototype.PlayAmbient = function(params) {
-    if(!!params.name && !!this.ambient[params.name] && !!this.ambient[params.name].play) {
-
+    if(!!params.name && !!this.ambient[params.name] && this.currentAmbient !== params.name) {
+        this.StopAllAmbient();
         this.ambient[params.name].play(null, 0, 0);
-
         this.ambient[params.name].fadeTo(500, this.ambient[params.name].initialVolume);
+        this.currentAmbient = params.name;
     }
 };
 
@@ -197,7 +197,7 @@ AudioController.prototype.StopAmbient = function(params) {
     }
 };
 
-AudioController.prototype.StopAllAmbient = function(params) {
+AudioController.prototype.StopAllAmbient = function() {
     for(var key in this.ambient) {
         if(!this.ambient.hasOwnProperty(key)) continue;
 

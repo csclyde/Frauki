@@ -62,7 +62,7 @@ TriggerController.prototype.triggers['ambient_up_down'] = {
 	},
 
 	exit: function(params, trigger) {
-		events.publish('stop_all_ambient', { fadeOut: 500 });
+		//events.publish('stop_all_ambient', { fadeOut: 500 });
 
 		if(frauki.body.center.y < trigger.y) {
 			events.publish('play_ambient', { name: params.up } );
