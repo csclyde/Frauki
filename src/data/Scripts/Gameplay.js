@@ -19,6 +19,7 @@ ScriptRunner.scripts['continue_game'] = [
     } },
 
     { name: 'wait', props: { amount: 2000 } },
+    { name: 'run_script', props: { name: 'enter_goddess' } },
     
     { func: function() {
         GameState.inMainMenu = false;

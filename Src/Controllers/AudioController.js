@@ -124,11 +124,12 @@ AudioController.prototype.StopAllMusic = function(params) {
 
 AudioController.prototype.PauseAllMusic = function(params) {
     for(var key in this.music) {
+        var music = this.music[key];
         if(!this.music.hasOwnProperty(key)) continue;
 
         if(!!this.music[key] && this.music[key].isPlaying) {
             this.music[key].fadeTo(params.fade || 1000, 0);
-            this.music[key].onFadeComplete.add(function(music) {
+            game.time.events.add(params.fade || 1000, function() {
                 music.pause();
             });
         }
