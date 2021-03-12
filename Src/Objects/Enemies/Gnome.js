@@ -3,20 +3,20 @@ Enemy.prototype.types['Gnome'] =  function() {
 	this.body.setSize(13, 20, 0, 4);
 	this.anchor.setTo(0.5);
 
-    this.animations.add('idle_boat', ['Gnome/boat0000', 'Gnome/boat0001', 'Gnome/boat0002', 'Gnome/boat0003', 'Gnome/boat0004', 'Gnome/boat0005'], 5, true, false);
-	this.animations.add('idle_city', ['Gnome/cool0000'], 10, true, false);
-    this.animations.add('idle_cooking', ['Gnome/cooking0000', 'Gnome/cooking0001', 'Gnome/cooking0002', 'Gnome/cooking0003', 'Gnome/cooking0004', 'Gnome/cooking0005', 'Gnome/cooking0006', 'Gnome/cooking0007', 'Gnome/cooking0008'], 3, true, false);
-	this.animations.add('idle_cool', ['Gnome/cool0000'], 10, true, false);
-	this.animations.add('idle_fishing', ['Gnome/fishing0000'], 10, true, false);
-	this.animations.add('idle_garden', ['Gnome/garden0000', 'Gnome/garden0001', 'Gnome/garden0002', 'Gnome/garden0003', 'Gnome/garden0004', 'Gnome/garden0005', 'Gnome/garden0006', 'Gnome/garden0007', 'Gnome/garden0008', 'Gnome/garden0009', 'Gnome/garden0010', 'Gnome/garden0011'], 3, true, false);
-	this.animations.add('idle_gossip', ['Gnome/gossip0000', 'Gnome/gossip0001'], 3, true, false);
-	this.animations.add('idle_hopper_rider', ['Gnome/hopper_rider0000', 'Gnome/hopper_rider0001', 'Gnome/hopper_rider0002', 'Gnome/hopper_rider0003', 'Gnome/hopper_rider0004', 'Gnome/hopper_rider0005', 'Gnome/hopper_rider0006', 'Gnome/hopper_rider0007'], 4, true, false);
-	this.animations.add('idle_love_gnomes', ['Gnome/love_gnomes0000', 'Gnome/love_gnomes0001', 'Gnome/love_gnomes0002', 'Gnome/love_gnomes0003', 'Gnome/love_gnomes0004', 'Gnome/love_gnomes0005', 'Gnome/love_gnomes0006', 'Gnome/love_gnomes0007'], 4, true, false);
-	this.animations.add('idle_mushroom', ['Gnome/cool0000'], 10, true, false);
-	this.animations.add('idle_pickaxe', ['Gnome/pickaxe0000', 'Gnome/pickaxe0001', 'Gnome/pickaxe0002', 'Gnome/pickaxe0003', 'Gnome/pickaxe0004', 'Gnome/pickaxe0005', 'Gnome/pickaxe0006', 'Gnome/pickaxe0007', 'Gnome/pickaxe0008', 'Gnome/pickaxe0009', 'Gnome/pickaxe0010', 'Gnome/pickaxe0011', 'Gnome/pickaxe0012', 'Gnome/pickaxe0013', 'Gnome/pickaxe0014', 'Gnome/pickaxe0015', 'Gnome/pickaxe00016', 'Gnome/pickaxe0017', 'Gnome/pickaxe0018'], 5, true, false);
-	this.animations.add('idle_sleepy', ['Gnome/sleepy0000', 'Gnome/sleepy0001', 'Gnome/sleepy0002', 'Gnome/sleepy0003', 'Gnome/sleepy0004', 'Gnome/sleepy0005'], 1, true, false);
-	this.animations.add('idle_windy', ['Gnome/windy0000', 'Gnome/windy0001', 'Gnome/windy0002', 'Gnome/windy0003', 'Gnome/windy0004', 'Gnome/windy0005', 'Gnome/windy0006'], 5, true, false);
-	this.animations.add('idle_wut', ['Gnome/windy0000'], 10, true, false);
+    this.animations.add('idle_boat', ['NPC/boat0000', 'NPC/boat0001', 'NPC/boat0002', 'NPC/boat0003', 'NPC/boat0004', 'NPC/boat0005'], 5, true, false);
+	this.animations.add('idle_city', ['NPC/cool0000'], 10, true, false);
+    this.animations.add('idle_cooking', ['NPC/cooking0000', 'NPC/cooking0001', 'NPC/cooking0002', 'NPC/cooking0003', 'NPC/cooking0004', 'NPC/cooking0005', 'NPC/cooking0006', 'NPC/cooking0007', 'NPC/cooking0008'], 3, true, false);
+	this.animations.add('idle_cool', ['NPC/cool0000'], 10, true, false);
+	this.animations.add('idle_fishing', ['NPC/fishing0000'], 10, true, false);
+	this.animations.add('idle_garden', ['NPC/garden0000', 'NPC/garden0001', 'NPC/garden0002', 'NPC/garden0003', 'NPC/garden0004', 'NPC/garden0005', 'NPC/garden0006', 'NPC/garden0007', 'NPC/garden0008', 'NPC/garden0009', 'NPC/garden0010', 'NPC/garden0011'], 3, true, false);
+	this.animations.add('idle_gossip', ['NPC/gossip0000', 'NPC/gossip0001'], 3, true, false);
+	this.animations.add('idle_hopper_rider', ['NPC/hopper_rider0000', 'NPC/hopper_rider0001', 'NPC/hopper_rider0002', 'NPC/hopper_rider0003', 'NPC/hopper_rider0004', 'NPC/hopper_rider0005', 'NPC/hopper_rider0006', 'NPC/hopper_rider0007'], 4, true, false);
+	this.animations.add('idle_love_gnomes', ['NPC/love_gnomes0000', 'NPC/love_gnomes0001', 'NPC/love_gnomes0002', 'NPC/love_gnomes0003', 'NPC/love_gnomes0004', 'NPC/love_gnomes0005', 'NPC/love_gnomes0006', 'NPC/love_gnomes0007'], 4, true, false);
+	this.animations.add('idle_mushroom', ['NPC/cool0000'], 10, true, false);
+	this.animations.add('idle_pickaxe', ['NPC/pickaxe0000', 'NPC/pickaxe0001', 'NPC/pickaxe0002', 'NPC/pickaxe0003', 'NPC/pickaxe0004', 'NPC/pickaxe0005', 'NPC/pickaxe0006', 'NPC/pickaxe0007', 'NPC/pickaxe0008', 'NPC/pickaxe0009', 'NPC/pickaxe0010', 'NPC/pickaxe0011', 'NPC/pickaxe0012', 'NPC/pickaxe0013', 'NPC/pickaxe0014', 'NPC/pickaxe0015', 'NPC/pickaxe00016', 'NPC/pickaxe0017', 'NPC/pickaxe0018'], 5, true, false);
+	this.animations.add('idle_sleepy', ['NPC/sleepy0000', 'NPC/sleepy0001', 'NPC/sleepy0002', 'NPC/sleepy0003', 'NPC/sleepy0004', 'NPC/sleepy0005'], 1, true, false);
+	this.animations.add('idle_windy', ['NPC/windy0000', 'NPC/windy0001', 'NPC/windy0002', 'NPC/windy0003', 'NPC/windy0004', 'NPC/windy0005', 'NPC/windy0006'], 5, true, false);
+	this.animations.add('idle_wut', ['NPC/windy0000'], 10, true, false);
 	
 
 

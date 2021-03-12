@@ -5,8 +5,8 @@ Enemy.prototype.types['Goddess'] =  function() {
 	this.body.setSize(40, 45, 0, 0);
 	this.anchor.setTo(0.5);
 
-    this.animations.add('idle', ['Goddess/Goddess0000', 'Goddess/Goddess0001'], 2, true, false);
-    this.animations.add('stuff', ['Goddess/Stand0000'], 10, false, false);
+    this.animations.add('idle', ['NPC/Goddess0000', 'NPC/Goddess0001'], 2, true, false);
+    this.animations.add('stuff', ['NPC/Stand0000'], 10, false, false);
 
     this.energy = 5;
     this.baseStunDuration = 400;
