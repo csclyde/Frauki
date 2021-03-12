@@ -73,7 +73,7 @@ GameState.BeginGameover = function() {
 
 GameState.Reset = function() {
     frauki.Reset(); 
-    goddess.Reset();
+    if(!!goddess) goddess.Reset();
 
     GameState.physicsSlowMo = 1.0;
     GameState.restarting = false;
@@ -114,7 +114,7 @@ GameState.CreateUI = function() {
     this.UI = game.add.group();
     this.UI.fixedToCamera = true;
     this.Menu = game.add.group();
-    this.Menu.fixedToCamera = true;
+    this.Menu.fixedToCamera = true;        
 
     if(this.inMainMenu) {
         this.UI.alpha = 0;
@@ -184,7 +184,6 @@ GameState.UpdateUI = function() {
             this.continueGame.setText('Continue Game');
             this.newGame.setText('- New Game -');
         }
-
         return;
     }
 
@@ -216,5 +215,5 @@ GameState.UpdateUI = function() {
     this['prismWit'].visible = GameData.HasShard('Wit');
     this['prismWill'].visible = GameData.HasShard('Will');
     this['prismLuck'].visible = GameData.HasShard('Luck');
-    this['prismPower'].visible = GameData.HasShard('Power');  
+    this['prismPower'].visible = GameData.HasShard('Power');       
 };

@@ -8,7 +8,7 @@ ScriptRunner.scripts['game_start'] = [
 ];
 
 ScriptRunner.scripts['continue_game'] = [
-    { name: 'stop_music', props: { name: 'Intro', duration: 2500 } },
+    { name: 'stop_music', props: { name: 'Intro', fade: 2500 } },
     { name: 'play_sound', props: { name: 'crystal_door' } },      
     
     { func: function() {
@@ -29,12 +29,13 @@ ScriptRunner.scripts['continue_game'] = [
 ];
 
 ScriptRunner.scripts['new_game'] = [
-    { name: 'stop_music', props: { name: 'Intro', duration: 3500 } },
+    { name: 'stop_music', props: { name: 'Intro', fade: 3500 } },
     { name: 'play_sound', props: { name: 'crystal_door' } },      
     
     { func: function() {
         GameData.ResetData();
         GameState.Reset();
+        effectsController.Fade(true, 3000);                
     } },
 
     { name: 'wait', props: { amount: 4000 } },
@@ -45,6 +46,7 @@ ScriptRunner.scripts['new_game'] = [
         
         GameState.inMainMenu = false;
         GameState.Menu.alpha = 0;
+        effectsController.Fade(false, 500);
     } },
 
     { name: 'wait', props: { amount: 800 } },
@@ -78,8 +80,8 @@ ScriptRunner.scripts['game_over'] = [
     { name: 'wait', props: { amount: 400 } },
     
     { func: function() {
-        events.publish('set_camera', { to: frauki.body.center });         
         effectsController.Fade(false, 500);
+        events.publish('set_camera', { to: frauki.body.center });         
     } },
 
     { name: 'wait', props: { amount: 500 } },
