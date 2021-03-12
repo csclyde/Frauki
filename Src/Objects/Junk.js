@@ -48,10 +48,6 @@ Junk.prototype.JunkHit = function(o) {
 	var probTable = [0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3];
 
 	game.time.events.add(100, function() {
-
-	    effectsController.SpawnEnergyNuggets(this.body, frauki.body, 'neutral', probTable[Math.round(Math.random() * (probTable.length - 1))]);
-	    //effectsController.SpawnEnergyNuggets(this.body, frauki.body, 'positive', probTable[Math.round(Math.random() * (probTable.length - 1))]);
-
 	    effectsController.ClashStreak(this.body.center.x, this.body.center.y, game.rnd.between(1, 2));
         effectsController.Dust(this.body.center.x, this.body.center.y);
 	    effectsController.DiceObject(this.objectName, this.body.center.x, this.body.center.y, this.body.velocity.x, this.body.velocity.y, this.owningLayer);

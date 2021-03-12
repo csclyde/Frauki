@@ -262,6 +262,12 @@ Collision.OverlapAttackWithEnemy = function(f, e, halfDmg) {
     e.TakeHit(damage);
     frauki.LandHit(e, damage);
 
+    if(damage > 0) {
+        effectsController.ClashStreak(e.body.center.x, e.body.center.y, game.rnd.between(1, 2)); 
+        effectsController.SlowHit(300);
+        effectsController.SparkSplash(f, e);
+    }
+
     frauki.animations.paused = true;
 
     game.time.events.add(200, function() {
@@ -286,6 +292,8 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
 
     frauki.LandHit(e, 0);
     e.LandHit();
+
+    effectsController.ClashStreak(e.body.center.x, e.body.center.y, game.rnd.between(1, 2));    
 
     if(e.GetCurrentDamage() === 0 && frauki.GetCurrentDamage() > 0) {
         e.OnBlock();
@@ -344,8 +352,6 @@ Collision.OverlapLobWithEnemy = function(l, e) {
         return false;
 
     if(!!e.currentAttack && e.currentAttack.priority >= 2) {
-        //effectsController.SparkSplash(l, e);
-
         var vel = new Phaser.Point(e.body.center.x - l.body.center.x, e.body.center.y - l.body.center.y);
         vel = vel.normalize();
 

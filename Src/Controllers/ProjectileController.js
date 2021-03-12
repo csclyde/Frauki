@@ -42,6 +42,10 @@ ProjectileController.prototype.Reset = function() {
 	this.DestroyAllProjectiles();
 };
 
+ProjectileController.prototype.DestroyAllProjectiles = function() {
+	this.projectiles.removeAll(true);
+};
+
 ProjectileController.prototype.Mortar = function(e) {
 	var xPos = e.body.center.x;
 	var yPos = e.body.center.y - 25;
@@ -366,8 +370,4 @@ ProjectileController.prototype.FallingTile = function(sourceTile, visibleTile) {
 	tile.lifeTime = 3000;
 
 	this.projectiles.add(tile);
-};
-
-ProjectileController.prototype.DestroyAllProjectiles = function() {
-	this.projectiles.removeAll(true);
 };

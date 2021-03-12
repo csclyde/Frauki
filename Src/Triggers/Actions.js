@@ -63,7 +63,7 @@ TriggerController.prototype.triggers['soccer_goal'] = {
 
 TriggerController.prototype.triggers['heal_to_open_door'] = {
 	load: function(trigger) {
-		events.subscribe('energy_heal', function() {
+		events.subscribe('restore_health', function() {
 			if(this.playerInside) {
 				events.publish('open_door', { door_name: 'heal_trainer' });
 			 	events.publish('open_door', { door_name: 'tutorial_goodie' });

@@ -1,8 +1,4 @@
-X_VEL_DIV = 5;
-Y_VEL_DIV = 10;
-
 CameraController = function() {
-
 	this.menuTarget = { x: 280 * 16, y: 110 * 16 };
 	this.target = this.menuTarget;
 	
@@ -19,10 +15,6 @@ CameraController = function() {
 	this.prevXVel = 0;
 	this.prevYVel = 0;
 
-	this.retweenY = false;
-
-	events.subscribe('player_crouch', this.CrouchCamera, this);
-	events.subscribe('control_up', this.RaiseCamera, this);
 	events.subscribe('camera_shake', this.ScreenShake, this);
 	events.subscribe('pan_camera', this.PanCamera, this);
 	events.subscribe('set_camera', this.SetCamera, this);
@@ -33,8 +25,7 @@ CameraController = function() {
 };
 
 //camera is controlled in player centric space
-CameraController.prototype.Update = function() {
-	
+CameraController.prototype.Update = function() {	
 	var xOffset = 0, yOffset = 0;
 
 	this.target = this.target || frauki.body.center;
@@ -103,27 +94,16 @@ CameraController.prototype.Reset = function() {
     if(this.shakeYTween) this.shakeYTween.stop();
 };
 
-CameraController.prototype.CrouchCamera = function(params) {
-	this.retweenY = true;
-};
-
-CameraController.prototype.RaiseCamera = function(params) {
-	this.retweenY = true;
-};
-
 CameraController.prototype.ScreenShake = function(params) {
-
 	if(GameState.restarting === true) {
 		return;
 	}
 
-	this.shakeMagnitudeX = params.magnitudeX;// * (game.rnd.between(0, 1) < 0.5 ? -1 : 1);
-	this.shakeMagnitudeY = params.magnitudeY;// * (game.rnd.between(0, 1) < 0.5 ? -1 : 1);
+	this.shakeMagnitudeX = params.magnitudeX;
+	this.shakeMagnitudeY = params.magnitudeY;
 	
 	this.shakeXTween = game.add.tween(this).to({shakeMagnitudeX: 0}, params.duration, Phaser.Easing.Linear.None, true);
 	this.shakeYTween = game.add.tween(this).to({shakeMagnitudeY: 0}, params.duration, Phaser.Easing.Linear.None, true);
-
-	//a sine function that is multiplied by the magnitude. The magnitude has a tween set to 0 based on the duration
 };
 
 CameraController.prototype.PanCamera = function(params) {

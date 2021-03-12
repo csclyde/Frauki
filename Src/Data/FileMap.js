@@ -7,7 +7,7 @@ FileMap.Images = [
 	{ Name: 'Doodads', File: 'Data/World/Doodads.png' },
 	{ Name: 'Collision', File: 'Data/World/CollisionKey.png' },
 	{ Name: 'Background', File: 'Data/World/Sky.png' },
-	{ Name: 'parallax1', File: 'Data/World/Parallax1.png' },
+	{ Name: 'mountain', File: 'Data/World/Mountain.png' },
 	{ Name: 'clouds1', File: 'Data/World/Clouds1.png' },
 	{ Name: 'clouds2', File: 'Data/World/Clouds2.png' },
 	{ Name: 'clouds3', File: 'Data/World/Clouds3.png' },
@@ -154,7 +154,7 @@ FileMap.Audio = [
 ];
 
 FileMap.Music = [
-	{ Name: 'Intro', File: 'Data/Music/intro.ogg', Volume: 0.15, Loop: true },
+	{ Name: 'Intro', File: 'Data/Music/Surface.ogg', Volume: 0.15, Loop: true },
 	{ Name: 'Choir', File: 'Data/Music/choir.ogg', Volume: 0.15, Loop: true },
 	{ Name: 'Gameover', File: 'Data/Music/game_over.ogg', Volume: 0.15, Loop: false },
 ];

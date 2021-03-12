@@ -17,74 +17,7 @@ EffectsController = function() {
 
 };
 
-EffectsController.prototype.Reset = function() {
-    this.dicedPieces.removeAll(true);
-};
-
-EffectsController.prototype.CreateEffect = function(e, x, y, w, h) {
-    var effect = game.add.emitter(x || 0, y || 0, e.Count);
-    effect.width = w || 0;
-    effect.height = h || 0;
-    effect.makeParticles('Misc', e.Frames); 
-    effect.gravity.setTo(0, e.Gravity || -700);
-    effect.particleDrag.setTo(e.Drag || 0);
-    effect.setRotation(e.MinRot || 0, e.MaxRot || 0);
-    effect.minParticleSpeed.setTo(e.MinSpeedX || 0, e.MinSpeedY || 0);
-    effect.maxParticleSpeed.setTo(e.MaxSpeedX || 0, e.MaxSpeedY || 0);
-    effect.alpha = e.Alpha || 1;
-    effect.minParticleScale = e.MinScale || 1;
-    effect.maxParticleScale = e.MaxScale || 1;
-
-    return effect;
-};
-
-EffectsController.prototype.CreateEffectsLayer = function() {
-    var that = this;
-
-    this.dicedPieces = game.add.group();
-    this.effectsGroup = game.add.group();
-
-    Effects.Emitters.forEach(function(e) {
-        that[e.Name] = that.CreateEffect(e);
-        that.effectsGroup.add(that[e.Name]);
-    });
-
-    this.materializingApple = game.add.image(0, 0, 'Misc', 'Apple0000');
-    this.materializingApple.animations.add('mat', ['Apple0007', 'Apple0008', 'Apple0009', 'Apple0010', 'Apple0011', 'Apple0012'], 12, true, false);
-    this.materializingApple.animations.play('mat');
-    this.materializingApple.visible = false;
-    this.materializingApple.anchor.setTo(0.5);
-
-    this.charge1 = game.add.image(0, 0, 'Misc', 'Charge10000');
-    this.charge1.animations.add('flicker', ['Charge10000', 'Charge10001', 'Charge10002', 'Charge10003'], 18, true, false);
-    this.charge1.animations.play('flicker');
-    this.charge1.visible = false;
-    this.charge1.anchor.setTo(0.5);
-
-    this.effectsGroup.add(this.materializingApple);
-    this.effectsGroup.add(this.charge1);
-
-    this.LoadMapEffects();
-};
-
-EffectsController.prototype.CreateForegroundEffectsLayer = function() {
-    var screenLightBmd = game.add.bitmapData(game.width, game.height);
-    screenLightBmd.ctx.fillStyle = 'white';
-    screenLightBmd.ctx.fillRect(0,0, game.width, game.height);
-    this.screenLight = game.add.sprite(0, 0, screenLightBmd);
-    this.screenLight.alpha = 0.5;
-    this.screenLight.fixedToCamera = true;
-    this.screenLight.visible = false;
-
-    var screenDarkBmd = game.add.bitmapData(game.width, game.height);
-    screenDarkBmd.ctx.fillStyle = 'black';
-    screenDarkBmd.ctx.fillRect(0,0, game.width, game.height);
-    this.screenDark = game.add.sprite(0, 0, screenDarkBmd);
-    this.screenDark.fixedToCamera = true;
-};
-
 EffectsController.prototype.Update = function() {
-
     this.loadedEffects.forEach(function(o) {
         var padding = 100;
 
@@ -106,54 +39,16 @@ EffectsController.prototype.Update = function() {
         }
         
     });
-
-    this.activeDest = frauki.body;
-    this.positiveBits.forEachAlive(UpdateParticle, this);
-
-    this.neutralBits.forEachAlive(UpdateParticle, this);
-
-    this.activeDest = this.enemyDest;
-    this.negativeBits.forEachAlive(UpdateParticle, this);
-
-    this.activeDest = this.activeAltar;
-    this.nuggDepositer.forEachAlive(UpdateParticle, this);
-
-    this.negativeBits.x = frauki.body.x;
-    this.negativeBits.y = frauki.body.y;
-    this.negativeBits.width = frauki.body.width;
-    this.negativeBits.height = frauki.body.height;
-
-    this.nuggDropper.x = frauki.body.x;
-    this.nuggDropper.y = frauki.body.y;
-    this.nuggDropper.width = frauki.body.width;
-    this.nuggDropper.height = frauki.body.height;
-
-    if(!!this.enemySource) {
-        this.positiveBits.x = this.enemySource.x;
-        this.positiveBits.y = this.enemySource.y;
-        this.positiveBits.width = this.enemySource.width;
-        this.positiveBits.height = this.enemySource.height;
-    }
-
-       
-    if(frauki.state === frauki.Rolling || frauki.state === frauki.Flipping) {
-        this.energyStreak.x = frauki.body.x;
-        this.energyStreak.y = frauki.body.bottom;
-        this.energyStreak.width = frauki.body.width;
-        this.energyStreak.height = 1;
-    } else {
-        this.energyStreak.x = frauki.attackRect.body.x;
-        this.energyStreak.y = frauki.attackRect.body.y;
-        this.energyStreak.width = frauki.attackRect.body.width;
-        this.energyStreak.height = frauki.attackRect.body.height;
-    }
+        
+    this.energyStreak.x = frauki.attackRect.body.x;
+    this.energyStreak.y = frauki.attackRect.body.y;
+    this.energyStreak.width = frauki.attackRect.body.width;
+    this.energyStreak.height = frauki.attackRect.body.height;
 
     this.charge1.x = frauki.body.center.x;
     this.charge1.y = frauki.body.center.y;
 
     game.physics.arcade.collideGroupVsTilemapLayer(this['dicedPieces'], Frogland.GetCollisionLayer(), null, null, null, false);
-    //game.physics.arcade.collide(this.dicedPieces3, Frogland.GetCollisionLayer());
-    //game.physics.arcade.collide(this.dicedPieces2, Frogland.GetCollisionLayer());
     game.physics.arcade.collide(this.loadedEffectsCollide, Frogland.GetCollisionLayer(), Collision.CollideEffectWithWorld, Collision.OverlapEffectWithWorld);
 
     if(frauki.state === frauki.Healing) {
@@ -163,9 +58,73 @@ EffectsController.prototype.Update = function() {
     }
 };
 
-EffectsController.prototype.LoadMapEffects = function() {
+EffectsController.prototype.Reset = function() {
+    this.dicedPieces.removeAll(true);
+};
+
+EffectsController.prototype.CreateEffect = function(e, x, y, w, h) {
+    var effect = game.add.emitter(x || 0, y || 0, e.Count);
+    effect.width = w || 0;
+    effect.height = h || 0;
+    effect.makeParticles('Misc', e.Frames); 
+    effect.gravity.setTo(0, e.Gravity || -700);
+    effect.particleDrag.setTo(e.Drag || 0);
+    effect.setRotation(e.MinRot || 0, e.MaxRot || 0);
+    effect.minParticleSpeed.setTo(e.MinSpeedX || 0, e.MinSpeedY || 0);
+    effect.maxParticleSpeed.setTo(e.MaxSpeedX || 0, e.MaxSpeedY || 0);
+    effect.alpha = e.Alpha || 1;
+    effect.minParticleScale = e.MinScale || 1;
+    effect.maxParticleScale = e.MaxScale || 1;
+
+    return effect;
+};
+
+EffectsController.prototype.CreateMidgroundEffects = function() {
     var that = this;
 
+    this.dicedPieces = game.add.group();
+    this.effectsGroup = game.add.group();
+
+    Effects.Emitters.forEach(function(e) {
+        this[e.Name] = this.CreateEffect(e);
+        this.effectsGroup.add(this[e.Name]);
+    }, this);
+
+    this.materializingApple = game.add.image(0, 0, 'Misc', 'Apple0000');
+    this.materializingApple.animations.add('mat', ['Apple0007', 'Apple0008', 'Apple0009', 'Apple0010', 'Apple0011', 'Apple0012'], 12, true, false);
+    this.materializingApple.animations.play('mat');
+    this.materializingApple.visible = false;
+    this.materializingApple.anchor.setTo(0.5);
+
+    this.charge1 = game.add.image(0, 0, 'Misc', 'Charge10000');
+    this.charge1.animations.add('flicker', ['Charge10000', 'Charge10001', 'Charge10002', 'Charge10003'], 18, true, false);
+    this.charge1.animations.play('flicker');
+    this.charge1.visible = false;
+    this.charge1.anchor.setTo(0.5);
+
+    this.effectsGroup.add(this.materializingApple);
+    this.effectsGroup.add(this.charge1);
+
+    this.LoadMapEffects();
+};
+
+EffectsController.prototype.CreateForegroundEffects = function() {
+    var screenLightBmd = game.add.bitmapData(game.width, game.height);
+    screenLightBmd.ctx.fillStyle = 'white';
+    screenLightBmd.ctx.fillRect(0,0, game.width, game.height);
+    this.screenLight = game.add.sprite(0, 0, screenLightBmd);
+    this.screenLight.alpha = 0.5;
+    this.screenLight.fixedToCamera = true;
+    this.screenLight.visible = false;
+
+    var screenDarkBmd = game.add.bitmapData(game.width, game.height);
+    screenDarkBmd.ctx.fillStyle = 'black';
+    screenDarkBmd.ctx.fillRect(0,0, game.width, game.height);
+    this.screenDark = game.add.sprite(0, 0, screenDarkBmd);
+    this.screenDark.fixedToCamera = true;
+};
+
+EffectsController.prototype.LoadMapEffects = function() {
     Frogland.map.objects['Effects'].forEach(function(o) {
         if(o.type === 'effect') {
             if(o.name === 'splash') {
@@ -197,8 +156,8 @@ EffectsController.prototype.LoadMapEffects = function() {
                 splasherRight.setRotation(0, 0);
                 splasherRight.start(false, 200, 5);
 
-                that.loadedEffects.push(splasherLeft);
-                that.loadedEffects.push(splasherRight);
+                this.loadedEffects.push(splasherLeft);
+                this.loadedEffects.push(splasherRight);
             } else if(o.name === 'drip') {
 
                 var dripper = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
@@ -214,7 +173,7 @@ EffectsController.prototype.LoadMapEffects = function() {
                 dripper.effectType = 'drip';
                 dripper.alpha = 0.5;
 
-                that.loadedEffectsCollide.push(dripper);
+                this.loadedEffectsCollide.push(dripper);
             } else if(o.name === 'dripDirty') {
 
                 var dripper = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
@@ -230,7 +189,7 @@ EffectsController.prototype.LoadMapEffects = function() {
                 dripper.effectType = 'dripDirty';
                 dripper.alpha = 0.5;
 
-                that.loadedEffectsCollide.push(dripper);
+                this.loadedEffectsCollide.push(dripper);
             } else if(o.name === 'fluff') {
 
                 var fluffer = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
@@ -247,7 +206,7 @@ EffectsController.prototype.LoadMapEffects = function() {
                 fluffer.effectType = 'fluff';
                 fluffer.alpha = 0.8;
 
-                that.loadedEffects.push(fluffer);
+                this.loadedEffects.push(fluffer);
             } else if(o.name === 'bubbles') {
 
                 var bubbler = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
@@ -265,10 +224,9 @@ EffectsController.prototype.LoadMapEffects = function() {
                 bubbler.effectType = 'bubbles';
                 bubbler.alpha = 0.5;
 
-                that.loadedEffects.push(bubbler);
+                this.loadedEffects.push(bubbler);
                 
             } else if(o.name === 'energy_spray') {
-
                 var sprayer = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
                 // sprayer.x = o.x;
                 // sprayer.y = o.y;
@@ -282,10 +240,9 @@ EffectsController.prototype.LoadMapEffects = function() {
                 sprayer.start(false, 300, 10);
                 sprayer.effectType = 'energy_spray';
 
-                that.loadedEffects.push(sprayer);
+                this.loadedEffects.push(sprayer);
 
             } else if(o.name === 'sparks') {
-
                 var sprayer = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
                 // sprayer.x = o.x;
                 // sprayer.y = o.y;
@@ -299,9 +256,8 @@ EffectsController.prototype.LoadMapEffects = function() {
                 sprayer.start(false, 200, 150);
                 sprayer.effectType = 'sparks';
 
-                that.loadedEffects.push(sprayer);
+                this.loadedEffects.push(sprayer);
             } else if(o.name === 'leaves_green') {
-
                 var leaves = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
                 leaves.width = o.width;
                 leaves.height = o.height;
@@ -316,9 +272,8 @@ EffectsController.prototype.LoadMapEffects = function() {
                 leaves.effectType = 'leaves';
                 //leaves.alpha = 0.5;
 
-                that.loadedEffects.push(leaves);
+                this.loadedEffects.push(leaves);
             } else if(o.name === 'leaves_brown') {
-
                 var leaves = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
                 leaves.width = o.width;
                 leaves.height = o.height;
@@ -333,7 +288,7 @@ EffectsController.prototype.LoadMapEffects = function() {
                 leaves.effectType = 'leaves';
                 //leaves.alpha = 0.5;
 
-                that.loadedEffects.push(leaves);
+                this.loadedEffects.push(leaves);
             } else if(o.name === 'spirits') {
                 var spirits = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
                 spirits.width = o.width;
@@ -350,7 +305,7 @@ EffectsController.prototype.LoadMapEffects = function() {
                 spirits.start(false, 5000, 4000);
                 spirits.effectType = 'spirits';
 
-                that.loadedEffects.push(spirits);
+                this.loadedEffects.push(spirits);
             }
 
         } else if(o.type === 'speech') {
@@ -368,125 +323,9 @@ EffectsController.prototype.LoadMapEffects = function() {
             sparkles.start(false, 200, 100);
             sparkles.effectType = 'sparkles';
 
-            that.loadedEffects.push(sparkles);
+            this.loadedEffects.push(sparkles);
         }
-    });
-};
-
-function UpdateParticle(p) {
-    var vel = 1000;
-    var maxVelocity = 400;
-
-    if(!p.destBody) {
-        p.destBody = this.activeDest;
-    }
-
-    if(!p.spawnTime) {
-        p.spawnTime = game.time.now;
-    }
-
-    if(!p.destBody) {
-        return;
-    }
-
-    if(game.time.now - p.spawnTime < 1000) {
-        return;
-    }
-
-    if(p.body.x > p.destBody.x && p.body.x < p.destBody.x + p.destBody.width && p.body.y > p.destBody.y && p.body.y < p.destBody.y + p.destBody.height) {
-        
-        if(p.destBody === frauki.body) {
-
-            events.publish('play_sound', {name: 'energy_bit', restart: true });
-
-            if(p.parent === effectsController.positiveBits) {
-                effectsController.EnergySplash(p.body, 100, 'positive');
-            } else if(p.parent === effectsController.neutralBits) {
-                effectsController.EnergySplash(p.body, 100, 'neutral');
-            } 
-        }
-        
-        p.destBody = null;
-        p.kill();
-
-        return;
-    }
-
-    var xDist = p.body.center.x - p.destBody.center.x;
-    var yDist = p.body.center.y - p.destBody.center.y;
-
-    var angle = Math.atan2(yDist, xDist); 
-    p.body.acceleration.x = Math.cos(angle) * -vel;// - (xDist * 5);    
-    p.body.acceleration.y = Math.sin(angle) * -vel;// - (yDist * 5);
-
-    if((p.destBody.center.x < p.body.center.x && p.body.velocity.x > 0) || (p.destBody.center.x > p.body.center.x && p.body.velocity.x < 0))
-        p.body.acceleration.x *= 4;
-
-    if((p.destBody.center.y < p.body.center.y && p.body.velocity.y > 0) || (p.destBody.center.y > p.body.center.y && p.body.velocity.y < 0))
-        p.body.acceleration.y *= 4;
-
-
-    if (p.body.velocity.getMagnitude() > maxVelocity) {
-        p.body.velocity.setMagnitude(maxVelocity);
-    }
-    
-    //update frames to animate the energy
-    if(!p.frameUpdateTimer) p.frameUpdateTimer = 0;
-    
-    if(game.time.now > p.frameUpdateTimer) {
-	    if(p.frameName === 'EnergyBitPos0000') p.frameName = 'EnergyBitPos0001';
-	    else if(p.frameName === 'EnergyBitPos0001') p.frameName = 'EnergyBitPos0002';
-	    else if(p.frameName === 'EnergyBitPos0002') p.frameName = 'EnergyBitPos0003';
-	    else if(p.frameName === 'EnergyBitPos0003') p.frameName = 'EnergyBitPos0004';
-	    else if(p.frameName === 'EnergyBitPos0004') p.frameName = 'EnergyBitPos0005';
-	    else if(p.frameName === 'EnergyBitPos0005') p.frameName = 'EnergyBitPos0000';
-	    
-	    p.frameUpdateTimer = game.time.now + 80;
-    }
-};
-
-EffectsController.prototype.SpawnEnergyNuggets = function(source, dest, color, amt) {
-    return;
-    if(amt === 0) return;
-    
-	var effect = null;
-    amt = Math.round(amt);
-    if(!amt) { amt = 1; }
-
-	if(color === 'positive') {
-		effect = this.positiveBits;
-        this.enemySource = source;
-    }
-    else if(color === 'negative') {
-        effect = this.negativeBits;
-        this.enemyDest = dest;
-	} else if(color === 'neutral') {
-        effect = this.neutralBits;
-        this.enemySource = source;
-    }
-
-    var vel = new Phaser.Point(source.center.x - dest.x, source.center.y - dest.y);
-    vel = vel.normalize();
-
-    var minVel = Phaser.Point.rotate(vel.clone(), 0, 0, 30, true, 1);
-    var maxVel = Phaser.Point.rotate(vel.clone(), 0, 0, -30, true, 1);
-    
-    maxVel.setMagnitude(1750);
-    minVel.setMagnitude(1400);
-
-    effect.minParticleSpeed.x = minVel.x + source.velocity.x;
-    effect.maxParticleSpeed.x = maxVel.x + source.velocity.x;
-    effect.minParticleSpeed.y = minVel.y + source.velocity.y;
-    effect.maxParticleSpeed.y = maxVel.y + source.velocity.y;
-
-    effect.x = source.x || 0;
-    effect.y = source.y || 0;
-    effect.width = source.width || 0;
-    effect.height = source.height || 0;
-
-    this.activeDest = dest;
-
-	effect.start(false, 0, 5, amt, amt);
+    }, this);
 };
 
 EffectsController.prototype.Splash = function(tile) {
@@ -606,83 +445,25 @@ EffectsController.prototype.ClearDicedPieces = function() {
     this.dicedPieces.removeAll(true);
 };
 
-EffectsController.prototype.MakeHearts = function(amt) {
-
-    var hearts = [];
-    for(var i = 0; i < amt; i++) {
-
-        var heart = game.add.sprite(frauki.body.center.x, frauki.body.center.y - 15, 'Misc');
-        game.physics.enable(heart, Phaser.Physics.ARCADE);
-
-        heart.animations.add('idle', ['Heart0000', 'Heart0001'], 4, true, false);
-        heart.play('idle');
-
-        heart.body.gravity.y = -500;
-
-        heart.body.drag.x = 300;
-        heart.body.drag.y = 100;
-
-        heart.body.velocity.x = Math.random() * 500 - 250;
-        heart.body.velocity.y = -100 + (Math.random() * -100);
-
-        hearts.push(heart);
-    }
-
-    hearts.forEach(function(h) {
-        game.rnd.between(0, 1000)(game.rnd.between(700, 1000), function() {
-            h.destroy();
-        });
-    })
-};
-
 EffectsController.prototype.SlowHit = function(duration) {
     var t = game.add.tween(GameState).to( { physicsSlowMo: 0.05 }, Math.round(duration * 0.2), Phaser.Easing.Exponential.Out, false).to( { physicsSlowMo: 1 }, Math.round(duration * 0.8), Phaser.Easing.Exponential.In, false);
     t.start();
-
-    //var currAnim = frauki.animations.currentAnim;
-    //var currSpeed = frauki.animations.currentAnim.speed;
-
-    //var t2 = game.add.tween(currAnim).to( { speed: currSpeed * 0.3 }, Math.round(duration * 0.2), Phaser.Easing.Exponential.InOut, false).to( { speed: currSpeed }, Math.round(duration * 0.8), Phaser.Easing.Exponential.InOut, false);
-    //t2.start();
 };
 
-EffectsController.prototype.SparkSplash = function(posSrc, negSrc) {
+EffectsController.prototype.SparkSplash = function(src) {
 
-    var x = (posSrc.body.x + (posSrc.width / 2) + negSrc.body.x + (negSrc.width / 2)) / 2;
-    var y = (posSrc.body.y + (posSrc.height / 2) + negSrc.body.y + (negSrc.height / 2)) / 2;
+    this.posSpark.x = src.body.center.x;
+    this.posSpark.y = src.body.center.y;
 
-    this.posSpark.x = x;
-    this.posSpark.y = y;
-    this.negSpark.x = x;
-    this.negSpark.y = y;
+    var minVel = new Phaser.Point(50, 50);
+    var maxVel = new Phaser.Point(150, 150);
 
-    var vel = new Phaser.Point(posSrc.body.center.x - negSrc.body.center.x, posSrc.body.center.y - negSrc.body.center.y);
-    vel = vel.normalize();
+    this.posSpark.minParticleSpeed.x = 50;
+    this.posSpark.minParticleSpeed.y = 50;
+    this.posSpark.maxParticleSpeed.x = 150;
+    this.posSpark.maxParticleSpeed.y = 150;
 
-    var minVel = Phaser.Point.rotate(vel.clone(), 0, 0, 30, true, 1);
-    var maxVel = Phaser.Point.rotate(vel.clone(), 0, 0, -30, true, 1);
-
-    minVel.setMagnitude(50);
-    maxVel.setMagnitude(75);
-
-    this.posSpark.minParticleSpeed.x = minVel.x;
-    this.posSpark.minParticleSpeed.y = minVel.y - 25;
-    this.posSpark.maxParticleSpeed.x = maxVel.x;
-    this.posSpark.maxParticleSpeed.y = maxVel.y;
-
-    this.posSpark.explode(1200, 10);
-
-    minVel.x *= -1;
-    minVel.y *= -1;
-    maxVel.x *= -1;
-    maxVel.y *= -1;
-
-    this.negSpark.minParticleSpeed.x = maxVel.x;
-    this.negSpark.maxParticleSpeed.x = minVel.x;
-    this.negSpark.minParticleSpeed.y = maxVel.y - 25;
-    this.negSpark.maxParticleSpeed.y = minVel.y;
-
-    this.negSpark.explode(1200, 10);
+    this.posSpark.explode(1200, 20);
 };
 
 EffectsController.prototype.EnergySplash = function(src, intensity, color, amt, vel) {
@@ -772,14 +553,13 @@ EffectsController.prototype.Dust = function(x, y) {
 };
 
 EffectsController.prototype.EnergyStreak = function() {
-
     this.energyStreak.flow(500, 5, 1, 60, true);
 };
 
 EffectsController.prototype.ClashStreak = function(x, y, angle) {
     var clash = game.add.sprite(x, y, 'Misc');
     clash.anchor.setTo(0.5);
-    clash.animations.add('clash', ['Clash0000', 'Clash0001', 'Clash0002', 'Clash0003'], 12, false, false);
+    clash.animations.add('clash', ['Clash0000', 'Clash0001', 'Clash0002', 'Clash0003'], 8, false, false);
     clash.animations.play('clash');
     clash.animations.currentAnim.killOnComplete = true;
     clash.rotation = angle;
@@ -869,35 +649,6 @@ EffectsController.prototype.Fade = function(show, dur) {
     }
 };
 
-EffectsController.prototype.SpriteTrail = function(sprite, freq, duration, dropoff, tint) {
-    
-    tint = tint || 0x0dff94;
-
-    var numTrails = Math.floor(duration / freq);
-    for(var i = 0; i < numTrails; i++) {
-        game.time.events.add(i * freq, AddSprite);
-    }
-
-    function AddSprite() {
-        var trailSprite = game.add.image(
-            sprite.body.center.x - 100 * sprite.scale.x,// - (sprite.animations.currentFrame.width / 2) * sprite.scale.x, 
-            sprite.body.center.y - 80,// - 100 - (sprite.animations.currentFrame.height / 2), 
-            sprite.key, 
-            sprite.animations.currentFrame.name, 
-            this.effectsGroup);
-        
-        trailSprite.anchor.setTo(0);
-        trailSprite.scale.x = sprite.scale.x;
-        trailSprite.tint = tint;
-        trailSprite.alpha = 0.8;
-
-        var fadeTween = game.add.tween(trailSprite).to({alpha: 0}, dropoff, Phaser.Easing.Linear.None, true);
-        fadeTween.onComplete.add(function() {
-            trailSprite.destroy();
-        });
-    }
-};
-
 EffectsController.prototype.ExplodeDoorSeal = function(door) {
 
     //create all the little broken pieces
@@ -970,36 +721,6 @@ EffectsController.prototype.MaterializeApple = function(x, y, show) {
     }
 };
 
-EffectsController.prototype.ShatterShield = function() {
-
-    var pieces = [];
-
-    var i = 0;
-    while(game.cache.getFrameData('Pieces').getFrameByName('Shield000' + i)) {
-        pieces.push(game.add.sprite(frauki.body.center.x + game.rnd.between(-20, 20), frauki.body.center.y + game.rnd.between(-20, 20), 'Pieces', 'Shield000' + i, this.effectsGroup));
-        i++;
-    }
-
-    pieces.forEach(function(p) {
-        game.physics.enable(p, Phaser.Physics.ARCADE);
-
-        p.anchor.setTo(0.5);
-        p.body.bounce.setTo(0.5);
-        p.body.angularDrag = 600;
-        p.body.drag.x = 100;
-        p.alpha = 0.5;
-
-        //randomly set the velocity, rotation, and lifespan
-        p.body.velocity.x = game.rnd.between(-150, 150) + frauki.body.velocity.x * 0.5;
-        p.body.velocity.y = game.rnd.between(-100, -200) + frauki.body.velocity.y * 0.5;
-        p.body.angularVelocity = game.rnd.between(500, 1000);
-
-        game.time.events.add(1500, function() { p.destroy(); } );
-
-        effectsController['dicedPieces'].addChild(p);
-    });
-};
-
 EffectsController.prototype.StarBurst = function(src) {
 
     this.stars.x = src.x - 5;
@@ -1022,23 +743,6 @@ EffectsController.prototype.SprocketBurst = function(src, amt) {
     this.sprockets.minParticleSpeed.setTo(-200);
     this.sprockets.maxParticleSpeed.setTo(200, 0);
     this.sprockets.particleDrag.setTo(100);
-};
-
-EffectsController.prototype.DropNuggets = function(amt) {
-
-    if(amt > 30) amt = 30;
-    
-    if(amt <= 0) return;
-
-    this.nuggDropper.flow(800, 10, 1, amt);
-};
-
-EffectsController.prototype.ShowCharge = function(level) {
-    this.charge1.visible = false;
-
-    if(level > 1) {
-        this.charge1.visible = true;
-    }
 };
 
 EffectsController.prototype.Dizzy = function(duration) {

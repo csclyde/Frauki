@@ -57,7 +57,7 @@ LoadingState.create = function() {
     audioController = new AudioController();
     triggerController = new TriggerController();
     timerUtil = new TimerUtil();
-    objectController = new ObjectController();
+    objectController = new ObjectController();    
     backdropController = new BackdropController();
     effectsController = new EffectsController();
 

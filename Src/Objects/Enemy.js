@@ -112,7 +112,6 @@ Enemy.prototype.update = function() {
 
         if(!!this.currentAttack && this.currentAttack.friendlyFire) {
             game.physics.arcade.collide(this.attackRect, objectController.enemyList, null, Collision.OverlapEnemyAttackWithEnemies);
-        
         }
     } 
 
@@ -423,8 +422,6 @@ Enemy.prototype.DestroyEnemy = function(e) {
     effectsController.DiceObject(this.objectName, this.body.center.x, this.body.center.y, this.body.velocity.x, this.body.velocity.y, this.owningLayer);
 
     damage = this.maxEnergy;
-
-    effectsController.SpawnEnergyNuggets(this.body, frauki.body, 'neutral', this.maxEnergy); 
 
     events.publish('camera_shake', {magnitudeX: 8, magnitudeY: 2, duration: 350 });
 

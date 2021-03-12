@@ -5,15 +5,16 @@ AudioController = function() {
 
     events.subscribe('play_sound', this.PlaySound, this);
     events.subscribe('stop_sound', this.StopSound, this);
+
     events.subscribe('play_music', this.PlayMusic, this);
     events.subscribe('stop_music', this.StopMusic, this);
-    events.subscribe('play_ambient', this.PlayAmbient, this);
-    events.subscribe('stop_ambient', this.StopAmbient, this);
     events.subscribe('stop_all_music', this.StopAllMusic, this);
     events.subscribe('pause_all_music', this.PauseAllMusic, this);
     events.subscribe('unpause_all_music', this.UnpauseAllMusic, this);
+
+    events.subscribe('play_ambient', this.PlayAmbient, this);
+    events.subscribe('stop_ambient', this.StopAmbient, this);
     events.subscribe('stop_all_ambient', this.StopAllAmbient, this);
-    events.subscribe('fade_music', this.FadeMusic, this);
 
     events.subscribe('stop_attack_sounds', function() {
         for(var key in this.sounds) {
@@ -26,21 +27,6 @@ AudioController = function() {
     this.sounds = {};
     this.music = {};
     this.ambient = {};
-
-    this.currentMusic = null;
-
-   
-
-    game.onPause.add(function() {
-        
-    }, this);
-
-    game.onResume.add(function() {
-        
-    }, this);
-
-    this.musicVolume = 1;
-    this.musicVolumeTween = null;
 
     //load audio
     FileMap.Audio.forEach(function(audio) {
@@ -62,32 +48,9 @@ AudioController = function() {
         that.ambient[ambient.Name] = game.add.audio(ambient.Name, ambient.Volume, ambient.Loop);
         that.ambient[ambient.Name].initialVolume = ambient.Volume;
     });
-
-    // this.sounds['baton_throw_0'].onStop.add(function() {
-    //     if(frauki.states.throwing) audioController.sounds['baton_spin_0'].play();
-    // });
-
-    // this.sounds['baton_throw_1'].onStop.add(function() {
-    //     if(frauki.states.throwing) audioController.sounds['baton_spin_1'].play();
-    // });
-
-    // this.sounds['baton_throw_2'].onStop.add(function() {
-    //     if(frauki.states.throwing) audioController.sounds['baton_spin_2'].play();
-    // });
-
-    // this.sounds['baton_throw_3'].onStop.add(function() {
-    //     if(frauki.states.throwing) audioController.sounds['baton_spin_3'].play();
-    // });
-
-    // this.sounds['baton_throw_4'].onStop.add(function() {
-    //     if(frauki.states.throwing) audioController.sounds['baton_spin_4'].play();
-    // });
 };
 
 AudioController.prototype.Update = function() {
-
-    //if the section ends and the thing does not loop, advance the section index
-    //and play the next section
 
 };
 
@@ -136,8 +99,6 @@ AudioController.prototype.PlayMusic = function(params) {
         } else {
             this.music[params.name].play(null, 0, this.music[params.name].initialVolume);
         }
-
-        this.currentMusic = params.name;
     }
 };
 
@@ -183,25 +144,6 @@ AudioController.prototype.UnpauseAllMusic = function(params) {
             music.resume();
             this.music[key].fadeTo(params.duration || 200, this.music[key].initialVolume);
         }
-    }
-};
-
-AudioController.prototype.FadeMusic = function(params) {
-    var that = this;
-
-    //volume, duration
-
-    if(!this.currentMusic) return;
-
-    //this.currentMusic.fadeTo(params.fadeDuration || 500, params.volume || 0);
-    if(this.musicVolumeTween) this.musicVolumeTween.stop();
-    this.musicVolumeTween = game.add.tween(this).to({ musicVolume: params.volume }, params.fadeDuration || 500, Phaser.Easing.Linear.None, true);
-
-    
-    if(params.duration) {
-        game.time.events.add(params.duration, function() {
-            that.FadeMusic({volume: 1});
-        }); 
     }
 };
 

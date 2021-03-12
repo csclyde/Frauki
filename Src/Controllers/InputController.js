@@ -54,9 +54,6 @@ InputController = function() {
         switch(e.keyCode) {
 
             case Phaser.Keyboard.P:
-                // energyController.AddHealth(2);
-                // energyController.AddCharge(2);
-
                 localStorage.setItem('save_data', '');
             break;
 
@@ -317,9 +314,7 @@ InputController.prototype.DisallowInput = function() {
     this.OnStart(false);
     this.currentDir = 'still';
 
-
     this.allowInput = false;
-
 };
 
 InputController.prototype.AllowInput = function() {
@@ -334,12 +329,6 @@ InputController.prototype.AllowInput = function() {
 
 InputController.prototype.OnJump = function(pressed) {
     this.tetrad.bottom = pressed;
-
-    // if(pressed && cameraController.target !== frauki.body.center) {
-    //     cameraController.target = frauki.body.center;
-    //     inputController.AllowInput();
-    //     return;
-    // }
 
     if(pressed) {
         events.publish('select_menu_option', {});

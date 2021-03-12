@@ -11,8 +11,7 @@ Frogland.Create = function() {
     this.map.addTilesetImage('Doodads');
     this.map.addTilesetImage('Collision');
 
-    backdropController.CreateParallax();
-    backdropController.LoadBackgrounds();
+    backdropController.Create();
     
     this['backgroundLayer'] = this.map.createLayer('Background');
     
@@ -21,15 +20,16 @@ Frogland.Create = function() {
 
     this.CreateCollisionLayer();
     
+    objectController.Create();    
     objectController.CreateObjectsLayer();
-    effectsController.CreateEffectsLayer();
+    effectsController.CreateMidgroundEffects();
 
     this['midgroundLayer'] = this.map.createLayer('Midground');
     this['midgroundLayer'].resizeWorld();
 
     this['foregroundLayer'] = this.map.createLayer('Foreground');
 
-    effectsController.CreateForegroundEffectsLayer();
+    effectsController.CreateForegroundEffects();
 
     this.PreprocessTiles();
 
