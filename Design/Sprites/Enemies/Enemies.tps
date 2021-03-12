@@ -816,13 +816,11 @@
             <filename>A3PZ</filename>
             <filename>HWK9</filename>
             <filename>GUBr</filename>
-            <filename>Goddess</filename>
             <filename>H0P8</filename>
             <filename>RKN1d</filename>
             <filename>QL0k</filename>
             <filename>SW8T</filename>
             <filename>Misc</filename>
-            <filename>Gnome</filename>
             <filename>NPC</filename>
         </array>
         <key>ignoreFileList</key>

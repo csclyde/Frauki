@@ -157,6 +157,8 @@ FileMap.Music = [
 	{ Name: 'Intro', File: 'Data/Music/Surface.ogg', Volume: 0.15, Loop: true },
 	{ Name: 'Choir', File: 'Data/Music/choir.ogg', Volume: 0.15, Loop: true },
 	{ Name: 'Gameover', File: 'Data/Music/game_over.ogg', Volume: 0.15, Loop: false },
+	{ Name: 'Chamber', File: 'Data/Music/chamber.ogg', Volume: 0.15, Loop: true },
+	{ Name: 'Ruins', File: 'Data/Music/ruins.ogg', Volume: 0.15, Loop: true },
 ];
 
 FileMap.Ambient = [
@@ -189,6 +191,7 @@ FileMap.Enemies = [
 	{ Name: 'Haystax', Tile: 147 },
 	{ Name: 'Crabby', Tile: 148 },
 	{ Name: 'Gnome', Tile: 149 },
+	{ Name: 'OldRobo', Tile: 150 },
 ];
 
 FileMap.Junk = [
@@ -213,5 +216,6 @@ FileMap.Portraits = [
 	{ Name: 'Displeased', Frame: 'PortraitsFraukiDispleased' },
 	{ Name: 'Mischeif', Frame: 'PortraitsFraukiMischeif' },
 	{ Name: 'Silly', Frame: 'PortraitsFraukiMischeif' },
-	{ Name: 'Goddess_Neutral', Frame: 'PortraitsGoddess_Neutral' }
+	{ Name: 'Goddess_Neutral', Frame: 'PortraitsGoddess_Neutral' },
+	{ Name: 'OldRobo', Frame: 'PortraitsOldRobo' }
 ];

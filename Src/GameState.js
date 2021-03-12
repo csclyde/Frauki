@@ -125,11 +125,11 @@ GameState.CreateUI = function() {
 
     this.continueGame = game.add.bitmapText(pixel.width / 2, 200, 'diest64','', 16, this.Menu);
     this.continueGame.anchor.setTo(0.5);
-    this.continueGame.setText('- Continue Game -');
+    this.continueGame.setText('- Continue Adventure -');
     
     this.newGame = game.add.bitmapText(pixel.width / 2, 220, 'diest64','', 16, this.Menu);
     this.newGame.anchor.setTo(0.5);
-    this.newGame.setText('New Game');
+    this.newGame.setText('New Adventure');
     
 
     this.healthFrameStart = game.add.image(10, 10, 'UI', 'HudFrame0000', this.UI);
@@ -177,12 +177,12 @@ GameState.UpdateUI = function() {
 
     if(this.inMainMenu) {
         if(this.menuSelection === 'continue') {
-            this.continueGame.setText('- Continue Game -');
-            this.newGame.setText('New Game');
+            this.continueGame.setText('- Continue Adventure -');
+            this.newGame.setText('New Adventure');
         }
         else {
-            this.continueGame.setText('Continue Game');
-            this.newGame.setText('- New Game -');
+            this.continueGame.setText('Continue Adventure');
+            this.newGame.setText('- New Adventure -');
         }
         return;
     }

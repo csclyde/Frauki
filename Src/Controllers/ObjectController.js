@@ -100,10 +100,9 @@ ObjectController.prototype.SpawnNearbyObjects = function() {
         var topBound = game.camera.y - padding;
         var bottomBound = game.camera.y + game.camera.height + padding;
 
-        if(o.x > leftBound && o.y > topBound && o.x < rightBound && o.y < bottomBound) {
+        if(o.id === 93 || (o.x > leftBound && o.y > topBound && o.x < rightBound && o.y < bottomBound)) {
             this.SpawnObject(o);
             this.latentObjects.splice(this.latentObjects.indexOf(o), 1);
-
         } 
     }
 };

@@ -134,6 +134,18 @@ TriggerController.prototype.triggers['goddess'] = {
 	}
 };
 
+TriggerController.prototype.triggers['old_robo'] = {
+	enter: function(params) {
+		ScriptRunner.run('enter_oldrobo');
+	},
+
+	stay: function(params) {
+	},
+
+	exit: function(params) {
+	}
+};
+
 TriggerController.prototype.triggers['vertical_loop'] = {
 	enter: function(params) {
 		

@@ -12,7 +12,7 @@ ScriptRunner.scripts['continue_game'] = [
     { name: 'play_sound', props: { name: 'crystal_door' } },      
     
     { func: function() {
-        events.publish('pan_camera', { to: frauki.body.center, duration: 2000 }); 
+        events.publish('pan_camera', { to: goddess.body.center, duration: 2000 }); 
         game.add.tween(GameState.Menu).to({alpha: 0}, 1500, Phaser.Easing.Cubic.Out, true);
         frauki.Reset();
         frauki.state = frauki.PreMaterializing;
@@ -20,12 +20,15 @@ ScriptRunner.scripts['continue_game'] = [
 
     { name: 'wait', props: { amount: 2000 } },
     
-    { name: 'allow_input', props: {} },
     { func: function() {
         GameState.inMainMenu = false;
         GameState.uiFadeTween = game.add.tween(GameState.UI).to({alpha: 1}, 1500, Phaser.Easing.Cubic.Out, true);
         frauki.state = frauki.Materializing;
     } },
+
+    { name: 'wait', props: { amount: 2000 } },
+    { name: 'run_script', props: { name: 'goddess_welcome_return' } },
+    
 ];
 
 ScriptRunner.scripts['new_game'] = [
@@ -40,9 +43,8 @@ ScriptRunner.scripts['new_game'] = [
 
     { name: 'wait', props: { amount: 4000 } },
     
-    { name: 'allow_input', props: {} },
     { func: function() {
-        events.publish('set_camera', { to: frauki.body.center }); 
+        events.publish('set_camera', { to: goddess.body.center }); 
         
         GameState.inMainMenu = false;
         GameState.Menu.alpha = 0;
@@ -50,10 +52,18 @@ ScriptRunner.scripts['new_game'] = [
     } },
 
     { name: 'wait', props: { amount: 800 } },
-
+    { name: 'run_script', props: { name: 'enter_goddess' } },
+    { name: 'wait', props: { amount: 1500 } },
+    { name: 'run_script', props: { name: 'goddess_summon_frauki' } },
+    { name: 'wait', props: { amount: 8000 } },
+    
     { func: function() {
         frauki.state = frauki.Materializing;
-    } }
+    } },
+
+    { name: 'wait', props: { amount: 3000 } },
+    { name: 'run_script', props: { name: 'goddess_intro' } },
+    
 ];
 
 ScriptRunner.scripts['game_over'] = [
@@ -81,14 +91,20 @@ ScriptRunner.scripts['game_over'] = [
     
     { func: function() {
         effectsController.Fade(false, 500);
-        events.publish('set_camera', { to: frauki.body.center });         
+        events.publish('set_camera', { to: goddess.body.center });         
     } },
 
+    { name: 'wait', props: { amount: 1000 } },
+
+    { name: 'run_script', props: { name: 'enter_goddess' } },
+    
     { name: 'wait', props: { amount: 500 } },
     
     { func: function() {
         frauki.state = frauki.Materializing;
     } },
+    { name: 'wait', props: { amount: 2000 } },
 
-    { name: 'allow_input', props: {} },
+    { name: 'run_script', props: { name: 'goddess_console' } },
+    
 ];
