@@ -12,7 +12,6 @@ Player = function (game, x, y, name) {
 
     this.body.collideWorldBounds = true;
     this.body.setSize(11, 50, 0, -74);
-    //this.body.maxVelocity.y = 10;
     this.body.drag.x = 2000;
 
     this.initialX = x;
@@ -36,7 +35,6 @@ Player = function (game, x, y, name) {
 
     this.timers = new TimerUtil();
 
-    //this.Reset();
     this.alpha = 0;
 
     this.currentAttack = {};
@@ -202,33 +200,6 @@ Player.prototype.postStateUpdate = function() {
         frauki.tint = 0xFFFFFF;
     }
 
-    // if(this.timers.TimerUp('charge_flicker') && energyController.GetCharge() > 0) {
-    //     var freq = 50;
-
-    //     if(energyController.GetCharge() > 3) {
-    //         frauki.tint = 0x00C86F;
-    //         freq = 25;
-
-    //     } else if(energyController.GetCharge() > 2) {
-    //         frauki.tint = 0x01FF8F;
-    //         freq = 50;
-
-    //     } else if(energyController.GetCharge() > 1) {
-    //         frauki.tint = 0x47FFAE;
-    //         freq = 100;
-
-    //     } else if(energyController.GetCharge() > 0) {
-    //         frauki.tint = 0x95FFD0;
-    //         freq = 200;
-
-    //     }
-
-    //     game.time.events.add(freq, function() { frauki.timers.SetTimer('charge_flicker', freq); });
-
-    // } else {
-    //     frauki.tint = 0xFFFFFF;
-    // }
-
     if(this.body.onFloor()) {
         this.timers.SetTimer('on_ground', 200);
     }
@@ -249,6 +220,59 @@ Player.prototype.update = function() {
     this.postStateUpdate();
 };
 
+Player.prototype.Reset = function() {
+    game.time.events.add(0, function() { frauki.alpha = 1; });
+    this.state = this.PreMaterializing;
+    this.SetDirection('right');
+    this.timers.SetTimer('frauki_invincible', 0);
+
+    this.states.crouching = false;
+    this.states.hasFlipped = false;
+    this.states.upPresseed = false;
+    this.states.wasAttacking = false;
+    this.states.inWater = false;
+    this.states.onCloud = false;
+    this.states.inUpdraft = false;
+    this.states.droppingThroughCloud = false;
+    this.states.onLeftSlope = false;
+    this.states.onRightSlope = false;
+    this.states.attackFallLanded = false;
+    this.states.shielded = false;
+    this.states.throwing = false;
+    this.states.entangled = false;
+    this.states.damageRefactory = [];
+
+    this.movement.diveVelocity = 0;
+    this.movement.jumpSlashVelocity = 0;
+    this.movement.rollBoost = 0;
+    this.movement.startRollTime = game.time.now;
+    this.movement.rollPop = false;
+    this.movement.rollPrevVel = 0;
+    this.movement.rollDirection = 1;
+    this.movement.globalMoveMod = 1.0;
+
+    this.upgrades.roll = true;
+    this.upgrades.hike = true;
+    this.upgrades.attackFront = true;
+    this.upgrades.attackOverhead = true;
+    this.upgrades.attackStab = true;
+    this.upgrades.attackDive = true;
+
+    frauki.timers.SetTimer('frauki_invincible', 0);
+    
+    if(GameData.GetDebugPos()) {
+        var pos = GameData.GetDebugPos();
+        frauki.x = pos.x;
+        frauki.y = pos.y; 
+    } else if(Frogland.map.properties.debug === 'false') {
+        frauki.x = 4487;
+        frauki.y = 2800;
+    } else {
+        frauki.x = Frogland.map.properties.startX * 16;
+        frauki.y = Frogland.map.properties.startY * 16 + 90;
+    }     
+};
+
 Player.prototype.SetDirection = function(dir) {
     if(this.states.direction !== dir && this.animations.paused === false && !this.InAttackAnim()) {
         this.states.direction = dir;
@@ -267,7 +291,6 @@ Player.prototype.ChangeState = function(newState) {
 };
 
 Player.prototype.Grace = function() {
-
     return !this.timers.TimerUp('grace') || !this.timers.TimerUp('frauki_invincible');
 };
 
@@ -431,60 +454,6 @@ Player.prototype.GetDirectionMultiplier = function() {
     
     return dir;
 };
-
-Player.prototype.Reset = function() {
-    game.time.events.add(0, function() { frauki.alpha = 1; });
-    this.state = this.Standing;
-    this.SetDirection('right');
-    this.timers.SetTimer('frauki_invincible', 0);
-
-    this.states.crouching = false;
-    this.states.hasFlipped = false;
-    this.states.upPresseed = false;
-    this.states.wasAttacking = false;
-    this.states.inWater = false;
-    this.states.onCloud = false;
-    this.states.inUpdraft = false;
-    this.states.droppingThroughCloud = false;
-    this.states.onLeftSlope = false;
-    this.states.onRightSlope = false;
-    this.states.attackFallLanded = false;
-    this.states.shielded = false;
-    this.states.throwing = false;
-    this.states.entangled = false;
-    this.states.damageRefactory = [];
-
-    this.movement.diveVelocity = 0;
-    this.movement.jumpSlashVelocity = 0;
-    this.movement.rollBoost = 0;
-    this.movement.startRollTime = game.time.now;
-    this.movement.rollPop = false;
-    this.movement.rollPrevVel = 0;
-    this.movement.rollDirection = 1;
-    this.movement.globalMoveMod = 1.0;
-
-    this.upgrades.roll = true;
-    this.upgrades.hike = true;
-    this.upgrades.attackFront = true;
-    this.upgrades.attackOverhead = true;
-    this.upgrades.attackStab = true;
-    this.upgrades.attackDive = true;
-
-    frauki.timers.SetTimer('frauki_invincible', 0);
-    
-    if(GameData.GetDebugPos()) {
-        var pos = GameData.GetDebugPos();
-        frauki.x = pos.x;
-        frauki.y = pos.y; 
-    } else if(Frogland.map.properties.debug === 'false') {
-        frauki.x = 4487;
-        frauki.y = 2666;
-    } else {
-        frauki.x = Frogland.map.properties.startX * 16;
-        frauki.y = Frogland.map.properties.startY * 16 + 90;
-    }
-};
-
 
 ////////////////ACTIONS//////////////////
 Player.prototype.Run = function(params) {
@@ -677,11 +646,6 @@ Player.prototype.Throw = function(params) {
         this.state = this.Throwing;
         this.states.throwing = true;
     }
-};
-
-Player.prototype.Block = function(params) {
-
-    this.state = this.Blocking;
 };
 
 Player.prototype.Slash = function(params) {
@@ -990,18 +954,8 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
     if(energyController.GetHealth() > 0) {
         effectsController.ScreenFlash();
         effectsController.SlowHit(300);
-
-        var nuggAmt = damage * 3;
-        if(nuggAmt > GameData.GetNuggCount()) nuggAmt = GameData.GetNuggCount();
-
-        effectsController.DropNuggets(nuggAmt);
-        GameData.RemoveNuggs(nuggAmt);
-
     } else {
-        this.body.velocity.y *= 2;
-
-        effectsController.DropNuggets(GameData.GetNuggCount());
-        GameData.ResetNuggCount();     
+        this.body.velocity.y *= 2;   
     }
 };
 

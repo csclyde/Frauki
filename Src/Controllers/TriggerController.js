@@ -124,6 +124,14 @@ TriggerController.prototype.Update = function(currentLayer) {
     }
 };
 
+TriggerController.prototype.Reset = function() {
+    this.triggerLayers['Triggers'].forEach(function(trig) {
+        trig.enterFired = false;
+        trig.stayFired = false;
+        trig.exitFired = false;
+    });
+};
+
 TriggerController.prototype.ForceExit = function(currentLayer) {
     currentLayer = this.triggerLayers['Triggers'];
 

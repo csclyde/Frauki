@@ -27,7 +27,6 @@ LoadingState.preload = function() {
     //load music
     FileMap.Music.forEach(function(music) {
         game.load.audio(music.Name, music.File);
-        //game.load.binary(music.Name, music.File);
     });
 
     FileMap.Ambient.forEach(function(music) {
@@ -47,6 +46,7 @@ LoadingState.create = function() {
 
     game.physics.startSystem(Phaser.Physics.ARCADE);
     game.physics.arcade.gravity.y = 700;
+    game.physics.arcade.sortDirection = game.physics.arcade.TOP_BOTTOM;    
 
     game.time.advancedTiming = true;
     game.time.desiredFps = 60;

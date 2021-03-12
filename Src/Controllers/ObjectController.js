@@ -70,6 +70,8 @@ ObjectController.prototype.Reset = function() {
     this.inactiveGroup.removeAll(true);
 
     this.CreateObjectsLayer();
+    this.CompileObjectList();
+    
 };
 
 ObjectController.prototype.GetObjectGroup = function() {

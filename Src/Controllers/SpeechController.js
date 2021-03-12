@@ -4,7 +4,7 @@ SpeechController = function() {
 
 	events.subscribe('activate_speech', this.ShowSpeech, this);
 	events.subscribe('control_up', this.Investigate, this);
-	//events.subscribe('deactivate_speech', this.HideSpeech, this);
+	events.subscribe('hide_speech', this.HideSpeech, this);
 
 	events.subscribe('advance_text', this.AdvanceText, this);
 

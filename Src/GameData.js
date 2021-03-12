@@ -6,7 +6,6 @@ var defaultData = {
     version: currentVer,
     dirty: true,
 
-    checkpoint: '0',
     activeCheckpoints: [],
     upgrades: [],
     doors: [],
@@ -51,7 +50,6 @@ GameData.SaveDataToStorage = function() {
 GameData.ResetData = function() {
     this.data = Object.assign({}, defaultData);
     this.SaveDataToStorage();
-
 };
 
 GameData.GetDebugPos = function() {
@@ -98,17 +96,6 @@ GameData.GetSetFlag = function(name) {
         return true;
     } else {
         return false;
-    }
-};
-
-GameData.GetCheckpoint = function() {
-    return this.data.checkpoint;
-};
-
-GameData.SetCheckpoint = function(c) {
-    if(this.data.checkpoint !== c) {
-        this.data.checkpoint = c;
-        this.SaveDataToStorage();
     }
 };
 
@@ -212,66 +199,4 @@ GameData.AddShard = function(name) {
 
 GameData.HasShard = function(name) {
     return GameData.data.shards.indexOf(name) >= 0;
-};
-
-GameData.GetNuggCount = function() {
-    return this.nuggetCount;
-};
-
-GameData.AddNugg = function() {
-    this.nuggetCount++;
-    //this.SaveDataToStorage();
-
-    //save every 10th nugget
-    // if(this.data.nuggets % 10 === 0) {
-    //     this.SaveDataToStorage();
-    // }
-};
-
-GameData.RemoveNuggs = function(amt) {
-    amt = amt || 1;
-
-    this.nuggetCount -= Math.floor(amt);
-
-    if(this.nuggetCount < 0) this.nuggetCount = 0;
-}
-
-GameData.ResetNuggCount = function() {
-    this.nuggetCount = 0;
-    //this.SaveDataToStorage();
-};
-
-GameData.SaveNuggsToBank = function() {
-    this.data.nugg_bank += this.nuggetCount;
-    this.nuggetCount = 0;
-    this.SaveDataToStorage();
-
-};
-
-GameData.GetNuggBankCount = function() {
-    
-    return this.data.nugg_bank;
-};
-
-GameData.DepositNugg = function() {
-    if(this.nuggetCount > 0) {
-        this.nuggetCount--;
-        this.data.nugg_bank++;
-        this.SaveDataToStorage();
-    }
-};
-
-GameData.GetFlashCopy = function() {
-    return this.data.flash_copy;
-};
-
-GameData.SetFlashCopy = function() {
-    this.data.flash_copy = {};
-
-    this.data.flash_copy.x = frauki.x;
-    this.data.flash_copy.y = frauki.y;
-    this.data.flash_copy.layer = Frogland.currentLayer;
-
-    this.SaveDataToStorage();
-
 };

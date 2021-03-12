@@ -96,6 +96,13 @@ CameraController.prototype.Update = function() {
 	game.camera.focusOnXY(Math.floor(this.camX), Math.floor(this.camY));
 };
 
+CameraController.prototype.Reset = function() {
+	this.shakeMagnitudeX = 0;
+    this.shakeMagnitudeY = 0;
+    if(this.shakeXTween) this.shakeXTween.stop();
+    if(this.shakeYTween) this.shakeYTween.stop();
+};
+
 CameraController.prototype.CrouchCamera = function(params) {
 	this.retweenY = true;
 };

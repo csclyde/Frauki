@@ -70,28 +70,28 @@ Enemy.prototype.types['Goddess'] =  function() {
     	//if the goddess is angry from being killed, reset that
         GameData.SetFlag('goddess_angry', false);
 
-        if(GameData.GetCheckpoint() === '0' && false) {
+        // if(GameData.GetCheckpoint() === '0' && false) {
 
-            //if they killed the goddess, give the player a lecture then make her angry
-            if(GameData.GetFlag('goddess_killed')) {
-                ScriptRunner.run('goddess_rez_angry');
-                GameData.SetFlag('goddess_killed', false);
-                GameData.SetFlag('goddess_angry', true);
-            } else if(this.deathMessage) {
-            	events.publish('show_text', { text: this.deathMessage, portrait: 'Goddess_Neutral' });
+        //     //if they killed the goddess, give the player a lecture then make her angry
+        //     if(GameData.GetFlag('goddess_killed')) {
+        //         ScriptRunner.run('goddess_rez_angry');
+        //         GameData.SetFlag('goddess_killed', false);
+        //         GameData.SetFlag('goddess_angry', true);
+        //     } else if(this.deathMessage) {
+        //     	events.publish('show_text', { text: this.deathMessage, portrait: 'Goddess_Neutral' });
 
-            	GameData.SetVal('goddess_death_message', null);
+        //     	GameData.SetVal('goddess_death_message', null);
      
-            } else {
-                events.publish('show_text', { text: [
-					"My, my... you need to be more careful! Well, brush it off and try again. On your way now.",
-					"Are you ok? That looked really painful... Well, I fixed you up. Go give it another shot!",
-					"Sorry that happened Frauki... But don't get discouraged. You can do it!"
-					], portrait: 'Goddess_Neutral' 
-				});
+        //     } else {
+        //         events.publish('show_text', { text: [
+		// 			"My, my... you need to be more careful! Well, brush it off and try again. On your way now.",
+		// 			"Are you ok? That looked really painful... Well, I fixed you up. Go give it another shot!",
+		// 			"Sorry that happened Frauki... But don't get discouraged. You can do it!"
+		// 			], portrait: 'Goddess_Neutral' 
+		// 		});
 
-            }
-        }
+        //     }
+        // }
     };
 
 	///////////////////////////////ACTIONS////////////////////////////////////

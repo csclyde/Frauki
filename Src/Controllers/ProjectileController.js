@@ -2,6 +2,46 @@ ProjectileController = function() {
 	this.projectiles = game.add.group();
 };
 
+ProjectileController.prototype.Update = function() {
+	
+	var childrenToRemove = [];
+
+	frauki.states.entangled = false;
+
+	this.projectiles.forEach(function(p) {
+
+		if(game.time.now - p.spawnTime > p.lifeTime && p.lifeTime !== 0) {
+			p.destroy();
+			childrenToRemove.push(p);
+
+			if(p.projType === 'bolas') {
+				events.publish('stop_sound', {name: 'SW8T_bolas_fly', restart: false});
+			}
+		} else if(p.solid) {
+			game.physics.arcade.collide(p, Frogland.GetCollisionLayer(), null, Collision.CollideProjectileWithWorld);
+		}
+
+		if(p.projType === 'bolas' && p.attached === true) {
+			p.x = frauki.body.center.x;
+			p.y = frauki.body.center.y + (Math.sin(game.time.now / 100) * 24) + 0;
+			frauki.states.entangled = true;
+			p.play('entangle');
+
+		} else if(p.projType === 'mortar' && !!p.body) {
+			p.rotation = Math.atan2(p.body.velocity.y, p.body.velocity.x);
+		}
+
+	});
+
+	childrenToRemove.forEach(function(e) {
+		e.destroy();
+	});
+};
+
+ProjectileController.prototype.Reset = function() {
+	this.DestroyAllProjectiles();
+};
+
 ProjectileController.prototype.Mortar = function(e) {
 	var xPos = e.body.center.x;
 	var yPos = e.body.center.y - 25;
@@ -326,42 +366,6 @@ ProjectileController.prototype.FallingTile = function(sourceTile, visibleTile) {
 	tile.lifeTime = 3000;
 
 	this.projectiles.add(tile);
-};
-
-ProjectileController.prototype.Update = function() {
-
-	var childrenToRemove = [];
-
-	frauki.states.entangled = false;
-
-	this.projectiles.forEach(function(p) {
-
-		if(game.time.now - p.spawnTime > p.lifeTime && p.lifeTime !== 0) {
-			p.destroy();
-			childrenToRemove.push(p);
-
-			if(p.projType === 'bolas') {
-				events.publish('stop_sound', {name: 'SW8T_bolas_fly', restart: false});
-			}
-		} else if(p.solid) {
-			game.physics.arcade.collide(p, Frogland.GetCollisionLayer(), null, Collision.CollideProjectileWithWorld);
-		}
-
-		if(p.projType === 'bolas' && p.attached === true) {
-			p.x = frauki.body.center.x;
-			p.y = frauki.body.center.y + (Math.sin(game.time.now / 100) * 24) + 0;
-			frauki.states.entangled = true;
-			p.play('entangle');
-
-		} else if(p.projType === 'mortar' && !!p.body) {
-			p.rotation = Math.atan2(p.body.velocity.y, p.body.velocity.x);
-		}
-
-	});
-
-	childrenToRemove.forEach(function(e) {
-		e.destroy();
-	});
 };
 
 ProjectileController.prototype.DestroyAllProjectiles = function() {

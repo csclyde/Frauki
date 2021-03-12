@@ -4,7 +4,6 @@ ScriptRunner.scripts['game_start'] = [
     { name: 'play_ambient', props: { name: 'ambient_surface' } },
     { func: function() {
         effectsController.Fade(false, 1000);
-        effectsController.screenDark.bringToTop();
     } },
 ];
 
@@ -35,8 +34,7 @@ ScriptRunner.scripts['new_game'] = [
     
     { func: function() {
         GameData.ResetData();
-        effectsController.screenDark.bringToTop();
-        GameState.Restart();
+        GameState.Reset();
     } },
 
     { name: 'wait', props: { amount: 4000 } },
@@ -54,4 +52,41 @@ ScriptRunner.scripts['new_game'] = [
     { func: function() {
         frauki.state = frauki.Materializing;
     } }
+];
+
+ScriptRunner.scripts['game_over'] = [
+    { name: 'disallow_input', props: {} },
+    { name: 'stop_all_music', props: { fade: 500 } },
+    { name: 'stop_all_ambient', props: {} },
+    { name: 'hide_speech', props: {} },
+    
+    { func: function() {
+        GameState.BeginGameover();
+        effectsController.Fade(true, 4000);        
+    } },
+
+    { name: 'wait', props: { amount: 800 } },
+    
+    { name: 'play_music', props: { name: 'Gameover' } },
+
+    { name: 'wait', props: { amount: 4000 } },
+
+    { func: function() {
+        GameState.Reset();
+    } },
+
+    { name: 'wait', props: { amount: 400 } },
+    
+    { func: function() {
+        events.publish('set_camera', { to: frauki.body.center });         
+        effectsController.Fade(false, 500);
+    } },
+
+    { name: 'wait', props: { amount: 500 } },
+    
+    { func: function() {
+        frauki.state = frauki.Materializing;
+    } },
+
+    { name: 'allow_input', props: {} },
 ];

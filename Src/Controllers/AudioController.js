@@ -91,6 +91,10 @@ AudioController.prototype.Update = function() {
 
 };
 
+AudioController.prototype.Reset = function() {
+    
+};
+
 AudioController.prototype.PlaySound = function(params) {
     var that = this;
 
@@ -152,8 +156,7 @@ AudioController.prototype.StopAllMusic = function(params) {
         if(!this.music.hasOwnProperty(key)) continue;
 
         if(!!this.music[key] && this.music[key].isPlaying) {
-
-            this.music[key].fadeTo(200, 0);
+            this.music[key].fadeTo(params.fade || 200, 0);
         }
     }
 };

@@ -296,6 +296,13 @@ InputController.prototype.Update = function() {
     frauki.Run({dir:this.currentDir});
 };
 
+InputController.prototype.Reset = function() {
+    this.OnLeft(false);
+    this.OnRight(false);
+    this.OnUp(false);
+    this.OnDown(false);    
+};
+
 InputController.prototype.DisallowInput = function() {
     this.OnJump(false);
     this.OnSlash(false);

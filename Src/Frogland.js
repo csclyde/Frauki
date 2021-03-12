@@ -16,14 +16,13 @@ Frogland.Create = function() {
     
     this['backgroundLayer'] = this.map.createLayer('Background');
     
-    effectsController.CreateEffectsLayer();
-    
     frauki = new Player(game, 0, 0, 'Frauki');
     game.add.existing(frauki);
 
     this.CreateCollisionLayer();
-
+    
     objectController.CreateObjectsLayer();
+    effectsController.CreateEffectsLayer();
 
     this['midgroundLayer'] = this.map.createLayer('Midground');
     this['midgroundLayer'].resizeWorld();
@@ -35,13 +34,10 @@ Frogland.Create = function() {
     this.PreprocessTiles();
 
     triggerController.CreateTriggers();
-
     objectController.CompileObjectList();
 
     //this will store fallen tiles, so that when you die they can be reset
     this.fallenTiles = [];
-
-    game.physics.arcade.sortDirection = game.physics.arcade.TOP_BOTTOM;
 
     setInterval(this.AnimateTiles, 200);
 
@@ -69,8 +65,22 @@ Frogland.Update = function() {
     }
 };
 
+Frogland.Reset = function() {
+    this.ResetFallenTiles();   
+    
+    frauki.states.inWater = false;
+    frauki.states.onCloud = false;
+    frauki.states.inUpdraft = false;
+    frauki.states.onLeftSlope = false;
+    frauki.states.onRightSlope = false;
+    frauki.states.flowDown = false;
+    frauki.states.flowRight = false;
+    frauki.states.flowUp = false;
+    frauki.states.flowLeft = false;
+};
+
 Frogland.HandleCollisions = function() {
-    //moving objects collided with the world geometry
+    //frauki colliding with the world geometry
     game.physics.arcade.collideSpriteVsTilemapLayer(
         frauki, 
         this.GetCollisionLayer(), 
@@ -78,6 +88,7 @@ Frogland.HandleCollisions = function() {
         Collision.CollideFraukiWithEnvironment, 
         null, false);
 
+    //all other objects colliding with the world geometry
     game.physics.arcade.collideGroupVsTilemapLayer(
         objectController.GetObjectGroup(),
         this.GetCollisionLayer(), 
@@ -85,7 +96,7 @@ Frogland.HandleCollisions = function() {
         Collision.OverlapObjectsWithEnvironment, 
         null, false);
 
-    //frauki is collided with other moving objects
+    //frauki colliding with other moving objects
     game.physics.arcade.collideHandler(
         frauki, 
         objectController.GetObjectGroup(), 
@@ -109,9 +120,13 @@ Frogland.HandleCollisions = function() {
     }
 
     //objects are collided with themselves
-    game.physics.arcade.collide(objectController.GetObjectGroup(), undefined, null, Collision.OverlapObjectsWithSelf);
+    game.physics.arcade.collide(
+        objectController.GetObjectGroup(), 
+        undefined, 
+        null, 
+        Collision.OverlapObjectsWithSelf);
 
-    //frauki is checked against projectiles
+    //frauki is overlapped with projectiles
     if(projectileController.projectiles.countLiving() > 0) {
         game.physics.arcade.overlap(
             frauki, 

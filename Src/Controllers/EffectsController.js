@@ -403,7 +403,6 @@ function UpdateParticle(p) {
                 effectsController.EnergySplash(p.body, 100, 'positive');
             } else if(p.parent === effectsController.neutralBits) {
                 effectsController.EnergySplash(p.body, 100, 'neutral');
-                GameData.AddNugg();
             } 
         }
         
@@ -860,6 +859,7 @@ EffectsController.prototype.ScreenDark = function(show, amt) {
 };
 
 EffectsController.prototype.Fade = function(show, dur) {
+    this.screenDark.bringToTop();
     if(show) {
         this.screenDark.alpha = 0;
         this.screenDark.visible = true;
