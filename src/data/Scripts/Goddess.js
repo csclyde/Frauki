@@ -88,6 +88,24 @@ ScriptRunner.scripts['goddess_console'] = [
 	{ name: 'play_music', props: { name: 'Ruins', fade: 0 } },
 ];
 
+ScriptRunner.scripts['goddess_chat'] = [
+	{ name: 'run_script', props: { name: 'enter_goddess' } },
+	{ name: 'wait', props: { amount: 1500 } },
+
+	{ name: 'show_text', props: { text: "You're doing great Frauki. Keep trying. I know you can do this.", portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 5000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'run_script', props: { name: 'exit_goddess' } },
+];
+
+
+
+
+
+
+
+
 ScriptRunner.scripts['goddess_shard'] = [
 	{ name: 'disallow_input', props: {} },
 	{ name: 'show_text', props: { text: 'You found it!! You beautiful little person thing!!', portrait: 'Goddess_Neutral' } },

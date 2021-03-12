@@ -124,7 +124,7 @@ TriggerController.prototype.triggers['goddess_intro'] = {
 
 TriggerController.prototype.triggers['goddess'] = {
 	enter: function(params) {
-		ScriptRunner.run('enter_goddess');
+		ScriptRunner.run('goddess_chat');
 	},
 
 	stay: function(params) {

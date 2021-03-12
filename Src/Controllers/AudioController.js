@@ -127,8 +127,7 @@ AudioController.prototype.PauseAllMusic = function(params) {
         if(!this.music.hasOwnProperty(key)) continue;
 
         if(!!this.music[key] && this.music[key].isPlaying) {
-
-            this.music[key].fadeTo(params.duration || 200, 0);
+            this.music[key].fadeTo(params.fade || 1000, 0);
             this.music[key].onFadeComplete.add(function(music) {
                 music.pause();
             });
@@ -140,9 +139,9 @@ AudioController.prototype.UnpauseAllMusic = function(params) {
     for(var key in this.music) {
         if(!this.music.hasOwnProperty(key)) continue;
 
-        if(!!this.music[key] && this.music[key].isPaused) {
-            music.resume();
-            this.music[key].fadeTo(params.duration || 200, this.music[key].initialVolume);
+        if(!!this.music[key] && this.music[key].paused) {
+            this.music[key].resume();
+            this.music[key].fadeTo(params.duration || 1000, this.music[key].initialVolume);
         }
     }
 };
