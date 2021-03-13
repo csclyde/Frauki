@@ -8,7 +8,7 @@ ScriptRunner.scripts['game_start'] = [
 ];
 
 ScriptRunner.scripts['continue_game'] = [
-    { name: 'stop_music', props: { name: 'Intro', fade: 2500 } },
+    { name: 'stop_music', props: { name: 'Intro', fade: 2000 } },
     { name: 'play_sound', props: { name: 'crystal_door' } },      
     
     { func: function() {
@@ -18,7 +18,7 @@ ScriptRunner.scripts['continue_game'] = [
         frauki.state = frauki.PreMaterializing;
     } },
 
-    { name: 'wait', props: { amount: 2000 } },
+    { name: 'wait', props: { amount: 2500 } },
     { name: 'run_script', props: { name: 'enter_goddess' } },
     
     { func: function() {

@@ -250,3 +250,52 @@ Phaser.Physics.Arcade.prototype.computeVelocity = function (axis, body, velocity
 
     return velocity;
 };
+
+Phaser.Sound.prototype.fadeToPause = function (duration) {
+    
+    if (!this.isPlaying || this.paused)
+    {
+        return;
+    }
+
+    if (duration === undefined) { duration = 1000; }
+
+    if(this.fadeTween && this.fadeTween.isRunning) {
+        console.log('on fade out, stop tween')
+        this.fadeTween.stop();
+    }
+
+    this.fadeTween = this.game.add.tween(this).to( { volume: 0 }, duration, Phaser.Easing.Linear.None, true);
+    this.willBePaused = true;
+
+    //this.fadeTween.onComplete.add(this.fadeComplete, this);
+    this.fadeTween.onComplete.add(function() {
+        console.log('after fade out, pausing song');
+        this.pause();
+        this.willBePaused = false;
+    }, this);
+};
+
+Phaser.Sound.prototype.fadeToResume = function (duration, volume) {
+    console.log('fade tween from fade in', this.fadeTween);
+
+    this.willBePaused = false;
+    
+    if(this.fadeTween && this.fadeTween.isRunning) {
+        console.log('on fade in, stop the tween')
+        this.fadeTween.stop();
+    }
+
+    if (duration === undefined) { duration = 1000; }
+    if (volume === undefined) { volume = 1; }
+
+    if(this.volume !== volume) {
+        console.log('on fade in, create tween')        
+        this.fadeTween = this.game.add.tween(this).to( { volume: volume }, duration, Phaser.Easing.Linear.None, true);
+    }
+    
+    if(this.paused) {
+        console.log('on fade in, resume')        
+        this.resume();
+    }
+};

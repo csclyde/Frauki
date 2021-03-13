@@ -126,10 +126,7 @@ AudioController.prototype.PauseAllMusic = function(params) {
         if(!this.music.hasOwnProperty(key)) continue;
 
         if(!!this.music[key] && this.music[key].isPlaying) {
-            this.music[key].pause();
-            // this.music[key].fadeOut(params.fade || 1000);
-            // game.time.events.add(params.fade || 1000, function() {
-            // }, this);
+            this.music[key].fadeToPause(params.fade || 1000);
         }
     }
 };
@@ -138,10 +135,8 @@ AudioController.prototype.UnpauseAllMusic = function(params) {
     for(var key in this.music) {
         if(!this.music.hasOwnProperty(key)) continue;
 
-        if(!!this.music[key] && this.music[key].paused) {
-            //this.music[key].volume = this.music[key].initialVolume;
-            this.music[key].resume();
-            //this.music[key].fadeTo(params.duration || 1000, this.music[key].initialVolume);
+        if(!!this.music[key] && (this.music[key].paused || this.music[key].willBePaused)) {
+            this.music[key].fadeToResume(params.duration || 1000, this.music[key].initialVolume);
         }
     }
 };

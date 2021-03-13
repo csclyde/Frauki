@@ -5390,7 +5390,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -7097,6 +7097,14 @@
                  "height":215.666633333333,
                  "id":3927,
                  "name":"music_zone",
+                 "properties":
+                    {
+                     "song":""
+                    },
+                 "propertytypes":
+                    {
+                     "song":"string"
+                    },
                  "rotation":0,
                  "type":"trigger",
                  "visible":true,
@@ -7125,7 +7133,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 

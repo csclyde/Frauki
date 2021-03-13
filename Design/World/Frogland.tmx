@@ -4219,7 +4219,7 @@
   <object id="3477" gid="107" x="1912" y="4619" width="16" height="16"/>
   <object id="3478" gid="109" x="2255" y="4619.5" width="16" height="16"/>
  </objectgroup>
- <objectgroup name="Enemies">
+ <objectgroup name="Enemies" visible="0">
   <object id="3244" gid="85" x="3482" y="2735.33" width="16" height="16">
    <properties>
     <property name="on_death" value="open_door,door_name:start_enemy"/>
@@ -4780,7 +4780,7 @@
   <object id="3819" name="splash" type="effect" x="879.625" y="2392.25" width="65.0833" height="9.5"/>
   <object id="3882" name="leaves_green" type="effect" x="3932.18" y="2704.17" width="136.979" height="7.6666"/>
  </objectgroup>
- <objectgroup name="Audio" visible="0">
+ <objectgroup name="Audio">
   <object id="3888" name="ambient_left_right" type="trigger" x="3216" y="2966.67" width="32" height="97.3333">
    <properties>
     <property name="left" value="ambient_ship"/>
@@ -4922,7 +4922,11 @@
     <property name="fade" value="3000"/>
    </properties>
   </object>
-  <object id="3927" name="music_zone" type="trigger" x="2687.83" y="2852.17" width="541.667" height="215.667"/>
+  <object id="3927" name="music_zone" type="trigger" x="2687.83" y="2852.17" width="541.667" height="215.667">
+   <properties>
+    <property name="song" value=""/>
+   </properties>
+  </object>
   <object id="3930" name="music_zone" type="trigger" x="2711.2" y="980.243" width="498.333" height="1862.58">
    <properties>
     <property name="song" value="Decimation"/>
