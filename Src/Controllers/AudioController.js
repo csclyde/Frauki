@@ -91,12 +91,11 @@ AudioController.prototype.StopSound = function(params) {
 };
 
 AudioController.prototype.PlayMusic = function(params) {
-
     if(!!params.name && !!this.music[params.name] && !this.music[params.name].isPlaying) {
         if(params.fade) {
             this.music[params.name].play(null, 0, 0);
             this.music[params.name].fadeTo(params.fade, this.music[params.name].initialVolume);
-        } else {
+        } else {         
             this.music[params.name].play(null, 0, this.music[params.name].initialVolume);
         }
     }
@@ -117,21 +116,20 @@ AudioController.prototype.StopAllMusic = function(params) {
         if(!this.music.hasOwnProperty(key)) continue;
 
         if(!!this.music[key] && this.music[key].isPlaying) {
-            this.music[key].fadeTo(params.fade || 200, 0);
+            //this.music[key].fadeOut(params.fade || 1000);
         }
     }
 };
 
 AudioController.prototype.PauseAllMusic = function(params) {
     for(var key in this.music) {
-        var music = this.music[key];
         if(!this.music.hasOwnProperty(key)) continue;
 
         if(!!this.music[key] && this.music[key].isPlaying) {
-            this.music[key].fadeTo(params.fade || 1000, 0);
-            game.time.events.add(params.fade || 1000, function() {
-                music.pause();
-            });
+            this.music[key].pause();
+            // this.music[key].fadeOut(params.fade || 1000);
+            // game.time.events.add(params.fade || 1000, function() {
+            // }, this);
         }
     }
 };
@@ -141,8 +139,9 @@ AudioController.prototype.UnpauseAllMusic = function(params) {
         if(!this.music.hasOwnProperty(key)) continue;
 
         if(!!this.music[key] && this.music[key].paused) {
+            //this.music[key].volume = this.music[key].initialVolume;
             this.music[key].resume();
-            this.music[key].fadeTo(params.duration || 1000, this.music[key].initialVolume);
+            //this.music[key].fadeTo(params.duration || 1000, this.music[key].initialVolume);
         }
     }
 };

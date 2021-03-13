@@ -126,189 +126,190 @@ EffectsController.prototype.CreateForegroundEffects = function() {
 
 EffectsController.prototype.LoadMapEffects = function() {
     Frogland.map.objects['Effects'].forEach(function(o) {
-        if(o.type === 'effect') {
-            if(o.name === 'splash') {
-                var splasherLeft = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
-                splasherLeft.width = o.width / 2;
-                splasherLeft.height = o.height;
-                splasherLeft.makeParticles('Misc', ['Splash0002', 'Splash0003'], 10); 
-                splasherLeft.gravity.setTo(0, 300);
-                splasherLeft.maxParticleScale = 1;
-                splasherLeft.minParticleScale = 1;
-                splasherLeft.minParticleSpeed.x = -50;
-                splasherLeft.maxParticleSpeed.x = 10;
-                splasherLeft.minParticleSpeed.y = -80;
-                splasherLeft.maxParticleSpeed.y = -130;
-                splasherLeft.setRotation(0, 0);
-                splasherLeft.start(false, 200, 5);
+        if(o.name === 'splash') {
+            var splasherLeft = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
+            splasherLeft.width = o.width / 2;
+            splasherLeft.height = o.height;
+            splasherLeft.makeParticles('Misc', ['Splash0002', 'Splash0003'], 10); 
+            splasherLeft.gravity.setTo(0, 300);
+            splasherLeft.maxParticleScale = 1;
+            splasherLeft.minParticleScale = 1;
+            splasherLeft.minParticleSpeed.x = -50;
+            splasherLeft.maxParticleSpeed.x = 10;
+            splasherLeft.minParticleSpeed.y = -80;
+            splasherLeft.maxParticleSpeed.y = -130;
+            splasherLeft.setRotation(0, 0);
+            splasherLeft.start(false, 200, 5);
 
-                var splasherRight = game.add.emitter(o.x + o.width / 2, o.y);
-                splasherRight.width = o.width / 2;
-                splasherRight.height = o.height;
-                splasherRight.makeParticles('Misc', ['Splash0000', 'Splash0001'], 10); 
-                splasherRight.gravity.setTo(0, 300);
-                splasherRight.maxParticleScale = 1;
-                splasherRight.minParticleScale = 1;
-                splasherRight.minParticleSpeed.x = -10;
-                splasherRight.maxParticleSpeed.x = 50;
-                splasherRight.minParticleSpeed.y = -80;
-                splasherRight.maxParticleSpeed.y = -130;
-                splasherRight.setRotation(0, 0);
-                splasherRight.start(false, 200, 5);
+            var splasherRight = game.add.emitter(o.x + o.width / 2, o.y);
+            splasherRight.width = o.width / 2;
+            splasherRight.height = o.height;
+            splasherRight.makeParticles('Misc', ['Splash0000', 'Splash0001'], 10); 
+            splasherRight.gravity.setTo(0, 300);
+            splasherRight.maxParticleScale = 1;
+            splasherRight.minParticleScale = 1;
+            splasherRight.minParticleSpeed.x = -10;
+            splasherRight.maxParticleSpeed.x = 50;
+            splasherRight.minParticleSpeed.y = -80;
+            splasherRight.maxParticleSpeed.y = -130;
+            splasherRight.setRotation(0, 0);
+            splasherRight.start(false, 200, 5);
 
-                this.loadedEffects.push(splasherLeft);
-                this.loadedEffects.push(splasherRight);
-            } else if(o.name === 'drip') {
+            this.loadedEffects.push(splasherLeft);
+            this.loadedEffects.push(splasherRight);
+        } else if(o.name === 'drip') {
 
-                var dripper = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
-                dripper.width = o.width;
-                dripper.height = o.height;
-                dripper.makeParticles('Misc', ['Drip0000', 'Drip0001'], 2);
-                dripper.gravity.setTo(0, -200);
-                dripper.maxParticleSpeed.setTo(0);
-                dripper.minParticleSpeed.setTo(0);
-                dripper.setRotation(0, 0);
-                dripper.bounce.setTo(0.5);
-                dripper.start(false, 1500, game.rnd.between(1200, 2000));
-                dripper.effectType = 'drip';
-                dripper.alpha = 0.5;
+            var dripper = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
+            dripper.width = o.width;
+            dripper.height = o.height;
+            dripper.makeParticles('Misc', ['Drip0000', 'Drip0001'], 2);
+            dripper.gravity.setTo(0, -200);
+            dripper.maxParticleSpeed.setTo(0);
+            dripper.minParticleSpeed.setTo(0);
+            dripper.setRotation(0, 0);
+            dripper.bounce.setTo(0.5);
+            dripper.start(false, 1500, game.rnd.between(1200, 2000));
+            dripper.effectType = 'drip';
+            dripper.alpha = 0.5;
 
-                this.loadedEffectsCollide.push(dripper);
-            } else if(o.name === 'dripDirty') {
+            this.loadedEffectsCollide.push(dripper);
+        } else if(o.name === 'dripDirty') {
 
-                var dripper = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
-                dripper.width = o.width;
-                dripper.height = o.height;
-                dripper.makeParticles('Misc', ['DripDirty0000', 'DripDirty0001'], 2);
-                dripper.gravity.setTo(0, -200);
-                dripper.maxParticleSpeed.setTo(0);
-                dripper.minParticleSpeed.setTo(0);
-                dripper.setRotation(0, 0);
-                dripper.bounce.setTo(0.5);
-                dripper.start(false, 1500, game.rnd.between(2000, 3000));
-                dripper.effectType = 'dripDirty';
-                dripper.alpha = 0.5;
+            var dripper = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
+            dripper.width = o.width;
+            dripper.height = o.height;
+            dripper.makeParticles('Misc', ['DripDirty0000', 'DripDirty0001'], 2);
+            dripper.gravity.setTo(0, -200);
+            dripper.maxParticleSpeed.setTo(0);
+            dripper.minParticleSpeed.setTo(0);
+            dripper.setRotation(0, 0);
+            dripper.bounce.setTo(0.5);
+            dripper.start(false, 1500, game.rnd.between(2000, 3000));
+            dripper.effectType = 'dripDirty';
+            dripper.alpha = 0.5;
 
-                this.loadedEffectsCollide.push(dripper);
-            } else if(o.name === 'fluff') {
+            this.loadedEffectsCollide.push(dripper);
+        } else if(o.name === 'fluff') {
 
-                var fluffer = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
-                // fluffer.x = o.x;
-                // fluffer.y = o.y;
-                fluffer.width = o.width;
-                fluffer.height = o.height;
-                fluffer.makeParticles('Misc', ['Fluff0000', 'Fluff0001', 'Fluff0002', 'Fluff0003'], 100);
-                fluffer.gravity.setTo(0, -695);
-                fluffer.maxParticleSpeed.setTo(10);
-                fluffer.minParticleSpeed.setTo(-10);
-                fluffer.setRotation(0, 0);
-                fluffer.start(false, 3000, 700);
-                fluffer.effectType = 'fluff';
-                fluffer.alpha = 0.8;
+            var fluffer = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
+            // fluffer.x = o.x;
+            // fluffer.y = o.y;
+            fluffer.width = o.width;
+            fluffer.height = o.height;
+            fluffer.makeParticles('Misc', ['Fluff0000', 'Fluff0001', 'Fluff0002', 'Fluff0003'], 100);
+            fluffer.gravity.setTo(0, -695);
+            fluffer.maxParticleSpeed.setTo(10);
+            fluffer.minParticleSpeed.setTo(-10);
+            fluffer.setRotation(0, 0);
+            fluffer.start(false, 3000, 700);
+            fluffer.effectType = 'fluff';
+            fluffer.alpha = 0.8;
 
-                this.loadedEffects.push(fluffer);
-            } else if(o.name === 'bubbles') {
+            this.loadedEffects.push(fluffer);
+        } else if(o.name === 'bubbles') {
 
-                var bubbler = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
-                bubbler.width = o.width;
-                bubbler.height = o.height;
-                bubbler.makeParticles('Misc', ['Bubbles0000', 'Bubbles0001', 'Bubbles0002', 'Bubbles0003'], 5);
-                bubbler.gravity.setTo(0, -700);
-                bubbler.maxParticleSpeed.setTo(0);
-                bubbler.minParticleSpeed.setTo(0);
-                bubbler.minParticleSpeed.y = -25;
-                bubbler.maxParticleSpeed.y = -50;
-                bubbler.setRotation(0, 0);
-                bubbler.bounce.setTo(0.5);
-                bubbler.start(false, 1200, game.rnd.between(1200, 1800));
-                bubbler.effectType = 'bubbles';
-                bubbler.alpha = 0.5;
+            var bubbler = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
+            bubbler.width = o.width;
+            bubbler.height = o.height;
+            bubbler.makeParticles('Misc', ['Bubbles0000', 'Bubbles0001', 'Bubbles0002', 'Bubbles0003'], 5);
+            bubbler.gravity.setTo(0, -700);
+            bubbler.maxParticleSpeed.setTo(0);
+            bubbler.minParticleSpeed.setTo(0);
+            bubbler.minParticleSpeed.y = -25;
+            bubbler.maxParticleSpeed.y = -50;
+            bubbler.setRotation(0, 0);
+            bubbler.bounce.setTo(0.5);
+            bubbler.start(false, 1200, game.rnd.between(1200, 1800));
+            bubbler.effectType = 'bubbles';
+            bubbler.alpha = 0.5;
 
-                this.loadedEffects.push(bubbler);
-                
-            } else if(o.name === 'energy_spray') {
-                var sprayer = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
-                // sprayer.x = o.x;
-                // sprayer.y = o.y;
-                sprayer.width = o.width;
-                sprayer.height = o.height;
-                sprayer.makeParticles('Misc', ['Sparks0000', 'Sparks0001', 'Sparks0002', 'Sparks0003', 'Sparks0004', 'Sparks0005'], 20);
-                sprayer.gravity.setTo(0, -695);
-                sprayer.maxParticleSpeed.setTo(-10, 100);
-                sprayer.minParticleSpeed.setTo(400, -100);
-                sprayer.setRotation(0, 0);
-                sprayer.start(false, 300, 10);
-                sprayer.effectType = 'energy_spray';
+            this.loadedEffects.push(bubbler);
+            
+        } else if(o.name === 'energy_spray') {
+            var sprayer = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
+            // sprayer.x = o.x;
+            // sprayer.y = o.y;
+            sprayer.width = o.width;
+            sprayer.height = o.height;
+            sprayer.makeParticles('Misc', ['Sparks0000', 'Sparks0001', 'Sparks0002', 'Sparks0003', 'Sparks0004', 'Sparks0005'], 20);
+            sprayer.gravity.setTo(0, -695);
+            sprayer.maxParticleSpeed.setTo(-10, 100);
+            sprayer.minParticleSpeed.setTo(400, -100);
+            sprayer.setRotation(0, 0);
+            sprayer.start(false, 300, 10);
+            sprayer.effectType = 'energy_spray';
 
-                this.loadedEffects.push(sprayer);
+            this.loadedEffects.push(sprayer);
 
-            } else if(o.name === 'sparks') {
-                var sprayer = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
-                // sprayer.x = o.x;
-                // sprayer.y = o.y;
-                sprayer.width = o.width;
-                sprayer.height = o.height;
-                sprayer.makeParticles('Misc', ['Sparks0012', 'Sparks0013', 'Sparks0014', 'Sparks0015', 'Sparks0015', 'Sparks0015'], 20);
-                sprayer.gravity.setTo(0, -695);
-                sprayer.maxParticleSpeed.setTo(-10, 200);
-                sprayer.minParticleSpeed.setTo(200, -100);
-                sprayer.setRotation(0, 0);
-                sprayer.start(false, 200, 150);
-                sprayer.effectType = 'sparks';
+        } else if(o.name === 'sparks') {
+            var sprayer = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
+            // sprayer.x = o.x;
+            // sprayer.y = o.y;
+            sprayer.width = o.width;
+            sprayer.height = o.height;
+            sprayer.makeParticles('Misc', ['Sparks0012', 'Sparks0013', 'Sparks0014', 'Sparks0015', 'Sparks0015', 'Sparks0015'], 20);
+            sprayer.gravity.setTo(0, -695);
+            sprayer.maxParticleSpeed.setTo(-10, 200);
+            sprayer.minParticleSpeed.setTo(200, -100);
+            sprayer.setRotation(0, 0);
+            sprayer.start(false, 200, 150);
+            sprayer.effectType = 'sparks';
 
-                this.loadedEffects.push(sprayer);
-            } else if(o.name === 'leaves_green') {
-                var leaves = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
-                leaves.width = o.width;
-                leaves.height = o.height;
-                leaves.makeParticles('Misc', ['Leaves0000', 'Leaves0001', 'Leaves0002'], 5);
-                leaves.gravity.setTo(0, -700);
-                leaves.maxParticleSpeed.y = 45;
-                leaves.minParticleSpeed.y = 15;
-                leaves.maxParticleSpeed.x = 40;
-                leaves.minParticleSpeed.x = -40;
-                leaves.setRotation(0, 0);
-                leaves.start(false, 2000, 2500);
-                leaves.effectType = 'leaves';
-                //leaves.alpha = 0.5;
+            this.loadedEffects.push(sprayer);
+        } else if(o.name === 'leaves_green') {
+            var leaves = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
+            leaves.width = o.width;
+            leaves.height = o.height;
+            leaves.makeParticles('Misc', ['Leaves0000', 'Leaves0001', 'Leaves0002'], 5);
+            leaves.gravity.setTo(0, -700);
+            leaves.maxParticleSpeed.y = 45;
+            leaves.minParticleSpeed.y = 15;
+            leaves.maxParticleSpeed.x = 40;
+            leaves.minParticleSpeed.x = -40;
+            leaves.setRotation(0, 0);
+            leaves.start(false, 2000, 2500);
+            leaves.effectType = 'leaves';
+            //leaves.alpha = 0.5;
 
-                this.loadedEffects.push(leaves);
-            } else if(o.name === 'leaves_brown') {
-                var leaves = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
-                leaves.width = o.width;
-                leaves.height = o.height;
-                leaves.makeParticles('Misc', ['Leaves0003', 'Leaves0004', 'Leaves0005'], 5);
-                leaves.gravity.setTo(0, -700);
-                leaves.maxParticleSpeed.y = 45;
-                leaves.minParticleSpeed.y = 15;
-                leaves.maxParticleSpeed.x = 40;
-                leaves.minParticleSpeed.x = -40;
-                leaves.setRotation(0, 0);
-                leaves.start(false, 2000, 2500);
-                leaves.effectType = 'leaves';
-                //leaves.alpha = 0.5;
+            this.loadedEffects.push(leaves);
+        } else if(o.name === 'leaves_brown') {
+            var leaves = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
+            leaves.width = o.width;
+            leaves.height = o.height;
+            leaves.makeParticles('Misc', ['Leaves0003', 'Leaves0004', 'Leaves0005'], 5);
+            leaves.gravity.setTo(0, -700);
+            leaves.maxParticleSpeed.y = 45;
+            leaves.minParticleSpeed.y = 15;
+            leaves.maxParticleSpeed.x = 40;
+            leaves.minParticleSpeed.x = -40;
+            leaves.setRotation(0, 0);
+            leaves.start(false, 2000, 2500);
+            leaves.effectType = 'leaves';
+            //leaves.alpha = 0.5;
 
-                this.loadedEffects.push(leaves);
-            } else if(o.name === 'spirits') {
-                var spirits = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
-                spirits.width = o.width;
-                spirits.height = o.height;
-                spirits.makeParticles('Misc', ['Spirit0000', 'Spirit0001', 'Spirit0002', 'Spirit0003'], 10);
-                spirits.gravity.setTo(0, -700);
-                spirits.alpha = 0.15;
-                spirits.particleDrag.setTo(0);
-                spirits.maxParticleSpeed.setTo(15);
-                spirits.minParticleSpeed.setTo(-15);
-                spirits.minRotation = 0;
-                spirits.maxRotation = 0;
-                spirits.setScale();
-                spirits.start(false, 5000, 4000);
-                spirits.effectType = 'spirits';
+            this.loadedEffects.push(leaves);
+        } else if(o.name === 'spirits') {
+            var spirits = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
+            spirits.width = o.width;
+            spirits.height = o.height;
+            spirits.makeParticles('Misc', ['Spirit0000', 'Spirit0001', 'Spirit0002', 'Spirit0003'], 10);
+            spirits.gravity.setTo(0, -700);
+            spirits.alpha = 0.15;
+            spirits.particleDrag.setTo(0);
+            spirits.maxParticleSpeed.setTo(15);
+            spirits.minParticleSpeed.setTo(-15);
+            spirits.minRotation = 0;
+            spirits.maxRotation = 0;
+            spirits.setScale();
+            spirits.start(false, 5000, 4000);
+            spirits.effectType = 'spirits';
 
-                this.loadedEffects.push(spirits);
-            }
+            this.loadedEffects.push(spirits);
+        }
+    }, this);
 
-        } else if(o.type === 'speech') {
+    Frogland.map.objects['Triggers'].forEach(function(o) {
+        if(o.type === 'speech') {
             var sparkles = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
             sparkles.width = o.width;
             sparkles.height = o.height;

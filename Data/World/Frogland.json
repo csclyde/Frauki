@@ -2905,8 +2905,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":3710,
-                 "y":2988
+                 "x":3482,
+                 "y":2735.33333333333
                 }, 
                 {
                  "gid":92,
@@ -3357,8 +3357,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":2964,
-                 "y":3014.5
+                 "x":3390,
+                 "y":2703.5
                 }, 
                 {
                  "gid":94,
@@ -5590,8 +5590,8 @@
                  "type":"effect",
                  "visible":true,
                  "width":51.396,
-                 "x":5031.06,
-                 "y":3205.34
+                 "x":5033.72666666667,
+                 "y":2696.00666666667
                 }, 
                 {
                  "height":337.909,
@@ -6605,7 +6605,7 @@
                  "visible":true,
                  "width":32,
                  "x":3216,
-                 "y":2958.66666666667
+                 "y":2966.66666666667
                 }, 
                 {
                  "height":21.333333333333,
@@ -7005,6 +7005,123 @@
                  "width":106.666666666667,
                  "x":861.333333333333,
                  "y":10185.33335
+                }, 
+                {
+                 "height":18.3333000000002,
+                 "id":3917,
+                 "name":"stop_music",
+                 "rotation":0,
+                 "type":"trigger",
+                 "visible":true,
+                 "width":107,
+                 "x":2548,
+                 "y":4457.33335
+                }, 
+                {
+                 "height":154.3333,
+                 "id":3918,
+                 "name":"play_music",
+                 "properties":
+                    {
+                     "song":"Tenements"
+                    },
+                 "propertytypes":
+                    {
+                     "song":"string"
+                    },
+                 "rotation":0,
+                 "type":"trigger",
+                 "visible":true,
+                 "width":107,
+                 "x":3620.5,
+                 "y":4796.83335
+                }, 
+                {
+                 "height":18.3333,
+                 "id":3919,
+                 "name":"stop_music",
+                 "properties":
+                    {
+                     "fade":"3000"
+                    },
+                 "propertytypes":
+                    {
+                     "fade":"string"
+                    },
+                 "rotation":0,
+                 "type":"trigger",
+                 "visible":true,
+                 "width":107,
+                 "x":1749.16666666667,
+                 "y":5540.16668333333
+                }, 
+                {
+                 "height":93.9996666666666,
+                 "id":3920,
+                 "name":"play_music",
+                 "properties":
+                    {
+                     "song":"Underwater"
+                    },
+                 "propertytypes":
+                    {
+                     "song":"string"
+                    },
+                 "rotation":0,
+                 "type":"trigger",
+                 "visible":true,
+                 "width":28.3333333333335,
+                 "x":1953.5,
+                 "y":7086.8335
+                }, 
+                {
+                 "height":18.3333,
+                 "id":3925,
+                 "name":"stop_music",
+                 "properties":
+                    {
+                     "fade":"3000"
+                    },
+                 "propertytypes":
+                    {
+                     "fade":"string"
+                    },
+                 "rotation":0,
+                 "type":"trigger",
+                 "visible":true,
+                 "width":107,
+                 "x":2271.5,
+                 "y":9479.83335
+                }, 
+                {
+                 "height":215.666633333333,
+                 "id":3927,
+                 "name":"music_zone",
+                 "rotation":0,
+                 "type":"trigger",
+                 "visible":true,
+                 "width":541.666666666667,
+                 "x":2687.83333333333,
+                 "y":2852.16668333333
+                }, 
+                {
+                 "height":1862.57542424242,
+                 "id":3930,
+                 "name":"music_zone",
+                 "properties":
+                    {
+                     "song":"Decimation"
+                    },
+                 "propertytypes":
+                    {
+                     "song":"string"
+                    },
+                 "rotation":0,
+                 "type":"trigger",
+                 "visible":true,
+                 "width":498.333333333334,
+                 "x":2711.19696969697,
+                 "y":980.242590909091
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -7309,18 +7426,18 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }],
- "nextobjectid":3916,
+ "nextobjectid":3932,
  "orientation":"orthogonal",
  "properties":
     {
      "debug":"false",
      "startLayer":"3",
-     "startX":"160",
-     "startY":"262"
+     "startX":"107",
+     "startY":"319"
     },
  "propertytypes":
     {

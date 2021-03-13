@@ -34,6 +34,73 @@ TriggerController.prototype.triggers['music_up_down'] = {
 	}
 }
 
+TriggerController.prototype.triggers['stop_music'] = {
+	enter: function(params, trigger) {
+	},
+
+	stay: function(params, trigger) {
+
+	},
+
+	exit: function(params, trigger) {
+		events.publish('stop_all_music', { fade: params.fade } );
+	}
+}
+
+TriggerController.prototype.triggers['play_music'] = {
+	enter: function(params, trigger) {
+		events.publish('play_music', { name: params.song } );
+	},
+
+	stay: function(params, trigger) {
+
+	},
+
+	exit: function(params, trigger) {
+	}
+}
+
+TriggerController.prototype.triggers['pause_music'] = {
+	enter: function(params, trigger) {
+		events.publish('pause_all_music', { } );
+	},
+
+	stay: function(params, trigger) {
+
+	},
+
+	exit: function(params, trigger) {
+	}
+}
+
+TriggerController.prototype.triggers['unpause_music'] = {
+	enter: function(params, trigger) {
+		events.publish('unpause_all_music', { } );
+	},
+
+	stay: function(params, trigger) {
+
+	},
+
+	exit: function(params, trigger) {
+	}
+}
+
+TriggerController.prototype.triggers['music_zone'] = {
+	enter: function(params, trigger) {
+		events.publish('pause_all_music', { } );
+	},
+
+	stay: function(params, trigger) {
+
+	},
+
+	exit: function(params, trigger) {
+		events.publish('unpause_all_music', { } );
+		
+	}
+}
+
 TriggerController.prototype.triggers['ambient_left_right'] = {
 	enter: function(params, trigger) {
 	},

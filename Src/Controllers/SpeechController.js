@@ -63,22 +63,18 @@ SpeechController.prototype.Create = function() {
 	this.dialogBox.cameraOffset.x = 70 + speechOffsetX; 
 	this.dialogBox.cameraOffset.y = 10 + speechOffsetY; 
 
-	//this.font = game.add.retroFont('font', 9, 15, 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890?,.!:#\' ', 13);
 	this.text = game.add.bitmapText(0, 0, 'diest64','', 16);
-	//this.text = game.add.image(0, 0, this.font);
 	this.text.fixedToCamera = true;
 	this.text.visible = false;
 	this.text.cameraOffset.x = 110 + speechOffsetX; 
 	this.text.cameraOffset.y = 15 + speechOffsetY;
 
 	this.regionText = game.add.bitmapText(0, 0, 'diest64','tester', 48);
-	//this.regionText = game.add.image(0, 0, this.font);
 	this.regionText.fixedToCamera = true;
 	this.regionText.alpha = 0;
 	this.regionText.anchor.setTo(0.5);
 	this.regionText.cameraOffset.x = game.width / 2; 
 	this.regionText.cameraOffset.y = game.height / 3;
-	//this.regionText.x = this.game.width / 2 - this.regionText.textWidth / 2;
 
 	this.portraits = {};
 
@@ -121,18 +117,16 @@ SpeechController.prototype.Create = function() {
 
 	GameData.SetFlag('test_flag', true);
 
-	this.LoadSpeechZones(4);
-	this.LoadSpeechZones(3);
+	this.LoadSpeechZones();
 
 };
 
-SpeechController.prototype.LoadSpeechZones = function(layer) {
+SpeechController.prototype.LoadSpeechZones = function() {
 	var that = this;
 
 	Frogland.map.objects['Triggers'].forEach(function(o) {
         if(o.type === 'speech') {
         	var zone = new Phaser.Rectangle(o.x, o.y, o.width, o.height);
-        	zone.owningLayer = layer;
             zone.text = o.properties ? o.properties.text : 'Error';
             zone.speechName = o.name;
             zone.active = true;

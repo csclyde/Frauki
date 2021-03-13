@@ -154,11 +154,14 @@ FileMap.Audio = [
 ];
 
 FileMap.Music = [
-	{ Name: 'Intro', File: 'Data/Music/Surface.ogg', Volume: 0.15, Loop: true },
+	{ Name: 'Intro', File: 'Data/Music/menu.ogg', Volume: 0.15, Loop: true },
 	{ Name: 'Choir', File: 'Data/Music/choir.ogg', Volume: 0.15, Loop: true },
 	{ Name: 'Gameover', File: 'Data/Music/game_over.ogg', Volume: 0.15, Loop: false },
 	{ Name: 'Chamber', File: 'Data/Music/chamber.ogg', Volume: 0.15, Loop: true },
 	{ Name: 'Ruins', File: 'Data/Music/ruins.ogg', Volume: 0.15, Loop: true },
+	{ Name: 'Tenements', File: 'Data/Music/Kowloon.ogg', Volume: 0.15, Loop: true },
+	{ Name: 'Decimation', File: 'Data/Music/Decimation.ogg', Volume: 0.15, Loop: true },
+	{ Name: 'Underwater', File: 'Data/Music/Underwater.ogg', Volume: 0.15, Loop: true },
 ];
 
 FileMap.Ambient = [

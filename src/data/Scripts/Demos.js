@@ -1,3 +1,17 @@
+ScriptRunner.scripts['demo_Door'] = [
+	{ name: 'disallow_input', props: {} },
+
+	{ name: 'wait', props: { amount: 350 } },
+
+	{ name: 'play_sound', props: { name: 'fanfare_short'} },
+
+	{ name: 'wait', props: { amount: 1000 } },
+	{ name: 'show_text', props: { text: 'Yay, a shortcut!! I can use this to get around much easier now.', portrait: 'Enticed' } },
+	{ name: 'wait', props: { amount: 1000 } },
+
+	{ name: 'allow_input', props: {} }
+];
+
 ScriptRunner.scripts['demo_Baton'] = [
 	{ name: 'disallow_input', props: {} },
 	{ name: 'show_text', props: { text: 'Oh neat! This weapon let\'s me throw my energy out like a boomerang. The more energy I have, the stronger it will be!', portrait: 'Enticed' } },
@@ -53,20 +67,6 @@ ScriptRunner.scripts['demo_Apple'] = [
 	{ name: 'allow_input', props: {} }
 ];
 
-ScriptRunner.scripts['demo_Door'] = [
-	{ name: 'disallow_input', props: {} },
-
-	{ name: 'wait', props: { amount: 350 } },
-
-	{ name: 'play_sound', props: { name: 'fanfare_short'} },
-
-	{ name: 'wait', props: { amount: 1000 } },
-	{ name: 'show_text', props: { text: 'Yay, a shortcut!! I can use this to get around much easier now.', portrait: 'Enticed' } },
-	{ name: 'wait', props: { amount: 1000 } },
-
-	{ name: 'allow_input', props: {} }
-];
-
 ScriptRunner.scripts['demo_Will'] = [
 	{ name: 'disallow_input', props: {} },
 	{ name: 'show_text', props: { text: 'Hooray! This must be the prism thing of... whatever... I should take it back to that lady.', portrait: 'Silly' } },
@@ -94,14 +94,6 @@ ScriptRunner.scripts['demo_Luck'] = [
 ScriptRunner.scripts['demo_Power'] = [
 	{ name: 'disallow_input', props: {} },
 	{ name: 'show_text', props: { text: 'This prism will make a fine addition to my collection.', portrait: 'Silly' } },
-	{ name: 'wait', props: { amount: 6000 } },
-	{ name: 'hide_text', props: {} },
-	{ name: 'allow_input', props: {} }
-];
-
-ScriptRunner.scripts['demo_Will_no_intro'] = [
-	{ name: 'disallow_input', props: {} },
-	{ name: 'show_text', props: { text: 'Hooray! I found some big... jewel thing...', portrait: 'Silly' } },
 	{ name: 'wait', props: { amount: 6000 } },
 	{ name: 'hide_text', props: {} },
 	{ name: 'allow_input', props: {} }
