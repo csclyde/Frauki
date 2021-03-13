@@ -64,7 +64,6 @@ ScriptRunner.scripts['goddess_intro'] = [
 	
 	{ name: 'run_script', props: { name: 'exit_goddess' } },
 	{ name: 'wait', props: { amount: 1000 } },
-	{ name: 'play_music', props: { name: 'Ruins', fade: 0 } },
 	
 ];
 
@@ -75,7 +74,6 @@ ScriptRunner.scripts['goddess_welcome_return'] = [
 
 	{ name: 'run_script', props: { name: 'exit_goddess' } },
 	{ name: 'wait', props: { amount: 1000 } },
-	{ name: 'play_music', props: { name: 'Ruins', fade: 0 } },
 ];
 
 ScriptRunner.scripts['goddess_console'] = [
@@ -85,7 +83,6 @@ ScriptRunner.scripts['goddess_console'] = [
 
 	{ name: 'run_script', props: { name: 'exit_goddess' } },
 	{ name: 'wait', props: { amount: 1000 } },
-	{ name: 'play_music', props: { name: 'Ruins', fade: 0 } },
 ];
 
 ScriptRunner.scripts['goddess_chat'] = [
