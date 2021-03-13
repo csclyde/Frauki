@@ -2906,7 +2906,7 @@
                  "visible":true,
                  "width":16,
                  "x":3482,
-                 "y":2735.33333333333
+                 "y":2735.33
                 }, 
                 {
                  "gid":92,
@@ -5385,8 +5385,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":4884.66666666667,
-                 "y":3543.33333333333
+                 "x":4884.67,
+                 "y":3543.33
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -5590,8 +5590,8 @@
                  "type":"effect",
                  "visible":true,
                  "width":51.396,
-                 "x":5033.72666666667,
-                 "y":2696.00666666667
+                 "x":5033.73,
+                 "y":2696.01
                 }, 
                 {
                  "height":337.909,
@@ -6587,7 +6587,7 @@
          "name":"Audio",
          "objects":[
                 {
-                 "height":97.3333333333335,
+                 "height":97.3333,
                  "id":3888,
                  "name":"ambient_left_right",
                  "properties":
@@ -6605,10 +6605,10 @@
                  "visible":true,
                  "width":32,
                  "x":3216,
-                 "y":2966.66666666667
+                 "y":2966.67
                 }, 
                 {
-                 "height":21.333333333333,
+                 "height":21.3333,
                  "id":3889,
                  "name":"ambient_up_down",
                  "properties":
@@ -6624,9 +6624,9 @@
                  "rotation":0,
                  "type":"trigger",
                  "visible":true,
-                 "width":117.333333333334,
-                 "x":4959.33333333333,
-                 "y":2896.66666666667
+                 "width":117.333,
+                 "x":4959.33,
+                 "y":2896.67
                 }, 
                 {
                  "height":97.3333,
@@ -6647,7 +6647,7 @@
                  "visible":true,
                  "width":32,
                  "x":2672,
-                 "y":2955.33335
+                 "y":2955.33
                 }, 
                 {
                  "height":97.3333,
@@ -6668,7 +6668,7 @@
                  "visible":true,
                  "width":32,
                  "x":3216,
-                 "y":2101.33335
+                 "y":2101.33
                 }, 
                 {
                  "height":97.3333,
@@ -6689,7 +6689,7 @@
                  "visible":true,
                  "width":32,
                  "x":3202,
-                 "y":1547.33335
+                 "y":1547.33
                 }, 
                 {
                  "height":97.3333,
@@ -6710,7 +6710,7 @@
                  "visible":true,
                  "width":32,
                  "x":2974,
-                 "y":809.33335
+                 "y":809.333
                 }, 
                 {
                  "height":97.3333,
@@ -6731,7 +6731,7 @@
                  "visible":true,
                  "width":32,
                  "x":2710,
-                 "y":1653.33335
+                 "y":1653.33
                 }, 
                 {
                  "height":97.3333,
@@ -6752,10 +6752,10 @@
                  "visible":true,
                  "width":32,
                  "x":3213,
-                 "y":3174.33335
+                 "y":3174.33
                 }, 
                 {
-                 "height":206.3333,
+                 "height":206.333,
                  "id":3899,
                  "name":"ambient_left_right",
                  "properties":
@@ -6773,7 +6773,7 @@
                  "visible":true,
                  "width":32,
                  "x":3229,
-                 "y":3498.33335
+                 "y":3498.33
                 }, 
                 {
                  "height":97.3333,
@@ -6794,7 +6794,7 @@
                  "visible":true,
                  "width":32,
                  "x":3186,
-                 "y":4093.33335
+                 "y":4093.33
                 }, 
                 {
                  "height":97.3333,
@@ -6815,7 +6815,7 @@
                  "visible":true,
                  "width":32,
                  "x":4356,
-                 "y":4446.66668333333
+                 "y":4446.67
                 }, 
                 {
                  "height":97.3333,
@@ -6835,11 +6835,11 @@
                  "type":"trigger",
                  "visible":true,
                  "width":32,
-                 "x":4020.66666666667,
-                 "y":4460.66668333333
+                 "x":4020.67,
+                 "y":4460.67
                 }, 
                 {
-                 "height":77.8332999999998,
+                 "height":77.8333,
                  "id":3903,
                  "name":"ambient_left_right",
                  "properties":
@@ -6857,7 +6857,7 @@
                  "visible":true,
                  "width":32,
                  "x":1264.5,
-                 "y":3344.33335
+                 "y":3344.33
                 }, 
                 {
                  "height":21.3333,
@@ -6876,9 +6876,9 @@
                  "rotation":0,
                  "type":"trigger",
                  "visible":true,
-                 "width":180.666666666667,
+                 "width":180.667,
                  "x":1982,
-                 "y":2994.00001666667
+                 "y":2994
                 }, 
                 {
                  "height":97.3333,
@@ -6898,8 +6898,8 @@
                  "type":"trigger",
                  "visible":true,
                  "width":32,
-                 "x":2469.33333333333,
-                 "y":4650.00001666667
+                 "x":2469.33,
+                 "y":4650
                 }, 
                 {
                  "height":97.3333,
@@ -6920,10 +6920,10 @@
                  "visible":true,
                  "width":32,
                  "x":3008,
-                 "y":4840.66668333333
+                 "y":4840.67
                 }, 
                 {
-                 "height":126.666633333334,
+                 "height":126.667,
                  "id":3907,
                  "name":"ambient_left_right",
                  "properties":
@@ -6940,8 +6940,8 @@
                  "type":"trigger",
                  "visible":true,
                  "width":32,
-                 "x":4014.66666666667,
-                 "y":4807.33335
+                 "x":4014.67,
+                 "y":4807.33
                 }, 
                 {
                  "height":97.3333,
@@ -6961,8 +6961,8 @@
                  "type":"trigger",
                  "visible":true,
                  "width":18,
-                 "x":4281.33333333333,
-                 "y":5290.66668333333
+                 "x":4281.33,
+                 "y":5290.67
                 }, 
                 {
                  "height":21.3333,
@@ -6983,7 +6983,7 @@
                  "visible":true,
                  "width":108,
                  "x":1739,
-                 "y":6144.33335
+                 "y":6144.33
                 }, 
                 {
                  "height":21.3333,
@@ -7002,12 +7002,12 @@
                  "rotation":0,
                  "type":"trigger",
                  "visible":true,
-                 "width":106.666666666667,
-                 "x":861.333333333333,
-                 "y":10185.33335
+                 "width":106.667,
+                 "x":861.333,
+                 "y":10185.3
                 }, 
                 {
-                 "height":18.3333000000002,
+                 "height":18.3333,
                  "id":3917,
                  "name":"stop_music",
                  "rotation":0,
@@ -7015,10 +7015,10 @@
                  "visible":true,
                  "width":107,
                  "x":2548,
-                 "y":4457.33335
+                 "y":4457.33
                 }, 
                 {
-                 "height":154.3333,
+                 "height":154.333,
                  "id":3918,
                  "name":"play_music",
                  "properties":
@@ -7034,7 +7034,7 @@
                  "visible":true,
                  "width":107,
                  "x":3620.5,
-                 "y":4796.83335
+                 "y":4796.83
                 }, 
                 {
                  "height":18.3333,
@@ -7052,11 +7052,11 @@
                  "type":"trigger",
                  "visible":true,
                  "width":107,
-                 "x":1749.16666666667,
-                 "y":5540.16668333333
+                 "x":1749.17,
+                 "y":5540.17
                 }, 
                 {
-                 "height":93.9996666666666,
+                 "height":93.9997,
                  "id":3920,
                  "name":"play_music",
                  "properties":
@@ -7070,9 +7070,9 @@
                  "rotation":0,
                  "type":"trigger",
                  "visible":true,
-                 "width":28.3333333333335,
+                 "width":28.3333,
                  "x":1953.5,
-                 "y":7086.8335
+                 "y":7086.83
                 }, 
                 {
                  "height":18.3333,
@@ -7091,10 +7091,10 @@
                  "visible":true,
                  "width":107,
                  "x":2271.5,
-                 "y":9479.83335
+                 "y":9479.83
                 }, 
                 {
-                 "height":215.666633333333,
+                 "height":215.667,
                  "id":3927,
                  "name":"music_zone",
                  "properties":
@@ -7108,12 +7108,12 @@
                  "rotation":0,
                  "type":"trigger",
                  "visible":true,
-                 "width":541.666666666667,
-                 "x":2687.83333333333,
-                 "y":2852.16668333333
+                 "width":541.667,
+                 "x":2687.83,
+                 "y":2852.17
                 }, 
                 {
-                 "height":1862.57542424242,
+                 "height":1862.58,
                  "id":3930,
                  "name":"music_zone",
                  "properties":
@@ -7127,9 +7127,28 @@
                  "rotation":0,
                  "type":"trigger",
                  "visible":true,
-                 "width":498.333333333334,
-                 "x":2711.19696969697,
-                 "y":980.242590909091
+                 "width":498.333,
+                 "x":2711.2,
+                 "y":980.243
+                }, 
+                {
+                 "height":22.8655853773766,
+                 "id":3932,
+                 "name":"play_music",
+                 "properties":
+                    {
+                     "song":"Ruins"
+                    },
+                 "propertytypes":
+                    {
+                     "song":"string"
+                    },
+                 "rotation":0,
+                 "type":"trigger",
+                 "visible":true,
+                 "width":120.42211393091,
+                 "x":3849.92708850682,
+                 "y":2816.11817086403
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -7422,14 +7441,14 @@
                  "y":3982.88
                 }, 
                 {
-                 "height":98.3333333333335,
+                 "height":98.3333,
                  "id":3914,
                  "name":"old_robo",
                  "rotation":0,
                  "type":"trigger",
                  "visible":true,
-                 "width":82.6666333333342,
-                 "x":4916.66668333333,
+                 "width":82.6666,
+                 "x":4916.67,
                  "y":3478.5
                 }],
          "opacity":1,
@@ -7438,7 +7457,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":3932,
+ "nextobjectid":3933,
  "orientation":"orthogonal",
  "properties":
     {
