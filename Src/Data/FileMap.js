@@ -60,8 +60,6 @@ FileMap.Audio = [
 	{ Name: 'skull_door', File: 'Data/Sfx/skull_door.ogg', Volume: 0.9, Loop: false },
 	{ Name: 'door_rumble', File: 'Data/Sfx/door_rumble.ogg', Volume: 0.4, Loop: false },
 	{ Name: 'door_slam', File: 'Data/Sfx/door_slam.ogg', Volume: 0.4, Loop: false },
-	{ Name: 'fanfare_long', File: 'Data/Sfx/fanfare_long.ogg', Volume: 14.0, Loop: false },
-	{ Name: 'fanfare_short', File: 'Data/Sfx/fanfare_short.ogg', Volume: 0.8, Loop: false },
 
 	{ Name: 'floor_crumble', File: 'Data/Sfx/crumble.ogg', Volume: 5.0, Loop: false },
 	{ Name: 'text_bloop', File: 'Data/Sfx/text.ogg', Volume: 0.4, Loop: false },
@@ -154,14 +152,18 @@ FileMap.Audio = [
 ];
 
 FileMap.Music = [
-	{ Name: 'Intro', File: 'Data/Music/Menu.ogg', Volume: 0.15, Loop: true },
-	{ Name: 'Choir', File: 'Data/Music/choir.ogg', Volume: 0.15, Loop: true },
+	{ Name: 'Intro', File: 'Data/Music/menu.ogg', Volume: 0.15, Loop: true },
+	{ Name: 'Goddess', File: 'Data/Music/goddess.ogg', Volume: 0.15, Loop: true },
 	{ Name: 'Gameover', File: 'Data/Music/game_over.ogg', Volume: 0.15, Loop: false },
 	{ Name: 'Chamber', File: 'Data/Music/chamber.ogg', Volume: 0.15, Loop: true },
-	{ Name: 'Ruins', File: 'Data/Music/Ruins.ogg', Volume: 0.15, Loop: true },
-	{ Name: 'Tenements', File: 'Data/Music/Kowloon.ogg', Volume: 0.15, Loop: true },
-	{ Name: 'Decimation', File: 'Data/Music/Decimation.ogg', Volume: 0.15, Loop: true },
-	{ Name: 'Underwater', File: 'Data/Music/Underwater.ogg', Volume: 0.15, Loop: true },
+	{ Name: 'Ruins', File: 'Data/Music/ruins.ogg', Volume: 0.15, Loop: true },
+	{ Name: 'Tenements', File: 'Data/Music/tenements.ogg', Volume: 0.15, Loop: true },
+	{ Name: 'Decimation', File: 'Data/Music/decimation.ogg', Volume: 0.15, Loop: true },
+	{ Name: 'Underwater', File: 'Data/Music/underwater.ogg', Volume: 0.15, Loop: true },
+	{ Name: 'Sunshine', File: 'Data/Music/sunshine.ogg', Volume: 0.15, Loop: true },
+
+	{ Name: 'fanfare_long', File: 'Data/Music/fanfare_long.ogg', Volume: 14.0, Loop: false },
+	{ Name: 'fanfare_short', File: 'Data/Music/fanfare_short.ogg', Volume: 0.8, Loop: false },
 ];
 
 FileMap.Ambient = [

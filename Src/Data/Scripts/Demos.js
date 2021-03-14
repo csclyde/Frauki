@@ -3,7 +3,7 @@ ScriptRunner.scripts['demo_Door'] = [
 
 	{ name: 'wait', props: { amount: 350 } },
 
-	{ name: 'play_sound', props: { name: 'fanfare_short'} },
+	{ name: 'play_music', props: { name: 'fanfare_short'} },
 
 	{ name: 'wait', props: { amount: 1000 } },
 	{ name: 'show_text', props: { text: 'Yay, a shortcut!! I can use this to get around much easier now.', portrait: 'Enticed' } },
