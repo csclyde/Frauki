@@ -45,7 +45,7 @@ FileMap.Audio = [
 	{ Name: 'frauki_running', File: 'Data/Sfx/frauki_run.ogg', Volume: 0.2, Loop: true },
 	{ Name: 'frauki_stun', File: 'Data/Sfx/frauki_stun.ogg', Volume: 0.8, Loop: false },
 	{ Name: 'frauki_slide', File: 'Data/Sfx/frauki_slide.ogg', Volume: 0.3, Loop: false },
-	{ Name: 'frauki_materialize', File: 'Data/Sfx/frauki_materialize.ogg', Volume: 0.2, Loop: false },
+	{ Name: 'frauki_materialize', File: 'Data/Sfx/frauki_materialize.ogg', Volume: 1.0, Loop: false },
 	{ Name: 'frauki_materialize_end', File: 'Data/Sfx/frauki_materialize_end.ogg', Volume: 0.2, Loop: false },
 
 	{ Name: 'no_energy', File: 'Data/Sfx/no_energy.ogg', Volume: 0.7, Loop: false },

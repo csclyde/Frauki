@@ -7173,6 +7173,14 @@
                  "height":110.178736658288,
                  "id":3934,
                  "name":"stop_music",
+                 "properties":
+                    {
+                     "song":"Ruins"
+                    },
+                 "propertytypes":
+                    {
+                     "song":"string"
+                    },
                  "rotation":0,
                  "type":"trigger",
                  "visible":true,
@@ -7506,7 +7514,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":3936,
+ "nextobjectid":3937,
  "orientation":"orthogonal",
  "properties":
     {
