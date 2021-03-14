@@ -31,32 +31,30 @@ ScriptRunner.run = function(name, params) {
 		}
 
 		//execute the first command in the chain. It will call the following commands
-		this.executeCommand(this.scripts[name][0]);
+		this.executeCommand(this.scripts[name][0], params);
 
 	} else {
 		console.warn('Script with name ' + name + ' was not found');
 	}
 };
 
-ScriptRunner.executeCommand = function(cmd) {
-	var that = this;
-
+ScriptRunner.executeCommand = function(cmd, params) {
 	this.currentCommand = cmd;
 	this.waitEvent = null;
 
 	if(!cmd) return;
 
 	if(cmd.name === 'wait') {
-		this.waitEvent = game.time.events.add(cmd.props.amount, function() { that.executeCommand(cmd.nextCommand); });
+		this.waitEvent = game.time.events.add(cmd.props.amount, function() { this.executeCommand(cmd.nextCommand, params); }, this);
 	} 
 	else {
 		if(typeof cmd.func === 'function') {
-			cmd.func.apply(null, cmd.props);
+			cmd.func.apply(null, [params]);
 		} else {
 			events.publish(cmd.name, cmd.props);
 		}
 
-		this.executeCommand(cmd.nextCommand);
+		this.executeCommand(cmd.nextCommand, params);
 	}
 };
 

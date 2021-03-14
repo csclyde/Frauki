@@ -109,3 +109,15 @@ ScriptRunner.scripts['game_over'] = [
     { name: 'run_script', props: { name: 'goddess_console' } },
     
 ];
+
+ScriptRunner.scripts['start_fight'] = [
+    { name: 'disallow_input', props: {} },
+    { name: 'set_attack_wait', props: { duration: 1000 } },
+    { func: function(params) {        
+        events.publish('close_enemy_door', { door: params.door });
+    } },
+    { name: 'wait', props: { amount: 1000 } },
+    { name: 'allow_input', props: {} },
+    
+    
+];

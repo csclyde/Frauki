@@ -69,11 +69,10 @@ ScriptRunner.scripts['goddess_intro'] = [
 
 ScriptRunner.scripts['goddess_welcome_return'] = [
 	{ name: 'show_text', props: { text: "Welcome back Frauki. You've got some work to do!", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 6000 } },
+	{ name: 'wait', props: { amount: 2000 } },
 	{ name: 'hide_text', props: {} },
 
 	{ name: 'run_script', props: { name: 'exit_goddess' } },
-	{ name: 'wait', props: { amount: 1000 } },
 ];
 
 ScriptRunner.scripts['goddess_console'] = [

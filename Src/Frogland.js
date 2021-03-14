@@ -4,6 +4,10 @@ Frogland.Create = function() {
 
     this.timers = new TimerUtil();
 
+    events.subscribe('set_attack_wait', function(params) {
+        this.timers.SetTimer('global_attack_wait', params.duration);
+    }, this);
+
     this.map = game.add.tilemap('Frogland');
     this.map.addTilesetImage('FrogtownTiles');
     this.map.addTilesetImage('DepthsTiles');

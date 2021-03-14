@@ -30,11 +30,24 @@ Door.prototype.create = function() {
         }
     }, this);
 
+    events.subscribe('close_enemy_door', function(params) {
+        if(this.id === params.door && this.type === 'enemy_start') {
+            console.log('closing door', params, this)
+            this.PerformClose(false);
+        }
+    }, this);
+
     events.subscribe('enemy_killed', function(params) {
     }, this);
 
     if(GameData.IsDoorOpen(this.id)) {
-        this.state = this.ReadyToOpen;
+        if(this.stay_open) {
+            this.ForceOpenDoor();
+        } else {
+            this.state = this.ReadyToOpen;
+        }
+    } else if(this.type == 'enemy_start') {
+        this.ForceOpenDoor();        
     } else {
         this.state = this.Closed;
     }
@@ -101,8 +114,13 @@ Door.prototype.create = function() {
 
 
         case 'enemy':
-            this.animations.add('closed', ['DoorEnemy0000'], 10, true, false);
-            this.animations.add('open', ['DoorEnemy0001'], 10, true, false);
+            this.animations.add('closed', ['DoorEnemy0001'], 10, true, false);
+            this.animations.add('open', ['DoorEnemy0000'], 10, true, false);
+        break;
+
+        case 'enemy_start':
+            this.animations.add('closed', ['DoorEnemy0001'], 10, true, false);
+            this.animations.add('open', ['DoorEnemy0000'], 10, true, false);
         break;
 
 
@@ -297,17 +315,39 @@ Door.prototype.PerformOpen = function(save, silent) {
     }
 };
 
-Door.prototype.PlayAnim = function(name) {
-    this.animations.play(name);
+Door.prototype.PerformClose = function() {
+    if(this.state === this.Closed || !this.body) return;
+
+    var movementTarget = this.body.y + 64;
+
+    if(!!this.open_direction && this.open_direction === 'down') {
+        movementTarget = this.body.y - 80;
+    }
+
+    this.state = this.Closed;
+
+    var openDuration = 1000;
+    events.publish('play_sound', {name: 'skull_door', restart: true });
+    events.publish('camera_shake', {magnitudeX: 0.4, magnitudeY: 0, duration: openDuration });
+    events.publish('fade_music', { volume: 0.1, duration: openDuration });
+    events.publish('play_sound', {name: 'door_rumble', restart: false });
+
+    events.publish('door_open_start', { id: this.id} );
+    
+    this.closeTween = game.add.tween(this.body).to({y: movementTarget}, openDuration, Phaser.Easing.Quintic.In, true);
+
+    game.time.events.add(openDuration, function() {
+        if(!this || !this.body) return;
+        
+        effectsController.DoorDust({x: this.body.center.x, y: this.body.y + this.body.height - 20, owningLayer: this.owningLayer });
+        events.publish('play_sound', {name: 'door_slam', restart: true });
+        events.publish('stop_sound', {name: 'door_rumble', restart: true });
+
+    }, this);
 };
 
-Door.prototype.Closed = function() {
-    //if the door takes a few events to open, and they have completed at least one
-    if(this.thresholdAttempts > 1 && this.openAttempts > 0) {
-        this.PlayAnim('attempt_' + this.openAttempts);
-    } else {
-        this.PlayAnim('closed');
-    }
+Door.prototype.PlayAnim = function(name) {
+    this.animations.play(name);
 };
 
 Door.prototype.ReadyToOpen = function() {
@@ -317,4 +357,13 @@ Door.prototype.ReadyToOpen = function() {
 Door.prototype.Open = function() {
 
     this.PlayAnim('open');
+};
+
+Door.prototype.Closed = function() {
+    //if the door takes a few events to open, and they have completed at least one
+    if(this.thresholdAttempts > 1 && this.openAttempts > 0) {
+        this.PlayAnim('attempt_' + this.openAttempts);
+    } else {
+        this.PlayAnim('closed');
+    }
 };
