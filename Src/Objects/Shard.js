@@ -85,7 +85,7 @@ function PickUpShard(f, a) {
 Shard.prototype.ReturnToUI = function() {
     effectsController.ScreenFlash();
     events.publish('play_sound', {name: 'crystal_door'});
-    events.publish('play_sound', {name: 'fanfare_short', restart: true });
+    events.publish('play_music', {name: 'fanfare_short', restart: true });
     this.visible = false;
     this.dead = true;
 };

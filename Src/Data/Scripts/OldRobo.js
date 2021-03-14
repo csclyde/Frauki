@@ -1,7 +1,7 @@
 ScriptRunner.scripts['enter_oldrobo'] = [
 	{ name: 'disallow_input', props: {} },
 	{ name: 'pause_all_music', props: {} },
-	{ name: 'play_music', props: { name: 'Chamber', fade: 1000 } },
+	{ name: 'play_music', props: { name: 'Sunshine', fade: 1000 } },
 
 	{ func: function() {
         events.publish('pan_camera', { to: oldrobo.body.center, duration: 1000 });
@@ -16,7 +16,7 @@ ScriptRunner.scripts['exit_oldrobo'] = [
 	{ func: function() {
         events.publish('pan_camera', { to: frauki.body.center, duration: 1000 });
 	} },
-	{ name: 'stop_music', props: { name: 'Chamber', fade: 1000 } },	
+	{ name: 'stop_music', props: { name: 'Sunshine', fade: 1000 } },	
 
 	{ name: 'wait', props: { amount: 1000 } },
 
