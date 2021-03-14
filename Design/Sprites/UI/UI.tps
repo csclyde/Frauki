@@ -305,7 +305,6 @@
             <key type="filename">Frames/PortraitsFraukiSilly.png</key>
             <key type="filename">Frames/PortraitsFrogman.png</key>
             <key type="filename">Frames/PortraitsGoddess_Neutral.png</key>
-            <key type="filename">Frames/PortraitsIrena.png</key>
             <key type="filename">Frames/PortraitsOldRobo.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>

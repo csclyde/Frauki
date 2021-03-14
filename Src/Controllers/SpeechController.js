@@ -82,8 +82,8 @@ SpeechController.prototype.Create = function() {
 		this.portraits[portrait.Name] = game.add.image(80, 70, 'UI', portrait.Frame);
 		this.portraits[portrait.Name].fixedToCamera = true;
 		this.portraits[portrait.Name].visible = false;
-		this.portraits[portrait.Name].cameraOffset.x = 10 + speechOffsetX;
-		this.portraits[portrait.Name].cameraOffset.y = 0 + speechOffsetY; 
+		this.portraits[portrait.Name].cameraOffset.x = -12 + speechOffsetX;
+		this.portraits[portrait.Name].cameraOffset.y = -14 + speechOffsetY; 
 	}, this);
 
 	this.speechVisible = false;
