@@ -116,7 +116,7 @@ AudioController.prototype.StopAllMusic = function(params) {
         if(!this.music.hasOwnProperty(key)) continue;
 
         if(!!this.music[key] && this.music[key].isPlaying) {
-            //this.music[key].fadeOut(params.fade || 1000);
+            this.music[key].fadeOut(params.fade || 1000);
         }
     }
 };

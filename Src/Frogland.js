@@ -211,7 +211,6 @@ Frogland.DislodgeTile = function(tile) {
         Frogland['midgroundLayer'].dirty = true;
 
         tile.dislodged = true;
-        tile.owningLayer = this.currentLayer;
 
         Frogland.fallenTiles.push(tile);
 

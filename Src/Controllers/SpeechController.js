@@ -161,11 +161,10 @@ SpeechController.prototype.Update = function() {
 	}
 
 	if(this.text.visible && !!this.currentSpeechZone) {
-		if(this.currentSpeechZone.owningLayer !== Frogland.currentLayer || 
-			frauki.body.x + frauki.body.width < this.currentSpeechZone.x || 
-			frauki.body.x > this.currentSpeechZone.x + this.currentSpeechZone.width || 
-			frauki.body.y + frauki.body.height < this.currentSpeechZone.y || 
-			frauki.body.y > this.currentSpeechZone.y + this.currentSpeechZone.height) {
+		if(frauki.body.x + frauki.body.width < this.currentSpeechZone.x || 
+		   frauki.body.x > this.currentSpeechZone.x + this.currentSpeechZone.width || 
+		   frauki.body.y + frauki.body.height < this.currentSpeechZone.y || 
+		   frauki.body.y > this.currentSpeechZone.y + this.currentSpeechZone.height) {
 
 			this.HideSpeech();
 		}
@@ -228,7 +227,7 @@ SpeechController.prototype.ShowSpeech = function() {
 
 	for(var i = 0; i < this.speechZones.length; i++) {
 		var zone = this.speechZones[i];
-		if(zone.owningLayer === Frogland.currentLayer && frauki.body.x + frauki.body.width > zone.x && frauki.body.x < zone.x + zone.width && frauki.body.y + frauki.body.height > zone.y && frauki.body.y < zone.y + zone.height) {
+		if(frauki.body.x + frauki.body.width > zone.x && frauki.body.x < zone.x + zone.width && frauki.body.y + frauki.body.height > zone.y && frauki.body.y < zone.y + zone.height) {
 			if(zone.speechName === 'goddess') {
 				this.Activate(goddess.GetSpeech(), goddess.GetPortrait());
 
@@ -291,7 +290,7 @@ SpeechController.prototype.FraukiInSpeechZone = function() {
 
 	for(var i = 0; i < this.speechZones.length; i++) {
 		var zone = this.speechZones[i];
-		if(zone.active && zone.owningLayer === Frogland.currentLayer && frauki.body.x + frauki.body.width > zone.x && frauki.body.x < zone.x + zone.width && frauki.body.y + frauki.body.height > zone.y && frauki.body.y < zone.y + zone.height) {
+		if(zone.active && frauki.body.x + frauki.body.width > zone.x && frauki.body.x < zone.x + zone.width && frauki.body.y + frauki.body.height > zone.y && frauki.body.y < zone.y + zone.height) {
 			return true;
 		}
 	}

@@ -44,7 +44,9 @@ Enemy.prototype.types['SpikeDropper'] =  function() {
     };
 
     this.Squash = function() {
-		events.publish('play_sound', {name: 'Dropper_bounce', restart: true});
+        if(cameraController.IsObjectOnScreen(this, 30)) {
+            events.publish('play_sound', {name: 'Dropper_bounce', restart: true});
+        }
 
         if(this.timers.TimerUp('squash_wait')) {
             this.state = this.Squashing;

@@ -93,9 +93,7 @@ TriggerController.prototype.triggers['region_text'] = {
 
 TriggerController.prototype.triggers['start_fight'] = {
 	enter: function(params, trigger) {
-		ScriptRunner.run('start_fight', {
-			door: params.door
-		});
+		ScriptRunner.run('start_fight', params);
 	},
 
 	stay: function(params, trigger) {

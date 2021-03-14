@@ -113,11 +113,28 @@ ScriptRunner.scripts['game_over'] = [
 ScriptRunner.scripts['start_fight'] = [
     { name: 'disallow_input', props: {} },
     { name: 'set_attack_wait', props: { duration: 1000 } },
-    { func: function(params) {        
+    { func: function(params) {
+        if(params.song) {
+            events.publish('pause_all_music', {});
+            events.publish('play_music', { name: params.song, fade: 1000});
+        }
         events.publish('close_enemy_door', { door: params.door });
     } },
     { name: 'wait', props: { amount: 1000 } },
     { name: 'allow_input', props: {} },
-    
-    
+];
+
+ScriptRunner.scripts['end_fight'] = [
+    { func: function(params) {
+        if(params.song) {
+            events.publish('stop_music', { name: params.song, fade: 1000});
+        }
+    } },
+    { name: 'wait', props: { amount: 1000 } },
+
+    { func: function(params) {
+        if(params.song) {
+            events.publish('unpause_all_music', { fade: 1000});
+        }
+    } },
 ];

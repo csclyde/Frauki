@@ -32,12 +32,12 @@ Door.prototype.create = function() {
 
     events.subscribe('close_enemy_door', function(params) {
         if(this.id === params.door && this.type === 'enemy_start') {
-            console.log('closing door', params, this)
             this.PerformClose(false);
         }
     }, this);
 
     events.subscribe('enemy_killed', function(params) {
+
     }, this);
 
     if(GameData.IsDoorOpen(this.id)) {
@@ -162,7 +162,7 @@ Door.prototype.create = function() {
 
 Door.prototype.update = function() {
 
-    if(this.state === this.ReadyToOpen && cameraController.IsObjectOnScreen(this, 50) && this.owningLayer === Frogland.currentLayer) {
+    if(this.state === this.ReadyToOpen && cameraController.IsObjectOnScreen(this, 50)) {
         this.PerformOpen(false, true);
     }
 
@@ -239,6 +239,10 @@ Door.prototype.PerformOpen = function(save, silent) {
         console.warn('Door open failed, attempt ' + this.openAttempts + ' / ' + this.thresholdAttempts);
         return;
     }
+    //if an enemy door is being opened, the fight is over
+    else if(this.type === 'enemy') {
+        ScriptRunner.run('end_fight', { door: this.name, song: this.song });
+    }
 
     var movementTarget = this.body.y - 64;
 
@@ -285,7 +289,7 @@ Door.prototype.PerformOpen = function(save, silent) {
         openDuration = 2500;
         events.publish('camera_shake', {magnitudeX: 0.4, magnitudeY: 0, duration: openDuration });
 
-        events.publish('fade_music', { volume: 0.1, duration: openDuration });
+        //events.publish('fade_music', { volume: 0.1, duration: openDuration });
     }
 
     events.publish('play_sound', {name: 'door_rumble', restart: false });
@@ -297,7 +301,7 @@ Door.prototype.PerformOpen = function(save, silent) {
     game.time.events.add(openDuration - (openDuration / 5), function() {
         if(!this || !this.body) return;
         
-        effectsController.DoorDust({x: this.body.center.x, y: this.body.y + this.body.height - 20, owningLayer: this.owningLayer });
+        effectsController.DoorDust({x: this.body.center.x, y: this.body.y + this.body.height - 20 });
         events.publish('play_sound', {name: 'door_slam', restart: true });
         events.publish('stop_sound', {name: 'door_rumble', restart: true });
         events.publish('door_open_finish', { id: this.id } );
@@ -329,7 +333,7 @@ Door.prototype.PerformClose = function() {
     var openDuration = 1000;
     events.publish('play_sound', {name: 'skull_door', restart: true });
     events.publish('camera_shake', {magnitudeX: 0.4, magnitudeY: 0, duration: openDuration });
-    events.publish('fade_music', { volume: 0.1, duration: openDuration });
+    //events.publish('fade_music', { volume: 0.1, duration: openDuration });
     events.publish('play_sound', {name: 'door_rumble', restart: false });
 
     events.publish('door_open_start', { id: this.id} );
@@ -339,7 +343,7 @@ Door.prototype.PerformClose = function() {
     game.time.events.add(openDuration, function() {
         if(!this || !this.body) return;
         
-        effectsController.DoorDust({x: this.body.center.x, y: this.body.y + this.body.height - 20, owningLayer: this.owningLayer });
+        effectsController.DoorDust({x: this.body.center.x, y: this.body.y + this.body.height - 20 });
         events.publish('play_sound', {name: 'door_slam', restart: true });
         events.publish('stop_sound', {name: 'door_rumble', restart: true });
 

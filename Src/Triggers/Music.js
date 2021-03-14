@@ -34,7 +34,7 @@ TriggerController.prototype.triggers['music_up_down'] = {
 	}
 }
 
-TriggerController.prototype.triggers['stop_music'] = {
+TriggerController.prototype.triggers['stop_all_music'] = {
 	enter: function(params, trigger) {
 	},
 
@@ -50,6 +50,19 @@ TriggerController.prototype.triggers['stop_music'] = {
 TriggerController.prototype.triggers['play_music'] = {
 	enter: function(params, trigger) {
 		events.publish('play_music', { name: params.song } );
+	},
+
+	stay: function(params, trigger) {
+
+	},
+
+	exit: function(params, trigger) {
+	}
+}
+
+TriggerController.prototype.triggers['stop_music'] = {
+	enter: function(params, trigger) {
+		events.publish('stop_music', { name: params.song } );		
 	},
 
 	stay: function(params, trigger) {

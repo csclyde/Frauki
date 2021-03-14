@@ -6,10 +6,6 @@ EnemyBehavior.SetProp = function(e, key, val) {
 };
 
 EnemyBehavior.WithinCameraRange = function(e, pad) {
-    if(e.owningLayer !== Frogland.currentLayer) {
-        return false;
-    }
-
     var padding = pad || -30;
 
     if(e.body.x > game.camera.x - padding &&

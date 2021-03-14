@@ -32,7 +32,7 @@ Enemy = function(game, x, y, name) {
     this.attackRect.owningEnemy = this;  
 
     this.UI = {};
-    this.UI.frame = game.add.image(0, 0, 'UI', 'EnemyHealth000' + (this.maxEnergy - 1), Frogland['objectGroup_' + this.owningLayer]);
+    this.UI.frame = game.add.image(0, 0, 'UI', 'EnemyHealth000' + (this.maxEnergy - 1));
     this.UI.pips = [];
 
     this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0008'));
@@ -115,7 +115,7 @@ Enemy.prototype.update = function() {
         }
     } 
 
-    if(this.maxEnergy > 1 && this.owningLayer === Frogland.currentLayer && !this.timers.TimerUp('health_view')) {
+    if(this.maxEnergy > 1 && !this.timers.TimerUp('health_view')) {
         this.DrawHealth();
     }
 
@@ -330,13 +330,7 @@ Enemy.prototype.TakeHit = function(damage) {
 
         if(this.robotic) events.publish('play_sound', { name: 'robosplosion' });
 
-        events.publish('enemy_killed', { name: this.objectName, owningLayer: this.owningLayer, x: this.body.center.x, y: this.body.center.y });
-        
-        if(this.robotic && !GameData.GetFlag('goddess_robo_speech')) {
-            //goddess.AddMessage("I see you've met those terrible robots. They're the ones who locked me up in this nasty prison. They're intruders, and they do not belong here.");
-
-            GameData.SetFlag('goddess_robo_speech', true);
-        }
+        events.publish('enemy_killed', { name: this.objectName, x: this.body.center.x, y: this.body.center.y });
 
     } else {
         this.timers.SetTimer('after_damage_flicker', graceTime);
@@ -419,7 +413,7 @@ Enemy.prototype.DestroyEnemy = function(e) {
 
     }
 
-    effectsController.DiceObject(this.objectName, this.body.center.x, this.body.center.y, this.body.velocity.x, this.body.velocity.y, this.owningLayer);
+    effectsController.DiceObject(this.objectName, this.body.center.x, this.body.center.y, this.body.velocity.x, this.body.velocity.y);
 
     damage = this.maxEnergy;
 

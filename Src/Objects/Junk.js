@@ -50,7 +50,7 @@ Junk.prototype.JunkHit = function(o) {
 	game.time.events.add(100, function() {
 	    effectsController.ClashStreak(this.body.center.x, this.body.center.y, game.rnd.between(1, 2));
         effectsController.Dust(this.body.center.x, this.body.center.y);
-	    effectsController.DiceObject(this.objectName, this.body.center.x, this.body.center.y, this.body.velocity.x, this.body.velocity.y, this.owningLayer);
+	    effectsController.DiceObject(this.objectName, this.body.center.x, this.body.center.y, this.body.velocity.x, this.body.velocity.y);
 	    events.publish('play_sound', {name: 'smash'});
 	    this.destroy();
 	}, this);
