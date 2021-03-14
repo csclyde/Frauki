@@ -205,9 +205,9 @@ Player.prototype.postStateUpdate = function() {
     }
 
     if(this.animations.currentAnim.name === 'run' && !this.states.inWater) {
-        events.publish('play_sound', {name: 'running', restart: false });
+        events.publish('play_sound', {name: 'frauki_running', restart: false });
     } else {
-        events.publish('stop_sound', {name: 'running'});
+        events.publish('stop_sound', {name: 'frauki_running'});
     }
 
     if(this.states.onCloud === false) this.states.droppingThroughCloud = false;
@@ -537,7 +537,7 @@ Player.prototype.Jump = function(params) {
 
             this.body.velocity.y = PLAYER_JUMP_VEL();
             this.ChangeState(this.Jumping);
-            events.publish('play_sound', {name: 'jump'});
+            events.publish('play_sound', {name: 'frauki_jump'});
         }
         //roll jump
         else if(this.state === this.Rolling) {
@@ -557,8 +557,8 @@ Player.prototype.Jump = function(params) {
             //add a little boost to their jump
             this.body.velocity.y = PLAYER_JUMP_VEL() - 50;
             
-            events.publish('play_sound', {name: 'jump'});
-            events.publish('stop_sound', {name: 'roll'});
+            events.publish('play_sound', {name: 'frauki_jump'});
+            events.publish('stop_sound', {name: 'frauki_roll'});
         }
         //overhead into jump atack
         else if(!this.timers.TimerUp('slash_start_window') && (this.state === this.AttackOverhead || this.state === this.AttackFront)) {
@@ -600,7 +600,7 @@ Player.prototype.DoubleJump = function() {
         this.states.hasFlipped = true;
         this.states.droppingThroughCloud = false;
 
-        events.publish('play_sound', {name: 'airhike'});
+        events.publish('play_sound', {name: 'frauki_airhike'});
         events.publish('stop_sound', {name: 'attack_dive_fall'});
     }
 };
@@ -741,7 +741,7 @@ Player.prototype.Roll = function(params) {
 
     if(this.body.onFloor()) {
 
-        events.publish('play_sound', {name: 'roll', restart: true});
+        events.publish('play_sound', {name: 'frauki_roll', restart: true});
 
         this.ChangeState(this.Rolling);
 
@@ -814,7 +814,7 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
 
     grace_duration = grace_duration || 1000;
 
-    events.publish('play_sound', {name: 'ouch'});
+    events.publish('play_sound', {name: 'frauki_ouch'});
     events.publish('play_sound', {name: 'lose_energy_bits'});
 
 
@@ -850,7 +850,7 @@ Player.prototype.Stun = function(e) {
 
     this.ChangeState(this.Stunned);
     this.timers.SetTimer('stunned', 1200);
-    events.publish('play_sound', {name: 'stun', restart: true});
+    events.publish('play_sound', {name: 'frauki_stun', restart: true});
 
     this.body.acceleration.x = 0;
     this.body.acceleration.y = 0;
@@ -1113,12 +1113,12 @@ Player.prototype.PreMaterializing = function() {
 
 Player.prototype.Materializing = function() {
     this.PlayAnim('materialize');
-    events.publish('play_sound', {name: 'baton_throw_3'});
+    events.publish('play_sound', {name: 'frauki_materialize'});
     
     
     if(this.animations.currentAnim.isFinished) {
-        events.publish('stop_sound', {name: 'baton_throw_3'});
-        events.publish('play_sound', {name: 'gain_energy_4'});
+        events.publish('stop_sound', {name: 'frauki_materialize'});
+        events.publish('play_sound', {name: 'frauki_materialize_end'});
         this.ChangeState(this.Standing);
     }
 };
