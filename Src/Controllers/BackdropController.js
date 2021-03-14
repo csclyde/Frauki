@@ -25,17 +25,17 @@ BackdropController.prototype.Update = function() {
         }
     });
 
-    this.clouds1.cameraOffset.x = -(game.camera.x * 0.10) + 200;
-    this.clouds1.cameraOffset.y = -(game.camera.y * 0.10) + 150 + (Math.sin(game.time.now / 2000) * 10);
+    this.clouds1.cameraOffset.x = -(game.camera.x * 0.10) + 250;
+    this.clouds1.cameraOffset.y = -(game.camera.y * 0.10) + 100 + (Math.sin(game.time.now / 2000) * 10);
 
-    this.clouds2.cameraOffset.x = -(game.camera.x * 0.12) + 200;
-    this.clouds2.cameraOffset.y = -(game.camera.y * 0.12) + 200 + (Math.sin(game.time.now / 1500) * 7);
+    this.clouds2.cameraOffset.x = -(game.camera.x * 0.12) + 250;
+    this.clouds2.cameraOffset.y = -(game.camera.y * 0.12) + 150 + (Math.sin(game.time.now / 1500) * 7);
 
-    this.mountain.cameraOffset.x = -(game.camera.x * 0.14) + 0;
-    this.mountain.cameraOffset.y = -(game.camera.y * 0.14) + 300;
+    this.mountain.cameraOffset.x = -(game.camera.x * 0.14) + 100;
+    this.mountain.cameraOffset.y = -(game.camera.y * 0.14) + 250;
 
-    this.clouds3.cameraOffset.x = -(game.camera.x * 0.16) + 400;
-    this.clouds3.cameraOffset.y = -(game.camera.y * 0.16) + 500 + (Math.sin(game.time.now / 1000) * 4);
+    this.clouds3.cameraOffset.x = -(game.camera.x * 0.16) + 550;
+    this.clouds3.cameraOffset.y = -(game.camera.y * 0.16) + 400 + (Math.sin(game.time.now / 1000) * 4);
 };
 
 BackdropController.prototype.CreateParallax = function() {
