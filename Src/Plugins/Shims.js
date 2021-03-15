@@ -299,3 +299,90 @@ Phaser.Sound.prototype.fadeToResume = function (duration, volume) {
         this.resume();
     }
 };
+
+Phaser.Animation.prototype.update = function () {
+    
+    if (this.isPaused || GameState.physicsSlowMo === 0)
+    {
+        return false;
+    }
+
+    if (this.isPlaying && this.game.time.time >= this._timeNextFrame)
+    {
+        this._frameSkip = 1;
+
+        //  Lagging?
+        this._frameDiff = this.game.time.time - this._timeNextFrame;
+
+        this._timeLastFrame = this.game.time.time;
+
+        if (this._frameDiff > this.delay)
+        {
+            //  We need to skip a frame, work out how many
+            this._frameSkip = Math.floor(this._frameDiff / this.delay);
+            this._frameDiff -= (this._frameSkip * this.delay);
+        }
+
+        //  And what's left now?
+        this._timeNextFrame = this.game.time.time + (this.delay - this._frameDiff);
+
+        if (this.isReversed)
+        {
+            this._frameIndex -= this._frameSkip;
+        }
+        else
+        {
+            this._frameIndex += this._frameSkip;
+        }
+
+        if (!this.isReversed && this._frameIndex >= this._frames.length || this.isReversed && this._frameIndex <= -1)
+        {
+            if (this.loop)
+            {
+                // Update current state before event callback
+                this._frameIndex = Math.abs(this._frameIndex) % this._frames.length;
+
+                if (this.isReversed)
+                {
+                    this._frameIndex = this._frames.length - 1 - this._frameIndex;
+                }
+
+                this.currentFrame = this._frameData.getFrame(this._frames[this._frameIndex]);
+
+                //  Instead of calling updateCurrentFrame we do it here instead
+                if (this.currentFrame)
+                {
+                    this._parent.setFrame(this.currentFrame);
+                }
+
+                this.loopCount++;
+                this._parent.events.onAnimationLoop$dispatch(this._parent, this);
+                this.onLoop.dispatch(this._parent, this);
+
+                if (this.onUpdate)
+                {
+                    this.onUpdate.dispatch(this, this.currentFrame);
+
+                    // False if the animation was destroyed from within a callback
+                    return !!this._frameData;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                this.complete();
+                return false;
+            }
+        }
+        else
+        {
+            return this.updateCurrentFrame(true);
+        }
+    }
+
+    return false;
+
+};

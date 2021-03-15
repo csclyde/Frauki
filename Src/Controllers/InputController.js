@@ -26,6 +26,7 @@ InputController = function() {
     this.testButton2 = game.input.keyboard.addKey(Phaser.Keyboard.O);
 
     this.binds = {};
+    this.binds.pause      = Phaser.Keyboard.ESC;
     this.binds.jump       = Phaser.Keyboard.SPACEBAR;
     this.binds.up         = Phaser.Keyboard.UP;
     this.binds.crouch     = Phaser.Keyboard.DOWN;
@@ -38,7 +39,7 @@ InputController = function() {
     this.binds.shoulderR  = Phaser.Keyboard.Q;
     this.binds.shoulderR2  = Phaser.Keyboard.V;
 
-    this.bindList = [this.binds.jump, this.binds.up, this.binds.crouch, this.binds.runLeft, this.binds.runRight, this.binds.slash, this.binds.weapon, this.binds.roll, this.binds.shoulderR];
+    this.bindList = [this.binds.pause, this.binds.jump, this.binds.up, this.binds.crouch, this.binds.runLeft, this.binds.runRight, this.binds.slash, this.binds.weapon, this.binds.roll, this.binds.shoulderR];
     
     events.subscribe('allow_input', this.AllowInput, this);
     events.subscribe('disallow_input', this.DisallowInput, this);
@@ -67,6 +68,10 @@ InputController = function() {
 
             case Phaser.Keyboard.W:
                 GameData.SetDebugPos(0, 0);
+            break;
+
+            case inputController.binds.pause:
+                inputController.OnPause(true);
             break;
 
             case inputController.binds.jump:
@@ -324,6 +329,14 @@ InputController.prototype.AllowInput = function() {
     if(this.dpad.right) this.OnRight(true);
     if(this.dpad.up) this.OnUp(true);
     if(this.dpad.down) this.OnDown(true);
+};
+
+InputController.prototype.OnPause = function(pressed) {
+
+    if(pressed) {
+        events.publish('select_menu_option', {});        
+        events.publish('pause_game', {});
+    }
 };
 
 

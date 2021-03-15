@@ -5,6 +5,8 @@ AudioController = function() {
 
     events.subscribe('play_sound', this.PlaySound, this);
     events.subscribe('stop_sound', this.StopSound, this);
+    events.subscribe('pause_all_sound', this.PauseAllSound, this);
+    events.subscribe('unpause_all_sound', this.UnpauseAllSound, this);
 
     events.subscribe('play_music', this.PlayMusic, this);
     events.subscribe('stop_music', this.StopMusic, this);
@@ -61,7 +63,7 @@ AudioController.prototype.Reset = function() {
 AudioController.prototype.PlaySound = function(params) {
     var that = this;
 
-    if(!!params.name && !!this.sounds[params.name]) {
+    if(!!params.name && !!this.sounds[params.name] && !this.sounds[params.name].paused) {
 
         //if the sound is already playing and they dont want to start it over
         if(this.sounds[params.name].isPlaying && params.restart !== true) return;
@@ -86,6 +88,27 @@ AudioController.prototype.StopSound = function(params) {
             this.sounds[params.name].fadeOut(params.fade);
         } else {
             this.sounds[params.name].stop();
+        }
+    }
+};
+
+AudioController.prototype.PauseAllSound = function(params) {
+    for(var key in this.sounds) {
+        if(!this.sounds.hasOwnProperty(key)) continue;
+
+        if(!!this.sounds[key] && this.sounds[key].isPlaying) {
+            console.log(this.sounds[key]);
+            this.sounds[key].pause();
+        }
+    }
+};
+
+AudioController.prototype.UnpauseAllSound = function(params) {
+    for(var key in this.sounds) {
+        if(!this.sounds.hasOwnProperty(key)) continue;
+
+        if(!!this.sounds[key] && this.sounds[key].paused) {
+            this.sounds[key].resume();
         }
     }
 };

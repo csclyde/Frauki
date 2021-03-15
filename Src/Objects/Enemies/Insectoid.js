@@ -99,6 +99,10 @@ Enemy.prototype.types['Insectoid'] =  function() {
         }
     };
 
+    this.Die = function() {
+        events.publish('stop_sound', {name: 'Insectoid_attack'});        
+    }
+
     ///////////////////////////////ACTIONS////////////////////////////////////
     this.Hop = function() {
 

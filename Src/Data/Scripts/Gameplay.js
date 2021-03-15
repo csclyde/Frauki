@@ -67,6 +67,42 @@ ScriptRunner.scripts['new_game'] = [
     
 ];
 
+ScriptRunner.scripts['pause_game'] = [
+    { name: 'disallow_input', props: {} },    
+    { name: 'pause_all_music', props: { fade: 250 } },
+    { name: 'pause_all_sound', props: { } },
+    
+    { func: function() {
+        GameState.pauseTween = game.add.tween(GameState).to( {physicsSlowMo: 0}, 250, Phaser.Easing.Quartic.Out, true);
+    } },
+
+    { name: 'wait', props: { amount: 250 } },  
+
+    { func: function() {
+        GameState.paused = true;      
+        GameState.prePauseCameraTarget = cameraController.target;
+        events.publish('pan_camera', { to: cameraController.menuTarget, duration: 500 });
+    } },
+];
+
+ScriptRunner.scripts['unpause_game'] = [
+    { name: 'unpause_all_music', props: { } },  
+    
+    { func: function() {
+        events.publish('pan_camera', { to: GameState.prePauseCameraTarget, duration: 1000 });
+    } },
+
+    { name: 'wait', props: { amount: 1500 } },
+
+    { func: function() {
+        GameState.paused = false;
+        GameState.pauseTween = game.add.tween(GameState).to( {physicsSlowMo: 1}, 250, Phaser.Easing.Quartic.In, true);        
+    } },
+
+    { name: 'unpause_all_sound', props: { } },        
+    { name: 'allow_input', props: {} },    
+];
+
 ScriptRunner.scripts['game_over'] = [
     { name: 'disallow_input', props: {} },
     { name: 'stop_all_music', props: { fade: 500 } },

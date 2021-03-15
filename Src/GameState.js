@@ -5,6 +5,9 @@ GameState.MAX_APPLES = 6;
 
 GameState.create = function() {
 
+    this.paused = false;
+    this.gameTime = 0;
+    this.prevTime = game.time.now;
     this.restarting = false;
     this.inMainMenu = true;
     this.menuSelectionMade = false;
@@ -21,6 +24,7 @@ GameState.create = function() {
     events.subscribe('update_ui', this.UpdateUI, this);
     events.subscribe('select_menu_option', this.MakeMenuSelection, this);
     events.subscribe('menu_change', this.UpdateMenuSelection, this);
+    events.subscribe('pause_game', this.PauseGame, this);
 
     this.CreateUI();
     
@@ -28,21 +32,29 @@ GameState.create = function() {
 };
 
 GameState.update = function() {
-    frauki.UpdateAttackGeometry();
-    objectController.Update();
-    
-    Frogland.Update();
 
+    this.gameTime += (game.time.now - this.prevTime) * this.physicsSlowMo;
+    this.prevTime = game.time.now;
+    
     audioController.Update();
     cameraController.Update();
     inputController.Update();
-    effectsController.Update();
-    energyController.Update();
-    projectileController.Update();
-    weaponController.Update();
-    speechController.Update();
-    triggerController.Update();
     backdropController.Update();
+ 
+    
+    
+    if(!this.paused) {
+        frauki.UpdateAttackGeometry();
+        objectController.Update();
+        
+        Frogland.Update();
+        weaponController.Update();
+        triggerController.Update();
+        effectsController.Update();
+        energyController.Update();
+        projectileController.Update();
+        speechController.Update();
+    }
 
     pixel.context.globalAlpha = this.currentAlpha;
 
@@ -107,6 +119,18 @@ GameState.UpdateMenuSelection = function(params) {
 
         events.publish('update_ui', {});
         events.publish('play_sound', {name: 'text_bloop'});   
+    }
+};
+
+GameState.PauseGame = function() {
+    
+    if(this.paused) {
+        console.log('unpausing game')
+        ScriptRunner.run('unpause_game');       
+    }
+    else {
+        console.log('pausing game')
+        ScriptRunner.run('pause_game');       
     }
 };
 
