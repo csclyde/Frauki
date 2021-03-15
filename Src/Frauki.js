@@ -245,7 +245,7 @@ Player.prototype.Reset = function() {
     this.movement.diveVelocity = 0;
     this.movement.jumpSlashVelocity = 0;
     this.movement.rollBoost = 0;
-    this.movement.startRollTime = game.time.now;
+    this.movement.startRollTime = GameState.gameTime;
     this.movement.rollPop = false;
     this.movement.rollPrevVel = 0;
     this.movement.rollDirection = 1;
@@ -725,7 +725,7 @@ Player.prototype.StabSlash = function() {
 
     this.movement.rollStage = 0;
     this.movement.rollDirection = dir;
-    this.movement.rollStart = game.time.now;
+    this.movement.rollStart = GameState.gameTime;
     this.movement.rollPrevVel = 0;
     this.movement.rollPop = false;
     this.movement.stabFrames = 0;
@@ -752,7 +752,7 @@ Player.prototype.Roll = function(params) {
 
         this.movement.rollStage = 0;
         this.movement.rollDirection = this.GetDirectionMultiplier();
-        this.movement.rollStart = game.time.now;
+        this.movement.rollStart = GameState.gameTime;
         this.movement.rollPop = false;
         this.movement.rollPrevVel = 0;
         this.movement.rollFrames = 0;

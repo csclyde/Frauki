@@ -89,7 +89,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
     this.Idling = function() {
         this.PlayAnim('idle');
         
-        this.body.velocity.y = Math.sin((this.hoverOffset + game.time.now) / 250) * 100;
+        this.body.velocity.y = Math.sin((this.hoverOffset + GameState.gameTime) / 250) * 100;
 
         return true;
     };
@@ -140,8 +140,8 @@ Enemy.prototype.types['Buzzar'] =  function() {
 
         //move to a point somewhere above fraukis head
         var locus = {};
-        locus.x = frauki.body.center.x + (Math.sin(game.time.now / 150) * 30);
-        locus.y = frauki.body.center.y - 150 + (Math.sin(game.time.now / 50) * 100 + (Math.random() * 40 - 20));
+        locus.x = frauki.body.center.x + (Math.sin(GameState.gameTime / 150) * 30);
+        locus.y = frauki.body.center.y - 150 + (Math.sin(GameState.gameTime / 50) * 100 + (Math.random() * 40 - 20));
 
         //EnemyBehavior.FacePlayer(this);
         game.physics.arcade.moveToXY(this, locus.x, locus.y, 40);

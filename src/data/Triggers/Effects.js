@@ -49,10 +49,10 @@ TriggerController.prototype.triggers['regen'] = {
 	stay: function(params) {
 
 		//if the timer is up, tick the health and reset the timer
-		if(game.time.now > triggerController.tickTimer) {
+		if(GameState.gameTime > triggerController.tickTimer) {
 			energyController.AddHealth(1);
 
-			triggerController.tickTimer = game.time.now + 400;
+			triggerController.tickTimer = GameState.gameTime + 400;
 		}
 	},
 

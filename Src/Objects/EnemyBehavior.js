@@ -124,11 +124,11 @@ EnemyBehavior.Player.IsVisible = function(e) {
     }
 
     //if the timestamp has expired, check for visibility
-    if(this.Visibility[e.z].timestamp + refreshTime < game.time.now) {
+    if(this.Visibility[e.z].timestamp + refreshTime < GameState.gameTime) {
         var ray = new Phaser.Line(frauki.body.center.x, frauki.body.center.y, e.body.center.x, e.body.center.y);
         var collideTiles = Frogland.GetCollisionLayer().getRayCastTiles(ray, 4, true);
 
-        this.Visibility[e.z].timestamp = game.time.now;
+        this.Visibility[e.z].timestamp = GameState.gameTime;
 
         this.Visibility[e.z].result = true;
 

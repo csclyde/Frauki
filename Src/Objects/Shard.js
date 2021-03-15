@@ -104,7 +104,7 @@ Shard.prototype.Floating = function() {
         return;
     }
 
-    this.body.velocity.y = Math.sin(game.time.now / 150) * 30;
+    this.body.velocity.y = Math.sin(GameState.gameTime / 150) * 30;
     this.body.velocity.x = 0;
 };
 

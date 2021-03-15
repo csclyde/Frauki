@@ -72,8 +72,8 @@ Enemy.prototype.types['Sporoid'] =  function() {
 	this.Idling = function() {
 		this.PlayAnim('idle');
 		
-		this.body.velocity.y = Math.sin(game.time.now / 300) * 50 + (Math.random() * 40 - 20);
-		this.body.velocity.x = Math.sin(game.time.now / 1000) * 5;
+		this.body.velocity.y = Math.sin(GameState.gameTime / 300) * 50 + (Math.random() * 40 - 20);
+		this.body.velocity.x = Math.sin(GameState.gameTime / 1000) * 5;
 
 		if(EnemyBehavior.Player.IsNear(this, 100)) {
 			this.Dash();
@@ -92,7 +92,7 @@ Enemy.prototype.types['Sporoid'] =  function() {
 	this.PreDashing = function() {
 		this.PlayAnim('idle');
 
-		this.body.velocity.y = Math.sin((game.time.now) / 30) * 200;
+		this.body.velocity.y = Math.sin((GameState.gameTime) / 30) * 200;
 		this.body.velocity.x = 0;
 
 		if(this.timers.TimerUp('dash')) {

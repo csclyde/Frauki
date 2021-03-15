@@ -77,7 +77,16 @@ ScriptRunner.scripts['goddess_welcome_return'] = [
 
 ScriptRunner.scripts['goddess_console'] = [
 	{ name: 'show_text', props: { text: "Oh you poor thing... Don't worry, I've got you back on your feet. Now get out there and give it another shot!", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 6000 } },
+	{ name: 'wait', props: { amount: 8000 } },
+	{ name: 'hide_text', props: {} },
+
+	{ name: 'run_script', props: { name: 'exit_goddess' } },
+	{ name: 'wait', props: { amount: 1000 } },
+];
+
+ScriptRunner.scripts['goddess_oh_hey'] = [
+	{ name: 'show_text', props: { text: "Oh hey Frauki, what are you doing back here?", portrait: 'Goddess_Neutral' } },
+	{ name: 'wait', props: { amount: 4000 } },
 	{ name: 'hide_text', props: {} },
 
 	{ name: 'run_script', props: { name: 'exit_goddess' } },

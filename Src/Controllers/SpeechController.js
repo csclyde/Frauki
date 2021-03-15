@@ -179,7 +179,7 @@ SpeechController.prototype.Update = function() {
 	if(!this.text.visible && this.FraukiInSpeechZone()) {
 		this.questionMark.visible = true;
 		this.questionMark.x = frauki.x;
-		this.questionMark.y = frauki.y - 140 + Math.sin(game.time.now / 200) * 3;
+		this.questionMark.y = frauki.y - 140 + Math.sin(GameState.gameTime / 200) * 3;
 		//this.ShowSpeech();
         events.publish('play_sound', {name: 'speech'});
 
@@ -193,7 +193,7 @@ SpeechController.prototype.Update = function() {
 	if(!!goddess && goddess.messageQueue.length > 0) {
 		this.exclamationMark.visible = true;
 		this.exclamationMark.x = goddess.x;
-		this.exclamationMark.y = goddess.y - 80 + Math.sin(game.time.now / 200) * 3;
+		this.exclamationMark.y = goddess.y - 80 + Math.sin(GameState.gameTime / 200) * 3;
 		//this.ShowSpeech();
 
 	} else {
@@ -203,8 +203,8 @@ SpeechController.prototype.Update = function() {
 
 	if(!this.timers.TimerUp('enemy_surprised') && !!this.targetEnemy && !!this.targetEnemy.body) {
 		this.surpriseMark.visible = true;
-		this.surpriseMark.x = this.targetEnemy.body.center.x + Math.sin(game.time.now / 10) * this.tweens.surpriseMarkShake;
-		this.surpriseMark.y = this.targetEnemy.body.y - 20 + Math.sin(game.time.now / 200) * 3;	
+		this.surpriseMark.x = this.targetEnemy.body.center.x + Math.sin(GameState.gameTime / 10) * this.tweens.surpriseMarkShake;
+		this.surpriseMark.y = this.targetEnemy.body.y - 20 + Math.sin(GameState.gameTime / 200) * 3;	
 	} else {
 		this.surpriseMark.visible = false;
 	}

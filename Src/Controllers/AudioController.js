@@ -141,6 +141,11 @@ AudioController.prototype.StopAllMusic = function(params) {
         if(!!this.music[key] && this.music[key].isPlaying) {
             this.music[key].fadeOut(params.fade || 1000);
         }
+        else if(!!this.music[key] && this.music[key].paused) {
+            this.music[key].stop();
+            this.music[key].paused = false;
+            this.music[key].willBePaused = false;
+        }
     }
 };
 

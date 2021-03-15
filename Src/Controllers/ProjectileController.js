@@ -10,7 +10,7 @@ ProjectileController.prototype.Update = function() {
 
 	this.projectiles.forEach(function(p) {
 
-		if(game.time.now - p.spawnTime > p.lifeTime && p.lifeTime !== 0) {
+		if(GameState.gameTime - p.spawnTime > p.lifeTime && p.lifeTime !== 0) {
 			p.destroy();
 			childrenToRemove.push(p);
 
@@ -23,7 +23,7 @@ ProjectileController.prototype.Update = function() {
 
 		if(p.projType === 'bolas' && p.attached === true) {
 			p.x = frauki.body.center.x;
-			p.y = frauki.body.center.y + (Math.sin(game.time.now / 100) * 24) + 0;
+			p.y = frauki.body.center.y + (Math.sin(GameState.gameTime / 100) * 24) + 0;
 			frauki.states.entangled = true;
 			p.play('entangle');
 
@@ -93,7 +93,7 @@ ProjectileController.prototype.Mortar = function(e) {
 
 	mortar.projType = 'mortar';
 	mortar.owningEnemy = e;
-	mortar.spawnTime = game.time.now;
+	mortar.spawnTime = GameState.gameTime;
 	mortar.lifeTime = 5000;
 	mortar.solid = true;
 	mortar.preserveAfterHit = true;
@@ -131,7 +131,7 @@ ProjectileController.prototype.MortarExplosion = function(e, x, y, style) {
 
 	explosion.projType = 'mortarExplosion';
 	explosion.owningEnemy = e;
-	explosion.spawnTime = game.time.now;
+	explosion.spawnTime = GameState.gameTime;
 	explosion.lifeTime = 5000;
 	explosion.solid = true;
 	explosion.preserveAfterHit = true;
@@ -173,7 +173,7 @@ ProjectileController.prototype.Bolas = function(e) {
 
 	bolas.projType = 'bolas';
 	bolas.owningEnemy = e;
-	bolas.spawnTime = game.time.now;
+	bolas.spawnTime = GameState.gameTime;
 	bolas.lifeTime = 3000;
 	bolas.solid = true;
 	bolas.attached = false;
@@ -231,7 +231,7 @@ ProjectileController.prototype.Detonator = function(e) {
 
 	detonator.projType = 'detonator';
 	detonator.owningEnemy = e;
-	detonator.spawnTime = game.time.now;
+	detonator.spawnTime = GameState.gameTime;
 	detonator.lifeTime = 5000;
 	detonator.solid = true;
 	detonator.preserveAfterHit = true;
@@ -259,7 +259,7 @@ ProjectileController.prototype.Tarball = function(e) {
 
 	tar.projType = 'tar';
 	tar.owningEnemy = e;
-	tar.spawnTime = game.time.now;
+	tar.spawnTime = GameState.gameTime;
 	tar.lifeTime = 3000;
 	tar.solid = true;
 
@@ -285,7 +285,7 @@ ProjectileController.prototype.Spore = function(e) {
 
 	spore.projType = 'spore';
 	spore.owningEnemy = e;
-	spore.spawnTime = game.time.now;
+	spore.spawnTime = GameState.gameTime;
 	spore.lifeTime = 3000;
 	spore.solid = true;
 
@@ -318,7 +318,7 @@ ProjectileController.prototype.LaserBolt = function(e, rot, flip) {
 
 	bolt.projType = 'bolt';
 	bolt.owningEnemy = e;
-	bolt.spawnTime = game.time.now;
+	bolt.spawnTime = GameState.gameTime;
 	bolt.lifeTime = 5000;
 	bolt.solid = true;
 
@@ -366,7 +366,7 @@ ProjectileController.prototype.FallingTile = function(sourceTile, visibleTile) {
 	tile.body.angularVelocity = game.rnd.between(-100, 100);
 
 	tile.projType = 'tile';
-	tile.spawnTime = game.time.now;
+	tile.spawnTime = GameState.gameTime;
 	tile.lifeTime = 3000;
 
 	this.projectiles.add(tile);

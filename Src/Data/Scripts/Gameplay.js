@@ -16,13 +16,14 @@ ScriptRunner.scripts['continue_game'] = [
         game.add.tween(GameState.Menu).to({alpha: 0}, 1500, Phaser.Easing.Cubic.Out, true);
         frauki.Reset();
         frauki.state = frauki.PreMaterializing;
+        GameState.menuSelectionMade = true;
     } },
 
     { name: 'wait', props: { amount: 2500 } },
     { name: 'run_script', props: { name: 'enter_goddess' } },
     
     { func: function() {
-        GameState.inMainMenu = false;
+        GameState.inMenu = false;
         GameState.uiFadeTween = game.add.tween(GameState.UI).to({alpha: 1}, 1500, Phaser.Easing.Cubic.Out, true);
         frauki.state = frauki.Materializing;
     } },
@@ -39,7 +40,8 @@ ScriptRunner.scripts['new_game'] = [
     { func: function() {
         GameData.ResetData();
         GameState.Reset();
-        effectsController.Fade(true, 3000);                
+        effectsController.Fade(true, 3000);  
+        GameState.menuSelectionMade = true;        
     } },
 
     { name: 'wait', props: { amount: 4000 } },
@@ -47,7 +49,7 @@ ScriptRunner.scripts['new_game'] = [
     { func: function() {
         events.publish('set_camera', { to: goddess.body.center }); 
         
-        GameState.inMainMenu = false;
+        GameState.inMenu = false;
         GameState.Menu.alpha = 0;
         effectsController.Fade(false, 500);
     } },
@@ -67,36 +69,77 @@ ScriptRunner.scripts['new_game'] = [
     
 ];
 
+ScriptRunner.scripts['show_settings_menu'] = [
+
+    { func: function() {
+        GameState.currentMenu = Menus.settings;
+        GameState.menuSelection = 0;
+    } },
+
+    { name: 'update_ui', props: { } },
+];
+
+ScriptRunner.scripts['exit_settings_menu'] = [
+    
+    { func: function() {
+        if(GameState.paused) {
+            GameState.currentMenu = Menus.pause;
+            GameState.menuSelection = 2;
+        } else {
+            GameState.currentMenu = Menus.main;
+            GameState.menuSelection = 2;
+        }
+    } },
+
+    { name: 'update_ui', props: { } },
+];
+
 ScriptRunner.scripts['pause_game'] = [
     { name: 'disallow_input', props: {} },    
     { name: 'pause_all_music', props: { fade: 250 } },
     { name: 'pause_all_sound', props: { } },
+    { name: 'play_music', props: { name: 'Intro', fade: 2000 } },    
     
     { func: function() {
         GameState.pauseTween = game.add.tween(GameState).to( {physicsSlowMo: 0}, 250, Phaser.Easing.Quartic.Out, true);
+        GameState.currentMenu = Menus.pause;
+        GameState.menuSelection = 0;
+        GameState.inMenu = true;
+        GameState.menuSelectionMade = false;
     } },
 
+    { name: 'update_ui', props: {  } },
     { name: 'wait', props: { amount: 250 } },  
 
     { func: function() {
         GameState.paused = true;      
         GameState.prePauseCameraTarget = cameraController.target;
         events.publish('pan_camera', { to: cameraController.menuTarget, duration: 500 });
+
+        game.add.tween(GameState.Menu).to({alpha: 1}, 500, Phaser.Easing.Cubic.In, true);
+        GameState.uiFadeTween = game.add.tween(GameState.UI).to({alpha: 0}, 500, Phaser.Easing.Cubic.Out, true);  
+            
     } },
 ];
 
 ScriptRunner.scripts['unpause_game'] = [
+    { name: 'stop_music', props: { name: 'Intro', fade: 1000 } },    
     { name: 'unpause_all_music', props: { } },  
+    { name: 'play_sound', props: { name: 'text_bloop' } },      
+    
     
     { func: function() {
         events.publish('pan_camera', { to: GameState.prePauseCameraTarget, duration: 1000 });
+        game.add.tween(GameState.Menu).to({alpha: 0}, 500, Phaser.Easing.Cubic.Out, true);
+        GameState.uiFadeTween = game.add.tween(GameState.UI).to({alpha: 1}, 500, Phaser.Easing.Cubic.In, true); 
     } },
 
     { name: 'wait', props: { amount: 1500 } },
 
     { func: function() {
         GameState.paused = false;
-        GameState.pauseTween = game.add.tween(GameState).to( {physicsSlowMo: 1}, 250, Phaser.Easing.Quartic.In, true);        
+        GameState.pauseTween = game.add.tween(GameState).to( {physicsSlowMo: 1}, 250, Phaser.Easing.Quartic.In, true);
+        GameState.inMenu = false;        
     } },
 
     { name: 'unpause_all_sound', props: { } },        
@@ -143,6 +186,51 @@ ScriptRunner.scripts['game_over'] = [
     { name: 'wait', props: { amount: 2000 } },
 
     { name: 'run_script', props: { name: 'goddess_console' } },
+    
+];
+
+ScriptRunner.scripts['restart_game'] = [
+    { name: 'disallow_input', props: {} },
+    { name: 'stop_all_music', props: { fade: 1000 } },
+    { name: 'stop_all_ambient', props: {} },
+    { name: 'hide_speech', props: {} },
+    
+    { func: function() {
+        GameState.paused = false;
+        GameState.inMenu = false;
+        GameState.physicsSloMo = 1;
+
+        GameState.BeginGameover();
+        effectsController.Fade(true, 1000);
+    } },
+
+    { name: 'wait', props: { amount: 1000 } },
+
+    { func: function() {
+        GameState.Menu.alpha = 0;
+        GameState.UI.alpha = 1;
+        GameState.Reset();
+    } },
+
+    { name: 'wait', props: { amount: 400 } },
+    
+    { func: function() {
+        effectsController.Fade(false, 500);
+        events.publish('set_camera', { to: goddess.body.center });         
+    } },
+
+    { name: 'wait', props: { amount: 1000 } },
+
+    { name: 'run_script', props: { name: 'enter_goddess' } },
+    
+    { name: 'wait', props: { amount: 500 } },
+    
+    { func: function() {
+        frauki.state = frauki.Materializing;
+    } },
+    { name: 'wait', props: { amount: 2000 } },
+
+    { name: 'run_script', props: { name: 'goddess_oh_hey' } },
     
 ];
 

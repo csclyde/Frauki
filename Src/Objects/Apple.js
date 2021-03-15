@@ -62,10 +62,10 @@ Apple.prototype.Fresh = function() {
     this.PlayAnim('fresh');
 
     if(this.shakeMagnitudeX > 0) {
-        this.body.velocity.x = Math.sin(game.time.now * 150) * this.shakeMagnitudeX;
+        this.body.velocity.x = Math.sin(GameState.gameTime * 150) * this.shakeMagnitudeX;
         this.body.velocity.y = 0;
     } else {
-        this.body.velocity.y = Math.sin(game.time.now / 150) * 30;
+        this.body.velocity.y = Math.sin(GameState.gameTime / 150) * 30;
         this.body.velocity.x = 0;
     }
 };

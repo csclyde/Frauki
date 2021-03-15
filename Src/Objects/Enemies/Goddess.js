@@ -16,8 +16,6 @@ Enemy.prototype.types['Goddess'] =  function() {
 
 	this.Vulnerable = function() { return false; }
 	
-	
-
     this.messageQueue = GameData.GetVal('goddess_message_queue');
     this.deathMessage = GameData.GetVal('goddess_death_message');
 	this.currentPortrait = 'Goddess_Neutral';
@@ -64,7 +62,7 @@ Enemy.prototype.types['Goddess'] =  function() {
     	} else {
     		GameData.SetFlag('goddess_killed', true);
     	}
-    };
+	};
 
     this.Reset = function() {
     	//if the goddess is angry from being killed, reset that
@@ -155,7 +153,7 @@ Enemy.prototype.types['Goddess'] =  function() {
 	this.Idling = function() {
 		this.PlayAnim('idle');
 
-		this.body.velocity.y = Math.sin((game.time.now) / 500) * 5;		
+		this.body.velocity.y = Math.sin((GameState.gameTime) / 500) * 5;		
 
 		this.SetDirection('left');
 

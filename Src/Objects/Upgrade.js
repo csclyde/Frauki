@@ -125,10 +125,10 @@ Upgrade.prototype.PlayAnim = function(name) {
 Upgrade.prototype.Active = function() {
     this.PlayAnim('active' + this.health);
 
-    this.body.velocity.y = Math.sin(game.time.now / 400) * 15;
+    this.body.velocity.y = Math.sin(GameState.gameTime / 400) * 15;
 
     if(this.shakeMagnitudeX > 0) {
-        this.body.velocity.x = Math.sin(game.time.now * 300) * this.shakeMagnitudeX;
+        this.body.velocity.x = Math.sin(GameState.gameTime * 300) * this.shakeMagnitudeX;
     } else {
         this.body.velocity.x = 0;
     }

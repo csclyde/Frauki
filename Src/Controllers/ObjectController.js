@@ -28,7 +28,7 @@ ObjectController.prototype.Update = function() {
         var preservedTypes = ['door', 'shard', 'checkpoint'];
 
         //if the object is not preserved, has a body, and is off screen, its not active
-        if(!preservedTypes.includes(o.spriteType) && !!o.body && !cameraController.IsObjectOnScreen(o, -400)) {
+        if(!preservedTypes.includes(o.spriteType) && !!o.body && !cameraController.IsObjectOnScreen(o, -400) && o !== goddess) {
             if(o.body.enable === true && !!o.Deactivate) o.Deactivate();
             o.body.enable = false;
             o.visible = false;

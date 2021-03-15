@@ -9,9 +9,11 @@ GameState.create = function() {
     this.gameTime = 0;
     this.prevTime = game.time.now;
     this.restarting = false;
-    this.inMainMenu = true;
+    this.inMenu = true;
     this.menuSelectionMade = false;
-    this.menuSelection = 'continue';    
+    
+    this.currentMenu = Menus.main;
+    this.menuSelection = 0; 
 
     this.physicsSlowMo = 1;
     this.currentAlpha = 1;
@@ -40,14 +42,12 @@ GameState.update = function() {
     cameraController.Update();
     inputController.Update();
     backdropController.Update();
+    Frogland.Update();
  
-    
-    
     if(!this.paused) {
         frauki.UpdateAttackGeometry();
         objectController.Update();
         
-        Frogland.Update();
         weaponController.Update();
         triggerController.Update();
         effectsController.Update();
@@ -98,39 +98,31 @@ GameState.Reset = function() {
 };
 
 GameState.MakeMenuSelection = function() {
-    if(GameState.inMainMenu && !GameState.menuSelectionMade) {
-        this.menuSelectionMade = true;
-    
-        if(this.menuSelection === 'new') {
-            ScriptRunner.run('new_game');
-        } else {
-            ScriptRunner.run('continue_game');
-        }
+    if(GameState.inMenu && !GameState.menuSelectionMade) {
+        ScriptRunner.run(this.currentMenu[this.menuSelection].script);
     }
 };
 
 GameState.UpdateMenuSelection = function(params) {
-    if(this.inMainMenu && !this.menuSelectionMade) {
-        if(this.menuSelection === 'continue') {
-            this.menuSelection = 'new';
-        } else {
-            this.menuSelection = 'continue';
+    if(this.inMenu && !this.menuSelectionMade) {
+        if(params.dir === 'up') {
+            this.menuSelection--;
+            if(this.menuSelection < 0) this.menuSelection = this.currentMenu.length - 1;
+        }
+        else {
+            this.menuSelection++;
+            if(this.menuSelection >= this.currentMenu.length) this.menuSelection = 0;
         }
 
         events.publish('update_ui', {});
-        events.publish('play_sound', {name: 'text_bloop'});   
+        events.publish('play_sound', {name: 'text_bloop'});
     }
 };
 
 GameState.PauseGame = function() {
     
-    if(this.paused) {
-        console.log('unpausing game')
-        ScriptRunner.run('unpause_game');       
-    }
-    else {
-        console.log('pausing game')
-        ScriptRunner.run('pause_game');       
+    if(!this.paused) {
+        ScriptRunner.run('pause_game');
     }
 };
 
@@ -140,21 +132,20 @@ GameState.CreateUI = function() {
     this.Menu = game.add.group();
     this.Menu.fixedToCamera = true;        
 
-    if(this.inMainMenu) {
+    if(this.inMenu) {
         this.UI.alpha = 0;
     }
 
     this.logo = game.add.image(pixel.width / 2, pixel.height / 3, 'UI', 'Logo0000', this.Menu);
     this.logo.anchor.setTo(0.5);
 
-    this.continueGame = game.add.bitmapText(pixel.width / 2, 200, 'diest64','', 16, this.Menu);
-    this.continueGame.anchor.setTo(0.5);
-    this.continueGame.setText('- Continue Adventure -');
-    
-    this.newGame = game.add.bitmapText(pixel.width / 2, 220, 'diest64','', 16, this.Menu);
-    this.newGame.anchor.setTo(0.5);
-    this.newGame.setText('New Adventure');
-    
+    this.menuText = [];
+    for(var i = 0; i < 6; i++) {
+        var text = game.add.bitmapText(pixel.width / 2, 200 + i * 20, 'diest64','', 16, this.Menu);
+        text.anchor.setTo(0.5);
+        text.setText('');
+        this.menuText.push(text);
+    }
 
     this.healthFrameStart = game.add.image(10, 10, 'UI', 'HudFrame0000', this.UI);
 
@@ -199,15 +190,15 @@ GameState.CreateUI = function() {
 
 GameState.UpdateUI = function() {
 
-    if(this.inMainMenu) {
-        if(this.menuSelection === 'continue') {
-            this.continueGame.setText('- Continue Adventure -');
-            this.newGame.setText('New Adventure');
-        }
-        else {
-            this.continueGame.setText('Continue Adventure');
-            this.newGame.setText('- New Adventure -');
-        }
+    if(this.inMenu) {
+        this.currentMenu.forEach(function(menuItem, i) {
+            if(this.menuSelection === i) {
+                this.menuText[i].setText('- ' + menuItem.text + ' -');
+            }
+            else {
+                this.menuText[i].setText(menuItem.text);
+            }
+        }, this);
         return;
     }
 

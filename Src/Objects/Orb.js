@@ -59,7 +59,7 @@ Orb.prototype.PlayAnim = function(name) {
 Orb.prototype.Floating = function() {
     this.PlayAnim('floating');
 
-    this.body.velocity.y = Math.sin((game.time.now / 300) + this.floatPhase) * 30;
+    this.body.velocity.y = Math.sin((GameState.gameTime / 300) + this.floatPhase) * 30;
 };
 
 /*
