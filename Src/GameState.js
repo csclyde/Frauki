@@ -120,8 +120,7 @@ GameState.UpdateMenuSelection = function(params) {
 };
 
 GameState.PauseGame = function() {
-    
-    if(!this.paused) {
+    if(!this.inMenu && !this.paused && !speechController.speechVisible && !this.restarting) {
         ScriptRunner.run('pause_game');
     }
 };
@@ -191,14 +190,18 @@ GameState.CreateUI = function() {
 GameState.UpdateUI = function() {
 
     if(this.inMenu) {
-        this.currentMenu.forEach(function(menuItem, i) {
-            if(this.menuSelection === i) {
-                this.menuText[i].setText('- ' + menuItem.text + ' -');
-            }
-            else {
-                this.menuText[i].setText(menuItem.text);
+        this.menuText.forEach(function(text, i) {
+            if(!!this.currentMenu[i]) {
+                if(this.menuSelection === i) {
+                    text.setText('- ' + this.currentMenu[i].text + ' -');
+                } else {
+                    text.setText(this.currentMenu[i].text);
+                }
+            } else {
+                text.setText('');
             }
         }, this);
+        
         return;
     }
 

@@ -290,7 +290,7 @@ var fraukiAnimations = [
 	{ Name: 'kick', Frames:  ['Kick0000', 'Kick0001'],  Fps: 18 , Loop: false },
 	{ Name: 'roll_jump', Frames:  ['Roll0009', 'Roll0010', 'Roll0011', 'Roll0012'],  Fps: 18 , Loop: false },
 	{ Name: 'pre_materialize', Frames:  ['Materialize0000'],  Fps: 12, Loop: false },
-	{ Name: 'materialize', Frames:  ['Materialize0000', 'Materialize0001', 'Materialize0002', 'Materialize0003', 'Materialize0004', 'Materialize0005', 'Materialize0006', 'Materialize0007', 'Materialize0008', 'Materialize0009', 'Materialize0010'],  Fps: 10 , Loop: false },
+	{ Name: 'materialize', Frames:  ['Materialize0001', 'Materialize0002', 'Materialize0003', 'Materialize0004', 'Materialize0005', 'Materialize0006', 'Materialize0007', 'Materialize0008', 'Materialize0009', 'Materialize0010', 'Materialize0011'],  Fps: 10 , Loop: false },
 	{ Name: 'hang', Frames:  ['Hang0000', 'Hang0001', 'Hang0002', 'Hang0003', 'Hang0004', 'Hang0005'],  Fps: 12, Loop: false },
 	{ Name: 'heal', Frames:  ['Heal0000', 'Heal0001', 'Heal0002', 'Heal0003', 'Heal0004'], Fps: 12 , Loop: true },
 	{ Name: 'throw', Frames:  ['Throw0001', 'Throw0001', 'Throw0002', 'Throw0003', 'Throw0004', 'Throw0005', 'Throw0006', 'Throw0007'], Fps: 14, Loop: false },

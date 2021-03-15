@@ -71,6 +71,8 @@ ScriptRunner.scripts['new_game'] = [
 
 ScriptRunner.scripts['show_settings_menu'] = [
 
+    { name: 'play_sound', props: { name: 'baton_catch' } },
+    
     { func: function() {
         GameState.currentMenu = Menus.settings;
         GameState.menuSelection = 0;
@@ -80,6 +82,7 @@ ScriptRunner.scripts['show_settings_menu'] = [
 ];
 
 ScriptRunner.scripts['exit_settings_menu'] = [
+    { name: 'play_sound', props: { name: 'baton_catch' } },
     
     { func: function() {
         if(GameState.paused) {
@@ -125,8 +128,7 @@ ScriptRunner.scripts['pause_game'] = [
 ScriptRunner.scripts['unpause_game'] = [
     { name: 'stop_music', props: { name: 'Intro', fade: 1000 } },    
     { name: 'unpause_all_music', props: { } },  
-    { name: 'play_sound', props: { name: 'text_bloop' } },      
-    
+    { name: 'play_sound', props: { name: 'baton_catch' } },    
     
     { func: function() {
         events.publish('pan_camera', { to: GameState.prePauseCameraTarget, duration: 1000 });
@@ -194,6 +196,7 @@ ScriptRunner.scripts['restart_game'] = [
     { name: 'stop_all_music', props: { fade: 1000 } },
     { name: 'stop_all_ambient', props: {} },
     { name: 'hide_speech', props: {} },
+    { name: 'play_sound', props: { name: 'baton_catch' } },    
     
     { func: function() {
         GameState.paused = false;

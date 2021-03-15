@@ -1,6 +1,6 @@
 var Menus = {
 	main: [
-		{ text: 'Contuinue Adventure', script: 'continue_game' },
+		{ text: 'Continue Adventure', script: 'continue_game' },
 		{ text: 'New Adventure', script: 'new_game' },
 		{ text: 'Settings', script: 'show_settings_menu' },
 	],

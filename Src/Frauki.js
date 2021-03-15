@@ -295,7 +295,6 @@ Player.prototype.Grace = function() {
 };
 
 Player.prototype.UpdateAttackGeometry = function() {
-
     //first, check the weapon controller for an attack geometry override
     //barring that, find the normal attack geometry
     if(weaponController.GetAttackGeometry()) {
@@ -1109,10 +1108,12 @@ Player.prototype.Hurting = function() {
 
 Player.prototype.PreMaterializing = function() {
     this.PlayAnim('pre_materialize');
+    this.alpha = 0;
 };
 
 Player.prototype.Materializing = function() {
     this.PlayAnim('materialize');
+    this.alpha = 1;    
     events.publish('play_sound', {name: 'frauki_materialize'});
     
     

@@ -422,6 +422,7 @@
             <key type="filename">Frames/Materialize0009.png</key>
             <key type="filename">Frames/Materialize0010.png</key>
             <key type="filename">Frames/Materialize0011.png</key>
+            <key type="filename">Frames/Materialize0012.png</key>
             <key type="filename">Frames/Peak0000.png</key>
             <key type="filename">Frames/Peak0001.png</key>
             <key type="filename">Frames/Roll0000.png</key>
