@@ -203,7 +203,6 @@ Collision.OverlapEnemyAttackWithEnemies = function(e, f) {
 
 
 Collision.OverlapAttackWithObject = function(f, o) {
-    console.log('hitting enemy')
     if(o.spriteType === 'enemy') {
         if(frauki.GetCurrentDamage() > 0) {
 
@@ -216,23 +215,12 @@ Collision.OverlapAttackWithObject = function(f, o) {
             } else if(!EnemyBehavior.FacingAttack(o)) {
                 Collision.OverlapAttackWithEnemy(f, o);
             }
-            // } else if(o.isAttacking() && frauki.GetCurrentPriority() > o.GetCurrentPriority()) {
-            //     o.timers.SetTimer('grace', 0);
-            //     events.publish('play_sound', {name: 'clang'});
-            //     Collision.OverlapAttackWithEnemy(f, o);
-            // }
-            //they can be hit if theyre not attacking, or they are attacking
-            //but facing away from the player
-            // if(!o.Attacking() || !EnemyBehavior.FacingPlayer(o) || !o.robotic) {
-            // }
         }
 
     } else if(o.spriteType === 'junk') {
         o.JunkHit(o);
     } else if(o.spriteType === 'checkpoint') {
         o.Activate();
-    } else if(o.spriteType === 'TechnoRune') {
-        EatTechnoRune(f, o);
     } else if(o.spriteType === 'door') {
         o.OpenDoor(frauki);
     } else if(o.spriteType === 'orb') {

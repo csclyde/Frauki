@@ -16,7 +16,13 @@ var defaultData = {
     vals: {
         goddess_message_queue: []
     },
-    debug_pos: { x: 0, y: 0 }
+    debug_pos: { x: 0, y: 0 },
+
+    settings: {
+        sound: 0,
+        music_option: 0,
+        sfx_option: 0,
+    }
 };
 
 //When game data is requested, it is pulled from the data structure in memory. When
@@ -47,8 +53,20 @@ GameData.SaveDataToStorage = function() {
     localStorage.setItem('save_data', JSON.stringify(this.data));
 };
 
+GameData.GetSoundSetting = function() {
+    return GameData.data.settings.sound;
+};
+
+GameData.SetSoundSetting = function(option) {
+    GameData.data.settings.sound = option;
+    this.SaveDataToStorage();    
+};
+
 GameData.ResetData = function() {
-    this.data = Object.assign({}, defaultData);
+    var newData = Object.assign({}, defaultData);
+    newData.settings = this.data.settings;
+    this.data = newData;
+    
     this.SaveDataToStorage();
 };
 

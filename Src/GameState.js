@@ -200,9 +200,9 @@ GameState.UpdateUI = function() {
         this.menuText.forEach(function(text, i) {
             if(!!this.currentMenu[i]) {
                 if(this.menuSelection === i) {
-                    text.setText('- ' + this.currentMenu[i].text + ' -');
+                    text.setText('- ' + this.currentMenu[i].getText() + ' -');
                 } else {
-                    text.setText(this.currentMenu[i].text);
+                    text.setText(this.currentMenu[i].getText());
                 }
             } else {
                 text.setText('');

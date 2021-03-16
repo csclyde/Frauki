@@ -97,7 +97,6 @@ AudioController.prototype.PauseAllSound = function(params) {
         if(!this.sounds.hasOwnProperty(key)) continue;
 
         if(!!this.sounds[key] && this.sounds[key].isPlaying) {
-            console.log(this.sounds[key]);
             this.sounds[key].pause();
         }
     }

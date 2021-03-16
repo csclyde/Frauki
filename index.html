@@ -39,6 +39,7 @@
             <script type="text/javascript" src="Src/Data/Scripts/Goddess.js"></script>
             <script type="text/javascript" src="Src/Data/Scripts/OldRobo.js"></script>
             <script type="text/javascript" src="Src/Data/Scripts/Gameplay.js"></script>
+            <script type="text/javascript" src="Src/Data/Scripts/Settings.js"></script>
 
 
         <script type="text/javascript" src="Src/Controllers/CameraController.js"></script>
@@ -59,6 +60,7 @@
 
 
 
+        <script type="text/javascript" src="Src/BootState.js"></script>        
         <script type="text/javascript" src="Src/LoadingState.js"></script>        
         <script type="text/javascript" src="Src/GameState.js"></script>
 
@@ -160,7 +162,8 @@
             var game = new Phaser.Game(pixel.width, pixel.height, Phaser.CANVAS, "game", LoadingState, false, false);
             var events = new EventRouter();
 
-            game.state.add('LoadingState', LoadingState, true);
+            game.state.add('BootState', BootState, true);
+            game.state.add('LoadingState', LoadingState, false);
             game.state.add('GameState', GameState, false);
 
 

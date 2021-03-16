@@ -1,6 +1,8 @@
 var LoadingState = new Phaser.State();
 
 LoadingState.preload = function() {
+    this.logo = game.add.image(0, 0, 'clyde_games_logo');
+    
     Phaser.TilemapParser.INSERT_NULL = true;
     game.load.tilemap('Frogland', 'Data/World/Frogland.json', null, Phaser.Tilemap.TILED_JSON);
     
