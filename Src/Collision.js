@@ -203,8 +203,8 @@ Collision.OverlapEnemyAttackWithEnemies = function(e, f) {
 
 
 Collision.OverlapAttackWithObject = function(f, o) {
+    console.log('hitting enemy')
     if(o.spriteType === 'enemy') {
-        console.log('hitting enemy')
         if(frauki.GetCurrentDamage() > 0) {
 
             if(!o.isAttacking()) {

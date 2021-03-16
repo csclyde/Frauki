@@ -41,6 +41,7 @@ Player = function (game, x, y, name) {
     this.attackRect = game.add.sprite(0, 0, null);
     game.physics.enable(this.attackRect, Phaser.Physics.ARCADE);
     this.attackRect.body.setSize(0, 0, 0, 0);
+    this.attackRect.body.moves = false;
 
     events.subscribe('player_jump', this.Jump, this);
     events.subscribe('player_crouch', this.Crouch, this);
@@ -313,7 +314,6 @@ Player.prototype.UpdateAttackGeometry = function() {
     } 
 
     if(!!this.currentAttack) {
-
         if(this.states.direction === 'right') {
             this.attackRect.body.x = this.currentAttack.x + this.body.x; 
             this.attackRect.body.y = this.currentAttack.y + this.body.y; 

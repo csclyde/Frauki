@@ -116,10 +116,11 @@ Frogland.HandleCollisions = function() {
         Collision.CollideEnemiesWithDoors);
 
     //overlap fraukis attack with objects and projectiles
+    frauki.UpdateAttackGeometry();
     if(frauki.Attacking()) {
         game.physics.arcade.overlap(
-            frauki.attackRect, 
-            objectController.GetObjectGroup(), 
+            frauki.attackRect,
+            objectController.GetObjectGroup(),
             Collision.OverlapAttackWithObject);
     }
 

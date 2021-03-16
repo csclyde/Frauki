@@ -45,7 +45,6 @@ GameState.update = function() {
     Frogland.Update();
  
     if(!this.paused) {
-        frauki.UpdateAttackGeometry();
         objectController.Update();
         
         weaponController.Update();
@@ -63,6 +62,14 @@ GameState.update = function() {
 
     frauki.alpha = 0;
 };
+
+GameState.render = function() {
+    // game.debug.body(frauki.attackRect);
+    
+    // objectController.GetObjectGroup().forEach(function(o) {
+    //     game.debug.body(o);
+    // });
+}
 
 GameState.BeginGameover = function() {
     if(this.restarting === true) {
