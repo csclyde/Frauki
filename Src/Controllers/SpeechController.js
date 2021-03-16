@@ -12,7 +12,7 @@ SpeechController = function() {
 		this.Activate(props.text, props.portrait);
 	}, this);
 
-	events.subscribe('hide_text', this.AdvanceText, this);
+	events.subscribe('hide_text', this.HideSpeech, this);
 
 	events.subscribe('display_region_text', function(params) {
 		if(!this.timers.TimerUp('region_text')) return;
@@ -79,7 +79,7 @@ SpeechController.prototype.Create = function() {
 	this.portraits = {};
 
 	FileMap.Portraits.forEach(function(portrait) {
-		this.portraits[portrait.Name] = game.add.image(80, 70, 'UI', portrait.Frame);
+		this.portraits[portrait.Name] = game.add.image(200, 200, 'UI', portrait.Frame);
 		this.portraits[portrait.Name].fixedToCamera = true;
 		this.portraits[portrait.Name].visible = false;
 		this.portraits[portrait.Name].cameraOffset.x = -12 + speechOffsetX;
@@ -256,6 +256,7 @@ SpeechController.prototype.AdvanceText = function() {
 			this.displayIndex = this.currentText.length;
 		} else {
 			this.HideSpeech();
+			events.publish('skip_text');
 		}
 	}
 };
@@ -309,8 +310,6 @@ SpeechController.prototype.HideSpeech = function() {
 	this.speechVisible = false;
 
 	this.currentSpeechZone = null;
-
-	events.publish('text_hidden', {});
 };
 
 SpeechController.prototype.SetText = function(text) {

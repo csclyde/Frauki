@@ -40,7 +40,11 @@ Checkpoint.prototype.Activate = function(o) {
 
     if(!GameData.IsCheckpointActive(this.id)) {
         effectsController.ScreenFlash();
-        events.publish('play_sound', {name: 'crystal_door'});        
+        events.publish('play_sound', {name: 'crystal_door'}); 
+        
+        if(this.id === '0') {
+            ScriptRunner.run('demo_Checkpoint');
+        }
     }
 
     GameData.AddActiveCheckpoint(this.id);

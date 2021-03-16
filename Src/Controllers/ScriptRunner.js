@@ -1,18 +1,16 @@
 ScriptRunner = {};
 
 ScriptRunner.create = function() {
-	this.waitEvent = null;
 	this.currentCommand = null;
 	this.waitTime = 200;
 
-	events.subscribe('text_hidden', function(params) {
-		if(!!this.waitEvent) {
-			game.time.events.remove(this.waitEvent);
-			this.waitEvent = null;
-
-			if(!!this.currentCommand && !!this.currentCommand.nextCommand) {
-				this.executeCommand(this.currentCommand.nextCommand);
-			}
+	events.subscribe('skip_text', function(params) {
+		if(!!this.textWaitEvent && !!this.textNextCommand) {
+			game.time.events.remove(this.textWaitEvent);
+			events.publish('hide_text', {});			
+			this.executeCommand(this.textNextCommand);
+			this.textWaitEvent = null;
+			this.textNextCommand = null;
 		}
 	}, this);
 
@@ -40,13 +38,23 @@ ScriptRunner.run = function(name, params) {
 
 ScriptRunner.executeCommand = function(cmd, params) {
 	this.currentCommand = cmd;
-	this.waitEvent = null;
 
 	if(!cmd) return;
 
 	if(cmd.name === 'wait') {
-		this.waitEvent = game.time.events.add(cmd.props.amount, function() { this.executeCommand(cmd.nextCommand, params); }, this);
+		game.time.events.add(cmd.props.amount, function() { this.executeCommand(cmd.nextCommand, params); }, this);
 	} 
+	else if(cmd.name === 'show_text') {
+		game.time.events.add(200, function() { 
+			events.publish(cmd.name, cmd.props);
+		
+			this.textNextCommand = cmd.nextCommand;
+			this.textWaitEvent = game.time.events.add(4000 + (50 * cmd.props.text.length), function() {
+				events.publish('hide_text', {});
+				this.executeCommand(cmd.nextCommand, params);
+			}, this);
+		}, this);
+	}
 	else {
 		if(typeof cmd.func === 'function') {
 			cmd.func.apply(null, [params]);

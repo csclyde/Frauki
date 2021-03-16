@@ -51,18 +51,30 @@ ScriptRunner.scripts['new_game'] = [
         
         GameState.inMenu = false;
         GameState.Menu.alpha = 0;
-        effectsController.Fade(false, 500);
+        effectsController.Fade(false, 2000);
     } },
 
-    { name: 'wait', props: { amount: 800 } },
     { name: 'run_script', props: { name: 'enter_goddess' } },
-    { name: 'wait', props: { amount: 1500 } },
-    { name: 'run_script', props: { name: 'goddess_summon_frauki' } },
-    { name: 'wait', props: { amount: 8000 } },
+    { name: 'wait', props: { amount: 4000 } },
+    { name: 'show_text', props: { text: "Frauki... I need your help. Come along now. It's time to get to work...", portrait: 'Goddess_Neutral' } },
+
+    { func: function() {
+        events.publish('pan_camera', { to: frauki.body.center, duration: 1000 });        
+    } },
+
+    { name: 'wait', props: { amount: 3000 } },    
     
     { func: function() {
         frauki.state = frauki.Materializing;
+        GameState.uiFadeTween = game.add.tween(GameState.UI).to({alpha: 1}, 1500, Phaser.Easing.Cubic.Out, true);        
     } },
+
+    { name: 'wait', props: { amount: 3000 } },
+
+    { func: function() {
+        events.publish('pan_camera', { to: goddess.body.center, duration: 1000 });        
+    } },
+
 
     { name: 'wait', props: { amount: 3000 } },
     { name: 'run_script', props: { name: 'goddess_intro' } },
@@ -187,7 +199,7 @@ ScriptRunner.scripts['game_over'] = [
     } },
     { name: 'wait', props: { amount: 2000 } },
 
-    { name: 'run_script', props: { name: 'goddess_console' } },
+    { name: 'run_script', props: { name: 'goddess_gameover' } },
     
 ];
 

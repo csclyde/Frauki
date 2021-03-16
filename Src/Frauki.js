@@ -266,7 +266,7 @@ Player.prototype.Reset = function() {
         frauki.x = pos.x;
         frauki.y = pos.y; 
     } else if(Frogland.map.properties.debug === 'false') {
-        frauki.x = 4487;
+        frauki.x = 4473;
         frauki.y = 2800;
     } else {
         frauki.x = Frogland.map.properties.startX * 16;

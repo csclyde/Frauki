@@ -21,90 +21,74 @@ ScriptRunner.scripts['exit_goddess'] = [
 
 ];
 
-ScriptRunner.scripts['goddess_summon_frauki'] = [
-	{ name: 'show_text', props: { text: "Frauki... I need your help. Come along now. It's time to get to work...", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 6000 } },
-	{ name: 'hide_text', props: {} },
-];
-
 ScriptRunner.scripts['goddess_intro'] = [
 	{ name: 'show_text', props: { text: 'There you are Frauki...', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 5000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'wait', props: { amount: 200 } },
-	{ name: 'show_text', props: { text: "It's been a long time since I've seen, well, anyone...", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 7000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'wait', props: { amount: 200 } },
 	{ name: 'show_text', props: { text: "I called you here because I need your help.", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 7000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'wait', props: { amount: 200 } },
-	{ name: 'show_text', props: { text: "These robots have crashed their ship here and are taking over.", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 7000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'wait', props: { amount: 200 } },
-	{ name: 'show_text', props: { text: "They took all the beautiful Prism Shards, and are sucking all the energy out of them.", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 7000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'wait', props: { amount: 200 } },
+	{ name: 'show_text', props: { text: "Some alien robots have crashed their ship here and are taking over.", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "They took all my beautiful Prism Shards, and are sucking all the energy out of them.", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "Go now with my blessing and bring me back those beautiful shining gems, Frauki.", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 7000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'wait', props: { amount: 200 } },
-	{ name: 'show_text', props: { text: "I know you can do it. I'm here for you if you run into any trouble.", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 7000 } },
-	{ name: 'hide_text', props: {} },
-	
 	{ name: 'run_script', props: { name: 'exit_goddess' } },
-	{ name: 'wait', props: { amount: 1000 } },
 	
 ];
 
 ScriptRunner.scripts['goddess_welcome_return'] = [
 	{ name: 'show_text', props: { text: "Welcome back Frauki. You've got some work to do!", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 2000 } },
-	{ name: 'hide_text', props: {} },
+	{ name: 'run_script', props: { name: 'exit_goddess' } },
+];
 
+ScriptRunner.scripts['goddess_gameover'] = [
+	{ func: function() {
+		if(!GameData.GetFlag('intro_finished') && !GameData.GetFlag('first_death')) {
+			GameData.SetFlag('first_death', true);
+			ScriptRunner.run('goddess_surprised_death');
+		}
+		else {
+			ScriptRunner.run('goddess_console');
+		}
+	}}
+];
+
+ScriptRunner.scripts['goddess_surprised_death'] = [
+	{ name: 'show_text', props: { text: "Oh. You died already...", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "...", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "Well, get back out there and try again Frauki.", portrait: 'Goddess_Neutral' } },
 	{ name: 'run_script', props: { name: 'exit_goddess' } },
 ];
 
 ScriptRunner.scripts['goddess_console'] = [
 	{ name: 'show_text', props: { text: "Oh you poor thing... Don't worry, I've got you back on your feet. Now get out there and give it another shot!", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 8000 } },
-	{ name: 'hide_text', props: {} },
-
 	{ name: 'run_script', props: { name: 'exit_goddess' } },
-	{ name: 'wait', props: { amount: 1000 } },
 ];
 
 ScriptRunner.scripts['goddess_oh_hey'] = [
 	{ name: 'show_text', props: { text: "Oh hey Frauki, what are you doing back here?", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 4000 } },
-	{ name: 'hide_text', props: {} },
-
 	{ name: 'run_script', props: { name: 'exit_goddess' } },
-	{ name: 'wait', props: { amount: 1000 } },
 ];
 
 ScriptRunner.scripts['goddess_chat'] = [
 	{ name: 'run_script', props: { name: 'enter_goddess' } },
 	{ name: 'wait', props: { amount: 1500 } },
-
 	{ name: 'show_text', props: { text: "You're doing great Frauki. Keep trying. I know you can do this.", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 5000 } },
-	{ name: 'hide_text', props: {} },
-
 	{ name: 'run_script', props: { name: 'exit_goddess' } },
 ];
 
-
+ScriptRunner.scripts['goddess_shortcut'] = [
+	{ func: function() {
+		goddess.SetDirection('right');
+		GameData.SetFlag('intro_finished', true);
+	}},
+	{ name: 'wait', props: { amount: 1000 } },
+	{ name: 'show_text', props: { text: "Oh, you're behind me now...", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "Anyway...", portrait: 'Goddess_Neutral' } },	
+	{ name: 'show_text', props: { text: "That seal you just broke will now remain open, letting you take a nice shortcut.", portrait: 'Goddess_Neutral' } },	
+	{ name: 'show_text', props: { text: "Feel free to open more of them. It should make your work a lot easier.", portrait: 'Goddess_Neutral' } },
+	{ name: 'run_script', props: { name: 'exit_goddess' } },
+	{ name: 'wait', props: { amount: 2000 } },
+	
+	{ func: function() {
+		goddess.SetDirection('left');
+	}},
+];
 
 
 
