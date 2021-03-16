@@ -12,7 +12,7 @@ ScriptRunner.scripts['continue_game'] = [
     { name: 'play_sound', props: { name: 'crystal_door' } },      
     
     { func: function() {
-        events.publish('pan_camera', { to: goddess.body.center, duration: 2000 }); 
+        events.publish('pan_camera', { to: frauki.body.center, duration: 2000 }); 
         game.add.tween(GameState.Menu).to({alpha: 0}, 1500, Phaser.Easing.Cubic.Out, true);
         frauki.Reset();
         frauki.state = frauki.PreMaterializing;
@@ -20,7 +20,6 @@ ScriptRunner.scripts['continue_game'] = [
     } },
 
     { name: 'wait', props: { amount: 2500 } },
-    { name: 'run_script', props: { name: 'enter_goddess' } },
     
     { func: function() {
         GameState.inMenu = false;
@@ -29,6 +28,11 @@ ScriptRunner.scripts['continue_game'] = [
     } },
 
     { name: 'wait', props: { amount: 2000 } },
+    
+    { name: 'run_script', props: { name: 'enter_goddess' } },
+
+    { name: 'wait', props: { amount: 1500 } },
+
     { name: 'run_script', props: { name: 'goddess_welcome_return' } },
     
 ];

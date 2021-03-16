@@ -1,5 +1,5 @@
 CameraController = function() {
-	this.menuTarget = { x: (294 * 16) + 8, y: 110 * 16 };
+	this.menuTarget = { x: (279 * 16) + 8, y: 110 * 16 };
 	this.target = this.menuTarget;
 	
 	this.camX = this.menuTarget.x;

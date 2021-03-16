@@ -32,7 +32,7 @@ ScriptRunner.scripts['goddess_intro'] = [
 ];
 
 ScriptRunner.scripts['goddess_welcome_return'] = [
-	{ name: 'show_text', props: { text: "Welcome back Frauki. You've got some work to do!", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: GoddessSpeeches.welcome_back, portrait: 'Goddess_Neutral' } },
 	{ name: 'run_script', props: { name: 'exit_goddess' } },
 ];
 

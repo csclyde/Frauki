@@ -49,6 +49,10 @@ Enemy.prototype.types['Goddess'] =  function() {
 
 	};
 
+	this.GetWelcomeBackMessage = function() {
+
+	};
+
 	this.GetPortrait = function() {
 		return this.currentPortrait;
 	};
