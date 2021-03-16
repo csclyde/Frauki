@@ -102,6 +102,16 @@ AudioController.prototype.PauseAllSound = function(params) {
     }
 };
 
+AudioController.prototype.StopAllSound = function(params) {
+    for(var key in this.sounds) {
+        if(!this.sounds.hasOwnProperty(key)) continue;
+
+        if(!!this.sounds[key] && this.sounds[key].isPlaying) {
+            this.sounds[key].fadeOut(params.fade || 500);
+        }
+    }
+};
+
 AudioController.prototype.UnpauseAllSound = function(params) {
     for(var key in this.sounds) {
         if(!this.sounds.hasOwnProperty(key)) continue;

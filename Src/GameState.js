@@ -95,7 +95,6 @@ GameState.Reset = function() {
     if(!!goddess) goddess.Reset();
 
     GameState.physicsSlowMo = 1.0;
-    GameState.restarting = false;
     
     energyController.Reset();
     objectController.Reset();

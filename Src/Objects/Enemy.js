@@ -32,27 +32,21 @@ Enemy = function(game, x, y, name) {
     this.attackRect.owningEnemy = this;  
 
     this.UI = {};
-    this.UI.frame = game.add.image(0, 0, 'UI', 'EnemyHealth000' + (this.maxEnergy - 1));
+    this.UIGroup = game.add.group();
+    this.UIGroup.visible = false;
+    this.UI.frame = game.add.image(0, 0, 'UI', 'EnemyHealth000' + (this.maxEnergy - 1), this.UIGroup);
     this.UI.pips = [];
 
-    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0008'));
-    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0008'));
-    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0008'));
-    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0008'));
-    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0008'));
-    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0008'));
-    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0008'));
-    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0008'));
-    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0008'));
-    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0008'));
+    for(var i = 0; i < 8; i++) {
+        var pip = game.add.image(0, 0, 'UI', 'EnemyHealth0008', this.UIGroup);
+        this.UI.pips.push(pip);
+    }
 
     this.events.onDestroy.add(function(e) {
-        e.UI.frame.destroy();
-
-        e.UI.pips.forEach(function(pip) {
-            pip.destroy();
-        });
+        e.UIGroup.destroy();
     });
+
+    events.subscribe('hide_enemy_health', this.HideHealth);
 };
 
 Enemy.prototype = Object.create(Phaser.Sprite.prototype);
@@ -115,9 +109,9 @@ Enemy.prototype.update = function() {
         }
     } 
 
-    if(this.maxEnergy > 1 && !this.timers.TimerUp('health_view')) {
+    if(this.maxEnergy > 1 && !this.timers.TimerUp('health_view') && !GameState.restarting) {
         this.DrawHealth();
-    }
+    } 
 
      if(!this.timers.TimerUp('after_damage_flicker') && this.timers.TimerUp('hurt_flicker')) {
         this.alpha = 0;
@@ -343,7 +337,8 @@ Enemy.prototype.DrawHealth = function() {
     
     this.UI.frame.x = this.body.x;
     this.UI.frame.y = this.body.y - 20;
-    this.UI.frame.visible = true;
+
+    this.UIGroup.visible = true;
 
     for(var i = 0; i < this.maxEnergy; i++) {
         //if the count is less than the energy, represent it
@@ -358,11 +353,9 @@ Enemy.prototype.DrawHealth = function() {
 };
 
 Enemy.prototype.HideHealth = function() {
-    this.UI.frame.visible = false;
+    if(!this.UI) return;
 
-    for(var i = 0; i < this.UI.pips.length; i++) {
-        this.UI.pips[i].visible = false;
-    }
+    this.UIGroup.visible = false;
 };
 
 Enemy.prototype.collideWithPlayer = function(f) {
@@ -419,11 +412,7 @@ Enemy.prototype.DestroyEnemy = function(e) {
 
     events.publish('camera_shake', {magnitudeX: 8, magnitudeY: 2, duration: 350 });
 
-    this.UI.frame.destroy();
-
-    this.UI.pips.forEach(function(pip) {
-        pip.destroy();
-    });
+    if(this.UIGroup) this.UIGroup.destroy();
 
     this.destroy();
     e = null;

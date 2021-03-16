@@ -23,7 +23,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
             this.body.drag.x = 600;
         }
 
-        if(this.animations.currentAnim.name === 'spin') {
+        if(this.animations.currentAnim.name === 'spin' && !GameState.restarting) {
             events.publish('play_sound', {name: 'Insectoid_attack', restart: false});
             
             if(this.direction === 'left') {

@@ -172,36 +172,38 @@ ScriptRunner.scripts['game_over'] = [
     
     { func: function() {
         GameState.BeginGameover();
-        effectsController.Fade(true, 4000);        
+        effectsController.Fade(true, 4000);
     } },
 
     { name: 'wait', props: { amount: 800 } },
     
     { name: 'play_music', props: { name: 'Gameover' } },
-
+    
     { name: 'wait', props: { amount: 4000 } },
-
+    
     { func: function() {
         GameState.Reset();
+        events.publish('set_camera', { to: frauki.body.center });        
     } },
 
     { name: 'wait', props: { amount: 400 } },
     
     { func: function() {
         effectsController.Fade(false, 500);
-        events.publish('set_camera', { to: goddess.body.center });         
+    } },
+
+    { name: 'wait', props: { amount: 500 } },
+
+    { func: function() {
+        GameState.restarting = false;
+        frauki.state = frauki.Materializing;        
     } },
 
     { name: 'wait', props: { amount: 1000 } },
 
     { name: 'run_script', props: { name: 'enter_goddess' } },
     
-    { name: 'wait', props: { amount: 500 } },
-    
-    { func: function() {
-        frauki.state = frauki.Materializing;
-    } },
-    { name: 'wait', props: { amount: 2000 } },
+    { name: 'wait', props: { amount: 1000 } },
 
     { name: 'run_script', props: { name: 'goddess_gameover' } },
     

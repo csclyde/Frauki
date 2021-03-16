@@ -294,7 +294,7 @@ Door.prototype.PerformOpen = function(save, silent) {
 
     events.publish('play_sound', {name: 'door_rumble', restart: false });
 
-    events.publish('door_open_start', { id: this.id} );
+    //events.publish('door_open_start', { id: this.id} );
     
     this.openTween = game.add.tween(this.body).to({y: movementTarget}, openDuration, Phaser.Easing.Quintic.InOut, true);
 
@@ -304,7 +304,7 @@ Door.prototype.PerformOpen = function(save, silent) {
         effectsController.DoorDust({x: this.body.center.x, y: this.body.y + this.body.height - 20 });
         events.publish('play_sound', {name: 'door_slam', restart: true });
         events.publish('stop_sound', {name: 'door_rumble', restart: true });
-        events.publish('door_open_finish', { id: this.id } );
+        //events.publish('door_open_finish', { id: this.id } );
         this.canRollUnder = false;
 
     }, this);

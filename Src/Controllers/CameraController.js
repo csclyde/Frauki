@@ -12,15 +12,9 @@ CameraController = function() {
 	this.shakeMagnitudeX = 0;
 	this.shakeMagnitudeY = 0;
 
-	this.prevXVel = 0;
-	this.prevYVel = 0;
-
 	events.subscribe('camera_shake', this.ScreenShake, this);
 	events.subscribe('pan_camera', this.PanCamera, this);
 	events.subscribe('set_camera', this.SetCamera, this);
-	events.subscribe('focus_on', function(params) {
-		this.target = params.target;
-	}, this);
 
 };
 
@@ -120,6 +114,8 @@ CameraController.prototype.SetCamera = function(params) {
 	cameraController.target = params.to;
 	this.camX = params.to.x;
 	this.camY = params.to.y;
+	this.camVelX = 0;
+	this.camVelX = 0;
 };
 
 CameraController.prototype.IsObjectOnScreen = function(obj, padding) {

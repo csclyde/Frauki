@@ -268,6 +268,7 @@ Player.prototype.Reset = function() {
     } else if(Frogland.map.properties.debug === 'false') {
         frauki.x = 4473;
         frauki.y = 2800;
+        frauki.body.velocity.setTo(0);
     } else {
         frauki.x = Frogland.map.properties.startX * 16;
         frauki.y = Frogland.map.properties.startY * 16 + 90;
