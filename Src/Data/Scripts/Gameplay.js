@@ -289,7 +289,6 @@ ScriptRunner.scripts['use_checkpoint'] = [
         effectsController.SparkSplash(frauki);
         frauki.ChangeState(frauki.Teleporting);
         game.add.tween(frauki).to({x: params.dest.x, y: params.dest.y + 60}, 2000, Phaser.Easing.Exponential.InOut, true);
-        
     } },
 
     { name: 'play_sound', props: {name: 'frauki_materialize_end'}},
@@ -308,6 +307,11 @@ ScriptRunner.scripts['use_checkpoint'] = [
     { name: 'play_sound', props: {name: 'frauki_materialize_end'}},
 
     { name: 'allow_input', props: {} },
-    
-    
+
+    { func: function(params) {
+        if(!GameData.GetFlag('used_checkpoint')) {
+            ScriptRunner.run('demo_Checkpoint2');
+            GameData.SetFlag('used_checkpoint', true);
+        }
+    } },
 ];

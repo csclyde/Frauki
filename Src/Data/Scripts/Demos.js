@@ -22,6 +22,14 @@ ScriptRunner.scripts['demo_Checkpoint'] = [
 	{ name: 'allow_input', props: {} }
 ];
 
+ScriptRunner.scripts['demo_Checkpoint2'] = [
+	{ name: 'disallow_input', props: {} },
+	{ name: 'wait', props: { amount: 1500 } },	
+	{ name: 'show_text', props: { text: "Uhhh... that felt really weird...", portrait: 'Dazed' } },
+	{ name: 'show_text', props: { text: "My legs feel like jelly.", portrait: 'Dazed' } },
+	{ name: 'allow_input', props: {} }
+];
+
 ScriptRunner.scripts['demo_Stab'] = [
 	{ name: 'disallow_input', props: {} },
 	{ name: 'show_text', props: { text: 'Whee! Now if I attack while rolling, I can shish-kebab some baddies.', portrait: 'Enticed' } },
@@ -48,7 +56,8 @@ ScriptRunner.scripts['demo_Dive'] = [
 
 ScriptRunner.scripts['demo_Health'] = [
 	{ name: 'disallow_input', props: {} },
-	{ name: 'show_text', props: { text: 'Yay, more health!', portrait: 'Enticed' } },
+	{ name: 'show_text', props: { text: 'Oh neat! These heart upgrades give me more health. That should make these fights a little easier!', portrait: 'Neutral' } },
+	{ name: 'show_text', props: { text: 'I bet I can find some more of them too.', portrait: 'Enticed' } },
 	{ name: 'allow_input', props: {} }
 ];
 
