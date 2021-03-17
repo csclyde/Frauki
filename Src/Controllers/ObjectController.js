@@ -67,6 +67,29 @@ ObjectController.prototype.Reset = function() {
     
 };
 
+ObjectController.prototype.CreateObjectsLayer = function(layer) {
+    Frogland.map.createFromObjects('Objects', 69, 'Misc', 'Checkpoint0000', true, true, this.activeGroup, Checkpoint, false);
+    Frogland.map.createFromObjects('Doors', 67, 'Misc', 'DoorSeal0000', true, true, this.activeGroup, Door, false);
+    Frogland.map.createFromObjects('Objects', 75, 'Misc', 'Upgrade0000', true, true, this.activeGroup, Upgrade, false);
+    Frogland.map.createFromObjects('Objects', 70, 'Shard0000', 'Shard0000', true, true, this.activeGroup, Shard, false);
+
+    this.activeGroup.forEach(function(obj) {
+
+        if(obj.spriteType === 'door') {
+            obj.create();
+            
+            objectController.doorList.push(obj);
+                
+        } else if(obj.spriteType === 'checkpoint') {
+            objectController.checkpointList.push(obj);
+
+        } else if(obj.spriteType === 'shard') {
+            objectController.shardList.push(obj);
+        }
+
+    });  
+};
+
 ObjectController.prototype.CompileObjectList = function() {
 
     this.latentObjects = [];
@@ -152,29 +175,6 @@ ObjectController.prototype.SpawnObject = function(o) {
             });
         }
     }
-};
-
-ObjectController.prototype.CreateObjectsLayer = function(layer) {
-    Frogland.map.createFromObjects('Objects', 69, 'Misc', 'Checkpoint0000', true, true, this.activeGroup, Checkpoint, false);
-    Frogland.map.createFromObjects('Doors', 67, 'Misc', 'DoorSeal0000', true, true, this.activeGroup, Door, false);
-    Frogland.map.createFromObjects('Objects', 75, 'Misc', 'Upgrade0000', true, true, this.activeGroup, Upgrade, false);
-    Frogland.map.createFromObjects('Objects', 70, 'Shard0000', 'Shard0000', true, true, this.activeGroup, Shard, false);
-
-    this.activeGroup.forEach(function(obj) {
-
-        if(obj.spriteType === 'door') {
-            obj.create();
-            
-            objectController.doorList.push(obj);
-                
-        } else if(obj.spriteType === 'checkpoint') {
-            objectController.checkpointList.push(obj);
-
-        } else if(obj.spriteType === 'shard') {
-            objectController.shardList.push(obj);
-        }
-
-    });  
 };
 
 ObjectController.prototype.GetObjectGroup = function() {

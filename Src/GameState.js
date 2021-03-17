@@ -92,7 +92,6 @@ GameState.BeginGameover = function() {
 
 GameState.Reset = function() {
     frauki.Reset(); 
-    if(!!goddess) goddess.Reset();
 
     GameState.physicsSlowMo = 1.0;
     
@@ -101,6 +100,8 @@ GameState.Reset = function() {
     effectsController.Reset();
     triggerController.Reset();
     projectileController.Reset();
+
+    if(!!goddess) goddess.Reset();    
 };
 
 GameState.MakeMenuSelection = function() {

@@ -4283,7 +4283,7 @@
     <property name="on_death" value="open_door,door_name:first_double"/>
    </properties>
   </object>
-  <object id="3360" gid="93" x="4712.33" y="2705.33" width="16" height="16"/>
+  <object id="3360" name="goddess" gid="93" x="4712.33" y="2705.33" width="16" height="16"/>
   <object id="3372" gid="86" x="4587.5" y="4006.5" width="16" height="16">
    <properties>
     <property name="on_death" value="open_door,door_name:flower_room_exit"/>
