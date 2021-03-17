@@ -45,7 +45,6 @@ InputController = function() {
     events.subscribe('disallow_input', this.DisallowInput, this);
 
     game.input.keyboard.onDownCallback = function(e) {
-
         if(e.repeat) return;
 
         if(GameState.restarting) {

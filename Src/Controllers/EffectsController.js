@@ -15,6 +15,8 @@ EffectsController = function() {
     this.loadedEffects = [];
     this.loadedEffectsCollide = [];
 
+    events.subscribe('screen_flash', this.ScreenFlash);
+
 };
 
 EffectsController.prototype.Update = function() {

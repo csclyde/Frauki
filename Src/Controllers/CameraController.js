@@ -48,6 +48,11 @@ CameraController.prototype.Update = function() {
 	this.camVelX = (idealX - this.camX) * 0.08;
 	this.camVelY = (idealY - this.camY) * 0.08;
 
+	if(frauki.state === frauki.Teleporting) {
+		this.camVelX *= 2;
+		this.camVelY *= 2;
+	}
+
 	var camXIncrement = this.camVelX * Phaser.Math.smoothstep(Math.abs(this.camVelX), -0.01, 3.33);
 	var camYIncrement = this.camVelY * Phaser.Math.smoothstep(Math.abs(this.camVelY), -0.01, 8.0);
 

@@ -405,8 +405,6 @@
             <key type="filename">Frames/Jump0002.png</key>
             <key type="filename">Frames/Jump0003.png</key>
             <key type="filename">Frames/Jump0004.png</key>
-            <key type="filename">Frames/Kick0000.png</key>
-            <key type="filename">Frames/Kick0001.png</key>
             <key type="filename">Frames/Land0000.png</key>
             <key type="filename">Frames/Land0001.png</key>
             <key type="filename">Frames/Land0002.png</key>
@@ -450,6 +448,8 @@
             <key type="filename">Frames/Run0007.png</key>
             <key type="filename">Frames/Slide0000.png</key>
             <key type="filename">Frames/Stand0000.png</key>
+            <key type="filename">Frames/Teleport0000.png</key>
+            <key type="filename">Frames/Teleport0001.png</key>
             <key type="filename">Frames/Throw0000.png</key>
             <key type="filename">Frames/Throw0001.png</key>
             <key type="filename">Frames/Throw0002.png</key>
@@ -471,29 +471,6 @@
                 <rect>50,50,100,100</rect>
                 <key>scale9Paddings</key>
                 <rect>50,50,100,100</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">Frames/Shield0000.png</key>
-            <key type="filename">Frames/Shield0001.png</key>
-            <key type="filename">Frames/Shield0002.png</key>
-            <key type="filename">Frames/Shield0003.png</key>
-            <key type="filename">Frames/Shield0004.png</key>
-            <key type="filename">Frames/Shield0005.png</key>
-            <key type="filename">Frames/Shield0006.png</key>
-            <key type="filename">Frames/Shield0007.png</key>
-            <key type="filename">Frames/Shield0008.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>25,25,50,50</rect>
-                <key>scale9Paddings</key>
-                <rect>25,25,50,50</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

@@ -1107,14 +1107,16 @@ Player.prototype.Hurting = function() {
     }
 };
 
+Player.prototype.Teleporting = function() {
+    this.PlayAnim('teleport');
+};
+
 Player.prototype.PreMaterializing = function() {
     this.PlayAnim('pre_materialize');
-    this.alpha = 0;
 };
 
 Player.prototype.Materializing = function() {
     this.PlayAnim('materialize');
-    this.alpha = 1;    
     events.publish('play_sound', {name: 'frauki_materialize'});
     
     

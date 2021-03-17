@@ -53,9 +53,11 @@ Checkpoint.prototype.Activate = function(o) {
     var nextCp = Frogland.checkpoints.find(function(c) { return c.id === nextId; });
 
     if(nextCp && nextCp.id !== this.id) {
-        frauki.x = nextCp.x;
-        frauki.y = nextCp.y + 120; 
+        // frauki.x = nextCp.x;
+        // frauki.y = nextCp.y + 120; 
+        ScriptRunner.run('use_checkpoint', { dest: nextCp });
     }
+
 
 };
 

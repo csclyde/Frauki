@@ -22,6 +22,9 @@ Frogland.Create = function() {
     frauki = new Player(game, 0, 0, 'Frauki');
     game.add.existing(frauki);
 
+    goddess = new Enemy(game, 294 * 16, 168 * 16, 'Goddess', 'Goddess');
+    game.add.existing(goddess);
+    
     this.CreateCollisionLayer();
     
     objectController.Create();    

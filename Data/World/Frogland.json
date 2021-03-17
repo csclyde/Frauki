@@ -3254,18 +3254,6 @@
                  "y":3679.33
                 }, 
                 {
-                 "gid":93,
-                 "height":16,
-                 "id":3360,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":4712.33,
-                 "y":2705.33
-                }, 
-                {
                  "gid":86,
                  "height":16,
                  "id":3372,
@@ -7761,10 +7749,10 @@
  "orientation":"orthogonal",
  "properties":
     {
-     "debug":"false",
+     "debug":"true",
      "startLayer":"3",
-     "startX":"120",
-     "startY":"478"
+     "startX":"197",
+     "startY":"305"
     },
  "propertytypes":
     {

@@ -114,7 +114,7 @@ ScriptRunner.scripts['exit_settings_menu'] = [
 ];
 
 ScriptRunner.scripts['pause_game'] = [
-    { name: 'disallow_input', props: {} },    
+    { name: 'disallow_input', props: {} },
     { name: 'pause_all_music', props: { fade: 250 } },
     { name: 'pause_all_sound', props: { } },
     { name: 'play_music', props: { name: 'Intro', fade: 2000 } },    
@@ -237,19 +237,16 @@ ScriptRunner.scripts['restart_game'] = [
     
     { func: function() {
         effectsController.Fade(false, 500);
-        events.publish('set_camera', { to: goddess.body.center });         
+        events.publish('set_camera', { to: frauki.body.center });  
+        frauki.state = frauki.Materializing;        
+        GameState.restarting = false;      
     } },
 
-    { name: 'wait', props: { amount: 1000 } },
+    { name: 'wait', props: { amount: 2000 } },
 
     { name: 'run_script', props: { name: 'enter_goddess' } },
     
-    { name: 'wait', props: { amount: 500 } },
-    
-    { func: function() {
-        frauki.state = frauki.Materializing;
-    } },
-    { name: 'wait', props: { amount: 2000 } },
+    { name: 'wait', props: { amount: 1500 } },
 
     { name: 'run_script', props: { name: 'goddess_oh_hey' } },
     
@@ -282,4 +279,35 @@ ScriptRunner.scripts['end_fight'] = [
             events.publish('unpause_all_music', { fade: 1000});
         }
     } },
+];
+
+ScriptRunner.scripts['use_checkpoint'] = [
+    { name: 'disallow_input', props: {} },
+    
+    { func: function(params) {
+        effectsController.StarBurst(frauki);
+        effectsController.SparkSplash(frauki);
+        frauki.ChangeState(frauki.Teleporting);
+        game.add.tween(frauki).to({x: params.dest.x, y: params.dest.y + 60}, 2000, Phaser.Easing.Exponential.InOut, true);
+        
+    } },
+
+    { name: 'play_sound', props: {name: 'frauki_materialize_end'}},
+    { name: 'play_sound', props: {name: 'frauki_materialize'}},
+    
+
+    { name: 'wait', props: { amount: 2000 } },
+
+    { func: function(params) {
+        frauki.ChangeState(frauki.Standing);
+        effectsController.StarBurst(frauki);
+        effectsController.SparkSplash(frauki);
+    } },
+
+    { name: 'stop_sound', props: {name: 'frauki_materialize'}},
+    { name: 'play_sound', props: {name: 'frauki_materialize_end'}},
+
+    { name: 'allow_input', props: {} },
+    
+    
 ];
