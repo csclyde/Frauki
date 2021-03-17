@@ -100,13 +100,15 @@ function HitUpgrade(f, o) {
             events.publish('play_sound', {name: 'door_break'});
             events.publish('full_heal', {});
             
-            GameData.AddUpgrade(o.upgrade);
-
             if(o.upgrade.indexOf('Health') >= 0) {
-                ScriptRunner.run('demo_Health');
+                if(GameData.data.health <= 3) {
+                    ScriptRunner.run('demo_Health');
+                }
             } else {
                 ScriptRunner.run('demo_' + o.upgrade);
             }
+
+            GameData.AddUpgrade(o.upgrade);
 
             o.destroy();
         } else {

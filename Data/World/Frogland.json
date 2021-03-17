@@ -800,8 +800,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":1952.75,
-                 "y":3820.25
+                 "x":2276.75,
+                 "y":3680.91666666667
                 }, 
                 {
                  "gid":74,
@@ -1353,7 +1353,7 @@
              "id":"string"
             },
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -1706,12 +1706,14 @@
                     {
                      "id":"first_prism_door",
                      "prism":"Will",
+                     "script":"demo_PrismDoor",
                      "type":"shard"
                     },
                  "propertytypes":
                     {
                      "id":"string",
                      "prism":"string",
+                     "script":"string",
                      "type":"string"
                     },
                  "rotation":0,
@@ -7775,8 +7777,8 @@
     {
      "debug":"true",
      "startLayer":"3",
-     "startX":"60",
-     "startY":"622"
+     "startX":"139",
+     "startY":"229"
     },
  "propertytypes":
     {

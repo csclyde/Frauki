@@ -209,6 +209,9 @@ Door.prototype.OpenDoor = function(f) {
         prism.scale.x = 0.1;
         prism.scale.y = 0.1;
 
+        if(!!this.script) {
+            ScriptRunner.run(this.script);
+        }
 
         //tween its position to the center of the door
         var shardTween = game.add.tween(prism.scale).to({x: 1, y: 1}, 2000, Phaser.Easing.Exponential.Out, true);

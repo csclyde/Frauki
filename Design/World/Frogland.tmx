@@ -3,8 +3,8 @@
  <properties>
   <property name="debug" value="true"/>
   <property name="startLayer" value="3"/>
-  <property name="startX" value="60"/>
-  <property name="startY" value="622"/>
+  <property name="startX" value="139"/>
+  <property name="startY" value="229"/>
  </properties>
  <tileset firstgid="1" name="Collision" tilewidth="16" tileheight="16" tilecount="64" columns="8">
   <image source="../../Data/World/CollisionKey.png" width="128" height="128"/>
@@ -3649,7 +3649,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,13,13,13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="Objects" visible="0">
+ <objectgroup name="Objects">
   <properties>
    <property name="id" value="sewer_transverse"/>
   </properties>
@@ -3735,7 +3735,7 @@
   </object>
   <object id="3504" name="Wit" gid="70" x="1958.5" y="4805.5" width="16" height="16"/>
   <object id="3507" name="Luck" gid="70" x="2942.17" y="1155" width="16" height="16"/>
-  <object id="3508" name="Will" gid="70" x="1952.75" y="3820.25" width="16" height="16"/>
+  <object id="3508" name="Will" gid="70" x="2276.75" y="3680.92" width="16" height="16"/>
   <object id="3524" gid="74" x="2187.17" y="3941" width="16" height="16">
    <properties>
     <property name="on_death" value="open_door,door_name:third_orbule"/>
@@ -3955,6 +3955,7 @@
    <properties>
     <property name="id" value="first_prism_door"/>
     <property name="prism" value="Will"/>
+    <property name="script" value="demo_PrismDoor"/>
     <property name="type" value="shard"/>
    </properties>
   </object>
