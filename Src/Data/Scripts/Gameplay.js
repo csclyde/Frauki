@@ -29,11 +29,13 @@ ScriptRunner.scripts['continue_game'] = [
 
     { name: 'wait', props: { amount: 2000 } },
     
-    { name: 'run_script', props: { name: 'enter_goddess' } },
+    // { name: 'run_script', props: { name: 'enter_goddess' } },
 
-    { name: 'wait', props: { amount: 1500 } },
+    // { name: 'wait', props: { amount: 1500 } },
 
-    { name: 'run_script', props: { name: 'goddess_welcome_return' } },
+    // { name: 'run_script', props: { name: 'goddess_welcome_return' } },
+
+    { name: 'allow_input', props: {}}
     
 ];
 

@@ -67,8 +67,8 @@ Frogland.Update = function() {
     this.HandleCollisions();
 
     if(frauki.y > 10800) {
-        frauki.body.y -= 10000;
-        cameraController.camY = -250;
+        frauki.y -= 10000;
+        cameraController.camY -= 10000 + 865;
     }
 };
 

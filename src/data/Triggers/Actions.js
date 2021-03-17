@@ -26,11 +26,11 @@ TriggerController.prototype.triggers['old_robo'] = {
 TriggerController.prototype.triggers['vertical_loop'] = {
 	enter: function(params) {
 		
-		console.log(frauki.y);
+		// console.log(frauki.y);
 
-		var yDiff = cameraController.camY - frauki.y;
-		frauki.y = 360;
-		cameraController.camY = frauki.y + yDiff - 1874;
+		// var yDiff = cameraController.camY - frauki.y;
+		// frauki.y = 360;
+		// cameraController.camY = frauki.y + yDiff - 1874;
 				
 	},
 
@@ -43,7 +43,7 @@ TriggerController.prototype.triggers['vertical_loop'] = {
 
 TriggerController.prototype.triggers['vertical_loop_up'] = {
 	enter: function(params) {
-		frauki.y = 641 * 16;
+		// frauki.y = 641 * 16;
 		//game.camera.y = 10000;
 		//cameraController.camY = 9000;
 	},
