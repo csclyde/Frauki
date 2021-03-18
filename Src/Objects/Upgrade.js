@@ -104,6 +104,10 @@ function HitUpgrade(f, o) {
                 if(GameData.data.health <= 3) {
                     ScriptRunner.run('demo_Health');
                 }
+            } else if(o.upgrade.indexOf('Shield') >= 0) {
+                if(GameData.data.shield <= 0) {
+                    ScriptRunner.run('demo_Shield');
+                }
             } else {
                 ScriptRunner.run('demo_' + o.upgrade);
             }

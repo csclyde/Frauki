@@ -21,8 +21,6 @@ GameState.create = function() {
 
     this.tweens = {};
 
-    this.UITextures = {};
-
     events.subscribe('update_ui', this.UpdateUI, this);
     events.subscribe('select_menu_option', this.MakeMenuSelection, this);
     events.subscribe('menu_change', this.UpdateMenuSelection, this);
@@ -133,13 +131,13 @@ GameState.PauseGame = function() {
 };
 
 GameState.CreateUI = function() {
-    this.UI = game.add.group();
-    this.UI.fixedToCamera = true;
+    this.HUD = game.add.group();
+    this.HUD.fixedToCamera = true;
     this.Menu = game.add.group();
     this.Menu.fixedToCamera = true;        
 
     if(this.inMenu) {
-        this.UI.alpha = 0;
+        this.HUD.alpha = 0;
     }
 
     this.logo = game.add.image(pixel.width / 2, pixel.height / 3, 'UI', 'Logo0000', this.Menu);
@@ -153,45 +151,29 @@ GameState.CreateUI = function() {
         this.menuText.push(text);
     }
 
-    this.healthFrameStart = game.add.image(10, 10, 'UI', 'HudFrame0000', this.UI);
+    this.healthFrameStart = game.add.image(10, 10, 'UI', 'HudFrame0000', this.HUD);
 
     for(var i = 0; i < this.MAX_PLAYER_HEALTH; i++) {
-        this['healthFrameBack' + i] = game.add.image(14 + (i * 5), 13, 'UI', 'HudFrame0003', this.UI);
-        this['healthFrameFront' + i] = game.add.image(14 + (i * 5), 10, 'UI', 'HudFrame0001', this.UI);
-
-        if(i >= energyController.GetMaxHealthBar()) {
-            this['healthFrameBack' + i].visible = false;
-            this['healthFrameFront' + i].visible = false;
-        }
+        this['healthFrameBack' + i] = game.add.image(14 + (i * 5), 13, 'UI', 'HudFrame0003', this.HUD);
+        this['healthFrameFront' + i] = game.add.image(14 + (i * 5), 10, 'UI', 'HudFrame0001', this.HUD);
     }
 
-    this.healthFrameEnd = game.add.image(14 + (energyController.GetMaxHealth() * 5), 10, 'UI', 'HudFrame0002', this.UI);
+    this.healthFrameEnd = game.add.image(0, 10, 'UI', 'HudFrame0002', this.HUD);
 
     //health pips
     for(var i = 0; i < this.MAX_PLAYER_HEALTH; i++) {
-        this['healthPip' + i] = game.add.image(14 + (5 * i), 13, 'UI', 'HealthPips0000', this.UI);
-        
-        if(i >= energyController.GetHealth()) {
-            this['healthPip' + i].visible = false;
-        }
-
-        this['shieldPip' + i] = game.add.image(14 + (5 * i), 13, 'UI', 'EnergyPips0000', this.UI);
-        this['shieldPip' + i].visible = false;
+        this['healthPip' + i] = game.add.image(14 + (5 * i), 13, 'UI', 'HealthPips0000', this.HUD);
+        this['shieldPip' + i] = game.add.image(14 + (5 * i), 13, 'UI', 'EnergyPips0000', this.HUD);
     }
 
     for(var i = 0; i < this.MAX_APPLES; i++) {
-        this['apple' + i] = game.add.image(-10 + (20 * i), 15, 'Misc', 'Apple0000', this.UI);
-        this['apple' + i].visible = false;
+        this['apple' + i] = game.add.image(-10 + (20 * i), 15, 'Misc', 'Apple0000', this.HUD);
     }
 
-    this['prismWill'] = game.add.image(-10, 320, 'Misc', 'Shard0005', this.UI);
-    this['prismWill'].visible = false;
-    this['prismWit'] = game.add.image(2, 320, 'Misc', 'Shard0004', this.UI);
-    this['prismWit'].visible = false;
-    this['prismPower'] = game.add.image(14, 320, 'Misc', 'Shard0007', this.UI);
-    this['prismPower'].visible = false;
-    this['prismLuck'] = game.add.image(26, 320, 'Misc', 'Shard0006', this.UI);
-    this['prismLuck'].visible = false; 
+    this['prismWill'] = game.add.image(-10, 320, 'Misc', 'Shard0005', this.HUD);
+    this['prismWit'] = game.add.image(2, 320, 'Misc', 'Shard0004', this.HUD);
+    this['prismPower'] = game.add.image(14, 320, 'Misc', 'Shard0007', this.HUD);
+    this['prismLuck'] = game.add.image(26, 320, 'Misc', 'Shard0006', this.HUD);
 };
 
 GameState.UpdateUI = function() {
@@ -208,8 +190,6 @@ GameState.UpdateUI = function() {
                 text.setText('');
             }
         }, this);
-        
-        return;
     }
 
     for(var i = 0; i < this.MAX_PLAYER_HEALTH; i++) {
@@ -219,7 +199,7 @@ GameState.UpdateUI = function() {
         if(i >= energyController.GetHealth()) {
             this['healthPip' + i].visible = false;
 
-            if(i < energyController.GetHealth() + energyController.GetShield()) {
+            if(i < (energyController.GetHealth() + energyController.GetShield())) {
                 this['shieldPip' + i].visible = true;
             } else {
                 this['shieldPip' + i].visible = false;
@@ -231,7 +211,7 @@ GameState.UpdateUI = function() {
         }
     }
 
-    this.healthFrameEnd.cameraOffset.x = 14 + (energyController.GetMaxHealthBar() * 5);
+    this.healthFrameEnd.x = 14 + (energyController.GetMaxHealthBar() * 5);
 
     for(var i = 0; i < this.MAX_APPLES; i++) {
         this['apple' + i].visible = i < energyController.GetApples();

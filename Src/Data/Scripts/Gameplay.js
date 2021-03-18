@@ -2,6 +2,7 @@ ScriptRunner.scripts['game_start'] = [
     { name: 'disallow_input', props: {} },
     { name: 'play_music', props: { name: 'Intro' } },
     { name: 'play_ambient', props: { name: 'ambient_surface' } },
+    { name: 'update_ui', props: {  } },
     { func: function() {
         effectsController.Fade(false, 1000);
     } },
@@ -23,7 +24,7 @@ ScriptRunner.scripts['continue_game'] = [
     
     { func: function() {
         GameState.inMenu = false;
-        GameState.uiFadeTween = game.add.tween(GameState.UI).to({alpha: 1}, 1500, Phaser.Easing.Cubic.Out, true);
+        GameState.uiFadeTween = game.add.tween(GameState.HUD).to({alpha: 1}, 1500, Phaser.Easing.Cubic.Out, true);
         frauki.state = frauki.Materializing;
     } },
 
@@ -72,7 +73,7 @@ ScriptRunner.scripts['new_game'] = [
     
     { func: function() {
         frauki.state = frauki.Materializing;
-        GameState.uiFadeTween = game.add.tween(GameState.UI).to({alpha: 1}, 1500, Phaser.Easing.Cubic.Out, true);        
+        GameState.HUDFadeTween = game.add.tween(GameState.HUD).to({alpha: 1}, 1500, Phaser.Easing.Cubic.Out, true);        
     } },
 
     { name: 'wait', props: { amount: 3000 } },
@@ -138,7 +139,7 @@ ScriptRunner.scripts['pause_game'] = [
         events.publish('pan_camera', { to: cameraController.menuTarget, duration: 500 });
 
         game.add.tween(GameState.Menu).to({alpha: 1}, 500, Phaser.Easing.Cubic.In, true);
-        GameState.uiFadeTween = game.add.tween(GameState.UI).to({alpha: 0}, 500, Phaser.Easing.Cubic.Out, true);  
+        GameState.HUDFadeTween = game.add.tween(GameState.HUD).to({alpha: 0}, 500, Phaser.Easing.Cubic.Out, true);  
             
     } },
 ];
@@ -151,7 +152,7 @@ ScriptRunner.scripts['unpause_game'] = [
     { func: function() {
         events.publish('pan_camera', { to: GameState.prePauseCameraTarget, duration: 1000 });
         game.add.tween(GameState.Menu).to({alpha: 0}, 500, Phaser.Easing.Cubic.Out, true);
-        GameState.uiFadeTween = game.add.tween(GameState.UI).to({alpha: 1}, 500, Phaser.Easing.Cubic.In, true); 
+        GameState.uiFadeTween = game.add.tween(GameState.HUD).to({alpha: 1}, 500, Phaser.Easing.Cubic.In, true); 
     } },
 
     { name: 'wait', props: { amount: 1500 } },
@@ -231,7 +232,7 @@ ScriptRunner.scripts['restart_game'] = [
 
     { func: function() {
         GameState.Menu.alpha = 0;
-        GameState.UI.alpha = 1;
+        GameState.HUD.alpha = 1;
         GameState.Reset();
     } },
 
