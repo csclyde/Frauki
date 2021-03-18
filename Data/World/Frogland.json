@@ -1342,6 +1342,26 @@
                  "width":16,
                  "x":4088.33333333333,
                  "y":2994.66666666667
+                }, 
+                {
+                 "gid":76,
+                 "height":16,
+                 "id":3965,
+                 "name":"",
+                 "properties":
+                    {
+                     "prism":"Wit"
+                    },
+                 "propertytypes":
+                    {
+                     "prism":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":4286.5,
+                 "y":2759
                 }],
          "opacity":1,
          "properties":
@@ -2728,8 +2748,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":4751.33,
-                 "y":3206.67
+                 "x":4742.66333333333,
+                 "y":3188.67
                 }, 
                 {
                  "gid":105,
@@ -2973,7 +2993,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -7564,15 +7584,15 @@
                  "y":8143.91
                 }, 
                 {
-                 "height":83,
+                 "height":37,
                  "id":2866,
                  "name":"goddess",
                  "rotation":0,
                  "type":"trigger",
                  "visible":true,
-                 "width":77.3333,
-                 "x":4504.67,
-                 "y":2701.67
+                 "width":48.8333000000002,
+                 "x":4446.67,
+                 "y":2773.67
                 }, 
                 {
                  "height":67,
@@ -7771,7 +7791,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":3965,
+ "nextobjectid":3966,
  "orientation":"orthogonal",
  "properties":
     {

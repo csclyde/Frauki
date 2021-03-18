@@ -227,6 +227,8 @@ Collision.OverlapAttackWithObject = function(f, o) {
         SmashOrb(frauki, o);
     } else if(o.spriteType === 'Upgrade') {
         HitUpgrade(frauki, o);
+    } else if(o.spriteType === 'GemSucker') {
+        o.Hit()
     }
 };
 

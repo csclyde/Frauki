@@ -7,11 +7,10 @@ Shard = function(game, x, y, name) {
     game.physics.enable(this, Phaser.Physics.ARCADE);
     
     this.body.setSize(16, 16, 0, 2);
-    this.anchor.setTo(0.5, 0.5);
+    this.anchor.setTo(0.5);
     this.body.bounce.y = 0.5;
     this.body.bounce.x = 0.5;
     this.body.drag.setTo(0);
-    //this.body.gravity.y = game.physics.arcade.gravity.y * 2;
 
     this.state = this.Floating;
 
@@ -19,7 +18,6 @@ Shard = function(game, x, y, name) {
 
     this.timers = new TimerUtil();
 
-    this.currentLayer = Frogland.shardLayer;
     this.shardFrame = name;
 
     this.animations.add('Wit', ['Shard0000'], 10, false, false);
@@ -29,12 +27,6 @@ Shard = function(game, x, y, name) {
     this.animations.add('Derp', ['Shard0002'], 10, false, false);
 
     objectController.shardList.push(this);
-    
-    if(this.currentLayer === Frogland.currentLayer) {
-        this.visible = true;
-    } else {
-        this.visible = false;
-    }
 };
 
 Shard.prototype = Object.create(Phaser.Sprite.prototype);
@@ -48,14 +40,14 @@ Shard.prototype.update = function() {
     
     if(!!this.state) this.state();
 
-    if(this.beingUsed === true) {
-        this.visible = true;
-    } else if(this.visible && GameData.HasShard(this.name)) {
-        this.visible = false;
-        this.dead = true;
-    } else if(!GameData.HasShard(this.name)) {
-        this.visible = true;
-    }
+    // if(this.beingUsed === true) {
+    //     this.visible = true;
+    // } else if(this.visible && GameData.HasShard(this.name)) {
+    //     this.visible = false;
+    //     this.dead = true;
+    // } else if(!GameData.HasShard(this.name)) {
+    //     this.visible = true;
+    // }
 
 };
 
@@ -114,6 +106,6 @@ Shard.prototype.Floating = function() {
 };
 
 Shard.prototype.collideWithPlayer = function(f) {
-    PickUpShard(f, this);
+    //PickUpShard(f, this);
     return false;
 };

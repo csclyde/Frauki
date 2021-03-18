@@ -71,7 +71,24 @@ ObjectController.prototype.CreateObjectsLayer = function(layer) {
     Frogland.map.createFromObjects('Objects', 69, 'Misc', 'Checkpoint0000', true, true, this.activeGroup, Checkpoint, false);
     Frogland.map.createFromObjects('Doors', 67, 'Misc', 'DoorSeal0000', true, true, this.activeGroup, Door, false);
     Frogland.map.createFromObjects('Objects', 75, 'Misc', 'Upgrade0000', true, true, this.activeGroup, Upgrade, false);
-    Frogland.map.createFromObjects('Objects', 70, 'Shard0000', 'Shard0000', true, true, this.activeGroup, Shard, false);
+    Frogland.map.createFromObjects('Objects', 76, 'Misc', 'GemSucker0000', true, true, this.activeGroup, GemSucker, false);
+
+    this.prisms = {};
+    this.prisms.Wit = new Shard(game, 0, 0, 'Misc', 'Shard0000');
+    this.prisms.Wit.name = 'Wit';
+    this.activeGroup.add(this.prisms.Wit);    
+    
+    this.prisms.Will = new Shard(game, 0, 0, 'Misc', 'Shard0001');
+    this.prisms.Will.name = 'Will';
+    this.activeGroup.add(this.prisms.Will);        
+    
+    this.prisms.Luck = new Shard(game, 0, 0, 'Misc', 'Shard0002');
+    this.prisms.Luck.name = 'Luck';
+    this.activeGroup.add(this.prisms.Luck);        
+    
+    this.prisms.Power = new Shard(game, 0, 0, 'Misc', 'Shard0003');
+    this.prisms.Power.name = 'Power';
+    this.activeGroup.add(this.prisms.Power);        
 
     this.activeGroup.forEach(function(obj) {
 
@@ -159,7 +176,7 @@ ObjectController.prototype.SpawnObject = function(o) {
 	            newObj.latent = o;
 	        }
 	    });
-    } else if(![69,67,75,70,71,72,73].includes(o.id)) {
+    } else if(![69,67,75,70,71,72,73,76].includes(o.id)) {
     	console.warn('Unknown object', o);
     }
 

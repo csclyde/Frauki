@@ -1,51 +1,25 @@
 
 TriggerController.prototype.triggers['goddess'] = {
 	enter: function(params) {
-		//ScriptRunner.run('goddess_chat');
+		console.log('testing', GameData.GetFlag('ready_for_goddess_talk'))
+		if(GameData.GetFlag('ready_for_goddess_talk')) {
+			ScriptRunner.run('goddess_chat');
+			GameData.SetFlag('ready_for_goddess_talk', false);
+		}
 	},
 
 	stay: function(params) {
 	},
 
 	exit: function(params) {
+		console.log('exiting')
+		GameData.SetFlag('ready_for_goddess_talk', true);
 	}
 };
 
 TriggerController.prototype.triggers['old_robo'] = {
 	enter: function(params) {
 		ScriptRunner.run('enter_oldrobo');
-	},
-
-	stay: function(params) {
-	},
-
-	exit: function(params) {
-	}
-};
-
-TriggerController.prototype.triggers['vertical_loop'] = {
-	enter: function(params) {
-		
-		// console.log(frauki.y);
-
-		// var yDiff = cameraController.camY - frauki.y;
-		// frauki.y = 360;
-		// cameraController.camY = frauki.y + yDiff - 1874;
-				
-	},
-
-	stay: function(params) {
-	},
-
-	exit: function(params) {
-	}
-};
-
-TriggerController.prototype.triggers['vertical_loop_up'] = {
-	enter: function(params) {
-		// frauki.y = 641 * 16;
-		//game.camera.y = 10000;
-		//cameraController.camY = 9000;
 	},
 
 	stay: function(params) {

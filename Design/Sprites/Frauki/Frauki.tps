@@ -364,9 +364,6 @@
             <key type="filename">Frames/Baton40003.png</key>
             <key type="filename">Frames/Baton40004.png</key>
             <key type="filename">Frames/Baton40005.png</key>
-            <key type="filename">Frames/Block0000.png</key>
-            <key type="filename">Frames/Block0001.png</key>
-            <key type="filename">Frames/Block0002.png</key>
             <key type="filename">Frames/Crouch0000.png</key>
             <key type="filename">Frames/Crouch0001.png</key>
             <key type="filename">Frames/Crouch0002.png</key>

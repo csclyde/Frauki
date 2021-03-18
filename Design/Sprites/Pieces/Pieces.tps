@@ -190,6 +190,14 @@
             <key type="filename">Frames/GUBr0000.png</key>
             <key type="filename">Frames/GUBr0001.png</key>
             <key type="filename">Frames/GUBr0002.png</key>
+            <key type="filename">Frames/GemSucker0000.png</key>
+            <key type="filename">Frames/GemSucker0001.png</key>
+            <key type="filename">Frames/GemSucker0002.png</key>
+            <key type="filename">Frames/GemSucker0003.png</key>
+            <key type="filename">Frames/GemSucker0004.png</key>
+            <key type="filename">Frames/GemSucker0005.png</key>
+            <key type="filename">Frames/GemSucker0006.png</key>
+            <key type="filename">Frames/GemSucker0007.png</key>
             <key type="filename">Frames/H0P80000.png</key>
             <key type="filename">Frames/H0P80001.png</key>
             <key type="filename">Frames/H0P80002.png</key>

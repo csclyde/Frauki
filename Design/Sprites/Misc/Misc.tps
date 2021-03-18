@@ -207,8 +207,6 @@
             <key type="filename">Frames/Dust0003.png</key>
             <key type="filename">Frames/Dust0004.png</key>
             <key type="filename">Frames/Dust0005.png</key>
-            <key type="filename">Frames/Heart0000.png</key>
-            <key type="filename">Frames/Heart0001.png</key>
             <key type="filename">Frames/JumpDust0000.png</key>
             <key type="filename">Frames/JumpDust0001.png</key>
             <key type="filename">Frames/JumpDust0002.png</key>
@@ -349,26 +347,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">Frames/BigNugg0000.png</key>
-            <key type="filename">Frames/BigNugg0001.png</key>
-            <key type="filename">Frames/BigNugg0002.png</key>
-            <key type="filename">Frames/BigNugg0003.png</key>
-            <key type="filename">Frames/BigNugg0004.png</key>
-            <key type="filename">Frames/BigNugg0005.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>12,12,24,24</rect>
-                <key>scale9Paddings</key>
-                <rect>12,12,24,24</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
+            <key type="filename">Frames/Barrel0000.png</key>
             <key type="filename">Frames/DoorApple0000.png</key>
             <key type="filename">Frames/DoorDark0000.png</key>
             <key type="filename">Frames/DoorDark0001.png</key>
@@ -438,6 +417,7 @@
             <key type="filename">Frames/DoorTenements0009.png</key>
             <key type="filename">Frames/DoorTenements0010.png</key>
             <key type="filename">Frames/DoorTenements0011.png</key>
+            <key type="filename">Frames/Egg0000.png</key>
             <key type="filename">Frames/ExplosionAir0000.png</key>
             <key type="filename">Frames/ExplosionAir0001.png</key>
             <key type="filename">Frames/ExplosionAir0002.png</key>
@@ -448,6 +428,12 @@
             <key type="filename">Frames/ExplosionFloor0002.png</key>
             <key type="filename">Frames/ExplosionFloor0003.png</key>
             <key type="filename">Frames/ExplosionFloor0004.png</key>
+            <key type="filename">Frames/GemSucker0000.png</key>
+            <key type="filename">Frames/GemSucker0001.png</key>
+            <key type="filename">Frames/GemSucker0002.png</key>
+            <key type="filename">Frames/Plant0000.png</key>
+            <key type="filename">Frames/Pot0000.png</key>
+            <key type="filename">Frames/Pot20000.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -490,7 +476,6 @@
             <key type="filename">Frames/DripSplash0002.png</key>
             <key type="filename">Frames/DripSplash0003.png</key>
             <key type="filename">Frames/DripSplash0004.png</key>
-            <key type="filename">Frames/spore0000.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -597,26 +582,6 @@
                 <rect>6,6,12,13</rect>
                 <key>scale9Paddings</key>
                 <rect>6,6,12,13</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">Frames/Runes0000.png</key>
-            <key type="filename">Frames/Runes0001.png</key>
-            <key type="filename">Frames/Runes0002.png</key>
-            <key type="filename">Frames/Runes0003.png</key>
-            <key type="filename">Frames/Runes0004.png</key>
-            <key type="filename">Frames/Runes0005.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>6,6,13,13</rect>
-                <key>scale9Paddings</key>
-                <rect>6,6,13,13</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

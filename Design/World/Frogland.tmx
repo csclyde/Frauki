@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="360" height="700" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="3965">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="360" height="700" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="3966">
  <properties>
   <property name="debug" value="false"/>
   <property name="startLayer" value="3"/>
@@ -3851,6 +3851,11 @@
    </properties>
   </object>
   <object id="3958" gid="66" x="4088.33" y="2994.67" width="16" height="16"/>
+  <object id="3965" gid="76" x="4286.5" y="2759" width="16" height="16">
+   <properties>
+    <property name="prism" value="Wit"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="Doors">
   <object id="3281" gid="67" x="3831.67" y="2999.67" width="16" height="16">
@@ -4207,7 +4212,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="Doodads" visible="0">
+ <objectgroup name="Doodads">
   <object id="3369" gid="105" x="4410.58" y="3346.59" width="16" height="16"/>
   <object id="3370" gid="109" x="4442.76" y="3346.75" width="16" height="16"/>
   <object id="3388" gid="105" x="3365.75" y="3242.5" width="16" height="16"/>
@@ -4219,7 +4224,7 @@
   <object id="3411" gid="105" x="1611.5" y="3829.25" width="16" height="16"/>
   <object id="3412" gid="109" x="1935" y="3651.38" width="16" height="16"/>
   <object id="3413" gid="106" x="1980" y="3656.13" width="16" height="16"/>
-  <object id="3444" gid="107" x="4751.33" y="3206.67" width="16" height="16"/>
+  <object id="3444" gid="107" x="4742.66" y="3188.67" width="16" height="16"/>
   <object id="3445" gid="105" x="3974" y="3998.5" width="16" height="16"/>
   <object id="3446" gid="105" x="4010.5" y="3998" width="16" height="16"/>
   <object id="3447" gid="105" x="4863" y="4127" width="16" height="16"/>
@@ -5017,7 +5022,7 @@
   </object>
   <object id="2727" name="dont_eat" type="speech" x="1527.83" y="7356.01" width="72" height="66.6667"/>
   <object id="2730" name="cold" type="speech" x="2095.25" y="8143.91" width="291.5" height="96.8367"/>
-  <object id="2866" name="goddess" type="trigger" x="4504.67" y="2701.67" width="77.3333" height="83"/>
+  <object id="2866" name="goddess" type="trigger" x="4446.67" y="2773.67" width="48.8333" height="37"/>
   <object id="2913" name="names_engraved" type="speech" x="4256" y="2356.67" width="61" height="67"/>
   <object id="3306" name="flower_bloom" type="speech" x="3374.5" y="4507.77" width="22" height="39.4545"/>
   <object id="3425" name="spores" type="speech" x="2920.38" y="3982.88" width="94.5" height="64.5"/>

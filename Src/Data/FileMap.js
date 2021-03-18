@@ -24,7 +24,6 @@ FileMap.Atlas = [
 	{ Name: 'Misc', File: 'Data/Sprites/Misc.json', Img: 'Data/Sprites/Misc.png' },
 	{ Name: 'UI', File: 'Data/Sprites/UI.json', Img: 'Data/Sprites/UI.png' },
 	{ Name: 'Pieces', File: 'Data/Sprites/Pieces.json', Img: 'Data/Sprites/Pieces.png' },
-	{ Name: 'Junk', File: 'Data/Sprites/Junk.json', Img: 'Data/Sprites/Junk.png' }
 ];
 
 FileMap.Audio = [

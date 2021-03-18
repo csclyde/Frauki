@@ -30,19 +30,17 @@ ScriptRunner.scripts['continue_game'] = [
 
     { name: 'wait', props: { amount: 2000 } },
     
-    // { name: 'run_script', props: { name: 'enter_goddess' } },
+    { name: 'run_script', props: { name: 'enter_goddess' } },
 
-    // { name: 'wait', props: { amount: 1500 } },
+    { name: 'wait', props: { amount: 1500 } },
 
-    // { name: 'run_script', props: { name: 'goddess_welcome_return' } },
-
-    { name: 'allow_input', props: {}}
+    { name: 'run_script', props: { name: 'goddess_welcome_return' } },
     
 ];
 
 ScriptRunner.scripts['new_game'] = [
     { name: 'stop_music', props: { name: 'Intro', fade: 3500 } },
-    { name: 'play_sound', props: { name: 'crystal_door' } },      
+    { name: 'play_sound', props: { name: 'crystal_door' } },
     
     { func: function() {
         GameData.ResetData();
@@ -317,4 +315,36 @@ ScriptRunner.scripts['use_checkpoint'] = [
             GameData.SetFlag('used_checkpoint', true);
         }
     } },
+];
+
+ScriptRunner.scripts['destroy_gemsucker'] = [
+    { name: 'disallow_input', props: {} },
+    { name: 'play_sound', props: { name: 'robosplosion'} },
+    { name: 'wait', props: { amount: 950 } },
+    
+    { func: function(params) {
+        var shard = objectController.prisms[params.prism.prism];
+        shard.visible = true;
+        console.log(shard)
+        shard.x = params.prism.x - 15;
+        shard.y = params.prism.y - 50;
+        shard.bringToTop();
+        params.prism.BlowUp();
+        //GameData.AddShard(this.prism);
+    } },
+
+    { name: 'pause_all_music', props: {} },
+    { name: 'play_music', props: { name: 'Goddess', fade: 1000 } },
+    { name: 'wait', props: { amount: 2000 } },
+
+    { func: function(params) {
+        var shard = objectController.prisms[params.prism.prism];
+        game.add.tween(shard).to({x: frauki.body.center.x, y: frauki.body.center.y}, 2000, Phaser.Easing.Elastic.Out, true);
+    } },
+
+    { name: 'wait', props: { amount: 2000 } },
+    { name: 'play_sound', props: { name: 'crystal_door' } },    
+    { name: 'stop_music', props: { name: 'Goddess', fade: 500 } },
+
+    { name: 'allow_input', props: {} },
 ];

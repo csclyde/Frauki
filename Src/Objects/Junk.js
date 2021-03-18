@@ -1,6 +1,6 @@
 Junk = function(game, x, y, name) {
     //instantiate the sprite
-    Phaser.Sprite.call(this, game, x, y, 'Junk', name + '0000');
+    Phaser.Sprite.call(this, game, x, y, 'Misc', name + '0000');
     this.spriteType = 'junk';
 
     this.anchor.setTo(0.5);
@@ -44,8 +44,6 @@ Junk.prototype.JunkHit = function(o) {
     vel = vel.setMagnitude(150);
 
     this.body.velocity = vel;
-
-	var probTable = [0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3];
 
 	game.time.events.add(100, function() {
 	    effectsController.ClashStreak(this.body.center.x, this.body.center.y, game.rnd.between(1, 2));
