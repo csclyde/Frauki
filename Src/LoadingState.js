@@ -2,6 +2,8 @@ var LoadingState = new Phaser.State();
 
 LoadingState.preload = function() {
     this.logo = game.add.image(0, 0, 'clyde_games_logo');
+    this.logo.alpha = 0;
+    this.fadeTween = game.add.tween(this.logo).to({alpha: 1}, 500, Phaser.Easing.Cubic.In, true);
     
     Phaser.TilemapParser.INSERT_NULL = true;
     game.load.tilemap('Frogland', 'Data/World/Frogland.json', null, Phaser.Tilemap.TILED_JSON);
@@ -71,7 +73,7 @@ LoadingState.create = function() {
     speechController.Create();
 
     ScriptRunner.create();
-
+ 
     game.state.start('GameState', false, false);
 
 };

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="360" height="700" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="3965">
  <properties>
-  <property name="debug" value="true"/>
+  <property name="debug" value="false"/>
   <property name="startLayer" value="3"/>
-  <property name="startX" value="281"/>
-  <property name="startY" value="280"/>
+  <property name="startX" value="104"/>
+  <property name="startY" value="455"/>
  </properties>
  <tileset firstgid="1" name="Collision" tilewidth="16" tileheight="16" tilecount="64" columns="8">
   <image source="../../Data/World/CollisionKey.png" width="128" height="128"/>
@@ -5015,7 +5015,7 @@
     <property name="down" value="Surface"/>
    </properties>
   </object>
-  <object id="2727" name="dont_eat" type="speech" x="1557.33" y="7261.01" width="72" height="66.6667"/>
+  <object id="2727" name="dont_eat" type="speech" x="1527.83" y="7356.01" width="72" height="66.6667"/>
   <object id="2730" name="cold" type="speech" x="2095.25" y="8143.91" width="291.5" height="96.8367"/>
   <object id="2866" name="goddess" type="trigger" x="4504.67" y="2701.67" width="77.3333" height="83"/>
   <object id="2913" name="names_engraved" type="speech" x="4256" y="2356.67" width="61" height="67"/>

@@ -7549,8 +7549,8 @@
                  "type":"speech",
                  "visible":true,
                  "width":72,
-                 "x":1557.33,
-                 "y":7261.01
+                 "x":1527.83,
+                 "y":7356.01
                 }, 
                 {
                  "height":96.8367,
@@ -7775,10 +7775,10 @@
  "orientation":"orthogonal",
  "properties":
     {
-     "debug":"true",
+     "debug":"false",
      "startLayer":"3",
-     "startX":"281",
-     "startY":"280"
+     "startX":"104",
+     "startY":"455"
     },
  "propertytypes":
     {

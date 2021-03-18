@@ -68,6 +68,22 @@ ScriptRunner.scripts['demo_Shield'] = [
 	{ name: 'allow_input', props: {} }
 ];
 
+ScriptRunner.scripts['demo_Damage'] = [
+	{ name: 'disallow_input', props: {} },
+	
+	{ name: 'wait', props: { amount: 1500 } },
+	{ name: 'control_up', props: { pressed: true } },
+	{ name: 'wait', props: { amount: 200 } },
+	{ name: 'player_slash', props: {} },
+	{ name: 'control_up', props: { pressed: false } },
+	{ name: 'wait', props: { amount: 1500 } },	
+
+	{ name: 'show_text', props: { text: "Whoa... alien robot power...", portrait: 'Dazed' } },
+	{ name: 'show_text', props: { text: "All of my attacks will do an extra damage now.", portrait: 'Neutral' } },
+	{ name: 'show_text', props: { text: "But I better not show the Goddess... she might be mad...", portrait: 'Neutral' } },
+	{ name: 'allow_input', props: {} }
+];
+
 ScriptRunner.scripts['demo_Will'] = [
 	{ name: 'disallow_input', props: {} },
 	{ name: 'screen_flash', props: {} },
@@ -90,18 +106,18 @@ ScriptRunner.scripts['demo_PrismDoor'] = [
 
 ScriptRunner.scripts['demo_Wit'] = [
 	{ name: 'disallow_input', props: {} },
-	{ name: 'show_text', props: { text: 'Yay, another prism shard! I\'ll be done in no time...', portrait: 'Silly' } },
+	{ name: 'show_text', props: { text: "Yay, another prism shard! I'll be done in no time...", portrait: 'Silly' } },
 	{ name: 'allow_input', props: {} }
 ];
 
 ScriptRunner.scripts['demo_Luck'] = [
 	{ name: 'disallow_input', props: {} },
-	{ name: 'show_text', props: { text: 'Toss another prism on the pile. This is too easy!', portrait: 'Silly' } },
+	{ name: 'show_text', props: { text: "Toss another prism on the pile. This is too easy!", portrait: 'Silly' } },
 	{ name: 'allow_input', props: {} }
 ];
 
 ScriptRunner.scripts['demo_Power'] = [
 	{ name: 'disallow_input', props: {} },
-	{ name: 'show_text', props: { text: 'This prism will make a fine addition to my collection.', portrait: 'Silly' } },
+	{ name: 'show_text', props: { text: "This prism will make a fine addition to my collection.", portrait: 'Silly' } },
 	{ name: 'allow_input', props: {} }
 ];

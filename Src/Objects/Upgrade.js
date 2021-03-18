@@ -108,8 +108,10 @@ function HitUpgrade(f, o) {
                 if(GameData.data.shield <= 0) {
                     ScriptRunner.run('demo_Shield');
                 }
-            } else {
-                ScriptRunner.run('demo_' + o.upgrade);
+            } else if(o.upgrade === 'Stab') {
+                ScriptRunner.run('demo_Stab');
+            } else if(o.upgrade === 'Dive') {
+                ScriptRunner.run('demo_Dive');
             }
 
             GameData.AddUpgrade(o.upgrade);
