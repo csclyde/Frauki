@@ -172,8 +172,8 @@ GameState.CreateUI = function() {
 
     this['prismWit'] = game.add.image(-10, 320, 'Misc', 'Shard0004', this.HUD);
     this['prismWill'] = game.add.image(2, 320, 'Misc', 'Shard0005', this.HUD);
-    this['prismPower'] = game.add.image(14, 320, 'Misc', 'Shard0007', this.HUD);
-    this['prismLuck'] = game.add.image(26, 320, 'Misc', 'Shard0006', this.HUD);
+    this['prismLuck'] = game.add.image(14, 320, 'Misc', 'Shard0006', this.HUD);
+    this['prismPower'] = game.add.image(26, 320, 'Misc', 'Shard0007', this.HUD);
 };
 
 GameState.UpdateUI = function() {

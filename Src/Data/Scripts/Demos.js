@@ -16,7 +16,7 @@ ScriptRunner.scripts['demo_Door'] = [
 
 ScriptRunner.scripts['demo_Checkpoint'] = [
 	{ name: 'disallow_input', props: {} },
-	{ name: 'wait', props: { amount: 1500 } },	
+	{ name: 'wait', props: { amount: 1000 } },	
 	{ name: 'show_text', props: { text: "That was pretty weird... what even is that thing.", portrait: 'Displeased' } },
 	{ name: 'show_text', props: { text: "Oh well, it's probably not important.", portrait: 'Neutral' } },
 	{ name: 'allow_input', props: {} }
@@ -56,6 +56,7 @@ ScriptRunner.scripts['demo_Dive'] = [
 
 ScriptRunner.scripts['demo_Health'] = [
 	{ name: 'disallow_input', props: {} },
+	{ name: 'wait', props: { amount: 500 } },
 	{ name: 'show_text', props: { text: 'Oh neat! These heart upgrades give me more health. That should make these fights a little easier!', portrait: 'Neutral' } },
 	{ name: 'show_text', props: { text: 'I bet I can find plenty more of them too.', portrait: 'Enticed' } },
 	{ name: 'allow_input', props: {} }
@@ -63,6 +64,7 @@ ScriptRunner.scripts['demo_Health'] = [
 
 ScriptRunner.scripts['demo_Shield'] = [
 	{ name: 'disallow_input', props: {} },
+	{ name: 'wait', props: { amount: 500 } },	
 	{ name: 'show_text', props: { text: 'Looks like I got a shield. This will soak up some damage and recharge all by itself.', portrait: 'Neutral' } },
 	{ name: 'show_text', props: { text: "If I get a few more I'll be unstoppable!", portrait: 'Enticed' } },
 	{ name: 'allow_input', props: {} }
