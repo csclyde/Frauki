@@ -170,8 +170,8 @@ GameState.CreateUI = function() {
         this['apple' + i] = game.add.image(-10 + (20 * i), 15, 'Misc', 'Apple0000', this.HUD);
     }
 
-    this['prismWill'] = game.add.image(-10, 320, 'Misc', 'Shard0005', this.HUD);
-    this['prismWit'] = game.add.image(2, 320, 'Misc', 'Shard0004', this.HUD);
+    this['prismWit'] = game.add.image(-10, 320, 'Misc', 'Shard0004', this.HUD);
+    this['prismWill'] = game.add.image(2, 320, 'Misc', 'Shard0005', this.HUD);
     this['prismPower'] = game.add.image(14, 320, 'Misc', 'Shard0007', this.HUD);
     this['prismLuck'] = game.add.image(26, 320, 'Misc', 'Shard0006', this.HUD);
 };

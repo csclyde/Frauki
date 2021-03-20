@@ -84,27 +84,14 @@ ScriptRunner.scripts['demo_Damage'] = [
 	{ name: 'allow_input', props: {} }
 ];
 
-ScriptRunner.scripts['demo_Will'] = [
-	{ name: 'disallow_input', props: {} },
-	{ name: 'screen_flash', props: {} },
-	{ name: 'play_sound', props: { name: 'crystal_door'} },
-	{ name: 'wait', props: { amount: 500 } },
-	{ name: 'play_music', props: {name: 'fanfare_short', restart: true} },
-	{ name: 'wait', props: { amount: 1500 } },
-	{ name: 'show_text', props: { text: 'Hooray! This HAS to be one of those prism things the nice lady was talking about...', portrait: 'Silly' } },
-	{ name: 'show_text', props: { text: 'I should go take it back to her right away!', portrait: 'Silly' } },
-	{ name: 'allow_input', props: {} }
-];
-
-ScriptRunner.scripts['demo_PrismDoor'] = [
-	{ name: 'disallow_input', props: {} },
-	
-	{ name: 'wait', props: { amount: 3000 } },
-	{ name: 'show_text', props: { text: 'Cool, seems like I can use this prism to open these special doors. That might be useful!', portrait: 'Neutral' } },
-	{ name: 'allow_input', props: {} }
-];
-
 ScriptRunner.scripts['demo_Wit'] = [
+	{ name: 'disallow_input', props: {} },
+	{ name: 'show_text', props: { text: 'Hooray! This HAS to be one of those prism things the nice lady was talking about...', portrait: 'Neutral' } },
+	{ name: 'show_text', props: { text: "It's my mission to get it back to her right away!", portrait: 'Mad' } },
+	{ name: 'allow_input', props: {} }
+];
+
+ScriptRunner.scripts['demo_Will'] = [
 	{ name: 'disallow_input', props: {} },
 	{ name: 'show_text', props: { text: "Yay, another prism shard! I'll be done in no time...", portrait: 'Silly' } },
 	{ name: 'allow_input', props: {} }
@@ -119,5 +106,13 @@ ScriptRunner.scripts['demo_Luck'] = [
 ScriptRunner.scripts['demo_Power'] = [
 	{ name: 'disallow_input', props: {} },
 	{ name: 'show_text', props: { text: "This prism will make a fine addition to my collection.", portrait: 'Silly' } },
+	{ name: 'allow_input', props: {} }
+];
+
+ScriptRunner.scripts['demo_PrismDoor'] = [
+	{ name: 'disallow_input', props: {} },
+	
+	{ name: 'wait', props: { amount: 3000 } },
+	{ name: 'show_text', props: { text: 'Cool, seems like I can use this prism to open these special doors. That might be useful!', portrait: 'Neutral' } },
 	{ name: 'allow_input', props: {} }
 ];

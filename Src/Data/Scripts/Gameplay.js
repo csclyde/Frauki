@@ -328,23 +328,37 @@ ScriptRunner.scripts['destroy_gemsucker'] = [
         console.log(shard)
         shard.x = params.prism.x - 15;
         shard.y = params.prism.y - 50;
+        shard.FlyAway();
         shard.bringToTop();
         params.prism.BlowUp();
-        //GameData.AddShard(this.prism);
     } },
 
     { name: 'pause_all_music', props: {} },
-    { name: 'play_music', props: { name: 'Goddess', fade: 1000 } },
-    { name: 'wait', props: { amount: 2000 } },
-
+    { name: 'wait', props: { amount: 1500 } },
+    
     { func: function(params) {
         var shard = objectController.prisms[params.prism.prism];
-        game.add.tween(shard).to({x: frauki.body.center.x, y: frauki.body.center.y}, 2000, Phaser.Easing.Elastic.Out, true);
+        shard.body.velocity.setTo(0);
+        game.add.tween(shard).to({x: frauki.body.center.x, y: frauki.body.center.y}, 4000, Phaser.Easing.Exponential.In, true);
+    } },
+    { name: 'play_music', props: { name: 'fanfare_long' } },
+
+    { name: 'wait', props: { amount: 4000 } }, 
+
+    { name: 'screen_flash', props: {} },    
+    { func: function(params) {
+        GameData.AddShard(params.prism.prism); 
+        objectController.prisms[params.prism.prism].visible = false;
+        effectsController.StarBurst(frauki.body.center);
+        effectsController.SparkSplash(frauki);
     } },
 
-    { name: 'wait', props: { amount: 2000 } },
-    { name: 'play_sound', props: { name: 'crystal_door' } },    
-    { name: 'stop_music', props: { name: 'Goddess', fade: 500 } },
+    { name: 'update_ui', props: { } },
+    { name: 'wait', props: { amount: 1000 } },
+    
+    { func: function(params) {
+        ScriptRunner.run('demo_' + params.prism.prism);
+    } },
 
-    { name: 'allow_input', props: {} },
+   // { name: 'allow_input', props: {} },
 ];

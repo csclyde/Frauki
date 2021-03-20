@@ -461,8 +461,8 @@ EffectsController.prototype.SparkSplash = function(src) {
     var minVel = new Phaser.Point(50, 50);
     var maxVel = new Phaser.Point(150, 150);
 
-    this.posSpark.minParticleSpeed.x = 50;
-    this.posSpark.minParticleSpeed.y = 50;
+    this.posSpark.minParticleSpeed.x = -150;
+    this.posSpark.minParticleSpeed.y = -150;
     this.posSpark.maxParticleSpeed.x = 150;
     this.posSpark.maxParticleSpeed.y = 150;
 
@@ -727,7 +727,7 @@ EffectsController.prototype.StarBurst = function(src) {
     this.stars.width = 10;
     this.stars.height = 10;
 
-    this.stars.explode(500, game.rnd.between(4, 6));
+    this.stars.explode(250, game.rnd.between(4, 6));
 };
 
 EffectsController.prototype.SprocketBurst = function(src, amt) {

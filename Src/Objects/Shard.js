@@ -15,6 +15,7 @@ Shard = function(game, x, y, name) {
     this.state = this.Floating;
 
     this.body.allowGravity = false;
+    this.body.drag.setTo(100);
 
     this.timers = new TimerUtil();
 
@@ -92,17 +93,21 @@ Shard.prototype.PlayAnim = function(name) {
         this.animations.play(name);
 };
 
+Shard.prototype.FlyAway = function() {
+    this.body.velocity.y = -100;
+};
+
 Shard.prototype.Floating = function() {
     this.PlayAnim(this.name);
 
-    if(this.dead) {
-        this.body.velocity.x = 0;
-        this.body.velocity.y = 0;
-        return;
-    }
+    // if(this.dead) {
+    //     this.body.velocity.x = 0;
+    //     this.body.velocity.y = 0;
+    //     return;
+    // }
 
-    this.body.velocity.y = Math.sin(GameState.gameTime / 150) * 30;
-    this.body.velocity.x = 0;
+    // this.body.velocity.y = Math.sin(GameState.gameTime / 150) * 30;
+    // this.body.velocity.x = 0;
 };
 
 Shard.prototype.collideWithPlayer = function(f) {

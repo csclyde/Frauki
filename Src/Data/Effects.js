@@ -27,11 +27,11 @@ Effects.Emitters = [
 		Count: 30,
 		Frames: ['Stars0000', 'Stars0001', 'Stars0002', 'Stars0003'],
 		Gravity: -700,
-		Drag: 3000,
-		MinSpeedX: -600,
-		MaxSpeedX: 600,
-		MinSpeedY: -600,
-		MaxSpeedY: 600,
+		Drag: 1000,
+		MinSpeedX: -400,
+		MaxSpeedX: 400,
+		MinSpeedY: -400,
+		MaxSpeedY: 400,
 		Alpha: 0.8
 	},
 

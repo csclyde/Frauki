@@ -106,6 +106,8 @@ GemSucker.prototype.PlayAnim = function(name) {
 GemSucker.prototype.Active = function() {
     this.PlayAnim('sucking');
 
+    this.icon.y = (Math.sin(GameState.gameTime / 30) * 2) - 77;
+
     if(this.health <= 2) {
         this.state = this.Broken;
     }
@@ -119,6 +121,9 @@ GemSucker.prototype.Active = function() {
 
 GemSucker.prototype.Broken = function() {
     this.PlayAnim('broken');
+
+    this.icon.y = (Math.sin(GameState.gameTime / 15) * 2) - 77;
+    
 
     if(this.shakeMagnitudeX > 0) {
         this.body.velocity.x = Math.sin(GameState.gameTime * 300) * this.shakeMagnitudeX;
