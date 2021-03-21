@@ -80,10 +80,11 @@ SpeechController.prototype.Create = function() {
 
 	FileMap.Portraits.forEach(function(portrait) {
 		this.portraits[portrait.Name] = game.add.image(200, 200, 'UI', portrait.Frame);
+		this.portraits[portrait.Name].anchor.setTo(0.5, 1);
 		this.portraits[portrait.Name].fixedToCamera = true;
 		this.portraits[portrait.Name].visible = false;
-		this.portraits[portrait.Name].cameraOffset.x = -12 + speechOffsetX;
-		this.portraits[portrait.Name].cameraOffset.y = -14 + speechOffsetY; 
+		this.portraits[portrait.Name].cameraOffset.x = 40 + speechOffsetX;
+		this.portraits[portrait.Name].cameraOffset.y = 105 + speechOffsetY; 
 	}, this);
 
 	this.speechVisible = false;

@@ -10,6 +10,7 @@ Junk = function(game, x, y, name) {
     this.body.collideWorldBounds = true;
     this.body.bounce.setTo(0.5);
     this.body.drag.setTo(200);
+    this.body.setSize(40, 40);
 
     this.objectName = 'Junk' + name;
 
