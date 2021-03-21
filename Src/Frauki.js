@@ -839,7 +839,10 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
         effectsController.ScreenFlash();
         effectsController.SlowHit(300);
     } else {
-        this.body.velocity.y *= 2;   
+        this.body.velocity.y *= 2;
+        GameState.death.type = e.objectName;
+        GameState.death.name = e.name;
+        GameState.death.end = game.time.now;
     }
 };
 

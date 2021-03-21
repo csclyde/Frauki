@@ -53,6 +53,52 @@ Enemy.prototype.types['Goddess'] =  function() {
 
 	};
 
+	this.GetGameoverScript = function() {
+		//INTRO AREA TRIGGERS
+		if(!GameData.GetFlag('intro_finished')) {
+			if(!GameData.GetFlag('first_death')) {
+				GameData.SetFlag('first_death', true);
+				return 'goddess_surprised_death1';
+			}
+			else if(!GameData.GetFlag('second_death')) {
+				GameData.SetFlag('second_death', true);
+				return 'goddess_surprised_death2';
+			}
+			else if(!GameData.GetFlag('third_death')) {
+				GameData.SetFlag('third_death', true);
+				return 'goddess_surprised_death3';
+			}
+			else {
+				return 'goddess_surprised_death_final';
+			}
+		}
+		//FIRST RUINS AREA TRIGGERS
+		else if(!GameData.IsDoorOpen('spawn_to_chapel')) {
+			if(GameData.data.upgrades.includes('Health2')  && !GameData.GetFlag('first_health_upgrade')) {
+				GameData.SetFlag('first_health_upgrade', true);
+				return 'first_health_upgrade';
+			}
+			else if(GameState.death.type === 'Buzzar' && !GameData.GetFlag('first_buzzar')) {
+				GameData.SetFlag('first_buzzar', true);
+				return 'first_buzzar';
+			}
+			else if(GameState.death.name === 'first_gubr' && !GameData.GetFlag('first_gubr')) {
+				GameData.SetFlag('first_gubr', true);
+				return 'first_gubr';
+			}
+			else {
+				return 'goddess_console_area1';
+			}
+		}
+		else if(GameData.IsDoorOpen('spawn_to_chapel') && !GameData.GetFlag('spawn_to_chapel')) {
+			GameData.SetFlag('spawn_to_chapel', true);
+			return 'first_shortcut';
+		}
+		else {
+			return 'goddess_console';
+		}
+	};
+
 	this.GetPortrait = function() {
 		return this.currentPortrait;
 	};
@@ -97,11 +143,4 @@ Enemy.prototype.types['Goddess'] =  function() {
 
 		return false;
 	};
-
-
-
-	this.attackFrames = {
-
-	};
-
 };

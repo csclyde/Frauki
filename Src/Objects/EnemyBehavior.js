@@ -62,6 +62,15 @@ EnemyBehavior.RollDice = function(sides, thresh) {
         return false;
 };
 
+EnemyBehavior.FlipCoin = function() {
+    var roll = Math.random();
+
+    if(roll >= 0.5)
+        return true;
+    else
+        return false;
+};
+
 EnemyBehavior.Player = {};
 
 EnemyBehavior.Player.IsNear = function(e, radius) {

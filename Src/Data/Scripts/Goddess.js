@@ -37,26 +37,8 @@ ScriptRunner.scripts['goddess_welcome_return'] = [
 
 ScriptRunner.scripts['goddess_gameover'] = [
 	{ func: function() {
-		if(!GameData.GetFlag('intro_finished') && !GameData.GetFlag('first_death')) {
-			GameData.SetFlag('first_death', true);
-			ScriptRunner.run('goddess_surprised_death');
-		}
-		else {
-			ScriptRunner.run('goddess_console');
-		}
+		ScriptRunner.run(goddess.GetGameoverScript());
 	}}
-];
-
-ScriptRunner.scripts['goddess_surprised_death'] = [
-	{ name: 'show_text', props: { text: "Oh. You died already...", portrait: 'Goddess_Neutral' } },
-	{ name: 'show_text', props: { text: "...", portrait: 'Goddess_Neutral' } },
-	{ name: 'show_text', props: { text: "Well, get back out there and try again Frauki.", portrait: 'Goddess_Neutral' } },
-	{ name: 'run_script', props: { name: 'exit_goddess' } },
-];
-
-ScriptRunner.scripts['goddess_console'] = [
-	{ name: 'show_text', props: { text: "Oh you poor thing... Don't worry, I've got you back on your feet. Now get out there and give it another shot!", portrait: 'Goddess_Neutral' } },
-	{ name: 'run_script', props: { name: 'exit_goddess' } },
 ];
 
 ScriptRunner.scripts['goddess_oh_hey'] = [
@@ -77,7 +59,7 @@ ScriptRunner.scripts['goddess_shortcut'] = [
 		GameData.SetFlag('intro_finished', true);
 	}},
 	{ name: 'wait', props: { amount: 1000 } },
-	{ name: 'show_text', props: { text: "Oh, you're behind me now...", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "Oh, you're behind me now. Cool.", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "Anyway...", portrait: 'Goddess_Neutral' } },	
 	{ name: 'show_text', props: { text: "That seal you just broke will now remain open, letting you take a nice shortcut.", portrait: 'Goddess_Neutral' } },	
 	{ name: 'show_text', props: { text: "Feel free to open more of them. It should make your work a lot easier.", portrait: 'Goddess_Neutral' } },
@@ -348,33 +330,6 @@ ScriptRunner.scripts['goddess_freedom'] = [
 	{ name: 'wait', props: { amount: 200 } },
 	{ name: 'show_text', props: { text: 'Just trust me. It will be pretty cool. I know you can do it... I\'m counting on you...', portrait: 'Goddess_Neutral' } },
 	{ name: 'wait', props: { amount: 9000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'allow_input', props: {} }
-
-];
-
-ScriptRunner.scripts['goddess_meet_with_shard'] = [
-	{ name: 'disallow_input', props: {} },
-
-	{ name: 'wait', props: { amount: 200 } },
-	{ name: 'show_text', props: { text: 'Oh, hello there...', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 4000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'wait', props: { amount: 200 } },
-	{ name: 'show_text', props: { text: 'It looks like you\'ve found a Prism Shard! Yes, that big red jewel.', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 7000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'wait', props: { amount: 200 } },
-	{ name: 'show_text', props: { text: 'That\'s very good news, because I happen to need that shard to escape this horrible prison.', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 7000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'wait', props: { amount: 200 } },
-	{ name: 'show_text', props: { text: "I've been in here so long... would you mind just walking up and opening this door for me?", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 7000 } },
 	{ name: 'hide_text', props: {} },
 
 	{ name: 'allow_input', props: {} }

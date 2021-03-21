@@ -21,6 +21,13 @@ GameState.create = function() {
 
     this.tweens = {};
 
+    this.death = {
+        type: '',
+        name: '',
+        start: 0,
+        end: 0,
+    };
+
     events.subscribe('update_ui', this.UpdateUI, this);
     events.subscribe('select_menu_option', this.MakeMenuSelection, this);
     events.subscribe('menu_change', this.UpdateMenuSelection, this);
@@ -102,6 +109,8 @@ GameState.Reset = function() {
     if(!!goddess) goddess.Reset(); 
     
     Frogland.Reset();
+
+    this.death.start = game.time.now;
 };
 
 GameState.MakeMenuSelection = function() {
