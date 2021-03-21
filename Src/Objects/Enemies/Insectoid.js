@@ -32,8 +32,6 @@ Enemy.prototype.types['Insectoid'] =  function() {
                 this.angle += 20;
             }
         } else {
-            events.publish('stop_sound', {name: 'Insectoid_attack'});
-
             this.angle = 0;
         }
     };

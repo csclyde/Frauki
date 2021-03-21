@@ -23,10 +23,9 @@ ScriptRunner.scripts['exit_goddess'] = [
 
 ScriptRunner.scripts['goddess_intro'] = [
 	{ name: 'show_text', props: { text: 'There you are Frauki...', portrait: 'Goddess_Neutral' } },
-	{ name: 'show_text', props: { text: "I called you here because I need your help.", portrait: 'Goddess_Neutral' } },
-	{ name: 'show_text', props: { text: "Some alien robots have crashed their ship here and are taking over.", portrait: 'Goddess_Neutral' } },
-	{ name: 'show_text', props: { text: "They took all my beautiful Prism Shards, and are sucking all the energy out of them.", portrait: 'Goddess_Neutral' } },
-	{ name: 'show_text', props: { text: "Go now with my blessing and bring me back those beautiful shining gems, Frauki.", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "Some yucky little alien robots have crashed their ship here and are taking over.", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "They took my four beautiful Prism Shards, and are sucking all the energy out of them.", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "Go now with my blessing and smash those alien robots. I want my Prism Shards back!", portrait: 'Goddess_Neutral' } },
 	{ name: 'run_script', props: { name: 'exit_goddess' } },
 	
 ];

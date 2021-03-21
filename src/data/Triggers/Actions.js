@@ -17,6 +17,15 @@ TriggerController.prototype.triggers['goddess'] = {
 	}
 };
 
+TriggerController.prototype.triggers['run_script_once'] = {
+	enter: function(params) {
+		if(!GameData.GetFlag(params.script)) {
+			ScriptRunner.run(params.script);
+			GameData.SetFlag(params.script, true);
+		}
+	},
+};
+
 TriggerController.prototype.triggers['old_robo'] = {
 	enter: function(params) {
 		ScriptRunner.run('enter_oldrobo');

@@ -45,7 +45,7 @@ Apple.prototype.collideWithPlayer = function(f) {
     
     this.state = this.Eaten;
 
-    events.publish('play_sound', {name: 'crystal_door'});
+    events.publish('play_sound', { name: 'gain_energy_4', restart: true });
 
     if(!GameData.GetFlag('first_apple_eaten')) {
         ScriptRunner.run('demo_Apple');

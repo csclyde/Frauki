@@ -99,7 +99,9 @@ GameState.Reset = function() {
     triggerController.Reset();
     projectileController.Reset();
 
-    if(!!goddess) goddess.Reset();    
+    if(!!goddess) goddess.Reset(); 
+    
+    Frogland.Reset();
 };
 
 GameState.MakeMenuSelection = function() {

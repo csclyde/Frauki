@@ -4,7 +4,7 @@ ScriptRunner.scripts['demo_Apple'] = [
 	{ name: 'allow_input', props: {} }
 ];
 
-ScriptRunner.scripts['demo_Door'] = [
+ScriptRunner.scripts['demo_ChapelDoor'] = [
 	{ name: 'disallow_input', props: {} },
 
 	{ name: 'wait', props: { amount: 1000 } },
@@ -12,6 +12,15 @@ ScriptRunner.scripts['demo_Door'] = [
 	{ name: 'wait', props: { amount: 1500 } },
 
 	{ name: 'run_script', props: { name: 'goddess_shortcut' } },
+];
+
+ScriptRunner.scripts['demo_statueDoor'] = [
+	{ name: 'disallow_input', props: {} },
+
+	{ name: 'wait', props: { amount: 1000 } },
+	{ name: 'show_text', props: { text: "I opened another seal! This is great, now I can get through this area much quicker.", portrait: 'Neutral' } },
+	
+	{ name: 'allow_input', props: {} },
 ];
 
 ScriptRunner.scripts['demo_Checkpoint'] = [
@@ -86,6 +95,14 @@ ScriptRunner.scripts['demo_Damage'] = [
 	{ name: 'allow_input', props: {} }
 ];
 
+ScriptRunner.scripts['demo_PrismDoor'] = [
+	{ name: 'disallow_input', props: {} },
+	
+	{ name: 'wait', props: { amount: 3000 } },
+	{ name: 'show_text', props: { text: 'Cool, seems like I can use this prism to open these special doors. That might be useful!', portrait: 'Neutral' } },
+	{ name: 'allow_input', props: {} }
+];
+
 ScriptRunner.scripts['demo_Wit'] = [
 	{ name: 'disallow_input', props: {} },
 	{ name: 'show_text', props: { text: 'Hooray! This HAS to be one of those prism things the nice lady was talking about...', portrait: 'Neutral' } },
@@ -108,13 +125,5 @@ ScriptRunner.scripts['demo_Luck'] = [
 ScriptRunner.scripts['demo_Power'] = [
 	{ name: 'disallow_input', props: {} },
 	{ name: 'show_text', props: { text: "This prism will make a fine addition to my collection.", portrait: 'Silly' } },
-	{ name: 'allow_input', props: {} }
-];
-
-ScriptRunner.scripts['demo_PrismDoor'] = [
-	{ name: 'disallow_input', props: {} },
-	
-	{ name: 'wait', props: { amount: 3000 } },
-	{ name: 'show_text', props: { text: 'Cool, seems like I can use this prism to open these special doors. That might be useful!', portrait: 'Neutral' } },
 	{ name: 'allow_input', props: {} }
 ];

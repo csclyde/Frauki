@@ -40,7 +40,7 @@ Enemy.prototype.types['SW8T'] =  function() {
 		if(this.state === this.Blocking) {
 			events.publish('play_sound', {name: 'SW8T_shield', restart: false});
 		} else {
-			events.publish('stop_sound', {name: 'SW8T_shield', restart: false});
+			//events.publish('stop_sound', {name: 'SW8T_shield', restart: false});
 		}
 	};
 
