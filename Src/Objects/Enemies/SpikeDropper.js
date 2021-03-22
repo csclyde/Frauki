@@ -1,6 +1,6 @@
 Enemy.prototype.types['SpikeDropper'] =  function() {
 
-    this.body.setSize(25, 25, 0, 5);
+    this.body.setSize(25, 25, 0, 0);
     this.anchor.setTo(0.5, 0.5);
 
     this.animations.add('cling', ['Misc/SpikeDropper0000'], 10, true, false);

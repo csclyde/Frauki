@@ -26,7 +26,7 @@ GemSucker = function(game, x, y, name) {
     this.icon.animations.add('Luck', ['Shard0002'], 6, false, false);
     this.icon.animations.add('Power', ['Shard0003'], 6, false, false);
     this.icon.iconSet = false;
-    this.icon.x = -40;
+    this.icon.x = -25;
     this.icon.y = -77;
 
     this.addChild(this.icon);

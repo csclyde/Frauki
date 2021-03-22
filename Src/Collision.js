@@ -321,12 +321,8 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
 };
 
 
-Collision.OverlapObjectsWithSelf = function(o1, o2) {
-    if(o1.spriteType === 'enemy' && o2.spriteType === 'enemy' && o1.robotic === o2.robotic) {
-        return true;
-    } else if(o1.spriteType === 'junk' && o2.spriteType === 'junk') {
-        return false;
-    } else if(o1.spriteType === 'enemy' && o2.spriteType === 'door') {
+Collision.OverlapEnemiesWithSelf = function(o1, o2) {
+    if(o1.robotic === o2.robotic) {
         return true;
     } else {
         return false;

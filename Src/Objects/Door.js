@@ -6,7 +6,7 @@ Door = function(game, x, y, name) {
     //enable its physics body
     game.physics.enable(this, Phaser.Physics.ARCADE);
     
-    this.body.setSize(16, 68, 0, -16);
+    this.body.setSize(24, 68, 0, -16);
     this.anchor.setTo(0.5, 0.5);
 
     this.x += 8;

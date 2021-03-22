@@ -6,7 +6,7 @@ Apple = function(game, x, y, name) {
     //enable its physics body
     game.physics.enable(this, Phaser.Physics.ARCADE);
     
-    this.body.setSize(16, 16, 0, 2);
+    this.body.setSize(16, 16, 0, 0);
     this.anchor.setTo(0.5, 0.5);
     this.body.bounce.y = 0.5;
     //this.body.gravity.y = game.physics.arcade.gravity.y * 2;

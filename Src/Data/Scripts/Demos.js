@@ -281,7 +281,7 @@ ScriptRunner.scripts['demo_Power'] = [
 		goddess.alpha = 0;
 		goddess.x = Frogland.goddessPositions.Power.x;
 		goddess.y = Frogland.goddessPositions.Power.y;
-		EnemyBehavior.FacePlayer(goddess);			
+		EnemyBehavior.FacePlayer(goddess);
 		game.add.tween(goddess).to({alpha: 1}, 2000, Phaser.Easing.Linear.None, true);
 	}},
 

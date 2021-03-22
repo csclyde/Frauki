@@ -1,6 +1,6 @@
 Enemy.prototype.types['Sporoid'] =  function() {
 
-	this.body.setSize(20, 16, 7, 0);
+	this.body.setSize(20, 16, 0, 0);
 	this.anchor.setTo(0.5, 0.5);
 
     this.animations.add('idle', ['Misc/Sporoid0000', 'Misc/Sporoid0001', 'Misc/Sporoid0002', 'Misc/Sporoid0003', 'Misc/Sporoid0004', 'Misc/Sporoid0005'], 10, true, false);

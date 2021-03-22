@@ -71,9 +71,9 @@ GameState.update = function() {
 GameState.render = function() {
     // game.debug.body(frauki.attackRect);
     
-    // objectController.GetObjectGroup().forEach(function(o) {
-    //     game.debug.body(o);
-    // });
+    objectController.GetObjectGroup().forEach(function(o) {
+        game.debug.body(o);
+    });
 }
 
 GameState.BeginGameover = function() {

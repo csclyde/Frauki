@@ -1,13 +1,13 @@
 Orb = function(game, x, y, name) {
     //instantiate the sprite
-    Phaser.Sprite.call(this, game, x, y, name);
+    Phaser.Sprite.call(this, game, x + 8, y, name);
     this.spriteType = 'orb';
     this.objectName = 'Orb';
     
     //enable its physics body
     game.physics.enable(this, Phaser.Physics.ARCADE);
     
-    this.body.setSize(50, 50, 0, 0);
+    this.body.setSize(30, 30, 0, 0);
     this.anchor.setTo(0.5);
     this.body.bounce.y = 0.5;
     //this.body.gravity.y = game.physics.arcade.gravity.y * 2;

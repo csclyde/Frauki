@@ -7,7 +7,7 @@ Upgrade = function(game, x, y, name) {
     //enable its physics body
     game.physics.enable(this, Phaser.Physics.ARCADE);
     
-    this.body.setSize(32, 64, 0, 0);
+    this.body.setSize(32, 32, 0, 0);
     this.anchor.setTo(0.5);
     this.body.bounce.y = 0;
     //this.body.gravity.y = game.physics.arcade.gravity.y * 2;
@@ -32,7 +32,7 @@ Upgrade = function(game, x, y, name) {
     this.icon.animations.add('Stab', ['UpgradeStab0000', 'UpgradeStab0001'], 10, true, false);
     this.icon.animations.add('Dive', ['UpgradeDamage0000'], 18, true, false);
     this.icon.iconSet = false;
-    this.icon.x = -25;
+    this.icon.x = -22;
     this.icon.y = -25;
 
     this.addChild(this.icon);

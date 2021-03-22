@@ -119,6 +119,13 @@ Frogland.HandleCollisions = function() {
         Collision.OverlapFraukiWithObject, 
         null, false);
 
+    //enemies are collided with themselves
+    game.physics.arcade.collide(
+        objectController.GetObjectGroup(), 
+        undefined, 
+        function(o1, o2) { return o1.type === 'enemy' && o2.type === 'enemy'; }, 
+        Collision.OverlapEnemiesWithSelf);
+
     //collide enemies with doors
     game.physics.arcade.collide(
         objectController.enemyList, 
@@ -134,13 +141,6 @@ Frogland.HandleCollisions = function() {
             objectController.GetObjectGroup(),
             Collision.OverlapAttackWithObject);
     }
-
-    //objects are collided with themselves
-    game.physics.arcade.collide(
-        objectController.GetObjectGroup(), 
-        undefined, 
-        null, 
-        Collision.OverlapObjectsWithSelf);
 
     //frauki is overlapped with projectiles
     if(projectileController.projectiles.countLiving() > 0) {
