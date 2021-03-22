@@ -371,9 +371,7 @@ ScriptRunner.scripts['finish_game'] = [
     
     { func: function(params) {
         var wit = objectController.prisms.Wit;
-        var will = objectController.prisms.Will;
-        var luck = objectController.prisms.Luck;
-        var power = objectController.prisms.Power;
+        GameState.inFinale = true;
 
         wit.visible = true;
         wit.x = frauki.body.center.x;
@@ -446,6 +444,7 @@ ScriptRunner.scripts['finish_game'] = [
 
     { func: function() {
         events.publish('pan_camera', { to: goddess.body.center, duration: 1000 });
+        GameState.HUDFadeTween = game.add.tween(GameState.HUD).to({alpha: 0}, 500, Phaser.Easing.Cubic.Out, true);          
     } },
     
     { name: 'wait', props: { amount: 1500 } },
@@ -487,34 +486,44 @@ ScriptRunner.scripts['finish_game'] = [
 
     { name: 'wait', props: { amount: 4000 } },
     { name: 'destroy_enemy', props: { name: 'tower_troll' } },
+    { name: 'play_sound', props: { name: 'explosion', restart: true } },
 
     { name: 'wait', props: { amount: 1500 } },
     { name: 'destroy_enemy', props: { name: 'tower_ninja' } },
+    { name: 'play_sound', props: { name: 'explosion', restart: true } },    
 
     { name: 'wait', props: { amount: 1000 } },
     { name: 'destroy_enemy', props: { name: 'tower_hopper' } },
-
+    { name: 'play_sound', props: { name: 'explosion', restart: true } },
+    
     { name: 'wait', props: { amount: 500 } },
     { name: 'destroy_enemy', props: { name: 'tower_hawk' } },
-
+    { name: 'play_sound', props: { name: 'explosion', restart: true } },
+    
     { name: 'wait', props: { amount: 500 } },
     { name: 'destroy_enemy', props: { name: 'tower_spider1' } },
-
+    { name: 'play_sound', props: { name: 'explosion', restart: true } },
+    
     { name: 'wait', props: { amount: 500 } },
     { name: 'destroy_enemy', props: { name: 'tower_spider2' } },
-
+    { name: 'play_sound', props: { name: 'explosion', restart: true } },
+    
     { name: 'wait', props: { amount: 500 } },
     { name: 'destroy_enemy', props: { name: 'tower_spider3' } },
-
+    { name: 'play_sound', props: { name: 'explosion', restart: true } },
+    
     { name: 'wait', props: { amount: 500 } },
     { name: 'destroy_enemy', props: { name: 'tower_goob1' } },
-
+    { name: 'play_sound', props: { name: 'explosion', restart: true } },
+    
     { name: 'wait', props: { amount: 500 } },
     { name: 'destroy_enemy', props: { name: 'tower_goob2' } },
-
+    { name: 'play_sound', props: { name: 'explosion', restart: true } },
+    
     { name: 'wait', props: { amount: 1500 } },
     { name: 'destroy_enemy', props: { name: 'tower_swat' } },
-
+    { name: 'play_sound', props: { name: 'explosion', restart: true } },
+    
     { name: 'wait', props: { amount: 5000 } },
     
     { name: 'show_text', props: { text: "My people...", portrait: 'OldRobo' } },
@@ -525,6 +534,7 @@ ScriptRunner.scripts['finish_game'] = [
     { name: 'show_text', props: { text: "The only lasting--", portrait: 'OldRobo' } },
 
     { name: 'destroy_enemy', props: { name: 'tower_leader' } },
+    { name: 'play_sound', props: { name: 'explosion', restart: true } },    
     { name: 'wait', props: { amount: 1500 } },
     
     { func: function() {
@@ -534,9 +544,44 @@ ScriptRunner.scripts['finish_game'] = [
     { name: 'wait', props: { amount: 3500 } },
     { name: 'show_text', props: { text: "Now that takes care of those nasty little pests.", portrait: 'Goddess_Neutral' } },
     { name: 'show_text', props: { text: "I think we really taught them a lesson.", portrait: 'Goddess_Neutral' } },
-    { name: 'show_text', props: { text: "Well done Frauki.", portrait: 'Goddess_Neutral' } },
+    { name: 'show_text', props: { text: "Well done Frauki, Frogland is saved!", portrait: 'Goddess_Neutral' } },
+
+	{ name: 'stop_music', props: { name: 'Goddess', fade: 4000 } },
+    { func: function() {
+        effectsController.Fade(true, 4000);
+    } },
+
+    { name: 'wait', props: { amount: 4000 } },
+    { name: 'play_music', props: { name: 'Denoument', fade: 1000 } },
+
+    { name: 'run_script', props: { name: 'show_random_scene' }}
     
+];
+
+
+ScriptRunner.scripts['show_random_scene'] = [
     
-  
-   // { name: 'allow_input', props: {} },
+    { func: function(params) {
+        var newTarget = {
+            x: game.rnd.between(100, 300) * 16,
+            y: game.rnd.between(175, 575) * 16
+        };
+
+        events.publish('set_camera', { to: newTarget });
+    } },
+
+    { func: function() {
+        effectsController.Fade(false, 3000);
+    } },
+
+    { name: 'wait', props: { amount: 8000 } },
+
+    { func: function() {
+        effectsController.Fade(true, 3000);
+    } },
+
+    { name: 'wait', props: { amount: 3000 } },
+
+    { name: 'run_script', props: { name: 'show_random_scene' }}
+    
 ];

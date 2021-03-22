@@ -235,7 +235,7 @@ Door.prototype.ForceOpenDoor = function() {
 }
 
 Door.prototype.PerformOpen = function(save, silent) {
-    if(this.state === this.Open || !this.body) return;
+    if(this.state === this.Open || !this.body || GameState.inFinale) return;
 
     //check that the door has received enough attempts to actually open
     if(++this.openAttempts < this.thresholdAttempts) {

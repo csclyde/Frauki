@@ -10,6 +10,7 @@ GameState.create = function() {
     this.prevTime = game.time.now;
     this.restarting = false;
     this.inMenu = true;
+    this.inFinale = false;
     this.menuSelectionMade = false;
     
     this.currentMenu = Menus.main;

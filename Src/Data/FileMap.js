@@ -164,6 +164,7 @@ FileMap.Music = [
 	{ Name: 'Underwater', File: 'Data/Music/underwater.ogg', Volume: 0.15, Loop: true },
 	{ Name: 'Sunshine', File: 'Data/Music/sunshine.ogg', Volume: 0.15, Loop: true },
 	{ Name: 'Frogtown', File: 'Data/Music/frogtown_theme.ogg', Volume: 0.15, Loop: true },
+	{ Name: 'Denoument', File: 'Data/Music/denoument.ogg', Volume: 0.15, Loop: true },
 
 	{ Name: 'fanfare_long', File: 'Data/Music/fanfare_long.ogg', Volume: 14.0, Loop: false },
 	{ Name: 'fanfare_short', File: 'Data/Music/fanfare_short.ogg', Volume: 0.8, Loop: false },
