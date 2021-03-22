@@ -334,7 +334,7 @@ ScriptRunner.scripts['destroy_gemsucker'] = [
     } },
 
     { name: 'pause_all_music', props: {} },
-    { name: 'wait', props: { amount: 1500 } },
+    { name: 'wait', props: { amount: 500 } },
     
     { func: function(params) {
         var shard = objectController.prisms[params.prism.prism];
@@ -347,7 +347,7 @@ ScriptRunner.scripts['destroy_gemsucker'] = [
 
     { name: 'screen_flash', props: {} },    
     { func: function(params) {
-        GameData.AddShard(params.prism.prism); 
+        //GameData.AddShard(params.prism.prism); 
         objectController.prisms[params.prism.prism].visible = false;
         effectsController.StarBurst(frauki.body.center);
         effectsController.SparkSplash(frauki);

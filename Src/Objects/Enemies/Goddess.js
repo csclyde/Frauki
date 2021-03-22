@@ -23,7 +23,7 @@ Enemy.prototype.types['Goddess'] =  function() {
 	this.currentPortrait = 'Goddess_Neutral';
     
 	this.updateFunction = function() {
-
+		
 	};
 
 	this.Act = function() {

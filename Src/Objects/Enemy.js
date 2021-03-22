@@ -113,10 +113,10 @@ Enemy.prototype.update = function() {
         this.DrawHealth();
     } 
 
-     if(!this.timers.TimerUp('after_damage_flicker') && this.timers.TimerUp('hurt_flicker')) {
+    if(!this.timers.TimerUp('after_damage_flicker') && this.timers.TimerUp('hurt_flicker')) {
         this.alpha = 0;
         game.time.events.add(15, function() { that.timers.SetTimer('hurt_flicker', 30); });
-    } else {
+    } else if(this !== goddess) {
         this.alpha = 1;
     }
 

@@ -55,8 +55,8 @@ ScriptRunner.scripts['first_shortcut'] = [
 ScriptRunner.scripts['goddess_console_area1'] = [
 	{ name: 'show_text', props: { text: [
 		"Ouch, that one looked pretty bad Frauki. But keep trying! My Prism Gems still need saving.",
-		"You're not thinking about giving up, are you Frauki? I want my Prism Gems.",
-		"You can do better, Frauki. Go do what I tell you or wou'll be in trouble.",
+		"You're not thinking about giving up, are you Frauki? I want my Prism Gems!",
+		"You can do better, Frauki. Go do what I tell you or you'll be in trouble.",
 		"Aww, I'm sorry Frauki. You just got creamed pretty hard. Well, wipe those tears away and try again.",
 		"Don't even think about giving up! Or I'll be very mad.",
 		"Well, that wasn't your best attempt. Try to do your best, each and every time!",
