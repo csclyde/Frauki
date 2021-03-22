@@ -1,19 +1,21 @@
 
 TriggerController.prototype.triggers['goddess'] = {
 	enter: function(params) {
-		console.log('testing', GameData.GetFlag('ready_for_goddess_talk'))
-		if(GameData.GetFlag('ready_for_goddess_talk')) {
-			ScriptRunner.run('goddess_chat');
-			GameData.SetFlag('ready_for_goddess_talk', false);
+		if(GameData.HasShard('Wit') && GameData.HasShard('Will') && GameData.HasShard('Luck') && GameData.HasShard('Power')) {
+			ScriptRunner.run('finish_game');
 		}
+
+		// if(GameData.GetFlag('ready_for_goddess_talk')) {
+		// 	ScriptRunner.run('goddess_chat');
+		// 	GameData.SetFlag('ready_for_goddess_talk', false);
+		// }
 	},
 
 	stay: function(params) {
 	},
 
 	exit: function(params) {
-		console.log('exiting')
-		GameData.SetFlag('ready_for_goddess_talk', true);
+		//GameData.SetFlag('ready_for_goddess_talk', true);
 	}
 };
 
@@ -29,21 +31,6 @@ TriggerController.prototype.triggers['run_script_once'] = {
 TriggerController.prototype.triggers['old_robo'] = {
 	enter: function(params) {
 		ScriptRunner.run('enter_oldrobo');
-	},
-
-	stay: function(params) {
-	},
-
-	exit: function(params) {
-	}
-};
-
-TriggerController.prototype.triggers['goddess_spaceship'] = {
-	enter: function(params) {
-		if(!GameData.GetFlag('goddess_spaceship')) {
-			GameData.SetFlag('goddess_spaceship', true);
-			GameData.SetVal('goddess_death_message', 'That big, ugly, metal eyesore is the robots space ship. They crashed that pile of junk into my planet many years ago and they haven\'t left since.')
-		}
 	},
 
 	stay: function(params) {

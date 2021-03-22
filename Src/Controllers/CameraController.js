@@ -1,6 +1,10 @@
 CameraController = function() {
 	this.menuTarget = { x: (279 * 16) + 8, y: 110 * 16 };
 	this.target = this.menuTarget;
+
+
+	this.shipBaseTarget = { x: (184 * 16) + 8, y: 186 * 16 };
+	this.shipTopTarget = { x: (184 * 16) + 8, y: 45 * 16 };
 	
 	this.camX = this.menuTarget.x;
 	this.camVelX = 0;

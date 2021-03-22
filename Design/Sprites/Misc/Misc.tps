@@ -181,66 +181,6 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">Frames/AngelKiss0000.png</key>
-            <key type="filename">Frames/AngelKiss0001.png</key>
-            <key type="filename">Frames/AngelKiss0002.png</key>
-            <key type="filename">Frames/AngelKiss0003.png</key>
-            <key type="filename">Frames/AngelKiss0004.png</key>
-            <key type="filename">Frames/AngelKiss0005.png</key>
-            <key type="filename">Frames/AngelKiss0006.png</key>
-            <key type="filename">Frames/Charge10000.png</key>
-            <key type="filename">Frames/Charge10001.png</key>
-            <key type="filename">Frames/Charge10002.png</key>
-            <key type="filename">Frames/Charge10003.png</key>
-            <key type="filename">Frames/Clash0000.png</key>
-            <key type="filename">Frames/Clash0001.png</key>
-            <key type="filename">Frames/Clash0002.png</key>
-            <key type="filename">Frames/Clash0003.png</key>
-            <key type="filename">Frames/DoorDust0000.png</key>
-            <key type="filename">Frames/DoorDust0001.png</key>
-            <key type="filename">Frames/DoorDust0002.png</key>
-            <key type="filename">Frames/DoorDust0003.png</key>
-            <key type="filename">Frames/DoorDust0004.png</key>
-            <key type="filename">Frames/Dust0000.png</key>
-            <key type="filename">Frames/Dust0001.png</key>
-            <key type="filename">Frames/Dust0002.png</key>
-            <key type="filename">Frames/Dust0003.png</key>
-            <key type="filename">Frames/Dust0004.png</key>
-            <key type="filename">Frames/Dust0005.png</key>
-            <key type="filename">Frames/JumpDust0000.png</key>
-            <key type="filename">Frames/JumpDust0001.png</key>
-            <key type="filename">Frames/JumpDust0002.png</key>
-            <key type="filename">Frames/JumpDust0003.png</key>
-            <key type="filename">Frames/JumpDust0004.png</key>
-            <key type="filename">Frames/JumpDust0005.png</key>
-            <key type="filename">Frames/JumpDust0006.png</key>
-            <key type="filename">Frames/Spirit0000.png</key>
-            <key type="filename">Frames/Spirit0001.png</key>
-            <key type="filename">Frames/Spirit0002.png</key>
-            <key type="filename">Frames/Spirit0003.png</key>
-            <key type="filename">Frames/Sprockets0000.png</key>
-            <key type="filename">Frames/Sprockets0001.png</key>
-            <key type="filename">Frames/Sprockets0002.png</key>
-            <key type="filename">Frames/Sprockets0003.png</key>
-            <key type="filename">Frames/Sprockets0004.png</key>
-            <key type="filename">Frames/Stars0000.png</key>
-            <key type="filename">Frames/Stars0001.png</key>
-            <key type="filename">Frames/Stars0002.png</key>
-            <key type="filename">Frames/Stars0003.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>25,25,50,50</rect>
-                <key>scale9Paddings</key>
-                <rect>25,25,50,50</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">Frames/Apple0000.png</key>
             <key type="filename">Frames/Apple0001.png</key>
             <key type="filename">Frames/Apple0002.png</key>
@@ -348,7 +288,6 @@
                 <false/>
             </struct>
             <key type="filename">Frames/Barrel0000.png</key>
-            <key type="filename">Frames/DoorApple0000.png</key>
             <key type="filename">Frames/DoorDark0000.png</key>
             <key type="filename">Frames/DoorDark0001.png</key>
             <key type="filename">Frames/DoorDark0002.png</key>
@@ -445,6 +384,59 @@
                 <rect>50,50,100,100</rect>
                 <key>scale9Paddings</key>
                 <rect>50,50,100,100</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">Frames/Charge10000.png</key>
+            <key type="filename">Frames/Charge10001.png</key>
+            <key type="filename">Frames/Charge10002.png</key>
+            <key type="filename">Frames/Charge10003.png</key>
+            <key type="filename">Frames/Clash0000.png</key>
+            <key type="filename">Frames/Clash0001.png</key>
+            <key type="filename">Frames/Clash0002.png</key>
+            <key type="filename">Frames/Clash0003.png</key>
+            <key type="filename">Frames/DoorDust0000.png</key>
+            <key type="filename">Frames/DoorDust0001.png</key>
+            <key type="filename">Frames/DoorDust0002.png</key>
+            <key type="filename">Frames/DoorDust0003.png</key>
+            <key type="filename">Frames/DoorDust0004.png</key>
+            <key type="filename">Frames/Dust0000.png</key>
+            <key type="filename">Frames/Dust0001.png</key>
+            <key type="filename">Frames/Dust0002.png</key>
+            <key type="filename">Frames/Dust0003.png</key>
+            <key type="filename">Frames/Dust0004.png</key>
+            <key type="filename">Frames/Dust0005.png</key>
+            <key type="filename">Frames/JumpDust0000.png</key>
+            <key type="filename">Frames/JumpDust0001.png</key>
+            <key type="filename">Frames/JumpDust0002.png</key>
+            <key type="filename">Frames/JumpDust0003.png</key>
+            <key type="filename">Frames/JumpDust0004.png</key>
+            <key type="filename">Frames/JumpDust0005.png</key>
+            <key type="filename">Frames/JumpDust0006.png</key>
+            <key type="filename">Frames/Spirit0000.png</key>
+            <key type="filename">Frames/Spirit0001.png</key>
+            <key type="filename">Frames/Spirit0002.png</key>
+            <key type="filename">Frames/Spirit0003.png</key>
+            <key type="filename">Frames/Sprockets0000.png</key>
+            <key type="filename">Frames/Sprockets0001.png</key>
+            <key type="filename">Frames/Sprockets0002.png</key>
+            <key type="filename">Frames/Sprockets0003.png</key>
+            <key type="filename">Frames/Sprockets0004.png</key>
+            <key type="filename">Frames/Stars0000.png</key>
+            <key type="filename">Frames/Stars0001.png</key>
+            <key type="filename">Frames/Stars0002.png</key>
+            <key type="filename">Frames/Stars0003.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>25,25,50,50</rect>
+                <key>scale9Paddings</key>
+                <rect>25,25,50,50</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

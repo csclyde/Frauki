@@ -49,10 +49,6 @@ Enemy.prototype.types['Goddess'] =  function() {
 
 	};
 
-	this.GetWelcomeBackMessage = function() {
-
-	};
-
 	this.GetGameoverScript = function() {
 		//INTRO AREA TRIGGERS
 		if(!GameData.GetFlag('intro_finished')) {
@@ -101,27 +97,6 @@ Enemy.prototype.types['Goddess'] =  function() {
 
 	this.GetPortrait = function() {
 		return this.currentPortrait;
-	};
-
-	this.AddMessage = function(msg) {
-		if(this.messageQueue.length === 5) {
-			this.messageQueue.shift();
-		}
-
-		this.messageQueue.push(msg);
-
-		GameData.SetVal('goddess_message_queue', this.messageQueue);
-	};
-
-	this.GetMessage = function() {
-		if(this.messageQueue.length > 0) {
-			var msg = this.messageQueue.shift();
-			GameData.SetVal('goddess_message_queue', this.messageQueue);
-			return msg;
-		}
-
-		return 'No message';
-
 	};
 
 	////////////////////////////////STATES////////////////////////////////////

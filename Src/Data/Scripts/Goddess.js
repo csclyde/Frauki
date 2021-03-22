@@ -72,266 +72,47 @@ ScriptRunner.scripts['goddess_shortcut'] = [
 ];
 
 
-
-
-
-
-ScriptRunner.scripts['goddess_shard'] = [
-	{ name: 'disallow_input', props: {} },
-	{ name: 'show_text', props: { text: 'You found it!! You beautiful little person thing!!', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 7000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'wait', props: { amount: 250 } },
-	{ name: 'show_text', props: { text: 'Great work. Now if you walk up to the door, it will open the first of four seals.', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 7000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'wait', props: { amount: 250 } },
-	{ name: 'show_text', props: { text: 'Find the other three and I will finally be free...', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 7000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'wait', props: { amount: 250 } },
-	{ name: 'show_text', props: { text: 'FREEEEEEEE!!!', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 7000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'allow_input', props: {} }
-];
-
-ScriptRunner.scripts['goddess_hurt_4'] = [
-	{ name: 'disallow_input', props: {} },
-	{ name: 'show_text', props: { text: "OUCH! What's your problem!? Don't do that again.", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 2000 } },
-	{ name: 'allow_input', props: {} }
-];
-
-ScriptRunner.scripts['goddess_hurt_3'] = [
-	{ name: 'disallow_input', props: {} },
-	{ name: 'show_text', props: { text: "Frauki why are you doing this?? I demand you stop!", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 2000 } },
-	{ name: 'allow_input', props: {} }
-];
-
-ScriptRunner.scripts['goddess_hurt_2'] = [
-	{ name: 'disallow_input', props: {} },
-	{ name: 'show_text', props: { text: "It hurts so bad... stop it you evil creature...", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 2000 } },
-	{ name: 'allow_input', props: {} }
-];
-
-ScriptRunner.scripts['goddess_hurt_1'] = [
-	{ name: 'disallow_input', props: {} },
-	{ name: 'show_text', props: { text: "I'm warning you... if you do that again you're not going to like what happens...", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 2000 } },
-	{ name: 'allow_input', props: {} }
-];
-
-ScriptRunner.scripts['goddess_rez_angry'] = [
-	{ name: 'disallow_input', props: {} },
-
-	{ name: 'show_text', props: { text: "I really don't appreciate being killed...", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 3000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'wait', props: { amount: 100 } },
-	{ name: 'show_text', props: { text: 'Don\'t.', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 1000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'wait', props: { amount: 100 } },
-	{ name: 'show_text', props: { text: 'Do.', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 1000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'wait', props: { amount: 100 } },
-	{ name: 'show_text', props: { text: 'It.', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 1000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'wait', props: { amount: 100 } },
-	{ name: 'show_text', props: { text: 'Again!!!!!!', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 2000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'allow_input', props: {} }
-
-];
-
-ScriptRunner.scripts['seal_hall_intro'] = [
-	{ name: 'disallow_input', props: {} },
-
-	{ name: 'show_text', props: { text: "Oh my! You've opened the first of four seals! I know you could do it. YOu really are a wonderful little creature.", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 7000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'wait', props: { amount: 200 } },
-	{ name: 'show_text', props: { text: "Now keep it up, I'm sure the other prism shards can't be far. Don't get discouraged. YOu can do this.", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 7000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'wait', props: { amount: 200 } },
-	{ name: 'show_text', props: { text: "Oh yeah, there is a special gift for you in the room behind me. Use that red prism shard to get it!", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 7000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'allow_input', props: {} }
-];
-
-ScriptRunner.scripts['open_second_seal'] = [
-	{ name: 'disallow_input', props: {} },
-
-	{ name: 'show_text', props: { text: "You opened the second seal! This is unbelievable...", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 7000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'show_text', props: { text: "So close to freedom!! No more musty cell...", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 4000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'wait', props: { amount: 200 } },
-	{ name: 'show_text', props: { text: 'No more dank dripping ceiling...', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 4000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'wait', props: { amount: 200 } },
-	{ name: 'show_text', props: { text: 'Just the sweet, juicy nectar of freedom...', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 4000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'wait', props: { amount: 200 } },
-	{ name: 'show_text', props: { text: '...', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 3000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'wait', props: { amount: 200 } },
-	{ name: 'show_text', props: { text: 'Heh heh heh... just... please be careful. Don\'t give up.', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 7000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'wait', props: { amount: 200 } },
-	{ name: 'show_text', props: { text: '...and thanks. Thanks for helping me.', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 5000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'allow_input', props: {} }
-];
-
-ScriptRunner.scripts['open_third_seal'] = [
-	{ name: 'disallow_input', props: {} },
-
-	{ name: 'show_text', props: { text: "You opened another seal!! Frauki... the closer you get, the harder it is to wait.", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 7000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'show_text', props: { text: "Before I met you, I gave up on being free.", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 7000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'show_text', props: { text: "I gave up on existing at all.", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 7000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'show_text', props: { text: "As the years and decades went by, my spirit faded into oblivion.", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 7000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'show_text', props: { text: "I no longer felt real, and time passed for me like it does for a stone.", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 7000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'show_text', props: { text: "But now that there is just one seal left, I feel real again. I'm so scared of how excited I am. This might be too good to be happening.", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 7000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'show_text', props: { text: "Please open the last seal. I know I'm asking so much of you. But if I don't escape now, my spirit will be destroyed.", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 7000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'show_text', props: { text: "I'm so scared...", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 7000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'allow_input', props: {} }
-];
-
-ScriptRunner.scripts['open_fourth_seal'] = [
-	{ name: 'disallow_input', props: {} },
-
-	{ name: 'show_text', props: { text: "The last seal is open...", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 7000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'show_text', props: { text: "I'm free...", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 7000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'show_text', props: { text: "But I'm scared to leave...", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 7000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'show_text', props: { text: "Nothing will be the same...", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 7000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'show_text', props: { text: "But the universe is calling me. I'm leaving this plane of existence.", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 7000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'show_text', props: { text: "The joy is covering me... Goodbye Frauki... I love you.", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 7000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'allow_input', props: {} }
-];
-
-ScriptRunner.scripts['goddess_restate'] = [
-	{ name: 'show_text', props: { text: "Before I met you, I gave up on being free...", portrait: 'Goddess_Neutral' } }
-];
-
-ScriptRunner.scripts['goddess_freedom'] = [
-	{ name: 'disallow_input', props: {} },
-
-	{ name: 'show_text', props: { text: "Freedom!! No more musty cell...", portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 4000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'wait', props: { amount: 200 } },
-	{ name: 'show_text', props: { text: 'No more dank dripping ceiling...', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 4000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'wait', props: { amount: 200 } },
-	{ name: 'show_text', props: { text: 'Just the sweet, juicy nectar of freedom...', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 4000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'wait', props: { amount: 200 } },
-	{ name: 'show_text', props: { text: '...', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 3000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'wait', props: { amount: 200 } },
-	{ name: 'show_text', props: { text: 'Now Frauki, I know I\'ve already asked a lot of you. But there is more to do. That prism shard you hold is a powerful artifact.', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 9000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'wait', props: { amount: 200 } },
-	{ name: 'show_text', props: { text: 'In fact, it\'s one of four powerful artifacts. Together they make up the Mother Prism, an object of great and mysterious power.', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 9000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'wait', props: { amount: 200 } },
-	{ name: 'show_text', props: { text: 'If you could find the remaining three prism shards that have been carelessly tossed around the world... well...', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 9000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'wait', props: { amount: 200 } },
-	{ name: 'show_text', props: { text: 'Just trust me. It will be pretty cool. I know you can do it... I\'m counting on you...', portrait: 'Goddess_Neutral' } },
-	{ name: 'wait', props: { amount: 9000 } },
-	{ name: 'hide_text', props: {} },
-
-	{ name: 'allow_input', props: {} }
-
-];
+/*
+You found it!! You beautiful little person thing!!
+Great work. Now if you walk up to the door, it will open the first of four seals.
+Find the other three and I will finally be free...
+FREEEEEEEE!!!
+
+OUCH! What's your problem!? Don't do that again
+Frauki why are you doing this?? I demand you stop!
+It hurts so bad... stop it you evil creature...
+I'm warning you... if you do that again you're not going to like what happens...
+I really don't appreciate being killed...
+Don't.
+Do.
+It.
+Again!!!!
+
+Oh my! You've opened the first of four seals! I know you could do it. YOu really are a wonderful little creature.
+Now keep it up, I'm sure the other prism shards can't be far. Don't get discouraged. YOu can do this.
+Oh yeah, there is a special gift for you in the room behind me. Use that red prism shard to get it!
+
+You opened the second seal! This is unbelievable...
+So close to freedom!! No more musty cell...
+No more dank dripping ceiling...
+Just the sweet, juicy nectar of freedom...
+...
+Heh heh heh... just... please be careful. Don't give up.
+...and thanks. Thanks for helping me.
+
+You opened another seal!! Frauki... the closer you get, the harder it is to wait.
+Before I met you, I gave up on being free.
+I gave up on existing at all.
+As the years and decades went by, my spirit faded into oblivion.
+I no longer felt real, and time passed for me like it does for a stone.
+But now that there is just one seal left, I feel real again. I'm so scared of how excited I am. This might be too good to be happening.
+Please open the last seal. I know I'm asking so much of you. But if I don't escape now, my spirit will be destroyed.
+I'm so scared...
+
+The last seal is open...
+I'm free...
+But I'm scared to leave...
+Nothing will be the same...
+But the universe is calling me. I'm leaving this plane of existence.
+The joy is covering me... Goodbye Frauki... I love you.
+*/

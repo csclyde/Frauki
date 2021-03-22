@@ -347,7 +347,7 @@ ScriptRunner.scripts['destroy_gemsucker'] = [
 
     { name: 'screen_flash', props: {} },    
     { func: function(params) {
-        //GameData.AddShard(params.prism.prism); 
+        GameData.AddShard(params.prism.prism); 
         objectController.prisms[params.prism.prism].visible = false;
         effectsController.StarBurst(frauki.body.center);
         effectsController.SparkSplash(frauki);
@@ -360,5 +360,183 @@ ScriptRunner.scripts['destroy_gemsucker'] = [
         ScriptRunner.run('demo_' + params.prism.prism);
     } },
 
+   // { name: 'allow_input', props: {} },
+];
+
+ScriptRunner.scripts['finish_game'] = [
+    { name: 'disallow_input', props: {} },
+    { name: 'pause_all_music', props: {} },
+	{ name: 'play_music', props: { name: 'Goddess', fade: 1000 } },
+    { name: 'wait', props: { amount: 1500 } },
+    
+    { func: function(params) {
+        var wit = objectController.prisms.Wit;
+        var will = objectController.prisms.Will;
+        var luck = objectController.prisms.Luck;
+        var power = objectController.prisms.Power;
+
+        wit.visible = true;
+        wit.x = frauki.body.center.x;
+        wit.y = frauki.body.center.y;
+        wit.bringToTop();
+        //4456, 2656
+        game.add.tween(wit).to({x: 4456, y: 2656}, 4000, Phaser.Easing.Quartic.InOut, true);
+
+        game.time.events.add(4000, function() {
+            events.publish('play_sound', { name: 'crystal_door', restart: true });
+            effectsController.ScreenFlash();
+        });
+    } },
+
+    { name: 'wait', props: { amount: 1500 } },
+
+    { func: function(params) {
+        var will = objectController.prisms.Will;
+
+        will.visible = true;
+        will.x = frauki.body.center.x;
+        will.y = frauki.body.center.y;
+        will.bringToTop();
+        //4456, 2656
+        game.add.tween(will).to({x: 4488, y: 2656}, 4000, Phaser.Easing.Quartic.InOut, true);
+
+        game.time.events.add(4000, function() {
+            events.publish('play_sound', { name: 'crystal_door', restart: true });
+            effectsController.ScreenFlash();
+        });
+    } },
+
+    { name: 'wait', props: { amount: 1500 } },
+
+    { func: function(params) {
+        var power = objectController.prisms.Power;
+
+        power.visible = true;
+        power.x = frauki.body.center.x;
+        power.y = frauki.body.center.y;
+        power.bringToTop();
+        //4456, 2656
+        game.add.tween(power).to({x: 4472, y: 2640}, 4000, Phaser.Easing.Quartic.InOut, true);
+
+        game.time.events.add(4000, function() {
+            events.publish('play_sound', { name: 'crystal_door', restart: true });
+            effectsController.ScreenFlash();
+        });
+    } },
+
+    { name: 'wait', props: { amount: 1500 } },
+
+    { func: function(params) {
+        var luck = objectController.prisms.Luck;
+
+        luck.visible = true;
+        luck.x = frauki.body.center.x;
+        luck.y = frauki.body.center.y;
+        luck.bringToTop();
+        //4456, 2656
+        game.add.tween(luck).to({x: 4472, y: 2673}, 4000, Phaser.Easing.Quartic.InOut, true);
+
+        game.time.events.add(4000, function() {
+            events.publish('play_sound', { name: 'crystal_door', restart: true });
+            effectsController.ScreenFlash();
+        });
+    } },
+
+    { name: 'wait', props: { amount: 4500 } },
+
+    { func: function() {
+        events.publish('pan_camera', { to: goddess.body.center, duration: 1000 });
+    } },
+    
+    { name: 'wait', props: { amount: 1500 } },
+    
+    
+    { name: 'show_text', props: { text: "Well, there they are Frauki. All of my beautiful Prism Shards all back safely in their home.", portrait: 'Goddess_Neutral' } },
+    { name: 'show_text', props: { text: "Just look at them glimmering happily.", portrait: 'Goddess_Neutral' } },
+    { name: 'show_text', props: { text: "My they're pretty little things...", portrait: 'Goddess_Neutral' } },
+    { name: 'show_text', props: { text: "Don't you agree Frauki?", portrait: 'Goddess_Neutral' } },
+
+    { func: function() {
+        events.publish('pan_camera', { to: frauki.body.center, duration: 1000 });
+    } },
+
+    { name: 'wait', props: { amount: 1500 } },    
+
+    { name: 'show_text', props: { text: "Uh, sure!", portrait: 'Neutral' } },
+    
+    { func: function() {
+        events.publish('pan_camera', { to: goddess.body.center, duration: 1000 });
+    } },
+
+    { name: 'wait', props: { amount: 1500 } },
+
+    { name: 'show_text', props: { text: "Now that they are returned, I have my powers back.", portrait: 'Goddess_Neutral' } },
+    { name: 'show_text', props: { text: "And with those powers, I will obliterate utterly the Alien Robots, with extreme prejudice and wrath.", portrait: 'Goddess_Neutral' } },
+    { name: 'show_text', props: { text: "Watch carefully Frauki, as I unleash am unholy wave of destruction and terror.", portrait: 'Goddess_Neutral' } },
+
+    { func: function() {
+        events.publish('pan_camera', { to: cameraController.shipBaseTarget, duration: 4000 });
+    } },
+
+    { name: 'wait', props: { amount: 5000 } },
+    
+    
+    { func: function() {
+        events.publish('pan_camera', { to: cameraController.shipTopTarget, duration: 20000 });
+    } },
+
+    { name: 'wait', props: { amount: 4000 } },
+    { name: 'destroy_enemy', props: { name: 'tower_troll' } },
+
+    { name: 'wait', props: { amount: 1500 } },
+    { name: 'destroy_enemy', props: { name: 'tower_ninja' } },
+
+    { name: 'wait', props: { amount: 1000 } },
+    { name: 'destroy_enemy', props: { name: 'tower_hopper' } },
+
+    { name: 'wait', props: { amount: 500 } },
+    { name: 'destroy_enemy', props: { name: 'tower_hawk' } },
+
+    { name: 'wait', props: { amount: 500 } },
+    { name: 'destroy_enemy', props: { name: 'tower_spider1' } },
+
+    { name: 'wait', props: { amount: 500 } },
+    { name: 'destroy_enemy', props: { name: 'tower_spider2' } },
+
+    { name: 'wait', props: { amount: 500 } },
+    { name: 'destroy_enemy', props: { name: 'tower_spider3' } },
+
+    { name: 'wait', props: { amount: 500 } },
+    { name: 'destroy_enemy', props: { name: 'tower_goob1' } },
+
+    { name: 'wait', props: { amount: 500 } },
+    { name: 'destroy_enemy', props: { name: 'tower_goob2' } },
+
+    { name: 'wait', props: { amount: 1500 } },
+    { name: 'destroy_enemy', props: { name: 'tower_swat' } },
+
+    { name: 'wait', props: { amount: 5000 } },
+    
+    { name: 'show_text', props: { text: "My people...", portrait: 'OldRobo' } },
+    { name: 'show_text', props: { text: "Our way of life... Extinguished...", portrait: 'OldRobo' } },
+    { name: 'show_text', props: { text: "Gone forever, like a blip of light from a dying star.", portrait: 'OldRobo' } },
+    { name: 'show_text', props: { text: "Now we fade back into non-existence, as though we were never here.", portrait: 'OldRobo' } },
+    { name: 'show_text', props: { text: "Let my final words of wisdom be somehow etched into the universe...", portrait: 'OldRobo' } },
+    { name: 'show_text', props: { text: "The only lasting--", portrait: 'OldRobo' } },
+
+    { name: 'destroy_enemy', props: { name: 'tower_leader' } },
+    { name: 'wait', props: { amount: 1500 } },
+    
+    { func: function() {
+        events.publish('pan_camera', { to: goddess.body.center, duration: 3000 });
+    } },
+
+    { name: 'wait', props: { amount: 3500 } },
+    { name: 'show_text', props: { text: "Now that takes care of those nasty little pests.", portrait: 'Goddess_Neutral' } },
+    { name: 'show_text', props: { text: "I think we really taught them a lesson.", portrait: 'Goddess_Neutral' } },
+    { name: 'show_text', props: { text: "Well done Frauki.", portrait: 'Goddess_Neutral' } },
+    
+    
+  
    // { name: 'allow_input', props: {} },
 ];

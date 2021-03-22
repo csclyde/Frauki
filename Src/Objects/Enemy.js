@@ -47,6 +47,9 @@ Enemy = function(game, x, y, name) {
     });
 
     events.subscribe('hide_enemy_health', this.HideHealth);
+    events.subscribe('destroy_enemy', function(params) {
+        if(this.name === params.name) this.DestroyEnemy(this);
+    }, this);
 };
 
 Enemy.prototype = Object.create(Phaser.Sprite.prototype);

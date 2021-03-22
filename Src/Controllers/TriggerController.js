@@ -47,7 +47,7 @@ TriggerController.prototype.CreateTriggers = function(layer) {
         trigger.stayFired = false;
         trigger.exitFired = false;
 
-        trigger.playerInside = false;
+        //trigger.playerInside = false;
 
         if(!!this.triggers[trigger.name]) {
             if(!!this.triggers[trigger.name].load) {
@@ -64,6 +64,10 @@ TriggerController.prototype.CreateTriggers = function(layer) {
 };
 
 TriggerController.prototype.Update = function(currentLayer) {
+
+    if(GameState.restarting || GameState.inMenu) {
+        return;
+    }
 
     currentLayer = this.triggerLayers['Triggers'];
 
@@ -95,7 +99,7 @@ TriggerController.prototype.Update = function(currentLayer) {
                 trigger.playerInside = true;
 
             //if the flag is already set, they are still in the trigger
-            } else {
+            } else if(trigger.playerInside === true) {
                 if(!trigger.stayFired || !trigger.once) {
                     //call the stay function
                     if(!!trigger.stay) trigger.stay(trigger.properties, trigger);
@@ -117,9 +121,9 @@ TriggerController.prototype.Update = function(currentLayer) {
                     trigger.exitFired = true;
                 }
 
-                //and unset the flag
-                trigger.playerInside = false;
             }
+            //and unset the flag
+            trigger.playerInside = false;
         }
     }
 };

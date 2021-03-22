@@ -471,6 +471,8 @@ EffectsController.prototype.SparkSplash = function(src) {
 
 EffectsController.prototype.EnergySplash = function(src, intensity, color, amt, vel) {
 
+    if(!src) return;
+    
     amt = amt || 6;
     vel = vel || new Phaser.Point(0, 0);
     vel = vel.clone();
