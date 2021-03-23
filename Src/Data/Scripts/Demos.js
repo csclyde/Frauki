@@ -113,7 +113,8 @@ ScriptRunner.scripts['demo_Wit'] = [
 		goddess.alpha = 0;
 		goddess.x = Frogland.goddessPositions.Wit.x;
 		goddess.y = Frogland.goddessPositions.Wit.y;
-		EnemyBehavior.FacePlayer(goddess);			
+		EnemyBehavior.FacePlayer(goddess);
+		frauki.SetDirection('right');
 		game.add.tween(goddess).to({alpha: 1}, 2000, Phaser.Easing.Linear.None, true);
 	}},
 
@@ -175,6 +176,8 @@ ScriptRunner.scripts['demo_Will'] = [
 		goddess.alpha = 0;	
 		goddess.x = Frogland.goddessPositions.Will.x;
 		goddess.y = Frogland.goddessPositions.Will.y;
+		goddess.SetDirection('right');
+		frauki.SetDirection('left');
 		game.add.tween(goddess).to({alpha: 1}, 2000, Phaser.Easing.Linear.None, true);
 	}},
 
@@ -201,6 +204,7 @@ ScriptRunner.scripts['demo_Will'] = [
 	{ func: function(params) {
 		goddess.x = Frogland.goddessPositions.start.x;
 		goddess.y = Frogland.goddessPositions.start.y;
+		goddess.SetDirection('left');
 		goddess.alpha = 1;
 	}},
 	
@@ -217,7 +221,7 @@ ScriptRunner.scripts['demo_Luck'] = [
 		goddess.alpha = 0;
 		goddess.x = Frogland.goddessPositions.Luck.x;
 		goddess.y = Frogland.goddessPositions.Luck.y;
-		goddess.SetDirection('right');		
+		frauki.SetDirection('right');		
 		game.add.tween(goddess).to({alpha: 1}, 2000, Phaser.Easing.Linear.None, true);
 	}},
 

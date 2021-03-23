@@ -112,6 +112,38 @@ Door.prototype.create = function() {
             }
         break;
 
+        case 'shard_metal':
+            if(this.prism === 'Wit') {
+                this.animations.add('closed', ['DoorPrismMetal0000'], 10, true, false);
+                this.animations.add('open', ['DoorPrismMetal0004'], 10, true, false);
+            } else if(this.prism === 'Will') {
+                this.animations.add('closed', ['DoorPrismMetal0001'], 10, true, false);
+                this.animations.add('open', ['DoorPrismMetal0005'], 10, true, false);
+            } else if(this.prism === 'Luck') {
+                this.animations.add('closed', ['DoorPrismMetal0002'], 10, true, false);
+                this.animations.add('open', ['DoorPrismMetal0006'], 10, true, false);
+            } else if(this.prism === 'Power') {
+                this.animations.add('closed', ['DoorPrismMetal0003'], 10, true, false);
+                this.animations.add('open', ['DoorPrismMetal0007'], 10, true, false);
+            }
+        break;
+
+        case 'shard_stone':
+            if(this.prism === 'Wit') {
+                this.animations.add('closed', ['DoorPrismStone0000'], 10, true, false);
+                this.animations.add('open', ['DoorPrismStone0004'], 10, true, false);
+            } else if(this.prism === 'Will') {
+                this.animations.add('closed', ['DoorPrismStone0001'], 10, true, false);
+                this.animations.add('open', ['DoorPrismStone0005'], 10, true, false);
+            } else if(this.prism === 'Luck') {
+                this.animations.add('closed', ['DoorPrismStone0002'], 10, true, false);
+                this.animations.add('open', ['DoorPrismStone0006'], 10, true, false);
+            } else if(this.prism === 'Power') {
+                this.animations.add('closed', ['DoorPrismStone0003'], 10, true, false);
+                this.animations.add('open', ['DoorPrismStone0007'], 10, true, false);
+            }
+        break;
+
 
         case 'enemy':
             this.animations.add('closed', ['DoorEnemy0001'], 10, true, false);
@@ -208,6 +240,7 @@ Door.prototype.OpenDoor = function(f) {
 
         prism.scale.x = 0.1;
         prism.scale.y = 0.1;
+        prism.bringToTop();
 
         if(!!this.script) {
             ScriptRunner.run(this.script);
@@ -270,6 +303,8 @@ Door.prototype.PerformOpen = function(save, silent) {
             break;
 
             case 'shard':
+            case 'shard_metal':
+            case 'shard_stone':
                 events.publish('play_sound', {name: 'crystal_door', restart: true });
             break;
 

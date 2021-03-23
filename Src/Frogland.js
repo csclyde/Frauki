@@ -19,7 +19,7 @@ Frogland.Create = function() {
         start: { x: 295 * 16, y: 168 * 16 },
         Wit: { x: 152 * 16, y: 228 * 16 },
         Will: { x: 111 * 16, y: 300 * 16 },
-        Luck: { x: 135 * 16, y: 548 * 16 },
+        Luck: { x: 144 * 16, y: 548 * 16 },
         Power: { x: 190 * 16, y: 72 * 16 },
     }
 

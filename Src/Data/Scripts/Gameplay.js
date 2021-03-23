@@ -471,7 +471,7 @@ ScriptRunner.scripts['finish_game'] = [
 
     { name: 'show_text', props: { text: "Now that they are returned, I have my powers back.", portrait: 'Goddess_Neutral' } },
     { name: 'show_text', props: { text: "And with those powers, I will obliterate utterly the Alien Robots, with extreme prejudice and wrath.", portrait: 'Goddess_Neutral' } },
-    { name: 'show_text', props: { text: "Watch carefully Frauki, as I unleash am unholy wave of destruction and terror.", portrait: 'Goddess_Neutral' } },
+    { name: 'show_text', props: { text: "Watch carefully Frauki, as I unleash an unholy wave of destruction and terror.", portrait: 'Goddess_Neutral' } },
 
     { func: function() {
         events.publish('pan_camera', { to: cameraController.shipBaseTarget, duration: 4000 });

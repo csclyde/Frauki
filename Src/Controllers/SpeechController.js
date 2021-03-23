@@ -46,19 +46,21 @@ SpeechController.prototype.Create = function() {
 	var speechOffsetY = 240;
 
 	this.portraitBox = game.add.image(80, 70, 'UI', 'Speech0000');
-	this.portraitBox.animations.add('flicker', ['Speech0000', 'Speech0001'], 18, true, false);
-	this.portraitBox.animations.play('flicker');
+	this.portraitBox.animations.add('green', ['Speech0000'], 18, true, false);
+	this.portraitBox.animations.add('red', ['Speech0002'], 18, true, false);
+	this.portraitBox.animations.play('green');
 	this.portraitBox.fixedToCamera = true;
-	this.portraitBox.alpha = 0.7;
+	this.portraitBox.alpha = 0.9;
 	this.portraitBox.visible = false;
 	this.portraitBox.cameraOffset.x = 0 + speechOffsetX;
 	this.portraitBox.cameraOffset.y = 10 + speechOffsetY; 
 
 	this.dialogBox = game.add.image(7, 7, 'UI', 'Speech0002');
 	this.dialogBox.fixedToCamera = true;
-	this.dialogBox.animations.add('flicker', ['Speech0002', 'Speech0003'], 18, true, false);
-	this.dialogBox.animations.play('flicker');
-	this.dialogBox.alpha = 0.7;
+	this.dialogBox.animations.add('green', ['Speech0001'], 18, true, false);
+	this.dialogBox.animations.add('red', ['Speech0003'], 18, true, false);
+	this.dialogBox.animations.play('green');
+	this.dialogBox.alpha = 0.9;
 	this.dialogBox.visible = false;
 	this.dialogBox.cameraOffset.x = 70 + speechOffsetX; 
 	this.dialogBox.cameraOffset.y = 10 + speechOffsetY; 
@@ -273,6 +275,14 @@ SpeechController.prototype.Activate = function(text, portrait) {
 	}
 
 	this.SetText(text);
+
+	if(portrait.includes('Robo')) {
+		this.portraitBox.animations.play('red');
+		this.dialogBox.animations.play('red');
+	} else {
+		this.portraitBox.animations.play('green');
+		this.dialogBox.animations.play('green');
+	}
 
 	this.portraits[this.currentPortrait].visible = false;
 	this.currentPortrait = portrait || 'Neutral';
