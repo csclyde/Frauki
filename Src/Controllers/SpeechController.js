@@ -2,7 +2,6 @@ SpeechController = function() {
 
 	var that  = this;
 
-	events.subscribe('activate_speech', this.ShowSpeech, this);
 	events.subscribe('control_up', this.Investigate, this);
 	events.subscribe('hide_speech', this.HideSpeech, this);
 
@@ -143,6 +142,26 @@ SpeechController.prototype.LoadSpeechZones = function() {
             that.speechZones.push(zone);
              
         }
+	});
+	
+	//create speech zones for all the NPCs
+	Frogland.map.objects['Enemies'].forEach(function(o) {
+        if(o.gid === 149) {
+			var zone = new Phaser.Rectangle(o.x + 8 - 50, o.y + 8 - 20, 100, 30);
+            zone.text = o.properties ? o.properties.text : 'Error';
+			zone.speechName = o.name;
+			zone.NPC = true;
+            zone.active = true;
+
+            if(!!o.properties && !!o.properties.show_flag) {
+            	zone.showFlag = o.properties.show_flag;
+            } else {
+            	zone.showFlag = null;
+            }
+
+            that.speechZones.push(zone);
+             
+        }
     });
 };
 
@@ -234,6 +253,8 @@ SpeechController.prototype.ShowSpeech = function() {
 			if(zone.speechName === 'goddess') {
 				this.Activate(goddess.GetSpeech(), goddess.GetPortrait());
 
+			} else if(zone.NPC === true) {
+				ScriptRunner.run('NPC_' + zone.speechName);
 			} else {
 				this.Activate(Speeches[zone.speechName].text, Speeches[zone.speechName].portrait);
 			}

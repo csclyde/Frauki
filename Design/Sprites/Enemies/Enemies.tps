@@ -313,7 +313,13 @@
             <key type="filename">KR32/Jump0007.png</key>
             <key type="filename">KR32/Stand0001.png</key>
             <key type="filename">KR32/Stand0002.png</key>
-            <key type="filename">NPC/OldRobo0000.png</key>
+            <key type="filename">NPC/Robos0000.png</key>
+            <key type="filename">NPC/Robos0001.png</key>
+            <key type="filename">NPC/Robos0002.png</key>
+            <key type="filename">NPC/Robos0003.png</key>
+            <key type="filename">NPC/Robos0004.png</key>
+            <key type="filename">NPC/Robos0005.png</key>
+            <key type="filename">NPC/Robos0006.png</key>
             <key type="filename">NPC/boat0000.png</key>
             <key type="filename">NPC/boat0001.png</key>
             <key type="filename">NPC/boat0002.png</key>

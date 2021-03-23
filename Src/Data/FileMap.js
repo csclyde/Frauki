@@ -165,6 +165,7 @@ FileMap.Music = [
 	{ Name: 'Sunshine', File: 'Data/Music/sunshine.ogg', Volume: 0.15, Loop: true },
 	{ Name: 'Frogtown', File: 'Data/Music/frogtown_theme.ogg', Volume: 0.15, Loop: true },
 	{ Name: 'Denoument', File: 'Data/Music/denoument.ogg', Volume: 0.15, Loop: true },
+	{ Name: 'Loopy', File: 'Data/Music/loopy.ogg', Volume: 0.15, Loop: true },
 
 	{ Name: 'fanfare_long', File: 'Data/Music/fanfare_long.ogg', Volume: 14.0, Loop: false },
 	{ Name: 'fanfare_short', File: 'Data/Music/fanfare_short.ogg', Volume: 0.8, Loop: false },
@@ -199,8 +200,7 @@ FileMap.Enemies = [
 	{ Name: 'SpikeDropper', Tile: 146 },
 	{ Name: 'Haystax', Tile: 147 },
 	{ Name: 'Crabby', Tile: 148 },
-	{ Name: 'Gnome', Tile: 149 },
-	{ Name: 'OldRobo', Tile: 150 },
+	{ Name: 'NPC', Tile: 149 },
 ];
 
 FileMap.Junk = [
