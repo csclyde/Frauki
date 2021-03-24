@@ -227,5 +227,6 @@ FileMap.Portraits = [
 	{ Name: 'Silly', Frame: 'PortraitsFraukiMischeif' },
 	{ Name: 'Goddess_Neutral', Frame: 'PortraitsGoddess_Neutral' },
 	{ Name: 'OldRobo', Frame: 'PortraitsOldRobo' },
-	{ Name: 'none', Frame: '' },
+	{ Name: 'red', Frame: '' },
+	{ Name: 'green', Frame: '' },
 ];

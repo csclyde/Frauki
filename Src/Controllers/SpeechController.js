@@ -46,7 +46,6 @@ SpeechController.prototype.Create = function() {
 
 	this.portraitBox = game.add.image(80, 70, 'UI', 'Speech0000');
 	this.portraitBox.animations.add('green', ['Speech0000'], 18, true, false);
-	this.portraitBox.animations.add('red', ['Speech0002'], 18, true, false);
 	this.portraitBox.animations.play('green');
 	this.portraitBox.fixedToCamera = true;
 	this.portraitBox.alpha = 0.9;
@@ -57,7 +56,8 @@ SpeechController.prototype.Create = function() {
 	this.dialogBox = game.add.image(7, 7, 'UI', 'Speech0002');
 	this.dialogBox.fixedToCamera = true;
 	this.dialogBox.animations.add('green', ['Speech0001'], 18, true, false);
-	this.dialogBox.animations.add('red', ['Speech0003'], 18, true, false);
+	this.dialogBox.animations.add('green_npc', ['Speech0002'], 18, true, false);
+	this.dialogBox.animations.add('red_npc', ['Speech0003'], 18, true, false);
 	this.dialogBox.animations.play('green');
 	this.dialogBox.alpha = 0.9;
 	this.dialogBox.visible = false;
@@ -160,7 +160,6 @@ SpeechController.prototype.LoadSpeechZones = function() {
             }
 
             that.speechZones.push(zone);
-             
         }
     });
 };
@@ -254,7 +253,7 @@ SpeechController.prototype.ShowSpeech = function() {
 				this.Activate(goddess.GetSpeech(), goddess.GetPortrait());
 
 			} else if(zone.NPC === true) {
-				ScriptRunner.run('enter_NPC', { name: zone.speechName});
+				ScriptRunner.run('enter_NPC', { name: zone.speechName });
 			} else {
 				this.Activate(Speeches[zone.speechName].text, Speeches[zone.speechName].portrait);
 			}
@@ -297,22 +296,19 @@ SpeechController.prototype.Activate = function(text, portrait) {
 
 	this.SetText(text);
 
-	if(portrait.includes('Robo')) {
-		this.portraitBox.animations.play('red');
-		this.dialogBox.animations.play('red');
-	} else {
-		this.portraitBox.animations.play('green');
-		this.dialogBox.animations.play('green');
-	}
-
 	this.portraits[this.currentPortrait].visible = false;
 	this.currentPortrait = portrait || 'Neutral';
 
-	if(portrait !== 'none') {
+	if(portrait === 'red') {
+		this.dialogBox.animations.play('red_npc');
+	} else if(portrait === 'green') {	
+		this.dialogBox.animations.play('green_npc');
+	} else {
+		this.dialogBox.animations.play('green');		
 		this.portraitBox.visible = true;
+		this.portraits[this.currentPortrait].visible = true;
 	}
-	
-	this.portraits[this.currentPortrait].visible = true;
+
 	this.dialogBox.visible = true;
 	this.text.visible = true;
 

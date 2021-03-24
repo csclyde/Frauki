@@ -3,7 +3,6 @@ Enemy.prototype.types['NPC'] =  function() {
 	this.body.setSize(20, 20, 0, 4);
 	this.anchor.setTo(0.5);
 
-    this.animations.add('gnome_boat', ['NPC/boat0000', 'NPC/boat0001', 'NPC/boat0002', 'NPC/boat0003', 'NPC/boat0004', 'NPC/boat0005'], 5, true, false);
 	this.animations.add('gnome_city', ['NPC/cool0000'], 10, true, false);
     this.animations.add('gnome_cooking', ['NPC/cooking0000', 'NPC/cooking0001', 'NPC/cooking0002', 'NPC/cooking0003', 'NPC/cooking0004', 'NPC/cooking0005', 'NPC/cooking0006', 'NPC/cooking0007', 'NPC/cooking0008'], 3, true, false);
 	this.animations.add('gnome_cool', ['NPC/cool0000'], 10, true, false);
@@ -16,6 +15,7 @@ Enemy.prototype.types['NPC'] =  function() {
 	this.animations.add('gnome_pickaxe', ['NPC/pickaxe0000', 'NPC/pickaxe0001', 'NPC/pickaxe0002', 'NPC/pickaxe0003', 'NPC/pickaxe0004', 'NPC/pickaxe0005', 'NPC/pickaxe0006', 'NPC/pickaxe0007', 'NPC/pickaxe0008', 'NPC/pickaxe0009', 'NPC/pickaxe0010', 'NPC/pickaxe0011', 'NPC/pickaxe0012', 'NPC/pickaxe0013', 'NPC/pickaxe0014', 'NPC/pickaxe0015', 'NPC/pickaxe00016', 'NPC/pickaxe0017', 'NPC/pickaxe0018'], 5, true, false);
 	this.animations.add('gnome_sleepy', ['NPC/sleepy0000', 'NPC/sleepy0001', 'NPC/sleepy0002', 'NPC/sleepy0003', 'NPC/sleepy0004', 'NPC/sleepy0005'], 1, true, false);
 	this.animations.add('gnome_windy', ['NPC/windy0000', 'NPC/windy0001', 'NPC/windy0002', 'NPC/windy0003', 'NPC/windy0004', 'NPC/windy0005', 'NPC/windy0006'], 5, true, false);
+    this.animations.add('gnome_boat', ['NPC/boat0000', 'NPC/boat0001', 'NPC/boat0002', 'NPC/boat0003', 'NPC/boat0004', 'NPC/boat0005'], 5, true, false);
 
 	this.animations.add('robo_puncher', ['NPC/Robos0000'], 10, true, false);
 	this.animations.add('robo_chonker', ['NPC/Robos0001'], 10, true, false);
@@ -24,6 +24,7 @@ Enemy.prototype.types['NPC'] =  function() {
 	this.animations.add('robo_samurai', ['NPC/Robos0004'], 10, true, false);
 	this.animations.add('robo_slickback', ['NPC/Robos0005'], 10, true, false);
 	this.animations.add('robo_oldie', ['NPC/Robos0006'], 10, true, false);
+	this.animations.add('robo_brokenanimationsystemcomon', ['NPC/Robos0006'], 10, true, false);
 	
 
 
