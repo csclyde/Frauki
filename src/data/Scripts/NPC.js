@@ -46,7 +46,7 @@ ScriptRunner.scripts['robo_samurai'] = [
 	{ name: 'show_text', props: { text: "Every breath of wind... a fleeting dream.", portrait: 'red' } },
 	{ name: 'show_text', props: { text: "Every drop of water...", portrait: 'red' } },
 	{ name: 'show_text', props: { text: "Hmm, I'll have to think about that one.", portrait: 'red' } },
-	{ name: 'show_text', props: { text: "A babies tear?", portrait: 'red' } },
+	{ name: 'show_text', props: { text: "A babies tear?", portrait: 'Neutral' } },
 	{ name: 'show_text', props: { text: "No no, that's stupid. Hmm...", portrait: 'red' } },
 	{ name: 'run_script', props: { name: 'exit_NPC' } },		
 ];
@@ -80,6 +80,7 @@ ScriptRunner.scripts['robo_armed'] = [
 	{ name: 'show_text', props: { text: "They told me to watch out for a little demon swinging around a green energy sword.", portrait: 'red' } },
 	{ name: 'show_text', props: { text: "But I'm starting to think they were just messing with me.", portrait: 'red' } },
 	{ name: 'show_text', props: { text: "I've been standing around waiting to blast her for months now. Nothing! Ughhhh.", portrait: 'red' } },
+	{ name: 'show_text', props: { text: "Oh don't worry, I'm sure you'll find her soon!", portrait: 'Neutral' } },	
 	{ name: 'run_script', props: { name: 'exit_NPC' } },
 ];
 
@@ -97,12 +98,13 @@ ScriptRunner.scripts['gnome_garden'] = [
 	{ name: 'show_text', props: { text: "These here is my tomaters.", portrait: 'green' } },
 	{ name: 'show_text', props: { text: "And before ya ask, NO. Ya can't have none.", portrait: 'green' } },
 	{ name: 'show_text', props: { text: "They's all mine so keep yer grabbers off 'em!", portrait: 'green' } },
+	{ name: 'show_text', props: { text: "Fine, I didn't want one anyway.", portrait: 'Displeased' } },	
 	{ name: 'run_script', props: { name: 'exit_NPC' } },		
 ];
 
 ScriptRunner.scripts['gnome_mushroom'] = [
 	{ name: 'show_text', props: { text: "Frauki? Is that really you?", portrait: 'green' } },
-	{ name: 'show_text', props: { text: "I think I just ate too many of those mushrooms...", portrait: 'green' } },
+	{ name: 'show_text', props: { text: "I think I ate too many of those mushrooms...", portrait: 'green' } },
 	{ name: 'run_script', props: { name: 'exit_NPC' } },		
 ];
 
@@ -150,10 +152,58 @@ ScriptRunner.scripts['gnome_windy'] = [
 ];
 
 ScriptRunner.scripts['gnome_cool'] = [
-	{ name: 'show_text', props: { text: " Oh wassup Frauki.", portrait: 'green' } },
+	{ name: 'show_text', props: { text: "Oh wassup Frauki.", portrait: 'green' } },
 	{ name: 'show_text', props: { text: "Welcome to my secret hangout.", portrait: 'green' } },
 	{ name: 'show_text', props: { text: "Just remember the password next time to get in.", portrait: 'green' } },
 	{ name: 'show_text', props: { text: "It's 'coolio', heh heh.", portrait: 'green' } },
 	{ name: 'show_text', props: { text: "Keep it crispy out there Frauki.", portrait: 'green' } },
+	{ name: 'run_script', props: { name: 'exit_NPC' } },		
+];
+
+ScriptRunner.scripts['gnome_cooking'] = [
+	{ name: 'show_text', props: { text: "Oh yeah...", portrait: 'green' } },
+	{ name: 'show_text', props: { text: "Mmmm! Comon' lil' mama...", portrait: 'green' } },
+	{ name: 'show_text', props: { text: "That's right, get nice and crispy...", portrait: 'green' } },
+	{ name: 'show_text', props: { text: "MMMMM! This is gonna be good...", portrait: 'green' } },
+	{ name: 'show_text', props: { text: "Easy now... easy now... let those flames lick ya.", portrait: 'green' } },
+	{ name: 'run_script', props: { name: 'exit_NPC' } },		
+];
+
+ScriptRunner.scripts['gnome_gossip'] = [
+	{ name: 'show_text', props: { text: "Frauki...?", portrait: 'green' } },
+	{ name: 'show_text', props: { text: "That you there?", portrait: 'green' } },
+	{ name: 'show_text', props: { text: "Did I ever tell you about the winter of...", portrait: 'green' } },
+	{ name: 'show_text', props: { text: "I think it was, say twelve years ago...", portrait: 'green' } },
+	{ name: 'show_text', props: { text: "No... hold on...", portrait: 'green' } },
+	{ name: 'show_text', props: { text: "Thirteen years ago...", portrait: 'green' } },
+	{ name: 'show_text', props: { text: "Is that right?", portrait: 'green' } },
+	{ name: 'show_text', props: { text: "Well let's see, little baby Pflugarth is eleven and a half now.", portrait: 'green' } },
+	{ name: 'show_text', props: { text: "And he was born about six months before this winter.", portrait: 'green' } },
+	{ name: 'show_text', props: { text: "No hold on, Pflugarth is thirteen and three quarters.", portrait: 'green' } },
+	{ name: 'show_text', props: { text: "I was getting him mixed up with little Ebeneezer.", portrait: 'green' } },
+	{ name: 'show_text', props: { text: "It was EBENEEZER who was born six months prior.", portrait: 'green' } },
+	{ name: 'show_text', props: { text: "But how old is Ebeneezer now?", portrait: 'green' } },
+	{ name: 'show_text', props: { text: "Well let's see, his mom is fourty-three now, and she was...", portrait: 'green' } },
+	{ name: 'show_text', props: { text: "Umm, I gotta go Mr. Gnome... I think the Goddess is summoning me...", portrait: 'Displeased' } },
+	{ name: 'show_text', props: { text: "Hold on, it wasn't a winter at all... it was a spring...", portrait: 'green' } },
+	{ name: 'show_text', props: { text: "Bye!", portrait: 'Neutral' } },
+	{ name: 'run_script', props: { name: 'exit_NPC' } },		
+];
+
+ScriptRunner.scripts['gnome_cowboy'] = [
+	{ name: 'show_text', props: { text: "Yeeeeeeeeeeeeeeeeeeee...", portrait: 'green' } },
+	{ name: 'show_text', props: { text: "HAWWWWWWWWWW!", portrait: 'green' } },
+	{ name: 'show_text', props: { text: "Giddy up ya lil' rascal! GIDDY UP NAH!", portrait: 'green' } },
+	{ name: 'show_text', props: { text: "It looks like you're squishing him.", portrait: 'Neutral' } },
+	{ name: 'show_text', props: { text: "Ahhh whadda you know anyway. I been bustin broncs since before you was born.", portrait: 'green' } },
+	{ name: 'run_script', props: { name: 'exit_NPC' } },		
+];
+
+ScriptRunner.scripts['gnome_pickaxe'] = [
+	{ name: 'show_text', props: { text: "Here we go, almost there.", portrait: 'green' } },
+	{ name: 'show_text', props: { text: "Gotta get my hands on those little gemmies.", portrait: 'green' } },
+	{ name: 'show_text', props: { text: "Can't wait to give them to the Goddess.", portrait: 'green' } },
+	{ name: 'show_text', props: { text: "She might even make me her king!", portrait: 'green' } },
+	{ name: 'show_text', props: { text: "Yahoo!", portrait: 'green' } },
 	{ name: 'run_script', props: { name: 'exit_NPC' } },		
 ];

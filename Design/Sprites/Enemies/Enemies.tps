@@ -320,12 +320,20 @@
             <key type="filename">NPC/Robos0004.png</key>
             <key type="filename">NPC/Robos0005.png</key>
             <key type="filename">NPC/Robos0006.png</key>
-            <key type="filename">NPC/boat0000.png</key>
-            <key type="filename">NPC/boat0001.png</key>
-            <key type="filename">NPC/boat0002.png</key>
-            <key type="filename">NPC/boat0003.png</key>
-            <key type="filename">NPC/boat0004.png</key>
-            <key type="filename">NPC/boat0005.png</key>
+            <key type="filename">NPC/fishing0001.png</key>
+            <key type="filename">NPC/fishing0002.png</key>
+            <key type="filename">NPC/fishing0003.png</key>
+            <key type="filename">NPC/fishing0004.png</key>
+            <key type="filename">NPC/fishing0005.png</key>
+            <key type="filename">NPC/fishing0006.png</key>
+            <key type="filename">NPC/fishing0007.png</key>
+            <key type="filename">NPC/fishing0008.png</key>
+            <key type="filename">NPC/fishing0009.png</key>
+            <key type="filename">NPC/fishing0010.png</key>
+            <key type="filename">NPC/fishing0011.png</key>
+            <key type="filename">NPC/fishing0012.png</key>
+            <key type="filename">NPC/fishing0013.png</key>
+            <key type="filename">NPC/fishing0014.png</key>
             <key type="filename">NPC/garden0000.png</key>
             <key type="filename">NPC/garden0001.png</key>
             <key type="filename">NPC/garden0002.png</key>
@@ -632,10 +640,6 @@
             <key type="filename">NPC/cooking0002.png</key>
             <key type="filename">NPC/cooking0003.png</key>
             <key type="filename">NPC/cooking0004.png</key>
-            <key type="filename">NPC/cooking0005.png</key>
-            <key type="filename">NPC/cooking0006.png</key>
-            <key type="filename">NPC/cooking0007.png</key>
-            <key type="filename">NPC/cooking0008.png</key>
             <key type="filename">NPC/fishing0000.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -668,6 +672,7 @@
             </struct>
             <key type="filename">NPC/gossip0000.png</key>
             <key type="filename">NPC/gossip0001.png</key>
+            <key type="filename">NPC/gossip0002.png</key>
             <key type="filename">NPC/windy0000.png</key>
             <key type="filename">NPC/windy0001.png</key>
             <key type="filename">NPC/windy0002.png</key>
