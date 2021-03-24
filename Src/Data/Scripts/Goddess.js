@@ -59,7 +59,8 @@ ScriptRunner.scripts['goddess_shortcut'] = [
 		GameData.SetFlag('intro_finished', true);
 	}},
 	{ name: 'wait', props: { amount: 1000 } },
-	{ name: 'show_text', props: { text: "Oh, you're behind me now. Cool.", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "Oh, you're behind me now.", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "Bit of a sneaky little thing, aren't you.", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "Anyway...", portrait: 'Goddess_Neutral' } },	
 	{ name: 'show_text', props: { text: "That seal you just broke will now remain open, letting you take a nice shortcut.", portrait: 'Goddess_Neutral' } },	
 	{ name: 'show_text', props: { text: "Feel free to open more of them. It should make your work a lot easier.", portrait: 'Goddess_Neutral' } },

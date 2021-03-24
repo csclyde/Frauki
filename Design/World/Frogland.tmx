@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="360" height="700" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="3983">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="360" height="700" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="3984">
  <properties>
   <property name="debug" value="false"/>
   <property name="startLayer" value="3"/>
@@ -4127,14 +4127,6 @@
     <property name="type" value="enemy"/>
    </properties>
   </object>
-  <object id="3837" gid="67" x="2968" y="856" width="16" height="16">
-   <properties>
-    <property name="facing" value="right"/>
-    <property name="id" value="spaceship_final"/>
-    <property name="open_direction" value="down"/>
-    <property name="type" value="metal_seal"/>
-   </properties>
-  </object>
   <object id="3838" gid="67" x="3048" y="2472" width="16" height="16">
    <properties>
     <property name="id" value="spaceship_third"/>
@@ -4222,6 +4214,13 @@
     <property name="id" value="third_prism_door"/>
     <property name="prism" value="Luck"/>
     <property name="type" value="shard_stone"/>
+   </properties>
+  </object>
+  <object id="3983" type="shard" gid="67" x="2968" y="856" width="16" height="16">
+   <properties>
+    <property name="id" value="second_prism_door"/>
+    <property name="prism" value="Power"/>
+    <property name="type" value="shard_metal"/>
    </properties>
   </object>
  </objectgroup>
@@ -5009,7 +5008,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="Triggers">
+ <objectgroup name="Triggers" visible="0">
   <object id="1592" name="mushrooms" type="speech" x="3845.75" y="3988.17" width="55.5" height="25.5"/>
   <object id="1607" name="extract" type="speech" x="2699.67" y="3322.83" width="34.5" height="60"/>
   <object id="1611" name="hidden_goodies" type="speech" x="3456.17" y="4064.67" width="250.497" height="79.6633"/>

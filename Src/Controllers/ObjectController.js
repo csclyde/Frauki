@@ -3,6 +3,7 @@ ObjectController = function() {
 
     this.doorList = [];
     this.enemyList = [];
+    this.npcMap = {};
     this.checkpointList = [];
     this.shardList = [];
 
@@ -165,7 +166,11 @@ ObjectController.prototype.SpawnObject = function(o) {
                 if(newObj.create) newObj.create();
 	            newObj.latent = o;
 
-                objectController.enemyList.push(newObj);
+                if(o.id === 149) {
+                    objectController.npcMap[o.name] = newObj;
+                } else {
+                    objectController.enemyList.push(newObj);
+                }
 	        }
 	    });
     }

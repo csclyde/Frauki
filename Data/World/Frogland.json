@@ -2292,32 +2292,6 @@
                 {
                  "gid":67,
                  "height":16,
-                 "id":3837,
-                 "name":"",
-                 "properties":
-                    {
-                     "facing":"right",
-                     "id":"spaceship_final",
-                     "open_direction":"down",
-                     "type":"metal_seal"
-                    },
-                 "propertytypes":
-                    {
-                     "facing":"string",
-                     "id":"string",
-                     "open_direction":"string",
-                     "type":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":2968,
-                 "y":856
-                }, 
-                {
-                 "gid":67,
-                 "height":16,
                  "id":3838,
                  "name":"",
                  "properties":
@@ -2622,6 +2596,30 @@
                  "width":16,
                  "x":2104,
                  "y":8616
+                }, 
+                {
+                 "gid":67,
+                 "height":16,
+                 "id":3983,
+                 "name":"",
+                 "properties":
+                    {
+                     "id":"second_prism_door",
+                     "prism":"Power",
+                     "type":"shard_metal"
+                    },
+                 "propertytypes":
+                    {
+                     "id":"string",
+                     "prism":"string",
+                     "type":"string"
+                    },
+                 "rotation":0,
+                 "type":"shard",
+                 "visible":true,
+                 "width":16,
+                 "x":2968,
+                 "y":856
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -5020,12 +5018,10 @@
                  "name":"gnome_garden",
                  "properties":
                     {
-                     "name":"gnome_garden",
                      "song":"Loopy"
                     },
                  "propertytypes":
                     {
-                     "name":"string",
                      "song":"string"
                     },
                  "rotation":0,
@@ -7816,11 +7812,11 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }],
- "nextobjectid":3983,
+ "nextobjectid":3984,
  "orientation":"orthogonal",
  "properties":
     {

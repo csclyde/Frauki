@@ -254,7 +254,7 @@ SpeechController.prototype.ShowSpeech = function() {
 				this.Activate(goddess.GetSpeech(), goddess.GetPortrait());
 
 			} else if(zone.NPC === true) {
-				ScriptRunner.run('NPC_' + zone.speechName);
+				ScriptRunner.run('enter_NPC', { name: zone.speechName});
 			} else {
 				this.Activate(Speeches[zone.speechName].text, Speeches[zone.speechName].portrait);
 			}
@@ -268,8 +268,8 @@ SpeechController.prototype.ShowSpeech = function() {
 	return false;
 };
 
-SpeechController.prototype.Investigate = function() {
-	if(!this.text.visible && this.FraukiInSpeechZone()) {
+SpeechController.prototype.Investigate = function(params) {
+	if(params.pressed && !this.text.visible && this.FraukiInSpeechZone()) {
 		this.ShowSpeech();
 	}
 };
@@ -307,7 +307,11 @@ SpeechController.prototype.Activate = function(text, portrait) {
 
 	this.portraits[this.currentPortrait].visible = false;
 	this.currentPortrait = portrait || 'Neutral';
-	this.portraitBox.visible = true;
+
+	if(portrait !== 'none') {
+		this.portraitBox.visible = true;
+	}
+	
 	this.portraits[this.currentPortrait].visible = true;
 	this.dialogBox.visible = true;
 	this.text.visible = true;
