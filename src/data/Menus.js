@@ -1,5 +1,6 @@
 var Menus = {
 	main: [
+		{ getText: function() { return "ABCDEFGHIJKLMNOPQRSTUVWXYZ" }, script: 'continue_game' },
 		{ getText: function() { return 'Continue Adventure' }, script: 'continue_game' },
 		{ getText: function() { return 'New Adventure' }, script: 'new_game' },
 		{ getText: function() { return 'Settings' }, script: 'show_settings_menu' },

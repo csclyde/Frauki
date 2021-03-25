@@ -49,8 +49,10 @@ ScriptRunner.scripts['goddess_oh_hey'] = [
 ScriptRunner.scripts['goddess_chat'] = [
 	{ name: 'run_script', props: { name: 'enter_goddess' } },
 	{ name: 'wait', props: { amount: 1500 } },
-	{ name: 'show_text', props: { text: "You're doing great Frauki. Keep trying. I know you can do this.", portrait: 'Goddess_Neutral' } },
-	{ name: 'run_script', props: { name: 'exit_goddess' } },
+
+	{ func: function(params) {
+		ScriptRunner.run('goddess_chat_intro');
+	}}
 ];
 
 ScriptRunner.scripts['goddess_shortcut'] = [

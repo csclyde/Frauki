@@ -153,11 +153,11 @@ GameState.CreateUI = function() {
     }
 
     this.logo = game.add.image(pixel.width / 2, pixel.height / 3, 'UI', 'Logo0000', this.Menu);
-    this.logo.anchor.setTo(0.5);
+    this.logo.anchor.setTo(0.5);    
 
     this.menuText = [];
     for(var i = 0; i < 6; i++) {
-        var text = game.add.bitmapText(pixel.width / 2, 200 + i * 20, 'diest64','', 16, this.Menu);
+        var text = game.add.bitmapText(pixel.width / 2, 200 + i * 20, 'bubble','', 18, this.Menu);
         text.anchor.setTo(0.5);
         text.setText('');
         this.menuText.push(text);

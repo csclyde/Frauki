@@ -33,12 +33,14 @@
         <script type="text/javascript" src="Src/Data/SpeechesGoddess.js"></script>
         <script type="text/javascript" src="Src/Data/Effects.js"></script>
         <script type="text/javascript" src="Src/Data/Menus.js"></script>
+        <script type="text/javascript" src="Src/Data/Credits.js"></script>
 
         <script type="text/javascript" src="Src/Controllers/EventRouter.js"></script>
         <script type="text/javascript" src="Src/Controllers/TimerUtil.js"></script>
         <script type="text/javascript" src="Src/Controllers/ScriptRunner.js"></script>
             <script type="text/javascript" src="Src/Data/Scripts/Demos.js"></script>
             <script type="text/javascript" src="Src/Data/Scripts/Goddess.js"></script>
+            <script type="text/javascript" src="Src/Data/Scripts/GoddessChats.js"></script>
             <script type="text/javascript" src="Src/Data/Scripts/GoddessGameover.js"></script>
             <script type="text/javascript" src="Src/Data/Scripts/NPC.js"></script>
             <script type="text/javascript" src="Src/Data/Scripts/Gameplay.js"></script>
@@ -63,8 +65,9 @@
 
 
 
-        <script type="text/javascript" src="Src/BootState.js"></script>        
-        <script type="text/javascript" src="Src/LoadingState.js"></script>        
+        <script type="text/javascript" src="Src/BootState.js"></script>
+        <script type="text/javascript" src="Src/LoadingState.js"></script>
+        <script type="text/javascript" src="Src/SettingsState.js"></script>
         <script type="text/javascript" src="Src/GameState.js"></script>
 
         <script type="text/javascript" src="Src/Frogland.js"></script>
@@ -167,6 +170,7 @@
 
             game.state.add('BootState', BootState, true);
             game.state.add('LoadingState', LoadingState, false);
+            game.state.add('SettingsState', SettingsState, false);
             game.state.add('GameState', GameState, false);
 
 

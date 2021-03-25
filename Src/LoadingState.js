@@ -40,6 +40,9 @@ LoadingState.preload = function() {
     game.load.bitmapFont('diest64', 'Data/Sprites/diest64.png', 'Data/Sprites/diest64.fnt');
     game.load.bitmapFont('slapface', 'Data/Sprites/slapface_0.png', 'Data/Sprites/slapface.fnt');
     game.load.bitmapFont('magicbook', 'Data/Sprites/magicbook_0.png', 'Data/Sprites/magicbook.fnt');
+    game.load.bitmapFont('ouef', 'Data/Sprites/ouef_0.png', 'Data/Sprites/ouef.fnt');
+    game.load.bitmapFont('rise', 'Data/Sprites/rise_0.png', 'Data/Sprites/rise.fnt');
+    game.load.bitmapFont('bubble', 'Data/Sprites/bubble_0.png', 'Data/Sprites/bubble.fnt');
 
     game.renderer.renderSession.roundPixels = false;
 };

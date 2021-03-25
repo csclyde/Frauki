@@ -127,7 +127,7 @@ SpeechController.prototype.LoadSpeechZones = function() {
 	var that = this;
 
 	Frogland.map.objects['Triggers'].forEach(function(o) {
-        if(o.type === 'speech') {
+        if(o.type === 'speech' || o.name === 'goddess') {
         	var zone = new Phaser.Rectangle(o.x, o.y, o.width, o.height);
             zone.text = o.properties ? o.properties.text : 'Error';
             zone.speechName = o.name;
@@ -197,7 +197,7 @@ SpeechController.prototype.Update = function() {
 		this.HideSpeech();
 	}
 
-	if(!this.text.visible && this.FraukiInSpeechZone()) {
+	if(!this.text.visible && this.FraukiInSpeechZone() && inputController.allowInput) {
 		this.questionMark.visible = true;
 		this.questionMark.x = frauki.x;
 		this.questionMark.y = frauki.y - 140 + Math.sin(GameState.gameTime / 200) * 3;
@@ -250,8 +250,7 @@ SpeechController.prototype.ShowSpeech = function() {
 		var zone = this.speechZones[i];
 		if(frauki.body.x + frauki.body.width > zone.x && frauki.body.x < zone.x + zone.width && frauki.body.y + frauki.body.height > zone.y && frauki.body.y < zone.y + zone.height) {
 			if(zone.speechName === 'goddess') {
-				this.Activate(goddess.GetSpeech(), goddess.GetPortrait());
-
+				ScriptRunner.run('goddess_chat');
 			} else if(zone.NPC === true) {
 				ScriptRunner.run('enter_NPC', { name: zone.speechName });
 			} else {

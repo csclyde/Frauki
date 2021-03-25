@@ -91,8 +91,10 @@ ScriptRunner.scripts['show_settings_menu'] = [
     { name: 'play_sound', props: { name: 'baton_catch' } },
     
     { func: function() {
-        GameState.currentMenu = Menus.settings;
-        GameState.menuSelection = 0;
+        // GameState.currentMenu = Menus.settings;
+        // GameState.menuSelection = 0;
+        //game.state.start('SettingsState', false, false);
+
     } },
 
     { name: 'update_ui', props: { } },
@@ -549,6 +551,10 @@ ScriptRunner.scripts['finish_game'] = [
 	{ name: 'stop_music', props: { name: 'Goddess', fade: 4000 } },
     { func: function() {
         effectsController.Fade(true, 4000);
+        GameState.creditsText = game.add.bitmapText(320, 180, 'bubble','', 18);
+        GameState.creditsText.anchor.setTo(0.5);
+        GameState.creditsText.fixedToCamera = true;
+        
     } },
 
     { name: 'wait', props: { amount: 4000 } },
@@ -566,6 +572,11 @@ ScriptRunner.scripts['show_random_scene'] = [
             x: game.rnd.between(100, 300) * 16,
             y: game.rnd.between(175, 575) * 16
         };
+
+        GameState.creditsText.x = 100;
+        GameState.creditsText.y = 100;
+        GameState.creditsText.setText(Credits.shift());
+        console.log(GameState.creditsText);
 
         events.publish('set_camera', { to: newTarget });
     } },
