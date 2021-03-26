@@ -32,6 +32,7 @@ GameState.create = function() {
     events.subscribe('update_ui', this.UpdateUI, this);
     events.subscribe('select_menu_option', this.MakeMenuSelection, this);
     events.subscribe('menu_change', this.UpdateMenuSelection, this);
+    events.subscribe('settings_change', this.UpdateSetting, this);
     events.subscribe('pause_game', this.PauseGame, this);
 
     this.CreateUI();
@@ -136,6 +137,30 @@ GameState.UpdateMenuSelection = function(params) {
     }
 };
 
+GameState.UpdateSetting = function(params) {
+    if(this.inMenu && !this.menuSelectionMade) {
+        var menuItem = this.GetCurrentMenu()[this.menuSelection];
+        if(!!menuItem.setting) {
+            var currentSetting = GameData.GetSetting(menuItem.setting);
+
+            if(params.dir === 'up') {
+                currentSetting += 1;
+            }
+            else {
+                currentSetting -= 1;                
+            }
+
+            currentSetting = Phaser.Math.clamp(currentSetting, 0, 8);
+
+            GameData.SetSetting(menuItem.setting, currentSetting);
+    
+            events.publish('update_ui', {});
+            events.publish('update_sound_settings', {});
+            events.publish('play_sound', {name: 'text_bloop'});
+        }
+    }
+};
+
 GameState.PauseGame = function() {
     if(!this.inMenu && !this.paused && !speechController.speechVisible && !this.restarting) {
         ScriptRunner.run('pause_game');
@@ -143,14 +168,10 @@ GameState.PauseGame = function() {
 };
 
 GameState.CreateUI = function() {
-    this.HUD = game.add.group();
-    this.HUD.fixedToCamera = true;
+    
+    //CREATE THE MAIN MENU
     this.Menu = game.add.group();
     this.Menu.fixedToCamera = true;        
-
-    if(this.inMenu) {
-        this.HUD.alpha = 0;
-    }
 
     this.logo = game.add.image(pixel.width / 2, pixel.height / 3, 'UI', 'Logo20000', this.Menu);
     this.logo.anchor.setTo(0.5);    
@@ -161,6 +182,39 @@ GameState.CreateUI = function() {
         text.anchor.setTo(0.5);
         text.setText('');
         this.menuText.push(text);
+    }
+
+    this.settingsMenu = game.add.group();
+    this.settingsMenu.fixedToCamera = true;
+    this.settingsMenu.visible = false;
+
+    this.soundSliderFrame = game.add.image(400, 189, 'UI', 'Settings0000', this.settingsMenu);
+    this.musicSliderFrame = game.add.image(400, 209, 'UI', 'Settings0000', this.settingsMenu);
+    this.effectsSliderFrame = game.add.image(400, 229, 'UI', 'Settings0000', this.settingsMenu);
+
+    this.soundPips = [];
+    this.musicPips = [];
+    this.sfxPips = [];
+
+    for(var i = 0; i < 8; i++) {
+        var soundPip = game.add.image(407 + (i * 7), 192, 'UI', 'Settings0001', this.settingsMenu);
+        this.soundPips.push(soundPip);
+
+        var musicPip = game.add.image(407 + (i * 7), 212, 'UI', 'Settings0001', this.settingsMenu);
+        this.musicPips.push(musicPip);
+
+        var sfxPip = game.add.image(407 + (i * 7), 232, 'UI', 'Settings0001', this.settingsMenu);
+        this.sfxPips.push(sfxPip);
+    
+    }
+
+
+    //CREATE THE IN GAME HUD
+    this.HUD = game.add.group();
+    this.HUD.fixedToCamera = true;
+
+    if(this.inMenu) {
+        this.HUD.alpha = 0;
     }
 
     this.healthFrameStart = game.add.image(10, 10, 'UI', 'HudFrame0000', this.HUD);
@@ -208,6 +262,16 @@ GameState.UpdateUI = function() {
                 }
             } 
         }, this);
+
+        var soundSetting = GameData.GetSetting('sound');
+        var musicSetting = GameData.GetSetting('music');
+        var sfxSetting = GameData.GetSetting('sfx');
+
+        for(var i = 0; i < 8; i++) {
+            this.soundPips[i].visible = i < soundSetting;
+            this.musicPips[i].visible = i < musicSetting;
+            this.sfxPips[i].visible = i < sfxSetting;
+        }
     }
 
     for(var i = 0; i < this.MAX_PLAYER_HEALTH; i++) {

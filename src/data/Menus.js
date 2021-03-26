@@ -17,12 +17,9 @@ var Menus = {
 	],
 
 	settings: [
-		{ 	
-			getText: function() { return this.options[GameData.GetSoundSetting()] }, 
-			script: 'adjust_sound',
-			options: ['Normal Sound', 'Quiet Sound', 'Really Quiet Sound', 'No Sound']
-		}, 
-		{ getText: function() { return 'Configure Controls' }, script: 'show_controls_menu' },
+		{ getText: function() { return 'Global Sound:' }, setting: 'sound' },
+		{ getText: function() { return 'Music Volume:' }, setting: 'music' },
+		{ getText: function() { return 'Effects Volume:' }, setting: 'sfx' },
 		{ getText: function() { return 'Back' }, script: 'exit_settings_menu' },
 	],
 

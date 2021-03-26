@@ -112,8 +112,9 @@ ScriptRunner.scripts['show_settings_menu'] = [
     { name: 'play_sound', props: { name: 'baton_catch' } },
     
     { func: function() {
-        // GameState.currentMenu = Menus.settings;
-        // GameState.menuSelection = 0;
+        GameState.currentMenu = Menus.settings;
+        GameState.menuSelection = 0;
+        GameState.settingsMenu.visible = true;
         //game.state.start('SettingsState', false, false);
 
     } },
@@ -132,6 +133,8 @@ ScriptRunner.scripts['exit_settings_menu'] = [
             GameState.currentMenu = Menus.main;
             GameState.menuSelection = 2;
         }
+
+        GameState.settingsMenu.visible = false;        
     } },
 
     { name: 'update_ui', props: { } },

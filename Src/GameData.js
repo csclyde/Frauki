@@ -20,10 +20,14 @@ var defaultData = {
     debug_pos: { x: 0, y: 0 },
 
     settings: {
-        sound: 0,
-        music_option: 0,
-        sfx_option: 0,
+        
     }
+};
+
+var defaultSettings = {
+    sound: 8,
+    music: 8,
+    sfx: 8,
 };
 
 //When game data is requested, it is pulled from the data structure in memory. When
@@ -31,8 +35,32 @@ var defaultData = {
 //So the only interaction with local storage is when the game loads, and when you
 //save something to it. It doesn't constantly read out of local storage
 GameData.data = Object.assign({}, defaultData);
+GameData.settings = Object.assign({}, defaultSettings);
 
-GameData.nuggetCount = 0;
+GameData.LoadSettingsFromStorage = function() {
+    var settings_string = localStorage.getItem('settings_data');
+
+    if(!settings_string || settings_string === '') return;
+    
+    var settings_data = JSON.parse(settings_string);
+
+    if(settings_data) {
+        this.settings = settings_data;
+    }
+};
+
+GameData.SaveSettingsToStorage = function() {
+    localStorage.setItem('settings_data', JSON.stringify(this.settings));
+};
+
+GameData.GetSetting = function(name) {
+    return GameData.settings[name];
+};
+
+GameData.SetSetting = function(name, val) {
+    GameData.settings[name] = val;
+    this.SaveSettingsToStorage();    
+};
 
 GameData.LoadDataFromStorage = function() {
     var save_string = localStorage.getItem('save_data');
@@ -58,15 +86,6 @@ GameData.SaveDataToStorage = function() {
     this.data.new = false;
     this.data.dirty = false;
     localStorage.setItem('save_data', JSON.stringify(this.data));
-};
-
-GameData.GetSoundSetting = function() {
-    return GameData.data.settings.sound;
-};
-
-GameData.SetSoundSetting = function(option) {
-    GameData.data.settings.sound = option;
-    this.SaveDataToStorage();    
 };
 
 GameData.ResetData = function() {

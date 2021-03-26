@@ -411,6 +411,10 @@ InputController.prototype.OnHeal = function(pressed) {
 InputController.prototype.OnLeft = function(pressed) {
     this.dpad.left = pressed;
 
+    if(pressed) {
+        events.publish('settings_change', { dir: 'down' });
+    }
+
     if(this.allowInput) {
 
         if(pressed) {
@@ -432,6 +436,10 @@ InputController.prototype.OnLeft = function(pressed) {
 
 InputController.prototype.OnRight = function(pressed) {
     this.dpad.right = pressed;
+
+    if(pressed) {
+        events.publish('settings_change', { dir: 'up' });
+    }
 
     if(this.allowInput) {
 

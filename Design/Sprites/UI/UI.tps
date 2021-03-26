@@ -220,6 +220,8 @@
             <key type="filename">Frames/HudFrame0001.png</key>
             <key type="filename">Frames/HudFrame0002.png</key>
             <key type="filename">Frames/HudFrame0003.png</key>
+            <key type="filename">Frames/Settings0000.png</key>
+            <key type="filename">Frames/Settings0001.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
