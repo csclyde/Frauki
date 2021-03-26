@@ -67,6 +67,7 @@ AudioController.prototype.UpdateVolumeSettings = function() {
     var musicSetting = GameData.GetSetting('music');
 
     game.sound.volume = soundSetting / 8;
+    game.sound.volume = Math.pow(game.sound.volume, 2);
 
     for(key in this.music) {
         if(this.music[key].isPlaying) {
