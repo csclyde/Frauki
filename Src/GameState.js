@@ -116,7 +116,7 @@ GameState.Reset = function() {
 
 GameState.MakeMenuSelection = function() {
     if(GameState.inMenu && !GameState.menuSelectionMade) {
-        ScriptRunner.run(this.currentMenu[this.menuSelection].script);
+        ScriptRunner.run(this.GetCurrentMenu()[this.menuSelection].script);
     }
 };
 
@@ -124,11 +124,11 @@ GameState.UpdateMenuSelection = function(params) {
     if(this.inMenu && !this.menuSelectionMade) {
         if(params.dir === 'up') {
             this.menuSelection--;
-            if(this.menuSelection < 0) this.menuSelection = this.currentMenu.length - 1;
+            if(this.menuSelection < 0) this.menuSelection = this.GetCurrentMenu().length - 1;
         }
         else {
             this.menuSelection++;
-            if(this.menuSelection >= this.currentMenu.length) this.menuSelection = 0;
+            if(this.menuSelection >= this.GetCurrentMenu().length) this.menuSelection = 0;
         }
 
         events.publish('update_ui', {});
@@ -152,7 +152,7 @@ GameState.CreateUI = function() {
         this.HUD.alpha = 0;
     }
 
-    this.logo = game.add.image(pixel.width / 2, pixel.height / 3, 'UI', 'Logo0000', this.Menu);
+    this.logo = game.add.image(pixel.width / 2, pixel.height / 3, 'UI', 'Logo20000', this.Menu);
     this.logo.anchor.setTo(0.5);    
 
     this.menuText = [];
@@ -188,19 +188,25 @@ GameState.CreateUI = function() {
     this['prismPower'] = game.add.image(26, 320, 'Misc', 'Shard0007', this.HUD);
 };
 
+GameState.GetCurrentMenu = function() {
+    return this.currentMenu.filter(function(menu, i) { return !menu.condition || menu.condition(); });
+};
+
 GameState.UpdateUI = function() {
 
     if(this.inMenu) {
-        this.menuText.forEach(function(text, i) {
-            if(!!this.currentMenu[i]) {
+        this.menuText.forEach(function(text) {
+            text.setText('');
+        });
+
+        this.GetCurrentMenu().forEach(function(menu, i) {
+            if(!!menu) {
                 if(this.menuSelection === i) {
-                    text.setText('- ' + this.currentMenu[i].getText() + ' -');
+                    this.menuText[i].setText('~ ' + menu.getText() + ' ~');
                 } else {
-                    text.setText(this.currentMenu[i].getText());
+                    this.menuText[i].setText(menu.getText());
                 }
-            } else {
-                text.setText('');
-            }
+            } 
         }, this);
     }
 

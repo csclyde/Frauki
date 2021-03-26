@@ -5,6 +5,7 @@ var currentVer = 0.5;
 var defaultData = {
     version: currentVer,
     dirty: true,
+    new: true,
 
     activeCheckpoints: [],
     upgrades: [],
@@ -49,7 +50,13 @@ GameData.LoadDataFromStorage = function() {
     }
 };
 
+GameData.SaveDataExists = function() {
+    return !this.data.new;
+};
+
 GameData.SaveDataToStorage = function() {
+    this.data.new = false;
+    this.data.dirty = false;
     localStorage.setItem('save_data', JSON.stringify(this.data));
 };
 

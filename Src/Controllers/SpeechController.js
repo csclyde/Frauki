@@ -117,8 +117,6 @@ SpeechController.prototype.Create = function() {
 
 	this.speechZones = [];
 
-	GameData.SetFlag('test_flag', true);
-
 	this.LoadSpeechZones();
 
 };

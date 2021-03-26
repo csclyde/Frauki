@@ -38,12 +38,33 @@ ScriptRunner.scripts['continue_game'] = [
     
 ];
 
+ScriptRunner.scripts['select_new_game'] = [
+    { func: function() {
+        if(GameData.SaveDataExists()) {
+            GameState.currentMenu = Menus.confirm;
+            GameState.menuSelection = 0;
+        } else {
+            ScriptRunner.run('new_game');
+        }       
+    } },
+
+    { name: 'update_ui', props: { } },    
+];
+
+ScriptRunner.scripts['exit_confirmation'] = [
+    { func: function() {
+        GameState.currentMenu = Menus.main;
+        GameState.menuSelection = 0; 
+    } },
+
+    { name: 'update_ui', props: { } },    
+];
+
 ScriptRunner.scripts['new_game'] = [
     { name: 'stop_music', props: { name: 'Intro', fade: 3500 } },
     { name: 'play_sound', props: { name: 'crystal_door' } },
     
     { func: function() {
-        GameData.ResetData();
         GameState.Reset();
         effectsController.Fade(true, 3000);  
         GameState.menuSelectionMade = true;        
@@ -53,7 +74,7 @@ ScriptRunner.scripts['new_game'] = [
     
     { func: function() {
         events.publish('set_camera', { to: goddess.body.center }); 
-        
+        GameData.ResetData();        
         GameState.inMenu = false;
         GameState.Menu.alpha = 0;
         effectsController.Fade(false, 2000);
