@@ -25,22 +25,18 @@ InputController = function() {
 	this.testButton = game.input.keyboard.addKey(Phaser.Keyboard.P);
     this.testButton2 = game.input.keyboard.addKey(Phaser.Keyboard.O);
 
+    var keybinds = game.cache.getJSON('keybinds');
     this.binds = {};
-    this.binds.pause      = Phaser.Keyboard.ESC;
-    this.binds.jump       = Phaser.Keyboard.SPACEBAR;
-    this.binds.up         = Phaser.Keyboard.UP;
-    this.binds.crouch     = Phaser.Keyboard.DOWN;
-    this.binds.runLeft    = Phaser.Keyboard.LEFT;
-    this.binds.runRight   = Phaser.Keyboard.RIGHT;
-    this.binds.slash      = Phaser.Keyboard.Z;
-    this.binds.slash2     = Phaser.Keyboard.Y; //dem wacky germans
-    this.binds.weapon     = Phaser.Keyboard.C;
-    this.binds.roll       = Phaser.Keyboard.X;
-    this.binds.shoulderR  = Phaser.Keyboard.Q;
-    this.binds.shoulderR2  = Phaser.Keyboard.V;
+    this.binds.pause      = Phaser.Keyboard[keybinds['pause']];
+    this.binds.jump       = Phaser.Keyboard[keybinds['jump']];
+    this.binds.up         = Phaser.Keyboard[keybinds['up']];
+    this.binds.crouch     = Phaser.Keyboard[keybinds['down']];
+    this.binds.runLeft    = Phaser.Keyboard[keybinds['left']];
+    this.binds.runRight   = Phaser.Keyboard[keybinds['right']];
+    this.binds.slash      = Phaser.Keyboard[keybinds['attack']];
+    this.binds.weapon     = Phaser.Keyboard[keybinds['heal']];
+    this.binds.roll       = Phaser.Keyboard[keybinds['roll']];
 
-    this.bindList = [this.binds.pause, this.binds.jump, this.binds.up, this.binds.crouch, this.binds.runLeft, this.binds.runRight, this.binds.slash, this.binds.weapon, this.binds.roll, this.binds.shoulderR];
-    
     events.subscribe('allow_input', this.AllowInput, this);
     events.subscribe('disallow_input', this.DisallowInput, this);
 
@@ -100,18 +96,11 @@ InputController = function() {
 
             case inputController.binds.weapon:
                 inputController.OnHeal(true);
-                //inputController.OnThrow(true);
             break;
 
             case inputController.binds.roll:
                 inputController.OnRoll(true);
             break;
-
-            case inputController.binds.shoulderR:
-            case inputController.binds.shoulderR2:
-                inputController.OnHeal(true);
-            break;
-
         }
     };
 
