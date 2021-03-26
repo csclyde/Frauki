@@ -68,6 +68,13 @@ ObjectController.prototype.Reset = function() {
     
 };
 
+ObjectController.prototype.DestroyAllEnemies = function() {
+    this.latentObjects = this.latentObjects.filter(function(o) { return !o.enemy; });
+    this.enemyList.forEach(function(enemy) {
+        enemy.pendingDestroy = true;
+    }, this);
+};
+
 ObjectController.prototype.CreateObjectsLayer = function(layer) {
     Frogland.map.createFromObjects('Objects', 69, 'Misc', 'Checkpoint0000', true, true, this.activeGroup, Checkpoint, false);
     Frogland.map.createFromObjects('Doors', 67, 'Misc', 'DoorSeal0000', true, true, this.activeGroup, Door, false);
@@ -77,19 +84,19 @@ ObjectController.prototype.CreateObjectsLayer = function(layer) {
     this.prisms = {};
     this.prisms.Wit = new Shard(game, 0, 0, 'Misc', 'Shard0000');
     this.prisms.Wit.name = 'Wit';
-    this.activeGroup.add(this.prisms.Wit);    
+    this.activeGroup.add(this.prisms.Wit);
     
     this.prisms.Will = new Shard(game, 0, 0, 'Misc', 'Shard0001');
     this.prisms.Will.name = 'Will';
-    this.activeGroup.add(this.prisms.Will);        
+    this.activeGroup.add(this.prisms.Will);
     
     this.prisms.Luck = new Shard(game, 0, 0, 'Misc', 'Shard0002');
     this.prisms.Luck.name = 'Luck';
-    this.activeGroup.add(this.prisms.Luck);        
+    this.activeGroup.add(this.prisms.Luck);
     
     this.prisms.Power = new Shard(game, 0, 0, 'Misc', 'Shard0003');
     this.prisms.Power.name = 'Power';
-    this.activeGroup.add(this.prisms.Power);        
+    this.activeGroup.add(this.prisms.Power);
 
     this.activeGroup.forEach(function(obj) {
 
@@ -117,7 +124,7 @@ ObjectController.prototype.CompileObjectList = function() {
     }, this);
 
     Frogland.map.objects['Enemies'].forEach(function(o) {
-        this.latentObjects.push({ id: o.gid, name: o.name, x: o.x, y: o.y, u: this.latentObjects.length, properties: o.properties });
+        this.latentObjects.push({ id: o.gid, name: o.name, x: o.x, y: o.y, u: this.latentObjects.length, properties: o.properties, enemy: true });
     }, this);
 
     Frogland.map.objects['Doodads'].forEach(function(o) {

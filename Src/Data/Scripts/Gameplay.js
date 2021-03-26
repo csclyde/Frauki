@@ -467,7 +467,7 @@ ScriptRunner.scripts['finish_game'] = [
 
     { func: function() {
         events.publish('pan_camera', { to: goddess.body.center, duration: 1000 });
-        GameState.HUDFadeTween = game.add.tween(GameState.HUD).to({alpha: 0}, 500, Phaser.Easing.Cubic.Out, true);          
+        GameState.HUDFadeTween = game.add.tween(GameState.HUD).to({alpha: 0}, 500, Phaser.Easing.Cubic.Out, true);
     } },
     
     { name: 'wait', props: { amount: 1500 } },
@@ -571,6 +571,7 @@ ScriptRunner.scripts['finish_game'] = [
 
 	{ name: 'stop_music', props: { name: 'Goddess', fade: 4000 } },
     { func: function() {
+        objectController.DestroyAllEnemies();
         effectsController.Fade(true, 4000);
         GameState.creditsText = game.add.bitmapText(320, 180, 'bubble','', 18);
         GameState.creditsText.anchor.setTo(0.5);
@@ -597,7 +598,6 @@ ScriptRunner.scripts['show_random_scene'] = [
         GameState.creditsText.x = 100;
         GameState.creditsText.y = 100;
         GameState.creditsText.setText(Credits.shift());
-        console.log(GameState.creditsText);
 
         events.publish('set_camera', { to: newTarget });
     } },
