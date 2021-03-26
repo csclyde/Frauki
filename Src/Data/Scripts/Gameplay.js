@@ -586,7 +586,6 @@ ScriptRunner.scripts['finish_game'] = [
     
 ];
 
-
 ScriptRunner.scripts['show_random_scene'] = [
     
     { func: function(params) {
