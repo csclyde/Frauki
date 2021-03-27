@@ -264,7 +264,7 @@ Phaser.Sound.prototype.fadeToPause = function (duration) {
         this.fadeTween.stop();
     }
 
-    this.fadeTween = this.game.add.tween(this).to( { volume: 0 }, duration, Phaser.Easing.Linear.None, true);
+    this.fadeTween = this.game.add.tween(this).to( { volume: 0 }, duration, Phaser.Easing.Exponential.Out, true);
     this.willBePaused = true;
 
     //this.fadeTween.onComplete.add(this.fadeComplete, this);
@@ -286,12 +286,31 @@ Phaser.Sound.prototype.fadeToResume = function (duration, volume) {
     if (volume === undefined) { volume = 1; }
 
     if(this.volume !== volume) {       
-        this.fadeTween = this.game.add.tween(this).to( { volume: volume }, duration, Phaser.Easing.Linear.None, true);
+        this.fadeTween = this.game.add.tween(this).to( { volume: volume }, duration, Phaser.Easing.Exponential.In, true);
     }
     
     if(this.paused) {      
         this.resume();
+    } else {
+        this.play();
     }
+};
+
+Phaser.Sound.prototype.fadeToStop = function (duration) {
+    
+    if (!this.isPlaying || this.paused)
+    {
+        return;
+    }
+
+    if (duration === undefined) { duration = 1000; }
+
+    this.fadeTween = this.game.add.tween(this).to( { volume: 0 }, duration, Phaser.Easing.Exponential.Out, true);
+
+    //this.fadeTween.onComplete.add(this.fadeComplete, this);
+    this.fadeTween.onComplete.add(function() {
+        this.stop();
+    }, this);
 };
 
 Phaser.Animation.prototype.update = function () {

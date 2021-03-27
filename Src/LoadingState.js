@@ -67,6 +67,8 @@ LoadingState.create = function() {
     inputController = new InputController();
     energyController = new EnergyController();
     audioController = new AudioController();
+    audioController.UpdateVolumeSettings();
+    
     triggerController = new TriggerController();
     timerUtil = new TimerUtil();
     objectController = new ObjectController();    

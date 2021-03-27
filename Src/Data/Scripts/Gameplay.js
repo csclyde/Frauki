@@ -8,6 +8,14 @@ ScriptRunner.scripts['game_start'] = [
     } },
 ];
 
+ScriptRunner.scripts['quit_game'] = [
+    { func: function() {
+        if(!!app) {
+            app.exit();
+        }
+    } },
+];
+
 ScriptRunner.scripts['continue_game'] = [
     { name: 'stop_music', props: { name: 'Intro', fade: 2000 } },
     { name: 'play_sound', props: { name: 'crystal_door' } },      
@@ -367,7 +375,7 @@ ScriptRunner.scripts['destroy_gemsucker'] = [
         shard.body.velocity.setTo(0);
         game.add.tween(shard).to({x: frauki.body.center.x, y: frauki.body.center.y}, 4000, Phaser.Easing.Exponential.In, true);
     } },
-    { name: 'play_music', props: { name: 'fanfare_long' } },
+    { name: 'play_music', props: { name: 'FanfareLong' } },
 
     { name: 'wait', props: { amount: 4000 } }, 
 

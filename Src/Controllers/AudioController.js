@@ -10,15 +10,15 @@ AudioController = function() {
     events.subscribe('pause_all_sound', this.PauseAllSound, this);
     events.subscribe('unpause_all_sound', this.UnpauseAllSound, this);
 
+    events.subscribe('play_ambient', this.PlayAmbient, this);
+    events.subscribe('stop_ambient', this.StopAmbient, this);
+    events.subscribe('stop_all_ambient', this.StopAllAmbient, this);
+
     events.subscribe('play_music', this.PlayMusic, this);
     events.subscribe('stop_music', this.StopMusic, this);
     events.subscribe('stop_all_music', this.StopAllMusic, this);
     events.subscribe('pause_all_music', this.PauseAllMusic, this);
     events.subscribe('unpause_all_music', this.UnpauseAllMusic, this);
-
-    events.subscribe('play_ambient', this.PlayAmbient, this);
-    events.subscribe('stop_ambient', this.StopAmbient, this);
-    events.subscribe('stop_all_ambient', this.StopAllAmbient, this);
 
     events.subscribe('stop_attack_sounds', function() {
         for(var key in this.sounds) {
@@ -29,13 +29,18 @@ AudioController = function() {
     }, this);
 
     this.sounds = {};
-    this.music = {};
     this.ambient = {};
+    this.music = {};
 
     //load audio
     FileMap.Audio.forEach(function(audio) {
         that.sounds[audio.Name] = game.add.audio(audio.Name, audio.Volume, audio.Loop);
         that.sounds[audio.Name].initialVolume = audio.Volume;
+    });
+
+    FileMap.Ambient.forEach(function(ambient) {
+        that.ambient[ambient.Name] = game.add.audio(ambient.Name, ambient.Volume, ambient.Loop);
+        that.ambient[ambient.Name].initialVolume = ambient.Volume;
     });
 
     FileMap.Music.forEach(function(music) {
@@ -47,19 +52,12 @@ AudioController = function() {
         musicAudio.initialLoop = music.Loop;
         
     });
-
-    FileMap.Ambient.forEach(function(ambient) {
-        that.ambient[ambient.Name] = game.add.audio(ambient.Name, ambient.Volume, ambient.Loop);
-        that.ambient[ambient.Name].initialVolume = ambient.Volume;
-    });
 };
 
 AudioController.prototype.Update = function() {
-
 };
 
 AudioController.prototype.Reset = function() {
-    
 };
 
 AudioController.prototype.UpdateVolumeSettings = function() {
@@ -76,6 +74,7 @@ AudioController.prototype.UpdateVolumeSettings = function() {
     }
 };
 
+//SFX//////
 AudioController.prototype.PlaySound = function(params) {
     var sfxSetting = GameData.GetSetting('sfx');    
 
@@ -95,6 +94,8 @@ AudioController.prototype.PlaySound = function(params) {
         
         this.sounds[params.name].play();
         this.sounds[params.name].volume = this.sounds[params.name].initialVolume * (sfxSetting / 8);
+        this.sounds[params.name].volume = Math.pow(this.sounds[params.name].volume, 2);
+    
     }
 };
 
@@ -138,14 +139,39 @@ AudioController.prototype.UnpauseAllSound = function(params) {
     }
 };
 
+//AMBIENT//////
+AudioController.prototype.PlayAmbient = function(params) {
+    if(!!params.name && !!this.ambient[params.name] && !this.ambient[params.name].isPlaying) {
+        this.StopAllAmbient(params.name);
+        this.ambient[params.name].play(null, 0, 0);
+        this.ambient[params.name].fadeTo(500, this.ambient[params.name].initialVolume);
+    }
+};
 
+AudioController.prototype.StopAmbient = function(params) {
+    if(!!params.name && !!this.ambient[params.name] && !!this.ambient[params.name].stop) {
+        this.ambient[params.name].pause();
+    }
+};
+
+AudioController.prototype.StopAllAmbient = function() {
+    for(var key in this.ambient) {
+        if(!this.ambient.hasOwnProperty(key)) continue;
+
+        if(!!this.ambient[key] && this.ambient[key].isPlaying) {
+            this.ambient[key].fadeTo(500, 0);
+        }
+    }
+};
+
+//MUSIC//////
 AudioController.prototype.PlayMusic = function(params) {
     var musicSetting = GameData.GetSetting('music');
     
     if(!!params.name && !!this.music[params.name] && !this.music[params.name].isPlaying) {
         if(params.fade) {
             this.music[params.name].play(null, 0, 0);
-            this.music[params.name].fadeTo(params.fade, this.music[params.name].initialVolume * (musicSetting / 8));
+            this.music[params.name].fadeToResume(params.fade, this.music[params.name].initialVolume * (musicSetting / 8));
         } else {         
             this.music[params.name].play(null, 0, this.music[params.name].initialVolume  * (musicSetting / 8));
         }
@@ -155,7 +181,7 @@ AudioController.prototype.PlayMusic = function(params) {
 AudioController.prototype.StopMusic = function(params) {
     if(!!params.name && !!this.music[params.name]) {
         if(params.fade) {
-            this.music[params.name].fadeOut(params.fade);
+            this.music[params.name].fadeToStop(params.fade);
         } else {
             this.music[params.name].stop();
         }
@@ -167,7 +193,7 @@ AudioController.prototype.StopAllMusic = function(params) {
         if(!this.music.hasOwnProperty(key)) continue;
 
         if(!!this.music[key] && this.music[key].isPlaying) {
-            this.music[key].fadeOut(params.fade || 1000);
+            this.music[key].fadeToStop(params.fade || 1000);
         }
         else if(!!this.music[key] && this.music[key].paused) {
             this.music[key].stop();
@@ -195,30 +221,6 @@ AudioController.prototype.UnpauseAllMusic = function(params) {
 
         if(!!this.music[key] && (this.music[key].paused || this.music[key].willBePaused)) {
             this.music[key].fadeToResume(params.duration || 1000, this.music[key].initialVolume  * (musicSetting / 8));
-        }
-    }
-};
-
-AudioController.prototype.PlayAmbient = function(params) {
-    if(!!params.name && !!this.ambient[params.name] && !this.ambient[params.name].isPlaying) {
-        this.StopAllAmbient(params.name);
-        this.ambient[params.name].play(null, 0, 0);
-        this.ambient[params.name].fadeTo(500, this.ambient[params.name].initialVolume);
-    }
-};
-
-AudioController.prototype.StopAmbient = function(params) {
-    if(!!params.name && !!this.ambient[params.name] && !!this.ambient[params.name].stop) {
-        this.ambient[params.name].pause();
-    }
-};
-
-AudioController.prototype.StopAllAmbient = function() {
-    for(var key in this.ambient) {
-        if(!this.ambient.hasOwnProperty(key)) continue;
-
-        if(!!this.ambient[key] && this.ambient[key].isPlaying) {
-            this.ambient[key].fadeTo(500, 0);
         }
     }
 };
