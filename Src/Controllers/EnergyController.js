@@ -9,7 +9,7 @@ EnergyController = function() {
 
 	events.subscribe('restore_health', function(params) {
 		if(this.remainingApples > 0) {
-			var healthAmt = Math.ceil((this.GetMaxHealth() / 3) * 2);
+			var healthAmt = 3; //Math.ceil((this.GetMaxHealth() / 3) * 2);
 			this.AddHealth(healthAmt);
 			this.remainingApples--;
 			effectsController.SpawnAppleCore(frauki.body.center.x, frauki.body.y - 5);
