@@ -7,7 +7,7 @@ GemSucker = function(game, x, y, name) {
     //enable its physics body
     game.physics.enable(this, Phaser.Physics.ARCADE);
     
-    this.body.setSize(32, 64, 0, 0);
+    this.body.setSize(32, 64, 0, -1);
     this.anchor.setTo(0.5);
     this.body.bounce.y = 0;
 

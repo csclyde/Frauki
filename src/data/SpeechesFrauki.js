@@ -1,4 +1,11 @@
 var Speeches = {
+	'cathedral_top': { text: 'I can see everything from up here.' },
+	'amazing_explorer': { text: "I just might be the best explorer ever. Bet no one has been here before.", portrait: 'Mischeif'  },
+	'ship_question': { text: "This must be the big Alien Robot ship she talked about. Those jerks...", portrait: 'Mad'  },
+	
+
+
+
 	'door_tutorial': { text: 'Looks like I can\'t open the door from this side. Maybe I can open it from the other side.', portrait: 'Displeased' },
 	'way_blocked': { text: 'Hmm... the way is blocked. Maybe I can find a way around.' },
 	'apple_tutorial': { text: 'Apples are tasty. If I find one, I can eat it with the right shoulder button to feel better.' },
@@ -9,7 +16,6 @@ var Speeches = {
 	'anyone_home': { text: 'Looks like no one is home...' },
 	'lovely_day': { text: 'Another lovely day in Frogtown.' },
 
-	'garden_gnome': { text: 'Hello little guy. Nice tomatoes!' },
 
 	'hole_sign': { text: 'The sign says: Watch out for danger! This hole is not safe to jump into. Leave what\'s down there alone.' },
 	'phone': { text: 'There’s still a noise when I pick it up. Hello?' },

@@ -283,9 +283,9 @@ ScriptRunner.scripts['demo_Power'] = [
 
 	{ func: function(params) {
 		goddess.alpha = 0;
+		frauki.SetDirection('right');
 		goddess.x = Frogland.goddessPositions.Power.x;
 		goddess.y = Frogland.goddessPositions.Power.y;
-		EnemyBehavior.FacePlayer(goddess);
 		game.add.tween(goddess).to({alpha: 1}, 2000, Phaser.Easing.Linear.None, true);
 	}},
 
@@ -332,8 +332,7 @@ ScriptRunner.scripts['demo_Power'] = [
 	{ func: function(params) {
 		goddess.x = Frogland.goddessPositions.start.x;
 		goddess.y = Frogland.goddessPositions.start.y;
-		goddess.alpha = 1;
-		goddess.SetDirection('left');				
+		goddess.alpha = 1;			
 	}},
 	
 	{ name: 'allow_input', props: {} }
