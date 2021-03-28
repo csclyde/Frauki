@@ -75,14 +75,14 @@ ScriptRunner.scripts['new_game'] = [
     { func: function() {
         GameState.Reset();
         effectsController.Fade(true, 3000);  
-        GameState.menuSelectionMade = true;        
+        GameState.menuSelectionMade = true;  
+        GameData.ResetData();        
     } },
 
     { name: 'wait', props: { amount: 4000 } },
     
     { func: function() {
         events.publish('set_camera', { to: goddess.body.center }); 
-        GameData.ResetData();        
         GameState.inMenu = false;
         GameState.Menu.alpha = 0;
         effectsController.Fade(false, 2000);

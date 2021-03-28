@@ -207,7 +207,7 @@ EnemyBehavior.Player.IsWallBetween = function(e) {
 
 EnemyBehavior.Player.IsBelow = function(e) {
     var margin = e.body.width / 2;
-    margin += 5;
+    margin += -10;
 
     if(e.body.center.y < frauki.body.y && 
        e.body.center.x > frauki.body.center.x - margin && 
