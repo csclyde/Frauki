@@ -69,7 +69,7 @@ Enemy.prototype.types['Goddess'] =  function() {
 			}
 		}
 		//FIRST RUINS AREA TRIGGERS
-		else if(!GameData.IsDoorOpen('spawn_to_chapel')) {
+		else if(!GameData.IsDoorOpen('statue_shortcut')) {
 			if(GameData.data.upgrades.includes('Health2')  && !GameData.GetFlag('first_health_upgrade')) {
 				GameData.SetFlag('first_health_upgrade', true);
 				return 'first_health_upgrade';
@@ -86,8 +86,8 @@ Enemy.prototype.types['Goddess'] =  function() {
 				return 'goddess_console_area1';
 			}
 		}
-		else if(GameData.IsDoorOpen('spawn_to_chapel') && !GameData.GetFlag('spawn_to_chapel')) {
-			GameData.SetFlag('spawn_to_chapel', true);
+		else if(GameData.IsDoorOpen('statue_shortcut') && !GameData.GetFlag('statue_shortcut')) {
+			GameData.SetFlag('statue_shortcut', true);
 			return 'first_shortcut';
 		}
 		else {
