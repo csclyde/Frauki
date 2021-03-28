@@ -52,6 +52,7 @@ ScriptRunner.scripts['goddess_chat'] = [
 
 	{ func: function(params) {
 		ScriptRunner.run('goddess_chat_intro');
+		frauki.SetDirection('right');
 	}}
 ];
 
