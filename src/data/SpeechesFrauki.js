@@ -19,6 +19,15 @@ var Speeches = {
 	'anyone_there': { text: "Anyone in there? I don't hear anything.", portrait: 'Neutral' },
 	'up_there': { text: 'Hmm I wonder if I can get up there.' },
 	'whew': { text: 'Whew, that was tricky.' },
+	'knock_knock': { text: "Knock knock! Anyone there? Ingrid?", portrait: "Neutral" },
+	'tight_passage': { text: "These passageways are so tight. So much rock above me. I could be crushed like a bug... I'm trapped...", portrait: "Dazed" },
+	'get_out': { text: "Get me out of these caves. I hate it I hate it I hate it.", portrait: "Dazed" },
+	'nibble': { text: 'Just a little nibble couldn\'t hurt... could it?', portrait: 'Mischeif' },
+	'maint': { text: 'Something is engraved into the wall: Maintenence access. Beware pipe currents.' },
+	'cold': { text: 'This place is so cold, it\'s making my knees shake', portrait: 'Displeased' },
+	'blocked': { text: "The pipe is blocked up! I'll have to go around I guess. I used to slip through this pipe all the time.", portrait: "Neutral" },
+	'dry_off': { text: "I need to dry off. Sure wish there was some sun way down here.", portrait: "Displeased" },
+	'secret_hideout': { text: "Looks like someones secret hideout. Dibs!", portrait: "Silly" },
 	
 
 
@@ -47,8 +56,6 @@ var Speeches = {
 	'ceiling': { text: 'I can barely see the ceiling, it\'s so high. I wonder how this is all still standing.' },
 	'fire': { text: 'The fire is warm. Maybe I can dry my socks off a little bit' },
 	'dont_eat': { text: 'No matter how tasty it looks, don\'t eat that mushroom...', portrait: 'Enticed' },
-	'nibble': { text: 'Just a little nibble couldn\'t hurt... could it?', portrait: 'Mischeif' },
-	'cold': { text: 'This water is so cold, it\'s making my knees shake', portrait: 'Displeased' },
 	'ellipses': { text: '...', portrait: 'Silly' },
 	'names_engraved': { text: 'Looks like each stone has a name engraved in it.', portrait: 'Neutral' },
 	'sorry_plant': { text: 'Sorry plant' },
@@ -58,7 +65,6 @@ var Speeches = {
 	'treasures': { text: 'Wow, look at all these treasures. Well, I don\'t have any use for them.' },
 	'garden': { text: 'Something is carved into the wall: To those who come after, this world is a garden.' },
 	'sweetnasty': { text: 'Something is carved into the wall: Good bye you sweet world!!!' },
-	'maint': { text: 'Something is engraved into the wall: GameStatetenence access. Beware pipe currents.' },
 	'pouring_joy': { text: 'Something is carved into the wall: I can barely withstand the joy pouring into me! Goodbye!' },
 	'another_sky': { text: 'Something is carved into the wall: So, we will find another sky. So it goes.' },
 	'behold_goddess': { text: 'Something is carved into the wall: The Goddess has appeared, and we are forgiven' },
