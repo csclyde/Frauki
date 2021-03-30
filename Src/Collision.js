@@ -322,11 +322,7 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
 
 
 Collision.OverlapEnemiesWithSelf = function(o1, o2) {
-    if(o1.robotic === o2.robotic) {
-        return true;
-    } else {
-        return false;
-    }
+    return false;
 };
 
 Collision.OverlapLobWithEnemy = function(l, e) {

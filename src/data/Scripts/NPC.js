@@ -79,7 +79,7 @@ ScriptRunner.scripts['robo_puncher'] = [
 ScriptRunner.scripts['robo_armed'] = [
 	{ name: 'show_text', props: { text: "They told me to watch out for a little demon swinging around a green energy sword.", portrait: 'red' } },
 	{ name: 'show_text', props: { text: "But I'm starting to think they were just messing with me.", portrait: 'red' } },
-	{ name: 'show_text', props: { text: "I've been standing around waiting to blast her for months now. Nothing! Ughhhh.", portrait: 'red' } },
+	{ name: 'show_text', props: { text: "I've been standing around waiting to blast her for months now. Nothing! I feel like such a fool.", portrait: 'red' } },
 	{ name: 'show_text', props: { text: "Oh don't worry, I'm sure you'll find her soon!", portrait: 'Neutral' } },	
 	{ name: 'run_script', props: { name: 'exit_NPC' } },
 ];

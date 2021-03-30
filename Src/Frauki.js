@@ -1,4 +1,4 @@
-PLAYER_SPEED = function() { return 200 * frauki.movement.globalMoveMod; }
+PLAYER_SPEED = function() { return 180 * frauki.movement.globalMoveMod; }
 PLAYER_ROLL_SPEED = function() { return 460 * frauki.movement.globalMoveMod; }
 PLAYER_RUN_SLASH_SPEED = function() { return  550 * frauki.movement.globalMoveMod; }
 PLAYER_JUMP_VEL = function() { return -500 * frauki.movement.globalMoveMod; }
@@ -695,10 +695,6 @@ Player.prototype.FallSlash = function() {
 };
 
 Player.prototype.DiveSlash = function() {
-    if(!GameData.HasUpgrade('Dive')) {
-        return this.FallSlash();
-    }
-
     this.ChangeState(this.AttackDiveCharge);
     this.movement.diveVelocity = 550;
 
@@ -712,10 +708,6 @@ Player.prototype.JumpSlash = function() {
 };
 
 Player.prototype.StabSlash = function() {
-    if(!GameData.HasUpgrade('Stab')) {
-        return this.FrontSlash();
-    }
-
     this.ChangeState(this.AttackStab);
 
     var dir = this.GetDirectionMultiplier();

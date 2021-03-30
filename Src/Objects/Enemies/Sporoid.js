@@ -7,7 +7,8 @@ Enemy.prototype.types['Sporoid'] =  function() {
     this.animations.add('shit', ['Misc/Sporoid0000'], 10, true, false);
 
     this.body.allowGravity = false;
-    this.body.bounce.set(0.3);
+	this.body.bounce.set(0.3);
+	this.body.drag.setTo(600);
     this.baseStunDuration = 800;
 
     this.dashTimer = 0;
@@ -53,7 +54,7 @@ Enemy.prototype.types['Sporoid'] =  function() {
 		EnemyBehavior.FacePlayer(this);
 		this.body.velocity.x = 0;
 
-		this.timers.SetTimer('dash', 500);
+		this.timers.SetTimer('dash', 750);
 		this.timers.SetTimer('dash_wait', 3000);
 	};
 
@@ -89,7 +90,7 @@ Enemy.prototype.types['Sporoid'] =  function() {
 			this.body.velocity.x = 30;
 		}
 
-		if(EnemyBehavior.Player.IsNear(this, 120)) {
+		if(EnemyBehavior.Player.IsNear(this, 140)) {
 			this.Dash();
 			return;
 		}
@@ -110,13 +111,13 @@ Enemy.prototype.types['Sporoid'] =  function() {
 	this.PreDashing = function() {
 		this.PlayAnim('idle');
 
-		this.body.velocity.y = Math.sin((GameState.gameTime) / 30) * 200;
+		this.body.velocity.y = Math.sin((GameState.gameTime) / 15) * 200;
 		this.body.velocity.x = 0;
 
 		if(this.timers.TimerUp('dash')) {
 			this.state = this.Dashing;
 			this.timers.SetTimer('dash', 1000);
-			game.physics.arcade.moveToXY(this, frauki.body.center.x, frauki.body.center.y, 400);
+			game.physics.arcade.moveToXY(this, frauki.body.center.x, frauki.body.center.y, 500);
 		}
 	};
 

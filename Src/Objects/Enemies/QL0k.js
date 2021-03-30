@@ -22,7 +22,7 @@ Enemy.prototype.types['QL0k'] =  function() {
 	
 	this.shotCount = 0;
 
-    //this.addChild(this.base);
+    this.addChild(this.base);
     
 	this.updateFunction = function() {
 		var idealRotation = Math.atan2(frauki.body.center.y - this.body.center.y, frauki.body.center.x - this.body.center.x);

@@ -71,11 +71,13 @@ GameState.update = function() {
 };
 
 GameState.render = function() {
-    // game.debug.body(frauki.attackRect);
+    game.debug.body(frauki);
+    game.debug.body(frauki.attackRect);
     
-    // objectController.GetObjectGroup().forEach(function(o) {
-    //     game.debug.body(o);
-    // });
+    objectController.GetObjectGroup().forEach(function(o) {
+        game.debug.body(o);
+        if(!!o.attackRect) game.debug.body(o.attackRect);
+    });
 }
 
 GameState.BeginGameover = function() {

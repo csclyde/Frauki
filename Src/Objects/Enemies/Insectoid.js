@@ -1,7 +1,7 @@
 Enemy.prototype.types['Insectoid'] =  function() {
 
-    this.body.setSize(50, 25, 10, 10);
-    this.anchor.setTo(0.5, 0.5);
+    this.body.setSize(50, 25, 0, 0);
+    this.anchor.setTo(0.5);
 
     this.animations.add('idle', ['Insectoid/Hop0000'], 10, true, false);
     this.animations.add('spin', ['Insectoid/Spin0000'], 10, true, false);
@@ -56,7 +56,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
                         this.Hop();
                     } 
                     else {
-                        if(EnemyBehavior.RollDice(2, 1) || EnemyBehavior.Player.IsNear(this, 40)) {
+                        if(this.CanAttack() && (EnemyBehavior.RollDice(2, 1) || EnemyBehavior.Player.IsNear(this, 40))) {
                             this.Scuttle();
                         } else {
                             this.Hop();
@@ -124,7 +124,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
         
         this.timers.SetTimer('attack', 500);
 
-        this.state = this.Dodging;
+        this.state = this.Escaping;
 
         events.publish('play_sound', {name: 'RKN1d_jump', restart: true});
 
@@ -284,7 +284,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
         return false;
     };
 
-    this.Dodging = function() {
+    this.Escaping = function() {
 
         if(!this.body.onFloor()) {
             this.PlayAnim('hop');

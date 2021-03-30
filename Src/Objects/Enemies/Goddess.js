@@ -52,7 +52,23 @@ Enemy.prototype.types['Goddess'] =  function() {
 	this.GetGameoverScript = function() {
 		//INTRO AREA TRIGGERS
 		if(!GameData.GetFlag('intro_finished')) {
-			if(!GameData.GetFlag('first_death')) {
+			if(GameState.death.name === 'tower_troll' && !GameData.GetFlag('tower_troll1')) {
+				GameData.SetFlag('tower_troll1', true);
+				return 'tower_troll1';
+			}
+			else if(GameState.death.name === 'tower_troll' && !GameData.GetFlag('tower_troll2')) {
+				GameData.SetFlag('tower_troll2', true);
+				return 'tower_troll2';
+			}
+			else if(GameState.death.name === 'tower_troll' && !GameData.GetFlag('tower_troll3')) {
+				GameData.SetFlag('tower_troll3', true);
+				return 'tower_troll3';
+			}
+			else if(GameState.death.name === 'tower_troll' && !GameData.GetFlag('tower_troll_final')) {
+				GameData.SetFlag('tower_troll_final', true);
+				return 'tower_troll_final';
+			}
+			else if(!GameData.GetFlag('first_death')) {
 				GameData.SetFlag('first_death', true);
 				return 'goddess_surprised_death1';
 			}

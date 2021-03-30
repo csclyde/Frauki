@@ -205,7 +205,7 @@ Enemy.prototype.isAttacking = function() {
 };
 
 Enemy.prototype.CanAttack = function() {
-    if(this.timers.TimerUp('attack_wait') && Frogland.timers.TimerUp('global_attack_wait')) {
+    if(this.timers.TimerUp('attack_wait') && Frogland.timers.TimerUp('global_attack_wait') && !frauki.Grace()) {
         return true;
     }
 
@@ -363,6 +363,8 @@ Enemy.prototype.HideHealth = function() {
 
 Enemy.prototype.collideWithPlayer = function(f) {
     if(this.objectName === 'Goddess') {
+        return false;
+    } else if(frauki.state === frauki.Rolling || frauki.state === frauki.Flipping || this.state === this.Escaping || this.state === this.Hurting) {
         return false;
     } else if(this.isAttacking() && this.GetCurrentDamage() > 0) {
         return false;

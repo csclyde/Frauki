@@ -27,7 +27,31 @@ ScriptRunner.scripts['goddess_surprised_death_final'] = [
 
 ScriptRunner.scripts['first_gubr'] = [
 	{ name: 'show_text', props: { text: "Ouch, looks like that annoying little robot got you.", portrait: 'Goddess_Neutral' } },
-	{ name: 'show_text', props: { text: "He's a coward, but look out for his poker.", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "He's a coward, but watch out for his little poker. It's really painful.", portrait: 'Goddess_Neutral' } },
+	{ name: 'run_script', props: { name: 'exit_goddess' } },
+];
+
+ScriptRunner.scripts['tower_troll1'] = [
+	{ name: 'show_text', props: { text: "Frauki, were you playing around in the crashed ship?", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "Tsk tsk, it's much too dangerous there. You're not ready.", portrait: 'Goddess_Neutral' } },
+	{ name: 'run_script', props: { name: 'exit_goddess' } },
+];
+
+ScriptRunner.scripts['tower_troll2'] = [
+	{ name: 'show_text', props: { text: "Frauki, do what I tell you. Please.", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "You're not ready for the ship yet.", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "So unless you like getting punched in the face, be a good girl and stay out!", portrait: 'Goddess_Neutral' } },
+	{ name: 'run_script', props: { name: 'exit_goddess' } },
+];
+
+ScriptRunner.scripts['tower_troll3'] = [
+	{ name: 'show_text', props: { text: "You're being very naughty, playing about in that ship.", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "You have work to do, silly girl. Just stop it.", portrait: 'Goddess_Neutral' } },
+	{ name: 'run_script', props: { name: 'exit_goddess' } },
+];
+
+ScriptRunner.scripts['tower_troll_final'] = [
+	{ name: 'show_text', props: { text: "Hmmmph. Maybe I just won't bring you back next time.", portrait: 'Goddess_Neutral' } },
 	{ name: 'run_script', props: { name: 'exit_goddess' } },
 ];
 

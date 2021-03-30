@@ -917,24 +917,24 @@
 	"frame": {"x":566,"y":839,"w":76,"h":36},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":14,"y":45,"w":76,"h":36},
-	"sourceSize": {"w":100,"h":100}
+	"spriteSourceSize": {"x":56,"y":77,"w":76,"h":36},
+	"sourceSize": {"w":200,"h":200}
 },
 "Insectoid/Hop0001":
 {
 	"frame": {"x":356,"y":879,"w":84,"h":50},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":8,"y":41,"w":84,"h":50},
-	"sourceSize": {"w":100,"h":100}
+	"spriteSourceSize": {"x":50,"y":82,"w":84,"h":50},
+	"sourceSize": {"w":200,"h":200}
 },
 "Insectoid/Hop0002":
 {
 	"frame": {"x":984,"y":109,"w":88,"h":44},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":8,"y":39,"w":88,"h":44},
-	"sourceSize": {"w":100,"h":100}
+	"spriteSourceSize": {"x":44,"y":80,"w":88,"h":44},
+	"sourceSize": {"w":200,"h":200}
 },
 "Insectoid/Spin0000":
 {
@@ -2975,6 +2975,6 @@
 	"format": "RGBA8888",
 	"size": {"w":1372,"h":1021},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:0d4a26fec7e0c82e80a2b9df9c77d921:684a4cf226d457535dd07eb666990209:b1585ba32d60cf5440f3fdffe8c37c76$"
+	"smartupdate": "$TexturePacker:SmartUpdate:b68fcff47b37f63b01e6d3f457c5a6f4:a4e6c4a90cada80de534d01e47420ede:b1585ba32d60cf5440f3fdffe8c37c76$"
 }
 }
