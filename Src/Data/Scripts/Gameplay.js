@@ -76,15 +76,16 @@ ScriptRunner.scripts['new_game'] = [
     { name: 'play_sound', props: { name: 'crystal_door' } },
     
     { func: function() {
+        GameData.ResetData();
         GameState.Reset();
         effectsController.Fade(true, 3000);  
         GameState.menuSelectionMade = true;  
-        GameData.ResetData();        
     } },
 
     { name: 'wait', props: { amount: 4000 } },
     
     { func: function() {
+        GameData.SaveDataToStorage();        
         events.publish('set_camera', { to: goddess.body.center }); 
         GameState.inMenu = false;
         GameState.Menu.alpha = 0;

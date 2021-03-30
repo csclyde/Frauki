@@ -92,8 +92,6 @@ GameData.ResetData = function() {
     var newData = Object.assign({}, defaultData);
     newData.settings = this.data.settings;
     this.data = newData;
-    
-    this.SaveDataToStorage();
 };
 
 GameData.GetDebugPos = function() {

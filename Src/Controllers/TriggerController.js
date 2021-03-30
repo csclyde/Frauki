@@ -4,7 +4,6 @@ TriggerController = function() {
 
     this.triggerLayers = {};
     this.triggerTargets = {};
-    console.log(this.triggers)
     
   
 };
