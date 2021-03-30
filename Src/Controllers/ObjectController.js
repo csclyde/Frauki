@@ -170,9 +170,8 @@ ObjectController.prototype.SpawnObject = function(o) {
 	    FileMap.Enemies.forEach(function(enemy) {
 	        if(o.id === enemy.Tile) {
                 newObj = new Enemy(game, o.x, o.y, enemy.Name, enemy.Name);
-                if(newObj.create) newObj.create();
 	            newObj.latent = o;
-
+                
                 if(o.id === 149) {
                     objectController.npcMap[o.name] = newObj;
                 } else {
@@ -196,6 +195,9 @@ ObjectController.prototype.SpawnObject = function(o) {
         this.activeGroup.add(newObj);
         newObj.properties = o.properties || {};
         newObj.name = o.name;
+
+        if(newObj.create) newObj.create();
+        
 
         //check for signals attached to the object
         if(!!newObj.properties.on_death) {

@@ -538,6 +538,10 @@
             <key type="filename">RKN1d/Jump0003.png</key>
             <key type="filename">RKN1d/Jump0004.png</key>
             <key type="filename">RKN1d/Jump0005.png</key>
+            <key type="filename">RKN1d/Walk0000.png</key>
+            <key type="filename">RKN1d/Walk0001.png</key>
+            <key type="filename">RKN1d/Walk0002.png</key>
+            <key type="filename">RKN1d/Walk0003.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
