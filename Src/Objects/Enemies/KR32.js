@@ -392,7 +392,7 @@ Enemy.prototype.types['KR32'] =  function() {
 
 		'KR32/Attack0005': {
 			x: 30, y: 20, w: 85, h: 40,
-			damage: 4,
+			damage: 3,
 			knockback: 0.3,
 			priority: 4,
 			juggle: 0
@@ -400,7 +400,7 @@ Enemy.prototype.types['KR32'] =  function() {
 
 		'KR32/Attack0006': {
 			x: 30, y: 20, w: 85, h: 40,
-			damage: 4,
+			damage: 3,
 			knockback: 0.3,
 			priority: 4,
 			juggle: 0
