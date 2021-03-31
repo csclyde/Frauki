@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="360" height="700" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="4128">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="360" height="700" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="4139">
  <properties>
   <property name="debug" value="false"/>
   <property name="startLayer" value="3"/>
@@ -3729,7 +3729,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,13,13,13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="Objects" visible="0">
+ <objectgroup name="Objects">
   <properties>
    <property name="id" value="sewer_transverse"/>
   </properties>
@@ -5060,7 +5060,7 @@
   </object>
   <object id="4127" name="dark" type="trigger" x="1680.16" y="3127" width="255.67" height="117"/>
  </objectgroup>
- <objectgroup name="Audio" visible="0">
+ <objectgroup name="Audio">
   <object id="3888" name="ambient_left_right" type="trigger" x="3216" y="2966.67" width="32" height="97.3333">
    <properties>
     <property name="left" value="ambient_ship"/>
@@ -5192,7 +5192,7 @@
     <property name="fade" value="3000"/>
    </properties>
   </object>
-  <object id="3920" name="play_music" type="trigger" x="1953.5" y="7086.83" width="28.3333" height="93.9997">
+  <object id="3920" name="play_music" type="trigger" x="1952.17" y="7086.83" width="29.6666" height="93.9997">
    <properties>
     <property name="song" value="Underwater"/>
    </properties>
@@ -5238,8 +5238,13 @@
     <property name="song" value="Goddess"/>
    </properties>
   </object>
+  <object id="4136" name="play_music" type="trigger" x="1737.17" y="6977.67" width="107" height="27.9997">
+   <properties>
+    <property name="song" value="Underwater"/>
+   </properties>
+  </object>
  </objectgroup>
- <objectgroup name="Triggers" visible="0">
+ <objectgroup name="Triggers">
   <object id="1592" name="mushrooms" type="speech" x="3824.42" y="3858.17" width="30.1667" height="45.5"/>
   <object id="1611" name="hidden_goodies" type="speech" x="3456.17" y="4064.67" width="250.497" height="79.6633"/>
   <object id="1646" name="regen" type="trigger" x="3278.08" y="3992" width="55.5" height="56.5"/>
@@ -5341,6 +5346,60 @@
     <property name="door" value="second_sw8t"/>
     <property name="once" value="true"/>
     <property name="song" value="Chamber"/>
+   </properties>
+  </object>
+  <object id="4128" name="region_text" type="trigger" x="4976.83" y="2948.99" width="79.8409" height="32.0151">
+   <properties>
+    <property name="once" value="true"/>
+    <property name="text" value="FROGLAND RUINS"/>
+   </properties>
+  </object>
+  <object id="4129" name="region_text" type="trigger" x="4032.41" y="4427.24" width="97.9242" height="33.6818">
+   <properties>
+    <property name="once" value="true"/>
+    <property name="text" value="FROGLAND GARDENS"/>
+   </properties>
+  </object>
+  <object id="4130" name="region_text" type="trigger" x="3635.7" y="4793.16" width="97.9242" height="175.015">
+   <properties>
+    <property name="once" value="true"/>
+    <property name="text" value="THE TENEMENTS"/>
+   </properties>
+  </object>
+  <object id="4131" name="region_text" type="trigger" x="1704.37" y="6986.99" width="171.924" height="189.682">
+   <properties>
+    <property name="once" value="true"/>
+    <property name="text" value="THE DEPTHS"/>
+   </properties>
+  </object>
+  <object id="4132" name="region_text" type="trigger" x="4101.54" y="6692.66" width="152.924" height="28.682">
+   <properties>
+    <property name="once" value="true"/>
+    <property name="text" value="CAVERSTOWN"/>
+   </properties>
+  </object>
+  <object id="4133" name="region_text" type="trigger" x="1792.04" y="7617.16" width="51.924" height="87.0153">
+   <properties>
+    <property name="once" value="true"/>
+    <property name="text" value="THE WATERWAYS"/>
+   </properties>
+  </object>
+  <object id="4134" name="region_text" type="trigger" x="828.038" y="10237.7" width="176.424" height="42.182">
+   <properties>
+    <property name="once" value="true"/>
+    <property name="text" value="THE SURFACE"/>
+   </properties>
+  </object>
+  <object id="4135" name="region_text" type="trigger" x="3206.54" y="6009.66" width="77.924" height="137.682">
+   <properties>
+    <property name="once" value="true"/>
+    <property name="text" value="FROGTOWN MARKET"/>
+   </properties>
+  </object>
+  <object id="4138" name="region_text" type="trigger" x="3098.58" y="2793.99" width="85.8409" height="28.0151">
+   <properties>
+    <property name="once" value="true"/>
+    <property name="text" value="CRASHED SHIP"/>
    </properties>
   </object>
  </objectgroup>

@@ -53,6 +53,9 @@ SpeechController.prototype.Create = function() {
 	this.portraitBox.cameraOffset.x = 0 + speechOffsetX;
 	this.portraitBox.cameraOffset.y = 10 + speechOffsetY; 
 
+	this.dialogBoxX = 70 + speechOffsetX;
+	this.dialogBoxSmallX = 20 + speechOffsetX;
+
 	this.dialogBox = game.add.image(7, 7, 'UI', 'Speech0002');
 	this.dialogBox.fixedToCamera = true;
 	this.dialogBox.animations.add('green', ['Speech0001'], 18, true, false);
@@ -61,8 +64,11 @@ SpeechController.prototype.Create = function() {
 	this.dialogBox.animations.play('green');
 	this.dialogBox.alpha = 0.9;
 	this.dialogBox.visible = false;
-	this.dialogBox.cameraOffset.x = 70 + speechOffsetX; 
+	this.dialogBox.cameraOffset.x = this.dialogBoxX; 
 	this.dialogBox.cameraOffset.y = 10 + speechOffsetY; 
+
+	this.textX = 110 + speechOffsetX;
+	this.textSmallX = 60 + speechOffsetX;
 
 	this.text = game.add.bitmapText(0, 0, 'diest64','', 16);
 	this.text.fixedToCamera = true;
@@ -70,7 +76,7 @@ SpeechController.prototype.Create = function() {
 	this.text.cameraOffset.x = 110 + speechOffsetX; 
 	this.text.cameraOffset.y = 15 + speechOffsetY;
 
-	this.regionText = game.add.bitmapText(0, 0, 'diest64','tester', 48);
+	this.regionText = game.add.bitmapText(0, 0, 'rise', null, 36);
 	this.regionText.fixedToCamera = true;
 	this.regionText.alpha = 0;
 	this.regionText.anchor.setTo(0.5);
@@ -298,10 +304,17 @@ SpeechController.prototype.Activate = function(text, portrait) {
 
 	if(portrait === 'red') {
 		this.dialogBox.animations.play('red_npc');
+		this.dialogBox.cameraOffset.x = this.dialogBoxSmallX;
+		this.text.cameraOffset.x = this.textSmallX;
 	} else if(portrait === 'green') {	
 		this.dialogBox.animations.play('green_npc');
+		this.dialogBox.cameraOffset.x = this.dialogBoxSmallX;		
+		this.text.cameraOffset.x = this.textSmallX;
 	} else {
-		this.dialogBox.animations.play('green');		
+		this.dialogBox.animations.play('green');
+		this.dialogBox.cameraOffset.x = this.dialogBoxX;
+		this.text.cameraOffset.x = this.textX;		
+		
 		this.portraitBox.visible = true;
 		this.portraits[this.currentPortrait].visible = true;
 	}

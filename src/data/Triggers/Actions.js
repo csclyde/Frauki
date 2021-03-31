@@ -42,6 +42,8 @@ TriggerController.prototype.triggers['old_robo'] = {
 
 TriggerController.prototype.triggers['region_text'] = {
 	enter: function(params, trigger) {
+		events.publish('display_region_text', { text: params.text });
+		
 	},
 
 	stay: function(params, trigger) {
@@ -49,15 +51,15 @@ TriggerController.prototype.triggers['region_text'] = {
 	},
 
 	exit: function(params, trigger) {
-		if(!!params.left && frauki.body.center.x < trigger.x) {
-			events.publish('display_region_text', { text: params.left });
-		} else if(!!params.right && frauki.body.center.x > trigger.x) {
-			events.publish('display_region_text', { text: params.right });
-		} else if(!!params.down && frauki.body.center.y > trigger.y) {
-			events.publish('display_region_text', { text: params.down });
-		} else if(!!params.up && frauki.body.center.y < trigger.y) {
-			events.publish('display_region_text', { text: params.up });
-		}
+		// if(!!params.left && frauki.body.center.x < trigger.x) {
+		// 	events.publish('display_region_text', { text: params.left });
+		// } else if(!!params.right && frauki.body.center.x > trigger.x) {
+		// 	events.publish('display_region_text', { text: params.right });
+		// } else if(!!params.down && frauki.body.center.y > trigger.y) {
+		// 	events.publish('display_region_text', { text: params.down });
+		// } else if(!!params.up && frauki.body.center.y < trigger.y) {
+		// 	events.publish('display_region_text', { text: params.up });
+		// }
 	}
 };
 

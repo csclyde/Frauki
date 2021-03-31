@@ -1737,7 +1737,7 @@
              "id":"string"
             },
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -7645,15 +7645,15 @@
                  "y":4042.54
                 }, 
                 {
-                 "height":116.9997,
+                 "height":117,
                  "id":4127,
                  "name":"dark",
                  "rotation":0,
                  "type":"trigger",
                  "visible":true,
                  "width":255.67,
-                 "x":1680.165,
-                 "y":3127.00015
+                 "x":1680.16,
+                 "y":3127
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -8149,8 +8149,8 @@
                  "rotation":0,
                  "type":"trigger",
                  "visible":true,
-                 "width":28.3333,
-                 "x":1953.5,
+                 "width":29.6666333333333,
+                 "x":1952.16666666667,
                  "y":7086.83
                 }, 
                 {
@@ -8306,10 +8306,29 @@
                  "width":494.089,
                  "x":4396.2,
                  "y":4266.9
+                }, 
+                {
+                 "height":27.9997000000003,
+                 "id":4136,
+                 "name":"play_music",
+                 "properties":
+                    {
+                     "song":"Underwater"
+                    },
+                 "propertytypes":
+                    {
+                     "song":"string"
+                    },
+                 "rotation":0,
+                 "type":"trigger",
+                 "visible":true,
+                 "width":106.999933333333,
+                 "x":1737.1667,
+                 "y":6977.66681666667
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -8900,14 +8919,203 @@
                  "width":39.1667,
                  "x":2833.75,
                  "y":7818.42
+                }, 
+                {
+                 "height":32.0151,
+                 "id":4128,
+                 "name":"region_text",
+                 "properties":
+                    {
+                     "once":"true",
+                     "text":"FROGLAND RUINS"
+                    },
+                 "propertytypes":
+                    {
+                     "once":"string",
+                     "text":"string"
+                    },
+                 "rotation":0,
+                 "type":"trigger",
+                 "visible":true,
+                 "width":79.8409000000001,
+                 "x":4976.82955,
+                 "y":2948.99245
+                }, 
+                {
+                 "height":33.6817666666666,
+                 "id":4129,
+                 "name":"region_text",
+                 "properties":
+                    {
+                     "once":"true",
+                     "text":"FROGLAND GARDENS"
+                    },
+                 "propertytypes":
+                    {
+                     "once":"string",
+                     "text":"string"
+                    },
+                 "rotation":0,
+                 "type":"trigger",
+                 "visible":true,
+                 "width":97.9242333333336,
+                 "x":4032.41288333333,
+                 "y":4427.24245
+                }, 
+                {
+                 "height":175.015133333334,
+                 "id":4130,
+                 "name":"region_text",
+                 "properties":
+                    {
+                     "once":"true",
+                     "text":"THE TENEMENTS"
+                    },
+                 "propertytypes":
+                    {
+                     "once":"string",
+                     "text":"string"
+                    },
+                 "rotation":0,
+                 "type":"trigger",
+                 "visible":true,
+                 "width":97.9242,
+                 "x":3635.70456666667,
+                 "y":4793.1591
+                }, 
+                {
+                 "height":189.681666666667,
+                 "id":4131,
+                 "name":"region_text",
+                 "properties":
+                    {
+                     "once":"true",
+                     "text":"THE DEPTHS"
+                    },
+                 "propertytypes":
+                    {
+                     "once":"string",
+                     "text":"string"
+                    },
+                 "rotation":0,
+                 "type":"trigger",
+                 "visible":true,
+                 "width":171.9242,
+                 "x":1704.37123333333,
+                 "y":6986.9925
+                }, 
+                {
+                 "height":28.6819999999998,
+                 "id":4132,
+                 "name":"region_text",
+                 "properties":
+                    {
+                     "once":"true",
+                     "text":"CAVERSTOWN"
+                    },
+                 "propertytypes":
+                    {
+                     "once":"string",
+                     "text":"string"
+                    },
+                 "rotation":0,
+                 "type":"trigger",
+                 "visible":true,
+                 "width":152.924,
+                 "x":4101.538,
+                 "y":6692.659
+                }, 
+                {
+                 "height":87.0153333333319,
+                 "id":4133,
+                 "name":"region_text",
+                 "properties":
+                    {
+                     "once":"true",
+                     "text":"THE WATERWAYS"
+                    },
+                 "propertytypes":
+                    {
+                     "once":"string",
+                     "text":"string"
+                    },
+                 "rotation":0,
+                 "type":"trigger",
+                 "visible":true,
+                 "width":51.924,
+                 "x":1792.038,
+                 "y":7617.159
+                }, 
+                {
+                 "height":42.1820000000007,
+                 "id":4134,
+                 "name":"region_text",
+                 "properties":
+                    {
+                     "once":"true",
+                     "text":"THE SURFACE"
+                    },
+                 "propertytypes":
+                    {
+                     "once":"string",
+                     "text":"string"
+                    },
+                 "rotation":0,
+                 "type":"trigger",
+                 "visible":true,
+                 "width":176.424,
+                 "x":828.038,
+                 "y":10237.659
+                }, 
+                {
+                 "height":137.682,
+                 "id":4135,
+                 "name":"region_text",
+                 "properties":
+                    {
+                     "once":"true",
+                     "text":"FROGTOWN MARKET"
+                    },
+                 "propertytypes":
+                    {
+                     "once":"string",
+                     "text":"string"
+                    },
+                 "rotation":0,
+                 "type":"trigger",
+                 "visible":true,
+                 "width":77.924,
+                 "x":3206.538,
+                 "y":6009.659
+                }, 
+                {
+                 "height":28.0151000000001,
+                 "id":4138,
+                 "name":"region_text",
+                 "properties":
+                    {
+                     "once":"true",
+                     "text":"CRASHED SHIP"
+                    },
+                 "propertytypes":
+                    {
+                     "once":"string",
+                     "text":"string"
+                    },
+                 "rotation":0,
+                 "type":"trigger",
+                 "visible":true,
+                 "width":85.8409000000001,
+                 "x":3098.57955,
+                 "y":2793.99245
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }],
- "nextobjectid":4128,
+ "nextobjectid":4139,
  "orientation":"orthogonal",
  "properties":
     {
