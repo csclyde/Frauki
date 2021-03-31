@@ -183,13 +183,12 @@ InputController = function() {
                 break;
 
                 case 3:
-                    //this.OnHeal(true);
-                    this.OnThrow(true);
+                    this.OnHeal(true);
+                    //this.OnThrow(true);
                 break;
 
                 //case 5: //right shoulder
                 case 7: //right shoulder
-                    this.OnHeal(true);
                 break;
 
                 //case 4: //left shoulder
@@ -197,7 +196,7 @@ InputController = function() {
                 break;
 
                 case 9: //start
-                    this.OnStart(true);
+                    this.OnPause(true);
                 break;
 
                 case 12:

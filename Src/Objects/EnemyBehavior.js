@@ -143,7 +143,7 @@ EnemyBehavior.Player.IsVisible = function(e) {
 
         var i = collideTiles.length;
         while(i--) {
-            if(collideTiles[i].index === 1) { 
+            if([1, 3, 4, 5, 7, 8, 9, 17, 18].includes(collideTiles[i].index)) { 
                 this.Visibility[e.z].result = false;
                 break;
             }

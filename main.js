@@ -1,6 +1,8 @@
 var electron = require('electron');
 var app = electron.app;  // Module to control application life.
 var BrowserWindow = electron.BrowserWindow;  // Module to create native browser window.
+var ipcMain = electron.ipcMain;
+
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is GCed.
@@ -8,14 +10,28 @@ var mainWindow = null;
 
 
 function createWindow() {
-  mainWindow = new BrowserWindow({fullscreen: true, frame: false, cursor: 'none'});
+  mainWindow = new BrowserWindow({
+    fullscreen: true, 
+    frame: false, 
+    cursor: 'none', 
+    enableRemoteModule: true,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+    }
+  });
   mainWindow.loadFile('index.html');
+  mainWindow.app = app;
 
   // Open the devtools.
-  //mainWindow.openDevTools();
+  // mainWindow.openDevTools();
 
   mainWindow.on('closed', function() {
     mainWindow = null;
+  });
+
+  ipcMain.on('close-app', function(event, arg) {
+    app.exit(0);
   });
 }
 

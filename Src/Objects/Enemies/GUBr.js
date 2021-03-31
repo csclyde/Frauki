@@ -17,11 +17,11 @@ Enemy.prototype.types['GUBr'] =  function() {
     
 	this.updateFunction = function() {
 
-		if(this.body.onFloor() && this.animations.currentAnim.name === 'walk') {
-			events.publish('play_sound', {name: 'GUBr_step', restart: false});
-		} else {
-			events.publish('stop_sound', {name: 'GUBr_step', restart: false});
-		}
+		// if(this.body.onFloor() && this.animations.currentAnim.name === 'walk') {
+		// 	events.publish('play_sound', {name: 'GUBr_step', restart: false});
+		// } else {
+		// 	events.publish('stop_sound', {name: 'GUBr_step', restart: false});
+		// }
 	};
 
 	this.Act = function() {
@@ -75,6 +75,8 @@ Enemy.prototype.types['GUBr'] =  function() {
     	if(this.state !== this.Fleeing) {
 			this.body.velocity.y = -150;
 			events.publish('play_sound', {name: 'enemy_jump', restart: true});
+			events.publish('play_sound', {name: 'GUBr_step', restart: false});
+			
 			
 			if(frauki.state === frauki.Hurting) {
 				setTimeout(function() {
@@ -102,7 +104,9 @@ Enemy.prototype.types['GUBr'] =  function() {
     };
 
     this.Charge = function() {
-    	this.state = this.Charging;
+		this.state = this.Charging;
+		events.publish('play_sound', {name: 'GUBr_step', restart: false});
+		
     };
 
 	////////////////////////////////STATES////////////////////////////////////
@@ -125,6 +129,8 @@ Enemy.prototype.types['GUBr'] =  function() {
 
 
 		if(this.body.onWall()) {
+			events.publish('stop_sound', {name: 'GUBr_step', restart: false});
+			
 			if(EnemyBehavior.Player.IsNear(this, 180) && this.CanAttack()) {
 				this.Attack();
 			} else {
@@ -135,6 +141,7 @@ Enemy.prototype.types['GUBr'] =  function() {
 		EnemyBehavior.FaceForward(this);
 
 		if(this.timers.TimerUp('flee')) {
+			events.publish('stop_sound', {name: 'GUBr_step', restart: false});			
 			return true;
 		} else {
 			return false;
@@ -169,6 +176,7 @@ Enemy.prototype.types['GUBr'] =  function() {
 		}
 
 		if(this.body.onWall() || EnemyBehavior.Player.IsNear(this, 120)) {
+			events.publish('stop_sound', {name: 'GUBr_step', restart: false});			
 			return true;
 		} else {
 			return false;

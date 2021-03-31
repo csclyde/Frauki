@@ -1493,7 +1493,7 @@
 	"frame": {"x":582,"y":767,"w":39,"h":34},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":29,"y":33,"w":39,"h":34},
+	"spriteSourceSize": {"x":29,"y":29,"w":39,"h":34},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/cooking0001":
@@ -1501,7 +1501,7 @@
 	"frame": {"x":821,"y":1196,"w":39,"h":34},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":29,"y":33,"w":39,"h":34},
+	"spriteSourceSize": {"x":29,"y":29,"w":39,"h":34},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/cooking0002":
@@ -1509,7 +1509,7 @@
 	"frame": {"x":861,"y":1204,"w":39,"h":34},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":29,"y":33,"w":39,"h":34},
+	"spriteSourceSize": {"x":29,"y":29,"w":39,"h":34},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/cooking0003":
@@ -1517,7 +1517,7 @@
 	"frame": {"x":946,"y":1189,"w":39,"h":34},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":29,"y":33,"w":39,"h":34},
+	"spriteSourceSize": {"x":29,"y":29,"w":39,"h":34},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/cooking0004":
@@ -1525,7 +1525,7 @@
 	"frame": {"x":946,"y":1224,"w":39,"h":34},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":29,"y":33,"w":39,"h":34},
+	"spriteSourceSize": {"x":29,"y":29,"w":39,"h":34},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/cool0000":
@@ -1541,7 +1541,7 @@
 	"frame": {"x":916,"y":707,"w":64,"h":45},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":1,"y":38,"w":64,"h":45},
+	"spriteSourceSize": {"x":1,"y":34,"w":64,"h":45},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/fishing0001":
@@ -1549,7 +1549,7 @@
 	"frame": {"x":554,"y":1084,"w":64,"h":45},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":1,"y":38,"w":64,"h":45},
+	"spriteSourceSize": {"x":1,"y":34,"w":64,"h":45},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/fishing0002":
@@ -1557,7 +1557,7 @@
 	"frame": {"x":586,"y":1180,"w":64,"h":45},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":1,"y":38,"w":64,"h":45},
+	"spriteSourceSize": {"x":1,"y":34,"w":64,"h":45},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/fishing0003":
@@ -1565,7 +1565,7 @@
 	"frame": {"x":588,"y":1226,"w":64,"h":45},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":1,"y":38,"w":64,"h":45},
+	"spriteSourceSize": {"x":1,"y":34,"w":64,"h":45},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/fishing0004":
@@ -1573,7 +1573,7 @@
 	"frame": {"x":586,"y":1180,"w":64,"h":45},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":1,"y":38,"w":64,"h":45},
+	"spriteSourceSize": {"x":1,"y":34,"w":64,"h":45},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/fishing0005":
@@ -1581,7 +1581,7 @@
 	"frame": {"x":914,"y":753,"w":65,"h":45},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":38,"w":65,"h":45},
+	"spriteSourceSize": {"x":0,"y":34,"w":65,"h":45},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/fishing0006":
@@ -1589,7 +1589,7 @@
 	"frame": {"x":586,"y":1180,"w":64,"h":45},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":1,"y":38,"w":64,"h":45},
+	"spriteSourceSize": {"x":1,"y":34,"w":64,"h":45},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/fishing0007":
@@ -1597,7 +1597,7 @@
 	"frame": {"x":554,"y":1084,"w":64,"h":45},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":1,"y":38,"w":64,"h":45},
+	"spriteSourceSize": {"x":1,"y":34,"w":64,"h":45},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/fishing0008":
@@ -1605,7 +1605,7 @@
 	"frame": {"x":586,"y":1180,"w":64,"h":45},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":1,"y":38,"w":64,"h":45},
+	"spriteSourceSize": {"x":1,"y":34,"w":64,"h":45},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/fishing0009":
@@ -1613,7 +1613,7 @@
 	"frame": {"x":588,"y":1226,"w":64,"h":45},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":1,"y":38,"w":64,"h":45},
+	"spriteSourceSize": {"x":1,"y":34,"w":64,"h":45},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/fishing0010":
@@ -1621,7 +1621,7 @@
 	"frame": {"x":586,"y":1180,"w":64,"h":45},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":1,"y":38,"w":64,"h":45},
+	"spriteSourceSize": {"x":1,"y":34,"w":64,"h":45},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/fishing0011":
@@ -1629,7 +1629,7 @@
 	"frame": {"x":914,"y":753,"w":65,"h":45},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":38,"w":65,"h":45},
+	"spriteSourceSize": {"x":0,"y":34,"w":65,"h":45},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/fishing0012":
@@ -1637,7 +1637,7 @@
 	"frame": {"x":914,"y":753,"w":65,"h":45},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":38,"w":65,"h":45},
+	"spriteSourceSize": {"x":0,"y":34,"w":65,"h":45},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/fishing0013":
@@ -1645,7 +1645,7 @@
 	"frame": {"x":914,"y":753,"w":65,"h":45},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":38,"w":65,"h":45},
+	"spriteSourceSize": {"x":0,"y":34,"w":65,"h":45},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/fishing0014":
@@ -1653,7 +1653,7 @@
 	"frame": {"x":523,"y":1130,"w":65,"h":45},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":38,"w":65,"h":45},
+	"spriteSourceSize": {"x":0,"y":34,"w":65,"h":45},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/garden0000":
@@ -1661,7 +1661,7 @@
 	"frame": {"x":766,"y":76,"w":87,"h":46},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":11,"y":22,"w":87,"h":46},
+	"spriteSourceSize": {"x":11,"y":18,"w":87,"h":46},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/garden0001":
@@ -1669,7 +1669,7 @@
 	"frame": {"x":905,"y":96,"w":87,"h":46},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":11,"y":22,"w":87,"h":46},
+	"spriteSourceSize": {"x":11,"y":18,"w":87,"h":46},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/garden0002":
@@ -1677,7 +1677,7 @@
 	"frame": {"x":764,"y":123,"w":87,"h":46},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":11,"y":22,"w":87,"h":46},
+	"spriteSourceSize": {"x":11,"y":18,"w":87,"h":46},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/garden0003":
@@ -1685,7 +1685,7 @@
 	"frame": {"x":905,"y":96,"w":87,"h":46},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":11,"y":22,"w":87,"h":46},
+	"spriteSourceSize": {"x":11,"y":18,"w":87,"h":46},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/garden0004":
@@ -1693,7 +1693,7 @@
 	"frame": {"x":766,"y":76,"w":87,"h":46},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":11,"y":22,"w":87,"h":46},
+	"spriteSourceSize": {"x":11,"y":18,"w":87,"h":46},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/garden0005":
@@ -1701,7 +1701,7 @@
 	"frame": {"x":905,"y":96,"w":87,"h":46},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":11,"y":22,"w":87,"h":46},
+	"spriteSourceSize": {"x":11,"y":18,"w":87,"h":46},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/garden0006":
@@ -1709,7 +1709,7 @@
 	"frame": {"x":737,"y":170,"w":87,"h":46},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":11,"y":22,"w":87,"h":46},
+	"spriteSourceSize": {"x":11,"y":18,"w":87,"h":46},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/garden0007":
@@ -1717,7 +1717,7 @@
 	"frame": {"x":715,"y":217,"w":87,"h":46},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":11,"y":22,"w":87,"h":46},
+	"spriteSourceSize": {"x":11,"y":18,"w":87,"h":46},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/garden0008":
@@ -1725,7 +1725,7 @@
 	"frame": {"x":715,"y":264,"w":87,"h":46},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":11,"y":22,"w":87,"h":46},
+	"spriteSourceSize": {"x":11,"y":18,"w":87,"h":46},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/garden0009":
@@ -1733,7 +1733,7 @@
 	"frame": {"x":715,"y":217,"w":87,"h":46},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":11,"y":22,"w":87,"h":46},
+	"spriteSourceSize": {"x":11,"y":18,"w":87,"h":46},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/garden0010":
@@ -1741,7 +1741,7 @@
 	"frame": {"x":715,"y":264,"w":87,"h":46},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":11,"y":22,"w":87,"h":46},
+	"spriteSourceSize": {"x":11,"y":18,"w":87,"h":46},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/garden0011":
@@ -1749,7 +1749,7 @@
 	"frame": {"x":715,"y":217,"w":87,"h":46},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":11,"y":22,"w":87,"h":46},
+	"spriteSourceSize": {"x":11,"y":18,"w":87,"h":46},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/Goddess0000":
@@ -1773,7 +1773,7 @@
 	"frame": {"x":913,"y":1306,"w":21,"h":36},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":42,"y":29,"w":21,"h":36},
+	"spriteSourceSize": {"x":42,"y":25,"w":21,"h":36},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/gossip0001":
@@ -1781,7 +1781,7 @@
 	"frame": {"x":935,"y":1302,"w":24,"h":36},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":39,"y":29,"w":24,"h":36},
+	"spriteSourceSize": {"x":39,"y":25,"w":24,"h":36},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/gossip0002":
@@ -1789,7 +1789,7 @@
 	"frame": {"x":935,"y":1302,"w":24,"h":36},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":39,"y":29,"w":24,"h":36},
+	"spriteSourceSize": {"x":39,"y":25,"w":24,"h":36},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/hopper_rider0000":
@@ -1797,7 +1797,7 @@
 	"frame": {"x":816,"y":1231,"w":38,"h":40},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":32,"y":25,"w":38,"h":40},
+	"spriteSourceSize": {"x":32,"y":21,"w":38,"h":40},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/hopper_rider0001":
@@ -1805,7 +1805,7 @@
 	"frame": {"x":981,"y":746,"w":38,"h":41},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":33,"y":26,"w":38,"h":41},
+	"spriteSourceSize": {"x":32,"y":20,"w":38,"h":41},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/hopper_rider0002":
@@ -1813,7 +1813,7 @@
 	"frame": {"x":746,"y":1126,"w":34,"h":45},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":37,"y":26,"w":34,"h":45},
+	"spriteSourceSize": {"x":37,"y":15,"w":34,"h":45},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/hopper_rider0003":
@@ -1821,7 +1821,7 @@
 	"frame": {"x":346,"y":1342,"w":39,"h":43},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":32,"y":24,"w":39,"h":43},
+	"spriteSourceSize": {"x":32,"y":17,"w":39,"h":43},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/hopper_rider0004":
@@ -1829,7 +1829,7 @@
 	"frame": {"x":386,"y":1342,"w":39,"h":43},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":32,"y":24,"w":39,"h":43},
+	"spriteSourceSize": {"x":32,"y":17,"w":39,"h":43},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/hopper_rider0005":
@@ -1837,7 +1837,7 @@
 	"frame": {"x":781,"y":1123,"w":39,"h":43},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":32,"y":24,"w":39,"h":43},
+	"spriteSourceSize": {"x":32,"y":18,"w":39,"h":43},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/hopper_rider0006":
@@ -1845,7 +1845,7 @@
 	"frame": {"x":821,"y":1120,"w":39,"h":43},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":32,"y":24,"w":39,"h":43},
+	"spriteSourceSize": {"x":32,"y":20,"w":39,"h":43},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/hopper_rider0007":
@@ -1853,7 +1853,7 @@
 	"frame": {"x":741,"y":1181,"w":39,"h":43},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":32,"y":24,"w":39,"h":43},
+	"spriteSourceSize": {"x":32,"y":22,"w":39,"h":43},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/love_gnomes0000":
@@ -1861,7 +1861,7 @@
 	"frame": {"x":688,"y":1237,"w":49,"h":39},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":28,"y":28,"w":49,"h":39},
+	"spriteSourceSize": {"x":28,"y":24,"w":49,"h":39},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/love_gnomes0001":
@@ -1869,7 +1869,7 @@
 	"frame": {"x":588,"y":1272,"w":49,"h":40},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":28,"y":27,"w":49,"h":40},
+	"spriteSourceSize": {"x":28,"y":23,"w":49,"h":40},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/love_gnomes0002":
@@ -1877,7 +1877,7 @@
 	"frame": {"x":638,"y":1275,"w":49,"h":39},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":28,"y":28,"w":49,"h":39},
+	"spriteSourceSize": {"x":28,"y":24,"w":49,"h":39},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/love_gnomes0003":
@@ -1885,7 +1885,7 @@
 	"frame": {"x":688,"y":1277,"w":49,"h":40},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":28,"y":27,"w":49,"h":40},
+	"spriteSourceSize": {"x":28,"y":23,"w":49,"h":40},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/love_gnomes0004":
@@ -1893,7 +1893,7 @@
 	"frame": {"x":903,"y":1080,"w":49,"h":40},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":28,"y":27,"w":49,"h":40},
+	"spriteSourceSize": {"x":28,"y":23,"w":49,"h":40},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/love_gnomes0005":
@@ -1901,7 +1901,7 @@
 	"frame": {"x":903,"y":1121,"w":49,"h":39},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":28,"y":28,"w":49,"h":39},
+	"spriteSourceSize": {"x":28,"y":24,"w":49,"h":39},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/love_gnomes0006":
@@ -1909,7 +1909,7 @@
 	"frame": {"x":903,"y":1080,"w":49,"h":40},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":28,"y":27,"w":49,"h":40},
+	"spriteSourceSize": {"x":28,"y":23,"w":49,"h":40},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/love_gnomes0007":
@@ -1917,7 +1917,7 @@
 	"frame": {"x":903,"y":1121,"w":49,"h":39},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":28,"y":28,"w":49,"h":39},
+	"spriteSourceSize": {"x":28,"y":24,"w":49,"h":39},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/pickaxe0000":
@@ -1925,7 +1925,7 @@
 	"frame": {"x":880,"y":1333,"w":29,"h":35},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":30,"y":30,"w":29,"h":35},
+	"spriteSourceSize": {"x":30,"y":26,"w":29,"h":35},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/pickaxe0001":
@@ -1933,7 +1933,7 @@
 	"frame": {"x":880,"y":1333,"w":29,"h":35},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":30,"y":30,"w":29,"h":35},
+	"spriteSourceSize": {"x":30,"y":26,"w":29,"h":35},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/pickaxe0002":
@@ -1941,7 +1941,7 @@
 	"frame": {"x":880,"y":1333,"w":29,"h":35},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":30,"y":30,"w":29,"h":35},
+	"spriteSourceSize": {"x":30,"y":26,"w":29,"h":35},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/pickaxe0003":
@@ -1949,7 +1949,7 @@
 	"frame": {"x":813,"y":1338,"w":32,"h":35},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":42,"y":30,"w":32,"h":35},
+	"spriteSourceSize": {"x":42,"y":26,"w":32,"h":35},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/pickaxe0004":
@@ -1957,7 +1957,7 @@
 	"frame": {"x":910,"y":1343,"w":19,"h":42},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":40,"y":23,"w":19,"h":42},
+	"spriteSourceSize": {"x":40,"y":19,"w":19,"h":42},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/pickaxe0005":
@@ -1965,7 +1965,7 @@
 	"frame": {"x":880,"y":1333,"w":29,"h":35},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":30,"y":30,"w":29,"h":35},
+	"spriteSourceSize": {"x":30,"y":26,"w":29,"h":35},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/pickaxe0006":
@@ -1973,7 +1973,7 @@
 	"frame": {"x":880,"y":1333,"w":29,"h":35},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":30,"y":30,"w":29,"h":35},
+	"spriteSourceSize": {"x":30,"y":26,"w":29,"h":35},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/pickaxe0007":
@@ -1981,7 +1981,7 @@
 	"frame": {"x":880,"y":1333,"w":29,"h":35},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":30,"y":30,"w":29,"h":35},
+	"spriteSourceSize": {"x":30,"y":26,"w":29,"h":35},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/pickaxe0008":
@@ -1989,7 +1989,7 @@
 	"frame": {"x":813,"y":1338,"w":32,"h":35},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":42,"y":30,"w":32,"h":35},
+	"spriteSourceSize": {"x":42,"y":26,"w":32,"h":35},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/pickaxe0009":
@@ -1997,7 +1997,7 @@
 	"frame": {"x":910,"y":1343,"w":19,"h":42},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":40,"y":23,"w":19,"h":42},
+	"spriteSourceSize": {"x":40,"y":19,"w":19,"h":42},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/pickaxe0010":
@@ -2005,7 +2005,7 @@
 	"frame": {"x":880,"y":1333,"w":29,"h":35},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":30,"y":30,"w":29,"h":35},
+	"spriteSourceSize": {"x":30,"y":26,"w":29,"h":35},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/pickaxe0011":
@@ -2013,7 +2013,7 @@
 	"frame": {"x":855,"y":1239,"w":36,"h":35},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":23,"y":30,"w":36,"h":35},
+	"spriteSourceSize": {"x":23,"y":26,"w":36,"h":35},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/pickaxe0012":
@@ -2021,7 +2021,7 @@
 	"frame": {"x":874,"y":1065,"w":28,"h":38},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":31,"y":30,"w":28,"h":38},
+	"spriteSourceSize": {"x":31,"y":26,"w":28,"h":38},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/pickaxe0013":
@@ -2029,7 +2029,7 @@
 	"frame": {"x":953,"y":1080,"w":28,"h":38},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":31,"y":30,"w":28,"h":38},
+	"spriteSourceSize": {"x":31,"y":26,"w":28,"h":38},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/pickaxe0014":
@@ -2037,7 +2037,7 @@
 	"frame": {"x":874,"y":1104,"w":28,"h":38},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":31,"y":30,"w":28,"h":38},
+	"spriteSourceSize": {"x":31,"y":26,"w":28,"h":38},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/pickaxe0015":
@@ -2045,7 +2045,7 @@
 	"frame": {"x":813,"y":1299,"w":32,"h":38},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":31,"y":30,"w":32,"h":38},
+	"spriteSourceSize": {"x":31,"y":26,"w":32,"h":38},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/pickaxe0016":
@@ -2053,7 +2053,7 @@
 	"frame": {"x":930,"y":1343,"w":28,"h":38},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":31,"y":30,"w":28,"h":38},
+	"spriteSourceSize": {"x":31,"y":26,"w":28,"h":38},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/pickaxe0017":
@@ -2061,7 +2061,7 @@
 	"frame": {"x":951,"y":1259,"w":28,"h":38},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":31,"y":30,"w":28,"h":38},
+	"spriteSourceSize": {"x":31,"y":26,"w":28,"h":38},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/pickaxe0018":
@@ -2069,7 +2069,7 @@
 	"frame": {"x":980,"y":1259,"w":28,"h":38},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":31,"y":30,"w":28,"h":38},
+	"spriteSourceSize": {"x":31,"y":26,"w":28,"h":38},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/Robos0000":
@@ -2077,7 +2077,7 @@
 	"frame": {"x":365,"y":1028,"w":63,"h":73},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":71,"y":48,"w":63,"h":73},
+	"spriteSourceSize": {"x":66,"y":38,"w":63,"h":73},
 	"sourceSize": {"w":200,"h":200}
 },
 "NPC/Robos0001":
@@ -2085,7 +2085,7 @@
 	"frame": {"x":585,"y":381,"w":75,"h":70},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":65,"y":51,"w":75,"h":70},
+	"spriteSourceSize": {"x":65,"y":41,"w":75,"h":70},
 	"sourceSize": {"w":200,"h":200}
 },
 "NPC/Robos0002":
@@ -2093,7 +2093,7 @@
 	"frame": {"x":852,"y":504,"w":58,"h":70},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":75,"y":51,"w":58,"h":70},
+	"spriteSourceSize": {"x":75,"y":41,"w":58,"h":70},
 	"sourceSize": {"w":200,"h":200}
 },
 "NPC/Robos0003":
@@ -2101,7 +2101,7 @@
 	"frame": {"x":971,"y":431,"w":48,"h":70},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":74,"y":51,"w":48,"h":70},
+	"spriteSourceSize": {"x":74,"y":41,"w":48,"h":70},
 	"sourceSize": {"w":200,"h":200}
 },
 "NPC/Robos0004":
@@ -2109,7 +2109,7 @@
 	"frame": {"x":611,"y":599,"w":54,"h":71},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":75,"y":50,"w":54,"h":71},
+	"spriteSourceSize": {"x":75,"y":40,"w":54,"h":71},
 	"sourceSize": {"w":200,"h":200}
 },
 "NPC/Robos0005":
@@ -2117,7 +2117,7 @@
 	"frame": {"x":622,"y":671,"w":51,"h":71},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":69,"y":50,"w":51,"h":71},
+	"spriteSourceSize": {"x":69,"y":40,"w":51,"h":71},
 	"sourceSize": {"w":200,"h":200}
 },
 "NPC/Robos0006":
@@ -2125,7 +2125,7 @@
 	"frame": {"x":878,"y":994,"w":27,"h":70},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":86,"y":51,"w":27,"h":70},
+	"spriteSourceSize": {"x":86,"y":41,"w":27,"h":70},
 	"sourceSize": {"w":200,"h":200}
 },
 "NPC/sleepy0000":
@@ -2133,7 +2133,7 @@
 	"frame": {"x":902,"y":1161,"w":44,"h":22},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":29,"y":46,"w":44,"h":22},
+	"spriteSourceSize": {"x":29,"y":42,"w":44,"h":22},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/sleepy0001":
@@ -2141,7 +2141,7 @@
 	"frame": {"x":901,"y":1218,"w":44,"h":28},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":29,"y":40,"w":44,"h":28},
+	"spriteSourceSize": {"x":29,"y":36,"w":44,"h":28},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/sleepy0002":
@@ -2149,7 +2149,7 @@
 	"frame": {"x":901,"y":1184,"w":44,"h":33},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":29,"y":35,"w":44,"h":33},
+	"spriteSourceSize": {"x":29,"y":31,"w":44,"h":33},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/sleepy0003":
@@ -2157,7 +2157,7 @@
 	"frame": {"x":529,"y":1297,"w":44,"h":35},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":29,"y":33,"w":44,"h":35},
+	"spriteSourceSize": {"x":29,"y":29,"w":44,"h":35},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/sleepy0004":
@@ -2165,7 +2165,7 @@
 	"frame": {"x":771,"y":1225,"w":44,"h":35},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":29,"y":33,"w":44,"h":35},
+	"spriteSourceSize": {"x":29,"y":29,"w":44,"h":35},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/sleepy0005":
@@ -2173,7 +2173,7 @@
 	"frame": {"x":771,"y":1261,"w":44,"h":35},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":29,"y":33,"w":44,"h":35},
+	"spriteSourceSize": {"x":29,"y":29,"w":44,"h":35},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/windy0000":
@@ -2181,7 +2181,7 @@
 	"frame": {"x":528,"y":1085,"w":25,"h":28},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":41,"y":37,"w":25,"h":28},
+	"spriteSourceSize": {"x":41,"y":33,"w":25,"h":28},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/windy0001":
@@ -2189,7 +2189,7 @@
 	"frame": {"x":270,"y":451,"w":24,"h":29},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":41,"y":36,"w":24,"h":29},
+	"spriteSourceSize": {"x":41,"y":32,"w":24,"h":29},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/windy0002":
@@ -2197,7 +2197,7 @@
 	"frame": {"x":927,"y":1271,"w":23,"h":30},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":41,"y":35,"w":23,"h":30},
+	"spriteSourceSize": {"x":41,"y":31,"w":23,"h":30},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/windy0003":
@@ -2205,7 +2205,7 @@
 	"frame": {"x":985,"y":1298,"w":22,"h":30},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":41,"y":35,"w":22,"h":30},
+	"spriteSourceSize": {"x":41,"y":31,"w":22,"h":30},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/windy0004":
@@ -2213,7 +2213,7 @@
 	"frame": {"x":960,"y":1298,"w":24,"h":29},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":41,"y":36,"w":24,"h":29},
+	"spriteSourceSize": {"x":41,"y":32,"w":24,"h":29},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/windy0005":
@@ -2221,7 +2221,7 @@
 	"frame": {"x":985,"y":1298,"w":22,"h":30},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":41,"y":35,"w":22,"h":30},
+	"spriteSourceSize": {"x":41,"y":31,"w":22,"h":30},
 	"sourceSize": {"w":100,"h":100}
 },
 "NPC/windy0006":
@@ -2229,7 +2229,7 @@
 	"frame": {"x":927,"y":1271,"w":23,"h":30},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":41,"y":35,"w":23,"h":30},
+	"spriteSourceSize": {"x":41,"y":31,"w":23,"h":30},
 	"sourceSize": {"w":100,"h":100}
 },
 "QL0k/Bolt0000":
@@ -3007,6 +3007,6 @@
 	"format": "RGBA8888",
 	"size": {"w":1020,"h":1386},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:2d8e244248c98bad04b5965287437427:370490a68bbc0c67faf030188c630c27:b1585ba32d60cf5440f3fdffe8c37c76$"
+	"smartupdate": "$TexturePacker:SmartUpdate:db684d0654cb3b2a375367f4d5b6555f:192eefd353d7ae9fc3108809764bbd82:b1585ba32d60cf5440f3fdffe8c37c76$"
 }
 }

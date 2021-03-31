@@ -1,6 +1,6 @@
 Upgrade = function(game, x, y, name) {
     //instantiate the sprite
-    Phaser.Sprite.call(this, game, x, y, name);
+    Phaser.Sprite.call(this, game, x + 8, y, name);
     this.spriteType = 'Upgrade';
     this.objectName = 'Upgrade';
     

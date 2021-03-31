@@ -10,9 +10,12 @@ ScriptRunner.scripts['game_start'] = [
 
 ScriptRunner.scripts['quit_game'] = [
     { func: function() {
-        if(!!app) {
-            app.exit();
-        }
+        //console.log(require('electron'));
+        require('electron').ipcRenderer.send('close-app');
+        //console.log(electron);
+        // if(!!app) {
+        //     app.exit();
+        // }
     } },
 ];
 

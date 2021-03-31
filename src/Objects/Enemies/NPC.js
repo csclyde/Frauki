@@ -1,6 +1,6 @@
 Enemy.prototype.types['NPC'] =  function() {
 
-	this.body.setSize(20, 20, 0, 4);
+	this.body.setSize(20, 20, 0, 0);
 	this.anchor.setTo(0.5);
 
 	this.animations.add('gnome_city', ['NPC/cool0000'], 10, true, false);

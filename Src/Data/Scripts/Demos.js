@@ -125,7 +125,7 @@ ScriptRunner.scripts['demo_Wit'] = [
 	
 
 	{ name: 'show_text', props: { text: "Well done Frauki... Well done. I'm so proud of you.", portrait: 'Goddess_Neutral' } },
-	{ name: 'show_text', props: { text: "You have just retrieved the Prism Shard of Wit.", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "You have just retrieved the Green Prism Shard of Wit.", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "They say whoever holds it will be brimming with cleverness and good charm.", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "Well, do you feel it?", portrait: 'Goddess_Neutral' } },
 
@@ -188,7 +188,7 @@ ScriptRunner.scripts['demo_Will'] = [
 	
 	{ name: 'show_text', props: { text: "Can this be true? You've rescued another one of my glimmering beauties?", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "You lovely little thing. You special, amazing, precious tadpole.", portrait: 'Goddess_Neutral' } },
-	{ name: 'show_text', props: { text: "This is the Prism Shard of Will. It imparts great powers of focus and positivity to the one who holds it.", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "This is the Red Prism Shard of Will. It imparts great powers of focus and positivity to the one who holds it.", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "But I think you already have that!", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "There are only two more Prism Shards out there. Don't let anything stop you now.", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "Frauki...", portrait: 'Goddess_Neutral' } },
@@ -230,7 +230,7 @@ ScriptRunner.scripts['demo_Luck'] = [
 	{ name: 'run_script', props: { name: 'enter_goddess' } },
 	{ name: 'wait', props: { amount: 1500 } },
 	
-	{ name: 'show_text', props: { text: "The third Prism Shard. I knew all along that you could get this far.", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "The third Prism Shard. The Rurple Prism Shard. I knew all along that you could get this far.", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "This one has the power of luck. If you hold this, the possibilities of the universe will reveal themselves to you.", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "It's a beautiful and humbling feeling, Frauki.", portrait: 'Goddess_Neutral' } },
 
@@ -298,7 +298,7 @@ ScriptRunner.scripts['demo_Power'] = [
 	{ name: 'show_text', props: { text: "Frauki... I called you here because I needed your help.", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "You've proven your excellence by answering that call.", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "I know it was hard. I know you've struggled.", portrait: 'Goddess_Neutral' } },
-	{ name: 'show_text', props: { text: "But you've found all four of my Prism Shards. I can finally rest easy.", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "Now that you've found the Yellow Prism Shard of Power, you've found them all. I can finally rest easy.", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "Thank you Frauki... Thank you...", portrait: 'Goddess_Neutral' } },
 
 	{ func: function() {
