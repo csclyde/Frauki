@@ -103,7 +103,7 @@ ScriptRunner.scripts['first_ql0k'] = [
 ];
 
 ScriptRunner.scripts['second_ql0k'] = [
-	{ name: 'show_text', props: { text: "Don't forget to roll Frauki. If you don't use your roll you're a sitting duck.", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "Don't forget to roll Frauki. If you don't use your roll you're a sitting frog.", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "Go back and try again Frauki.", portrait: 'Goddess_Neutral' } },
 	{ name: 'run_script', props: { name: 'exit_goddess' } },
 ];

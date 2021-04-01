@@ -113,17 +113,17 @@ EnemyBehavior.Player.IsVisible = function(e) {
     }
 
     //determine how often the check should be redone
-    var refreshTime = 2000;
+    var refreshTime = 1000;
 
     if(this.Visibility[e.z].result === true) {
-        refreshTime = 10000;
+        refreshTime = 1000;
     } else {
         var dist = EnemyBehavior.Player.Distance(e);
 
         if(dist < 100) {
             refreshTime = 500;
         } else if(dist < 200) {
-            refreshTime = 1000;
+            refreshTime = 500;
         }
 
         if(EnemyBehavior.Player.MovingTowards(e)) {
@@ -135,7 +135,7 @@ EnemyBehavior.Player.IsVisible = function(e) {
     //if the timestamp has expired, check for visibility
     if(this.Visibility[e.z].timestamp + refreshTime < GameState.gameTime) {
         var ray = new Phaser.Line(frauki.body.center.x, frauki.body.center.y, e.body.center.x, e.body.center.y);
-        var collideTiles = Frogland.GetCollisionLayer().getRayCastTiles(ray, 4, true);
+        var collideTiles = Frogland.GetCollisionLayer().getRayCastTiles(ray, 20, true);
 
         this.Visibility[e.z].timestamp = GameState.gameTime;
 

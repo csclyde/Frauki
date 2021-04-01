@@ -728,8 +728,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":4250.73,
-                 "y":3839.82
+                 "x":4240,
+                 "y":3840
                 }, 
                 {
                  "gid":75,
@@ -9079,7 +9079,7 @@
  "orientation":"orthogonal",
  "properties":
     {
-     "debug":"true",
+     "debug":"false",
      "startLayer":"3",
      "startX":"207",
      "startY":"201"

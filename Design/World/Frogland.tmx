@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="360" height="700" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="4140">
  <properties>
-  <property name="debug" value="true"/>
+  <property name="debug" value="false"/>
   <property name="startLayer" value="3"/>
   <property name="startX" value="207"/>
   <property name="startY" value="201"/>
@@ -3763,7 +3763,7 @@
     <property name="upgrade" value="Health1"/>
    </properties>
   </object>
-  <object id="3530" gid="75" x="4250.73" y="3839.82" width="16" height="16">
+  <object id="3530" gid="75" x="4240" y="3840" width="16" height="16">
    <properties>
     <property name="upgrade" value="Health2"/>
    </properties>
