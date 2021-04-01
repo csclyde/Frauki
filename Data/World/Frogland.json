@@ -638,7 +638,7 @@
                  "name":"",
                  "properties":
                     {
-                     "upgrade":"Stab"
+                     "upgrade":"Shield0"
                     },
                  "propertytypes":
                     {
@@ -650,26 +650,6 @@
                  "width":16,
                  "x":4592.5,
                  "y":4391
-                }, 
-                {
-                 "gid":75,
-                 "height":16,
-                 "id":3993,
-                 "name":"",
-                 "properties":
-                    {
-                     "upgrade":"Dive"
-                    },
-                 "propertytypes":
-                    {
-                     "upgrade":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":3512,
-                 "y":5520
                 }, 
                 {
                  "gid":75,
@@ -958,7 +938,7 @@
                  "name":"",
                  "properties":
                     {
-                     "upgrade":"Shield1"
+                     "upgrade":"Health40"
                     },
                  "propertytypes":
                     {
@@ -968,8 +948,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":1608,
-                 "y":3224
+                 "x":1600,
+                 "y":3216
                 }, 
                 {
                  "gid":75,
@@ -1010,26 +990,6 @@
                  "width":16,
                  "x":2004.25,
                  "y":8113.76
-                }, 
-                {
-                 "gid":75,
-                 "height":16,
-                 "id":3815,
-                 "name":"",
-                 "properties":
-                    {
-                     "upgrade":"Shield4"
-                    },
-                 "propertytypes":
-                    {
-                     "upgrade":"string"
-                    },
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":918,
-                 "y":3816
                 }, 
                 {
                  "gid":69,
@@ -3905,7 +3865,7 @@
                  "gid":98,
                  "height":16,
                  "id":3266,
-                 "name":"",
+                 "name":"first_kr32",
                  "properties":
                     {
                      "fight":"kr32_first",
@@ -3987,7 +3947,7 @@
                  "gid":98,
                  "height":16,
                  "id":3280,
-                 "name":"",
+                 "name":"wit_guard",
                  "properties":
                     {
                      "on_death":"open_door,door_name:first_double"
@@ -4191,7 +4151,7 @@
                  "gid":97,
                  "height":16,
                  "id":3540,
-                 "name":"",
+                 "name":"first_ql0k",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -4215,7 +4175,7 @@
                  "gid":97,
                  "height":16,
                  "id":3542,
-                 "name":"",
+                 "name":"second_ql0k",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -4311,7 +4271,7 @@
                  "gid":92,
                  "height":16,
                  "id":3553,
-                 "name":"",
+                 "name":"wit_guard",
                  "properties":
                     {
                      "on_death":"open_door,door_name:first_double"
@@ -6425,7 +6385,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -9119,10 +9079,10 @@
  "orientation":"orthogonal",
  "properties":
     {
-     "debug":"false",
+     "debug":"true",
      "startLayer":"3",
-     "startX":"156",
-     "startY":"275"
+     "startX":"207",
+     "startY":"201"
     },
  "propertytypes":
     {

@@ -235,11 +235,13 @@ Door.prototype.OpenDoor = function(f) {
         var prism = objectController.shardList.find(function(s) { return s.name === this.prism; }, this);
 
         prism.beingUsed = true;
-        prism.x = this.body.x + 9;
+        prism.x = this.body.x + 13;
         prism.y = this.body.y + 31;
 
         prism.scale.x = 0.1;
         prism.scale.y = 0.1;
+        prism.visible = true;
+        prism.alpha = 1;
         prism.bringToTop();
 
         if(!!this.script) {
@@ -253,6 +255,7 @@ Door.prototype.OpenDoor = function(f) {
             effectsController.ScreenFlash();
             this.PerformOpen(true);
             prism.beingUsed = false;
+            prism.visible = false;
         }, this);
     }  
 };

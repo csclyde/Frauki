@@ -21,7 +21,14 @@ Frogland.Create = function() {
         Will: { x: 111 * 16, y: 300 * 16 },
         Luck: { x: 144 * 16, y: 548 * 16 },
         Power: { x: 189 * 16, y: 64 * 16 },
-    }
+    };
+
+    this.prismPositions = {
+        Wit: {x: 4456, y: 2656},
+        Will: {x: 4488, y: 2656},
+        Luck: {x: 4472, y: 2673},
+        Power: {x: 4472, y: 2640},
+    };
 
     backdropController.Create();
     

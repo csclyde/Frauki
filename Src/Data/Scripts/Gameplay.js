@@ -419,7 +419,7 @@ ScriptRunner.scripts['finish_game'] = [
         wit.y = frauki.body.center.y;
         wit.bringToTop();
         //4456, 2656
-        game.add.tween(wit).to({x: 4456, y: 2656}, 4000, Phaser.Easing.Quartic.InOut, true);
+        game.add.tween(wit).to(Frogland.prismPositions.Wit, 4000, Phaser.Easing.Quartic.InOut, true);
 
         game.time.events.add(4000, function() {
             events.publish('play_sound', { name: 'crystal_door', restart: true });
@@ -437,7 +437,7 @@ ScriptRunner.scripts['finish_game'] = [
         will.y = frauki.body.center.y;
         will.bringToTop();
         //4456, 2656
-        game.add.tween(will).to({x: 4488, y: 2656}, 4000, Phaser.Easing.Quartic.InOut, true);
+        game.add.tween(will).to(Frogland.prismPositions.Will, 4000, Phaser.Easing.Quartic.InOut, true);
 
         game.time.events.add(4000, function() {
             events.publish('play_sound', { name: 'crystal_door', restart: true });
@@ -455,7 +455,7 @@ ScriptRunner.scripts['finish_game'] = [
         power.y = frauki.body.center.y;
         power.bringToTop();
         //4456, 2656
-        game.add.tween(power).to({x: 4472, y: 2640}, 4000, Phaser.Easing.Quartic.InOut, true);
+        game.add.tween(power).to(Frogland.prismPositions.Power, 4000, Phaser.Easing.Quartic.InOut, true);
 
         game.time.events.add(4000, function() {
             events.publish('play_sound', { name: 'crystal_door', restart: true });
@@ -473,7 +473,7 @@ ScriptRunner.scripts['finish_game'] = [
         luck.y = frauki.body.center.y;
         luck.bringToTop();
         //4456, 2656
-        game.add.tween(luck).to({x: 4472, y: 2673}, 4000, Phaser.Easing.Quartic.InOut, true);
+        game.add.tween(luck).to(Frogland.prismPositions.Luck, 4000, Phaser.Easing.Quartic.InOut, true);
 
         game.time.events.add(4000, function() {
             events.publish('play_sound', { name: 'crystal_door', restart: true });

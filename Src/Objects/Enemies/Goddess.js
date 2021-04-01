@@ -102,9 +102,54 @@ Enemy.prototype.types['Goddess'] =  function() {
 				return 'goddess_console_area1';
 			}
 		}
-		else if(GameData.IsDoorOpen('statue_shortcut') && !GameData.GetFlag('statue_shortcut')) {
-			GameData.SetFlag('statue_shortcut', true);
-			return 'first_shortcut';
+		//SECOND RUINS AREA
+		else if(!GameData.IsDoorOpen('drop_to_right')) {
+			
+			if(GameState.death.name === 'first_ql0k' && !GameData.GetFlag('first_ql0k')) {
+				GameData.SetFlag('first_ql0k', true);
+				return 'first_ql0k';
+			}
+			else if(GameState.death.name === 'second_ql0k' && !GameData.GetFlag('second_ql0k')) {
+				GameData.SetFlag('second_ql0k', true);
+				return 'second_ql0k';
+			}
+			else if(!GameData.GetFlag('statue_shortcut')) {
+				GameData.SetFlag('statue_shortcut', true);
+				return 'first_shortcut';
+			}
+			else {
+				return 'goddess_console_area2';
+			}
+		}
+		//GARDENS BEFORE WIT GEM
+		else if(!GameData.HasShard('wit')) {
+			
+			if(GameState.death.name === 'first_kr32' && !GameData.GetFlag('first_kr32')) {
+				GameData.SetFlag('first_kr32', true);
+				return 'first_kr32';
+			}
+			else if(GameState.death.name === 'wit_guard' && !GameData.GetFlag('wit_guard')) {
+				GameData.SetFlag('wit_guard', true);
+				return 'wit_guard';
+			}
+			else if(GameState.death.name === 'wit_guard' && !GameData.GetFlag('wit_guard2')) {
+				GameData.SetFlag('wit_guard2', true);
+				return 'wit_guard2';
+			}
+			else if(GameState.death.name === 'wit_guard' && !GameData.GetFlag('wit_guard3')) {
+				GameData.SetFlag('wit_guard3', true);
+				return 'wit_guard3';
+			}
+			else if(GameState.death.name === 'wit_guard') {
+				return 'wit_guard_final';
+			}
+			else if(!GameData.GetFlag('ship_frontdoor')) {
+				GameData.SetFlag('ship_frontdoor', true);
+				return 'second_shortcut';
+			}
+			else {
+				return 'goddess_console_area3';
+			}
 		}
 		else {
 			return 'goddess_console';

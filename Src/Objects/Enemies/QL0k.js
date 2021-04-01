@@ -15,14 +15,14 @@ Enemy.prototype.types['QL0k'] =  function() {
     this.isSolid = true;
     this.hasShot = false;
 
-    this.base = game.add.image(0, 0, 'EnemySprites', 'QL0k/Shoot0000');
+    this.base = game.add.image(0, 0, 'EnemySprites', 'QL0k/Shoot0000', effectsController.effectsGroup);
     this.base.anchor.setTo(0.5, 0.5);
     this.base.x = this.x + 5;
 	this.base.y = this.y - 37;
 	
 	this.shotCount = 0;
 
-    this.addChild(this.base);
+    //this.addChild(this.base);
     
 	this.updateFunction = function() {
 		var idealRotation = Math.atan2(frauki.body.center.y - this.body.center.y, frauki.body.center.x - this.body.center.x);
