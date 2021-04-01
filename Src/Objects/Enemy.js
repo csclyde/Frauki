@@ -205,7 +205,7 @@ Enemy.prototype.isAttacking = function() {
 };
 
 Enemy.prototype.CanAttack = function() {
-    if(this.timers.TimerUp('attack_wait') && Frogland.timers.TimerUp('global_attack_wait') && !frauki.Grace()) {
+    if(this.timers.TimerUp('attack_wait') && Frogland.timers.TimerUp('global_attack_wait') && !frauki.Grace() && inputController.allowInput) {
         return true;
     }
 

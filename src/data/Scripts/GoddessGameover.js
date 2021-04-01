@@ -120,6 +120,12 @@ ScriptRunner.scripts['goddess_console_area2'] = [
 
 // TO WIT GEM //////////
 
+ScriptRunner.scripts['second_shortcut'] = [
+	{ name: 'show_text', props: { text: "You're opening lots of seals! That's good!", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "I'm proud of you...", portrait: 'Goddess_Neutral' } },
+	{ name: 'run_script', props: { name: 'exit_goddess' } },
+];
+
 ScriptRunner.scripts['first_kr32'] = [
 	{ name: 'show_text', props: { text: "I saw that one coming. Yeah...", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "That horrible thing was the KR32 Alien Murderbot.", portrait: 'Goddess_Neutral' } },
@@ -177,6 +183,7 @@ ScriptRunner.scripts['goddess_console_area3'] = [
 	], portrait: 'Goddess_Neutral' } },
 	{ name: 'run_script', props: { name: 'exit_goddess' } },
 ];
+
 
 // GENERIC MESSAGES //////////
 
