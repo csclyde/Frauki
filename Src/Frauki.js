@@ -671,6 +671,8 @@ Player.prototype.Slash = function(params) {
     }
 
     this.timers.SetTimer('slash_start_window', 200);
+    this.timers.SetTimer('grace', 0);
+    this.timers.SetTimer('frauki_invincible', 0);
 };
 
 Player.prototype.ReleaseSlash = function(params) {

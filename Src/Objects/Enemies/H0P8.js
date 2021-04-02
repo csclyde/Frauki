@@ -4,10 +4,11 @@ Enemy.prototype.types['H0P8'] =  function() {
     this.anchor.setTo(0.5, 0.5);
 
     this.animations.add('idle', ['H0P8/Idle0000', 'H0P8/Idle0001', 'H0P8/Idle0002', 'H0P8/Idle0003'], 6, true, false);
-    this.animations.add('pre_hop', ['H0P8/Attack0001'], 10, false, false);
-    this.animations.add('hop', ['H0P8/Attack0002'], 10, false, false);
-    this.animations.add('attack', ['H0P8/Attack0003', 'H0P8/Attack0004', 'H0P8/Attack0005', 'H0P8/Attack0006'], 10, false, false);
-    this.animations.add('hurt', ['H0P8/Hurt0001'], 10, false, false);
+    this.animations.add('pre_hop', ['H0P8/Attack0000'], 10, false, false);
+    this.animations.add('hop', ['H0P8/Attack0001'], 10, false, false);
+    this.animations.add('attack', ['H0P8/Attack0002', 'H0P8/Attack0003', 'H0P8/Attack0004', 'H0P8/Attack0005'], 10, false, false);
+    this.animations.add('shield', ['H0P8/Shield0000', 'H0P8/Shield0001', 'H0P8/Shield0002', 'H0P8/Shield0003', 'H0P8/Shield0004', 'H0P8/Shield0005', 'H0P8/Shield0006'], 8, false, false);
+    this.animations.add('hurt', ['H0P8/Hurt0000'], 10, false, false);
 
     this.energy = 4;
     this.baseStunDuration = 500;
@@ -36,32 +37,35 @@ Enemy.prototype.types['H0P8'] =  function() {
             if(EnemyBehavior.Player.IsStunned(this)) {
                 this.Hop();
 
-            } else if(this.body.onFloor()) {
-                if(this.timers.TimerUp('dodge') && (EnemyBehavior.Player.IsDangerous(this) || EnemyBehavior.Player.IsNear(this, 100))) {
+            } else if(frauki.state === frauki.AttackDiveCharge) {
+                this.Dodge();
+
+            } else if(frauki.InPreAttackAnim()) {
+                this.Shield();
+                
+                
+            } else if((EnemyBehavior.Player.IsNear(this, 50))) {
+                if(EnemyBehavior.Player.IsDangerous(this) || EnemyBehavior.Player.MovingTowards(this)) {
+                    this.Shield();
+                } else if(this.CanAttack() && EnemyBehavior.Player.IsVulnerable(this)) {
+                    this.Slash();
+                } else {
                     this.Dodge();
                 }
-                else if(EnemyBehavior.Player.IsNear(this, 50)) {
-                    if(this.timers.TimerUp('dodge')) {
-                        this.Dodge();
-                    } else if(this.timers.TimerUp('attack') && EnemyBehavior.Player.IsVulnerable(this)) {
-                        this.timers.SetTimer('attack', 600);
-                        EnemyBehavior.FacePlayer(this);
-                        this.Slash();
-                    }
-                }
-                else if(this.CanAttack() && EnemyBehavior.Player.IsVulnerable(this) && !EnemyBehavior.Player.IsNear(this, 50) && EnemyBehavior.Player.IsNear(this, 250)) {
+            }
+            else if(EnemyBehavior.Player.IsNear(this, 250)) {
+                if(this.CanAttack() && EnemyBehavior.Player.IsVulnerable(this)) {
                     this.Hop();
-                } 
-                else {
-                    if(this.timers.TimerUp('idle_hop_wait') && !EnemyBehavior.Player.IsNear(this, 100)) {
-                        this.IdleHop();
-                    } else {
-                        this.state = this.Idling;
-                    }
+                } else {
+                    this.state = this.Idling;
                 }
-
-            } else {
-                this.state = this.Idling;
+            } 
+            else {
+                if(this.timers.TimerUp('idle_hop_wait') && !EnemyBehavior.Player.IsNear(this, 100)) {
+                    this.IdleHop();
+                } else {
+                    this.state = this.Idling;
+                }
             }
 
         } else {
@@ -71,6 +75,10 @@ Enemy.prototype.types['H0P8'] =  function() {
 
     this.LandHit = function() {
         //this.Dodge();
+    };
+
+    this.OnBlock = function() {
+        //this.Slash();
     };
 
     ///////////////////////////////ACTIONS////////////////////////////////////
@@ -84,9 +92,14 @@ Enemy.prototype.types['H0P8'] =  function() {
 
     this.Dodge = function() {
         
-        this.timers.SetTimer('attack', 500);
+        if(!this.timers.TimerUp('dodge')) {
+            return;
+        }
 
-        this.state = this.Dodging;
+        this.timers.SetTimer('attack', 1000);
+        this.timers.SetTimer('dodge', 1000);
+
+        this.state = this.Escaping;
 
         if(frauki.body.onFloor()) {
             this.body.velocity.y = -300;
@@ -111,6 +124,8 @@ Enemy.prototype.types['H0P8'] =  function() {
     this.Slash = function() {
         this.state = this.Slashing;
         this.timers.SetTimer('attack', 600);
+        EnemyBehavior.JumpToPoint(this, frauki.body.center.x, frauki.body.center.y, 0.1);
+        EnemyBehavior.FacePlayer(this);
 		events.publish('play_sound', {name: 'H0P8_attack', restart: false });
 
     };
@@ -127,6 +142,12 @@ Enemy.prototype.types['H0P8'] =  function() {
         EnemyBehavior.FaceForward(this);
 
         this.timers.SetTimer('idle_hop_wait', game.rnd.between(1500, 2500));
+    };
+
+    this.Shield = function() {
+        this.state = this.Shielding; 
+
+        EnemyBehavior.FacePlayer(this);
     };
 
 
@@ -149,6 +170,10 @@ Enemy.prototype.types['H0P8'] =  function() {
 
     this.PreHopping = function() {
         this.PlayAnim('pre_hop');
+
+        if(EnemyBehavior.Player.IsDangerous(this) && EnemyBehavior.Player.IsNear(this, 50)) {
+            this.Shield();
+        }
 
         if(this.timers.TimerUp('attack')) {
 
@@ -189,7 +214,7 @@ Enemy.prototype.types['H0P8'] =  function() {
             this.PlayAnim('hop');
         }
 
-        if(EnemyBehavior.Player.IsNear(this, 100)) {
+        if(EnemyBehavior.Player.IsNear(this, 50)) {
             this.Slash();
         }
 
@@ -205,7 +230,7 @@ Enemy.prototype.types['H0P8'] =  function() {
     this.Slashing = function() {
         this.PlayAnim('attack');
 
-        if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold')) {
+        if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold') && this.body.onFloor()) {
             this.SetAttackTimer(800);
             this.timers.SetTimer('idle_hop_wait', 4000)
             this.timers.SetTimer('dodge', 1000)
@@ -215,7 +240,7 @@ Enemy.prototype.types['H0P8'] =  function() {
         return false;
     };
 
-    this.Dodging = function() {
+    this.Escaping = function() {
 
         if(!this.body.onFloor()) {
             this.PlayAnim('hop');
@@ -223,10 +248,22 @@ Enemy.prototype.types['H0P8'] =  function() {
             this.PlayAnim('pre_hop');
         }
 
-        if(this.timers.TimerUp('attack') || this.body.velocity.y > 0 || this.body.onFloor()) {
-            this.timers.SetTimer('dodge', 1400);
+        if(this.timers.TimerUp('attack')) {
             this.SetAttackTimer(0);
-            this.bouncedOffWall = false;
+            return true;
+        }
+
+        return false;
+    };
+
+    this.Shielding = function() {
+        this.PlayAnim('shield');
+
+        if(EnemyBehavior.Player.IsInVulnerableFrame(this) && EnemyBehavior.Player.IsNear(this, 60)) {
+            this.Slash();
+        }
+
+        if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slide_hold')) {
             return true;
         }
 
@@ -250,7 +287,43 @@ Enemy.prototype.types['H0P8'] =  function() {
             knockback: 1,
             priority: 1,
             juggle: 0
-        }
+        },
+
+        'H0P8/Shield0000': {
+            x: 0, y: 0, w: 50, h: 50,
+            damage: 0,
+            knockback: 0,
+            priority: 5,
+            juggle: 0
+        },
+        'H0P8/Shield0001': {
+            x: 0, y: 0, w: 50, h: 50,
+            damage: 0,
+            knockback: 0,
+            priority: 5,
+            juggle: 0
+        },
+        'H0P8/Shield0002': {
+            x: 0, y: 0, w: 50, h: 50,
+            damage: 0,
+            knockback: 0,
+            priority: 5,
+            juggle: 0
+        },
+        'H0P8/Shield0003': {
+            x: 0, y: 0, w: 50, h: 50,
+            damage: 0,
+            knockback: 0,
+            priority: 5,
+            juggle: 0
+        },
+        'H0P8/Shield0004': {
+            x: 0, y: 0, w: 50, h: 50,
+            damage: 0,
+            knockback: 0,
+            priority: 5,
+            juggle: 0
+        },
     };
 
 };

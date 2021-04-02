@@ -113,7 +113,7 @@ Enemy.prototype.types['RKN1d'] =  function() {
     this.Bite = function() {
         this.DropOff();
         EnemyBehavior.FacePlayer(this);
-        EnemyBehavior.JumpToPoint(this, frauki.body.center.x, frauki.body.center.y, 0.1);        
+        EnemyBehavior.JumpToPoint(this, frauki.body.center.x, frauki.body.center.y, 0.1);
 
         events.publish('play_sound', {name: 'RKN1d_attack', restart: true});
 
