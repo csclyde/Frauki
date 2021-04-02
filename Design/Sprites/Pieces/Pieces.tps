@@ -214,6 +214,10 @@
             <key type="filename">Frames/JunkBarrel0003.png</key>
             <key type="filename">Frames/JunkBarrel0004.png</key>
             <key type="filename">Frames/JunkBarrel0005.png</key>
+            <key type="filename">Frames/JunkCrate0000.png</key>
+            <key type="filename">Frames/JunkCrate0001.png</key>
+            <key type="filename">Frames/JunkCrate0002.png</key>
+            <key type="filename">Frames/JunkCrate0003.png</key>
             <key type="filename">Frames/JunkEgg0000.png</key>
             <key type="filename">Frames/JunkEgg0001.png</key>
             <key type="filename">Frames/JunkEgg0002.png</key>

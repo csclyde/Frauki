@@ -53,7 +53,7 @@ ScriptRunner.scripts['robo_samurai'] = [
 
 ScriptRunner.scripts['robo_chonker'] = [
 	{ name: 'show_text', props: { text: "I'm really just not feeling it today.", portrait: 'red' } },
-	{ name: 'show_text', props: { text: "I know how to blast. But I don't know WHY I blast.", portrait: 'red' } },
+	{ name: 'show_text', props: { text: "I know how to kill. But I don't know WHY I kill.", portrait: 'red' } },
 	{ name: 'show_text', props: { text: "Oh well, I'm gonna give myself a break.", portrait: 'red' } },
 	{ name: 'show_text', props: { text: "I'll try again tomorrow.", portrait: 'red' } },
 	{ name: 'run_script', props: { name: 'exit_NPC' } },

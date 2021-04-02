@@ -288,6 +288,7 @@
                 <false/>
             </struct>
             <key type="filename">Frames/Barrel0000.png</key>
+            <key type="filename">Frames/Crate0000.png</key>
             <key type="filename">Frames/DoorDark0000.png</key>
             <key type="filename">Frames/DoorDark0001.png</key>
             <key type="filename">Frames/DoorDark0002.png</key>

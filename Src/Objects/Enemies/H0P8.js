@@ -14,7 +14,7 @@ Enemy.prototype.types['H0P8'] =  function() {
     this.baseStunDuration = 500;
     this.stunThreshold = 1;
     this.body.bounce.y = 0;
-    this.body.drag.x = 600;
+    this.body.drag.x = 100;
     this.onFloor = false;
 
     this.robotic = true;
@@ -26,7 +26,13 @@ Enemy.prototype.types['H0P8'] =  function() {
 
 		} else if(!this.body.onFloor()) {
 			this.onFloor = false;
-		}
+        }
+        
+        if(this.body.onFloor()) {
+            this.body.drag.x = 8000;
+        } else {
+            this.body.drag.x = 100;
+        }
     };
 
     this.Act = function() {
@@ -34,7 +40,7 @@ Enemy.prototype.types['H0P8'] =  function() {
         if(EnemyBehavior.Player.IsVisible(this)) {
 
             //if theyre stunned, seize the opportunity
-            if(EnemyBehavior.Player.IsStunned(this)) {
+            if(this.CanAttack() && EnemyBehavior.Player.IsStunned(this)) {
                 this.Hop();
 
             } else if(frauki.state === frauki.AttackDiveCharge) {
@@ -49,8 +55,10 @@ Enemy.prototype.types['H0P8'] =  function() {
                     this.Shield();
                 } else if(this.CanAttack() && EnemyBehavior.Player.IsVulnerable(this)) {
                     this.Slash();
-                } else {
+                } else if(this.timers.TimerUp('dodge')){
                     this.Dodge();
+                } else {
+                    this.IdleHop();                    
                 }
             }
             else if(EnemyBehavior.Player.IsNear(this, 250)) {
@@ -78,25 +86,18 @@ Enemy.prototype.types['H0P8'] =  function() {
     };
 
     this.OnBlock = function() {
-        //this.Slash();
     };
 
     ///////////////////////////////ACTIONS////////////////////////////////////
     this.Hop = function() {
-
         EnemyBehavior.FacePlayer(this);
 
-        this.timers.SetTimer('attack', 600);
+        this.timers.SetTimer('hop_wait', 600);
         this.state = this.PreHopping;
     };
 
     this.Dodge = function() {
-        
-        if(!this.timers.TimerUp('dodge')) {
-            return;
-        }
 
-        this.timers.SetTimer('attack', 1000);
         this.timers.SetTimer('dodge', 1000);
 
         this.state = this.Escaping;
@@ -122,15 +123,18 @@ Enemy.prototype.types['H0P8'] =  function() {
     };
 
     this.Slash = function() {
+        
         this.state = this.Slashing;
-        this.timers.SetTimer('attack', 600);
-        EnemyBehavior.JumpToPoint(this, frauki.body.center.x, frauki.body.center.y, 0.1);
+        this.timers.SetTimer('attack_wait', 600);
+        this.timers.SetTimer('attack_wait', 800);
+        //EnemyBehavior.JumpToPoint(this, frauki.body.center.x, frauki.body.center.y, 0.1);
         EnemyBehavior.FacePlayer(this);
 		events.publish('play_sound', {name: 'H0P8_attack', restart: false });
 
     };
 
     this.IdleHop = function() {
+        
         this.state = this.IdleHopping;
         this.body.velocity.y = game.rnd.between(-100, -200);
         this.body.velocity.x = game.rnd.between(150, 250);
@@ -145,6 +149,7 @@ Enemy.prototype.types['H0P8'] =  function() {
     };
 
     this.Shield = function() {
+        
         this.state = this.Shielding; 
 
         EnemyBehavior.FacePlayer(this);
@@ -175,32 +180,31 @@ Enemy.prototype.types['H0P8'] =  function() {
             this.Shield();
         }
 
-        if(this.timers.TimerUp('attack')) {
+        if(this.timers.TimerUp('hop_wait')) {
 
             if(EnemyBehavior.Player.IsNear(this, 40)) {
-                this.Dodge();
-                return false;
+                return true;
             }
 
             this.state = this.Hopping;
 
             var ptX = frauki.body.center.x;
             var ptY = frauki.body.y - 20;
-            var overDist = game.rnd.between(250, 300);
+            var overDist = 0; //game.rnd.between(250, 300);
+
+            var xVelMod = (this.body.center.x = frauki.body.center.x) / 6;
 
             if(EnemyBehavior.Player.IsLeft(this)) {
-                ptX -= overDist;
+                this.body.velocity.x = -200 - xVelMod;
             } else {
-                ptX += overDist;
+                this.body.velocity.x = 200 + xVelMod;
             }
+            this.body.velocity.y = -200;
 
             EnemyBehavior.FacePlayer(this);
-            EnemyBehavior.JumpToPoint(this, ptX, ptY); 
+            //EnemyBehavior.JumpToPoint(this, ptX, ptY, 1); 
             events.publish('play_sound', {name: 'H0P8_jump', restart: true});
 
-            if(this.body.velocity.y < -400) {
-                this.body.velocity.y = -400;
-            }
 
         }
 
@@ -214,7 +218,7 @@ Enemy.prototype.types['H0P8'] =  function() {
             this.PlayAnim('hop');
         }
 
-        if(EnemyBehavior.Player.IsNear(this, 50)) {
+        if(this.CanAttack() && EnemyBehavior.Player.IsNear(this, 50)) {
             this.Slash();
         }
 
@@ -232,6 +236,7 @@ Enemy.prototype.types['H0P8'] =  function() {
 
         if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slash_hold') && this.body.onFloor()) {
             this.SetAttackTimer(800);
+            EnemyBehavior.FacePlayer(this);
             this.timers.SetTimer('idle_hop_wait', 4000)
             this.timers.SetTimer('dodge', 1000)
             return true;
@@ -259,11 +264,11 @@ Enemy.prototype.types['H0P8'] =  function() {
     this.Shielding = function() {
         this.PlayAnim('shield');
 
-        if(EnemyBehavior.Player.IsInVulnerableFrame(this) && EnemyBehavior.Player.IsNear(this, 60)) {
+        if(this.CanAttack() && EnemyBehavior.Player.IsInVulnerableFrame(this) && EnemyBehavior.Player.IsNear(this, 50)) {
             this.Slash();
         }
 
-        if(this.animations.currentAnim.isFinished && this.timers.TimerUp('slide_hold')) {
+        if(this.animations.currentAnim.isFinished) {
             return true;
         }
 

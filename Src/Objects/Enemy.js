@@ -293,7 +293,7 @@ Enemy.prototype.TakeHit = function(damage) {
         return;
     }
 
-    //this.energy -= damage;
+    this.energy -= damage;
     events.publish('play_sound', { name: 'attack_connect' });
 
     var hurtTime = this.baseStunDuration + (250 * damage);

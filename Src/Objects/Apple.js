@@ -1,6 +1,6 @@
 Apple = function(game, x, y, name) {
     //instantiate the sprite
-    Phaser.Sprite.call(this, game, x, y, name);
+    Phaser.Sprite.call(this, game, x + 8, y + 8, name);
     this.spriteType = 'apple';
     
     //enable its physics body
