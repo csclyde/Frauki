@@ -90,7 +90,7 @@ Enemy.prototype.types['Sporoid'] =  function() {
 			this.body.velocity.x = 30;
 		}
 
-		if(EnemyBehavior.Player.IsNear(this, 140)) {
+		if(EnemyBehavior.Player.IsNear(this, 140) && EnemyBehavior.Player.IsVisible(this)) {
 			this.Dash();
 			return;
 		}

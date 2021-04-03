@@ -230,7 +230,7 @@ ScriptRunner.scripts['demo_Luck'] = [
 	{ name: 'run_script', props: { name: 'enter_goddess' } },
 	{ name: 'wait', props: { amount: 1500 } },
 	
-	{ name: 'show_text', props: { text: "The third Prism Shard. The Rurple Prism Shard. I knew all along that you could get this far.", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "The third Prism Shard. The Purple Prism Shard. I knew all along that you could get this far.", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "This one has the power of luck. If you hold this, the possibilities of the universe will reveal themselves to you.", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "It's a beautiful and humbling feeling, Frauki.", portrait: 'Goddess_Neutral' } },
 
