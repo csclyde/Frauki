@@ -394,8 +394,6 @@
             <key type="filename">Misc/Crabby0001.png</key>
             <key type="filename">Misc/Crabby0002.png</key>
             <key type="filename">Misc/Crabby0003.png</key>
-            <key type="filename">Misc/Haystax0000.png</key>
-            <key type="filename">Misc/Haystax0001.png</key>
             <key type="filename">Misc/Hopper0000.png</key>
             <key type="filename">Misc/Hopper0001.png</key>
             <key type="filename">Misc/Hopper0002.png</key>
@@ -559,24 +557,6 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">Misc/CreeperThistle0000.png</key>
-            <key type="filename">Misc/CreeperThistle0001.png</key>
-            <key type="filename">Misc/CreeperThistle0002.png</key>
-            <key type="filename">Misc/CreeperThistle0003.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>11,9,22,19</rect>
-                <key>scale9Paddings</key>
-                <rect>11,9,22,19</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">Misc/Fungu0000.png</key>
             <key type="filename">Misc/Fungu0001.png</key>
             <struct type="IndividualSpriteSettings">
@@ -590,21 +570,6 @@
                 <rect>18,18,35,35</rect>
                 <key>scale9Paddings</key>
                 <rect>18,18,35,35</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">Misc/Mask0000.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>15,15,30,30</rect>
-                <key>scale9Paddings</key>
-                <rect>15,15,30,30</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -626,27 +591,15 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">Misc/Tarball0000.png</key>
-            <key type="filename">Misc/Tarball0001.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>5,6,11,12</rect>
-                <key>scale9Paddings</key>
-                <rect>5,6,11,12</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">NPC/cooking0000.png</key>
             <key type="filename">NPC/cooking0001.png</key>
             <key type="filename">NPC/cooking0002.png</key>
             <key type="filename">NPC/cooking0003.png</key>
             <key type="filename">NPC/cooking0004.png</key>
+            <key type="filename">NPC/cooking0005.png</key>
+            <key type="filename">NPC/cooking0006.png</key>
+            <key type="filename">NPC/cooking0007.png</key>
+            <key type="filename">NPC/cooking0008.png</key>
             <key type="filename">NPC/fishing0000.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -663,6 +616,13 @@
                 <false/>
             </struct>
             <key type="filename">NPC/cool0000.png</key>
+            <key type="filename">NPC/cool0001.png</key>
+            <key type="filename">NPC/cool0002.png</key>
+            <key type="filename">NPC/cool0003.png</key>
+            <key type="filename">NPC/cool0004.png</key>
+            <key type="filename">NPC/cool0005.png</key>
+            <key type="filename">NPC/cool0006.png</key>
+            <key type="filename">NPC/cool0007.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>

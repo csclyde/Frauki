@@ -5,7 +5,7 @@ Enemy.prototype.types['NPC'] =  function() {
 
 	this.animations.add('gnome_city', ['NPC/cool0000'], 10, true, false);
     this.animations.add('gnome_cooking', ['NPC/cooking0000', 'NPC/cooking0001', 'NPC/cooking0002', 'NPC/cooking0003', 'NPC/cooking0004', 'NPC/cooking0005', 'NPC/cooking0006', 'NPC/cooking0007', 'NPC/cooking0008'], 3, true, false);
-	this.animations.add('gnome_cool', ['NPC/cool0000'], 10, true, false);
+	this.animations.add('gnome_cool', ['NPC/cool0000', 'NPC/cool0001', 'NPC/cool0002', 'NPC/cool0003', 'NPC/cool0004', 'NPC/cool0005', 'NPC/cool0006', 'NPC/cool0007'], 10, true, false);
 	this.animations.add('gnome_fishing', ['NPC/fishing0000', 'NPC/fishing0001', 'NPC/fishing0002', 'NPC/fishing0003', 'NPC/fishing0004', 'NPC/fishing0005', 'NPC/fishing0006', 'NPC/fishing0007', 'NPC/fishing0008', 'NPC/fishing0009', 'NPC/fishing0010', 'NPC/fishing0011', 'NPC/fishing0012', 'NPC/fishing0013', 'NPC/fishing0014'], 10, true, false);
 	this.animations.add('gnome_garden', ['NPC/garden0000', 'NPC/garden0001', 'NPC/garden0002', 'NPC/garden0003', 'NPC/garden0004', 'NPC/garden0005', 'NPC/garden0006', 'NPC/garden0007', 'NPC/garden0008', 'NPC/garden0009', 'NPC/garden0010', 'NPC/garden0011'], 3, true, false);
 	this.animations.add('gnome_gossip', ['NPC/gossip0000', 'NPC/gossip0001'], 3, true, false);
