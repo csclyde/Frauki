@@ -16,8 +16,14 @@ WeaponController = function() {
     this.runes = [];
 };
 
-WeaponController.prototype.create = function() {
+WeaponController.prototype.Create = function() {
   
+};
+
+WeaponController.prototype.Update = function() {
+    if(this.currentWeapon != null) {
+        this.currentWeapon.Update();
+    }
 };
 
 WeaponController.prototype.Next = function() {
@@ -74,12 +80,6 @@ WeaponController.prototype.RefactorWeaponList = function() {
     this.currentWeapon = this.Baton;//this.weaponList[0] || null;
 };
 
-WeaponController.prototype.Update = function() {
-    if(this.currentWeapon != null) {
-        this.currentWeapon.Update();
-    }
-};
-
 WeaponController.prototype.ToggleWeapon = function(params) {
     this.weaponActive = params.activate;
     
@@ -87,12 +87,7 @@ WeaponController.prototype.ToggleWeapon = function(params) {
     if(this.currentWeapon != null) {
         //and the toggle is to activate it
         if(params.activate && frauki.state !== frauki.Hurting && (!frauki.InAttackAnim() || params.override)) {
-            if(energyController.GetCharge() >= 0) {
-                this.currentWeapon.Start();
-                this.weaponActive = true;
-            } else {
-                events.publish('play_sound', { name: 'no_energy', restart: true });
-            }
+            events.publish('play_sound', { name: 'no_energy', restart: true });
         //otherwise, if the toggle is to deactivate it
         } else {
             this.currentWeapon.Stop();
@@ -121,6 +116,7 @@ WeaponController.prototype.Baton = {
         game.physics.enable(this.baton, Phaser.Physics.ARCADE);
         this.baton.body.gravity.y = -700;
         this.baton.body.setSize(30, 30, 0, 0);
+        this.baton.body.bounce.setTo(1);
         this.baton.animations.add('baton1', ['Baton00000', 'Baton00001', 'Baton00002', 'Baton00003', 'Baton00004', 'Baton00005'], 30, true, false);
         this.baton.animations.add('baton2', ['Baton10000', 'Baton10001', 'Baton10002'], 30, true, false);
         this.baton.animations.add('baton3', ['Baton20000', 'Baton20001', 'Baton20002'], 30, true, false);
@@ -130,10 +126,6 @@ WeaponController.prototype.Baton = {
     },
 
     Start: function() {
-        // if(energyController.GetCharge() <= 0) {
-        //     return;
-        // }
-
         if(!frauki.states.throwing) {
             //the initial activity when you press the button
             game.time.events.add(200, this.ThrowBaton, this);
@@ -144,6 +136,10 @@ WeaponController.prototype.Baton = {
     
     Update: function() {
         if(this.baton && this.baton.visible) {
+            // if(!weaponController.timers.TimerUp('max_throw_time')) {
+            //     game.physics.arcade.collide(this.baton, Frogland.GetCollisionLayer(), null, Collision.CollideBatonWithWorld);
+            // }
+            
             var vel = 800;
             var maxVelocity = 900 + this.baton.chargeLevel * 100;
 
@@ -214,8 +210,7 @@ WeaponController.prototype.Baton = {
 
     ThrowBaton: function() {
 
-        this.baton.chargeLevel = 3;//energyController.GetCharge();
-        energyController.ResetCharge();
+        this.baton.chargeLevel = 3;
 
         this.baton.animations.play('baton' + this.baton.chargeLevel);
         events.publish('play_sound', {name: 'baton_throw_' + this.baton.chargeLevel });
@@ -248,6 +243,7 @@ WeaponController.prototype.Baton = {
 
 
         weaponController.timers.SetTimer('min_throw_time', 200);
+        weaponController.timers.SetTimer('max_throw_time', 3000);
     },
 
     ResetBaton: function() {
@@ -300,7 +296,6 @@ WeaponController.prototype.Bomb = {
     Update: function() {
         //what to do while updating (only called while active)
         if(weaponController.weaponActive && weaponController.timers.TimerUp('bomb')) {
-            energyController.RemoveEnergy(0.2);
             weaponController.timers.SetTimer('bomb', 200);
             this.power += 0.1;
         }
@@ -322,10 +317,6 @@ WeaponController.prototype.Lob = {
     },
 
     Start: function() {
-
-        if(!energyController.UseCharge(3)) {
-            return;
-        }
 
         var lob = game.add.sprite(frauki.body.center.x + (frauki.states.direction === 'right' ? 20 : -20), frauki.body.center.y, 'Frauki');
         lob.anchor.setTo(0.5);
@@ -405,8 +396,6 @@ WeaponController.prototype.Mace = {
         this.mace.body.acceleration.y = 0;
         this.mace.body.velocity.x = 0;
         this.mace.body.velocity.y = 0;
-
-        energyController.RemoveCharge(2);
     },
     
     Update: function() {
@@ -443,7 +432,6 @@ WeaponController.prototype.Mace = {
         weaponController.attackGeometry = this.mace.body;
 
         if(weaponController.timers.TimerUp('mace_depletion')) {
-            energyController.RemoveCharge(0.1);
             weaponController.timers.SetTimer('mace_depletion', 200);
         }
     },
@@ -453,7 +441,6 @@ WeaponController.prototype.Mace = {
         this.mace.visible = false;
         
         this.mace.body.enable = false;
-        energyController.RemoveCharge(2);
     },
 
     mace: null
@@ -497,9 +484,6 @@ WeaponController.prototype.Shield = {
     },
 
     Start: function() {
-        if(!energyController.UseCharge(1)) {
-            return;
-        }
 
         if(this.forceField.visible === false) {
             this.forceField.animations.play('activate');
@@ -570,7 +554,6 @@ WeaponController.prototype.Saw = {
         if(energyController.GetCharge() >= 10 && frauki.Roll()) {
             this.saw.animations.play('activate');
             this.saw.visible = true;
-            energyController.RemoveCharge(10);
 
 
             if(frauki.states.direction === 'right') {
@@ -623,50 +606,3 @@ WeaponController.prototype.Saw = {
         }
     }
 };  
-
-WeaponController.prototype.Jumper = {
-    Init: function() {
-
-    },
-
-    Start: function() {
-        //the initial activity when you press the button
-        if(energyController.GetCharge() >= 0) {
-            frauki.states.dashing = true;
-            
-            // //set direction based on which way youre holding the buttons
-            // if(inputController.up.isDown) {
-            //     frauki.body.velocity.y = -500;
-            // } else if(inputController.crouch.isDown) {
-            //     frauki.body.velocity.y = 500;
-            // }
-
-            // if(inputController.runLeft.isDown) {
-            //     frauki.body.velocity.x = -500;
-            // } else if(inputController.runRight.isDown) {
-            //     frauki.body.velocity.x = 500;
-            // }
-            //energyController.RemoveEnergy(15);
-
-            var vel = frauki.body.velocity.clone();
-            vel = vel.normalize();
-            vel.setMagnitude(500);
-
-            frauki.body.velocity = vel;
-
-            game.time.events.add(300, function() { frauki.states.dashing = false; } );
-        }
-    },
-    
-    Update: function() {
-        //what to do while updating (only called while active)
-    },
-    
-    Stop: function() {
-        //the final activity when they release the button
-    },
-
-    GetDamageFrame: function() {
-        return null;
-    }
-};

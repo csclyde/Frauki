@@ -4,6 +4,10 @@ Frogland.Create = function() {
 
     this.timers = new TimerUtil();
 
+    events.subscribe('set_attack_wait', function(params) {
+        this.timers.SetTimer('global_attack_wait', params.duration);
+    }, this);
+
     this.map = game.add.tilemap('Frogland');
     this.map.addTilesetImage('FrogtownTiles');
     this.map.addTilesetImage('DepthsTiles');
@@ -11,43 +15,55 @@ Frogland.Create = function() {
     this.map.addTilesetImage('Doodads');
     this.map.addTilesetImage('Collision');
 
-    backdropController.CreateParallax();
-    backdropController.LoadBackgrounds();
-    
-    this.CreateBackgroundLayer();
+    this.goddessPositions = {
+        start: { x: 295 * 16, y: 168 * 16 },
+        Wit: { x: 152 * 16, y: 228 * 16 },
+        Will: { x: 111 * 16, y: 300 * 16 },
+        Luck: { x: 144 * 16, y: 548 * 16 },
+        Power: { x: 189 * 16, y: 64 * 16 },
+    };
 
-    effectsController.CreateEffectsLayer();
+    this.prismPositions = {
+        Wit: {x: 4456, y: 2656},
+        Will: {x: 4488, y: 2656},
+        Luck: {x: 4472, y: 2673},
+        Power: {x: 4472, y: 2640},
+    };
+
+    backdropController.Create();
+    
+    this['backgroundLayer'] = this.map.createLayer('Background');
     
     frauki = new Player(game, 0, 0, 'Frauki');
     game.add.existing(frauki);
 
+    goddess = new Enemy(game, this.goddessPositions.start.x, this.goddessPositions.start.y, 'Goddess', 'Goddess');
+    game.add.existing(goddess);
+    
     this.CreateCollisionLayer();
-
+    
+    objectController.Create();    
     objectController.CreateObjectsLayer();
+    effectsController.CreateMidgroundEffects();
 
-    this.CreateMidgroundLayer();
-    this.CreateForegroundLayer();
+    this['midgroundLayer'] = this.map.createLayer('Midground');
+    this['midgroundLayer'].resizeWorld();
 
-    effectsController.CreateForegroundEffectsLayer();
+    this['foregroundLayer'] = this.map.createLayer('Foreground');
+
+    effectsController.CreateForegroundEffects();
 
     this.PreprocessTiles();
 
     triggerController.CreateTriggers();
-
-    this.SpawnFrauki();
-
     objectController.CompileObjectList();
 
     //this will store fallen tiles, so that when you die they can be reset
     this.fallenTiles = [];
 
-    //events.subscribe('enemy_killed', this.Ragnarok, this);
-    this.ragnarokCounter = 1;
-    this.ragnarokLevel = 0;
-
-    game.physics.arcade.sortDirection = game.physics.arcade.TOP_BOTTOM;
-
     setInterval(this.AnimateTiles, 200);
+
+    frauki.Reset();
 };
 
 Frogland.Update = function() {
@@ -66,15 +82,27 @@ Frogland.Update = function() {
     this.HandleCollisions();
 
     if(frauki.y > 10800) {
-        //console.log(game.camera.y - frauki.body.y);
-        frauki.body.y -= 10000;
-        cameraController.camY = -250;
-        //console.log(game.camera.y - frauki.body.y);
+        frauki.y -= 10000;
+        cameraController.camY -= 10000 + 865;
     }
 };
 
+Frogland.Reset = function() {
+    this.ResetFallenTiles();   
+    
+    frauki.states.inWater = false;
+    frauki.states.onCloud = false;
+    frauki.states.inUpdraft = false;
+    frauki.states.onLeftSlope = false;
+    frauki.states.onRightSlope = false;
+    frauki.states.flowDown = false;
+    frauki.states.flowRight = false;
+    frauki.states.flowUp = false;
+    frauki.states.flowLeft = false;
+};
+
 Frogland.HandleCollisions = function() {
-    //moving objects collided with the world geometry
+    //frauki colliding with the world geometry
     game.physics.arcade.collideSpriteVsTilemapLayer(
         frauki, 
         this.GetCollisionLayer(), 
@@ -82,6 +110,7 @@ Frogland.HandleCollisions = function() {
         Collision.CollideFraukiWithEnvironment, 
         null, false);
 
+    //all other objects colliding with the world geometry
     game.physics.arcade.collideGroupVsTilemapLayer(
         objectController.GetObjectGroup(),
         this.GetCollisionLayer(), 
@@ -89,13 +118,20 @@ Frogland.HandleCollisions = function() {
         Collision.OverlapObjectsWithEnvironment, 
         null, false);
 
-    //frauki is collided with other moving objects
+    //frauki colliding with other moving objects
     game.physics.arcade.collideHandler(
         frauki, 
         objectController.GetObjectGroup(), 
         null, 
         Collision.OverlapFraukiWithObject, 
         null, false);
+
+    //enemies are collided with themselves
+    game.physics.arcade.collide(
+        objectController.GetObjectGroup(), 
+        undefined, 
+        function(o1, o2) { return o1.type === 'enemy' && o2.type === 'enemy'; }, 
+        Collision.OverlapEnemiesWithSelf);
 
     //collide enemies with doors
     game.physics.arcade.collide(
@@ -105,60 +141,21 @@ Frogland.HandleCollisions = function() {
         Collision.CollideEnemiesWithDoors);
 
     //overlap fraukis attack with objects and projectiles
+    frauki.UpdateAttackGeometry();
     if(frauki.Attacking()) {
         game.physics.arcade.overlap(
-            frauki.attackRect, 
-            objectController.GetObjectGroup(), 
+            frauki.attackRect,
+            objectController.GetObjectGroup(),
             Collision.OverlapAttackWithObject);
     }
 
-    //objects are collided with themselves
-    //game.physics.arcade.collide(objectController.GetObjectGroup(), undefined, null, Collision.OverlapObjectsWithSelf);
-
-    //frauki is checked against projectiles
+    //frauki is overlapped with projectiles
     if(projectileController.projectiles.countLiving() > 0) {
         game.physics.arcade.overlap(
             frauki, 
             projectileController.projectiles, 
             Collision.CollideFraukiWithProjectile);
     }
-};
-
-Frogland.SpawnFrauki = function() {
-
-    if(GameData.GetDebugPos()) {
-        var pos = GameData.GetDebugPos();
-        frauki.x = pos.x;
-        frauki.y = pos.y; 
-    } else if(Frogland.map.properties.debug === 'false') {
-        objectController.checkpointList.forEach(function(obj) {
-            if(obj.spriteType === 'checkpoint' && obj.id == GameData.GetCheckpoint()) {
-                frauki.x = obj.x;
-                frauki.y = obj.y + 90;  
-                frauki.timers.SetTimer('frauki_invincible', 0);
-            } 
-        }); 
-
-    } else {
-        frauki.x = this.map.properties.startX * 16;
-        frauki.y = this.map.properties.startY * 16 + 90;
-    }
-
-    cameraController.camX = frauki.x + 300;
-    cameraController.camY = frauki.y + 180;
-};
-
-Frogland.CreateBackgroundLayer = function() {
-    this['backgroundLayer'] = this.map.createLayer('Background');
-};
-
-Frogland.CreateMidgroundLayer = function() {
-    this['midgroundLayer'] = this.map.createLayer('Midground');
-    this['midgroundLayer'].resizeWorld();
-};
-
-Frogland.CreateForegroundLayer = function() {
-    this['foregroundLayer'] = this.map.createLayer('Foreground');
 };
 
 Frogland.CreateCollisionLayer = function() {
@@ -189,11 +186,6 @@ Frogland.PreprocessTiles = function() {
                 var rightTile = this.map.getTile(tile.x + 1, tile.y, 'Collision');
                 var topTile = this.map.getTile(tile.x, tile.y - 1, 'Collision');
                 var bottomTile = this.map.getTile(tile.x, tile.y + 1, 'Collision');
-
-                // if(!!leftTile && leftTile.index === 1) leftTile.setCollision(true, true, true, true);
-                // if(!!rightTile && rightTile.index === 1) rightTile.setCollision(true, true, true, true);
-                // if(!!topTile && topTile.index === 1) topTile.setCollision(true, true, true, true);
-                // if(!!bottomTile && bottomTile.index === 1) bottomTile.setCollision(true, true, true, true);
             }
         }
            
@@ -238,7 +230,6 @@ Frogland.DislodgeTile = function(tile) {
         Frogland['midgroundLayer'].dirty = true;
 
         tile.dislodged = true;
-        tile.owningLayer = this.currentLayer;
 
         Frogland.fallenTiles.push(tile);
 
@@ -372,48 +363,5 @@ Frogland.UpdateTutorialBlocks = function() {
 
         Frogland['backgroundLayer'].dirty = true;
         
-
-            
     }, Frogland, 0, 0, Frogland.width, Frogland.height, 'Background'); 
-};
-
-Frogland.Ragnarok = function(e) {
-
-    if(e.owningLayer !== 4 || e.x < 2140 || e.x > 2860 || e.y < 4180 || e.y > 4500) {
-        return;
-    }
-
-    var enemyConfigs = [85, 86, 87, 92, 95, 98, 99, 100];
-
-
-    this.ragnarokCounter -= 1;
-
-    if(this.ragnarokCounter <= 0) {
-        var waitDuration = 2000;
-
-        if(this.ragnarokLevel % 4 === 0) {
-            waitDuration = 6000;
-            objectController.SpawnObject({id: 66, x: 2500, y: 4300, name: 'apple'});
-        }
-
-        game.time.events.add(waitDuration, function() {
-            var numEnemies = game.rnd.between(1, 3);
-
-            for(var i = 0; i < numEnemies; i++) {
-                var enemySpawn = enemyConfigs[game.rnd.between(0, enemyConfigs.length - 1)];
-
-
-                objectController.SpawnObject({ 
-                    id: enemySpawn, 
-                    x: game.rnd.between(2400, 2800), 
-                    y: game.rnd.between(4300, 4450)
-                });
-                
-                this.ragnarokCounter += 1;
-            }
-
-            this.ragnarokLevel += 1;
-        }, this);
-        
-    }
 };

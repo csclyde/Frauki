@@ -6,7 +6,7 @@ Door = function(game, x, y, name) {
     //enable its physics body
     game.physics.enable(this, Phaser.Physics.ARCADE);
     
-    this.body.setSize(16, 68, 0, -16);
+    this.body.setSize(24, 68, 0, -16);
     this.anchor.setTo(0.5, 0.5);
 
     this.x += 8;
@@ -30,11 +30,24 @@ Door.prototype.create = function() {
         }
     }, this);
 
+    events.subscribe('close_enemy_door', function(params) {
+        if(this.id === params.door && this.type === 'enemy_start') {
+            this.PerformClose(false);
+        }
+    }, this);
+
     events.subscribe('enemy_killed', function(params) {
+
     }, this);
 
     if(GameData.IsDoorOpen(this.id)) {
-        this.state = this.ReadyToOpen;
+        if(this.stay_open) {
+            this.ForceOpenDoor();
+        } else {
+            this.state = this.ReadyToOpen;
+        }
+    } else if(this.type == 'enemy_start') {
+        this.ForceOpenDoor();        
     } else {
         this.state = this.Closed;
     }
@@ -99,10 +112,47 @@ Door.prototype.create = function() {
             }
         break;
 
+        case 'shard_metal':
+            if(this.prism === 'Wit') {
+                this.animations.add('closed', ['DoorPrismMetal0000'], 10, true, false);
+                this.animations.add('open', ['DoorPrismMetal0004'], 10, true, false);
+            } else if(this.prism === 'Will') {
+                this.animations.add('closed', ['DoorPrismMetal0001'], 10, true, false);
+                this.animations.add('open', ['DoorPrismMetal0005'], 10, true, false);
+            } else if(this.prism === 'Luck') {
+                this.animations.add('closed', ['DoorPrismMetal0002'], 10, true, false);
+                this.animations.add('open', ['DoorPrismMetal0006'], 10, true, false);
+            } else if(this.prism === 'Power') {
+                this.animations.add('closed', ['DoorPrismMetal0003'], 10, true, false);
+                this.animations.add('open', ['DoorPrismMetal0007'], 10, true, false);
+            }
+        break;
+
+        case 'shard_stone':
+            if(this.prism === 'Wit') {
+                this.animations.add('closed', ['DoorPrismStone0000'], 10, true, false);
+                this.animations.add('open', ['DoorPrismStone0004'], 10, true, false);
+            } else if(this.prism === 'Will') {
+                this.animations.add('closed', ['DoorPrismStone0001'], 10, true, false);
+                this.animations.add('open', ['DoorPrismStone0005'], 10, true, false);
+            } else if(this.prism === 'Luck') {
+                this.animations.add('closed', ['DoorPrismStone0002'], 10, true, false);
+                this.animations.add('open', ['DoorPrismStone0006'], 10, true, false);
+            } else if(this.prism === 'Power') {
+                this.animations.add('closed', ['DoorPrismStone0003'], 10, true, false);
+                this.animations.add('open', ['DoorPrismStone0007'], 10, true, false);
+            }
+        break;
+
 
         case 'enemy':
-            this.animations.add('closed', ['DoorEnemy0000'], 10, true, false);
-            this.animations.add('open', ['DoorEnemy0001'], 10, true, false);
+            this.animations.add('closed', ['DoorEnemy0001'], 10, true, false);
+            this.animations.add('open', ['DoorEnemy0000'], 10, true, false);
+        break;
+
+        case 'enemy_start':
+            this.animations.add('closed', ['DoorEnemy0001'], 10, true, false);
+            this.animations.add('open', ['DoorEnemy0000'], 10, true, false);
         break;
 
 
@@ -144,7 +194,7 @@ Door.prototype.create = function() {
 
 Door.prototype.update = function() {
 
-    if(this.state === this.ReadyToOpen && cameraController.IsObjectOnScreen(this, 50) && this.owningLayer === Frogland.currentLayer) {
+    if(this.state === this.ReadyToOpen && cameraController.IsObjectOnScreen(this, 50)) {
         this.PerformOpen(false, true);
     }
 
@@ -185,12 +235,18 @@ Door.prototype.OpenDoor = function(f) {
         var prism = objectController.shardList.find(function(s) { return s.name === this.prism; }, this);
 
         prism.beingUsed = true;
-        prism.x = this.body.x + 9;
+        prism.x = this.body.x + 13;
         prism.y = this.body.y + 31;
 
         prism.scale.x = 0.1;
         prism.scale.y = 0.1;
+        prism.visible = true;
+        prism.alpha = 1;
+        prism.bringToTop();
 
+        if(!!this.script) {
+            ScriptRunner.run(this.script);
+        }
 
         //tween its position to the center of the door
         var shardTween = game.add.tween(prism.scale).to({x: 1, y: 1}, 2000, Phaser.Easing.Exponential.Out, true);
@@ -199,6 +255,7 @@ Door.prototype.OpenDoor = function(f) {
             effectsController.ScreenFlash();
             this.PerformOpen(true);
             prism.beingUsed = false;
+            prism.visible = false;
         }, this);
     }  
 };
@@ -214,12 +271,16 @@ Door.prototype.ForceOpenDoor = function() {
 }
 
 Door.prototype.PerformOpen = function(save, silent) {
-    if(this.state === this.Open || !this.body) return;
+    if(this.state === this.Open || !this.body || GameState.inFinale) return;
 
     //check that the door has received enough attempts to actually open
     if(++this.openAttempts < this.thresholdAttempts) {
         console.warn('Door open failed, attempt ' + this.openAttempts + ' / ' + this.thresholdAttempts);
         return;
+    }
+    //if an enemy door is being opened, the fight is over
+    else if(this.type === 'enemy') {
+        ScriptRunner.run('end_fight', { door: this.name, song: this.song });
     }
 
     var movementTarget = this.body.y - 64;
@@ -245,6 +306,8 @@ Door.prototype.PerformOpen = function(save, silent) {
             break;
 
             case 'shard':
+            case 'shard_metal':
+            case 'shard_stone':
                 events.publish('play_sound', {name: 'crystal_door', restart: true });
             break;
 
@@ -267,22 +330,22 @@ Door.prototype.PerformOpen = function(save, silent) {
         openDuration = 2500;
         events.publish('camera_shake', {magnitudeX: 0.4, magnitudeY: 0, duration: openDuration });
 
-        events.publish('fade_music', { volume: 0.1, duration: openDuration });
+        //events.publish('fade_music', { volume: 0.1, duration: openDuration });
     }
 
-    events.publish('play_sound', {name: 'door_rumble', restart: true });
+    events.publish('play_sound', {name: 'door_rumble', restart: false });
 
-    events.publish('door_open_start', { id: this.id} );
+    //events.publish('door_open_start', { id: this.id} );
     
     this.openTween = game.add.tween(this.body).to({y: movementTarget}, openDuration, Phaser.Easing.Quintic.InOut, true);
 
     game.time.events.add(openDuration - (openDuration / 5), function() {
         if(!this || !this.body) return;
         
-        effectsController.DoorDust({x: this.body.center.x, y: this.body.y + this.body.height - 20, owningLayer: this.owningLayer });
+        effectsController.DoorDust({x: this.body.center.x, y: this.body.y + this.body.height - 20 });
         events.publish('play_sound', {name: 'door_slam', restart: true });
         events.publish('stop_sound', {name: 'door_rumble', restart: true });
-        events.publish('door_open_finish', { id: this.id } );
+        //events.publish('door_open_finish', { id: this.id } );
         this.canRollUnder = false;
 
     }, this);
@@ -297,17 +360,39 @@ Door.prototype.PerformOpen = function(save, silent) {
     }
 };
 
-Door.prototype.PlayAnim = function(name) {
-    this.animations.play(name);
+Door.prototype.PerformClose = function() {
+    if(this.state === this.Closed || !this.body) return;
+
+    var movementTarget = this.body.y + 64;
+
+    if(!!this.open_direction && this.open_direction === 'down') {
+        movementTarget = this.body.y - 80;
+    }
+
+    this.state = this.Closed;
+
+    var openDuration = 1000;
+    events.publish('play_sound', {name: 'skull_door', restart: true });
+    events.publish('camera_shake', {magnitudeX: 0.4, magnitudeY: 0, duration: openDuration });
+    //events.publish('fade_music', { volume: 0.1, duration: openDuration });
+    events.publish('play_sound', {name: 'door_rumble', restart: false });
+
+    events.publish('door_open_start', { id: this.id} );
+    
+    this.closeTween = game.add.tween(this.body).to({y: movementTarget}, openDuration, Phaser.Easing.Quintic.In, true);
+
+    game.time.events.add(openDuration, function() {
+        if(!this || !this.body) return;
+        
+        effectsController.DoorDust({x: this.body.center.x, y: this.body.y + this.body.height - 20 });
+        events.publish('play_sound', {name: 'door_slam', restart: true });
+        events.publish('stop_sound', {name: 'door_rumble', restart: true });
+
+    }, this);
 };
 
-Door.prototype.Closed = function() {
-    //if the door takes a few events to open, and they have completed at least one
-    if(this.thresholdAttempts > 1 && this.openAttempts > 0) {
-        this.PlayAnim('attempt_' + this.openAttempts);
-    } else {
-        this.PlayAnim('closed');
-    }
+Door.prototype.PlayAnim = function(name) {
+    this.animations.play(name);
 };
 
 Door.prototype.ReadyToOpen = function() {
@@ -317,4 +402,13 @@ Door.prototype.ReadyToOpen = function() {
 Door.prototype.Open = function() {
 
     this.PlayAnim('open');
+};
+
+Door.prototype.Closed = function() {
+    //if the door takes a few events to open, and they have completed at least one
+    if(this.thresholdAttempts > 1 && this.openAttempts > 0) {
+        this.PlayAnim('attempt_' + this.openAttempts);
+    } else {
+        this.PlayAnim('closed');
+    }
 };

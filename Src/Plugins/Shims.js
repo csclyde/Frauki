@@ -250,3 +250,152 @@ Phaser.Physics.Arcade.prototype.computeVelocity = function (axis, body, velocity
 
     return velocity;
 };
+
+Phaser.Sound.prototype.fadeToPause = function (duration) {
+    
+    if (!this.isPlaying || this.paused)
+    {
+        return;
+    }
+
+    if (duration === undefined) { duration = 1000; }
+
+    if(this.fadeTween && this.fadeTween.isRunning) {
+        this.fadeTween.stop();
+    }
+
+    this.fadeTween = this.game.add.tween(this).to( { volume: 0 }, duration, Phaser.Easing.Exponential.Out, true);
+    this.willBePaused = true;
+
+    //this.fadeTween.onComplete.add(this.fadeComplete, this);
+    this.fadeTween.onComplete.add(function() {
+        this.pause();
+        this.willBePaused = false;
+    }, this);
+};
+
+Phaser.Sound.prototype.fadeToResume = function (duration, volume) {
+
+    this.willBePaused = false;
+    
+    if(this.fadeTween && this.fadeTween.isRunning) {
+        this.fadeTween.stop();
+    }
+
+    if (duration === undefined) { duration = 1000; }
+    if (volume === undefined) { volume = 1; }
+
+    if(this.volume !== volume) {       
+        this.fadeTween = this.game.add.tween(this).to( { volume: volume }, duration, Phaser.Easing.Exponential.In, true);
+    }
+    
+    if(this.paused) {      
+        this.resume();
+    } else {
+        this.play();
+    }
+};
+
+Phaser.Sound.prototype.fadeToStop = function (duration) {
+    
+    if (!this.isPlaying || this.paused)
+    {
+        return;
+    }
+
+    if (duration === undefined) { duration = 1000; }
+
+    this.fadeTween = this.game.add.tween(this).to( { volume: 0 }, duration, Phaser.Easing.Exponential.Out, true);
+
+    //this.fadeTween.onComplete.add(this.fadeComplete, this);
+    this.fadeTween.onComplete.add(function() {
+        this.stop();
+    }, this);
+};
+
+Phaser.Animation.prototype.update = function () {
+    
+    if (this.isPaused || GameState.physicsSlowMo === 0)
+    {
+        return false;
+    }
+
+    if (this.isPlaying && this.game.time.time >= this._timeNextFrame)
+    {
+        this._frameSkip = 1;
+
+        //  Lagging?
+        this._frameDiff = this.game.time.time - this._timeNextFrame;
+
+        this._timeLastFrame = this.game.time.time;
+
+        if (this._frameDiff > this.delay)
+        {
+            //  We need to skip a frame, work out how many
+            this._frameSkip = Math.floor(this._frameDiff / this.delay);
+            this._frameDiff -= (this._frameSkip * this.delay);
+        }
+
+        //  And what's left now?
+        this._timeNextFrame = this.game.time.time + (this.delay - this._frameDiff);
+
+        if (this.isReversed)
+        {
+            this._frameIndex -= this._frameSkip;
+        }
+        else
+        {
+            this._frameIndex += this._frameSkip;
+        }
+
+        if (!this.isReversed && this._frameIndex >= this._frames.length || this.isReversed && this._frameIndex <= -1)
+        {
+            if (this.loop)
+            {
+                // Update current state before event callback
+                this._frameIndex = Math.abs(this._frameIndex) % this._frames.length;
+
+                if (this.isReversed)
+                {
+                    this._frameIndex = this._frames.length - 1 - this._frameIndex;
+                }
+
+                this.currentFrame = this._frameData.getFrame(this._frames[this._frameIndex]);
+
+                //  Instead of calling updateCurrentFrame we do it here instead
+                if (this.currentFrame)
+                {
+                    this._parent.setFrame(this.currentFrame);
+                }
+
+                this.loopCount++;
+                this._parent.events.onAnimationLoop$dispatch(this._parent, this);
+                this.onLoop.dispatch(this._parent, this);
+
+                if (this.onUpdate)
+                {
+                    this.onUpdate.dispatch(this, this.currentFrame);
+
+                    // False if the animation was destroyed from within a callback
+                    return !!this._frameData;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                this.complete();
+                return false;
+            }
+        }
+        else
+        {
+            return this.updateCurrentFrame(true);
+        }
+    }
+
+    return false;
+
+};

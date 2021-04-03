@@ -8,7 +8,7 @@ Enemy.prototype.types['KR32'] =  function() {
     this.animations.add('walk_back', ['KR32/WalkBack0000', 'KR32/WalkBack0001', 'KR32/WalkBack0002', 'KR32/WalkBack0003'], 6, true, false);
 
     this.animations.add('windup', ['KR32/Attack0000', 'KR32/Attack0001', 'KR32/Attack0002', 'KR32/Attack0003', 'KR32/Attack0004'], 16,  false, false);
-    this.animations.add('attack', ['KR32/Attack0005', 'KR32/Attack0006', 'KR32/Attack0007', 'KR32/Attack0008'], 15, false, false);
+    this.animations.add('attack', ['KR32/Attack0005', 'KR32/Attack0006', 'KR32/Attack0007', 'KR32/Attack0008'], 16, false, false);
     this.animations.add('attack_stab', ['KR32/Stab0000', 'KR32/Stab0001', 'KR32/Stab0002'], 10, false, false);
     this.animations.add('hurt', ['KR32/Hit0000'], 8, true, false);
     this.animations.add('block', ['KR32/Block0000', 'KR32/Block0001', 'KR32/Block0002', 'KR32/Block0003', 'KR32/Block0004', 'KR32/Block0005'], 14, false, false);
@@ -38,7 +38,7 @@ Enemy.prototype.types['KR32'] =  function() {
 		}
 
 		if(this.state === this.Slashing) {
-			this.body.drag.x = 1200;
+			this.body.drag.x = 2000;
 		} else {
 			this.body.drag.x = 200;
 		}
@@ -243,15 +243,15 @@ Enemy.prototype.types['KR32'] =  function() {
 
 		if(this.timers.TimerUp('windup')) {
 			this.state = this.Slashing;
-			this.timers.SetTimer('attack_hold', 700);
+			this.timers.SetTimer('attack_hold', 1000);
 
 			events.publish('stop_sound', {name: 'attack_windup', restart: true});
         	events.publish('play_sound', {name: 'KR32_attack', restart: true});
 
 			if(this.direction === 'left') {
-				this.body.velocity.x = -550;
+				this.body.velocity.x = -700;
 			} else {
-				this.body.velocity.x = 550;
+				this.body.velocity.x = 700;
 			}
 		}
 
@@ -391,23 +391,23 @@ Enemy.prototype.types['KR32'] =  function() {
 		},
 
 		'KR32/Attack0005': {
-			x: 30, y: -3, w: 70, h: 50,
-			damage: 4,
+			x: 30, y: 20, w: 85, h: 40,
+			damage: 3,
 			knockback: 0.3,
 			priority: 4,
 			juggle: 0
 		},
 
 		'KR32/Attack0006': {
-			x: 30, y: -3, w: 70, h: 50,
-			damage: 4,
+			x: 30, y: 20, w: 85, h: 40,
+			damage: 3,
 			knockback: 0.3,
 			priority: 4,
 			juggle: 0
 		},
 
 		'KR32/Stab0001': {
-			x: 0, y: 12, w: 90, h: 30,
+			x: 0, y: 12, w: 75, h: 30,
 			damage: 1,
 			knockback: 0.2,
 			priority: 3,

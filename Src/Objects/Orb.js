@@ -1,13 +1,13 @@
 Orb = function(game, x, y, name) {
     //instantiate the sprite
-    Phaser.Sprite.call(this, game, x, y, name);
+    Phaser.Sprite.call(this, game, x + 8, y, name);
     this.spriteType = 'orb';
     this.objectName = 'Orb';
     
     //enable its physics body
     game.physics.enable(this, Phaser.Physics.ARCADE);
     
-    this.body.setSize(50, 50, 0, 0);
+    this.body.setSize(30, 30, 0, 0);
     this.anchor.setTo(0.5);
     this.body.bounce.y = 0.5;
     //this.body.gravity.y = game.physics.arcade.gravity.y * 2;
@@ -46,7 +46,7 @@ function SmashOrb(f, o) {
     effectsController.ClashStreak(o.body.center.x, o.body.center.y, game.rnd.between(1, 2));
     effectsController.Dust(o.body.center.x, o.body.center.y);
     effectsController.ScreenFlash();
-    effectsController.DiceObject(o.objectName, o.body.center.x, o.body.center.y, o.body.velocity.x, o.body.velocity.y, o.owningLayer);
+    effectsController.DiceObject(o.objectName, o.body.center.x, o.body.center.y, o.body.velocity.x, o.body.velocity.y);
     events.publish('play_sound', {name: 'door_break'});
     o.destroy();
 };
@@ -59,7 +59,7 @@ Orb.prototype.PlayAnim = function(name) {
 Orb.prototype.Floating = function() {
     this.PlayAnim('floating');
 
-    this.body.velocity.y = Math.sin((game.time.now / 300) + this.floatPhase) * 30;
+    this.body.velocity.y = Math.sin((GameState.gameTime / 300) + this.floatPhase) * 30;
 };
 
 /*

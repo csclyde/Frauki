@@ -1,12 +1,12 @@
 Apple = function(game, x, y, name) {
     //instantiate the sprite
-    Phaser.Sprite.call(this, game, x, y, name);
+    Phaser.Sprite.call(this, game, x + 8, y + 8, name);
     this.spriteType = 'apple';
     
     //enable its physics body
     game.physics.enable(this, Phaser.Physics.ARCADE);
     
-    this.body.setSize(16, 16, 0, 2);
+    this.body.setSize(16, 16, 0, 0);
     this.anchor.setTo(0.5, 0.5);
     this.body.bounce.y = 0.5;
     //this.body.gravity.y = game.physics.arcade.gravity.y * 2;
@@ -45,7 +45,7 @@ Apple.prototype.collideWithPlayer = function(f) {
     
     this.state = this.Eaten;
 
-    events.publish('play_sound', {name: 'crystal_door'});
+    events.publish('play_sound', { name: 'gain_energy_4', restart: true });
 
     if(!GameData.GetFlag('first_apple_eaten')) {
         ScriptRunner.run('demo_Apple');
@@ -62,10 +62,10 @@ Apple.prototype.Fresh = function() {
     this.PlayAnim('fresh');
 
     if(this.shakeMagnitudeX > 0) {
-        this.body.velocity.x = Math.sin(game.time.now * 150) * this.shakeMagnitudeX;
+        this.body.velocity.x = Math.sin(GameState.gameTime * 150) * this.shakeMagnitudeX;
         this.body.velocity.y = 0;
     } else {
-        this.body.velocity.y = Math.sin(game.time.now / 150) * 30;
+        this.body.velocity.y = Math.sin(GameState.gameTime / 150) * 30;
         this.body.velocity.x = 0;
     }
 };

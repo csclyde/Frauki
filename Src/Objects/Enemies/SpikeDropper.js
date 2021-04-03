@@ -1,6 +1,6 @@
 Enemy.prototype.types['SpikeDropper'] =  function() {
 
-    this.body.setSize(25, 25, 0, 5);
+    this.body.setSize(25, 25, 0, 0);
     this.anchor.setTo(0.5, 0.5);
 
     this.animations.add('cling', ['Misc/SpikeDropper0000'], 10, true, false);
@@ -19,6 +19,10 @@ Enemy.prototype.types['SpikeDropper'] =  function() {
 
     this.isSolid = true;
 
+    this.LandHit = function() {
+        this.Drop();
+    };
+
 
     this.updateFunction = function() {
         if(this.body.allowGravity === false && EnemyBehavior.Player.IsBelow(this) && EnemyBehavior.Player.IsVisible(this)) {
@@ -34,16 +38,16 @@ Enemy.prototype.types['SpikeDropper'] =  function() {
         return true;
     };
 
-    this.LandHit = function() {
-        
-    };
-
     ///////////////////////////////ACTIONS////////////////////////////////////
     this.Drop = function() {
         this.body.allowGravity = true;
     };
 
     this.Squash = function() {
+        if(cameraController.IsObjectOnScreen(this, 30)) {
+            events.publish('play_sound', {name: 'Dropper_bounce', restart: true});
+        }
+
         if(this.timers.TimerUp('squash_wait')) {
             this.state = this.Squashing;
             this.timers.SetTimer('squash_wait', 75);

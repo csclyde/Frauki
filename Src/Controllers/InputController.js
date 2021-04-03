@@ -15,7 +15,7 @@ InputController = function() {
     this.tetrad.left = false;
     this.tetrad.right = false;
 
-    this.allowInput = true;
+    this.allowInput = false;
 
     this.currentDir = 'still';
 
@@ -25,26 +25,22 @@ InputController = function() {
 	this.testButton = game.input.keyboard.addKey(Phaser.Keyboard.P);
     this.testButton2 = game.input.keyboard.addKey(Phaser.Keyboard.O);
 
+    var keybinds = game.cache.getJSON('keybinds');
     this.binds = {};
-    this.binds.jump       = Phaser.Keyboard.SPACEBAR;
-    this.binds.up         = Phaser.Keyboard.UP;
-    this.binds.crouch     = Phaser.Keyboard.DOWN;
-    this.binds.runLeft    = Phaser.Keyboard.LEFT;
-    this.binds.runRight   = Phaser.Keyboard.RIGHT;
-    this.binds.slash      = Phaser.Keyboard.Z;
-    this.binds.slash2     = Phaser.Keyboard.Y; //dem wacky germans
-    this.binds.weapon     = Phaser.Keyboard.C;
-    this.binds.roll       = Phaser.Keyboard.X;
-    this.binds.shoulderR  = Phaser.Keyboard.Q;
-    this.binds.shoulderR2  = Phaser.Keyboard.V;
+    this.binds.pause      = Phaser.Keyboard[keybinds['pause']];
+    this.binds.jump       = Phaser.Keyboard[keybinds['jump']];
+    this.binds.up         = Phaser.Keyboard[keybinds['up']];
+    this.binds.crouch     = Phaser.Keyboard[keybinds['down']];
+    this.binds.runLeft    = Phaser.Keyboard[keybinds['left']];
+    this.binds.runRight   = Phaser.Keyboard[keybinds['right']];
+    this.binds.slash      = Phaser.Keyboard[keybinds['attack']];
+    this.binds.weapon     = Phaser.Keyboard[keybinds['heal']];
+    this.binds.roll       = Phaser.Keyboard[keybinds['roll']];
 
-    this.bindList = [this.binds.jump, this.binds.up, this.binds.crouch, this.binds.runLeft, this.binds.runRight, this.binds.slash, this.binds.weapon, this.binds.roll, this.binds.shoulderR];
-    
     events.subscribe('allow_input', this.AllowInput, this);
     events.subscribe('disallow_input', this.DisallowInput, this);
 
     game.input.keyboard.onDownCallback = function(e) {
-
         if(e.repeat) return;
 
         if(GameState.restarting) {
@@ -54,9 +50,6 @@ InputController = function() {
         switch(e.keyCode) {
 
             case Phaser.Keyboard.P:
-                // energyController.AddHealth(2);
-                // energyController.AddCharge(2);
-
                 localStorage.setItem('save_data', '');
             break;
 
@@ -70,6 +63,10 @@ InputController = function() {
 
             case Phaser.Keyboard.W:
                 GameData.SetDebugPos(0, 0);
+            break;
+
+            case inputController.binds.pause:
+                inputController.OnPause(true);
             break;
 
             case inputController.binds.jump:
@@ -98,24 +95,18 @@ InputController = function() {
             break;
 
             case inputController.binds.weapon:
-                //inputController.OnHeal(true);
-                inputController.OnThrow(true);
+                inputController.OnHeal(true);
             break;
 
             case inputController.binds.roll:
                 inputController.OnRoll(true);
             break;
-
-            case inputController.binds.shoulderR:
-            case inputController.binds.shoulderR2:
-                inputController.OnHeal(true);
-            break;
-
         }
     };
 
     game.input.keyboard.onUpCallback = function(e) {
 
+        
         if(GameState.restarting) {
             return;
         }
@@ -192,13 +183,12 @@ InputController = function() {
                 break;
 
                 case 3:
-                    //this.OnHeal(true);
-                    this.OnThrow(true);
+                    this.OnHeal(true);
+                    //this.OnThrow(true);
                 break;
 
                 //case 5: //right shoulder
                 case 7: //right shoulder
-                    this.OnHeal(true);
                 break;
 
                 //case 4: //left shoulder
@@ -206,7 +196,7 @@ InputController = function() {
                 break;
 
                 case 9: //start
-                    this.OnStart(true);
+                    this.OnPause(true);
                 break;
 
                 case 12:
@@ -295,6 +285,13 @@ InputController.prototype.Update = function() {
     frauki.Run({dir:this.currentDir});
 };
 
+InputController.prototype.Reset = function() {
+    this.OnLeft(false);
+    this.OnRight(false);
+    this.OnUp(false);
+    this.OnDown(false);    
+};
+
 InputController.prototype.DisallowInput = function() {
     this.OnJump(false);
     this.OnSlash(false);
@@ -309,9 +306,7 @@ InputController.prototype.DisallowInput = function() {
     this.OnStart(false);
     this.currentDir = 'still';
 
-
     this.allowInput = false;
-
 };
 
 InputController.prototype.AllowInput = function() {
@@ -323,17 +318,22 @@ InputController.prototype.AllowInput = function() {
     if(this.dpad.down) this.OnDown(true);
 };
 
+InputController.prototype.OnPause = function(pressed) {
+
+    if(this.allowInput && pressed) {      
+        events.publish('pause_game', {});
+        events.publish('advance_text', {});        
+    }
+};
+
 
 InputController.prototype.OnJump = function(pressed) {
     this.tetrad.bottom = pressed;
 
-    // if(pressed && cameraController.target !== frauki.body.center) {
-    //     cameraController.target = frauki.body.center;
-    //     inputController.AllowInput();
-    //     return;
-    // }
-
-    if(pressed) events.publish('advance_text', {});
+    if(pressed) {
+        events.publish('select_menu_option', {});
+        events.publish('advance_text', {});
+    }
 
     if(this.allowInput) {
         if(pressed) {
@@ -347,7 +347,10 @@ InputController.prototype.OnJump = function(pressed) {
 InputController.prototype.OnSlash = function(pressed) {
     this.tetrad.left = pressed;
 
-    if(pressed) events.publish('advance_text', {});
+    if(pressed) {
+        events.publish('select_menu_option', {});
+        events.publish('advance_text', {});
+    }
 
     if(this.allowInput) {
         if(pressed) {
@@ -362,7 +365,10 @@ InputController.prototype.OnSlash = function(pressed) {
 InputController.prototype.OnThrow = function(pressed) {
     this.tetrad.top = pressed;
 
-    if(pressed) events.publish('advance_text', {});
+    if(pressed) {
+        events.publish('select_menu_option', {});
+        events.publish('advance_text', {});
+    }
 
     if(this.allowInput) {
         if(pressed) {
@@ -377,7 +383,10 @@ InputController.prototype.OnThrow = function(pressed) {
 InputController.prototype.OnRoll = function(pressed) {
     this.tetrad.right = pressed;
 
-    if(pressed) events.publish('advance_text', {});
+    if(pressed) {
+        events.publish('select_menu_option', {});
+        events.publish('advance_text', {});
+    }
 
     if(this.allowInput) {
         if(pressed) {
@@ -401,6 +410,10 @@ InputController.prototype.OnHeal = function(pressed) {
 InputController.prototype.OnLeft = function(pressed) {
     this.dpad.left = pressed;
 
+    if(pressed) {
+        events.publish('settings_change', { dir: 'down' });
+    }
+
     if(this.allowInput) {
 
         if(pressed) {
@@ -423,6 +436,10 @@ InputController.prototype.OnLeft = function(pressed) {
 InputController.prototype.OnRight = function(pressed) {
     this.dpad.right = pressed;
 
+    if(pressed) {
+        events.publish('settings_change', { dir: 'up' });
+    }
+
     if(this.allowInput) {
 
         if(pressed) {
@@ -444,6 +461,10 @@ InputController.prototype.OnRight = function(pressed) {
 InputController.prototype.OnUp = function(pressed) {
     this.dpad.up = pressed;
 
+    if(pressed) {
+        events.publish('menu_change', { dir: 'up' });
+    }
+
     if(this.allowInput) {
         if(pressed) {
             events.publish('control_up', {pressed: true});
@@ -455,6 +476,10 @@ InputController.prototype.OnUp = function(pressed) {
 
 InputController.prototype.OnDown = function(pressed) {
     this.dpad.down = pressed;
+
+    if(pressed) {
+        events.publish('menu_change', { dir: 'down' });
+    }
 
     if(this.allowInput) {
         if(pressed) {

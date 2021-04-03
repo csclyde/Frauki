@@ -3,15 +3,22 @@ AudioController = function() {
 
     this.timers = new TimerUtil();
 
+    events.subscribe('update_sound_settings', this.UpdateVolumeSettings, this);
+
     events.subscribe('play_sound', this.PlaySound, this);
     events.subscribe('stop_sound', this.StopSound, this);
-    events.subscribe('play_music', this.PlayMusic, this);
-    events.subscribe('stop_music', this.StopMusic, this);
+    events.subscribe('pause_all_sound', this.PauseAllSound, this);
+    events.subscribe('unpause_all_sound', this.UnpauseAllSound, this);
+
     events.subscribe('play_ambient', this.PlayAmbient, this);
     events.subscribe('stop_ambient', this.StopAmbient, this);
-    events.subscribe('stop_all_music', this.StopAllMusic, this);
     events.subscribe('stop_all_ambient', this.StopAllAmbient, this);
-    events.subscribe('fade_music', this.FadeMusic, this);
+
+    events.subscribe('play_music', this.PlayMusic, this);
+    events.subscribe('stop_music', this.StopMusic, this);
+    events.subscribe('stop_all_music', this.StopAllMusic, this);
+    events.subscribe('pause_all_music', this.PauseAllMusic, this);
+    events.subscribe('unpause_all_music', this.UnpauseAllMusic, this);
 
     events.subscribe('stop_attack_sounds', function() {
         for(var key in this.sounds) {
@@ -22,24 +29,8 @@ AudioController = function() {
     }, this);
 
     this.sounds = {};
-    this.music = {};
     this.ambient = {};
-
-    this.currentMusic = null;
-
-    this.XMMusicPlayer = new Modplayer();
-    this.XMMusicPlayer.autostart = true;
-
-    game.onPause.add(function() {
-        this.XMMusicPlayer.pause();
-    }, this);
-
-    game.onResume.add(function() {
-        this.XMMusicPlayer.pause();
-    }, this);
-
-    this.musicVolume = 1;
-    this.musicVolumeTween = null;
+    this.music = {};
 
     //load audio
     FileMap.Audio.forEach(function(audio) {
@@ -47,75 +38,64 @@ AudioController = function() {
         that.sounds[audio.Name].initialVolume = audio.Volume;
     });
 
-    // FileMap.Music.forEach(function(music) {
-
-    //     that.music[music.Name] = game.add.audio(music.Name, music.Volume, music.Loop);
-    //     var musicAudio = that.music[music.Name];
-
-    //     musicAudio.initialVolume = music.Volume;
-    //     musicAudio.initialName = music.Name;
-    //     musicAudio.initialLoop = music.Loop;
-        
-    // });
-
     FileMap.Ambient.forEach(function(ambient) {
         that.ambient[ambient.Name] = game.add.audio(ambient.Name, ambient.Volume, ambient.Loop);
         that.ambient[ambient.Name].initialVolume = ambient.Volume;
     });
 
-    this.sounds['baton_throw_0'].onStop.add(function() {
-        if(frauki.states.throwing) audioController.sounds['baton_spin_0'].play();
-    });
+    FileMap.Music.forEach(function(music) {
+        that.music[music.Name] = game.add.audio(music.Name, music.Volume, music.Loop);
+        var musicAudio = that.music[music.Name];
 
-    this.sounds['baton_throw_1'].onStop.add(function() {
-        if(frauki.states.throwing) audioController.sounds['baton_spin_1'].play();
-    });
-
-    this.sounds['baton_throw_2'].onStop.add(function() {
-        if(frauki.states.throwing) audioController.sounds['baton_spin_2'].play();
-    });
-
-    this.sounds['baton_throw_3'].onStop.add(function() {
-        if(frauki.states.throwing) audioController.sounds['baton_spin_3'].play();
-    });
-
-    this.sounds['baton_throw_4'].onStop.add(function() {
-        if(frauki.states.throwing) audioController.sounds['baton_spin_4'].play();
+        musicAudio.initialVolume = music.Volume;
+        musicAudio.initialName = music.Name;
+        musicAudio.initialLoop = music.Loop;
+        
     });
 };
 
 AudioController.prototype.Update = function() {
-
-    //if the section ends and the thing does not loop, advance the section index
-    //and play the next section
-
-    if(this.XMMusicPlayer.context) this.XMMusicPlayer.setVolume(this.musicVolume); 
-
-    if(this.musicVolume === 0 && this.XMMusicPlayer.playing) {
-        this.XMMusicPlayer.stop();
-        this.currentMusic = null;
-    } 
 };
 
-AudioController.prototype.PlaySound = function(params) {
-    var that = this;
+AudioController.prototype.Reset = function() {
+};
 
-    if(!!params.name && !!this.sounds[params.name]) {
+AudioController.prototype.UpdateVolumeSettings = function() {
+    var soundSetting = GameData.GetSetting('sound');
+    var musicSetting = GameData.GetSetting('music');
+
+    game.sound.volume = soundSetting / 8;
+    game.sound.volume = Math.pow(game.sound.volume, 2);
+
+    for(key in this.music) {
+        if(this.music[key].isPlaying) {
+            this.music[key].volume = this.music[key].initialVolume * (musicSetting / 8);
+        }
+    }
+};
+
+//SFX//////
+AudioController.prototype.PlaySound = function(params) {
+    var sfxSetting = GameData.GetSetting('sfx');    
+
+    if(!!params.name && !!this.sounds[params.name] && !this.sounds[params.name].paused) {
 
         //if the sound is already playing and they dont want to start it over
         if(this.sounds[params.name].isPlaying && params.restart !== true) return;
         
         //if this is the damage sound, or an attack sound, stop all attack sounds
-        if((params.name.indexOf('ouch') > -1 || params.name.indexOf('attack') > -1) && params.name !== 'attack_connect') {
-            that.sounds['attack_slash'].stop();
-            that.sounds['attack_stab'].stop();
-            that.sounds['attack_dive_charge'].stop();
-            that.sounds['attack_dive_fall'].stop();
-            that.sounds['attack_dive_land'].stop();
+        if((params.name.indexOf('frauki_ouch') > -1 || params.name.indexOf('attack') > -1) && params.name !== 'attack_connect') {
+            this.sounds['attack_slash'].stop();
+            this.sounds['attack_stab'].stop();
+            this.sounds['attack_dive_charge'].stop();
+            this.sounds['attack_dive_fall'].stop();
+            this.sounds['attack_dive_land'].stop();
         }
         
         this.sounds[params.name].play();
-        this.sounds[params.name].volume = this.sounds[params.name].initialVolume;
+        this.sounds[params.name].volume = this.sounds[params.name].initialVolume * (sfxSetting / 8);
+        this.sounds[params.name].volume = Math.pow(this.sounds[params.name].volume, 2);
+    
     }
 };
 
@@ -129,129 +109,41 @@ AudioController.prototype.StopSound = function(params) {
     }
 };
 
-AudioController.prototype.PlayMusic = function(params) {
+AudioController.prototype.PauseAllSound = function(params) {
+    for(var key in this.sounds) {
+        if(!this.sounds.hasOwnProperty(key)) continue;
 
-    //they either want to just stop the song, play a new one, or they are trying to play the same song
-    if(!params.name) {
-        this.FadeMusic({volume: 0, fadeDuration: 3000});
-
-    } else if(!!params.name && params.name !== this.currentMusic) {
-        this.XMMusicPlayer.stop();
-        if(this.musicVolumeTween) this.musicVolumeTween.stop();
-        this.musicVolume = 1;
-        this.XMMusicPlayer.player.clearsong();
-        this.XMMusicPlayer.player.initialize();
-        //this.XMMusicPlayer.loadFromBuffer(game.cache.getBinary(params.name));
-        this.currentMusic = params.name;
-
-    } else if(!!params.name && params.name === this.currentMusic) {
-        this.FadeMusic({volume: 1});
-    }
-
-    
-
-
-
-    // //if the specified song is undefined 
-    // if(!!this.currentMusic && !params.name) {
-    //     //then just kill the current song
-    //     this.currentMusic.fadeTo(500, 0);
-    // }
-    // //if the song is not the currently playing song
-    // else if(!!this.currentMusic && this.currentMusic.initialName !== params.name) {
-    //     //fade out the current song
-    //     this.currentMusic.fadeTo(500, 0);
-
-    //     //then fade in the new song
-    //     this.currentMusic = this.music[params.name];
-    //     this.currentMusic.fadeTo(500, this.currentMusic.initialVolume);
-    // }
-    // //otherwise, just fade the song in
-    // else if(!!params.name) {
-
-    //     //fade it back in from whatever it was at
-    //     this.currentMusic = this.music[params.name];
-    //     this.currentMusic.volume = this.currentMusic.initialVolume;
-    //     this.currentMusic.play();
-    // }
-
-    /*
-    if(!!params.name && !!this.music[params.name] && !!this.music[params.name].play) {
-
-
-        //if the current song is the one to play
-        if(this.currentMusic === this.music[params.name] && !this.timers.TimerUp('music_reset')) {
-            if(!!this.currentMusic.fadeTween) this.currentMusic.fadeTween.stop();
-
-            this.currentMusic.fadeTo(500, this.currentMusic.initialVolume);
+        if(!!this.sounds[key] && this.sounds[key].isPlaying) {
+            this.sounds[key].pause();
         }
-        //otherwise, stop the other song
-        else {
-            if(!!this.currentMusic) this.currentMusic.stop();
+    }
+};
 
-            //set the new song as the current music.
-            this.currentMusic = this.music[params.name];
-            this.currentMusic.play('intro', 0, this.currentMusic.initialVolume, false);
+AudioController.prototype.StopAllSound = function(params) {
+    for(var key in this.sounds) {
+        if(!this.sounds.hasOwnProperty(key)) continue;
+
+        if(!!this.sounds[key] && this.sounds[key].isPlaying) {
+            this.sounds[key].fadeOut(params.fade || 500);
         }
-
-    }
-    */
-};
-
-AudioController.prototype.StopMusic = function(params) {
-    this.XMMusicPlayer.stop();
-};
-
-AudioController.prototype.StopAllMusic = function(params) {
-    this.XMMusicPlayer.stop();
-
-    // if(!!this.currentMusic) {
-    //     if(!!this.currentMusic.fadeTween) this.currentMusic.fadeTween.stop();
-
-    //     this.currentMusic.fadeOut(params.fadeOut || 500);
-    //     this.timers.SetTimer('music_reset', (params.fadeOut || 500) + 10000);
-    // }
-    // for(var key in this.music) {
-    //     if(!this.music.hasOwnProperty(key)) continue;
-
-    //     if(!!this.music[key] && this.music[key].isPlaying) {
-
-    //         if(!!this.music[key].fadeTween && this.music[key].fadeTween.isRunning) {
-    //             this.music[key].fadeTween.stop();
-    //         }
-
-    //         this.music[key].fadeOut(params.fadeOut || 500);
-    //         this.music[key].quietTimestamp = game.time.now + (params.fadeOut || 500);
-    //     }
-    // }
-};
-
-AudioController.prototype.FadeMusic = function(params) {
-    var that = this;
-
-    //volume, duration
-
-    if(!this.currentMusic) return;
-
-
-
-    //this.currentMusic.fadeTo(params.fadeDuration || 500, params.volume || 0);
-    if(this.musicVolumeTween) this.musicVolumeTween.stop();
-    this.musicVolumeTween = game.add.tween(this).to({ musicVolume: params.volume }, params.fadeDuration || 500, Phaser.Easing.Linear.None, true);
-
-    
-    if(params.duration) {
-        game.time.events.add(params.duration, function() {
-            that.FadeMusic({volume: 1});
-        }); 
     }
 };
 
+AudioController.prototype.UnpauseAllSound = function(params) {
+    for(var key in this.sounds) {
+        if(!this.sounds.hasOwnProperty(key)) continue;
+
+        if(!!this.sounds[key] && this.sounds[key].paused) {
+            this.sounds[key].resume();
+        }
+    }
+};
+
+//AMBIENT//////
 AudioController.prototype.PlayAmbient = function(params) {
-    if(!!params.name && !!this.ambient[params.name] && !!this.ambient[params.name].play) {
-
+    if(!!params.name && !!this.ambient[params.name] && !this.ambient[params.name].isPlaying) {
+        this.StopAllAmbient(params.name);
         this.ambient[params.name].play(null, 0, 0);
-
         this.ambient[params.name].fadeTo(500, this.ambient[params.name].initialVolume);
     }
 };
@@ -262,18 +154,73 @@ AudioController.prototype.StopAmbient = function(params) {
     }
 };
 
-AudioController.prototype.StopAllAmbient = function(params) {
+AudioController.prototype.StopAllAmbient = function() {
     for(var key in this.ambient) {
         if(!this.ambient.hasOwnProperty(key)) continue;
 
         if(!!this.ambient[key] && this.ambient[key].isPlaying) {
-
             this.ambient[key].fadeTo(500, 0);
         }
     }
 };
 
+//MUSIC//////
+AudioController.prototype.PlayMusic = function(params) {
+    var musicSetting = GameData.GetSetting('music');
+    
+    if(!!params.name && !!this.music[params.name] && !this.music[params.name].isPlaying) {
+        if(params.fade) {
+            this.music[params.name].play(null, 0, 0);
+            this.music[params.name].fadeToResume(params.fade, this.music[params.name].initialVolume * (musicSetting / 8));
+        } else {         
+            this.music[params.name].play(null, 0, this.music[params.name].initialVolume  * (musicSetting / 8));
+        }
+    }
+};
 
-//NOTES
-//Each element of the sounds object could be either a clip or an array. If
-//it is an array, it will choose one at random to play
+AudioController.prototype.StopMusic = function(params) {
+    if(!!params.name && !!this.music[params.name]) {
+        if(params.fade) {
+            this.music[params.name].fadeToStop(params.fade);
+        } else {
+            this.music[params.name].stop();
+        }
+    }
+};
+
+AudioController.prototype.StopAllMusic = function(params) {
+    for(var key in this.music) {
+        if(!this.music.hasOwnProperty(key)) continue;
+
+        if(!!this.music[key] && this.music[key].isPlaying) {
+            this.music[key].fadeToStop(params.fade || 1000);
+        }
+        else if(!!this.music[key] && this.music[key].paused) {
+            this.music[key].stop();
+            this.music[key].paused = false;
+            this.music[key].willBePaused = false;
+        }
+    }
+};
+
+AudioController.prototype.PauseAllMusic = function(params) {
+    for(var key in this.music) {
+        if(!this.music.hasOwnProperty(key)) continue;
+
+        if(!!this.music[key] && this.music[key].isPlaying) {
+            this.music[key].fadeToPause(params.fade || 1000);
+        }
+    }
+};
+
+AudioController.prototype.UnpauseAllMusic = function(params) {
+    var musicSetting = GameData.GetSetting('music');
+    
+    for(var key in this.music) {
+        if(!this.music.hasOwnProperty(key)) continue;
+
+        if(!!this.music[key] && (this.music[key].paused || this.music[key].willBePaused)) {
+            this.music[key].fadeToResume(params.duration || 1000, this.music[key].initialVolume  * (musicSetting / 8));
+        }
+    }
+};

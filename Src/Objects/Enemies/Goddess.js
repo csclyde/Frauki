@@ -2,50 +2,28 @@ Enemy.prototype.types['Goddess'] =  function() {
 
 	goddess = this;
 
-	this.body.setSize(40, 145, 0, 0);
+	this.body.setSize(40, 45, 0, 0);
 	this.anchor.setTo(0.5);
 
-    this.animations.add('idle', ['Goddess/Goddess0000'], 10, false, false);
-    this.animations.add('stuff', ['Goddess/Stand0000'], 10, false, false);
+    this.animations.add('idle', ['NPC/Goddess0000', 'NPC/Goddess0001'], 2, true, false);
+    this.animations.add('stuff', ['NPC/Stand0000'], 10, false, false);
 
     this.energy = 5;
     this.baseStunDuration = 400;
 
+	this.body.drag.x = 500;
+	this.body.allowGravity = false;
 
-    this.body.drag.x = 500;
+	this.Vulnerable = function() { return false; }
 
+	this.SetDirection('left');	
+	
     this.messageQueue = GameData.GetVal('goddess_message_queue');
     this.deathMessage = GameData.GetVal('goddess_death_message');
 	this.currentPortrait = 'Goddess_Neutral';
-
-
-    events.subscribe('door_open_start', function(params) {
-    	if(params.id === 'final_second' && !GameData.GetFlag('seal_hall_intro')) {
-			ScriptRunner.run('seal_hall_intro');
-			GameData.SetFlag('seal_hall_intro', true);
-		} else if(params.id === 'final_first' && !GameData.GetFlag('open_second_seal')) {
-			ScriptRunner.run('open_second_seal');
-			GameData.SetFlag('open_second_seal', true);
-		} else if(params.id === 'final_third' && !GameData.GetFlag('open_third_seal')) {
-			ScriptRunner.run('open_third_seal');
-			GameData.SetFlag('open_third_seal', true);
-		} else if(params.id === 'final_fourth' && !GameData.GetFlag('open_fourth_seal')) {
-			ScriptRunner.run('open_fourth_seal');
-			GameData.SetFlag('open_fourth_seal', true);
-    	} else if(params.id === 'prison_door') {
-    		GameData.SetFlag('goddess_released', true);
-    	}
-    });
-
-    events.subscribe('door_open_finish', function(params) {
-    	if(params.id === 'prison_door' && !GameData.GetFlag('prison_door_intro')) {
-			ScriptRunner.run('goddess_freedom');
-			GameData.SetFlag('prison_door_intro', true);
-    	}
-    });
     
 	this.updateFunction = function() {
-
+		
 	};
 
 	this.Act = function() {
@@ -60,65 +38,121 @@ Enemy.prototype.types['Goddess'] =  function() {
     	} else {
     		GameData.SetFlag('goddess_killed', true);
     	}
-    };
+	};
 
     this.Reset = function() {
-    	//if the goddess is angry from being killed, reset that
-        GameData.SetFlag('goddess_angry', false);
 
-        if(GameData.GetCheckpoint() === '0' && false) {
-
-            //if they killed the goddess, give the player a lecture then make her angry
-            if(GameData.GetFlag('goddess_killed')) {
-                ScriptRunner.run('goddess_rez_angry');
-                GameData.SetFlag('goddess_killed', false);
-                GameData.SetFlag('goddess_angry', true);
-            } else if(this.deathMessage) {
-            	events.publish('show_text', { text: this.deathMessage, portrait: 'Goddess_Neutral' });
-
-            	GameData.SetVal('goddess_death_message', null);
-     
-            } else {
-                events.publish('show_text', { text: [
-					"My, my... you need to be more careful! Well, brush it off and try again. On your way now.",
-					"Are you ok? That looked really painful... Well, I fixed you up. Go give it another shot!",
-					"Sorry that happened Frauki... But don't get discouraged. You can do it!"
-					], portrait: 'Goddess_Neutral' 
-				});
-
-            }
-        }
     };
 
 	///////////////////////////////ACTIONS////////////////////////////////////
 	this.GetSpeech = function() {
-		if(GameData.GetFlag('goddess_angry')) {
-			this.currentPortrait = 'Goddess_Neutral';
-			return "I'm still mad at you for killing me. Hrmph.";
 
-		} else if(GameData.GetFlag('goddess_smacked') && this.energy > 3) {
-			GameData.SetFlag('goddess_smacked', false);
-			this.currentPortrait = 'Goddess_Neutral';
-			return "Why have you been smacking me? Cut it out.";
+	};
 
-		} else if(this.energy === 1) {
-			this.currentPortrait = 'Goddess_Neutral';
-			return "Just get away from me...";
-
-		} else if(this.energy <= 3) {
-			this.currentPortrait = 'Goddess_Neutral';
-			return "You're just a bully... leave me alone.";
-
-		} else if(energyController.GetHealth() < energyController.GetMaxHealth()) {
-        	events.publish('full_heal', {});
-			this.currentPortrait = 'Goddess_Neutral';
-			return "Oh my, you're not looking so good. Let me fix you up...";
-		} else if(this.messageQueue.length > 0) {
-			return this.GetMessage();
-		} else {
-			this.currentPortrait = 'Goddess_Neutral';
-			return ['Do you need something Frauki?', 'Oh, hello.', 'Things just aren\'t the same.', 'Yes?'];
-
+	this.GetGameoverScript = function() {
+		//INTRO AREA TRIGGERS
+		if(!GameData.GetFlag('intro_finished')) {
+			if(GameState.death.name === 'tower_troll' && !GameData.GetFlag('tower_troll1')) {
+				GameData.SetFlag('tower_troll1', true);
+				return 'tower_troll1';
+			}
+			else if(GameState.death.name === 'tower_troll' && !GameData.GetFlag('tower_troll2')) {
+				GameData.SetFlag('tower_troll2', true);
+				return 'tower_troll2';
+			}
+			else if(GameState.death.name === 'tower_troll' && !GameData.GetFlag('tower_troll3')) {
+				GameData.SetFlag('tower_troll3', true);
+				return 'tower_troll3';
+			}
+			else if(GameState.death.name === 'tower_troll' && !GameData.GetFlag('tower_troll_final')) {
+				GameData.SetFlag('tower_troll_final', true);
+				return 'tower_troll_final';
+			}
+			else if(!GameData.GetFlag('first_death')) {
+				GameData.SetFlag('first_death', true);
+				return 'goddess_surprised_death1';
+			}
+			else if(!GameData.GetFlag('second_death')) {
+				GameData.SetFlag('second_death', true);
+				return 'goddess_surprised_death2';
+			}
+			else if(!GameData.GetFlag('third_death')) {
+				GameData.SetFlag('third_death', true);
+				return 'goddess_surprised_death3';
+			}
+			else {
+				return 'goddess_surprised_death_final';
+			}
+		}
+		//FIRST RUINS AREA TRIGGERS
+		else if(!GameData.IsDoorOpen('statue_shortcut')) {
+			if(GameData.data.upgrades.includes('Health2')  && !GameData.GetFlag('first_health_upgrade')) {
+				GameData.SetFlag('first_health_upgrade', true);
+				return 'first_health_upgrade';
+			}
+			else if(GameState.death.type === 'Buzzar' && !GameData.GetFlag('first_buzzar')) {
+				GameData.SetFlag('first_buzzar', true);
+				return 'first_buzzar';
+			}
+			else if(GameState.death.name === 'first_gubr' && !GameData.GetFlag('first_gubr')) {
+				GameData.SetFlag('first_gubr', true);
+				return 'first_gubr';
+			}
+			else {
+				return 'goddess_console_area1';
+			}
+		}
+		//SECOND RUINS AREA
+		else if(!GameData.IsDoorOpen('drop_to_right')) {
+			
+			if(GameState.death.name === 'first_ql0k' && !GameData.GetFlag('first_ql0k')) {
+				GameData.SetFlag('first_ql0k', true);
+				return 'first_ql0k';
+			}
+			else if(GameState.death.name === 'second_ql0k' && !GameData.GetFlag('second_ql0k')) {
+				GameData.SetFlag('second_ql0k', true);
+				return 'second_ql0k';
+			}
+			else if(!GameData.GetFlag('statue_shortcut')) {
+				GameData.SetFlag('statue_shortcut', true);
+				return 'first_shortcut';
+			}
+			else {
+				return 'goddess_console_area2';
+			}
+		}
+		//GARDENS BEFORE WIT GEM
+		else if(!GameData.HasShard('wit')) {
+			
+			if(GameState.death.name === 'first_kr32' && !GameData.GetFlag('first_kr32')) {
+				GameData.SetFlag('first_kr32', true);
+				return 'first_kr32';
+			}
+			else if(GameState.death.name === 'wit_guard' && !GameData.GetFlag('wit_guard')) {
+				GameData.SetFlag('wit_guard', true);
+				return 'wit_guard';
+			}
+			else if(GameState.death.name === 'wit_guard' && !GameData.GetFlag('wit_guard2')) {
+				GameData.SetFlag('wit_guard2', true);
+				return 'wit_guard2';
+			}
+			else if(GameState.death.name === 'wit_guard' && !GameData.GetFlag('wit_guard3')) {
+				GameData.SetFlag('wit_guard3', true);
+				return 'wit_guard3';
+			}
+			else if(GameState.death.name === 'wit_guard') {
+				return 'wit_guard_final';
+			}
+			else if(!GameData.GetFlag('ship_frontdoor')) {
+				GameData.SetFlag('ship_frontdoor', true);
+				return 'second_shortcut';
+			}
+			else {
+				return 'goddess_console_area3';
+			}
+		}
+		else {
+			return 'goddess_console';
 		}
 	};
 
@@ -126,33 +160,11 @@ Enemy.prototype.types['Goddess'] =  function() {
 		return this.currentPortrait;
 	};
 
-	this.AddMessage = function(msg) {
-		if(this.messageQueue.length === 5) {
-			this.messageQueue.shift();
-		}
-
-		this.messageQueue.push(msg);
-
-		GameData.SetVal('goddess_message_queue', this.messageQueue);
-	};
-
-	this.GetMessage = function() {
-		if(this.messageQueue.length > 0) {
-			var msg = this.messageQueue.shift();
-			GameData.SetVal('goddess_message_queue', this.messageQueue);
-			return msg;
-		}
-
-		return 'No message';
-
-	};
-
 	////////////////////////////////STATES////////////////////////////////////
 	this.Idling = function() {
 		this.PlayAnim('idle');
 
-		this.SetDirection('right');
-		//EnemyBehavior.FacePlayer(this);
+		this.body.velocity.y = Math.sin((GameState.gameTime) / 500) * 5;		
 
 		return true;
 	};
@@ -167,11 +179,4 @@ Enemy.prototype.types['Goddess'] =  function() {
 
 		return false;
 	};
-
-
-
-	this.attackFrames = {
-
-	};
-
 };

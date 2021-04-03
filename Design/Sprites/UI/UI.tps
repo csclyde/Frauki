@@ -4,9 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>4.5.0</string>
-        <key>fileName</key>
-        <string>D:/gamedev/Frauki/Design/Sprites/UI/UI.tps</string>
+        <string>5.5.0</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -129,22 +127,6 @@
                 <uint>1</uint>
             </struct>
         </struct>
-        <key>andEngine</key>
-        <struct type="AndEngine">
-            <key>minFilter</key>
-            <enum type="AndEngine::MinFilter">Linear</enum>
-            <key>packageName</key>
-            <string>Texture</string>
-            <key>wrap</key>
-            <struct type="AndEngineWrap">
-                <key>s</key>
-                <enum type="AndEngineWrap::Wrap">Clamp</enum>
-                <key>t</key>
-                <enum type="AndEngineWrap::Wrap">Clamp</enum>
-            </struct>
-            <key>magFilter</key>
-            <enum type="AndEngine::MagFilter">MagLinear</enum>
-        </struct>
         <key>dataFileNames</key>
         <map type="GFileNameMap">
             <key>data</key>
@@ -199,30 +181,6 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">Frames/BankCounter0000.png</key>
-            <key type="filename">Frames/BankCounter0001.png</key>
-            <key type="filename">Frames/ExclamationMark0000.png</key>
-            <key type="filename">Frames/ExclamationMark0001.png</key>
-            <key type="filename">Frames/NuggCounterBack0000.png</key>
-            <key type="filename">Frames/NuggCounterBack0001.png</key>
-            <key type="filename">Frames/QuestionMark0000.png</key>
-            <key type="filename">Frames/QuestionMark0001.png</key>
-            <key type="filename">Frames/SurpriseMark0000.png</key>
-            <key type="filename">Frames/SurpriseMark0001.png</key>
-            <key type="filename">Frames/SurpriseMark0002.png</key>
-            <key type="filename">Frames/SurpriseMark0003.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>25,25,50,50</rect>
-                <key>scale9Paddings</key>
-                <rect>25,25,50,50</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">Frames/ChargePips0000.png</key>
             <key type="filename">Frames/ChargePips0001.png</key>
             <key type="filename">Frames/ChargePips0002.png</key>
@@ -238,6 +196,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -260,15 +220,71 @@
             <key type="filename">Frames/HudFrame0001.png</key>
             <key type="filename">Frames/HudFrame0002.png</key>
             <key type="filename">Frames/HudFrame0003.png</key>
+            <key type="filename">Frames/Settings0000.png</key>
+            <key type="filename">Frames/Settings0001.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
                 <rect>28,25,55,50</rect>
                 <key>scale9Paddings</key>
                 <rect>28,25,55,50</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">Frames/ExclamationMark0000.png</key>
+            <key type="filename">Frames/ExclamationMark0001.png</key>
+            <key type="filename">Frames/QuestionMark0000.png</key>
+            <key type="filename">Frames/QuestionMark0001.png</key>
+            <key type="filename">Frames/SurpriseMark0000.png</key>
+            <key type="filename">Frames/SurpriseMark0001.png</key>
+            <key type="filename">Frames/SurpriseMark0002.png</key>
+            <key type="filename">Frames/SurpriseMark0003.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>25,25,50,50</rect>
+                <key>scale9Paddings</key>
+                <rect>25,25,50,50</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">Frames/Logo0000.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>28,18,57,37</rect>
+                <key>scale9Paddings</key>
+                <rect>28,18,57,37</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">Frames/Logo20000.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>99,29,197,57</rect>
+                <key>scale9Paddings</key>
+                <rect>99,29,197,57</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -282,17 +298,11 @@
             <key type="filename">Frames/Numbers0007.png</key>
             <key type="filename">Frames/Numbers0008.png</key>
             <key type="filename">Frames/Numbers0009.png</key>
-            <key type="filename">Frames/UpgradeIconLob.png</key>
-            <key type="filename">Frames/UpgradeIconSaw.png</key>
-            <key type="filename">Frames/UpgradeIconShield.png</key>
-            <key type="filename">Frames/Upgrades0000.png</key>
-            <key type="filename">Frames/Upgrades0001.png</key>
-            <key type="filename">Frames/Upgrades0002.png</key>
-            <key type="filename">Frames/Upgrades0003.png</key>
-            <key type="filename">Frames/Upgrades0004.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -310,30 +320,20 @@
             <key type="filename">Frames/PortraitsFraukiNeutral.png</key>
             <key type="filename">Frames/PortraitsFraukiPeaceful.png</key>
             <key type="filename">Frames/PortraitsFraukiSilly.png</key>
-            <key type="filename">Frames/PortraitsGoddess_Neutral.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>15,28,30,55</rect>
-                <key>scale9Paddings</key>
-                <rect>15,28,30,55</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">Frames/PortraitsFrogman.png</key>
-            <key type="filename">Frames/PortraitsIrena.png</key>
+            <key type="filename">Frames/PortraitsGoddess_Neutral.png</key>
+            <key type="filename">Frames/PortraitsOldRobo.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>30,28,60,55</rect>
+                <rect>15,28,30,55</rect>
                 <key>scale9Paddings</key>
-                <rect>30,28,60,55</rect>
+                <rect>15,28,30,55</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -344,6 +344,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>

@@ -2,6 +2,50 @@ ProjectileController = function() {
 	this.projectiles = game.add.group();
 };
 
+ProjectileController.prototype.Update = function() {
+	
+	var childrenToRemove = [];
+
+	frauki.states.entangled = false;
+
+	this.projectiles.forEach(function(p) {
+
+		if(GameState.gameTime - p.spawnTime > p.lifeTime && p.lifeTime !== 0) {
+			p.destroy();
+			childrenToRemove.push(p);
+
+			if(p.projType === 'bolas') {
+				events.publish('stop_sound', {name: 'SW8T_bolas_fly', restart: false});
+			}
+		} else if(p.solid) {
+			game.physics.arcade.collide(p, Frogland.GetCollisionLayer(), null, Collision.CollideProjectileWithWorld);
+		}
+
+		if(p.projType === 'bolas' && p.attached === true) {
+			p.x = frauki.body.center.x;
+			p.y = frauki.body.center.y + (Math.sin(GameState.gameTime / 100) * 24) + 0;
+			frauki.states.entangled = true;
+			p.play('entangle');
+
+		} else if(p.projType === 'mortar' && !!p.body) {
+			p.rotation = Math.atan2(p.body.velocity.y, p.body.velocity.x);
+		}
+
+	});
+
+	childrenToRemove.forEach(function(e) {
+		e.destroy();
+	});
+};
+
+ProjectileController.prototype.Reset = function() {
+	this.DestroyAllProjectiles();
+};
+
+ProjectileController.prototype.DestroyAllProjectiles = function() {
+	this.projectiles.removeAll(true);
+};
+
 ProjectileController.prototype.Mortar = function(e) {
 	var xPos = e.body.center.x;
 	var yPos = e.body.center.y - 25;
@@ -49,7 +93,7 @@ ProjectileController.prototype.Mortar = function(e) {
 
 	mortar.projType = 'mortar';
 	mortar.owningEnemy = e;
-	mortar.spawnTime = game.time.now;
+	mortar.spawnTime = GameState.gameTime;
 	mortar.lifeTime = 5000;
 	mortar.solid = true;
 	mortar.preserveAfterHit = true;
@@ -60,27 +104,34 @@ ProjectileController.prototype.Mortar = function(e) {
 	this.projectiles.add(mortar);
 };
 
-ProjectileController.prototype.MortarExplosion = function(e, x, y) {
+ProjectileController.prototype.MortarExplosion = function(e, x, y, style) {
 	var xPos = x;
 	var yPos = y;
 
-	var explosion = game.add.sprite(xPos, yPos - 20, 'EnemySprites');
+	var explosion = game.add.sprite(xPos, yPos - 20, 'Misc');
 	game.physics.enable(explosion, Phaser.Physics.ARCADE);
 
 	explosion.body.setSize(50, 40);
 	explosion.body.moves = false;
 	explosion.anchor.setTo(0.5);
 
-	var explode = explosion.animations.add('explode', ['SW8T/Mortar0004', 'SW8T/Mortar0005', 'SW8T/Mortar0006', 'SW8T/Mortar0007', 'SW8T/Mortar0008'], 14, false, false);
-	explode.killOnComplete = true;
+	var explodeFloor = explosion.animations.add('explode_floor', ['ExplosionFloor0000', 'ExplosionFloor0001', 'ExplosionFloor0002', 'ExplosionFloor0003', 'ExplosionFloor0004'], 14, false, false);
+	var explodeAir = explosion.animations.add('explode_air', ['ExplosionAir0000', 'ExplosionAir0001', 'ExplosionAir0002', 'ExplosionAir0003', 'ExplosionAir0004'], 14, false, false);
+	explodeFloor.killOnComplete = true;
+	explodeAir.killOnComplete = true;
 
-	explosion.play('explode');
+	if(style === 'air') {
+		explosion.play('explode_air');
+	} 
+	else {
+		explosion.play('explode_floor');
+	}
 
 	explosion.body.bounce.set(0.0);
 
 	explosion.projType = 'mortarExplosion';
 	explosion.owningEnemy = e;
-	explosion.spawnTime = game.time.now;
+	explosion.spawnTime = GameState.gameTime;
 	explosion.lifeTime = 5000;
 	explosion.solid = true;
 	explosion.preserveAfterHit = true;
@@ -122,7 +173,7 @@ ProjectileController.prototype.Bolas = function(e) {
 
 	bolas.projType = 'bolas';
 	bolas.owningEnemy = e;
-	bolas.spawnTime = game.time.now;
+	bolas.spawnTime = GameState.gameTime;
 	bolas.lifeTime = 3000;
 	bolas.solid = true;
 	bolas.attached = false;
@@ -131,6 +182,61 @@ ProjectileController.prototype.Bolas = function(e) {
 	events.publish('play_sound', {name: 'SW8T_bolas_fly', restart: false});
 
 	this.projectiles.add(bolas);
+};
+
+ProjectileController.prototype.Detonator = function(e) {
+	var xPos = e.body.center.x;
+	var yPos = e.body.center.y - 25;
+
+	if(e.direction === 'left') {
+		xPos -= 50;
+	} else {
+		xPos += 50;
+	}
+
+	var detonator = game.add.sprite(xPos, yPos, 'EnemySprites');
+	game.physics.enable(detonator, Phaser.Physics.ARCADE);
+
+	detonator.body.setSize(10, 10);
+	detonator.anchor.setTo(0.5);
+
+	detonator.animations.add('idle', ['HWK9/Grenade0000', 'HWK9/Grenade0001', 'HWK9/Grenade0002', 'HWK9/Grenade0003'], 14, true, false);
+
+	detonator.play('idle');
+
+	//parabolic arc
+	var duration = 0.75;
+
+	// if(frauki.states.entangled) {
+	// 	duration = 1.0;
+	// }
+
+	var xTarget = frauki.body.center.x;
+	var yTarget = frauki.body.y + frauki.body.height;
+
+	detonator.body.velocity.x = (xTarget - detonator.body.center.x) / duration;
+	detonator.body.velocity.y = (yTarget + -0.5 * game.physics.arcade.gravity.y * duration * duration - detonator.body.center.y) / duration;
+
+	detonator.body.velocity.x += (frauki.body.velocity.x * frauki.movement.globalMoveMod);
+	
+	if(e.direction === 'left') {
+		if(detonator.body.velocity.x < -500) detonator.body.velocity.x = -500;
+		if(detonator.body.velocity.x > -20) detonator.body.velocity.x = -20;
+	} else {
+		if(detonator.body.velocity.x > 500) detonator.body.velocity.x = 500;
+		if(detonator.body.velocity.x < 20) detonator.body.velocity.x = 20;
+	}
+
+	detonator.body.bounce.set(0.0);
+
+	detonator.projType = 'detonator';
+	detonator.owningEnemy = e;
+	detonator.spawnTime = GameState.gameTime;
+	detonator.lifeTime = 5000;
+	detonator.solid = true;
+	detonator.preserveAfterHit = true;
+
+	this.projectiles.add(detonator);
 };
 
 ProjectileController.prototype.Tarball = function(e) {
@@ -153,7 +259,7 @@ ProjectileController.prototype.Tarball = function(e) {
 
 	tar.projType = 'tar';
 	tar.owningEnemy = e;
-	tar.spawnTime = game.time.now;
+	tar.spawnTime = GameState.gameTime;
 	tar.lifeTime = 3000;
 	tar.solid = true;
 
@@ -179,8 +285,8 @@ ProjectileController.prototype.Spore = function(e) {
 
 	spore.projType = 'spore';
 	spore.owningEnemy = e;
-	spore.spawnTime = game.time.now;
-	spore.lifeTime = 5000;
+	spore.spawnTime = GameState.gameTime;
+	spore.lifeTime = 3000;
 	spore.solid = true;
 
 	this.projectiles.add(spore);
@@ -212,7 +318,7 @@ ProjectileController.prototype.LaserBolt = function(e, rot, flip) {
 
 	bolt.projType = 'bolt';
 	bolt.owningEnemy = e;
-	bolt.spawnTime = game.time.now;
+	bolt.spawnTime = GameState.gameTime;
 	bolt.lifeTime = 5000;
 	bolt.solid = true;
 
@@ -260,48 +366,8 @@ ProjectileController.prototype.FallingTile = function(sourceTile, visibleTile) {
 	tile.body.angularVelocity = game.rnd.between(-100, 100);
 
 	tile.projType = 'tile';
-	tile.spawnTime = game.time.now;
+	tile.spawnTime = GameState.gameTime;
 	tile.lifeTime = 3000;
 
 	this.projectiles.add(tile);
-};
-
-ProjectileController.prototype.Update = function() {
-
-	var childrenToRemove = [];
-
-	frauki.states.entangled = false;
-
-	this.projectiles.forEach(function(p) {
-
-		if(game.time.now - p.spawnTime > p.lifeTime && p.lifeTime !== 0) {
-			p.destroy();
-			childrenToRemove.push(p);
-
-			if(p.projType === 'bolas') {
-				events.publish('stop_sound', {name: 'SW8T_bolas_fly', restart: false});
-			}
-		} else if(p.solid) {
-			game.physics.arcade.collide(p, Frogland.GetCollisionLayer(), null, Collision.CollideProjectileWithWorld);
-		}
-
-		if(p.projType === 'bolas' && p.attached === true) {
-			p.x = frauki.body.center.x;
-			p.y = frauki.body.center.y + (Math.sin(game.time.now / 100) * 24) + 0;
-			frauki.states.entangled = true;
-			p.play('entangle');
-
-		} else if(p.projType === 'mortar' && !!p.body) {
-			p.rotation = Math.atan2(p.body.velocity.y, p.body.velocity.x);
-		}
-
-	});
-
-	childrenToRemove.forEach(function(e) {
-		e.destroy();
-	});
-};
-
-ProjectileController.prototype.DestroyAllProjectiles = function() {
-	this.projectiles.removeAll(true);
 };

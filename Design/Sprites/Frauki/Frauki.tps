@@ -4,9 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>4.5.0</string>
-        <key>fileName</key>
-        <string>D:/gamedev/Frauki/Design/Sprites/Frauki/Frauki.tps</string>
+        <string>5.5.0</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -128,22 +126,6 @@
                 <key>alignToGrid</key>
                 <uint>1</uint>
             </struct>
-        </struct>
-        <key>andEngine</key>
-        <struct type="AndEngine">
-            <key>minFilter</key>
-            <enum type="AndEngine::MinFilter">Linear</enum>
-            <key>packageName</key>
-            <string>Texture</string>
-            <key>wrap</key>
-            <struct type="AndEngineWrap">
-                <key>s</key>
-                <enum type="AndEngineWrap::Wrap">Clamp</enum>
-                <key>t</key>
-                <enum type="AndEngineWrap::Wrap">Clamp</enum>
-            </struct>
-            <key>magFilter</key>
-            <enum type="AndEngine::MagFilter">MagLinear</enum>
         </struct>
         <key>dataFileNames</key>
         <map type="GFileNameMap">
@@ -382,9 +364,6 @@
             <key type="filename">Frames/Baton40003.png</key>
             <key type="filename">Frames/Baton40004.png</key>
             <key type="filename">Frames/Baton40005.png</key>
-            <key type="filename">Frames/Block0000.png</key>
-            <key type="filename">Frames/Block0001.png</key>
-            <key type="filename">Frames/Block0002.png</key>
             <key type="filename">Frames/Crouch0000.png</key>
             <key type="filename">Frames/Crouch0001.png</key>
             <key type="filename">Frames/Crouch0002.png</key>
@@ -423,14 +402,9 @@
             <key type="filename">Frames/Jump0002.png</key>
             <key type="filename">Frames/Jump0003.png</key>
             <key type="filename">Frames/Jump0004.png</key>
-            <key type="filename">Frames/Kick0000.png</key>
-            <key type="filename">Frames/Kick0001.png</key>
             <key type="filename">Frames/Land0000.png</key>
             <key type="filename">Frames/Land0001.png</key>
             <key type="filename">Frames/Land0002.png</key>
-            <key type="filename">Frames/Lob0000.png</key>
-            <key type="filename">Frames/Lob0001.png</key>
-            <key type="filename">Frames/Lob0002.png</key>
             <key type="filename">Frames/Materialize0000.png</key>
             <key type="filename">Frames/Materialize0001.png</key>
             <key type="filename">Frames/Materialize0002.png</key>
@@ -443,6 +417,7 @@
             <key type="filename">Frames/Materialize0009.png</key>
             <key type="filename">Frames/Materialize0010.png</key>
             <key type="filename">Frames/Materialize0011.png</key>
+            <key type="filename">Frames/Materialize0012.png</key>
             <key type="filename">Frames/Peak0000.png</key>
             <key type="filename">Frames/Peak0001.png</key>
             <key type="filename">Frames/Roll0000.png</key>
@@ -470,6 +445,8 @@
             <key type="filename">Frames/Run0007.png</key>
             <key type="filename">Frames/Slide0000.png</key>
             <key type="filename">Frames/Stand0000.png</key>
+            <key type="filename">Frames/Teleport0000.png</key>
+            <key type="filename">Frames/Teleport0001.png</key>
             <key type="filename">Frames/Throw0000.png</key>
             <key type="filename">Frames/Throw0001.png</key>
             <key type="filename">Frames/Throw0002.png</key>
@@ -483,33 +460,14 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
                 <rect>50,50,100,100</rect>
                 <key>scale9Paddings</key>
                 <rect>50,50,100,100</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">Frames/Shield0000.png</key>
-            <key type="filename">Frames/Shield0001.png</key>
-            <key type="filename">Frames/Shield0002.png</key>
-            <key type="filename">Frames/Shield0003.png</key>
-            <key type="filename">Frames/Shield0004.png</key>
-            <key type="filename">Frames/Shield0005.png</key>
-            <key type="filename">Frames/Shield0006.png</key>
-            <key type="filename">Frames/Shield0007.png</key>
-            <key type="filename">Frames/Shield0008.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0,0</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>25,25,50,50</rect>
-                <key>scale9Paddings</key>
-                <rect>25,25,50,50</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

@@ -2,28 +2,65 @@ var GameData = {};
 
 var currentVer = 0.5;
 
-//When game data is requested, it is pulled from the data structure in memory. When
-//it is saved, it is put into the data structure, and then put into local storage.
-//So the only interaction with local storage is when the game loads, and when you
-//save something to it. It doesn't constantly read out of local storage
-GameData.data = {
+var defaultData = {
     version: currentVer,
     dirty: true,
+    new: true,
 
-    checkpoint: '0',
-    upgrades: ['Dive', 'Stab'],
+    activeCheckpoints: [],
+    upgrades: [],
     doors: [],
-    shards: ['Wit', 'Will', 'Luck', 'Power'],
-    health: 4,
+    shards: [],
+    health: 3,
     shield: 0,
     flags: {},
     vals: {
         goddess_message_queue: []
     },
-    debug_pos: { x: 0, y: 0 }
+    debug_pos: { x: 0, y: 0 },
+
+    settings: {
+        
+    }
 };
 
-GameData.nuggetCount = 0;
+var defaultSettings = {
+    sound: 8,
+    music: 8,
+    sfx: 8,
+};
+
+//When game data is requested, it is pulled from the data structure in memory. When
+//it is saved, it is put into the data structure, and then put into local storage.
+//So the only interaction with local storage is when the game loads, and when you
+//save something to it. It doesn't constantly read out of local storage
+GameData.data = Object.assign({}, defaultData);
+GameData.settings = Object.assign({}, defaultSettings);
+
+GameData.LoadSettingsFromStorage = function() {
+    var settings_string = localStorage.getItem('settings_data');
+
+    if(!settings_string || settings_string === '') return;
+    
+    var settings_data = JSON.parse(settings_string);
+
+    if(settings_data) {
+        this.settings = settings_data;
+    }
+};
+
+GameData.SaveSettingsToStorage = function() {
+    localStorage.setItem('settings_data', JSON.stringify(this.settings));
+};
+
+GameData.GetSetting = function(name) {
+    return GameData.settings[name];
+};
+
+GameData.SetSetting = function(name, val) {
+    GameData.settings[name] = val;
+    this.SaveSettingsToStorage();    
+};
 
 GameData.LoadDataFromStorage = function() {
     var save_string = localStorage.getItem('save_data');
@@ -41,8 +78,20 @@ GameData.LoadDataFromStorage = function() {
     }
 };
 
+GameData.SaveDataExists = function() {
+    return !this.data.new;
+};
+
 GameData.SaveDataToStorage = function() {
+    this.data.new = false;
+    this.data.dirty = false;
     localStorage.setItem('save_data', JSON.stringify(this.data));
+};
+
+GameData.ResetData = function() {
+    var newData = Object.assign({}, defaultData);
+    newData.settings = this.data.settings;
+    this.data = newData;
 };
 
 GameData.GetDebugPos = function() {
@@ -92,14 +141,32 @@ GameData.GetSetFlag = function(name) {
     }
 };
 
-GameData.GetCheckpoint = function() {
-    return this.data.checkpoint;
+GameData.AddActiveCheckpoint = function(c) {
+    if(!this.data.activeCheckpoints.includes(c)) {
+        this.data.activeCheckpoints.push(c);
+        this.SaveDataToStorage();
+    }
 };
 
-GameData.SetCheckpoint = function(c) {
-    if(this.data.checkpoint !== c) {
-        this.data.checkpoint = c;
-        this.SaveDataToStorage();
+GameData.IsCheckpointActive = function(c) {
+    return this.data.activeCheckpoints.includes(c);
+}
+
+GameData.GetNextActiveCheckpoint = function(curr) {
+    if(this.data.activeCheckpoints.length <= 0) {
+        return null;
+    }
+
+    var currIndex = this.data.activeCheckpoints.indexOf(curr);
+
+    if(currIndex < 0) {
+        return this.data.activeCheckpoints[0];
+    }
+    else if(currIndex === this.data.activeCheckpoints.length - 1) {
+        return this.data.activeCheckpoints[0];
+    }
+    else {
+        return this.data.activeCheckpoints[currIndex + 1];
     }
 };
 
@@ -174,66 +241,4 @@ GameData.AddShard = function(name) {
 
 GameData.HasShard = function(name) {
     return GameData.data.shards.indexOf(name) >= 0;
-};
-
-GameData.GetNuggCount = function() {
-    return this.nuggetCount;
-};
-
-GameData.AddNugg = function() {
-    this.nuggetCount++;
-    //this.SaveDataToStorage();
-
-    //save every 10th nugget
-    // if(this.data.nuggets % 10 === 0) {
-    //     this.SaveDataToStorage();
-    // }
-};
-
-GameData.RemoveNuggs = function(amt) {
-    amt = amt || 1;
-
-    this.nuggetCount -= Math.floor(amt);
-
-    if(this.nuggetCount < 0) this.nuggetCount = 0;
-}
-
-GameData.ResetNuggCount = function() {
-    this.nuggetCount = 0;
-    //this.SaveDataToStorage();
-};
-
-GameData.SaveNuggsToBank = function() {
-    this.data.nugg_bank += this.nuggetCount;
-    this.nuggetCount = 0;
-    this.SaveDataToStorage();
-
-};
-
-GameData.GetNuggBankCount = function() {
-    
-    return this.data.nugg_bank;
-};
-
-GameData.DepositNugg = function() {
-    if(this.nuggetCount > 0) {
-        this.nuggetCount--;
-        this.data.nugg_bank++;
-        this.SaveDataToStorage();
-    }
-};
-
-GameData.GetFlashCopy = function() {
-    return this.data.flash_copy;
-};
-
-GameData.SetFlashCopy = function() {
-    this.data.flash_copy = {};
-
-    this.data.flash_copy.x = frauki.x;
-    this.data.flash_copy.y = frauki.y;
-    this.data.flash_copy.layer = Frogland.currentLayer;
-
-    this.SaveDataToStorage();
-
 };

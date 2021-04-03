@@ -32,28 +32,24 @@ Enemy = function(game, x, y, name) {
     this.attackRect.owningEnemy = this;  
 
     this.UI = {};
-    this.UI.frame = game.add.image(0, 0, 'UI', 'EnemyHealth000' + (this.maxEnergy - 1), Frogland['objectGroup_' + this.owningLayer]);
+    this.UIGroup = game.add.group();
+    this.UIGroup.visible = false;
+    this.UI.frame = game.add.image(0, 0, 'UI', 'EnemyHealth000' + (this.maxEnergy - 1), this.UIGroup);
     this.UI.pips = [];
 
-    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0008'));
-    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0008'));
-    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0008'));
-    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0008'));
-    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0008'));
-    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0008'));
-    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0008'));
-    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0008'));
-    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0008'));
-    this.UI.pips.push(game.add.image(0, 0, 'UI', 'EnemyHealth0008'));
+    for(var i = 0; i < 8; i++) {
+        var pip = game.add.image(0, 0, 'UI', 'EnemyHealth0008', this.UIGroup);
+        this.UI.pips.push(pip);
+    }
 
     this.events.onDestroy.add(function(e) {
-        e.UI.frame.destroy();
-        e.UI.pips[0].destroy();
-        e.UI.pips[1].destroy();
-        e.UI.pips[2].destroy();
-        e.UI.pips[3].destroy();
-        e.UI.pips[4].destroy();
+        e.UIGroup.destroy();
     });
+
+    events.subscribe('hide_enemy_health', this.HideHealth);
+    events.subscribe('destroy_enemy', function(params) {
+        if(this.name === params.name) this.DestroyEnemy(this);
+    }, this);
 };
 
 Enemy.prototype = Object.create(Phaser.Sprite.prototype);
@@ -113,18 +109,17 @@ Enemy.prototype.update = function() {
 
         if(!!this.currentAttack && this.currentAttack.friendlyFire) {
             game.physics.arcade.collide(this.attackRect, objectController.enemyList, null, Collision.OverlapEnemyAttackWithEnemies);
-        
         }
     } 
 
-    if(this.maxEnergy > 1 && this.owningLayer === Frogland.currentLayer && !this.timers.TimerUp('health_view')) {
+    if(this.maxEnergy > 1 && !this.timers.TimerUp('health_view') && !GameState.restarting) {
         this.DrawHealth();
-    }
+    } 
 
-     if(!this.timers.TimerUp('after_damage_flicker') && this.timers.TimerUp('hurt_flicker')) {
+    if(!this.timers.TimerUp('after_damage_flicker') && this.timers.TimerUp('hurt_flicker')) {
         this.alpha = 0;
         game.time.events.add(15, function() { that.timers.SetTimer('hurt_flicker', 30); });
-    } else {
+    } else if(this !== goddess) {
         this.alpha = 1;
     }
 
@@ -210,7 +205,7 @@ Enemy.prototype.isAttacking = function() {
 };
 
 Enemy.prototype.CanAttack = function() {
-    if(this.timers.TimerUp('attack_wait') && Frogland.timers.TimerUp('global_attack_wait')) {
+    if(this.timers.TimerUp('attack_wait') && Frogland.timers.TimerUp('global_attack_wait') && !frauki.Grace() && inputController.allowInput) {
         return true;
     }
 
@@ -220,6 +215,7 @@ Enemy.prototype.CanAttack = function() {
 Enemy.prototype.SetAttackTimer = function(amt) {
     amt = amt || 0;
     this.timers.SetTimer('attack_wait', amt);
+    Frogland.timers.SetTimer('global_attack_wait', 800);
 };
 
 Enemy.prototype.Grace = function() {
@@ -331,13 +327,7 @@ Enemy.prototype.TakeHit = function(damage) {
 
         if(this.robotic) events.publish('play_sound', { name: 'robosplosion' });
 
-        events.publish('enemy_killed', { name: this.objectName, owningLayer: this.owningLayer, x: this.body.center.x, y: this.body.center.y });
-        
-        if(this.robotic && !GameData.GetFlag('goddess_robo_speech')) {
-            //goddess.AddMessage("I see you've met those terrible robots. They're the ones who locked me up in this nasty prison. They're intruders, and they do not belong here.");
-
-            GameData.SetFlag('goddess_robo_speech', true);
-        }
+        events.publish('enemy_killed', { name: this.objectName, x: this.body.center.x, y: this.body.center.y });
 
     } else {
         this.timers.SetTimer('after_damage_flicker', graceTime);
@@ -346,11 +336,12 @@ Enemy.prototype.TakeHit = function(damage) {
 
 Enemy.prototype.DrawHealth = function() {
 
-    if(this.name === 'Goddess') return;
+    if(this.objectName === 'Goddess') return;
     
     this.UI.frame.x = this.body.x;
     this.UI.frame.y = this.body.y - 20;
-    this.UI.frame.visible = true;
+
+    this.UIGroup.visible = true;
 
     for(var i = 0; i < this.maxEnergy; i++) {
         //if the count is less than the energy, represent it
@@ -365,15 +356,15 @@ Enemy.prototype.DrawHealth = function() {
 };
 
 Enemy.prototype.HideHealth = function() {
-    this.UI.frame.visible = false;
+    if(!this.UI) return;
 
-    for(var i = 0; i < this.UI.pips.length; i++) {
-        this.UI.pips[i].visible = false;
-    }
+    this.UIGroup.visible = false;
 };
 
 Enemy.prototype.collideWithPlayer = function(f) {
     if(this.objectName === 'Goddess') {
+        return false;
+    } else if(frauki.state === frauki.Rolling || frauki.state === frauki.Flipping || this.state === this.Escaping || this.state === this.Hurting) {
         return false;
     } else if(this.isAttacking() && this.GetCurrentDamage() > 0) {
         return false;
@@ -418,24 +409,15 @@ Enemy.prototype.DestroyEnemy = function(e) {
 
         effectsController.SprocketBurst(this.body.center);
 
-    } else {
-        effectsController.Explosion(this.body.center);
     }
 
-    effectsController.DiceObject(this.objectName, this.body.center.x, this.body.center.y, this.body.velocity.x, this.body.velocity.y, this.owningLayer);
+    effectsController.DiceObject(this.objectName, this.body.center.x, this.body.center.y, this.body.velocity.x, this.body.velocity.y);
 
     damage = this.maxEnergy;
 
-    effectsController.SpawnEnergyNuggets(this.body, frauki.body, 'neutral', this.maxEnergy); 
-
     events.publish('camera_shake', {magnitudeX: 8, magnitudeY: 2, duration: 350 });
 
-    this.UI.frame.destroy();
-    this.UI.pips[0].destroy();
-    this.UI.pips[1].destroy();
-    this.UI.pips[2].destroy();
-    this.UI.pips[3].destroy();
-    this.UI.pips[4].destroy();
+    if(this.UIGroup) this.UIGroup.destroy();
 
     this.destroy();
     e = null;

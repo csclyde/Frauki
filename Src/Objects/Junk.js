@@ -1,6 +1,6 @@
 Junk = function(game, x, y, name) {
     //instantiate the sprite
-    Phaser.Sprite.call(this, game, x, y, 'Junk', name + '0000');
+    Phaser.Sprite.call(this, game, x, y, 'Misc', name + '0000');
     this.spriteType = 'junk';
 
     this.anchor.setTo(0.5);
@@ -10,11 +10,11 @@ Junk = function(game, x, y, name) {
     this.body.collideWorldBounds = true;
     this.body.bounce.setTo(0.5);
     this.body.drag.setTo(200);
+    this.body.setSize(40, 40);
 
     this.objectName = 'Junk' + name;
 
     this.destroyed = false;
-
 
     this.initialX = this.body.x;
     this.initialY = this.body.y;
@@ -46,16 +46,10 @@ Junk.prototype.JunkHit = function(o) {
 
     this.body.velocity = vel;
 
-	var probTable = [0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3];
-
 	game.time.events.add(100, function() {
-
-	    effectsController.SpawnEnergyNuggets(this.body, frauki.body, 'neutral', probTable[Math.round(Math.random() * (probTable.length - 1))]);
-	    //effectsController.SpawnEnergyNuggets(this.body, frauki.body, 'positive', probTable[Math.round(Math.random() * (probTable.length - 1))]);
-
 	    effectsController.ClashStreak(this.body.center.x, this.body.center.y, game.rnd.between(1, 2));
         effectsController.Dust(this.body.center.x, this.body.center.y);
-	    effectsController.DiceObject(this.objectName, this.body.center.x, this.body.center.y, this.body.velocity.x, this.body.velocity.y, this.owningLayer);
+	    effectsController.DiceObject(this.objectName, this.body.center.x, this.body.center.y, this.body.velocity.x, this.body.velocity.y);
 	    events.publish('play_sound', {name: 'smash'});
 	    this.destroy();
 	}, this);

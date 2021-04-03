@@ -19,23 +19,32 @@
             var map;
             var frauki;
             var goddess;
+            var speeches = {};
         </script>
 
         <script type="text/javascript" src="Src/Plugins/phaser.min.js"></script>
         <script type="text/javascript" src="Src/Plugins/phaser-debug.js"></script>
-        <script type="text/javascript" src="Src/Plugins/player.js"></script>
-        <script type="text/javascript" src="Src/Plugins/ft2.js"></script>
         <script type="text/javascript" src="Src/Plugins/Shims.js"></script>
 
         <script type="text/javascript" src="Src/GameData.js"></script>
         <script type="text/javascript" src="Src/Data/FileMap.js"></script>
         <script type="text/javascript" src="Src/Data/FraukiDamageFrames.js"></script>
-        <script type="text/javascript" src="Src/Data/Speeches.js"></script>
+        <script type="text/javascript" src="Src/Data/SpeechesFrauki.js"></script>
+        <script type="text/javascript" src="Src/Data/SpeechesGoddess.js"></script>
         <script type="text/javascript" src="Src/Data/Effects.js"></script>
+        <script type="text/javascript" src="Src/Data/Menus.js"></script>
+        <script type="text/javascript" src="Src/Data/Credits.js"></script>
 
         <script type="text/javascript" src="Src/Controllers/EventRouter.js"></script>
         <script type="text/javascript" src="Src/Controllers/TimerUtil.js"></script>
         <script type="text/javascript" src="Src/Controllers/ScriptRunner.js"></script>
+            <script type="text/javascript" src="Src/Data/Scripts/Demos.js"></script>
+            <script type="text/javascript" src="Src/Data/Scripts/Goddess.js"></script>
+            <script type="text/javascript" src="Src/Data/Scripts/GoddessChats.js"></script>
+            <script type="text/javascript" src="Src/Data/Scripts/GoddessGameover.js"></script>
+            <script type="text/javascript" src="Src/Data/Scripts/NPC.js"></script>
+            <script type="text/javascript" src="Src/Data/Scripts/Gameplay.js"></script>
+            <script type="text/javascript" src="Src/Data/Scripts/Settings.js"></script>
 
 
         <script type="text/javascript" src="Src/Controllers/CameraController.js"></script>
@@ -50,13 +59,15 @@
         <script type="text/javascript" src="Src/Controllers/ObjectController.js"></script>
 
         <script type="text/javascript" src="Src/Controllers/TriggerController.js"></script>
-            <script type="text/javascript" src="Src/Triggers/Music.js"></script>
-            <script type="text/javascript" src="Src/Triggers/Effects.js"></script>
-            <script type="text/javascript" src="Src/Triggers/Actions.js"></script>
+            <script type="text/javascript" src="Src/Data/Triggers/Music.js"></script>
+            <script type="text/javascript" src="Src/Data/Triggers/Effects.js"></script>
+            <script type="text/javascript" src="Src/Data/Triggers/Actions.js"></script>
 
 
 
-        <script type="text/javascript" src="Src/LoadingState.js"></script>        
+        <script type="text/javascript" src="Src/BootState.js"></script>
+        <script type="text/javascript" src="Src/LoadingState.js"></script>
+        <script type="text/javascript" src="Src/SettingsState.js"></script>
         <script type="text/javascript" src="Src/GameState.js"></script>
 
         <script type="text/javascript" src="Src/Frogland.js"></script>
@@ -85,17 +96,16 @@
             <script type="text/javascript" src="Src/Objects/Enemies/SpikeDropper.js"></script>
             <script type="text/javascript" src="Src/Objects/Enemies/Haystax.js"></script>
             <script type="text/javascript" src="Src/Objects/Enemies/Crabby.js"></script>
-            <script type="text/javascript" src="Src/Objects/Enemies/Gnome.js"></script>
+            <script type="text/javascript" src="Src/Objects/Enemies/NPC.js"></script>
 
         <script type="text/javascript" src="Src/Objects/Door.js"></script>
         <script type="text/javascript" src="Src/Objects/Apple.js"></script>
-        <script type="text/javascript" src="Src/Objects/PowerUp.js"></script>
         <script type="text/javascript" src="Src/Objects/Orb.js"></script>
-        <script type="text/javascript" src="Src/Objects/EnergyNugg.js"></script>
         <script type="text/javascript" src="Src/Objects/Junk.js"></script>
         <script type="text/javascript" src="Src/Objects/Checkpoint.js"></script>
         <script type="text/javascript" src="Src/Objects/Shard.js"></script>
         <script type="text/javascript" src="Src/Objects/Upgrade.js"></script>
+        <script type="text/javascript" src="Src/Objects/GemSucker.js"></script>
 
         <script>
 
@@ -158,13 +168,15 @@
             var game = new Phaser.Game(pixel.width, pixel.height, Phaser.CANVAS, "game", LoadingState, false, false);
             var events = new EventRouter();
 
-            game.state.add('LoadingState', LoadingState, true);
+            game.state.add('BootState', BootState, true);
+            game.state.add('LoadingState', LoadingState, false);
+            game.state.add('SettingsState', SettingsState, false);
             game.state.add('GameState', GameState, false);
 
 
         </script>
     </head>
-    <body style="background-color: black">
+    <body style="background-color: black; overflow: hidden; margin: 0px;">
 
     </body>
 </html>

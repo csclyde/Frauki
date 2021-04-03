@@ -6,10 +6,6 @@ EnemyBehavior.SetProp = function(e, key, val) {
 };
 
 EnemyBehavior.WithinCameraRange = function(e, pad) {
-    if(e.owningLayer !== Frogland.currentLayer) {
-        return false;
-    }
-
     var padding = pad || -30;
 
     if(e.body.x > game.camera.x - padding &&
@@ -66,6 +62,15 @@ EnemyBehavior.RollDice = function(sides, thresh) {
         return false;
 };
 
+EnemyBehavior.FlipCoin = function() {
+    var roll = Math.random();
+
+    if(roll >= 0.5)
+        return true;
+    else
+        return false;
+};
+
 EnemyBehavior.Player = {};
 
 EnemyBehavior.Player.IsNear = function(e, radius) {
@@ -108,17 +113,17 @@ EnemyBehavior.Player.IsVisible = function(e) {
     }
 
     //determine how often the check should be redone
-    var refreshTime = 2000;
+    var refreshTime = 1000;
 
     if(this.Visibility[e.z].result === true) {
-        refreshTime = 10000;
+        refreshTime = 1000;
     } else {
         var dist = EnemyBehavior.Player.Distance(e);
 
         if(dist < 100) {
             refreshTime = 500;
         } else if(dist < 200) {
-            refreshTime = 1000;
+            refreshTime = 500;
         }
 
         if(EnemyBehavior.Player.MovingTowards(e)) {
@@ -128,17 +133,17 @@ EnemyBehavior.Player.IsVisible = function(e) {
     }
 
     //if the timestamp has expired, check for visibility
-    if(this.Visibility[e.z].timestamp + refreshTime < game.time.now) {
+    if(this.Visibility[e.z].timestamp + refreshTime < GameState.gameTime) {
         var ray = new Phaser.Line(frauki.body.center.x, frauki.body.center.y, e.body.center.x, e.body.center.y);
-        var collideTiles = Frogland.GetCollisionLayer().getRayCastTiles(ray, 4, true);
+        var collideTiles = Frogland.GetCollisionLayer().getRayCastTiles(ray, 20, true);
 
-        this.Visibility[e.z].timestamp = game.time.now;
+        this.Visibility[e.z].timestamp = GameState.gameTime;
 
         this.Visibility[e.z].result = true;
 
         var i = collideTiles.length;
         while(i--) {
-            if(collideTiles[i].index === 1) { 
+            if([1, 3, 4, 5, 7, 8, 9, 17, 18].includes(collideTiles[i].index)) { 
                 this.Visibility[e.z].result = false;
                 break;
             }
@@ -202,7 +207,7 @@ EnemyBehavior.Player.IsWallBetween = function(e) {
 
 EnemyBehavior.Player.IsBelow = function(e) {
     var margin = e.body.width / 2;
-    margin += 5;
+    margin += -10;
 
     if(e.body.center.y < frauki.body.y && 
        e.body.center.x > frauki.body.center.x - margin && 

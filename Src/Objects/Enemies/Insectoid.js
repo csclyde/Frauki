@@ -1,14 +1,14 @@
 Enemy.prototype.types['Insectoid'] =  function() {
 
-    this.body.setSize(50, 25, 0, 10);
-    this.anchor.setTo(0.5, 0.5);
+    this.body.setSize(50, 25, 0, 0);
+    this.anchor.setTo(0.5);
 
     this.animations.add('idle', ['Insectoid/Hop0000'], 10, true, false);
     this.animations.add('spin', ['Insectoid/Spin0000'], 10, true, false);
     this.animations.add('hop', ['Insectoid/Hop0000', 'Insectoid/Hop0001', 'Insectoid/Hop0002'], 10, false, false);
     this.animations.add('die', ['Insectoid/Die0000'], 10, false, false);
 
-    this.damage = 2;
+    this.damage = 1;
     this.energy = 2;
 
     this.body.maxVelocity.y = 500;
@@ -23,7 +23,9 @@ Enemy.prototype.types['Insectoid'] =  function() {
             this.body.drag.x = 600;
         }
 
-        if(this.animations.currentAnim.name === 'spin') {
+        if(this.animations.currentAnim.name === 'spin' && !GameState.restarting) {
+            events.publish('play_sound', {name: 'Insectoid_attack', restart: false});
+            
             if(this.direction === 'left') {
                 this.angle -= 20;
             } else {
@@ -54,7 +56,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
                         this.Hop();
                     } 
                     else {
-                        if(EnemyBehavior.RollDice(2, 1) || EnemyBehavior.Player.IsNear(this, 40)) {
+                        if(this.CanAttack() && (EnemyBehavior.RollDice(2, 1) || EnemyBehavior.Player.IsNear(this, 40))) {
                             this.Scuttle();
                         } else {
                             this.Hop();
@@ -95,6 +97,10 @@ Enemy.prototype.types['Insectoid'] =  function() {
         }
     };
 
+    this.Die = function() {
+        events.publish('stop_sound', {name: 'Insectoid_attack'});        
+    }
+
     ///////////////////////////////ACTIONS////////////////////////////////////
     this.Hop = function() {
 
@@ -118,7 +124,9 @@ Enemy.prototype.types['Insectoid'] =  function() {
         
         this.timers.SetTimer('attack', 500);
 
-        this.state = this.Dodging;
+        this.state = this.Escaping;
+
+        events.publish('play_sound', {name: 'RKN1d_jump', restart: true});
 
         if(frauki.body.onFloor()) {
             this.body.velocity.y = -300;
@@ -199,6 +207,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
 
             EnemyBehavior.FacePlayer(this);
             EnemyBehavior.JumpToPoint(this, frauki.body.center.x, frauki.body.y - 50); 
+            events.publish('play_sound', {name: 'RKN1d_jump', restart: true});
 
             if(this.body.velocity.y < -400) {
                 this.body.velocity.y = -400;
@@ -221,6 +230,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
         }
 
         if(this.body.onFloor()) {
+            events.publish('play_sound', {name: 'GUBr_land', restart: true});
             return true;
         }
 
@@ -274,7 +284,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
         return false;
     };
 
-    this.Dodging = function() {
+    this.Escaping = function() {
 
         if(!this.body.onFloor()) {
             this.PlayAnim('hop');

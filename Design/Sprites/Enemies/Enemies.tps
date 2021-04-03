@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>5.3.0</string>
+        <string>5.5.0</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -205,6 +205,8 @@
             <key type="filename">A3PZ/Walk0003.png</key>
             <key type="filename">A3PZ/Walk0004.png</key>
             <key type="filename">A3PZ/Walk0005.png</key>
+            <key type="filename">NPC/Goddess0000.png</key>
+            <key type="filename">NPC/Goddess0001.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -234,7 +236,6 @@
             <key type="filename">A3PZ/Hammer0012.png</key>
             <key type="filename">A3PZ/Hammer0013.png</key>
             <key type="filename">A3PZ/Hammer0014.png</key>
-            <key type="filename">A3PZ/Hammer0015.png</key>
             <key type="filename">A3PZ/Hit0000.png</key>
             <key type="filename">A3PZ/Hit0001.png</key>
             <key type="filename">A3PZ/Idle0000.png</key>
@@ -269,46 +270,39 @@
             <key type="filename">H0P8/Attack0003.png</key>
             <key type="filename">H0P8/Attack0004.png</key>
             <key type="filename">H0P8/Attack0005.png</key>
-            <key type="filename">H0P8/Attack0006.png</key>
             <key type="filename">H0P8/Hurt0000.png</key>
-            <key type="filename">H0P8/Hurt0001.png</key>
-            <key type="filename">H0P8/Hurt0002.png</key>
-            <key type="filename">H0P8/Hurt0003.png</key>
             <key type="filename">H0P8/Idle0000.png</key>
             <key type="filename">H0P8/Idle0001.png</key>
             <key type="filename">H0P8/Idle0002.png</key>
             <key type="filename">H0P8/Idle0003.png</key>
+            <key type="filename">H0P8/Shield0000.png</key>
+            <key type="filename">H0P8/Shield0001.png</key>
+            <key type="filename">H0P8/Shield0002.png</key>
+            <key type="filename">H0P8/Shield0003.png</key>
+            <key type="filename">H0P8/Shield0004.png</key>
+            <key type="filename">H0P8/Shield0005.png</key>
+            <key type="filename">H0P8/Shield0006.png</key>
             <key type="filename">HWK9/AttackDash0000.png</key>
             <key type="filename">HWK9/AttackDash0001.png</key>
             <key type="filename">HWK9/AttackDash0002.png</key>
             <key type="filename">HWK9/AttackDash0003.png</key>
             <key type="filename">HWK9/AttackDash0004.png</key>
+            <key type="filename">HWK9/AttackDash0005.png</key>
             <key type="filename">HWK9/AttackWallHang0000.png</key>
             <key type="filename">HWK9/AttackWallHang0001.png</key>
             <key type="filename">HWK9/AttackWallHang0002.png</key>
             <key type="filename">HWK9/AttackWallHang0003.png</key>
             <key type="filename">HWK9/AttackWallHang0004.png</key>
-            <key type="filename">HWK9/AttackWallHang0005.png</key>
-            <key type="filename">HWK9/AttackWallHang0006.png</key>
-            <key type="filename">HWK9/EvadeJetPackSide0000.png</key>
-            <key type="filename">HWK9/EvadeJetPackSide0001.png</key>
-            <key type="filename">HWK9/EvadeJetPackSide0002.png</key>
-            <key type="filename">HWK9/EvadeJetPackSide0003.png</key>
-            <key type="filename">HWK9/EvadeJetPackSide0004.png</key>
-            <key type="filename">HWK9/EvadeJetPackSide0005.png</key>
-            <key type="filename">HWK9/EvadeJetPackSide0006.png</key>
-            <key type="filename">HWK9/EvadeJetPackSide0007.png</key>
-            <key type="filename">HWK9/EvadeJetPackSide0008.png</key>
-            <key type="filename">HWK9/EvadeJetPackUp0000.png</key>
-            <key type="filename">HWK9/EvadeJetPackUp0001.png</key>
-            <key type="filename">HWK9/EvadeJetPackUp0002.png</key>
-            <key type="filename">HWK9/IdleWallHang0000.png</key>
-            <key type="filename">HWK9/IdleWallHang0001.png</key>
-            <key type="filename">HWK9/IdleWallHang0002.png</key>
-            <key type="filename">HWK9/IdleWallHang0003.png</key>
-            <key type="filename">HWK9/IdleWallHang0004.png</key>
-            <key type="filename">HWK9/IdleWallHang0005.png</key>
-            <key type="filename">HWK9/IdleWallHang0006.png</key>
+            <key type="filename">HWK9/Fall0000.png</key>
+            <key type="filename">HWK9/Grenade0000.png</key>
+            <key type="filename">HWK9/Grenade0001.png</key>
+            <key type="filename">HWK9/Grenade0002.png</key>
+            <key type="filename">HWK9/Grenade0003.png</key>
+            <key type="filename">HWK9/Hurt0000.png</key>
+            <key type="filename">HWK9/Hurt0001.png</key>
+            <key type="filename">HWK9/JetpackSide0000.png</key>
+            <key type="filename">HWK9/JetpackSide0001.png</key>
+            <key type="filename">HWK9/JetpackUp0000.png</key>
             <key type="filename">Insectoid/Die0000.png</key>
             <key type="filename">Insectoid/Spin0000.png</key>
             <key type="filename">KR32/Hit0000.png</key>
@@ -322,7 +316,39 @@
             <key type="filename">KR32/Jump0007.png</key>
             <key type="filename">KR32/Stand0001.png</key>
             <key type="filename">KR32/Stand0002.png</key>
-            <key type="filename">SW8T/Mortar0008.png</key>
+            <key type="filename">NPC/Robos0000.png</key>
+            <key type="filename">NPC/Robos0001.png</key>
+            <key type="filename">NPC/Robos0002.png</key>
+            <key type="filename">NPC/Robos0003.png</key>
+            <key type="filename">NPC/Robos0004.png</key>
+            <key type="filename">NPC/Robos0005.png</key>
+            <key type="filename">NPC/Robos0006.png</key>
+            <key type="filename">NPC/fishing0001.png</key>
+            <key type="filename">NPC/fishing0002.png</key>
+            <key type="filename">NPC/fishing0003.png</key>
+            <key type="filename">NPC/fishing0004.png</key>
+            <key type="filename">NPC/fishing0005.png</key>
+            <key type="filename">NPC/fishing0006.png</key>
+            <key type="filename">NPC/fishing0007.png</key>
+            <key type="filename">NPC/fishing0008.png</key>
+            <key type="filename">NPC/fishing0009.png</key>
+            <key type="filename">NPC/fishing0010.png</key>
+            <key type="filename">NPC/fishing0011.png</key>
+            <key type="filename">NPC/fishing0012.png</key>
+            <key type="filename">NPC/fishing0013.png</key>
+            <key type="filename">NPC/fishing0014.png</key>
+            <key type="filename">NPC/garden0000.png</key>
+            <key type="filename">NPC/garden0001.png</key>
+            <key type="filename">NPC/garden0002.png</key>
+            <key type="filename">NPC/garden0003.png</key>
+            <key type="filename">NPC/garden0004.png</key>
+            <key type="filename">NPC/garden0005.png</key>
+            <key type="filename">NPC/garden0006.png</key>
+            <key type="filename">NPC/garden0007.png</key>
+            <key type="filename">NPC/garden0008.png</key>
+            <key type="filename">NPC/garden0009.png</key>
+            <key type="filename">NPC/garden0010.png</key>
+            <key type="filename">NPC/garden0011.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -361,76 +387,6 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">Gnome/cooking0000.png</key>
-            <key type="filename">Gnome/cooking0001.png</key>
-            <key type="filename">Gnome/cooking0002.png</key>
-            <key type="filename">Gnome/cooking0003.png</key>
-            <key type="filename">Gnome/cooking0004.png</key>
-            <key type="filename">Gnome/cooking0005.png</key>
-            <key type="filename">Gnome/cooking0006.png</key>
-            <key type="filename">Gnome/cooking0007.png</key>
-            <key type="filename">Gnome/cooking0008.png</key>
-            <key type="filename">Gnome/fishing0000.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>11,8,21,16</rect>
-                <key>scale9Paddings</key>
-                <rect>11,8,21,16</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">Gnome/cool0000.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>5,10,11,20</rect>
-                <key>scale9Paddings</key>
-                <rect>5,10,11,20</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">Gnome/gossip0000.png</key>
-            <key type="filename">Gnome/gossip0001.png</key>
-            <key type="filename">Gnome/windy0000.png</key>
-            <key type="filename">Gnome/windy0001.png</key>
-            <key type="filename">Gnome/windy0002.png</key>
-            <key type="filename">Gnome/windy0003.png</key>
-            <key type="filename">Gnome/windy0004.png</key>
-            <key type="filename">Gnome/windy0005.png</key>
-            <key type="filename">Gnome/windy0006.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>8,11,16,21</rect>
-                <key>scale9Paddings</key>
-                <rect>8,11,16,21</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">Gnome/hopper_rider0000.png</key>
-            <key type="filename">Gnome/hopper_rider0001.png</key>
-            <key type="filename">Gnome/hopper_rider0002.png</key>
-            <key type="filename">Gnome/hopper_rider0003.png</key>
-            <key type="filename">Gnome/hopper_rider0004.png</key>
-            <key type="filename">Gnome/hopper_rider0005.png</key>
-            <key type="filename">Gnome/hopper_rider0006.png</key>
-            <key type="filename">Gnome/hopper_rider0007.png</key>
             <key type="filename">Insectoid/Hop0000.png</key>
             <key type="filename">Insectoid/Hop0001.png</key>
             <key type="filename">Insectoid/Hop0002.png</key>
@@ -449,6 +405,14 @@
             <key type="filename">Misc/Sporoid0003.png</key>
             <key type="filename">Misc/Sporoid0004.png</key>
             <key type="filename">Misc/Sporoid0005.png</key>
+            <key type="filename">NPC/hopper_rider0000.png</key>
+            <key type="filename">NPC/hopper_rider0001.png</key>
+            <key type="filename">NPC/hopper_rider0002.png</key>
+            <key type="filename">NPC/hopper_rider0003.png</key>
+            <key type="filename">NPC/hopper_rider0004.png</key>
+            <key type="filename">NPC/hopper_rider0005.png</key>
+            <key type="filename">NPC/hopper_rider0006.png</key>
+            <key type="filename">NPC/hopper_rider0007.png</key>
             <key type="filename">SW8T/BolasEntangle0000.png</key>
             <key type="filename">SW8T/BolasEntangle0001.png</key>
             <key type="filename">SW8T/BolasEntangle0002.png</key>
@@ -458,10 +422,6 @@
             <key type="filename">SW8T/BolasShot0001.png</key>
             <key type="filename">SW8T/BolasShot0002.png</key>
             <key type="filename">SW8T/BolasShot0003.png</key>
-            <key type="filename">SW8T/Mortar0004.png</key>
-            <key type="filename">SW8T/Mortar0005.png</key>
-            <key type="filename">SW8T/Mortar0006.png</key>
-            <key type="filename">SW8T/Mortar0007.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -473,96 +433,6 @@
                 <rect>25,25,50,50</rect>
                 <key>scale9Paddings</key>
                 <rect>25,25,50,50</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">Gnome/love_gnomes0000.png</key>
-            <key type="filename">Gnome/love_gnomes0001.png</key>
-            <key type="filename">Gnome/love_gnomes0002.png</key>
-            <key type="filename">Gnome/love_gnomes0003.png</key>
-            <key type="filename">Gnome/love_gnomes0004.png</key>
-            <key type="filename">Gnome/love_gnomes0005.png</key>
-            <key type="filename">Gnome/love_gnomes0006.png</key>
-            <key type="filename">Gnome/love_gnomes0007.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>16,11,31,21</rect>
-                <key>scale9Paddings</key>
-                <rect>16,11,31,21</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">Gnome/pickaxe0000.png</key>
-            <key type="filename">Gnome/pickaxe0001.png</key>
-            <key type="filename">Gnome/pickaxe0002.png</key>
-            <key type="filename">Gnome/pickaxe0003.png</key>
-            <key type="filename">Gnome/pickaxe0004.png</key>
-            <key type="filename">Gnome/pickaxe0005.png</key>
-            <key type="filename">Gnome/pickaxe0006.png</key>
-            <key type="filename">Gnome/pickaxe0007.png</key>
-            <key type="filename">Gnome/pickaxe0008.png</key>
-            <key type="filename">Gnome/pickaxe0009.png</key>
-            <key type="filename">Gnome/pickaxe0010.png</key>
-            <key type="filename">Gnome/pickaxe0011.png</key>
-            <key type="filename">Gnome/pickaxe0012.png</key>
-            <key type="filename">Gnome/pickaxe0013.png</key>
-            <key type="filename">Gnome/pickaxe0014.png</key>
-            <key type="filename">Gnome/pickaxe0015.png</key>
-            <key type="filename">Gnome/pickaxe0016.png</key>
-            <key type="filename">Gnome/pickaxe0017.png</key>
-            <key type="filename">Gnome/pickaxe0018.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>15,12,30,23</rect>
-                <key>scale9Paddings</key>
-                <rect>15,12,30,23</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">Gnome/sleepy0000.png</key>
-            <key type="filename">Gnome/sleepy0001.png</key>
-            <key type="filename">Gnome/sleepy0002.png</key>
-            <key type="filename">Gnome/sleepy0003.png</key>
-            <key type="filename">Gnome/sleepy0004.png</key>
-            <key type="filename">Gnome/sleepy0005.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>12,9,24,18</rect>
-                <key>scale9Paddings</key>
-                <rect>12,9,24,18</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">Goddess/Goddess0000.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>36,41,72,82</rect>
-                <key>scale9Paddings</key>
-                <rect>36,41,72,82</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -590,7 +460,6 @@
             <key type="filename">QL0k/Shoot0006.png</key>
             <key type="filename">SW8T/Hurt0000.png</key>
             <key type="filename">SW8T/Hurt0001.png</key>
-            <key type="filename">SW8T/Hurt0002.png</key>
             <key type="filename">SW8T/Idle0000.png</key>
             <key type="filename">SW8T/Idle0001.png</key>
             <key type="filename">SW8T/Idle0002.png</key>
@@ -672,6 +541,10 @@
             <key type="filename">RKN1d/Jump0003.png</key>
             <key type="filename">RKN1d/Jump0004.png</key>
             <key type="filename">RKN1d/Jump0005.png</key>
+            <key type="filename">RKN1d/Walk0000.png</key>
+            <key type="filename">RKN1d/Walk0001.png</key>
+            <key type="filename">RKN1d/Walk0002.png</key>
+            <key type="filename">RKN1d/Walk0003.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -769,6 +642,140 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">NPC/cooking0000.png</key>
+            <key type="filename">NPC/cooking0001.png</key>
+            <key type="filename">NPC/cooking0002.png</key>
+            <key type="filename">NPC/cooking0003.png</key>
+            <key type="filename">NPC/cooking0004.png</key>
+            <key type="filename">NPC/fishing0000.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>11,8,21,16</rect>
+                <key>scale9Paddings</key>
+                <rect>11,8,21,16</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">NPC/cool0000.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>5,10,11,20</rect>
+                <key>scale9Paddings</key>
+                <rect>5,10,11,20</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">NPC/gossip0000.png</key>
+            <key type="filename">NPC/gossip0001.png</key>
+            <key type="filename">NPC/gossip0002.png</key>
+            <key type="filename">NPC/windy0000.png</key>
+            <key type="filename">NPC/windy0001.png</key>
+            <key type="filename">NPC/windy0002.png</key>
+            <key type="filename">NPC/windy0003.png</key>
+            <key type="filename">NPC/windy0004.png</key>
+            <key type="filename">NPC/windy0005.png</key>
+            <key type="filename">NPC/windy0006.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>8,11,16,21</rect>
+                <key>scale9Paddings</key>
+                <rect>8,11,16,21</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">NPC/love_gnomes0000.png</key>
+            <key type="filename">NPC/love_gnomes0001.png</key>
+            <key type="filename">NPC/love_gnomes0002.png</key>
+            <key type="filename">NPC/love_gnomes0003.png</key>
+            <key type="filename">NPC/love_gnomes0004.png</key>
+            <key type="filename">NPC/love_gnomes0005.png</key>
+            <key type="filename">NPC/love_gnomes0006.png</key>
+            <key type="filename">NPC/love_gnomes0007.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>16,11,31,21</rect>
+                <key>scale9Paddings</key>
+                <rect>16,11,31,21</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">NPC/pickaxe0000.png</key>
+            <key type="filename">NPC/pickaxe0001.png</key>
+            <key type="filename">NPC/pickaxe0002.png</key>
+            <key type="filename">NPC/pickaxe0003.png</key>
+            <key type="filename">NPC/pickaxe0004.png</key>
+            <key type="filename">NPC/pickaxe0005.png</key>
+            <key type="filename">NPC/pickaxe0006.png</key>
+            <key type="filename">NPC/pickaxe0007.png</key>
+            <key type="filename">NPC/pickaxe0008.png</key>
+            <key type="filename">NPC/pickaxe0009.png</key>
+            <key type="filename">NPC/pickaxe0010.png</key>
+            <key type="filename">NPC/pickaxe0011.png</key>
+            <key type="filename">NPC/pickaxe0012.png</key>
+            <key type="filename">NPC/pickaxe0013.png</key>
+            <key type="filename">NPC/pickaxe0014.png</key>
+            <key type="filename">NPC/pickaxe0015.png</key>
+            <key type="filename">NPC/pickaxe0016.png</key>
+            <key type="filename">NPC/pickaxe0017.png</key>
+            <key type="filename">NPC/pickaxe0018.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>15,12,30,23</rect>
+                <key>scale9Paddings</key>
+                <rect>15,12,30,23</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">NPC/sleepy0000.png</key>
+            <key type="filename">NPC/sleepy0001.png</key>
+            <key type="filename">NPC/sleepy0002.png</key>
+            <key type="filename">NPC/sleepy0003.png</key>
+            <key type="filename">NPC/sleepy0004.png</key>
+            <key type="filename">NPC/sleepy0005.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>12,9,23,18</rect>
+                <key>scale9Paddings</key>
+                <rect>12,9,23,18</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">SW8T/Block0000.png</key>
             <key type="filename">SW8T/Block0001.png</key>
             <key type="filename">SW8T/Block0002.png</key>
@@ -827,13 +834,12 @@
             <filename>A3PZ</filename>
             <filename>HWK9</filename>
             <filename>GUBr</filename>
-            <filename>Goddess</filename>
             <filename>H0P8</filename>
             <filename>RKN1d</filename>
             <filename>QL0k</filename>
             <filename>SW8T</filename>
             <filename>Misc</filename>
-            <filename>Gnome</filename>
+            <filename>NPC</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

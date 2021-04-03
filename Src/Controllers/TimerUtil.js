@@ -4,23 +4,24 @@ TimerUtil = function() {
 
 TimerUtil.prototype.SetTimer = function(name, duration, callback, callbackContext) {	
 	this.timers[name] = {};
-	this.timers[name].timestamp = game.time.now;
+	this.timers[name].timestamp = GameState.gameTime;
 	this.timers[name].duration = duration;
 }
 
 TimerUtil.prototype.TimerUp = function(name) {
-	if(!!this.timers[name]) {
-		return (this.timers[name].timestamp + this.timers[name].duration < game.time.now);
+	if(GameState.paused) {
+		return false;
+	} else if(!!this.timers[name]) {
+		return (this.TimeLeft(name) <= 0);
 	} else {
 		return true;
 	}
-
 };
 
 TimerUtil.prototype.TimeLeft = function(name) {
 	if(!!this.timers[name]) {
-		var diff = this.timers[name].timestamp + this.timers[name].duration - game.time.now;
-		return diff > 0 ? diff : 0;
+		var remainder = (this.timers[name].timestamp + this.timers[name].duration) - GameState.gameTime;
+		return remainder > 0 ? remainder : 0;
 	} else {
 		return 0;
 	}

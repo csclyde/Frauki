@@ -7,6 +7,8 @@ Thumbs.db
 frauki.cfg
 *.cfg
 Working/
+Concept/Promo/Clips/
 .vscode
 node_modules/
 Data/World/Frogland.json
+build/

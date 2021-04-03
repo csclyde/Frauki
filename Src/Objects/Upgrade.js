@@ -1,13 +1,13 @@
 Upgrade = function(game, x, y, name) {
     //instantiate the sprite
-    Phaser.Sprite.call(this, game, x, y, name);
+    Phaser.Sprite.call(this, game, x + 8, y, name);
     this.spriteType = 'Upgrade';
     this.objectName = 'Upgrade';
     
     //enable its physics body
     game.physics.enable(this, Phaser.Physics.ARCADE);
     
-    this.body.setSize(32, 64, 0, 0);
+    this.body.setSize(32, 32, 0, 0);
     this.anchor.setTo(0.5);
     this.body.bounce.y = 0;
     //this.body.gravity.y = game.physics.arcade.gravity.y * 2;
@@ -22,8 +22,6 @@ Upgrade = function(game, x, y, name) {
     this.animations.add('active2', ['Upgrade0001'], 10, true, false);
     this.animations.add('active1', ['Upgrade0002'], 10, true, false);
 
-    this.animations.add('eaten', ['Upgrade0000'], 10, false, false);
-
     this.health = 3;
 
     this.icon = game.add.image(20, 20, 'Misc', 'Upgrade0003');
@@ -31,8 +29,10 @@ Upgrade = function(game, x, y, name) {
     this.icon.animations.add('Shield', ['UpgradeShield0000', 'UpgradeShield0001', 'UpgradeShield0002', 'UpgradeShield0003'], 4, true, false);
     this.icon.animations.add('Baton', ['Upgrade0005'], 18, true, false);
     this.icon.animations.add('Damage', ['UpgradeDamage0000'], 18, true, false);
+    this.icon.animations.add('Stab', ['UpgradeStab0000', 'UpgradeStab0001'], 10, true, false);
+    this.icon.animations.add('Dive', ['UpgradeDamage0000'], 18, true, false);
     this.icon.iconSet = false;
-    this.icon.x = -25;
+    this.icon.x = -22;
     this.icon.y = -25;
 
     this.addChild(this.icon);
@@ -67,6 +67,10 @@ Upgrade.prototype.update = function() {
             this.icon.animations.play('Baton');
         } else if(this.upgrade === 'Damage') {
             this.icon.animations.play('Damage');
+        } else if(this.upgrade === 'Stab') {
+            this.icon.animations.play('Stab');
+        } else if(this.upgrade === 'Dive') {
+            this.icon.animations.play('Dive');
         }
 
         this.icon.iconSet = true;
@@ -90,19 +94,27 @@ function HitUpgrade(f, o) {
         if(o.health <= 0) {
             effectsController.Dust(o.body.center.x, o.body.center.y);
             effectsController.ScreenFlash();
-            effectsController.DiceObject(o.objectName, o.body.center.x, o.body.center.y, o.body.velocity.x, o.body.velocity.y, o.owningLayer);
+            effectsController.DiceObject(o.objectName, o.body.center.x, o.body.center.y, o.body.velocity.x, o.body.velocity.y);
             
             events.publish('stop_sound', {name: 'crystal_door'});
             events.publish('play_sound', {name: 'door_break'});
             events.publish('full_heal', {});
             
-            GameData.AddUpgrade(o.upgrade);
-
             if(o.upgrade.indexOf('Health') >= 0) {
-                ScriptRunner.run('demo_Health');
-            } else {
-                ScriptRunner.run('demo_' + o.upgrade);
+                if(GameData.data.health <= 3) {
+                    ScriptRunner.run('demo_Health');
+                }
+            } else if(o.upgrade.indexOf('Shield') >= 0) {
+                if(GameData.data.shield <= 0) {
+                    ScriptRunner.run('demo_Shield');
+                }
+            } else if(o.upgrade === 'Stab') {
+                ScriptRunner.run('demo_Stab');
+            } else if(o.upgrade === 'Dive') {
+                ScriptRunner.run('demo_Dive');
             }
+
+            GameData.AddUpgrade(o.upgrade);
 
             o.destroy();
         } else {
@@ -121,10 +133,10 @@ Upgrade.prototype.PlayAnim = function(name) {
 Upgrade.prototype.Active = function() {
     this.PlayAnim('active' + this.health);
 
-    this.body.velocity.y = Math.sin(game.time.now / 400) * 15;
+    this.body.velocity.y = Math.sin(GameState.gameTime / 400) * 15;
 
     if(this.shakeMagnitudeX > 0) {
-        this.body.velocity.x = Math.sin(game.time.now * 300) * this.shakeMagnitudeX;
+        this.body.velocity.x = Math.sin(GameState.gameTime * 300) * this.shakeMagnitudeX;
     } else {
         this.body.velocity.x = 0;
     }

@@ -1,12 +1,12 @@
 Checkpoint = function(game, x, y, name) {
     //instantiate the sprite
-    Phaser.Sprite.call(this, game, x, y, 'Misc');
+    Phaser.Sprite.call(this, game, x + 8, y - 8, 'Misc');
     this.spriteType = 'checkpoint';
 
     this.animations.add('active', ['Checkpoint0000', 'Checkpoint0001', 'Checkpoint0002', 'Checkpoint0003', 'Checkpoint0004'], 10, true, false);
     this.animations.add('inactive', ['Checkpoint0005'], 10, true, false);
 
-    this.anchor.setTo(0.5, 0.5);
+    this.anchor.setTo(0.5);
 
     //enable its physics body
     game.physics.enable(this, Phaser.Physics.ARCADE);
@@ -19,7 +19,6 @@ Checkpoint = function(game, x, y, name) {
 
     if(!Frogland.checkpoints) Frogland.checkpoints = [];
     Frogland.checkpoints.push(this);
-
 };
 
 Checkpoint.prototype = Object.create(Phaser.Sprite.prototype);
@@ -27,6 +26,8 @@ Checkpoint.prototype.constructor = Checkpoint;
 Checkpoint.prototype.types = {};
 
 Checkpoint.prototype.update = function() {
+
+    this.active = GameData.IsCheckpointActive(this.id);
 
     if(this.active) {
         this.animations.play('active');
@@ -37,13 +38,27 @@ Checkpoint.prototype.update = function() {
 
 Checkpoint.prototype.Activate = function(o) {
 
-    Frogland.checkpoints.forEach(function(check) {
-        check.active = false;
-    });
+    if(!GameData.IsCheckpointActive(this.id)) {
+        effectsController.ScreenFlash();
+        events.publish('play_sound', {name: 'crystal_door'}); 
+        
+        if(this.id === '0') {
+            ScriptRunner.run('demo_Checkpoint');
+        }
+    }
 
-    GameData.SetCheckpoint(this.id);
+    GameData.AddActiveCheckpoint(this.id);
 
-	this.active = true;
+    var nextId = GameData.GetNextActiveCheckpoint(this.id);
+    var nextCp = Frogland.checkpoints.find(function(c) { return c.id === nextId; });
+
+    if(nextCp && nextCp.id !== this.id) {
+        // frauki.x = nextCp.x;
+        // frauki.y = nextCp.y + 120; 
+        ScriptRunner.run('use_checkpoint', { dest: nextCp });
+    }
+
+
 };
 
 Checkpoint.prototype.collideWithPlayer = function(f) {

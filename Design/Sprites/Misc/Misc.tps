@@ -4,9 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>4.5.0</string>
-        <key>fileName</key>
-        <string>D:/gamedev/Frauki/Design/Sprites/Misc/Misc.tps</string>
+        <string>5.5.0</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -129,22 +127,6 @@
                 <uint>1</uint>
             </struct>
         </struct>
-        <key>andEngine</key>
-        <struct type="AndEngine">
-            <key>minFilter</key>
-            <enum type="AndEngine::MinFilter">Linear</enum>
-            <key>packageName</key>
-            <string>Texture</string>
-            <key>wrap</key>
-            <struct type="AndEngineWrap">
-                <key>s</key>
-                <enum type="AndEngineWrap::Wrap">Clamp</enum>
-                <key>t</key>
-                <enum type="AndEngineWrap::Wrap">Clamp</enum>
-            </struct>
-            <key>magFilter</key>
-            <enum type="AndEngine::MagFilter">MagLinear</enum>
-        </struct>
         <key>dataFileNames</key>
         <map type="GFileNameMap">
             <key>data</key>
@@ -199,66 +181,6 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">Frames/AngelKiss0000.png</key>
-            <key type="filename">Frames/AngelKiss0001.png</key>
-            <key type="filename">Frames/AngelKiss0002.png</key>
-            <key type="filename">Frames/AngelKiss0003.png</key>
-            <key type="filename">Frames/AngelKiss0004.png</key>
-            <key type="filename">Frames/AngelKiss0005.png</key>
-            <key type="filename">Frames/AngelKiss0006.png</key>
-            <key type="filename">Frames/Charge10000.png</key>
-            <key type="filename">Frames/Charge10001.png</key>
-            <key type="filename">Frames/Charge10002.png</key>
-            <key type="filename">Frames/Charge10003.png</key>
-            <key type="filename">Frames/Clash0000.png</key>
-            <key type="filename">Frames/Clash0001.png</key>
-            <key type="filename">Frames/Clash0002.png</key>
-            <key type="filename">Frames/Clash0003.png</key>
-            <key type="filename">Frames/DoorDust0000.png</key>
-            <key type="filename">Frames/DoorDust0001.png</key>
-            <key type="filename">Frames/DoorDust0002.png</key>
-            <key type="filename">Frames/DoorDust0003.png</key>
-            <key type="filename">Frames/DoorDust0004.png</key>
-            <key type="filename">Frames/Dust0000.png</key>
-            <key type="filename">Frames/Dust0001.png</key>
-            <key type="filename">Frames/Dust0002.png</key>
-            <key type="filename">Frames/Dust0003.png</key>
-            <key type="filename">Frames/Dust0004.png</key>
-            <key type="filename">Frames/Dust0005.png</key>
-            <key type="filename">Frames/Heart0000.png</key>
-            <key type="filename">Frames/Heart0001.png</key>
-            <key type="filename">Frames/JumpDust0000.png</key>
-            <key type="filename">Frames/JumpDust0001.png</key>
-            <key type="filename">Frames/JumpDust0002.png</key>
-            <key type="filename">Frames/JumpDust0003.png</key>
-            <key type="filename">Frames/JumpDust0004.png</key>
-            <key type="filename">Frames/JumpDust0005.png</key>
-            <key type="filename">Frames/JumpDust0006.png</key>
-            <key type="filename">Frames/Spirit0000.png</key>
-            <key type="filename">Frames/Spirit0001.png</key>
-            <key type="filename">Frames/Spirit0002.png</key>
-            <key type="filename">Frames/Spirit0003.png</key>
-            <key type="filename">Frames/Sprockets0000.png</key>
-            <key type="filename">Frames/Sprockets0001.png</key>
-            <key type="filename">Frames/Sprockets0002.png</key>
-            <key type="filename">Frames/Sprockets0003.png</key>
-            <key type="filename">Frames/Sprockets0004.png</key>
-            <key type="filename">Frames/Stars0000.png</key>
-            <key type="filename">Frames/Stars0001.png</key>
-            <key type="filename">Frames/Stars0002.png</key>
-            <key type="filename">Frames/Stars0003.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>25,25,50,50</rect>
-                <key>scale9Paddings</key>
-                <rect>25,25,50,50</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">Frames/Apple0000.png</key>
             <key type="filename">Frames/Apple0001.png</key>
             <key type="filename">Frames/Apple0002.png</key>
@@ -334,9 +256,13 @@
             <key type="filename">Frames/UpgradeShield0001.png</key>
             <key type="filename">Frames/UpgradeShield0002.png</key>
             <key type="filename">Frames/UpgradeShield0003.png</key>
+            <key type="filename">Frames/UpgradeStab0000.png</key>
+            <key type="filename">Frames/UpgradeStab0001.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -350,6 +276,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -359,25 +287,8 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">Frames/BigNugg0000.png</key>
-            <key type="filename">Frames/BigNugg0001.png</key>
-            <key type="filename">Frames/BigNugg0002.png</key>
-            <key type="filename">Frames/BigNugg0003.png</key>
-            <key type="filename">Frames/BigNugg0004.png</key>
-            <key type="filename">Frames/BigNugg0005.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>12,12,24,24</rect>
-                <key>scale9Paddings</key>
-                <rect>12,12,24,24</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">Frames/DoorApple0000.png</key>
+            <key type="filename">Frames/Barrel0000.png</key>
+            <key type="filename">Frames/Crate0000.png</key>
             <key type="filename">Frames/DoorDark0000.png</key>
             <key type="filename">Frames/DoorDark0001.png</key>
             <key type="filename">Frames/DoorDark0002.png</key>
@@ -422,6 +333,22 @@
             <key type="filename">Frames/DoorPrism0005.png</key>
             <key type="filename">Frames/DoorPrism0006.png</key>
             <key type="filename">Frames/DoorPrism0007.png</key>
+            <key type="filename">Frames/DoorPrismMetal0000.png</key>
+            <key type="filename">Frames/DoorPrismMetal0001.png</key>
+            <key type="filename">Frames/DoorPrismMetal0002.png</key>
+            <key type="filename">Frames/DoorPrismMetal0003.png</key>
+            <key type="filename">Frames/DoorPrismMetal0004.png</key>
+            <key type="filename">Frames/DoorPrismMetal0005.png</key>
+            <key type="filename">Frames/DoorPrismMetal0006.png</key>
+            <key type="filename">Frames/DoorPrismMetal0007.png</key>
+            <key type="filename">Frames/DoorPrismStone0000.png</key>
+            <key type="filename">Frames/DoorPrismStone0001.png</key>
+            <key type="filename">Frames/DoorPrismStone0002.png</key>
+            <key type="filename">Frames/DoorPrismStone0003.png</key>
+            <key type="filename">Frames/DoorPrismStone0004.png</key>
+            <key type="filename">Frames/DoorPrismStone0005.png</key>
+            <key type="filename">Frames/DoorPrismStone0006.png</key>
+            <key type="filename">Frames/DoorPrismStone0007.png</key>
             <key type="filename">Frames/DoorSeal0000.png</key>
             <key type="filename">Frames/DoorSeal0001.png</key>
             <key type="filename">Frames/DoorSeal0002.png</key>
@@ -446,15 +373,87 @@
             <key type="filename">Frames/DoorTenements0009.png</key>
             <key type="filename">Frames/DoorTenements0010.png</key>
             <key type="filename">Frames/DoorTenements0011.png</key>
+            <key type="filename">Frames/Egg0000.png</key>
+            <key type="filename">Frames/ExplosionAir0000.png</key>
+            <key type="filename">Frames/ExplosionAir0001.png</key>
+            <key type="filename">Frames/ExplosionAir0002.png</key>
+            <key type="filename">Frames/ExplosionAir0003.png</key>
+            <key type="filename">Frames/ExplosionAir0004.png</key>
+            <key type="filename">Frames/ExplosionFloor0000.png</key>
+            <key type="filename">Frames/ExplosionFloor0001.png</key>
+            <key type="filename">Frames/ExplosionFloor0002.png</key>
+            <key type="filename">Frames/ExplosionFloor0003.png</key>
+            <key type="filename">Frames/ExplosionFloor0004.png</key>
+            <key type="filename">Frames/GemSucker0000.png</key>
+            <key type="filename">Frames/GemSucker0001.png</key>
+            <key type="filename">Frames/GemSucker0002.png</key>
+            <key type="filename">Frames/Plant0000.png</key>
+            <key type="filename">Frames/Pot0000.png</key>
+            <key type="filename">Frames/Pot20000.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
                 <rect>50,50,100,100</rect>
                 <key>scale9Paddings</key>
                 <rect>50,50,100,100</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">Frames/Charge10000.png</key>
+            <key type="filename">Frames/Charge10001.png</key>
+            <key type="filename">Frames/Charge10002.png</key>
+            <key type="filename">Frames/Charge10003.png</key>
+            <key type="filename">Frames/Clash0000.png</key>
+            <key type="filename">Frames/Clash0001.png</key>
+            <key type="filename">Frames/Clash0002.png</key>
+            <key type="filename">Frames/Clash0003.png</key>
+            <key type="filename">Frames/DoorDust0000.png</key>
+            <key type="filename">Frames/DoorDust0001.png</key>
+            <key type="filename">Frames/DoorDust0002.png</key>
+            <key type="filename">Frames/DoorDust0003.png</key>
+            <key type="filename">Frames/DoorDust0004.png</key>
+            <key type="filename">Frames/Dust0000.png</key>
+            <key type="filename">Frames/Dust0001.png</key>
+            <key type="filename">Frames/Dust0002.png</key>
+            <key type="filename">Frames/Dust0003.png</key>
+            <key type="filename">Frames/Dust0004.png</key>
+            <key type="filename">Frames/Dust0005.png</key>
+            <key type="filename">Frames/JumpDust0000.png</key>
+            <key type="filename">Frames/JumpDust0001.png</key>
+            <key type="filename">Frames/JumpDust0002.png</key>
+            <key type="filename">Frames/JumpDust0003.png</key>
+            <key type="filename">Frames/JumpDust0004.png</key>
+            <key type="filename">Frames/JumpDust0005.png</key>
+            <key type="filename">Frames/JumpDust0006.png</key>
+            <key type="filename">Frames/Spirit0000.png</key>
+            <key type="filename">Frames/Spirit0001.png</key>
+            <key type="filename">Frames/Spirit0002.png</key>
+            <key type="filename">Frames/Spirit0003.png</key>
+            <key type="filename">Frames/Sprockets0000.png</key>
+            <key type="filename">Frames/Sprockets0001.png</key>
+            <key type="filename">Frames/Sprockets0002.png</key>
+            <key type="filename">Frames/Sprockets0003.png</key>
+            <key type="filename">Frames/Sprockets0004.png</key>
+            <key type="filename">Frames/Stars0000.png</key>
+            <key type="filename">Frames/Stars0001.png</key>
+            <key type="filename">Frames/Stars0002.png</key>
+            <key type="filename">Frames/Stars0003.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>25,25,50,50</rect>
+                <key>scale9Paddings</key>
+                <rect>25,25,50,50</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -465,6 +464,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -484,10 +485,11 @@
             <key type="filename">Frames/DripSplash0002.png</key>
             <key type="filename">Frames/DripSplash0003.png</key>
             <key type="filename">Frames/DripSplash0004.png</key>
-            <key type="filename">Frames/spore0000.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -518,6 +520,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -534,10 +538,11 @@
             <key type="filename">Frames/Explosion0004.png</key>
             <key type="filename">Frames/Explosion0005.png</key>
             <key type="filename">Frames/Explosion0006.png</key>
-            <key type="filename">Frames/Explosion0007.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -560,6 +565,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -576,30 +583,14 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
                 <rect>6,6,12,13</rect>
                 <key>scale9Paddings</key>
                 <rect>6,6,12,13</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">Frames/Runes0000.png</key>
-            <key type="filename">Frames/Runes0001.png</key>
-            <key type="filename">Frames/Runes0002.png</key>
-            <key type="filename">Frames/Runes0003.png</key>
-            <key type="filename">Frames/Runes0004.png</key>
-            <key type="filename">Frames/Runes0005.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>6,6,13,13</rect>
-                <key>scale9Paddings</key>
-                <rect>6,6,13,13</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -611,6 +602,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
@@ -640,6 +633,8 @@
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>

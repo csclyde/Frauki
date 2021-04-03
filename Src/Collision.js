@@ -115,7 +115,7 @@ Collision.CollideFraukiWithProjectile = function(f, p) {
         return;
     }
     
-    if(p.projType === 'spore' || p.projType === 'bolt' || p.projType === 'mortar' || (p.projType === 'mortarExplosion' && p.animations.currentFrame.name === 'SW8T/Mortar0004')) {
+    if(p.projType === 'spore' || p.projType === 'bolt' || p.projType === 'mortar' || p.projType === 'detonator' || (p.projType === 'mortarExplosion' && p.animations.currentFrame.name === 'SW8T/Mortar0004')) {
         if(p.owningEnemy.state !== p.owningEnemy.Dying) {
             if(frauki.Attacking() || frauki.states.shielded) {
                 Collision.OverlapAttackWithEnemyAttack(p, f);
@@ -125,10 +125,10 @@ Collision.CollideFraukiWithProjectile = function(f, p) {
             }
         }
 
-        if(p.projType === 'mortar') {
+        if(p.projType === 'mortar' || p.projType === 'detonator') {
             p.pendingDestroy = true;
             events.publish('camera_shake', {magnitudeX: 3, magnitudeY: 1, duration: 200});
-            projectileController.MortarExplosion(p.owningEnemy, p.x, p.y);
+            projectileController.MortarExplosion(p.owningEnemy, p.x, p.y, 'air');
         }
         
         if(!p.preserveAfterHit) {
@@ -180,6 +180,8 @@ Collision.OverlapEnemyAttackWithFrauki = function(e, f) {
         frauki.Stun(e);
     }
 
+    
+    
     if(e.GetCurrentDamage() > 0 && (!frauki.Grace() || e.GetCurrentPower()) && !e.Grace()) {
         frauki.Hit(e, e.GetCurrentDamage(), 1000);
         e.LandHit();
@@ -202,7 +204,6 @@ Collision.OverlapEnemyAttackWithEnemies = function(e, f) {
 
 Collision.OverlapAttackWithObject = function(f, o) {
     if(o.spriteType === 'enemy') {
-
         if(frauki.GetCurrentDamage() > 0) {
 
             if(!o.isAttacking()) {
@@ -214,29 +215,20 @@ Collision.OverlapAttackWithObject = function(f, o) {
             } else if(!EnemyBehavior.FacingAttack(o)) {
                 Collision.OverlapAttackWithEnemy(f, o);
             }
-            // } else if(o.isAttacking() && frauki.GetCurrentPriority() > o.GetCurrentPriority()) {
-            //     o.timers.SetTimer('grace', 0);
-            //     events.publish('play_sound', {name: 'clang'});
-            //     Collision.OverlapAttackWithEnemy(f, o);
-            // }
-            //they can be hit if theyre not attacking, or they are attacking
-            //but facing away from the player
-            // if(!o.Attacking() || !EnemyBehavior.FacingPlayer(o) || !o.robotic) {
-            // }
         }
 
     } else if(o.spriteType === 'junk') {
         o.JunkHit(o);
     } else if(o.spriteType === 'checkpoint') {
         o.Activate();
-    } else if(o.spriteType === 'TechnoRune') {
-        EatTechnoRune(f, o);
     } else if(o.spriteType === 'door') {
         o.OpenDoor(frauki);
     } else if(o.spriteType === 'orb') {
         SmashOrb(frauki, o);
     } else if(o.spriteType === 'Upgrade') {
         HitUpgrade(frauki, o);
+    } else if(o.spriteType === 'GemSucker') {
+        o.Hit()
     }
 };
 
@@ -259,6 +251,12 @@ Collision.OverlapAttackWithEnemy = function(f, e, halfDmg) {
 
     e.TakeHit(damage);
     frauki.LandHit(e, damage);
+
+    if(damage > 0) {
+        effectsController.ClashStreak(e.body.center.x, e.body.center.y, game.rnd.between(1, 2)); 
+        effectsController.SlowHit(300);
+        effectsController.SparkSplash(f, e);
+    }
 
     frauki.animations.paused = true;
 
@@ -284,6 +282,8 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
 
     frauki.LandHit(e, 0);
     e.LandHit();
+
+    effectsController.ClashStreak(e.body.center.x, e.body.center.y, game.rnd.between(1, 2));    
 
     if(e.GetCurrentDamage() === 0 && frauki.GetCurrentDamage() > 0) {
         e.OnBlock();
@@ -321,16 +321,8 @@ Collision.OverlapAttackWithEnemyAttack = function(e, f) {
 };
 
 
-Collision.OverlapObjectsWithSelf = function(o1, o2) {
-    if(o1.spriteType === 'enemy' && o2.spriteType === 'enemy' && o1.robotic === o2.robotic) {
-        return true;
-    } else if(o1.spriteType === 'junk' && o2.spriteType === 'junk') {
-        return false;
-    } else if(o1.spriteType === 'enemy' && o2.spriteType === 'door') {
-        return true;
-    } else {
-        return false;
-    }
+Collision.OverlapEnemiesWithSelf = function(o1, o2) {
+    return false;
 };
 
 Collision.OverlapLobWithEnemy = function(l, e) {
@@ -342,8 +334,6 @@ Collision.OverlapLobWithEnemy = function(l, e) {
         return false;
 
     if(!!e.currentAttack && e.currentAttack.priority >= 2) {
-        //effectsController.SparkSplash(l, e);
-
         var vel = new Phaser.Point(e.body.center.x - l.body.center.x, e.body.center.y - l.body.center.y);
         vel = vel.normalize();
 
@@ -494,10 +484,16 @@ Collision.CollideProjectileWithWorld = function(p, t) {
         effectsController.Explosion(p);
 		events.publish('play_sound', {name: 'explosion', restart: true});
         
-    } else if(p.projType === 'mortar') {
+    } else if(p.projType === 'mortar' || p.projType === 'detonator') {
         p.pendingDestroy = true;
         events.publish('camera_shake', {magnitudeX: 3, magnitudeY: 1, duration: 200});
-        projectileController.MortarExplosion(p.owningEnemy, p.x, p.y);
+
+        if(p.body.onFloor()) {
+            projectileController.MortarExplosion(p.owningEnemy, p.x, p.y, 'floor');
+        }
+        else {
+            projectileController.MortarExplosion(p.owningEnemy, p.x, p.y, 'air');
+        }
 
     } else if(p.projType === 'bolas' && !p.attached) {
         p.pendingDestroy = true;
@@ -513,5 +509,11 @@ Collision.CollideProjectileWithWorld = function(p, t) {
         return true;
     } else {
         return false;
+    }
+};
+
+Collision.CollideBatonWithWorld = function(b, t) {
+    if(t.index === 1) {
+        return true;
     }
 };

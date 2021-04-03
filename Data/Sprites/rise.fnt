@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<font>
+  <info face="ChevyRay - Rise" size="36" bold="0" italic="0" charset="" unicode="1" stretchH="100" smooth="0" aa="1" padding="0,0,0,0" spacing="1,1" outline="0"/>
+  <common lineHeight="36" base="33" scaleW="256" scaleH="256" pages="1" packed="0" alphaChnl="0" redChnl="3" greenChnl="3" blueChnl="3"/>
+  <pages>
+    <page id="0" file="rise_0.png" />
+  </pages>
+  <chars count="27">
+    <char id="32" x="240" y="34" width="3" height="1" xoffset="-1" yoffset="35" xadvance="12" page="0" chnl="15" />
+    <char id="65" x="89" y="0" width="23" height="33" xoffset="0" yoffset="0" xadvance="26" page="0" chnl="15" />
+    <char id="66" x="113" y="0" width="23" height="33" xoffset="0" yoffset="0" xadvance="26" page="0" chnl="15" />
+    <char id="67" x="137" y="0" width="23" height="33" xoffset="0" yoffset="0" xadvance="26" page="0" chnl="15" />
+    <char id="68" x="161" y="0" width="23" height="33" xoffset="0" yoffset="0" xadvance="26" page="0" chnl="15" />
+    <char id="69" x="233" y="0" width="20" height="33" xoffset="0" yoffset="0" xadvance="22" page="0" chnl="15" />
+    <char id="70" x="72" y="68" width="20" height="33" xoffset="0" yoffset="0" xadvance="22" page="0" chnl="15" />
+    <char id="71" x="185" y="0" width="23" height="33" xoffset="0" yoffset="0" xadvance="26" page="0" chnl="15" />
+    <char id="72" x="209" y="0" width="23" height="33" xoffset="0" yoffset="0" xadvance="26" page="0" chnl="15" />
+    <char id="73" x="93" y="68" width="20" height="33" xoffset="0" yoffset="0" xadvance="22" page="0" chnl="15" />
+    <char id="74" x="0" y="34" width="23" height="33" xoffset="0" yoffset="0" xadvance="26" page="0" chnl="15" />
+    <char id="75" x="24" y="34" width="23" height="33" xoffset="0" yoffset="0" xadvance="26" page="0" chnl="15" />
+    <char id="76" x="114" y="68" width="20" height="33" xoffset="0" yoffset="0" xadvance="22" page="0" chnl="15" />
+    <char id="77" x="0" y="0" width="30" height="33" xoffset="0" yoffset="0" xadvance="32" page="0" chnl="15" />
+    <char id="78" x="48" y="34" width="23" height="33" xoffset="0" yoffset="0" xadvance="26" page="0" chnl="15" />
+    <char id="79" x="72" y="34" width="23" height="33" xoffset="0" yoffset="0" xadvance="26" page="0" chnl="15" />
+    <char id="80" x="96" y="34" width="23" height="33" xoffset="0" yoffset="0" xadvance="26" page="0" chnl="15" />
+    <char id="81" x="120" y="34" width="23" height="33" xoffset="0" yoffset="0" xadvance="26" page="0" chnl="15" />
+    <char id="82" x="144" y="34" width="23" height="33" xoffset="0" yoffset="0" xadvance="26" page="0" chnl="15" />
+    <char id="83" x="168" y="34" width="23" height="33" xoffset="0" yoffset="0" xadvance="26" page="0" chnl="15" />
+    <char id="84" x="192" y="34" width="23" height="33" xoffset="0" yoffset="0" xadvance="26" page="0" chnl="15" />
+    <char id="85" x="216" y="34" width="23" height="33" xoffset="0" yoffset="0" xadvance="26" page="0" chnl="15" />
+    <char id="86" x="0" y="68" width="23" height="33" xoffset="0" yoffset="0" xadvance="26" page="0" chnl="15" />
+    <char id="87" x="31" y="0" width="30" height="33" xoffset="0" yoffset="0" xadvance="32" page="0" chnl="15" />
+    <char id="88" x="24" y="68" width="23" height="33" xoffset="0" yoffset="0" xadvance="26" page="0" chnl="15" />
+    <char id="89" x="48" y="68" width="23" height="33" xoffset="0" yoffset="0" xadvance="26" page="0" chnl="15" />
+    <char id="90" x="62" y="0" width="26" height="33" xoffset="0" yoffset="0" xadvance="29" page="0" chnl="15" />
+  </chars>
+  <kernings count="4">
+    <kerning first="84" second="74" amount="-3" />
+    <kerning first="76" second="86" amount="-3" />
+    <kerning first="76" second="84" amount="-7" />
+    <kerning first="71" second="84" amount="-3" />
+  </kernings>
+</font>
