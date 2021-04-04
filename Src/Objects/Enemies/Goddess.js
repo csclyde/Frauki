@@ -50,141 +50,221 @@ Enemy.prototype.types['Goddess'] =  function() {
 	};
 
 	this.GetGameoverScript = function() {
-		//INTRO AREA TRIGGERS
-		if(!GameData.GetFlag('intro_finished')) {
-			if(GameState.death.name === 'tower_troll' && !GameData.GetFlag('tower_troll1')) {
-				GameData.SetFlag('tower_troll1', true);
-				return 'tower_troll1';
+		if(!GameData.HasShard('Wit')) {
+			//INTRO AREA TRIGGERS
+			if(!GameData.GetFlag('intro_finished')) {
+				if(GameState.death.name === 'tower_troll' && !GameData.GetFlag('tower_troll1')) {
+					GameData.SetFlag('tower_troll1', true);
+					return 'tower_troll1';
+				}
+				else if(GameState.death.name === 'tower_troll' && !GameData.GetFlag('tower_troll2')) {
+					GameData.SetFlag('tower_troll2', true);
+					return 'tower_troll2';
+				}
+				else if(GameState.death.name === 'tower_troll' && !GameData.GetFlag('tower_troll3')) {
+					GameData.SetFlag('tower_troll3', true);
+					return 'tower_troll3';
+				}
+				else if(GameState.death.name === 'tower_troll' && !GameData.GetFlag('tower_troll_final')) {
+					GameData.SetFlag('tower_troll_final', true);
+					return 'tower_troll_final';
+				}
+				else if(!GameData.GetFlag('first_death')) {
+					GameData.SetFlag('first_death', true);
+					return 'goddess_surprised_death1';
+				}
+				else if(!GameData.GetFlag('second_death')) {
+					GameData.SetFlag('second_death', true);
+					return 'goddess_surprised_death2';
+				}
+				else if(!GameData.GetFlag('third_death')) {
+					GameData.SetFlag('third_death', true);
+					return 'goddess_surprised_death3';
+				}
+				else {
+					return 'goddess_surprised_death_final';
+				}
 			}
-			else if(GameState.death.name === 'tower_troll' && !GameData.GetFlag('tower_troll2')) {
-				GameData.SetFlag('tower_troll2', true);
-				return 'tower_troll2';
+			//FIRST RUINS AREA TRIGGERS
+			else if(!GameData.IsDoorOpen('statue_shortcut')) {
+				if(GameData.data.upgrades.includes('Health2')  && !GameData.GetFlag('first_health_upgrade')) {
+					GameData.SetFlag('first_health_upgrade', true);
+					return 'first_health_upgrade';
+				}
+				else if(GameState.death.type === 'Buzzar' && !GameData.GetFlag('first_buzzar')) {
+					GameData.SetFlag('first_buzzar', true);
+					return 'first_buzzar';
+				}
+				else if(GameState.death.name === 'first_gubr' && !GameData.GetFlag('first_gubr')) {
+					GameData.SetFlag('first_gubr', true);
+					return 'first_gubr';
+				}
+				else {
+					return 'goddess_console_area1';
+				}
 			}
-			else if(GameState.death.name === 'tower_troll' && !GameData.GetFlag('tower_troll3')) {
-				GameData.SetFlag('tower_troll3', true);
-				return 'tower_troll3';
+			//SECOND RUINS AREA
+			else if(!GameData.IsDoorOpen('drop_to_right')) {
+				
+				if(GameState.death.name === 'first_ql0k' && !GameData.GetFlag('first_ql0k')) {
+					GameData.SetFlag('first_ql0k', true);
+					return 'first_ql0k';
+				}
+				else if(GameState.death.name === 'second_ql0k' && !GameData.GetFlag('second_ql0k')) {
+					GameData.SetFlag('second_ql0k', true);
+					return 'second_ql0k';
+				}
+				else if(!GameData.GetFlag('statue_shortcut')) {
+					GameData.SetFlag('statue_shortcut', true);
+					return 'first_shortcut';
+				}
+				else {
+					return 'goddess_console_area2';
+				}
 			}
-			else if(GameState.death.name === 'tower_troll' && !GameData.GetFlag('tower_troll_final')) {
-				GameData.SetFlag('tower_troll_final', true);
-				return 'tower_troll_final';
-			}
-			else if(!GameData.GetFlag('first_death')) {
-				GameData.SetFlag('first_death', true);
-				return 'goddess_surprised_death1';
-			}
-			else if(!GameData.GetFlag('second_death')) {
-				GameData.SetFlag('second_death', true);
-				return 'goddess_surprised_death2';
-			}
-			else if(!GameData.GetFlag('third_death')) {
-				GameData.SetFlag('third_death', true);
-				return 'goddess_surprised_death3';
-			}
-			else {
-				return 'goddess_surprised_death_final';
-			}
-		}
-		//FIRST RUINS AREA TRIGGERS
-		else if(!GameData.IsDoorOpen('statue_shortcut')) {
-			if(GameData.data.upgrades.includes('Health2')  && !GameData.GetFlag('first_health_upgrade')) {
-				GameData.SetFlag('first_health_upgrade', true);
-				return 'first_health_upgrade';
-			}
-			else if(GameState.death.type === 'Buzzar' && !GameData.GetFlag('first_buzzar')) {
-				GameData.SetFlag('first_buzzar', true);
-				return 'first_buzzar';
-			}
-			else if(GameState.death.name === 'first_gubr' && !GameData.GetFlag('first_gubr')) {
-				GameData.SetFlag('first_gubr', true);
-				return 'first_gubr';
-			}
-			else {
-				return 'goddess_console_area1';
-			}
-		}
-		//SECOND RUINS AREA
-		else if(!GameData.IsDoorOpen('drop_to_right')) {
-			
-			if(GameState.death.name === 'first_ql0k' && !GameData.GetFlag('first_ql0k')) {
-				GameData.SetFlag('first_ql0k', true);
-				return 'first_ql0k';
-			}
-			else if(GameState.death.name === 'second_ql0k' && !GameData.GetFlag('second_ql0k')) {
-				GameData.SetFlag('second_ql0k', true);
-				return 'second_ql0k';
-			}
-			else if(!GameData.GetFlag('statue_shortcut')) {
-				GameData.SetFlag('statue_shortcut', true);
-				return 'first_shortcut';
-			}
-			else {
-				return 'goddess_console_area2';
-			}
-		}
-		//GARDENS BEFORE WIT GEM
-		else if(!GameData.HasShard('Wit')) {
-			
-			if(GameState.death.name === 'first_kr32' && !GameData.GetFlag('first_kr32')) {
-				GameData.SetFlag('first_kr32', true);
-				return 'first_kr32';
-			}
-			else if(GameState.death.name === 'wit_guard' && !GameData.GetFlag('wit_guard')) {
-				GameData.SetFlag('wit_guard', true);
-				return 'wit_guard';
-			}
-			else if(GameState.death.name === 'wit_guard' && !GameData.GetFlag('wit_guard2')) {
-				GameData.SetFlag('wit_guard2', true);
-				return 'wit_guard2';
-			}
-			else if(GameState.death.name === 'wit_guard' && !GameData.GetFlag('wit_guard3')) {
-				GameData.SetFlag('wit_guard3', true);
-				return 'wit_guard3';
-			}
-			else if(GameState.death.name === 'wit_guard') {
-				return 'wit_guard_final';
-			}
-			else if(!GameData.GetFlag('ship_frontdoor')) {
-				GameData.SetFlag('ship_frontdoor', true);
-				return 'second_shortcut';
-			}
-			else {
-				return 'goddess_console_area3';
-			}
-		}
-		//WIT GEM TO APARTMENTS SHORTCUT
-		else if(!GameData.IsDoorOpen('apartments_to_tower')) {
-			if(GameData.IsCheckPointActive('1') && !GameData.GetFlag('first_checkpoint')) {
-				GameData.SetFlag('first_checkpoint', true);
-				return 'first_checkpoint';
+			//GARDENS BEFORE WIT GEM
+			else {	
+				if(GameState.death.name === 'first_kr32' && !GameData.GetFlag('first_kr32')) {
+					GameData.SetFlag('first_kr32', true);
+					return 'first_kr32';
+				}
+				else if(GameState.death.name === 'wit_guard' && !GameData.GetFlag('wit_guard')) {
+					GameData.SetFlag('wit_guard', true);
+					return 'wit_guard';
+				}
+				else if(GameState.death.name === 'wit_guard' && !GameData.GetFlag('wit_guard2')) {
+					GameData.SetFlag('wit_guard2', true);
+					return 'wit_guard2';
+				}
+				else if(GameState.death.name === 'wit_guard' && !GameData.GetFlag('wit_guard3')) {
+					GameData.SetFlag('wit_guard3', true);
+					return 'wit_guard3';
+				}
+				else if(GameState.death.name === 'wit_guard') {
+					return 'wit_guard_final';
+				}
+				else if(!GameData.GetFlag('ship_frontdoor')) {
+					GameData.SetFlag('ship_frontdoor', true);
+					return 'second_shortcut';
+				}
+				else {
+					return 'goddess_console_area3';
+				}
 			}
 		}
-		//APARTMENTS SHORTCUT TO CHUTE SHORTCUT
-		else if(!GameData.IsDoorOpen('vent_to_arches')) {
-
-		}
-		//CHUTE SHORTCUT TO WILL GEM
 		else if(!GameData.HasShard('Will')) {
-			
+			//WIT GEM TO APARTMENTS SHORTCUT
+			if(!GameData.IsDoorOpen('apartments_to_tower')) {
+				if(GameData.IsCheckPointActive('1') && !GameData.GetFlag('first_checkpoint')) {
+					GameData.SetFlag('first_checkpoint', true);
+					return 'first_checkpoint';
+				}
+				else if(GameState.death.type === 'RKN1d' && !GameData.GetFlag('spider_death')) {
+					GameData.SetFlag('spider_death', true);
+					return 'spider_death';
+				}
+				else {
+					return 'goddess_console_area4';
+				}
+			}
+			//APARTMENTS SHORTCUT TO CHUTE SHORTCUT
+			else if(!GameData.IsDoorOpen('vent_to_arches')) {
+				if(GameState.death.name === 'first_hwk9' && !GameData.GetFlag('first_hwk9')) {
+					GameData.SetFlag('first_hwk9', true);
+					return 'first_hwk9';
+				}
+				else {
+					return 'goddess_console_area4';
+				}
+			}
+			//CHUTE SHORTCUT TO WILL GEM
+			else {
+				return 'goddess_console_area5';
+			}
 		}
-		//WILL GEM TO BASEMENT SHORTCUT
-		else if(!GameData.IsDoorOpen('deep_house_basement')) {
-			
-		}
-		//BASEMENT SHORTCUT TO PIPE SHORTCUT
-		else if(!GameData.IsDoorOpen('second_depths_cut')) {
-			
-		}
-		//PIPE SHORTCUT TO HARD SHORTCUT
-		else if(!GameData.IsDoorOpen('hard_depths_cut')) {
-			
-		}
-		//HARD SHORTCUT TO LUCK GEM
 		else if(!GameData.HasShard('Luck')) {
-			
+			if(!GameData.IsDoorOpen('deep_house_basement')) {
+				
+			}
+			//BASEMENT SHORTCUT TO PIPE SHORTCUT
+			else if(!GameData.IsDoorOpen('second_depths_cut')) {
+				
+			}
+			//PIPE SHORTCUT TO HARD SHORTCUT
+			else if(!GameData.IsDoorOpen('hard_depths_cut')) {
+				
+			}
+			//HARD SHORTCUT TO LUCK GEM
+			else {
+				
+			}
 		}
-		//FINAL STRETCH
-		else {
+		else if(!GameData.HasShard('Power')) {
 			return 'goddess_console';
+		}
+		else {
+			return 'goddess_console';			
+		}
+
+	};
+
+	this.GetChatScript = function() {
+		return 'goddess_chat_intro';
+		
+		if(!GameData.HasShard('Wit')) {
+			//INTRO AREA TRIGGERS
+			if(!GameData.GetFlag('intro_finished')) {
+				
+			}
+			//FIRST RUINS AREA TRIGGERS
+			else if(!GameData.IsDoorOpen('statue_shortcut')) {
+				
+			}
+			//SECOND RUINS AREA
+			else if(!GameData.IsDoorOpen('drop_to_right')) {
+				
+			}
+			//GARDENS BEFORE WIT GEM
+			else {	
+				return 'goddess_chat_intro';			
+			}
+		}
+		else if(!GameData.HasShard('Will')) {
+			//WIT GEM TO APARTMENTS SHORTCUT
+			if(!GameData.IsDoorOpen('apartments_to_tower')) {
+				
+			}
+			//APARTMENTS SHORTCUT TO CHUTE SHORTCUT
+			else if(!GameData.IsDoorOpen('vent_to_arches')) {
+				
+			}
+			//CHUTE SHORTCUT TO WILL GEM
+			else {
+				return 'goddess_chat_intro';
+			}
+		}
+		else if(!GameData.HasShard('Luck')) {
+			if(!GameData.IsDoorOpen('deep_house_basement')) {
+				
+			}
+			//BASEMENT SHORTCUT TO PIPE SHORTCUT
+			else if(!GameData.IsDoorOpen('second_depths_cut')) {
+				
+			}
+			//PIPE SHORTCUT TO HARD SHORTCUT
+			else if(!GameData.IsDoorOpen('hard_depths_cut')) {
+				
+			}
+			//HARD SHORTCUT TO LUCK GEM
+			else {
+				return 'goddess_chat_intro';			
+			}
+		}
+		else if(!GameData.HasShard('Power')) {
+			return 'goddess_chat_intro';
+		}
+		else {
+			return 'goddess_chat_intro';			
 		}
 	};
 

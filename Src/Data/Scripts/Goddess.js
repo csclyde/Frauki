@@ -51,7 +51,7 @@ ScriptRunner.scripts['goddess_chat'] = [
 	{ name: 'wait', props: { amount: 1500 } },
 
 	{ func: function(params) {
-		ScriptRunner.run('goddess_chat_intro');
+		ScriptRunner.run(goddess.GetChatScript());
 		frauki.SetDirection('right');
 	}}
 ];

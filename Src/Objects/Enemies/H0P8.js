@@ -28,7 +28,7 @@ Enemy.prototype.types['H0P8'] =  function() {
 			this.onFloor = false;
         }
         
-        if(this.body.onFloor()) {
+        if(this.body.onFloor() && this.state !== this.Escaping) {
             this.body.drag.x = 8000;
         } else {
             this.body.drag.x = 100;
@@ -45,6 +45,7 @@ Enemy.prototype.types['H0P8'] =  function() {
 
             } else if(frauki.state === frauki.AttackDiveCharge) {
                 this.Dodge();
+                console.log('YOINKS')
 
             } else if(frauki.InPreAttackAnim()) {
                 this.Shield();
@@ -92,30 +93,20 @@ Enemy.prototype.types['H0P8'] =  function() {
     this.Hop = function() {
         EnemyBehavior.FacePlayer(this);
 
-        this.timers.SetTimer('hop_wait', 600);
+        this.timers.SetTimer('hop_wait', 500 + game.rnd.between(50, 150));
         this.state = this.PreHopping;
     };
 
     this.Dodge = function() {
 
-        this.timers.SetTimer('dodge', 1000);
+        this.timers.SetTimer('dodge_wait', 800 + game.rnd.between(50, 300));
 
         this.state = this.Escaping;
 
-        if(frauki.body.onFloor()) {
-            this.body.velocity.y = -300;
+        this.body.velocity.x = game.rnd.between(400, 550) * EnemyBehavior.Player.DirMod(this);
 
-            if(frauki.body.center.x < this.body.center.x) {
-                this.body.velocity.x = 600;
-            } else {
-                this.body.velocity.x = -600;
-            }   
-        } else {
-            if(frauki.body.center.x < this.body.center.x) {
-                this.body.velocity.x = -600;
-            } else {
-                this.body.velocity.x = 600;
-            }   
+        if(frauki.body.onFloor()) {
+            this.body.velocity.y = -200  + game.rnd.between(50, 150);
         }
 
         EnemyBehavior.FaceForward(this);
@@ -125,8 +116,7 @@ Enemy.prototype.types['H0P8'] =  function() {
     this.Slash = function() {
         
         this.state = this.Slashing;
-        this.timers.SetTimer('attack_wait', 600);
-        this.timers.SetTimer('attack_wait', 800);
+        this.timers.SetTimer('attack_wait', 700  + game.rnd.between(50, 150));
         //EnemyBehavior.JumpToPoint(this, frauki.body.center.x, frauki.body.center.y, 0.1);
         EnemyBehavior.FacePlayer(this);
 		events.publish('play_sound', {name: 'H0P8_attack', restart: false });
@@ -177,7 +167,7 @@ Enemy.prototype.types['H0P8'] =  function() {
         this.PlayAnim('pre_hop');
 
         if(EnemyBehavior.Player.IsDangerous(this) && EnemyBehavior.Player.IsNear(this, 50)) {
-            this.Shield();
+            return true;
         }
 
         if(this.timers.TimerUp('hop_wait')) {
@@ -253,7 +243,7 @@ Enemy.prototype.types['H0P8'] =  function() {
             this.PlayAnim('pre_hop');
         }
 
-        if(this.timers.TimerUp('attack')) {
+        if(this.timers.TimerUp('dodge_wait')) {
             this.SetAttackTimer(0);
             return true;
         }

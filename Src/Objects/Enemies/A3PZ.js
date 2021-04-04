@@ -53,6 +53,9 @@ Enemy.prototype.types['A3PZ'] =  function() {
                         this.Punch();
                     }
                 }
+                else if(EnemyBehavior.Player.IsAbove(this) && frauki.state === frauki.AttackDiveCharge) {
+                    this.JumpAway();
+                } 
                 else if(EnemyBehavior.Player.IsNear(this, 100) && EnemyBehavior.Player.MovingAway(this) && this.timers.TimerUp('charge_wait')) {
                     this.Charge();
                 } 
@@ -154,6 +157,18 @@ Enemy.prototype.types['A3PZ'] =  function() {
         this.timers.SetTimer('slash_hold', 400);
     };
 
+    this.JumpAway = function() {
+        this.state = this.Jumping;
+        EnemyBehavior.FacePlayer(this);
+
+        events.publish('play_sound', {name: 'SW8T_jump', restart: true});
+        
+        this.body.velocity.y = -150;
+        this.body.velocity.x = game.rnd.between(300, 450) * EnemyBehavior.Player.DirMod(this);
+        
+        this.timers.SetTimer('dodge_wait', 1000);		
+    };
+
     ////////////////////////////////STATES////////////////////////////////////
     this.Idling = function() {
         if(this.body.velocity.x === 0 || this.body.onWall()) {
@@ -231,6 +246,20 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
         return false;
     };
+
+    this.Jumping = function() {
+        this.PlayAnim('idle');
+
+		if(this.body.onFloor()) {
+			events.publish('play_sound', {name: 'SW8T_land', restart: false});
+		}
+
+		if(this.body.onFloor()) {
+			return true;
+		} 
+
+		return false;
+	};
 
     this.Charging = function() {
         this.PlayAnim('charge');

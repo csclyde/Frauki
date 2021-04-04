@@ -67,26 +67,28 @@ Enemy.prototype.types['SW8T'] =  function() {
         			this.Block();
         		}
 
-        	} else if(EnemyBehavior.Player.IsNear(this, 160) && !EnemyBehavior.Player.IsNear(this, 80) && frauki.body.onFloor() && EnemyBehavior.Player.MovingAway(this) && this.timers.TimerUp('bolas_wait')) {
+			} 
+			else if(EnemyBehavior.Player.IsNear(this, 160) && !EnemyBehavior.Player.IsNear(this, 80) && frauki.body.onFloor() && EnemyBehavior.Player.MovingAway(this) && this.timers.TimerUp('bolas_wait')) {
         		this.Bolas();
 
         	//if the player is trying to down slam, get out
-        	} else if(EnemyBehavior.Player.IsAbove(this) && frauki.state === frauki.AttackDiveCharge) {
+			} 
+			else if(EnemyBehavior.Player.IsAbove(this) && frauki.state === frauki.AttackDiveCharge) {
         		this.JumpAway();
-
-     		} else if(frauki.states.entangled && !EnemyBehavior.Player.IsNear(this, 120)  && this.CanAttack()) {
+			} 
+			else if(frauki.states.entangled && !EnemyBehavior.Player.IsNear(this, 120)  && this.CanAttack()) {
      			this.Shoot();
-
-        	} else if(EnemyBehavior.Player.IsNear(this, 160) || EnemyBehavior.Player.IsDangerous(this)) {
+			} 
+			else if(EnemyBehavior.Player.IsNear(this, 160) || EnemyBehavior.Player.IsDangerous(this)) {
         		this.Block();
-
-        	} else if(!EnemyBehavior.Player.IsNear(this, 160) && this.CanAttack()) { 
+			} 
+			else if(!EnemyBehavior.Player.IsNear(this, 160) && this.CanAttack()) { 
         		this.Shoot();
-
-        	} else if(!EnemyBehavior.Player.IsNear(this, 160)) { 
+			} 
+			else if(!EnemyBehavior.Player.IsNear(this, 160)) { 
         		this.state = this.Walking;
-
-        	} else {
+			} 
+			else {
         		this.state = this.Idling;
         	}
         	

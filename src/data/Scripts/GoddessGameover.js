@@ -193,6 +193,45 @@ ScriptRunner.scripts['first_checkpoint'] = [
 	{ name: 'run_script', props: { name: 'exit_goddess' } },
 ];
 
+ScriptRunner.scripts['spider_death'] = [
+	{ name: 'show_text', props: { text: "Oh Frauki, yuck. Were you playing around with those nasty little spider?", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "Oh get out of the Cathedral, don't bring any eggs in here.", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "That's so gross Frauki. Shoo.", portrait: 'Goddess_Neutral' } },
+	{ name: 'run_script', props: { name: 'exit_goddess' } },
+];
+
+ScriptRunner.scripts['goddess_console_area4'] = [
+	{ name: 'show_text', props: { text: [
+		"The Tenements are so ugly. I'm a little embarrased you saw that, Frauki.",
+		"Be careful down there Frauki, the Tenemenets are not safe!",
+		"Have you been splashing around in that dirty water Frauki? You have a... bit of an aroma...",
+		"Don't slip and fall down there Frauki. It's really dangerous!",
+		"Keep going Frauki, I know you can get through the Tenements. There's a Prism Gem there for sure!",
+	], portrait: 'Goddess_Neutral' } },
+	{ name: 'run_script', props: { name: 'exit_goddess' } },
+];
+
+// TO CHUTE SHORTCUT //////////
+ScriptRunner.scripts['first_hwk9'] = [
+	{ name: 'show_text', props: { text: "The killer hawk. She is a tough one for sure.", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "I've seen her do terrible things. What a nasty piece of work.", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "Don't feel too bad Frauki, it's ok that you lost. I kind of expected it.", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "You'll get her eventually...", portrait: 'Goddess_Neutral' } },
+	{ name: 'run_script', props: { name: 'exit_goddess' } },
+];
+
+// CHUTE SHORTCUT TO WILL GEM //////////
+ScriptRunner.scripts['goddess_console_area5'] = [
+	{ name: 'show_text', props: { text: [
+		"You're almost out of the Tenements Frauk! The next Prism Shard is so close!",
+		"Be careful. Be wise. Be clever. Never give up. Ummm... and keep a smile on your face. Hmm what else...",
+		"Oh, what is it Frauki? Back here again? Ok...",
+		"What's taking so long...",
+	], portrait: 'Goddess_Neutral' } },
+	{ name: 'run_script', props: { name: 'exit_goddess' } },
+];
+
+
 // GENERIC MESSAGES //////////
 
 ScriptRunner.scripts['goddess_console'] = [
