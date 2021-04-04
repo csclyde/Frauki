@@ -122,7 +122,7 @@ Enemy.prototype.types['Goddess'] =  function() {
 			}
 		}
 		//GARDENS BEFORE WIT GEM
-		else if(!GameData.HasShard('wit')) {
+		else if(!GameData.HasShard('Wit')) {
 			
 			if(GameState.death.name === 'first_kr32' && !GameData.GetFlag('first_kr32')) {
 				GameData.SetFlag('first_kr32', true);
@@ -151,6 +151,38 @@ Enemy.prototype.types['Goddess'] =  function() {
 				return 'goddess_console_area3';
 			}
 		}
+		//WIT GEM TO APARTMENTS SHORTCUT
+		else if(!GameData.IsDoorOpen('apartments_to_tower')) {
+			if(GameData.IsCheckPointActive('1') && !GameData.GetFlag('first_checkpoint')) {
+				GameData.SetFlag('first_checkpoint', true);
+				return 'first_checkpoint';
+			}
+		}
+		//APARTMENTS SHORTCUT TO CHUTE SHORTCUT
+		else if(!GameData.IsDoorOpen('vent_to_arches')) {
+
+		}
+		//CHUTE SHORTCUT TO WILL GEM
+		else if(!GameData.HasShard('Will')) {
+			
+		}
+		//WILL GEM TO BASEMENT SHORTCUT
+		else if(!GameData.IsDoorOpen('deep_house_basement')) {
+			
+		}
+		//BASEMENT SHORTCUT TO PIPE SHORTCUT
+		else if(!GameData.IsDoorOpen('second_depths_cut')) {
+			
+		}
+		//PIPE SHORTCUT TO HARD SHORTCUT
+		else if(!GameData.IsDoorOpen('hard_depths_cut')) {
+			
+		}
+		//HARD SHORTCUT TO LUCK GEM
+		else if(!GameData.HasShard('Luck')) {
+			
+		}
+		//FINAL STRETCH
 		else {
 			return 'goddess_console';
 		}

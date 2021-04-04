@@ -184,6 +184,14 @@ ScriptRunner.scripts['goddess_console_area3'] = [
 	{ name: 'run_script', props: { name: 'exit_goddess' } },
 ];
 
+// TO APARTMENTS SHORTCUT //////////
+
+ScriptRunner.scripts['first_checkpoint'] = [
+	{ name: 'show_text', props: { text: "Oh, you found one of my little warp apples.", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "I was hoping those might help you out!", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "Feels pretty strange, huh? You get used to it, don't worry.", portrait: 'Goddess_Neutral' } },
+	{ name: 'run_script', props: { name: 'exit_goddess' } },
+];
 
 // GENERIC MESSAGES //////////
 
