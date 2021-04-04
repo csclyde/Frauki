@@ -298,11 +298,11 @@ Door.prototype.PerformOpen = function(save, silent) {
         switch(this.type) {
 
             case 'stone_seal':
-                events.publish('play_sound', {name: 'door_break', restart: true });
-            break;
-
             case 'metal_seal':
+            case 'tenements_seal':
+            case 'dark_seal':
                 events.publish('play_sound', {name: 'door_break', restart: true });
+                ScriptRunner.run('play_fanfare');
             break;
 
             case 'shard':

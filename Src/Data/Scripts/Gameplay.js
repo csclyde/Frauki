@@ -323,6 +323,14 @@ ScriptRunner.scripts['end_fight'] = [
     } },
 ];
 
+ScriptRunner.scripts['play_fanfare'] = [
+    { name: 'pause_all_music', props: {} },
+    { name: 'wait', props: { amount: 500 } },
+    { name: 'play_music', props: { name: 'FanfareShort' } },
+    { name: 'wait', props: { amount: 2500 } },  
+    { name: 'unpause_all_music', props: {} },    
+];
+
 ScriptRunner.scripts['use_checkpoint'] = [
     { name: 'disallow_input', props: {} },
     

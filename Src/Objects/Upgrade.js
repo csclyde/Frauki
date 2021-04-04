@@ -112,7 +112,9 @@ function HitUpgrade(f, o) {
                 ScriptRunner.run('demo_Stab');
             } else if(o.upgrade === 'Dive') {
                 ScriptRunner.run('demo_Dive');
+            } else {
             }
+            ScriptRunner.run('play_fanfare');
 
             GameData.AddUpgrade(o.upgrade);
 

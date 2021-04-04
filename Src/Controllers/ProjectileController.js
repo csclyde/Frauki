@@ -1,5 +1,5 @@
 ProjectileController = function() {
-	this.projectiles = game.add.group();
+	
 };
 
 ProjectileController.prototype.Update = function() {
@@ -40,6 +40,10 @@ ProjectileController.prototype.Update = function() {
 
 ProjectileController.prototype.Reset = function() {
 	this.DestroyAllProjectiles();
+};
+
+ProjectileController.prototype.CreateProjectileLayer = function() {
+	this.projectiles = game.add.group();
 };
 
 ProjectileController.prototype.DestroyAllProjectiles = function() {

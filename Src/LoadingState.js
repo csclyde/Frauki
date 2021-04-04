@@ -74,11 +74,11 @@ LoadingState.create = function() {
     objectController = new ObjectController();    
     backdropController = new BackdropController();
     effectsController = new EffectsController();
+    projectileController = new ProjectileController();
 
     Frogland.Create();
     
     weaponController = new WeaponController();
-    projectileController = new ProjectileController();
     speechController = new SpeechController();
     speechController.Create();
 

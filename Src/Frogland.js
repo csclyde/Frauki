@@ -45,6 +45,7 @@ Frogland.Create = function() {
     objectController.Create();    
     objectController.CreateObjectsLayer();
     effectsController.CreateMidgroundEffects();
+    projectileController.CreateProjectileLayer();
 
     this['midgroundLayer'] = this.map.createLayer('Midground');
     this['midgroundLayer'].resizeWorld();

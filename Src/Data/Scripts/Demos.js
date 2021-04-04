@@ -7,7 +7,7 @@ ScriptRunner.scripts['demo_Apple'] = [
 ScriptRunner.scripts['demo_ChapelDoor'] = [
 	{ name: 'disallow_input', props: {} },
 
-	{ name: 'wait', props: { amount: 1000 } },
+	{ name: 'wait', props: { amount: 3000 } },
 	{ name: 'run_script', props: { name: 'enter_goddess' } },
 	{ name: 'wait', props: { amount: 1500 } },
 
