@@ -14,7 +14,11 @@ Enemy.prototype.types['HWK9'] =  function() {
 
     this.energy = 4;
 	this.baseStunDuration = 500;
-    this.robotic = true;
+	this.robotic = true;
+
+	this.create = function() {
+        this.clingDir = this.properties.clingDir || 'left';
+    };
 
 	this.body.bounce.y = 0;
 	
@@ -25,6 +29,13 @@ Enemy.prototype.types['HWK9'] =  function() {
 	};
     
 	this.updateFunction = function() {
+		if(this.body.blocked.left) {
+			this.clingDir = 'left';
+		}
+		else if(this.body.blocked.right) {
+			this.clingDir = 'right';
+		}
+
 		if(this.state === this.Slashing) {
 			this.body.allowGravity = false;
 			this.body.drag.x = 0;
@@ -34,9 +45,10 @@ Enemy.prototype.types['HWK9'] =  function() {
 		}
 
 		if(this.state === this.Idling || this.state === this.ThrowingBomb) {
-            this.body.moves = false;
+			this.body.allowGravity = false;
+			this.body.velocity.y = 0;
         } else {
-            this.body.moves = true;
+			this.body.allowGravity = true;
         }
 	};
 
@@ -115,7 +127,19 @@ Enemy.prototype.types['HWK9'] =  function() {
 
 	////////////////////////////////STATES////////////////////////////////////
 	this.Idling = function() {
-		this.PlayAnim('idle');
+		if(this.body.blocked.left || this.body.blocked.right) {
+			this.PlayAnim('idle');
+		} else {
+			this.PlayAnim('evade')
+		}
+
+		if(this.clingDir === 'left') {
+			this.SetDirection('right');
+			this.body.velocity.x = -200;
+		} else {
+			this.SetDirection('left');
+			this.body.velocity.x = 200;
+		}
 
 		return true;
 	};
@@ -180,9 +204,9 @@ Enemy.prototype.types['HWK9'] =  function() {
 			this.SetAttackTimer(700);
 
 			if(this.direction === 'left') {
-				this.SetDirection('right');
+				this.clingDir = 'left';
 			} else {
-				this.SetDirection('left');
+				this.clingDir = 'right';
 			}
 
 			return true;
@@ -215,6 +239,15 @@ Enemy.prototype.types['HWK9'] =  function() {
 
 		this.body.acceleration.x = 0;
 		this.body.acceleration.y = 0;
+		this.body.velocity.y = 0;
+
+		if(this.clingDir === 'left') {
+			this.SetDirection('right');
+			this.body.velocity.x = -200;
+		} else {
+			this.SetDirection('left');
+			this.body.velocity.x = 200;
+		}
 
 		EnemyBehavior.FacePlayer(this);
 
