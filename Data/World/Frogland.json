@@ -9403,10 +9403,10 @@
  "orientation":"orthogonal",
  "properties":
     {
-     "debug":"false",
+     "debug":"true",
      "startLayer":"3",
-     "startX":"147",
-     "startY":"301"
+     "startX":"237",
+     "startY":"170"
     },
  "propertytypes":
     {
