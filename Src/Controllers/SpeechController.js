@@ -131,7 +131,7 @@ SpeechController.prototype.LoadSpeechZones = function() {
 	var that = this;
 
 	Frogland.map.objects['Triggers'].forEach(function(o) {
-        if(o.type === 'speech' || o.name === 'goddess') {
+        if(o.type === 'speech') {
         	var zone = new Phaser.Rectangle(o.x, o.y, o.width, o.height);
             zone.text = o.properties ? o.properties.text : 'Error';
             zone.speechName = o.name;
@@ -253,9 +253,7 @@ SpeechController.prototype.ShowSpeech = function() {
 	for(var i = 0; i < this.speechZones.length; i++) {
 		var zone = this.speechZones[i];
 		if(frauki.body.x + frauki.body.width > zone.x && frauki.body.x < zone.x + zone.width && frauki.body.y + frauki.body.height > zone.y && frauki.body.y < zone.y + zone.height) {
-			if(zone.speechName === 'goddess') {
-				ScriptRunner.run('goddess_chat');
-			} else if(zone.NPC === true) {
+			if(zone.NPC === true) {
 				ScriptRunner.run('enter_NPC', { name: zone.speechName });
 			} else {
 				this.Activate(Speeches[zone.speechName].text, Speeches[zone.speechName].portrait);

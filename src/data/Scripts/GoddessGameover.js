@@ -99,6 +99,7 @@ ScriptRunner.scripts['first_ql0k'] = [
 	{ name: 'show_text', props: { text: "Oopsie... looks like you got a little booboo from the turret.", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "It doesn't move, so you should have no problem cutting those things down.", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "So wipe those tears and try again!", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "I wasn't crying... I'm not a baby...", portrait: 'Displeased' } },
 	{ name: 'run_script', props: { name: 'exit_goddess' } },
 ];
 
@@ -132,6 +133,7 @@ ScriptRunner.scripts['first_kr32'] = [
 	{ name: 'show_text', props: { text: "It wasn't programmed for anything besides murder.", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "I mean, we all like killing a bit. But the KR32 takes it too far.", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "Go give it a taste of it's own programming.", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "You got it! He's going down!", portrait: 'Mad' } },
 	{ name: 'run_script', props: { name: 'exit_goddess' } },
 ];
 
@@ -195,6 +197,7 @@ ScriptRunner.scripts['first_checkpoint'] = [
 
 ScriptRunner.scripts['spider_death'] = [
 	{ name: 'show_text', props: { text: "Oh Frauki, yuck. Were you playing around with those nasty little spider?", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "They bit me all over... It really hurt...", portrait: 'Dazed' } },
 	{ name: 'show_text', props: { text: "Oh get out of the Cathedral, don't bring any eggs in here.", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "That's so gross Frauki. Shoo.", portrait: 'Goddess_Neutral' } },
 	{ name: 'run_script', props: { name: 'exit_goddess' } },
@@ -217,6 +220,7 @@ ScriptRunner.scripts['first_hwk9'] = [
 	{ name: 'show_text', props: { text: "I've seen her do terrible things. What a nasty piece of work.", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "Don't feel too bad Frauki, it's ok that you lost. I kind of expected it.", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "You'll get her eventually...", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "Do you really think so?", portrait: 'Enticed' } },
 	{ name: 'run_script', props: { name: 'exit_goddess' } },
 ];
 
@@ -231,6 +235,78 @@ ScriptRunner.scripts['goddess_console_area5'] = [
 	{ name: 'run_script', props: { name: 'exit_goddess' } },
 ];
 
+// DEPTHS CHECKPOINT TO BASEMENT SHORTCUT //////////
+ScriptRunner.scripts['first_h0p8'] = [
+	{ name: 'show_text', props: { text: "Those grasshopper-looking creeps really weird me out.", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "Nope. I don't like them. Yuck.", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "I'm just glad it's you and not me having to fight them.", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "They could tear my dress Frauki... and we don't want that, do we?", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "Yeah... I guess not.", portrait: 'Displeased' } },
+	{ name: 'run_script', props: { name: 'exit_goddess' } },
+];
+
+ScriptRunner.scripts['goddess_depths'] = [
+	{ name: 'show_text', props: { text: [
+		"Wow, you've gone so deep... it's kind of scary Frauki. I haven't been that deep for hundreds of years.",
+		"Is everything going ok down there Frauki?",
+		"I know it's a little bit... dank... down there. Sorry.",
+		"Did the mean little Alien Robots get you again? Oh Frauki...",
+		"You're so close Frauki. Get that next Prism Shard! I'll meet you there once you get it.",
+	], portrait: 'Goddess_Neutral' } },
+	{ name: 'run_script', props: { name: 'exit_goddess' } },
+];
+
+// BASEMENT SHORTCUT TO PIPE SHORTCUT //////////
+ScriptRunner.scripts['first_AZP3'] = [
+	{ name: 'show_text', props: { text: "You got punched in the face, Frauki.", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "Well, it looked really painful and humiliating.", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "Ha ha, yeah, it did.", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "Grrr...", portrait: 'Mad' } },
+	{ name: 'show_text', props: { text: "Aww, I'm sorry Frauki. It's ok. I'm sorry.", portrait: 'Goddess_Neutral' } },
+	{ name: 'run_script', props: { name: 'exit_goddess' } },
+];
+
+ScriptRunner.scripts['goddess_depths2'] = [
+	{ name: 'show_text', props: { text: [
+		"It's getting pretty wet down there, huh? All the water in Frogland has dripped down I guess.",
+		"Stay focused, Frauki. You're in the home stretch now. Soon I will have my Prism Gems. Won't that be great?",
+		"Oh I can't wait to have my gems back! All your suffering will have been worth it.",
+		"Ah ah, no crying. You're a tough killer, not a crybaby. Right?",
+	], portrait: 'Goddess_Neutral' } },
+	{ name: 'run_script', props: { name: 'exit_goddess' } },
+];
+
+// PIPE SHORTCUT TO LUCK GEM //////////
+ScriptRunner.scripts['first_sw8t'] = [
+	{ name: 'show_text', props: { text: "What even was that thing? I've never seen it before.", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "I guess he wasn't much of a friend, whatever he was.", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "Well, I'm cheering you on, but... yikes... how...", portrait: 'Goddess_Neutral' } },
+	{ name: 'run_script', props: { name: 'exit_goddess' } },
+];
+
+ScriptRunner.scripts['goddess_depths3'] = [
+	{ name: 'show_text', props: { text: [
+		"Honestly Frauki, I'm totally lost trying to watch you. I have no idea where you are down there. I'm glad you do though!",
+		"I'm honestly really impressed you know how to get around down there. I never would have guessed.",
+		"How are you doing little tadpole? Getting tired? It's hard dying over and over, isn't it.",
+		"I know how much you want to get my Prism Shards back to me Frauki. Thanks...",
+		"What a little trooper you are. Constantly dying and showing back up, then heading right back out.",
+		"The Prism Shard is close Frauki, I can taste it. I actually did taste it, once. Not very good. But it's so pretty.",
+	], portrait: 'Goddess_Neutral' } },
+	{ name: 'run_script', props: { name: 'exit_goddess' } },
+];
+
+// FINAL STRETCH //////////
+ScriptRunner.scripts['final_stetch'] = [
+	{ name: 'show_text', props: { text: [
+		"All that's left to do it get through the Alien Robot ship. I can't believe you're almost done!",
+		"Go show them what happens when they mess with me. Destroy them without mercy, you little spitfire!",
+		"Let's destroy every single Alien Robot! Are you with me?",
+		"You are my little angel of destruction. Go forth and kill! Ha ha ha.",
+		"This Alien Robot ship should be a piece of cake! Burn it to the ground!",
+	], portrait: 'Goddess_Neutral' } },
+	{ name: 'run_script', props: { name: 'exit_goddess' } },
+];
 
 // GENERIC MESSAGES //////////
 

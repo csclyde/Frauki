@@ -4,18 +4,12 @@ TriggerController.prototype.triggers['goddess'] = {
 		if(GameData.HasShard('Wit') && GameData.HasShard('Will') && GameData.HasShard('Luck') && GameData.HasShard('Power')) {
 			ScriptRunner.run('finish_game');
 		}
-
-		// if(GameData.GetFlag('ready_for_goddess_talk')) {
-		// 	ScriptRunner.run('goddess_chat');
-		// 	GameData.SetFlag('ready_for_goddess_talk', false);
-		// }
 	},
 
 	stay: function(params) {
 	},
 
 	exit: function(params) {
-		//GameData.SetFlag('ready_for_goddess_talk', true);
 	}
 };
 
@@ -51,15 +45,7 @@ TriggerController.prototype.triggers['region_text'] = {
 	},
 
 	exit: function(params, trigger) {
-		// if(!!params.left && frauki.body.center.x < trigger.x) {
-		// 	events.publish('display_region_text', { text: params.left });
-		// } else if(!!params.right && frauki.body.center.x > trigger.x) {
-		// 	events.publish('display_region_text', { text: params.right });
-		// } else if(!!params.down && frauki.body.center.y > trigger.y) {
-		// 	events.publish('display_region_text', { text: params.down });
-		// } else if(!!params.up && frauki.body.center.y < trigger.y) {
-		// 	events.publish('display_region_text', { text: params.up });
-		// }
+	
 	}
 };
 

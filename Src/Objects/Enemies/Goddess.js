@@ -184,23 +184,37 @@ Enemy.prototype.types['Goddess'] =  function() {
 		}
 		else if(!GameData.HasShard('Luck')) {
 			if(!GameData.IsDoorOpen('deep_house_basement')) {
-				
+				if(GameState.death.name === 'first_h0p8' && !GameData.GetFlag('first_h0p8')) {
+					GameData.SetFlag('first_h0p8', true);
+					return 'first_h0p8';
+				}
+				else {
+					return 'goddes_depths';
+				}
 			}
 			//BASEMENT SHORTCUT TO PIPE SHORTCUT
 			else if(!GameData.IsDoorOpen('second_depths_cut')) {
-				
+				if(GameState.death.name === 'first_AZP3' && !GameData.GetFlag('first_AZP3')) {
+					GameData.SetFlag('first_AZP3', true);
+					return 'first_AZP3';
+				}
+				else {
+					return 'goddes_depths2';
+				}
 			}
 			//PIPE SHORTCUT TO HARD SHORTCUT
-			else if(!GameData.IsDoorOpen('hard_depths_cut')) {
-				
-			}
-			//HARD SHORTCUT TO LUCK GEM
 			else {
-				
+				if(GameState.death.name === 'first_sw8t' && !GameData.GetFlag('first_sw8t')) {
+					GameData.SetFlag('first_sw8t', true);
+					return 'first_sw8t';
+				}
+				else {
+					return 'goddes_depths3';
+				}
 			}
 		}
 		else if(!GameData.HasShard('Power')) {
-			return 'goddess_console';
+			return 'final_stretch';
 		}
 		else {
 			return 'goddess_console';			
@@ -210,62 +224,6 @@ Enemy.prototype.types['Goddess'] =  function() {
 
 	this.GetChatScript = function() {
 		return 'goddess_chat_intro';
-		
-		if(!GameData.HasShard('Wit')) {
-			//INTRO AREA TRIGGERS
-			if(!GameData.GetFlag('intro_finished')) {
-				
-			}
-			//FIRST RUINS AREA TRIGGERS
-			else if(!GameData.IsDoorOpen('statue_shortcut')) {
-				
-			}
-			//SECOND RUINS AREA
-			else if(!GameData.IsDoorOpen('drop_to_right')) {
-				
-			}
-			//GARDENS BEFORE WIT GEM
-			else {	
-				return 'goddess_chat_intro';			
-			}
-		}
-		else if(!GameData.HasShard('Will')) {
-			//WIT GEM TO APARTMENTS SHORTCUT
-			if(!GameData.IsDoorOpen('apartments_to_tower')) {
-				
-			}
-			//APARTMENTS SHORTCUT TO CHUTE SHORTCUT
-			else if(!GameData.IsDoorOpen('vent_to_arches')) {
-				
-			}
-			//CHUTE SHORTCUT TO WILL GEM
-			else {
-				return 'goddess_chat_intro';
-			}
-		}
-		else if(!GameData.HasShard('Luck')) {
-			if(!GameData.IsDoorOpen('deep_house_basement')) {
-				
-			}
-			//BASEMENT SHORTCUT TO PIPE SHORTCUT
-			else if(!GameData.IsDoorOpen('second_depths_cut')) {
-				
-			}
-			//PIPE SHORTCUT TO HARD SHORTCUT
-			else if(!GameData.IsDoorOpen('hard_depths_cut')) {
-				
-			}
-			//HARD SHORTCUT TO LUCK GEM
-			else {
-				return 'goddess_chat_intro';			
-			}
-		}
-		else if(!GameData.HasShard('Power')) {
-			return 'goddess_chat_intro';
-		}
-		else {
-			return 'goddess_chat_intro';			
-		}
 	};
 
 	this.GetPortrait = function() {
