@@ -31,7 +31,7 @@ Door.prototype.create = function() {
     }, this);
 
     events.subscribe('close_enemy_door', function(params) {
-        if(this.id === params.door && this.type === 'enemy_start') {
+        if(this.id === params.door && (this.type === 'enemy_start' || this.type === 'enemy')) {
             this.PerformClose(false);
         }
     }, this);
