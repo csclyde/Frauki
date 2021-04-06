@@ -1007,8 +1007,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":2004.25,
-                 "y":8113.76
+                 "x":1984,
+                 "y":8112
                 }, 
                 {
                  "gid":69,
@@ -9395,10 +9395,10 @@
  "orientation":"orthogonal",
  "properties":
     {
-     "debug":"true",
+     "debug":"false",
      "startLayer":"3",
-     "startX":"195",
-     "startY":"444"
+     "startX":"117",
+     "startY":"506"
     },
  "propertytypes":
     {

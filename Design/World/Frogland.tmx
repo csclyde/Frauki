@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="360" height="700" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="4194">
  <properties>
-  <property name="debug" value="true"/>
+  <property name="debug" value="false"/>
   <property name="startLayer" value="3"/>
-  <property name="startX" value="195"/>
-  <property name="startY" value="444"/>
+  <property name="startX" value="117"/>
+  <property name="startY" value="506"/>
  </properties>
  <tileset firstgid="1" name="Collision" tilewidth="16" tileheight="16" tilecount="64" columns="8">
   <image source="../../Data/World/CollisionKey.png" width="128" height="128"/>
@@ -3833,7 +3833,7 @@
     <property name="upgrade" value="Shield2"/>
    </properties>
   </object>
-  <object id="3772" gid="75" x="2004.25" y="8113.76" width="16" height="16">
+  <object id="3772" gid="75" x="1984" y="8112" width="16" height="16">
    <properties>
     <property name="upgrade" value="Shield3"/>
    </properties>
