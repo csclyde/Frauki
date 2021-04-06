@@ -3,7 +3,7 @@ var Speeches = {
 	'amazing_explorer': { text: "I just might be the best explorer ever. Bet no one has been here before.", portrait: 'Mischeif'  },
 	'ship_question': { text: "This must be the big Alien Robot ship she talked about. Those jerks...", portrait: 'Mad'  },
 	'someone_listening': { text: "Hmm, is someone listening?", portrait: 'Neutral'  },
-	'lovely_day': { text: 'Another lovely day in Frogtown.' },
+	'lovely_day': { text: 'Another lovely day in Frogland.' },
 	'hole_sign': { text: 'The sign says: Watch out for danger! This hole is not safe to jump into.' },
 	'thats_me': { text: 'Is that... me?', portrait: 'Displeased' },
 	'mushrooms': { text: 'These mushrooms don’t look safe to eat... I better not', portrait: 'Enticed' },

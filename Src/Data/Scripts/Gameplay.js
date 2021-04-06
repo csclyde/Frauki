@@ -46,10 +46,6 @@ ScriptRunner.scripts['continue_game'] = [
     { name: 'wait', props: { amount: 1500 } },
 
     { name: 'run_script', props: { name: 'goddess_welcome_return' } },
-
-    { name: 'allow_input', props: {} },
-    
-    
 ];
 
 ScriptRunner.scripts['select_new_game'] = [

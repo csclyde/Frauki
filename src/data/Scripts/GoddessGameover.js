@@ -49,6 +49,7 @@ ScriptRunner.scripts['tower_troll2'] = [
 ScriptRunner.scripts['tower_troll3'] = [
 	{ name: 'show_text', props: { text: "You're being very naughty, playing about in that ship.", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "You have work to do, silly girl. Just stop it.", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "Yeah, I'll stay out... heh heh...", portrait: 'Mischeif' } },
 	{ name: 'run_script', props: { name: 'exit_goddess' } },
 ];
 
