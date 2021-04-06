@@ -484,7 +484,7 @@ Collision.CollideProjectileWithWorld = function(p, t) {
         effectsController.Explosion(p);
 		events.publish('play_sound', {name: 'explosion', restart: true});
         
-    } else if(p.projType === 'mortar' || p.projType === 'detonator') {
+    } else if((p.projType === 'mortar' || p.projType === 'detonator') && t.index === 1) {
         p.pendingDestroy = true;
         events.publish('camera_shake', {magnitudeX: 3, magnitudeY: 1, duration: 200});
 

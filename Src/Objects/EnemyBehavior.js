@@ -175,7 +175,7 @@ EnemyBehavior.Player.IsDoorBetween = function(e) {
     while(i--) {
         door = objectController.doorList[i];
         if(!door.body) continue;
-        doorLine = new Phaser.Line(door.body.x + door.body.width / 2, door.body.y - 50, door.body.x + door.body.width / 2, door.body.y + door.body.height + 50);
+        doorLine = new Phaser.Line(door.body.x + door.body.width / 2, door.body.y, door.body.x + door.body.width / 2, door.body.y + door.body.height);
 
         if(Phaser.Line.intersects(ray, doorLine)) {
 

@@ -2125,7 +2125,7 @@
 	"frame": {"x":652,"y":438,"w":75,"h":70},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":65,"y":41,"w":75,"h":70},
+	"spriteSourceSize": {"x":60,"y":41,"w":75,"h":70},
 	"sourceSize": {"w":200,"h":200}
 },
 "NPC/Robos0002":
@@ -3047,6 +3047,6 @@
 	"format": "RGBA8888",
 	"size": {"w":1024,"h":1385},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:f6a81af6c3b0a3ec1fd4c3e73aa62cf6:900f84de2b726617d07a4cba6f02fb8e:b1585ba32d60cf5440f3fdffe8c37c76$"
+	"smartupdate": "$TexturePacker:SmartUpdate:c7954ae5497972583ac3319a4ebd6e7d:ef6d94cac36b4a5f133f7501620da673:b1585ba32d60cf5440f3fdffe8c37c76$"
 }
 }

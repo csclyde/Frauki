@@ -52,10 +52,13 @@ ScriptRunner.scripts['robo_samurai'] = [
 ];
 
 ScriptRunner.scripts['robo_chonker'] = [
-	{ name: 'show_text', props: { text: "I'm really just not feeling it today.", portrait: 'red' } },
-	{ name: 'show_text', props: { text: "I know how to kill. But I don't know WHY I kill.", portrait: 'red' } },
-	{ name: 'show_text', props: { text: "Oh well, I'm gonna give myself a break.", portrait: 'red' } },
-	{ name: 'show_text', props: { text: "I'll try again tomorrow.", portrait: 'red' } },
+	{ name: 'show_text', props: { text: "You know what?", portrait: 'red' } },
+	{ name: 'show_text', props: { text: "No. I'm not doing it.", portrait: 'red' } },
+	{ name: 'show_text', props: { text: "Why even bother trying to stop you? Seriously.", portrait: 'red' } },
+	{ name: 'show_text', props: { text: "What do I get out of it? Chopped up into scrap? No thanks.", portrait: 'red' } },
+	{ name: 'show_text', props: { text: "You can just go ahead. ", portrait: 'red' } },
+	{ name: 'show_text', props: { text: "Have a nice day.", portrait: 'red' } },
+	{ name: 'open_door', props: { door_name: 'spaceship_10' }},
 	{ name: 'run_script', props: { name: 'exit_NPC' } },
 ];
 
