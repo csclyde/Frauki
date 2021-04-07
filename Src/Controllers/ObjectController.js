@@ -13,6 +13,7 @@ ObjectController = function() {
 ObjectController.prototype.Create = function() {
     this.activeGroup = game.add.group(Frogland.froglandGroup, 'active_objects');
     this.inactiveGroup = game.add.group(Frogland.froglandGroup, 'inactive_objects');
+    this.enemyHealthGroup = game.add.group(Frogland.froglandGroup, 'enemy_health');    
 };
 
 ObjectController.prototype.Update = function() {
@@ -59,6 +60,7 @@ ObjectController.prototype.Update = function() {
 ObjectController.prototype.Reset = function() {
     this.activeGroup.removeAll(true);
     this.inactiveGroup.removeAll(true);
+    this.enemyHealthGroup.removeAll(true);
     this.latentObjects = [];    
 
     this.CreateObjectsLayer();
@@ -111,10 +113,10 @@ ObjectController.prototype.CreateObjectsLayer = function(layer) {
             objectController.shardList.push(obj);
         } 
         else if(obj.spriteType === 'gem_sucker') {
-            obj.name = 'gem_sucker';
+            obj.name = 'GemSucker';
         }
         else if(obj.spriteType === 'upgrade') {
-            obj.name = 'upgrade';
+            obj.name = 'Upgrade';
         }
 
     });  

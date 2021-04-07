@@ -94,7 +94,7 @@ function HitUpgrade(f, o) {
         if(o.health <= 0) {
             effectsController.Dust(o.body.center.x, o.body.center.y);
             effectsController.ScreenFlash();
-            effectsController.DiceObject(o.objectName, o.body.center.x, o.body.center.y, o.body.velocity.x, o.body.velocity.y);
+            effectsController.DiceObject('Upgrade', o.body.center.x, o.body.center.y, o.body.velocity.x, o.body.velocity.y);
             
             events.publish('stop_sound', {name: 'crystal_door'});
             events.publish('play_sound', {name: 'door_break'});

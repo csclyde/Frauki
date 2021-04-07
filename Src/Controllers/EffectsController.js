@@ -124,6 +124,7 @@ EffectsController.prototype.CreateForegroundEffects = function() {
     screenDarkBmd.ctx.fillRect(0,0, game.width, game.height);
     this.screenDark = game.add.sprite(0, 0, screenDarkBmd);
     this.screenDark.fixedToCamera = true;
+    this.screenDark.visible = false;
     this.foregroundEffectsGroup.add(this.screenDark);    
 };
 

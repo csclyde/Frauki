@@ -35,7 +35,7 @@ SpeechController = function() {
 
 SpeechController.prototype.Create = function() {
 
-	this.speechGroup = game.add.group(Frogland.froglandGroup, 'speech');	
+	this.speechGroup = game.add.group(Frogland.froglandGroup, 'speech');
 
 	var speechOffsetX = 91;
 	var speechOffsetY = 240;

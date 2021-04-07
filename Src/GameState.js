@@ -195,10 +195,10 @@ GameState.CreateUI = function() {
         this['apple' + i] = game.add.image(-10 + (20 * i), 15, 'Misc', 'Apple0000', this.HUD);
     }
 
-    this['prismWit'] = game.add.image(-10, 320, 'Misc', 'Shard0004', this.HUD);
-    this['prismWill'] = game.add.image(2, 320, 'Misc', 'Shard0005', this.HUD);
-    this['prismLuck'] = game.add.image(14, 320, 'Misc', 'Shard0006', this.HUD);
-    this['prismPower'] = game.add.image(26, 320, 'Misc', 'Shard0007', this.HUD);
+    this.prismWit = game.add.image(-10, 320, 'Misc', 'Shard0004', this.HUD);
+    this.prismWill = game.add.image(2, 320, 'Misc', 'Shard0005', this.HUD);
+    this.prismLuck = game.add.image(14, 320, 'Misc', 'Shard0006', this.HUD);
+    this.prismPower = game.add.image(26, 320, 'Misc', 'Shard0007', this.HUD);
     
     //CREATE THE MAIN MENU
     this.Menu = game.add.group(undefined, 'main_menu');
@@ -238,9 +238,26 @@ GameState.CreateUI = function() {
 
         var sfxPip = game.add.image(407 + (i * 7), 232, 'UI', 'Settings0001', this.settingsMenu);
         this.sfxPips.push(sfxPip);
-    
     }
 
+    var screenDarkBmd = game.add.bitmapData(game.width, game.height);
+    screenDarkBmd.ctx.fillStyle = 'black';
+    screenDarkBmd.ctx.fillRect(0,0, game.width, game.height);
+    this.screenDark = game.add.sprite(0, 0, screenDarkBmd);
+    this.screenDark.fixedToCamera = true;
+    this.screenDark.name = 'screen_dark';
+
+};
+
+GameState.Fade = function(show, dur) {
+    this.screenDark.bringToTop();
+    if(show) {
+        this.screenDark.alpha = 0;
+        this.screenDark.visible = true;
+        return game.add.tween(this.screenDark).to( { alpha: 1 }, dur || 2500, Phaser.Easing.Linear.In, true);
+    } else {
+        return game.add.tween(this.screenDark).to( { alpha: 0 }, dur || 1000, Phaser.Easing.Quintic.In, true);
+    }
 };
 
 GameState.GetCurrentMenu = function() {

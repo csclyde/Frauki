@@ -33,21 +33,6 @@ Enemy = function(game, x, y, name) {
     this.attackRect.owningEnemy = this;  
     this.addChild(this.attackRect);
 
-    this.UI = {};
-    this.UIGroup = game.add.group(this, 'enemy_ui');
-    this.UIGroup.visible = false;
-    this.UI.frame = game.add.image(0, 0, 'UI', 'EnemyHealth000' + (this.maxEnergy - 1), this.UIGroup);
-    this.UI.pips = [];
-
-    for(var i = 0; i < 8; i++) {
-        var pip = game.add.image(0, 0, 'UI', 'EnemyHealth0008', this.UIGroup);
-        this.UI.pips.push(pip);
-    }
-
-    this.events.onDestroy.add(function(e) {
-        e.UIGroup.destroy();
-    });
-
     events.subscribe('hide_enemy_health', this.HideHealth);
     events.subscribe('destroy_enemy', function(params) {
         if(this.name === params.name) this.DestroyEnemy(this);
@@ -327,9 +312,28 @@ Enemy.prototype.TakeHit = function(damage) {
     } 
 };
 
+Enemy.prototype.CreateHealthUI = function() {
+    this.UI = {};
+    this.UIGroup = game.add.group(objectController.enemyHealthGroup, 'enemy_ui');
+    this.UIGroup.visible = false;
+    this.UI.frame = game.add.image(0, 0, 'UI', 'EnemyHealth000' + (this.maxEnergy - 1), this.UIGroup);
+    this.UI.pips = [];
+
+    for(var i = 0; i < 8; i++) {
+        var pip = game.add.image(0, 0, 'UI', 'EnemyHealth0008', this.UIGroup);
+        this.UI.pips.push(pip);
+    }
+
+    this.events.onDestroy.add(function(e) {
+        e.UIGroup.destroy();
+    });
+};
+
 Enemy.prototype.DrawHealth = function() {
 
     if(this.objectName === 'Goddess') return;
+
+    if(!this.UI) this.CreateHealthUI();
     
     this.UI.frame.x = this.body.x;
     this.UI.frame.y = this.body.y - 20;

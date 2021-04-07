@@ -81,7 +81,7 @@ GemSucker.prototype.BlowUp = function() {
     var center = this.body.center.clone();
     effectsController.Dust(center.x, center.y);
     effectsController.ScreenFlash();
-    effectsController.DiceObject(this.objectName, center.x, center.y, this.body.velocity.x, this.body.velocity.y);
+    effectsController.DiceObject('GemSucker', center.x, center.y, this.body.velocity.x, this.body.velocity.y);
 
     for(var i = 0, max = 3; i < max; i++) {
         game.time.events.add(i * game.rnd.between(150, 200), function() {

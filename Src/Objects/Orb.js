@@ -47,7 +47,7 @@ function SmashOrb(f, o) {
     effectsController.ClashStreak(o.body.center.x, o.body.center.y, game.rnd.between(1, 2));
     effectsController.Dust(o.body.center.x, o.body.center.y);
     effectsController.ScreenFlash();
-    effectsController.DiceObject(o.objectName, o.body.center.x, o.body.center.y, o.body.velocity.x, o.body.velocity.y);
+    effectsController.DiceObject('Orb', o.body.center.x, o.body.center.y, o.body.velocity.x, o.body.velocity.y);
     events.publish('play_sound', {name: 'door_break'});
     o.destroy();
 };

@@ -4,7 +4,7 @@ ScriptRunner.scripts['game_start'] = [
     { name: 'play_ambient', props: { name: 'ambient_surface' } },
     { name: 'update_ui', props: {  } },
     { func: function() {
-        effectsController.Fade(false, 1000);
+        GameState.Fade(false, 1000);
     } },
 ];
 
@@ -77,7 +77,7 @@ ScriptRunner.scripts['new_game'] = [
     { func: function() {
         GameData.ResetData();
         GameState.Reset();
-        effectsController.Fade(true, 3000);  
+        GameState.Fade(true, 3000);  
         GameState.menuSelectionMade = true;  
     } },
 
@@ -88,7 +88,7 @@ ScriptRunner.scripts['new_game'] = [
         events.publish('set_camera', { to: goddess.body.center }); 
         GameState.inMenu = false;
         GameState.Menu.alpha = 0;
-        effectsController.Fade(false, 2000);
+        GameState.Fade(false, 2000);
     } },
 
     { name: 'run_script', props: { name: 'enter_goddess' } },
@@ -210,7 +210,7 @@ ScriptRunner.scripts['game_over'] = [
     
     { func: function() {
         GameState.BeginGameover();
-        effectsController.Fade(true, 4000);
+        GameState.Fade(true, 4000);
     } },
 
     { name: 'wait', props: { amount: 800 } },
@@ -227,7 +227,7 @@ ScriptRunner.scripts['game_over'] = [
     { name: 'wait', props: { amount: 400 } },
     
     { func: function() {
-        effectsController.Fade(false, 500);
+        GameState.Fade(false, 500);
     } },
 
     { name: 'wait', props: { amount: 500 } },
@@ -260,7 +260,7 @@ ScriptRunner.scripts['restart_game'] = [
         GameState.physicsSloMo = 1;
 
         GameState.BeginGameover();
-        effectsController.Fade(true, 1000);
+        GameState.Fade(true, 1000);
     } },
 
     { name: 'wait', props: { amount: 1000 } },
@@ -274,7 +274,7 @@ ScriptRunner.scripts['restart_game'] = [
     { name: 'wait', props: { amount: 400 } },
     
     { func: function() {
-        effectsController.Fade(false, 500);
+        GameState.Fade(false, 500);
         events.publish('set_camera', { to: frauki.body.center });  
         frauki.state = frauki.Materializing;        
         GameState.restarting = false;      
@@ -594,7 +594,7 @@ ScriptRunner.scripts['finish_game'] = [
 	{ name: 'stop_music', props: { name: 'Goddess', fade: 4000 } },
     { func: function() {
         objectController.DestroyAllEnemies();
-        effectsController.Fade(true, 4000);
+        GameState.Fade(true, 4000);
         GameState.creditsText = game.add.bitmapText(320, 180, 'bubble','', 18);
         GameState.creditsText.anchor.setTo(0.5);
         GameState.creditsText.fixedToCamera = true;
@@ -625,13 +625,13 @@ ScriptRunner.scripts['show_random_scene'] = [
     } },
 
     { func: function() {
-        effectsController.Fade(false, 3000);
+        GameState.Fade(false, 3000);
     } },
 
     { name: 'wait', props: { amount: 8000 } },
 
     { func: function() {
-        effectsController.Fade(true, 3000);
+        GameState.Fade(true, 3000);
     } },
 
     { name: 'wait', props: { amount: 3000 } },

@@ -9373,10 +9373,10 @@
  "orientation":"orthogonal",
  "properties":
     {
-     "debug":"false",
+     "debug":"true",
      "startLayer":"3",
-     "startX":"117",
-     "startY":"506"
+     "startX":"149",
+     "startY":"229"
     },
  "propertytypes":
     {
