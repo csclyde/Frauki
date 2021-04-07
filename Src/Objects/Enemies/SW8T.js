@@ -5,7 +5,7 @@ Enemy.prototype.types['SW8T'] =  function() {
 
     this.animations.add('idle', ['SW8T/Idle0000', 'SW8T/Idle0001', 'SW8T/Idle0002', 'SW8T/Idle0003'], 8, true, false);
     this.animations.add('walk', ['SW8T/Run0000', 'SW8T/Run0001', 'SW8T/Run0002', 'SW8T/Run0003', 'SW8T/Run0004', 'SW8T/Run0005', 'SW8T/Run0006'], 6, true, false);
-    this.animations.add('hurt', ['SW8T/Hurt0000', 'SW8T/Hurt0001'], 10, true, false);
+    this.animations.add('hurt', ['SW8T/Hurt0000', 'SW8T/Hurt0001'], 12, true, false);
     this.animations.add('shoot_start', ['SW8T/Shoot0001', 'SW8T/Shoot0002'], 10, false, false);
     this.animations.add('shoot', ['SW8T/Shoot0003', 'SW8T/Shoot0004', 'SW8T/Shoot0005', 'SW8T/Shoot0006', 'SW8T/Shoot0007', 'SW8T/Shoot0008'], 14, false, false);
     this.animations.add('shoot_bolas', ['SW8T/Bolas0000', 'SW8T/Bolas0001', 'SW8T/Bolas0002', 'SW8T/Bolas0003', 'SW8T/Bolas0004', 'SW8T/Bolas0005'], 14, false, false);

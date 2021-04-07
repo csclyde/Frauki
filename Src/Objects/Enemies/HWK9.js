@@ -10,7 +10,7 @@ Enemy.prototype.types['HWK9'] =  function() {
     this.animations.add('attack_slash', ['HWK9/AttackDash0003', 'HWK9/AttackDash0004', 'HWK9/AttackDash0005'], 12, false, false);
     this.animations.add('jetpack', ['HWK9/JetpackSide0000', 'HWK9/JetpackSide0001'], 12, true, false);
     this.animations.add('evade', ['HWK9/JetpackUp0000', 'HWK9/JetpackUp0001', 'HWK9/JetpackUp0002'], 12, true, false);
-    this.animations.add('hurt', ['HWK9/Hurt0000', 'HWK9/Hurt0001'], 8, true, false);
+    this.animations.add('hurt', ['HWK9/Hurt0000', 'HWK9/Hurt0001'], 12, true, false);
 
     this.energy = 4;
 	this.baseStunDuration = 500;

@@ -6,7 +6,7 @@ Enemy.prototype.types['Buzzar'] =  function() {
     this.animations.add('idle', ['Buzzar/Idle0000', 'Buzzar/Idle0001'], 20, true, false);
     this.animations.add('enraged', ['Buzzar/Enraged0000', 'Buzzar/Enraged0001', 'Buzzar/Enraged0002', 'Buzzar/Enraged0003'], 20, true, false);
     this.animations.add('sting', ['Buzzar/Attack0000', 'Buzzar/Attack0001'], 20, false, false);
-    this.animations.add('hurt', ['Buzzar/Hurt0000', 'Buzzar/Hurt0001'], 20, true, false);
+    this.animations.add('hurt', ['Buzzar/Hurt0000', 'Buzzar/Hurt0001'], 12, true, false);
 
     this.wanderDirection = 'left';
 

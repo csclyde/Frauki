@@ -8,7 +8,7 @@ Enemy.prototype.types['H0P8'] =  function() {
     this.animations.add('hop', ['H0P8/Attack0001'], 10, false, false);
     this.animations.add('attack', ['H0P8/Attack0002', 'H0P8/Attack0003', 'H0P8/Attack0004', 'H0P8/Attack0005'], 10, false, false);
     this.animations.add('shield', ['H0P8/Shield0000', 'H0P8/Shield0001', 'H0P8/Shield0002', 'H0P8/Shield0003', 'H0P8/Shield0004', 'H0P8/Shield0005', 'H0P8/Shield0006'], 8, false, false);
-    this.animations.add('hurt', ['H0P8/Hurt0000'], 10, false, false);
+    this.animations.add('hurt', ['H0P8/Hurt0000', 'H0P8/Hurt0001'], 12, true, false);
 
     this.energy = 4;
     this.baseStunDuration = 500;

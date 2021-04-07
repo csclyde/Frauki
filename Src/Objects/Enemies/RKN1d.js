@@ -8,7 +8,7 @@ Enemy.prototype.types['RKN1d'] =  function() {
     this.animations.add('jump', ['RKN1d/Jump0003', 'RKN1d/Jump0004', 'RKN1d/Jump0005'], 12, false, false);
     this.animations.add('walk', ['RKN1d/Walk0000', 'RKN1d/Walk0001', 'RKN1d/Walk0002', 'RKN1d/Walk0003'], 16, true, false);
     this.animations.add('attack', ['RKN1d/Bite0002', 'RKN1d/Bite0003', 'RKN1d/Bite0004', 'RKN1d/Bite0005'], 18, false, false);
-    this.animations.add('hurt', ['RKN1d/Hurt0000'], 18, false, false);
+    this.animations.add('hurt', ['RKN1d/Hurt0000', 'RKN1d/Hurt0001'], 12, true, false);
 
     this.damage = 1;
     this.energy = 2;

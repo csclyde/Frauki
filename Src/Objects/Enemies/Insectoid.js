@@ -6,7 +6,7 @@ Enemy.prototype.types['Insectoid'] =  function() {
     this.animations.add('idle', ['Insectoid/Hop0000'], 10, true, false);
     this.animations.add('spin', ['Insectoid/Spin0000'], 10, true, false);
     this.animations.add('hop', ['Insectoid/Hop0000', 'Insectoid/Hop0001', 'Insectoid/Hop0002'], 10, false, false);
-    this.animations.add('die', ['Insectoid/Die0000'], 10, false, false);
+    this.animations.add('die', ['Insectoid/Die0000', 'Insectoid/Die0001'], 12, true, false);
 
     this.damage = 1;
     this.energy = 2;

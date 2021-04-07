@@ -5,6 +5,7 @@ Enemy.prototype.types['QL0k'] =  function() {
 	this.anchor.setTo(0.5, 0.75);
 
     this.animations.add('idle', ['QL0k/Shoot0001'], 10, false, false);
+    this.animations.add('die', ['QL0k/Hurt0000', 'QL0k/Hurt0001'], 12, true, false);
     this.animations.add('shoot', ['QL0k/Shoot0001', 'QL0k/Shoot0002', 'QL0k/Shoot0003', 'QL0k/Shoot0004', 'QL0k/Shoot0005', 'QL0k/Shoot0006'], 16, false, false);
 
     this.energy = 1;

@@ -118,13 +118,6 @@ Enemy.prototype.update = function() {
         this.DrawHealth();
     } 
 
-    if(!this.timers.TimerUp('after_damage_flicker') && this.timers.TimerUp('hurt_flicker')) {
-        this.alpha = 0;
-        game.time.events.add(15, function() { that.timers.SetTimer('hurt_flicker', 30); });
-    } else if(this !== goddess) {
-        this.alpha = 1;
-    }
-
     if(this.isAttacking()) {
         this.timers.SetTimer('grace', 0);
     }
@@ -331,9 +324,7 @@ Enemy.prototype.TakeHit = function(damage) {
 
         events.publish('enemy_killed', { name: this.objectName, x: this.body.center.x, y: this.body.center.y });
 
-    } else {
-        this.timers.SetTimer('after_damage_flicker', graceTime);
-    }
+    } 
 };
 
 Enemy.prototype.DrawHealth = function() {

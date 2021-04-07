@@ -6,7 +6,7 @@ Enemy.prototype.types['GUBr'] =  function() {
     this.animations.add('idle', ['GUBr/Stand0000'], 10, false, false);
     this.animations.add('walk', ['GUBr/Walk0000', 'GUBr/Walk0001', 'GUBr/Walk0002', 'GUBr/Walk0003'], 10, true, false);
     this.animations.add('attack', ['GUBr/Attack0000', 'GUBr/Attack0001', 'GUBr/Attack0002', 'GUBr/Attack0003', 'GUBr/Attack0004', 'GUBr/Attack0005'], 10, false, false);
-    this.animations.add('hit', ['GUBr/Hit0000'], 10, false, false);
+    this.animations.add('hit', ['GUBr/Hit0000', 'GUBr/Hit0001'], 12, true, false);
     this.animations.add('cower', ['GUBr/Cower0000', 'GUBr/Cower0001', 'GUBr/Cower0002', 'GUBr/Cower0003'], 16, true, false);
 
     this.energy = 2;

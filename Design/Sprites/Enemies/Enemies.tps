@@ -259,6 +259,7 @@
             <key type="filename">GUBr/Cower0002.png</key>
             <key type="filename">GUBr/Cower0003.png</key>
             <key type="filename">GUBr/Hit0000.png</key>
+            <key type="filename">GUBr/Hit0001.png</key>
             <key type="filename">GUBr/Stand0000.png</key>
             <key type="filename">GUBr/Walk0000.png</key>
             <key type="filename">GUBr/Walk0001.png</key>
@@ -271,6 +272,7 @@
             <key type="filename">H0P8/Attack0004.png</key>
             <key type="filename">H0P8/Attack0005.png</key>
             <key type="filename">H0P8/Hurt0000.png</key>
+            <key type="filename">H0P8/Hurt0001.png</key>
             <key type="filename">H0P8/Idle0000.png</key>
             <key type="filename">H0P8/Idle0001.png</key>
             <key type="filename">H0P8/Idle0002.png</key>
@@ -304,8 +306,10 @@
             <key type="filename">HWK9/JetpackSide0001.png</key>
             <key type="filename">HWK9/JetpackUp0000.png</key>
             <key type="filename">Insectoid/Die0000.png</key>
+            <key type="filename">Insectoid/Die0001.png</key>
             <key type="filename">Insectoid/Spin0000.png</key>
             <key type="filename">KR32/Hit0000.png</key>
+            <key type="filename">KR32/Hit0001.png</key>
             <key type="filename">KR32/Jump0000.png</key>
             <key type="filename">KR32/Jump0001.png</key>
             <key type="filename">KR32/Jump0002.png</key>
@@ -448,7 +452,6 @@
             <key type="filename">KR32/Stab0002.png</key>
             <key type="filename">QL0k/Hurt0000.png</key>
             <key type="filename">QL0k/Hurt0001.png</key>
-            <key type="filename">QL0k/Hurt0002.png</key>
             <key type="filename">QL0k/Shoot0000.png</key>
             <key type="filename">QL0k/Shoot0001.png</key>
             <key type="filename">QL0k/Shoot0002.png</key>
@@ -529,6 +532,7 @@
             <key type="filename">RKN1d/Bite0004.png</key>
             <key type="filename">RKN1d/Bite0005.png</key>
             <key type="filename">RKN1d/Hurt0000.png</key>
+            <key type="filename">RKN1d/Hurt0001.png</key>
             <key type="filename">RKN1d/Idle0000.png</key>
             <key type="filename">RKN1d/Idle0001.png</key>
             <key type="filename">RKN1d/Idle0002.png</key>

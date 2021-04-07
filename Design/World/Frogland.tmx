@@ -5318,7 +5318,7 @@
     <property name="once" value="true"/>
    </properties>
   </object>
-  <object id="3946" name="start_fight" type="trigger" x="3413.08" y="4596.42" width="348.5" height="193.833">
+  <object id="3946" name="start_fight" type="trigger" x="3413.08" y="4620.42" width="348.5" height="169.833">
    <properties>
     <property name="door" value="kr32_first"/>
     <property name="once" value="true"/>
