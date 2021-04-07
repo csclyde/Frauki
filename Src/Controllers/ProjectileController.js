@@ -43,7 +43,7 @@ ProjectileController.prototype.Reset = function() {
 };
 
 ProjectileController.prototype.CreateProjectileLayer = function() {
-	this.projectiles = game.add.group();
+	this.projectiles = game.add.group(Frogland.froglandGroup, 'projectiles');
 };
 
 ProjectileController.prototype.DestroyAllProjectiles = function() {
@@ -60,7 +60,7 @@ ProjectileController.prototype.Mortar = function(e) {
 		xPos += 50;
 	}
 
-	var mortar = game.add.sprite(xPos, yPos, 'EnemySprites');
+	var mortar = game.add.sprite(xPos, yPos, 'EnemySprites', null, this.projectiles);
 	game.physics.enable(mortar, Phaser.Physics.ARCADE);
 
 	mortar.body.setSize(10, 10);
@@ -112,7 +112,7 @@ ProjectileController.prototype.MortarExplosion = function(e, x, y, style) {
 	var xPos = x;
 	var yPos = y;
 
-	var explosion = game.add.sprite(xPos, yPos - 20, 'Misc');
+	var explosion = game.add.sprite(xPos, yPos - 20, 'Misc', null, this.projectiles);
 	game.physics.enable(explosion, Phaser.Physics.ARCADE);
 
 	explosion.body.setSize(50, 40);
@@ -155,7 +155,7 @@ ProjectileController.prototype.Bolas = function(e) {
 		xPos += 50;
 	}
 
-	var bolas = game.add.sprite(xPos, yPos, 'EnemySprites');
+	var bolas = game.add.sprite(xPos, yPos, 'EnemySprites', null, this.projectiles);
 	game.physics.enable(bolas, Phaser.Physics.ARCADE);
 
 	bolas.body.setSize(20, 10);
@@ -198,7 +198,7 @@ ProjectileController.prototype.Detonator = function(e) {
 		xPos += 50;
 	}
 
-	var detonator = game.add.sprite(xPos, yPos, 'EnemySprites');
+	var detonator = game.add.sprite(xPos, yPos, 'EnemySprites', null, this.projectiles);
 	game.physics.enable(detonator, Phaser.Physics.ARCADE);
 
 	detonator.body.setSize(10, 10);
@@ -243,36 +243,9 @@ ProjectileController.prototype.Detonator = function(e) {
 	this.projectiles.add(detonator);
 };
 
-ProjectileController.prototype.Tarball = function(e) {
-	var tar = game.add.sprite(e.body.center.x, e.body.center.y, 'EnemySprites');
-	game.physics.enable(tar, Phaser.Physics.ARCADE);
-
-	tar.body.setSize(12, 12);
-	tar.body.gravity.y = -200;
-	tar.animations.add('idle', ['Misc/Tarball0000', 'Misc/Tarball0001'], 14, true, false);
-	tar.play('idle');
-
-	//parabolic arc
-	var duration = 1.2;
-	tar.body.velocity.x = (frauki.body.center.x - tar.body.center.x) / duration;
-	tar.body.velocity.y = (frauki.body.center.y + -0.5 * (game.physics.arcade.gravity.y - 200) * duration * duration - tar.body.center.y) / duration;
-
-	// tar.body.velocity.y = game.rnd.between(-100, -150);
-	// tar.body.velocity.x = EnemyBehavior.Player.IsLeft(e) ? game.rnd.between(-100, -150) : game.rnd.between(100, 150);
-	tar.body.bounce.set(0.4);
-
-	tar.projType = 'tar';
-	tar.owningEnemy = e;
-	tar.spawnTime = GameState.gameTime;
-	tar.lifeTime = 3000;
-	tar.solid = true;
-
-	this.projectiles.add(tar);
-};
-
 ProjectileController.prototype.Spore = function(e) {
 	var xOffset = e.direction === 'right' ? -15 : 0;
-	var spore = game.add.sprite(e.body.center.x + xOffset, e.body.center.y, 'EnemySprites');
+	var spore = game.add.sprite(e.body.center.x + xOffset, e.body.center.y, 'EnemySprites', null, this.projectiles);
 	game.physics.enable(spore, Phaser.Physics.ARCADE);
 
 	spore.body.setSize(10, 10);
@@ -307,7 +280,7 @@ ProjectileController.prototype.LaserBolt = function(e, rot, flip) {
 		finalY += 7;
 	}
 
-	var bolt = game.add.sprite(e.body.center.x + finalX, e.body.center.y + finalY, 'EnemySprites');
+	var bolt = game.add.sprite(e.body.center.x + finalX, e.body.center.y + finalY, 'EnemySprites', null, this.projectiles);
 	game.physics.enable(bolt, Phaser.Physics.ARCADE);
 
 	bolt.body.setSize(5, 5);
@@ -358,7 +331,7 @@ ProjectileController.prototype.FallingTile = function(sourceTile, visibleTile) {
 	// 	tileName = 'Tiles0002';
 	// }
 
-	var tile = game.add.sprite(sourceTile.worldX - 16, sourceTile.worldY - 16, 'Misc', tileName);
+	var tile = game.add.sprite(sourceTile.worldX - 16, sourceTile.worldY - 16, 'Misc', tileName, this.projectiles);
 	game.physics.enable(tile, Phaser.Physics.ARCADE);
 
 	tile.body.setSize(16, 16, 0.5, 0.5);

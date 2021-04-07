@@ -2,6 +2,7 @@ Apple = function(game, x, y, name) {
     //instantiate the sprite
     Phaser.Sprite.call(this, game, x + 8, y, name);
     this.spriteType = 'apple';
+    this.name = 'apple';
     
     //enable its physics body
     game.physics.enable(this, Phaser.Physics.ARCADE);

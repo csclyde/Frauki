@@ -3,6 +3,7 @@ Enemy = function(game, x, y, name) {
     Phaser.Sprite.call(this, game, x, y, 'EnemySprites');
     this.spriteType = 'enemy';
     this.objectName = name;
+    this.name = name;
 
     //enable its physics body
     game.physics.enable(this, Phaser.Physics.ARCADE);
@@ -30,9 +31,10 @@ Enemy = function(game, x, y, name) {
     game.physics.enable(this.attackRect, Phaser.Physics.ARCADE);
     this.attackRect.body.setSize(0, 0, 0, 0);
     this.attackRect.owningEnemy = this;  
+    this.addChild(this.attackRect);
 
     this.UI = {};
-    this.UIGroup = game.add.group();
+    this.UIGroup = game.add.group(this, 'enemy_ui');
     this.UIGroup.visible = false;
     this.UI.frame = game.add.image(0, 0, 'UI', 'EnemyHealth000' + (this.maxEnergy - 1), this.UIGroup);
     this.UI.pips = [];

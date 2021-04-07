@@ -39,9 +39,12 @@ Player = function (game, x, y, name) {
 
     this.currentAttack = {};
     this.attackRect = game.add.sprite(0, 0, null);
+    this.attackRect.name = 'attack_rect';
     game.physics.enable(this.attackRect, Phaser.Physics.ARCADE);
     this.attackRect.body.setSize(0, 0, 0, 0);
     this.attackRect.body.moves = false;
+
+    this.addChild(this.attackRect);
 
     events.subscribe('player_jump', this.Jump, this);
     events.subscribe('player_crouch', this.Crouch, this);
@@ -69,9 +72,14 @@ Player = function (game, x, y, name) {
 
     //set up the run dust
     this.runDust = game.add.sprite(0, 0, 'Misc');
+    this.runDust.name = 'run_dust';
     this.runDust.animations.add('dust', ['RunDust0000', 'RunDust0001', 'RunDust0002', 'RunDust0003'], 10, true, false);
     this.runDust.play('dust');
     this.runDust.alpha = 0.5;
+    this.runDust.y =  -95;
+    this.runDust.x = -32;
+
+    this.addChild(this.runDust);
 };
 
 Player.prototype = Object.create(Phaser.Sprite.prototype);
@@ -106,17 +114,6 @@ Player.prototype.preStateUpdate = function() {
 
     if(!this.states.inWater && (this.state === this.Running || this.state === this.Rolling)) {
         this.runDust.visible = true;
-
-        this.runDust.y = this.body.y + this.body.height - this.runDust.height;
-
-        //position the dust
-        if(this.states.direction === 'right') {
-            this.runDust.x = this.body.x - 22;
-            this.runDust.scale.x = 1;
-        } else {
-            this.runDust.x = this.body.x + 32;
-            this.runDust.scale.x = -1;
-        }
     } else {
         this.runDust.visible = false;
     }

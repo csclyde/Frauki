@@ -1289,6 +1289,13 @@ function typeToString () {
 
     // If no phaser type defined, try to guess
     if (node.type === undefined) {
+
+        if(node.name.length === 1) {
+            return 'Letter';
+        }
+
+        return 'Unknown';
+        
         if (node instanceof PIXI.Stage) {
             return 'PIXI Stage';
         }

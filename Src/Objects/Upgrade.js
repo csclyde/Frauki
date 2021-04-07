@@ -1,8 +1,8 @@
 Upgrade = function(game, x, y, name) {
     //instantiate the sprite
     Phaser.Sprite.call(this, game, x + 8, y, name);
-    this.spriteType = 'Upgrade';
-    this.objectName = 'Upgrade';
+    this.spriteType = 'upgrade';
+    this.objectName = 'upgrade';
     
     //enable its physics body
     game.physics.enable(this, Phaser.Physics.ARCADE);

@@ -198,7 +198,6 @@ GameData.AddUpgrade = function(name) {
     } else if(this.data.upgrades.indexOf(name) < 0) {
         this.data.upgrades.push(name);
         this.SaveDataToStorage();
-        weaponController.RefactorWeaponList();
     }
 };
 

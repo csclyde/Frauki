@@ -2,6 +2,7 @@ Junk = function(game, x, y, name) {
     //instantiate the sprite
     Phaser.Sprite.call(this, game, x, y, 'Misc', name + '0000');
     this.spriteType = 'junk';
+    this.name = 'junk';
 
     this.anchor.setTo(0.5);
 

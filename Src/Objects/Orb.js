@@ -3,6 +3,7 @@ Orb = function(game, x, y, name) {
     Phaser.Sprite.call(this, game, x + 8, y, name);
     this.spriteType = 'orb';
     this.objectName = 'Orb';
+    this.name = 'orb';
     
     //enable its physics body
     game.physics.enable(this, Phaser.Physics.ARCADE);

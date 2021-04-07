@@ -39,7 +39,7 @@ BackdropController.prototype.Update = function() {
 };
 
 BackdropController.prototype.CreateParallax = function() {
-    this.background = game.add.group();
+    this.background = game.add.group(Frogland.froglandGroup, 'backgrounds');
 
     this.bg = game.add.image(0, 0, 'Background', null, this.background);
     this.bg.fixedToCamera = true;
@@ -54,7 +54,7 @@ BackdropController.prototype.CreateParallax = function() {
 };
 
 BackdropController.prototype.LoadBackgrounds = function() {
-    this.backdrops = game.add.group();
+    this.backdrops = game.add.group(Frogland.froglandGroup, 'backdrops');
     
     Frogland.map.objects['Backdrop'].forEach(function(o) {
         var b = game.add.tileSprite(o.x, o.y, o.width, o.height, o.name, null, this.backdrops);

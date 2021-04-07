@@ -598,6 +598,7 @@ ScriptRunner.scripts['finish_game'] = [
         GameState.creditsText = game.add.bitmapText(320, 180, 'bubble','', 18);
         GameState.creditsText.anchor.setTo(0.5);
         GameState.creditsText.fixedToCamera = true;
+        GameState.Menu.add(GameStae.creditsText);
         
     } },
 

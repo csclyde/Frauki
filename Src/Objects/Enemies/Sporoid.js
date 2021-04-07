@@ -13,7 +13,6 @@ Enemy.prototype.types['Sporoid'] =  function() {
 
     this.dashTimer = 0;
     this.dashWaitTimer = 0;
-    this.shootTimer = 0;
     this.energy = 1;
     
 	this.damage = 1;
@@ -56,14 +55,6 @@ Enemy.prototype.types['Sporoid'] =  function() {
 
 		this.timers.SetTimer('dash', 750);
 		this.timers.SetTimer('dash_wait', 3000);
-	};
-
-	this.Shoot = function() {
-		//var spore = game.add.sprite(this.body.center.x, this.body.center.y, 'Spore');
-		//game.physics.arcade.moveToXY(this, frauki.body.center.x, frauki.body.center.y, 500);
-		//game.add.tween(spore.body).to({x: 0, y: 0}, 1000, Phaser.Easing.Exponential.Out, true);
-
-	    this.timers.SetTimer('shoot', 1000);
 	};
 
 	this.Reset = function() {

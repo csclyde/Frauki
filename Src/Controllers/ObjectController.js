@@ -11,8 +11,8 @@ ObjectController = function() {
 };
 
 ObjectController.prototype.Create = function() {
-    this.activeGroup = game.add.group();
-    this.inactiveGroup = game.add.group();
+    this.activeGroup = game.add.group(Frogland.froglandGroup, 'active_objects');
+    this.inactiveGroup = game.add.group(Frogland.froglandGroup, 'inactive_objects');
 };
 
 ObjectController.prototype.Update = function() {
@@ -26,10 +26,10 @@ ObjectController.prototype.Update = function() {
 
         if(!o) continue;
 
-        var preservedTypes = ['door', 'shard', 'checkpoint'];
+        var preservedTypes = ['checkpoint'];
 
         //if the object is not preserved, has a body, and is off screen, its not active
-        if(!preservedTypes.includes(o.spriteType) && !!o.body && !cameraController.IsObjectOnScreen(o, -400) && o !== goddess) {
+        if(!preservedTypes.includes(o.spriteType) && !!o.body && !cameraController.IsObjectOnScreen(o, -200)) {
             if(o.body.enable === true && !!o.Deactivate) o.Deactivate();
             o.body.enable = false;
             o.visible = false;
@@ -44,16 +44,14 @@ ObjectController.prototype.Update = function() {
 
         if(!o) continue;
 
-        if(o.spriteType !== 'door' && !!o.body) {
-            if(!cameraController.IsObjectOnScreen(o, -300)) {
-                if(o.body.enable === false && !!o.Activate) o.Activate();
-                o.body.enable = true;
-                o.visible = true;
+        if(!cameraController.IsObjectOnScreen(o, -100)) {
+            if(o.body.enable === false && !!o.Activate) o.Activate();
+            o.body.enable = true;
+            o.visible = true;
 
-                this.inactiveGroup.remove(o);
-                this.activeGroup.add(o);
+            this.inactiveGroup.remove(o);
+            this.activeGroup.add(o);
 
-            }
         }
     }
 };
@@ -65,7 +63,6 @@ ObjectController.prototype.Reset = function() {
 
     this.CreateObjectsLayer();
     this.CompileObjectList();
-    
 };
 
 ObjectController.prototype.DestroyAllEnemies = function() {
@@ -102,21 +99,28 @@ ObjectController.prototype.CreateObjectsLayer = function(layer) {
 
         if(obj.spriteType === 'door') {
             obj.create();
+            obj.name = 'door';
             
             objectController.doorList.push(obj);
-                
-        } else if(obj.spriteType === 'checkpoint') {
+        } 
+        else if(obj.spriteType === 'checkpoint') {
             objectController.checkpointList.push(obj);
-
-        } else if(obj.spriteType === 'shard') {
+            obj.name = 'checkpoint';
+        } 
+        else if(obj.spriteType === 'shard') {
             objectController.shardList.push(obj);
+        } 
+        else if(obj.spriteType === 'gem_sucker') {
+            obj.name = 'gem_sucker';
+        }
+        else if(obj.spriteType === 'upgrade') {
+            obj.name = 'upgrade';
         }
 
     });  
 };
 
 ObjectController.prototype.CompileObjectList = function() {
-
     this.latentObjects = [];
 
     Frogland.map.objects['Objects'].forEach(function(o) {
@@ -161,15 +165,18 @@ ObjectController.prototype.SpawnObject = function(o) {
     if(o.id === 66) {
         newObj = new Apple(game, o.x, o.y, 'Misc', 'Apple0000');
         newObj.latent = o;
+        newObj.name = 'apple';
     }
     else if(o.id === 74) {
         newObj = new Orb(game, o.x, o.y, 'Misc', 'Orb0000');
         newObj.latent = o;
+        newObj.name = 'orb';
     } 
     else if((o.id >= 85 && o.id <= 104) || (o.id >= 145 && o.id <= 164)) {
 	    FileMap.Enemies.forEach(function(enemy) {
 	        if(o.id === enemy.Tile) {
                 newObj = new Enemy(game, o.x, o.y, enemy.Name, enemy.Name);
+                newObj.name = enemy.Name;
 	            newObj.latent = o;
                 
                 if(o.id === 149) {
@@ -183,8 +190,9 @@ ObjectController.prototype.SpawnObject = function(o) {
     else if(o.id >= 105 && o.id <= 124) {
 	    FileMap.Junk.forEach(function(junk) {
 	        if(o.id === junk.Tile) {
-	            newObj = new Junk(game, o.x, o.y, junk.Name, junk.Name);
-	            newObj.latent = o;
+                newObj = new Junk(game, o.x, o.y, junk.Name, junk.Name);
+                newObj.latent = o;
+                newObj.name = 'junk';
 	        }
 	    });
     } else if(![69,67,75,70,71,72,73,76].includes(o.id)) {
@@ -194,7 +202,7 @@ ObjectController.prototype.SpawnObject = function(o) {
     if(newObj !== null) {
         this.activeGroup.add(newObj);
         newObj.properties = o.properties || {};
-        newObj.name = o.name;
+        if(!!o.name) newObj.name = o.name;
 
         if(newObj.create) newObj.create();
         

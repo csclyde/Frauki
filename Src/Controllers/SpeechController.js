@@ -1,7 +1,5 @@
 SpeechController = function() {
 
-	var that  = this;
-
 	events.subscribe('control_up', this.Investigate, this);
 	events.subscribe('hide_speech', this.HideSpeech, this);
 
@@ -28,10 +26,6 @@ SpeechController = function() {
 
 	this.timers = new TimerUtil();
 
-	this.speechVariables = {
-		goober: 'booper'
-	};
-
 	this.targetEnemy = null;
 
 	this.tweens = {};
@@ -41,10 +35,12 @@ SpeechController = function() {
 
 SpeechController.prototype.Create = function() {
 
+	this.speechGroup = game.add.group(Frogland.froglandGroup, 'speech');	
+
 	var speechOffsetX = 91;
 	var speechOffsetY = 240;
 
-	this.portraitBox = game.add.image(80, 70, 'UI', 'Speech0000');
+	this.portraitBox = game.add.image(80, 70, 'UI', 'Speech0000', this.speechGroup);
 	this.portraitBox.animations.add('green', ['Speech0000'], 18, true, false);
 	this.portraitBox.animations.play('green');
 	this.portraitBox.fixedToCamera = true;
@@ -56,7 +52,7 @@ SpeechController.prototype.Create = function() {
 	this.dialogBoxX = 70 + speechOffsetX;
 	this.dialogBoxSmallX = 20 + speechOffsetX;
 
-	this.dialogBox = game.add.image(7, 7, 'UI', 'Speech0002');
+	this.dialogBox = game.add.image(7, 7, 'UI', 'Speech0002', this.speechGroup);
 	this.dialogBox.fixedToCamera = true;
 	this.dialogBox.animations.add('green', ['Speech0001'], 18, true, false);
 	this.dialogBox.animations.add('green_npc', ['Speech0002'], 18, true, false);
@@ -75,6 +71,7 @@ SpeechController.prototype.Create = function() {
 	this.text.visible = false;
 	this.text.cameraOffset.x = 110 + speechOffsetX; 
 	this.text.cameraOffset.y = 15 + speechOffsetY;
+	this.speechGroup.add(this.text);
 
 	this.regionText = game.add.bitmapText(0, 0, 'rise', null, 36);
 	this.regionText.fixedToCamera = true;
@@ -82,11 +79,12 @@ SpeechController.prototype.Create = function() {
 	this.regionText.anchor.setTo(0.5);
 	this.regionText.cameraOffset.x = game.width / 2; 
 	this.regionText.cameraOffset.y = game.height / 3;
+	this.speechGroup.add(this.regionText);	
 
 	this.portraits = {};
 
 	FileMap.Portraits.forEach(function(portrait) {
-		this.portraits[portrait.Name] = game.add.image(200, 200, 'UI', portrait.Frame);
+		this.portraits[portrait.Name] = game.add.image(200, 200, 'UI', portrait.Frame, this.speechGroup);
 		this.portraits[portrait.Name].anchor.setTo(0.5, 1);
 		this.portraits[portrait.Name].fixedToCamera = true;
 		this.portraits[portrait.Name].visible = false;
@@ -101,21 +99,21 @@ SpeechController.prototype.Create = function() {
 
 	this.SetText('');
 
-	this.questionMark = game.add.sprite(0, 0, 'UI');
+	this.questionMark = game.add.sprite(0, 0, 'UI', null, this.speechGroup);
     this.questionMark.animations.add('blink', ['QuestionMark0000', 'QuestionMark0001'], 18, true, false);
     this.questionMark.animations.play('blink');
     this.questionMark.alpha = 0.8;
     this.questionMark.anchor.setTo(0.5);
     this.questionMark.visible = false;
 
-    this.exclamationMark = game.add.sprite(0, 0, 'UI');
+    this.exclamationMark = game.add.sprite(0, 0, 'UI', null, this.speechGroup);
     this.exclamationMark.animations.add('blink', ['ExclamationMark0000', 'ExclamationMark0001'], 18, true, false);
     this.exclamationMark.animations.play('blink');
     this.exclamationMark.alpha = 0.8;
     this.exclamationMark.anchor.setTo(0.5);
     this.exclamationMark.visible = false;
 
-	this.surpriseMark = game.add.sprite(0, 0, 'UI', 'SurpriseMark0000');
+	this.surpriseMark = game.add.sprite(0, 0, 'UI', 'SurpriseMark0000', this.speechGroup);
 	this.surpriseMark.animations.add('shake', ['SurpriseMark0000', 'SurpriseMark0001', 'SurpriseMark0002', 'SurpriseMark0003'], 50, true, false);
     this.surpriseMark.animations.play('shake');
     this.surpriseMark.anchor.setTo(0.5);
@@ -128,8 +126,6 @@ SpeechController.prototype.Create = function() {
 };
 
 SpeechController.prototype.LoadSpeechZones = function() {
-	var that = this;
-
 	Frogland.map.objects['Triggers'].forEach(function(o) {
         if(o.type === 'speech') {
         	var zone = new Phaser.Rectangle(o.x, o.y, o.width, o.height);
@@ -143,10 +139,10 @@ SpeechController.prototype.LoadSpeechZones = function() {
             	zone.showFlag = null;
             }
 
-            that.speechZones.push(zone);
+            this.speechZones.push(zone);
              
         }
-	});
+	}, this);
 	
 	//create speech zones for all the NPCs
 	Frogland.map.objects['Enemies'].forEach(function(o) {
@@ -163,9 +159,9 @@ SpeechController.prototype.LoadSpeechZones = function() {
             	zone.showFlag = null;
             }
 
-            that.speechZones.push(zone);
+            this.speechZones.push(zone);
         }
-    });
+    }, this);
 };
 
 SpeechController.prototype.Update = function() {
@@ -359,7 +355,7 @@ SpeechController.prototype.SetText = function(text) {
 		return;
 	}
 
-	var parsedText = this.ParseTextVariables(text);
+	var parsedText = text;
 
 	var words = parsedText.split(' ');
 
@@ -384,21 +380,6 @@ SpeechController.prototype.SetText = function(text) {
 
 	this.currentText = this.processedText.join('\n');
 	this.displayIndex = 0;
-};
-
-SpeechController.prototype.ParseTextVariables = function(text) {
-	var that = this;
-
-	text = text.replace(/\{.*\}/g, function(match) {
-		match = match.slice(1, -1);
-		if(!!that.speechVariables[match]) {
-			return that.speechVariables[match];
-		} else {
-			return 'X';
-		}
-	});
-
-	return text;
 };
 
 SpeechController.prototype.ShowExclamationMark = function(e) {

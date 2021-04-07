@@ -2,8 +2,11 @@ var LoadingState = new Phaser.State();
 
 LoadingState.preload = function() {
     this.logo = game.add.image(0, 0, 'clyde_games_logo');
+    this.logo.name = 'clyde_logo';
     this.logo.alpha = 0;
     this.fadeTween = game.add.tween(this.logo).to({alpha: 1}, 500, Phaser.Easing.Cubic.In, true);
+
+    game.add.plugin(Phaser.Plugin.Debug);
     
     game.load.json('keybinds', 'keybinds.json');
     GameData.LoadSettingsFromStorage();
@@ -75,15 +78,15 @@ LoadingState.create = function() {
     backdropController = new BackdropController();
     effectsController = new EffectsController();
     projectileController = new ProjectileController();
-
-    Frogland.Create();
-    
     weaponController = new WeaponController();
     speechController = new SpeechController();
-    speechController.Create();
+
+    Frogland.Create();
 
     ScriptRunner.create();
  
     game.state.start('GameState', false, false);
+
+    
 
 };

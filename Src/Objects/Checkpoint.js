@@ -2,6 +2,7 @@ Checkpoint = function(game, x, y, name) {
     //instantiate the sprite
     Phaser.Sprite.call(this, game, x + 8, y - 8, 'Misc');
     this.spriteType = 'checkpoint';
+    this.name = 'checkpoint';
 
     this.animations.add('active', ['Checkpoint0000', 'Checkpoint0001', 'Checkpoint0002', 'Checkpoint0003', 'Checkpoint0004'], 10, true, false);
     this.animations.add('inactive', ['Checkpoint0005'], 10, true, false);

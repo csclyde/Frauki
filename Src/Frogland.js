@@ -30,29 +30,45 @@ Frogland.Create = function() {
         Power: {x: 4472, y: 2640},
     };
 
+    this.froglandGroup = game.add.group(undefined, 'frogland');
+
     backdropController.Create();
     
-    this['backgroundLayer'] = this.map.createLayer('Background');
+    this.backgroundLayer = this.map.createLayer('Background');
+    this.backgroundLayer.name = 'background_tiles';
+    this.froglandGroup.add(this.backgroundLayer);
     
     frauki = new Player(game, 0, 0, 'Frauki');
+    frauki.name = 'frauki';
     game.add.existing(frauki);
+    this.froglandGroup.add(frauki);
 
     goddess = new Enemy(game, this.goddessPositions.start.x, this.goddessPositions.start.y, 'Goddess', 'Goddess');
+    goddess.name = 'goddess';
     game.add.existing(goddess);
+    this.froglandGroup.add(goddess);    
     
     this.CreateCollisionLayer();
     
     objectController.Create();    
     objectController.CreateObjectsLayer();
-    effectsController.CreateMidgroundEffects();
     projectileController.CreateProjectileLayer();
+    effectsController.CreateMidgroundEffects();
 
-    this['midgroundLayer'] = this.map.createLayer('Midground');
-    this['midgroundLayer'].resizeWorld();
+    this.midgroundLayer = this.map.createLayer('Midground');
+    this.midgroundLayer.resizeWorld();
+    this.midgroundLayer.name = 'midground_tiles';
+    this.froglandGroup.add(this.midgroundLayer);    
 
-    this['foregroundLayer'] = this.map.createLayer('Foreground');
+    this.foregroundLayer = this.map.createLayer('Foreground');
+    this.foregroundLayer.name = 'foreground_tiles';
+    this.froglandGroup.add(this.foregroundLayer);
 
+    weaponController.Create();
+    
     effectsController.CreateForegroundEffects();
+
+    speechController.Create();    
 
     this.PreprocessTiles();
 
@@ -160,9 +176,11 @@ Frogland.HandleCollisions = function() {
 };
 
 Frogland.CreateCollisionLayer = function() {
-    this['collisionLayer'] = this.map.createLayer('Collision');
+    this.collisionLayer = this.map.createLayer('Collision');
+    this.collisionLayer.name = 'collision_layer';
     this.map.setCollision([1, 3, 4, 5, 7, 8, 9, 17, 18], true, 'Collision');
-    this['collisionLayer'].visible = false;
+    this.collisionLayer.visible = false;
+    this.froglandGroup.add(this.collisionLayer);
 };
 
 Frogland.PreprocessTiles = function() {
@@ -214,7 +232,7 @@ Frogland.PreprocessTiles = function() {
 };
 
 Frogland.GetCollisionLayer = function() {
-    return this['collisionLayer'];
+    return this.collisionLayer;
 };
 
 Frogland.DislodgeTile = function(tile) {

@@ -85,7 +85,6 @@
             <script type="text/javascript" src="Src/Objects/Enemies/KR32.js"></script>
             <script type="text/javascript" src="Src/Objects/Enemies/A3PZ.js"></script>
             <script type="text/javascript" src="Src/Objects/Enemies/HWK9.js"></script>
-            <script type="text/javascript" src="Src/Objects/Enemies/R2BTU.js"></script>
             <script type="text/javascript" src="Src/Objects/Enemies/GUBr.js"></script>
             <script type="text/javascript" src="Src/Objects/Enemies/Goddess.js"></script>
             <script type="text/javascript" src="Src/Objects/Enemies/H0P8.js"></script>
@@ -94,7 +93,6 @@
             <script type="text/javascript" src="Src/Objects/Enemies/SW8T.js"></script>
             <script type="text/javascript" src="Src/Objects/Enemies/Hopper.js"></script>
             <script type="text/javascript" src="Src/Objects/Enemies/SpikeDropper.js"></script>
-            <script type="text/javascript" src="Src/Objects/Enemies/Haystax.js"></script>
             <script type="text/javascript" src="Src/Objects/Enemies/Crabby.js"></script>
             <script type="text/javascript" src="Src/Objects/Enemies/NPC.js"></script>
 
@@ -165,7 +163,7 @@
             }
             
 
-            var game = new Phaser.Game(pixel.width, pixel.height, Phaser.CANVAS, "game", LoadingState, false, false);
+            var game = new Phaser.Game(pixel.width, pixel.height, Phaser.AUTO, "game", LoadingState, false, false);
             var events = new EventRouter();
 
             game.state.add('BootState', BootState, true);

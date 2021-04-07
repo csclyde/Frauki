@@ -1,8 +1,8 @@
 GemSucker = function(game, x, y, name) {
     //instantiate the sprite
     Phaser.Sprite.call(this, game, x, y, name);
-    this.spriteType = 'GemSucker';
-    this.objectName = 'GemSucker';
+    this.spriteType = 'gem_sucker';
+    this.objectName = 'gem_sucker';
     
     //enable its physics body
     game.physics.enable(this, Phaser.Physics.ARCADE);

@@ -20,6 +20,11 @@ EffectsController = function() {
 };
 
 EffectsController.prototype.Update = function() {
+
+    if(this.dicedPieces.length > 0 && this.timers.TimerUp('dice_clear')) {
+        this.dicedPieces.removeAll(true);
+    }
+
     this.loadedEffects.forEach(function(o) {
         var padding = 100;
 
@@ -46,9 +51,6 @@ EffectsController.prototype.Update = function() {
     this.energyStreak.y = frauki.attackRect.body.y;
     this.energyStreak.width = frauki.attackRect.body.width;
     this.energyStreak.height = frauki.attackRect.body.height;
-
-    this.charge1.x = frauki.body.center.x;
-    this.charge1.y = frauki.body.center.y;
 
     game.physics.arcade.collideGroupVsTilemapLayer(this['dicedPieces'], Frogland.GetCollisionLayer(), null, null, null, false);
     game.physics.arcade.collide(this.loadedEffectsCollide, Frogland.GetCollisionLayer(), Collision.CollideEffectWithWorld, Collision.OverlapEffectWithWorld);
@@ -84,52 +86,52 @@ EffectsController.prototype.CreateEffect = function(e, x, y, w, h) {
 EffectsController.prototype.CreateMidgroundEffects = function() {
     var that = this;
 
-    this.dicedPieces = game.add.group();
-    this.effectsGroup = game.add.group();
+    this.dicedPieces = game.add.group(Frogland.froglandGroup, 'diced_pieces');
+    this.effectsGroup = game.add.group(Frogland.froglandGroup, 'midground_effects');
+
+    this.materializingApple = game.add.image(0, 0, 'Misc', 'Apple0000');
+    this.materializingApple.name = 'mater_apple';
+    this.materializingApple.animations.add('mat', ['Apple0007', 'Apple0008', 'Apple0009', 'Apple0010', 'Apple0011', 'Apple0012'], 12, true, false);
+    this.materializingApple.animations.play('mat');
+    this.materializingApple.visible = false;
+    this.materializingApple.anchor.setTo(0.5);
+
+    this.effectsGroup.add(this.materializingApple);
 
     Effects.Emitters.forEach(function(e) {
         this[e.Name] = this.CreateEffect(e);
         this.effectsGroup.add(this[e.Name]);
     }, this);
 
-    this.materializingApple = game.add.image(0, 0, 'Misc', 'Apple0000');
-    this.materializingApple.animations.add('mat', ['Apple0007', 'Apple0008', 'Apple0009', 'Apple0010', 'Apple0011', 'Apple0012'], 12, true, false);
-    this.materializingApple.animations.play('mat');
-    this.materializingApple.visible = false;
-    this.materializingApple.anchor.setTo(0.5);
-
-    this.charge1 = game.add.image(0, 0, 'Misc', 'Charge10000');
-    this.charge1.animations.add('flicker', ['Charge10000', 'Charge10001', 'Charge10002', 'Charge10003'], 18, true, false);
-    this.charge1.animations.play('flicker');
-    this.charge1.visible = false;
-    this.charge1.anchor.setTo(0.5);
-
-    this.effectsGroup.add(this.materializingApple);
-    this.effectsGroup.add(this.charge1);
-
     this.LoadMapEffects();
 };
 
 EffectsController.prototype.CreateForegroundEffects = function() {
+    this.foregroundEffectsGroup = game.add.group(Frogland.froglandGroup, 'foreground_effects');
+    
     var screenLightBmd = game.add.bitmapData(game.width, game.height);
     screenLightBmd.ctx.fillStyle = 'white';
     screenLightBmd.ctx.fillRect(0,0, game.width, game.height);
+
     this.screenLight = game.add.sprite(0, 0, screenLightBmd);
     this.screenLight.alpha = 0.5;
     this.screenLight.fixedToCamera = true;
     this.screenLight.visible = false;
+    this.foregroundEffectsGroup.add(this.screenLight);
 
     var screenDarkBmd = game.add.bitmapData(game.width, game.height);
     screenDarkBmd.ctx.fillStyle = 'black';
     screenDarkBmd.ctx.fillRect(0,0, game.width, game.height);
     this.screenDark = game.add.sprite(0, 0, screenDarkBmd);
     this.screenDark.fixedToCamera = true;
+    this.foregroundEffectsGroup.add(this.screenDark);    
 };
 
 EffectsController.prototype.LoadMapEffects = function() {
     Frogland.map.objects['Effects'].forEach(function(o) {
         if(o.name === 'splash') {
             var splasherLeft = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
+            splasherLeft.name = o.name;
             splasherLeft.width = o.width / 2;
             splasherLeft.height = o.height;
             splasherLeft.makeParticles('Misc', ['Splash0002', 'Splash0003'], 10); 
@@ -144,6 +146,7 @@ EffectsController.prototype.LoadMapEffects = function() {
             splasherLeft.start(false, 200, 5);
 
             var splasherRight = game.add.emitter(o.x + o.width / 2, o.y);
+            splasherRight.name = o.name;            
             splasherRight.width = o.width / 2;
             splasherRight.height = o.height;
             splasherRight.makeParticles('Misc', ['Splash0000', 'Splash0001'], 10); 
@@ -159,9 +162,12 @@ EffectsController.prototype.LoadMapEffects = function() {
 
             this.loadedEffects.push(splasherLeft);
             this.loadedEffects.push(splasherRight);
+            this.effectsGroup.add(splasherLeft);
+            this.effectsGroup.add(splasherRight);
+        
         } else if(o.name === 'drip') {
-
             var dripper = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
+            dripper.name = o.name;            
             dripper.width = o.width;
             dripper.height = o.height;
             dripper.makeParticles('Misc', ['Drip0000', 'Drip0001'], 2);
@@ -175,9 +181,12 @@ EffectsController.prototype.LoadMapEffects = function() {
             dripper.alpha = 0.5;
 
             this.loadedEffectsCollide.push(dripper);
+            this.effectsGroup.add(dripper);
+            
         } else if(o.name === 'dripDirty') {
 
             var dripper = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
+            dripper.name = o.name;
             dripper.width = o.width;
             dripper.height = o.height;
             dripper.makeParticles('Misc', ['DripDirty0000', 'DripDirty0001'], 2);
@@ -191,9 +200,12 @@ EffectsController.prototype.LoadMapEffects = function() {
             dripper.alpha = 0.5;
 
             this.loadedEffectsCollide.push(dripper);
+            this.effectsGroup.add(dripper);
+            
         } else if(o.name === 'fluff') {
 
             var fluffer = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
+            fluffer.name = o.name;
             // fluffer.x = o.x;
             // fluffer.y = o.y;
             fluffer.width = o.width;
@@ -208,9 +220,12 @@ EffectsController.prototype.LoadMapEffects = function() {
             fluffer.alpha = 0.8;
 
             this.loadedEffects.push(fluffer);
+            this.effectsGroup.add(fluffer);
+            
         } else if(o.name === 'bubbles') {
 
             var bubbler = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
+            bubbler.name = o.name;
             bubbler.width = o.width;
             bubbler.height = o.height;
             bubbler.makeParticles('Misc', ['Bubbles0000', 'Bubbles0001', 'Bubbles0002', 'Bubbles0003'], 5);
@@ -226,9 +241,11 @@ EffectsController.prototype.LoadMapEffects = function() {
             bubbler.alpha = 0.5;
 
             this.loadedEffects.push(bubbler);
+            this.effectsGroup.add(bubbler);
             
         } else if(o.name === 'energy_spray') {
             var sprayer = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
+            sprayer.name = o.name;            
             // sprayer.x = o.x;
             // sprayer.y = o.y;
             sprayer.width = o.width;
@@ -242,9 +259,11 @@ EffectsController.prototype.LoadMapEffects = function() {
             sprayer.effectType = 'energy_spray';
 
             this.loadedEffects.push(sprayer);
-
+            this.effectsGroup.add(sprayer);
+            
         } else if(o.name === 'sparks') {
             var sprayer = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
+            sprayer.name = o.name;
             // sprayer.x = o.x;
             // sprayer.y = o.y;
             sprayer.width = o.width;
@@ -258,8 +277,11 @@ EffectsController.prototype.LoadMapEffects = function() {
             sprayer.effectType = 'sparks';
 
             this.loadedEffects.push(sprayer);
+            this.effectsGroup.add(sprayer);
+            
         } else if(o.name === 'leaves_green') {
             var leaves = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
+            leaves.name = o.name;            
             leaves.width = o.width;
             leaves.height = o.height;
             leaves.makeParticles('Misc', ['Leaves0000', 'Leaves0001', 'Leaves0002'], 5);
@@ -274,8 +296,11 @@ EffectsController.prototype.LoadMapEffects = function() {
             //leaves.alpha = 0.5;
 
             this.loadedEffects.push(leaves);
+            this.effectsGroup.add(leaves);
+            
         } else if(o.name === 'leaves_brown') {
             var leaves = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
+            leaves.name = o.name;
             leaves.width = o.width;
             leaves.height = o.height;
             leaves.makeParticles('Misc', ['Leaves0003', 'Leaves0004', 'Leaves0005'], 5);
@@ -290,8 +315,11 @@ EffectsController.prototype.LoadMapEffects = function() {
             //leaves.alpha = 0.5;
 
             this.loadedEffects.push(leaves);
+            this.effectsGroup.add(leaves);
+            
         } else if(o.name === 'spirits') {
             var spirits = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
+            spirits.name = o.name;
             spirits.width = o.width;
             spirits.height = o.height;
             spirits.makeParticles('Misc', ['Spirit0000', 'Spirit0001', 'Spirit0002', 'Spirit0003'], 10);
@@ -307,12 +335,16 @@ EffectsController.prototype.LoadMapEffects = function() {
             spirits.effectType = 'spirits';
 
             this.loadedEffects.push(spirits);
+            this.effectsGroup.add(spirits);
+            
         }
+
     }, this);
 
     Frogland.map.objects['Triggers'].forEach(function(o) {
         if(o.type === 'speech') {
             var sparkles = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
+            sparkles.name = 'sparkles';
             sparkles.width = o.width;
             sparkles.height = o.height;
             sparkles.makeParticles('Misc', ['Sparkles0000', 'Sparkles0001', 'Sparkles0002', 'Sparkles0003', 'Sparkles0004'], 25);
@@ -327,6 +359,8 @@ EffectsController.prototype.LoadMapEffects = function() {
             sparkles.effectType = 'sparkles';
 
             this.loadedEffects.push(sparkles);
+            this.effectsGroup.add(sparkles);
+            
         }
     }, this);
 };
@@ -440,8 +474,10 @@ EffectsController.prototype.DiceObject = function(name, x, y, xv, yv) {
 
         game.time.events.add(4000, function() { if(!!p && !!p.body) p.body.enable = false; } );
 
-        effectsController['dicedPieces'].addChild(p);
+        effectsController.dicedPieces.addChild(p);
     });
+
+    this.timers.SetTimer('dice_clear', 20000);
 };
 
 EffectsController.prototype.ClearDicedPieces = function() {
@@ -558,7 +594,7 @@ EffectsController.prototype.EnergyStreak = function() {
 };
 
 EffectsController.prototype.ClashStreak = function(x, y, angle) {
-    var clash = game.add.sprite(x, y, 'Misc');
+    var clash = game.add.sprite(x, y, 'Misc', null, this.effectsGroup);
     clash.anchor.setTo(0.5);
     clash.animations.add('clash', ['Clash0000', 'Clash0001', 'Clash0002', 'Clash0003'], 8, false, false);
     clash.animations.play('clash');
@@ -569,7 +605,7 @@ EffectsController.prototype.ClashStreak = function(x, y, angle) {
 EffectsController.prototype.DripSplash = function(src, onWater) {
     var yPos = src.y - (src.y % 16) + 2;
 
-    var dripSplash = game.add.sprite(src.x - 10, yPos, 'Misc');
+    var dripSplash = game.add.sprite(src.x - 10, yPos, 'Misc', null, this.effectsGroup);
     dripSplash.animations.add('splish', ['DripSplash0000', 'DripSplash0001', 'DripSplash0002', 'DripSplash0003', 'DripSplash0004'], 18, false, false);
     dripSplash.animations.play('splish');
     dripSplash.animations.currentAnim.killOnComplete = true;
@@ -580,7 +616,7 @@ EffectsController.prototype.DripSplash = function(src, onWater) {
     if(onWater) {
         events.publish('play_sound', {name: 'drip', restart: false });
         
-        var ripple = game.add.sprite(src.x, yPos + 8, 'Misc');
+        var ripple = game.add.sprite(src.x, yPos + 8, 'Misc', null, this.effectsGroup);
         ripple.anchor.setTo(0.5);
         ripple.animations.add('ripple', ['Ripple0000', 'Ripple0001', 'Ripple0002', 'Ripple0003', 'Ripple0004', 'Ripple0005'], 12, false, false);
         ripple.animations.play('ripple');
@@ -592,7 +628,7 @@ EffectsController.prototype.DripSplash = function(src, onWater) {
 EffectsController.prototype.DripDirtySplash = function(src, onWater) {
     var yPos = src.y - (src.y % 16) + 2;
 
-    var dripSplash = game.add.sprite(src.x - 10, yPos, 'Misc');
+    var dripSplash = game.add.sprite(src.x - 10, yPos, 'Misc', null, this.effectsGroup);
     dripSplash.animations.add('splish', ['DripDirtySplash0000', 'DripDirtySplash0001', 'DripDirtySplash0002', 'DripDirtySplash0003', 'DripDirtySplash0004'], 18, false, false);
     dripSplash.animations.play('splish');
     dripSplash.animations.currentAnim.killOnComplete = true;
@@ -603,7 +639,7 @@ EffectsController.prototype.DripDirtySplash = function(src, onWater) {
     if(onWater) {
         events.publish('play_sound', {name: 'drip', restart: false });
         
-        var ripple = game.add.sprite(src.x, yPos + 8, 'Misc');
+        var ripple = game.add.sprite(src.x, yPos + 8, 'Misc', null, this.effectsGroup);
         ripple.anchor.setTo(0.5);
         ripple.animations.add('ripple', ['RippleDirty0000', 'RippleDirty0001', 'RippleDirty0002', 'RippleDirty0003', 'RippleDirty0004', 'RippleDirty0005'], 12, false, false);
         ripple.animations.play('ripple');
@@ -658,7 +694,7 @@ EffectsController.prototype.ExplodeDoorSeal = function(door) {
 
     var i = 0;
     while(game.cache.getFrameData('Pieces').getFrameByName('DoorSeal000' + i)) {
-        pieces.push(game.add.sprite(door.x + game.rnd.between(-20, 20), door.y + game.rnd.between(-20, 20), 'Pieces', 'DoorSeal000' + i));
+        pieces.push(game.add.sprite(door.x + game.rnd.between(-20, 20), door.y + game.rnd.between(-20, 20), 'Pieces', 'DoorSeal000' + i, this.effectsGroup));
         i++;
     }
 

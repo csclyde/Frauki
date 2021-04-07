@@ -62,8 +62,6 @@ GameState.update = function() {
         speechController.Update();
     }
 
-    pixel.context.globalAlpha = this.currentAlpha;
-
     game.canvas.style.width = (pixel.width * pixel.scale) + "px";
     game.canvas.style.height = (pixel.height * pixel.scale) + "px";
 
@@ -92,7 +90,6 @@ GameState.BeginGameover = function() {
 
     this.physicsSlowMo = 0.1;
     this.currentAlpha = 1;
-    pixel.context.globalAlpha = 1;
 
     audioController.Reset();
     inputController.Reset();
@@ -171,48 +168,8 @@ GameState.PauseGame = function() {
 
 GameState.CreateUI = function() {
     
-    //CREATE THE MAIN MENU
-    this.Menu = game.add.group();
-    this.Menu.fixedToCamera = true;        
-
-    this.logo = game.add.image(pixel.width / 2, pixel.height / 3, 'UI', 'Logo0000', this.Menu);
-    this.logo.anchor.setTo(0.5);    
-
-    this.menuText = [];
-    for(var i = 0; i < 6; i++) {
-        var text = game.add.bitmapText(pixel.width / 2, 200 + i * 20, 'bubble','', 18, this.Menu);
-        text.anchor.setTo(0.5);
-        text.setText('');
-        this.menuText.push(text);
-    }
-
-    this.settingsMenu = game.add.group();
-    this.settingsMenu.fixedToCamera = true;
-    this.settingsMenu.visible = false;
-
-    this.soundSliderFrame = game.add.image(400, 189, 'UI', 'Settings0000', this.settingsMenu);
-    this.musicSliderFrame = game.add.image(400, 209, 'UI', 'Settings0000', this.settingsMenu);
-    this.effectsSliderFrame = game.add.image(400, 229, 'UI', 'Settings0000', this.settingsMenu);
-
-    this.soundPips = [];
-    this.musicPips = [];
-    this.sfxPips = [];
-
-    for(var i = 0; i < 8; i++) {
-        var soundPip = game.add.image(407 + (i * 7), 192, 'UI', 'Settings0001', this.settingsMenu);
-        this.soundPips.push(soundPip);
-
-        var musicPip = game.add.image(407 + (i * 7), 212, 'UI', 'Settings0001', this.settingsMenu);
-        this.musicPips.push(musicPip);
-
-        var sfxPip = game.add.image(407 + (i * 7), 232, 'UI', 'Settings0001', this.settingsMenu);
-        this.sfxPips.push(sfxPip);
-    
-    }
-
-
     //CREATE THE IN GAME HUD
-    this.HUD = game.add.group();
+    this.HUD = game.add.group(undefined, 'hud');
     this.HUD.fixedToCamera = true;
 
     if(this.inMenu) {
@@ -242,6 +199,48 @@ GameState.CreateUI = function() {
     this['prismWill'] = game.add.image(2, 320, 'Misc', 'Shard0005', this.HUD);
     this['prismLuck'] = game.add.image(14, 320, 'Misc', 'Shard0006', this.HUD);
     this['prismPower'] = game.add.image(26, 320, 'Misc', 'Shard0007', this.HUD);
+    
+    //CREATE THE MAIN MENU
+    this.Menu = game.add.group(undefined, 'main_menu');
+    this.Menu.fixedToCamera = true;        
+
+    this.logo = game.add.image(pixel.width / 2, pixel.height / 3, 'UI', 'Logo0000');
+    this.Menu.add(this.logo);
+    this.logo.anchor.setTo(0.5);    
+
+    this.menuText = [];
+    for(var i = 0; i < 6; i++) {
+        var text = game.add.bitmapText(pixel.width / 2, 200 + i * 20, 'bubble','', 18);
+        this.Menu.add(text);
+        text.anchor.setTo(0.5);
+        text.setText('');
+        this.menuText.push(text);
+    }
+
+    this.settingsMenu = game.add.group(undefined, 'settings_menu');
+    this.settingsMenu.fixedToCamera = true;
+    this.settingsMenu.visible = false;
+
+    this.soundSliderFrame = game.add.image(400, 189, 'UI', 'Settings0000', this.settingsMenu);
+    this.musicSliderFrame = game.add.image(400, 209, 'UI', 'Settings0000', this.settingsMenu);
+    this.effectsSliderFrame = game.add.image(400, 229, 'UI', 'Settings0000', this.settingsMenu);
+
+    this.soundPips = [];
+    this.musicPips = [];
+    this.sfxPips = [];
+
+    for(var i = 0; i < 8; i++) {
+        var soundPip = game.add.image(407 + (i * 7), 192, 'UI', 'Settings0001', this.settingsMenu);
+        this.soundPips.push(soundPip);
+
+        var musicPip = game.add.image(407 + (i * 7), 212, 'UI', 'Settings0001', this.settingsMenu);
+        this.musicPips.push(musicPip);
+
+        var sfxPip = game.add.image(407 + (i * 7), 232, 'UI', 'Settings0001', this.settingsMenu);
+        this.sfxPips.push(sfxPip);
+    
+    }
+
 };
 
 GameState.GetCurrentMenu = function() {
