@@ -281,9 +281,13 @@ SpeechController.prototype.AdvanceText = function() {
 	}
 };
 
+SpeechController.prototype.SpeechVisible = function() {
+	return this.text.visible;
+};
+
 SpeechController.prototype.CurrentTextIsAllPrinted = function() {
 	return this.displayIndex === this.currentText.length;
-}
+};
 
 SpeechController.prototype.Activate = function(text, portrait) {
 	//if there is an array, pull a random one from it

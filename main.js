@@ -3,6 +3,8 @@ var app = electron.app;  // Module to control application life.
 var BrowserWindow = electron.BrowserWindow;  // Module to create native browser window.
 var ipcMain = electron.ipcMain;
 
+var greenworks = require('./greenworks');
+
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is GCed.
@@ -23,8 +25,10 @@ function createWindow() {
   mainWindow.loadFile('index.html');
   mainWindow.app = app;
 
+  console.log(greenworks);
+
   // Open the devtools.
-  // mainWindow.openDevTools();
+  mainWindow.openDevTools();
 
   mainWindow.on('closed', function() {
     mainWindow = null;

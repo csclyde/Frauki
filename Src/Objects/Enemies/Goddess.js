@@ -155,7 +155,7 @@ Enemy.prototype.types['Goddess'] =  function() {
 		else if(!GameData.HasShard('Will')) {
 			//WIT GEM TO APARTMENTS SHORTCUT
 			if(!GameData.IsDoorOpen('apartments_to_tower')) {
-				if(GameData.IsCheckPointActive('1') && !GameData.GetFlag('first_checkpoint')) {
+				if(GameData.IsCheckpointActive('1') && !GameData.GetFlag('first_checkpoint')) {
 					GameData.SetFlag('first_checkpoint', true);
 					return 'first_checkpoint';
 				}

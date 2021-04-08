@@ -347,18 +347,18 @@ InputController.prototype.OnJump = function(pressed) {
 InputController.prototype.OnSlash = function(pressed) {
     this.tetrad.left = pressed;
 
-    if(pressed) {
-        events.publish('select_menu_option', {});
-        events.publish('advance_text', {});
-    }
-
-    if(this.allowInput) {
+    if(this.allowInput && !speechController.SpeechVisible()) {
         if(pressed) {
             events.publish('player_slash', {});
         } else {
             events.publish('player_release_slash', {});
 
         }
+    }
+
+    if(pressed) {
+        events.publish('select_menu_option', {});
+        events.publish('advance_text', {});
     }
 };
 

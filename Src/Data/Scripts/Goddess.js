@@ -33,23 +33,41 @@ ScriptRunner.scripts['goddess_intro'] = [
 ScriptRunner.scripts['goddess_welcome_return'] = [
 	{ func: function() {
 		if(!GameData.HasShard('Wit')) {
-			events.publish('show_text', { text: GoddessSpeeches.welcome_back1, portrait: 'Goddess_Neutral' });
+			ScriptRunner.run('welcome_back1');
 		}
 		else if(!GameData.HasShard('Will')) {
-			events.publish('show_text', { text: GoddessSpeeches.welcome_back2, portrait: 'Goddess_Neutral' });
+			ScriptRunner.run('welcome_back2');
 		}
 		else if(!GameData.HasShard('Luck')) {
-			events.publish('show_text', { text: GoddessSpeeches.welcome_back3, portrait: 'Goddess_Neutral' });			
+			ScriptRunner.run('welcome_back3');			
 		}
 		else if(!GameData.HasShard('Power')) {
-			events.publish('show_text', { text: GoddessSpeeches.welcome_back4, portrait: 'Goddess_Neutral' });						
+		    ScriptRunner.run('welcome_back4');						
 		}
 		else {
 			//has all the shards. initiate the endgame						
 		}
 	}},
-	//{ name: 'show_text', props: { text: GoddessSpeeches.welcome_back, portrait: 'Goddess_Neutral' } },
-	{ name: 'run_script', props: { name: 'exit_goddess' } },
+];
+
+ScriptRunner.scripts['welcome_back1'] = [
+	{ name: 'show_text', props: { text: GoddessSpeeches.welcome_back1, portrait: 'Goddess_Neutral' } },
+	{ name: 'run_script', props: { name: 'exit_goddess' } },	
+];
+
+ScriptRunner.scripts['welcome_back2'] = [
+	{ name: 'show_text', props: { text: GoddessSpeeches.welcome_back2, portrait: 'Goddess_Neutral' } },
+	{ name: 'run_script', props: { name: 'exit_goddess' } },	
+];
+
+ScriptRunner.scripts['welcome_back3'] = [
+	{ name: 'show_text', props: { text: GoddessSpeeches.welcome_back3, portrait: 'Goddess_Neutral' } },
+	{ name: 'run_script', props: { name: 'exit_goddess' } },	
+];
+
+ScriptRunner.scripts['welcome_back4'] = [
+	{ name: 'show_text', props: { text: GoddessSpeeches.welcome_back4, portrait: 'Goddess_Neutral' } },
+	{ name: 'run_script', props: { name: 'exit_goddess' } },	
 ];
 
 ScriptRunner.scripts['goddess_gameover'] = [
