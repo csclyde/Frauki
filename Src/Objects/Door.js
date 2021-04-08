@@ -232,17 +232,14 @@ Door.prototype.OpenDoor = function(f) {
         this.waitingToOpen = true;
 
         //get the prism for this door
-        var prism = objectController.shardList.find(function(s) { return s.name === this.prism; }, this);
+        var prism = effectsController.shardList[this.prism];
 
-        prism.beingUsed = true;
         prism.x = this.body.x + 13;
         prism.y = this.body.y + 31;
 
         prism.scale.x = 0.1;
         prism.scale.y = 0.1;
         prism.visible = true;
-        prism.alpha = 1;
-        prism.bringToTop();
 
         if(!!this.script) {
             ScriptRunner.run(this.script);
@@ -254,7 +251,6 @@ Door.prototype.OpenDoor = function(f) {
             //when the tween is done, perform the door opening
             effectsController.ScreenFlash();
             this.PerformOpen(true);
-            prism.beingUsed = false;
             prism.visible = false;
         }, this);
     }  

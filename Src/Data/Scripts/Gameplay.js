@@ -368,13 +368,10 @@ ScriptRunner.scripts['destroy_gemsucker'] = [
     { name: 'wait', props: { amount: 950 } },
     
     { func: function(params) {
-        var shard = objectController.prisms[params.prism.prism];
+        var shard = effectsController.shardList[params.prism.prism];
         shard.visible = true;
-        console.log(shard)
         shard.x = params.prism.x - 15;
         shard.y = params.prism.y - 50;
-        shard.FlyAway();
-        shard.bringToTop();
         params.prism.BlowUp();
     } },
 
@@ -382,8 +379,7 @@ ScriptRunner.scripts['destroy_gemsucker'] = [
     { name: 'wait', props: { amount: 500 } },
     
     { func: function(params) {
-        var shard = objectController.prisms[params.prism.prism];
-        shard.body.velocity.setTo(0);
+        var shard = effectsController.shardList[params.prism.prism];
         game.add.tween(shard).to({x: frauki.body.center.x, y: frauki.body.center.y}, 4000, Phaser.Easing.Exponential.In, true);
     } },
     { name: 'play_music', props: { name: 'FanfareLong' } },
@@ -393,7 +389,7 @@ ScriptRunner.scripts['destroy_gemsucker'] = [
     { name: 'screen_flash', props: {} },    
     { func: function(params) {
         GameData.AddShard(params.prism.prism); 
-        objectController.prisms[params.prism.prism].visible = false;
+        effectsController.shardList[params.prism.prism].visible = false;
         effectsController.StarBurst(frauki.body.center);
         effectsController.SparkSplash(frauki);
     } },
@@ -415,13 +411,12 @@ ScriptRunner.scripts['finish_game'] = [
     { name: 'wait', props: { amount: 1500 } },
     
     { func: function(params) {
-        var wit = objectController.prisms.Wit;
+        var wit = effectsController.shardList.Wit;
         GameState.inFinale = true;
 
         wit.visible = true;
         wit.x = frauki.body.center.x;
         wit.y = frauki.body.center.y;
-        wit.bringToTop();
         //4456, 2656
         game.add.tween(wit).to(Frogland.prismPositions.Wit, 4000, Phaser.Easing.Quartic.InOut, true);
 
@@ -434,12 +429,11 @@ ScriptRunner.scripts['finish_game'] = [
     { name: 'wait', props: { amount: 1500 } },
 
     { func: function(params) {
-        var will = objectController.prisms.Will;
+        var will = effectsController.shardList.Will;
 
         will.visible = true;
         will.x = frauki.body.center.x;
         will.y = frauki.body.center.y;
-        will.bringToTop();
         //4456, 2656
         game.add.tween(will).to(Frogland.prismPositions.Will, 4000, Phaser.Easing.Quartic.InOut, true);
 
@@ -452,12 +446,11 @@ ScriptRunner.scripts['finish_game'] = [
     { name: 'wait', props: { amount: 1500 } },
 
     { func: function(params) {
-        var power = objectController.prisms.Power;
+        var power = effectsController.shardList.Power;
 
         power.visible = true;
         power.x = frauki.body.center.x;
         power.y = frauki.body.center.y;
-        power.bringToTop();
         //4456, 2656
         game.add.tween(power).to(Frogland.prismPositions.Power, 4000, Phaser.Easing.Quartic.InOut, true);
 
@@ -470,12 +463,11 @@ ScriptRunner.scripts['finish_game'] = [
     { name: 'wait', props: { amount: 1500 } },
 
     { func: function(params) {
-        var luck = objectController.prisms.Luck;
+        var luck = effectsController.shardList.Luck;
 
         luck.visible = true;
         luck.x = frauki.body.center.x;
         luck.y = frauki.body.center.y;
-        luck.bringToTop();
         //4456, 2656
         game.add.tween(luck).to(Frogland.prismPositions.Luck, 4000, Phaser.Easing.Quartic.InOut, true);
 

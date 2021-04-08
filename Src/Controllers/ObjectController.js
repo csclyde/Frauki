@@ -5,8 +5,6 @@ ObjectController = function() {
     this.enemyList = [];
     this.npcMap = {};
     this.checkpointList = [];
-    this.shardList = [];
-
     this.latentObjects = [];    
 };
 
@@ -78,40 +76,19 @@ ObjectController.prototype.CreateObjectsLayer = function(layer) {
     Frogland.map.createFromObjects('Objects', 69, 'Misc', 'Checkpoint0000', true, true, this.activeGroup, Checkpoint, false);
     Frogland.map.createFromObjects('Doors', 67, 'Misc', 'DoorSeal0000', true, true, this.activeGroup, Door, false);
     Frogland.map.createFromObjects('Objects', 75, 'Misc', 'Upgrade0000', true, true, this.activeGroup, Upgrade, false);
-    Frogland.map.createFromObjects('Objects', 76, 'Misc', 'GemSucker0000', true, true, this.activeGroup, GemSucker, false);
-
-    this.prisms = {};
-    this.prisms.Wit = new Shard(game, 0, 0, 'Misc', 'Shard0000');
-    this.prisms.Wit.name = 'Wit';
-    this.activeGroup.add(this.prisms.Wit);
-    
-    this.prisms.Will = new Shard(game, 0, 0, 'Misc', 'Shard0001');
-    this.prisms.Will.name = 'Will';
-    this.activeGroup.add(this.prisms.Will);
-    
-    this.prisms.Luck = new Shard(game, 0, 0, 'Misc', 'Shard0002');
-    this.prisms.Luck.name = 'Luck';
-    this.activeGroup.add(this.prisms.Luck);
-    
-    this.prisms.Power = new Shard(game, 0, 0, 'Misc', 'Shard0003');
-    this.prisms.Power.name = 'Power';
-    this.activeGroup.add(this.prisms.Power);
+    Frogland.map.createFromObjects('Objects', 76, 'Misc', 'GemSucker0000', true, true, this.activeGroup, GemSucker, false); 
 
     this.activeGroup.forEach(function(obj) {
-
+        
         if(obj.spriteType === 'door') {
             obj.create();
             obj.name = 'door';
-            
-            objectController.doorList.push(obj);
+            this.doorList.push(obj);
         } 
         else if(obj.spriteType === 'checkpoint') {
-            objectController.checkpointList.push(obj);
             obj.name = 'checkpoint';
-        } 
-        else if(obj.spriteType === 'shard') {
-            objectController.shardList.push(obj);
-        } 
+            this.checkpointList.push(obj);
+        }
         else if(obj.spriteType === 'gem_sucker') {
             obj.name = 'GemSucker';
         }
@@ -119,7 +96,7 @@ ObjectController.prototype.CreateObjectsLayer = function(layer) {
             obj.name = 'Upgrade';
         }
 
-    });  
+    }, this); 
 };
 
 ObjectController.prototype.CompileObjectList = function() {
