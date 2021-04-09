@@ -3,7 +3,7 @@ var app = electron.app;  // Module to control application life.
 var BrowserWindow = electron.BrowserWindow;  // Module to create native browser window.
 var ipcMain = electron.ipcMain;
 
-var greenworks = require('./greenworks');
+var greenworks = require('greenworks');
 
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -25,10 +25,17 @@ function createWindow() {
   mainWindow.loadFile('index.html');
   mainWindow.app = app;
 
-  console.log(greenworks);
-
   // Open the devtools.
-  mainWindow.openDevTools();
+  //mainWindow.openDevTools();
+
+  try {
+    if (greenworks.init()) {
+      console.log('Steam API has been initalized.');
+    }
+  }
+  catch(e) {
+    console.error(e);
+  }
 
   mainWindow.on('closed', function() {
     mainWindow = null;
