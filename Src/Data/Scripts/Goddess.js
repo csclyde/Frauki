@@ -139,7 +139,6 @@ ScriptRunner.scripts['goddess_angry4'] = [
 		GameState.physicsSlowMo = 0.1;
 		GameState.death.name = 'goddess';
 		
-		
 		for(var i = 0, max = energyController.GetHealth() + energyController.GetShield(); i < max; i++) {
             game.time.events.add(i * 400, function() {
 				effectsController.Explosion({ x: frauki.body.center.x + game.rnd.between(-20, 20), y: frauki.body.center.y + game.rnd.between(-20, 20) });
