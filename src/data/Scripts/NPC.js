@@ -87,13 +87,22 @@ ScriptRunner.scripts['robo_armed'] = [
 	{ name: 'run_script', props: { name: 'exit_NPC' } },
 ];
 
-ScriptRunner.scripts['robo_oldie'] = [
+ScriptRunner.scripts['robo_bouncer'] = [
 	{ name: 'show_text', props: { text: "Whoa whoa whoa, you're coming in pretty hot. Chill...", portrait: 'red' } },
 	{ name: 'show_text', props: { text: "Just chill out for one second... geez... don't slash me...", portrait: 'red' } },
 	{ name: 'show_text', props: { text: "Look, this is our secret hangout. You really shouldn't be here. We like to fight and get rowdy in there.", portrait: 'red' } },
 	{ name: 'show_text', props: { text: "But you look pretty tough...", portrait: 'red' } },
 	{ name: 'show_text', props: { text: "I'll tell ya what... if you can beat all my Robo bros, I'll give you some of our power", portrait: 'red' } },
 	{ name: 'show_text', props: { text: "If not... then bye bye Frauki! Heh heh heh. You're not scared... are you?", portrait: 'red' } },
+	{ name: 'run_script', props: { name: 'exit_NPC' } },
+];
+
+ScriptRunner.scripts['robo_oldie'] = [
+	{ name: 'show_text', props: { text: "Well, well, well...", portrait: 'red' } },
+	{ name: 'show_text', props: { text: "It's Frauki... Great...", portrait: 'red' } },
+	{ name: 'show_text', props: { text: "You are a monster. A little demon tearing up my people.", portrait: 'red' } },
+	{ name: 'show_text', props: { text: "How many times must I put my friends back together? You just keep tearing them apart.", portrait: 'red' } },
+	{ name: 'show_text', props: { text: "I'm just tired. Leave me be, demon.", portrait: 'red' } },
 	{ name: 'run_script', props: { name: 'exit_NPC' } },
 ];
 

@@ -808,7 +808,6 @@ Player.prototype.Hit = function(e, damage, grace_duration) {
     events.publish('play_sound', {name: 'frauki_ouch'});
     events.publish('play_sound', {name: 'lose_energy_bits'});
 
-
     this.body.velocity.y = -150;
 
     energyController.RemoveHealth(damage);
@@ -1100,6 +1099,10 @@ Player.prototype.Hurting = function() {
         this.timers.SetTimer('grace', 1000);
     }
 };
+
+Player.prototype.Dying = function() {
+    this.PlayAnim('dead');
+}
 
 Player.prototype.Teleporting = function() {
     this.PlayAnim('teleport');

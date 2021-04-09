@@ -196,7 +196,7 @@
                  "y":7472.89
                 }, 
                 {
-                 "height":280.565000000001,
+                 "height":280.565,
                  "id":3724,
                  "name":"dark_cave",
                  "properties":
@@ -553,8 +553,8 @@
                  "type":"",
                  "visible":true,
                  "width":473.605,
-                 "x":1313.6975,
-                 "y":8452.736
+                 "x":1313.7,
+                 "y":8452.74
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -4565,8 +4565,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":1334.33333333333,
-                 "y":4267.16666666667
+                 "x":1334.33,
+                 "y":4267.17
                 }, 
                 {
                  "gid":85,
@@ -4586,7 +4586,7 @@
                  "visible":true,
                  "width":16,
                  "x":1416.33,
-                 "y":4268.49666666667
+                 "y":4268.5
                 }, 
                 {
                  "gid":146,
@@ -5919,18 +5919,6 @@
                  "y":2228
                 }, 
                 {
-                 "gid":150,
-                 "height":16,
-                 "id":3915,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":4914.67,
-                 "y":3544.66
-                }, 
-                {
                  "gid":87,
                  "height":16,
                  "id":3976,
@@ -5958,7 +5946,7 @@
                  "gid":149,
                  "height":16,
                  "id":3985,
-                 "name":"robo_oldie",
+                 "name":"robo_bouncer",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -6527,8 +6515,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":2752.33333333333,
-                 "y":2789.33333333333
+                 "x":2752.33,
+                 "y":2789.33
                 }, 
                 {
                  "gid":98,
@@ -6581,6 +6569,18 @@
                  "width":16,
                  "x":2976,
                  "y":1296
+                }, 
+                {
+                 "gid":149,
+                 "height":16,
+                 "id":4194,
+                 "name":"robo_oldie",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":2944,
+                 "y":768
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -7866,8 +7866,8 @@
                  "rotation":0,
                  "type":"effect",
                  "visible":true,
-                 "width":84.6669999999999,
-                 "x":2108.4165,
+                 "width":84.667,
+                 "x":2108.42,
                  "y":8288.5
                 }],
          "opacity":1,
@@ -9149,9 +9149,9 @@
                  "rotation":0,
                  "type":"trigger",
                  "visible":true,
-                 "width":373.257533333333,
+                 "width":373.258,
                  "x":2627.7,
-                 "y":4785.49333333333
+                 "y":4785.49
                 }, 
                 {
                  "height":189.682,
@@ -9212,12 +9212,12 @@
                  "rotation":0,
                  "type":"trigger",
                  "visible":true,
-                 "width":743.757333333333,
-                 "x":540.704666666667,
+                 "width":743.757,
+                 "x":540.705,
                  "y":10441.7
                 }, 
                 {
-                 "height":53.6819999999998,
+                 "height":53.682,
                  "id":4135,
                  "name":"region_text",
                  "properties":
@@ -9234,11 +9234,11 @@
                  "type":"trigger",
                  "visible":true,
                  "width":137.924,
-                 "x":3043.87333333333,
-                 "y":6132.32666666667
+                 "x":3043.87,
+                 "y":6132.33
                 }, 
                 {
-                 "height":178.681766666667,
+                 "height":178.682,
                  "id":4138,
                  "name":"region_text",
                  "properties":
@@ -9254,9 +9254,9 @@
                  "rotation":0,
                  "type":"trigger",
                  "visible":true,
-                 "width":521.8409,
+                 "width":521.841,
                  "x":2686.58,
-                 "y":2888.65666666667
+                 "y":2888.66
                 }, 
                 {
                  "height":96.5,
@@ -9277,7 +9277,7 @@
                  "visible":true,
                  "width":22.5,
                  "x":2862.75,
-                 "y":2511.08333333333
+                 "y":2511.08
                 }, 
                 {
                  "height":96.5,
@@ -9360,8 +9360,19 @@
                  "type":"trigger",
                  "visible":true,
                  "width":22.5,
-                 "x":3163.41666666667,
-                 "y":1548.41666666667
+                 "x":3163.42,
+                 "y":1548.42
+                }, 
+                {
+                 "height":159,
+                 "id":4195,
+                 "name":"goddess_body",
+                 "rotation":0,
+                 "type":"trigger",
+                 "visible":true,
+                 "width":134.166633333334,
+                 "x":4648.91668333333,
+                 "y":2588.16666666667
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -9369,14 +9380,14 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":4194,
+ "nextobjectid":4196,
  "orientation":"orthogonal",
  "properties":
     {
      "debug":"false",
      "startLayer":"3",
-     "startX":"149",
-     "startY":"229"
+     "startX":"192",
+     "startY":"53"
     },
  "propertytypes":
     {

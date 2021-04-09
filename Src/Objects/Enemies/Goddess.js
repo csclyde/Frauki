@@ -2,14 +2,16 @@ Enemy.prototype.types['Goddess'] =  function() {
 
 	goddess = this;
 
-	this.body.setSize(40, 45, 0, 0);
+	this.body.setSize(60, 140, 0, 0);
 	this.anchor.setTo(0.5);
 
     this.animations.add('idle', ['NPC/Goddess0000', 'NPC/Goddess0001'], 2, true, false);
     this.animations.add('stuff', ['NPC/Stand0000'], 10, false, false);
 
     this.energy = 5;
-    this.baseStunDuration = 400;
+	this.baseStunDuration = 400;
+	this.fraukiInSpace = false;
+	this.beenAttacked = false;
 
 	this.body.drag.x = 500;
 	this.body.allowGravity = false;
@@ -21,6 +23,28 @@ Enemy.prototype.types['Goddess'] =  function() {
     this.messageQueue = GameData.GetVal('goddess_message_queue');
     this.deathMessage = GameData.GetVal('goddess_death_message');
 	this.currentPortrait = 'Goddess_Neutral';
+
+	this.RespondToAttack = function() {
+		if(!this.beenAttacked) {
+			if(!GameData.GetFlag('angry1')) {
+				ScriptRunner.run('goddess_angry1');
+				GameData.SetFlag('angry1', true);
+			}
+			else if(!GameData.GetFlag('angry2')) {
+				ScriptRunner.run('goddess_angry2');
+				GameData.SetFlag('angry2', true);
+			}
+			else if(!GameData.GetFlag('angry3')) {
+				ScriptRunner.run('goddess_angry3');
+				GameData.SetFlag('angry3', true);
+			}
+			else {
+				ScriptRunner.run('goddess_angry4');
+			}
+
+			this.beenAttacked = true;
+		}
+	};
     
 	this.updateFunction = function() {
 		
@@ -32,16 +56,11 @@ Enemy.prototype.types['Goddess'] =  function() {
     };
 
     this.OnHit = function() {
-    	if(this.energy > 0) {
-    		ScriptRunner.run('goddess_hurt_' + this.energy);
-			GameData.SetFlag('goddess_smacked', true);
-    	} else {
-    		GameData.SetFlag('goddess_killed', true);
-    	}
+    	
 	};
 
     this.Reset = function() {
-
+		this.beenAttacked = false;
     };
 
 	///////////////////////////////ACTIONS////////////////////////////////////
@@ -50,7 +69,10 @@ Enemy.prototype.types['Goddess'] =  function() {
 	};
 
 	this.GetGameoverScript = function() {
-		if(!GameData.HasShard('Wit')) {
+		if(GameState.death.name === 'goddess') {
+			return 'goddess_after_killing';
+		}
+		else if(!GameData.HasShard('Wit')) {
 			//INTRO AREA TRIGGERS
 			if(!GameData.GetFlag('intro_finished')) {
 				if(GameState.death.name === 'tower_troll' && !GameData.GetFlag('tower_troll1')) {

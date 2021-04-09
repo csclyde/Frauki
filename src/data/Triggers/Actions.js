@@ -13,6 +13,19 @@ TriggerController.prototype.triggers['goddess'] = {
 	}
 };
 
+TriggerController.prototype.triggers['goddess_body'] = {
+	enter: function(params) {
+		goddess.fraukiInSpace = true;
+	},
+
+	stay: function(params) {
+	},
+
+	exit: function(params) {
+		goddess.fraukiInSpace = false;		
+	}
+};
+
 TriggerController.prototype.triggers['run_script_once'] = {
 	enter: function(params) {
 		if(!GameData.GetFlag(params.script)) {

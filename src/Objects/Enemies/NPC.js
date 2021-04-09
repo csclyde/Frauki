@@ -23,6 +23,7 @@ Enemy.prototype.types['NPC'] =  function() {
 	this.animations.add('robo_spikey', ['NPC/Robos0003'], 10, true, false);
 	this.animations.add('robo_samurai', ['NPC/Robos0004'], 10, true, false);
 	this.animations.add('robo_slickback', ['NPC/Robos0005'], 10, true, false);
+	this.animations.add('robo_bouncer', ['NPC/Robos0006'], 10, true, false);
 	this.animations.add('robo_oldie', ['NPC/Robos0006'], 10, true, false);
 	this.animations.add('robo_brokenanimationsystemcomon', ['NPC/Robos0006'], 10, true, false);
 	

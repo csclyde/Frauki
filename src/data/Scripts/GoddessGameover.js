@@ -1,3 +1,10 @@
+ScriptRunner.scripts['goddess_after_killing'] = [
+	{ name: 'show_text', props: { text: "Now, I hope that taught you a lesson.", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "No more misbehaving.", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "I'm watching you Frauki.", portrait: 'Goddess_Neutral' } },
+	{ name: 'run_script', props: { name: 'exit_goddess' } },
+];
+
 // INTRO AREA //////////
 ScriptRunner.scripts['goddess_surprised_death1'] = [
 	{ name: 'show_text', props: { text: "Oh. You died already...", portrait: 'Goddess_Neutral' } },

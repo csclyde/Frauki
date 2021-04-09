@@ -38,15 +38,15 @@ Frogland.Create = function() {
     this.backgroundLayer.name = 'background_tiles';
     this.froglandGroup.add(this.backgroundLayer);
     
-    frauki = new Player(game, 0, 0, 'Frauki');
-    frauki.name = 'frauki';
-    game.add.existing(frauki);
-    this.froglandGroup.add(frauki);
-
     goddess = new Enemy(game, this.goddessPositions.start.x, this.goddessPositions.start.y, 'Goddess', 'Goddess');
     goddess.name = 'goddess';
     game.add.existing(goddess);
     this.froglandGroup.add(goddess);    
+
+    frauki = new Player(game, 0, 0, 'Frauki');
+    frauki.name = 'frauki';
+    game.add.existing(frauki);
+    this.froglandGroup.add(frauki);
     
     this.CreateCollisionLayer();
     
@@ -164,6 +164,11 @@ Frogland.HandleCollisions = function() {
             frauki.attackRect,
             objectController.GetObjectGroup(),
             Collision.OverlapAttackWithObject);
+        
+        game.physics.arcade.overlap(
+            frauki.attackRect,
+            goddess,
+            goddess.RespondToAttack);
     }
 
     //frauki is overlapped with projectiles

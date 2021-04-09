@@ -71,6 +71,7 @@ GameState.update = function() {
 GameState.render = function() {
     // game.debug.body(frauki);
     // game.debug.body(frauki.attackRect);
+    // game.debug.body(goddess);
     
     // objectController.GetObjectGroup().forEach(function(o) {
     //     game.debug.body(o);

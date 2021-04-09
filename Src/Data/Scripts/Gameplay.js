@@ -257,7 +257,7 @@ ScriptRunner.scripts['restart_game'] = [
     { func: function() {
         GameState.paused = false;
         GameState.inMenu = false;
-        GameState.physicsSloMo = 1;
+        GameState.physicsSlowMo = 1;
 
         GameState.BeginGameover();
         GameState.Fade(true, 1000);
