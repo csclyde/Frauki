@@ -49,7 +49,7 @@ ScriptRunner.executeCommand = function(cmd, params) {
 			events.publish(cmd.name, cmd.props);
 		
 			this.textNextCommand = cmd.nextCommand;
-			this.textWaitEvent = game.time.events.add(4000 + (50 * cmd.props.text.length), function() {
+			this.textWaitEvent = game.time.events.add(4000 + (70 * cmd.props.text.length), function() {
 				events.publish('hide_text', {});
 				this.executeCommand(cmd.nextCommand, params);
 			}, this);

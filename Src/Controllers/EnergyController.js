@@ -38,6 +38,12 @@ EnergyController.prototype.Update = function() {
 			this.health++;
 			this.latentHealth--;
 		}
+		else if(this.shield < this.GetMaxShield()) {
+			events.publish('play_sound', {name: 'heal_1', restart: true });
+			
+			this.shield++;
+			this.latentHealth--;
+		}
 	}
 
 	if(this.timers.TimerUp('shield_tick')) {
@@ -71,10 +77,10 @@ EnergyController.prototype.Reset = function() {
 };
 
 EnergyController.prototype.AddHealth = function(amt) {
-	if(this.health + amt < this.GetMaxHealth()) {
+	if(this.health + amt < this.GetMaxHealthBar()) {
 		this.latentHealth += Math.floor(amt);
 	} else {
-		this.latentHealth = this.GetMaxHealth() - this.health;
+		this.latentHealth = this.GetMaxHealthBar() - (this.health + this.shield);
 	}
 };
 

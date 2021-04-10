@@ -3653,18 +3653,6 @@
                  "y":3932.33
                 }, 
                 {
-                 "gid":105,
-                 "height":16,
-                 "id":3471,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":975.333,
-                 "y":3712.67
-                }, 
-                {
                  "gid":106,
                  "height":16,
                  "id":3476,
@@ -3978,7 +3966,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }, 
@@ -5613,8 +5601,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":976.083,
-                 "y":3711.39
+                 "x":977.537545454545,
+                 "y":3711.57181818182
                 }, 
                 {
                  "gid":149,
@@ -9364,15 +9352,15 @@
                  "y":1548.42
                 }, 
                 {
-                 "height":159,
+                 "height":235.666666666666,
                  "id":4195,
                  "name":"goddess_body",
                  "rotation":0,
                  "type":"trigger",
                  "visible":true,
-                 "width":134.166633333334,
-                 "x":4648.91668333333,
-                 "y":2588.16666666667
+                 "width":152.166633333335,
+                 "x":4634.91668333333,
+                 "y":2510.16666666667
                 }],
          "opacity":1,
          "type":"objectgroup",

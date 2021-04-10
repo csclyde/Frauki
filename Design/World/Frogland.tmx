@@ -4415,7 +4415,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="Doodads" visible="0">
+ <objectgroup name="Doodads">
   <object id="3369" gid="105" x="4410.58" y="3346.59" width="16" height="16"/>
   <object id="3370" gid="109" x="4442.76" y="3346.75" width="16" height="16"/>
   <object id="3388" gid="105" x="3365.75" y="3242.5" width="16" height="16"/>
@@ -4444,7 +4444,6 @@
   <object id="3466" gid="105" x="995.333" y="3932" width="16" height="16"/>
   <object id="3467" gid="105" x="1062.67" y="3931.67" width="16" height="16"/>
   <object id="3468" gid="105" x="1090.67" y="3932.33" width="16" height="16"/>
-  <object id="3471" gid="105" x="975.333" y="3712.67" width="16" height="16"/>
   <object id="3476" gid="106" x="2391.67" y="2820.67" width="16" height="16"/>
   <object id="3477" gid="107" x="1912" y="4619" width="16" height="16"/>
   <object id="3478" gid="109" x="2255" y="4619.5" width="16" height="16"/>
@@ -4747,7 +4746,7 @@
   </object>
   <object id="3729" name="gnome_mushroom" gid="149" x="2835.03" y="4048.9" width="16" height="16"/>
   <object id="3731" name="gnome_love" gid="149" x="1175.03" y="4396.37" width="16" height="16"/>
-  <object id="3732" name="gnome_city" gid="149" x="976.083" y="3711.39" width="16" height="16"/>
+  <object id="3732" name="gnome_city" gid="149" x="977.538" y="3711.57" width="16" height="16"/>
   <object id="3733" name="gnome_cooking" gid="149" x="2880.49" y="6595.27" width="16" height="16"/>
   <object id="3734" name="gnome_pickaxe" gid="149" x="4135.89" y="7965.58" width="16" height="16"/>
   <object id="3735" name="gnome_gossip" gid="149" x="1663.74" y="7151.58" width="16" height="16"/>

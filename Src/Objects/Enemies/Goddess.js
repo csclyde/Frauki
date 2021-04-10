@@ -211,7 +211,7 @@ Enemy.prototype.types['Goddess'] =  function() {
 					return 'first_h0p8';
 				}
 				else {
-					return 'goddes_depths';
+					return 'goddess_depths';
 				}
 			}
 			//BASEMENT SHORTCUT TO PIPE SHORTCUT
@@ -221,7 +221,7 @@ Enemy.prototype.types['Goddess'] =  function() {
 					return 'first_AZP3';
 				}
 				else {
-					return 'goddes_depths2';
+					return 'goddess_depths2';
 				}
 			}
 			//PIPE SHORTCUT TO HARD SHORTCUT
@@ -231,7 +231,7 @@ Enemy.prototype.types['Goddess'] =  function() {
 					return 'first_sw8t';
 				}
 				else {
-					return 'goddes_depths3';
+					return 'goddess_depths3';
 				}
 			}
 		}
