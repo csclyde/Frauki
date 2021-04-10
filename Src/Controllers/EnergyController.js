@@ -1,7 +1,7 @@
 EnergyController = function() {
 
 	this.Reset();
-	this.shieldRechargeRate = 15000;	
+	this.shieldRechargeRate = 10000;	
 
 	this.timers = new TimerUtil();
 
@@ -46,7 +46,7 @@ EnergyController.prototype.Update = function() {
 		if(this.shield < this.GetMaxShield()) {
 			this.shield++;
 
-			events.publish('play_sound', {name: 'heal_' + this.health + this.shield, restart: true });
+			events.publish('play_sound', {name: 'heal_1', restart: true });
 		}
 	}
 

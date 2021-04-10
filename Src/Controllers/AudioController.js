@@ -69,7 +69,7 @@ AudioController.prototype.UpdateVolumeSettings = function() {
 
     for(key in this.music) {
         if(this.music[key].isPlaying) {
-            this.music[key].volume = this.music[key].initialVolume * (musicSetting / 8);
+            //this.music[key].volume = this.music[key].initialVolume * (musicSetting / 8);
         }
     }
 };
@@ -94,7 +94,7 @@ AudioController.prototype.PlaySound = function(params) {
         
         this.sounds[params.name].play();
         this.sounds[params.name].volume = this.sounds[params.name].initialVolume * (sfxSetting / 8);
-        this.sounds[params.name].volume = Math.pow(this.sounds[params.name].volume, 2);
+        //this.sounds[params.name].volume = Math.pow(this.sounds[params.name].volume, 2);
     
     }
 };
