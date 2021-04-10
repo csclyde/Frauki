@@ -21,9 +21,7 @@ EffectsController = function() {
 
 EffectsController.prototype.Update = function() {
 
-    if(this.dicedPieces.length > 0 && this.timers.TimerUp('dice_clear')) {
-        this.dicedPieces.removeAll(true);
-    }
+    this.ClearOffscreenDicedPieces();
 
     this.loadedEffects.forEach(function(o) {
         var padding = 100;
@@ -490,12 +488,21 @@ EffectsController.prototype.DiceObject = function(name, x, y, xv, yv) {
 
         effectsController.dicedPieces.addChild(p);
     });
-
-    this.timers.SetTimer('dice_clear', 20000);
 };
 
-EffectsController.prototype.ClearDicedPieces = function() {
-    this.dicedPieces.removeAll(true);
+EffectsController.prototype.ClearOffscreenDicedPieces = function() {
+    //this.dicedPieces.removeAll(true);
+
+    this.dicedPieces.children.forEach(function(d) {
+        var padding = 30;
+        
+        if(d.body.x < game.camera.x - padding ||
+            d.body.y < game.camera.y - padding ||
+            d.body.x > game.camera.x + game.camera.width + padding ||
+            d.body.y > game.camera.y + game.camera.height + padding)
+            d.destroy();
+    
+    }, this);
 };
 
 EffectsController.prototype.SlowHit = function(duration) {

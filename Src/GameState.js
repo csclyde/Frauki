@@ -1,6 +1,6 @@
 var GameState = new Phaser.State();
 
-GameState.MAX_PLAYER_HEALTH = 14;
+GameState.MAX_PLAYER_HEALTH = 18;
 GameState.MAX_APPLES = 6;
 
 GameState.create = function() {

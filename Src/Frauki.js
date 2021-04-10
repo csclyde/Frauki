@@ -133,6 +133,10 @@ Player.prototype.preStateUpdate = function() {
 
 Player.prototype.postStateUpdate = function() {
 
+    if(!this.body.onFloor() && this.states.crouching) {
+        this.body.gravity.y = 1000;
+    }
+
     if(this.states.inWater) {
         if(this.states.flowLeft || this.states.flowRight) {
             this.body.maxVelocity.x *= 2;
@@ -729,7 +733,7 @@ Player.prototype.StabSlash = function() {
 
 Player.prototype.Roll = function(params) {
 
-    if(this.state === this.Stunned || this.state === this.Rolling || this.state === this.Hurting || this.InAttackAnim())
+    if(this.state === this.Stunned || this.state === this.Rolling || this.InAttackAnim())
         return false;
 
     if(this.body.onFloor()) {
