@@ -322,7 +322,7 @@ InputController.prototype.OnPause = function(pressed) {
 
     if(this.allowInput && pressed) {      
         events.publish('pause_game', {});
-        events.publish('advance_text', {});        
+        //events.publish('advance_text', {});        
     }
 };
 
@@ -401,6 +401,7 @@ InputController.prototype.OnHeal = function(pressed) {
     if(this.allowInput) {
         if(pressed) {
             events.publish('player_heal', { charging: true });
+            events.publish('advance_text', {});
         } else {
             //events.publish('player_heal', { charging: false });
         }
@@ -412,6 +413,7 @@ InputController.prototype.OnLeft = function(pressed) {
 
     if(pressed) {
         events.publish('settings_change', { dir: 'down' });
+        events.publish('advance_text', {});        
     }
 
     if(this.allowInput) {
@@ -438,6 +440,7 @@ InputController.prototype.OnRight = function(pressed) {
 
     if(pressed) {
         events.publish('settings_change', { dir: 'up' });
+        events.publish('advance_text', {});        
     }
 
     if(this.allowInput) {
@@ -463,6 +466,7 @@ InputController.prototype.OnUp = function(pressed) {
 
     if(pressed) {
         events.publish('menu_change', { dir: 'up' });
+        events.publish('advance_text', {});        
     }
 
     if(this.allowInput) {
@@ -479,6 +483,7 @@ InputController.prototype.OnDown = function(pressed) {
 
     if(pressed) {
         events.publish('menu_change', { dir: 'down' });
+        events.publish('advance_text', {});        
     }
 
     if(this.allowInput) {

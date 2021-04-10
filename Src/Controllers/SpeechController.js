@@ -194,7 +194,7 @@ SpeechController.prototype.Update = function() {
 	this.text.setText(this.currentText.slice(0, this.displayIndex));
 
 	if(this.timers.TimerUp('auto_hide') && this.text.visible) {
-		this.HideSpeech();
+		//this.HideSpeech();
 	}
 
 	if(!this.text.visible && this.FraukiInSpeechZone() && inputController.allowInput) {
@@ -328,6 +328,10 @@ SpeechController.prototype.Activate = function(text, portrait) {
 };
 
 SpeechController.prototype.FraukiInSpeechZone = function() {
+
+	if(!frauki.body.onFloor()) {
+		return false;
+	}
 
 	for(var i = 0; i < this.speechZones.length; i++) {
 		var zone = this.speechZones[i];

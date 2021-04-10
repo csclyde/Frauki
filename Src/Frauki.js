@@ -482,13 +482,14 @@ Player.prototype.StartStopRun = function(params) {
         if(this.state === this.Crouching) {
             this.Roll();
             this.timers.SetTimer('frauki_dash', 200);
-        } else if(this.timers.TimerUp('frauki_dash')) {
-            this.timers.SetTimer('frauki_dash', 200);
-        //double tap to roll
-        } else if(params.dir === this.states.direction && frauki.body.onFloor()) {
-            this.Roll();
-            this.timers.SetTimer('frauki_dash', 200);
-        }
+        } 
+        // else if(this.timers.TimerUp('frauki_dash')) {
+        //     this.timers.SetTimer('frauki_dash', 200);
+        // //double tap to roll
+        // } else if(params.dir === this.states.direction && frauki.body.onFloor()) {
+        //     this.Roll();
+        //     this.timers.SetTimer('frauki_dash', 200);
+        // }
 
         if(this.movement.rollBoost > 0) {
             if(this.movement.rollDirection === -1 && params.dir === 'right') {
@@ -671,8 +672,6 @@ Player.prototype.Slash = function(params) {
     }
 
     this.timers.SetTimer('slash_start_window', 200);
-    this.timers.SetTimer('grace', 0);
-    this.timers.SetTimer('frauki_invincible', 0);
 };
 
 Player.prototype.ReleaseSlash = function(params) {

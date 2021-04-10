@@ -5,8 +5,8 @@ ScriptRunner.create = function() {
 	this.waitTime = 200;
 
 	events.subscribe('skip_text', function(params) {
-		if(!!this.textWaitEvent && !!this.textNextCommand) {
-			game.time.events.remove(this.textWaitEvent);
+		if(!!this.textNextCommand) {
+			//game.time.events.remove(this.textWaitEvent);
 			events.publish('hide_text', {});			
 			this.executeCommand(this.textNextCommand);
 			this.textWaitEvent = null;
@@ -49,10 +49,10 @@ ScriptRunner.executeCommand = function(cmd, params) {
 			events.publish(cmd.name, cmd.props);
 		
 			this.textNextCommand = cmd.nextCommand;
-			this.textWaitEvent = game.time.events.add(4000 + (70 * cmd.props.text.length), function() {
-				events.publish('hide_text', {});
-				this.executeCommand(cmd.nextCommand, params);
-			}, this);
+			// this.textWaitEvent = game.time.events.add(4000 + (20000 * cmd.props.text.length), function() {
+			// 	events.publish('hide_text', {});
+			// 	this.executeCommand(cmd.nextCommand, params);
+			// }, this);
 		}, this);
 	}
 	else {

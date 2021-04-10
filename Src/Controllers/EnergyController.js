@@ -47,7 +47,7 @@ EnergyController.prototype.Update = function() {
 	}
 
 	if(this.timers.TimerUp('shield_tick')) {
-		this.timers.SetTimer('shield_tick', this.shieldRechargeRate);
+		this.timers.SetTimer('shield_tick', 750);
 
 		if(this.shield < this.GetMaxShield()) {
 			this.shield++;

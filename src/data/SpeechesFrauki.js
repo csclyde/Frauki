@@ -2,7 +2,6 @@ var Speeches = {
 	'cathedral_top': { text: 'I can see everything from up here.' },
 	'amazing_explorer': { text: "I just might be the best explorer ever. Bet no one has been here before.", portrait: 'Mischeif'  },
 	'ship_question': { text: "This must be the big Alien Robot ship she talked about. Those jerks...", portrait: 'Mad'  },
-	'someone_listening': { text: "Hmm, is someone listening?", portrait: 'Neutral'  },
 	'lovely_day': { text: 'Another lovely day in Frogland.' },
 	'hole_sign': { text: 'The sign says: Watch out for danger! This hole is not safe to jump into.' },
 	'thats_me': { text: 'Is that... me?', portrait: 'Displeased' },
@@ -28,6 +27,7 @@ var Speeches = {
 	'blocked': { text: "The pipe is blocked up! I'll have to go around I guess. I used to slip through this pipe all the time.", portrait: "Neutral" },
 	'dry_off': { text: "I need to dry off. Sure wish there was some sun way down here.", portrait: "Displeased" },
 	'secret_hideout': { text: "Looks like someones secret hideout. Dibs!", portrait: "Silly" },
+	'underwater_sign': { text: "The sign says: Keep out! This is my property. No Alien Robots allowed!", portrait: "Neutral" },
 	
 
 

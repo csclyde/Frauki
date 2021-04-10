@@ -93,7 +93,7 @@ Enemy.prototype.types['KR32'] =  function() {
     this.Attack = function() {
     	EnemyBehavior.FacePlayer(this);
     	this.state = this.Windup;
-    	this.timers.SetTimer('windup', game.rnd.between(500, 550));
+    	this.timers.SetTimer('windup', game.rnd.between(400, 450));
         events.publish('play_sound', {name: 'attack_windup', restart: true});
 
     };
@@ -243,7 +243,7 @@ Enemy.prototype.types['KR32'] =  function() {
 
 		if(this.timers.TimerUp('windup')) {
 			this.state = this.Slashing;
-			this.timers.SetTimer('attack_hold', 1000);
+			this.timers.SetTimer('attack_hold', 750);
 
 			events.publish('stop_sound', {name: 'attack_windup', restart: true});
         	events.publish('play_sound', {name: 'KR32_attack', restart: true});
