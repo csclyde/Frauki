@@ -63,22 +63,22 @@ AudioController.prototype.Reset = function() {
 AudioController.prototype.UpdateVolumeSettings = function() {
     var soundSetting = GameData.GetSetting('sound');
     var musicSetting = GameData.GetSetting('music');
+    var sfxSetting = GameData.GetSetting('sfx');
 
-    game.sound.volume = soundSetting / 8;
-    game.sound.volume = Math.pow(game.sound.volume, 2);
+    game.sound.volume = Math.pow(soundSetting / 8, 2);
 
-    for(key in this.music) {
-        if(this.music[key].isPlaying) {
-            //this.music[key].volume = this.music[key].initialVolume * (musicSetting / 8);
-        }
+    if(musicSetting) {
+        this.UnpauseAllMusic({ fade: 0 });
+    } else {
+        this.PauseAllMusic({ fade: 0 });
     }
 };
 
 //SFX//////
 AudioController.prototype.PlaySound = function(params) {
-    var sfxSetting = GameData.GetSetting('sfx');    
+    var sfxSetting = GameData.GetSetting('sfx');
 
-    if(!!params.name && !!this.sounds[params.name] && !this.sounds[params.name].paused) {
+    if(sfxSetting && !!params.name && !!this.sounds[params.name] && !this.sounds[params.name].paused) {
 
         //if the sound is already playing and they dont want to start it over
         if(this.sounds[params.name].isPlaying && params.restart !== true) return;
@@ -93,9 +93,7 @@ AudioController.prototype.PlaySound = function(params) {
         }
         
         this.sounds[params.name].play();
-        this.sounds[params.name].volume = this.sounds[params.name].initialVolume * (sfxSetting / 8);
-        //this.sounds[params.name].volume = Math.pow(this.sounds[params.name].volume, 2);
-    
+        this.sounds[params.name].volume = this.sounds[params.name].initialVolume;
     }
 };
 
@@ -168,12 +166,12 @@ AudioController.prototype.StopAllAmbient = function() {
 AudioController.prototype.PlayMusic = function(params) {
     var musicSetting = GameData.GetSetting('music');
     
-    if(!!params.name && !!this.music[params.name] && !this.music[params.name].isPlaying) {
+    if(musicSetting && !!params.name && !!this.music[params.name] && !this.music[params.name].isPlaying) {
         if(params.fade) {
             this.music[params.name].play(null, 0, 0);
-            this.music[params.name].fadeToResume(params.fade, this.music[params.name].initialVolume * (musicSetting / 8));
+            this.music[params.name].fadeToResume(params.fade, this.music[params.name].initialVolume);
         } else {         
-            this.music[params.name].play(null, 0, this.music[params.name].initialVolume  * (musicSetting / 8));
+            this.music[params.name].play(null, 0, this.music[params.name].initialVolume);
         }
     }
 };
@@ -220,7 +218,7 @@ AudioController.prototype.UnpauseAllMusic = function(params) {
         if(!this.music.hasOwnProperty(key)) continue;
 
         if(!!this.music[key] && (this.music[key].paused || this.music[key].willBePaused)) {
-            this.music[key].fadeToResume(params.duration || 1000, this.music[key].initialVolume  * (musicSetting / 8));
+            this.music[key].fadeToResume(params.duration || 1000, this.music[key].initialVolume);
         }
     }
 };
