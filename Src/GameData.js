@@ -26,8 +26,8 @@ var defaultData = {
 
 var defaultSettings = {
     sound: 8,
-    music: 8,
-    sfx: 8,
+    music: true,
+    sfx: true,
 };
 
 //When game data is requested, it is pulled from the data structure in memory. When

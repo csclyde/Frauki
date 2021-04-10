@@ -20,8 +20,8 @@ var Menus = {
 
 	settings: [
 		{ getText: function() { return 'Global Sound:' }, setting: 'sound' },
-		{ getText: function() { return 'Music Volume:' }, setting: 'music' },
-		{ getText: function() { return 'Effects Volume:' }, setting: 'sfx' },
+		{ getText: function() { return 'Music: ' }, setting: 'music' },
+		{ getText: function() { return 'Sound Effects: ' }, setting: 'sfx' },
 		{ getText: function() { return 'Back' }, script: 'exit_settings_menu' },
 	],
 

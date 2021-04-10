@@ -115,8 +115,19 @@ GameState.Reset = function() {
 };
 
 GameState.MakeMenuSelection = function() {
+    var menuItem = this.GetCurrentMenu()[this.menuSelection];
+    
     if(GameState.inMenu && !GameState.menuSelectionMade) {
-        ScriptRunner.run(this.GetCurrentMenu()[this.menuSelection].script);
+        if(menuItem.setting === 'music' || menuItem.setting === 'sfx') {
+            var currentSetting = GameData.GetSetting(menuItem.setting);
+            currentSetting = !currentSetting;
+            GameData.SetSetting(menuItem.setting, currentSetting);
+            events.publish('update_ui', {});
+            events.publish('update_sound_settings', {});
+            events.publish('play_sound', {name: 'text_bloop'});
+        } else {
+            ScriptRunner.run(menuItem.script);
+        }
     }
 };
 
@@ -139,24 +150,27 @@ GameState.UpdateMenuSelection = function(params) {
 GameState.UpdateSetting = function(params) {
     if(this.inMenu && !this.menuSelectionMade) {
         var menuItem = this.GetCurrentMenu()[this.menuSelection];
-        if(!!menuItem.setting) {
-            var currentSetting = GameData.GetSetting(menuItem.setting);
+        var currentSetting = GameData.GetSetting(menuItem.setting);
+        if(menuItem.setting === 'sound') {
 
             if(params.dir === 'up') {
                 currentSetting += 1;
-            }
-            else {
+            } else {
                 currentSetting -= 1;                
             }
 
             currentSetting = Phaser.Math.clamp(currentSetting, 0, 8);
 
-            GameData.SetSetting(menuItem.setting, currentSetting);
-    
-            events.publish('update_ui', {});
-            events.publish('update_sound_settings', {});
-            events.publish('play_sound', {name: 'text_bloop'});
         }
+        else {
+            currentSetting = !currentSetting;
+        }
+
+        GameData.SetSetting(menuItem.setting, currentSetting);
+
+        events.publish('update_ui', {});
+        events.publish('update_sound_settings', {});
+        events.publish('play_sound', {name: 'text_bloop'});
     }
 };
 
@@ -222,22 +236,17 @@ GameState.CreateUI = function() {
     this.settingsMenu.visible = false;
 
     this.soundSliderFrame = game.add.image(400, 189, 'UI', 'Settings0000', this.settingsMenu);
-    this.musicSliderFrame = game.add.image(400, 209, 'UI', 'Settings0000', this.settingsMenu);
-    this.effectsSliderFrame = game.add.image(400, 229, 'UI', 'Settings0000', this.settingsMenu);
-
     this.soundPips = [];
-    this.musicPips = [];
-    this.sfxPips = [];
+
+    this.musicSetting = game.add.bitmapText(400, 209, 'bubble','ON', 18);
+    this.settingsMenu.add(this.musicSetting);
+    this.sfxSetting = game.add.bitmapText(400, 229, 'bubble','OFF', 18);
+    this.settingsMenu.add(this.sfxSetting);
+
 
     for(var i = 0; i < 8; i++) {
         var soundPip = game.add.image(407 + (i * 7), 192, 'UI', 'Settings0001', this.settingsMenu);
         this.soundPips.push(soundPip);
-
-        var musicPip = game.add.image(407 + (i * 7), 212, 'UI', 'Settings0001', this.settingsMenu);
-        this.musicPips.push(musicPip);
-
-        var sfxPip = game.add.image(407 + (i * 7), 232, 'UI', 'Settings0001', this.settingsMenu);
-        this.sfxPips.push(sfxPip);
     }
 
     var screenDarkBmd = game.add.bitmapData(game.width, game.height);
@@ -285,10 +294,20 @@ GameState.UpdateUI = function() {
         var musicSetting = GameData.GetSetting('music');
         var sfxSetting = GameData.GetSetting('sfx');
 
+        if(musicSetting) {
+            this.musicSetting.setText('ON');
+        } else {
+            this.musicSetting.setText('OFF');
+        }
+
+        if(sfxSetting) {
+            this.sfxSetting.setText('ON');
+        } else {
+            this.sfxSetting.setText('OFF');
+        }
+
         for(var i = 0; i < 8; i++) {
             this.soundPips[i].visible = i < soundSetting;
-            this.musicPips[i].visible = i < musicSetting;
-            this.sfxPips[i].visible = i < sfxSetting;
         }
     }
 
