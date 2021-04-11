@@ -30,7 +30,7 @@ Enemy.prototype.types['GUBr'] =  function() {
 			if(EnemyBehavior.Player.IsDangerous(this) || !this.CanAttack()) {
         		this.Flee();
 
-        	} else if(EnemyBehavior.Player.IsVulnerable(this) && EnemyBehavior.Player.IsNear(this, 160) && this.CanAttack() && frauki.body.onFloor()) {
+        	} else if(EnemyBehavior.Player.IsVulnerable(this) && EnemyBehavior.Player.IsNear(this, 140) && this.CanAttack() && frauki.body.onFloor()) {
 	            this.Attack();
 
 	        } else if(this.state === this.Cowering && !EnemyBehavior.Player.IsNear(this, 180)) {
@@ -65,9 +65,9 @@ Enemy.prototype.types['GUBr'] =  function() {
 		
 
     	if(this.direction === 'left') {
-			this.body.velocity.x = -400;
+			this.body.velocity.x = -350;
 		} else {
-			this.body.velocity.x = 400;
+			this.body.velocity.x = 350;
 		}
     };
 
@@ -122,9 +122,9 @@ Enemy.prototype.types['GUBr'] =  function() {
 		//EnemyBehavior.FaceAwayFromPlayer(this);
 
 		if(EnemyBehavior.Player.IsLeft(this)) {
-			this.body.velocity.x = 250;
+			this.body.velocity.x = 200;
 		} else if(EnemyBehavior.Player.IsRight(this)) {
-			this.body.velocity.x = -250;
+			this.body.velocity.x = -200;
 		}
 
 

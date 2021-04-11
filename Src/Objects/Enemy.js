@@ -58,7 +58,6 @@ Enemy.prototype.OnHit = function() {};
 Enemy.prototype.OnBlock = function() {};
 
 Enemy.prototype.update = function() {
-    var that = this;
 
     if(!this.body.enable) {
         return;
@@ -105,6 +104,13 @@ Enemy.prototype.update = function() {
 
     if(this.isAttacking()) {
         this.timers.SetTimer('grace', 0);
+    }
+
+    if(!this.timers.TimerUp('grace') && this.state !== this.Hurting && this.timers.TimerUp('hurt_flicker')) {
+        this.alpha = 0.2;
+        game.time.events.add(30, function() { this.timers.SetTimer('hurt_flicker', 30); }, this);        
+    } else {
+        this.alpha = 1;
     }
 };
 
@@ -267,7 +273,6 @@ Enemy.prototype.PlayAnim = function(name) {
 };
 
 Enemy.prototype.TakeHit = function(damage) {
-    var that = this;
 
     if(!this.timers.TimerUp('hit') || !this.timers.TimerUp('grace')) {
         return;
@@ -303,7 +308,7 @@ Enemy.prototype.TakeHit = function(damage) {
         this.timers.SetTimer('hit', 1000);
         this.timers.SetTimer('grace', 300);
 
-        game.time.events.add(this.robotic ? 800 : game.rnd.between(250, 350), function() { that.DestroyEnemy(); });
+        game.time.events.add(this.robotic ? 800 : game.rnd.between(250, 350), function() { this.DestroyEnemy(); }, this);
 
         if(this.robotic) events.publish('play_sound', { name: 'robosplosion' });
 

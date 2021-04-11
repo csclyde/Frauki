@@ -360,6 +360,11 @@
             <key type="filename">Frames/RKN1d0001.png</key>
             <key type="filename">Frames/RKN1d0002.png</key>
             <key type="filename">Frames/RKN1d0003.png</key>
+            <key type="filename">Frames/SpikeDropper0000.png</key>
+            <key type="filename">Frames/SpikeDropper0001.png</key>
+            <key type="filename">Frames/SpikeDropper0002.png</key>
+            <key type="filename">Frames/SpikeDropper0003.png</key>
+            <key type="filename">Frames/SpikeDropper0004.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>

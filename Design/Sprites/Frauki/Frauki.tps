@@ -285,7 +285,6 @@
             <key type="filename">Frames/Attack Dive0020.png</key>
             <key type="filename">Frames/Attack Dive0021.png</key>
             <key type="filename">Frames/Attack Dive0022.png</key>
-            <key type="filename">Frames/Attack Dive0023.png</key>
             <key type="filename">Frames/Attack Fall0000.png</key>
             <key type="filename">Frames/Attack Fall0001.png</key>
             <key type="filename">Frames/Attack Fall0002.png</key>
@@ -379,11 +378,6 @@
             <key type="filename">Frames/Fall0001.png</key>
             <key type="filename">Frames/Fall0002.png</key>
             <key type="filename">Frames/Fall0003.png</key>
-            <key type="filename">Frames/Flip0000.png</key>
-            <key type="filename">Frames/Flip0001.png</key>
-            <key type="filename">Frames/Flip0002.png</key>
-            <key type="filename">Frames/Flip0003.png</key>
-            <key type="filename">Frames/Flip0004.png</key>
             <key type="filename">Frames/Hang0000.png</key>
             <key type="filename">Frames/Hang0001.png</key>
             <key type="filename">Frames/Hang0002.png</key>

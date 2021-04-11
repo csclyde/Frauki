@@ -57,8 +57,6 @@ Player = function (game, x, y, name) {
     events.subscribe('player_block', this.Block, this);
     events.subscribe('control_up', function(params) { 
 
-        this.states.upPressed = params.pressed;
-
         if(frauki.state === this.Hurting) {
             return;
         }
@@ -134,7 +132,7 @@ Player.prototype.preStateUpdate = function() {
 Player.prototype.postStateUpdate = function() {
 
     if(!this.body.onFloor() && this.states.crouching) {
-        this.body.gravity.y = 1000;
+        this.body.gravity.y = game.physics.arcade.gravity.y * 3;        
     }
 
     if(this.states.inWater) {
@@ -185,7 +183,7 @@ Player.prototype.postStateUpdate = function() {
     }
 
     if(!this.timers.TimerUp('frauki_invincible') && this.timers.TimerUp('hurt_flicker')) {
-        this.alpha = 0;
+        this.alpha = 0.2;
         game.time.events.add(30, function() { frauki.timers.SetTimer('hurt_flicker', 30); });
     } else {
         this.alpha = 1;
@@ -682,7 +680,7 @@ Player.prototype.ReleaseSlash = function(params) {
 };
 
 Player.prototype.FrontSlash = function() {
-    if(this.states.upPressed) {
+    if(inputController.dpad.up) {
         this.ChangeState(this.AttackOverhead);
         events.publish('play_sound', {name: 'attack_overhead', restart: true });  
     } else {

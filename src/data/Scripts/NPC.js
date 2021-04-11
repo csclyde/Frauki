@@ -1,6 +1,7 @@
 ScriptRunner.scripts['enter_NPC'] = [
 	{ name: 'disallow_input', props: {} },
 	{ name: 'pause_all_music', props: {} },
+	{ name: 'control_up', props: {pressed: false} },
 
 	{ func: function(params) {
 		if(params.name.includes('robo')) {
@@ -9,7 +10,7 @@ ScriptRunner.scripts['enter_NPC'] = [
 			events.publish('play_music', { name: 'Loopy', fade: 1000 });
 		}
 
-        	events.publish('pan_camera', { to: objectController.npcMap[params.name], duration: 1000 });
+        events.publish('pan_camera', { to: objectController.npcMap[params.name], duration: 1000 });
 	} },
 	
 	{ name: 'wait', props: { amount: 1500 } },
