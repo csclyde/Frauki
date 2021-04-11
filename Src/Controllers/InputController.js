@@ -320,9 +320,9 @@ InputController.prototype.AllowInput = function() {
 
 InputController.prototype.OnPause = function(pressed) {
 
-    if(this.allowInput && pressed) {      
+    if(this.allowInput && pressed && !GameState.inMenu) {      
         events.publish('pause_game', {});
-        //events.publish('advance_text', {});        
+        //events.publish('advance_text', {});
     }
 };
 

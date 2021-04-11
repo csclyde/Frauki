@@ -125,6 +125,10 @@ GameState.MakeMenuSelection = function() {
             events.publish('update_ui', {});
             events.publish('update_sound_settings', {});
             events.publish('play_sound', {name: 'text_bloop'});
+        } else if(menuItem.script === 'unpause_game') {
+            if(GameState.inMenu) {
+                ScriptRunner.run(menuItem.script);
+            }
         } else {
             ScriptRunner.run(menuItem.script);
         }
