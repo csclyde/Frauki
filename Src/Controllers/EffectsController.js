@@ -13,10 +13,8 @@ EffectsController = function() {
     this.particleType = 'pos';
 
     this.loadedEffects = [];
-    this.loadedEffectsCollide = [];
 
     events.subscribe('screen_flash', this.ScreenFlash, this);
-
 };
 
 EffectsController.prototype.Update = function() {
@@ -33,25 +31,13 @@ EffectsController.prototype.Update = function() {
         }
         
     });
-
-    this.loadedEffectsCollide.forEach(function(o) {
-        var padding = 100;
-
-        if(o.x > game.camera.x - padding && o.y > game.camera.y - padding && o.x < game.camera.x + game.camera.width + padding && o.y < game.camera.y + game.camera.height + padding) {
-            o.on = true;
-        } else {
-            o.on = false;
-        }
-        
-    });
         
     this.energyStreak.x = frauki.attackRect.body.x;
     this.energyStreak.y = frauki.attackRect.body.y;
     this.energyStreak.width = frauki.attackRect.body.width;
     this.energyStreak.height = frauki.attackRect.body.height;
 
-    game.physics.arcade.collideGroupVsTilemapLayer(this['dicedPieces'], Frogland.GetCollisionLayer(), null, null, null, false);
-    game.physics.arcade.collide(this.loadedEffectsCollide, Frogland.GetCollisionLayer(), Collision.CollideEffectWithWorld, Collision.OverlapEffectWithWorld);
+    game.physics.arcade.collideGroupVsTilemapLayer(this.dicedPieces, Frogland.GetCollisionLayer(), null, null, null, false);
 
     if(frauki.state === frauki.Healing) {
         effectsController.MaterializeApple(frauki.body.center.x, frauki.body.y - 5, true);
@@ -192,7 +178,7 @@ EffectsController.prototype.LoadMapEffects = function() {
             dripper.effectType = 'drip';
             dripper.alpha = 0.5;
 
-            this.loadedEffectsCollide.push(dripper);
+            this.loadedEffects.push(dripper);
             this.effectsGroup.add(dripper);
             
         } else if(o.name === 'dripDirty') {
@@ -211,7 +197,7 @@ EffectsController.prototype.LoadMapEffects = function() {
             dripper.effectType = 'dripDirty';
             dripper.alpha = 0.5;
 
-            this.loadedEffectsCollide.push(dripper);
+            this.loadedEffects.push(dripper);
             this.effectsGroup.add(dripper);
             
         } else if(o.name === 'fluff') {

@@ -7,9 +7,9 @@
   "scripts": {
     "serve": "http-server",
     "build": "npm run build-win & npm run build-osx & npm run build-lin",
-    "build-win": "electron-packager . --overwrite --platform=win32 --arch=x64 --icon=favicon.ico --prune=true --out=build --ignore=.gitignore --ignore=Working --ignore=Design --ignore=.vscode",
-    "build-osx": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=favicon.ico --prune=true --out=build --ignore=.gitignore --ignore=Working --ignore=Design --ignore=.vscode",
-    "build-lin": "electron-packager . --overwrite --platform=linux --arch=x64 --icon=favicon.ico --prune=true --out=build --ignore=.gitignore --ignore=Working --ignore=Design --ignore=.vscode",
+    "build-win": "electron-packager . --overwrite --platform=win32 --arch=x64 --icon=favicon.ico --prune=true --out=build --ignore=.gitignore --ignore=Working --ignore=Concept --ignore=Design --ignore=.vscode",
+    "build-osx": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=favicon.ico --prune=true --out=build --ignore=.gitignore --ignore=Working --ignore=Concept --ignore=Design --ignore=.vscode",
+    "build-lin": "electron-packager . --overwrite --platform=linux --arch=x64 --icon=favicon.ico --prune=true --out=build --ignore=.gitignore --ignore=Working --ignore=Concept --ignore=Design --ignore=.vscode",
     "rebuild-stuff": "electron-rebuild -f -w greenworks",
     "electron": "electron ."
   },

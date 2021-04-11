@@ -111,10 +111,6 @@ Enemy.prototype.types['Buzzar'] =  function() {
     this.Stinging = function() {
         this.PlayAnim('sting');
 
-        // game.physics.arcade.overlap(this, frauki, function() {
-        //     this.timers.SetTimer('attack', 0);
-        // }, null, this);
-
         if(this.timers.TimerUp('attack') || this.body.onFloor() || this.body.onWall()) {
             this.SetAttackTimer(2000 + game.rnd.between(500, 1500));
             return true;

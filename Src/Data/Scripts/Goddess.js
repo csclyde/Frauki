@@ -98,6 +98,10 @@ ScriptRunner.scripts['goddess_angry1'] = [
 	{ name: 'show_text', props: { text: "Did you just try and attack me Frauki...?", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "I'll warn you, that is a very bad idea...", portrait: 'Goddess_Neutral' } },
 	
+	{ func: function() {
+		goddess.beenAttacked = false;
+	} },
+	
 	{ name: 'run_script', props: { name: 'exit_goddess' } },	
 ];
 
@@ -109,6 +113,10 @@ ScriptRunner.scripts['goddess_angry2'] = [
 	{ name: 'show_text', props: { text: "Oh you're such a little monster sometimes.", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "Shame on you Frauki. Just stop it.", portrait: 'Goddess_Neutral' } },
 	
+	{ func: function() {
+		goddess.beenAttacked = false;
+	} },
+
 	{ name: 'run_script', props: { name: 'exit_goddess' } },	
 ];
 
@@ -121,6 +129,10 @@ ScriptRunner.scripts['goddess_angry3'] = [
 	{ name: 'show_text', props: { text: "Just terrible.", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "Stop it.", portrait: 'Goddess_Neutral' } },
 	
+	{ func: function() {
+		goddess.beenAttacked = false;
+	} },
+
 	{ name: 'run_script', props: { name: 'exit_goddess' } },	
 ];
 
@@ -138,6 +150,7 @@ ScriptRunner.scripts['goddess_angry4'] = [
 		frauki.body.velocity.x = -500;
 		GameState.physicsSlowMo = 0.1;
 		GameState.death.name = 'goddess';
+		goddess.beenAttacked = false;
 		
 		for(var i = 0, max = energyController.GetHealth() + energyController.GetShield(); i < max; i++) {
             game.time.events.add(i * 400, function() {

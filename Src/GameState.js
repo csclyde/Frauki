@@ -38,6 +38,11 @@ GameState.create = function() {
     this.CreateUI();
     
     ScriptRunner.run('game_start');
+
+    this.profile = {
+        frogland: [],
+        objects: [],
+    }
 };
 
 GameState.update = function() {
@@ -49,6 +54,7 @@ GameState.update = function() {
     cameraController.Update();
     inputController.Update();
     backdropController.Update();
+
     Frogland.Update();
  
     if(!this.paused) {
@@ -66,6 +72,7 @@ GameState.update = function() {
     game.canvas.style.height = (pixel.height * pixel.scale) + "px";
 
     frauki.alpha = 0;
+
 };
 
 GameState.render = function() {
@@ -160,7 +167,7 @@ GameState.UpdateSetting = function(params) {
             if(params.dir === 'up') {
                 currentSetting += 1;
             } else {
-                currentSetting -= 1;                
+                currentSetting -= 1;            
             }
 
             currentSetting = Phaser.Math.clamp(currentSetting, 0, 8);
@@ -220,11 +227,11 @@ GameState.CreateUI = function() {
     
     //CREATE THE MAIN MENU
     this.Menu = game.add.group(undefined, 'main_menu');
-    this.Menu.fixedToCamera = true;        
+    this.Menu.fixedToCamera = true;    
 
     this.logo = game.add.image(pixel.width / 2, pixel.height / 3, 'UI', 'Logo0000');
     this.Menu.add(this.logo);
-    this.logo.anchor.setTo(0.5);    
+    this.logo.anchor.setTo(0.5);
 
     this.menuText = [];
     for(var i = 0; i < 6; i++) {
@@ -343,5 +350,5 @@ GameState.UpdateUI = function() {
     this['prismWit'].visible = GameData.HasShard('Wit');
     this['prismWill'].visible = GameData.HasShard('Will');
     this['prismLuck'].visible = GameData.HasShard('Luck');
-    this['prismPower'].visible = GameData.HasShard('Power');       
+    this['prismPower'].visible = GameData.HasShard('Power');   
 };

@@ -8,7 +8,7 @@ var GoddessSpeeches = {
 		"I really don't know why you left Frauki. Get back to work please.",
 		"Please ask my permission next time you're going to leave like that.",
 		"Be good and follow my directions Frauki. No misbehaving.",
-		"Keep it up Frauki, you're going a very good job.",
+		"Keep it up Frauki, you're doing a very good job.",
 		"Well, I suppose you're well rested now. So you should have no problem getting my gems back.",
 		"Ah, she decided to come back. How sweet it is.",
 		"You haven't even gotten a single gem yet Frauki...",

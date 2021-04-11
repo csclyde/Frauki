@@ -28,6 +28,7 @@ var Speeches = {
 	'dry_off': { text: "I need to dry off. Sure wish there was some sun way down here.", portrait: "Displeased" },
 	'secret_hideout': { text: "Looks like someones secret hideout. Dibs!", portrait: "Silly" },
 	'underwater_sign': { text: "The sign says: Keep out! This is my property. No Alien Robots allowed!", portrait: "Neutral" },
+	'whats_down': { text: "I'm scared... what's down there?", portrait: "Displeased" },
 	
 
 

@@ -1,6 +1,6 @@
 <!doctype html>
 <html>
-    <style>canvas { image-rendering: pixelated; cursor: none; } </style>
+    <style>canvas { image-rendering: pixelated; cursor: none; margin: auto; } </style>
     <head>
         <meta charset="UTF-8" />
         <title>Frauki's Adventure!</title>
@@ -106,19 +106,42 @@
 
             var pixel = { scale: 3, canvas: null, context: null, width: 640, height: 360 };
 
-            if(window.innerWidth < pixel.width * 2) {
-                pixel.scale = 1;
-                pixel.what = 3;
-            } else if(window.innerWidth < pixel.width * 3) {
-                pixel.scale = 2;
-                pixel.what = 4;
-            } else if(window.innerWidth < pixel.width * 4) {
+            if(window.innerWidth === 1920 && window.innerHeight === 1080) {
                 pixel.scale = 3;
-                pixel.what = 2;
-            } else {
-                pixel.scale = 4;
-                pixel.what = 1.5;
             }
+            else if(window.innerWidth === 2560 && window.innerHeight === 1440) {
+                pixel.scale = 3;
+            }
+            else if(window.innerWidth === 1366 && window.innerHeight === 768) {
+                pixel.scale = 2;
+            }
+            else if(window.innerWidth === 1440 && window.innerHeight === 900) {
+                pixel.scale = 2;
+            }
+            else if(window.innerWidth === 3840 && window.innerHeight === 2160) {
+                pixel.scale = 4;
+            }
+            else if(window.innerWidth === 1600 && window.innerHeight === 900) {
+                pixel.scale = 2;
+            }
+            else if(window.innerWidth === 1680 && window.innerHeight === 1050) {
+                pixel.scale = 2;
+            }
+            else if(window.innerWidth === 1360 && window.innerHeight === 768) {
+                pixel.scale = 2;
+            }
+            else {
+                if(window.innerWidth < pixel.width * 2) {
+                    pixel.scale = 1;
+                } else if(window.innerWidth < pixel.width * 3) {
+                    pixel.scale = 2;
+                } else if(window.innerWidth < pixel.width * 4) {
+                    pixel.scale = 3;
+                } else {
+                    pixel.scale = 4;
+                }
+            }
+
 
 
             var hidden = "hidden";

@@ -77,9 +77,6 @@ WeaponController.prototype.Baton = {
     
     Update: function() {
         if(this.baton && this.baton.visible) {
-            // if(!weaponController.timers.TimerUp('max_throw_time')) {
-            //     game.physics.arcade.collide(this.baton, Frogland.GetCollisionLayer(), null, Collision.CollideBatonWithWorld);
-            // }
             
             var vel = 800;
             var maxVelocity = 900 + this.baton.chargeLevel * 100;

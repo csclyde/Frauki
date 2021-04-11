@@ -144,11 +144,11 @@ Frogland.HandleCollisions = function() {
         null, false);
 
     //enemies are collided with themselves
-    game.physics.arcade.collide(
-        objectController.GetObjectGroup(), 
-        undefined, 
-        function(o1, o2) { return o1.type === 'enemy' && o2.type === 'enemy'; }, 
-        Collision.OverlapEnemiesWithSelf);
+    // game.physics.arcade.collide(
+    //     objectController.GetObjectGroup(), 
+    //     undefined, 
+    //     function(o1, o2) { return o1.type === 'enemy' && o2.type === 'enemy'; }, 
+    //     Collision.OverlapEnemiesWithSelf);
 
     //collide enemies with doors
     game.physics.arcade.collide(

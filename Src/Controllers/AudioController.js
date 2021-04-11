@@ -7,6 +7,7 @@ AudioController = function() {
 
     events.subscribe('play_sound', this.PlaySound, this);
     events.subscribe('stop_sound', this.StopSound, this);
+    events.subscribe('stop_all_sound', this.StopAllSound, this);
     events.subscribe('pause_all_sound', this.PauseAllSound, this);
     events.subscribe('unpause_all_sound', this.UnpauseAllSound, this);
 
@@ -122,7 +123,7 @@ AudioController.prototype.StopAllSound = function(params) {
         if(!this.sounds.hasOwnProperty(key)) continue;
 
         if(!!this.sounds[key] && this.sounds[key].isPlaying) {
-            this.sounds[key].fadeOut(params.fade || 500);
+            this.sounds[key].stop();
         }
     }
 };

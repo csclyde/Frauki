@@ -45,7 +45,6 @@ Enemy.prototype.types['H0P8'] =  function() {
 
             } else if(frauki.state === frauki.AttackDiveCharge) {
                 this.Dodge();
-                console.log('YOINKS')
 
             } else if(frauki.InPreAttackAnim()) {
                 this.Shield();

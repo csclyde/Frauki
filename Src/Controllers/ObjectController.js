@@ -11,6 +11,7 @@ ObjectController = function() {
 ObjectController.prototype.Create = function() {
     this.activeGroup = game.add.group(Frogland.froglandGroup, 'active_objects');
     this.inactiveGroup = game.add.group(Frogland.froglandGroup, 'inactive_objects');
+    this.inactiveGroup.exists = false;
     this.enemyHealthGroup = game.add.group(Frogland.froglandGroup, 'enemy_health');    
 };
 

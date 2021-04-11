@@ -11,7 +11,7 @@ Enemy.prototype.types['Goddess'] =  function() {
     this.energy = 5;
 	this.baseStunDuration = 400;
 	this.fraukiInSpace = false;
-	GameState.beenAttacked = false;
+	this.beenAttacked = false;
 
 	this.body.drag.x = 500;
 	this.body.allowGravity = false;
@@ -25,7 +25,8 @@ Enemy.prototype.types['Goddess'] =  function() {
 	this.currentPortrait = 'Goddess_Neutral';
 
 	this.RespondToAttack = function() {
-		if(!GameState.beenAttacked) {
+		console.log(goddess.beenAttacked);
+		if(!goddess.beenAttacked) {
 			if(!GameData.GetFlag('angry1')) {
 				ScriptRunner.run('goddess_angry1');
 				GameData.SetFlag('angry1', true);
@@ -42,7 +43,7 @@ Enemy.prototype.types['Goddess'] =  function() {
 				ScriptRunner.run('goddess_angry4');
 			}
 
-			GameState.beenAttacked = true;
+			goddess.beenAttacked = true;
 		}
 	};
     
@@ -60,7 +61,7 @@ Enemy.prototype.types['Goddess'] =  function() {
 	};
 
     this.Reset = function() {
-		GameState.beenAttacked = false;
+		this.beenAttacked = false;
     };
 
 	///////////////////////////////ACTIONS////////////////////////////////////

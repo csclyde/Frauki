@@ -230,6 +230,8 @@ ScriptRunner.scripts['game_over'] = [
         events.publish('set_camera', { to: frauki.body.center });
     } },
 
+    { name: 'stop_all_sound', props: {} },    
+
     { name: 'wait', props: { amount: 400 } },
     
     { func: function() {
