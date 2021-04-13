@@ -98,7 +98,7 @@ EnemyBehavior.Player.Distance = function(e) {
 
 EnemyBehavior.Player.Visibility = {};
 EnemyBehavior.Player.IsVisible = function(e) {
-
+    if(!inputController.allowInput) return false;
 
     //if the enemy is not cached, create an object for it
     if(!this.Visibility[e.z]) {

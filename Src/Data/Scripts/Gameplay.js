@@ -310,6 +310,12 @@ ScriptRunner.scripts['start_fight'] = [
     } },
     { name: 'wait', props: { amount: 1000 } },
     { name: 'allow_input', props: {} },
+
+    { func: function(params) {
+        if(params.script) {
+            ScriptRunner.run(params.script);
+        }
+    }}
 ];
 
 ScriptRunner.scripts['end_fight'] = [

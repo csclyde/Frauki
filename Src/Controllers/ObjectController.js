@@ -5,14 +5,14 @@ ObjectController = function() {
     this.enemyList = [];
     this.npcMap = {};
     this.checkpointList = [];
-    this.latentObjects = [];    
+    this.latentObjects = [];
 };
 
 ObjectController.prototype.Create = function() {
     this.activeGroup = game.add.group(Frogland.froglandGroup, 'active_objects');
     this.inactiveGroup = game.add.group(Frogland.froglandGroup, 'inactive_objects');
     this.inactiveGroup.exists = false;
-    this.enemyHealthGroup = game.add.group(Frogland.froglandGroup, 'enemy_health');    
+    this.enemyHealthGroup = game.add.group(Frogland.froglandGroup, 'enemy_health');
 };
 
 ObjectController.prototype.Update = function() {
@@ -60,7 +60,11 @@ ObjectController.prototype.Reset = function() {
     this.activeGroup.removeAll(true);
     this.inactiveGroup.removeAll(true);
     this.enemyHealthGroup.removeAll(true);
-    this.latentObjects = [];    
+    this.doorList = [];
+    this.enemyList = [];
+    this.npcMap = {};
+    this.checkpointList = [];
+    this.latentObjects = [];
 
     this.CreateObjectsLayer();
     this.CompileObjectList();

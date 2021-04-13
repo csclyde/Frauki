@@ -75,3 +75,32 @@ TriggerController.prototype.triggers['start_fight'] = {
 		
 	}
 };
+
+TriggerController.prototype.triggers['apple_drain'] = {
+	enter: function(params, trigger) {
+		if(energyController.GetApples() > 0) {
+			ScriptRunner.run('apple_drain', params);
+		}
+	},
+
+	stay: function(params, trigger) {
+
+	},
+
+	exit: function(params, trigger) {
+		
+	}
+};
+
+TriggerController.prototype.triggers['electro_floor'] = {
+	enter: function(params, trigger) {
+		frauki.states.electroFloor = true;
+	},
+
+	stay: function(params, trigger) {
+	},
+
+	exit: function(params, trigger) {
+		frauki.states.electroFloor = false;
+	}
+};

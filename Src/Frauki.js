@@ -241,6 +241,7 @@ Player.prototype.Reset = function() {
     this.states.throwing = false;
     this.states.entangled = false;
     this.states.damageRefactory = [];
+    this.states.electroFloor = false;
 
     this.movement.diveVelocity = 0;
     this.movement.jumpSlashVelocity = 0;
@@ -853,7 +854,11 @@ Player.prototype.Stun = function(e) {
     this.body.acceleration.y = 0;
     this.body.velocity.y = -100;
 
-    if(this.body.center.x < e.body.center.x) {
+    if(!e) {
+        this.body.velocity.x = 500 * this.GetDirectionMultiplier();
+        this.body.velocity.y = -500;
+    }
+    else if(this.body.center.x < e.body.center.x) {
         this.body.velocity.x = -30;
     } else {
         this.body.velocity.x = 30;
@@ -1023,6 +1028,12 @@ Player.prototype.Rolling = function() {
 
     //ready to switch to release
     } else if(this.movement.rollStage === 0) {
+
+        if(this.states.electroFloor) {
+            this.Stun();
+            return;
+        }
+
         this.movement.rollStage = 1;
         this.movement.rollFrames = 0;
 
