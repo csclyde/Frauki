@@ -82,6 +82,16 @@ TriggerController.prototype.triggers['apple_drain'] = {
 			ScriptRunner.run('apple_drain', params);
 		}
 	},
+	stay: function(params, trigger) {},
+	exit: function(params, trigger) {}
+};
+
+TriggerController.prototype.triggers['shield_drain'] = {
+	enter: function(params, trigger) {
+		if(energyController.GetMaxShield() > 0) {
+			ScriptRunner.run('shield_drain', params);
+		}
+	},
 
 	stay: function(params, trigger) {
 
@@ -102,5 +112,18 @@ TriggerController.prototype.triggers['electro_floor'] = {
 
 	exit: function(params, trigger) {
 		frauki.states.electroFloor = false;
+	}
+};
+
+TriggerController.prototype.triggers['super_gravity'] = {
+	enter: function(params, trigger) {
+		frauki.states.superGravity = true;
+	},
+
+	stay: function(params, trigger) {
+	},
+
+	exit: function(params, trigger) {
+		frauki.states.superGravity = false;
 	}
 };

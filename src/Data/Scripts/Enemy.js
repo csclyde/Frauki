@@ -46,6 +46,13 @@ ScriptRunner.scripts['tower_ninja'] = [
 	{ name: 'run_script', props: { name: 'exit_enemy' } },
 ];
 
+ScriptRunner.scripts['tower_hawk'] = [
+	{ name: 'show_text', props: { text: "Finally, you arrived.", portrait: 'red' } },
+	{ name: 'show_text', props: { text: "You think your pathetic little frog-jumps are impressive? Ha!", portrait: 'red' } },
+	{ name: 'show_text', props: { text: "I rule these skies, Frauki. Let's see how great your little jumps are in my super-gravity chamber.", portrait: 'red' } },
+	{ name: 'run_script', props: { name: 'exit_enemy' } },
+];
+
 ScriptRunner.scripts['apple_drain'] = [
 	{ name: 'disallow_input', props: {} },
 	
@@ -67,5 +74,26 @@ ScriptRunner.scripts['apple_drain'] = [
 	} },
 
 	{ name: 'wait', props: { amount: 2000 } },	
+	{ name: 'allow_input', props: {} }
+];
+
+ScriptRunner.scripts['shield_drain'] = [
+	{ name: 'disallow_input', props: {} },
+	
+	{ name: 'wait', props: { amount: 500 } },
+	{ name: 'show_text', props: { text: 'ERROR! WARNING! CONTRABAND DETECTED!', portrait: 'red' } },
+	{ name: 'show_text', props: { text: "ILLEGAL DEFENSIVE MEASURES ARE BEING USED.", portrait: 'red' } },
+	{ name: 'show_text', props: { text: "UNFAIR CHEATING DEVICES ARE STRICTLY PROHIBITED!", portrait: 'red' } },
+	{ name: 'show_text', props: { text: "REMOVING SHIELD...", portrait: 'red' } },
+
+	{ func: function() {
+		energyController.shield = 0;
+		frauki.states.shieldBlock = true;
+	} },
+
+	{ name: 'play_sound', props: { name: 'frauki_stun' } },
+	
+
+	{ name: 'wait', props: { amount: 1000 } },	
 	{ name: 'allow_input', props: {} }
 ];

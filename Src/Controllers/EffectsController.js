@@ -22,7 +22,7 @@ EffectsController.prototype.Update = function() {
     this.ClearOffscreenDicedPieces();
 
     this.loadedEffects.forEach(function(o) {
-        var padding = 100;
+        var padding = 200;
 
         if(o.x > game.camera.x - padding && o.y > game.camera.y - padding && o.x < game.camera.x + game.camera.width + padding && o.y < game.camera.y + game.camera.height + padding) {
             o.on = true;
@@ -335,6 +335,25 @@ EffectsController.prototype.LoadMapEffects = function() {
             this.loadedEffects.push(spirits);
             this.effectsGroup.add(spirits);
             
+        } else if(o.name === 'super_grav') {
+            var heavy = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
+            heavy.name = 'heavy';
+            heavy.width = o.width;
+            heavy.height = o.height;
+            heavy.makeParticles('Misc', ['Sparks0006', 'Sparks0007', 'Sparks0008', 'Sparks0009', 'Sparks0010', 'Sparks0011'], 100);
+            
+            heavy.gravity.setTo(0, -700);
+            heavy.maxParticleSpeed.setTo(0, 400);
+            heavy.minParticleSpeed.setTo(0, 400);
+            heavy.minRotation = 0;
+            heavy.maxRotation = 0;
+            heavy.setScale(1);
+
+            heavy.start(false, 800, 20);
+            heavy.effectType = 'heavy';
+
+            this.loadedEffects.push(heavy);
+            this.effectsGroup.add(heavy);
         }
 
     }, this);
@@ -360,6 +379,7 @@ EffectsController.prototype.LoadMapEffects = function() {
             this.effectsGroup.add(sparkles);
             
         }
+       
     }, this);
 };
 

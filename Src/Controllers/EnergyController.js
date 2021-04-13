@@ -117,7 +117,11 @@ EnergyController.prototype.GetMaxHealth = function() {
 };
 
 EnergyController.prototype.GetMaxShield = function() {
-	return GameData.GetMaxShield();
+	if(!!frauki && frauki.states.shieldBlock) {
+		return 0;
+	} else {
+		return GameData.GetMaxShield();
+	}
 };
 
 EnergyController.prototype.AddApple = function() {

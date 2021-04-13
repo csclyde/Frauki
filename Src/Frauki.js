@@ -135,6 +135,10 @@ Player.prototype.postStateUpdate = function() {
         this.body.gravity.y = game.physics.arcade.gravity.y * 3;        
     }
 
+    if(this.states.superGravity) {
+        this.body.gravity.y = game.physics.arcade.gravity.y * 0.6;
+    }
+
     if(this.states.inWater) {
         if(this.states.flowLeft || this.states.flowRight) {
             this.body.maxVelocity.x *= 2;
@@ -151,7 +155,12 @@ Player.prototype.postStateUpdate = function() {
     }
 
     if(this.states.inUpdraft) {
-        this.body.acceleration.y = -850;
+        if(this.states.superGravity) {
+            this.body.acceleration.y = -450;
+        } else {
+            this.body.acceleration.y = -850;
+        }
+
         this.body.maxVelocity.y = 500;
     } else {
         this.body.acceleration.y = 0;
@@ -242,6 +251,8 @@ Player.prototype.Reset = function() {
     this.states.entangled = false;
     this.states.damageRefactory = [];
     this.states.electroFloor = false;
+    this.states.shieldBlock = false;
+    this.states.superGravity = false;
 
     this.movement.diveVelocity = 0;
     this.movement.jumpSlashVelocity = 0;
