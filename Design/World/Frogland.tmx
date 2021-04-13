@@ -5480,17 +5480,19 @@
   <object id="4205" name="start_fight" type="trigger" x="3195.75" y="2970.75" width="22.5" height="96.5">
    <properties>
     <property name="door" value="spaceship_0"/>
+    <property name="name" value="tower_troll"/>
     <property name="once" value="true"/>
-    <property name="script" value="azp3_intro"/>
+    <property name="script" value="enter_enemy"/>
    </properties>
   </object>
   <object id="4206" name="electro_floor" type="trigger" x="2667.25" y="2706.75" width="326.5" height="111.5"/>
   <object id="4207" name="apple_drain" type="trigger" x="3107" y="2846.75" width="75" height="22.5"/>
-  <object id="4209" name="start_fight" type="trigger" x="2975.75" y="2733.25" width="22.5" height="96.5">
+  <object id="4209" name="start_fight" type="trigger" x="2972.5" y="2733.25" width="22.5" height="96.5">
    <properties>
     <property name="door" value="spaceship_2"/>
+    <property name="name" value="tower_ninja"/>
     <property name="once" value="true"/>
-    <property name="script" value="kr32_intro"/>
+    <property name="script" value="enter_enemy"/>
    </properties>
   </object>
  </objectgroup>

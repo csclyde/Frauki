@@ -9474,12 +9474,14 @@
                  "properties":
                     {
                      "door":"spaceship_0",
+                     "name":"tower_troll",
                      "once":"true",
-                     "script":"azp3_intro"
+                     "script":"enter_enemy"
                     },
                  "propertytypes":
                     {
                      "door":"string",
+                     "name":"string",
                      "once":"string",
                      "script":"string"
                     },
@@ -9519,12 +9521,14 @@
                  "properties":
                     {
                      "door":"spaceship_2",
+                     "name":"tower_ninja",
                      "once":"true",
-                     "script":"kr32_intro"
+                     "script":"enter_enemy"
                     },
                  "propertytypes":
                     {
                      "door":"string",
+                     "name":"string",
                      "once":"string",
                      "script":"string"
                     },
@@ -9532,7 +9536,7 @@
                  "type":"trigger",
                  "visible":true,
                  "width":22.5,
-                 "x":2975.75,
+                 "x":2972.5,
                  "y":2733.25
                 }],
          "opacity":1,

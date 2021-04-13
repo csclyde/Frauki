@@ -313,7 +313,7 @@ ScriptRunner.scripts['start_fight'] = [
 
     { func: function(params) {
         if(params.script) {
-            ScriptRunner.run(params.script);
+            ScriptRunner.run(params.script, params);
         }
     }}
 ];
