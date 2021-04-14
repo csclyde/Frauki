@@ -3927,7 +3927,7 @@
     <property name="prism" value="Luck"/>
    </properties>
   </object>
-  <object id="3969" gid="76" x="2864.5" y="1059" width="16" height="16">
+  <object id="3969" gid="76" x="2715.17" y="647.667" width="16" height="16">
    <properties>
     <property name="prism" value="Power"/>
    </properties>
@@ -3944,7 +3944,6 @@
   <object id="4004" gid="66" x="1687.5" y="7540.5" width="16" height="16"/>
   <object id="4005" gid="66" x="2143.67" y="8306.33" width="16" height="16"/>
   <object id="4008" gid="66" x="2605" y="8901.5" width="16" height="16"/>
-  <object id="4031" gid="66" x="2586.83" y="1671.67" width="16" height="16"/>
   <object id="4199" gid="66" x="4114" y="4198.67" width="16" height="16"/>
   <object id="4202" gid="66" x="1707" y="6696.67" width="16" height="16"/>
  </objectgroup>
@@ -4062,7 +4061,7 @@
     <property name="type" value="metal_seal"/>
    </properties>
   </object>
-  <object id="3494" gid="67" x="2776" y="1384" width="16" height="16">
+  <object id="3494" gid="67" x="2616" y="968" width="16" height="16">
    <properties>
     <property name="id" value="spaceship_9"/>
     <property name="open_direction" value="down"/>
@@ -4267,7 +4266,7 @@
     <property name="type" value="shard_stone"/>
    </properties>
   </object>
-  <object id="3983" type="shard" gid="67" x="2968" y="856" width="16" height="16">
+  <object id="3983" type="shard" gid="67" x="2968" y="440" width="16" height="16">
    <properties>
     <property name="id" value="power_prism_door"/>
     <property name="open_direction" value="down"/>
@@ -4303,7 +4302,7 @@
     <property name="type" value="enemy"/>
    </properties>
   </object>
-  <object id="4015" gid="67" x="2840" y="2568" width="16" height="16">
+  <object id="4015" gid="67" x="2680" y="2568" width="16" height="16">
    <properties>
     <property name="id" value="spaceship_3"/>
     <property name="thresholdAttempts" value="2"/>
@@ -4318,7 +4317,7 @@
     <property name="type" value="enemy"/>
    </properties>
   </object>
-  <object id="4030" gid="67" x="3080" y="1256" width="16" height="16">
+  <object id="4030" gid="67" x="3080" y="840" width="16" height="16">
    <properties>
     <property name="id" value="spaceship_10"/>
     <property name="type" value="enemy"/>
@@ -4409,7 +4408,7 @@
     <property name="type" value="stone_seal"/>
    </properties>
   </object>
-  <object id="4192" gid="67" x="3192" y="1608" width="16" height="16">
+  <object id="4192" gid="67" x="3192" y="1192" width="16" height="16">
    <properties>
     <property name="id" value="spaceship_9"/>
     <property name="thresholdAttempts" value="3"/>
@@ -4551,7 +4550,7 @@
     <property name="on_death" value="open_door,door_name:spaceship_1"/>
    </properties>
   </object>
-  <object id="3521" name="tower_swat" gid="94" x="2824.5" y="1589.5" width="16" height="16">
+  <object id="3521" name="tower_swat" gid="94" x="2778.5" y="1176.17" width="16" height="16">
    <properties>
     <property name="on_death" value="open_door,door_name:spaceship_9"/>
    </properties>
@@ -4818,8 +4817,9 @@
   <object id="3988" name="robo_samurai" gid="149" x="2859.67" y="3394.67" width="16" height="16"/>
   <object id="3989" name="robo_spikey" gid="149" x="2595.33" y="6337.67" width="16" height="16"/>
   <object id="3991" name="robo_slickback" gid="149" x="2307" y="5210" width="16" height="16"/>
-  <object id="4009" name="tower_spider1" gid="101" x="2732.67" y="2578" width="16" height="16">
+  <object id="4009" name="tower_spider1" gid="101" x="2565.34" y="2563.33" width="16" height="16">
    <properties>
+    <property name="clingDir" value="left"/>
     <property name="on_death" value="open_door,door_name:spaceship_3"/>
    </properties>
   </object>
@@ -4833,7 +4833,7 @@
     <property name="on_death" value="open_door,door_name:spaceship_7"/>
    </properties>
   </object>
-  <object id="4020" gid="97" x="2806" y="1738.67" width="16" height="16">
+  <object id="4020" gid="97" x="2854" y="1735.34" width="16" height="16">
    <properties>
     <property name="on_death" value="open_door,door_name:spaceship_8"/>
    </properties>
@@ -4925,18 +4925,18 @@
     <property name="on_death" value="open_door,door_name:spaceship_3"/>
    </properties>
   </object>
-  <object id="4184" gid="98" x="2931.5" y="1739" width="16" height="16">
+  <object id="4184" gid="98" x="2979.5" y="1735.67" width="16" height="16">
    <properties>
     <property name="on_death" value="open_door,door_name:spaceship_8"/>
    </properties>
   </object>
-  <object id="4186" name="tower_swat" gid="94" x="2927" y="1586.5" width="16" height="16">
+  <object id="4186" name="tower_swat" gid="94" x="2881" y="1173.17" width="16" height="16">
    <properties>
     <property name="on_death" value="open_door,door_name:spaceship_9"/>
    </properties>
   </object>
-  <object id="4187" name="robo_chonker" gid="149" x="2976" y="1296" width="16" height="16"/>
-  <object id="4194" name="robo_oldie" gid="149" x="2944" y="768" width="16" height="16"/>
+  <object id="4187" name="robo_chonker" gid="149" x="2963.33" y="880" width="16" height="16"/>
+  <object id="4194" name="robo_oldie" gid="149" x="2940.67" y="349.333" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Effects" visible="0">
   <object id="3284" name="fluff" type="effect" x="2928.46" y="3986" width="90.4167" height="57.3333"/>
@@ -5430,7 +5430,7 @@
     <property name="text" value="CRASHED SHIP"/>
    </properties>
   </object>
-  <object id="4188" name="start_fight" type="trigger" x="2862.75" y="2511.08" width="22.5" height="96.5">
+  <object id="4188" name="start_fight" type="trigger" x="2702.08" y="2514.41" width="22.5" height="96.5">
    <properties>
     <property name="door" value="spaceship_3"/>
     <property name="once" value="true"/>
@@ -5456,7 +5456,7 @@
     <property name="once" value="true"/>
    </properties>
   </object>
-  <object id="4193" name="start_fight" type="trigger" x="3163.42" y="1548.42" width="22.5" height="96.5">
+  <object id="4193" name="start_fight" type="trigger" x="3161.42" y="1132.42" width="22.5" height="96.5">
    <properties>
     <property name="door" value="spaceship_9"/>
     <property name="once" value="true"/>
