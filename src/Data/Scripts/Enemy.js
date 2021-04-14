@@ -53,6 +53,13 @@ ScriptRunner.scripts['tower_hawk'] = [
 	{ name: 'run_script', props: { name: 'exit_enemy' } },
 ];
 
+ScriptRunner.scripts['fan_kr32'] = [
+	{ name: 'show_text', props: { text: "Ha! So far you have merely been lucky.", portrait: 'red' } },
+	{ name: 'show_text', props: { text: "That ends now. With this gravity fan, you won't even be able to touch me.", portrait: 'red' } },
+	{ name: 'show_text', props: { text: "Pathetic fool!", portrait: 'red' } },
+	{ name: 'run_script', props: { name: 'exit_enemy' } },
+];
+
 ScriptRunner.scripts['apple_drain'] = [
 	{ name: 'disallow_input', props: {} },
 	

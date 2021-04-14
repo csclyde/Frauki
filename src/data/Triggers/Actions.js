@@ -127,3 +127,17 @@ TriggerController.prototype.triggers['super_gravity'] = {
 		frauki.states.superGravity = false;
 	}
 };
+
+TriggerController.prototype.triggers['grav_fan'] = {
+	enter: function(params, trigger) {
+		frauki.states.gravFan = true;
+		console.log('in grav fan')
+	},
+
+	stay: function(params, trigger) {
+	},
+
+	exit: function(params, trigger) {
+		frauki.states.gravFan = false;
+	}
+};

@@ -354,6 +354,25 @@ EffectsController.prototype.LoadMapEffects = function() {
 
             this.loadedEffects.push(heavy);
             this.effectsGroup.add(heavy);
+        } else if(o.name === 'grav_fan') {
+            var heavy = game.add.emitter(o.x + (o.width / 2), o.y + (o.height / 2));
+            heavy.name = 'heavy';
+            heavy.width = o.width;
+            heavy.height = o.height;
+            heavy.makeParticles('Misc', ['Sparks0006', 'Sparks0007', 'Sparks0008', 'Sparks0009', 'Sparks0010', 'Sparks0011'], 100);
+            
+            heavy.gravity.setTo(0, -700);
+            heavy.maxParticleSpeed.setTo(400, 0);
+            heavy.minParticleSpeed.setTo(400, 0);
+            heavy.minRotation = 0;
+            heavy.maxRotation = 0;
+            heavy.setScale(1);
+
+            heavy.start(false, 800, 20);
+            heavy.effectType = 'heavy';
+
+            this.loadedEffects.push(heavy);
+            this.effectsGroup.add(heavy);
         }
 
     }, this);

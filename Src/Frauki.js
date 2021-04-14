@@ -166,6 +166,10 @@ Player.prototype.postStateUpdate = function() {
         this.body.acceleration.y = 0;
     }
 
+    if(this.states.gravFan) {
+        this.body.acceleration.x = 100;
+    }
+
     if(this.state !== this.Hanging) {
         if(frauki.states.flowDown) {
             this.body.acceleration.y = 700;
@@ -253,6 +257,7 @@ Player.prototype.Reset = function() {
     this.states.electroFloor = false;
     this.states.shieldBlock = false;
     this.states.superGravity = false;
+    this.states.gravFan = false;
 
     this.movement.diveVelocity = 0;
     this.movement.jumpSlashVelocity = 0;
@@ -514,6 +519,10 @@ Player.prototype.StartStopRun = function(params) {
         }
 
     } else {
+        if(this.states.gravFan && this.body.velocity.x < 0) {
+            this.body.velocity.x = 0;
+        }
+        
         this.movement.rollBoost = 0;
     }
 };
