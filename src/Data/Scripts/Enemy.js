@@ -9,6 +9,8 @@ ScriptRunner.scripts['enter_enemy'] = [
 			return e.name === params.name;
 		});
 
+		EnemyBehavior.FacePlayer(enemy);
+
 		if(!!enemy && !!enemy.body) {
 			events.publish('pan_camera', { to: enemy.body.center, duration: 1000 });
 		}
@@ -76,11 +78,13 @@ ScriptRunner.scripts['power_gubr'] = [
 ];
 
 ScriptRunner.scripts['tower_swat1'] = [
-	{ name: 'show_text', props: { text: "We're the buster brothers,", portrait: 'red' } },
+	{ name: 'show_text', props: { text: "We're the buster brothers!", portrait: 'red' } },
 
 	{ func: function(params) {
 		var enemy = objectController.enemyList.find(function(e) { return e.name === 'tower_swat2'; });
 		if(!!enemy && !!enemy.body) { events.publish('pan_camera', { to: enemy.body.center, duration: 500 }); }
+		EnemyBehavior.FacePlayer(enemy);
+		
 	} },
 	{ name: 'wait', props: { amount: 500 } },
 
@@ -116,7 +120,7 @@ ScriptRunner.scripts['tower_swat1'] = [
 	} },
 	{ name: 'wait', props: { amount: 500 } },
 
-	{ name: 'show_text', props: { text: "Yeah get ready! Hu hu hu...", portrait: 'red' } },
+	{ name: 'show_text', props: { text: "Yeah, get ready! Hu hu hu...", portrait: 'red' } },
 
 	{ name: 'run_script', props: { name: 'exit_enemy' } },
 ];
