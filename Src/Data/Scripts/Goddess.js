@@ -45,7 +45,9 @@ ScriptRunner.scripts['goddess_welcome_return'] = [
 		    ScriptRunner.run('welcome_back4');						
 		}
 		else {
-			//has all the shards. initiate the endgame						
+			//has all the shards. initiate the endgame	
+		    ScriptRunner.run('exit_goddess');						
+			
 		}
 	}},
 ];

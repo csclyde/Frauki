@@ -154,7 +154,7 @@ Enemy.prototype.types['HWK9'] =  function() {
 			var attackVector = new Phaser.Point(frauki.body.x - this.body.x, (frauki.body.y - 30) - this.body.y);
 			attackVector = attackVector.normalize();
 
-			attackVector.setMagnitude(600);
+			attackVector.setMagnitude(400);
 
 			this.body.velocity = attackVector;
 

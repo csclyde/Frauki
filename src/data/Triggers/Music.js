@@ -101,7 +101,6 @@ TriggerController.prototype.triggers['unpause_music'] = {
 
 TriggerController.prototype.triggers['music_zone'] = {
 	enter: function(params, trigger) {
-		console.log('enter music zone', params)
 		events.publish('pause_all_music', { } );
 		events.publish('play_music', { name: params.song, fade: 1000 } );
 	},
@@ -111,7 +110,6 @@ TriggerController.prototype.triggers['music_zone'] = {
 	},
 	
 	exit: function(params, trigger) {
-		console.log('exit music zone', params)
 		events.publish('stop_music', { name: params.song, fade: 1000 } );		
 		events.publish('unpause_all_music', { } );
 		

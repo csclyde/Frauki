@@ -167,7 +167,7 @@ Player.prototype.postStateUpdate = function() {
     }
 
     if(this.states.gravFan) {
-        this.body.acceleration.x = 100;
+        this.body.acceleration.x += 1100;
     }
 
     if(this.state !== this.Hanging) {
