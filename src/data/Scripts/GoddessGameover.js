@@ -305,7 +305,7 @@ ScriptRunner.scripts['goddess_depths3'] = [
 ];
 
 // FINAL STRETCH //////////
-ScriptRunner.scripts['final_stetch'] = [
+ScriptRunner.scripts['final_stretch'] = [
 	{ name: 'show_text', props: { text: [
 		"All that's left to do it get through the Alien Robot ship. I can't believe you're almost done!",
 		"Go show them what happens when they mess with me. Destroy them without mercy, you little spitfire!",

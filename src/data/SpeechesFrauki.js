@@ -29,6 +29,7 @@ var Speeches = {
 	'secret_hideout': { text: "Looks like someones secret hideout. Dibs!", portrait: "Silly" },
 	'underwater_sign': { text: "The sign says: Keep out! This is my property. No Alien Robots allowed!", portrait: "Neutral" },
 	'whats_down': { text: "I'm scared... what's down there?", portrait: "Displeased" },
+	'someone_listening': { text: "Hello? Is someone listening in?", portrait: "Displeased" },
 	
 
 
