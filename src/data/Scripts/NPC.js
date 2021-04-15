@@ -59,7 +59,7 @@ ScriptRunner.scripts['robo_chonker'] = [
 	{ name: 'show_text', props: { text: "What do I get out of it? Chopped up into scrap? No thanks.", portrait: 'red' } },
 	{ name: 'show_text', props: { text: "You can just go ahead. ", portrait: 'red' } },
 	{ name: 'show_text', props: { text: "Have a nice day.", portrait: 'red' } },
-	{ name: 'open_door', props: { door_name: 'spaceship_10' }},
+	{ name: 'open_door', props: { door_name: 'spaceship_13' }},
 	{ name: 'run_script', props: { name: 'exit_NPC' } },
 ];
 

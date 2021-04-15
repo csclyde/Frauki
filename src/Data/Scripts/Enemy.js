@@ -60,6 +60,67 @@ ScriptRunner.scripts['fan_kr32'] = [
 	{ name: 'run_script', props: { name: 'exit_enemy' } },
 ];
 
+ScriptRunner.scripts['protector_sw8t'] = [
+	{ name: 'show_text', props: { text: "I'm sick of you picking on my little buddies.", portrait: 'red' } },
+	{ name: 'show_text', props: { text: "Let's see how tough you are with me protecting them!", portrait: 'red' } },
+	{ name: 'run_script', props: { name: 'exit_enemy' } },
+];
+
+ScriptRunner.scripts['power_gubr'] = [
+	{ name: 'show_text', props: { text: "I'm your worst nightmare.", portrait: 'red' } },
+	{ name: 'show_text', props: { text: "I'm the chill running down your spine.", portrait: 'red' } },
+	{ name: 'show_text', props: { text: "I'm the shiver you feel in the dark.", portrait: 'red' } },
+	{ name: 'show_text', props: { text: "I'm the noise you hear at night.", portrait: 'red' } },
+	{ name: 'show_text', props: { text: "Prepare yourself. Death comes swiftly..", portrait: 'red' } },
+	{ name: 'run_script', props: { name: 'exit_enemy' } },
+];
+
+ScriptRunner.scripts['tower_swat1'] = [
+	{ name: 'show_text', props: { text: "We're the buster brothers,", portrait: 'red' } },
+
+	{ func: function(params) {
+		var enemy = objectController.enemyList.find(function(e) { return e.name === 'tower_swat2'; });
+		if(!!enemy && !!enemy.body) { events.publish('pan_camera', { to: enemy.body.center, duration: 500 }); }
+	} },
+	{ name: 'wait', props: { amount: 500 } },
+
+	{ name: 'show_text', props: { text: "Yeah!", portrait: 'red' } },
+
+	{ func: function(params) {
+		var enemy = objectController.enemyList.find(function(e) { return e.name === 'tower_swat1'; });
+		if(!!enemy && !!enemy.body) { events.publish('pan_camera', { to: enemy.body.center, duration: 500 }); }
+	} },
+	{ name: 'wait', props: { amount: 500 } },
+
+	{ name: 'show_text', props: { text: "And we're gonna bust you up!", portrait: 'red' } },
+
+	{ func: function(params) {
+		var enemy = objectController.enemyList.find(function(e) { return e.name === 'tower_swat2'; });
+		if(!!enemy && !!enemy.body) { events.publish('pan_camera', { to: enemy.body.center, duration: 500 }); }
+	} },
+	{ name: 'wait', props: { amount: 500 } },
+
+	{ name: 'show_text', props: { text: "That's right!", portrait: 'red' } },
+	
+	{ func: function(params) {
+		var enemy = objectController.enemyList.find(function(e) { return e.name === 'tower_swat1'; });
+		if(!!enemy && !!enemy.body) { events.publish('pan_camera', { to: enemy.body.center, duration: 500 }); }
+	} },
+	{ name: 'wait', props: { amount: 500 } },
+	
+	{ name: 'show_text', props: { text: "So get ready for a serious bustin'!", portrait: 'red' } },
+
+	{ func: function(params) {
+		var enemy = objectController.enemyList.find(function(e) { return e.name === 'tower_swat2'; });
+		if(!!enemy && !!enemy.body) { events.publish('pan_camera', { to: enemy.body.center, duration: 500 }); }
+	} },
+	{ name: 'wait', props: { amount: 500 } },
+
+	{ name: 'show_text', props: { text: "Yeah get ready! Hu hu hu...", portrait: 'red' } },
+
+	{ name: 'run_script', props: { name: 'exit_enemy' } },
+];
+
 ScriptRunner.scripts['apple_drain'] = [
 	{ name: 'disallow_input', props: {} },
 	
