@@ -13,6 +13,13 @@ ObjectController.prototype.Create = function() {
     this.inactiveGroup = game.add.group(Frogland.froglandGroup, 'inactive_objects');
     this.inactiveGroup.exists = false;
     this.enemyHealthGroup = game.add.group(Frogland.froglandGroup, 'enemy_health');
+
+    events.subscribe('destroy_enemy', function(params) {
+        var enemy = this.enemyList.find(function(e) { return e.name === params.name}) || this.npcMap[params.name];
+        if(enemy) {
+            enemy.DestroyEnemy(enemy);
+        } 
+    }, this);
 };
 
 ObjectController.prototype.Update = function() {
@@ -71,10 +78,14 @@ ObjectController.prototype.Reset = function() {
 };
 
 ObjectController.prototype.DestroyAllEnemies = function() {
-    this.latentObjects = this.latentObjects.filter(function(o) { return !o.enemy; });
-    this.enemyList.forEach(function(enemy) {
-        enemy.pendingDestroy = true;
-    }, this);
+    this.activeGroup.removeAll(true);
+    this.inactiveGroup.removeAll(true);
+    this.enemyHealthGroup.removeAll(true);
+    this.doorList = [];
+    this.enemyList = [];
+    this.npcMap = {};
+    this.checkpointList = [];
+    this.latentObjects = [];
 };
 
 ObjectController.prototype.CreateObjectsLayer = function(layer) {
@@ -202,6 +213,12 @@ ObjectController.prototype.SpawnObject = function(o) {
 
 ObjectController.prototype.GetObjectGroup = function() {
     return this.activeGroup;
+};
+
+ObjectController.prototype.GetActiveEnemies = function() {
+    return this.activeGroup.children.filter(function(o) {
+        return o instanceof Enemy;
+    })
 }
 
 function ComposeAndEmitSignal(data) {

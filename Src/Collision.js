@@ -203,7 +203,7 @@ Collision.OverlapEnemyAttackWithEnemies = function(e, f) {
 
 
 Collision.OverlapAttackWithObject = function(f, o) {
-    if(o.spriteType === 'enemy') {
+    if(o.spriteType === 'enemy') {    
         if(frauki.GetCurrentDamage() > 0) {
 
             if(!o.isAttacking()) {
@@ -228,12 +228,12 @@ Collision.OverlapAttackWithObject = function(f, o) {
     } else if(o.spriteType === 'upgrade') {
         HitUpgrade(frauki, o);
     } else if(o.spriteType === 'gem_sucker') {
-        o.Hit()
+        o.Hit();
     }
 };
 
 Collision.OverlapAttackWithEnemy = function(f, e, halfDmg) {
-
+    
     if(e.spriteType !== 'enemy' || !e.timers.TimerUp('grace') || !e.Vulnerable() || e.state === e.Dying || e.state === e.Hurting)
         return;
 

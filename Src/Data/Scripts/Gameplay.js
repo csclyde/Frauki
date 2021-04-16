@@ -422,203 +422,204 @@ ScriptRunner.scripts['finish_game'] = [
     { name: 'disallow_input', props: {} },
     { name: 'pause_all_music', props: {} },
 	{ name: 'play_music', props: { name: 'Goddess', fade: 1000 } },
-    // { name: 'wait', props: { amount: 1500 } },
+    { name: 'wait', props: { amount: 1500 } },
     
-    // { func: function(params) {
-    //     var wit = effectsController.shardList.Wit;
-    //     GameState.inFinale = true;
+    { func: function(params) {
+        var wit = effectsController.shardList.Wit;
+        GameState.inFinale = true;
 
-    //     wit.visible = true;
-    //     wit.x = frauki.body.center.x;
-    //     wit.y = frauki.body.center.y;
-    //     //4456, 2656
-    //     game.add.tween(wit).to(Frogland.prismPositions.Wit, 4000, Phaser.Easing.Quartic.InOut, true);
+        wit.visible = true;
+        wit.x = frauki.body.center.x;
+        wit.y = frauki.body.center.y;
+        //4456, 2656
+        game.add.tween(wit).to(Frogland.prismPositions.Wit, 4000, Phaser.Easing.Quartic.InOut, true);
 
-    //     game.time.events.add(4000, function() {
-    //         events.publish('play_sound', { name: 'crystal_door', restart: true });
-    //         effectsController.ScreenFlash();
-    //     });
-    // } },
+        game.time.events.add(4000, function() {
+            events.publish('play_sound', { name: 'crystal_door', restart: true });
+            effectsController.ScreenFlash();
+        });
+    } },
 
-    // { name: 'wait', props: { amount: 1500 } },
+    { name: 'wait', props: { amount: 1500 } },
 
-    // { func: function(params) {
-    //     var will = effectsController.shardList.Will;
+    { func: function(params) {
+        var will = effectsController.shardList.Will;
 
-    //     will.visible = true;
-    //     will.x = frauki.body.center.x;
-    //     will.y = frauki.body.center.y;
-    //     //4456, 2656
-    //     game.add.tween(will).to(Frogland.prismPositions.Will, 4000, Phaser.Easing.Quartic.InOut, true);
+        will.visible = true;
+        will.x = frauki.body.center.x;
+        will.y = frauki.body.center.y;
+        //4456, 2656
+        game.add.tween(will).to(Frogland.prismPositions.Will, 4000, Phaser.Easing.Quartic.InOut, true);
 
-    //     game.time.events.add(4000, function() {
-    //         events.publish('play_sound', { name: 'crystal_door', restart: true });
-    //         effectsController.ScreenFlash();
-    //     });
-    // } },
+        game.time.events.add(4000, function() {
+            events.publish('play_sound', { name: 'crystal_door', restart: true });
+            effectsController.ScreenFlash();
+        });
+    } },
 
-    // { name: 'wait', props: { amount: 1500 } },
+    { name: 'wait', props: { amount: 1500 } },
 
-    // { func: function(params) {
-    //     var power = effectsController.shardList.Power;
+    { func: function(params) {
+        var power = effectsController.shardList.Power;
 
-    //     power.visible = true;
-    //     power.x = frauki.body.center.x;
-    //     power.y = frauki.body.center.y;
-    //     //4456, 2656
-    //     game.add.tween(power).to(Frogland.prismPositions.Power, 4000, Phaser.Easing.Quartic.InOut, true);
+        power.visible = true;
+        power.x = frauki.body.center.x;
+        power.y = frauki.body.center.y;
+        //4456, 2656
+        game.add.tween(power).to(Frogland.prismPositions.Power, 4000, Phaser.Easing.Quartic.InOut, true);
 
-    //     game.time.events.add(4000, function() {
-    //         events.publish('play_sound', { name: 'crystal_door', restart: true });
-    //         effectsController.ScreenFlash();
-    //     });
-    // } },
+        game.time.events.add(4000, function() {
+            events.publish('play_sound', { name: 'crystal_door', restart: true });
+            effectsController.ScreenFlash();
+        });
+    } },
 
-    // { name: 'wait', props: { amount: 1500 } },
+    { name: 'wait', props: { amount: 1500 } },
 
-    // { func: function(params) {
-    //     var luck = effectsController.shardList.Luck;
+    { func: function(params) {
+        var luck = effectsController.shardList.Luck;
 
-    //     luck.visible = true;
-    //     luck.x = frauki.body.center.x;
-    //     luck.y = frauki.body.center.y;
-    //     //4456, 2656
-    //     game.add.tween(luck).to(Frogland.prismPositions.Luck, 4000, Phaser.Easing.Quartic.InOut, true);
+        luck.visible = true;
+        luck.x = frauki.body.center.x;
+        luck.y = frauki.body.center.y;
+        //4456, 2656
+        game.add.tween(luck).to(Frogland.prismPositions.Luck, 4000, Phaser.Easing.Quartic.InOut, true);
 
-    //     game.time.events.add(4000, function() {
-    //         events.publish('play_sound', { name: 'crystal_door', restart: true });
-    //         effectsController.ScreenFlash();
-    //     });
-    // } },
+        game.time.events.add(4000, function() {
+            events.publish('play_sound', { name: 'crystal_door', restart: true });
+            effectsController.ScreenFlash();
+        });
+    } },
 
-    // { name: 'wait', props: { amount: 4500 } },
+    { name: 'wait', props: { amount: 4500 } },
 
-    // { func: function() {
-    //     events.publish('pan_camera', { to: goddess.body.center, duration: 1000 });
-    //     GameState.HUDFadeTween = game.add.tween(GameState.HUD).to({alpha: 0}, 500, Phaser.Easing.Cubic.Out, true);
-    // } },
+    { func: function() {
+        objectController.Reset();
+        events.publish('pan_camera', { to: goddess.body.center, duration: 1000 });
+        GameState.HUDFadeTween = game.add.tween(GameState.HUD).to({alpha: 0}, 500, Phaser.Easing.Cubic.Out, true);
+    } },
     
-    // { name: 'wait', props: { amount: 1500 } },
-    
-    
-    // { name: 'show_text', props: { text: "Well, there they are Frauki. All of my beautiful Prism Shards all back safely in their home.", portrait: 'Goddess_Neutral' } },
-    // { name: 'show_text', props: { text: "Just look at them glimmering happily.", portrait: 'Goddess_Neutral' } },
-    // { name: 'show_text', props: { text: "My they're pretty little things...", portrait: 'Goddess_Neutral' } },
-    // { name: 'show_text', props: { text: "Don't you agree Frauki?", portrait: 'Goddess_Neutral' } },
-
-    // { func: function() {
-    //     events.publish('pan_camera', { to: frauki.body.center, duration: 1000 });
-    // } },
-
-    // { name: 'wait', props: { amount: 1500 } },
-
-    // { name: 'show_text', props: { text: "Uh, sure!", portrait: 'Neutral' } },
-    
-    // { func: function() {
-    //     events.publish('pan_camera', { to: goddess.body.center, duration: 1000 });
-    // } },
-
-    // { name: 'wait', props: { amount: 1500 } },
-
-    // { name: 'show_text', props: { text: "Now that they are returned, I have my powers back.", portrait: 'Goddess_Neutral' } },
-    // { name: 'show_text', props: { text: "And with those powers, I will obliterate utterly the Alien Robots, with extreme prejudice and wrath.", portrait: 'Goddess_Neutral' } },
-    // { name: 'show_text', props: { text: "Watch carefully Frauki, as I unleash an unholy wave of destruction and terror.", portrait: 'Goddess_Neutral' } },
-
-    // { func: function() {
-    //     events.publish('pan_camera', { to: cameraController.shipBaseTarget, duration: 4000 });
-    // } },
-
-    // { name: 'wait', props: { amount: 5000 } },
+    { name: 'wait', props: { amount: 1500 } },
     
     
-    // { func: function() {
-    //     events.publish('pan_camera', { to: cameraController.shipTopTarget, duration: 20000 });
-    // } },
+    { name: 'show_text', props: { text: "Well, there they are Frauki. All of my beautiful Prism Shards all back safely in their home.", portrait: 'Goddess_Neutral' } },
+    { name: 'show_text', props: { text: "Just look at them glimmering happily.", portrait: 'Goddess_Neutral' } },
+    { name: 'show_text', props: { text: "My they're pretty little things...", portrait: 'Goddess_Neutral' } },
+    { name: 'show_text', props: { text: "Don't you agree Frauki?", portrait: 'Goddess_Neutral' } },
 
-    // { name: 'wait', props: { amount: 4000 } },
-    // { name: 'destroy_enemy', props: { name: 'tower_troll' } },
-    // { name: 'play_sound', props: { name: 'explosion', restart: true } },
+    { func: function() {
+        events.publish('pan_camera', { to: frauki.body.center, duration: 1000 });
+    } },
 
-    // { name: 'wait', props: { amount: 1500 } },
-    // { name: 'destroy_enemy', props: { name: 'tower_ninja' } },
-    // { name: 'play_sound', props: { name: 'explosion', restart: true } },
+    { name: 'wait', props: { amount: 1500 } },
 
-    // { name: 'wait', props: { amount: 200 } },
-    // { name: 'destroy_enemy', props: { name: 'tower_qlok1' } },
-    // { name: 'play_sound', props: { name: 'explosion', restart: true } },
-
-    // { name: 'wait', props: { amount: 500 } },
-    // { name: 'destroy_enemy', props: { name: 'tower_qlok2' } },
-    // { name: 'destroy_enemy', props: { name: 'tower_qlok3' } },
-    // { name: 'play_sound', props: { name: 'explosion', restart: true } },
-
-    // { name: 'wait', props: { amount: 100 } },    
-    // { name: 'destroy_enemy', props: { name: 'tower_hopper' } },
-    // { name: 'play_sound', props: { name: 'explosion', restart: true } },
-
-    // { name: 'wait', props: { amount: 100 } },
-    // { name: 'destroy_enemy', props: { name: 'tower_spider1' } },
-    // { name: 'destroy_enemy', props: { name: 'tower_spider2' } },
-    // { name: 'destroy_enemy', props: { name: 'tower_spider3' } },
-    // { name: 'play_sound', props: { name: 'explosion', restart: true } },
+    { name: 'show_text', props: { text: "Uh, sure!", portrait: 'Neutral' } },
     
-    // { name: 'wait', props: { amount: 1500 } },
-    // { name: 'destroy_enemy', props: { name: 'tower_hawk' } },
-    // { name: 'play_sound', props: { name: 'explosion', restart: true } },
+    { func: function() {
+        events.publish('pan_camera', { to: goddess.body.center, duration: 1000 });
+    } },
 
-    // { name: 'wait', props: { amount: 200 } },
-    // { name: 'destroy_enemy', props: { name: 'tower_goob1' } },
-    // { name: 'wait', props: { amount: 100 } },
-    // { name: 'destroy_enemy', props: { name: 'tower_goob2' } },
-    // { name: 'play_sound', props: { name: 'explosion', restart: true } },
+    { name: 'wait', props: { amount: 1500 } },
+
+    { name: 'show_text', props: { text: "Now that they are returned, I have my powers back.", portrait: 'Goddess_Neutral' } },
+    { name: 'show_text', props: { text: "And with those powers, I will obliterate utterly the Alien Robots, with extreme prejudice and wrath.", portrait: 'Goddess_Neutral' } },
+    { name: 'show_text', props: { text: "Watch carefully Frauki, as I unleash an unholy wave of destruction and terror.", portrait: 'Goddess_Neutral' } },
+
+    { func: function() {
+        events.publish('pan_camera', { to: cameraController.shipBaseTarget, duration: 4000 });
+    } },
+
+    { name: 'wait', props: { amount: 5000 } },
     
-    // { name: 'wait', props: { amount: 1000 } },
-    // { name: 'destroy_enemy', props: { name: 'tower_azp3' } },
-    // { name: 'play_sound', props: { name: 'explosion', restart: true } },
-
-    // { name: 'wait', props: { amount: 100 } },
-    // { name: 'destroy_enemy', props: { name: 'tower_spider4' } },
-    // { name: 'destroy_enemy', props: { name: 'tower_spider5' } },
-    // { name: 'destroy_enemy', props: { name: 'tower_spider6' } },    
-    // { name: 'play_sound', props: { name: 'explosion', restart: true } },
     
-    // { name: 'wait', props: { amount: 500 } },
-    // { name: 'destroy_enemy', props: { name: 'fan_kr32' } },
-    // { name: 'destroy_enemy', props: { name: 'fan_qlok' } },
-    // { name: 'play_sound', props: { name: 'explosion', restart: true } },
+    { func: function() {
+        events.publish('pan_camera', { to: cameraController.shipTopTarget, duration: 20000 });
+    } },
+
+    { name: 'wait', props: { amount: 4000 } },
+    { name: 'destroy_enemy', props: { name: 'tower_troll' } },
+    { name: 'play_sound', props: { name: 'explosion', restart: true } },
+
+    { name: 'wait', props: { amount: 1500 } },
+    { name: 'destroy_enemy', props: { name: 'tower_ninja' } },
+    { name: 'play_sound', props: { name: 'explosion', restart: true } },
+
+    { name: 'wait', props: { amount: 200 } },
+    { name: 'destroy_enemy', props: { name: 'tower_qlok1' } },
+    { name: 'play_sound', props: { name: 'explosion', restart: true } },
+
+    { name: 'wait', props: { amount: 500 } },
+    { name: 'destroy_enemy', props: { name: 'tower_qlok2' } },
+    { name: 'destroy_enemy', props: { name: 'tower_qlok3' } },
+    { name: 'play_sound', props: { name: 'explosion', restart: true } },
+
+    { name: 'wait', props: { amount: 100 } },    
+    { name: 'destroy_enemy', props: { name: 'tower_hopper' } },
+    { name: 'play_sound', props: { name: 'explosion', restart: true } },
+
+    { name: 'wait', props: { amount: 100 } },
+    { name: 'destroy_enemy', props: { name: 'tower_spider1' } },
+    { name: 'destroy_enemy', props: { name: 'tower_spider2' } },
+    { name: 'destroy_enemy', props: { name: 'tower_spider3' } },
+    { name: 'play_sound', props: { name: 'explosion', restart: true } },
     
-    // { name: 'wait', props: { amount: 500 } },
-    // { name: 'destroy_enemy', props: { name: 'protector_sw8t' } },
-    // { name: 'play_sound', props: { name: 'explosion', restart: true } },
+    { name: 'wait', props: { amount: 1500 } },
+    { name: 'destroy_enemy', props: { name: 'tower_hawk' } },
+    { name: 'play_sound', props: { name: 'explosion', restart: true } },
 
-    // { name: 'wait', props: { amount: 100 } },
-    // { name: 'destroy_enemy', props: { name: 'lil_buddy1' } },
-    // { name: 'destroy_enemy', props: { name: 'lil_buddy2' } },
-    // { name: 'destroy_enemy', props: { name: 'power_gubr' } },
-    // { name: 'play_sound', props: { name: 'explosion', restart: true } },
+    { name: 'wait', props: { amount: 200 } },
+    { name: 'destroy_enemy', props: { name: 'tower_goob1' } },
+    { name: 'wait', props: { amount: 100 } },
+    { name: 'destroy_enemy', props: { name: 'tower_goob2' } },
+    { name: 'play_sound', props: { name: 'explosion', restart: true } },
+    
+    { name: 'wait', props: { amount: 1000 } },
+    { name: 'destroy_enemy', props: { name: 'tower_azp3' } },
+    { name: 'play_sound', props: { name: 'explosion', restart: true } },
 
-    // { name: 'wait', props: { amount: 1500 } },
-    // { name: 'destroy_enemy', props: { name: 'tower_swat1' } },
-    // { name: 'destroy_enemy', props: { name: 'tower_swat2' } },
-    // { name: 'play_sound', props: { name: 'explosion', restart: true } },
+    { name: 'wait', props: { amount: 100 } },
+    { name: 'destroy_enemy', props: { name: 'tower_spider4' } },
+    { name: 'destroy_enemy', props: { name: 'tower_spider5' } },
+    { name: 'destroy_enemy', props: { name: 'tower_spider6' } },    
+    { name: 'play_sound', props: { name: 'explosion', restart: true } },
+    
+    { name: 'wait', props: { amount: 500 } },
+    { name: 'destroy_enemy', props: { name: 'fan_kr32' } },
+    { name: 'destroy_enemy', props: { name: 'fan_qlok' } },
+    { name: 'play_sound', props: { name: 'explosion', restart: true } },
+    
+    { name: 'wait', props: { amount: 500 } },
+    { name: 'destroy_enemy', props: { name: 'protector_sw8t' } },
+    { name: 'play_sound', props: { name: 'explosion', restart: true } },
 
-    // { name: 'wait', props: { amount: 1000 } },
-    // { name: 'destroy_enemy', props: { name: 'robo_chonker' } },
-    // { name: 'play_sound', props: { name: 'explosion', restart: true } },
+    { name: 'wait', props: { amount: 100 } },
+    { name: 'destroy_enemy', props: { name: 'lil_buddy1' } },
+    { name: 'destroy_enemy', props: { name: 'lil_buddy2' } },
+    { name: 'destroy_enemy', props: { name: 'power_gubr' } },
+    { name: 'play_sound', props: { name: 'explosion', restart: true } },
+
+    { name: 'wait', props: { amount: 1500 } },
+    { name: 'destroy_enemy', props: { name: 'tower_swat1' } },
+    { name: 'destroy_enemy', props: { name: 'tower_swat2' } },
+    { name: 'play_sound', props: { name: 'explosion', restart: true } },
+
+    { name: 'wait', props: { amount: 1000 } },
+    { name: 'destroy_enemy', props: { name: 'robo_chonker' } },
+    { name: 'play_sound', props: { name: 'explosion', restart: true } },
 
     
-    // { name: 'wait', props: { amount: 5000 } },
+    { name: 'wait', props: { amount: 5000 } },
     
-    // { name: 'show_text', props: { text: "My people...", portrait: 'red' } },
-    // { name: 'show_text', props: { text: "Our way of life... Extinguished...", portrait: 'red' } },
-    // { name: 'show_text', props: { text: "Gone forever, like a blip of light from a dying star.", portrait: 'red' } },
-    // { name: 'show_text', props: { text: "Now we fade back into non-existence, as though we were never here.", portrait: 'red' } },
-    // { name: 'show_text', props: { text: "Let my final words of wisdom be somehow etched into the universe...", portrait: 'red' } },
-    // { name: 'show_text', props: { text: "The only lasting--", portrait: 'red' } },
+    { name: 'show_text', props: { text: "My people...", portrait: 'red' } },
+    { name: 'show_text', props: { text: "Our way of life... Extinguished...", portrait: 'red' } },
+    { name: 'show_text', props: { text: "Gone forever, like a blip of light from a dying star.", portrait: 'red' } },
+    { name: 'show_text', props: { text: "Now we fade back into non-existence, as though we were never here.", portrait: 'red' } },
+    { name: 'show_text', props: { text: "Let my final words of wisdom be somehow etched into the universe...", portrait: 'red' } },
+    { name: 'show_text', props: { text: "The only lasting--", portrait: 'red' } },
 
-    // { name: 'destroy_enemy', props: { name: 'robo_oldie' } },
-    // { name: 'play_sound', props: { name: 'explosion', restart: true } },
-    // { name: 'wait', props: { amount: 1500 } },
+    { name: 'destroy_enemy', props: { name: 'robo_oldie' } },
+    { name: 'play_sound', props: { name: 'explosion', restart: true } },
+    { name: 'wait', props: { amount: 1500 } },
     
     { func: function() {
         events.publish('pan_camera', { to: goddess.body.center, duration: 3000 });
@@ -633,11 +634,17 @@ ScriptRunner.scripts['finish_game'] = [
     
 	{ name: 'stop_music', props: { name: 'Goddess', fade: 4000 } },
     { func: function() {
-        objectController.DestroyAllEnemies();
         GameState.Fade(true, 4000);
     } },
 
     { name: 'wait', props: { amount: 4000 } },
+
+    { func: function() {
+        objectController.DestroyAllEnemies();        
+        frauki.visible = false;
+        goddess.visible = false;
+    } },
+
     { name: 'play_music', props: { name: 'Denoument', fade: 1000 } },
 
     { name: 'run_script', props: { name: 'show_random_scene' }}
@@ -654,7 +661,7 @@ ScriptRunner.scripts['show_random_scene'] = [
 
         // GameState.creditsText.x = 100;
         // GameState.creditsText.y = 100;
-        GameState.creditsText.setText(Credits.shift());
+        GameState.creditsText.setText(Credits.shift() || '');
 
         events.publish('set_camera', { to: newTarget });
     } },

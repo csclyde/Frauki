@@ -152,7 +152,7 @@ Frogland.HandleCollisions = function() {
 
     //collide enemies with doors
     game.physics.arcade.collide(
-        objectController.enemyList, 
+        objectController.GetActiveEnemies(), 
         objectController.doorList, 
         null, 
         Collision.CollideEnemiesWithDoors);

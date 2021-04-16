@@ -32,11 +32,6 @@ Enemy = function(game, x, y, name) {
     this.attackRect.body.setSize(0, 0, 0, 0);
     this.attackRect.owningEnemy = this;  
     this.addChild(this.attackRect);
-
-    events.subscribe('hide_enemy_health', this.HideHealth);
-    events.subscribe('destroy_enemy', function(params) {
-        if(this.name === params.name) this.DestroyEnemy(this);
-    }, this);
 };
 
 Enemy.prototype = Object.create(Phaser.Sprite.prototype);
@@ -94,7 +89,7 @@ Enemy.prototype.update = function() {
         game.physics.arcade.collide(this.attackRect, frauki, null, Collision.OverlapEnemyAttackWithFrauki);
 
         if(!!this.currentAttack && this.currentAttack.friendlyFire) {
-            game.physics.arcade.collide(this.attackRect, objectController.enemyList, null, Collision.OverlapEnemyAttackWithEnemies);
+            game.physics.arcade.collide(this.attackRect, objectController.GetActiveEnemies(), null, Collision.OverlapEnemyAttackWithEnemies);
         }
     } 
 
@@ -275,7 +270,7 @@ Enemy.prototype.PlayAnim = function(name) {
 };
 
 Enemy.prototype.TakeHit = function(damage) {
-
+    
     if(!this.timers.TimerUp('hit') || !this.timers.TimerUp('grace')) {
         return;
     }
@@ -306,11 +301,11 @@ Enemy.prototype.TakeHit = function(damage) {
 
     this.OnHit();
 
-    if(this.energy <= 0) {
+    if(this.energy <= 0) {    
         this.timers.SetTimer('hit', 1000);
-        this.timers.SetTimer('grace', 300);
+        this.timers.SetTimer('grace', 300);    
 
-        game.time.events.add(this.robotic ? 800 : game.rnd.between(250, 350), function() { this.DestroyEnemy(); }, this);
+        game.time.events.add(this.robotic ? 800 : game.rnd.between(250, 350), this.DestroyEnemy, this);
 
         if(this.robotic) events.publish('play_sound', { name: 'robosplosion' });
 

@@ -66,7 +66,7 @@ TriggerController.prototype.CreateTriggers = function(layer) {
 
 TriggerController.prototype.Update = function(currentLayer) {
 
-    if(GameState.restarting || GameState.inMenu) {
+    if(GameState.restarting || GameState.inMenu || GameState.inFinale) {
         return;
     }
 

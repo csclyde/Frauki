@@ -12,7 +12,7 @@ SpeechController = function() {
 	events.subscribe('hide_text', this.HideSpeech, this);
 
 	events.subscribe('display_region_text', function(params) {
-		if(!this.timers.TimerUp('region_text')) return;
+		if(!this.timers.TimerUp('region_text') || GameState.inFinale) return;
 
 		game.add.tween(this.regionText).
 			to({alpha: 1}, 800, Phaser.Easing.Linear.None, true).
