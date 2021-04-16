@@ -305,6 +305,7 @@ Door.prototype.PerformOpen = function(save, silent) {
             case 'shard_metal':
             case 'shard_stone':
                 events.publish('play_sound', {name: 'crystal_door', restart: true });
+                ScriptRunner.run('play_fanfare');                
             break;
 
             case 'enemy':

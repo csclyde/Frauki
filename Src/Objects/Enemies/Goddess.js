@@ -151,19 +151,19 @@ Enemy.prototype.types['Goddess'] =  function() {
 					GameData.SetFlag('first_kr32', true);
 					return 'first_kr32';
 				}
-				else if(GameState.death.name === 'wit_guard' && !GameData.GetFlag('wit_guard')) {
+				else if((GameState.death.name === 'wit_guard1' || GameState.death.name === 'wit_guard2') && !GameData.GetFlag('wit_guard')) {
 					GameData.SetFlag('wit_guard', true);
 					return 'wit_guard';
 				}
-				else if(GameState.death.name === 'wit_guard' && !GameData.GetFlag('wit_guard2')) {
+				else if((GameState.death.name === 'wit_guard1' || GameState.death.name === 'wit_guard2') && !GameData.GetFlag('wit_guard2')) {
 					GameData.SetFlag('wit_guard2', true);
 					return 'wit_guard2';
 				}
-				else if(GameState.death.name === 'wit_guard' && !GameData.GetFlag('wit_guard3')) {
+				else if((GameState.death.name === 'wit_guard1' || GameState.death.name === 'wit_guard2') && !GameData.GetFlag('wit_guard3')) {
 					GameData.SetFlag('wit_guard3', true);
 					return 'wit_guard3';
 				}
-				else if(GameState.death.name === 'wit_guard') {
+				else if((GameState.death.name === 'wit_guard1' || GameState.death.name === 'wit_guard2')) {
 					return 'wit_guard_final';
 				}
 				else if(!GameData.GetFlag('ship_frontdoor')) {

@@ -20,7 +20,7 @@ Frogland.Create = function() {
         Wit: { x: 152 * 16, y: 228 * 16 },
         Will: { x: 111 * 16, y: 300 * 16 },
         Luck: { x: 144 * 16, y: 548 * 16 },
-        Power: { x: 189 * 16, y: 64 * 16 },
+        Power: { x: 188 * 16, y: 39 * 16 },
     };
 
     this.prismPositions = {

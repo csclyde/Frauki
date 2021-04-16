@@ -106,11 +106,13 @@ Enemy.prototype.update = function() {
         this.timers.SetTimer('grace', 0);
     }
 
-    if(!this.timers.TimerUp('grace') && this.state !== this.Hurting && this.timers.TimerUp('hurt_flicker')) {
-        this.alpha = 0.2;
-        game.time.events.add(30, function() { this.timers.SetTimer('hurt_flicker', 30); }, this);        
-    } else {
-        this.alpha = 1;
+    if(this !== goddess) {
+        if(!this.timers.TimerUp('grace') && this.state !== this.Hurting && this.timers.TimerUp('hurt_flicker')) {
+            this.alpha = 0.2;
+            game.time.events.add(30, function() { this.timers.SetTimer('hurt_flicker', 30); }, this);        
+        } else {
+            this.alpha = 1;
+        }
     }
 };
 
