@@ -1,7 +1,7 @@
 var Credits = [
 	"Programming and Design: Casey Clyde",
 	"Music and Sound Effects: Matthew Underwood",
-	"Art: Casey Clyde, Kirk Barnett, Ze Osmar, Caitlin Underwood",
+	"Art: Casey Clyde, Kirk Barnett, Ze Osmar, Caitlin Rogers Underwood",
 	"Special Thanks to Jason Rohrer for his wisdom",
 	"Special Thanks to Jared Johnson for his positive spirit",
 	"Special Thanks to Camille Reid for loving me",

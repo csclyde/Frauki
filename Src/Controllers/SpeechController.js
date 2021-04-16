@@ -144,26 +144,28 @@ SpeechController.prototype.LoadSpeechZones = function() {
         }
 	}, this);
 	
-	if(!GameData.GetFlag('GAME_COMPLETE')) {
-		//create speech zones for all the NPCs
-		Frogland.map.objects['Enemies'].forEach(function(o) {
-			if(o.gid === 149) {
+	
+	//create speech zones for all the NPCs
+	Frogland.map.objects['Enemies'].forEach(function(o) {
+		if(o.gid === 149) {
+			if(!GameData.GetFlag('GAME_COMPLETE') || o.name.includes('gnome')) {
 				var zone = new Phaser.Rectangle(o.x + 8 - 50, o.y + 8 - 20, 100, 30);
 				zone.text = o.properties ? o.properties.text : 'Error';
 				zone.speechName = o.name;
 				zone.NPC = true;
 				zone.active = true;
-	
+
 				if(!!o.properties && !!o.properties.show_flag) {
 					zone.showFlag = o.properties.show_flag;
 				} else {
 					zone.showFlag = null;
 				}
-	
+
 				this.speechZones.push(zone);
 			}
-		}, this);
-	}
+		}
+	}, this);
+	
 };
 
 SpeechController.prototype.Update = function() {
