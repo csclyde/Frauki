@@ -40,7 +40,10 @@ Door.prototype.create = function() {
 
     }, this);
 
-    if(GameData.IsDoorOpen(this.id)) {
+    if(GameData.GetFlag('GAME_COMPLETE')) {
+        this.ForceOpenDoor();        
+    }
+    else if(GameData.IsDoorOpen(this.id)) {
         if(this.stay_open) {
             this.ForceOpenDoor();
         } else {

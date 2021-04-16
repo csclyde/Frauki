@@ -239,8 +239,11 @@ Enemy.prototype.types['Goddess'] =  function() {
 		else if(!GameData.HasShard('Power')) {
 			return 'final_stretch';
 		}
+		else if(!GameData.GetFlag('GAME_COMPLETE')) {
+			return 'welcome_back5';			
+		}
 		else {
-			return 'goddess_console';			
+			return 'gameover_postgame';
 		}
 
 	};

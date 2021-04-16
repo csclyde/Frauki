@@ -66,7 +66,7 @@ TriggerController.prototype.CreateTriggers = function(layer) {
 
 TriggerController.prototype.Update = function(currentLayer) {
 
-    if(GameState.restarting || GameState.inMenu || GameState.inFinale) {
+    if(GameState.restarting || GameState.inMenu || GameState.inFinale || GameData.GetFlag('GAME_COMPLETE')) {
         return;
     }
 

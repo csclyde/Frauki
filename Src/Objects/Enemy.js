@@ -395,7 +395,7 @@ Enemy.prototype.DestroyEnemy = function(e) {
 
     var enemBody = this.body.center.clone();
 
-    if(this.robotic) {
+    if(this.robotic || this.objectName === 'NPC') {
         for(var i = 0, max = game.rnd.between(2, 4); i < max; i++) {
             game.time.events.add(i * game.rnd.between(150, 200), function() {
                 var pt = enemBody.clone();
@@ -410,7 +410,11 @@ Enemy.prototype.DestroyEnemy = function(e) {
 
     }
 
-    effectsController.DiceObject(this.objectName, this.body.center.x, this.body.center.y, this.body.velocity.x, this.body.velocity.y);
+    if(this.objectName === 'NPC') {
+        effectsController.DiceObject(this.name, this.body.center.x, this.body.center.y, this.body.velocity.x, this.body.velocity.y);
+    } else {
+        effectsController.DiceObject(this.objectName, this.body.center.x, this.body.center.y, this.body.velocity.x, this.body.velocity.y);
+    }
 
     damage = this.maxEnergy;
 

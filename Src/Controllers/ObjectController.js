@@ -123,7 +123,9 @@ ObjectController.prototype.CompileObjectList = function() {
     }, this);
 
     Frogland.map.objects['Enemies'].forEach(function(o) {
-        this.latentObjects.push({ id: o.gid, name: o.name, x: o.x, y: o.y, u: this.latentObjects.length, properties: o.properties, enemy: true });
+        if(!GameData.GetFlag('GAME_COMPLETE') || o.name.includes('gnome')) {
+            this.latentObjects.push({ id: o.gid, name: o.name, x: o.x, y: o.y, u: this.latentObjects.length, properties: o.properties, enemy: true });
+        }
     }, this);
 
     Frogland.map.objects['Doodads'].forEach(function(o) {

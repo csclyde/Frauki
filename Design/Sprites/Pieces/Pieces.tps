@@ -241,6 +241,17 @@
             <key type="filename">Frames/JunkPot20001.png</key>
             <key type="filename">Frames/JunkPot20002.png</key>
             <key type="filename">Frames/JunkPot20003.png</key>
+            <key type="filename">Frames/robo_chonker0000.png</key>
+            <key type="filename">Frames/robo_chonker0001.png</key>
+            <key type="filename">Frames/robo_chonker0002.png</key>
+            <key type="filename">Frames/robo_chonker0003.png</key>
+            <key type="filename">Frames/robo_chonker0004.png</key>
+            <key type="filename">Frames/robo_chonker0005.png</key>
+            <key type="filename">Frames/robo_oldie0000.png</key>
+            <key type="filename">Frames/robo_oldie0001.png</key>
+            <key type="filename">Frames/robo_oldie0002.png</key>
+            <key type="filename">Frames/robo_oldie0003.png</key>
+            <key type="filename">Frames/robo_oldie0004.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>

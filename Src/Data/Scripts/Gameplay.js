@@ -226,6 +226,10 @@ ScriptRunner.scripts['game_over'] = [
     { name: 'wait', props: { amount: 4000 } },
     
     { func: function() {
+        if(GameData.HasShard('Wit') && GameData.HasShard('Will') && GameData.HasShard('Luck') && GameData.HasShard('Power')) {
+            GameState.inFinale = true;
+        }
+
         GameState.Reset();
         events.publish('set_camera', { to: frauki.body.center });
     } },
@@ -643,6 +647,7 @@ ScriptRunner.scripts['finish_game'] = [
         objectController.DestroyAllEnemies();        
         frauki.visible = false;
         goddess.visible = false;
+        GameData.SetFlag('GAME_COMPLETE', true);
     } },
 
     { name: 'play_music', props: { name: 'Denoument', fade: 1000 } },

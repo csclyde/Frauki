@@ -44,10 +44,13 @@ ScriptRunner.scripts['goddess_welcome_return'] = [
 		else if(!GameData.HasShard('Power')) {
 		    ScriptRunner.run('welcome_back4');						
 		}
-		else {
-			//has all the shards. initiate the endgame	
-		    ScriptRunner.run('exit_goddess');						
+		else if(!GameData.GetFlag('GAME_COMPLETE')) {
+			//has all the shards. initiate the endgame
+		    ScriptRunner.run('welcome_back5');
+		    //ScriptRunner.run('exit_goddess');						
 			
+		} else {
+		    ScriptRunner.run('welcome_back_postgame');
 		}
 	}},
 ];
@@ -70,6 +73,32 @@ ScriptRunner.scripts['welcome_back3'] = [
 ScriptRunner.scripts['welcome_back4'] = [
 	{ name: 'show_text', props: { text: GoddessSpeeches.welcome_back4, portrait: 'Goddess_Neutral' } },
 	{ name: 'run_script', props: { name: 'exit_goddess' } },	
+];
+
+ScriptRunner.scripts['welcome_back5'] = [
+	{ name: 'show_text', props: { text: "You're back! And you have all the Prism Shards! Oh joy. How sweet it is.", portrait: 'Goddess_Neutral' } },
+	{ func: function() {
+        events.publish('pan_camera', { to: frauki.body.center, duration: 1000 });
+	} },
+
+	{ name: 'wait', props: { amount: 1000 } },
+	
+	{ name: 'run_script', props: { name: 'finish_game' } },	
+];
+
+ScriptRunner.scripts['gameover_postgame'] = [
+	{ name: 'show_text', props: { text: "Ah, yep... There you are again...", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "I'm  a little busy Frauki...", portrait: 'Goddess_Neutral' } },
+	{ name: 'run_script', props: { name: 'exit_goddess' } },	
+];
+
+ScriptRunner.scripts['welcome_back_postgame'] = [
+	{ name: 'show_text', props: { text: "Oh...", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "What are you doing back here Frauki?", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "You've served your purpose. There's no reason for you to be here.", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "I suppose you can look around...", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "Just please don't touch anything. Or track anymore mud into my Cathedral...", portrait: 'Goddess_Neutral' } },
+	{ name: 'run_script', props: { name: 'exit_goddess' } },		
 ];
 
 ScriptRunner.scripts['goddess_gameover'] = [

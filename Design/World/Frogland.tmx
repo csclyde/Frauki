@@ -4964,7 +4964,7 @@
    </properties>
   </object>
   <object id="4187" name="robo_chonker" gid="149" x="2963.33" y="880" width="16" height="16"/>
-  <object id="4194" name="robo_oldie" gid="149" x="2894" y="354.667" width="16" height="16"/>
+  <object id="4194" name="robo_oldie" gid="149" x="2900" y="354.667" width="16" height="16"/>
   <object id="4218" name="tower_spider3" gid="101" x="2618.75" y="2531.75" width="16" height="16">
    <properties>
     <property name="clingDir" value="up"/>
