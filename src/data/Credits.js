@@ -15,8 +15,6 @@ var Credits = [
 	"",
 	"",
 	"",
-	"",
-	"",
 	"Enjoying the music?",
 	"Feel free to email me if you want to chat.",
 	"caseysclyde@gmail.com",

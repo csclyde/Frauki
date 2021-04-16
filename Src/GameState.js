@@ -260,6 +260,10 @@ GameState.CreateUI = function() {
         this.soundPips.push(soundPip);
     }
 
+    this.creditsText = game.add.bitmapText(320, 180, 'bubble','', 18);
+    this.creditsText.anchor.setTo(0.5);
+    this.creditsText.fixedToCamera = true;
+
     var screenDarkBmd = game.add.bitmapData(game.width, game.height);
     screenDarkBmd.ctx.fillStyle = 'black';
     screenDarkBmd.ctx.fillRect(0,0, game.width, game.height);
