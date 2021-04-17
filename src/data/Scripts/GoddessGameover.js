@@ -5,6 +5,43 @@ ScriptRunner.scripts['goddess_after_killing'] = [
 	{ name: 'run_script', props: { name: 'exit_goddess' } },
 ];
 
+ScriptRunner.scripts['damage_lecture'] = [
+	{ name: 'show_text', props: { text: "Umm Frauki... What happened to that nice green energy sword I gave you?", portrait: 'Goddess_Neutral' } },
+
+	{ func: function() {
+        events.publish('pan_camera', { to: frauki.body.center, duration: 1000 });
+	} },
+	{ name: 'wait', props: { amount: 1000 } },
+
+	{ name: 'show_text', props: { text: "Well... I dunno... I mean... It's...", portrait: 'Dazed' } },
+
+	{ func: function() {
+        events.publish('pan_camera', { to: goddess.body.center, duration: 1000 });
+	} },
+	{ name: 'wait', props: { amount: 1000 } },
+
+	{ name: 'show_text', props: { text: "Frauki... why is it all red now like the Alien Robots weapons...?", portrait: 'Goddess_Neutral' } },
+
+	{ func: function() {
+        events.publish('pan_camera', { to: frauki.body.center, duration: 1000 });
+	} },
+	{ name: 'wait', props: { amount: 1000 } },
+
+	{ name: 'show_text', props: { text: "Well, there was this secret club where the Alien Robots hung out. And they started dropping out of the ceiling. And I was like SHLING, CHOP, WOOSH", portrait: 'Mischeif' } },
+	{ name: 'show_text', props: { text: "And all the Alien Robots were exploding, and there was this announcer guy, and he was a total jerk...", portrait: 'Mischeif' } },
+	{ name: 'show_text', props: { text: "And then he said I was cheating, but also he said earlier that if I won I could have some of their power.", portrait: 'Mischeif' } },
+	{ name: 'show_text', props: { text: "I didn't really know what he meant but the door closed behind me, and so I started fighting all these Alien Robots, and--", portrait: 'Mischeif' } },
+	
+	{ func: function() {
+        events.publish('pan_camera', { to: goddess.body.center, duration: 1000 });
+	} },
+	{ name: 'wait', props: { amount: 1000 } },
+
+	{ name: 'show_text', props: { text: "Ok, ok, stop. Please be quiet... It's fine. I thought you would like the green energy, but I guess not. Whatever.", portrait: 'Goddess_Neutral' } },
+	
+	{ name: 'run_script', props: { name: 'exit_goddess' } },
+];
+
 // INTRO AREA //////////
 ScriptRunner.scripts['goddess_surprised_death1'] = [
 	{ name: 'show_text', props: { text: "Oh. You died already...", portrait: 'Goddess_Neutral' } },

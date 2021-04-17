@@ -87,8 +87,8 @@ EnergyController.prototype.AddHealth = function(amt) {
 EnergyController.prototype.RemoveHealth = function(amt) {
 	if(this.invincible) return;
 	
+	this.timers.SetTimer('shield_tick', this.shieldRechargeRate);
 	if(this.shield > 0) {
-		this.timers.SetTimer('shield_tick', this.shieldRechargeRate);
 		if(this.shield > amt) {
 			this.shield -= amt;
 		} else {

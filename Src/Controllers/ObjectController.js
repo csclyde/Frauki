@@ -20,6 +20,8 @@ ObjectController.prototype.Create = function() {
             enemy.DestroyEnemy(enemy);
         } 
     }, this);
+
+    events.subscribe('spawn_enemy', this.SpawnEnemy, this);
 };
 
 ObjectController.prototype.Update = function() {
@@ -210,6 +212,25 @@ ObjectController.prototype.SpawnObject = function(o) {
                 ComposeAndEmitSignal(newObj.properties.on_death);
             });
         }
+    }
+};
+
+ObjectController.prototype.SpawnEnemy = function(params) {
+    var newEnemy = new Enemy(game, Frogland.battleBarSpawn.x, Frogland.battleBarSpawn.y, params.name, params.name);
+    newEnemy.name = params.name;
+    
+    this.activeGroup.add(newEnemy);
+    this.enemyList.push(newEnemy);
+    newEnemy.properties = {};
+    newEnemy.name = params.name;
+
+    if(newEnemy.create) newEnemy.create();
+
+    //check for signals attached to the object
+    if(!!params.on_death) {
+        newEnemy.events.onDestroy.add(function() {
+            ComposeAndEmitSignal(params.on_death);
+        });
     }
 };
 

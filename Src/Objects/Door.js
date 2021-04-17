@@ -36,6 +36,12 @@ Door.prototype.create = function() {
         }
     }, this);
 
+    events.subscribe('open_enemy_door', function(params) {
+        if(this.id === params.door && (this.type === 'enemy_start' || this.type === 'enemy')) {
+            this.PerformOpen(false);
+        }
+    }, this);
+
     events.subscribe('enemy_killed', function(params) {
 
     }, this);

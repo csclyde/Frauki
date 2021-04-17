@@ -25,7 +25,6 @@ Enemy.prototype.types['Goddess'] =  function() {
 	this.currentPortrait = 'Goddess_Neutral';
 
 	this.RespondToAttack = function() {
-		console.log(goddess.beenAttacked);
 		if(!goddess.beenAttacked) {
 			if(!GameData.GetFlag('angry1')) {
 				ScriptRunner.run('goddess_angry1');
@@ -72,6 +71,10 @@ Enemy.prototype.types['Goddess'] =  function() {
 	this.GetGameoverScript = function() {
 		if(GameState.death.name === 'goddess') {
 			return 'goddess_after_killing';
+		}
+		else if(GameData.HasUpgrade('Damage') && !GameData.GetFlag('damage_lecture')) {
+			GameData.SetFlag('damage_lecture', true);
+			return 'damage_lecture';
 		}
 		else if(!GameData.HasShard('Wit')) {
 			//INTRO AREA TRIGGERS

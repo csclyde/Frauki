@@ -83,10 +83,14 @@ ScriptRunner.scripts['demo_Damage'] = [
 	{ name: 'disallow_input', props: {} },
 	
 	{ name: 'wait', props: { amount: 1500 } },
-	{ name: 'control_up', props: { pressed: true } },
+	{ func: function(params) {
+		inputController.dpad.up = true;		
+	} },
 	{ name: 'wait', props: { amount: 200 } },
 	{ name: 'player_slash', props: {} },
-	{ name: 'control_up', props: { pressed: false } },
+	{ func: function(params) {
+		inputController.dpad.up = false;		
+	} },
 	{ name: 'wait', props: { amount: 1500 } },	
 
 	{ name: 'show_text', props: { text: "Whoa... alien robot power...", portrait: 'Dazed' } },

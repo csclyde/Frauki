@@ -30,6 +30,11 @@ Frogland.Create = function() {
         Power: {x: 4472, y: 2640},
     };
 
+    this.battleBarSpawn = {
+        x: 297 * 16,
+        y: 215 * 16,
+    }
+
     this.froglandGroup = game.add.group(undefined, 'frogland');
 
     backdropController.Create();
