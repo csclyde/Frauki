@@ -49,22 +49,6 @@ InputController = function() {
 
         switch(e.keyCode) {
 
-            case Phaser.Keyboard.P:
-                localStorage.setItem('save_data', '');
-            break;
-
-            case Phaser.Keyboard.O:
-                energyController.invincible = true;
-            break;
-
-            case Phaser.Keyboard.Q:
-                GameData.SetDebugPos(frauki.x, frauki.y);
-            break;
-
-            case Phaser.Keyboard.W:
-                GameData.SetDebugPos(0, 0);
-            break;
-
             case inputController.binds.pause:
                 inputController.OnPause(true);
             break;

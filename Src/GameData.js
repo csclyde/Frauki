@@ -13,6 +13,8 @@ var defaultData = {
     shards: [],
     health: 3,
     shield: 0,
+    deaths: 0,
+    arena_kills: 0,
     flags: {},
     vals: {
         goddess_message_queue: []
@@ -94,6 +96,28 @@ GameData.ResetData = function() {
     this.data = newData;
 };
 
+GameData.AddDeath = function() {
+    GameData.data.deaths += 1;
+    this.SaveDataToStorage();
+
+    if(GameData.data.deaths >= 100) {
+        //achievement10
+        try { require('electron').ipcRenderer.send('achievement', '100_DEATHS'); } catch(e) { }        
+    }
+};
+
+GameData.RegisterArenaKills = function(count) {
+    if(count > GameData.data.arena_kills) {
+        GameData.data.arena_kills = count;
+        this.SaveDataToStorage();
+
+        if(count >= 100) {
+            //achievement11
+            try { require('electron').ipcRenderer.send('achievement', '100_KILLS'); } catch(e) { }            
+        }
+    }
+};
+
 GameData.GetDebugPos = function() {
     if(GameData.data.debug_pos.x !== 0 || GameData.data.debug_pos.y !== 0) {
         return GameData.data.debug_pos;
@@ -101,6 +125,7 @@ GameData.GetDebugPos = function() {
         return null;
     }
 };
+
 
 GameData.SetDebugPos = function(x, y) {
     x = x || 0;
@@ -189,15 +214,26 @@ GameData.AddUpgrade = function(name) {
         energyController.AddHealth(1);
         this.data.upgrades.push(name);
         this.SaveDataToStorage();
+        //achievement8
+        try { require('electron').ipcRenderer.send('achievement', 'HEART_UPGRADE'); } catch(e) { }
+        
     } else if(name.indexOf('Shield') >= 0) {
         this.data.shield++;
         energyController.shield++;
         this.data.upgrades.push(name);
         this.SaveDataToStorage();
-
+        //achievement7
+        try { require('electron').ipcRenderer.send('achievement', 'SHIELD_UPGRADE'); } catch(e) { }
+        
     } else if(this.data.upgrades.indexOf(name) < 0) {
         this.data.upgrades.push(name);
         this.SaveDataToStorage();
+    }
+
+    if(this.data.health + this.data.shield >= 18) {
+        //achievement9
+        try { require('electron').ipcRenderer.send('achievement', 'ALL_UPGRADES'); } catch(e) { }
+        
     }
 };
 

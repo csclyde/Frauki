@@ -44,6 +44,17 @@ function createWindow() {
   ipcMain.on('close-app', function(event, arg) {
     app.exit(0);
   });
+
+  ipcMain.on('achievement', function(event, name) {
+      greenworks.activateAchievement(name, 
+        function() {
+          console.log('Steam achievement registered');
+        },
+        function(e) {
+          console.error('Steam achievement error', e);
+        }
+      )
+  });
 }
 
 app.whenReady().then(createWindow);

@@ -11,7 +11,11 @@ ScriptRunner.scripts['game_start'] = [
 ScriptRunner.scripts['quit_game'] = [
     { func: function() {
         //console.log(require('electron'));
-        require('electron').ipcRenderer.send('close-app');
+        try {
+            require('electron').ipcRenderer.send('close-app');
+        } catch(e) {
+
+        }
         //console.log(electron);
         // if(!!app) {
         //     app.exit();
@@ -232,6 +236,7 @@ ScriptRunner.scripts['game_over'] = [
 
         GameState.Reset();
         events.publish('set_camera', { to: frauki.body.center });
+        GameData.AddDeath();
     } },
 
     { name: 'stop_all_sound', props: {} },    
@@ -648,6 +653,9 @@ ScriptRunner.scripts['finish_game'] = [
         frauki.visible = false;
         goddess.visible = false;
         GameData.SetFlag('GAME_COMPLETE', true);
+        //achievement5
+        try { require('electron').ipcRenderer.send('achievement', 'FINISH_GAME'); } catch(e) { }
+        
     } },
 
     { name: 'play_music', props: { name: 'Denoument', fade: 1000 } },

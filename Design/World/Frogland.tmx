@@ -3748,16 +3748,6 @@
     <property name="on_death" value="open_door,door_name:secret_chamber"/>
    </properties>
   </object>
-  <object id="2134" gid="75" x="4592.5" y="4391" width="16" height="16">
-   <properties>
-    <property name="upgrade" value="Shield0"/>
-   </properties>
-  </object>
-  <object id="3854" gid="75" x="1605.33" y="7302.67" width="16" height="16">
-   <properties>
-    <property name="upgrade" value="Health99"/>
-   </properties>
-  </object>
   <object id="3525" gid="75" x="4209.16" y="2398.48" width="16" height="16">
    <properties>
     <property name="upgrade" value="Health0"/>
@@ -3826,6 +3816,21 @@
   <object id="3222" gid="75" x="1600" y="3216" width="16" height="16">
    <properties>
     <property name="upgrade" value="Health13"/>
+   </properties>
+  </object>
+  <object id="3854" gid="75" x="1605.33" y="7302.67" width="16" height="16">
+   <properties>
+    <property name="upgrade" value="Health14"/>
+   </properties>
+  </object>
+  <object id="4237" gid="75" x="1662.67" y="3019.33" width="16" height="16">
+   <properties>
+    <property name="upgrade" value="Health15"/>
+   </properties>
+  </object>
+  <object id="2134" gid="75" x="4592.5" y="4391" width="16" height="16">
+   <properties>
+    <property name="upgrade" value="Shield1"/>
    </properties>
   </object>
   <object id="3761" gid="75" x="2647.56" y="5199.78" width="16" height="16">
@@ -3946,11 +3951,7 @@
   <object id="4008" gid="66" x="2605" y="8901.5" width="16" height="16"/>
   <object id="4199" gid="66" x="4114" y="4198.67" width="16" height="16"/>
   <object id="4202" gid="66" x="1707" y="6696.67" width="16" height="16"/>
-  <object id="4237" gid="75" x="1662.67" y="3019.33" width="16" height="16">
-   <properties>
-    <property name="upgrade" value="Health14"/>
-   </properties>
-  </object>
+  
  </objectgroup>
  <objectgroup name="Doors">
   <object id="3281" gid="67" x="3831.67" y="2999.67" width="16" height="16">

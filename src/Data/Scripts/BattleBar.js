@@ -235,7 +235,10 @@ ScriptRunner.scripts['kill_sw8t2'] = [
 
 	{ func: function(params) {
 		events.publish('pan_camera', { to: frauki.body.center, duration: 1000 });
-		GameData.AddUpgrade('Damage');		
+		GameData.AddUpgrade('Damage');
+		//achievement6
+		try { require('electron').ipcRenderer.send('achievement', 'BATTLE_BAR'); } catch(e) { }
+		
 	} },
 
 	{ name: 'wait', props: { amount: 1000 } },	
@@ -285,6 +288,8 @@ ScriptRunner.scripts['battle_arena_fight'] = [
 		});
 
 		Frogland.battleArenaKills++;
+
+		GameData.RegisterArenaKills(Frogland.battleArenaKills);
 	} },
 
 	{ name: 'wait', props: { amount: 1000 } },
