@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="360" height="700" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="4251">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="360" height="700" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="4252">
  <properties>
-  <property name="debug" value="true"/>
+  <property name="debug" value="false"/>
   <property name="startLayer" value="3"/>
   <property name="startX" value="97"/>
   <property name="startY" value="445"/>
@@ -5620,6 +5620,12 @@
    <properties>
     <property name="once" value="true"/>
     <property name="text" value="ENDLESS ARENA"/>
+   </properties>
+  </object>
+  <object id="4251" name="region_text" type="trigger" x="4786.54" y="3469.91" width="56.424" height="105.182">
+   <properties>
+    <property name="once" value="true"/>
+    <property name="text" value="THE BATTLE BAR"/>
    </properties>
   </object>
  </objectgroup>

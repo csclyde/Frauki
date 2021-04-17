@@ -9930,6 +9930,27 @@
                  "width":56.424,
                  "x":1527.038,
                  "y":7075.659
+                }, 
+                {
+                 "height":105.182,
+                 "id":4251,
+                 "name":"region_text",
+                 "properties":
+                    {
+                     "once":"true",
+                     "text":"THE BATTLE BAR"
+                    },
+                 "propertytypes":
+                    {
+                     "once":"string",
+                     "text":"string"
+                    },
+                 "rotation":0,
+                 "type":"trigger",
+                 "visible":true,
+                 "width":56.424,
+                 "x":4786.538,
+                 "y":3469.909
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -9937,11 +9958,11 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":4251,
+ "nextobjectid":4252,
  "orientation":"orthogonal",
  "properties":
     {
-     "debug":"true",
+     "debug":"false",
      "startLayer":"3",
      "startX":"97",
      "startY":"445"
