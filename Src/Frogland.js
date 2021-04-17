@@ -33,7 +33,14 @@ Frogland.Create = function() {
     this.battleBarSpawn = {
         x: 297 * 16,
         y: 215 * 16,
-    }
+    };
+
+    this.battleArenaSpawn = {
+        x: 74 * 16,
+        y: 443 * 16,
+    };
+
+    this.battleArenaKills = 0;
 
     this.froglandGroup = game.add.group(undefined, 'frogland');
 
@@ -121,6 +128,8 @@ Frogland.Reset = function() {
     frauki.states.flowRight = false;
     frauki.states.flowUp = false;
     frauki.states.flowLeft = false;
+
+    this.battleArenaKills = 0;
 };
 
 Frogland.HandleCollisions = function() {

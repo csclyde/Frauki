@@ -23,6 +23,18 @@ SpeechController = function() {
 		this.timers.SetTimer('region_text', 4000);
 	}, this);
 
+	events.subscribe('display_kill_text', function(params) {
+		if(!this.timers.TimerUp('kill_text') || GameState.inFinale) return;
+
+		game.add.tween(this.killText).
+			to({alpha: 1}, 800, Phaser.Easing.Linear.None, true).
+			chain(game.add.tween(this.killText).to({alpha: 0}, 800, Phaser.Easing.Linear.None, false, 2000));
+
+		this.killText.setText(params.text);
+
+		this.timers.SetTimer('kill_text', 4000);
+	}, this);
+
 
 	this.timers = new TimerUtil();
 
@@ -80,6 +92,14 @@ SpeechController.prototype.Create = function() {
 	this.regionText.cameraOffset.x = game.width / 2; 
 	this.regionText.cameraOffset.y = game.height / 3;
 	this.speechGroup.add(this.regionText);	
+
+	this.killText = game.add.bitmapText(0, 0, 'bubble', null, 18);
+	this.killText.fixedToCamera = true;
+	this.killText.alpha = 0;
+	this.killText.anchor.setTo(0.5);
+	this.killText.cameraOffset.x = game.width / 2; 
+	this.killText.cameraOffset.y = game.height / 3;
+	this.speechGroup.add(this.killText);	
 
 	this.portraits = {};
 

@@ -245,3 +245,60 @@ ScriptRunner.scripts['kill_sw8t2'] = [
 	
 	{ name: 'run_script', props: { name: 'demo_Damage' } },
 ];
+
+ScriptRunner.scripts['start_battle_arena'] = [
+	{ name: 'disallow_input', props: {} },
+	{ name: 'pause_all_music', props: {} },
+	{ name: 'play_music', props: { name: 'Decimation', fade: 1000 } },
+
+	{ func: function(params) {
+		energyController.shield = 0;		
+		frauki.states.shieldBlock = true;
+		energyController.remainingApples = 0;
+	} },
+
+	{ name: 'run_script', props: { name: 'battle_arena_fight' } },	
+];
+
+var enemyList = [
+	'Sporoid',
+	'Insectoid',
+	'Buzzar',
+	'H0P8',
+	'GUBr',
+	'SW8T',
+	'QL0k',
+	'KR32',
+	'A3PZ',
+	'HWK9',
+	'RKN1d',
+];
+
+ScriptRunner.scripts['battle_arena_fight'] = [
+	{ name: 'disallow_input', props: {} },
+	
+	{ name: 'wait', props: { amount: 500 } },
+
+	{ func: function(params) {
+		events.publish('display_kill_text', {
+			text: Frogland.battleArenaKills + ' KILLS',
+		});
+
+		Frogland.battleArenaKills++;
+	} },
+
+	{ name: 'wait', props: { amount: 1000 } },
+	
+	{ func: function(params) {
+		events.publish('spawn_enemy', {
+			name: enemyList[game.rnd.between(0, enemyList.length - 1)],
+			x: Frogland.battleArenaSpawn.x,
+			y: Frogland.battleArenaSpawn.y,
+			on_death: "run_script,name:battle_arena_fight"
+		});
+	} },
+
+	{ name: 'wait', props: { amount: 500 } },
+
+	{ name: 'allow_input', props: {} },
+];

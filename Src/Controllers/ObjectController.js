@@ -216,7 +216,7 @@ ObjectController.prototype.SpawnObject = function(o) {
 };
 
 ObjectController.prototype.SpawnEnemy = function(params) {
-    var newEnemy = new Enemy(game, Frogland.battleBarSpawn.x, Frogland.battleBarSpawn.y, params.name, params.name);
+    var newEnemy = new Enemy(game, params.x || Frogland.battleBarSpawn.x, params.y || Frogland.battleBarSpawn.y, params.name, params.name);
     newEnemy.name = params.name;
     
     this.activeGroup.add(newEnemy);
