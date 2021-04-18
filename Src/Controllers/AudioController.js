@@ -176,11 +176,15 @@ AudioController.prototype.PlayMusic = function(params) {
     if(!!newMusic && musicSetting) {
         //if there is other music playing, fade it out
         if(this.currentMusic && this.currentMusic !== newMusic) {
-            this.currentMusic.fadeToStop(params.fade || 0);
+            this.currentMusic.fadeToStop(params.fade || 1);
         }
 
-        newMusic.play(null, 0, 0);
-        newMusic.fadeToResume(params.fade || 0, newMusic.initialVolume);
+        if(params.fade) {
+            newMusic.play(null, 0, 0);
+            newMusic.fadeToResume(params.fade, newMusic.initialVolume);
+        } else {
+            newMusic.play(null, 0, newMusic.initialVolume);
+        }
 
         this.currentMusic = newMusic;
     }
@@ -188,7 +192,7 @@ AudioController.prototype.PlayMusic = function(params) {
 
 AudioController.prototype.StopMusic = function(params) {
     if(this.currentMusic) {
-        this.currentMusic.fadeToStop(params.fade || 0);
+        this.currentMusic.fadeToStop(params.fade || 1);
         this.currentMusic = null;
     }
 };
@@ -198,30 +202,42 @@ AudioController.prototype.PlayInterlude = function(params) {
     
     var newInterlude = this.music[params.name];
 
+    console.log('Got song', params.name);
+
     if(!!newInterlude && musicSetting) {
+        console.log('Settings check out');
+    
         //if there is other music playing, fade it out
         if(this.currentMusic) {
-            this.currentMusic.fadeToPause(params.fade || 0);
+            console.log('Pausing current song');
+            this.currentMusic.fadeToPause(params.fade || 1);
         }
 
         if(!!this.currentInterlude) {
-            this.currentInterlude.fadeToStop(params.fade || 0);
+            console.log('Stopping current interlude');
+            this.currentInterlude.fadeToStop(params.fade || 1);
         }
 
-        newInterlude.play(null, 0, 0);
-        newInterlude.fadeToResume(params.fade || 0, newInterlude.initialVolume);
+        if(params.fade) {
+            newInterlude.stop();
+            newInterlude.play(null, 0, 0.01);
+            newInterlude.fadeToResume(params.fade, newInterlude.initialVolume);
+        } else {
+            newInterlude.play(null, 0, newInterlude.initialVolume);
+        }
 
         this.currentInterlude = newInterlude;
     }
 };
 
 AudioController.prototype.StopInterlude = function(params) {
+    console.log('Stopping interlude')
     if(this.currentInterlude) {
-        this.currentInterlude.fadeToStop(params.fade || 0);
+        this.currentInterlude.fadeToStop(params.fade || 1);
         this.currentInterlude = null;
     }
 
     if(this.currentMusic) {
-        this.currentMusic.fadeToResume(params.fade || 0, this.currentMusic.initialVolume);
+        this.currentMusic.fadeToResume(params.fade || 1, this.currentMusic.initialVolume);
     }
 };

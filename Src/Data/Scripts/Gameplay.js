@@ -335,7 +335,7 @@ ScriptRunner.scripts['end_fight'] = [
 ];
 
 ScriptRunner.scripts['play_fanfare'] = [
-    { name: 'play_interlude', props: { name: 'FanfareShort', fade: 500 } },
+    { name: 'play_interlude', props: { name: 'FanfareShort', fade: null } },
     { name: 'wait', props: { amount: 2500 } },  
     { name: 'stop_interlude', props: { fade: 500 } },
 ];
