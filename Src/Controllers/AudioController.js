@@ -175,6 +175,8 @@ AudioController.prototype.PlayMusic = function(params) {
     if(!!newMusic && musicSetting && this.currentMusic !== newMusic) {
         //if there is other music playing, fade it out
         if(this.currentMusic) {
+            //if a song is playing, force a crossfade
+            params.fade = 1000;
             this.currentMusic.fadeToStop(params.fade || 1);
         }
 
@@ -194,6 +196,10 @@ AudioController.prototype.StopMusic = function(params) {
         this.currentMusic.fadeToStop(params.fade || 1);
         this.currentMusic = null;
     }
+};
+
+AudioController.prototype.StopAllSongs = function() {
+
 };
 
 AudioController.prototype.PlayInterlude = function(params) {

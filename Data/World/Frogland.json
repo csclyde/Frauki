@@ -747,8 +747,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":4364.85,
-                 "y":5338.28
+                 "x":4365.18333333333,
+                 "y":5306.28
                 }, 
                 {
                  "gid":75,
@@ -6766,7 +6766,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -8453,25 +8453,6 @@
                  "y":4646.33
                 }, 
                 {
-                 "height":154.333,
-                 "id":3918,
-                 "name":"play_music",
-                 "properties":
-                    {
-                     "song":"Tenements"
-                    },
-                 "propertytypes":
-                    {
-                     "song":"string"
-                    },
-                 "rotation":0,
-                 "type":"trigger",
-                 "visible":true,
-                 "width":107,
-                 "x":3572.5,
-                 "y":4792.83
-                }, 
-                {
                  "height":18.3333,
                  "id":3919,
                  "name":"stop_music",
@@ -8491,25 +8472,6 @@
                  "y":5540.17
                 }, 
                 {
-                 "height":93.9997,
-                 "id":3920,
-                 "name":"play_music",
-                 "properties":
-                    {
-                     "song":"Underwater"
-                    },
-                 "propertytypes":
-                    {
-                     "song":"string"
-                    },
-                 "rotation":0,
-                 "type":"trigger",
-                 "visible":true,
-                 "width":29.6666,
-                 "x":1980.17,
-                 "y":7230.83
-                }, 
-                {
                  "height":18.3333,
                  "id":3925,
                  "name":"stop_music",
@@ -8527,63 +8489,6 @@
                  "width":107,
                  "x":2271.5,
                  "y":9479.83
-                }, 
-                {
-                 "height":22.8656,
-                 "id":3935,
-                 "name":"play_music",
-                 "properties":
-                    {
-                     "song":"Frogtown"
-                    },
-                 "propertytypes":
-                    {
-                     "song":"string"
-                    },
-                 "rotation":0,
-                 "type":"trigger",
-                 "visible":true,
-                 "width":120.422,
-                 "x":4964.92,
-                 "y":2979.04
-                }, 
-                {
-                 "height":273.694,
-                 "id":3944,
-                 "name":"music_zone",
-                 "properties":
-                    {
-                     "song":"Goddess"
-                    },
-                 "propertytypes":
-                    {
-                     "song":"string"
-                    },
-                 "rotation":0,
-                 "type":"trigger",
-                 "visible":true,
-                 "width":494.089,
-                 "x":4396.2,
-                 "y":4266.9
-                }, 
-                {
-                 "height":27.9997,
-                 "id":4136,
-                 "name":"play_music",
-                 "properties":
-                    {
-                     "song":"Underwater"
-                    },
-                 "propertytypes":
-                    {
-                     "song":"string"
-                    },
-                 "rotation":0,
-                 "type":"trigger",
-                 "visible":true,
-                 "width":107,
-                 "x":1737.17,
-                 "y":6977.67
                 }, 
                 {
                  "height":21.3333,
@@ -8675,23 +8580,15 @@
                  "y":3341.16683333333
                 }, 
                 {
-                 "height":93.9997,
-                 "id":4258,
-                 "name":"play_music",
-                 "properties":
-                    {
-                     "song":"Underwater"
-                    },
-                 "propertytypes":
-                    {
-                     "song":"string"
-                    },
+                 "height":116.333,
+                 "id":4262,
+                 "name":"stop_music",
                  "rotation":0,
                  "type":"trigger",
                  "visible":true,
-                 "width":29.6666,
-                 "x":1952.1667,
-                 "y":7079.00015
+                 "width":140,
+                 "x":1721.5,
+                 "y":3730.8335
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -9277,11 +9174,13 @@
                  "properties":
                     {
                      "once":"true",
+                     "song":"Frogtown",
                      "text":"FROGLAND RUINS"
                     },
                  "propertytypes":
                     {
                      "once":"string",
+                     "song":"string",
                      "text":"string"
                     },
                  "rotation":0,
@@ -9298,11 +9197,13 @@
                  "properties":
                     {
                      "once":"true",
+                     "song":"InfiniteTerrace",
                      "text":"FROGLAND GARDENS"
                     },
                  "propertytypes":
                     {
                      "once":"string",
+                     "song":"string",
                      "text":"string"
                     },
                  "rotation":0,
@@ -9313,46 +9214,50 @@
                  "y":4427.24
                 }, 
                 {
-                 "height":175.015,
+                 "height":153.015,
                  "id":4130,
                  "name":"region_text",
                  "properties":
                     {
                      "once":"true",
+                     "song":"Tenements",
                      "text":"THE TENEMENTS"
                     },
                  "propertytypes":
                     {
                      "once":"string",
+                     "song":"string",
                      "text":"string"
                     },
                  "rotation":0,
                  "type":"trigger",
                  "visible":true,
-                 "width":373.258,
-                 "x":2627.7,
-                 "y":4785.49
+                 "width":94.2579999999998,
+                 "x":4024.7,
+                 "y":4791.49
                 }, 
                 {
-                 "height":189.682,
+                 "height":265.682,
                  "id":4131,
                  "name":"region_text",
                  "properties":
                     {
                      "once":"true",
+                     "song":"BitterWork",
                      "text":"THE DEPTHS"
                     },
                  "propertytypes":
                     {
                      "once":"string",
+                     "song":"string",
                      "text":"string"
                     },
                  "rotation":0,
                  "type":"trigger",
                  "visible":true,
-                 "width":171.924,
-                 "x":1704.37,
-                 "y":6986.99
+                 "width":31.924,
+                 "x":1980.37,
+                 "y":7052.99
                 }, 
                 {
                  "height":87.0153,
@@ -9361,11 +9266,13 @@
                  "properties":
                     {
                      "once":"true",
+                     "song":"Underwater",
                      "text":"THE WATERWAYS"
                     },
                  "propertytypes":
                     {
                      "once":"string",
+                     "song":"string",
                      "text":"string"
                     },
                  "rotation":0,
@@ -9403,11 +9310,13 @@
                  "properties":
                     {
                      "once":"true",
+                     "song":"Landfill",
                      "text":"WEEKEND MARKET"
                     },
                  "propertytypes":
                     {
                      "once":"string",
+                     "song":"string",
                      "text":"string"
                     },
                  "rotation":0,
@@ -9921,11 +9830,11 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }],
- "nextobjectid":4259,
+ "nextobjectid":4263,
  "orientation":"orthogonal",
  "properties":
     {

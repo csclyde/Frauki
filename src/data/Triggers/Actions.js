@@ -50,6 +50,10 @@ TriggerController.prototype.triggers['old_robo'] = {
 TriggerController.prototype.triggers['region_text'] = {
 	enter: function(params, trigger) {
 		events.publish('display_region_text', { text: params.text });
+
+		if(params.song) {
+			events.publish('play_music', { name: params.song });
+		}
 		
 	},
 

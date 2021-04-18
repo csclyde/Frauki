@@ -28,7 +28,7 @@ ScriptRunner.scripts['battlebar_scram'] = [
 
 ScriptRunner.scripts['enter_battlebar'] = [
 	{ name: 'disallow_input', props: {} },
-	{ name: 'play_interlude', props: { name: 'Decimation', fade: 1000 } },
+	{ name: 'play_interlude', props: { name: 'Ota', fade: 1000 } },
 	
 	{ name: 'wait', props: { amount: 1000 } },
 
