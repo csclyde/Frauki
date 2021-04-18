@@ -24,7 +24,7 @@ ScriptRunner.scripts['quit_game'] = [
 ];
 
 ScriptRunner.scripts['continue_game'] = [
-    { name: 'stop_music', props: { name: 'Intro', fade: 2000 } },
+    { name: 'stop_music', props: { fade: 2000 } },
     { name: 'play_sound', props: { name: 'crystal_door' } },  
     
     { func: function() {
@@ -75,7 +75,7 @@ ScriptRunner.scripts['exit_confirmation'] = [
 ];
 
 ScriptRunner.scripts['new_game'] = [
-    { name: 'stop_music', props: { name: 'Intro', fade: 3500 } },
+    { name: 'stop_music', props: { fade: 3500 } },
     { name: 'play_sound', props: { name: 'crystal_door' } },
     
     { func: function() {
@@ -157,9 +157,8 @@ ScriptRunner.scripts['exit_settings_menu'] = [
 
 ScriptRunner.scripts['pause_game'] = [
     { name: 'disallow_input', props: {} },
-    { name: 'pause_all_music', props: { fade: 250 } },
     { name: 'pause_all_sound', props: { } },
-    { name: 'play_music', props: { name: 'Intro', fade: 2000 } },
+    { name: 'play_interlude', props: { name: 'Intro', fade: 2000 } },
     
     { func: function() {
         GameState.pauseTween = game.add.tween(GameState).to( {physicsSlowMo: 0}, 250, Phaser.Easing.Quartic.Out, true);
@@ -190,8 +189,7 @@ ScriptRunner.scripts['pause_game'] = [
 ];
 
 ScriptRunner.scripts['unpause_game'] = [
-    { name: 'stop_music', props: { name: 'Intro', fade: 1000 } },
-    { name: 'unpause_all_music', props: { } },  
+    { name: 'stop_interlude', props: { fade: 1000 } },  
     { name: 'play_sound', props: { name: 'baton_catch' } },
     
     { func: function() {
@@ -214,7 +212,7 @@ ScriptRunner.scripts['unpause_game'] = [
 
 ScriptRunner.scripts['game_over'] = [
     { name: 'disallow_input', props: {} },
-    { name: 'stop_all_music', props: { fade: 500 } },
+    { name: 'stop_music', props: { fade: 500 } },
     { name: 'stop_all_ambient', props: {} },
     { name: 'hide_speech', props: {} },
     
@@ -266,7 +264,7 @@ ScriptRunner.scripts['game_over'] = [
 
 ScriptRunner.scripts['restart_game'] = [
     { name: 'disallow_input', props: {} },
-    { name: 'stop_all_music', props: { fade: 1000 } },
+    { name: 'stop_music', props: { fade: 1000 } },
     { name: 'stop_all_ambient', props: {} },
     { name: 'hide_speech', props: {} },
     { name: 'play_sound', props: { name: 'baton_catch' } },
@@ -312,8 +310,7 @@ ScriptRunner.scripts['start_fight'] = [
     { name: 'set_attack_wait', props: { duration: 1000 } },
     { func: function(params) {
         if(params.song) {
-            events.publish('pause_all_music', {});
-            events.publish('play_music', { name: params.song, fade: 1000});
+            events.publish('play_interlude', { name: params.song, fade: 1000});
         }
         events.publish('close_enemy_door', { door: params.door });
     } },
@@ -328,26 +325,19 @@ ScriptRunner.scripts['start_fight'] = [
 ];
 
 ScriptRunner.scripts['end_fight'] = [
-    { func: function(params) {
-        if(params.song) {
-            events.publish('stop_music', { name: params.song, fade: 1000});
-        }
-    } },
     { name: 'wait', props: { amount: 1000 } },
 
     { func: function(params) {
         if(params.song) {
-            events.publish('unpause_all_music', { fade: 1000});
+            events.publish('stop_interlude', { fade: 1000});
         }
     } },
 ];
 
 ScriptRunner.scripts['play_fanfare'] = [
-    { name: 'pause_all_music', props: {} },
-    { name: 'wait', props: { amount: 500 } },
-    { name: 'play_music', props: { name: 'FanfareShort' } },
+    { name: 'play_interlude', props: { name: 'FanfareShort', fade: 500 } },
     { name: 'wait', props: { amount: 2500 } },  
-    { name: 'unpause_all_music', props: {} },
+    { name: 'stop_interlude', props: { fade: 500 } },
 ];
 
 ScriptRunner.scripts['use_checkpoint'] = [
@@ -398,7 +388,7 @@ ScriptRunner.scripts['destroy_gemsucker'] = [
         params.prism.BlowUp();
     } },
 
-    { name: 'pause_all_music', props: {} },
+    { name: 'stop_music', props: { fade: 500 } },
     { name: 'wait', props: { amount: 500 } },
     
     { func: function(params) {
@@ -419,6 +409,8 @@ ScriptRunner.scripts['destroy_gemsucker'] = [
 
     { name: 'update_ui', props: { } },
     { name: 'wait', props: { amount: 1000 } },
+
+    { name: 'stop_music', props: { } },
     
     { func: function(params) {
         ScriptRunner.run('demo_' + params.prism.prism);
@@ -429,7 +421,6 @@ ScriptRunner.scripts['destroy_gemsucker'] = [
 
 ScriptRunner.scripts['finish_game'] = [
     { name: 'disallow_input', props: {} },
-    { name: 'pause_all_music', props: {} },
 	{ name: 'play_music', props: { name: 'Goddess', fade: 1000 } },
     { name: 'wait', props: { amount: 1500 } },
     
@@ -641,7 +632,7 @@ ScriptRunner.scripts['finish_game'] = [
 
     { name: 'wait', props: { amount: 3000 } },
     
-	{ name: 'stop_music', props: { name: 'Goddess', fade: 4000 } },
+	{ name: 'stop_music', props: { fade: 4000 } },
     { func: function() {
         GameState.Fade(true, 4000);
     } },

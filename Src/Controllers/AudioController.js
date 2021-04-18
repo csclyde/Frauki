@@ -18,8 +18,9 @@ AudioController = function() {
     events.subscribe('play_music', this.PlayMusic, this);
     events.subscribe('stop_music', this.StopMusic, this);
     events.subscribe('stop_all_music', this.StopAllMusic, this);
-    events.subscribe('pause_all_music', this.PauseAllMusic, this);
-    events.subscribe('unpause_all_music', this.UnpauseAllMusic, this);
+
+    events.subscribe('play_interlude', this.PlayInterlude, this);
+    events.subscribe('stop_interlude', this.StopInterlude, this);
 
     events.subscribe('stop_attack_sounds', function() {
         for(var key in this.sounds) {
@@ -32,6 +33,9 @@ AudioController = function() {
     this.sounds = {};
     this.ambient = {};
     this.music = {};
+
+    this.currentMusic = null;
+    this.currentInterlude = null;
 
     //load audio
     FileMap.Audio.forEach(function(audio) {
@@ -68,11 +72,11 @@ AudioController.prototype.UpdateVolumeSettings = function() {
 
     game.sound.volume = Math.pow(soundSetting / 8, 2);
 
-    if(musicSetting) {
-        this.UnpauseAllMusic({ fade: 0 });
-    } else {
-        this.PauseAllMusic({ fade: 0 });
-    }
+    // if(musicSetting) {
+    //     this.UnpauseAllMusic({ fade: 0 });
+    // } else {
+    //     this.PauseAllMusic({ fade: 0 });
+    // }
 };
 
 //SFX//////
@@ -166,60 +170,58 @@ AudioController.prototype.StopAllAmbient = function() {
 //MUSIC//////
 AudioController.prototype.PlayMusic = function(params) {
     var musicSetting = GameData.GetSetting('music');
-    
-    if(musicSetting && !!params.name && !!this.music[params.name] && !this.music[params.name].isPlaying) {
-        if(params.fade) {
-            this.music[params.name].play(null, 0, 0);
-            this.music[params.name].fadeToResume(params.fade, this.music[params.name].initialVolume);
-        } else {         
-            this.music[params.name].play(null, 0, this.music[params.name].initialVolume);
+
+    var newMusic = this.music[params.name];
+
+    if(!!newMusic && musicSetting) {
+        //if there is other music playing, fade it out
+        if(this.currentMusic && this.currentMusic !== newMusic) {
+            this.currentMusic.fadeToStop(params.fade || 0);
         }
+
+        newMusic.play(null, 0, 0);
+        newMusic.fadeToResume(params.fade || 0, newMusic.initialVolume);
+
+        this.currentMusic = newMusic;
     }
 };
 
 AudioController.prototype.StopMusic = function(params) {
-    if(!!params.name && !!this.music[params.name]) {
-        if(params.fade) {
-            this.music[params.name].fadeToStop(params.fade);
-        } else {
-            this.music[params.name].stop();
-        }
+    if(this.currentMusic) {
+        this.currentMusic.fadeToStop(params.fade || 0);
+        this.currentMusic = null;
     }
 };
 
-AudioController.prototype.StopAllMusic = function(params) {
-    for(var key in this.music) {
-        if(!this.music.hasOwnProperty(key)) continue;
-
-        if(!!this.music[key] && this.music[key].isPlaying) {
-            this.music[key].fadeToStop(params.fade || 1000);
-        }
-        else if(!!this.music[key] && this.music[key].paused) {
-            this.music[key].stop();
-            this.music[key].paused = false;
-            this.music[key].willBePaused = false;
-        }
-    }
-};
-
-AudioController.prototype.PauseAllMusic = function(params) {
-    for(var key in this.music) {
-        if(!this.music.hasOwnProperty(key)) continue;
-
-        if(!!this.music[key] && this.music[key].isPlaying) {
-            this.music[key].fadeToPause(params.fade || 1000);
-        }
-    }
-};
-
-AudioController.prototype.UnpauseAllMusic = function(params) {
+AudioController.prototype.PlayInterlude = function(params) {
     var musicSetting = GameData.GetSetting('music');
     
-    for(var key in this.music) {
-        if(!this.music.hasOwnProperty(key)) continue;
+    var newInterlude = this.music[params.name];
 
-        if(!!this.music[key] && (this.music[key].paused || this.music[key].willBePaused)) {
-            this.music[key].fadeToResume(params.duration || 1000, this.music[key].initialVolume);
+    if(!!newInterlude && musicSetting) {
+        //if there is other music playing, fade it out
+        if(this.currentMusic) {
+            this.currentMusic.fadeToPause(params.fade || 0);
         }
+
+        if(!!this.currentInterlude) {
+            this.currentInterlude.fadeToStop(params.fade || 0);
+        }
+
+        newInterlude.play(null, 0, 0);
+        newInterlude.fadeToResume(params.fade || 0, newInterlude.initialVolume);
+
+        this.currentInterlude = newInterlude;
+    }
+};
+
+AudioController.prototype.StopInterlude = function(params) {
+    if(this.currentInterlude) {
+        this.currentInterlude.fadeToStop(params.fade || 0);
+        this.currentInterlude = null;
+    }
+
+    if(this.currentMusic) {
+        this.currentMusic.fadeToResume(params.fade || 0, this.currentMusic.initialVolume);
     }
 };

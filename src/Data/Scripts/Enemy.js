@@ -1,9 +1,8 @@
 ScriptRunner.scripts['enter_enemy'] = [
 	{ name: 'disallow_input', props: {} },
-	{ name: 'pause_all_music', props: {} },
 
 	{ func: function(params) {
-		events.publish('play_music', { name: 'Sunshine', fade: 1000 });
+		events.publish('play_interlude', { name: 'Sunshine', fade: 1000 });
 
 		var enemy = objectController.enemyList.find(function(e) {
 			return e.name === params.name;
@@ -27,11 +26,10 @@ ScriptRunner.scripts['exit_enemy'] = [
 	{ func: function() {
         events.publish('pan_camera', { to: frauki.body.center, duration: 1000 });
 	} },
-	{ name: 'stop_music', props: { name: 'Sunshine', fade: 1000 } },
 
 	{ name: 'wait', props: { amount: 1000 } },
 
-	{ name: 'unpause_all_music', props: {} },	
+	{ name: 'stop_interlude', props: { fade: 500 } },	
 	{ name: 'allow_input', props: {} },
 ];
 

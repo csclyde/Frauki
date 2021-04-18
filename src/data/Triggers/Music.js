@@ -43,7 +43,7 @@ TriggerController.prototype.triggers['stop_all_music'] = {
 	},
 
 	exit: function(params, trigger) {
-		events.publish('stop_all_music', { fade: params.fade } );
+		events.publish('stop_music', { fade: params.fade } );
 	}
 }
 
@@ -75,7 +75,7 @@ TriggerController.prototype.triggers['stop_music'] = {
 
 TriggerController.prototype.triggers['pause_music'] = {
 	enter: function(params, trigger) {
-		events.publish('pause_all_music', { } );
+		//events.publish('pause_all_music', { } );
 	},
 
 	stay: function(params, trigger) {
@@ -88,7 +88,7 @@ TriggerController.prototype.triggers['pause_music'] = {
 
 TriggerController.prototype.triggers['unpause_music'] = {
 	enter: function(params, trigger) {
-		events.publish('unpause_all_music', { } );
+		//events.publish('unpause_all_music', { } );
 	},
 
 	stay: function(params, trigger) {
@@ -101,8 +101,8 @@ TriggerController.prototype.triggers['unpause_music'] = {
 
 TriggerController.prototype.triggers['music_zone'] = {
 	enter: function(params, trigger) {
-		events.publish('pause_all_music', { } );
-		events.publish('play_music', { name: params.song, fade: 1000 } );
+		//events.publish('pause_all_music', { } );
+		//events.publish('play_music', { name: params.song, fade: 1000 } );
 	},
 	
 	stay: function(params, trigger) {
@@ -110,8 +110,8 @@ TriggerController.prototype.triggers['music_zone'] = {
 	},
 	
 	exit: function(params, trigger) {
-		events.publish('stop_music', { name: params.song, fade: 1000 } );		
-		events.publish('unpause_all_music', { } );
+		//events.publish('stop_music', { name: params.song, fade: 1000 } );		
+		//events.publish('unpause_all_music', { } );
 		
 	}
 }

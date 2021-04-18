@@ -28,8 +28,7 @@ ScriptRunner.scripts['battlebar_scram'] = [
 
 ScriptRunner.scripts['enter_battlebar'] = [
 	{ name: 'disallow_input', props: {} },
-	{ name: 'pause_all_music', props: {} },
-	{ name: 'play_music', props: { name: 'Decimation', fade: 1000 } },
+	{ name: 'play_interlude', props: { name: 'Decimation', fade: 1000 } },
 	
 	{ name: 'wait', props: { amount: 1000 } },
 
@@ -243,16 +242,14 @@ ScriptRunner.scripts['kill_sw8t2'] = [
 
 	{ name: 'wait', props: { amount: 1000 } },	
 	
-	{ name: 'stop_music', props: { name: 'Decimation', fade: 1000 } },
-	{ name: 'unpause_all_music', props: {} },	
+	{ name: 'stop_interlude', props: { fade: 1000 } },	
 	
 	{ name: 'run_script', props: { name: 'demo_Damage' } },
 ];
 
 ScriptRunner.scripts['start_battle_arena'] = [
 	{ name: 'disallow_input', props: {} },
-	{ name: 'pause_all_music', props: {} },
-	{ name: 'play_music', props: { name: 'Decimation', fade: 1000 } },
+	{ name: 'play_interlude', props: { name: 'Decimation', fade: 1000 } },
 
 	{ func: function(params) {
 		energyController.shield = 0;		
