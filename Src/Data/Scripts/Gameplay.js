@@ -342,6 +342,8 @@ ScriptRunner.scripts['play_fanfare'] = [
 
 ScriptRunner.scripts['use_checkpoint'] = [
     { name: 'disallow_input', props: {} },
+    { name: 'stop_music', props: { fade: 1000 }},
+    
     
     { func: function(params) {
         effectsController.StarBurst(frauki);
@@ -364,6 +366,7 @@ ScriptRunner.scripts['use_checkpoint'] = [
 
     { name: 'stop_sound', props: {name: 'frauki_materialize'}},
     { name: 'play_sound', props: {name: 'frauki_materialize_end'}},
+    { name: 'stop_all_ambient', props: {name: 'frauki_materialize_end'}},
 
     { name: 'allow_input', props: {} },
 
@@ -371,6 +374,14 @@ ScriptRunner.scripts['use_checkpoint'] = [
         if(!GameData.GetFlag('used_checkpoint')) {
             ScriptRunner.run('demo_Checkpoint2');
             GameData.SetFlag('used_checkpoint', true);
+        }
+
+        if(params.dest.id === '0') {
+            events.publish('play_ambient', { name: 'ambient_surface'} );
+        } else if(params.dest.id === '1') {
+            events.publish('play_ambient', { name: 'ambient_tenements'} );
+        } else if(params.dest.id === '2') {
+            events.publish('play_ambient', { name: 'ambient_cave'} );
         }
     } },
 ];

@@ -1,6 +1,5 @@
 TriggerController.prototype.triggers['music_left_right'] = {
 	enter: function(params, trigger) {
-		//events.publish('stop_all_music', { fadeOut: params.fadeOut || 3000 });
 	},
 
 	stay: function(params, trigger) {
@@ -18,7 +17,6 @@ TriggerController.prototype.triggers['music_left_right'] = {
 
 TriggerController.prototype.triggers['music_up_down'] = {
 	enter: function(params, trigger) {
-		//events.publish('stop_all_music', { fadeOut: params.fadeOut || 3000 });
 	},
 
 	stay: function(params, trigger) {
@@ -34,22 +32,9 @@ TriggerController.prototype.triggers['music_up_down'] = {
 	}
 }
 
-TriggerController.prototype.triggers['stop_all_music'] = {
-	enter: function(params, trigger) {
-	},
-
-	stay: function(params, trigger) {
-
-	},
-
-	exit: function(params, trigger) {
-		events.publish('stop_music', { fade: params.fade } );
-	}
-}
-
 TriggerController.prototype.triggers['play_music'] = {
 	enter: function(params, trigger) {
-		events.publish('play_music', { name: params.song } );
+		events.publish('play_music', { name: params.song, fade: params.fade } );
 	},
 
 	stay: function(params, trigger) {
@@ -62,7 +47,7 @@ TriggerController.prototype.triggers['play_music'] = {
 
 TriggerController.prototype.triggers['stop_music'] = {
 	enter: function(params, trigger) {
-		events.publish('stop_music', { name: params.song } );		
+		events.publish('stop_music', { fade: params.fade || 500 } );		
 	},
 
 	stay: function(params, trigger) {

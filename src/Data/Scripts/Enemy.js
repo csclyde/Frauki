@@ -88,6 +88,7 @@ ScriptRunner.scripts['tower_ninja'] = [
 	{ name: 'show_text', props: { text: 'So, you have come to my dojo...', portrait: 'red' } },
 	{ name: 'show_text', props: { text: 'Your slippery little rolls may not serve you so well anymore...', portrait: 'red' } },
 	{ name: 'show_text', props: { text: 'Nothing personal... kid...', portrait: 'red' } },
+	{ name: 'play_song', props: { name: 'Decimation' } },
 	{ name: 'run_script', props: { name: 'exit_enemy' } },
 ];
 

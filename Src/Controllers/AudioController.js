@@ -17,7 +17,6 @@ AudioController = function() {
 
     events.subscribe('play_music', this.PlayMusic, this);
     events.subscribe('stop_music', this.StopMusic, this);
-    events.subscribe('stop_all_music', this.StopAllMusic, this);
 
     events.subscribe('play_interlude', this.PlayInterlude, this);
     events.subscribe('stop_interlude', this.StopInterlude, this);
@@ -173,9 +172,9 @@ AudioController.prototype.PlayMusic = function(params) {
 
     var newMusic = this.music[params.name];
 
-    if(!!newMusic && musicSetting) {
+    if(!!newMusic && musicSetting && this.currentMusic !== newMusic) {
         //if there is other music playing, fade it out
-        if(this.currentMusic && this.currentMusic !== newMusic) {
+        if(this.currentMusic) {
             this.currentMusic.fadeToStop(params.fade || 1);
         }
 
@@ -206,7 +205,11 @@ AudioController.prototype.PlayInterlude = function(params) {
     
         //if there is other music playing, fade it out
         if(this.currentMusic) {
-            this.currentMusic.fadeToPause(params.fade || 1);
+            if(this.currentMusic.loop) {
+                this.currentMusic.fadeToPause(params.fade || 1);
+            } else {
+                this.currentMusic.fadeToStop(params.fade || 1);
+            }
         }
 
         if(!!this.currentInterlude) {
@@ -232,6 +235,11 @@ AudioController.prototype.StopInterlude = function(params) {
     }
 
     if(this.currentMusic) {
-        this.currentMusic.fadeToResume(params.fade || 1, this.currentMusic.initialVolume);
+        //if the current music is not paused, trash it
+        if(!this.currentMusic.paused) {
+            this.currentMusic = null;
+        } else {
+            this.currentMusic.fadeToResume(params.fade || 1, this.currentMusic.initialVolume);
+        }
     }
 };

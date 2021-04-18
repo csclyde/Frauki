@@ -6,7 +6,7 @@ LoadingState.preload = function() {
     this.logo.alpha = 0;
     this.fadeTween = game.add.tween(this.logo).to({alpha: 1}, 500, Phaser.Easing.Cubic.In, true);
 
-    game.add.plugin(Phaser.Plugin.Debug);
+    //game.add.plugin(Phaser.Plugin.Debug);
     
     game.load.json('keybinds', 'keybinds.json');
     GameData.LoadSettingsFromStorage();
