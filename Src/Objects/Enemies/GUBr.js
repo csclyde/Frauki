@@ -17,11 +17,9 @@ Enemy.prototype.types['GUBr'] =  function() {
     
 	this.updateFunction = function() {
 
-		// if(this.body.onFloor() && this.animations.currentAnim.name === 'walk') {
-		// 	events.publish('play_sound', {name: 'GUBr_step', restart: false});
-		// } else {
-		// 	events.publish('stop_sound', {name: 'GUBr_step', restart: false});
-		// }
+		if(!this.body.onFloor() || this.animations.currentAnim.name !== 'walk') {
+			events.publish('stop_sound', {name: 'GUBr_step', restart: false});
+		}
 	};
 
 	this.Act = function() {
@@ -50,7 +48,12 @@ Enemy.prototype.types['GUBr'] =  function() {
     	if(this.state === this.Cowering) {
     		this.timers.SetTimer('block_recoil', 200);
     	}
-    };
+	};
+	
+	this.OnHit = function() {
+		events.publish('stop_sound', {name: 'GUBr_step', restart: true});
+		
+	};
 
 	///////////////////////////////ACTIONS////////////////////////////////////
 	this.Attack = function() {

@@ -14,7 +14,7 @@ ScriptRunner.scripts['exit_goddess'] = [
 
 	{ name: 'wait', props: { amount: 1000 } },
 
-	{ name: 'stop_interlude', props: {} },
+	{ name: 'stop_interlude', props: { fade: 1000 } },
 	{ name: 'allow_input', props: {} },
 
 ];

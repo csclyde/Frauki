@@ -37,10 +37,8 @@ Enemy.prototype.types['SW8T'] =  function() {
     
 	this.updateFunction = function() {
 
-		if(this.state === this.Blocking) {
-			events.publish('play_sound', {name: 'SW8T_shield', restart: false});
-		} else {
-			//events.publish('stop_sound', {name: 'SW8T_shield', restart: false});
+		if(this.state !== this.Blocking) {
+			events.publish('stop_sound', {name: 'SW8T_shield', restart: false});
 		}
 	};
 
@@ -285,12 +283,18 @@ Enemy.prototype.types['SW8T'] =  function() {
 
 		EnemyBehavior.FacePlayer(this);
 
+		events.publish('play_sound', {name: 'SW8T_shield', restart: false});
+		
+
 		if(EnemyBehavior.Player.IsAbove(this) || frauki.states.entangled) {
+			events.publish('stop_sound', {name: 'SW8T_shield' });
+		
 			return true;
 		}
 
 		if(this.timers.TimerUp('blocking')) {
-
+		events.publish('stop_sound', {name: 'SW8T_shield' });
+		
 			return true;
 		}
 
