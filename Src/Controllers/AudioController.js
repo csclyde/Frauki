@@ -202,19 +202,14 @@ AudioController.prototype.PlayInterlude = function(params) {
     
     var newInterlude = this.music[params.name];
 
-    console.log('Got song', params.name);
-
     if(!!newInterlude && musicSetting) {
-        console.log('Settings check out');
     
         //if there is other music playing, fade it out
         if(this.currentMusic) {
-            console.log('Pausing current song');
             this.currentMusic.fadeToPause(params.fade || 1);
         }
 
         if(!!this.currentInterlude) {
-            console.log('Stopping current interlude');
             this.currentInterlude.fadeToStop(params.fade || 1);
         }
 
@@ -231,7 +226,6 @@ AudioController.prototype.PlayInterlude = function(params) {
 };
 
 AudioController.prototype.StopInterlude = function(params) {
-    console.log('Stopping interlude')
     if(this.currentInterlude) {
         this.currentInterlude.fadeToStop(params.fade || 1);
         this.currentInterlude = null;

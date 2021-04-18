@@ -273,29 +273,22 @@ Phaser.Sound.prototype.fadeToPause = function (duration) {
 };
 
 Phaser.Sound.prototype.fadeToResume = function (duration, volume) {
-    
-    console.log('in the shim');
 
     if(this.fadeTween && this.fadeTween.isRunning) {
-        console.log('stopping current fade tween');
-    
         this.fadeTween.stop();
     }
 
     if (duration === undefined) { duration = 1000; }
     if (volume === undefined) { volume = 1; }
 
-    if(this.volume !== volume) {  
-        console.log('volume going from ' + this.volume + ' to ' + volume);     
+    if(this.volume !== volume) {     
         this.fadeTween = this.game.add.tween(this).to( { volume: volume }, duration, Phaser.Easing.Exponential.In, true);
     }
     
     if(this.paused) {      
         this.resume();
-        console.log('resuming play');
     } else {
         this.play();
-        console.log('starting play');
         
     }
 };
