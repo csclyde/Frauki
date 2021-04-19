@@ -367,10 +367,6 @@ Enemy.prototype.collideWithPlayer = function(f) {
         return false;
     } else if(this.isAttacking() && this.GetCurrentDamage() > 0) {
         return false;
-    } else if(this.isSolid) {
-        f.body.blocked.down = true;
-        if(f.body.velocity.y > 0) f.body.velocity.y = 0;
-        return true;
     } else if(f.body.y + f.body.height <= this.body.y + (f.body.height / 4) || this.body.y + this.body.height <= f.body.y + (this.body.height / 4)) {
         return false;
     } else {

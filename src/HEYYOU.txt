@@ -1,0 +1,5 @@
+Hey there. Welcome to the source code. If you're in here, I'm guessing you have some interest in the game,
+or at least in game development. I left the sourcecode here, unminified, in a readable form, so that if you
+are interested, you can take a good look. It's not beautiful, but it works decently well. You can even modify
+the code if you want, and it should take effect when the game runs. Might be hard to debug, though. Anyway,
+feel free to reach out to me if you have any questions or comments. Thanks! - CLYDE

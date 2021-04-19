@@ -1,6 +1,6 @@
 var GameState = new Phaser.State();
 
-GameState.MAX_PLAYER_HEALTH = 18;
+GameState.MAX_PLAYER_HEALTH = 22;
 GameState.MAX_APPLES = 6;
 
 GameState.create = function() {
@@ -102,6 +102,9 @@ GameState.BeginGameover = function() {
     audioController.Reset();
     inputController.Reset();
     cameraController.Reset();
+    energyController.latentHealth = 0;
+    energyController.health = 0;
+    energyController.shield = 0;
 };
 
 GameState.Reset = function() {

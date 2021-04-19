@@ -154,7 +154,7 @@ ScriptRunner.scripts['demo_Wit'] = [
 	{ func: function(params) {
 		game.add.tween(goddess).to({alpha: 0}, 2000, Phaser.Easing.Linear.None, true);
 		//achievement1
-		try { require('electron').ipcRenderer.send('achievement', 'WIT_GEM'); } catch(e) { }
+		try { if(!!require) require('electron').ipcRenderer.send('achievement', 'WIT_GEM'); } catch(e) { }
 	}},
 
 	{ name: 'wait', props: { amount: 2000 } },
@@ -202,7 +202,7 @@ ScriptRunner.scripts['demo_Will'] = [
 	{ func: function(params) {
 		game.add.tween(goddess).to({alpha: 0}, 2000, Phaser.Easing.Linear.None, true);
 		//achievement2
-		try { require('electron').ipcRenderer.send('achievement', 'WILL_GEM'); } catch(e) { }
+		try { if(!!require) require('electron').ipcRenderer.send('achievement', 'WILL_GEM'); } catch(e) { }
 		
 	}},
 
@@ -268,7 +268,7 @@ ScriptRunner.scripts['demo_Luck'] = [
 	{ func: function(params) {
 		game.add.tween(goddess).to({alpha: 0}, 2000, Phaser.Easing.Linear.None, true);
 		//achievement3
-		try { require('electron').ipcRenderer.send('achievement', 'LUCK_GEM'); } catch(e) { }
+		try { if(!!require) require('electron').ipcRenderer.send('achievement', 'LUCK_GEM'); } catch(e) { }
 		
 	}},
 
@@ -335,7 +335,7 @@ ScriptRunner.scripts['demo_Power'] = [
 	{ func: function(params) {
 		game.add.tween(goddess).to({alpha: 0}, 2000, Phaser.Easing.Linear.None, true);
 		//achievement4
-		try { require('electron').ipcRenderer.send('achievement', 'POWER_GEM'); } catch(e) { }
+		try { if(!!require) require('electron').ipcRenderer.send('achievement', 'POWER_GEM'); } catch(e) { }
 		
 	}},
 

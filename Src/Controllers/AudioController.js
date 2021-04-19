@@ -17,6 +17,7 @@ AudioController = function() {
 
     events.subscribe('play_music', this.PlayMusic, this);
     events.subscribe('stop_music', this.StopMusic, this);
+    events.subscribe('stop_all_music', this.StopAllMusic, this);
 
     events.subscribe('play_interlude', this.PlayInterlude, this);
     events.subscribe('stop_interlude', this.StopInterlude, this);
@@ -198,8 +199,10 @@ AudioController.prototype.StopMusic = function(params) {
     }
 };
 
-AudioController.prototype.StopAllSongs = function() {
-
+AudioController.prototype.StopAllMusic = function() {
+    for(var name in this.music) {
+        this.music[name].stop();
+    }
 };
 
 AudioController.prototype.PlayInterlude = function(params) {

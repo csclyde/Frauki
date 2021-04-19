@@ -305,6 +305,8 @@ InputController.prototype.AllowInput = function() {
     if(this.dpad.right) this.OnRight(true);
     if(this.dpad.up) this.OnUp(true);
     if(this.dpad.down) this.OnDown(true);
+
+    events.publish('set_attack_wait', { duration: 500 });
 };
 
 InputController.prototype.OnPause = function(pressed) {
@@ -453,17 +455,17 @@ InputController.prototype.OnRight = function(pressed) {
 InputController.prototype.OnUp = function(pressed) {
     this.dpad.up = pressed;
 
-    if(pressed) {
-        events.publish('menu_change', { dir: 'up' });
-        events.publish('advance_text', {});        
-    }
-
     if(this.allowInput) {
         if(pressed) {
             events.publish('control_up', {pressed: true});
         } else {
             events.publish('control_up', {pressed: false});
         }
+    }
+
+    if(pressed) {
+        events.publish('menu_change', { dir: 'up' });
+        events.publish('advance_text', {});        
     }
 };
 

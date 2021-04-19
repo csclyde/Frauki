@@ -25,12 +25,15 @@ function createWindow() {
   mainWindow.loadFile('index.html');
   mainWindow.app = app;
 
+  var steamSuccess = false;
+
   // Open the devtools.
   //mainWindow.openDevTools();
 
   try {
     if (greenworks.init()) {
       console.log('Steam API has been initalized.');
+      steamSuccess = true;
     }
   }
   catch(e) {
@@ -46,6 +49,7 @@ function createWindow() {
   });
 
   ipcMain.on('achievement', function(event, name) {
+    if(steamSuccess) {
       greenworks.activateAchievement(name, 
         function() {
           console.log('Steam achievement registered');
@@ -53,7 +57,8 @@ function createWindow() {
         function(e) {
           console.error('Steam achievement error', e);
         }
-      )
+      );
+    }
   });
 }
 

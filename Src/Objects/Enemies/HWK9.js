@@ -25,7 +25,7 @@ Enemy.prototype.types['HWK9'] =  function() {
 	
 	this.state = this.Idling;
 
-	this.collideWithPlayer = function() {
+	this.isSolid = function() {
 		return this.state !== this.Jetpacking && this.state !== this.Slashing;
 	};
     

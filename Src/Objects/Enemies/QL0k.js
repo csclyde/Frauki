@@ -13,7 +13,7 @@ Enemy.prototype.types['QL0k'] =  function() {
     this.damage = 1;
 
     this.robotic = true;
-    this.isSolid = true;
+    this.isSolid = function() { return true };
     this.hasShot = false;
 
     this.base = game.add.image(0, 0, 'EnemySprites', 'QL0k/Shoot0000', effectsController.effectsGroup);

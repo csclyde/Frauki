@@ -102,7 +102,7 @@ GameData.AddDeath = function() {
 
     if(GameData.data.deaths >= 100) {
         //achievement10
-        try { require('electron').ipcRenderer.send('achievement', '100_DEATHS'); } catch(e) { }        
+        try { if(!!require) require('electron').ipcRenderer.send('achievement', '100_DEATHS'); } catch(e) { }        
     }
 };
 
@@ -113,7 +113,7 @@ GameData.RegisterArenaKills = function(count) {
 
         if(count >= 100) {
             //achievement11
-            try { require('electron').ipcRenderer.send('achievement', '100_KILLS'); } catch(e) { }            
+            try { if(!!require) require('electron').ipcRenderer.send('achievement', '100_KILLS'); } catch(e) { }            
         }
     }
 };
@@ -215,7 +215,7 @@ GameData.AddUpgrade = function(name) {
         this.data.upgrades.push(name);
         this.SaveDataToStorage();
         //achievement8
-        try { require('electron').ipcRenderer.send('achievement', 'HEART_UPGRADE'); } catch(e) { }
+        try { if(!!require) require('electron').ipcRenderer.send('achievement', 'HEART_UPGRADE'); } catch(e) { }
         
     } else if(name.indexOf('Shield') >= 0) {
         this.data.shield++;
@@ -223,7 +223,7 @@ GameData.AddUpgrade = function(name) {
         this.data.upgrades.push(name);
         this.SaveDataToStorage();
         //achievement7
-        try { require('electron').ipcRenderer.send('achievement', 'SHIELD_UPGRADE'); } catch(e) { }
+        try { if(!!require) require('electron').ipcRenderer.send('achievement', 'SHIELD_UPGRADE'); } catch(e) { }
         
     } else if(this.data.upgrades.indexOf(name) < 0) {
         this.data.upgrades.push(name);
@@ -232,7 +232,7 @@ GameData.AddUpgrade = function(name) {
 
     if(this.data.health + this.data.shield >= 18) {
         //achievement9
-        try { require('electron').ipcRenderer.send('achievement', 'ALL_UPGRADES'); } catch(e) { }
+        try { if(!!require) require('electron').ipcRenderer.send('achievement', 'ALL_UPGRADES'); } catch(e) { }
         
     }
 };

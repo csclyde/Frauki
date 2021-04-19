@@ -238,7 +238,7 @@ ScriptRunner.scripts['kill_sw8t2'] = [
 		events.publish('pan_camera', { to: frauki.body.center, duration: 1000 });
 		GameData.AddUpgrade('Damage');
 		//achievement6
-		try { require('electron').ipcRenderer.send('achievement', 'BATTLE_BAR'); } catch(e) { }
+		try { if(!!require) require('electron').ipcRenderer.send('achievement', 'BATTLE_BAR'); } catch(e) { }
 		
 	} },
 

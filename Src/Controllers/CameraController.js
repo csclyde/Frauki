@@ -114,6 +114,8 @@ CameraController.prototype.ScreenShake = function(params) {
 };
 
 CameraController.prototype.PanCamera = function(params) {
+	if(GameState.inCredits) return;
+	
 	var transitionTarget = { x: this.target.x, y: this.target.y };
 	this.target = transitionTarget;
 

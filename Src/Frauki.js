@@ -131,7 +131,7 @@ Player.prototype.preStateUpdate = function() {
 
 Player.prototype.postStateUpdate = function() {
 
-    if(!this.body.onFloor() && this.states.crouching) {
+    if(!this.body.onFloor() && this.states.crouching && !this.states.inUpdraft) {
         this.body.gravity.y = game.physics.arcade.gravity.y * 3;        
     }
 
@@ -154,7 +154,7 @@ Player.prototype.postStateUpdate = function() {
 
     }
 
-    if(this.states.inUpdraft) {
+    if(this.states.inUpdraft && this.state !== this.Hanging) {
         if(this.states.superGravity) {
             this.body.acceleration.y = -450;
         } else {

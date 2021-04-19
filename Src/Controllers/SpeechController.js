@@ -2,7 +2,6 @@ SpeechController = function() {
 
 	events.subscribe('control_up', this.Investigate, this);
 	events.subscribe('hide_speech', this.HideSpeech, this);
-
 	events.subscribe('advance_text', this.AdvanceText, this);
 
 	events.subscribe('show_text', function(props) {
@@ -205,7 +204,7 @@ SpeechController.prototype.Update = function() {
 
 	}
 
-	if(this.text.visible && !!this.currentSpeechZone) {
+	if(this.text.visible && !!this.currentSpeechZone && inputController.allowInput) {
 		if(frauki.body.x + frauki.body.width < this.currentSpeechZone.x || 
 		   frauki.body.x > this.currentSpeechZone.x + this.currentSpeechZone.width || 
 		   frauki.body.y + frauki.body.height < this.currentSpeechZone.y || 

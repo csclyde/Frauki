@@ -17,7 +17,7 @@ Enemy.prototype.types['SpikeDropper'] =  function() {
     this.body.bounce.setTo(0);
     this.body.drag.x = 100;
 
-    this.isSolid = true;
+    this.isSolid = function() { return true };
 
     this.LandHit = function() {
         this.Drop();
