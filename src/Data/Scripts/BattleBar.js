@@ -67,8 +67,10 @@ ScriptRunner.scripts['exit_battlebar'] = [
 ScriptRunner.scripts['enter_bouncer'] = [
 	{ name: 'disallow_input', props: {} },
 	{ func: function(params) {
-		events.publish('pan_camera', { to: objectController.npcMap['robo_bouncer'].body.center, duration: 1000 });
-		EnemyBehavior.FacePlayer(objectController.npcMap['robo_bouncer']);		
+		if(objectController.npcMap['robo_bouncer']) {
+			events.publish('pan_camera', { to: objectController.npcMap['robo_bouncer'].body.center, duration: 1000 });
+			EnemyBehavior.FacePlayer(objectController.npcMap['robo_bouncer']);
+		}
 	} },
 ];
 

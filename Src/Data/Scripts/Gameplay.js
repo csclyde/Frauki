@@ -212,6 +212,7 @@ ScriptRunner.scripts['unpause_game'] = [
 
 ScriptRunner.scripts['game_over'] = [
     { name: 'disallow_input', props: {} },
+    { name: 'stop_interlude', props: { fade: 500 } },
     { name: 'stop_music', props: { fade: 500 } },
     { name: 'stop_all_ambient', props: {} },
     { name: 'hide_speech', props: {} },

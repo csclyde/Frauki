@@ -258,5 +258,7 @@ function ComposeAndEmitSignal(data) {
         params[paramData[0]] = paramData[1];
     }
 
-    events.publish(signalName, params);
+    if(!GameState.restarting) {
+        events.publish(signalName, params);
+    }
 };

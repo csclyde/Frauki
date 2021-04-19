@@ -40,6 +40,8 @@ Enemy.prototype.types['NPC'] =  function() {
 	this.state = this.Idling;
 
 	this.create = function() {
+		
+		this.SetDirection('right');
 	};
 
 	this.updateFunction = function() {
@@ -62,8 +64,6 @@ Enemy.prototype.types['NPC'] =  function() {
 	////////////////////////////////STATES////////////////////////////////////
 	this.Idling = function() {
 		this.PlayAnim(this.name);
-
-		this.SetDirection('right');
 
 		if(this.properties.name === 'boat') {
 			this.body.gravity.y = -700;

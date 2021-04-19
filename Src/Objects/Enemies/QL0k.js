@@ -74,7 +74,7 @@ Enemy.prototype.types['QL0k'] =  function() {
 
 	this.Act = function() {
 
-        if(this.CanSeePlayer() && this.timers.TimerUp('shoot') && this.facingPlayer) {
+        if(this.CanAttack() && this.CanSeePlayer() && this.timers.TimerUp('shoot') && this.facingPlayer) {
 
             this.Shoot();
 

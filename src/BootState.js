@@ -8,7 +8,5 @@ BootState.preload = function() {
 };
 
 BootState.create = function() {
-
     game.state.start('LoadingState', false, false);
-
 };

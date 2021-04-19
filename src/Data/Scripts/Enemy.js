@@ -2,7 +2,7 @@ ScriptRunner.scripts['enter_enemy'] = [
 	{ name: 'disallow_input', props: {} },
 
 	{ func: function(params) {
-		events.publish('play_interlude', { name: 'Sunshine', fade: 1000 });
+		//events.publish('play_interlude', { name: 'Sunshine', fade: 1000 });
 
 		var enemy = objectController.enemyList.find(function(e) {
 			return e.name === params.name;
@@ -29,7 +29,7 @@ ScriptRunner.scripts['exit_enemy'] = [
 
 	{ name: 'wait', props: { amount: 1000 } },
 
-	{ name: 'stop_interlude', props: { fade: 500 } },	
+	//{ name: 'stop_interlude', props: { fade: 500 } },	
 	{ name: 'allow_input', props: {} },
 ];
 
@@ -85,10 +85,10 @@ ScriptRunner.scripts['tower_troll'] = [
 ];
 
 ScriptRunner.scripts['tower_ninja'] = [
+	{ name: 'play_music', props: { name: 'Decimation' } },
 	{ name: 'show_text', props: { text: 'So, you have come to my dojo...', portrait: 'red' } },
 	{ name: 'show_text', props: { text: 'Your slippery little rolls may not serve you so well anymore...', portrait: 'red' } },
 	{ name: 'show_text', props: { text: 'Nothing personal... kid...', portrait: 'red' } },
-	{ name: 'play_song', props: { name: 'Decimation' } },
 	{ name: 'run_script', props: { name: 'exit_enemy' } },
 ];
 

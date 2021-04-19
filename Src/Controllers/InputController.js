@@ -290,6 +290,11 @@ InputController.prototype.DisallowInput = function() {
     this.OnStart(false);
     this.currentDir = 'still';
 
+    if(frauki.state === frauki.Rolling) {
+        frauki.ChangeState(frauki.Standing);
+        frauki.body.velocity.x = 0;
+    }
+
     this.allowInput = false;
 };
 
