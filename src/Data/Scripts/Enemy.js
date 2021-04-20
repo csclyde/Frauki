@@ -8,10 +8,11 @@ ScriptRunner.scripts['enter_enemy'] = [
 			return e.name === params.name;
 		});
 
-		EnemyBehavior.FacePlayer(enemy);
-
 		if(!!enemy && !!enemy.body) {
+			EnemyBehavior.FacePlayer(enemy);
 			events.publish('pan_camera', { to: enemy.body.center, duration: 1000 });
+		} else {
+			params.name = null;
 		}
 	} },
 	
