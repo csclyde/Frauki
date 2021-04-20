@@ -330,9 +330,7 @@ ScriptRunner.scripts['end_fight'] = [
     { name: 'wait', props: { amount: 1000 } },
 
     { func: function(params) {
-        if(params.song) {
-            events.publish('stop_interlude', { fade: 1000});
-        }
+        events.publish('stop_interlude', { fade: 1000});
     } },
 ];
 

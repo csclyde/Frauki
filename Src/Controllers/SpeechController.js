@@ -352,10 +352,6 @@ SpeechController.prototype.Activate = function(text, portrait) {
 
 SpeechController.prototype.FraukiInSpeechZone = function() {
 
-	if(!frauki.body.onFloor()) {
-		return false;
-	}
-
 	for(var i = 0; i < this.speechZones.length; i++) {
 		var zone = this.speechZones[i];
 		if(zone.active && frauki.body.x + frauki.body.width > zone.x && frauki.body.x < zone.x + zone.width && frauki.body.y + frauki.body.height > zone.y && frauki.body.y < zone.y + zone.height) {

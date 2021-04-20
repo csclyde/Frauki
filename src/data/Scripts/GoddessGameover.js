@@ -71,7 +71,7 @@ ScriptRunner.scripts['goddess_surprised_death_final'] = [
 ];
 
 // TO STATUE SHORTCUT //////////
-ScriptRunner.scripts['first_gubr'] = [
+ScriptRunner.scripts['first_gubr_death'] = [
 	{ name: 'show_text', props: { text: "Ouch, looks like that annoying little robot got you.", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "He's a coward, but watch out for his little poker. It's really painful.", portrait: 'Goddess_Neutral' } },
 	{ name: 'run_script', props: { name: 'exit_goddess' } },
@@ -172,7 +172,7 @@ ScriptRunner.scripts['second_shortcut'] = [
 	{ name: 'run_script', props: { name: 'exit_goddess' } },
 ];
 
-ScriptRunner.scripts['first_kr32'] = [
+ScriptRunner.scripts['first_kr32_death'] = [
 	{ name: 'show_text', props: { text: "I saw that one coming. Yeah...", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "That horrible thing was the KR32 Alien Murderbot.", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "It wasn't programmed for anything besides murder.", portrait: 'Goddess_Neutral' } },
@@ -260,7 +260,7 @@ ScriptRunner.scripts['goddess_console_area4'] = [
 ];
 
 // TO CHUTE SHORTCUT //////////
-ScriptRunner.scripts['first_hwk9'] = [
+ScriptRunner.scripts['first_hwk9_death'] = [
 	{ name: 'show_text', props: { text: "The killer hawk. She is a tough one for sure.", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "I've seen her do terrible things. What a nasty piece of work.", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "Don't feel too bad Frauki, it's ok that you lost. I kind of expected it.", portrait: 'Goddess_Neutral' } },
@@ -281,7 +281,7 @@ ScriptRunner.scripts['goddess_console_area5'] = [
 ];
 
 // DEPTHS CHECKPOINT TO BASEMENT SHORTCUT //////////
-ScriptRunner.scripts['first_h0p8'] = [
+ScriptRunner.scripts['first_h0p8_death'] = [
 	{ name: 'show_text', props: { text: "Those grasshopper-looking creeps really weird me out.", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "Nope. I don't like them. Yuck.", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "I'm just glad it's you and not me having to fight them.", portrait: 'Goddess_Neutral' } },
@@ -302,7 +302,7 @@ ScriptRunner.scripts['goddess_depths'] = [
 ];
 
 // BASEMENT SHORTCUT TO PIPE SHORTCUT //////////
-ScriptRunner.scripts['first_AZP3'] = [
+ScriptRunner.scripts['first_AZP3_death'] = [
 	{ name: 'show_text', props: { text: "You got punched in the face, Frauki.", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "Well, it looked really painful and humiliating.", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "Ha ha, yeah, it did.", portrait: 'Goddess_Neutral' } },
@@ -322,7 +322,7 @@ ScriptRunner.scripts['goddess_depths2'] = [
 ];
 
 // PIPE SHORTCUT TO LUCK GEM //////////
-ScriptRunner.scripts['first_sw8t'] = [
+ScriptRunner.scripts['first_sw8t_death'] = [
 	{ name: 'show_text', props: { text: "What even was that thing? I've never seen it before.", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "I guess he wasn't much of a friend, whatever he was.", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "Well, I'm cheering you on, but... yikes... how...", portrait: 'Goddess_Neutral' } },

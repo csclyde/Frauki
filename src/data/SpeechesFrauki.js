@@ -1,5 +1,6 @@
 var Speeches = {
 	'cathedral_top': { text: 'I can see everything from up here.' },
+	'cathedral_final': { text: "I always feel a bit sad when I finish something. When you live with something for a while, it becomes a little part of you. Finishing it is like losing that part of yourself." },
 	'amazing_explorer': { text: "I just might be the best explorer ever. Bet no one has been here before.", portrait: 'Mischeif'  },
 	'ship_question': { text: "This must be the big Alien Robot ship she talked about. Those jerks...", portrait: 'Mad'  },
 	'lovely_day': { text: 'Another lovely day in Frogland.' },
@@ -30,6 +31,7 @@ var Speeches = {
 	'underwater_sign': { text: "The sign says: Keep out! This is my property. No Alien Robots allowed!", portrait: "Neutral" },
 	'whats_down': { text: "I'm scared... what's down there?", portrait: "Displeased" },
 	'someone_listening': { text: "Hello? Is someone listening in? That would be really creepy if someone was watching and listening to everything I did.", portrait: "Displeased" },
+	'wheee': { text: "Wheeeeeeeeeee!!!", portrait: "Silly" },
 	
 
 

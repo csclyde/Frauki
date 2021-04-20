@@ -123,7 +123,7 @@ Enemy.prototype.types['Goddess'] =  function() {
 				}
 				else if(GameState.death.name === 'first_gubr' && !GameData.GetFlag('first_gubr')) {
 					GameData.SetFlag('first_gubr', true);
-					return 'first_gubr';
+					return 'first_gubr_death';
 				}
 				else {
 					return 'goddess_console_area1';
@@ -152,7 +152,7 @@ Enemy.prototype.types['Goddess'] =  function() {
 			else {	
 				if(GameState.death.name === 'first_kr32' && !GameData.GetFlag('first_kr32')) {
 					GameData.SetFlag('first_kr32', true);
-					return 'first_kr32';
+					return 'first_kr32_death';
 				}
 				else if((GameState.death.name === 'wit_guard1' || GameState.death.name === 'wit_guard2') && !GameData.GetFlag('wit_guard')) {
 					GameData.SetFlag('wit_guard', true);
@@ -197,7 +197,7 @@ Enemy.prototype.types['Goddess'] =  function() {
 			else if(!GameData.IsDoorOpen('vent_to_arches')) {
 				if(GameState.death.name === 'first_hwk9' && !GameData.GetFlag('first_hwk9')) {
 					GameData.SetFlag('first_hwk9', true);
-					return 'first_hwk9';
+					return 'first_hwk9_death';
 				}
 				else {
 					return 'goddess_console_area4';
@@ -212,7 +212,7 @@ Enemy.prototype.types['Goddess'] =  function() {
 			if(!GameData.IsDoorOpen('deep_house_basement')) {
 				if(GameState.death.name === 'first_h0p8' && !GameData.GetFlag('first_h0p8')) {
 					GameData.SetFlag('first_h0p8', true);
-					return 'first_h0p8';
+					return 'first_h0p8_death';
 				}
 				else {
 					return 'goddess_depths';
@@ -222,7 +222,7 @@ Enemy.prototype.types['Goddess'] =  function() {
 			else if(!GameData.IsDoorOpen('second_depths_cut')) {
 				if(GameState.death.name === 'first_AZP3' && !GameData.GetFlag('first_AZP3')) {
 					GameData.SetFlag('first_AZP3', true);
-					return 'first_AZP3';
+					return 'first_AZP3_death';
 				}
 				else {
 					return 'goddess_depths2';
@@ -232,7 +232,7 @@ Enemy.prototype.types['Goddess'] =  function() {
 			else {
 				if(GameState.death.name === 'first_sw8t' && !GameData.GetFlag('first_sw8t')) {
 					GameData.SetFlag('first_sw8t', true);
-					return 'first_sw8t';
+					return 'first_sw8t_death';
 				}
 				else {
 					return 'goddess_depths3';

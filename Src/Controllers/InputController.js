@@ -455,17 +455,16 @@ InputController.prototype.OnRight = function(pressed) {
 InputController.prototype.OnUp = function(pressed) {
     this.dpad.up = pressed;
 
+    if(pressed) {
+        events.publish('menu_change', { dir: 'up' });
+    }
+    
     if(this.allowInput) {
         if(pressed) {
             events.publish('control_up', {pressed: true});
         } else {
             events.publish('control_up', {pressed: false});
         }
-    }
-
-    if(pressed) {
-        events.publish('menu_change', { dir: 'up' });
-        events.publish('advance_text', {});        
     }
 };
 
