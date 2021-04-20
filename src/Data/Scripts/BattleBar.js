@@ -152,7 +152,10 @@ ScriptRunner.scripts['kill_a3pz'] = [
 	{ name: 'show_text', props: { text: "I wrote her a poem, but I haven't shown her yet.", portrait: 'red' } },
 	{ name: 'show_text', props: { text: "Bah, it's stupid anyway. Nevermind. Here she comes!", portrait: 'red' } },
 
-	{ name: 'spawn_enemy', props: { name: 'HWK9', on_death: "run_script,name:kill_hwk9" }},
+	{ func: function() {
+		events.publish('spawn_enemy', { name: 'HWK9', on_death: "run_script,name:kill_hwk9", y: Frogland.battleBarSpawn.y + 30})
+	}},
+	//{ name: 'spawn_enemy', props: { name: 'HWK9', on_death: "run_script,name:kill_hwk9" }},
 	{ name: 'wait', props: { amount: 2000 } },	
 
 	{ name: 'show_text', props: { text: "Isn't she lovely? Such a fine specimen of Alien engineering. Ahh......", portrait: 'red' } },
