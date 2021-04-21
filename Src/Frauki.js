@@ -157,6 +157,9 @@ Player.prototype.postStateUpdate = function() {
     if(this.states.inUpdraft && this.state !== this.Hanging) {
         if(this.states.superGravity) {
             this.body.acceleration.y = -450;
+        } else if(this.body.velocity.y < 0) {
+            //this.body.acceleration.y = -1850;
+            this.body.acceleration.y = -1850 - this.body.velocity.y;            
         } else {
             this.body.acceleration.y = -850;
         }

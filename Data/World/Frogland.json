@@ -9975,10 +9975,10 @@
  "orientation":"orthogonal",
  "properties":
     {
-     "debug":"false",
+     "debug":"true",
      "startLayer":"3",
-     "startX":"259",
-     "startY":"305"
+     "startX":"218",
+     "startY":"338"
     },
  "propertytypes":
     {

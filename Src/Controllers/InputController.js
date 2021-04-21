@@ -301,8 +301,14 @@ InputController.prototype.DisallowInput = function() {
 InputController.prototype.AllowInput = function() {
     this.allowInput = true;
 
-    if(this.dpad.left) this.OnLeft(true);
-    if(this.dpad.right) this.OnRight(true);
+    if(game.input.keyboard.isDown(this.binds.runLeft) || game.input.gamepad.isDown(14)) {
+        this.OnLeft(true);
+    }
+
+    if(game.input.keyboard.isDown(this.binds.runRight) || game.input.gamepad.isDown(15)) {
+        this.OnRight(true);
+    }
+    
     if(this.dpad.up) this.OnUp(true);
     if(this.dpad.down) this.OnDown(true);
 

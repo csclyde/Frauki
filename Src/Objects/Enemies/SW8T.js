@@ -25,7 +25,7 @@ Enemy.prototype.types['SW8T'] =  function() {
 
     this.energy = 5;
     this.baseStunDuration = 400;
-    this.damage = 1;
+    this.damage = 3;
 
     this.body.bounce.y = 0;
 
