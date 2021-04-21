@@ -93,7 +93,7 @@ Enemy.prototype.types['KR32'] =  function() {
     this.Attack = function() {
     	EnemyBehavior.FacePlayer(this);
     	this.state = this.Windup;
-    	this.timers.SetTimer('windup', game.rnd.between(400, 450));
+    	this.timers.SetTimer('windup', game.rnd.between(420, 470));
         events.publish('play_sound', {name: 'attack_windup', restart: true});
 
     };

@@ -19,6 +19,8 @@ Enemy.prototype.types['RKN1d'] =  function() {
     
     this.SetAttackTimer(0);
     this.timers.SetTimer('idle_walk', 0);
+    this.body.maxVelocity.setTo(500);
+    
 
     this.create = function() {
         this.clingDir = this.properties.clingDir || 'down';

@@ -11,6 +11,7 @@ GameState.create = function() {
     this.restarting = false;
     this.inMenu = true;
     this.inFinale = false;
+    this.inCredits = false;
     this.menuSelectionMade = false;
     
     this.currentMenu = Menus.main;
@@ -122,6 +123,11 @@ GameState.Reset = function() {
     Frogland.Reset();
 
     this.death.start = game.time.now;
+
+    this.inMenu = false;
+    this.inFinale = false;
+    this.inCredits = false;
+    this.menuSelectionMade = false;
 };
 
 GameState.MakeMenuSelection = function() {
@@ -189,7 +195,11 @@ GameState.UpdateSetting = function(params) {
 };
 
 GameState.PauseGame = function() {
-    if(!this.inMenu && !this.paused && !speechController.speechVisible && !this.restarting) {
+    if(this.inCredits) {
+        this.inCredits = false;
+        ScriptRunner.run('return_to_menu');
+    }
+    else if(!this.inMenu && !this.paused && !speechController.speechVisible && !this.restarting) {
         ScriptRunner.run('pause_game');
     }
 };

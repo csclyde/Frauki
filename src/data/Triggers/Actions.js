@@ -1,7 +1,7 @@
 
 TriggerController.prototype.triggers['goddess'] = {
 	enter: function(params) {
-		if(GameData.HasShard('Wit') && GameData.HasShard('Will') && GameData.HasShard('Luck') && GameData.HasShard('Power')) {
+		if(!GameData.GetFlag('GAME_COMPLETE') && GameData.HasShard('Wit') && GameData.HasShard('Will') && GameData.HasShard('Luck') && GameData.HasShard('Power')) {
 			ScriptRunner.run('finish_game');
 		}
 	},

@@ -37,15 +37,15 @@ ScriptRunner.scripts['goddess_welcome_return'] = [
 			ScriptRunner.run('welcome_back2');
 		}
 		else if(!GameData.HasShard('Luck')) {
-			ScriptRunner.run('welcome_back3');			
+			ScriptRunner.run('welcome_back3');
 		}
 		else if(!GameData.HasShard('Power')) {
-		    ScriptRunner.run('welcome_back4');						
+		    ScriptRunner.run('welcome_back4');
 		}
 		else if(!GameData.GetFlag('GAME_COMPLETE')) {
 			//has all the shards. initiate the endgame
 		    ScriptRunner.run('welcome_back5');
-		    //ScriptRunner.run('exit_goddess');						
+		    //ScriptRunner.run('exit_goddess');
 			
 		} else {
 		    ScriptRunner.run('welcome_back_postgame');
@@ -186,7 +186,7 @@ ScriptRunner.scripts['goddess_angry4'] = [
 				effectsController.Explosion({ x: frauki.body.center.x + game.rnd.between(-20, 20), y: frauki.body.center.y + game.rnd.between(-20, 20) });
 				effectsController.StarBurst(frauki.body.center);
 				
-				energyController.RemoveHealth(1);				
+				energyController.RemoveHealth(1);	
             });
         };
 	}},

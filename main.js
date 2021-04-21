@@ -28,7 +28,7 @@ function createWindow() {
   var steamSuccess = false;
 
   // Open the devtools.
-  //mainWindow.openDevTools();
+  // mainWindow.openDevTools();
 
   try {
     if (greenworks.init()) {
@@ -46,6 +46,10 @@ function createWindow() {
 
   ipcMain.on('close-app', function(event, arg) {
     app.exit(0);
+  });
+
+  ipcMain.on('refresh-game', function(event, arg) {
+    mainWindow.reload();
   });
 
   ipcMain.on('achievement', function(event, name) {

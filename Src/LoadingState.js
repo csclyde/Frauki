@@ -11,6 +11,8 @@ LoadingState.preload = function() {
     game.load.json('keybinds', 'keybinds.json');
     GameData.LoadSettingsFromStorage();
 
+    //game.stage.disableVisibilityChange = true;    
+
     Phaser.TilemapParser.INSERT_NULL = true;
     game.load.tilemap('Frogland', 'Data/World/Frogland.json', null, Phaser.Tilemap.TILED_JSON);
     

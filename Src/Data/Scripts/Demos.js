@@ -31,6 +31,12 @@ ScriptRunner.scripts['demo_Checkpoint'] = [
 	{ name: 'allow_input', props: {} }
 ];
 
+ScriptRunner.scripts['test_Checkpoint'] = [
+	{ name: 'wait', props: { amount: 500 } },	
+	{ name: 'show_text', props: { text: "Eeee... Weird... feels like my insides lurch every time I hit it...", portrait: 'Dazed' } },
+	{ name: 'allow_input', props: {} }
+];
+
 ScriptRunner.scripts['demo_Checkpoint2'] = [
 	{ name: 'disallow_input', props: {} },
 	{ name: 'wait', props: { amount: 1500 } },	

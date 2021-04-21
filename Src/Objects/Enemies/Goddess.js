@@ -42,6 +42,9 @@ Enemy.prototype.types['Goddess'] =  function() {
 				ScriptRunner.run('goddess_angry4');
 			}
 
+			events.publish('play_sound', { name: 'attack_connect' });
+			effectsController.StarBurst(goddess.body.center);
+			
 			goddess.beenAttacked = true;
 		}
 	};

@@ -755,6 +755,13 @@ Player.prototype.Roll = function(params) {
     if(this.state === this.Stunned || this.state === this.Rolling || this.InAttackAnim())
         return false;
 
+    if(inputController.dpad.down && this.states.onCloud) {
+        this.states.droppingThroughCloud = true;
+        var dropTime = 200;
+        if(frauki.states.inWater) dropTime *= 2;
+        this.timers.SetTimer('frauki_dash', 250);
+    }
+
     if(this.body.onFloor()) {
 
         events.publish('play_sound', {name: 'frauki_roll', restart: true});

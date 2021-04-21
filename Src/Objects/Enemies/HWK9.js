@@ -21,7 +21,7 @@ Enemy.prototype.types['HWK9'] =  function() {
     };
 
 	this.body.bounce.y = 0;
-	this.body.maxVelocity.setTo(700);
+	this.body.maxVelocity.setTo(600);
 	
 	this.state = this.Idling;
 

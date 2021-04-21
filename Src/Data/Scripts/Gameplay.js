@@ -675,8 +675,6 @@ ScriptRunner.scripts['show_random_scene'] = [
             y: game.rnd.between(175, 575) * 16
         };
 
-        // GameState.creditsText.x = 100;
-        // GameState.creditsText.y = 100;
         GameState.creditsText.setText(Credits.shift() || '');
 
         events.publish('set_camera', { to: newTarget });
@@ -689,11 +687,52 @@ ScriptRunner.scripts['show_random_scene'] = [
     { name: 'wait', props: { amount: 8000 } },
 
     { func: function() {
-        GameState.Fade(true, 3000);
+        if(GameState.inCredits) {
+            GameState.Fade(true, 3000);
+        }
     } },
 
     { name: 'wait', props: { amount: 3000 } },
 
-    { name: 'run_script', props: { name: 'show_random_scene' }}
+    { func: function() {
+        if(GameState.inCredits) {
+            ScriptRunner.run('show_random_scene');
+        }
+    } },
+    
+];
+
+ScriptRunner.scripts['return_to_menu'] = [
+    { name: 'disallow_input', props: {} },
+    { name: 'pause_all_sound', props: { } },
+    { name: 'play_interlude', props: { name: 'Intro', fade: 2000 } },
+    
+    { func: function() {
+        GameState.creditsText.setText('');
+        GameState.currentMenu = Menus.main;
+        GameState.menuSelection = 0;
+        GameState.menuSelectionMade = false;
+        GameState.paused = false;
+        GameState.physicsSlowMo = 1;
+
+        GameState.BeginGameover();
+    } },
+
+    { name: 'update_ui', props: {  } },
+    { name: 'wait', props: { amount: 250 } },
+
+    { func: function() {
+        
+        GameState.Menu.alpha = 1;
+        GameState.HUD.alpha = 0;
+        frauki.state = frauki.Materializing;
+        GameState.Reset();
+        frauki.visible = true;
+        goddess.visible = true;
+        GameState.inMenu = true;
+        GameState.restarting = false;
+        
+        events.publish('pan_camera', { to: cameraController.menuTarget, duration: 500 });
+    } },
     
 ];
