@@ -77,9 +77,6 @@ Upgrade.prototype.update = function() {
     }
 };
 
-Upgrade.prototype.ChangeLayerAway = function() {
-};
-
 function HitUpgrade(f, o) {
     if(o.timers.TimerUp('hit')) {
         effectsController.ClashStreak(o.body.center.x, o.body.center.y, game.rnd.between(1, 2));

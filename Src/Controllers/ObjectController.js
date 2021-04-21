@@ -169,6 +169,11 @@ ObjectController.prototype.SpawnObject = function(o) {
         newObj.latent = o;
         newObj.name = 'orb';
     } 
+    else if(o.id === 77) {
+        newObj = new ExpToken(game, o.x, o.y, 'Misc', 'ExplorationToken0000');
+        newObj.latent = o;
+        newObj.name = 'expToken';
+    }
     else if((o.id >= 85 && o.id <= 104) || (o.id >= 145 && o.id <= 164)) {
 	    FileMap.Enemies.forEach(function(enemy) {
 	        if(o.id === enemy.Tile) {

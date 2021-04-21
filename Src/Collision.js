@@ -225,6 +225,8 @@ Collision.OverlapAttackWithObject = function(f, o) {
         o.OpenDoor(frauki);
     } else if(o.spriteType === 'orb') {
         SmashOrb(frauki, o);
+    } else if(o.spriteType === 'expToken') {
+        SmashExpToken(frauki, o);
     } else if(o.spriteType === 'upgrade') {
         HitUpgrade(frauki, o);
     } else if(o.spriteType === 'gem_sucker') {

@@ -374,6 +374,12 @@
             <key type="filename">Frames/DoorTenements0010.png</key>
             <key type="filename">Frames/DoorTenements0011.png</key>
             <key type="filename">Frames/Egg0000.png</key>
+            <key type="filename">Frames/ExplorationToken0000.png</key>
+            <key type="filename">Frames/ExplorationToken0001.png</key>
+            <key type="filename">Frames/ExplorationToken0002.png</key>
+            <key type="filename">Frames/ExplorationToken0003.png</key>
+            <key type="filename">Frames/ExplorationToken0004.png</key>
+            <key type="filename">Frames/ExplorationToken0005.png</key>
             <key type="filename">Frames/ExplosionAir0000.png</key>
             <key type="filename">Frames/ExplosionAir0001.png</key>
             <key type="filename">Frames/ExplosionAir0002.png</key>

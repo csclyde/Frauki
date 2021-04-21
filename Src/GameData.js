@@ -1,6 +1,6 @@
 var GameData = {};
 
-var currentVer = 0.5;
+var currentVer = 0.6;
 
 var defaultData = {
     version: currentVer,
@@ -14,6 +14,7 @@ var defaultData = {
     health: 3,
     shield: 0,
     deaths: 0,
+    expTokens: [],
     arena_kills: 0,
     flags: {},
     vals: {
@@ -201,6 +202,21 @@ GameData.GetMaxHealth = function() {
 
 GameData.GetMaxShield = function() {
     return this.data.shield;
+};
+
+GameData.AddExpToken = function(name) {
+    
+    this.data.expTokens.push(name);
+    this.SaveDataToStorage();
+
+    //achievement12
+    if(this.data.expTokens.length >= 10) {
+        try { if(!!require) require('electron').ipcRenderer.send('achievement', 'EXP_TOKEN'); } catch(e) { }
+    }
+};
+
+GameData.HasExpToken = function(name) {
+    return (this.data.expTokens.indexOf(name) > -1);
 };
 
 GameData.HasUpgrade = function(name) {

@@ -320,13 +320,6 @@
             <key type="filename">KR32/Jump0007.png</key>
             <key type="filename">KR32/Stand0001.png</key>
             <key type="filename">KR32/Stand0002.png</key>
-            <key type="filename">NPC/Robos0000.png</key>
-            <key type="filename">NPC/Robos0001.png</key>
-            <key type="filename">NPC/Robos0002.png</key>
-            <key type="filename">NPC/Robos0003.png</key>
-            <key type="filename">NPC/Robos0004.png</key>
-            <key type="filename">NPC/Robos0005.png</key>
-            <key type="filename">NPC/Robos0006.png</key>
             <key type="filename">NPC/fishing0001.png</key>
             <key type="filename">NPC/fishing0002.png</key>
             <key type="filename">NPC/fishing0003.png</key>
@@ -353,6 +346,42 @@
             <key type="filename">NPC/garden0009.png</key>
             <key type="filename">NPC/garden0010.png</key>
             <key type="filename">NPC/garden0011.png</key>
+            <key type="filename">NPC/robo_armed0000.png</key>
+            <key type="filename">NPC/robo_armed0001.png</key>
+            <key type="filename">NPC/robo_armed0002.png</key>
+            <key type="filename">NPC/robo_armed0003.png</key>
+            <key type="filename">NPC/robo_armed0004.png</key>
+            <key type="filename">NPC/robo_chonker0000.png</key>
+            <key type="filename">NPC/robo_chonker0001.png</key>
+            <key type="filename">NPC/robo_chonker0002.png</key>
+            <key type="filename">NPC/robo_chonker0003.png</key>
+            <key type="filename">NPC/robo_chonker0004.png</key>
+            <key type="filename">NPC/robo_chonker0005.png</key>
+            <key type="filename">NPC/robo_chonker0006.png</key>
+            <key type="filename">NPC/robo_chonker0007.png</key>
+            <key type="filename">NPC/robo_chonker0008.png</key>
+            <key type="filename">NPC/robo_chonker0009.png</key>
+            <key type="filename">NPC/robo_chonker0010.png</key>
+            <key type="filename">NPC/robo_oldie0000.png</key>
+            <key type="filename">NPC/robo_puncher0000.png</key>
+            <key type="filename">NPC/robo_puncher0001.png</key>
+            <key type="filename">NPC/robo_puncher0002.png</key>
+            <key type="filename">NPC/robo_puncher0003.png</key>
+            <key type="filename">NPC/robo_samurai0000.png</key>
+            <key type="filename">NPC/robo_samurai0001.png</key>
+            <key type="filename">NPC/robo_samurai0002.png</key>
+            <key type="filename">NPC/robo_samurai0003.png</key>
+            <key type="filename">NPC/robo_samurai0004.png</key>
+            <key type="filename">NPC/robo_samurai0005.png</key>
+            <key type="filename">NPC/robo_slickback0000.png</key>
+            <key type="filename">NPC/robo_slickback0001.png</key>
+            <key type="filename">NPC/robo_slickback0002.png</key>
+            <key type="filename">NPC/robo_spikey0000.png</key>
+            <key type="filename">NPC/robo_spikey0001.png</key>
+            <key type="filename">NPC/robo_spikey0002.png</key>
+            <key type="filename">NPC/robo_spikey0003.png</key>
+            <key type="filename">NPC/robo_spikey0004.png</key>
+            <key type="filename">NPC/robo_spikey0005.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -407,6 +436,21 @@
             <key type="filename">Misc/Sporoid0003.png</key>
             <key type="filename">Misc/Sporoid0004.png</key>
             <key type="filename">Misc/Sporoid0005.png</key>
+            <key type="filename">NPC/gossip0003.png</key>
+            <key type="filename">NPC/gossip0004.png</key>
+            <key type="filename">NPC/gossip0005.png</key>
+            <key type="filename">NPC/gossip0006.png</key>
+            <key type="filename">NPC/gossip0007.png</key>
+            <key type="filename">NPC/gossip0008.png</key>
+            <key type="filename">NPC/gossip0009.png</key>
+            <key type="filename">NPC/gossip0010.png</key>
+            <key type="filename">NPC/gossip0011.png</key>
+            <key type="filename">NPC/gossip0012.png</key>
+            <key type="filename">NPC/gossip0013.png</key>
+            <key type="filename">NPC/gossip0014.png</key>
+            <key type="filename">NPC/gossip0015.png</key>
+            <key type="filename">NPC/gossip0016.png</key>
+            <key type="filename">NPC/gossip0017.png</key>
             <key type="filename">NPC/hopper_rider0000.png</key>
             <key type="filename">NPC/hopper_rider0001.png</key>
             <key type="filename">NPC/hopper_rider0002.png</key>
@@ -641,7 +685,6 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">NPC/gossip0000.png</key>
             <key type="filename">NPC/gossip0001.png</key>
             <key type="filename">NPC/gossip0002.png</key>
             <key type="filename">NPC/windy0000.png</key>

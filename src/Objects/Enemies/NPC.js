@@ -17,15 +17,15 @@ Enemy.prototype.types['NPC'] =  function() {
 	this.animations.add('gnome_windy', ['NPC/windy0000', 'NPC/windy0001', 'NPC/windy0002', 'NPC/windy0003', 'NPC/windy0004', 'NPC/windy0005', 'NPC/windy0006'], 5, true, false);
     this.animations.add('gnome_boat', ['NPC/boat0000', 'NPC/boat0001', 'NPC/boat0002', 'NPC/boat0003', 'NPC/boat0004', 'NPC/boat0005'], 5, true, false);
 
-	this.animations.add('robo_puncher', ['NPC/Robos0000'], 10, true, false);
-	this.animations.add('robo_chonker', ['NPC/Robos0001'], 10, true, false);
-	this.animations.add('robo_armed', ['NPC/Robos0002'], 10, true, false);
-	this.animations.add('robo_spikey', ['NPC/Robos0003'], 10, true, false);
-	this.animations.add('robo_samurai', ['NPC/Robos0004'], 10, true, false);
-	this.animations.add('robo_slickback', ['NPC/Robos0005'], 10, true, false);
-	this.animations.add('robo_bouncer', ['NPC/Robos0006'], 10, true, false);
-	this.animations.add('robo_oldie', ['NPC/Robos0006'], 10, true, false);
-	this.animations.add('robo_brokenanimationsystemcomon', ['NPC/Robos0006'], 10, true, false);
+	this.animations.add('robo_puncher', ['NPC/robo_puncher0000', 'NPC/robo_puncher0001', 'NPC/robo_puncher0002', 'NPC/robo_puncher0003'], 4, true, false);
+	this.animations.add('robo_chonker', ['NPC/robo_chonker0000', 'NPC/robo_chonker0001', 'NPC/robo_chonker0002', 'NPC/robo_chonker0003', 'NPC/robo_chonker0004', 'NPC/robo_chonker0005', 'NPC/robo_chonker0006', 'NPC/robo_chonker0007', 'NPC/robo_chonker0008', 'NPC/robo_chonker0009', 'NPC/robo_chonker0010'], 4, true, false);
+	this.animations.add('robo_armed', ['NPC/robo_armed0000', 'NPC/robo_armed0001', 'NPC/robo_armed0002', 'NPC/robo_armed0003', 'NPC/robo_armed0004'], 4, true, false);
+	this.animations.add('robo_spikey', ['NPC/robo_spikey0000', 'NPC/robo_spikey0001', 'NPC/robo_spikey0002', 'NPC/robo_spikey0003', 'NPC/robo_spikey0004', 'NPC/robo_spikey0005'], 4, true, false);
+	this.animations.add('robo_samurai', ['NPC/robo_samurai0000', 'NPC/robo_samurai0001', 'NPC/robo_samurai0002', 'NPC/robo_samurai0003', 'NPC/robo_samurai0004', 'NPC/robo_samurai0005'], 4, true, false);
+	this.animations.add('robo_slickback', ['NPC/robo_slickback0000', 'NPC/robo_slickback0001', 'NPC/robo_slickback0002'], 4, true, false);
+	this.animations.add('robo_bouncer', ['NPC/robo_oldie0000'], 4, true, false);
+	this.animations.add('robo_oldie', ['NPC/robo_oldie0000'], 4, true, false);
+	this.animations.add('robo_brokenanimationsystemcomon', ['NPC/robo_oldiefdsaf0000'], 4, true, false);
 	
 
 

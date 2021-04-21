@@ -187,6 +187,11 @@
             <key type="filename">Frames/A3PZ0003.png</key>
             <key type="filename">Frames/A3PZ0004.png</key>
             <key type="filename">Frames/A3PZ0005.png</key>
+            <key type="filename">Frames/ExplorationToken0000.png</key>
+            <key type="filename">Frames/ExplorationToken0001.png</key>
+            <key type="filename">Frames/ExplorationToken0002.png</key>
+            <key type="filename">Frames/ExplorationToken0003.png</key>
+            <key type="filename">Frames/ExplorationToken0004.png</key>
             <key type="filename">Frames/GUBr0000.png</key>
             <key type="filename">Frames/GUBr0001.png</key>
             <key type="filename">Frames/GUBr0002.png</key>
