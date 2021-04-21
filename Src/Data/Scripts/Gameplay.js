@@ -157,7 +157,7 @@ ScriptRunner.scripts['exit_settings_menu'] = [
 
 ScriptRunner.scripts['pause_game'] = [
     { name: 'disallow_input', props: {} },
-    { name: 'pause_all_sound', props: { } },
+    { name: 'stop_all_sound', props: { } },
     { name: 'play_interlude', props: { name: 'Intro', fade: 2000 } },
     
     { func: function() {
@@ -206,7 +206,7 @@ ScriptRunner.scripts['unpause_game'] = [
         GameState.pauseTween = game.add.tween(GameState).to( {physicsSlowMo: 1}, 250, Phaser.Easing.Quartic.In, true);
     } },
 
-    { name: 'unpause_all_sound', props: { } },
+    //{ name: 'unpause_all_sound', props: { } },
     { name: 'allow_input', props: {} },
 ];
 

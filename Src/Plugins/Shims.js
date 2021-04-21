@@ -264,7 +264,7 @@ Phaser.Sound.prototype.fadeToPause = function (duration) {
         this.fadeTween.stop();
     }
 
-    this.fadeTween = this.game.add.tween(this).to( { volume: 0 }, duration, Phaser.Easing.Exponential.Out, true);
+    this.fadeTween = this.game.add.tween(this).to( { volume: 0.01 }, duration, Phaser.Easing.Exponential.Out, true);
 
     //this.fadeTween.onComplete.add(this.fadeComplete, this);
     this.fadeTween.onComplete.add(function() {
@@ -287,9 +287,8 @@ Phaser.Sound.prototype.fadeToResume = function (duration, volume) {
     
     if(this.paused) {      
         this.resume();
-    } else {
+    } else if(!this.isPlaying) {
         this.play();
-        
     }
 };
 

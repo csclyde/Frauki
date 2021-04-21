@@ -72,11 +72,16 @@ AudioController.prototype.UpdateVolumeSettings = function() {
 
     game.sound.volume = Math.pow(soundSetting / 8, 2);
 
-    // if(musicSetting) {
-    //     this.UnpauseAllMusic({ fade: 0 });
-    // } else {
-    //     this.PauseAllMusic({ fade: 0 });
-    // }
+    if(!musicSetting) {
+        this.PauseAllMusic();
+    } else {
+        if(this.currentInterlude) {
+            this.currentInterlude.resume();
+        } else if(this.currentMusic) {
+            this.currentMusic.resume();
+        }
+        //this.UnpauseAllMusic();
+    }
 };
 
 //SFX//////
@@ -189,6 +194,12 @@ AudioController.prototype.PlayMusic = function(params) {
         }
 
         this.currentMusic = newMusic;
+    } else if(!musicSetting) {
+        if(this.currentMusic) {
+            this.currentMusic.stop();
+        }
+
+        this.currentMusic = newMusic;
     }
 };
 
@@ -202,6 +213,23 @@ AudioController.prototype.StopMusic = function(params) {
 AudioController.prototype.StopAllMusic = function() {
     for(var name in this.music) {
         this.music[name].stop();
+    }
+};
+
+AudioController.prototype.PauseAllMusic = function() {
+    for(var name in this.music) {
+        if(this.music[name].isPlaying) {
+            this.music[name].pause();
+            this.music[name].pausedFromSetting = true;
+        }
+    }
+};
+
+AudioController.prototype.UnpauseAllMusic = function() {
+    for(var name in this.music) {
+        if(this.music[name].paused) {
+            this.music[name].resume();
+        }
     }
 };
 
@@ -235,20 +263,30 @@ AudioController.prototype.PlayInterlude = function(params) {
 
         this.currentInterlude = newInterlude;
     }
+    else if(!musicSetting) {
+        if(this.currentInterlude) {
+            this.currentInterlude.stop();
+        }
+
+        this.currentInterlude = newInterlude;
+    }
 };
 
 AudioController.prototype.StopInterlude = function(params) {
+    var musicSetting = GameData.GetSetting('music');
+    
     if(this.currentInterlude) {
         this.currentInterlude.fadeToStop(params.fade || 1);
         this.currentInterlude = null;
-    }
 
-    if(this.currentMusic) {
-        //if the current music is not paused, trash it
-        if(!this.currentMusic.paused) {
-            this.currentMusic = null;
-        } else {
+        if(this.currentMusic && musicSetting) {
+            //if the current music is not paused, trash it
+            // if(!this.currentMusic.paused) {
+            //     this.currentMusic = null;
+            // } else {
+            // }
             this.currentMusic.fadeToResume(params.fade || 1, this.currentMusic.initialVolume);
         }
     }
+
 };
