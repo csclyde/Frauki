@@ -50,6 +50,9 @@ ScriptRunner.scripts['continue_game'] = [
     { name: 'wait', props: { amount: 1500 } },
 
     { name: 'run_script', props: { name: 'goddess_welcome_return' } },
+
+   // { name: 'allow_input', props: {} },
+    
 ];
 
 ScriptRunner.scripts['select_new_game'] = [
@@ -349,6 +352,7 @@ ScriptRunner.scripts['use_checkpoint'] = [
         effectsController.StarBurst(frauki);
         effectsController.SparkSplash(frauki);
         frauki.ChangeState(frauki.Teleporting);
+        frauki.body.checkCollision.none = true;
         game.add.tween(frauki).to({x: params.dest.x, y: params.dest.y + 60}, 2000, Phaser.Easing.Exponential.InOut, true);
     } },
 
@@ -359,6 +363,7 @@ ScriptRunner.scripts['use_checkpoint'] = [
     { name: 'wait', props: { amount: 2000 } },
 
     { func: function(params) {
+        frauki.body.checkCollision.none = false;        
         frauki.ChangeState(frauki.Standing);
         effectsController.StarBurst(frauki);
         effectsController.SparkSplash(frauki);

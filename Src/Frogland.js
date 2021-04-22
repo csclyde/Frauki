@@ -113,6 +113,7 @@ Frogland.Update = function() {
     if(frauki.y > 10800) {
         frauki.y -= 10000;
         cameraController.camY -= 10000 + 865;
+        events.publish('screen_flash');
     }
 };
 

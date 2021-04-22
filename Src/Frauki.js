@@ -220,7 +220,7 @@ Player.prototype.postStateUpdate = function() {
         this.timers.SetTimer('on_ground', 200);
     }
 
-    if(this.animations.currentAnim.name === 'run' && !this.states.inWater) {
+    if(this.animations.currentAnim.name === 'run' && !this.states.inWater && !GameState.paused) {
         events.publish('play_sound', {name: 'frauki_running', restart: false });
     } else {
         events.publish('stop_sound', {name: 'frauki_running'});

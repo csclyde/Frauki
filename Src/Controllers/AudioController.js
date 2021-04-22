@@ -63,6 +63,15 @@ AudioController.prototype.Update = function() {
 };
 
 AudioController.prototype.Reset = function() {
+    if(this.currentMusic) {
+        this.currentMusic.stop();
+        this.currentMusic = null;
+    }
+
+    if(this.currentInterlude) {
+        this.currentInterlude.stop();
+        this.currentInterlude = nulll;
+    }
 };
 
 AudioController.prototype.UpdateVolumeSettings = function() {

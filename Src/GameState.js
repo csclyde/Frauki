@@ -119,6 +119,7 @@ GameState.Reset = function() {
     effectsController.Reset();
     triggerController.Reset();
     projectileController.Reset();
+    audioController.Reset();
     
     Frogland.Reset();
 
