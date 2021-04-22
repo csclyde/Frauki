@@ -73,8 +73,10 @@ GameData.LoadDataFromStorage = function() {
     var save_data = JSON.parse(save_string);
 
     if(!!save_data && save_data.version !== currentVer) {
-        save_data = null;
-        localStorage.setItem('save_data', '');
+        save_data = Object.assign({}, defaultData, save_data);
+        save_data.version = currentVer;
+        this.data = save_data;
+        this.SaveDataToStorage();        
     }
     if(save_data) {
         this.data = save_data;
