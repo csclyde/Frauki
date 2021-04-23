@@ -590,7 +590,7 @@
          "name":"Foreground",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":360,
          "x":0,
          "y":0
@@ -7016,7 +7016,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }, 
@@ -10077,7 +10077,7 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":true,
+         "visible":false,
          "x":0,
          "y":0
         }],
@@ -10087,8 +10087,8 @@
     {
      "debug":"false",
      "startLayer":"3",
-     "startX":"345",
-     "startY":"415"
+     "startX":"186",
+     "startY":"154"
     },
  "propertytypes":
     {
