@@ -17,7 +17,7 @@ ScriptRunner.scripts['battlebar_scram'] = [
 	} },
 	{ name: 'wait', props: { amount: 1000 } },
 	
-	{ name: 'show_text', props: { text: "Eh? Whadda ya want now, frog-dork.", portrait: 'red' } },
+	{ name: 'show_text', props: { text: "Eh? Whadda ya want now, frog-dork?", portrait: 'red' } },
 	{ name: 'show_text', props: { text: "You already humiliated us. Are you just back to gloat?", portrait: 'red' } },
 	{ name: 'show_text', props: { text: "You want more prizes? Well I ain't GOT NONE. So beat it.", portrait: 'red' } },
 
@@ -79,7 +79,7 @@ ScriptRunner.scripts['kill_gubr'] = [
 	{ name: 'run_script', props: { name: 'enter_bouncer' } },
 	{ name: 'wait', props: { amount: 1500 } },	
 	
-	{ name: 'show_text', props: { text: "Huh... ok. Well that was pretty lame.", portrait: 'red' } },
+	{ name: 'show_text', props: { text: "Huh... OK. Well, that was pretty lame.", portrait: 'red' } },
 	{ name: 'show_text', props: { text: "...", portrait: 'red' } },
 	{ name: 'show_text', props: { text: "On with the show!!", portrait: 'red' } },
 
@@ -87,7 +87,7 @@ ScriptRunner.scripts['kill_gubr'] = [
 	{ name: 'wait', props: { amount: 2000 } },	
 
 	{ name: 'show_text', props: { text: "Next up is a deadly killer. A viscious assassin. A murder machine.", portrait: 'red' } },
-	{ name: 'show_text', props: { text: "He's got a big sword and he's happy to use it. Let's see which of Frauki's limbs he will lop off first.", portrait: 'red' } },
+	{ name: 'show_text', props: { text: "He's got a big sword and he's happy to use it. Let's see which of Frauki's limbs he'll lop off first.", portrait: 'red' } },
 	{ name: 'show_text', props: { text: "FIGHT!!", portrait: 'red' } },
 
 	
@@ -101,14 +101,14 @@ ScriptRunner.scripts['kill_kr32'] = [
 	{ name: 'wait', props: { amount: 1500 } },	
 	
 	{ name: 'show_text', props: { text: "Ok, now that's what I'm talkin' about!", portrait: 'red' } },
-	{ name: 'show_text', props: { text: "Spicy spicy action, tsssss. Yummy.", portrait: 'red' } },
+	{ name: 'show_text', props: { text: "Spicy, spicy action, tsssss. Yummy.", portrait: 'red' } },
 	{ name: 'show_text', props: { text: "I mean, I think he had a glitch. That's the only way he lost, heh.", portrait: 'red' } },
 	{ name: 'show_text', props: { text: "Forget him! He stinks! On with the show!", portrait: 'red' } },
 
 	{ name: 'spawn_enemy', props: { name: 'H0P8', on_death: "run_script,name:kill_h0p8" }},
 	{ name: 'wait', props: { amount: 2000 } },	
 
-	{ name: 'show_text', props: { text: "Ok let's see, this next fella gives me the creeps. He's not much of a conversationalist, but he sure knows how to kill!", portrait: 'red' } },
+	{ name: 'show_text', props: { text: "OK, let's see, this next fella gives me the creeps. He's not much of a conversationalist, but he sure knows how to kill!", portrait: 'red' } },
 	{ name: 'show_text', props: { text: "And that's what we're here for, right?", portrait: 'red' } },
 	{ name: 'show_text', props: { text: "FIGHT!!", portrait: 'red' } },
 
@@ -124,11 +124,11 @@ ScriptRunner.scripts['kill_h0p8'] = [
 	
 	{ name: 'show_text', props: { text: "Wow. Alright, wasn't expexting that...", portrait: 'red' } },
 	{ name: 'show_text', props: { text: "Hmm, this isn't going too well for us.", portrait: 'red' } },
-	{ name: 'show_text', props: { text: "Good thing our next fighter is an", portrait: 'red' } },
+	{ name: 'show_text', props: { text: "Good thing our next fighter is an...", portrait: 'red' } },
 	{ name: 'show_text', props: { text: "UNSTOPPABLE", portrait: 'red' } },
 	{ name: 'show_text', props: { text: "FORCE", portrait: 'red' } },
 	{ name: 'show_text', props: { text: "OF DESTRUCTION!", portrait: 'red' } },
-	{ name: 'show_text', props: { text: "Yeah you know who I'm talking about, the big bruiser himself! Bring him on out.", portrait: 'red' } },
+	{ name: 'show_text', props: { text: "Yeah, you know who I'm talking about, the big bruiser himself! Bring him on out.", portrait: 'red' } },
 
 	{ name: 'spawn_enemy', props: { name: 'A3PZ', on_death: "run_script,name:kill_a3pz" }},
 	{ name: 'wait', props: { amount: 2000 } },	
@@ -213,7 +213,7 @@ ScriptRunner.scripts['kill_sw8t2'] = [
 	{ name: 'wait', props: { amount: 1500 } },	
 	
 	{ name: 'show_text', props: { text: "Yep, you're definitely cheating. There is NO other way you could have won there.", portrait: 'red' } },
-	{ name: 'show_text', props: { text: "Sorry, cheaters don't get any prizes. Good day to you, begone.", portrait: 'red' } },
+	{ name: 'show_text', props: { text: "Sorry, cheaters don't get any prizes. Good day to you. Begone.", portrait: 'red' } },
 
 	{ func: function(params) {
 		events.publish('pan_camera', { to: frauki.body.center, duration: 1000 });	
@@ -231,7 +231,7 @@ ScriptRunner.scripts['kill_sw8t2'] = [
 
 	{ name: 'wait', props: { amount: 1000 } },	
 
-	{ name: 'show_text', props: { text: "Whoa! Cool it. Don't have a tantrum. Geez. Ok, ok...", portrait: 'red' } },
+	{ name: 'show_text', props: { text: "Whoa! Cool it. Don't have a tantrum. Geez. OK, OK...", portrait: 'red' } },
 	{ name: 'show_text', props: { text: "You get your prize, ya little cheater.", portrait: 'red' } },
 	{ name: 'show_text', props: { text: "I hope you feel really great about yourself.", portrait: 'red' } },
 
