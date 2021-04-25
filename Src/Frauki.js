@@ -136,7 +136,7 @@ Player.prototype.postStateUpdate = function() {
     }
 
     if(this.states.superGravity) {
-        this.body.gravity.y = game.physics.arcade.gravity.y * 0.6;
+        this.body.gravity.y = game.physics.arcade.gravity.y * 0.8;
     }
 
     if(this.states.inWater) {

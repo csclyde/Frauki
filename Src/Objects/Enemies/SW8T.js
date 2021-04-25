@@ -25,7 +25,7 @@ Enemy.prototype.types['SW8T'] =  function() {
 
     this.energy = 5;
     this.baseStunDuration = 400;
-    this.damage = 3;
+    this.damage = 7;
 
     this.body.bounce.y = 0;
 
@@ -376,7 +376,7 @@ Enemy.prototype.types['SW8T'] =  function() {
 
 		'SW8T/Swipe0002': {
 			x: 10, y: 20, w: 55, h: 35,
-			damage: 2,
+			damage: 5,
 			knockback: 0.2,
 			priority: 1,
 			juggle: 0

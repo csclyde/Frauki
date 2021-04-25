@@ -243,7 +243,7 @@ GameState.CreateUI = function() {
     this.Menu = game.add.group(undefined, 'main_menu');
     this.Menu.fixedToCamera = true;    
 
-    this.logo = game.add.image(pixel.width / 2, pixel.height / 3, 'UI', 'Logo0000');
+    this.logo = game.add.image(pixel.width / 2, pixel.height / 3, 'UI', 'Logo20000');
     this.Menu.add(this.logo);
     this.logo.anchor.setTo(0.5);
 

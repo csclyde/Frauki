@@ -15,7 +15,7 @@ Enemy.prototype.types['HWK9'] =  function() {
     this.energy = 4;
 	this.baseStunDuration = 500;
 	this.robotic = true;
-	this.damage = 2;
+	this.damage = 3;
 
 	this.create = function() {
         this.clingDir = this.properties.clingDir || 'left';
@@ -320,7 +320,7 @@ Enemy.prototype.types['HWK9'] =  function() {
 
 		'HWK9/AttackDash0003': {
 			x: 20, y: -36, w: 60, h: 120,
-			damage: 3,
+			damage: 4,
 			knockback: 0,
 			priority: 2,
 			juggle: 0
