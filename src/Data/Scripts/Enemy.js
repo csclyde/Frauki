@@ -80,8 +80,7 @@ ScriptRunner.scripts['shield_drain'] = [
 ];
 
 ScriptRunner.scripts['tower_troll'] = [
-	{ name: 'show_text', props: { text: 'Hey dork, you ready to get DUNKED ON?', portrait: 'red' } },
-	{ name: 'show_text', props: { text: 'Ha ha ha.', portrait: 'red' } },
+	{ name: 'show_text', props: { text: 'Hey, dork, you ready to get DUNKED ON? Ha ha ha.', portrait: 'red' } },
 	{ name: 'run_script', props: { name: 'exit_enemy' } },
 ];
 
@@ -193,7 +192,7 @@ ScriptRunner.scripts['first_hwk9'] = [
 	{ name: 'show_text', props: { text: "Huh? Ba ha ha ha ha ha...", portrait: 'red' } },
 	{ name: 'show_text', props: { text: "That's it??", portrait: 'red' } },
 	{ name: 'show_text', props: { text: "From the stories, I was expecting so much more! What a dweeb!", portrait: 'red' } },
-	{ name: 'show_text', props: { text: "Well this shouldn't take long.", portrait: 'red' } },
+	{ name: 'show_text', props: { text: "Well, this shouldn't take long.", portrait: 'red' } },
 	{ name: 'run_script', props: { name: 'exit_enemy' } },
 ];
 
@@ -217,7 +216,7 @@ ScriptRunner.scripts['first_sw8t'] = [
 ];
 
 ScriptRunner.scripts['angry_hawk'] = [
-	{ name: 'show_text', props: { text: "Grrrraaahhhhh! It's time we stop this little punk. Restrain her and I'll dice her to pieces.", portrait: 'red' } },
+	{ name: 'show_text', props: { text: "Grrrraaahhhhh! It's time we stop this little punk. You restrain her and I'll dice her to pieces.", portrait: 'red' } },
 
 	{ func: function(params) {
 		var enemy = objectController.enemyList.find(function(e) { return e.name === 'angry_swat'; });
