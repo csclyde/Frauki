@@ -233,12 +233,12 @@ Door.prototype.OpenDoor = function(f) {
     
 
     //or if its a shard door and they are holding the right shard
-    if(GameData.HasShard(this.prism) && !this.waitingToOpen) {
+    if(GameData.HasGem(this.prism) && !this.waitingToOpen) {
 
         this.waitingToOpen = true;
 
         //get the prism for this door
-        var prism = effectsController.shardList[this.prism];
+        var prism = effectsController.gemList[this.prism];
 
         prism.x = this.body.x + 13;
         prism.y = this.body.y + 31;
@@ -252,8 +252,8 @@ Door.prototype.OpenDoor = function(f) {
         }
 
         //tween its position to the center of the door
-        var shardTween = game.add.tween(prism.scale).to({x: 1, y: 1}, 2000, Phaser.Easing.Exponential.Out, true);
-        shardTween.onComplete.add(function() {
+        var gemTween = game.add.tween(prism.scale).to({x: 1, y: 1}, 2000, Phaser.Easing.Exponential.Out, true);
+        gemTween.onComplete.add(function() {
             //when the tween is done, perform the door opening
             effectsController.ScreenFlash();
             this.PerformOpen(true);

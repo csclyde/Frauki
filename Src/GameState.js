@@ -1,7 +1,7 @@
 var GameState = new Phaser.State();
 
 GameState.MAX_PLAYER_HEALTH = 22;
-GameState.MAX_APPLES = 6;
+GameState.MAX_APPLES = 3;
 
 GameState.create = function() {
 
@@ -365,8 +365,8 @@ GameState.UpdateUI = function() {
         this['apple' + i].visible = i < energyController.GetApples();
     }
 
-    this['prismWit'].visible = GameData.HasShard('Wit');
-    this['prismWill'].visible = GameData.HasShard('Will');
-    this['prismLuck'].visible = GameData.HasShard('Luck');
-    this['prismPower'].visible = GameData.HasShard('Power');   
+    this['prismWit'].visible = GameData.HasGem('Wit');
+    this['prismWill'].visible = GameData.HasGem('Will');
+    this['prismLuck'].visible = GameData.HasGem('Luck');
+    this['prismPower'].visible = GameData.HasGem('Power');   
 };

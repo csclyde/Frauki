@@ -81,19 +81,19 @@ EffectsController.prototype.CreateMidgroundEffects = function() {
     this.materializingApple.anchor.setTo(0.5);
     this.effectsGroup.add(this.materializingApple);
 
-    this.shardList = {};
-    this.shardList.Wit = game.add.image(0, 0, 'Misc', 'Shard0000', this.effectsGroup);
-    this.shardList.Wit.visible = false;
-    this.shardList.Wit.anchor.setTo(0.5);
-    this.shardList.Will = game.add.image(0, 0, 'Misc', 'Shard0001', this.effectsGroup);
-    this.shardList.Will.visible = false;
-    this.shardList.Will.anchor.setTo(0.5);
-    this.shardList.Luck = game.add.image(0, 0, 'Misc', 'Shard0002', this.effectsGroup);
-    this.shardList.Luck.visible = false;
-    this.shardList.Luck.anchor.setTo(0.5);
-    this.shardList.Power = game.add.image(0, 0, 'Misc', 'Shard0003', this.effectsGroup);
-    this.shardList.Power.visible = false;
-    this.shardList.Power.anchor.setTo(0.5);
+    this.gemList = {};
+    this.gemList.Wit = game.add.image(0, 0, 'Misc', 'Shard0000', this.effectsGroup);
+    this.gemList.Wit.visible = false;
+    this.gemList.Wit.anchor.setTo(0.5);
+    this.gemList.Will = game.add.image(0, 0, 'Misc', 'Shard0001', this.effectsGroup);
+    this.gemList.Will.visible = false;
+    this.gemList.Will.anchor.setTo(0.5);
+    this.gemList.Luck = game.add.image(0, 0, 'Misc', 'Shard0002', this.effectsGroup);
+    this.gemList.Luck.visible = false;
+    this.gemList.Luck.anchor.setTo(0.5);
+    this.gemList.Power = game.add.image(0, 0, 'Misc', 'Shard0003', this.effectsGroup);
+    this.gemList.Power.visible = false;
+    this.gemList.Power.anchor.setTo(0.5);
 
     Effects.Emitters.forEach(function(e) {
         this[e.Name] = this.CreateEffect(e);

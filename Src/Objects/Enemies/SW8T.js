@@ -101,8 +101,14 @@ Enemy.prototype.types['SW8T'] =  function() {
     		this.timers.SetTimer('blocking', 500);
     	}
 
+		events.publish('stop_sound', {name: 'SW8T_shield', restart: false});
+		
     	this.numShots = 0;
-    };
+	};
+	
+	this.OnHit = function() {
+		events.publish('stop_sound', {name: 'SW8T_shield', restart: false});		
+	};
 
 	///////////////////////////////ACTIONS////////////////////////////////////
    	this.Shoot = function() {
@@ -136,6 +142,7 @@ Enemy.prototype.types['SW8T'] =  function() {
 
 		EnemyBehavior.JumpToPoint(this, frauki.body.center.x, frauki.body.center.y, 0.5);
 		events.publish('play_sound', {name: 'SW8T_jump', restart: true});
+		events.publish('stop_sound', {name: 'SW8T_shield', restart: false});		
 		
    	};
 
@@ -144,6 +151,8 @@ Enemy.prototype.types['SW8T'] =  function() {
    		EnemyBehavior.FacePlayer(this);
 
 		events.publish('play_sound', {name: 'SW8T_jump', restart: true});
+		events.publish('stop_sound', {name: 'SW8T_shield', restart: false});
+		
 		
    		this.body.velocity.y = -200;
 		this.body.velocity.x = game.rnd.between(400, 550) * EnemyBehavior.Player.DirMod(this);
@@ -156,6 +165,8 @@ Enemy.prototype.types['SW8T'] =  function() {
 		EnemyBehavior.FacePlayer(this);
 
 		events.publish('play_sound', {name: 'SW8T_jump', restart: true});
+		events.publish('stop_sound', {name: 'SW8T_shield', restart: false});
+		
 	 
 		this.body.velocity.y = -200;
 		this.body.velocity.x = game.rnd.between(400, 550) * EnemyBehavior.Player.DirMod(this) * -1;
@@ -168,6 +179,8 @@ Enemy.prototype.types['SW8T'] =  function() {
 		   this.timers.SetTimer('swipe_wait', 1000);
 		   
 		events.publish('play_sound', {name: 'SW8T_baton_attack', restart: true});
+		events.publish('stop_sound', {name: 'SW8T_shield', restart: false});
+		
 
 
    		if(this.direction === 'left') {
@@ -288,13 +301,11 @@ Enemy.prototype.types['SW8T'] =  function() {
 
 		if(EnemyBehavior.Player.IsAbove(this) || frauki.states.entangled) {
 			events.publish('stop_sound', {name: 'SW8T_shield' });
-		
 			return true;
 		}
 
 		if(this.timers.TimerUp('blocking')) {
-		events.publish('stop_sound', {name: 'SW8T_shield' });
-		
+			events.publish('stop_sound', {name: 'SW8T_shield' });
 			return true;
 		}
 

@@ -284,7 +284,7 @@ GameData.GetMaxApples = function() {
     return 1;
 };
 
-GameData.AddShard = function(name) {
+GameData.AddGem = function(name) {
     if(GameData.data.shards.indexOf(name) < 0) {
         GameData.data.shards.push(name);
         this.SaveDataToStorage();
@@ -292,6 +292,6 @@ GameData.AddShard = function(name) {
     }
 };
 
-GameData.HasShard = function(name) {
+GameData.HasGem = function(name) {
     return GameData.data.shards.indexOf(name) >= 0;
 };

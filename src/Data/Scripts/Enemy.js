@@ -19,7 +19,15 @@ ScriptRunner.scripts['enter_enemy'] = [
 	{ name: 'wait', props: { amount: 1500 } },
 
 	{ func: function(params) {
-        	ScriptRunner.run(params.name);
+		var enemy = objectController.enemyList.find(function(e) {
+			return e.name === params.name;
+		});
+
+		if(!!enemy && !!enemy.body) {
+			ScriptRunner.run(params.name);
+		} else {
+			ScriptRunner.run('exit_enemy');
+		}
 	} },	
 ];
 

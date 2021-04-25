@@ -233,7 +233,7 @@ ScriptRunner.scripts['game_over'] = [
     { name: 'wait', props: { amount: 4000 } },
     
     { func: function() {
-        if(GameData.HasShard('Wit') && GameData.HasShard('Will') && GameData.HasShard('Luck') && GameData.HasShard('Power')) {
+        if(GameData.HasGem('Wit') && GameData.HasGem('Will') && GameData.HasGem('Luck') && GameData.HasGem('Power')) {
             GameState.inFinale = true;
         }
 
@@ -323,8 +323,9 @@ ScriptRunner.scripts['start_fight'] = [
     { name: 'allow_input', props: {} },
 
     { func: function(params) {
-        if(params.script) {
+        if(params.script && !GameData.GetFlag('enemy_intro_' + params.script)) {
             ScriptRunner.run(params.script, params);
+            GameData.SetFlag('enemy_intro_' + params.script, true)
         }
     }}
 ];
@@ -397,10 +398,10 @@ ScriptRunner.scripts['destroy_gemsucker'] = [
     { name: 'wait', props: { amount: 950 } },
     
     { func: function(params) {
-        var shard = effectsController.shardList[params.prism.prism];
-        shard.visible = true;
-        shard.x = params.prism.x - 15;
-        shard.y = params.prism.y - 50;
+        var gem = effectsController.gemList[params.prism.prism];
+        gem.visible = true;
+        gem.x = params.prism.x - 15;
+        gem.y = params.prism.y - 50;
         params.prism.BlowUp();
     } },
 
@@ -408,8 +409,8 @@ ScriptRunner.scripts['destroy_gemsucker'] = [
     { name: 'wait', props: { amount: 500 } },
     
     { func: function(params) {
-        var shard = effectsController.shardList[params.prism.prism];
-        game.add.tween(shard).to({x: frauki.body.center.x, y: frauki.body.center.y}, 4000, Phaser.Easing.Exponential.In, true);
+        var gem = effectsController.gemList[params.prism.prism];
+        game.add.tween(gem).to({x: frauki.body.center.x, y: frauki.body.center.y}, 4000, Phaser.Easing.Exponential.In, true);
     } },
     { name: 'play_music', props: { name: 'FanfareLong' } },
 
@@ -417,8 +418,8 @@ ScriptRunner.scripts['destroy_gemsucker'] = [
 
     { name: 'screen_flash', props: {} },
     { func: function(params) {
-        GameData.AddShard(params.prism.prism); 
-        effectsController.shardList[params.prism.prism].visible = false;
+        GameData.AddGem(params.prism.prism); 
+        effectsController.gemList[params.prism.prism].visible = false;
         effectsController.StarBurst(frauki.body.center);
         effectsController.SparkSplash(frauki);
     } },
@@ -441,7 +442,7 @@ ScriptRunner.scripts['finish_game'] = [
     { name: 'wait', props: { amount: 1500 } },
     
     { func: function(params) {
-        var wit = effectsController.shardList.Wit;
+        var wit = effectsController.gemList.Wit;
         GameState.inFinale = true;
 
         wit.visible = true;
@@ -459,7 +460,7 @@ ScriptRunner.scripts['finish_game'] = [
     { name: 'wait', props: { amount: 1500 } },
 
     { func: function(params) {
-        var will = effectsController.shardList.Will;
+        var will = effectsController.gemList.Will;
 
         will.visible = true;
         will.x = frauki.body.center.x;
@@ -476,7 +477,7 @@ ScriptRunner.scripts['finish_game'] = [
     { name: 'wait', props: { amount: 1500 } },
 
     { func: function(params) {
-        var power = effectsController.shardList.Power;
+        var power = effectsController.gemList.Power;
 
         power.visible = true;
         power.x = frauki.body.center.x;
@@ -493,7 +494,7 @@ ScriptRunner.scripts['finish_game'] = [
     { name: 'wait', props: { amount: 1500 } },
 
     { func: function(params) {
-        var luck = effectsController.shardList.Luck;
+        var luck = effectsController.gemList.Luck;
 
         luck.visible = true;
         luck.x = frauki.body.center.x;
@@ -518,7 +519,7 @@ ScriptRunner.scripts['finish_game'] = [
     { name: 'wait', props: { amount: 1500 } },
     
     
-    { name: 'show_text', props: { text: "Well, there they are Frauki. All of my beautiful Prism Shards all back safely in their home.", portrait: 'Goddess_Neutral' } },
+    { name: 'show_text', props: { text: "Well, there they are Frauki. All of my beautiful Prism Gems all back safely in their home.", portrait: 'Goddess_Neutral' } },
     { name: 'show_text', props: { text: "Just look at them glimmering happily.", portrait: 'Goddess_Neutral' } },
     { name: 'show_text', props: { text: "My they're pretty little things...", portrait: 'Goddess_Neutral' } },
     { name: 'show_text', props: { text: "Don't you agree Frauki?", portrait: 'Goddess_Neutral' } },

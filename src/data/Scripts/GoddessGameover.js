@@ -198,7 +198,7 @@ ScriptRunner.scripts['wit_guard2'] = [
 	{ name: 'show_text', props: { text: "I just don't even know what to say.", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "It's not your fault... you tried your best... it's not your fault.", portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "I'll keep telling myself that.", portrait: 'Goddess_Neutral' } },
-	{ name: 'show_text', props: { text: "But I really, really... really... want my Prism Shards back...", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "But I really, really... really... want my Prism Gems back...", portrait: 'Goddess_Neutral' } },
 	{ name: 'run_script', props: { name: 'exit_goddess' } },
 ];
 
@@ -221,7 +221,7 @@ ScriptRunner.scripts['wit_guard_final'] = [
 ScriptRunner.scripts['goddess_console_area3'] = [
 	{ name: 'show_text', props: { text: [
 		"You're really not doing too bad Frauki. A little clumsy, but that's ok!",
-		"I can tell you're getting close to the first Prism Shard Frauki. Yay!",
+		"I can tell you're getting close to the first Prism Gem Frauki. Yay!",
 		"Ughh, I guess I'll have to make these daisies work. Oh, what do you need Frauki?",
 		"Everytime you kill a robot, I feel one drip of precious joy. Make sure and kill lots and lots of them for me, ok.",
 		"Pick some flowers for me from the Frogland Gardens, ok Frauki?",
@@ -272,7 +272,7 @@ ScriptRunner.scripts['first_hwk9_death'] = [
 // CHUTE SHORTCUT TO WILL GEM //////////
 ScriptRunner.scripts['goddess_console_area5'] = [
 	{ name: 'show_text', props: { text: [
-		"You're almost out of the Tenements Frauk! The next Prism Shard is so close!",
+		"You're almost out of the Tenements Frauk! The next Prism Gem is so close!",
 		"Be careful. Be wise. Be clever. Never give up. Ummm... and keep a smile on your face. Hmm what else...",
 		"Oh, what is it Frauki? Back here again? Ok...",
 		"What's taking so long...",
@@ -296,7 +296,7 @@ ScriptRunner.scripts['goddess_depths'] = [
 		"Is everything going ok down there Frauki?",
 		"I know it's a little bit... dank... down there. Sorry.",
 		"Did the mean little Alien Robots get you again? Oh Frauki...",
-		"You're so close Frauki. Get that next Prism Shard! I'll meet you there once you get it.",
+		"You're so close Frauki. Get that next Prism Gem! I'll meet you there once you get it.",
 	], portrait: 'Goddess_Neutral' } },
 	{ name: 'run_script', props: { name: 'exit_goddess' } },
 ];
@@ -334,9 +334,9 @@ ScriptRunner.scripts['goddess_depths3'] = [
 		"Honestly Frauki, I'm totally lost trying to watch you. I have no idea where you are down there. I'm glad you do though!",
 		"I'm honestly really impressed you know how to get around down there. I never would have guessed.",
 		"How are you doing little tadpole? Getting tired? It's hard dying over and over, isn't it.",
-		"I know how much you want to get my Prism Shards back to me Frauki. Thanks...",
+		"I know how much you want to get my Prism Gems back to me Frauki. Thanks...",
 		"What a little trooper you are. Constantly dying and showing back up, then heading right back out.",
-		"The Prism Shard is close Frauki, I can taste it. I actually did taste it, once. Not very good. But it's so pretty.",
+		"The Prism Gem is close Frauki, I can taste it. I actually did taste it, once. Not very good. But it's so pretty.",
 	], portrait: 'Goddess_Neutral' } },
 	{ name: 'run_script', props: { name: 'exit_goddess' } },
 ];

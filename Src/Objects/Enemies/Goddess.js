@@ -79,7 +79,7 @@ Enemy.prototype.types['Goddess'] =  function() {
 			GameData.SetFlag('damage_lecture', true);
 			return 'damage_lecture';
 		}
-		else if(!GameData.HasShard('Wit')) {
+		else if(!GameData.HasGem('Wit')) {
 			//INTRO AREA TRIGGERS
 			if(!GameData.GetFlag('intro_finished')) {
 				if(GameState.death.name === 'tower_troll' && !GameData.GetFlag('tower_troll1')) {
@@ -181,7 +181,7 @@ Enemy.prototype.types['Goddess'] =  function() {
 				}
 			}
 		}
-		else if(!GameData.HasShard('Will')) {
+		else if(!GameData.HasGem('Will')) {
 			//WIT GEM TO APARTMENTS SHORTCUT
 			if(!GameData.IsDoorOpen('apartments_to_tower')) {
 				if(GameData.IsCheckpointActive('1') && !GameData.GetFlag('first_checkpoint')) {
@@ -211,7 +211,7 @@ Enemy.prototype.types['Goddess'] =  function() {
 				return 'goddess_console_area5';
 			}
 		}
-		else if(!GameData.HasShard('Luck')) {
+		else if(!GameData.HasGem('Luck')) {
 			if(!GameData.IsDoorOpen('deep_house_basement')) {
 				if(GameState.death.name === 'first_h0p8' && !GameData.GetFlag('first_h0p8')) {
 					GameData.SetFlag('first_h0p8', true);
@@ -242,7 +242,7 @@ Enemy.prototype.types['Goddess'] =  function() {
 				}
 			}
 		}
-		else if(!GameData.HasShard('Power')) {
+		else if(!GameData.HasGem('Power')) {
 			return 'final_stretch';
 		}
 		else if(!GameData.GetFlag('GAME_COMPLETE')) {

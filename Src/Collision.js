@@ -390,7 +390,7 @@ Collision.OverlapLobWithEnemy = function(l, e) {
 };
 
 Collision.OverlapObjectsWithEnvironment = function(o, e) {
-    if(o.spriteType === 'shard') {
+    if(o.spriteType === 'gem') {
         return false;
     } else if(o.spriteType === 'enemy') {
         return Collision.CollideEnemyWithEnvironment(o, e);

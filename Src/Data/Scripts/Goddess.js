@@ -22,28 +22,28 @@ ScriptRunner.scripts['exit_goddess'] = [
 ScriptRunner.scripts['goddess_intro'] = [
 	{ name: 'show_text', props: { text: 'There you are, Frauki...', portrait: 'Goddess_Neutral' } },
 	{ name: 'show_text', props: { text: "Some terrible little Alien Robots have crashed their ship here and are taking over.", portrait: 'Goddess_Neutral' } },
-	{ name: 'show_text', props: { text: "They took my four beautiful Prism Shards, and are sucking all the energy out of them.", portrait: 'Goddess_Neutral' } },
-	{ name: 'show_text', props: { text: "Go now with my blessing and smash those Alien Robots. I want my Prism Shards back!", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "They took my four beautiful Prism Gems, and are sucking all the energy out of them.", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "Go now with my blessing and smash those Alien Robots. I want my Prism Gems back!", portrait: 'Goddess_Neutral' } },
 	{ name: 'run_script', props: { name: 'exit_goddess' } },
 	
 ];
 
 ScriptRunner.scripts['goddess_welcome_return'] = [
 	{ func: function() {
-		if(!GameData.HasShard('Wit')) {
+		if(!GameData.HasGem('Wit')) {
 			ScriptRunner.run('welcome_back1');
 		}
-		else if(!GameData.HasShard('Will')) {
+		else if(!GameData.HasGem('Will')) {
 			ScriptRunner.run('welcome_back2');
 		}
-		else if(!GameData.HasShard('Luck')) {
+		else if(!GameData.HasGem('Luck')) {
 			ScriptRunner.run('welcome_back3');
 		}
-		else if(!GameData.HasShard('Power')) {
+		else if(!GameData.HasGem('Power')) {
 		    ScriptRunner.run('welcome_back4');
 		}
 		else if(!GameData.GetFlag('GAME_COMPLETE')) {
-			//has all the shards. initiate the endgame
+			//has all the gems. initiate the endgame
 		    ScriptRunner.run('welcome_back5');
 		    //ScriptRunner.run('exit_goddess');
 			
@@ -74,7 +74,7 @@ ScriptRunner.scripts['welcome_back4'] = [
 ];
 
 ScriptRunner.scripts['welcome_back5'] = [
-	{ name: 'show_text', props: { text: "You're back! And you have all the Prism Shards! Oh joy. How sweet it is.", portrait: 'Goddess_Neutral' } },
+	{ name: 'show_text', props: { text: "You're back! And you have all the Prism Gems! Oh joy. How sweet it is.", portrait: 'Goddess_Neutral' } },
 	{ func: function() {
         events.publish('pan_camera', { to: frauki.body.center, duration: 1000 });
 	} },
@@ -212,49 +212,3 @@ ScriptRunner.scripts['goddess_shortcut'] = [
 		goddess.SetDirection('left');
 	}},
 ];
-
-
-/*
-You found it!! You beautiful little person thing!!
-Great work. Now if you walk up to the door, it will open the first of four seals.
-Find the other three and I will finally be free...
-FREEEEEEEE!!!
-
-OUCH! What's your problem!? Don't do that again
-Frauki why are you doing this?? I demand you stop!
-It hurts so bad... stop it you evil creature...
-I'm warning you... if you do that again you're not going to like what happens...
-I really don't appreciate being killed...
-Don't.
-Do.
-It.
-Again!!!!
-
-Oh my! You've opened the first of four seals! I know you could do it. YOu really are a wonderful little creature.
-Now keep it up, I'm sure the other prism shards can't be far. Don't get discouraged. YOu can do this.
-Oh yeah, there is a special gift for you in the room behind me. Use that red prism shard to get it!
-
-You opened the second seal! This is unbelievable...
-So close to freedom!! No more musty cell...
-No more dank dripping ceiling...
-Just the sweet, juicy nectar of freedom...
-...
-Heh heh heh... just... please be careful. Don't give up.
-...and thanks. Thanks for helping me.
-
-You opened another seal!! Frauki... the closer you get, the harder it is to wait.
-Before I met you, I gave up on being free.
-I gave up on existing at all.
-As the years and decades went by, my spirit faded into oblivion.
-I no longer felt real, and time passed for me like it does for a stone.
-But now that there is just one seal left, I feel real again. I'm so scared of how excited I am. This might be too good to be happening.
-Please open the last seal. I know I'm asking so much of you. But if I don't escape now, my spirit will be destroyed.
-I'm so scared...
-
-The last seal is open...
-I'm free...
-But I'm scared to leave...
-Nothing will be the same...
-But the universe is calling me. I'm leaving this plane of existence.
-The joy is covering me... Goodbye Frauki... I love you.
-*/

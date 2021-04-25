@@ -125,7 +125,7 @@ EnergyController.prototype.GetMaxShield = function() {
 };
 
 EnergyController.prototype.AddApple = function() {
-	if(this.remainingApples >= 6) {
+	if(this.remainingApples >= 3) {
 		this.AddHealth(3);
 		effectsController.SpawnAppleCore(frauki.body.center.x, frauki.body.y - 5);
 	} else {

@@ -158,7 +158,6 @@ FileMap.Music = [
 	{ Name: 'Goddess', File: 'Data/Music/goddess.ogg', Volume: 0.15, Loop: true },
 	{ Name: 'Gameover', File: 'Data/Music/game_over.ogg', Volume: 0.15, Loop: false },
 	{ Name: 'Chamber', File: 'Data/Music/chamber.ogg', Volume: 0.15, Loop: true },
-	{ Name: 'Ruins', File: 'Data/Music/ruins.ogg', Volume: 0.15, Loop: true },
 	{ Name: 'Tenements', File: 'Data/Music/tenements.ogg', Volume: 0.15, Loop: true },
 	{ Name: 'Decimation', File: 'Data/Music/decimation.ogg', Volume: 0.15, Loop: true },
 	{ Name: 'Underwater', File: 'Data/Music/underwater.ogg', Volume: 0.15, Loop: true },

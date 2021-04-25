@@ -47,7 +47,7 @@ GemSucker.prototype.update = function() {
     if(!!this.state)
         this.state();
 
-    if(GameData.HasShard(this.prism)) {        
+    if(GameData.HasGem(this.prism)) {        
         this.destroy();
     }
 
