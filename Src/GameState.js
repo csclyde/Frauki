@@ -243,13 +243,13 @@ GameState.CreateUI = function() {
     this.Menu = game.add.group(undefined, 'main_menu');
     this.Menu.fixedToCamera = true;    
 
-    this.logo = game.add.image(pixel.width / 2, pixel.height / 3, 'UI', 'Logo20000');
+    this.logo = game.add.image(pixel.width / 2, pixel.height / 3 - 20, 'UI', 'Logo20000');
     this.Menu.add(this.logo);
     this.logo.anchor.setTo(0.5);
 
     this.menuText = [];
     for(var i = 0; i < 6; i++) {
-        var text = game.add.bitmapText(pixel.width / 2, 200 + i * 20, 'bubble','', 18);
+        var text = game.add.bitmapText(pixel.width / 2, 220 + i * 20, 'bubble','', 18);
         this.Menu.add(text);
         text.anchor.setTo(0.5);
         text.setText('');
@@ -260,17 +260,17 @@ GameState.CreateUI = function() {
     this.settingsMenu.fixedToCamera = true;
     this.settingsMenu.visible = false;
 
-    this.soundSliderFrame = game.add.image(400, 189, 'UI', 'Settings0000', this.settingsMenu);
+    this.soundSliderFrame = game.add.image(400, 209, 'UI', 'Settings0000', this.settingsMenu);
     this.soundPips = [];
 
-    this.musicSetting = game.add.bitmapText(400, 209, 'bubble','ON', 18);
+    this.musicSetting = game.add.bitmapText(400, 229, 'bubble','ON', 18);
     this.settingsMenu.add(this.musicSetting);
-    this.sfxSetting = game.add.bitmapText(400, 229, 'bubble','OFF', 18);
+    this.sfxSetting = game.add.bitmapText(400, 249, 'bubble','OFF', 18);
     this.settingsMenu.add(this.sfxSetting);
 
 
     for(var i = 0; i < 8; i++) {
-        var soundPip = game.add.image(407 + (i * 7), 192, 'UI', 'Settings0001', this.settingsMenu);
+        var soundPip = game.add.image(407 + (i * 7), 212, 'UI', 'Settings0001', this.settingsMenu);
         this.soundPips.push(soundPip);
     }
 
