@@ -103,9 +103,9 @@ GameData.AddDeath = function() {
     GameData.data.deaths += 1;
     this.SaveDataToStorage();
 
-    if(GameData.data.deaths >= 100) {
+    if(GameData.data.deaths >= 30) {
         //achievement10
-        try { if(!!require) require('electron').ipcRenderer.send('achievement', '100_DEATHS'); } catch(e) { }        
+        try { if(!!require) require('electron').ipcRenderer.send('achievement', '100_DEATHS'); } catch(e) { }
     }
 };
 
@@ -114,7 +114,7 @@ GameData.RegisterArenaKills = function(count) {
         GameData.data.arena_kills = count;
         this.SaveDataToStorage();
 
-        if(count >= 100) {
+        if(count >= 50) {
             //achievement11
             try { if(!!require) require('electron').ipcRenderer.send('achievement', '100_KILLS'); } catch(e) { }            
         }
@@ -213,7 +213,7 @@ GameData.AddExpToken = function(name) {
 
     //achievement12
     if(this.data.expTokens.length >= 10) {
-        try { if(!!require) require('electron').ipcRenderer.send('achievement', 'EXP_TOKEN'); } catch(e) { }
+        try { if(!!require) require('electron').ipcRenderer.send('achievement', 'EXPLORER'); } catch(e) { }
     }
 };
 

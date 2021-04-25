@@ -70,7 +70,7 @@ AudioController.prototype.Reset = function() {
 
     if(this.currentInterlude) {
         this.currentInterlude.stop();
-        this.currentInterlude = nulll;
+        this.currentInterlude = null;
     }
 };
 
