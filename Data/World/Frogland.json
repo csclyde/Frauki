@@ -601,7 +601,7 @@
          "name":"Collision",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":360,
          "x":0,
          "y":0
@@ -10088,10 +10088,10 @@
  "orientation":"orthogonal",
  "properties":
     {
-     "debug":"false",
+     "debug":"true",
      "startLayer":"3",
-     "startX":"186",
-     "startY":"154"
+     "startX":"153",
+     "startY":"466"
     },
  "propertytypes":
     {

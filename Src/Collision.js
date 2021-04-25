@@ -193,7 +193,7 @@ Collision.OverlapEnemyAttackWithFrauki = function(e, f) {
 Collision.OverlapEnemyAttackWithEnemies = function(e, f) {
     e = e.owningEnemy;    
 
-    if(e.GetCurrentDamage() > 0) {
+    if(e.GetCurrentDamage() > 0 && e !== f) {
         f.TakeHit(e.GetCurrentDamage());
         e.LandHit();
     }

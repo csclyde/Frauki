@@ -40,9 +40,11 @@ Enemy.prototype.types['A3PZ'] =  function() {
 
     this.Act = function() {
 
-        if(EnemyBehavior.Player.IsVisible(this) && this.CanAttack()) {
+        var tree = 'act';
+
+        if(EnemyBehavior.Player.IsVisible(this)) {
             if(EnemyBehavior.Player.IsVulnerable(this)) {
-                if(EnemyBehavior.Player.MovingAway(this) && frauki.body.onFloor()) {
+                if(EnemyBehavior.Player.MovingAway(this) && frauki.body.onFloor()  && this.CanAttack()) {
                     this.Hammer();
                 }
                 else if(frauki.state === frauki.AttackStab && EnemyBehavior.Player.IsDangerous(this)) {
@@ -59,10 +61,10 @@ Enemy.prototype.types['A3PZ'] =  function() {
                 else if(EnemyBehavior.Player.IsNear(this, 100) && EnemyBehavior.Player.MovingAway(this) && this.timers.TimerUp('charge_wait')) {
                     this.Charge();
                 } 
-                else if(EnemyBehavior.Player.IsNear(this, 80)) {
+                else if(EnemyBehavior.Player.IsNear(this, 80)  && this.CanAttack()) {
                     this.Punch();
                 } 
-                else if(EnemyBehavior.Player.IsNear(this, 140)  && frauki.body.onFloor()) {
+                else if(EnemyBehavior.Player.IsNear(this, 140)  && frauki.body.onFloor()  && this.CanAttack()) {
                     this.Hammer();
                 } 
                 else if(EnemyBehavior.Player.IsNear(this, 200) && this.timers.TimerUp('charge_wait')) {
@@ -296,9 +298,9 @@ Enemy.prototype.types['A3PZ'] =  function() {
             this.timers.SetTimer('slash_hold', 600);
 
             if(this.direction === 'left') {
-                this.body.velocity.x = -300;
+                this.body.velocity.x = -400;
             } else {
-                this.body.velocity.x = 300;
+                this.body.velocity.x = 400;
             }
 
             this.body.velocity.y = -200
@@ -444,7 +446,7 @@ Enemy.prototype.types['A3PZ'] =  function() {
         },
 
         'A3PZ/Hammer0011': {
-            x: 42, y: -26, w: 95, h: 90,
+            x: 22, y: -26, w: 115, h: 90,
             damage: 7,
             knockback: 3,
             priority: 3,
