@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="360" height="700" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="4335">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="360" height="700" tilewidth="16" tileheight="16" backgroundcolor="#4ceefe" nextobjectid="4341">
  <properties>
   <property name="debug" value="true"/>
   <property name="startLayer" value="3"/>
-  <property name="startX" value="198"/>
-  <property name="startY" value="606"/>
+  <property name="startX" value="153"/>
+  <property name="startY" value="199"/>
  </properties>
  <tileset firstgid="1" name="Collision" tilewidth="16" tileheight="16" tilecount="64" columns="8">
   <image source="../../Data/World/CollisionKey.png" width="128" height="128"/>
@@ -4583,6 +4583,8 @@
   <object id="4332" gid="110" x="3353" y="9287" width="16" height="16"/>
   <object id="4333" gid="110" x="3766" y="9284" width="16" height="16"/>
   <object id="4334" gid="110" x="3702" y="9280" width="16" height="16"/>
+  <object id="4339" gid="105" x="2544.67" y="3729.33" width="16" height="16"/>
+  <object id="4340" gid="106" x="2578.67" y="3739.33" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Enemies">
   <object id="3244" gid="85" x="3661" y="2990.33" width="16" height="16">
