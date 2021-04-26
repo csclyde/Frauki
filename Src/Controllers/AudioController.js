@@ -223,6 +223,8 @@ AudioController.prototype.StopAllMusic = function() {
     for(var name in this.music) {
         this.music[name].stop();
     }
+    this.currentMusic = null;
+    this.currentInterlude = null;
 };
 
 AudioController.prototype.PauseAllMusic = function() {

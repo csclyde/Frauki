@@ -10184,7 +10184,7 @@
  "orientation":"orthogonal",
  "properties":
     {
-     "debug":"true",
+     "debug":"false",
      "startLayer":"3",
      "startX":"266",
      "startY":"568"

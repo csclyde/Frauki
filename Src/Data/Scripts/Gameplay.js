@@ -192,14 +192,14 @@ ScriptRunner.scripts['pause_game'] = [
 ];
 
 ScriptRunner.scripts['unpause_game'] = [
-    { name: 'stop_interlude', props: { fade: 1000 } },  
+    { name: 'stop_interlude', props: { fade: 1000 } },
     { name: 'play_sound', props: { name: 'baton_catch' } },
     
     { func: function() {
-        GameState.inMenu = false;        
+        GameState.inMenu = false;
         events.publish('pan_camera', { to: GameState.prePauseCameraTarget, duration: 1000 });
         game.add.tween(GameState.Menu).to({alpha: 0}, 500, Phaser.Easing.Cubic.Out, true);
-        GameState.uiFadeTween = game.add.tween(GameState.HUD).to({alpha: 1}, 500, Phaser.Easing.Cubic.In, true); 
+        GameState.uiFadeTween = game.add.tween(GameState.HUD).to({alpha: 1}, 500, Phaser.Easing.Cubic.In, true);
     } },
 
     { name: 'wait', props: { amount: 1500 } },
