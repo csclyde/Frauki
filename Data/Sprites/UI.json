@@ -2,7 +2,7 @@
 
 "ChargePips0000":
 {
-	"frame": {"x":337,"y":558,"w":8,"h":5},
+	"frame": {"x":493,"y":457,"w":8,"h":5},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":5,"y":7,"w":8,"h":5},
@@ -10,7 +10,7 @@
 },
 "ChargePips0001":
 {
-	"frame": {"x":493,"y":466,"w":8,"h":5},
+	"frame": {"x":467,"y":260,"w":8,"h":5},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":5,"y":7,"w":8,"h":5},
@@ -18,7 +18,7 @@
 },
 "ChargePips0002":
 {
-	"frame": {"x":496,"y":259,"w":8,"h":5},
+	"frame": {"x":477,"y":260,"w":8,"h":5},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":5,"y":7,"w":8,"h":5},
@@ -26,7 +26,7 @@
 },
 "ChargePips0003":
 {
-	"frame": {"x":496,"y":266,"w":8,"h":5},
+	"frame": {"x":494,"y":479,"w":8,"h":5},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":5,"y":7,"w":8,"h":5},
@@ -42,7 +42,7 @@
 },
 "EnemyHealth0001":
 {
-	"frame": {"x":468,"y":466,"w":23,"h":10},
+	"frame": {"x":468,"y":457,"w":23,"h":10},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":9,"y":33,"w":23,"h":10},
@@ -50,7 +50,7 @@
 },
 "EnemyHealth0002":
 {
-	"frame": {"x":292,"y":555,"w":28,"h":10},
+	"frame": {"x":468,"y":424,"w":28,"h":10},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":9,"y":33,"w":28,"h":10},
@@ -106,7 +106,7 @@
 },
 "EnergyPips0000":
 {
-	"frame": {"x":322,"y":555,"w":13,"h":10},
+	"frame": {"x":452,"y":254,"w":13,"h":10},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":3,"y":5,"w":13,"h":10},
@@ -138,7 +138,7 @@
 },
 "ExclamationMark0000":
 {
-	"frame": {"x":468,"y":424,"w":17,"h":19},
+	"frame": {"x":292,"y":555,"w":17,"h":19},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":42,"y":27,"w":17,"h":19},
@@ -146,7 +146,7 @@
 },
 "ExclamationMark0001":
 {
-	"frame": {"x":487,"y":424,"w":17,"h":19},
+	"frame": {"x":468,"y":436,"w":17,"h":19},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":42,"y":27,"w":17,"h":19},
@@ -154,7 +154,7 @@
 },
 "HealthPips0000":
 {
-	"frame": {"x":452,"y":254,"w":13,"h":10},
+	"frame": {"x":446,"y":278,"w":13,"h":10},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":3,"y":5,"w":13,"h":10},
@@ -186,7 +186,7 @@
 },
 "HudFrame0000":
 {
-	"frame": {"x":468,"y":514,"w":13,"h":16},
+	"frame": {"x":468,"y":505,"w":13,"h":16},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":4,"y":32,"w":13,"h":16},
@@ -194,7 +194,7 @@
 },
 "HudFrame0001":
 {
-	"frame": {"x":468,"y":496,"w":14,"h":16},
+	"frame": {"x":468,"y":487,"w":14,"h":16},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":8,"y":32,"w":14,"h":16},
@@ -202,7 +202,7 @@
 },
 "HudFrame0002":
 {
-	"frame": {"x":468,"y":478,"w":15,"h":16},
+	"frame": {"x":468,"y":469,"w":15,"h":16},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":15,"y":32,"w":15,"h":16},
@@ -218,7 +218,7 @@
 },
 "Logo0000":
 {
-	"frame": {"x":286,"y":296,"w":208,"h":126},
+	"frame": {"x":288,"y":296,"w":208,"h":126},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":13,"y":13,"w":208,"h":126},
@@ -226,11 +226,11 @@
 },
 "Logo20000":
 {
-	"frame": {"x":2,"y":296,"w":282,"h":168},
+	"frame": {"x":2,"y":296,"w":284,"h":177},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":11,"y":9,"w":282,"h":168},
-	"sourceSize": {"w":282,"h":168}
+	"spriteSourceSize": {"x":8,"y":6,"w":284,"h":177},
+	"sourceSize": {"w":284,"h":177}
 },
 "Numbers0000":
 {
@@ -242,7 +242,7 @@
 },
 "Numbers0001":
 {
-	"frame": {"x":485,"y":478,"w":7,"h":13},
+	"frame": {"x":485,"y":469,"w":7,"h":13},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":16,"y":13,"w":7,"h":13},
@@ -258,7 +258,7 @@
 },
 "Numbers0003":
 {
-	"frame": {"x":446,"y":278,"w":9,"h":13},
+	"frame": {"x":330,"y":558,"w":9,"h":13},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":15,"y":13,"w":9,"h":13},
@@ -266,7 +266,7 @@
 },
 "Numbers0004":
 {
-	"frame": {"x":457,"y":278,"w":9,"h":13},
+	"frame": {"x":341,"y":558,"w":9,"h":13},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":15,"y":13,"w":9,"h":13},
@@ -274,7 +274,7 @@
 },
 "Numbers0005":
 {
-	"frame": {"x":494,"y":473,"w":9,"h":13},
+	"frame": {"x":494,"y":464,"w":9,"h":13},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":15,"y":13,"w":9,"h":13},
@@ -282,7 +282,7 @@
 },
 "Numbers0006":
 {
-	"frame": {"x":467,"y":245,"w":9,"h":13},
+	"frame": {"x":468,"y":523,"w":9,"h":13},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":15,"y":13,"w":9,"h":13},
@@ -290,7 +290,7 @@
 },
 "Numbers0007":
 {
-	"frame": {"x":478,"y":245,"w":9,"h":13},
+	"frame": {"x":479,"y":523,"w":9,"h":13},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":15,"y":13,"w":9,"h":13},
@@ -298,7 +298,7 @@
 },
 "Numbers0008":
 {
-	"frame": {"x":467,"y":260,"w":9,"h":13},
+	"frame": {"x":467,"y":245,"w":9,"h":13},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":15,"y":13,"w":9,"h":13},
@@ -306,7 +306,7 @@
 },
 "Numbers0009":
 {
-	"frame": {"x":478,"y":260,"w":9,"h":13},
+	"frame": {"x":478,"y":245,"w":9,"h":13},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":15,"y":13,"w":9,"h":13},
@@ -322,7 +322,7 @@
 },
 "PortraitsFraukiDispleased":
 {
-	"frame": {"x":2,"y":466,"w":56,"h":103},
+	"frame": {"x":2,"y":475,"w":56,"h":103},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":72,"y":97,"w":56,"h":103},
@@ -330,7 +330,7 @@
 },
 "PortraitsFraukiEnticed":
 {
-	"frame": {"x":60,"y":466,"w":56,"h":103},
+	"frame": {"x":60,"y":475,"w":56,"h":103},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":72,"y":97,"w":56,"h":103},
@@ -338,7 +338,7 @@
 },
 "PortraitsFraukiMad":
 {
-	"frame": {"x":118,"y":466,"w":56,"h":103},
+	"frame": {"x":118,"y":475,"w":56,"h":103},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":72,"y":97,"w":56,"h":103},
@@ -346,7 +346,7 @@
 },
 "PortraitsFraukiMischeif":
 {
-	"frame": {"x":176,"y":466,"w":56,"h":103},
+	"frame": {"x":176,"y":475,"w":56,"h":103},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":72,"y":97,"w":56,"h":103},
@@ -354,7 +354,7 @@
 },
 "PortraitsFraukiNeutral":
 {
-	"frame": {"x":234,"y":466,"w":56,"h":103},
+	"frame": {"x":234,"y":475,"w":56,"h":103},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":72,"y":97,"w":56,"h":103},
@@ -386,7 +386,7 @@
 },
 "QuestionMark0000":
 {
-	"frame": {"x":468,"y":445,"w":17,"h":19},
+	"frame": {"x":487,"y":436,"w":17,"h":19},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":42,"y":27,"w":17,"h":19},
@@ -394,7 +394,7 @@
 },
 "QuestionMark0001":
 {
-	"frame": {"x":487,"y":445,"w":17,"h":19},
+	"frame": {"x":311,"y":555,"w":17,"h":19},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":42,"y":27,"w":17,"h":19},
@@ -410,7 +410,7 @@
 },
 "Settings0001":
 {
-	"frame": {"x":496,"y":245,"w":8,"h":12},
+	"frame": {"x":489,"y":245,"w":8,"h":12},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":25,"y":42,"w":8,"h":12},
@@ -485,8 +485,8 @@
 	"version": "1.0",
 	"image": "UI.png",
 	"format": "RGBA8888",
-	"size": {"w":506,"h":571},
+	"size": {"w":506,"h":580},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:ffc2dc6e2b2b329efd0abcb81b4f2d7d:be9dce1508761be0f029202849e8eba2:4b774b923918ecd961888279dba3ffad$"
+	"smartupdate": "$TexturePacker:SmartUpdate:2883a95e0974e6acfc2a55f2cbdbd492:2fc8b1f3ecf008ed8c4a5a8b74f98470:4b774b923918ecd961888279dba3ffad$"
 }
 }
