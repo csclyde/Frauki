@@ -254,7 +254,7 @@ AudioController.prototype.PlayInterlude = function(params) {
         //if there is other music playing, fade it out
         if(this.currentMusic) {
             if(this.currentMusic.loop) {
-                this.currentMusic.fadeToPause(params.fade || 1);
+                this.currentMusic.fadeToStop(params.fade || 1);
             } else {
                 this.currentMusic.fadeToStop(params.fade || 1);
             }
