@@ -5,7 +5,7 @@ EnergyController = function() {
 
 	this.timers = new TimerUtil();
 
-	this.invincible = true;
+	this.invincible = false;
 
 	events.subscribe('restore_health', function(params) {
 		if(this.remainingApples > 0) {
