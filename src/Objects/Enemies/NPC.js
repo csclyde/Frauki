@@ -23,8 +23,8 @@ Enemy.prototype.types['NPC'] =  function() {
 	this.animations.add('robo_spikey', ['NPC/robo_spikey0000', 'NPC/robo_spikey0001', 'NPC/robo_spikey0002', 'NPC/robo_spikey0003', 'NPC/robo_spikey0004', 'NPC/robo_spikey0005'], 4, true, false);
 	this.animations.add('robo_samurai', ['NPC/robo_samurai0000', 'NPC/robo_samurai0001', 'NPC/robo_samurai0002', 'NPC/robo_samurai0003', 'NPC/robo_samurai0004', 'NPC/robo_samurai0005'], 4, true, false);
 	this.animations.add('robo_slickback', ['NPC/robo_slickback0000', 'NPC/robo_slickback0001', 'NPC/robo_slickback0002'], 4, true, false);
-	this.animations.add('robo_bouncer', ['NPC/robo_oldie0000'], 4, true, false);
-	this.animations.add('robo_oldie', ['NPC/robo_oldie0000'], 4, true, false);
+	this.animations.add('robo_oldie', ['NPC/robo_oldie0000', 'NPC/robo_oldie0001', 'NPC/robo_oldie0002', 'NPC/robo_oldie0003', 'NPC/robo_oldie0004', 'NPC/robo_oldie0005', 'NPC/robo_oldie0006', 'NPC/robo_oldie0007', 'NPC/robo_oldie0008', 'NPC/robo_oldie0009', 'NPC/robo_oldie0010', 'NPC/robo_oldie0011', 'NPC/robo_oldie0012', 'NPC/robo_oldie0013'], 4, true, false);
+	this.animations.add('robo_bouncer', ['NPC/robo_oldie0000', 'NPC/robo_oldie0001', 'NPC/robo_oldie0002', 'NPC/robo_oldie0003', 'NPC/robo_oldie0004', 'NPC/robo_oldie0005', 'NPC/robo_oldie0006', 'NPC/robo_oldie0007', 'NPC/robo_oldie0008', 'NPC/robo_oldie0009', 'NPC/robo_oldie0010', 'NPC/robo_oldie0011', 'NPC/robo_oldie0012', 'NPC/robo_oldie0013'], 4, true, false);
 	this.animations.add('robo_brokenanimationsystemcomon', ['NPC/robo_oldiefdsaf0000'], 4, true, false);
 	
 
