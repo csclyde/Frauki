@@ -10186,8 +10186,13 @@
     {
      "debug":"false",
      "startLayer":"3",
+<<<<<<< Updated upstream
      "startX":"266",
      "startY":"568"
+=======
+     "startX":"204",
+     "startY":"380"
+>>>>>>> Stashed changes
     },
  "propertytypes":
     {
