@@ -323,7 +323,7 @@ ScriptRunner.scripts['start_fight'] = [
     { name: 'allow_input', props: {} },
 
     { func: function(params) {
-        if(params.script && !GameData.GetFlag('enemy_intro_' + params.script)) {
+        if(params.script && (!GameData.GetFlag('enemy_intro_' + params.script) || params.script === 'check_battlebar')) {
             ScriptRunner.run(params.script, params);
             GameData.SetFlag('enemy_intro_' + params.script, true)
         }
