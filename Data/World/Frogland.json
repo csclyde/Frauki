@@ -553,11 +553,11 @@
                  "type":"",
                  "visible":true,
                  "width":338.771,
-                 "x":2937.1145,
-                 "y":7805.569
+                 "x":2937.11,
+                 "y":7805.57
                 }, 
                 {
-                 "height":421.695333333333,
+                 "height":421.695,
                  "id":4382,
                  "name":"dark_cave",
                  "properties":
@@ -571,12 +571,12 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":502.104333333333,
-                 "x":2003.94783333333,
-                 "y":8539.319
+                 "width":502.104,
+                 "x":2003.95,
+                 "y":8539.32
                 }, 
                 {
-                 "height":421.695333333333,
+                 "height":421.695,
                  "id":4383,
                  "name":"dark_cave",
                  "properties":
@@ -590,9 +590,9 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":502.104333333333,
-                 "x":2003.94783333333,
-                 "y":8539.319
+                 "width":502.104,
+                 "x":2003.95,
+                 "y":8539.32
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -4545,8 +4545,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":2690.33333333333,
-                 "y":8912.33333333333
+                 "x":2690.33,
+                 "y":8912.33
                 }, 
                 {
                  "gid":105,
@@ -10344,8 +10344,8 @@
     {
      "debug":"true",
      "startLayer":"3",
-     "startX":"65",
-     "startY":"188"
+     "startX":"195",
+     "startY":"179"
     },
  "propertytypes":
     {
