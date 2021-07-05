@@ -69,9 +69,6 @@ GameState.update = function() {
         speechController.Update();
     }
 
-    game.canvas.style.width = (pixel.width * pixel.scale) + "px";
-    game.canvas.style.height = (pixel.height * pixel.scale) + "px";
-
     frauki.alpha = 0;
 
 };

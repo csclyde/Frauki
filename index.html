@@ -107,85 +107,8 @@
 
         <script>
 
-            var pixel = { scale: 3, canvas: null, context: null, width: 640, height: 360 };
-
-            if(window.innerWidth === 1920 && window.innerHeight === 1080) {
-                pixel.scale = 3;
-            }
-            else if(window.innerWidth === 2560 && window.innerHeight === 1440) {
-                pixel.scale = 3;
-            }
-            else if(window.innerWidth === 1366 && window.innerHeight === 768) {
-                pixel.scale = 2;
-            }
-            else if(window.innerWidth === 1440 && window.innerHeight === 900) {
-                pixel.scale = 2;
-            }
-            else if(window.innerWidth === 3840 && window.innerHeight === 2160) {
-                pixel.scale = 4;
-            }
-            else if(window.innerWidth === 1600 && window.innerHeight === 900) {
-                pixel.scale = 2;
-            }
-            else if(window.innerWidth === 1680 && window.innerHeight === 1050) {
-                pixel.scale = 2;
-            }
-            else if(window.innerWidth === 1360 && window.innerHeight === 768) {
-                pixel.scale = 2;
-            }
-            else {
-                if(window.innerWidth < pixel.width * 2) {
-                    pixel.scale = 1;
-                } else if(window.innerWidth < pixel.width * 3) {
-                    pixel.scale = 2;
-                } else if(window.innerWidth < pixel.width * 4) {
-                    pixel.scale = 3;
-                } else {
-                    pixel.scale = 4;
-                }
-            }
-
-
-
-            // var hidden = "hidden";
-            // // Standards:
-            // if (hidden in document)
-            //     document.addEventListener("visibilitychange", onchange);
-            // else if ((hidden = "mozHidden") in document)
-            //     document.addEventListener("mozvisibilitychange", onchange);
-            // else if ((hidden = "webkitHidden") in document)
-            //     document.addEventListener("webkitvisibilitychange", onchange);
-            // else if ((hidden = "msHidden") in document)
-            //     document.addEventListener("msvisibilitychange", onchange);
-            // // IE 9 and lower:
-            // else if ("onfocusin" in document)
-            //     document.onfocusin = document.onfocusout = onchange;
-            // // All others:
-            // else
-            //     window.onpageshow = window.onpagehide = window.onfocus = window.onblur = onchange;
-
-            // function onchange(evt) {
-            //     var v = "visible", h = "hidden",
-            //     evtMap = {
-            //         focus: v, focusin: v, pageshow: v, blur: h, focusout: h, pagehide: h
-            //     };
-
-            //     evt = evt || window.event;
-            //     if (evt.type in evtMap)
-            //         document.body.className = evtMap[evt.type];
-            //     else
-            //         document.body.className = this[hidden] ? "hidden" : "visible";
-            //     if (game) {
-            //         if (document.body.className.match(/hidden/)) {
-            //             game.input.gamepad.stop();
-            //         }
-            //         else {
-            //             game.input.gamepad.start();
-            //         }
-            //     }
-            // }
+            var pixel = { width: 640, height: 360 };
             
-
             var game = new Phaser.Game(pixel.width, pixel.height, Phaser.AUTO, "game", LoadingState, false, false);
             var events = new EventRouter();
 

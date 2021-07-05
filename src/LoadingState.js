@@ -15,11 +15,6 @@ LoadingState.preload = function() {
 
     Phaser.TilemapParser.INSERT_NULL = true;
     game.load.tilemap('Frogland', 'Data/World/Frogland.json', null, Phaser.Tilemap.TILED_JSON);
-    
-    game.canvas.id = 'game-canvas';
-    pixel.context = game.canvas.getContext('2d');
-    game.canvas.style.width = (pixel.width * pixel.scale) + "px";
-    game.canvas.style.height = (pixel.height * pixel.scale) + "px";
 
     //load images
     FileMap.Images.forEach(function(img) {
